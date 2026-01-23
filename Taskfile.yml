@@ -1,0 +1,85 @@
+---
+# yaml-language-server: $schema=https://taskfile.dev/schema.json
+version: '3'
+
+vars:
+  TODAY:
+    sh: date +'%Y%m%d'
+
+env:
+  MAIN_BRANCH: master
+  CODEBERG_URL: https://codeberg.org/mimikun/nvim-new
+
+tasks:
+  default:
+    cmds:
+      - task --list
+    silent: true
+
+  clean:
+    desc: File cleanup
+    cmds:
+      - echo "WIP"
+    silent: true
+
+  pull:
+    desc: git pull
+    cmds:
+      - git pull
+    silent: true
+
+  push:
+    desc: git push
+    cmds:
+      - git push origin master
+      - git push codeberg master
+    silent: true
+
+  clean-fetch:
+    desc: git cleanfetch
+    aliases:
+      - cleanfetch
+    cmds:
+      - git fetch --all --prune --tags --prune-tags
+    silent: true
+
+  delete-branch:
+    desc: Delete patch branch
+    aliases:
+      - deleb
+    cmds:
+      - task: clean
+      - task: switch-master
+      - git branch --list "patch*" | xargs -n 1 git branch -D
+    silent: true
+
+  morning-routine:
+    desc: Morning routine by Work-day
+    cmds:
+      - task: clean-fetch
+      - task: delete-branch
+      - task: pull
+      - task: patch-branch
+    silent: true
+
+  switch-master:
+    desc: Switch to master branch
+    aliases:
+      - smas
+    cmds:
+      - git switch $MAIN_BRANCH
+    silent: true
+
+  patch-branch:
+    desc: Create a patch branch
+    aliases:
+      - pab
+    cmds:
+      - git switch -c "patch-{{.TODAY}}"
+    silent: true
+
+  view:
+    desc: View remote repository"
+    cmds:
+      - cmd: wsl-open $CODEBERG_URL
+    silent: true

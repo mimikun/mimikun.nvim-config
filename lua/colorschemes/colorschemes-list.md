@@ -1,0 +1,12 @@
+catppuccin-nvim
+colorschemes-list.md
+cyberdream-nvim
+dracula-vim
+github-nvim-theme
+kanagawa-nvim
+kanagawa-paper-nvim
+monokai-v2-nvim
+nightfox-nvim
+pastelnight-nvim
+sonokai
+tokyonight-nvim
