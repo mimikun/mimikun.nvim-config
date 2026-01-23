@@ -2,62 +2,102 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
-## Project Overview
+## Table of Contents
 
-This is a Neovim configuration repository designed for personal use, managing plugins, colorschemes, and language-specific settings using lazy.nvim as the plugin manager.
+- [Overview](#overview)
+- [Quick Start](#quick-start)
+- [Development Workflow](#development-workflow)
+  - [Task Runner (Taskfile)](#task-runner-taskfile)
+  - [Git Workflow](#git-workflow)
+  - [Plugin Management](#plugin-management)
+  - [Neovim Commands](#neovim-commands)
+- [Architecture](#architecture)
+  - [Directory Structure](#directory-structure)
+  - [Configuration Flow](#configuration-flow)
+  - [Key Design Decisions](#key-design-decisions)
+- [Current Status](#current-status)
+  - [Plugin System Status](#plugin-system-status)
+  - [Active TODOs](#active-todos)
+- [Coding Standards](#coding-standards)
+- [AI-DLC Workflow](#ai-dlc-workflow)
 
-## Development Commands
+## Overview
+
+Personal Neovim configuration repository using lazy.nvim as the plugin manager.
+
+**Key Features:**
+- 330+ curated plugins (currently disabled by default)
+- 12 colorscheme options
+- Modular LSP and filetype configurations
+- Multi-format snippet support (traditional, LuaSnip, VSCode)
+- Task-based development workflow
+
+## Quick Start
+
+```bash
+# 1. Launch Neovim (lazy.nvim auto-installs)
+nvim
+
+# 2. Enable plugins (edit lua/config/lazy.lua)
+# Uncomment: { import = "plugins" }, { import = "colorschemes" },
+
+# 3. Daily workflow
+task morning-routine  # Fetch, clean, pull, create patch branch
+
+# 4. View available tasks
+task
+```
+
+## Development Workflow
 
 ### Task Runner (Taskfile)
 
-The repository uses [Task](https://taskfile.dev) as the primary task runner. All common operations are defined in `Taskfile.yml`:
+All common operations are defined in `Taskfile.yml`:
 
 ```bash
-# List all available tasks
-task
-
 # Git operations
-task pull                  # Pull from all remotes
-task push                  # Push to origin and codeberg remotes
-task clean-fetch          # Fetch with prune (also: task cleanfetch)
+task pull           # Pull from all remotes
+task push           # Push to origin and codeberg remotes
+task clean-fetch    # Fetch with prune (alias: cleanfetch)
 
 # Branch management
-task switch-master        # Switch to master branch (also: task smas)
-task patch-branch         # Create dated patch branch (also: task pab)
-task delete-branch        # Delete all patch* branches (also: task deleb)
+task switch-master  # Switch to master branch (alias: smas)
+task patch-branch   # Create dated patch branch YYYYMMDD (alias: pab)
+task delete-branch  # Delete all patch* branches (alias: deleb)
 
 # Daily workflow
-task morning-routine      # Run clean-fetch, delete-branch, pull, and create new patch branch
+task morning-routine  # Clean fetch → delete branches → pull → new patch branch
 ```
+
+### Git Workflow
+
+- **Main branch**: `master`
+- **Daily development**: Dated patch branches (`patch-YYYYMMDD`)
+- **Remotes**: Pushes to both `origin` and `codeberg`
 
 ### Plugin Management
 
-This configuration uses lazy.nvim but with a **currently disabled plugin loading system**:
+**⚠️ IMPORTANT**: Plugin loading is currently **DISABLED** by default.
 
-```lua
--- In lua/config/lazy.lua, the spec imports are commented out:
-spec = {
-  --{ import = "plugins" },
-  --{ import = "colorschemes" },
-},
-```
+To enable plugins:
 
-**Important**: To enable plugins, uncomment these lines in `lua/config/lazy.lua`.
+1. Edit `lua/config/lazy.lua`
+2. Uncomment the spec imports:
+   ```lua
+   spec = {
+     { import = "plugins" },      -- Enable 330+ plugins
+     { import = "colorschemes" },  -- Enable 12 colorschemes
+   },
+   ```
+3. Create plugin spec files in `lua/plugins/` (currently only list exists)
+4. Create colorscheme spec files in `lua/colorschemes/`
 
 ### Neovim Commands
 
-```bash
-# Launch Neovim (plugins auto-install via lazy.nvim)
-nvim
-
-# Open lazy.nvim UI (after launching Neovim)
-:Lazy
-
-# Update plugins
-:Lazy update
-
-# Sync plugins (install missing, clean removed)
-:Lazy sync
+```vim
+:Lazy         " Open plugin manager UI
+:Lazy update  " Update all plugins
+:Lazy sync    " Install missing, clean removed plugins
 ```
 
 ## Architecture
@@ -66,126 +106,171 @@ nvim
 
 ```
 .
-├── init.lua                    # Entry point: sets basic options, loads lazy.nvim
+├── init.lua                      # Entry point: basic options, lazy.nvim loader
 ├── lua/
 │   ├── config/
-│   │   └── lazy.lua           # lazy.nvim configuration and setup
-│   ├── plugins/               # Plugin specifications (currently not loaded)
-│   │   └── plugins-list.md    # Comprehensive list of 330+ plugin names
-│   └── colorschemes/          # Colorscheme plugin specifications
-│       └── colorschemes-list.md # List of 12 colorscheme plugins
+│   │   └── lazy.lua             # lazy.nvim configuration
+│   ├── plugins/                 # Plugin specifications (⚠️ not loaded)
+│   │   └── plugins-list.md      # 330+ plugin names
+│   └── colorschemes/            # Colorscheme specifications (⚠️ not loaded)
+│       └── colorschemes-list.md # 12 colorscheme options
 ├── after/
-│   ├── ftplugin/              # Filetype-specific settings
-│   │   ├── rust.lua
+│   ├── ftplugin/                # Language-specific settings
+│   │   ├── rust.lua             # TODO: rust-analyzer config
 │   │   ├── haskell.lua
 │   │   ├── java.lua
 │   │   └── cabal.lua
-│   └── lsp/                   # LSP server configurations (TODOs)
+│   └── lsp/                     # LSP server configs (⚠️ mostly TODOs)
 │       ├── yamlls.lua
 │       ├── jsonls.lua
 │       ├── taplo.lua
 │       └── helm_ls.lua
-├── snippets/                  # Traditional snippet files
-├── luasnippets/              # LuaSnip snippet definitions
-├── vscode-snippets/          # VSCode-style snippet definitions
-├── templates/                # File templates
-└── neovim_tips/              # Personal tips and notes
+├── snippets/                    # Traditional snippet format
+├── luasnippets/                 # LuaSnip format
+├── vscode-snippets/             # VSCode format
+├── templates/                   # File templates
+└── neovim_tips/                 # Personal notes
 ```
 
 ### Configuration Flow
 
-1. **init.lua**: Bootstraps Neovim with basic settings
-   - Enables `vim.loader` for faster Lua module loading
-   - Sets global options (number, relativenumber, clipboard, etc.)
-   - Disables external providers (Perl, Python3, Ruby, Node)
-   - Sets leader key to Space, localleader to backslash
-   - Loads lazy.nvim via `require("config.lazy")`
-   - Includes DVC filetype detection autocmd
+1. **init.lua** - Bootstrap
+   - Enable `vim.loader` for fast Lua module loading
+   - Set global options (number, relativenumber, clipboard, etc.)
+   - Disable external providers (Perl, Python3, Ruby, Node)
+   - Set leader keys (Space = leader, Backslash = localleader)
+   - Load lazy.nvim via `require("config.lazy")`
+   - DVC filetype detection autocmd
 
-2. **lua/config/lazy.lua**: Configures lazy.nvim
-   - Auto-installs lazy.nvim on first run
-   - Sets lazy-loading defaults (all plugins lazy by default)
-   - Defines concurrency based on platform (Windows uses 2x CPU cores)
-   - Disables git throttling and cooldown for faster operations
-   - Optimizes performance by disabling built-in plugins (gzip, netrw, etc.)
-   - **Critical**: Plugin specs currently commented out - must be manually enabled
+2. **lua/config/lazy.lua** - Plugin Manager
+   - Auto-install lazy.nvim on first run
+   - Lazy-load all plugins by default
+   - Platform-specific concurrency (Windows: 2x CPU cores)
+   - Disable git throttling for faster operations
+   - Disable built-in plugins (gzip, netrw, etc.) for performance
+   - **⚠️ Plugin specs currently commented out**
 
-3. **after/**: Loads after main configuration
+3. **after/** - Post-configuration
    - `ftplugin/`: Language-specific settings (mostly TODOs)
    - `lsp/`: LSP server configurations (mostly TODOs)
 
-### Plugin Organization
-
-- **plugins-list.md**: Contains 330+ plugin names (one per line)
-  - Notable categories: LSP tools (Mason, nvim-lspconfig), completions (blink-cmp, nvim-cmp), AI assistants (avante, codecompanion, copilot), Git integration, UI enhancements, language-specific tools
-
-- **colorschemes-list.md**: Contains 12 colorscheme options
-  - catppuccin, cyberdream, dracula, github-theme, kanagawa, monokai, nightfox, pastelnight, sonokai, tokyonight
-
 ### Key Design Decisions
 
-1. **Lazy Loading**: All plugins are lazy-loaded by default (`lazy = true` in lazy.nvim config)
+| Decision | Rationale |
+|----------|-----------|
+| **Lazy Loading** | All plugins lazy by default (`lazy = true`) |
+| **Multi-Remote Git** | Push to `origin` + `codeberg` simultaneously |
+| **Patch Branches** | Daily dated branches (`patch-YYYYMMDD`) for development |
+| **No External Providers** | Disable Perl/Python/Ruby/Node for faster startup |
+| **Modular LSP** | Individual files in `after/lsp/` for maintainability |
+| **Multi-Format Snippets** | Support traditional + LuaSnip + VSCode formats |
 
-2. **Multi-Remote Git Setup**: Configured to push to both `origin` and `codeberg` remotes (main branch: `master`)
+## Current Status
 
-3. **Daily Workflow Pattern**: Uses dated patch branches (`patch-YYYYMMDD`) for daily development work
+### Plugin System Status
 
-4. **Provider Management**: All external language providers disabled to reduce startup time
+**🔴 CRITICAL**: The plugin system is currently **DISABLED**.
 
-5. **Modular LSP Config**: LSP configurations separated into individual files in `after/lsp/`
+**Why**: Plugin spec imports are commented out in `lua/config/lazy.lua`
 
-6. **Multi-Format Snippet Support**: Supports traditional, LuaSnip, and VSCode snippet formats
+**Impact**:
+- No plugins are loaded at startup
+- Only base Neovim functionality available
+- `lua/plugins/plugins-list.md` contains 330+ plugin names but no specs
+- `lua/colorschemes/colorschemes-list.md` lists 12 colorschemes but no specs
 
-## Current State and TODOs
+**To Enable**:
+1. Uncomment specs in `lua/config/lazy.lua`
+2. Create actual `.lua` spec files for desired plugins
+3. Restart Neovim
 
 ### Active TODOs
 
-The following files contain TODO markers for incomplete implementations:
+**LSP Configurations** (all in `after/lsp/`):
+- `yamlls.lua` - YAML language server config
+- `jsonls.lua` - JSON language server config
+- `taplo.lua` - TOML language server config
+- `helm_ls.lua` - Helm language server config
 
-- `after/ftplugin/rust.lua`: Needs rust-language-server configs
-- `after/lsp/yamlls.lua`: Needs yaml-ls configs
-- `after/lsp/jsonls.lua`: Needs JSON language server configs
-- `after/lsp/taplo.lua`: Needs TOML language server configs
-- `after/lsp/helm_ls.lua`: Needs Helm language server configs
-- `Taskfile.yml`: `clean` task is marked as WIP
+**Filetype Configurations**:
+- `after/ftplugin/rust.lua` - rust-analyzer settings
 
-### Plugin Loading Status
+**Build Tasks**:
+- `Taskfile.yml` - `clean` task marked as WIP
 
-**Critical**: The plugin system is currently disabled. To activate plugins:
-
-1. Edit `lua/config/lazy.lua`
-2. Uncomment the spec imports:
-   ```lua
-   spec = {
-     { import = "plugins" },      -- Enable plugin loading
-     { import = "colorschemes" },  -- Enable colorscheme loading
-   },
-   ```
-3. Create actual plugin spec files in `lua/plugins/` (currently only has list file)
-4. Create colorscheme spec files in `lua/colorschemes/`
+**Plugin Specifications**:
+- Create actual plugin spec files (currently only name lists exist)
+- Implement lazy.nvim configurations for 330+ plugins
+- Create colorscheme spec files for 12 themes
 
 ## Coding Standards
 
 ### Lua Code Style
 
-- **Indentation**: 2 spaces (defined in .editorconfig)
-- **Line endings**: LF (Unix-style)
-- **Charset**: UTF-8
-- **Final newline**: Required
+```lua
+-- Indentation: 2 spaces
+-- Line endings: LF (Unix)
+-- Charset: UTF-8
+-- Final newline: Required
+```
 
-### File Type Conventions
+See `.editorconfig` for complete style rules across file types (Shell, YAML, JSON, TOML, TypeScript, Makefiles, PowerShell).
 
-See `.editorconfig` for complete style rules across different file types (shell scripts, YAML, JSON, TOML, TypeScript, Makefiles, PowerShell).
+## AI-DLC Workflow
 
-## Notes for Future Development
+**Kiro-style Spec-Driven Development** for AI Development Life Cycle
 
-1. **Plugin Specifications Missing**: The `plugins-list.md` contains plugin names but no actual lazy.nvim spec files exist yet
+### Paths
 
-2. **LSP Configuration Incomplete**: All LSP config files are empty with TODO comments
+- **Steering**: `.kiro/steering/` - Project-wide rules and context
+- **Specs**: `.kiro/specs/` - Feature-specific development processes
 
-3. **Branch Strategy**: Uses patch branches for development, master as main branch
+### Workflow Phases
 
-4. **Platform Detection**: Configuration includes Windows-specific optimizations (concurrency settings)
+**Phase 0 (Optional)**: Setup
+```bash
+/kiro:steering         # Initialize steering documents
+/kiro:steering-custom  # Create custom steering files
+```
 
-5. **Performance Optimization**: Aggressive built-in plugin disabling for faster startup times
+**Phase 1**: Specification
+```bash
+/kiro:spec-init "description"       # Initialize new spec
+/kiro:spec-requirements {feature}   # Generate requirements
+/kiro:validate-gap {feature}        # (Optional) Analyze implementation gap
+/kiro:spec-design {feature} [-y]    # Create design (use -y to skip approval)
+/kiro:validate-design {feature}     # (Optional) Review design quality
+/kiro:spec-tasks {feature} [-y]     # Generate implementation tasks
+```
+
+**Phase 2**: Implementation
+```bash
+/kiro:spec-impl {feature} [tasks]   # Execute tasks with TDD
+/kiro:validate-impl {feature}       # (Optional) Validate implementation
+```
+
+**Progress Check**:
+```bash
+/kiro:spec-status {feature}  # Check specification status (use anytime)
+```
+
+### Development Rules
+
+1. **3-Phase Approval**: Requirements → Design → Tasks → Implementation
+2. **Human Review**: Required after each phase (use `-y` only intentionally)
+3. **Language Policy**: Think in English, generate Japanese responses. Project file content (requirements.md, design.md, tasks.md, etc.) follows `spec.json.language` setting
+4. **Autonomous Execution**: Follow instructions precisely, gather necessary context, complete work end-to-end, ask only when critical information is missing
+
+### Steering Configuration
+
+**Default Files** (`.kiro/steering/`):
+- `product.md` - Product vision and requirements
+- `tech.md` - Technical stack and architecture decisions
+- `structure.md` - Project structure and organization
+
+**Custom Files**: Managed via `/kiro:steering-custom`
+
+---
+
+**Last Updated**: 2026-01-23
 
