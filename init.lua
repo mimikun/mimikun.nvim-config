@@ -32,7 +32,7 @@ vim.g.mapleader = " "
 
 require("config.lazy")
 
---vim.cmd.colorscheme("tokyonight")
+vim.cmd.colorscheme("tokyonight")
 
 vim.keymap.set("n", "<Esc><Esc>", function()
   vim.cmd("nohlsearch")
