@@ -22,7 +22,7 @@ require("lazy").setup({
     lazy = true,
   },
   spec = {
-    --{ import = "plugins" },
+    { import = "plugins" },
     { import = "colorschemes" },
   },
   lockfile = vim.fn.stdpath("config") .. "/lazy-lock.json",
