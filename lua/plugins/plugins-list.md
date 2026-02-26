@@ -5,7 +5,6 @@ atone-nvim
 auto-cmdheight-nvim
 auto-save-nvim
 avante-nvim
-barbar-nvim
 blink-cmp
 boundary-nvim
 brewfile-nvim
@@ -135,7 +134,6 @@ markview-nvim
 mason-lock-nvim
 mason-lspconfig-nvim
 mason-null-ls-nvim
-mason-nvim
 mason-nvim-dap-nvim
 mason-nvim-lint
 mcphub-nvim
@@ -213,7 +211,6 @@ octo-nvim
 octohub-nvim
 oil-git-status-nvim
 oil-lsp-diagnostics-nvim
-oil-nvim
 opencode-nvim
 org-roam-nvim
 org-super-agenda-nvim
@@ -255,7 +252,6 @@ smart-open-nvim
 smart-splits-nvim
 smear-cursor-nvim
 smoothcursor-nvim
-snacks-nvim
 snipbrowzurr-nvim
 sniprun
 sops-edit-nvim
@@ -302,7 +298,6 @@ toggleterm-nvim
 toggleword-nvim
 token-count-nvim
 translate-nvim
-transparent-nvim
 tree-sitter-ghostty
 treesj
 treewalker-nvim
