@@ -78,7 +78,6 @@ ghcid-nvim
 git-blame-nvim
 git-conflict-nvim
 gitgraph-nvim
-github-actions-nvim
 gitsigns-nvim
 go-nvim
 gobjdump-nvim
@@ -184,7 +183,6 @@ nvim-hlslens
 nvim-java
 nvim-jdtls
 nvim-lint
-nvim-lspconfig
 nvim-lusc
 nvim-navbuddy
 nvim-navic
@@ -250,7 +248,6 @@ skkeleton-indicator-nvim
 skkeleton-state-popup
 smart-open-nvim
 smart-splits-nvim
-smear-cursor-nvim
 smoothcursor-nvim
 snipbrowzurr-nvim
 sniprun
@@ -290,7 +287,6 @@ text-to-colorscheme
 theme-hub-nvim
 timber-nvim
 timers-nvim
-tiny-glimmer-nvim
 tiny-inline-diagnostic-nvim
 tmux-nvim
 todo-comments-nvim
