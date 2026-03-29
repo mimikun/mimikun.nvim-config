@@ -2,7 +2,7 @@
 local spec = {
   "Nako0/devglobe-extension",
   --lazy = false,
-  build = "cd devglobe-core && npm install && npm run build",
+  build = "cd devglobe-core && npm install && npm run build && git restore package-lock.json",
   --build = require("plugins.devglobe-extension-nvim.builds"),
   cmd = require("plugins.devglobe-extension-nvim.cmds"),
   event = require("plugins.devglobe-extension-nvim.events"),
