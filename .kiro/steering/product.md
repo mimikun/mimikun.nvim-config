@@ -25,8 +25,9 @@ Personal Neovim configuration focused on modularity, extensibility, and maintain
 
 - **Lazy.nvim foundation**: Modern plugin manager with auto-installation
 - **Lazy-by-default**: All plugins configured with `lazy = true`
-- **Opt-in activation**: Plugin specs commented out in `lua/config/lazy.lua`
+- **Active plugin specs**: Plugin imports enabled in `lua/config/lazy.lua` (plugins, colorschemes, denops-plugins)
 - **Multi-format catalogs**: Plugin list (330+ items), colorscheme list (12 themes)
+- **Denops ecosystem**: Dedicated `lua/denops-plugins/` category for Denops-based plugins
 
 ### Development Environment
 
@@ -60,6 +61,17 @@ Personal Neovim configuration focused on modularity, extensibility, and maintain
 - Minimal default configuration (only essential options)
 - Progressive disclosure (start minimal, enable features as needed)
 - Documentation accessibility (CLAUDE.md, neovim_tips/)
+
+## Active Plugins (Examples)
+
+- **UI**: transparent-nvim, glaze-nvim, smear-cursor-nvim, tiny-glimmer-nvim
+- **Navigation**: lazytree, vim-illuminate
+- **LSP**: nvim-lspconfig
+- **Tools**: taskfile-nvim, github-actions-nvim, k8s-nvim, chezmoi-nvim/vim
+- **Notes**: telekasten-nvim, calendar-vim
+- **Media**: image-nvim, img-clip-nvim
+- **Denops**: denops-vim, denops-translate-vim, denops-docker-vim, dps-ghosttext-vim, dps-translate-vim
+- **Colorschemes**: tokyonight-nvim
 
 ## Out of Scope
 

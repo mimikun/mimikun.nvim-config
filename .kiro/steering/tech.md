@@ -25,10 +25,11 @@
 
 ### Plugin Opt-In Model
 
-**Decision**: Plugin specs commented out in lazy.lua
-**Rationale**: Users start with minimal config, enable features as needed
-**Trade-offs**: Requires manual spec creation for 330+ plugins
-**Migration Path**: Uncomment spec imports → create individual spec files
+**Decision**: Plugin specs are active in lazy.lua (uncommented)
+**Rationale**: Plugin ecosystem is actively being built out
+**Trade-offs**: Startup time increases as more plugins are added
+**Categories**: `plugins`, `colorschemes`, `denops-plugins` (each a separate import)
+**Migration Note**: Moved from catalog-only to active spec creation
 
 ### Multi-Remote Git Strategy
 
@@ -119,19 +120,40 @@ vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {
 })
 ```
 
-#### Lazy Plugin Spec (Placeholder Pattern)
+#### Lazy Plugin Spec (Subdirectory Pattern)
+
+Each plugin lives in its own subdirectory with separate modules:
 
 ```lua
--- lua/plugins/example.lua
-return {
+-- lua/plugins/plugin-name/init.lua
+---@type LazySpec
+local spec = {
   "author/plugin-name",
-  lazy = true,
-  event = "VeryLazy",
+  cmd = require("plugins.plugin-name.cmds"),
+  keys = require("plugins.plugin-name.keys"),
+  event = require("plugins.plugin-name.events"),
   config = function()
-    require("plugin").setup({})
+    require("plugin").setup(require("plugins.plugin-name.opts"))
   end,
+  --cond = false,
+  --enabled = false,
 }
+return spec
 ```
+
+Optional module files per plugin:
+- `init.lua` - Main spec (required)
+- `opts.lua` - Plugin configuration options
+- `cmds.lua` - Command triggers
+- `events.lua` - Event triggers
+- `keys.lua` - Keymaps
+- `ft.lua` - Filetype triggers
+- `dependencies.lua` - Plugin dependencies
+- `builds.lua` - Build commands
+
+#### Denops Plugin Spec (Subdirectory Pattern)
+
+Denops-based plugins follow the same subdirectory pattern under `lua/denops-plugins/`.
 
 ## Testing Strategy
 
@@ -177,7 +199,7 @@ return {
 
 ## Known Limitations
 
-- 330+ plugins available but none configured (spec files TODO)
+- Plugin catalog (plugins-list.md) still contains 330+ entries but only a subset have spec files
 - LSP servers require manual installation (Mason not configured)
 - Snippets directories exist but no plugin integration configured
 - Templates exist but no plugin to use them

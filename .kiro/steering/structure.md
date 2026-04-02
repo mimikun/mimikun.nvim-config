@@ -7,11 +7,24 @@ nvim-new/
 ├── init.lua                      # Entry point: options, lazy.nvim bootstrap
 ├── lua/
 │   ├── config/
-│   │   └── lazy.lua             # Plugin manager configuration
+│   │   └── lazy.lua             # Plugin manager configuration (specs active)
 │   ├── plugins/
-│   │   └── plugins-list.md      # 330+ plugin catalog (specs TODO)
-│   └── colorschemes/
-│       └── colorschemes-list.md # 12 colorscheme catalog (specs TODO)
+│   │   ├── plugins-list.md      # 330+ plugin catalog
+│   │   ├── <plugin-name>/       # Each plugin in its own subdirectory
+│   │   │   ├── init.lua         # Main spec (required)
+│   │   │   ├── opts.lua         # Configuration options
+│   │   │   ├── cmds.lua         # Command triggers
+│   │   │   ├── events.lua       # Event triggers
+│   │   │   ├── keys.lua         # Keymaps
+│   │   │   ├── ft.lua           # Filetype triggers
+│   │   │   ├── dependencies.lua # Plugin dependencies
+│   │   │   └── builds.lua       # Build commands
+│   │   └── ...
+│   ├── colorschemes/
+│   │   ├── colorschemes-list.md # 12 colorscheme catalog
+│   │   └── <theme-name>/        # Same subdirectory pattern as plugins
+│   └── denops-plugins/          # Denops-based plugins (separate category)
+│       └── <plugin-name>/       # Same subdirectory pattern
 ├── after/
 │   ├── ftplugin/                # Language-specific settings
 │   │   ├── rust.lua             # Rust (TODO: rust-analyzer)
@@ -46,7 +59,7 @@ nvim-new/
 2. **lua/config/lazy.lua** - Plugin manager setup
    - Auto-install lazy.nvim if missing (lines 1-14)
    - Configure lazy.nvim with defaults
-   - **⚠️ Plugin specs currently commented out** (lines 25-26)
+   - **Active imports**: `plugins`, `colorschemes`, `denops-plugins` (line 25-27)
 
 3. **after/** - Post-configuration (loaded after init)
    - `ftplugin/*.lua` - Filetype-specific settings
@@ -54,19 +67,21 @@ nvim-new/
 
 ### Import Patterns
 
-#### Lazy.nvim Spec Import (Currently Disabled)
+#### Lazy.nvim Spec Import (Active)
 
 ```lua
--- lua/config/lazy.lua:24-27
+-- lua/config/lazy.lua:24-28
 spec = {
-  -- { import = "plugins" },      -- ⚠️ Commented out
-  -- { import = "colorschemes" }, -- ⚠️ Commented out
+  { import = "plugins" },
+  { import = "colorschemes" },
+  { import = "denops-plugins" },
 },
 ```
 
-When enabled, imports all files from:
-- `lua/plugins/*.lua` (each file returns a plugin spec)
-- `lua/colorschemes/*.lua` (each file returns a colorscheme spec)
+Imports all `init.lua` files from:
+- `lua/plugins/<name>/init.lua` (subdirectory per plugin)
+- `lua/colorschemes/<name>/init.lua` (subdirectory per colorscheme)
+- `lua/denops-plugins/<name>/init.lua` (subdirectory per Denops plugin)
 
 #### Module Require Pattern
 
@@ -97,10 +112,11 @@ require("config.lazy")  -- Loads lua/config/lazy.lua
 
 ### Plugin Specification Files
 
-- Pattern: Match plugin name (e.g., `lazy-nvim.lua` for folke/lazy.nvim)
-- Location: `lua/plugins/` or `lua/colorschemes/`
-- Format: Return table with plugin spec
-- Status: **Not yet created** (only list files exist)
+- Pattern: Subdirectory named after plugin slug (e.g., `lua/plugins/vim-illuminate/`)
+- Entry point: `init.lua` inside each subdirectory (returns `LazySpec` table)
+- Optional modules: `opts.lua`, `cmds.lua`, `events.lua`, `keys.lua`, `ft.lua`, `dependencies.lua`, `builds.lua`
+- Location: `lua/plugins/`, `lua/colorschemes/`, or `lua/denops-plugins/`
+- Denops plugins: Same pattern under `lua/denops-plugins/`
 
 ## Code Organization Patterns
 
@@ -215,22 +231,31 @@ vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {
 })
 ```
 
-## Future Structure (When Plugins Enabled)
-
-When plugin specs are uncommented:
+## Current Active Plugin Structure
 
 ```
 lua/plugins/
-  ├── lsp.lua              # LSP-related plugins (nvim-lspconfig, mason)
-  ├── treesitter.lua       # Syntax highlighting
-  ├── completion.lua       # Completion engines (nvim-cmp, blink-cmp)
-  ├── ui.lua               # UI enhancements (lualine, bufferline)
-  └── [330+ more specs]
+  ├── vim-illuminate/      # Symbol highlighting
+  ├── telekasten-nvim/     # Zettelkasten notes
+  ├── image-nvim/          # Image preview
+  ├── img-clip-nvim/       # Image clipboard paste
+  ├── chezmoi-nvim/        # Dotfiles management (chezmoi)
+  ├── taskfile-nvim/       # Taskfile integration
+  ├── github-actions-nvim/ # GitHub Actions
+  ├── k8s-nvim/            # Kubernetes
+  ├── lazytree/            # File tree
+  ├── nvim-lspconfig/      # LSP configuration
+  └── [more being added]
 
 lua/colorschemes/
-  ├── tokyonight.lua       # Tokyo Night theme
-  ├── catppuccin.lua       # Catppuccin theme
-  └── [10+ more specs]
+  └── tokyonight-nvim/     # Tokyo Night theme
+
+lua/denops-plugins/
+  ├── denops-vim/          # Denops runtime
+  ├── denops-translate-vim/ # Translation
+  ├── denops-docker-vim/   # Docker
+  ├── dps-ghosttext-vim/   # GhostText
+  └── dps-translate-vim/   # Translation (dps)
 ```
 
 ## Anti-Patterns to Avoid
