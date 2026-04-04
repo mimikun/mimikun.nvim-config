@@ -1,5 +1,3 @@
--- TODO: rust-language-server configs
-
 -- syntax highlighting, provided by Neovim
 vim.treesitter.start()
 -- folds, provided by Neovim
