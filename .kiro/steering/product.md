@@ -64,10 +64,13 @@ Personal Neovim configuration focused on modularity, extensibility, and maintain
 
 ## Active Plugins (Examples)
 
-- **UI**: transparent-nvim, glaze-nvim, smear-cursor-nvim, tiny-glimmer-nvim
+- **UI**: transparent-nvim, glaze-nvim, smear-cursor-nvim, tiny-glimmer-nvim, drop-nvim, wrapped-nvim
+- **Focus/Writing**: zen-mode-nvim, twilight-nvim
 - **Navigation**: lazytree, vim-illuminate
-- **LSP**: nvim-lspconfig
-- **Tools**: taskfile-nvim, github-actions-nvim, k8s-nvim, chezmoi-nvim/vim
+- **LSP**: nvim-lspconfig, lazydev-nvim, neoconf-nvim
+- **Syntax**: nvim-treesitter
+- **Keybindings**: which-key-nvim
+- **Tools**: taskfile-nvim, github-actions-nvim, k8s-nvim, chezmoi-nvim/vim, devglobe-extension-nvim
 - **Notes**: telekasten-nvim, calendar-vim
 - **Media**: image-nvim, img-clip-nvim
 - **Denops**: denops-vim, denops-translate-vim, denops-docker-vim, dps-ghosttext-vim, dps-translate-vim

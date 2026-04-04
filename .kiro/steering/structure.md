@@ -166,8 +166,9 @@ require("config.lazy")  -- Loads lua/config/lazy.lua
 ```
 init.lua
   └─> require("config.lazy")
-        └─> (Would import lua/plugins/*.lua if uncommented)
-        └─> (Would import lua/colorschemes/*.lua if uncommented)
+        └─> imports lua/plugins/<name>/init.lua (active)
+        └─> imports lua/colorschemes/<name>/init.lua (active)
+        └─> imports lua/denops-plugins/<name>/init.lua (active)
 ```
 
 ### Side Loading
@@ -235,17 +236,32 @@ vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {
 
 ```
 lua/plugins/
-  ├── vim-illuminate/      # Symbol highlighting
-  ├── telekasten-nvim/     # Zettelkasten notes
-  ├── image-nvim/          # Image preview
-  ├── img-clip-nvim/       # Image clipboard paste
-  ├── chezmoi-nvim/        # Dotfiles management (chezmoi)
-  ├── taskfile-nvim/       # Taskfile integration
-  ├── github-actions-nvim/ # GitHub Actions
-  ├── k8s-nvim/            # Kubernetes
-  ├── lazytree/            # File tree
-  ├── nvim-lspconfig/      # LSP configuration
-  └── [more being added]
+  ├── vim-illuminate/           # Symbol highlighting
+  ├── telekasten-nvim/          # Zettelkasten notes
+  ├── image-nvim/               # Image preview
+  ├── img-clip-nvim/            # Image clipboard paste
+  ├── chezmoi-nvim/             # Dotfiles management (chezmoi)
+  ├── chezmoi-vim/              # Dotfiles management (vim)
+  ├── taskfile-nvim/            # Taskfile integration
+  ├── github-actions-nvim/      # GitHub Actions
+  ├── k8s-nvim/                 # Kubernetes
+  ├── lazytree/                 # File tree
+  ├── nvim-lspconfig/           # LSP configuration
+  ├── calendar-vim/             # Calendar
+  ├── devglobe-extension-nvim/  # Dev globe extension
+  ├── transparent-nvim/         # Background transparency
+  ├── glaze-nvim/               # Window glazing effect
+  ├── wrapped-nvim/             # Wrap display
+  ├── smear-cursor-nvim/        # Cursor smear animation
+  ├── tiny-glimmer-nvim/        # Glimmer effect
+  ├── drop-nvim/                # Drop animation (folke)
+  ├── styler-nvim/              # Per-window colorscheme (disabled)
+  ├── which-key-nvim/           # Keybinding hints (folke)
+  ├── zen-mode-nvim/            # Focus mode (folke)
+  ├── lazydev-nvim/             # Neovim Lua dev (folke)
+  ├── neoconf-nvim/             # Project config (folke)
+  ├── twilight-nvim/            # Dim inactive code (folke)
+  └── nvim-treesitter/          # Syntax highlighting
 
 lua/colorschemes/
   └── tokyonight-nvim/     # Tokyo Night theme
@@ -276,9 +292,9 @@ lua/denops-plugins/
 
 ### Enabling Plugin
 
-1. Uncomment spec import in `lua/config/lazy.lua:25-26`
-2. Create `lua/plugins/<name>.lua` with spec
-3. Restart Neovim (lazy.nvim auto-installs)
+1. Create `lua/plugins/<name>/init.lua` with LazySpec (imports already active)
+2. Restart Neovim (lazy.nvim auto-installs)
+3. To disable a plugin without removing: set `--cond = false` or `--enabled = false` in spec
 
 ### Task Automation
 
