@@ -1,8 +1,13 @@
+local tm = require("plugins.drop-nvim.opts.custom-theme")
+
+---@type DropTheme|string
+local theme = tm.sgp
+
 ---@type DropConfig
 local opts = {
   -- when auto, it will choose a theme based on the date
   ---@type DropTheme|string
-  theme = "auto",
+  theme = theme,
   ---@type ({theme: string}|DropDate|{from:DropDate, to:DropDate}|{holiday:"us_thanksgiving"|"easter"})[]
   themes = {
     -- 37. **new_year** - 🎆 🎉 🍾 🥂 ⏰ 🕛 🎈 🌟 ✨ 🎊 🥳 💫 📅 2️⃣ 0️⃣ 2️⃣ 4️⃣
