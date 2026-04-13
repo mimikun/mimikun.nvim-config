@@ -7,6 +7,11 @@ local spec = {
   event = require("plugins.telekasten-nvim.events"),
   dependencies = require("plugins.telekasten-nvim.dependencies"),
   opts = require("plugins.telekasten-nvim.opts"),
+  init = function()
+    -- Register markdown treesitter parser for telekasten filetype
+    -- so nvim-treesitter highlights .md files opened through telekasten
+    vim.treesitter.language.register("markdown", "telekasten")
+  end,
   --cond = false,
   --enabled = false,
 }
