@@ -261,7 +261,11 @@ lua/plugins/
   ├── lazydev-nvim/             # Neovim Lua dev (folke)
   ├── neoconf-nvim/             # Project config (folke)
   ├── twilight-nvim/            # Dim inactive code (folke)
-  └── nvim-treesitter/          # Syntax highlighting
+  ├── nvim-treesitter/          # Syntax highlighting (FileType autocmd)
+  ├── paint-nvim/               # Highlight virtual text (folke)
+  ├── todo-comments-nvim/       # TODO comment highlighting (folke)
+  ├── mason-nvim/               # LSP/tool installer (mason-org)
+  └── tiny-cmdline-nvim/        # Centered cmdline popup (rachartier)
 
 lua/colorschemes/
   └── tokyonight-nvim/     # Tokyo Night theme

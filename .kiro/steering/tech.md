@@ -200,7 +200,7 @@ Denops-based plugins follow the same subdirectory pattern under `lua/denops-plug
 ## Known Limitations
 
 - Plugin catalog (plugins-list.md) still contains 330+ entries but only a subset have spec files
-- LSP servers require manual installation (Mason not configured)
+- LSP servers installable via Mason (mason-nvim added), but LSP configs (after/lsp/*.lua) remain TODO
 - Snippets directories exist but no plugin integration configured
 - Templates exist but no plugin to use them
 
