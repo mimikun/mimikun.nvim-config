@@ -1,7 +1,7 @@
 ---@type LazyKeysSpec[]
 local keys = {
   {
-    "<leader>p",
+    "<leader>ip",
     "<cmd>PasteImage<cr>",
     mode = "n",
     desc = "Paste image from system clipboard",
