@@ -23,7 +23,7 @@ Add animation support to the substitute plugin:
 
 ## HakonHarnes/img-clip.nvim
 
-### Telescope.nvim
+### nvim-telescope/telescope.nvim
 
 The plugin can be integrated with [telescope.nvim](https://github.com/nvim-telescope/telescope.nvim) to provide a seamless way to select and embed images using Telescope's powerful fuzzy finding capabilities.
 
@@ -55,7 +55,7 @@ end
 
 The above function should be bound to a keymap, e.g. through lazy.nvim.
 
-### Snacks.nvim
+### folke/snacks.nvim
 
 The plugin can be integrated with [Snacks.nvim picker](https://github.com/folke/snacks.nvim) which includes built-in support for previewing media files.
 
@@ -73,7 +73,7 @@ end
 
 The above function should be bound to a keymap, e.g. through lazy.nvim.
 
-### Oil.nvim
+### stevearc/oil.nvim
 
 The plugin also integrates with [oil.nvim](https://github.com/stevearc/oil.nvim), providing a convenient way to browse and select images using Oil's file explorer.
 
@@ -109,7 +109,7 @@ keymaps = {
 
 ## rachartier/tiny-cmdline.nvim
 
-### blink.cmp
+### saghen/blink.cmp
 
 blink.cmp manages its own menu position independently. Use the built-in adapter so it follows the repositioned cmdline window:
 
