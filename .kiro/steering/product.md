@@ -26,7 +26,7 @@ Personal Neovim configuration focused on modularity, extensibility, and maintain
 - **Lazy.nvim foundation**: Modern plugin manager with auto-installation
 - **Lazy-by-default**: All plugins configured with `lazy = true`
 - **Active plugin specs**: Plugin imports enabled in `lua/config/lazy.lua` (plugins, colorschemes, denops-plugins)
-- **Multi-format catalogs**: Plugin list (330+ items), colorscheme list (12 themes)
+- **Colorscheme catalog**: 12 colorscheme options documented in `lua/colorschemes/colorschemes-list.md`
 - **Denops ecosystem**: Dedicated `lua/denops-plugins/` category for Denops-based plugins
 
 ### Development Environment
@@ -66,10 +66,12 @@ Personal Neovim configuration focused on modularity, extensibility, and maintain
 
 - **UI**: transparent-nvim, glaze-nvim, smear-cursor-nvim, tiny-glimmer-nvim, drop-nvim, wrapped-nvim, paint-nvim, tiny-cmdline-nvim
 - **Focus/Writing**: zen-mode-nvim, twilight-nvim
-- **Navigation**: lazytree, vim-illuminate
+- **Navigation**: oil-nvim (file manager), lazytree, vim-illuminate
+- **File Manager Ecosystem**: oil-nvim, oil-git-nvim, oil-git-status-nvim, oil-lsp-diagnostics-nvim
 - **LSP**: nvim-lspconfig, lazydev-nvim, neoconf-nvim, mason-nvim
-- **Syntax**: nvim-treesitter, todo-comments-nvim
-- **Keybindings**: which-key-nvim
+- **Syntax**: nvim-treesitter, todo-comments-nvim, ts-comments-nvim
+- **Keybindings**: which-key-nvim, hardtime-nvim (habit enforcement)
+- **Clipboard/Yank**: yanky-nvim, yankbank-nvim, nvim-neoclip-lua, sqlite-lua
 - **Tools**: taskfile-nvim, github-actions-nvim, k8s-nvim, chezmoi-nvim/vim, devglobe-extension-nvim
 - **Notes**: telekasten-nvim, calendar-vim
 - **Media**: image-nvim, img-clip-nvim
