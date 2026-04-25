@@ -96,7 +96,7 @@ local opts = {
   ---@type table<string, any>
   win_options = {
     wrap = false,
-    -- NOTE: oil-git-status.nvim is NEED it 
+    -- NOTE: oil-git-status.nvim is NEED it
     signcolumn = "yes:2",
     cursorcolumn = false,
     foldcolumn = "0",

@@ -95,7 +95,6 @@ current_line_blame_formatter_nc
 
 ]]
 
-
 ---@alias Gitsigns.SignType
 ---| 'add'
 ---| 'change'
