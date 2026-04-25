@@ -64,16 +64,19 @@ Personal Neovim configuration focused on modularity, extensibility, and maintain
 
 ## Active Plugins (Examples)
 
-- **UI**: transparent-nvim, glaze-nvim, smear-cursor-nvim, tiny-glimmer-nvim, drop-nvim, wrapped-nvim, paint-nvim, tiny-cmdline-nvim
+- **UI**: transparent-nvim, glaze-nvim, smear-cursor-nvim, tiny-glimmer-nvim, drop-nvim, wrapped-nvim, paint-nvim, tiny-cmdline-nvim, edgy-nvim (edge panels), satellite-nvim (scrollbar), statuscol-nvim, virt-column-nvim
 - **Focus/Writing**: zen-mode-nvim, twilight-nvim
 - **Navigation**: oil-nvim (file manager), lazytree, vim-illuminate
 - **File Manager Ecosystem**: oil-nvim, oil-git-nvim, oil-git-status-nvim, oil-lsp-diagnostics-nvim
-- **LSP**: nvim-lspconfig, lazydev-nvim, neoconf-nvim, mason-nvim
+- **LSP/Diagnostics**: nvim-lspconfig, lazydev-nvim, neoconf-nvim, mason-nvim, tiny-inline-diagnostic-nvim
 - **Syntax**: nvim-treesitter, todo-comments-nvim, ts-comments-nvim
+- **Git**: gitsigns-nvim (signcolumn indicators)
 - **Keybindings**: which-key-nvim, hardtime-nvim (habit enforcement)
 - **Clipboard/Yank**: yanky-nvim, yankbank-nvim, nvim-neoclip-lua, sqlite-lua
-- **Tools**: taskfile-nvim, github-actions-nvim, k8s-nvim, chezmoi-nvim/vim, devglobe-extension-nvim
-- **Notes**: telekasten-nvim, calendar-vim
+- **Session**: persistence-nvim (session management)
+- **Tools**: taskfile-nvim, github-actions-nvim, k8s-nvim, chezmoi-nvim/vim, devglobe-extension-nvim, orphans-nvim (plugin cleanup)
+- **Time Tracking**: takatime (WakaTime-style), milli-nvim
+- **Notes/Markdown**: telekasten-nvim, calendar-vim, md-render-nvim, milli-nvim (MilliPreview)
 - **Media**: image-nvim, img-clip-nvim
 - **Denops**: denops-vim, denops-translate-vim, denops-docker-vim, dps-ghosttext-vim, dps-translate-vim
 - **Colorschemes**: tokyonight-nvim

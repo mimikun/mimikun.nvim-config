@@ -236,46 +236,57 @@ vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {
 
 ```
 lua/plugins/
-  ├── vim-illuminate/           # Symbol highlighting
-  ├── telekasten-nvim/          # Zettelkasten notes
-  ├── image-nvim/               # Image preview
-  ├── img-clip-nvim/            # Image clipboard paste
-  ├── chezmoi-nvim/             # Dotfiles management (chezmoi)
-  ├── chezmoi-vim/              # Dotfiles management (vim)
-  ├── taskfile-nvim/            # Taskfile integration
-  ├── github-actions-nvim/      # GitHub Actions
-  ├── k8s-nvim/                 # Kubernetes
-  ├── lazytree/                 # File tree (legacy)
-  ├── oil-nvim/                 # File manager (stevearc, replaces netrw)
-  ├── oil-git-nvim/             # Git status in oil.nvim (malewicz1337)
-  ├── oil-git-status-nvim/      # Git status columns for oil (refractalize)
-  ├── oil-lsp-diagnostics-nvim/ # LSP diagnostics in oil (JezerM)
-  ├── nvim-lspconfig/           # LSP configuration
-  ├── calendar-vim/             # Calendar
-  ├── devglobe-extension-nvim/  # Dev globe extension
-  ├── transparent-nvim/         # Background transparency
-  ├── glaze-nvim/               # Window glazing effect
-  ├── wrapped-nvim/             # Wrap display
-  ├── smear-cursor-nvim/        # Cursor smear animation
-  ├── tiny-glimmer-nvim/        # Glimmer effect
-  ├── drop-nvim/                # Drop animation (folke)
-  ├── styler-nvim/              # Per-window colorscheme (disabled)
-  ├── which-key-nvim/           # Keybinding hints (folke)
-  ├── zen-mode-nvim/            # Focus mode (folke)
-  ├── lazydev-nvim/             # Neovim Lua dev (folke)
-  ├── neoconf-nvim/             # Project config (folke)
-  ├── twilight-nvim/            # Dim inactive code (folke)
-  ├── nvim-treesitter/          # Syntax highlighting (FileType autocmd)
-  ├── paint-nvim/               # Highlight virtual text (folke)
-  ├── todo-comments-nvim/       # TODO comment highlighting (folke)
-  ├── ts-comments-nvim/         # TypeScript comment handling (folke)
-  ├── mason-nvim/               # LSP/tool installer (mason-org)
-  ├── tiny-cmdline-nvim/        # Centered cmdline popup (rachartier)
-  ├── hardtime-nvim/            # Vim habit enforcement (m4xshen)
-  ├── yanky-nvim/               # Yank history and cycling (gbprod)
-  ├── yankbank-nvim/            # Yank bank UI (ptdewey)
-  ├── nvim-neoclip-lua/         # Clipboard manager with telescope (AckslD)
-  └── sqlite-lua/               # SQLite dependency for neoclip/yankbank
+  ├── vim-illuminate/              # Symbol highlighting
+  ├── telekasten-nvim/             # Zettelkasten notes
+  ├── image-nvim/                  # Image preview
+  ├── img-clip-nvim/               # Image clipboard paste
+  ├── chezmoi-nvim/                # Dotfiles management (chezmoi)
+  ├── chezmoi-vim/                 # Dotfiles management (vim)
+  ├── taskfile-nvim/               # Taskfile integration
+  ├── github-actions-nvim/         # GitHub Actions
+  ├── k8s-nvim/                    # Kubernetes
+  ├── lazytree/                    # File tree (legacy)
+  ├── oil-nvim/                    # File manager (stevearc, replaces netrw)
+  ├── oil-git-nvim/                # Git status in oil.nvim (malewicz1337)
+  ├── oil-git-status-nvim/         # Git status columns for oil (refractalize)
+  ├── oil-lsp-diagnostics-nvim/    # LSP diagnostics in oil (JezerM)
+  ├── nvim-lspconfig/              # LSP configuration
+  ├── calendar-vim/                # Calendar
+  ├── devglobe-extension-nvim/     # Dev globe extension
+  ├── transparent-nvim/            # Background transparency
+  ├── glaze-nvim/                  # Window glazing effect
+  ├── wrapped-nvim/                # Wrap display
+  ├── smear-cursor-nvim/           # Cursor smear animation
+  ├── tiny-glimmer-nvim/           # Glimmer effect
+  ├── drop-nvim/                   # Drop animation (folke)
+  ├── edgy-nvim/                   # Window layout / edge panels (folke)
+  ├── styler-nvim/                 # Per-window colorscheme (disabled)
+  ├── which-key-nvim/              # Keybinding hints (folke)
+  ├── zen-mode-nvim/               # Focus mode (folke)
+  ├── lazydev-nvim/                # Neovim Lua dev (folke)
+  ├── neoconf-nvim/                # Project config (folke)
+  ├── persistence-nvim/            # Session persistence (folke)
+  ├── twilight-nvim/               # Dim inactive code (folke)
+  ├── nvim-treesitter/             # Syntax highlighting (FileType autocmd)
+  ├── paint-nvim/                  # Highlight virtual text (folke)
+  ├── todo-comments-nvim/          # TODO comment highlighting (folke)
+  ├── ts-comments-nvim/            # TypeScript comment handling (folke)
+  ├── mason-nvim/                  # LSP/tool installer (mason-org)
+  ├── tiny-cmdline-nvim/           # Centered cmdline popup (rachartier)
+  ├── tiny-inline-diagnostic-nvim/ # Inline LSP diagnostics (rachartier)
+  ├── hardtime-nvim/               # Vim habit enforcement (m4xshen)
+  ├── yanky-nvim/                  # Yank history and cycling (gbprod)
+  ├── yankbank-nvim/               # Yank bank UI (ptdewey)
+  ├── nvim-neoclip-lua/            # Clipboard manager with telescope (AckslD)
+  ├── sqlite-lua/                  # SQLite dependency for neoclip/yankbank
+  ├── gitsigns-nvim/               # Git signs in signcolumn (lewis6991)
+  ├── satellite-nvim/              # Scrollbar with decorations (lewis6991)
+  ├── statuscol-nvim/              # Status column customization (luukvbaal)
+  ├── virt-column-nvim/            # Virtual colorcolumn (luukvbaal)
+  ├── md-render-nvim/              # Markdown rendering (delphinus)
+  ├── milli-nvim/                  # Markdown preview / MilliPreview (amansingh-afk)
+  ├── orphans-nvim/                # Orphan plugin cleanup (ZWindL)
+  └── takatime/                    # WakaTime-style time tracking (Rtarun3606k)
 
 lua/colorschemes/
   └── tokyonight-nvim/     # Tokyo Night theme
