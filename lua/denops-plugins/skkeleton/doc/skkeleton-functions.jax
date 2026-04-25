@@ -1,0 +1,101 @@
+*skkeleton-functions.txt* skkeletonの機能定義
+
+マッピングで使える機能( *skkeleton-functions* )の一覧です。
+括弧内は機能が使えるモードとデフォルトのマッピングです。!が付いている物はマッ
+ピング先のキーに一部の挙動が依存します。
+
+kakutei                                          *skkeleton-functions-kakutei*
+        (input: <NL>, henkan: <NL>)
+        入力中や変換中の文字列を確定します。
+        何も入力されていない場合、カナ入力などのモードを解除します。
+
+newline                                          *skkeleton-functions-newline*
+        (input: <CR>, henkan: <CR>)
+        現在の入力を確定し改行します。
+        確定後に改行が入るかどうかを |skkeleton-config-eggLikeNewline| により
+        カスタマイズすることもできます。
+
+cancel                                            *skkeleton-functions-cancel*
+        (input: <C-g>, henkan: <C-g>)
+        現在の入力をキャンセルします。
+        どこまで戻るかを |skkeleton-config-immediatelyCancel| により
+        変更できます。
+
+disable                                          *skkeleton-functions-disable*
+        (input, henkan)
+        skkeletonを無効化します。
+
+escape                                            *skkeleton-functions-escape*
+        (input: <Esc>, henkan: <Esc>)
+        挿入モードもしくはコマンドラインモードから抜けます。
+        |skkeleton-config-keepState| が有効になっている場合は
+        再びモードに入った際にskkeletonが有効化されます。
+
+henkanFirst                                  *skkeleton-functions-henkanFirst*
+        (input)!
+        変換を開始します。
+        直接入力モードの場合は仮名テーブルの処理を行います。
+        該当のテーブルに `henkanFirst` が割り当てられている場合は何もマッピング
+        されていないように振る舞います。
+
+henkanForward                              *skkeleton-functions-henkanForward*
+        (henkan: <Space>)
+        変換候補を次に進めます。
+
+henkanBackward                             *skkeleton-function-henkanBackward*
+        (henkan: x)
+        変換候補を前に戻します。
+        戻りきった際は入力ステートに戻ります。
+
+purgeCandidate                             *skkeleton-function-purgeCandidate*
+        (input, henkan)
+        現在選択している変換候補をユーザー辞書から削除します。
+        変換中以外は直前に確定した候補が対象になります。
+        (補完で確定した候補を消す際などに便利です)
+        削除が行われた場合は入力状態が解除されます。
+
+henkanInput                                  *skkeleton-functions-henkanInput*
+        (henkan)!
+        変換候補を確定して文字を入力します。
+
+kakuteiFeed                                  *skkeleton-functions-kakuteiFeed*
+        (input)
+        直接入力時に入力が確定できる場合、確定します。
+        (ローマ字入力で「n」が入力されている場合など)
+
+henkanPoint                                  *skkeleton-functions-henkanPoint*
+        (input)
+        変換ポイントを設定します。いわゆるsticky-keyです。
+
+deleteChar                                    *skkeleton-functions-deleteChar*
+        (input: <BS>)
+        入力を1文字削除します。変換ポイントに差し掛かると解除します。
+
+katakana                                        *skkeleton-functions-katakana*
+        (input)
+        カタカナモードに入ります。
+        変換ポイントが設定されている場合はカタカナに変換します。
+
+hankatakana                                  *skkeleton-functions-hankatakana*
+        (input: <C-q>)
+        半角カタカナモードに入ります。
+        変換ポイントが設定されている場合は半角カタカナに変換します。
+
+zenkaku                                          *skkeleton-functions-zenkaku*
+        (input)
+        全角英数モードに入ります。
+
+abbrev                                            *skkeleton-functions-abbrev*
+        (input)
+        abbrevモードに入ります。
+
+prefix                                            *skkeleton-functions-prefix*
+        (input: >)
+        接頭辞の入力を開始します。
+        開始できない場合はマッピングしたキーに従ってかな入力します。
+
+suffix                                            *skkeleton-functions-suffix*
+        (henkan: >)
+        接尾辞の入力を開始します。
+
+vim:tw=78:fo=tcq2mM:ts=8:ft=help:norl
