@@ -399,8 +399,5 @@ Provided if |gitsigns-config-current_line_blame| is enabled.
 dictionary containing of the blame object for the current line. For complete
 list of keys, see the {blame_info} argument from
 |gitsigns-config-current_line_blame_formatter|.
-
-------------------------------------------------------------------------------
-vim:tw=78:ts=8:ft=help:norl:
 ```
 
