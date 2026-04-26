@@ -1453,12 +1453,17 @@ M.colors[2] = (function()
       { 3, 6, "#ddcccc", "NONE" },
       { 6, 72, "#ffffff", "NONE" },
     },
-    { { 0, 13, "#ffffff", "NONE" }, { 13, 16, "#ffeeee", "NONE" }, { 16, 22, "#eedddd", "NONE" }, {
-      22,
-      74,
-      "#ffffff",
-      "NONE",
-    } },
+    {
+      { 0, 13, "#ffffff", "NONE" },
+      { 13, 16, "#ffeeee", "NONE" },
+      { 16, 22, "#eedddd", "NONE" },
+      {
+        22,
+        74,
+        "#ffffff",
+        "NONE",
+      },
+    },
     {
       { 0, 13, "#ffffff", "NONE" },
       { 13, 16, "#eedddd", "NONE" },
