@@ -1,0 +1,81 @@
+---@type table
+local cmds = {
+  "HopWord",
+  "HopWordBC",
+  "HopWordAC",
+  "HopWordCurrentLine",
+  "HopWordCurrentLineBC",
+  "HopWordCurrentLineAC",
+  "HopWordMW",
+
+  "HopPattern",
+  "HopPatternBC",
+  "HopPatternAC",
+  "HopPatternCurrentLine",
+  "HopPatternCurrentLineBC",
+  "HopPatternCurrentLineAC",
+  "HopPatternMW",
+
+  "HopChar1",
+  "HopChar1BC",
+  "HopChar1AC",
+  "HopChar1CurrentLine",
+  "HopChar1CurrentLineBC",
+  "HopChar1CurrentLineAC",
+  "HopChar1MW",
+
+  "HopChar2",
+  "HopChar2BC",
+  "HopChar2AC",
+  "HopChar2CurrentLine",
+  "HopChar2CurrentLineBC",
+  "HopChar2CurrentLineAC",
+  "HopChar2MW",
+
+  "HopLine",
+  "HopLineBC",
+  "HopLineAC",
+  "HopLineCurrentLine",
+  "HopLineCurrentLineBC",
+  "HopLineCurrentLineAC",
+  "HopLineMW",
+
+  "HopLineStart",
+  "HopLineStartBC",
+  "HopLineStartAC",
+  "HopLineStartCurrentLine",
+  "HopLineStartCurrentLineBC",
+  "HopLineStartCurrentLineAC",
+  "HopLineStartMW",
+
+  "HopVertical",
+  "HopVerticalBC",
+  "HopVerticalAC",
+  "HopVerticalMW",
+
+  "HopAnywhere",
+  "HopAnywhereBC",
+  "HopAnywhereAC",
+  "HopAnywhereCurrentLine",
+  "HopAnywhereCurrentLineBC",
+  "HopAnywhereCurrentLineAC",
+  "HopAnywhereMW",
+
+  "HopPasteChar1",
+  "HopPasteChar1BC",
+  "HopPasteChar1AC",
+  "HopPasteChar1CurrentLine",
+  "HopPasteChar1CurrentLineBC",
+  "HopPasteChar1CurrentLineAC",
+
+  "HopYankChar1",
+  "HopYankChar1BC",
+  "HopYankChar1AC",
+  "HopYankChar1CurrentLine",
+  "HopYankChar1CurrentLineBC",
+  "HopYankChar1CurrentLineAC",
+
+  "HopNodes",
+}
+
+return cmds
