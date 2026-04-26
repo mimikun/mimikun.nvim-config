@@ -44,11 +44,17 @@ local opts = {
     clipboard_register = nil,
   },
   highlight = {
-    ---@type boolean Define if highlight put text feature is enabled.
-    on_put = true,
+    -- NOTE: Use y3owk1n/undo-glow.nvim
+    
+    -- Define if highlight put text feature is enabled.
+    ---@type boolean 
+    on_put = false,
 
-    ---@type boolean Define if highlight yanked text feature is enabled.
-    on_yank = true,
+    -- NOTE: Use y3owk1n/undo-glow.nvim
+ 
+    -- Define if highlight yanked text feature is enabled.
+    ---@type boolean 
+    on_yank = false,
 
     ---@type number Define the duration of highlight.
     timer = 500,
