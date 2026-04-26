@@ -1,0 +1,216 @@
+local MODSTR = "telescope._extensions.projects.actions"
+local ERROR = vim.log.levels.ERROR
+if vim.g.project_setup ~= 1 then
+  vim.notify(("(%s): `project.nvim` is not loaded!"):format(MODSTR), ERROR)
+  return
+end
+
+local Log = require("project.util.log")
+if not require("project.util").mod_exists("telescope") then
+  Log.error(("(%s): Telescope is not installed!"):format(MODSTR))
+  vim.notify(("(%s): Telescope is not installed!"):format(MODSTR))
+  return
+end
+
+local Telescope = require("telescope")
+local Finders = require("telescope.finders")
+local Actions = require("telescope.actions")
+local Generate = require("telescope.actions.generate")
+local Builtin = require("telescope.builtin")
+local State = require("telescope.actions.state")
+local History = require("project.util.history")
+local Api = require("project.api")
+local Config = require("project.config")
+local Util = require("project.util")
+local make_display = require("telescope._extensions.projects.util").make_display
+
+---@class Project.Telescope.Actions
+local M = {}
+
+M.help_mappings = Generate.which_key({
+  only_show_curret_mode = true,
+  name_width = 30,
+  max_height = 0.6,
+  separator = " | ",
+  close_with_action = false,
+})
+
+---@param prompt_bufnr integer
+function M.delete_project(prompt_bufnr)
+  local active_entry = State.get_selected_entry() ---@type Project.ActionEntry
+  if not active_entry then
+    Actions.close(prompt_bufnr)
+    Log.error(("(%s.delete_project): Entry not available!"):format(MODSTR, prompt_bufnr))
+    return
+  end
+
+  History.delete_project(active_entry.value, true)
+  Log.debug(("(%s.delete_project): Refreshing prompt `%s`."):format(MODSTR, prompt_bufnr))
+  State.get_current_picker(prompt_bufnr):refresh(
+    (function()
+      local results = History.get_recent_projects(true)
+      if Config.options.telescope.sort == "newest" then
+        Log.debug(("(%s.delete_project): Sorting order to `newest`."):format(MODSTR))
+        results = Util.reverse(results)
+      end
+      return Finders.new_table({
+        results = results,
+        entry_maker = function(value) ---@param value string|ProjectHistoryEntry
+          local name ---@type string
+          if History.legacy then
+            ---@cast value string
+            name = ("%s/%s"):format(vim.fn.fnamemodify(value, ":h:t"), vim.fn.fnamemodify(value, ":t"))
+          else
+            ---@cast value ProjectHistoryEntry
+            name = value.name
+          end
+          local action_entry = { ---@class Project.ActionEntry
+            display = make_display,
+            name = name,
+            value = value,
+            ordinal = ("%s %s"):format(name, value),
+          }
+          return action_entry
+        end,
+      })
+    end)(),
+    { reset_prompt = true }
+  )
+end
+
+---@param prompt_bufnr integer
+---@return string|nil
+---@return boolean|nil
+function M.change_working_directory(prompt_bufnr)
+  local selected_entry = State.get_selected_entry() ---@type Project.ActionEntry
+  Actions.close(prompt_bufnr)
+  Log.debug(("(%s.change_working_directory): Closed prompt `%s`."):format(MODSTR, prompt_bufnr))
+  if not selected_entry then
+    Log.error(("(%s.change_working_directory): Invalid entry!"):format(MODSTR))
+    return
+  end
+
+  local cd_successful = Api.set_pwd(selected_entry.value, "telescope")
+  if cd_successful then
+    Log.info(("(%s.change_working_directory): Successfully changed directory."):format(MODSTR))
+  else
+    Log.error(("(%s.change_working_directory): Failed to change directory!"):format(MODSTR))
+  end
+  return selected_entry.value, cd_successful
+end
+
+---@param prompt_bufnr integer
+function M.find_project_files(prompt_bufnr)
+  local project_path, cd_successful = M.change_working_directory(prompt_bufnr)
+  if not cd_successful then
+    return
+  end
+  local opts = {
+    path = project_path,
+    cwd = project_path,
+    cwd_to_path = true,
+    hidden = Config.options.show_hidden,
+    hide_parent_dir = true,
+    mode = "insert",
+  }
+  ---CREDITS: https://github.com/ahmedkhalf/project.nvim/pull/107
+  if Config.options.telescope.prefer_file_browser and Telescope.extensions.file_browser then
+    Telescope.extensions.file_browser.file_browser(opts)
+    return
+  end
+  Builtin.find_files(opts)
+end
+
+---@param prompt_bufnr integer
+function M.browse_project_files(prompt_bufnr)
+  local project_path, cd_successful = M.change_working_directory(prompt_bufnr)
+  if not cd_successful then
+    return
+  end
+  local opts = {
+    path = project_path,
+    cwd = project_path,
+    cwd_to_path = true,
+    hidden = Config.options.show_hidden,
+    hide_parent_dir = true,
+    mode = "insert",
+  }
+  ---CREDITS: https://github.com/ahmedkhalf/project.nvim/pull/107
+  if Config.options.telescope.prefer_file_browser and Telescope.extensions.file_browser then
+    Telescope.extensions.file_browser.file_browser(opts)
+    return
+  end
+  Builtin.find_files(opts)
+end
+
+---@param prompt_bufnr integer
+function M.search_in_project_files(prompt_bufnr)
+  local project_path, cd_successful = M.change_working_directory(prompt_bufnr)
+  if not cd_successful then
+    return
+  end
+  Builtin.live_grep({ cwd = project_path, hidden = Config.options.show_hidden, mode = "insert" })
+end
+
+---@param prompt_bufnr integer
+function M.rename_project(prompt_bufnr)
+  local active_entry = State.get_selected_entry() ---@type Project.ActionEntry
+  if not active_entry then
+    Actions.close(prompt_bufnr)
+    Log.error(("(%s.rename_project): Entry not available!"):format(MODSTR, prompt_bufnr))
+    return
+  end
+
+  require("project.popup").rename_input(active_entry.value, History.find_entry("recent", active_entry.value, "name"))
+  Log.debug(("(%s.rename_project): Refreshing prompt `%s`."):format(MODSTR, prompt_bufnr))
+
+  State.get_current_picker(prompt_bufnr):refresh(
+    (function()
+      local results = History.get_recent_projects(true)
+      if Config.options.telescope.sort == "newest" then
+        Log.debug(("(%s.rename_project): Sorting order to `newest`."):format(MODSTR))
+        results = Util.reverse(results)
+      end
+      return Finders.new_table({
+        results = results,
+        entry_maker = function(value) ---@param value string|ProjectHistoryEntry
+          local name ---@type string
+          if History.legacy then
+            ---@cast value string
+            name = ("%s/%s"):format(vim.fn.fnamemodify(value, ":h:t"), vim.fn.fnamemodify(value, ":t"))
+          else
+            ---@cast value ProjectHistoryEntry
+            name = value.name
+          end
+          local action_entry = { ---@class Project.ActionEntry
+            display = make_display,
+            name = name,
+            value = value,
+            ordinal = ("%s %s"):format(name, value),
+          }
+          return action_entry
+        end,
+      })
+    end)(),
+    { reset_prompt = true }
+  )
+end
+
+---@param prompt_bufnr integer
+function M.recent_project_files(prompt_bufnr)
+  local _, cd_successful = M.change_working_directory(prompt_bufnr)
+  if not cd_successful then
+    return
+  end
+  Builtin.oldfiles({ cwd_only = true, hidden = Config.options.show_hidden })
+end
+
+local T_Actions = setmetatable(M, { ---@type Project.Telescope.Actions
+  __index = M,
+  __newindex = function()
+    vim.notify("Project.Telescope.Actions is Read-Only!", ERROR)
+  end,
+})
+
+return T_Actions
+-- vim: set ts=2 sts=2 sw=2 et ai si sta:

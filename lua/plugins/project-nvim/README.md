@@ -1,0 +1,588 @@
+### Pattern Matching
+
+`project.nvim` comes with a `vim-rooter`-inspired pattern matching expression engine
+to give you better handling of your projects.
+
+For your convenience here come some examples:
+
+<details>
+<summary>To specify the root is a certain directory, prefix it with <code>=</code>:</summary>
+
+```lua
+patterns = { '=src' }
+```
+
+</details>
+
+<details>
+<summary>
+To specify the root has a certain directory or file (which may be a glob), just
+add it to the pattern list:
+</summary>
+
+```lua
+patterns = { '.git', '.github', '*.sln', 'build/env.sh' }
+```
+
+</details>
+
+<details>
+<summary>
+To specify the root has a certain directory as an ancestor (useful for excluding directories),
+prefix it with <code>^</code>:
+</summary>
+
+```lua
+patterns = { '^fixtures' }
+```
+
+</details>
+
+<details>
+<summary>
+To specify the root has a certain directory as its direct ancestor/parent
+(useful when you put working projects in a common directory), prefix it with <code>\></code>:
+</summary>
+
+```lua
+patterns = { '>Latex' }
+```
+
+</details>
+
+<details>
+<summary>To exclude a pattern, prefix it with `!`</summary>
+
+```lua
+patterns = { '!.git/worktrees', '!=extras', '!^fixtures', '!build/env.sh' }
+```
+
+</details>
+
+> [!IMPORTANT]
+> Make sure to put your pattern exclusions first, and then the patterns you DO want included.
+>
+> Also if you have `allow_patterns_for_lsp` enabled, it will also work somewhat for your LSP clients.
+
+### Lualine
+
+You can add the `project.nvim` component to your statusline using `lualine.nvim`:
+
+```lua
+lualine_b = {
+  {
+    "project",
+
+    -- Can be:
+    -- - `'short'`         - Only shows the basename of the project root directory
+    -- - `'full'`          - Shows the full path but without expanding the home directory
+    -- - `'full_expanded'` - Shows the full, expanded path
+    -- - `'name'`          - (default) Will show the current project's name. ONLY WORKS IF HISTORY
+    --                       HAS BEEN MIGRATED, OTHERWISE `'short'` WILL BE USED
+    format = 'name',
+
+    -- Text to display when no project root is found (set to `nil` or empty string to disable)
+    no_project = 'N/A',
+
+    -- The separator
+    separator = " ",
+
+    -- Optional table of two strings set as enclosing characters.
+    -- Set to `nil` to disable it
+    --
+    -- e.g. `enclose_pair = { '(', ')' }` ==> `(<YOUR_PROJECT>)`
+    --      `enclose_pair = { '<', ']' }` ==> `<<YOUR_PROJECT>]`
+    --      `enclose_pair = { nil, 'a' }` ==> `<YOUR_PROJECT>a`
+    enclose_pair = nil,
+  }
+}
+```
+
+### Nvim Tree
+
+Make sure these flags are enabled to support [`nvim-tree.lua`](https://github.com/nvim-tree/nvim-tree.lua):
+
+```lua
+require('nvim-tree').setup({
+  sync_root_with_cwd = true,
+  respect_buf_cwd = true,
+  update_focused_file = {
+    enable = true,
+    update_root = true,
+  },
+})
+```
+
+### Neo Tree
+
+You can use `:Neotree filesystem ...` when changing a project:
+
+```lua
+vim.keymap.set('n', '<YOUR-TOGGLE-MAP>', ':Neotree filesystem toggle reveal_force_cwd<CR>', opts)
+vim.keymap.set('n', '<YOUR-SHOW-MAP>', ':Neotree filesystem show reveal_force_cwd<CR>', opts)
+vim.keymap.set('n', '<YOUR-FLOAT-MAP>', ':Neotree filesystem float reveal_force_cwd<CR>', opts)
+-- ... and so on
+```
+
+### Telescope
+
+To enable [`telescope.nvim`](https://github.com/nvim-telescope/telescope.nvim) integration use the following
+code in your config:
+
+```lua
+require('telescope').setup()
+require('telescope').load_extension('projects')
+```
+
+After that you can now call it from the command line:
+
+```vim
+:Telescope projects
+```
+
+You can also configure the picker when calling `require('telescope').setup()`
+**CREDITS**: [@ldfwbebp](https://github.com/ahmedkhalf/project.nvim/pull/160)
+
+```lua
+require('telescope').setup({
+  extensions = {
+    projects = {
+      prompt_prefix = "󱎸  ",
+      layout_strategy = "horizontal",
+      layout_config = {
+        anchor = "N",
+        height = 0.25,
+        width = 0.6,
+        prompt_position = "bottom",
+      },
+    },
+  },
+})
+```
+
+#### Telescope Mappings
+
+`project.nvim` comes with the following mappings for Telescope:
+
+| Normal Mode | Insert Mode | Action                     |
+|-------------|-------------|----------------------------|
+| `f`         | `<C-f>`     | `find_project_files`       |
+| `b`         | `<C-b>`     | `browse_project_files`     |
+| `d`         | `<C-d>`     | `delete_project`           |
+| `s`         | `<C-s>`     | `search_in_project_files`  |
+| `r`         | `<C-r>`     | `recent_project_files`     |
+| `w`         | `<C-w>`     | `change_working_directory` |
+
+_You can find the Actions in [`telescope/_extensions/projects/actions.lua`](https://github.com/DrKJeff16/project.nvim/blob/main/lua/telescope/_extensions/projects/actions.lua)_.
+
+---
+
+### `mini.starter`
+
+If you use [`nvim-mini/mini.starter`](https://github.com/nvim-mini/mini.starter) you can include the
+following snippet in your `MiniStarter` setup:
+
+```lua
+require('mini.starter').setup({
+  evaluate_single = true,
+  items = {
+    { name = 'Projects', action = 'Project', section = 'Projects' }, -- Runs `:Project`
+    { name = 'Recent Projects', action = 'ProjectRecents', section = 'Projects' }, -- `:ProjectRecents`
+    -- Other items...
+  },
+})
+```
+
+### `picker.nvim`
+
+This plugin has a custom integration with [@wsdjeg](https://github.com/wsdjeg)'s
+[`picker.nvim`](https://github.com/wsdjeg/picker.nvim).
+If enabled, the [`:ProjectPicker`](#projectpicker) command will be available to you.
+
+To enable it you'll need the plugin installed, then in your setup:
+
+```lua
+require('project').setup({
+  picker = {
+    enabled = true,
+    sort = 'newest', -- 'newest' or 'oldest'
+    hidden = false, -- Show hidden files
+  }
+})
+```
+
+Mappings:
+
+| Normal Mode | Description                             |
+|-------------|-----------------------------------------|
+| `<C-d>`     | Delete the selected project             |
+| `<C-w>`     | Changes the cwd to the selected project |
+
+You can find the integration in:
+
+- [_`extensions/picker.lua`_](https://github.com/DrKJeff16/project.nvim/blob/main/lua/project/extensions/picker.lua)
+- [_`picker/sources/project.lua`_](https://github.com/DrKJeff16/project.nvim/blob/main/lua/picker/sources/project.lua).
+
+### `snacks.nvim`
+
+This plugin has a custom integration with [`snacks.nvim`](https://github.com/folke/snacks.nvim).
+If enabled, the [`:ProjectSnacks`](#projectsnacks) command will be available to you.
+
+```lua
+require('project.extensions.snacks').pick()
+```
+
+To enable and configure it you'll need the plugin installed, then in your setup:
+
+```lua
+require('project').setup({
+  snacks = {
+    enabled = true, -- Will enable the `:ProjectSnacks` command
+    opts = {
+      sort = 'newest',
+      hidden = false,
+      title = 'Select Project',
+      layout = 'select',
+      -- icon = {},
+      -- path_icons = {},
+    },
+  },
+})
+```
+
+Mappings:
+
+| Normal Mode | Description                             |
+|-------------|-----------------------------------------|
+| `<C-d>`     | Delete the selected project             |
+| `<C-w>`     | Changes the cwd to the selected project |
+
+You can find the integration in [_`extensions/snacks.lua`_](https://github.com/DrKJeff16/project.nvim/blob/main/lua/project/extensions/snacks.lua).
+
+---
+
+## Commands
+
+These are the user commands you can call from the cmdline:
+
+### `:Project`
+
+The `:Project` command will open a UI window pointing to all the useful operations
+this plugin can provide. This one is subject to change, just as `vim.ui` is.
+
+See [_`commands.lua`_](https://github.com/DrKJeff16/project.nvim/blob/main/lua/project/commands.lua) for more info.
+
+### `:ProjectPicker`
+
+> [!IMPORTANT]
+> **This command works ONLY if you have `picker.nvim` installed
+> and `picker.enabled` set to `true`.**
+
+The `:ProjectPicker` command is a dynamically enabled user command that runs
+`project.nvim` through `picker.nvim`.
+
+If a bang is passed (`:ProjectPicker!`) and you don't already have `picker.hidden` set to `true`,
+then a selected project will show hidden files.
+
+This is an alias for `:Picker project`.
+
+See [_`picker.nvim` Integration_](#pickernvim) for more info.
+
+### `:ProjectSnacks`
+
+> [!IMPORTANT]
+> **This command works ONLY if you have `snacks.nvim` installed
+> and `snacks.enabled` set to `true`.**
+
+The `:ProjectSnacks` command is a dynamically enabled user command that runs
+`project.nvim` through `snacks.nvim`.
+
+This is an alias for:
+
+```lua
+require('project.extensions.snacks').pick()
+```
+
+See [_`snacks.nvim` Integration_](#snacksnvim) for more info.
+
+### `:ProjectFzf`
+
+> [!IMPORTANT]
+> **This command works ONLY if you have `fzf-lua` installed and loaded
+> and `fzf_lua.enabled` set to `true`.**
+
+The `:ProjectFzf` command is a dynamically enabled user command that opens a `fzf-lua` picker
+for `project.nvim`.
+For now it just executes `require('project').run_fzf_lua()`.
+
+Mappings:
+
+| Mapping | Description                 |
+|---------|-----------------------------|
+| `<C-d>` | Delete the selected project |
+
+See [_`extensions/fzf-lua.lua`_](https://github.com/DrKJeff16/project.nvim/blob/main/lua/project/extensions/fzf-lua.lua)
+for more info.
+
+### `:ProjectTelescope`
+
+> [!IMPORTANT]
+> **This command works ONLY if you have `telescope.nvim` installed and loaded**
+
+The `:ProjectTelescope` command is a dynamicly enabled User Command that runs
+the Telescope `projects` picker.
+A shortcut, to be honest.
+
+See [_`telescope/_extensions/projects.lua`_](https://github.com/DrKJeff16/project.nvim/blob/main/lua/telescope/_extensions/projects.lua)
+for more info.
+
+### `:ProjectHealth`
+
+The `:ProjectHealth` command runs `:checkhealth project` in a single command.
+
+See [_`commands.lua`_](https://github.com/DrKJeff16/project.nvim/blob/main/lua/project/commands.lua) for more info.
+
+### `:ProjectHistory`
+
+The `:ProjectHistory` handles the project history.
+
+If the command is called without any arguments it'll toggle the `project.nvim` history file
+in a new tab, which can be exited by pressing `q` in Normal Mode.
+
+**(DANGER ZONE)**
+If called with the `clear` argument (`:ProjectHistory[!] clear`) your project history
+will be cleared. If you want to avoid a "Yes/No" prompt you can call the command
+with a bang (`!`) to force it.
+
+See [_`commands.lua`_](https://github.com/DrKJeff16/project.nvim/blob/main/lua/project/commands.lua) for more info.
+
+### `:ProjectLog`
+
+> [!IMPORTANT]
+> This command will not be available unless you set `log.enabled = true`
+> in your `setup()`.
+
+The `:ProjectLog` command handles the `project.nvim` log file.
+
+The valid arguments are:
+
+```vim
+:ProjectLog           " Toggles the window
+:ProjectLog clear     " Clears the current log file. Will close any opened log window
+:ProjectLog close     " Closes the Log Window
+:ProjectLog open      " Opens the Log Window
+:ProjectLog toggle    " Toggles the Log Window
+```
+
+See [_`log.lua`_](https://github.com/DrKJeff16/project.nvim/blob/main/lua/project/util/log.lua) for more info.
+
+### `:ProjectAdd`
+
+The `:ProjectAdd` command is a manual hook that opens a prompt to input any
+directory through a UI prompt, to be saved to your project history.
+
+If your prompt is valid, your `cwd` will be switched to said directory.
+Adding a [!] will set the prompt to your cwd.
+
+**This is particularly useful if you've enabled `manual_mode` in `setup()`.**
+
+See [_`commands.lua`_](https://github.com/DrKJeff16/project.nvim/blob/main/lua/project/commands.lua) for more info.
+
+### `:ProjectRoot`
+
+The `:ProjectRoot` command is a manual hook to set the working directory to the current
+file's root, attempting to use any of the `setup()` detection methods
+set by the user.
+
+The command is like doing the following in the cmdline:
+
+```vim
+:lua require('project.api').on_buf_enter()
+```
+
+See [_`commands.lua`_](https://github.com/DrKJeff16/project.nvim/blob/main/lua/project/commands.lua) for more info.
+
+### `:ProjectConfig`
+
+The `:ProjectConfig` command will toggle your current config in a floating window,
+making it easier to access. To exit the window you can either press `q` in normal mode
+or by runnning `:ProjectConfig` again.
+
+You can also print the output instead by running `:ProjectConfig!`.
+
+See [_`commands.lua`_](https://github.com/DrKJeff16/project.nvim/blob/main/lua/project/commands.lua) for more info.
+
+### `:ProjectDelete`
+
+The `:ProjectDelete` command is a utility to delete your projects.
+
+If no arguments are given, a popup with a list of your current projects will be opened.
+
+If one or more arguments are passed, it will expect directories separated
+by a space. The arguments have to be directories that are returned by `get_recent_projects()`.
+The arguments can be relative, absolute or un-expanded (`~/path/to/project`).
+The command will attemptto parse the args and, unless a `!` is passed to the command
+(`:ProjectDelete!`). In that case, invalid args will be ignored.
+
+If there's a successful deletion, you'll recieve a notification denoting success.
+
+Usage:
+
+```vim
+" Vim command line
+:ProjectDelete[!] [/path/to/first [/path/to/second [...]]]
+```
+
+For more info, see:
+
+- _`:h :ProjectDelete`_
+- [_`commands.lua`_](https://github.com/DrKJeff16/project.nvim/blob/main/lua/project/commands.lua)
+
+### `:ProjectSession`
+
+> [!IMPORTANT]
+> **This command requires `fd` to be installed for it to work!**
+
+The `:ProjectSession` command opens a custom picker with a selection of
+your current session projects (stored in `History.session_projects`). **Bear in mind this table gets
+filled on runtime**.
+
+If you select a session project, your `cwd` will be changed to what you selected.
+If the command is called with a `!` (`:ProjectSession!`) the UI will close.
+Otherwise, another custom UI picker will appear for you to select the files/dirs.
+Selecting a directory will open another UI picker with its contents, and so on.
+
+See [_`popup.lua`_](https://github.com/DrKJeff16/project.nvim/blob/main/lua/project/popup.lua) for more info.
+
+### `:ProjectExport`
+
+> [!WARNING]
+> **_Use this script with caution, as you may overwrite your files if doing something reckless!_**
+
+The `:ProjectExport` allows the user to save their project history in a JSON format,
+allowing a custom indent level if desired.
+
+If the target file already exists and is not empty then a confirmation prompt
+will appear.
+
+Example usage:
+
+```vim
+" Will open a prompt
+:ProjectExport
+
+" The output file will be `a.json`
+:ProjectExport a
+
+" The output file will be `b`, with a tab size of 12
+:ProjectExport! b 12
+
+" The output file will be `~/.c.json` (bang here is irrelevant)
+:ProjectExport! ~/.c.json
+```
+
+### `:ProjectImport`
+
+The `:ProjectImport` allows the user to retrieved their saved project history in a JSON format.
+
+Example usage:
+
+```vim
+" Will open a prompt
+:ProjectImport
+
+" Will be treated as `a.json`
+:ProjectExport a
+:ProjectImport a
+
+" Will be treated as `b`
+:ProjectExport! b
+:ProjectImport! b
+```
+
+---
+
+## API
+
+The API can be found in [_`api.lua`_](https://github.com/DrKJeff16/project.nvim/blob/main/lua/project/api.lua).
+
+### `get_project_root()`
+
+`get_project_root()` is an [API](https://github.com/DrKJeff16/project.nvim/blob/main/lua/project/api.lua) utility
+for finding out about the current project's root, if any:
+
+```lua
+---@type string|nil, string|nil
+local root, lsp_or_method = require('project').get_project_root()
+```
+
+### `get_recent_projects()`
+
+You can get a list of recent projects by running the code below:
+
+```lua
+local recent_projects = require('project').get_recent_projects() ---@type string[]
+vim.notify(vim.inspect(recent_projects))
+```
+
+Where `get_recent_projects()` returns either an empty table `{}`
+or a string array `{ '/path/to/project1', ... }`.
+
+### `get_config()`
+
+**If** `setup()` **has been called**, it returns a table containing the currently set options.
+Otherwise it will return `nil`.
+
+```lua
+local config = require('project').get_config()
+
+-- Using `vim.notify()`
+vim.notify(vim.inspect(config))
+
+-- Using `vim.print()`
+vim.print(config)
+```
+
+### `get_history_paths()`
+
+If no valid args are passed to this function, it will return the following dictionary:
+
+```lua
+local get_history_paths = require('project').get_history_paths
+
+-- A dictionary table containing all return values below
+vim.print(get_history_paths())
+--- { datapath = <datapath>, projectpath = <projectpath>, historyfile = <historyfile> }
+```
+
+Otherwise, if either `'datapath'`, `'projectpath'` or `'historyfile'` are passed,
+it will return the string value of said arg:
+
+```lua
+-- The directory where `project` sets its `datapath`
+vim.print(get_history_paths('datapath'))
+
+-- The directory where `project` saves the project history
+vim.print(get_history_paths('projectpath'))
+
+-- The path to where `project` saves its recent projects history
+vim.print(get_history_paths('historyfile'))
+```
+
+---
+
+## Utils
+
+A set of utilities that get repeated across the board.
+You can import them as shown below:
+
+```lua
+local ProjUtil = require('project.util')
+```
+
+_These utilities are in part inspired by my own utilities found in my Neovim config,
+[**`Jnvim`**](https://github.com/DrKJeff16/nvim)_.
+
+See [`util.lua`](https://github.com/DrKJeff16/project.nvim/blob/main/lua/project/util.lua) for further reference.
+
+

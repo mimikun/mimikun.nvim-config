@@ -1,0 +1,784 @@
+---@module 'project._meta'
+
+local MODSTR = "project.util"
+local ERROR = vim.log.levels.ERROR
+
+---@class Project.Util
+local M = {}
+
+---@param s string
+---@param chars string
+---@param extra_allowed? { spaces?: boolean, newlines?: boolean }
+---@return boolean result
+function M.only_has_chars(s, chars, extra_allowed)
+  M.validate({
+    s = { s, { "string" } },
+    chars = { chars, { "string" } },
+    extra_allowed = { extra_allowed, { "table", "nil" }, true },
+  })
+  extra_allowed = extra_allowed or {}
+
+  M.validate({
+    ["extra_allowed.spaces"] = { extra_allowed.spaces, { "boolean", "nil" }, true },
+    ["extra_allowed.newlines"] = { extra_allowed.newlines, { "boolean", "nil" }, true },
+  })
+  if extra_allowed.spaces == nil then
+    extra_allowed.spaces = false
+  end
+  if extra_allowed.newlines == nil then
+    extra_allowed.newlines = false
+  end
+
+  if s == "" or chars == "" then
+    return false
+  end
+
+  local chars_list = M.dedup(vim.split(chars, "", { trimempty = true }))
+  local i = 1
+  while i <= #chars_list do
+    if chars_list[i] == "\n" then
+      table.remove(chars_list, i)
+    else
+      i = i + 1
+    end
+  end
+  if vim.tbl_isempty(chars_list) then
+    return false
+  end
+
+  if extra_allowed.spaces then
+    table.insert(chars_list, " ")
+  end
+  if extra_allowed.newlines then
+    table.insert(chars_list, "\n")
+  end
+
+  local str_list = vim.split(s, "", { trimempty = false })
+  for _, c in ipairs(str_list) do
+    if not vim.list_contains(chars_list, c) then
+      return false
+    end
+  end
+  return true
+end
+
+---@param list any[]
+---@param t? type
+---@return boolean result
+function M.same_type_list(list, t)
+  M.validate({
+    list = { list, { "table" } },
+    t = { t, { "string", "nil" }, true },
+  })
+  if t and not vim.list_contains({ "boolean", "userdata", "string", "function", "number", "thread", "table" }, t) then
+    error(("(%s.same_type_list): Invalid type `%s`"):format(t), ERROR)
+  end
+  if vim.tbl_isempty(list) or not vim.islist(list) then
+    return false
+  end
+
+  for _, v in ipairs(list) do
+    if not t then
+      t = type(v)
+    end
+    if not M.is_type(t, v) then
+      return false
+    end
+  end
+  return true
+end
+
+---@overload fun(option: string|vim.wo|vim.bo): value: any
+---@overload fun(option: string|vim.wo|vim.bo, param: 'scope', param_value: 'local'|'global'): value: any
+---@overload fun(option: string|vim.wo|vim.bo, param: 'ft', param_value: string): value: any
+---@overload fun(option: string|vim.wo|vim.bo, param: 'buf'|'win', param_value: integer): value: any
+---@nodiscard
+function M.optget(option, param, param_value)
+  M.validate({
+    option = { option, { "string" } },
+    param = { param, { "string", "nil" }, true },
+    param_value = { param_value, { "string", "number", "nil" }, true },
+  })
+  param = param or "buf"
+  if not vim.list_contains({ "scope", "ft", "buf", "win" }, param) then
+    error(("Bad parameter: `%s`\nCan only accept `scope`, `ft`, `buf` or `win`!"):format(vim.inspect(param)), ERROR)
+  end
+  if param == "scope" then
+    param_value = param_value or "local"
+    if not vim.list_contains({ "global", "local" }, param_value) then
+      error(("Bad param value `%s`\nCan only accept `global` or `local`!"):format(vim.inspect(param_value)), ERROR)
+    end
+  end
+  if param == "ft" and (not param_value or type(param_value) ~= "string") then
+    error("Missing/bad value for `ft` parameter!", ERROR)
+  end
+  if vim.list_contains({ "win", "buf" }, param) then
+    if not (param_value and type(param_value) == "number" and M.is_int(param_value, param_value >= 0)) then
+      error("Missing/bad value for `win`/`buf` parameter!", ERROR)
+    end
+  end
+
+  return vim.api.nvim_get_option_value(option, { [param] = param_value })
+end
+
+---@overload fun(option: string|vim.wo|vim.bo, value: any)
+---@overload fun(option: string|vim.wo|vim.bo, value: any, param: 'scope', param_value: 'local'|'global')
+---@overload fun(option: string|vim.wo|vim.bo, value: any, param: 'ft', param_value: string)
+---@overload fun(option: string|vim.wo|vim.bo, value: any, param: 'buf'|'win', param_value: integer)
+function M.optset(option, value, param, param_value)
+  M.validate({
+    option = { option, { "string" } },
+    param = { param, { "string", "nil" }, true },
+    param_value = { param_value, { "string", "number", "nil" }, true },
+  })
+  if value == nil then
+    error("Empty option value is unacceptable!", ERROR)
+  end
+  param = param or "buf"
+  if not vim.list_contains({ "scope", "ft", "buf", "win" }, param) then
+    error(("Bad parameter: `%s`\nCan only accept `scope`, `ft`, `buf` or `win`!"):format(vim.inspect(param)), ERROR)
+  end
+  if param == "scope" then
+    param_value = param_value or "local"
+    if not vim.list_contains({ "global", "local" }, param_value) then
+      error(("Bad param value `%s`\nCan only accept `global` or `local`!"):format(vim.inspect(param_value)), ERROR)
+    end
+  end
+  if param == "ft" and (not param_value or type(param_value) ~= "string") then
+    error("Missing/bad value for `ft` parameter!", ERROR)
+  end
+  if vim.list_contains({ "win", "buf" }, param) then
+    if not (param_value and type(param_value) == "number" and M.is_int(param_value, param_value >= 0)) then
+      error("Missing/bad value for `win`/`buf` parameter!", ERROR)
+    end
+  end
+
+  vim.api.nvim_set_option_value(option, value, { [param] = param_value })
+end
+
+---@param fmt string
+---@return boolean confirmation
+function M.yes_no(fmt, ...)
+  M.validate({ fmt = { fmt, { "string" } } })
+
+  return vim.fn.confirm(fmt:format(...), "&Yes\n&No", 2) == 1
+end
+
+---Checks whether nvim is running on Windows.
+--- ---
+---@return boolean win32
+---@nodiscard
+function M.is_windows()
+  return M.vim_has("win32")
+end
+
+---@param num number
+---@return integer n_digits
+function M.digits(num)
+  M.validate({ num = { num, { "number" } } })
+  num = num < 0 and (num * -1) or num
+
+  local n_digits = num >= 1 and 1 or 0
+  while num / 10 >= 1 do
+    n_digits = n_digits + 1
+    num = num / 10
+  end
+
+  return n_digits
+end
+
+---@param feature string
+---@return boolean has
+---@nodiscard
+function M.vim_has(feature)
+  M.validate({ feature = { feature, { "string" } } })
+
+  return vim.fn.has(feature) == 1
+end
+
+---Dynamic `vim.validate()` wrapper. Covers both legacy and newer implementations
+---@param T table<string, vim.validate.Spec|ValidateSpec>
+function M.validate(T)
+  local max = vim.fn.has("nvim-0.11") == 1 and 3 or 4
+  for name, spec in pairs(T) do
+    while #spec > max do
+      table.remove(spec, #spec)
+    end
+    T[name] = spec
+  end
+
+  if vim.fn.has("nvim-0.11") == 1 then
+    for name, spec in pairs(T) do
+      table.insert(spec, 1, name)
+      vim.validate(unpack(spec))
+    end
+    return
+  end
+
+  vim.validate(T)
+end
+
+---Checks whether a given path is a directory or not.
+---
+---If the data passed to the function is not a string,
+---an error will be raised.
+--- ---
+---@param dir string
+---@return boolean exists
+---@nodiscard
+function M.dir_exists(dir)
+  M.validate({ dir = { dir, { "string" } } })
+
+  return vim.fn.isdirectory(dir) == 1
+end
+
+---@param str string
+---@param use_dot? boolean
+---@param triggers? string[]
+---@return string new_str
+---@nodiscard
+function M.capitalize(str, use_dot, triggers)
+  M.validate({
+    str = { str, { "string" } },
+    use_dot = { use_dot, { "boolean", "nil" }, true },
+    triggers = { triggers, { "table", "nil" }, true },
+  })
+
+  if str == "" then
+    return str
+  end
+
+  if use_dot == nil then
+    use_dot = false
+  end
+  triggers = triggers or { " ", "" }
+  if not vim.list_contains(triggers, " ") then
+    table.insert(triggers, " ")
+  end
+  if not vim.list_contains(triggers, "") then
+    table.insert(triggers, "")
+  end
+
+  local strlen = str:len()
+  local prev_char, new_str, i = "", "", 1
+  local dot = true
+  while i <= strlen do
+    local char = str:sub(i, i)
+    if char == char:lower() and vim.list_contains(triggers, prev_char) then
+      char = dot and char:upper() or char:lower()
+      if dot then
+        dot = false
+      end
+    else
+      char = char:lower()
+    end
+    dot = (use_dot and not dot) and (char == ".") or (use_dot and dot or true)
+    new_str = ("%s%s"):format(new_str, char)
+    prev_char = char
+    i = i + 1
+  end
+  return new_str
+end
+
+---Checks whether `data` is of type `t` or not.
+---
+---If `data` is `nil`, the function will always return `false`.
+--- ---
+---@param t type Any return value the `type()` function would return.
+---@param data any The data to be type-checked.
+---@return boolean correct_type
+---@nodiscard
+function M.is_type(t, data)
+  return data ~= nil and type(data) == t
+end
+
+---Reverses a given table.
+---
+---If the passed data is an empty table, it'll be returned as-is.
+---
+---If the data passed to the function is not a table,
+---an error will be raised.
+--- ---
+---@generic T
+---@param T T
+---@return T T
+---@nodiscard
+function M.reverse(T)
+  M.validate({ T = { T, { "table" } } })
+
+  if vim.tbl_isempty(T) then
+    return T
+  end
+
+  local len = #T
+  for i = 1, math.floor(len / 2) do
+    T[i], T[len - i + 1] = T[len - i + 1], T[i]
+  end
+  return T
+end
+
+---@param T table<string|integer, any>
+---@return integer len
+---@nodiscard
+function M.get_dict_size(T)
+  M.validate({ T = { T, { "table" } } })
+
+  local len = 0
+  if vim.tbl_isempty(T) then
+    return len
+  end
+
+  for _ in pairs(T) do
+    len = len + 1
+  end
+  return len
+end
+
+---Checks if module `mod` exists to be imported.
+--- ---
+---@param mod string The `require()` argument to be checked
+---@return boolean exists A boolean indicating whether the module exists or not
+---@nodiscard
+function M.mod_exists(mod)
+  M.validate({ mod = { mod, { "string" } } })
+
+  if mod == "" then
+    return false
+  end
+  local exists = pcall(require, mod)
+  return exists
+end
+
+---@param nums number[]|number
+---@param cond? boolean
+---@return boolean int
+---@nodiscard
+function M.is_int(nums, cond)
+  M.validate({
+    nums = { nums, { "number", "table" } },
+    cond = { cond, { "boolean", "nil" }, true },
+  })
+  if cond == nil then
+    cond = true
+  end
+
+  if M.is_type("number", nums) then
+    ---@cast nums number
+    return nums == math.floor(nums) and nums == math.ceil(nums) and cond
+  end
+
+  ---@cast nums number[]
+  for _, num in ipairs(nums) do
+    if not M.is_int(num) then
+      return false
+    end
+  end
+
+  return cond
+end
+
+---Emulates the behaviour of Python's builtin `range()` function.
+--- ---
+---@param x integer
+---@param y integer
+---@param step integer
+---@return integer[] range_list
+---@overload fun(x: integer): range_list: integer[]
+---@overload fun(x: integer, y: integer): range_list: integer[]
+---@nodiscard
+function M.range(x, y, step)
+  M.validate({
+    x = { x, { "number" } },
+    y = { y, { "number", "nil" }, true },
+    step = { step, { "number", "nil" }, true },
+  })
+
+  if not M.is_int(x) then
+    error(("(%s.range): Argument `x` is not an integer: `%s`"):format(MODSTR, x), ERROR)
+  end
+
+  local range_list = {} ---@type integer[]
+  if not (y or step) then
+    y = x
+    x = 1
+    step = x <= y and 1 or -1
+
+    table.insert(range_list, x)
+    for v = x + step, y, step do
+      table.insert(range_list, v)
+    end
+  elseif y and not step then
+    if not M.is_int(y) then
+      error(("(%s.range): Argument `y` is not an integer: `%s`"):format(MODSTR, y), ERROR)
+    end
+    step = x <= y and 1 or -1
+
+    table.insert(range_list, x)
+    for v = x + step, y, step do
+      table.insert(range_list, v)
+    end
+  elseif y and step then
+    if not M.is_int({ y, step }) then
+      error(("(%s.range): Arguments `y` and/or `step` are not an integer!"):format(MODSTR), ERROR)
+    end
+    if step == 0 then
+      error(("(%s.range): Argument `step` cannot be `0`!"):format(MODSTR), ERROR)
+    end
+    if x > y and step >= 1 then
+      error(("(%s.range): Index out of bounds!"):format(MODSTR), ERROR)
+    end
+    if x > y and step <= -1 then
+      local p = x
+      x = y
+      y = p
+      step = step * -1
+    end
+
+    table.insert(range_list, x)
+    for v = x + step, y, step do
+      table.insert(range_list, v)
+    end
+  else
+    error(("(%s.range): Argument `y` is nil while `step` is not: `%s`"):format(MODSTR, step), ERROR)
+  end
+
+  table.sort(range_list)
+  return range_list
+end
+
+---Attempt to find out if given path is a hidden file.
+---**Works only Windows, currently!**
+---
+---CREDITS:
+---https://github.com/nvim-neo-tree/neo-tree.nvim/blob/8dd9f08ff086d09d112f1873f88dc0f74b598cdb/lua/neo-tree/utils/init.lua#L1299
+--- ---
+---@param path string
+---@return boolean hidden
+---@nodiscard
+function M.is_hidden(path)
+  M.validate({ path = { path, { "string" } } })
+
+  ---CREDITS: [u/Some_Derpy_Pineapple](https://www.reddit.com/r/neovim/comments/1nu5ehj/comment/ngyz21m/)
+  local FILE_ATTRIBUTE_HIDDEN = 0x2
+  local ffi = nil ---@type ffilib
+  if M.mod_exists("ffi") then
+    ffi = require("ffi")
+    ffi.cdef([[
+      int GetFileAttributesA(const char *path);
+    ]])
+  end
+
+  if M.is_windows() then
+    if ffi then
+      return bit.band(ffi.C.GetFileAttributesA(path), FILE_ATTRIBUTE_HIDDEN) ~= 0
+    end
+    return false -- FIXME: Find a reliable alternative
+  end
+
+  return false --- TODO: Find a reliable method for UNIX systems
+end
+
+---@param exe string[]|string
+---@return boolean is_executable
+---@nodiscard
+function M.executable(exe)
+  M.validate({ exe = { exe, { "string", "table" } } })
+
+  if M.is_type("string", exe) then
+    ---@cast exe string
+    return vim.fn.executable(exe) == 1
+  end
+
+  ---@cast exe string[]
+  local res = false
+  for _, v in ipairs(exe) do
+    res = M.executable(v)
+    if not res then
+      break
+    end
+  end
+  return res
+end
+
+---@generic T
+---@param tbl T
+---@return T res
+---@nodiscard
+function M.delete_duplicates(tbl)
+  M.validate({ tbl = { tbl, { "table" } } })
+
+  local cache_dict = {} ---@type table<string, integer>
+  require("project.util.history").is_legacy(tbl)
+  local legacy = require("project.util.history").legacy
+  for _, v in ipairs(tbl) do
+    local normalised_path = M.normalise_path(legacy and v or v.path)
+    if not cache_dict[normalised_path] then
+      cache_dict[normalised_path] = 1
+    else
+      cache_dict[normalised_path] = cache_dict[normalised_path] + 1
+    end
+  end
+
+  local res = {} ---@type string[]|ProjectHistoryEntry[]
+  for _, v in ipairs(tbl) do
+    local normalised_path = M.normalise_path(legacy and v or v.path)
+    if cache_dict[normalised_path] == 1 then
+      table.insert(res, legacy and normalised_path or { path = normalised_path, name = v.name })
+    else
+      cache_dict[normalised_path] = cache_dict[normalised_path] - 1
+    end
+  end
+  return M.dedup(res)
+end
+
+---Left strip given a leading string (or list of strings) within a string, if any.
+--- ---
+---@param char string[]|string
+---@param str string
+---@return string new_str
+---@nodiscard
+function M.lstrip(char, str)
+  M.validate({
+    char = { char, { "string", "table" } },
+    str = { str, { "string" } },
+  })
+  if str == "" then
+    return str
+  end
+
+  if M.is_type("table", char) then
+    ---@cast char string[]
+    if not vim.tbl_isempty(char) then
+      for _, c in ipairs(char) do
+        if c:len() > str:len() then
+          return str
+        end
+        str = M.lstrip(c, str)
+      end
+    end
+    return str
+  end
+
+  ---@cast char string
+  if not vim.startswith(str, char) or char:len() > str:len() then
+    return str
+  end
+
+  ---@cast char string
+  local i, len, new_str = 1, str:len(), ""
+  local other = false
+  while i <= len and i + char:len() - 1 <= len do
+    if str:sub(i, i + char:len() - 1) ~= char and not other then
+      other = true
+    end
+    if other then
+      new_str = ("%s%s"):format(new_str, str:sub(i, i))
+    end
+    i = i + 1
+  end
+  return new_str ~= "" and new_str or str
+end
+
+---Right strip given a leading string (or list of strings) within a string, if any.
+--- ---
+---@param char string[]|string
+---@param str string
+---@return string new_str
+---@nodiscard
+function M.rstrip(char, str)
+  M.validate({
+    char = { char, { "string", "table" } },
+    str = { str, { "string" } },
+  })
+  if str == "" then
+    return str
+  end
+
+  if M.is_type("table", char) then
+    ---@cast char string[]
+    if not vim.tbl_isempty(char) then
+      for _, c in ipairs(char) do
+        if c:len() > str:len() then
+          return str
+        end
+        str = M.rstrip(c, str)
+      end
+    end
+    return str
+  end
+
+  ---@cast char string
+  if not vim.startswith(str:reverse(), char) or char:len() > str:len() then
+    return str
+  end
+
+  return M.lstrip(char, str:reverse()):reverse()
+end
+
+---Strip given a leading string (or list of strings) within a string, if any, bidirectionally.
+--- ---
+---@param char string[]|string
+---@param str string
+---@return string new_str
+---@nodiscard
+function M.strip(char, str)
+  M.validate({
+    char = { char, { "string", "table" } },
+    str = { str, { "string" } },
+  })
+  if str == "" then
+    return str
+  end
+
+  if M.is_type("table", char) then
+    ---@cast char string[]
+    if not vim.tbl_isempty(char) then
+      for _, c in ipairs(char) do
+        if c:len() > str:len() then
+          return str
+        end
+        str = M.strip(c, str)
+      end
+    end
+    return str
+  end
+
+  ---@cast char string
+  return M.rstrip(char, M.lstrip(char, str))
+end
+
+---Get rid of all duplicates in input table.
+---
+---If table is empty, it'll just return it as-is.
+---
+---If the data passed to the function is not a table,
+---an error will be raised.
+--- ---
+---@generic T
+---@param T T
+---@param key? string|integer
+---@return T NT
+---@nodiscard
+function M.dedup(T, key)
+  M.validate({
+    T = { T, { "table" } },
+    key = { key, { "string", "nil" }, true },
+  })
+  key = (key and key ~= "") and key or nil
+  if vim.tbl_isempty(T) then
+    return T
+  end
+
+  local NT = {}
+  local names = {} ---@type any[]
+  for _, v in pairs(T) do
+    local not_dup = false
+    if M.is_type("table", v) then
+      if not key then
+        not_dup = not vim.tbl_contains(NT, function(val)
+          return vim.deep_equal(val, v)
+        end, { predicate = true })
+      else
+        not_dup = not vim.list_contains(names, v[key])
+        if not_dup then
+          table.insert(names, v[key])
+        end
+      end
+    else
+      not_dup = not vim.list_contains(NT, v)
+    end
+    if not_dup then
+      table.insert(NT, v)
+    end
+  end
+  return NT
+end
+
+---@generic T
+---@param t type
+---@param data T
+---@param sep? string
+---@param constraints? string[]
+---@return string
+---@return boolean|nil
+---@nodiscard
+function M.format_per_type(t, data, sep, constraints)
+  M.validate({
+    t = { t, { "string" } },
+    sep = { sep, { "string", "nil" }, true },
+    constraints = { constraints, { "table", "nil" }, true },
+  })
+  sep = sep or ""
+  constraints = constraints or nil
+
+  if t == "string" then
+    local res = ('%s`"%s"`'):format(sep, data)
+    if not M.is_type("table", constraints) then
+      return res
+    end
+    if constraints and vim.list_contains(constraints, data) then
+      return res
+    end
+    return res, true
+  end
+  if vim.list_contains({ "number", "boolean" }, t) then
+    return ("%s`%s`"):format(sep, tostring(data))
+  end
+  if t == "function" then
+    return ("%s`%s`"):format(sep, t)
+  end
+
+  local msg = ""
+  if t == "nil" then
+    return ("%s%s `nil`"):format(sep, msg)
+  end
+  if t ~= "table" then
+    return ("%s%s `?`"):format(sep, msg)
+  end
+  if vim.tbl_isempty(data) then
+    return ("%s%s `{}`"):format(sep, msg)
+  end
+
+  sep = ("%s "):format(sep)
+  for k, v in pairs(data) do
+    k = M.is_type("number", k) and ("[%s]"):format(tostring(k)) or k
+    msg = ("%s\n%s`%s`: "):format(msg, sep, k)
+    msg = M.is_type("string", v) and ('%s`"%s"`'):format(msg, v)
+      or ("%s%s"):format(msg, M.format_per_type(type(v), v, sep))
+  end
+  return msg
+end
+
+---@param path string
+---@return boolean exists
+function M.path_exists(path)
+  M.validate({ path = { path, { "string" } } })
+
+  if M.dir_exists(path) then
+    return true
+  end
+
+  return vim.fn.filereadable(path) == 1
+end
+
+---@param path string
+---@return string normalised_path
+function M.normalise_path(path)
+  M.validate({ path = { path, { "string" } } })
+
+  local normalised_path = path:gsub("\\", "/"):gsub("//", "/")
+  if M.is_windows() then
+    normalised_path = normalised_path:sub(1, 1):lower() .. normalised_path:sub(2)
+  end
+  return normalised_path
+end
+
+local Util = setmetatable(M, { ---@type Project.Util
+  __index = M,
+  __newindex = function()
+    vim.notify("Project.Util is Read-Only!", vim.log.levels.ERROR)
+  end,
+})
+
+return Util
+-- vim: set ts=2 sts=2 sw=2 et ai si sta:

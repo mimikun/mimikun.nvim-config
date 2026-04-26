@@ -1,0 +1,155 @@
+---@module 'project._meta'
+
+local uv = vim.uv or vim.loop
+local MODSTR = "project.extensions.snacks"
+local Util = require("project.util")
+local Log = require("project.util.log")
+
+---@class Project.Extensions.Snacks
+---@field config ProjectSnacksConfig
+local M = {}
+
+M.config = {
+  hidden = false,
+  icon = { icon = " ", highlight = "Directory" },
+  layout = "select",
+  path_icons = {},
+  show = "paths",
+  sort = "newest",
+  title = "Select Project",
+}
+
+---@return snacks.picker.finder.Item[] items
+function M.gen_items()
+  local History = require("project.util.history")
+  local items = {} ---@type snacks.picker.finder.Item[]
+  local recents = require("project").get_recent_projects(nil, true)
+  if M.config.sort and M.config.sort == "newest" then
+    recents = Util.reverse(recents)
+  end
+
+  for i, proj in ipairs(recents) do
+    local text = "" ---@type string
+    if History.legacy then
+      ---@cast proj string
+      text = vim.fn.fnamemodify(proj, ":~")
+    elseif M.config.show == "paths" then
+      ---@cast proj ProjectHistoryEntry
+      text = vim.fn.fnamemodify(proj.path, ":~")
+    else
+      ---@cast proj ProjectHistoryEntry
+      text = History.find_entry("recent", proj.name, "name")
+    end
+
+    table.insert(items, {
+      idx = i,
+      score = i,
+      text = text,
+      value = vim.fn.fnamemodify(History.legacy and proj or proj.path, ":~"),
+    })
+  end
+  return items
+end
+
+---@param display_value string
+local function apply_icon(display_value)
+  for _, icon in pairs(M.config.path_icons) do
+    if display_value:find(icon.match) then
+      return icon, display_value:gsub(icon.match, "")
+    end
+  end
+  return M.config.icon, display_value
+end
+
+---@param item snacks.picker.finder.Item
+local function format_session_item(item)
+  local icon, display_value = apply_icon(item.text)
+  return { ---@type { [1]: string, [2]?: (string|string[]), virtual: boolean, field: string, resolve: fun(max_width: number):unknown[], inline: boolean }[]
+    { icon.icon, icon.highlight },
+    { display_value, "Normal" },
+  }
+end
+
+function M.pick()
+  local History = require("project.util.history")
+  local Popup = require("project.popup")
+  local Api = require("project.api")
+  return require("snacks").picker.pick({
+    actions = {
+      chdir_only = function(self, item)
+        Api.set_pwd(item.value, "snacks")
+        self:close()
+      end,
+      delete_project = function(self, item)
+        History.delete_project(vim.fn.expand(item.value), true)
+        self:close()
+        M.pick()
+      end,
+      rename = function(self, item)
+        Popup.rename_input(vim.fn.expand(item.value), History.find_entry("recent", item.value, "name"))
+        self:close()
+        M.pick()
+      end,
+    },
+    confirm = function(self, item)
+      self:close()
+      if require("project.api").set_pwd(vim.fn.expand(item.value), "snacks") then
+        Log.debug(("(%s.pick): Opening Snacks picker"):format(MODSTR))
+        require("snacks").picker.files({
+          cwd = uv.cwd(),
+          show_empty = true,
+          hidden = M.config.hidden,
+          finder = "files",
+          format = "file",
+          supports_live = true,
+          auto_close = true,
+          dirs = { uv.cwd() },
+          enter = true,
+        })
+      end
+    end,
+    enter = true,
+    format = format_session_item,
+    items = M.gen_items(),
+    layout = M.config.layout,
+    preview = function()
+      return false
+    end,
+    show_empty = false,
+    title = M.config.title,
+    win = {
+      input = {
+        keys = {
+          ["<C-d>"] = { "delete_project", mode = { "n", "i" }, desc = "Delete a project" },
+          ["<C-r>"] = { "rename_project", mode = { "n", "i" }, desc = "Rename a project" },
+          ["<C-w>"] = { "chdir_only", mode = { "n", "i" }, desc = "Change working directory" },
+        },
+      },
+    },
+  })
+end
+
+---@param opts? ProjectSnacksConfig
+function M.setup(opts)
+  if not Util.mod_exists("snacks") then
+    vim.notify("snacks.nvim is not installed! Aborting.", vim.log.levels.ERROR)
+    return
+  end
+
+  Util.validate({ opts = { opts, { "table", "nil" }, true } })
+
+  M.config = vim.tbl_deep_extend("force", M.config, opts or {})
+
+  require("project.commands").new({
+    {
+      name = "ProjectSnacks",
+      desc = "Project picker using snacks.nvim",
+      callback = M.pick,
+    },
+  })
+
+  vim.g.project_snacks_loaded = 1
+end
+
+return M
+-- vim: set ts=2 sts=2 sw=2 et ai si sta:
