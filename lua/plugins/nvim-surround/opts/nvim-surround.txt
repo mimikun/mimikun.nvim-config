@@ -1,0 +1,333 @@
+3.3. Setup                                               *nvim-surround.setup*
+
+To configure this plugin, call `require("nvim-surround").setup()` or
+`require("nvim-surround").buffer_setup()`. The former configures "global"
+options that are present in every buffer, while the latter configures
+buffer-local options that override the global options.
+
+`buffer_setup` is particularly useful for setting up filetype-specific
+surrounds, for example setting up a `$` surround, but only in bash files:
+>lua
+    -- In after/ftplugin/bash.lua
+    require("nvim-surround").buffer_setup({
+        surrounds = {
+            ["$"] = {
+                add = { "${", "}" },
+                find = "$%b{}",
+                delete = "^(..)().-(.)()$",
+            },
+        },
+    })
+<
+The main setup and buffer setup functions are strictly additive, so only the
+keys that are to be modified need to be provided. To disable any default
+behavior, set the corresponding value to `false`. For example, to disable
+the `(` surround, call:
+>lua
+    require("nvim-surround").setup({
+        surrounds = {
+            ["("] = false,
+        }
+    })
+<
+--------------------------------------------------------------------------------
+3.3.1. Surrounds                               *nvim-surround.setup.surrounds*
+
+The `surrounds` table associates each key with a "surround", which is a table
+containing the following keys:
+
+                                           *nvim-surround.setup.surrounds.add*
+    add: ~
+        A function that returns the delimiter pair to be added to the buffer.
+        For example, consider the function for adding parentheses:
+>lua
+        [")"] = {
+            add = function()
+                return { { "(" }, { ")" } }
+            end,
+        }
+<
+        The function must return pairs of multi-line strings. Anything can be
+        called in the functions; consider the default for `f`:
+>lua
+        add = function()
+            local config = require("nvim-surround.config")
+            local result = config.get_input("Enter the function name: ")
+            if result then
+                return { { result .. "(" }, { ")" } }
+            end
+        end,
+<
+        The user is queried for the function name, and that is used to create
+        the surrounding pair at runtime.
+
+        For "static" delimiter pairs that are not evaluated at runtime, the
+        function can be omitted and the `add` key can directly take on the
+        value of the delimiter pair. Furthermore, tables with just one string
+        can be replaced by the string itself. For example, the following
+        configuration also adds parentheses:
+>lua
+        [")"] = {
+            add = { "(", ")" },
+        }
+<
+                                          *nvim-surround.setup.surrounds.find*
+    find: ~
+        A function that returns the "parent selection" for a surrounding pair.
+        The `delete` and `change` keys use this parent selection to determine
+        which delimiter pair to delete/change. For example, HTML tags are
+        found via the `at` text-object:
+>lua
+        ["t"] = {
+            find = function()
+            end,
+        }
+<
+        See |nvim-surround.config.get_selection()| for more information.
+
+        For convenience, this key can also take a string as a value, which is
+        then interpreted as a Lua pattern that represents the selection.
+
+                                        *nvim-surround.setup.surrounds.delete*
+    delete: ~
+        A function that returns the pair of selections to remove from the
+        buffer when deleting the surrounding pair.
+
+        For convenience, this key can also take a string as a value, which is
+        then interpreted as a Lua pattern whose match groups represent the
+        left/right delimiter pair. For example, function calls are deleted
+        via
+>lua
+        delete = "^(.-%()().-(%))()$",
+<
+        The Lua pattern matches the function name and opening parenthesis for
+        the left delimiter, and the closing parenthesis for the right
+        delimiter.
+
+        See |nvim-surround.config.get_selections()| for more information.
+
+                                        *nvim-surround.setup.surrounds.change*
+    change: ~
+        A table of two keys: `target` and `replacement`.
+
+        target: ~
+            A function that returns the pair of selections to be replaced in
+            the buffer when changing the surrounding pair. Similar to the
+            `delete` key.
+
+            For simplicity, this key can also take a string as a value, which
+            is then interpreted as a Lua pattern whose match groups represent
+            the left/right delimiter pair. For example, the default `T`
+            surround's `change.target` key:
+>lua
+            target = "^<([^>]*)().-([^%/]*)()>$",
+<
+            The Lua pattern matches the contents of the opening tag (including
+            attributes) for the left delimiter, and the contents of the
+            closing tag for the right delimiter.
+
+            See |nvim-surround.config.get_selections()| for more information.
+
+        replacement: ~
+            A function that returns the surrounding pair to replace the target
+            selections. This is kept separate from the `add` key because it is
+            often the case that replacing a delimiter pair is slightly
+            different from adding a new one. For example, when changing HTML
+            tags you only want the inner contents to be changed, without
+            including the angle brackets.
+
+    Note: When the `change.replacement` key is provided, the user is not
+    queried for a replacement character; the results of `change.replacement`
+    are directly used as the replacement pair. For example, when changing HTML
+    tag types, only `cst` is needed, instead of `cstt`.
+
+
+                          *nvim-surround.setup.surrounds.invalid_key_behavior*
+`invalid_key_behavior` is a special key in the `surrounds` table that defines
+fallback behavior when a surround key is not present in the `surrounds` table.
+It takes the same form as all other surrounds.
+
+The default behavior is to assume the delimiter pair is just the surround key
+for both the left and right delimiters. For example, `ysiw*` would surround a
+word with asterisks, and `ds*` would delete those same asterisks, despite the
+`*` surround not being configured by default. Note that control characters are
+valid inputs, with the exception of <C-c>, which cancels the input (same as
+<Esc>).
+
+Default value:
+>lua
+    invalid_key_behavior = {
+        add = function(char)
+            if not char or char:find("%c") then
+                return nil
+            end
+            return { { char }, { char } }
+        end,
+        find = function(char)
+            if not char or char:find("%c") then
+                return nil
+            end
+            return M.get_selection({
+                pattern = vim.pesc(char) .. ".-" .. vim.pesc(char),
+            })
+        end,
+        delete = function(char)
+            if not char or char:find("%c") then
+                return nil
+            end
+            return M.get_selections({
+                char = char,
+                pattern = "^(.)().-(.)()$",
+            })
+        end,
+    },
+<
+--------------------------------------------------------------------------------
+3.3.2. Aliases                                   *nvim-surround.setup.aliases*
+
+The aliases table maps characters to other characters, or lists of characters.
+Its behavior is described in |nvim-surround.aliasing|.
+
+Default value:
+>lua
+    aliases = {
+        ["a"] = ">",
+        ["b"] = ")",
+        ["B"] = "}",
+        ["r"] = "]",
+        ["q"] = { '"', "'", "`" },
+        ["s"] = { "}", "]", ")", ">", '"', "'", "`" },
+    },
+<
+
+--------------------------------------------------------------------------------
+3.3.5. Indentation                          *nvim-surround.setup.indent_lines*
+
+By default, when a surround action is performed, |nvim-surround| tries to
+indent things "appropriately", i.e. when it is enabled by a Vim option. The
+`indent_lines` key corresponds to a function with parameters {start} and
+{stop}, which represent line numbers (inclusive). This indentation can be
+disabled by setting `indent_lines = false` in one of the setup functions.
+
+By default, |nvim-surround| uses the following function for indentation:
+>lua
+    indent_lines = function(start, stop)
+        local b = vim.bo
+        -- Only re-indent the selection if a formatter is set up already
+        if start < stop
+            and (b.equalprg ~= ""
+            or b.indentexpr ~= ""
+            or b.cindent
+            or b.smartindent
+            or b.lisp) then
+            vim.cmd(string.format("silent normal! %dG=%dG", start, stop))
+        end
+    end,
+<
+
+--------------------------------------------------------------------------------
+3.4. Helpers                                             *nvim-surround.helpers*
+
+|nvim-surround| exposes a few helper functions to assist in finding
+selection(s). In the following examples we assume:
+>lua
+    local config = require("nvim-surround.config")
+<
+                                            *nvim-surround.config.get_input()*
+config.get_input({prompt})
+    Queries the user for input using {prompt}. Properly handles keyboard
+    interrupts (i.e. <C-c>) and <Esc> for cancelling the input.
+
+                                        *nvim-surround.config.get_selection()*
+config.get_selection({args})
+    Retrieves a selection from the buffer using {args}. The {args} table
+    currently takes one of the following keys:
+
+    motion: ~
+        A string that represents any Neovim motion. For example, the default
+        `find` key for `(` is:
+>lua
+        find = function()
+            return config.get_selection({ motion = "a(" })
+        end,
+<
+    pattern: ~
+        A Lua pattern to be found in the buffer. For example, the default
+        `find` key for `invalid_key_behavior` is:
+>lua
+        find = function(char)
+            return config.get_selection({
+                pattern = vim.pesc(char) .. ".-" .. vim.pesc(char),
+            })
+        end,
+<
+        The Lua pattern escapes the provided character, and |nvim-surround|
+        finds a selection that starts and ends with that character.
+
+    node: ~
+        A Tree-sitter node type to be found in the buffer. For example, the
+        default `find` key for `f` in Lua files is:
+>lua
+        find = function()
+            return config.get_selection({ node = "function_call" })
+        end,
+<
+    query: ~
+        A Tree-sitter query capture group to be found in the buffer. This
+        pairs well with the |nvim-treesitter-textobjects| plugin. For example,
+        one could match on function call nodes, regardless of the language:
+>lua
+        find = function()
+            require("nvim-surround.config").get_selection({
+                query = {
+                    capture = "@call.outer",
+                    type = "textobjects",
+                },
+            })
+        end
+<
+                                       *nvim-surround.config.get_selections()*
+config.get_selections({args})
+    Retrieves a pair of selections from the buffer using {args}. The {args}
+    table takes a {char} key and {pattern} key:
+
+    char: ~
+        The character associated with the current surround.
+    pattern: ~
+        A Lua pattern that narrows down a parent selection to the left/right
+        pair to be modified. It must contain four match groups:
+
+        * The left selection to be modified
+        * An empty capture group
+        * The right selection to be modified
+        * An empty capture group
+
+        Note: The empty capture groups must come immediately after the left
+        and right selections.
+
+        For example, the default `delete` key for `t` is:
+>lua
+        delete = function()
+            return config.get_selections({
+                char = "t",
+                pattern = "^(%b<>)().-(%b<>)()$",
+            })
+        end,
+<
+        The left selection to be deleted is a balanced pair of angle brackets
+        `%b<>`, immediately followed by an empty capture group. The right
+        selection is a second balanced pair of angle brackets `%b<>`, followed
+        by an empty capture group. Another example is the `change.target` key
+        for `t`:
+>lua
+        target = function()
+            return config.get_selections({
+                char = "t",
+                pattern = "^<([^%s<>]*)().-([^/]*)()>$",
+            })
+        end,
+<
+        The Lua pattern matches just the HTML tag type in both the beginning
+        and end.
+
+vim:tw=78:ts=8:ft=help:norl:conceallevel=0:
