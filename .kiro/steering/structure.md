@@ -286,7 +286,11 @@ lua/plugins/
   ├── md-render-nvim/              # Markdown rendering (delphinus)
   ├── milli-nvim/                  # Markdown preview / MilliPreview (amansingh-afk)
   ├── orphans-nvim/                # Orphan plugin cleanup (ZWindL)
-  └── takatime/                    # WakaTime-style time tracking (Rtarun3606k)
+  ├── takatime/                    # WakaTime-style time tracking (Rtarun3606k)
+  ├── trouble-nvim/                # Diagnostics/quickfix viewer (folke)
+  ├── blink-pairs/                 # Auto-pair brackets (saghen)
+  └── docs/                        # Integration documentation (per-plugin .md files)
+      └── Integrations/            # Per-plugin integration notes
 
 lua/colorschemes/
   └── tokyonight-nvim/     # Tokyo Night theme
@@ -298,6 +302,10 @@ lua/denops-plugins/
   ├── dps-ghosttext-vim/   # GhostText
   └── dps-translate-vim/   # Translation (dps)
 ```
+
+## Documentation Pattern
+
+Integration notes and research for each plugin are kept in `lua/plugins/docs/Integrations/<plugin-name>.md`. These are per-plugin Markdown files that document integration considerations, configuration options researched, and usage notes. This replaces the previous single `Integrations-memo.md` file.
 
 ## Anti-Patterns to Avoid
 

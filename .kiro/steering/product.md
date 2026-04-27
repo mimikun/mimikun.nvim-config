@@ -79,6 +79,8 @@ Personal Neovim configuration focused on modularity, extensibility, and maintain
 - **Notes/Markdown**: telekasten-nvim, calendar-vim, md-render-nvim, milli-nvim (MilliPreview)
 - **Media**: image-nvim, img-clip-nvim
 - **Denops**: denops-vim, denops-translate-vim, denops-docker-vim, dps-ghosttext-vim, dps-translate-vim
+- **Diagnostics/Lists**: trouble-nvim (folke, quickfix/diagnostic viewer)
+- **Auto-pairs**: blink-pairs (saghen, bracket auto-pairing)
 - **Colorschemes**: tokyonight-nvim
 
 ## Out of Scope
