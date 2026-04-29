@@ -259,9 +259,11 @@ lua/plugins/
   ├── smear-cursor-nvim/           # Cursor smear animation
   ├── tiny-glimmer-nvim/           # Glimmer effect
   ├── drop-nvim/                   # Drop animation (folke)
+  ├── ascii-nvim/                  # ASCII art library with Telescope extension (MaximilianLloyd)
   ├── edgy-nvim/                   # Window layout / edge panels (folke)
   ├── styler-nvim/                 # Per-window colorscheme (disabled)
   ├── which-key-nvim/              # Keybinding hints (folke)
+  ├── surround-ui-nvim/            # UI for surround text objects (roobert)
   ├── zen-mode-nvim/               # Focus mode (folke)
   ├── lazydev-nvim/                # Neovim Lua dev (folke)
   ├── neoconf-nvim/                # Project config (folke)
@@ -272,6 +274,7 @@ lua/plugins/
   ├── todo-comments-nvim/          # TODO comment highlighting (folke)
   ├── ts-comments-nvim/            # TypeScript comment handling (folke)
   ├── mason-nvim/                  # LSP/tool installer (mason-org)
+  ├── crates-nvim/                 # Rust crates.io integration (saecki)
   ├── tiny-cmdline-nvim/           # Centered cmdline popup (rachartier)
   ├── tiny-inline-diagnostic-nvim/ # Inline LSP diagnostics (rachartier)
   ├── hardtime-nvim/               # Vim habit enforcement (m4xshen)
