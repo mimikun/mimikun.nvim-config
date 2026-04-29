@@ -1,0 +1,81 @@
+-- Highlight priority of rainbow delimiters
+---@type rainbow_delimiters.config.priorities
+local priority = {
+  ---@type integer | fun(bufnr: integer): integer
+  [""] = 110,
+  -- astro
+  -- bash
+  -- c
+  -- c_sharp
+  -- clojure
+  -- commonlisp
+  -- cpp
+  -- css
+  -- cuda
+  -- cue
+  -- dart
+  -- elixir
+  -- elm
+  -- fennel
+  -- fish
+  -- glsl
+  -- go
+  -- groovy
+  -- haskell
+  -- hcl
+  -- html
+  -- janet_simple
+  -- java
+  -- javascript
+  -- json
+  -- json5
+  -- jsonc
+  -- jsonnet
+  -- julia
+  -- kdl
+  -- kotlin
+  -- latex
+  ---@type integer | fun(bufnr: integer): integer
+  lua = 210,
+  -- luadoc
+  -- make
+  -- markdown
+  -- nickel
+  -- nim
+  -- nix
+  -- nu
+  -- ocaml
+  -- odin
+  -- perl
+  -- php
+  -- python
+  -- qmljs
+  -- query
+  -- r
+  -- racket
+  -- rasi
+  -- regex
+  -- rst
+  -- ruby
+  -- rust
+  -- scheme
+  -- scss
+  -- sql
+  -- starlark
+  -- templ
+  -- terraform
+  -- toml
+  -- tsx
+  -- typescript
+  -- typst
+  -- verilog
+  -- vim
+  -- vimdoc
+  -- vue
+  -- wgsl
+  -- yaml
+  -- yuck
+  -- zig
+}
+
+return priority
