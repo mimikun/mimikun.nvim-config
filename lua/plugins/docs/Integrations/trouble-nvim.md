@@ -27,7 +27,7 @@ telescope.setup({
 
 When you open telescope, you can now hit `<c-t>` to open the results in **Trouble**
 
-### fzf-lua
+### ibhagwan/fzf-lua
 
 You can easily open any search results in **Trouble**, by defining a custom action:
 
