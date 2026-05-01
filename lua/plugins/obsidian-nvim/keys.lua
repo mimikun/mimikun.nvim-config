@@ -122,7 +122,10 @@ local keys = {
   {
     "<leader>oi",
     function()
-      require("obsidian.commands.paste_img")({ args = "", fargs = {} })
+      require("obsidian.commands.paste_img")({
+        args = "",
+        fargs = {},
+      })
     end,
     mode = "n",
     desc = "Obsidian: Paste image",
@@ -163,7 +166,10 @@ local keys = {
   {
     "<leader>#",
     function()
-      require("obsidian.commands.tags")({ fargs = {}, args = "" })
+      require("obsidian.commands.tags")({
+        fargs = {},
+        args = "",
+      })
     end,
     mode = "n",
     desc = "Obsidian: Show tags",
