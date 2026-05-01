@@ -3,7 +3,7 @@ local dependencies = {
   -- NOTE: markdown renderer
 
   --"MeanderingProgrammer/render-markdown.nvim",
-  "OXY2DEV/markview.nvim",
+  --"OXY2DEV/markview.nvim",
 
   -- NOTE: Image viewing
 
