@@ -11,7 +11,7 @@ local keys = {
     silent = true,
   },
   {
-    "<leader>od",
+    "<leader>oD",
     function()
       require("obsidian.daily").pick(-5, 0, function(note)
         note:open()
@@ -31,7 +31,7 @@ local keys = {
     silent = true,
   },
   {
-    "<leader>ow",
+    "<leader>oW",
     function()
       require("obsidian.picker").find_notes({
         query = "-W",
@@ -63,7 +63,7 @@ local keys = {
     silent = true,
   },
   {
-    "<leader>oT",
+    "<leader>od",
     function()
       local note = require("obsidian.daily").today()
       note:open()
@@ -73,7 +73,7 @@ local keys = {
     silent = true,
   },
   {
-    "<leader>oW",
+    "<leader>ow",
     function()
       require("obsidian.actions").new(os.date("%Y-W%V"))
     end,
