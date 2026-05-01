@@ -1,0 +1,352 @@
+VARIABLES					*gin-variables*
+
+*g:gin_branch_default_args*
+	Specify default arguments of |:GinBranch|.
+
+	Default: []
+
+*g:gin_branch_persistent_args*
+	Specify persistent arguments of |:GinBranch|.
+
+	Default: []
+
+*g:gin_branch_disable_default_mappings*
+	Disable default mappings on buffers shown by |:GinBranch|.
+
+	Default: 0
+
+*g:gin_browse_aliases*
+	Define a REMOTE alias for a specific hosting service on |:GinBrowse|
+	command. This is useful for example GitHub Enterprise with a custom
+	domain like
+>
+	let g:gin_browse_aliases = {
+	      \ 'github.on.my.custom.domain.com': 'github.com',
+	      \}
+<
+	Default: {}
+
+*g:gin_browse_default_args*
+	Specify default arguments of |:GinBrowse|.
+
+	Default: []
+
+*g:gin_browse_persistent_args*
+	Specify persistent arguments of |:GinBrowse|.
+
+	Default: []
+
+*g:gin_chaperon_default_args*
+	Specify default arguments of |:GinChaperon|.
+
+	Default: []
+
+*g:gin_chaperon_persistent_args*
+	Specify persistent arguments of |:GinChaperon|.
+
+	Default: []
+
+*g:gin_chaperon_disable_default_mappings*
+	Disable default mappings on buffers shown by |:GinChaperon|.
+
+	Default: 0
+
+*g:gin_chaperon_supplement_disable*
+	Disable supplemental buffers on |:GinChaperon|.
+
+	Default: 0
+
+*g:gin_chaperon_supplement_height*
+	|Number| that indicates the height of supplemental buffers of
+	|:GinChaperon| command.
+
+	Default: 10
+
+*g:gin_diff_default_args*
+	Specify default arguments of |:GinDiff|.
+
+	Default: []
+
+*g:gin_diff_persistent_args*
+	Specify persistent arguments of |:GinDiff|.
+
+	Default: []
+
+*g:gin_diff_disable_default_mappings*
+	Disable default mappings on buffers shown by |:GinDiff|.
+
+	Default: 0
+
+*g:gin_difffold_prefixes*			*gin-difffold*
+	Customize prefixes shown in diff buffer foldtext. The foldtext
+	displays file status (added/deleted/modified/renamed) and diff
+	statistics (+added -deleted lines).
+
+	The value is a |Dictionary| with the following keys:
+	  - added:    Prefix for newly added files
+	  - deleted:  Prefix for deleted files
+	  - modified: Prefix for modified files
+	  - renamed:  Prefix for renamed files
+
+	Two preset constants are provided:
+	  - |g:gin#difffold#prefixes_ascii|    ASCII symbols (default)
+	  - |g:gin#difffold#prefixes_nerdfont| Nerd Font icons
+
+	Example (using Nerd Font icons):
+>
+	let g:gin_difffold_prefixes = g:gin#difffold#prefixes_nerdfont
+<
+	Example (custom prefixes):
+>
+	let g:gin_difffold_prefixes = {
+	      \ 'added': '[NEW]',
+	      \ 'deleted': '[DEL]',
+	      \ }
+<
+	Partial configuration is supported. Unspecified keys will use the
+	default ASCII values.
+
+	Default: |g:gin#difffold#prefixes_ascii|
+
+*g:gin#difffold#prefixes_ascii*
+	ASCII prefix set for diff foldtext (constant).
+	Values: {'added': '[+]', 'deleted': '[-]', 'modified': '[.]',
+	         'renamed': '[/]'}
+
+*g:gin#difffold#prefixes_nerdfont*
+	Nerd Font icon prefix set for diff foldtext (constant).
+	Uses Codicons nf-cod-diff_* icons.
+
+*g:gin_buffer_disable_default_mappings*
+	Disable default mappings on buffers shown by |:GinBuffer| with
+	|++diffjump| option (filetype "gin-buffer").
+
+	Default: 0
+
+*g:gin_edit_default_args*
+	Specify default arguments of |:GinEdit|.
+
+	Default: []
+
+*g:gin_edit_persistent_args*
+	Specify persistent arguments of |:GinEdit|.
+
+	Default: []
+
+*g:gin_log_default_args*
+	Specify default arguments of |:GinLog|.
+
+	Default: []
+
+*g:gin_log_persistent_args*
+	Specify persistent arguments of |:GinLog|.
+
+	Default: []
+
+*g:gin_log_disable_default_mappings*
+	Disable default mappings on buffers shown by |:GinLog|.
+
+	Default: 0
+
+*g:gin_reflog_default_args*
+	Specify default arguments of |:GinReflog|.
+
+	Default: []
+
+*g:gin_reflog_persistent_args*
+	Specify persistent arguments of |:GinReflog|.
+
+	Default: []
+
+*g:gin_reflog_disable_default_mappings*
+	Disable default mappings on buffers shown by |:GinReflog|.
+
+	Default: 0
+
+*g:gin_patch_default_args*
+	Specify default arguments of |:GinPatch|.
+
+	Default: []
+
+*g:gin_patch_persistent_args*
+	Specify persistent arguments of |:GinPatch|.
+
+	Default: []
+
+*g:gin_patch_disable_default_mappings*
+	Disable default mappings on buffers shown by |:GinPatch|.
+
+	Default: 0
+
+*g:gin_stash_default_args*
+	Specify default arguments of |:GinStash|.
+
+	Default: []
+
+*g:gin_stash_persistent_args*
+	Specify persistent arguments of |:GinStash|.
+
+	Default: []
+
+*g:gin_stash_disable_default_mappings*
+	Disable default mappings on buffers shown by |:GinStash|.
+
+	Default: 0
+
+*g:gin_proxy_apply_without_confirm*
+	Apply changes without confirmation on proxy editors.
+
+	Default: 0
+
+*g:gin_proxy_disable_askpass*
+	Disable overriding "GIT_ASKPASS" to proxy prompts.
+
+	Default: 0
+
+*g:gin_proxy_disable_editor*
+	Disable overriding "GIT_EDITOR" to proxy editors.
+
+	Default: 0
+
+*g:gin_proxy_disable_accept_and_cancel_aliases*
+	Disable :Accept and :Cancel aliases in "gitcommit" and "gitrebase"
+	filetype buffers.
+
+	Default: 0
+
+*g:gin_proxy_editor_opener*
+	Opener command (e.g. "split", "vsplit", "tabedit") to open a buffer
+	on proxy editors.
+
+	Default: "tabedit"
+
+*g:gin_status_default_args*
+	Specify default arguments of |:GinStatus|.
+
+	Default: []
+
+*g:gin_status_persistent_args*
+	Specify persistent arguments of |:GinStatus|.
+
+	Default: []
+
+*g:gin_status_disable_default_mappings*
+	Disable default mappings on |:GinStatus| buffer.
+
+	Default: 0
+
+-----------------------------------------------------------------------------
+FUNCTIONS					*gin-functions*
+
+						*gin#util#reload()*
+gin#util#reload([{bufnr}])
+	Reload a content of {bufnr} gin buffer.
+
+						*gin#util#expand()*
+gin#util#expand({expr})
+	Like |expand()| but it extract a target filename if the buffer is
+	gin's file-like buffer.
+
+						*gin#util#worktree()*
+gin#util#worktree([{path}])
+	Return a git worktree path of the {path} or the current buffer.
+
+-----------------------------------------------------------------------------
+COMPONENTS					*gin-components*
+
+Components are |Function| that never fail and always return a string for
+|statusline| and |tabline|. It returns information of a current working tree
+(See |gin-worktree| for detail about how gin find a current working tree.)
+
+Use component functions like:
+>
+	set statusline+=\ %{gin#component#worktree#name()}
+	set statusline+=\ (%{gin#component#branch#ascii()})
+	set statusline+=\ [%{gin#component#traffic#ascii()}]
+<
+Note that components are updated asynchronously in background and it emits
+|GinComponentPost| |User| autocmd when the status is updated. Use this autocmd
+to update |statusline| or |tabline|.
+>
+	augroup my_gin_component
+	  autocmd!
+	  autocmd User GinComponentPost redrawstatus
+	  " Or if you use tabline instead
+	  "autocmd User GinComponentPost redrawtabline
+	augroup END
+<
+
+					*gin#component#branch#ascii()*
+					*gin#component#branch#unicode()*
+gin#component#branch#ascii()
+gin#component#branch#unicode()
+	Return an indicator string of a current and upstream branches.
+
+					*gin#component#traffic#ascii()*
+					*gin#component#traffic#unicode()*
+gin#component#traffic#ascii()
+gin#component#traffic#unicode()
+	Return an indicator string of the number of ahead and behind commits.
+
+					*gin#component#worktree#name()*
+					*gin#component#worktree#full()*
+gin#component#worktree#name()
+gin#component#worktree#full()
+	Return an indicator string of the current working tree.
+
+-----------------------------------------------------------------------------
+MAPPINGS					*gin-mappings*
+
+*<Plug>(gin-diffput)*
+	Put a diff chunk to WORKTREE buffer.
+
+*<Plug>(gin-diffget)*
+	Get a diff chunk from WORKTREE or HEAD buffer (prefer WORKTREE.)
+
+*<Plug>(gin-diffget-l)*
+	Get a diff chunk from HEAD buffer.
+
+*<Plug>(gin-diffget-r)*
+	Get a diff chunk from WORKTREE buffer.
+
+*<Plug>(gin-diffjump-smart)*
+	Jump to the corresponding line of the comparison or comparison source.
+	Available in buffers with diff jump enabled (|:GinDiff|, |:GinBuffer|
+	with |++diffjump| option).
+
+*<Plug>(gin-diffjump-old)*
+	Jump to the corresponding line of the comparison source.
+	Available in buffers with diff jump enabled.
+
+*<Plug>(gin-diffjump-new)*
+	Jump to the corresponding line of the comparison.
+	Available in buffers with diff jump enabled.
+
+-----------------------------------------------------------------------------
+ACTIONS						*gin-actions*
+
+NOTE that we won't list all actions available here because there are too many
+of them and we cannot maintain correct documentation of that.
+Use the "help" action to check what actions are available on each gin buffer.
+
+*<Plug>(gin-action-echo)*
+	Echo active action candidates for debugging.
+
+*<Plug>(gin-action-choice)*
+	Open a prompt to select an action to invoke. It will invoke selected
+	action on active action candidates.
+	It is mapped to "a" in default when no mapping exists.
+
+*<Plug>(gin-action-repeat)*
+	Repeat a previous action triggered from |<Plug>(gin-action-choice)|.
+	Note that previous actions triggered from actual mappings are not
+	repeated.
+	It is mapped to "." in default when no mapping exists.
+
+*<Plug>(gin-action-help)*
+*<Plug>(gin-action-help:all)*
+	Show action help.
+	It is mapped to "?" in default when no mapping exists.
+
+=============================================================================
+vim:tw=78:fo=tcq2mM:ts=8:ft=help:norl
