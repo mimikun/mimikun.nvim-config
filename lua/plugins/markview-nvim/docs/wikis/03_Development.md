@@ -1,0 +1,188 @@
+<!--markdoc
+    {
+        "generic": {
+            "filename": "../doc/markview.nvim-dev.txt",
+            "force_write": true,
+            "header": {
+                "desc": "💻 Development with `markview`",
+                "tag": "markview.nvim-dev.txt"
+            }
+        },
+        "markdown": {
+            "list_items": {
+                "marker_minus": "◆",
+                "marker_plus": "◇"
+            }
+        }
+    }
+-->
+<!--markdoc_ignore_start-->
+# 💻 Development
+<!--markdoc_ignore_end-->
+
+## ✨ Triggering sub-commands
+
+Normally, the sub-commands can be triggered with,
+
+```lua
+vim.cmd("Markview <sub-command>");
+```
+
+But they can also be triggered using pure Lua.
+
+```lua
+local sub_commands = require("markview.commands");
+sub_commands.Toggle();
+```
+
+The function name matches with the sub-command name(e.g. `sub_commands.splitToggle()` is the same as `:Markview splitToggle`).
+
+Functions/sub-commands that start with a small letter optionally take the `buffer` as a parameter.
+
+## ✨ Using `markview.nvim` as a previewer
+
+You can use `markview` to render markdown & other filetypes in your plugins.
+
+### 🧭 High-level API
+
+This is the recommended way to use `markview` within external plugins.
+
+You can use this if you,
+
++ Don't want to manually set up `concealcursor`, `conceallevel` etc.
++ Would like to render with your own configuration.
++ Have rendering *on demand*(like `fzf-lua`).
+
+```lua
+if package.loaded["markview"] then
+    local render = require("markview").strict_render;
+    -- `buffer` is where you want to render in.
+    render:render(buffer);
+end
+```
+
+>[!IMPORTANT]
+> The `buffer` **must** be cleared using the API function before calling `:render()` again.
+
+You can clear a buffer like so,
+
+```lua
+if package.loaded["markview"] then
+    local render = require("markview").strict_render;
+    render:clear(buffer);
+end
+```
+
+#### 💡 Disable previews if the buffer is too long
+
+If you don't want to render the preview on a large buffer(e.g. due to performance issues). You can disable it if the buffer is more or equal to a certain line count.
+
+```lua
+local render = require("markview").strict_render;
+render:render(buffer, 1000);
+```
+
+#### 💡 Using custom configuration
+
+If you want the preview looking a certain way you can do so with this,
+
+```lua
+local render = require("markview").strict_render;
+render:render(buffer, nil, {
+    markdown = {
+        headings = { enable = false }
+    },
+    -- ...
+});
+```
+
+Configuration table is the same as `setup()`.
+
+### 🧭 Low-level API
+
+>[!NOTE]
+> This will not set `concealcursor`, `conceallevel` etc., you will need to set them yourself!
+
+To use it add the following code to your plugin,
+
+```lua
+if package.loaded["markview"] then
+    -- `buffer` is where you want to render in.
+    require("markview").render(buffer);
+end
+```
+
+#### 💡 Using custom state
+
+If you don't want to have things like `hybrid mode` be present in previews you can disable them in the preview.
+
+```lua
+if package.loaded["markview"] then
+    -- `buffer` is where you want to render in.
+    require("markview").render(buffer, {
+        enable = true,
+        hybrid_mode = false
+    });
+end
+```
+
+Each buffer has the following states,
+
+```lua from: ../lua/markview/types/markview.lua class: markview.state.buf
+--[[ Buffer state for `markview.nvim`. ]]
+---@class markview.state.buf
+---
+---@field enable boolean Is the `preview` enabled?
+---@field hybrid_mode boolean Is `hybrid_mode` enabled?
+```
+
+------
+
+To clear previews use,
+
+```lua
+if package.loaded["markview"] then
+    -- `buffer` is where you want to render in.
+    require("markview").clear(buffer);
+end
+```
+
+## ✨ Using `markview.nvim` as a parser
+
+You can use `markview` to parse files.
+
+This is useful if you have extended syntax or simply don't want to build a parser yourself.
+
+```lua
+local parser = require("markview.parser");
+local data, sorted = parser.init(buffer);
+
+vim.print(data);
+```
+
+`data` is a map between the language & a list of parsed nodes.
+
+```lua from: ../lua/markview/types/parsers.lua class: markview.parsed
+---@class markview.parsed
+---
+---@field html? markview.parsed.html[]
+---@field latex? markview.parsed.latex[]
+---@field markdown? markview.parsed.markdown[]
+---@field markdown_inline? markview.parsed.markdown_inline[]
+---@field typst? markview.parsed.typst[]
+---@field yaml? markview.parsed.yaml[]
+```
+
+`sorted` is a map between the language & another map between node names & a list of parsed nodes.
+
+```lua from: ../lua/markview/types/parsers.lua class: markview.parsed_sorted
+---@class markview.parsed_sorted
+---
+---@field html? markview.parsed.html_sorted
+---@field latex? markview.parsed.latex_sorted
+---@field markdown? markview.parsed.markdown_sorted
+---@field markdown_inline? markview.parsed.markdown_inline_sorted
+---@field typst? markview.parsed.typst_sorted
+---@field yaml? markview.parsed.yaml_sorted
+```
+

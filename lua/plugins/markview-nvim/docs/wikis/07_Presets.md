@@ -1,0 +1,198 @@
+<!--markdoc
+    {
+        "generic": {
+            "filename": "../doc/markview.nvim-presets.txt",
+            "force_write": true,
+            "header": {
+                "desc": "💡 Presets for `markview.nvim`",
+                "tag": "markview.nvim-presets"
+            }
+        },
+        "markdown": {
+            "list_items": {
+                "marker_minus": "◆",
+                "marker_plus": "◇"
+            }
+        }
+    }
+-->
+<!--markdoc_ignore_start-->
+# 💡 Presets
+<!--markdoc_ignore_end-->
+
+Pre-defined configurations to take inspiration from.
+
+## 🔩 Usage
+
+```lua
+local presets = require("markview.presets");
+
+require("markview").setup({
+    markdown = {
+        headings = presets.headings.glow
+    }
+});
+
+--- You can again call `setup()` to modify
+--- the options without changing the preset.
+require("markview").setup({
+    markdown = {
+        headings = { shift_width = 1 }
+    }
+});
+```
+
+## 🔖 Heading presets
+
+### 📚 Usage:
+
+```lua
+local presets = require("markview.presets").headings;
+
+require("markview").setup({
+    markdown = {
+        headings = presets.glow
+    }
+});
+```
+
+### 🌟 Showcase:
+
+- glow
+
+<img src="https://github.com/OXY2DEV/markview.nvim/blob/images/v25/wiki/presets-headings.glow.png">
+
+- glow_center
+
+<img src="https://github.com/OXY2DEV/markview.nvim/blob/images/v25/wiki/presets-headings.glow_center.png">
+
+- slanted
+
+<img src="https://github.com/OXY2DEV/markview.nvim/blob/images/v25/wiki/presets-headings.slanted.png">
+
+- arrowed
+
+<img src="https://github.com/OXY2DEV/markview.nvim/blob/images/v25/wiki/presets-headings.arrowed.png">
+
+- simple
+
+<img src="https://github.com/OXY2DEV/markview.nvim/blob/images/v25/wiki/presets-headings.simple.png">
+
+- marker
+
+<img src="https://github.com/OXY2DEV/markview.nvim/blob/images/v25/wiki/presets-headings.marker.png">
+
+## 🔖 Horizontal rules presets
+
+### 📚 Usage:
+
+```lua
+local presets = require("markview.horizontal_rules").horizontal_rules;
+
+require("markview").setup({
+    markdown = {
+        horizontal_rules = presets.arrowed
+    }
+});
+```
+
+### 🌟 Showcase:
+
+- thin
+
+<img src="https://github.com/OXY2DEV/markview.nvim/blob/images/v25/wiki/presets-hr.thin.png">
+
+- thick
+
+<img src="https://github.com/OXY2DEV/markview.nvim/blob/images/v25/wiki/presets-hr.thick.png">
+
+- double
+
+<img src="https://github.com/OXY2DEV/markview.nvim/blob/images/v25/wiki/presets-hr.double.png">
+
+- dashed
+
+<img src="https://github.com/OXY2DEV/markview.nvim/blob/images/v25/wiki/presets-hr.dashed.png">
+
+- dotted
+
+<img src="https://github.com/OXY2DEV/markview.nvim/blob/images/v25/wiki/presets-hr.dotted.png">
+
+- solid
+
+<img src="https://github.com/OXY2DEV/markview.nvim/blob/images/v25/wiki/presets-hr.solid.png">
+
+- arrowed
+
+<img src="https://github.com/OXY2DEV/markview.nvim/blob/images/v25/wiki/presets-hr.arrowed.png">
+
+## 🔖 Tables presets
+
+### 📚 Usage:
+
+```lua
+local presets = require("markview.presets").tables;
+
+require("markview").setup({
+    markdown = {
+        tables = presets.none
+    }
+});
+```
+
+### 🌟 Showcase:
+
+- none
+
+<img src="https://github.com/OXY2DEV/markview.nvim/blob/images/v25/wiki/presets-tables.none.png">
+
+- single
+
+<img src="https://github.com/OXY2DEV/markview.nvim/blob/images/v25/wiki/presets-tables.single.png">
+
+- double
+
+<img src="https://github.com/OXY2DEV/markview.nvim/blob/images/v25/wiki/presets-tables.double.png">
+
+- rounded
+
+<img src="https://github.com/OXY2DEV/markview.nvim/blob/images/v25/wiki/presets-tables.rounded.png">
+
+- solid
+
+<img src="https://github.com/OXY2DEV/markview.nvim/blob/images/v25/wiki/presets-tables.solid.png">
+
+## 🔖 No nerd fonts presets
+
+
+| Nerd fonts | No nerd fonts |
+|------------|---------------|
+| ![nerd fonts](./images/markview.nvim-nerd_fonts.png) | ![no nerd fonts](./images/markview.nvim-no_nerd_fonts.png) |
+
+
+### 📚 Usage:
+
+```lua
+local presets = require("markview.presets");
+
+require("markview").setup(presets.no_nerd_fonts);
+```
+
+## 🌆 Obsidian-like colored block quote backgrounds
+
+### 🌟 Showcase:
+
+![block_quote backgrounds](./images/preview/markview.nvim-block_quotes_obsidian.png)
+
+### 📚 Usage:
+
+```lua
+local presets = require("markview.presets").block_quotes;
+
+require("markview").setup({
+    markdown = {
+        block_quotes = presets.obsidian
+    }
+});
+```
+
