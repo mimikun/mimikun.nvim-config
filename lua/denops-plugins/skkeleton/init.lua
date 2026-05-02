@@ -1,6 +1,6 @@
 ---@type LazySpec
 local spec = {
-  "mimikun/spec-template",
+  "vim-skk/skkeleton",
   --lazy = false,
   --dir = ""
   --url = ""
@@ -11,21 +11,15 @@ local spec = {
   --tag = "",
   --commit = "",
   --version = "",
-  --ft = require("plugins.PLUGIN_NAME.ft"),
-  --ft = require("denops-plugins.PLUGIN_NAME.ft"),
-  --cmd = require("plugins.PLUGIN_NAME.cmds"),
-  --cmd = require("denops-plugins.PLUGIN_NAME.cmds"),
-  --keys = require("plugins.PLUGIN_NAME.keys"),
-  --keys = require("denops-plugins.PLUGIN_NAME.keys"),
-  --event = require("plugins.PLUGIN_NAME.events"),
-  --event = require("denops-plugins.PLUGIN_NAME.events"),
-  --dependencies = require("plugins.PLUGIN_NAME.dependencies"),
-  --dependencies = require("denops-plugins.PLUGIN_NAME.dependencies"),
+  --ft = require("denops-plugins.skkeleton.ft"),
+  --cmd = require("denops-plugins.skkeleton.cmds"),
+  --keys = require("denops-plugins.skkeleton.keys"),
+  --event = require("denops-plugins.skkeleton.events"),
+  --dependencies = require("denops-plugins.skkeleton.dependencies"),
   --init = function()
   --    INIT
   --end,
-  --opts = require("plugins.PLUGIN_NAME.opts"),
-  --opts = require("denops-plugins.PLUGIN_NAME.opts"),
+  --opts = require("denops-plugins.skkeleton.opts"),
   --config = function()
   --    INIT
   --end,
@@ -40,4 +34,3 @@ local spec = {
 }
 
 return spec
--- :%s/PLUGIN_NAME/
