@@ -1,21 +1,3 @@
-*skkeleton.txt* 日本語入力システム
-
-Author: kuuote
-License: zlib
-
-==============================================================================
-INTRODUCTION                                          *skkeleton-introduction*
-
-*skkeleton* は |denops.vim| を利用したSKK環境を提供します。
-
-REQUIRED                                                  *skkeleton-required*
-
-基本的に作者が最新のVimを利用しているため古いバージョンのVimでの動作は
-保証しませんが、テストはVim v9.1.1646 Neovim 0.11.3 以降で動かしているので
-それ以降であれば動くと思います。
-他の条件は|denops.vim|に準拠します。
-
-==============================================================================
 INTERFACE                                                *skkeleton-interface*
 
 ------------------------------------------------------------------------------
@@ -668,31 +650,4 @@ skkeleton側では |g:skkeleton#mapped_keys| に応じて
 を使うという手もあります。
 
 ==============================================================================
-COMPATIBILITY                                        *skkeleton-compatibility*
-
-2024-12-17~
-- denops.vimのv8で追加された仕様に追従
-  - v7以前のdenops.vimで使いたい方はdenopsv7ブランチを使用してください
-
-2024-12-17~
-- "usePopup" オプションを廃止し、cmdline含め常にpopupを表示するようにした
-
-2024-12-17~
-- "usePopup" オプションを廃止し、cmdline含め常にpopupを表示するようにした
-
-2024-07-27~
-- denops v7を前提とするように
-- ddcのfilterを廃止(sourceでフィルタリングしているため)
-
-2024-01-11~
-- "globalJisyo" オプションと "globalJisyoEncoding" オプションの削除
-- "userJisyo" オプションは "userDictionary" オプションに変更
-- "immediatelyJisyoRW" オプションは "immediatelyDictionaryRW" オプションに変更
-
-2024-01-10~
-- 使用する辞書は "sources" オプションにより指定するように
-
-2023-12-30~
-- 補完の後処理と端末モードの相性が悪いので一旦無効化
-
 vim:tw=78:fo=tcq2mM:ts=8:ft=help:norl
