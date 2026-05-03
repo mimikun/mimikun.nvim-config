@@ -13,8 +13,8 @@ local spec = {
     local opts = require("plugins.cord-nvim.opts")
     require("cord").setup(opts)
   end,
-  --cond = false,
-  --enabled = false,
+  cond = false,
+  enabled = false,
 }
 
 return spec
