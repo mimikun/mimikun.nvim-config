@@ -1,0 +1,3 @@
+---@class PresenceProps
+---@field startTimestamp integer
+---@field idling         boolean
