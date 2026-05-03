@@ -7,7 +7,7 @@ local keys = {
     end,
     mode = "n",
     desc = "Enable diagnostics",
-    { silent = true },
+    silent = true,
   },
   {
     "<leader>dd",
@@ -16,7 +16,7 @@ local keys = {
     end,
     mode = "n",
     desc = "Disable diagnostics",
-    { silent = true },
+    silent = true,
   },
   {
     "<leader>dt",
@@ -25,7 +25,7 @@ local keys = {
     end,
     mode = "n",
     desc = "Toggle diagnostics",
-    { silent = true },
+    silent = true,
   },
   {
     "<leader>dc",
@@ -34,7 +34,7 @@ local keys = {
     end,
     mode = "n",
     desc = "Toggle cursor-only diagnostics",
-    { silent = true },
+    silent = true,
   },
   {
     "<leader>dr",
@@ -43,7 +43,7 @@ local keys = {
     end,
     mode = "n",
     desc = "Reset diagnostic options",
-    { silent = true },
+    silent = true,
   },
 }
 

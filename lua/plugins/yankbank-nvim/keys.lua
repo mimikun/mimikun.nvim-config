@@ -4,7 +4,8 @@ local keys = {
     "<leader>y",
     "<cmd>YankBank<CR>",
     mode = "n",
-    { silent = true, noremap = true },
+    noremap = true,
+    silent = true,
   },
 }
 

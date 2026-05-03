@@ -5,7 +5,7 @@ local keys = {
     "<cmd>PasteImage<cr>",
     mode = "n",
     desc = "Paste image from system clipboard",
-    { silent = true },
+    silent = true,
   },
 }
 

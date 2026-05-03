@@ -10,7 +10,7 @@ local keys = {
     mode = "n",
     desc = "Next todo comment",
     --desc = "Next error/warning todo comment",
-    { silent = true },
+    silent = true,
   },
   {
     "[t",
@@ -19,7 +19,7 @@ local keys = {
     end,
     mode = "n",
     desc = "Previous todo comment",
-    { silent = true },
+    silent = true,
   },
 }
 

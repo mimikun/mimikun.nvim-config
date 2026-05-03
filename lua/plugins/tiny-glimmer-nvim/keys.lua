@@ -7,7 +7,7 @@ local keys = {
     end,
     mode = "n",
     desc = "Enable animations",
-    { silent = true },
+    silent = true,
   },
   {
     "<leader>gd",
@@ -16,7 +16,7 @@ local keys = {
     end,
     mode = "n",
     desc = "Disable animations",
-    { silent = true },
+    silent = true,
   },
   {
     "<leader>gt",
@@ -25,7 +25,7 @@ local keys = {
     end,
     mode = "n",
     desc = "Toggle animations",
-    { silent = true },
+    silent = true,
   },
 }
 

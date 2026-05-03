@@ -7,7 +7,7 @@ local keys = {
     end,
     mode = "n",
     desc = "Move to next reference",
-    { silent = true },
+    silent = true,
   },
   {
     "<a-p>",
@@ -16,7 +16,7 @@ local keys = {
     end,
     mode = "n",
     desc = "Move to previous reference",
-    { silent = true },
+    silent = true,
   },
   {
     "<a-i>",
@@ -25,7 +25,7 @@ local keys = {
     end,
     mode = "o",
     desc = "",
-    { silent = true },
+    silent = true,
   },
   {
     "<a-i>",
@@ -34,7 +34,7 @@ local keys = {
     end,
     mode = "x",
     desc = "",
-    { silent = true },
+    silent = true,
   },
 }
 

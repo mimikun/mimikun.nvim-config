@@ -8,7 +8,7 @@ local keys = {
     end,
     mode = "n",
     desc = "Search all chezmoi files",
-    { silent = true },
+    silent = true,
   },
   {
     "<leader>cfn",
@@ -26,7 +26,7 @@ local keys = {
     end,
     mode = "n",
     desc = "Search only neovim config files",
-    { silent = true },
+    silent = true,
   },
   --[[
   -- NOTE: USE snacks.nvim picker
@@ -37,7 +37,7 @@ local keys = {
     end,
     mode = "n",
     desc = "Search all chezmoi files",
-    { silent = true },
+    silent = true,
   },
   {
     "<leader>cfn",
@@ -55,7 +55,7 @@ local keys = {
     end,
     mode = "n",
     desc = "Search only neovim config files",
-    { silent = true },
+    silent = true,
   },
   ]]
   --[[
@@ -67,7 +67,7 @@ local keys = {
     end,
     mode = "n",
     desc = "Search all chezmoi files",
-    { silent = true },
+    silent = true,
   },
   {
     "<leader>cfn",
@@ -85,7 +85,7 @@ local keys = {
     end,
     mode = "n",
     desc = "Search only neovim config files",
-    { silent = true },
+    silent = true,
   },
   ]]
   --[[
@@ -97,7 +97,7 @@ local keys = {
     end,
     mode = "n",
     desc = "Search all chezmoi files",
-    { silent = true },
+    silent = true,
   },
   {
     "<leader>cfn",
@@ -115,7 +115,7 @@ local keys = {
     end,
     mode = "n",
     desc = "Search only neovim config files",
-    { silent = true },
+    silent = true,
   },
   ]]
 }

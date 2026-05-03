@@ -7,7 +7,7 @@ local keys = {
     end,
     mode = "n",
     desc = "load the session for the current directory",
-    { silent = true },
+    silent = true,
   },
   {
     "<leader>qS",
@@ -16,7 +16,7 @@ local keys = {
     end,
     mode = "n",
     desc = "select a session to load",
-    { silent = true },
+    silent = true,
   },
   {
     "<leader>ql",
@@ -25,7 +25,7 @@ local keys = {
     end,
     mode = "n",
     desc = "load the last session",
-    { silent = true },
+    silent = true,
   },
   {
     "<leader>qd",
@@ -34,7 +34,7 @@ local keys = {
     end,
     mode = "n",
     desc = "stop Persistence => session won't be saved on exit",
-    { silent = true },
+    silent = true,
   },
 }
 

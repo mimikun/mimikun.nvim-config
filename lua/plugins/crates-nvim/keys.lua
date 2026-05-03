@@ -7,7 +7,7 @@ local keys = {
     end,
     mode = "n",
     desc = "",
-    { silent = true },
+    silent = true,
   },
   {
     "<leader>cr",
@@ -16,7 +16,7 @@ local keys = {
     end,
     mode = "n",
     desc = "",
-    { silent = true },
+    silent = true,
   },
   {
     "<leader>cv",
@@ -25,7 +25,7 @@ local keys = {
     end,
     mode = "n",
     desc = "",
-    { silent = true },
+    silent = true,
   },
   {
     "<leader>cf",
@@ -34,7 +34,7 @@ local keys = {
     end,
     mode = "n",
     desc = "",
-    { silent = true },
+    silent = true,
   },
   {
     "<leader>cd",
@@ -43,7 +43,7 @@ local keys = {
     end,
     mode = "n",
     desc = "",
-    { silent = true },
+    silent = true,
   },
   {
     "<leader>cu",
@@ -52,7 +52,7 @@ local keys = {
     end,
     mode = "n",
     desc = "",
-    { silent = true },
+    silent = true,
   },
   {
     "<leader>cu",
@@ -61,7 +61,7 @@ local keys = {
     end,
     mode = "v",
     desc = "",
-    { silent = true },
+    silent = true,
   },
   {
     "<leader>ca",
@@ -70,7 +70,7 @@ local keys = {
     end,
     mode = "n",
     desc = "",
-    { silent = true },
+    silent = true,
   },
   {
     "<leader>cU",
@@ -79,7 +79,7 @@ local keys = {
     end,
     mode = "n",
     desc = "",
-    { silent = true },
+    silent = true,
   },
   {
     "<leader>cU",
@@ -88,7 +88,7 @@ local keys = {
     end,
     mode = "v",
     desc = "",
-    { silent = true },
+    silent = true,
   },
   {
     "<leader>cA",
@@ -97,7 +97,7 @@ local keys = {
     end,
     mode = "n",
     desc = "",
-    { silent = true },
+    silent = true,
   },
   {
     "<leader>cx",
@@ -106,7 +106,7 @@ local keys = {
     end,
     mode = "n",
     desc = "",
-    { silent = true },
+    silent = true,
   },
   {
     "<leader>cX",
@@ -115,7 +115,7 @@ local keys = {
     end,
     mode = "n",
     desc = "",
-    { silent = true },
+    silent = true,
   },
   {
     "<leader>cH",
@@ -124,7 +124,7 @@ local keys = {
     end,
     mode = "n",
     desc = "",
-    { silent = true },
+    silent = true,
   },
   {
     "<leader>cR",
@@ -133,7 +133,7 @@ local keys = {
     end,
     mode = "n",
     desc = "",
-    { silent = true },
+    silent = true,
   },
   {
     "<leader>cD",
@@ -142,7 +142,7 @@ local keys = {
     end,
     mode = "n",
     desc = "",
-    { silent = true },
+    silent = true,
   },
   {
     "<leader>cC",
@@ -151,7 +151,7 @@ local keys = {
     end,
     mode = "n",
     desc = "",
-    { silent = true },
+    silent = true,
   },
   {
     "<leader>cL",
@@ -160,7 +160,7 @@ local keys = {
     end,
     mode = "n",
     desc = "",
-    { silent = true },
+    silent = true,
   },
 }
 

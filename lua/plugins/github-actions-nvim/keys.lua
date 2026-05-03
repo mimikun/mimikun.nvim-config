@@ -7,7 +7,7 @@ local keys = {
     end,
     mode = "n",
     desc = "Dispatch workflow",
-    { silent = true },
+    silent = true,
   },
   {
     "<leader>gh",
@@ -16,7 +16,7 @@ local keys = {
     end,
     mode = "n",
     desc = "Show workflow history",
-    { silent = true },
+    silent = true,
   },
   {
     "<leader>gp",
@@ -25,7 +25,7 @@ local keys = {
     end,
     mode = "n",
     desc = "Show workflow history by branch/PR",
-    { silent = true },
+    silent = true,
   },
   {
     "<leader>gw",
@@ -34,7 +34,7 @@ local keys = {
     end,
     mode = "n",
     desc = "Watch running workflow",
-    { silent = true },
+    silent = true,
   },
   {
     "<leader>go",
@@ -43,7 +43,7 @@ local keys = {
     end,
     mode = "n",
     desc = "Open workflow URL in browser",
-    { silent = true },
+    silent = true,
   },
 }
 

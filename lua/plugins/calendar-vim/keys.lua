@@ -5,14 +5,14 @@ local keys = {
     "CalendarV",
     mode = "n",
     desc = "Open vertical calendar",
-    { silent = true },
+    silent = true,
   },
   {
     "<leader>caL",
     "CalendarH",
     mode = "n",
     desc = "Open horizontal calendar",
-    { silent = true },
+    silent = true,
   },
 }
 

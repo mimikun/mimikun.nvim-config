@@ -8,7 +8,7 @@ local keys = {
     mode = "n",
     desc = "Undo with highlight",
     noremap = true,
-    { silent = true },
+    silent = true,
   },
   {
     "U",
@@ -18,7 +18,7 @@ local keys = {
     mode = "n",
     desc = "Redo with highlight",
     noremap = true,
-    { silent = true },
+    silent = true,
   },
   {
     "p",
@@ -40,7 +40,7 @@ local keys = {
     mode = "n",
     desc = "Paste above with highlight",
     noremap = true,
-    { silent = true },
+    silent = true,
   },
   {
     "n",
@@ -54,7 +54,7 @@ local keys = {
     mode = "n",
     desc = "Search next with highlight",
     noremap = true,
-    { silent = true },
+    silent = true,
   },
   {
     "N",
@@ -68,7 +68,7 @@ local keys = {
     mode = "n",
     desc = "Search prev with highlight",
     noremap = true,
-    { silent = true },
+    silent = true,
   },
   {
     "*",
@@ -82,7 +82,7 @@ local keys = {
     mode = "n",
     desc = "Search star with highlight",
     noremap = true,
-    { silent = true },
+    silent = true,
   },
   {
     "#",
@@ -96,7 +96,7 @@ local keys = {
     mode = "n",
     desc = "Search hash with highlight",
     noremap = true,
-    { silent = true },
+    silent = true,
   },
   {
     "gc",
@@ -112,7 +112,7 @@ local keys = {
     desc = "Toggle comment with highlight",
     expr = true,
     noremap = true,
-    { silent = true },
+    silent = true,
   },
   {
     "gc",
@@ -122,6 +122,7 @@ local keys = {
     mode = "o",
     desc = "Comment textobject with highlight",
     noremap = true,
+    silent = true,
   },
   {
     "gcc",
@@ -132,7 +133,7 @@ local keys = {
     desc = "Toggle comment line with highlight",
     expr = true,
     noremap = true,
-    { silent = true },
+    silent = true,
   },
 }
 

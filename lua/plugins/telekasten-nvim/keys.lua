@@ -8,7 +8,7 @@ local keys = {
     end,
     mode = "n",
     desc = "Telekasten: Find notes",
-    { silent = true },
+    silent = true,
   },
   {
     "<leader>zd",
@@ -17,7 +17,7 @@ local keys = {
     end,
     mode = "n",
     desc = "Telekasten: Find daily notes",
-    { silent = true },
+    silent = true,
   },
   {
     "<leader>zg",
@@ -26,7 +26,7 @@ local keys = {
     end,
     mode = "n",
     desc = "Telekasten: Search notes",
-    { silent = true },
+    silent = true,
   },
   {
     "<leader>zw",
@@ -35,7 +35,7 @@ local keys = {
     end,
     mode = "n",
     desc = "Telekasten: Find weekly notes",
-    { silent = true },
+    silent = true,
   },
   {
     "<leader>zF",
@@ -44,7 +44,7 @@ local keys = {
     end,
     mode = "n",
     desc = "Telekasten: Find friends",
-    { silent = true },
+    silent = true,
   },
 
   -- Navigation
@@ -55,7 +55,7 @@ local keys = {
     end,
     mode = "n",
     desc = "Telekasten: Follow link",
-    { silent = true },
+    silent = true,
   },
   {
     "<leader>zT",
@@ -64,7 +64,7 @@ local keys = {
     end,
     mode = "n",
     desc = "Telekasten: Go to today",
-    { silent = true },
+    silent = true,
   },
   {
     "<leader>zW",
@@ -73,7 +73,7 @@ local keys = {
     end,
     mode = "n",
     desc = "Telekasten: Go to this week",
-    { silent = true },
+    silent = true,
   },
 
   -- Create
@@ -84,7 +84,7 @@ local keys = {
     end,
     mode = "n",
     desc = "Telekasten: New note",
-    { silent = true },
+    silent = true,
   },
   {
     "<leader>zN",
@@ -93,7 +93,7 @@ local keys = {
     end,
     mode = "n",
     desc = "Telekasten: New templated note",
-    { silent = true },
+    silent = true,
   },
 
   -- Yank / Clipboard
@@ -104,7 +104,7 @@ local keys = {
     end,
     mode = "n",
     desc = "Telekasten: Yank note link",
-    { silent = true },
+    silent = true,
   },
 
   -- Calendar
@@ -115,14 +115,14 @@ local keys = {
     end,
     mode = "n",
     desc = "Telekasten: Show calendar",
-    { silent = true },
+    silent = true,
   },
   {
     "<leader>zC",
     "<cmd>CalendarT<CR>",
     mode = "n",
     desc = "Telekasten: Open CalendarT",
-    { silent = true },
+    silent = true,
   },
 
   -- Media / Images
@@ -133,7 +133,7 @@ local keys = {
     end,
     mode = "n",
     desc = "Telekasten: Paste image and link",
-    { silent = true },
+    silent = true,
   },
   {
     "<leader>zI",
@@ -142,7 +142,7 @@ local keys = {
     end,
     mode = "n",
     desc = "Telekasten: Insert image link",
-    { silent = true },
+    silent = true,
   },
   {
     "<leader>zp",
@@ -151,7 +151,7 @@ local keys = {
     end,
     mode = "n",
     desc = "Telekasten: Preview image",
-    { silent = true },
+    silent = true,
   },
   {
     "<leader>zm",
@@ -160,7 +160,7 @@ local keys = {
     end,
     mode = "n",
     desc = "Telekasten: Browse media",
-    { silent = true },
+    silent = true,
   },
 
   -- Todo
@@ -171,7 +171,7 @@ local keys = {
     end,
     mode = "n",
     desc = "Telekasten: Toggle todo",
-    { silent = true },
+    silent = true,
   },
   {
     "<leader>zt",
@@ -180,7 +180,7 @@ local keys = {
     end,
     mode = "v",
     desc = "Telekasten: Toggle todo (visual)",
-    { silent = true },
+    silent = true,
   },
 
   -- Backlinks / Tags
@@ -191,7 +191,7 @@ local keys = {
     end,
     mode = "n",
     desc = "Telekasten: Show backlinks",
-    { silent = true },
+    silent = true,
   },
   {
     "<leader>#",
@@ -200,7 +200,7 @@ local keys = {
     end,
     mode = "n",
     desc = "Telekasten: Show tags",
-    { silent = true },
+    silent = true,
   },
 
   -- Insert mode
@@ -211,7 +211,7 @@ local keys = {
     end,
     mode = "i",
     desc = "Telekasten: Insert link",
-    { silent = true },
+    silent = true,
   },
   {
     "<leader>zt",
@@ -220,7 +220,7 @@ local keys = {
     end,
     mode = "i",
     desc = "Telekasten: Toggle todo (insert)",
-    { silent = true },
+    silent = true,
   },
   {
     "<leader>#",
@@ -229,7 +229,7 @@ local keys = {
     end,
     mode = "i",
     desc = "Telekasten: Show tags (insert)",
-    { silent = true },
+    silent = true,
   },
 }
 
