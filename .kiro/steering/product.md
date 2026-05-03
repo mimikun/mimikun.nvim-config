@@ -62,32 +62,9 @@ Personal Neovim configuration focused on modularity, extensibility, and maintain
 - Progressive disclosure (start minimal, enable features as needed)
 - Documentation accessibility (CLAUDE.md, neovim_tips/)
 
-## Active Plugins (Examples)
+## Active Plugins
 
-- **UI**: transparent-nvim, glaze-nvim, smear-cursor-nvim, tiny-glimmer-nvim, drop-nvim, wrapped-nvim, paint-nvim, tiny-cmdline-nvim, edgy-nvim (edge panels), satellite-nvim (scrollbar), statuscol-nvim, virt-column-nvim, ascii-nvim (ASCII art with Telescope, MaximilianLloyd)
-- **Focus/Writing**: zen-mode-nvim, twilight-nvim
-- **Navigation**: oil-nvim (file manager), lazytree, vim-illuminate
-- **File Manager Ecosystem**: oil-nvim, oil-git-nvim, oil-git-status-nvim, oil-lsp-diagnostics-nvim
-- **LSP/Diagnostics**: nvim-lspconfig, lazydev-nvim, neoconf-nvim, mason-nvim, tiny-inline-diagnostic-nvim, crates-nvim (Rust crates.io integration, saecki)
-- **Syntax**: nvim-treesitter, todo-comments-nvim, ts-comments-nvim
-- **Git**: gitsigns-nvim (signcolumn indicators)
-- **Keybindings**: which-key-nvim, hardtime-nvim (habit enforcement), surround-ui-nvim (surround text object UI, roobert)
-- **Clipboard/Yank**: yanky-nvim, yankbank-nvim, nvim-neoclip-lua, sqlite-lua
-- **Session**: persistence-nvim (session management)
-- **Tools**: taskfile-nvim, github-actions-nvim, k8s-nvim, chezmoi-nvim/vim, devglobe-extension-nvim, orphans-nvim (plugin cleanup)
-- **Time Tracking**: takatime (WakaTime-style), milli-nvim
-- **Notes/Markdown**: telekasten-nvim, calendar-vim, md-render-nvim, milli-nvim (MilliPreview)
-- **Media**: image-nvim, img-clip-nvim
-- **Denops**: denops-vim, denops-translate-vim, denops-docker-vim, dps-ghosttext-vim, dps-translate-vim
-- **Diagnostics/Lists**: trouble-nvim (folke, quickfix/diagnostic viewer)
-- **Auto-pairs**: blink-pairs (saghen, bracket auto-pairing)
-- **Code Outline**: aerial-nvim (stevearc, symbol navigator/outline)
-- **Discord Presence**: cord-nvim (vyfor, Discord Rich Presence)
-- **Home Automation**: homeassistant-nvim (myakove, Home Assistant integration)
-- **Color Generation**: matugen-nvim (daedlock, material color generation)
-- **Rainbow Brackets**: rainbow-delimiters-nvim (HiPhish, colorized delimiter matching)
-- **Undo Feedback**: undo-glow-nvim (y3owk1n, visual highlight for undo/redo/yank)
-- **Colorschemes**: tokyonight-nvim
+Active plugins are cataloged in `lua/plugins/` (one subdirectory per plugin). Run `ls lua/plugins/` for the full list. Categories span UI, LSP, Git, navigation, editing, notes, media, Denops, and tooling integrations.
 
 ## Out of Scope
 
