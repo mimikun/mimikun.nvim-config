@@ -23,19 +23,31 @@ local mode = {
 local AUGROUP = api.nvim_create_augroup("ToggleTermBuffer", { clear = true })
 
 local is_windows = fn.has("win32") == 1
-local function is_cmd(shell) return shell:find("cmd") end
+local function is_cmd(shell)
+  return shell:find("cmd")
+end
 
-local function is_pwsh(shell) return shell:find("pwsh") or shell:find("powershell") end
+local function is_pwsh(shell)
+  return shell:find("pwsh") or shell:find("powershell")
+end
 
-local function is_nushell(shell) return shell:find("nu") end
+local function is_nushell(shell)
+  return shell:find("nu")
+end
 
-local function get_command_sep() return is_windows and is_cmd(vim.o.shell) and "&" or ";" end
+local function get_command_sep()
+  return is_windows and is_cmd(vim.o.shell) and "&" or ";"
+end
 
-local function get_comment_sep() return is_windows and is_cmd(vim.o.shell) and "::" or "#" end
+local function get_comment_sep()
+  return is_windows and is_cmd(vim.o.shell) and "::" or "#"
+end
 
 local function get_newline_chr()
   local shell = config.get("shell")
-  if type(shell) == "function" then shell = shell() end
+  if type(shell) == "function" then
+    shell = shell()
+  end
   if is_windows then
     return is_pwsh(shell) and "\r" or "\r\n"
   elseif is_nushell(shell) then
@@ -109,7 +121,9 @@ local Terminal = {}
 function M.next_id()
   local all = M.get_all(true)
   for index, term in pairs(all) do
-    if index ~= term.id then return index end
+    if index ~= term.id then
+      return index
+    end
   end
   return #all + 1
 end
@@ -127,7 +141,9 @@ end
 ---@return number?
 function M.get_focused_id()
   for _, term in pairs(terminals) do
-    if term:is_focused() then return term.id end
+    if term:is_focused() then
+      return term.id
+    end
   end
   return nil
 end
@@ -148,14 +164,18 @@ end
 ---@param id number terminal id
 local function on_vim_resized(id)
   local term = M.get(id, true)
-  if not term or not term:is_float() or not term:is_open() then return end
+  if not term or not term:is_float() or not term:is_open() then
+    return
+  end
   ui.update_float(term)
 end
 
 --- Remove the in memory reference to the no longer open terminal
 --- @param num number
 local function delete(num)
-  if terminals[num] then terminals[num] = nil end
+  if terminals[num] then
+    terminals[num] = nil
+  end
 end
 
 ---Terminal buffer autocommands
@@ -164,19 +184,25 @@ local function setup_buffer_autocommands(term)
   api.nvim_create_autocmd("TermClose", {
     buffer = term.bufnr,
     group = AUGROUP,
-    callback = function() delete(term.id) end,
+    callback = function()
+      delete(term.id)
+    end,
   })
   if term:is_float() then
     api.nvim_create_autocmd("VimResized", {
       buffer = term.bufnr,
       group = AUGROUP,
-      callback = function() on_vim_resized(term.id) end,
+      callback = function()
+        on_vim_resized(term.id)
+      end,
     })
   end
 
   if config.start_in_insert then
     -- Avoid entering insert mode when spawning terminal in the background
-    if term.window == api.nvim_get_current_win() then vim.cmd("startinsert") end
+    if term.window == api.nvim_get_current_win() then
+      vim.cmd("startinsert")
+    end
   end
 end
 
@@ -184,7 +210,9 @@ end
 ---@param dir string?
 ---@return string
 local function _get_dir(dir)
-  if dir == "git_dir" then dir = utils.git_dir() end
+  if dir == "git_dir" then
+    dir = utils.git_dir()
+  end
   if dir then
     return fn.expand(dir)
   else
@@ -200,7 +228,9 @@ function Terminal:new(term)
   --- If we try to create a new terminal, but the id is already
   --- taken, return the terminal with the containing id
   local id = term.count or term.id
-  if id and terminals[id] then return terminals[id] end
+  if id and terminals[id] then
+    return terminals[id]
+  end
   local conf = config.get()
   self.__index = self
   term.newline_chr = term.newline_chr or get_newline_chr()
@@ -219,7 +249,9 @@ function Terminal:new(term)
   term.on_stderr = vim.F.if_nil(term.on_stderr, conf.on_stderr)
   term.on_exit = vim.F.if_nil(term.on_exit, conf.on_exit)
   term.__state = { mode = "?" }
-  if term.close_on_exit == nil then term.close_on_exit = conf.close_on_exit end
+  if term.close_on_exit == nil then
+    term.close_on_exit = conf.close_on_exit
+  end
   -- Add the newly created terminal to the list of all terminals
   ---@diagnostic disable-next-line: return-type-mismatch
   return setmetatable(term, self)
@@ -228,26 +260,37 @@ end
 ---@package
 ---Add a terminal to the list of terminals
 function Terminal:__add()
-  if terminals[self.id] and terminals[self.id] ~= self then self.id = M.next_id() end
-  if not terminals[self.id] then terminals[self.id] = self end
+  if terminals[self.id] and terminals[self.id] ~= self then
+    self.id = M.next_id()
+  end
+  if not terminals[self.id] then
+    terminals[self.id] = self
+  end
   return self
 end
 
-function Terminal:is_float() return self.direction == "float" and ui.is_float(self.window) end
-
-function Terminal:is_split()
-  return (self.direction == "vertical" or self.direction == "horizontal")
-    and not ui.is_float(self.window)
+function Terminal:is_float()
+  return self.direction == "float" and ui.is_float(self.window)
 end
 
-function Terminal:is_tab() return self.direction == "tab" and not ui.is_float(self.window) end
+function Terminal:is_split()
+  return (self.direction == "vertical" or self.direction == "horizontal") and not ui.is_float(self.window)
+end
+
+function Terminal:is_tab()
+  return self.direction == "tab" and not ui.is_float(self.window)
+end
 
 function Terminal:resize(size)
-  if self:is_split() then ui.resize_split(self, size) end
+  if self:is_split() then
+    ui.resize_split(self, size)
+  end
 end
 
 function Terminal:is_open()
-  if not self.window then return false end
+  if not self.window then
+    return false
+  end
   local win_type = fn.win_gettype(self.window)
   -- empty string window type corresponds to a normal window
   local win_open = win_type == "" or win_type == "popup"
@@ -255,17 +298,25 @@ function Terminal:is_open()
 end
 
 ---@package
-function Terminal:__restore_mode() self:set_mode(self.__state.mode) end
+function Terminal:__restore_mode()
+  self:set_mode(self.__state.mode)
+end
 
 --- Set the terminal's mode
 ---@param m Mode
 function Terminal:set_mode(m)
   if m == mode.INSERT then
-    vim.schedule(function() vim.cmd("startinsert") end)
+    vim.schedule(function()
+      vim.cmd("startinsert")
+    end)
   elseif m == mode.NORMAL then
-    vim.schedule(function() vim.cmd("stopinsert") end)
+    vim.schedule(function()
+      vim.cmd("stopinsert")
+    end)
   elseif m == mode.UNSUPPORTED and config.get("start_in_insert") then
-    vim.schedule(function() vim.cmd("startinsert") end)
+    vim.schedule(function()
+      vim.cmd("startinsert")
+    end)
   end
 end
 
@@ -281,17 +332,23 @@ function Terminal:persist_mode()
 end
 
 ---@package
-function Terminal:_display_name() return self.display_name or vim.split(self.name, ";")[1] end
+function Terminal:_display_name()
+  return self.display_name or vim.split(self.name, ";")[1]
+end
 
 function Terminal:close()
-  if self.on_close then self:on_close() end
+  if self.on_close then
+    self:on_close()
+  end
   ui.close(self)
   ui.stopinsert()
   ui.update_origin_window(self.window)
 end
 
 function Terminal:shutdown()
-  if self:is_open() then self:close() end
+  if self:is_open() then
+    self:close()
+  end
   ui.delete_buf(self)
   delete(self.id)
 end
@@ -309,14 +366,22 @@ local function with_cr(newline_chr, ...)
 end
 
 function Terminal:scroll_bottom()
-  if not api.nvim_buf_is_loaded(self.bufnr) or not api.nvim_buf_is_valid(self.bufnr) then return end
-  if ui.term_has_open_win(self) then api.nvim_buf_call(self.bufnr, ui.scroll_to_bottom) end
+  if not api.nvim_buf_is_loaded(self.bufnr) or not api.nvim_buf_is_valid(self.bufnr) then
+    return
+  end
+  if ui.term_has_open_win(self) then
+    api.nvim_buf_call(self.bufnr, ui.scroll_to_bottom)
+  end
 end
 
-function Terminal:is_focused() return self.window == api.nvim_get_current_win() end
+function Terminal:is_focused()
+  return self.window == api.nvim_get_current_win()
+end
 
 function Terminal:focus()
-  if ui.term_has_open_win(self) then api.nvim_set_current_win(self.window) end
+  if ui.term_has_open_win(self) then
+    api.nvim_set_current_win(self.window)
+  end
 end
 
 ---Send a command to a running terminal
@@ -345,7 +410,9 @@ end
 ---@param dir string
 function Terminal:change_dir(dir, go_back)
   dir = _get_dir(dir)
-  if self.dir == dir then return end
+  if self.dir == dir then
+    return
+  end
   self:send({ fmt("cd %s", dir), self:clear() }, go_back)
   self.dir = dir
 end
@@ -361,7 +428,9 @@ end
 ---@param term Terminal
 local function __handle_exit(term)
   return function(...)
-    if term.on_exit then term:on_exit(...) end
+    if term.on_exit then
+      term:on_exit(...)
+    end
     if term.close_on_exit then
       term:close()
       if api.nvim_buf_is_loaded(term.bufnr) then
@@ -380,8 +449,12 @@ end
 function Terminal:__make_output_handler(handler)
   if self.auto_scroll or handler then
     return function(...)
-      if self.auto_scroll then self:scroll_bottom() end
-      if handler then handler(self, ...) end
+      if self.auto_scroll then
+        self:scroll_bottom()
+      end
+      if handler then
+        handler(self, ...)
+      end
     end
   end
 end
@@ -389,7 +462,9 @@ end
 ---@private
 function Terminal:__spawn()
   local cmd = self.cmd or config.get("shell")
-  if type(cmd) == "function" then cmd = cmd() end
+  if type(cmd) == "function" then
+    cmd = cmd()
+  end
   local command_sep = get_command_sep()
   local comment_sep = get_comment_sep()
   cmd = table.concat({
@@ -418,7 +493,9 @@ end
 ---Add an orphaned terminal to the list of terminal and re-apply settings
 function Terminal:__resurrect()
   self:__add()
-  if self:is_split() then ui.resize_split(self) end
+  if self:is_split() then
+    ui.resize_split(self)
+  end
   -- set the window options including fixing height or width once the window is resized
   self:__set_options()
   ui.hl_term(self)
@@ -469,16 +546,22 @@ end
 
 ---Spawn terminal background job in a buffer without a window
 function Terminal:spawn()
-  if not self.bufnr or not api.nvim_buf_is_valid(self.bufnr) then self.bufnr = ui.create_buf() end
+  if not self.bufnr or not api.nvim_buf_is_valid(self.bufnr) then
+    self.bufnr = ui.create_buf()
+  end
   self:__add()
   if api.nvim_get_current_buf() ~= self.bufnr then
-    api.nvim_buf_call(self.bufnr, function() self:__spawn() end)
+    api.nvim_buf_call(self.bufnr, function()
+      self:__spawn()
+    end)
   else
     self:__spawn()
   end
   setup_buffer_autocommands(self)
   setup_buffer_mappings(self.bufnr)
-  if self.on_create then self:on_create() end
+  if self.on_create then
+    self:on_create()
+  end
 end
 
 ---Open a terminal window
@@ -488,20 +571,30 @@ function Terminal:open(size, direction)
   local cwd = fn.getcwd()
   self.dir = _get_dir(config.autochdir and cwd or self.dir)
   ui.set_origin_window()
-  if direction then self:change_direction(direction) end
+  if direction then
+    self:change_direction(direction)
+  end
   if not self.bufnr or not api.nvim_buf_is_valid(self.bufnr) then
     local ok, err = pcall(opener, size, self)
-    if not ok and err then return utils.notify(err, "error") end
+    if not ok and err then
+      return utils.notify(err, "error")
+    end
     self:spawn()
   else
     local ok, err = pcall(opener, size, self)
-    if not ok and err then return utils.notify(err, "error") end
+    if not ok and err then
+      return utils.notify(err, "error")
+    end
     ui.switch_buf(self.bufnr)
-    if config.autochdir and self.dir ~= cwd then self:change_dir(cwd) end
+    if config.autochdir and self.dir ~= cwd then
+      self:change_dir(cwd)
+    end
   end
   ui.hl_term(self)
   -- NOTE: it is important that this function is called at this point. i.e. the buffer has been correctly assigned
-  if self.on_open then self:on_open() end
+  if self.on_open then
+    self:on_open()
+  end
 end
 
 ---Open if closed and close if opened
@@ -539,8 +632,12 @@ end
 ---@return boolean
 function M.get_or_create_term(num, dir, direction, name)
   local term = M.get(num)
-  if term then return term, false end
-  if dir and fn.isdirectory(fn.expand(dir)) == 0 then dir = nil end
+  if term then
+    return term, false
+  end
+  if dir and fn.isdirectory(fn.expand(dir)) == 0 then
+    dir = nil
+  end
   return Terminal:new({ id = num, dir = dir, direction = direction, display_name = name }), true
 end
 
@@ -562,7 +659,9 @@ function M.find(predicate)
     return
   end
   for _, term in pairs(terminals) do
-    if predicate(term) then return term end
+    if predicate(term) then
+      return term
+    end
   end
   return nil
 end
@@ -573,9 +672,13 @@ end
 function M.get_all(include_hidden)
   local result = {}
   for _, v in pairs(terminals) do
-    if include_hidden or (not include_hidden and not v.hidden) then table.insert(result, v) end
+    if include_hidden or (not include_hidden and not v.hidden) then
+      table.insert(result, v)
+    end
   end
-  table.sort(result, function(a, b) return a.id < b.id end)
+  table.sort(result, function(a, b)
+    return a.id < b.id
+  end)
   return result
 end
 

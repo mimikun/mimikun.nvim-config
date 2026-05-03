@@ -78,7 +78,9 @@ local function toggle_nth_term(num, size, dir, direction, name)
   ui.update_origin_window(term.window)
   term:toggle(size, direction)
   -- Save the terminal in view if it was last closed terminal.
-  if not ui.find_open_windows() then ui.save_terminal_view({ term.id }, term.id) end
+  if not ui.find_open_windows() then
+    ui.save_terminal_view({ term.id }, term.id)
+  end
 end
 
 ---Close the last window if only a terminal *split* is open
@@ -100,10 +102,14 @@ local function handle_term_enter()
   if term then
     --- FIXME: we have to reset the filetype here because it is reset by other plugins
     --- i.e. telescope.nvim
-    if vim.bo[term.bufnr] ~= constants.FILETYPE then term:__set_ft_options() end
+    if vim.bo[term.bufnr] ~= constants.FILETYPE then
+      term:__set_ft_options()
+    end
 
     local closed = close_last_window(term)
-    if closed then return end
+    if closed then
+      return
+    end
     if config.persist_mode then
       term:__restore_mode()
     elseif config.start_in_insert then
@@ -114,9 +120,15 @@ end
 
 local function handle_term_leave()
   local _, term = terms.identify()
-  if not term then return end
-  if config.persist_mode then term:persist_mode() end
-  if term:is_float() then term:close() end
+  if not term then
+    return
+  end
+  if config.persist_mode then
+    term:persist_mode()
+  end
+  if term:is_float() then
+    term:close()
+  end
 end
 
 local function on_term_open()
@@ -155,16 +167,7 @@ function M.exec_command(args, count)
     go_back = { parsed.go_back, "boolean", true },
     open = { parsed.open, "boolean", true },
   })
-  M.exec(
-    parsed.cmd,
-    count,
-    parsed.size,
-    parsed.dir,
-    parsed.direction,
-    parsed.name,
-    parsed.go_back,
-    parsed.open
-  )
+  M.exec(parsed.cmd, count, parsed.size, parsed.dir, parsed.direction, parsed.name, parsed.go_back, parsed.open)
 end
 
 --- @param cmd string
@@ -189,10 +192,16 @@ function M.exec(cmd, num, size, dir, direction, name, go_back, open)
   num = (num and num >= 1) and num or terms.get_toggled_id()
   open = open == nil or open
   local term = terms.get_or_create_term(num, dir, direction, name)
-  if not term:is_open() then term:open(size, direction) end
+  if not term:is_open() then
+    term:open(size, direction)
+  end
   -- going back from floating window closes it
-  if term:is_float() then go_back = false end
-  if go_back == nil then go_back = true end
+  if term:is_float() then
+    go_back = false
+  end
+  if go_back == nil then
+    go_back = true
+  end
   if not open then
     term:close()
     go_back = false
@@ -241,7 +250,9 @@ function M.send_lines_to_terminal(selection_type, trim_spaces, cmd_data)
     end
   end
 
-  if not lines or not next(lines) then return end
+  if not lines or not next(lines) then
+    return
+  end
 
   if not trim_spaces then
     M.exec(table.concat(lines, "\n"), id)
@@ -266,7 +277,9 @@ function M.new_command(args)
     direction = { parsed.direction, "string", true },
     name = { parsed.name, "string", true },
   })
-  if parsed.size then parsed.size = tonumber(parsed.size) end
+  if parsed.size then
+    parsed.size = tonumber(parsed.size)
+  end
   M.new(parsed.size, parsed.dir, parsed.direction, parsed.name)
 end
 
@@ -278,14 +291,18 @@ function M.toggle_command(args, count)
     direction = { parsed.direction, "string", true },
     name = { parsed.name, "string", true },
   })
-  if parsed.size then parsed.size = tonumber(parsed.size) end
+  if parsed.size then
+    parsed.size = tonumber(parsed.size)
+  end
   M.toggle(count, parsed.size, parsed.dir, parsed.direction, parsed.name)
 end
 
 function _G.___toggleterm_winbar_click(id)
   if id then
     local term = terms.get_or_create_term(id)
-    if not term then return end
+    if not term then
+      return
+    end
     term:toggle()
   end
 end
@@ -373,7 +390,9 @@ local function setup_autocommands(_)
       config.reset_highlights()
       for _, term in pairs(terms.get_all()) do
         if term.window and api.nvim_win_is_valid(term.window) then
-          api.nvim_win_call(term.window, function() ui.hl_term(term) end)
+          api.nvim_win_call(term.window, function()
+            ui.hl_term(term)
+          end)
         end
       end
     end,
@@ -393,36 +412,52 @@ end
 ---@param callback fun(t: Terminal?)
 local function get_subject_terminal(callback)
   local items = terms.get_all(true)
-  if #items == 0 then return utils.notify("No toggleterms are open yet") end
+  if #items == 0 then
+    return utils.notify("No toggleterms are open yet")
+  end
 
   vim.ui.select(items, {
     prompt = "Please select a terminal to name: ",
-    format_item = function(term) return term.id .. ": " .. term:_display_name() end,
+    format_item = function(term)
+      return term.id .. ": " .. term:_display_name()
+    end,
   }, function(term)
-    if not term then return end
+    if not term then
+      return
+    end
     callback(term)
   end)
 end
 
 ---@param name string
 ---@param term Terminal
-local function set_term_name(name, term) term.display_name = name end
+local function set_term_name(name, term)
+  term.display_name = name
+end
 
 local function request_term_name(term)
   vim.ui.input({ prompt = "Please set a name for the terminal" }, function(name)
-    if name and #name > 0 then set_term_name(name, term) end
+    if name and #name > 0 then
+      set_term_name(name, term)
+    end
   end)
 end
 
 local function select_terminal(opts)
   local terminals = terms.get_all(opts.bang)
-  if #terminals == 0 then return utils.notify("No toggleterms are open yet", "info") end
+  if #terminals == 0 then
+    return utils.notify("No toggleterms are open yet", "info")
+  end
   vim.ui.select(terminals, {
     prompt = "Please select a terminal to open (or focus): ",
-    format_item = function(term) return term.id .. ": " .. term:_display_name() end,
+    format_item = function(term)
+      return term.id .. ": " .. term:_display_name()
+    end,
   }, function(_, idx)
     local term = terminals[idx]
-    if not term then return end
+    if not term then
+      return
+    end
     if term:is_open() then
       term:focus()
     else
@@ -435,43 +470,33 @@ local function setup_commands()
   local command = api.nvim_create_user_command
   command("TermSelect", select_terminal, { bang = true })
   -- Count is 0 by default
-  command(
-    "TermExec",
-    function(opts) M.exec_command(opts.args, opts.count) end,
-    { count = true, complete = commandline.term_exec_complete, nargs = "*" }
-  )
+  command("TermExec", function(opts)
+    M.exec_command(opts.args, opts.count)
+  end, { count = true, complete = commandline.term_exec_complete, nargs = "*" })
 
-  command(
-    "TermNew",
-    function(opts) M.new_command(opts.args) end,
-    { count = true, complete = commandline.toggle_term_complete, nargs = "*" }
-  )
+  command("TermNew", function(opts)
+    M.new_command(opts.args)
+  end, { count = true, complete = commandline.toggle_term_complete, nargs = "*" })
 
-  command(
-    "ToggleTerm",
-    function(opts) M.toggle_command(opts.args, opts.count) end,
-    { count = true, complete = commandline.toggle_term_complete, nargs = "*" }
-  )
+  command("ToggleTerm", function(opts)
+    M.toggle_command(opts.args, opts.count)
+  end, { count = true, complete = commandline.toggle_term_complete, nargs = "*" })
 
-  command("ToggleTermToggleAll", function(opts) M.toggle_all(opts.bang) end, { bang = true })
+  command("ToggleTermToggleAll", function(opts)
+    M.toggle_all(opts.bang)
+  end, { bang = true })
 
-  command(
-    "ToggleTermSendVisualLines",
-    function(args) M.send_lines_to_terminal("visual_lines", true, args) end,
-    { range = true, nargs = "?" }
-  )
+  command("ToggleTermSendVisualLines", function(args)
+    M.send_lines_to_terminal("visual_lines", true, args)
+  end, { range = true, nargs = "?" })
 
-  command(
-    "ToggleTermSendVisualSelection",
-    function(args) M.send_lines_to_terminal("visual_selection", true, args) end,
-    { range = true, nargs = "?" }
-  )
+  command("ToggleTermSendVisualSelection", function(args)
+    M.send_lines_to_terminal("visual_selection", true, args)
+  end, { range = true, nargs = "?" })
 
-  command(
-    "ToggleTermSendCurrentLine",
-    function(args) M.send_lines_to_terminal("single_line", true, args) end,
-    { nargs = "?" }
-  )
+  command("ToggleTermSendCurrentLine", function(args)
+    M.send_lines_to_terminal("single_line", true, args)
+  end, { nargs = "?" })
 
   command("ToggleTermSetName", function(opts)
     local no_count = not opts.count or opts.count < 1
@@ -480,13 +505,19 @@ local function setup_commands()
       get_subject_terminal(request_term_name)
     elseif no_name then
       local term = terms.get(opts.count)
-      if not term then return end
+      if not term then
+        return
+      end
       request_term_name(term)
     elseif no_count then
-      get_subject_terminal(function(t) set_term_name(opts.args, t) end)
+      get_subject_terminal(function(t)
+        set_term_name(opts.args, t)
+      end)
     else
       local term = terms.get(opts.count)
-      if not term then return end
+      if not term then
+        return
+      end
       set_term_name(opts.args, term)
     end
   end, { nargs = "?", count = true })

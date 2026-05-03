@@ -16,7 +16,9 @@ end
 function M.notify(msg, level)
   local err = level:upper()
   level = level and levels[err] or levels.INFO
-  vim.schedule(function() vim.notify(msg, level, { title = "Toggleterm" }) end)
+  vim.schedule(function()
+    vim.notify(msg, level, { title = "Toggleterm" })
+  end)
 end
 
 ---@private
@@ -25,20 +27,26 @@ end
 function M.git_dir()
   local gitdir = fn.system(fmt("git -C %s rev-parse --show-toplevel", fn.expand("%:p:h")))
   local isgitdir = fn.matchstr(gitdir, "^fatal:.*") == ""
-  if not isgitdir then return end
+  if not isgitdir then
+    return
+  end
   return vim.trim(gitdir)
 end
 
 ---@param str string|nil
 ---@return boolean
-function M.str_is_empty(str) return str == nil or str == "" end
+function M.str_is_empty(str)
+  return str == nil or str == ""
+end
 
 ---@param tbl table
 ---@return table
 function M.tbl_filter_empty(tbl)
   return vim.tbl_filter(
     ---@param str string|nil
-    function(str) return not M.str_is_empty(str) end,
+    function(str)
+      return not M.str_is_empty(str)
+    end,
     tbl
   )
 end
@@ -46,7 +54,9 @@ end
 --- Concats a table ignoring empty entries
 ---@param tbl table
 ---@param sep string
-function M.concat_without_empty(tbl, sep) return table.concat(M.tbl_filter_empty(tbl), sep) end
+function M.concat_without_empty(tbl, sep)
+  return table.concat(M.tbl_filter_empty(tbl), sep)
+end
 
 -- Key mapping function
 ---@param mod string | string[]
@@ -90,11 +100,15 @@ end
 function M.get_visual_selection(res, motion)
   motion = motion or false
   local mode = fn.visualmode()
-  if motion then mode = "v" end
+  if motion then
+    mode = "v"
+  end
 
   -- line-visual
   -- return lines encompassed by the selection; already in res object
-  if mode == "V" then return res.selected_lines end
+  if mode == "V" then
+    return res.selected_lines
+  end
 
   if mode == "v" then
     -- regular-visual
@@ -102,7 +116,9 @@ function M.get_visual_selection(res, motion)
     local start_line, start_col = unpack(res.start_pos)
     local end_line, end_col = unpack(res.end_pos)
     -- exclude the last char in text if "selection" is set to "exclusive"
-    if opt.selection:get() == "exclusive" then end_col = end_col - 1 end
+    if opt.selection:get() == "exclusive" then
+      end_col = end_col - 1
+    end
     return api.nvim_buf_get_text(0, start_line - 1, start_col - 1, end_line - 1, end_col, {})
   end
 
@@ -112,14 +128,18 @@ function M.get_visual_selection(res, motion)
     local _, start_col = unpack(res.start_pos)
     local _, end_col = unpack(res.end_pos)
     -- exclude the last col of the block if "selection" is set to "exclusive"
-    if opt.selection:get() == "exclusive" then end_col = end_col - 1 end
+    if opt.selection:get() == "exclusive" then
+      end_col = end_col - 1
+    end
     -- exchange start and end columns for proper substring indexing if needed
     -- e.g. instead of str:sub(10, 5), do str:sub(5, 10)
     if start_col > end_col then
       start_col, end_col = end_col, start_col
     end
     -- iterate over lines, truncating each one
-    return vim.tbl_map(function(line) return line:sub(start_col, end_col) end, res.selected_lines)
+    return vim.tbl_map(function(line)
+      return line:sub(start_col, end_col)
+    end, res.selected_lines)
   end
 end
 
