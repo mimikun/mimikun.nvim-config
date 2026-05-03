@@ -2,19 +2,11 @@
 local spec = {
   "akinsho/toggleterm.nvim",
   --lazy = false,
-  --dir = ""
-  --url = ""
-  --name = ""
-  --dev = false
-  --build = "",
-  --branch = "",
-  --tag = "",
-  --commit = "",
-  version = "*",
+  --version = "*",
   --ft = require("plugins.toggleterm-nvim.ft"),
-  --cmd = require("plugins.toggleterm-nvim.cmds"),
+  cmd = require("plugins.toggleterm-nvim.cmds"),
   --keys = require("plugins.toggleterm-nvim.keys"),
-  --event = require("plugins.toggleterm-nvim.events"),
+  event = require("plugins.toggleterm-nvim.events"),
   --dependencies = require("plugins.toggleterm-nvim.dependencies"),
   --init = function()
   --    INIT
@@ -24,14 +16,8 @@ local spec = {
     local opts = require("plugins.toggleterm-nvim.opts")
     require("toggleterm").setup(opts)
   end,
-  --main = ""
-  --pin = false,
-  --submodules = false,
-  --module = false,
-  --priority = 1000,
-  --optional = false,
-  cond = false,
-  enabled = false,
+  --cond = false,
+  --enabled = false,
 }
 
 return spec
