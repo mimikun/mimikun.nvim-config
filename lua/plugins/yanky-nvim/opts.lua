@@ -45,15 +45,15 @@ local opts = {
   },
   highlight = {
     -- NOTE: Use y3owk1n/undo-glow.nvim
-    
+
     -- Define if highlight put text feature is enabled.
-    ---@type boolean 
+    ---@type boolean
     on_put = false,
 
     -- NOTE: Use y3owk1n/undo-glow.nvim
- 
+
     -- Define if highlight yanked text feature is enabled.
-    ---@type boolean 
+    ---@type boolean
     on_yank = false,
 
     ---@type number Define the duration of highlight.
