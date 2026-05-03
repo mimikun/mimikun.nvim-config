@@ -1,6 +1,6 @@
 ---@type LazySpec
 local spec = {
-        'akinsho/toggleterm.nvim', 
+  "akinsho/toggleterm.nvim",
   --lazy = false,
   --dir = ""
   --url = ""
@@ -10,7 +10,7 @@ local spec = {
   --branch = "",
   --tag = "",
   --commit = "",
-        version = "*", 
+  version = "*",
   --ft = require("plugins.toggleterm-nvim.ft"),
   --cmd = require("plugins.toggleterm-nvim.cmds"),
   --keys = require("plugins.toggleterm-nvim.keys"),
@@ -21,8 +21,8 @@ local spec = {
   --end,
   --opts = require("plugins.toggleterm-nvim.opts"),
   config = function()
-  local opts = require("plugins.toggleterm-nvim.opts")
-  require("toggleterm").setup(opts)
+    local opts = require("plugins.toggleterm-nvim.opts")
+    require("toggleterm").setup(opts)
   end,
   --main = ""
   --pin = false,
