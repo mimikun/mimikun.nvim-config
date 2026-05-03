@@ -1,6 +1,15 @@
 ---@type table
 local cmds = {
-  -- TODO: it
+  "TermSelect", 
+  "TermExec", 
+  "TermNew", 
+  "ToggleTerm", 
+  "ToggleTermToggleAll", 
+  "ToggleTermSendVisualLines", 
+  "ToggleTermSendVisualSelection", 
+  "ToggleTermSendCurrentLine", 
+  "ToggleTermSetName", 
 }
 
 return cmds
+
