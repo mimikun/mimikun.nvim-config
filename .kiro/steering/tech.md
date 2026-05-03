@@ -151,6 +151,19 @@ Optional module files per plugin:
 - `dependencies.lua` - Plugin dependencies
 - `builds.lua` - Build commands
 
+#### GitLab Plugin Spec (url = pattern)
+
+Plugins hosted on GitLab (not GitHub) require `url =` instead of the short `"author/repo"` form:
+
+```lua
+local spec = {
+  url = "https://gitlab.com/HiPhish/rainbow-delimiters.nvim",
+  -- rest of spec...
+}
+```
+
+**Example**: `lua/plugins/rainbow-delimiters-nvim/init.lua`
+
 #### Denops Plugin Spec (Subdirectory Pattern)
 
 Denops-based plugins follow the same subdirectory pattern under `lua/denops-plugins/`.

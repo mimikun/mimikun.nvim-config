@@ -81,6 +81,12 @@ Personal Neovim configuration focused on modularity, extensibility, and maintain
 - **Denops**: denops-vim, denops-translate-vim, denops-docker-vim, dps-ghosttext-vim, dps-translate-vim
 - **Diagnostics/Lists**: trouble-nvim (folke, quickfix/diagnostic viewer)
 - **Auto-pairs**: blink-pairs (saghen, bracket auto-pairing)
+- **Code Outline**: aerial-nvim (stevearc, symbol navigator/outline)
+- **Discord Presence**: cord-nvim (vyfor, Discord Rich Presence)
+- **Home Automation**: homeassistant-nvim (myakove, Home Assistant integration)
+- **Color Generation**: matugen-nvim (daedlock, material color generation)
+- **Rainbow Brackets**: rainbow-delimiters-nvim (HiPhish, colorized delimiter matching)
+- **Undo Feedback**: undo-glow-nvim (y3owk1n, visual highlight for undo/redo/yank)
 - **Colorschemes**: tokyonight-nvim
 
 ## Out of Scope

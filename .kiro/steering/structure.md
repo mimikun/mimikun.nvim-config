@@ -292,6 +292,12 @@ lua/plugins/
   ├── takatime/                    # WakaTime-style time tracking (Rtarun3606k)
   ├── trouble-nvim/                # Diagnostics/quickfix viewer (folke)
   ├── blink-pairs/                 # Auto-pair brackets (saghen)
+  ├── aerial-nvim/                 # Code outline / symbol navigator (stevearc)
+  ├── cord-nvim/                   # Discord Rich Presence (vyfor)
+  ├── homeassistant-nvim/          # Home Assistant integration (myakove)
+  ├── matugen-nvim/                # Material color generation (daedlock)
+  ├── rainbow-delimiters-nvim/     # Rainbow bracket/delimiter matching (HiPhish, GitLab)
+  ├── undo-glow-nvim/              # Visual glow for undo/redo/yank (y3owk1n)
   └── docs/                        # Integration documentation (per-plugin .md files)
       └── Integrations/            # Per-plugin integration notes
 
