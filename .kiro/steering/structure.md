@@ -155,7 +155,7 @@ require("config.lazy")  -- Loads lua/config/lazy.lua
 ### after/ Organization
 
 - **ftplugin/**: One file per language (e.g., `rust.lua`)
-- **lsp/**: One file per LSP server (e.g., `yamlls.lua`)
+- **lsp/**: One file per LSP server (e.g., `yamlls.lua`) + optional reference docs (`.md`, `.txt`)
 - No subdirectories (flat structure)
 - Files loaded automatically by Neovim (`ftplugin`) or manually (`lsp`)
 

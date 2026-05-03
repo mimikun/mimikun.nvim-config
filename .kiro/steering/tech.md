@@ -178,13 +178,14 @@ Denops-based plugins follow the same subdirectory pattern under `lua/denops-plug
 ### Internal Dependencies
 
 - `init.lua` → `lua/config/lazy.lua` (bootstrap)
-- `lua/config/lazy.lua` → `lua/plugins/*.lua` (specs, currently disabled)
-- `lua/config/lazy.lua` → `lua/colorschemes/*.lua` (specs, currently disabled)
+- `lua/config/lazy.lua` → `lua/plugins/<name>/init.lua` (active via `{ import = "plugins" }`)
+- `lua/config/lazy.lua` → `lua/colorschemes/<name>/init.lua` (active via `{ import = "colorschemes" }`)
+- `lua/config/lazy.lua` → `lua/denops-plugins/<name>/init.lua` (active via `{ import = "denops-plugins" }`)
 
 ### External Dependencies
 
 - **lazy.nvim**: Auto-installed from GitHub (stable branch)
-- **Plugins**: Managed by lazy.nvim (330+ in catalog, none active)
+- **Plugins**: Managed by lazy.nvim (all spec files in subdirectories are active)
 - **Nerd Fonts**: Required for icons in plugin UI
 
 ### Build Tools
