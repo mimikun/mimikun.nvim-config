@@ -10,7 +10,6 @@
 ---@field text string
 ---@field range helpview.parsed.range
 
-
 ---@class helpview.parsed.vimdoc.code_block
 ---
 ---@field class "vimdoc_code_block"
@@ -22,7 +21,6 @@
 ---
 ---@field text string
 ---@field range helpview.parsed.range
-
 
 ---@class helpview.parsed.vimdoc.heading
 ---
@@ -36,13 +34,11 @@
 ---@field text string
 ---@field range helpview.parsed.vimdoc.heading.range
 
-
 ---@alias helpview.parsed.vimdoc.heading.level
 ---| 1
 ---| 2
 ---| 3
 ---| 4
-
 
 ---@class helpview.parsed.vimdoc.heading.tag
 ---
@@ -50,7 +46,6 @@
 ---
 ---@field col_start integer
 ---@field col_end integer
-
 
 ---@class helpview.parsed.vimdoc.heading.range
 ---
@@ -63,14 +58,12 @@
 ---@field desc_start integer Column where the heading text start.
 ---@field desc_end integer Column where the heading text end.
 
-
 ---@class helpview.parsed.vimdoc.hr
 ---
 ---@field class "vimdoc_hr"
 ---
 ---@field text string
 ---@field range helpview.parsed.range
-
 
 ---@class helpview.parsed.vimdoc.inline_code
 ---
@@ -79,7 +72,6 @@
 ---
 ---@field text string
 ---@field range helpview.parsed.range
-
 
 ---@class helpview.parsed.vimdoc.keycode
 ---
@@ -91,7 +83,6 @@
 ---@field text string
 ---@field range helpview.parsed.range
 
-
 ---@class helpview.parsed.vimdoc.modeline
 ---
 ---@field class "vimdoc_modeline"
@@ -100,12 +91,10 @@
 ---@field text string
 ---@field range helpview.parsed.range
 
-
 ---@class helpview.parsed.vimdoc.modeline.option
 ---
 ---@field option string
 ---@field value string | number | boolean | nil
-
 
 ---@class helpview.parsed.vimdoc.note
 ---
@@ -117,7 +106,6 @@
 ---@field text string
 ---@field range helpview.parsed.range
 
-
 ---@class helpview.parsed.vimdoc.optionlink
 ---
 ---@field class "vimdoc_optionlink"
@@ -127,7 +115,6 @@
 ---
 ---@field text string
 ---@field range helpview.parsed.range
-
 
 ---@class helpview.parsed.vimdoc.tag
 ---
@@ -139,7 +126,6 @@
 ---@field text string
 ---@field range helpview.parsed.range
 
-
 ---@class helpview.parsed.vimdoc.taglink
 ---
 ---@field class "vimdoc_taglink"
@@ -149,7 +135,6 @@
 ---
 ---@field text string
 ---@field range helpview.parsed.range
-
 
 ---@class helpview.parsed.vimdoc.hl
 ---
@@ -161,7 +146,6 @@
 ---@field text string
 ---@field range helpview.parsed.range
 
-
 ---@class helpview.parsed.vimdoc.url
 ---
 ---@field class "vimdoc_url"
@@ -170,4 +154,3 @@
 ---
 ---@field text string
 ---@field range helpview.parsed.range
-

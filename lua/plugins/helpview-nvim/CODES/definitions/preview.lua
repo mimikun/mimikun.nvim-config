@@ -34,12 +34,10 @@
 ---
 ---@field splitview_winopts? table Window options for the `splitview` window. See `:h nvim.open_win()`.
 
-
 --- Controls which items are affected by `hybrid_mode`.
 ---@class helpview.config.preview.ignore
 ---
 ---@field vimdoc? helpview.config.preview.ignore.vimdoc[]
-
 
 ---@alias helpview.config.preview.ignore.vimdoc
 ---| "arguments"
@@ -69,7 +67,6 @@
 ---| "!tags"
 ---| "!taglinks"
 ---| "!urls"
-
 
 ---@class helpview.config.preview.callbacks
 ---

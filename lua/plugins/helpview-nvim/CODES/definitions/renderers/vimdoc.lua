@@ -9,7 +9,7 @@
 ---@field headings? helpview.config.vimdoc.headings Configuration for headings.
 ---@field highlight_groups? helpview.config.vimdoc.highlights Configuration for highlight group names.
 ---@field horizontal_rules? helpview.config.vimdoc.hr Configuration for horizontal rules.
----@field inline_codes? helpview.config.vimdoc.inline_codes Configuration for 
+---@field inline_codes? helpview.config.vimdoc.inline_codes Configuration for
 ---@field keycodes? helpview.config.vimdoc.keycodes Configuration for <Keycodes>.
 ---@field modelines? helpview.config.vimdoc.modelines Configuration for vim:modeline:.
 ---@field notes? helpview.config.vimdoc.notes Configuration for Note.
@@ -38,14 +38,12 @@
 ---@field padding_right_hl? string
 ---@field corner_right_hl? string
 
-
 ---@class helpview.config.vimdoc.arguments Configuration for `{arguments}`.
 ---
 ---@field enable? boolean
 ---
 ---@field default helpview.config.vimdoc.inline Default configuration for arguments.
 ---@field [string] helpview.config.vimdoc.inline Configuration for `{string}`.
-
 
 ---@class helpview.config.vimdoc.code_blocks Configuration for code blocks.
 ---
@@ -57,14 +55,12 @@
 ---@field default helpview.config.vimdoc.code_blocks.line_opts Default line configuration(used for stuff like `diff`).
 ---@field [string] helpview.config.vimdoc.code_blocks.line_opts Line configuration when the language is `string`.
 
-
 ---@class helpview.config.vimdoc.code_blocks.line_opts Line options for code blocks.
 ---
 --- Highlight group for the background of each line.
 ---@field block_hl
 ---| string Highlight group name.
 ---| fun (buffer: integer, line: string): string? Function returning a highlight group name.
-
 
 ---@class helpview.config.vimdoc.headings Configuration for headings.
 ---
@@ -74,7 +70,6 @@
 ---@field heading_2 helpview.config.vimdoc.headings.opts Configuration for `---` headings.
 ---@field heading_3 helpview.config.vimdoc.headings.opts Configuration for `ABC` headings.
 ---@field heading_4 helpview.config.vimdoc.headings.opts Configuration for `A ~` headings.
-
 
 ---@class helpview.config.vimdoc.headings.opts Configuration options for each heading level.
 ---
@@ -89,9 +84,7 @@
 ---@field label? [ string, string ] Text to add before & after the `sign`.
 ---@field label_hl? [ string, string ] Highlight group for the parts of the label.
 
-
 ---@alias helpview.config.vimdoc.highlights helpview.config.vimdoc.inline Configuration for highlight group names.
-
 
 ---@class helpview.config.vimdoc.hr Configuration for horizontal rules.
 ---
@@ -99,11 +92,9 @@
 ---
 ---@field parts helpview.config.vimdoc.hr.part[] Parts for the shown horizontal rule.
 
-
 ---@alias helpview.config.vimdoc.hr.part
 ---| helpview.config.vimdoc.hr.text
 ---| helpview.config.vimdoc.hr.repeating
-
 
 ---@class helpview.config.vimdoc.hr.text Shows some text.
 ---
@@ -111,7 +102,6 @@
 ---
 ---@field text string Text to show.
 ---@field hl? string Highlight group for `text`.
-
 
 ---@class helpview.config.vimdoc.hr.repeating Repeats the given character(s)/highlight group(s).
 ---
@@ -128,9 +118,7 @@
 ---@field text string | string[]
 ---@field hl? string | string[]
 
-
 ---@alias helpview.config.vimdoc.inline_codes helpview.config.vimdoc.inline Configuration for highlight group names.
-
 
 ---@class helpview.config.vimdoc.keycodes Configuration for `<keycodes>`
 ---
@@ -138,7 +126,6 @@
 ---
 ---@field default helpview.config.vimdoc.inline Default configuration for keycodes.
 ---@field [string] helpview.config.vimdoc.inline Configuration for `<string>`.
-
 
 ---@class helpview.config.vimdoc.modelines Configuration for Vim modeline.
 ---
@@ -151,7 +138,6 @@
 ---@field default helpview.config.vimdoc.modelines.opts Default configuration options.
 ---@field [string] helpview.config.vimdoc.modelines.opts Configuration for various options.
 
-
 ---@class helpview.config.vimdoc.modelines.data_types Configuration for various primitive data types.
 ---
 ---@field boolean helpview.config.vimdoc.modelines.opts
@@ -159,12 +145,10 @@
 ---@field number helpview.config.vimdoc.modelines.opts
 ---@field string helpview.config.vimdoc.modelines.opts
 
-
 ---@class helpview.config.vimdoc.modelines.opts
 ---
 ---@field option_hl? string Highlight group for the option name.
 ---@field value_hl? string Highlight group for the option value.
-
 
 ---@class helpview.config.vimdoc.notes Configuration for notes.
 ---
@@ -173,14 +157,12 @@
 ---@field default helpview.config.vimdoc.inline Default configuration for notes.
 ---@field [string] helpview.config.vimdoc.inline Configuration for `string` note.
 
-
 ---@class helpview.config.vimdoc.optionlinks Configuration for optionlinks.
 ---
 ---@field enable? boolean
 ---
 ---@field default helpview.config.vimdoc.inline Default configuration for optionlinks.
 ---@field [string] helpview.config.vimdoc.inline Configuration for `'string'` optionlink.
-
 
 ---@class helpview.config.vimdoc.tags Configuration for tags.
 ---
@@ -189,7 +171,6 @@
 ---@field default helpview.config.vimdoc.inline Default configuration for tags.
 ---@field [string] helpview.config.vimdoc.inline Configuration for `*string*` tag.
 
-
 ---@class helpview.config.vimdoc.taglinks Configuration for taglinks.
 ---
 ---@field enable? boolean
@@ -197,14 +178,12 @@
 ---@field default helpview.config.vimdoc.inline Default configuration for taglinks.
 ---@field [string] helpview.config.vimdoc.inline Configuration for `|string|` taglink.
 
-
 ---@class helpview.config.vimdoc.urls Configuration for URLs.
 ---
 ---@field enable? boolean
 ---
 ---@field default url.opts
 ---@field [string] url.opts
-
 
 ---@class url.opts
 ---

@@ -11,18 +11,15 @@
 ---@field splitview_buffer? integer Buffer used to for the preview.
 ---@field splitview_window? integer Window where splitview is being show.
 
-
 ---@class helpview.state.buffer Buffer states.
 ---
 ---@field enable boolean Is `helpview.nvim` enabled on this buffer?
 ---@field hybrid_mode boolean Is hybrid mode enabled for this buffer?
 
-
 ---@class helpview.config Configuration for `helpview.nvim`
 ---
 ---@field preview helpview.config.preview Options for changing when preview is shown.
 ---@field vimdoc helpview.config.vimdoc Options for changing how vimdoc looks.
-
 
 ---@class helpview.parsed.range Parsed TSNode range.
 ---
@@ -31,7 +28,6 @@
 ---
 ---@field col_start integer
 ---@field col_end integer
-
 
 --- A parsed item.
 ---@alias helpview.parsed.item
@@ -47,11 +43,9 @@
 ---| helpview.parsed.vimdoc.taglink
 ---| helpview.parsed.vimdoc.url
 
-
 ---@class helpview.parsed.sorted Sorted parsed item for each language.
 ---
 ---@field vimdoc? helpview.parsed.sorted.vimdoc
-
 
 ---@class helpview.parsed.sorted.vimdoc Sorted vimdoc items by class name.
 ---
@@ -66,4 +60,3 @@
 ---@field tag? helpview.parsed.vimdoc.tag
 ---@field taglink? helpview.parsed.vimdoc.taglink
 ---@field url? helpview.parsed.vimdoc.url
-
