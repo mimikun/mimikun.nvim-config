@@ -1,0 +1,828 @@
+*eskk.txt* eskk.vim 日本語help
+
+Author:
+  tyru <tyru.exe@gmail.com>
+Version: X.Y.Z
+License:
+NEW BSD LICENSE {{{
+  Copyright (c) 2010, tyru
+  All rights reserved.
+
+  Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
+
+      * Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
+      * Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the distribution.
+      * Neither the name of the tyru nor the names of its contributors may be used to endorse or promote products derived from this software without specific prior written permission.
+
+  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+}}}
+
+==============================================================================
+CONTENTS						*eskk-contents*
+
+概要					|eskk-introduction|
+インターフェース			|eskk-interface|
+  キーマッピング			|eskk-keymappings|
+  変数					|eskk-variables|
+  コマンド				|eskk-commands|
+  関数					|eskk-functions|
+Hooks					|eskk-hooks|
+  initialize-pre			|eskk-initialize-pre|
+    アルファベットテーブルの登録	|eskk-alphabet-table|
+  initialize-post			|eskk-initialize-post|
+  enable-pre				|eskk-enable-pre|
+  enable-post				|eskk-enable-post|
+  disable-pre				|eskk-disable-pre|
+  disable-post				|eskk-disable-post|
+モード					|eskk-modes|
+フェーズ				|eskk-phases|
+補完					|eskk-completion|
+FAQ					|eskk-faq|
+TODO					|eskk-todo|
+Changelog				|eskk-changelog|
+
+==============================================================================
+概要						*eskk-introduction* {{{
+
+|eskk| はVim上でパワフルなIM環境を実現することを目指して作られ
+た、まったく新しいプラグインです。
+
+私達はskk.vimというプラグインもメンテナンスしています。
+(もしあなたがインストールしていれば |skk| で見られるはずです)
+
+しかしskk.vimはVim 6でも動くよう互換性を図るため、
+ほとんどメンテナンス不可能になっていました。
+そこで私達はeskkを開発することを決めました。
+
+eskkは拡張された、そしてさらなる拡張性を秘めたマルチバイト環境を提供します。
+
+eskkで実装されている独自機能は主に以下が挙げられます。
+
+* |neocomplete| と連携した自動補完機能
+* 改良された改行時の挙動
+* eskkのモード(|eskk-modes|)に応じて、カーソルの色を変更する
+
+}}}
+==============================================================================
+インターフェース				*eskk-interface* {{{
+------------------------------------------------------------------------------
+キーマッピング					*eskk-keymappings* {{{
+
+<Plug>(eskk:enable) (icl)		*<Plug>(eskk:enable)*
+<Plug>(eskk:disable) (icl)		*<Plug>(eskk:disable)*
+<Plug>(eskk:toggle) (icl)		*<Plug>(eskk:toggle)*
+
+	|eskk#enable()|, |eskk#disable()|, |eskk#toggle()|のキーマッピング版。
+
+
+<Plug>(eskk:save-dictionary) (n)		*<Plug>(eskk:save-dictionary)*
+
+	SKK辞書が変更されていたら (1つ以上の単語が登録されていれば)
+	ユーザ辞書に保存する。
+	|:EskkUpdateDictionary| や |eskk#update_dictionary()| のキーマッピング
+	版。
+
+
+デフォルトキーマッピング			*eskk-default-keymappings*
+----------------------
+<C-j> => <Plug>(eskk:toggle)   (icl)
+
+}}}
+------------------------------------------------------------------------------
+変数					*eskk-variables* {{{
+
+
+eskkが作るディレクトリに関する変数
+-------------------------------------
+
+g:eskk#directory			*g:eskk#directory*
+						(デフォルト値: "~/.eskk")
+	このディレクトリに様々なeskkに関するファイルやディレクトリが作成され
+	る。
+
+
+SKK辞書に関する変数
+------------------
+
+g:eskk#dictionary			*g:eskk#dictionary*
+						(デフォルト値: 下を参照)
+	ユーザ辞書の情報。
+
+	この変数の定義は：
+		もしユーザが定義していたら：
+			文字列型なら： >
+				let g:eskk#dictionary = {
+				\	'path': {value},
+				\	'sorted': 0,
+				\	'encoding': 'utf-8',
+				\}
+<			辞書型なら：
+				ユーザの辞書型を保存しながら
+				定義していないキーには
+				デフォルト値を補う形で追加していく。
+		定義していなかったら： >
+				let g:eskk#dictionary = {
+				\	'path': "~/.skk-jisyo",
+				\	'sorted': 0,
+				\	'encoding': 'utf-8',
+				\}
+<
+
+
+g:eskk#large_dictionary		*g:eskk#large_dictionary*
+						(デフォルト値: 下を参照)
+	システム辞書の情報。
+
+	この変数の定義は:
+		もしユーザが定義していたら:
+			文字列型なら: >
+				let g:eskk#large_dictionary = {
+				\	'path': {value},
+				\	'sorted': 1,
+				\	'encoding': 'euc-jp',
+				\}
+<			辞書型なら:
+				ユーザの辞書型を保存しながら
+				定義していないキーには
+				デフォルト値を補う形で追加していく。
+		定義していなかったら: >
+				let g:eskk#large_dictionary = {
+				\	'path': "/usr/local/share/skk/SKK-JISYO.L",
+				\	'sorted': 1,
+				\	'encoding': 'euc-jp',
+				\}
+
+g:eskk#server					*g:eskk#server*
+						(デフォルト値: 下を参照)
+	Skkserv のサーバ情報
+	Note: この機能を使用するためには、|channel|か neovim が必要。
+
+	この変数の定義は:
+			辞書型なら:
+				ユーザの辞書型を保存しながら
+				定義していないキーには
+				デフォルト値を補う形で追加していく。 >
+				let g:eskk#server = {
+				\	'host': '',
+				\	'port': 1178,
+				\	'encoding': 'euc-jp',
+				\	'timeout': 1000,
+				\	'type': 'dictionary',
+				\}
+
+				" Example.
+				" Use google-ime-skk
+				let g:eskk#server = {
+				\	'host': 'localhost',
+				\	'port': 55100,
+				\	'type': 'notfound',
+				\}
+
+				" Use yaskkserv
+				let g:eskk#server = {
+				\	'host': 'localhost',
+				\	'port': 1178,
+				\}
+
+g:eskk#backup_dictionary		*g:eskk#backup_dictionary*
+			(デフォルト値: g:eskk#dictionary.path . ".BAK")
+	ユーザ辞書をバックアップする時に使用するファイル名を指定する。
+
+					*g:eskk#auto_save_dictionary_at_exit*
+g:eskk#auto_save_dictionary_at_exit
+							(デフォルト値: 1)
+	もし真なら、1つ以上の単語が登録されていた場合、
+	Vimの終了時 (|VimLeave|) に自動的にユーザ辞書へ保存する。
+
+g:eskk#dictionary_save_count		*g:eskk#dictionary_save_count*
+							(デフォルト値: -1)
+	もし辞書登録された単語がこの個数を超えたら
+	自動的にユーザ辞書に書き込みを行う (|:EskkUpdateDictionary|)。
+	負数にすると辞書登録の度に常にユーザ辞書に書き込む。
+
+
+漢字変換、アノテーションに関する変数
+-----------------------------------------
+
+g:eskk#select_cand_keys			*g:eskk#select_cand_keys*
+						(デフォルト値: "asdfjkl")
+	|eskk-select-candidates| で候補を選択するキー。
+	キーは各文字をつなげた文字列として与えられる。
+
+g:eskk#show_candidates_count		*g:eskk#show_candidates_count*
+							(デフォルト値: 4)
+	|eskk-henkan-select-phase| において、
+	もしユーザが変換キーをタイプした回数がこの値を上回るなら、
+	|eskk-select-candidates| に移る。
+
+				*g:eskk#kata_convert_to_hira_at_henkan*
+g:eskk#kata_convert_to_hira_at_henkan
+							(Default: 1)
+	SKK辞書にはひらがなと変換候補のペアしか載っていないため、
+	|eskk-kata-mode|でカタカナを入力しても変換できない。
+	この変数が真なら、|eskk-kata-mode| において
+	SKK辞書を探索する前にカタカナをひらがなに変換する。
+	よって|eskk-kata-mode|であってもSKK辞書から候補を見つけ出し、
+	無事変換することができる。
+
+				*g:eskk#kata_convert_to_hira_at_completion*
+g:eskk#kata_convert_to_hira_at_completion
+							(Default: 1)
+	|g:eskk#kata_convert_to_hira_at_henkan|と同じだが、
+	これは補完候補に対してのみ働く。
+	補完に関して詳しくは|eskk-completion|を参照すること。
+
+g:eskk#show_annotation			*g:eskk#show_annotation*
+							(デフォルト値: 0)
+	もし真なら、|eskk-select-candidates| の時にアノテーションを表示する。
+
+g:eskk#kakutei_when_unique_candidate	*g:eskk#kakutei_when_unique_candidate*
+							(デフォルト値: 0)
+	もし真なら、漢字変換した時に候補が1つの場合、自動的に確定する。
+
+
+キーマッピングに関する変数
+-----------
+
+g:eskk#no_default_mappings		*g:eskk#no_default_mappings*
+							(デフォルト値: 0)
+	もし真なら、eskkは デフォルトキーマッピング
+	(|eskk-default-keymappings|) をマッピングしない。
+
+				*g:eskk#dont_map_default_if_already_mapped*
+g:eskk#dont_map_default_if_already_mapped
+							(デフォルト値: 1)
+	もし真なら、デフォルトキーマッピングが存在する場合
+	マッピングしない。
+
+g:eskk#mapped_keys				*g:eskk#mapped_keys*
+				(デフォルト値: eskk#get_default_mapped_keys())
+	(keycodeではなく) |key-notation| の文字列を含むリスト。
+	|eskk#get_default_mapped_keys()| の値参照。
+	Note: この変数の値に"|"を含めたい場合、"<Bar>"と書く必要があることに気
+	を付けること。
+
+
+モードに関する変数
+-------
+
+g:eskk#initial_mode				*g:eskk#initial_mode*
+							(デフォルト値: "hira")
+	|eskk#enable()| が呼ばれた時、
+	eskkはこの値をモードの初期値とする。
+
+g:eskk#statusline_mode_strings		*g:eskk#statusline_mode_strings*
+						(デフォルト値: 下を参照)
+	|'statusline'| に表示される現在のモードの文字列。
+	これは |eskk#statusline()| の返り値を変える。
+
+	デフォルト値は： >
+	let g:eskk#statusline_mode_strings = {
+	\	'hira': 'あ',
+	\	'kata': 'ア',
+	\	'ascii': 'aA',
+	\	'zenei': 'ａ',
+	\	'hankata': 'ｧｱ',
+	\	'abbrev': 'aあ'
+	\}
+
+
+マーカーに関する変数
+----------
+
+g:eskk#marker_henkan				*g:eskk#marker_henkan*
+							(デフォルト値: "▽")
+	(TODO: doc)
+
+g:eskk#marker_okuri				*g:eskk#marker_okuri*
+							(デフォルト値: "*")
+	(TODO: doc)
+
+g:eskk#marker_henkan_select			*g:eskk#marker_henkan_select*
+							(デフォルト値: "▼")
+	(TODO: doc)
+
+g:eskk#marker_jisyo_touroku			*g:eskk#marker_jisyo_touroku*
+							(デフォルト値: "?")
+	(TODO)
+
+
+補完に関する変数
+-------------
+
+g:eskk#enable_completion			*g:eskk#enable_completion*
+							(デフォルト値: 1)
+	もし真なら、eskk組み込みの補完機能を有効にする。
+        |neocomplete| がインストールされている場合、変換時に 自動補完が有効にな
+        る。
+
+g:eskk#max_candidates				*g:eskk#max_candidates*
+							(デフォルト値: 30)
+	eskkの補完時に表示される候補の最大数を指定する。
+
+g:eskk#start_completion_length		*g:eskk#start_completion_length*
+							(デフォルト値: 3)
+	指定された文字数(バイト数ではない)が入力されるまで
+	補完をしない。(補完関数を実行しても常に空のリストを返す)
+
+g:eskk#register_completed_word		*g:eskk#register_completed_word*
+							(デフォルト値: 1)
+	もし真なら、補完時に決定した候補を自動的に辞書登録する。
+	補完については |eskk-completion| 参照。
+
+g:eskk#tab_select_completion			*g:eskk#tab_select_completion*
+							(デフォルト値: 0)
+	もし真なら、<Tab> キーで次の候補を選択する。
+
+
+カーソルの色に関する変数
+---------------
+
+g:eskk#use_color_cursor			*g:eskk#use_color_cursor*
+							(デフォルト値: 1)
+	もし真なら、eskkが有効になっている場合、モードを切り替えたときにカーソ
+	ルの色を変更する。
+	Note: 現在の実装では、この機能はGUIのVim上でしか動作しない。
+
+g:eskk#cursor_color			*g:eskk#cursor_color*
+							(デフォルト値: 下を参照)
+	eskkが有効になっているときのカーソルの色を指定する。
+
+	デフォルト値は： >
+    " ascii: ivory4:#8b8b83, gray:#bebebe
+    " hira: coral4:#8b3e2f, pink:#ffc0cb
+    " kata: forestgreen:#228b22, green:#00ff00
+    " abbrev: royalblue:#4169e1
+    " zenei: gold:#ffd700
+    let g:eskk#cursor_color = {
+    \   'ascii': ['#8b8b83', '#bebebe'],
+    \   'hira': ['#8b3e2f', '#ffc0cb'],
+    \   'kata': ['#228b22', '#00ff00'],
+    \   'abbrev': '#4169e1',
+    \   'zenei': '#ffd700',
+    \}
+<
+
+その他の変数
+--------
+
+g:eskk#egg_like_newline				*g:eskk#egg_like_newline*
+							(デフォルト値: 0)
+	もし真なら、変換候補を確定する為に<Enter>キーを押しても改行されなくなる。
+	ちなみにeggとはかな漢字変換システムWnnのクライアントプログラムのこと。
+
+g:eskk#egg_like_newline_completion	*g:eskk#egg_like_newline_completion*
+							(デフォルト値: 0)
+	(TODO: doc)
+
+g:eskk#keep_state				*g:eskk#keep_state*
+							(デフォルト値: 0)
+	(TODO: doc)
+
+g:eskk#keep_state_beyond_buffer		*g:eskk#keep_state_beyond_buffer*
+							(デフォルト値: 0)
+	(TODO: doc)
+
+g:eskk#revert_henkan_style			*g:eskk#revert_henkan_style*
+							(デフォルト値: "okuri")
+	(TODO: doc)
+
+g:eskk#delete_implies_kakutei		*g:eskk#delete_implies_kakutei*
+							(デフォルト値: 0)
+	(TODO: doc)
+
+g:eskk#rom_input_style			*g:eskk#rom_input_style*
+							(デフォルト値: "skk")
+	(TODO: doc)
+
+g:eskk#auto_henkan_at_okuri_match	*g:eskk#auto_henkan_at_okuri_match*
+							(デフォルト値: 1)
+	(TODO: doc)
+
+g:eskk#set_undo_point				*g:eskk#set_undo_point*
+							(デフォルト値: 下を参照)
+	(TODO: doc)
+
+	デフォルト値は： >
+	let g:eskk#set_undo_point = {
+	\	'sticky': 1,
+	\	'kakutei': 1,
+	\}
+<
+g:eskk#fix_extra_okuri				*g:eskk#fix_extra_okuri*
+							(デフォルト値: 1)
+	(TODO: doc)
+
+	 >
+	▽おくr {henkan-key}
+<
+	 >
+	▽おく*r
+<
+g:eskk#convert_at_exact_match		*g:eskk#convert_at_exact_match*
+							(デフォルト値: 0)
+	(TODO: doc)
+
+g:eskk#use_azik					*g:eskk#use_azik*
+							(デフォルト値: 0)
+	もし真なら、AZIKのアルファベットテーブルを定義して入力する場合に、
+	|vimrc|では設定できないいくつかの変換が可能となる。
+	具体的には以下のとおり。
+
+	Xから始まる単語を変換出来るようになる。~
+	例1: 社会主義 Xakqxugi
+	Note: 一方、▼モードで誤った単語登録を削除することは出来なくなる。
+
+	<S-;>から始まる送り仮名を変換出来るようになる。~
+	例2: くららが立った kuraragaTa<S-;>ta
+	Note: SKK辞書の仕様上、一般的なAZIKのアルファベットテーブルに加え、
+	以下の定義を追加する必要がある。
+>
+	let t = eskk#table#new('rom_to_hira*', 'rom_to_hira')
+	call t.add_map('t;', 'っ')
+	call eskk#register_mode_table('hira', t)
+<
+	AZIKについては以下のWebサイトを参照のこと。
+	http://hp.vector.co.jp/authors/VA002116/azik/azikinfo.htm
+	アルファベットテーブルについては|eskk-alphabet-table|を参照のこと。
+	また、|vimrc|の設定例は|eskk-faq-use-azik|を参照のこと。
+
+g:eskk#azik_enable_precise_shift		*g:eskk#azik_enable_precise_shift*
+							(デフォルト値: 0)
+	AZIKを使う際、Shiftキーを正確に入力することを前提として、
+	Z, K, J, D, L, Q, W, H, Pから始まる送り仮名を変換出来るようになる。
+	例1: かもめが飛んだ kamomegaTLda
+	例2: さくらが咲いた sakuragaSQta
+	例3: ぱんつを編んだ pztuwoAQda
+	例4: 急いてはことを仕損ずる SWtehaktwoSislZuru
+
+g:eskk#azik_keyboard_type				*g:eskk#azik_keyboard_type*
+							(デフォルト値: "jp106")
+	AZIKを使う際のキーボード配列を指定する。
+	値は"jp106"または"us101"。
+	Note: "us101"を選択した場合、かぎかっこ"「"が入力できなくなるので、
+	例えば以下のとおり別のキーに割り当てる必要がある。
+>
+	let t = eskk#table#new('rom_to_hira*', 'rom_to_hira')
+	call t.add_map('x[', '「')
+	call eskk#register_mode_table('hira', t)
+<
+	(TODO: "jp-pc98"を実装する?)
+
+
+
+デバッグ用変数
+----------------------
+
+Note: ここで挙げた変数は開発者専用である。
+よって仕様が変わる可能性が高いので使用する場合は注意すること。
+
+
+g:eskk#debug					*g:eskk#debug*
+						(デフォルト値: 0)
+	もし真なら、|g:eskk#log_cmdline_level|と
+	|g:eskk#log_file_level|の初期値が違ってくる。
+	詳しくは|g:eskk#log_cmdline_level|と|g:eskk#log_file_level|を参照。
+	NOTE: この変数は廃止予定される。
+	|g:eskk#log_cmdline_level|と|g:eskk#log_file_level|
+	を使うこと。
+
+g:eskk#debug_wait_ms				*g:eskk#debug_wait_ms*
+						(デフォルト値: 0)
+	もしこの変数が0より大きければ、
+	指定時間 |:sleep| する。(ミリ秒)
+
+g:eskk#log_cmdline_level				*g:eskk#log_cmdline_level*
+						(デフォルト値: g:eskk#debugが
+						真なら2、偽なら0)
+	コマンドラインに表示するログレベルを設定する。
+	数値の意味は以下の通り。
+	0	何も出力しない
+	1	エラーのみ出力する
+	2	エラー、警告のみ出力する
+	3	エラー、警告、情報のみ出力する
+	4	エラー、警告、情報、デバッグのみ出力する
+
+	また現在は、エラーが起きた時はエラー用のログファイルに
+	出力しているので、この変数で制御できるエラー出力は存在しない。
+
+g:eskk#log_file_level				*g:eskk#log_file_level*
+						(デフォルト値: g:eskk#debugが
+						真なら2、偽なら0)
+	ログファイルに書き込むログレベルを設定する。
+	数値の意味については|g:eskk#log_cmdline_level|を参照。
+
+	ログファイルへは次のタイミングで書きこまれる。
+	- CursorHold
+	- VimLeavePre
+	- eskk経由で20キー押される度
+
+}}}
+------------------------------------------------------------------------------
+コマンド					*eskk-commands* {{{
+
+:EskkMap					*:EskkMap*
+	今の所、内部的に使われているExコマンド。
+	将来はこのExコマンドによってeskk有効時のマッピングを定義できる予定。
+
+:EskkUnmap					*:EskkUnmap*
+	eskk 内部マッピングを無効化する。まだ実験的な機能。
+
+:EskkForgetRegisteredWords			*:EskkForgetRegisteredWords*
+	辞書登録した単語を全て消去する。
+
+:EskkUpdateDictionary				*:EskkUpdateDictionary*
+	辞書登録した単語などを辞書に書き込む。
+
+:EskkFixDictionary[!] [{path}]			*:EskkFixDictionary*
+	壊れたSKK辞書を修正する。
+	[!]をつけると確認のプロンプトを出さない。
+	{path}が省略された場合はユーザ辞書を修正する。
+
+:EskkReload					*:EskkReload*
+	|eskk| の読み込まれた全てのautoloadスクリプトを再読み込みする。
+	例: autoload/eskk.vim, autoload/eskk/table.vim
+	まだ読み込まれていないautoloadスクリプトには何もしない。
+
+}}}
+------------------------------------------------------------------------------
+関数					*eskk-functions* {{{
+
+eskk#enable()					*eskk#enable()*
+eskk#disable()					*eskk#disable()*
+eskk#toggle()					*eskk#toggle()*
+	それぞれ、eskkを有効化する、無効化する、状態をトグルする関数である。
+	これらの関数は|Normal-mode|、|mapmode-ic|中で有効である。
+
+eskk#is_enabled()				*eskk#is_enabled()*
+	eskkが有効になっている場合、真を返す。
+
+eskk#get_mode()					*eskk#get_mode()*
+	現在のeskkのモードを文字列形式で返す。
+	Note: この関数はeskkが有効でないとき(|eskk#is_enabled()|が偽の値を返す
+	状態のとき)、動作は保証されない。
+
+eskk#update_dictionary()		*eskk#update_dictionary()*
+	|:EskkUpdateDictionary|を参照。
+
+eskk#get_default_mapped_keys()		*eskk#get_default_mapped_keys()*
+	この関数は|g:eskk#mapped_keys|のデフォルト値を返す。
+
+}}}
+}}}
+==============================================================================
+HOOKS						*eskk-hooks* {{{
+
+eskk ではいくつかフックの仕組みを提供している。
+
+eskk-initialize-pre				*eskk-initialize-pre*
+-------------------
+
+このフックは最初にeskkが有効化される前に一度だけ実行される。
+毎回有効化された時点で行いたい場合は|eskk-enable-pre|フックを参照。
+
+アルファベットテーブルの登録			*eskk-alphabet-table*
+----------------------------
+
+|eskk-initialize-pre|フックを利用して次のようにアルファベット変換テーブルを
+定義することができる。
+>
+    autocmd User eskk-initialize-pre call s:eskk_initial_pre()
+    function! s:eskk_initial_pre()
+      " ユーザはここで何か重たい初期化処理を実行することができる。
+      let t = eskk#table#new('rom_to_hira*', 'rom_to_hira')
+      call t.add_map('~', '～')
+      call t.add_map('zc', '©')
+      call t.add_map('zr', '®')
+      call t.add_map('tm', '™')
+      call t.add_map('z ', '　')
+      " "1." のように数字の後のドットはそのまま入力
+      for n in range(10)
+        call t.add_map(n . '.', n . '.')
+      endfor
+      call eskk#register_mode_table('hira', t)
+    endfunction
+
+    " http://subtech.g.hatena.ne.jp/motemen/20110527/1306485690
+    " のeskkでの設定例。
+    " この方法は g:eskk#rom_input_style が"skk"でないと
+    " 最後のzが残ってしまうことに注意。
+    autocmd User eskk-initialize-pre call s:eskk_initial_pre()
+    function! s:eskk_initial_pre()
+      for [orgtable, mode] in [['rom_to_hira', 'hira'], ['rom_to_kata', 'kata']]
+        let t = eskk#table#new(orgtable.'*', orgtable)
+        call t.add_map('zw', 'w', 'z')
+        call eskk#register_mode_table(mode, t)
+      endfor
+    endfunction
+<
+eskk-initialize-post			*eskk-initialize-post*
+--------------------
+
+このフックは最初にeskkが有効化された後に一度だけ実行される。
+毎回有効化された時点で行いたい場合は|eskk-enable-post|フックを参照。
+
+eskk-enable-pre				*eskk-enable-pre*
+---------------
+
+このフックはeskkが有効化される前に毎回実行される。
+
+eskk-enable-post			*eskk-enable-post*
+----------------
+
+このフックはeskkが有効化された後に毎回実行される。
+
+eskk-disable-pre			*eskk-disable-pre*
+----------------
+
+このフックはeskkが無効化される前に毎回実行される。
+
+eskk-disable-post			*eskk-disable-post*
+-----------------
+
+このフックはeskkが無効化された後に毎回実行される。
+
+}}}
+==============================================================================
+モード					*eskk-modes* {{{
+
+------------------------------------------------------------------------------
+hiraモード				*eskk-hira-mode* {{{
+}}}
+------------------------------------------------------------------------------
+kataモード				*eskk-kata-mode* {{{
+}}}
+------------------------------------------------------------------------------
+hankataモード				*eskk-hankata-mode* {{{
+}}}
+------------------------------------------------------------------------------
+abbrevモード				*eskk-abbrev-mode* {{{
+}}}
+------------------------------------------------------------------------------
+asciiモード				*eskk-ascii-mode* {{{
+}}}
+------------------------------------------------------------------------------
+zeneiモード				*eskk-zenei-mode* {{{
+}}}
+
+}}}
+==============================================================================
+フェーズ					*eskk-phases* {{{
+
+------------------------------------------------------------------------------
+ノーマルフェーズ			*eskk-normal-phase* {{{
+}}}
+------------------------------------------------------------------------------
+変換フェーズ			*eskk-henkan-phase* {{{
+}}}
+------------------------------------------------------------------------------
+送り仮名フェーズ			*eskk-okuri-phase* {{{
+}}}
+------------------------------------------------------------------------------
+変換選択フェーズ			*eskk-henkan-select-phase* {{{
+}}}
+
+}}}
+==============================================================================
+補完				*eskk-completion* {{{
+
+(TODO: doc)
+
+}}}
+==============================================================================
+FAQ					*eskk-faq* {{{
+
+					*eskk-faq-broken-dict*
+Q. SKK辞書が壊れてしまいました！どうすればいいですか？
+A. |:EskkFixDictionary| を使ってください。
+
+このようにeskk自体にも辞書を修正する機能はありますが、
+skktoolsのskkdic-expr2などでも直すことが可能のようです。
+>
+	# catで繋ぎ直しても
+	$ cat skk-dict >>skk-dict.new
+	# このように整形してくれる
+	$ skkdic-expr2 skk-dict.new >skk-dict
+
+また壊れたのがeskkのせいであるならば、
+バグレポートを送っていただけると幸いです。
+
+Q. <C-j>でeskkがオンになりません。
+A. 他のプラグインと干渉している可能性があります。
+「:verbose imap <C-j>」を実行すると、どのプラグインによってマッピングされたか
+を表示できます。
+
+解決策は3つあります。
+1. eskkをアンインストールする (それをすてるなんてとんでもない！)
+2. マッピングを上書きしたプラグインをアンインストールする
+3. |<Plug>(eskk:toggle)|を別のキーにマッピングする。(次の設定を.vimrcに記載し
+てください)
+>
+	autocmd VimEnter * imap <C-j> <Plug>(eskk:toggle)
+	autocmd VimEnter * cmap <C-j> <Plug>(eskk:toggle)
+
+Q. Sticky キーを無効化または変更したいです。
+
+A.
+>
+	autocmd User eskk-initialize-post call s:eskk_initial_post()
+	function! s:eskk_initial_post() abort
+	    EskkUnmap -type=sticky ;
+	    EskkMap -type=sticky Q
+	endfunction
+
+Q. ddc.vim で eskk の補完を有効にしたいです。
+
+A.
+>
+	call ddc#custom#patch_global('sources', ['eskk'])
+	call ddc#custom#patch_global('sourceOptions', {
+	    \ '_': {
+	    \   'matchers': ['matcher_head'],
+	    \   'sorters': ['sorter_rank']
+	    \ },
+	    \ 'eskk': {'mark': 'eskk', 'matchers': [], 'sorters': []},
+	    \ })
+
+eskkの補完はpum.vimでは動作しないことに注意してください．
+
+					*eskk-faq-use-azik*
+Q. AZIKで入力したいです。
+A. 以下に設定例を示します。 |g:eskk#use_azik| も参照してください。
+なお、アルファベット変換テーブルは長くなりすぎるのでここでは割愛します。
+例えば以下を参照してください。
+https://github.com/hakehash/vimrc/blob/9823c5c91522eb5a1534bc81a6304c21d209545c/.vimrc#L112-L1820
+>
+	let g:eskk#use_azik = 1
+	let g:eskk#azik_keyboard_type = 'jp106'
+	augroup EskkInit
+	  autocmd!
+	  autocmd User eskk-initialize-pre call s:eskk_initial_pre()
+	  autocmd User eskk-initialize-post call s:eskk_initial_post()
+	augroup END
+	function! s:eskk_initial_pre() abort
+	  let t = eskk#table#new('rom_to_hira*', 'rom_to_hira')
+	    " ここにひらがなの変換テーブルを定義する
+	  call eskk#register_mode_table('hira', t)
+	  let t = eskk#table#new('rom_to_kata*', 'rom_to_kata')
+	    " ここにカタカナの変換テーブルを定義する
+	  call eskk#register_mode_table('kata', t)
+	  let t = eskk#table#new('rom_to_hankata*', 'rom_to_hankata')
+	    " ここに半角ｶﾀｶﾅの変換テーブルを定義する
+	  call eskk#register_mode_table('hankata', t)
+	endfunction
+	function! s:eskk_initial_post() abort
+	  if g:eskk#use_azik
+	    EskkUnmap -type=mode:hira:toggle-kata q
+	    EskkUnmap -type=mode:hira:q-key q
+	    EskkUnmap -type=mode:hira:l-key l
+	    EskkUnmap -type=mode:kata:toggle-kata q
+	    EskkUnmap -type=mode:kata:q-key q
+	    EskkUnmap -type=mode:kata:l-key l
+	    EskkUnmap -type=mode:hankata:toggle-kata q
+	    EskkUnmap -type=mode:hankata:q-key q
+	    EskkUnmap -type=mode:hankata:l-key l
+	    EskkUnmap -type=sticky ;
+	    EskkUnmap -type=phase:henkan-select:delete-from-dict X
+	    if g:eskk#azik_keyboard_type=="jp106"
+	      EskkMap -type=mode:hira:toggle-kata @
+	      EskkMap -type=mode:hira:q-key @
+	      EskkMap -type=mode:kata:toggle-kata @
+	      EskkMap -type=mode:kata:q-key @
+	      EskkMap -type=mode:hankata:toggle-kata @
+	      EskkMap -type=mode:hankata:q-key @
+	    elseif g:eskk#azik_keyboard_type=="us101"
+	      EskkMap -type=mode:hira:toggle-kata [
+	      EskkMap -type=mode:hira:q-key [
+	      EskkMap -type=mode:kata:toggle-kata [
+	      EskkMap -type=mode:kata:q-key [
+	      EskkMap -type=mode:hankata:toggle-kata [
+	      EskkMap -type=mode:hankata:q-key [
+	    endif
+	  endif
+	endfunction
+}}}
+==============================================================================
+TODO						*eskk-todo* {{{
+
+現在判明している問題については、
+https://github.com/vim-skk/eskk.vim/issues を参照せよ。
+
+特に優先度が高いと思われるものについて、以下に示す。
+
+* ドキュメンテーションの改善
+
+* 時々eskkが謎のエラーを吐く場合がある
+
+* "the mapping already exists" の警告メッセージが表示される
+
+}}}
+==============================================================================
+CHANGELOG						*eskk-changelog* {{{
+
+0.0.0:
+- 
+
+}}}
+==============================================================================
+vim:tw=78:fo=tcq2mM:ts=8:ft=help:norl:noet:fdm=marker:fen

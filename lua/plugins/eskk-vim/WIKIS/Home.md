@@ -1,0 +1,1 @@
+See [Pages](https://github.com/tyru/eskk.vim/wiki/_pages).
