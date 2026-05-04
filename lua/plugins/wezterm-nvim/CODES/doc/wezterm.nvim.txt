@@ -1,0 +1,262 @@
+wezterm.SplitOpts                                            *wezterm.SplitOpts*
+
+    Fields: ~
+        {cwd}        (string|nil)
+        {pane}       (number|nil)    The pane to split (default current)
+        {top}        (boolean|nil)   (default false)
+        {left}       (boolean|nil)   (default false)
+        {bottom}     (boolean|nil)   (default false)
+        {right}      (boolean|nil)   (default false)
+        {move_pane}  (number|nil)    Move a pane instead of spawning a command in it (default nil/disabled)
+        {percent}    (number|nil)    The percentage of the pane to split (default nil)
+        {program}    (string[]|nil)  The program to spawn in the new pane (default nil/Wezterm default)
+        {top_level}  (boolean|nil)   Split the window instead of the pane (default false)-
+
+
+wezterm.SpawnOpts                                            *wezterm.SpawnOpts*
+
+    Fields: ~
+        {pane}        (number|nil)    Set the current pane
+        {new_window}  (boolean|nil)   Open in a new window
+        {workspace}   (string|nil)    Set the workspace for the new window (requires new window)
+        {cwd}         (string|nil)    Set the cwd for the spawned program
+        {args}        (string[]|nil)  Additional args to pass to the spawned program
+
+
+wezterm.GetTextOpts                                        *wezterm.GetTextOpts*
+
+    Fields: ~
+        {pane_id}     (number|nil)
+        {start_line}  (number|nil)
+        {end_line}    (number|nil)
+        {escapes}     (boolean|nil)  Include escape sequences in the output
+
+
+wezterm.exec({args}, {handler})                                   *wezterm.exec*
+    Exec an arbitrary command in wezterm (does not return result)
+
+    Parameters: ~
+        {args}     (string[])
+        {handler}  (fun(res:vim.SystemObj))
+
+
+wezterm.exec_sync({args})                                    *wezterm.exec_sync*
+    Synchronously exec an arbitrary command in wezterm
+
+    Parameters: ~
+        {args}  (string[])
+
+    Returns: ~
+        (boolean)  success
+        (string)   stdout
+        (string)   stderr
+
+
+wezterm.set_user_var({name}, {value})                     *wezterm.set_user_var*
+    Set a user var in the current wezterm pane
+
+    Parameters: ~
+        {name}   (string)
+        {value}  (string|number|boolean|table|nil)
+
+
+wezterm.notify({title}, {body})                                 *wezterm.notify*
+    Show a desktop notification from wezterm
+
+    Parameters: ~
+        {title}  (string)
+        {body}   (string)
+
+
+wezterm.spawn({program}, {opts})                                 *wezterm.spawn*
+    Spawn a program in wezterm
+
+    Parameters: ~
+        {program}  (string)
+        {opts}     (wezterm.SpawnOpts)
+
+
+wezterm.split_pane.vertical({opts})                *wezterm.split_pane.vertical*
+    Split a pane vertically
+
+    Parameters: ~
+        {opts}  (wezterm.SplitOpts)
+
+
+wezterm.split_pane.horizontal({opts})            *wezterm.split_pane.horizontal*
+    Split a pane horizontally
+
+    Parameters: ~
+        {opts}  (wezterm.SplitOpts)
+
+
+wezterm.set_tab_title({title}, {id})                     *wezterm.set_tab_title*
+    Set the title of a Wezterm tab
+
+    Parameters: ~
+        {title}  (string)
+        {id}     (number|nil)  Tab id
+
+
+wezterm.set_win_title({title}, {id})                     *wezterm.set_win_title*
+    Set the the title of a Wezterm window
+
+    Parameters: ~
+        {title}  (string)
+        {id}     (number|nil)  Window id
+
+
+wezterm.switch_tab.relative({relno})               *wezterm.switch_tab.relative*
+    Switch to the tab relative to the current tab
+
+    Parameters: ~
+        {relno}  (number)  The relative number of tabs to switch
+
+
+wezterm.switch_tab.index({index})                     *wezterm.switch_tab.index*
+    Switch to the tab with the given index
+
+    Parameters: ~
+        {index}  (number)  The absolute index of the tab to switch to
+
+
+wezterm.switch_tab.id({id})                              *wezterm.switch_tab.id*
+    Switch to the tab with the given id
+
+    Parameters: ~
+        {id}  (number)  The id of the tab to switch to
+
+
+wezterm.switch_pane.id({id})                            *wezterm.switch_pane.id*
+    Switch to the given pane
+
+    Parameters: ~
+        {id}  (number)  The id of the pane to switch to
+
+
+                                                    *wezterm.get_pane_direction*
+wezterm.get_pane_direction({dir}, {pane})
+
+    Parameters: ~
+        {dir}   ("Up"|"Down"|"Left"|"Right"|"Next"|"Prev")
+        {pane}  (integer|nil)                               Specify the current pane
+
+
+wezterm.get_current_pane()                            *wezterm.get_current_pane*
+    Get the id of the current pane
+
+    Returns: ~
+        (number|nil)
+
+
+wezterm.zoom_pane({pane}, {opts})                            *wezterm.zoom_pane*
+    Zoom or unzoom a pane.
+
+    If no options are provided, toggles zoom for the provided (or current) pane.
+
+    Parameters: ~
+        {pane}  (number|nil)                                    The pane to zoom (default current)
+        {opts}  ({zoom:boolean,unzoom:boolean,toggle:boolean})  # Default: { toggle = true }
+
+
+wezterm.get_text({opts})                                      *wezterm.get_text*
+
+    Parameters: ~
+        {opts}  (wezterm.GetTextOpts)
+
+
+                                                 *wezterm.switch_pane.direction*
+wezterm.switch_pane.direction({dir}, {pane})
+    Switch pane in the given direction
+
+    Parameters: ~
+        {dir}   ("Up"|"Down"|"Left"|"Right"|"Next"|"Prev")  The direction to switch to
+        {pane}  (integer|nil)                               Specify the current pane
+
+
+Wezterm.PaneSize                                              *Wezterm.PaneSize*
+    @text The size of a Wezterm pane
+
+    Fields: ~
+        {cols}          (integer)
+        {rows}          (integer)
+        {pixel_width}   (integer)
+        {pixel_height}  (integer)
+        {dpi}           (integer)
+
+
+Wezterm.Pane                                                      *Wezterm.Pane*
+    @text Information about a Wezterm pane
+
+    Fields: ~
+        {cursor_shape}       (string)
+        {cursor_visibility}  (string)
+        {cursor_x}           (integer)
+        {cursor_y}           (integer)
+        {cwd}                (string)
+        {is_active}          (boolean)
+        {is_zoomed}          (boolean)
+        {left_col}           (integer)
+        {pane_id}            (integer)
+        {size}               (Wezterm.PaneSize)
+        {tab_id}             (integer)
+        {tab_title}          (string)
+        {title}              (string)
+        {top_row}            (integer)
+        {tty_name}           (string)
+        {window_id}          (integer)
+        {window_title}       (string)
+        {workspace}          (string)
+
+
+Wezterm.Tab                                                        *Wezterm.Tab*
+    @text Information about a Wezterm tab
+
+    Fields: ~
+        {tab_id}        (integer)
+        {tab_title}     (string)
+        {window_id}     (integer)
+        {window_title}  (string)
+        {panes}         (Wezterm.Pane[])
+
+
+Wezterm.Window                                                  *Wezterm.Window*
+    @text Information about a Wezterm GUI window
+
+    Fields: ~
+        {window_id}     (integer)
+        {window_title}  (string)
+        {tabs}          (Wezterm.Tab[])
+
+
+wezterm.list_panes()                                        *wezterm.list_panes*
+    @text Wrapper around `wezterm cli list`
+
+    @return Wezterm.Pane[]?
+
+
+wezterm.list_tabs()                                          *wezterm.list_tabs*
+    @text Wrapper around `wezterm cli list`
+
+    @return Wezterm.Tab[]?
+
+
+wezterm.list_windows()                                    *wezterm.list_windows*
+    @text Wrapper around `wezterm cli list`
+
+    @return Wezterm.Window[]?
+
+
+wezterm.list_clients()                                    *wezterm.list_clients*
+    Wrapper around `wezterm cli list-clients`
+
+    @return table[]?
+
+
+wezterm.setup({opts})                                            *wezterm.setup*
+
+    Parameters: ~
+        {opts}  (wezterm.Config)
+
+
+vim:tw=78:ts=8:noet:ft=help:norl:
