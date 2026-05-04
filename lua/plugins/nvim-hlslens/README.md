@@ -1,60 +1,6 @@
-# nvim-hlslens
+"kevinhwang91/nvim-ufo",
+    'kevinhwang91/nvim-hlslens',
 
-nvim-hlslens helps you better glance at matched information, seamlessly jump between matched
-instances.
-
-<https://user-images.githubusercontent.com/17562139/144654751-0d439610-b913-4e72-b473-e49db3317fab.mp4>
-
-## Table of contents
-
-- [Table of contents](#table-of-contents)
-- [Features](#features)
-- [Quickstart](#quickstart)
-  - [Requirements](#requirements)
-  - [Installation](#installation)
-  - [Minimal configuration](#minimal-configuration)
-  - [Usage](#usage)
-    - [Start hlslens](#start-hlslens)
-    - [Stop hlslens](#stop-hlslens)
-- [Documentation](#documentation)
-  - [Setup and description](#setup-and-description)
-  - [Highlight](#highlight)
-  - [Commands](#commands)
-  - [API](#api)
-- [Advanced configuration](#advanced-configuration)
-  - [Customize configuration](#customize-configuration)
-  - [Customize virtual text](#customize-virtual-text)
-  - [Integrate with other plugins](#integrate-with-other-plugins)
-    - [vim-asterisk](https://github.com/haya14busa/vim-asterisk)
-    - [nvim-ufo](https://github.com/kevinhwang91/nvim-ufo)
-    - [vim-visual-multi](https://github.com/mg979/vim-visual-multi)
-- [Feedback](#feedback)
-- [License](#license)
-
-## Features
-
-- Fully customizable style of virtual text
-- Clear highlighting and virtual text when cursor is out of range
-- Display search result dynamically while cursor is moving
-- Display search result for the current matched instance while searching
-- Display search result for some built-in commands that support incsearch (need Neovim 0.8.0)
-
-> Need `vim.api.nvim_parse_cmd` to parse built-in commands if incsearch is enabled.
-
-## Quickstart
-
-### Requirements
-
-- [Neovim](https://github.com/neovim/neovim) 0.7.2 or later
-- [nvim-ufo](https://github.com/kevinhwang91/nvim-ufo) (optional)
-
-### Installation
-
-Install nvim-hlslens with [Packer.nvim](https://github.com/wbthomason/packer.nvim):
-
-```lua
-use {'kevinhwang91/nvim-hlslens'}
-```
 
 ### Minimal configuration
 
