@@ -1,0 +1,96 @@
+---@meta
+
+---@class helpview.config.preview Options for changing when preview is shown.
+---
+---@field enable? boolean Enables *preview* when attaching to new buffers.
+---@field enable_hybrid_mode? boolean Enables `hybrid mode` when attaching to new buffers.
+---
+--- Icon provider.
+---@field icon_provider?
+---| "internal" Internal icon provider.
+---| "devicons" `nvim-web-devicons` as icon provider.
+---| "mini" `mini.icons` as icon provider.
+---
+---@field callbacks? helpview.config.preview.callbacks Callback functions.
+---@field hybrid_modes? string[] VIM-modes where `hybrid mode` is enabled.
+---
+---@field ignore_previews? helpview.config.preview.ignore Options that should/shouldn't be previewed in `hybrid_modes`.
+---@field linewise_hybrid_mode? boolean Clear lines around the cursor in `hybrid mode`, instead of nodes?
+---
+---@field modes? string[] VIM-modes where previews will be shown.
+---
+---@field debounce? integer Debounce delay for updating previews.
+---
+---@field filetypes? string[] Buffer filetypes where the plugin should attach.
+---@field ignore_buftypes? string[] Buftypes that should be ignored(e.g. nofile).
+---@field condition? fun(buffer: integer): boolean Condition to check if a buffer should be attached or not.
+---
+---@field max_buf_lines? integer Maximum number of lines a buffer can have before switching to partial rendering.
+---
+--- Lines before & after the cursor that is considered being edited.
+--- Edited content isn't rendered.
+---@field edit_range? [ integer, integer ]
+---@field draw_range? [ integer, integer ] Lines before & after the cursor that is considered being previewed.
+---
+---@field splitview_winopts? table Window options for the `splitview` window. See `:h nvim.open_win()`.
+
+
+--- Controls which items are affected by `hybrid_mode`.
+---@class helpview.config.preview.ignore
+---
+---@field vimdoc? helpview.config.preview.ignore.vimdoc[]
+
+
+---@alias helpview.config.preview.ignore.vimdoc
+---| "arguments"
+---| "code_blocks"
+---| "headings"
+---| "highlight_groups"
+---| "horizontal_rules"
+---| "inline_codes"
+---| "keycodes"
+---| "modelines"
+---| "notes"
+---| "optionlinks"
+---| "tags"
+---| "taglinks"
+---| "urls"
+---
+---| "!arguments"
+---| "!code_blocks"
+---| "!headings"
+---| "!highlight_groups"
+---| "!horizontal_rules"
+---| "!inline_codes"
+---| "!keycodes"
+---| "!modelines"
+---| "!notes"
+---| "!optionlinks"
+---| "!tags"
+---| "!taglinks"
+---| "!urls"
+
+
+---@class helpview.config.preview.callbacks
+---
+---@field on_attach? fun(buf: integer, wins: integer[]): nil Called when attaching to a buffer.
+---@field on_detach? fun(buf: integer, wins: integer[]): nil Called when detaching from a buffer.
+---
+---@field on_disable? fun(buf: integer, wins: integer[]): nil Called when disabling preview of a buffer. Also called when opening `splitview`.
+---@field on_enable? fun(buf: integer, wins: integer[]): nil Called when enabling preview of a buffer. Also called when disabling `splitview`.
+---
+--- Called when disabling hybrid mode in a buffer.
+--- > Called after `on_attach` when attaching to a buffer.
+--- > Called after `on_disable`.
+---@field on_hybrid_disable? fun(buf: integer, wins: integer[]): nil
+--- Called when enabling hybrid mode in a buffer.
+--- > Called after `on_attach`(if `hybrid_mod` is disabled).
+--- > Called after `on_enable`.
+---@field on_hybrid_enable? fun(buf: integer, wins: integer[]): nil
+---
+---@field on_mode_change? fun(buf: integer, wins: integer[], mode: string): nil Called when changing VIM-modes(only on active buffers).
+---
+---@field on_splitview_close? fun(source: integer, preview_buf: integer, preview_win: integer): nil Called before closing splitview.
+---@field on_splitview_open? fun(source: integer, preview_buf: integer, preview_win: integer): nil Called when opening splitview.
+---
+---@field on_help_open? fun(preview_buf: integer, preview_win: integer, overlay_buf: integer, overlay_win: integer): nil Called when opening `:Help`(:H).

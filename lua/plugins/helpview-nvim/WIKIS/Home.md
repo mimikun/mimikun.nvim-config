@@ -1,0 +1,759 @@
+<h1 align="center">☄️ helpview.nvim</h1>
+
+<img src="https://github.com/OXY2DEV/helpview.nvim/blob/images/v2/repo/helpview-3.png">
+
+A hackable & *fancy* vimdoc viewer for Neovim.
+
+>[!NOTE]
+> This wiki assumes you have basic understanding of `LuaCATS` annotations.
+> If you don't, check out [this section](https://luals.github.io/wiki/annotations/#documenting-types).
+
+## 📚 Wiki files
+
+- [🔄 Migration guide](https://github.com/OXY2DEV/helpview.nvim/wiki/Migration-guide)
+- [💻 Developer docs](https://github.com/OXY2DEV/helpview.nvim/wiki/Developer-documentation)
+- [🌟 Custom renderers](https://github.com/OXY2DEV/helpview.nvim/wiki/Custom-renderers)
+
+- [🔭 Preview options](https://github.com/OXY2DEV/helpview.nvim/wiki/Preview-options)
+
+- [🧊 Vimdoc options](https://github.com/OXY2DEV/helpview.nvim/wiki/Vimdoc-options)
+
+## 🔩 Configuration
+
+```lua
+--- Configuration for `helpview.nvim`.
+---@class helpview.config
+---
+--- Preview options.
+---@field preview? helpview.preview
+---
+--- Configuration options for vimdoc.
+---@field vimdoc? helpview.vimdoc
+---
+--- Custom highlight groups.
+---@field highlight_groups? table[]
+---
+--- Custom renderers
+---@field renderers? { [string]: function }
+{
+    ---+${lua}
+
+    renderers = {},
+
+    preview = {
+        enable = true,
+        enable_hybrid_mode = true,
+
+        modes = { "n", "c", "no" },
+        hybrid_modes = {},
+        linewise_hybrid_mode = false,
+
+        filetypes = { "help" },
+        ignore_previews = {},
+        ignore_buftypes = {},
+        condition = nil,
+
+        max_buf_lines = 500,
+        draw_range = { 2 * vim.o.lines, 2 * vim.o.lines },
+        edit_range = { 0, 0 },
+
+        debounce = 150,
+        callbacks = {},
+
+        icon_provider = "internal",
+
+        splitview_winopts = { split = "right" },
+        preview_winopts = { width = math.floor(80) }
+    },
+
+    vimdoc = {
+        arguments = {
+            enable = true,
+
+            default = {
+                hl = "Argument",
+                padding_left = " ",
+                padding_right = " ",
+            },
+        },
+
+        code_blocks = {
+            enable = true,
+
+            border_hl = "Code",
+
+            default = { block_hl = "HelpviewCode" },
+
+            ["diff"] = {
+                block_hl = function (_, line)
+                    if line:match("^%s*%+") then
+                        return "HelpviewPalette4";
+                    elseif line:match("^%s*%-") then
+                        return "HelpviewPalette1";
+                    else
+                        return "HelpviewCode";
+                    end
+                end
+            }
+        },
+
+        headings = {
+            enable = true,
+
+            heading_1 = {
+                sign = " ⣾⣿⠛⣿⣷ ",
+                sign_hl = "Palette1Inv",
+
+                marker_hl = "Palette1Bg",
+
+                hl = "Palette1Fg"
+            },
+
+            heading_2 = {
+                sign = " ⣠⠞⠛⠳⣄ ",
+                sign_hl = "Palette2Inv",
+
+                marker_hl = "Palette2",
+                hl = "Palette2Fg"
+            },
+
+            heading_3 = {
+                sign = " ⣯⣤⠛⣤⣽ ",
+                sign_hl = "Palette3Inv",
+
+                marker_hl = "Palette3",
+                hl = "Palette3"
+            },
+
+            heading_4 = {
+                sign = " ⠓⣠⣿⣄⠚ ",
+                sign_hl = "Palette4Inv",
+
+                marker_hl = "Palette4",
+                hl = "Palette4"
+            },
+        },
+
+        highlight_groups = {
+            enable = true
+        },
+
+        horizontal_rules = {
+            parts = {
+                {
+                    type = "repeating",
+                    repeat_amount = function (buffer)
+                        return math.ceil((vim.bo[buffer].tw - 3) / 2);
+                    end,
+
+                    text = "─",
+                    hl = {
+                        "HelpviewGradient1", "HelpviewGradient1",
+                        "HelpviewGradient2", "HelpviewGradient2",
+                        "HelpviewGradient3", "HelpviewGradient3",
+                        "HelpviewGradient4", "HelpviewGradient4",
+                        "HelpviewGradient5", "HelpviewGradient5",
+                        "HelpviewGradient6", "HelpviewGradient6",
+                        "HelpviewGradient7", "HelpviewGradient7",
+                        "HelpviewGradient8", "HelpviewGradient8",
+                        "HelpviewGradient8", "HelpviewGradient8",
+                    }
+                },
+                {
+                    type = "text",
+                    text = " ◈ "
+                },
+                {
+                    type = "repeating",
+                    repeat_amount = function (buffer)
+                        return math.floor((vim.bo[buffer].tw - 3) / 2);
+                    end,
+                    direction = "right",
+
+                    text = "─",
+                    hl = {
+                        "HelpviewGradient1", "HelpviewGradient1",
+                        "HelpviewGradient2", "HelpviewGradient2",
+                        "HelpviewGradient3", "HelpviewGradient3",
+                        "HelpviewGradient4", "HelpviewGradient4",
+                        "HelpviewGradient5", "HelpviewGradient5",
+                        "HelpviewGradient6", "HelpviewGradient6",
+                        "HelpviewGradient7", "HelpviewGradient7",
+                        "HelpviewGradient8", "HelpviewGradient8",
+                        "HelpviewGradient8", "HelpviewGradient8",
+                    }
+                },
+            }
+        },
+
+        inline_codes = {
+            enable = true,
+
+            hl = "Palette5",
+
+            padding_left = " ",
+            padding_right = " ",
+        },
+
+        keycodes = {
+            enable = true,
+
+            default = {
+                hl = "Keycode",
+
+                padding_left = " ",
+                padding_right = " ",
+            }
+        },
+
+        modelines = {
+            enable = true,
+
+            border = "─",
+            border_hl = "@text.todo.unchecked",
+
+            data_types = {
+                ["nil"] = { value_hl = "@constant.builtin" },
+                ["string"] = { value_hl = "String" },
+                ["number"] = { value_hl = "Number" },
+                ["boolean"] = { value_hl = "Boolean" }
+            },
+
+            default = {
+                option_hl = "@property",
+                value_hl = "Comment"
+            }
+        },
+
+        notes = {
+            enable = true,
+
+            default = {
+                hl = "Palette5Inv",
+                padding_left = " ",
+                padding_right = " ",
+            },
+
+            ["[dD]eprecated"] = {
+                hl = "Palette1Inv",
+            },
+
+            ["[wW]arning"] = {
+                hl = "Palette3Inv",
+            },
+        },
+
+        optionlinks = {
+            enable = true,
+
+            default = {
+                hl = "Optionlink",
+                padding_left = " ",
+                padding_right = " ",
+            }
+        },
+
+        tags = {
+            enable = true,
+
+            default = {
+                hl = "Tag",
+
+                padding_left = " ",
+                padding_right = " ",
+            },
+
+            ["%.txt$"] = {
+                hl = "Palette3",
+            }
+        },
+
+        taglinks = {
+            enable = true,
+
+            default = {
+                hl = "Taglink",
+
+                padding_left = " ",
+                padding_right = " ",
+            }
+        },
+
+        urls = {
+            enable = true,
+
+            default = {
+                icon = "󰌷 ",
+                hl = "@string.special.url.vimdoc",
+            },
+
+            ---+${lua, Github sites}
+
+            ["github%.com/[%a%d%-%_%.]+%/?$"] = {
+                --- github.com/<user>
+                icon = " ",
+                hl = "HelpviewPalette0Fg",
+
+                text = function (_, item)
+                    return string.match(item.label, "github%.com/([%a%d%-%_%.]+)%/?$");
+                end
+            },
+            ["github%.com/[%a%d%-%_%.]+/[%a%d%-%_%.]+%/?$"] = {
+                --- github.com/<user>/<repo>
+                icon = "󰳐 ",
+                hl = "HelpviewPalette0Fg",
+
+                text = function (_, item)
+                    return string.match(item.label, "github%.com/([%a%d%-%_%.]+/[%a%d%-%_%.]+)%/?$");
+                end
+            },
+            ["github%.com/[%a%d%-%_%.]+/[%a%d%-%_%.]+/tree/[%a%d%-%_%.]+%/?$"] = {
+                --- github.com/<user>/<repo>/tree/<branch>
+                icon = " ",
+                hl = "HelpviewPalette0Fg",
+
+                text = function (_, item)
+                    local repo, branch = string.match(item.label, "github%.com/([%a%d%-%_%.]+/[%a%d%-%_%.]+)/tree/([%a%d%-%_%.]+)%/?$");
+                    return repo .. " at " .. branch;
+                end
+            },
+            ["github%.com/[%a%d%-%_%.]+/[%a%d%-%_%.]+/commits/[%a%d%-%_%.]+%/?$"] = {
+                --- github.com/<user>/<repo>/commits/<branch>
+                icon = " ",
+                hl = "HelpviewPalette0Fg",
+
+                text = function (_, item)
+                    return string.match(item.label, "github%.com/([%a%d%-%_%.]+/[%a%d%-%_%.]+/commits/[%a%d%-%_%.]+)%/?$");
+                end
+            },
+
+            ["github%.com/[%a%d%-%_%.]+/[%a%d%-%_%.]+%/releases$"] = {
+                --- github.com/<user>/<repo>/releases
+                icon = " ",
+                hl = "HelpviewPalette0Fg",
+
+                text = function (_, item)
+                    return "Releases • " .. string.match(item.label, "github%.com/([%a%d%-%_%.]+/[%a%d%-%_%.]+)%/releases$");
+                end
+            },
+            ["github%.com/[%a%d%-%_%.]+/[%a%d%-%_%.]+%/tags$"] = {
+                --- github.com/<user>/<repo>/tags
+                icon = " ",
+                hl = "HelpviewPalette0Fg",
+
+                text = function (_, item)
+                    return "Tags • " .. string.match(item.label, "github%.com/([%a%d%-%_%.]+/[%a%d%-%_%.]+)%/tags$");
+                end
+            },
+            ["github%.com/[%a%d%-%_%.]+/[%a%d%-%_%.]+%/issues$"] = {
+                --- github.com/<user>/<repo>/issues
+                icon = " ",
+                hl = "HelpviewPalette0Fg",
+
+                text = function (_, item)
+                    return "Issues • " .. string.match(item.label, "github%.com/([%a%d%-%_%.]+/[%a%d%-%_%.]+)%/issues$");
+                end
+            },
+            ["github%.com/[%a%d%-%_%.]+/[%a%d%-%_%.]+%/pulls$"] = {
+                --- github.com/<user>/<repo>/pulls
+                icon = " ",
+                hl = "HelpviewPalette0Fg",
+
+                text = function (_, item)
+                    return "Pull requests • " .. string.match(item.label, "github%.com/([%a%d%-%_%.]+/[%a%d%-%_%.]+)%/pulls$");
+                end
+            },
+
+            ["github%.com/[%a%d%-%_%.]+/[%a%d%-%_%.]+%/wiki$"] = {
+                --- github.com/<user>/<repo>/wiki
+                icon = " ",
+                hl = "HelpviewPalette0Fg",
+
+                text = function (_, item)
+                    return "Wiki • " .. string.match(item.label, "github%.com/([%a%d%-%_%.]+/[%a%d%-%_%.]+)%/wiki$");
+                end
+            },
+
+            ---_
+            ---+${lua, Commonly used sites by programmers}
+
+            ["developer%.mozilla%.org"] = {
+                priority = -9999,
+
+                icon = "󰖟 ",
+                hl = "HelpviewPalette5Fg"
+            },
+
+            ["w3schools%.com"] = {
+                priority = -9999,
+
+                icon = " ",
+                hl = "HelpviewPalette4Fg"
+            },
+
+            ["stackoverflow%.com"] = {
+                priority = -9999,
+
+                icon = "󰓌 ",
+                hl = "HelpviewPalette2Fg"
+            },
+
+            ["reddit%.com"] = {
+                priority = -9999,
+
+                icon = " ",
+                hl = "HelpviewPalette2Fg"
+            },
+
+            ["github%.com"] = {
+                priority = -9999,
+
+                icon = " ",
+                hl = "HelpviewPalette6Fg"
+            },
+
+            ["gitlab%.com"] = {
+                priority = -9999,
+
+                icon = " ",
+                hl = "HelpviewPalette2Fg"
+            },
+
+            ["dev%.to"] = {
+                priority = -9999,
+
+                icon = "󱁴 ",
+                hl = "HelpviewPalette0Fg"
+            },
+
+            ["codepen%.io"] = {
+                priority = 9999,
+
+                icon = " ",
+                hl = "HelpviewPalette6Fg"
+            },
+
+            ["replit%.com"] = {
+                priority = -9999,
+
+                icon = " ",
+                hl = "HelpviewPalette2Fg"
+            },
+
+            ["jsfiddle%.net"] = {
+                priority = -9999,
+
+                icon = " ",
+                hl = "HelpviewPalette5Fg"
+            },
+
+            ["npmjs%.com"] = {
+                priority = -9999,
+
+                icon = " ",
+                hl = "HelpviewPalette0Fg"
+            },
+
+            ["pypi%.org"] = {
+                priority = -9999,
+
+                icon = "󰆦 ",
+                hl = "HelpviewPalette0Fg"
+            },
+
+            ["mvnrepository%.com"] = {
+                priority = -9999,
+
+                icon = " ",
+                hl = "HelpviewPalette1Fg"
+            },
+
+            ["medium%.com"] = {
+                priority = -9999,
+
+                icon = " ",
+                hl = "HelpviewPalette6Fg"
+            },
+
+            ["linkedin%.com"] = {
+                priority = -9999,
+
+                icon = "󰌻 ",
+                hl = "HelpviewPalette5Fg"
+            },
+
+            ["news%.ycombinator%.com"] = {
+                priority = -9999,
+
+                icon = " ",
+                hl = "HelpviewPalette2Fg"
+            },
+
+            ---_
+
+            ["neovim%.io/doc/user/.*#%_?.*$"] = {
+                icon = " ",
+                hl = "HelpviewPalette4Fg",
+
+                text = function (_, item)
+                    local file, tag = string.match(item.label, "neovim%.io/doc/user/(.*)#%_?(.*)$");
+                    --- The actual website seems to show
+                    --- _ in the site name so, we won't
+                    --- be replacing `_`s with ` `s.
+                    file = string.gsub(file, "%.html$", "");
+
+                    return string.format("%s(%s) - Neovim docs", utils.normalize_str(file), tag);
+                end
+            },
+            ["neovim%.io/doc/user/.*$"] = {
+                icon = " ",
+                hl = "HelpviewPalette4Fg",
+
+                text = function (_, item)
+                    local file = string.match(item.label, "neovim%.io/doc/user/(.*)$");
+                    file = string.gsub(file, "%.html$", "");
+
+                    return string.format("%s - Neovim docs", utils.normalize_str(file));
+                end
+            },
+
+            ["github%.com/vim/vim"] = {
+                priority = -100,
+
+                icon = " ",
+                hl = "HelpviewPalette4Fg",
+            },
+
+            ["github%.com/neovim/neovim"] = {
+                priority = -100,
+
+                icon = " ",
+                hl = "HelpviewPalette4Fg",
+            },
+
+            ["vim%.org"] = {
+                icon = " ",
+                hl = "HelpviewPalette4Fg",
+            },
+
+            ["luals%.github%.io/wiki/?.*$"] = {
+                icon = " ",
+                hl = "HelpviewPalette5Fg",
+
+                text = function (_, item)
+                    if string.match(item.label, "luals%.github%.io/wiki/(.-)/#(.+)$") then
+                        local page_mappings = {
+                            annotations = {
+                                ["as"] = "@as",
+                                ["alias"] = "@alias",
+                                ["async"] = "@async",
+                                ["cast"] = "@cast",
+                                ["class"] = "@class",
+                                ["deprecated"] = "@deprecated",
+                                ["diagnostic"] = "@diagnostic",
+                                ["enum"] = "@enum",
+                                ["field"] = "@field",
+                                ["generic"] = "@generic",
+                                ["meta"] = "@meta",
+                                ["module"] = "@module",
+                                ["nodiscard"] = "@nodiscard",
+                                ["operator"] = "@operator",
+                                ["overload"] = "@overload",
+                                ["package"] = "@package",
+                                ["param"] = "@param",
+                                ["see"] = "@see",
+                                ["source"] = "@source",
+                                ["type"] = "@type",
+                                ["vaarg"] = "@vaarg",
+                                ["version"] = "@version"
+                            }
+                        };
+
+                        local page, section = string.match(item.label, "luals%.github%.io/wiki/(.-)/#(.+)$");
+
+                        if page_mappings[page] and page_mappings[page][section] then
+                            section = page_mappings[page][section];
+                        else
+                            section = utils.normalize_str(string.gsub(section, "%-", " "));
+                        end
+
+                        return string.format("%s(%s) | Lua Language Server", utils.normalize_str(page), section);
+                    elseif string.match(item.label, "") then
+                        local page = string.match(item.label, "luals%.github%.io/wiki/(.-)/?$");
+
+                        return string.format("%s | Lua Language Server", utils.normalize_str(page));
+                    else
+                        return item.label;
+                    end
+                end
+            },
+        }
+    },
+
+    ---_
+}
+```
+
+## 🎇 Commands
+
+This plugin follows the *sub-commands* approach for creating commands. There is only a single `:Helpview` command.
+
+It comes with the following sub-commands,
+
+>[!NOTE]
+> When no sub-command name is provided(or an invalid sub-command is used) `:Helpview` will run `:Helpview Toggle`.
+
+
+| Sub-command  | Arguments           | Description                              |
+|--------------|---------------------|------------------------------------------|
+| `Start`      | none                | Allows attaching to new buffers.         |
+| `Stop`       | none                | Prevents attaching to new buffers.       |
+| ———————————— | ——————————————————— | ———————————————————————————————————————— |
+| `attach`     | **buffer**, integer | Attaches to **buffer**.                  |
+| `detach`     | **buffer**, integer | Detaches from **buffer**.                |
+| ———————————— | ——————————————————— | ———————————————————————————————————————— |
+| `Enable`     | none                | Enables preview *globally*.              |
+| `Disable`    | none                | Disables preview *globally*.             |
+| `Toggle`     | none                | Toggles preview *globally*.              |
+| ———————————— | ——————————————————— | ———————————————————————————————————————— |
+| `enable`     | **buffer**, integer | Enables preview for **buffer**.          |
+| `disable`    | **buffer**, integer | Disables preview for **buffer**.         |
+| `toggle`     | **buffer**, integer | Toggles preview for **buffer**.          |
+| ———————————— | ——————————————————— | ———————————————————————————————————————— |
+| `splitOpen`  | **buffer**, integer | Opens *splitview* for **buffer**.        |
+| `splitClose` | none                | Closes any open *splitview*.             |
+| `splitToggle`| none                | Toggles *splitview*.                     |
+| `splitRedraw`| none                | Updates *splitview* contents.            |
+| ———————————— | ——————————————————— | ———————————————————————————————————————— |
+| `Render`     | none                | Updates preview of all *active* buffers. |
+| `Clear`      | none                | Clears preview of all **active** buffer. |
+| ———————————— | ——————————————————— | ———————————————————————————————————————— |
+| `render`     | **buffer**, integer | Renders preview for **buffer**.          |
+| `clear`      | **buffer**, integer | Clears preview for **buffer**.           |
+| ———————————— | ——————————————————— | ———————————————————————————————————————— |
+| `toggleAll`  | none                | **Deprecated** version of `Toggle`.      |
+| `enableAll`  | none                | **Deprecated** version of `Enable`.      |
+| `disableAll` | none                | **Deprecated** version of `Disable`.     |
+| ———————————— | ——————————————————— | ———————————————————————————————————————— |
+| `traceExport`| none                | Exports trace logs to `trace.txt`.       |
+| `traceShow`  | none                | Shows trace logs in a window.            |
+
+
+>[!TIP]
+> **buffer** defaults to the current buffer. So, you can run commands on the current buffer without providing the buffer.
+> ```vim
+> :Helpview toggle "Toggles preview of the current buffer.
+> ```
+
+## 🎨 Highlight groups
+
+`helpgiew.nvim` creates a number of *primary highlight groups* that are used by most of the decorations.
+
+>[!IMPORTANT]
+> These groups are all **generated** during runtime and as such their colors may look different.
+
+If you want to create your own *dynamic* highlight groups or modify existing ones, see the [custom highlight groups](placeholder) section.
+
+
+| Highlight group      | Generated from                           | Default                     |
+|----------------------|------------------------------------------|-----------------------------|
+| HelpviewPalette0     | Normal(bg) + Comment(fg)                 | fg: `#9399b2` bg: `#35374a` |
+| HelpviewPalette0Fg   | Comment(fg)                              | fg: `#9399b2`               |
+| HelpviewPalette0Bg   | Normal(bg) + Comment(fg)                 | bg: `#35374a`               |
+| HelpviewPalette0Sign | Normal(bg) + Comment(fg), LineNr(bg)     | fg: `#9399b2`               |
+| ———————————————————— | ———————————————————————————————————————— | ——————————————————————————— |
+| HelpviewPalette1     | Normal(bg) + markdownH1(fg)              | fg: `#f38ba8` bg: `#4d3649` |
+| HelpviewPalette1Fg   | markdownH1(fg)                           | fg: `#f38ba8`               |
+| HelpviewPalette1Bg   | Normal(bg) + markdownH1(fg)              | bg: `#4d3649`               |
+| HelpviewPalette1Sign | Normal(bg) + markdownH1(fg), LineNr(bg)  | fg: `#f38ba8`               |
+| ———————————————————— | ———————————————————————————————————————— | ——————————————————————————— |
+| HelpviewPalette2     | Normal(bg) + markdownH2(fg)              | fg: `#f9b387` bg: `#4d3d43` |
+| HelpviewPalette2Fg   | markdownH2(fg)                           | fg: `#f9b387`               |
+| HelpviewPalette2Bg   | Normal(bg) + markdownH2(fg)              | bg: `#4d3d43`               |
+| HelpviewPalette2Sign | Normal(bg) + markdownH2(fg), LineNr(bg)  | fg: `#f9b387`               |
+| ———————————————————— | ———————————————————————————————————————— | ——————————————————————————— |
+| HelpviewPalette3     | Normal(bg) + markdownH3(fg)              | fg: `#f9e2af` bg: `#4c474b` |
+| HelpviewPalette3Fg   | markdownH3(fg)                           | fg: `#f9e2af`               |
+| HelpviewPalette3Bg   | Normal(bg) + markdownH3(fg)              | bg: `#4c474b`               |
+| HelpviewPalette3Sign | Normal(bg) + markdownH3(fg), LineNr(bg)  | fg: `#f9e2af`               |
+| ———————————————————— | ———————————————————————————————————————— | ——————————————————————————— |
+| HelpviewPalette4     | Normal(bg) + markdownH4(fg)              | fg: `#a6e3a1` bg: `#3c4948` |
+| HelpviewPalette4Fg   | markdownH4(fg)                           | fg: `#a6e3a1`               |
+| HelpviewPalette4Bg   | Normal(bg) + markdownH4(fg)              | bg: `#3c4948`               |
+| HelpviewPalette4Sign | Normal(bg) + markdownH4(fg), LineNr(bg)  | fg: `#a6e3a1`               |
+| ———————————————————— | ———————————————————————————————————————— | ——————————————————————————— |
+| HelpviewPalette5     | Normal(bg) + markdownH5(fg)              | fg: `#74c7ec` bg: `#314358` |
+| HelpviewPalette5Fg   | markdownH5(fg)                           | fg: `#74c7ec`               |
+| HelpviewPalette5Bg   | Normal(bg) + markdownH5(fg)              | bg: `#314358`               |
+| HelpviewPalette5Sign | Normal(bg) + markdownH5(fg), LineNr(bg)  | fg: `#74c7ec`               |
+| ———————————————————— | ———————————————————————————————————————— | ——————————————————————————— |
+| HelpviewPalette6     | Normal(bg) + markdownH6(fg)              | fg: `#b4befe` bg: `#3c405b` |
+| HelpviewPalette6Fg   | markdownH6(fg)                           | fg: `#b4befe`               |
+| HelpviewPalette6Bg   | Normal(bg) + markdownH6(fg)              | bg: `#3c405b`               |
+| HelpviewPalette6Sign | Normal(bg) + markdownH6(fg), LineNr(bg)  | fg: `#b4befe`               |
+| ———————————————————— | ———————————————————————————————————————— | ——————————————————————————— |
+| HelpviewPalette7     | Normal(bg) + @conditional(fg)            | fg: `#cba6f7` bg: `#403b5a` |
+| HelpviewPalette7Fg   | @conditional(fg)                         | fg: `#cba6f7`               |
+| HelpviewPalette7Bg   | Normal(bg) + @conditional(fg)            | bg: `#403b5a`               |
+| HelpviewPalette7Sign | Normal(bg) + @conditional(fg), LineNr(bg)| fg: `#cba6f7`               |
+
+
+> The source highlight group's values are turned into `Lab` color-space and then mixed to reduce unwanted results.
+
+These groups are then used as links by other groups responsible for various preview elements,
+
+>[!NOTE]
+> These groups exist for the sake of *backwards compatibility* and *ease of use*.
+>
+> You will see something like `fg: Normal`, it means the *fg* of Normal was used as the *fg* of that group.
+
+
+| Highlight group           | value                                    |
+|---------------------------|------------------------------------------|
+| HelpviewCode              | bg\*: `normal` ± 5%(L)                   |
+| HelpviewCodeInfo          | bg\*: `normal` ± 5%(L), fg: `comment`    |
+| HelpviewCodeFg            | fg\*: `normal` ± 5%(L)                   |
+| HelpviewInlineCode        | fg\*: `normal` ± 10%(L)                  |
+| ————————————————————————— | ———————————————————————————————————————— |
+| HelpviewIcon0             | link\*\*: `HelpviewPalette0Fg`           |
+| HelpviewIcon1             | link\*\*: `HelpviewPalette1Fg`           |
+| HelpviewIcon2             | link\*\*: `HelpviewPalette5Fg`           |
+| HelpviewIcon3             | link\*\*: `HelpviewPalette4Fg`           |
+| HelpviewIcon4             | link\*\*: `HelpviewPalette3Fg`           |
+| HelpviewIcon5             | link\*\*: `HelpviewPalette2Fg`           |
+| ————————————————————————— | ———————————————————————————————————————— |
+| HelpviewGradient0         | fg: `Normal`                             |
+| HelpviewGradient1         | fg\*\*\*: `lerp(Normal, Title, 1/9)`     |
+| HelpviewGradient2         | fg\*\*\*: `lerp(Normal, Title, 2/9)`     |
+| HelpviewGradient3         | fg\*\*\*: `lerp(Normal, Title, 3/9)`     |
+| HelpviewGradient4         | fg\*\*\*: `lerp(Normal, Title, 4/9)`     |
+| HelpviewGradient5         | fg\*\*\*: `lerp(Normal, Title, 5/9)`     |
+| HelpviewGradient6         | fg\*\*\*: `lerp(Normal, Title, 6/9)`     |
+| HelpviewGradient7         | fg\*\*\*: `lerp(Normal, Title, 7/9)`     |
+| HelpviewGradient8         | fg\*\*\*: `lerp(Normal, Title, 8/9)`     |
+| HelpviewGradient9         | fg: `Title`                              |
+
+
+> \* = The color is converted to HSL and it's luminosity(L) is increased/decreased by the specified amount.
+> 
+> \*\* = The background color of `HelpviewCode` is added to the groups.
+> 
+> \*\*\* = Linearly interpolated value between 2 highlight groups `fg`.
+
+There are also highlight groups that are made using the default highlight groups
+
+
+| Highlight group           | Inherited from                           |
+|---------------------------|------------------------------------------|
+| HelpviewTaglink           | @markup.link.vimdoc                      |
+| HelpviewTag               | @label.vimdoc                            |
+| HelpviewTag               | @label.vimdoc                            |
+| HelpviewOptionlink        | @markup.link.vimdoc                      |
+| HelpviewKeycode           | @string.special.vimdoc                   |
+| HelpviewArgument          | @variable.parameter.vimdoc               |
+
+
+------
+
+Also available in vimdoc, `:h helpview.nvim`.
+
