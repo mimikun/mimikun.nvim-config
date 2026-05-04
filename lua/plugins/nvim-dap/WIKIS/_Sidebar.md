@@ -1,0 +1,7 @@
+- [Debug Adapter Installation](https://codeberg.org/mfussenegger/nvim-dap/wiki/Debug-Adapter-installation)
+  - [C/C++/Rust (cpptools)](https://codeberg.org/mfussenegger/nvim-dap/wiki/C-C---Rust-(gdb-via--vscode-cpptools))
+  - [C/C++/Rust (codelldb)](https://codeberg.org/mfussenegger/nvim-dap/wiki/C-C---Rust-(via--codelldb))
+  - [Java](https://codeberg.org/mfussenegger/nvim-dap/wiki/Java)
+- [Extensions](https://codeberg.org/mfussenegger/nvim-dap/wiki/Extensions)
+- [Cookbook](https://codeberg.org/mfussenegger/nvim-dap/wiki/Cookbook)
+- [Local and Remote Debugging with Docker](https://codeberg.org/mfussenegger/nvim-dap/wiki/Local-and-Remote-Debugging-with-Docker)

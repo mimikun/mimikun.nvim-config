@@ -1,0 +1,1 @@
+Moved to https://codeberg.org/mfussenegger/nvim-dap/wiki/Cookbook
