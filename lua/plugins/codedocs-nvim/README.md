@@ -1,0 +1,457 @@
+## Usage
+
+### Generate an annotation
+
+An annotation insertion can be triggered using the `:Codedocs` command. There are
+two ways to use the command:
+
+- **Without arguments**: The plugin attempts to detect the code target under
+  the cursor, determines the default style for the current file’s language, and
+  applies the corresponding annotation. If no target is recognized under the
+  cursor, an inline comment is inserted. By default, a matching annotation exists
+  for each target unless you’ve customized the configuration.
+
+- **With an annotation name**: You can pass the name of any annotation definition
+  defined in the language’s default style. The plugin will generate and insert the
+  annotation using that definition.
+
+For a more convenient experience, you can bind the command to a keymap. For example:
+
+```lua
+vim.keymap.set(
+    "n", "<leader>k", "<cmd>Codedocs<CR>",
+    { desc = "Insert annotation" }
+)
+```
+
+### Delete an annotation
+
+Although it is not actually a Codedocs feature but a Neovim one, you should know
+that any comment can be deleted by placing your cursor on it and pressing `dgc`.
+
+### Lua API
+
+> [!TIP]
+> You can check the function signatures using a LSP such as [LuaLS](https://luals.github.io/)
+
+A Lua API is provided in case you find any of the already existing functionality
+useful. The API can be accessed by requiring the `codedocs` module:
+
+```lua
+local Codedocs = require("codedocs")
+```
+
+The following functions are available:
+
+- `generate`: Triggers an annotation generation (it's what `:Codedocs` uses under
+  the hood)
+
+## Configuration
+
+All options can be customized using the setup function. Here are most of the
+default options:
+
+```lua
+require("codedocs").setup {
+    debug = false,
+    languages = {
+        --- This table is too big to be displayed here
+        --- The path to the config file is `codedocs/config/init.lua`
+    },
+    aliases = {
+        sh = "bash"
+    }
+}
+```
+
+### Change a language's default style
+
+Default styles are defined using the `default_style` key. For example, let's set
+the default styles for Python and Lua:
+
+```lua
+require("codedocs").setup {
+    languages = {
+        python = {
+            default_style =  "reST"
+        },
+        lua = {
+            default_style = "EmmyLua"
+        }
+    },
+}
+```
+
+### How annotations work
+
+> [!CAUTION]
+> All annotations are expected to include all the options, using any of the valid
+> values, for the plugin to work properly
+
+An annotation is a regular Lua table that can interact with code items,
+and with some options (keys).
+
+#### Items
+
+An item is a unit of data that can be extracted from code structures such as functions,
+classes, and similar constructs. In the context of the plugin, a code structure
+from which items are extracted is referred to as a `target`.
+
+Ultimately, an item is a table with a `name` and `type` keys.
+
+For example, the following function:
+
+```python
+def foo(a: int, b: string) -> int:
+    ...
+```
+
+has the following items:
+
+```lua
+{
+    parameters = { -- List of parameter items
+        {
+            name = "a",
+            type = "int"
+        },
+        {
+            name = "b",
+            type = "string"
+        },
+    },
+    returns = {
+        {
+            name = "",
+            type = "int"
+        }
+    }
+}
+```
+
+Since the plugin relies on Treesitter for extraction, a target is identified by
+one or more Treesitter node types.
+
+For example, this is what the `targets` key of the default Lua configuration looks
+like:
+
+```lua
+local default_config = {
+    languages = {
+        lua = {
+            default_style = "EmmyLua",
+            styles = {
+                --Style/annotation data
+            },
+            targets = {
+                func = {
+                    node_identifiers = { ---Determines what Treesitter node types identify the target
+                        "function_definition",
+                        "function_declaration",
+                    },
+                    extractors = {
+                        parameters = function()
+                            ---Some logic that eventually returns a list of items
+                        end,
+                        returns = function()
+                            ---Some logic that eventually returns a list of items
+                        end
+                    }
+                }
+            }
+        }
+    }
+}
+```
+
+When the target is processed the result is a table where each key corresponds to
+one of the keys under `extractors`, and the values are the list of items returned
+by each function.
+
+#### Options
+
+| Option Name         | Expected Value Type                                 | Behavior                                          |
+| ------------------- | --------------------------------------------------- | ------------------------------------------------- |
+| `relative_position` | `"above"` \| `"below"` \| `"empty_target_or_above"` | Where to insert the annotation                    |
+| `indented`          | boolean                                             | Whether to indent the entire annotation one level |
+| `blocks`            | table (list)                                        | List of blocks forming the annotation             |
+
+Blocks are the core of an annotation, they determine what it ultimately looks
+like.
+
+##### Blocks
+
+> [!IMPORTANT]
+> The `blocks` option is a list, so you cannot override a single block on its
+> own. Because your config is merged recursively with the defaults, any blocks
+> you do not explicitly include will be removed, even if they exist in the defaults.
+>
+> To customize just one block, copy the default `blocks` list and modify the
+> specific block you want.
+
+| Option Name          | Expected Type | Behavior                                                     |
+| -------------------- | ------------- | ------------------------------------------------------------ |
+| `name`               | string        | The name of the block, useful for readability and for items  |
+| `layout`             | string[]      | List of lines that that make up the block                    |
+| `insert_gap_between` | table         | Sets up a gap in between the current block/item and the next |
+| `ignore_prev_gap`    | boolean       | Skips the gap defined by the previous block (if enabled)     |
+| `items`              | table?        | Sets up options for the block's items                        |
+
+All options with the exception of `ignore_prev_gap` have some caveats that will
+be explained below in detail.
+
+###### `layout` option
+
+> [!INFO]
+> The layout lines of all blocks are concatenated in block order to form the
+> final annotation.
+
+The following string placeholders are predefined:
+
+- `%snippet_tabstop_index`: Inserts a tabstop index for defining snippet tabstops
+  (e.g., `$%snippet_tabstop_index` or `${%snippet_tabstop_index:default label}`).
+- `%>`: Either a tab character or a number of spaces, based on your Neovim settings
+
+###### `insert_gap_between` option
+
+The following suboptions are available:
+
+| Name    | Expected Value Type | Behavior                                                 |
+| ------- | ------------------- | -------------------------------------------------------- |
+| enabled | `boolean`           | Whether a gap is inserted in between two blocks or items |
+| text    | `string`            | String used as the gap                                   |
+
+###### `name` and `items` option
+
+The `name` option serves two main purposes:
+
+1. It identifies the block, making its role easier to understand
+2. It links the block to a specific group of items extracted from a target
+
+The second purpose only applies to item-based blocks. When items are extracted
+from a target, they are grouped by block name. For a block to access those items,
+its `name` must match the corresponding group in the target.
+
+For example, given a target called `func` with the following items table:
+
+```lua
+local items = {
+    parameters = {
+        {
+            name = "a",
+            type = "string"
+        },
+        {
+            name = "b",
+            type = "int"
+        }
+    },
+    returns = {
+        {
+            name = "",
+            type = "int"
+        }
+    }
+}
+```
+
+If the annotation to be generated is also named `func` these items become available
+for use. Any block whose `name` matches a key in the items table, such as `parameters`
+or `returns` in the example, can access the corresponding items. This is done through
+the `items` option, which supports options like
+`insert_gap_between` and `layout`.
+
+In this context, the `layout` defines how each individual item is rendered, and
+its output is appended to the block’s own `layout`. Additionally, the default `layout`
+placeholders are expanded with the following ones:
+
+- `%item_name`
+- `%item_type`
+
+When used, they get replaced by the item's name and type respectively.
+
+The following target blocks are available:
+
+| target  | blocks                           |
+| ------- | -------------------------------- |
+| `func`  | `title`, `parameters`, `returns` |
+| `class` | `title`, `attributes`            |
+
+### Customize an annotation
+
+You can customize almost (for now!) every aspect of an annotation. Whether you
+want to make a simple change, like modifying the characters wrapping the parameter
+type:
+
+```python
+def cool_function_with_type_hints(a: int, b: bool) -> str:
+    """
+    <title goes here>
+
+    Args:
+        a <int>:
+        b <bool>:
+    Returns:
+        str:
+    """
+    self.sum = 1 + 1
+    return <value>
+```
+
+Or if you want to go all out with customization:
+
+```python
+def cool_function_with_type_hints(a: int, b: bool) -> str:
+        """
+        <title goes here>
+
+        Some cool customized title!:
+            a (づ ◕‿◕ )づ int ⊂(´• ω •`⊂):
+
+            b (づ ◕‿◕ )づ bool ⊂(´• ω •`⊂):
+        This is some return type...:
+            (￢_￢;) str:
+        """
+        self.sum = 1 + 1
+        return <value>
+```
+
+In this case, we:
+
+- Increased spacing between items in the parameters block.
+- Wrapped parameter types with two [Kaomojis](https://kaomoji.ru/en/).
+- Added a third kaomoji to wrap the left side of the return type.
+- Customized the titles for both the parameters and return blocks.
+
+The [How annotations work](#how-annotations-work) section covers everything you
+need to know about annotations. Since all built-in annotations are implemented this
+way, you can customize them using the same principles.
+
+With that in mind, suppose we want to make the following changes to the `func` annotation
+for Python's Google style:
+
+- Add a gap in between parameters.
+- Add a gap in between blocks
+
+As mentioned earlier, the blocks option is a list, so you can’t override a single
+block in isolation; you have to redefine the entire list. That’s fine if you
+intend to change the whole annotation, but if you only need to adjust one block,
+it’s better to copy the annotation and modify only the blocks you need.
+
+```lua
+local original_blocks_list = require("codedocs.config").languages.python.styles.Google.func.blocks
+local new_func_blocks = vim.deepcopy(original_blocks_list) -- We copy the original annotation blocks list
+print(vim.inspect(new_func_blocks)) -- It's helpful to print the list to check what it looks like before modifying it
+
+local second_block = new_func_blocks[2] -- In this specific case the second block is the parameters one
+second_block.items.insert_gap_between.enabled = true -- We enable the insertion of a gap in between items (parameters in this case)
+
+for _, block in ipairs(new_func_blocks) do -- We iterate over each block
+    block.insert_gap_between.enabled = true -- We enable the insertion of a gap in between the current block and the next
+end
+
+require("codedocs").setup({
+    languages = {
+        python = {
+            styles = {
+                Google = {
+                    func = { -- The func annotation key
+                        blocks = new_func_blocks -- We assign the new list which will replace the default one
+                    }
+                },
+            },
+        },
+    }
+})
+```
+
+### Add a new language
+
+> [!IMPORTANT]
+> Check the [How annotations work](#how-annotations-work) section to understand
+> how annotations work, how they are defined, and their relationship with the
+> `targets` key.
+
+To add support for a new language, simply add a key under `languages` with the name
+of that language. For example, to add support for `Cobol` with a default style called
+`cobolito`:
+
+```lua
+require("codedocs").setup {
+    languages = {
+        cobol = {
+            default_style = "cobolito",
+            styles = {
+                cobolito = {
+                    --The annotations contained in the `cobolito` style should be defined  here
+                }
+            },
+            targets = {
+                --The target definitions
+            }
+        }
+    }
+}
+```
+
+### Add a new annotation
+
+> [!IMPORTANT]
+> Check the [How annotations work](#how-annotations-work) section to see what
+> annotation options are available and how they work
+
+To add a new annotation for an existing language, simply add the annotation name
+as a key under the desired style. The value of that key should be a table containing
+the annotation options.
+
+For example, to add a new annotation called `deprecated` under the EmmyLua style
+in Lua:
+
+```lua
+require("codedocs").setup {
+    languages = {
+        lua = {
+            styles = {
+                EmmyLua = {
+                    deprecated = {
+                        --Annotation options go here
+                    }
+                }
+            }
+        }
+    }
+}
+```
+
+## Language support
+
+> [!NOTE]
+> The `Codedocs` style is not an official style. It exists to provide annotations
+> for languages without native styles or to offer a custom alternative.
+
+| Language   | Styles (\* = default) | Built-in annotations                             |
+| ---------- | --------------------- | ------------------------------------------------ |
+| bash       | \*Google              | `comment`, `func`, `shebang`                     |
+| c          | \*Doxygen             | `comment`, `func`                                |
+| c++ (cpp)  | \*Doxygen             | `comment`, `func`                                |
+| go         | \*Godoc               | `comment`, `func`                                |
+| gdscript   | \*Codedocs            | `comment`, `export`, `onready`, `warning_ignore` |
+| html       | \*Codedocs            | `comment`                                        |
+| javascript | \*JSDoc               | `comment`, `func`, `class`                       |
+| java       | \*JavaDoc             | `comment`, `func`, `class`                       |
+| kotlin     | \*KDoc                | `comment`, `func`, `class`                       |
+| lua        | \*EmmyLua, LDoc       | `comment`, `func`                                |
+| markdown   | \*Codedocs            | `comment`                                        |
+| python     | Google, NumPy, \*reST | `comment`, `func`, `class`                       |
+| php        | \*PHPDoc              | `comment`, `func`, `phptag`                      |
+| ruby       | \*YARD                | `comment`, `func`                                |
+| rust       | \*RustDoc             | `comment`, `func`                                |
+| sql        | \*Codedocs            | `comment`                                        |
+| typescript | \*TSDoc               | `comment`, `func`, `class`                       |
+| toml       | \*Codedocs            | `comment`                                        |
+
+## Annotation examples
+
+Want to see what annotations look like across all languages and styles? Check out
+[Annotation Examples](./ANNOTATION_EXAMPLES.md).
+
