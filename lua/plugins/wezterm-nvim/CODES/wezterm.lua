@@ -254,14 +254,7 @@ function wezterm.set_tab_title(title, id)
   else
     table.insert(args, title)
   end
-  wezterm.exec(
-    args,
-    exit_handler(
-      "set tab title to '"
-        .. title
-        .. (id == nil and "'" or "' for tab " .. id)
-    )
-  )
+  wezterm.exec(args, exit_handler("set tab title to '" .. title .. (id == nil and "'" or "' for tab " .. id)))
 end
 
 ---Set the the title of a Wezterm window
@@ -279,14 +272,7 @@ function wezterm.set_win_title(title, id)
   else
     table.insert(args, title)
   end
-  wezterm.exec(
-    args,
-    exit_handler(
-      "set window title to '"
-        .. title
-        .. (id == nil and "'" or ("' for window " .. id))
-    )
-  )
+  wezterm.exec(args, exit_handler("set window title to '" .. title .. (id == nil and "'" or ("' for window " .. id))))
 end
 
 ---Switch to the tab relative to the current tab
@@ -319,10 +305,7 @@ function wezterm.switch_tab.id(id)
   if not id then
     id = vim.v.count or 0
   end
-  wezterm.exec(
-    { "cli", "activate-tab", "--tab-id", fmt("%d", id) },
-    exit_handler("activate tab by id " .. id)
-  )
+  wezterm.exec({ "cli", "activate-tab", "--tab-id", fmt("%d", id) }, exit_handler("activate tab by id " .. id))
 end
 
 ---Switch to the given pane
@@ -331,10 +314,7 @@ function wezterm.switch_pane.id(id)
   if not id then
     id = vim.v.count or 0
   end
-  wezterm.exec(
-    { "cli", "activate-pane", "--pane-id", fmt("%d", id) },
-    exit_handler("activate pane by id " .. id)
-  )
+  wezterm.exec({ "cli", "activate-pane", "--pane-id", fmt("%d", id) }, exit_handler("activate pane by id " .. id))
 end
 
 ---Used for validating directions
@@ -555,8 +535,7 @@ end
 ---
 ---@return Wezterm.Pane[]?
 function wezterm.list_panes()
-  local ok, stdout, stderr =
-    wezterm.exec_sync({ "cli", "list", "--format", "json" })
+  local ok, stdout, stderr = wezterm.exec_sync({ "cli", "list", "--format", "json" })
   if not ok then
     err("list panes: " .. stderr)
     return
@@ -633,8 +612,7 @@ end
 ---
 ---@return table[]?
 function wezterm.list_clients()
-  local ok, stdout, stderr =
-    wezterm.exec_sync({ "cli", "list-clients", "--format", "json" })
+  local ok, stdout, stderr = wezterm.exec_sync({ "cli", "list-clients", "--format", "json" })
   if not ok then
     err("list panes: " .. stderr)
     return
@@ -654,14 +632,10 @@ end
 
 ---@private
 function wezterm.create_commands()
-  vim.api.nvim_create_user_command(
-    "WeztermSpawn",
-    "lua require('wezterm').spawn(<f-args>)",
-    {
-      nargs = "*",
-      complete = "shellcmd",
-    }
-  )
+  vim.api.nvim_create_user_command("WeztermSpawn", "lua require('wezterm').spawn(<f-args>)", {
+    nargs = "*",
+    complete = "shellcmd",
+  })
 end
 
 ---@private

@@ -1,13 +1,12 @@
 ---@type LazyKeysSpec[]
 local keys = {
   {
-    -- TODO: it
-    "<lhs>",
+    "<leader>wt",
     function()
-      -- TODO: it
+      require("wezterm").switch_tab.index()
     end,
     mode = "n",
-    desc = "",
+    desc = "Switch tab by index using vim.v.count",
     silent = true,
   },
 }

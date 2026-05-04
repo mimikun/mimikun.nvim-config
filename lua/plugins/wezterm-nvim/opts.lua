@@ -1,6 +1,6 @@
 ---@type table
 local opts = {
-  -- TODO: it
+  create_commands = true,
 }
 
 return opts
