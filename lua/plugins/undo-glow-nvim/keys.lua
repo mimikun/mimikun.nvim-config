@@ -28,7 +28,6 @@ local keys = {
     end,
     mode = "n",
     desc = "Paste below with highlight",
-    noremap = true,
     expr = true,
     silent = true,
   },
