@@ -28,6 +28,16 @@ local opts = {
     ".nvim.lua",
     ".neoconf.json",
     "neoconf.json",
+    "*.sln",
+    "build/env.sh",
+    -- TODO: comment out
+    "=src",
+    "^fixtures",
+    ">Latex",
+    "!.git/worktrees",
+    "!=extras",
+    "!^fixtures",
+    "!build/env.sh",
   },
   different_owners = {
     -- Allow adding projects with a different owner to the project session
