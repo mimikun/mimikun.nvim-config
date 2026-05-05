@@ -1,6 +1,6 @@
 ---@type LazySpec
 local spec = {
-  "mimikun/spec-template",
+"thinca/vim-quickrun",
   --lazy = false,
   --dir = ""
   --url = ""

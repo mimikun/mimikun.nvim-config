@@ -1,6 +1,6 @@
 ---@type table
 local cmds = {
-  -- TODO: it
+  "QuickRun",
 }
 
 return cmds
