@@ -69,8 +69,8 @@ local spec = {
     })
   end,
   opts = require("plugins.undo-glow-nvim.opts"),
-  --cond = false
-  --enabled = false
+  cond = false
+  enabled = false
 }
 
 return spec
