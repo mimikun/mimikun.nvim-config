@@ -96,9 +96,9 @@ local opts = {
   screensaver = 1000 * 60 * 5,
   -- will enable/disable automatically for the following filetypes
   filetypes = {
-    "dashboard",
-    "alpha",
-    "ministarter",
+    --"dashboard",
+    --"alpha",
+    --"ministarter",
   },
   -- winblend for the drop window
   winblend = 100,
