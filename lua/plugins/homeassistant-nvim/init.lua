@@ -11,8 +11,9 @@ local spec = {
     local opts = require("plugins.homeassistant-nvim.opts")
     require("homeassistant").setup(opts)
   end,
-  --cond = false,
-  --enabled = false,
+  -- TODO: it
+  cond = false,
+  enabled = false,
 }
 
 return spec
