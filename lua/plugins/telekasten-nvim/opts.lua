@@ -176,7 +176,7 @@ local opts = {
 
   -- Specify a clipboard program to use
   ---@type string "xsel" | "xclip" | "wl-paste" | "osascript"
-  clipboard_program = "",
+  clipboard_program = "wl-paste",
 
   -- Make syntax available to markdown buffers and telescope previewers
   install_syntax = true,
