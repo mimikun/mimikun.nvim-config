@@ -1,6 +1,16 @@
 ---@type table
 local cmds = {
-  -- TODO: it
+"MultipleCursorsAddDown",
+"MultipleCursorsAddUp",
+"MultipleCursorsAddDelete",
+"MultipleCursorsMouseAddDelete",
+"MultipleCursorsAddVisualArea",
+"MultipleCursorsAddMatches",
+"MultipleCursorsAddMatchesV",
+"MultipleCursorsAddJumpNextMatch",
+"MultipleCursorsJumpNextMatch",
+"MultipleCursorsAddJumpPrevMatch",
+"MultipleCursorsJumpPrevMatch",
 }
 
 return cmds
