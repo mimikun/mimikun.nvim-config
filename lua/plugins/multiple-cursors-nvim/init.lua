@@ -3,7 +3,7 @@ local spec = {
   "brenton-leighton/multiple-cursors.nvim",
   --lazy = false,
   -- Use the latest tagged version
-  version = "*",  
+  version = "*",
   --ft = require("plugins.multiple-cursors-nvim.ft"),
   --cmd = require("plugins.multiple-cursors-nvim.cmds"),
   --keys = require("plugins.multiple-cursors-nvim.keys"),
