@@ -1,66 +1,3 @@
-*ccc.txt*					Create Color Code in neovim.
-
-==============================================================================
-Contents                                                          *ccc-contents*
-
-
-Introduction						|ccc-introduction|
-Setup							|ccc-setup|
-Option							|ccc-option|
-Command							|ccc-command|
-Key mapping						|ccc-key-mapping|
-Variable						|ccc-variable|
-Autocmd							|ccc-autocmd|
-Action							|ccc-action|
-
-
-
-==============================================================================
-Introduction                                                  *ccc-introduction*
-
-
-Use the colorful sliders to easily generate any desired color!
-
-Features:
-- No dependency.
-- Dynamic highlighting of sliders.
-- Supports more than 10 color spaces (RGB, HSL, CMYK, etc.).
-- Seamless input/output mode change.
-- Restore previously used colors.
-- Transparent slider for css functions (e.g. `rgb()`, `hsl()`)
-- Color Highlighter for many formats.
-- Programmable modules (input/output/picker)
-
-Requirements:
-- Neovim 0.9.0+
-
-
-
-==============================================================================
-Setup                                                                *ccc-setup*
-
-
-Enable |'termguicolors'| and call `require("ccc").setup()`.
-See |ccc-options| for the options that can be used.
->lua
-	-- Enable true color
-	vim.opt.termguicolors = true
-
-	local ccc = require("ccc")
-	local mapping = ccc.mapping
-
-	ccc.setup({
-	  -- Your preferred settings
-	  -- Example: enable highlighter
-	  highlighter = {
-	    auto_enable = true,
-	    lsp = true,
-	  },
-	})
-<
-
-
-
 ==============================================================================
 Options                                                            *ccc-options*
 
@@ -610,31 +547,6 @@ Variable                                                          *ccc-variable*
 g:ccc_color ~
 	The color currently being edited is stored in HEX format. If the ccc
 	UI is not open, it is empty string ("").
-
-
-
-==============================================================================
-Autocmd                                                            *ccc-autocmd*
-
-
-                                                               *CccColorChanged*
-CccColorChanged ~
-	After changing |g:ccc_color|.
-
-
-
-==============================================================================
-Highlight                                                        *ccc-highlight*
-
-
-                                              *CccFloatNormal* *hl-CccFloatNormal*
-CccFloatNormal ~
-	The highlight for float window.
-
-
-                                              *CccFloatBorder* *hl-CccFloatBorder*
-CccFloatBorder ~
-	The highlight for float window border.
 
 
 
