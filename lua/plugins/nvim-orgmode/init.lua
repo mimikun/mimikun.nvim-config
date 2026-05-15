@@ -18,8 +18,8 @@ local spec = {
     -- Experimental LSP support
     vim.lsp.enable("org")
   end,
-  cond = false,
-  enabled = false,
+  --cond = false,
+  --enabled = false,
 }
 
 return spec
