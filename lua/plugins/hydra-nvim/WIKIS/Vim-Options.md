@@ -1,5 +1,3 @@
-![Screenshot from 2022-07-17 18-20-29](https://user-images.githubusercontent.com/13056013/179424026-b7b0cefa-3e5b-4cf0-890c-03b924c992da.png)
-
 ```lua
 local Hydra = require("hydra")
 
