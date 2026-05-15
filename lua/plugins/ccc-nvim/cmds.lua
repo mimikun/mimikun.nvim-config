@@ -1,8 +1,8 @@
 ---@type table
 local cmds = {
-  "CccPick", 
+  "CccPick",
   "CccConvert",
-  "CccHighlighterEnable", 
+  "CccHighlighterEnable",
   "CccHighlighterDisable",
   "CccHighlighterToggle",
 }
