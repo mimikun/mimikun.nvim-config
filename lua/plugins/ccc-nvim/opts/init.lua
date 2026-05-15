@@ -4,6 +4,7 @@ local output = ccc.output
 local picker = ccc.picker
 local mapping = ccc.mapping
 local utils = require("ccc.utils")
+local ui = require("ccc.ui.float")
 
 ---@type ccc.Options
 local opts = {
@@ -15,40 +16,16 @@ local opts = {
   point_color_on_dark = "#ffffff",
   point_color_on_light = "#000000",
   bar_len = 30,
-  win_opts = {
-    relative = "cursor",
-    row = 1,
-    col = 1,
-    style = "minimal",
-    border = "rounded",
-  },
+  --win_opts = require("plugins.ccc-nvim.opts.win_opts"),
   auto_close = true,
   preserve = false,
   save_on_quit = false,
   max_prev_colors = 10,
   alpha_show = "auto",
-  inputs = {
-    input.rgb,
-    input.hsl,
-    input.cmyk,
-  },
-  outputs = {
-    output.hex,
-    output.hex_short,
-    output.css_rgb,
-    output.css_hsl,
-  },
-  pickers = {
-    picker.hex,
-    picker.css_rgb,
-    picker.css_hsl,
-    picker.css_hwb,
-    picker.css_lab,
-    picker.css_lch,
-    picker.css_oklab,
-    picker.css_oklch,
-  },
-  ui = require("ccc.ui.float"),
+  --inputs = require("plugins.ccc-nvim.opts.inputs"),
+  --outputs = require("plugins.ccc-nvim.opts.outputs"),
+  pickers = require("plugins.ccc-nvim.opts.pickers"),
+  ui = ui,
   output_line = function(before_color, after_color, width)
     local b_hex = before_color:hex()
     local a_str = after_color:str()
@@ -64,24 +41,11 @@ local opts = {
   virtual_symbol = " ● ",
   virtual_pos = "inline-left",
   lsp = true,
-  highlighter = {
-    auto_enable = true,
-    max_byte = 100 * 1024, -- 100 KB
-    filetypes = {},
-    excludes = {},
-    lsp = true,
-    picker = true,
-    update_insert = true,
-  },
-  convert = {
-    { picker.hex, output.css_rgb },
-    { picker.css_rgb, output.css_hsl },
-    { picker.css_hsl, output.hex },
-  },
+  highlighter = require("plugins.ccc-nvim.opts.highlighter"),
+  --convert = require("plugins.ccc-nvim.opts.convert"),
   --recognize = require("plugins.ccc-nvim.opts.recognize"),
   --mappings = require("plugins.ccc-nvim.opts.mappings"),
   disable_default_mappings = false,
 }
---require("plugins.ccc-nvim.opts."),
 
 return opts
