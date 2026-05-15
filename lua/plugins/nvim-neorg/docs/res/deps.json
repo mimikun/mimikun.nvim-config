@@ -1,0 +1,6 @@
+{
+    "nvim-nio": "1.9.3",
+    "lua-utils.nvim": "1.0.2",
+    "nui.nvim": "0.3.0",
+    "pathlib.nvim": "2.2.2"
+}

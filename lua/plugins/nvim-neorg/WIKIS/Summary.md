@@ -1,0 +1,61 @@
+<div align="center">
+
+# `core.summary`
+
+### Write notes, not boilerplate.
+
+The summary module creates links and annotations to all files in a given workspace.
+
+
+
+</div>
+
+# Overview
+
+<!-- TODO: GIF -->
+The `core.summary` module exposes a single command - `:Neorg generate-workspace-summary`.
+
+When executed with the cursor hovering over a heading, `core.summary` will generate, you guessed it,
+a summary of the entire workspace, with links to each respective entry in that workspace.
+
+If arguments are provided then a partial summary is generated containing only categories that
+you have provided.
+E.g. `:Neorg generate-workspace-summary work todos` would only generate a
+summary of the categories `work` and `todos`.
+
+The way the summary is generated relies on the `strategy` configuration option,
+which by default consults the document metadata (see also
+[`core.esupports.metagen`](https://github.com/nvim-neorg/neorg/wiki/Metagen)) or the first heading title
+as a fallback to build up a tree of categories, titles and descriptions.
+
+# Configuration
+
+* <details open>
+  
+  <summary><h6><code>strategy</h6></code> (string)</summary>
+  
+  <div>
+  
+  The strategy to use to generate a summary.
+  
+  Possible options are:
+  - "default" - read the metadata to categorize and annotate files. Files
+  without metadata will use the top level heading as the title. If no headings are present, the filename will be used.
+  - "by_path" - Similar to "default" but uses the capitalized name of the folder containing a *.norg file as category.
+  - A custom function with the signature:
+  `fun(files: PathlibPath[], ws_root: PathlibPath, heading_level: number?, include_categories: string[]?): string[]?`.
+  Returning a list of lines that make up the summary
+  
+  </div>
+  
+  ```lua
+  "default"
+  ```
+  
+  </details>
+
+
+# Dependencies
+
+- [`core.integrations.treesitter`](https://github.com/nvim-neorg/neorg/wiki/Treesitter-Integration) - A module designed to integrate Treesitter into Neorg.
+
