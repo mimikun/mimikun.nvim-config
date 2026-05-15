@@ -4,7 +4,7 @@ local spec = {
   --lazy = false,
   cmd = require("plugins.ccc-nvim.cmds"),
   --keys = require("plugins.ccc-nvim.keys"),
-  --event = require("plugins.ccc-nvim.events"),
+  event = require("plugins.ccc-nvim.events"),
   --dependencies = require("plugins.ccc-nvim.dependencies"),
   init = function()
     -- Enable true color
