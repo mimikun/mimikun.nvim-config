@@ -6,7 +6,7 @@ local mapping = ccc.mapping
 local utils = require("ccc.utils")
 
 ---@type ccc.Options
-local default = {
+local opts = {
   default_color = "#000000",
   bar_char = "█",
   point_char = "◊",
@@ -65,7 +65,7 @@ local default = {
   virtual_pos = "inline-left",
   lsp = true,
   highlighter = {
-    auto_enable = false,
+    auto_enable = true,
     max_byte = 100 * 1024, -- 100 KB
     filetypes = {},
     excludes = {},
@@ -133,16 +133,6 @@ local default = {
     ["<ScrollWheelUp>"] = mapping.increase1,
   },
   disable_default_mappings = false,
-}
-
----@type table
-local opts = {
-  -- Your preferred settings
-  -- Example: enable highlighter
-  highlighter = {
-    auto_enable = true,
-    lsp = true,
-  },
 }
 
 return opts
