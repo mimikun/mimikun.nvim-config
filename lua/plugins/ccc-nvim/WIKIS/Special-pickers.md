@@ -18,8 +18,6 @@ ccc.setup({
 })
 ```
 
-<img width="548" alt="スクリーンショット 2023-02-26 19 18 46" src="https://user-images.githubusercontent.com/1239245/221404713-d7acabbd-8587-4869-8c5c-06a933e6faab.png">
-
 # ansi_escape
 
 You can define colors corresponding to ANSI escape code (16 colors).
@@ -36,5 +34,3 @@ ccc.setup({
   }
 })
 ```
-
-![image](https://user-images.githubusercontent.com/82267684/234368642-980b93fd-4fa4-45e0-b8d2-5da411954906.png)
