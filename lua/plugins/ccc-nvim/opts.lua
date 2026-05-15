@@ -6,7 +6,7 @@ local mapping = ccc.mapping
 local utils = require("ccc.utils")
 
 ---@type ccc.Options
-local default={
+local default = {
   default_color = "#000000",
   bar_char = "█",
   point_char = "◊",
