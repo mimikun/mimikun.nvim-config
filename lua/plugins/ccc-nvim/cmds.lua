@@ -1,6 +1,10 @@
 ---@type table
 local cmds = {
-  -- TODO: it
+  "CccPick", 
+  "CccConvert",
+  "CccHighlighterEnable", 
+  "CccHighlighterDisable",
+  "CccHighlighterToggle",
 }
 
 return cmds
