@@ -1,9 +1,3 @@
-local ccc = require("ccc")
-local input = ccc.input
-local output = ccc.output
-local picker = ccc.picker
-local mapping = ccc.mapping
-local utils = require("ccc.utils")
 local ui = require("ccc.ui.float")
 
 ---@type ccc.Options
@@ -24,8 +18,9 @@ local opts = {
   alpha_show = "auto",
   --inputs = require("plugins.ccc-nvim.opts.inputs"),
   --outputs = require("plugins.ccc-nvim.opts.outputs"),
-  pickers = require("plugins.ccc-nvim.opts.pickers"),
+  --pickers = require("plugins.ccc-nvim.opts.pickers"),
   ui = ui,
+  --[[
   output_line = function(before_color, after_color, width)
     local b_hex = before_color:hex()
     local a_str = after_color:str()
@@ -37,11 +32,12 @@ local opts = {
     local a_end_col = width
     return line, b_start_col, b_end_col, a_start_col, a_end_col
   end,
+  ]]
   highlight_mode = "bg",
   virtual_symbol = " ● ",
   virtual_pos = "inline-left",
   lsp = true,
-  highlighter = require("plugins.ccc-nvim.opts.highlighter"),
+  --highlighter = require("plugins.ccc-nvim.opts.highlighter"),
   --convert = require("plugins.ccc-nvim.opts.convert"),
   --recognize = require("plugins.ccc-nvim.opts.recognize"),
   --mappings = require("plugins.ccc-nvim.opts.mappings"),

@@ -11,7 +11,8 @@ local spec = {
   --opts = require("plugins.ccc-nvim.opts"),
   config = function()
     local opts = require("plugins.ccc-nvim.opts")
-    require("ccc").setup(opts)
+    local ccc = require("ccc")
+    ccc.setup(opts)
   end,
   --cond = false,
   --enabled = false,
