@@ -78,7 +78,7 @@ local opts = {
     { picker.css_rgb, output.css_hsl },
     { picker.css_hsl, output.hex },
   },
-  recognize = require("plugins.ccc-nvim.opts.recognize"),
+  --recognize = require("plugins.ccc-nvim.opts.recognize"),
   --mappings = require("plugins.ccc-nvim.opts.mappings"),
   disable_default_mappings = false,
 }
