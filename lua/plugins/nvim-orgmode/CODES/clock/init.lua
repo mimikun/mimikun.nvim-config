@@ -1,7 +1,7 @@
-local Duration = require('orgmode.objects.duration')
-local utils = require('orgmode.utils')
-local Promise = require('orgmode.utils.promise')
-local Input = require('orgmode.ui.input')
+local Duration = require("orgmode.objects.duration")
+local utils = require("orgmode.utils")
+local Promise = require("orgmode.utils.promise")
+local Input = require("orgmode.ui.input")
 
 ---@class OrgClock
 ---@field files OrgFiles
@@ -75,22 +75,22 @@ end
 function Clock:org_clock_cancel()
   self:update_clocked_headline()
   if not self.clocked_headline or not self.clocked_headline:is_clocked_in() then
-    return utils.echo_info('No active clock')
+    return utils.echo_info("No active clock")
   end
 
   self.clocked_headline:cancel_active_clock()
   self.clocked_headline = nil
-  utils.echo_info('Clock canceled')
+  utils.echo_info("Clock canceled")
 end
 
 function Clock:org_clock_goto()
   self:update_clocked_headline()
   if not self.clocked_headline then
-    return utils.echo_info('No active or recent clock task')
+    return utils.echo_info("No active or recent clock task")
   end
 
   if not self.clocked_headline:is_clocked_in() then
-    utils.echo_info('No running clock, this is the most recently clocked task')
+    utils.echo_info("No running clock, this is the most recently clocked task")
   end
 
   utils.goto_headline(self.clocked_headline)
@@ -99,31 +99,31 @@ end
 function Clock:org_set_effort()
   local item = self.files:get_closest_headline()
   -- TODO: Add Effort_ALL property as autocompletion
-  local current_effort = item:get_property('Effort')
-  return Input.open('Effort: ', current_effort or ''):next(function(effort)
+  local current_effort = item:get_property("Effort")
+  return Input.open("Effort: ", current_effort or ""):next(function(effort)
     if not effort then
       return false
     end
     local duration = Duration.parse(effort)
     if duration == nil then
-      return utils.echo_error('Invalid duration format: ' .. effort)
+      return utils.echo_error("Invalid duration format: " .. effort)
     end
-    item:set_property('Effort', effort)
+    item:set_property("Effort", effort)
     return item
   end)
 end
 
 function Clock:get_statusline()
   if not self.clocked_headline or not self.clocked_headline:is_clocked_in() then
-    return ''
+    return ""
   end
 
-  local effort = self.clocked_headline:get_property('effort', false)
+  local effort = self.clocked_headline:get_property("effort", false)
   local total = self.clocked_headline:get_logbook():get_total_with_active():to_string()
   if effort then
-    return string.format('(Org) [%s/%s] (%s)', total, effort or '', self.clocked_headline:get_title())
+    return string.format("(Org) [%s/%s] (%s)", total, effort or "", self.clocked_headline:get_title())
   end
-  return string.format('(Org) [%s] (%s)', total, self.clocked_headline:get_title())
+  return string.format("(Org) [%s] (%s)", total, self.clocked_headline:get_title())
 end
 
 return Clock

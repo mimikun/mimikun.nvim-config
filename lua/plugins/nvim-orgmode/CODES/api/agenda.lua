@@ -1,5 +1,5 @@
-local Date = require('orgmode.objects.date')
-local orgmode = require('orgmode')
+local Date = require("orgmode.objects.date")
+local orgmode = require("orgmode")
 
 ---@class OrgApiAgenda
 local OrgAgenda = {}
@@ -13,7 +13,7 @@ local function get_date(date, name)
   if type(date) == Date then
     return date
   end
-  if type(date) == 'string' then
+  if type(date) == "string" then
     return Date.from_string(date)
   end
 
@@ -23,7 +23,7 @@ end
 local function get_shared_opts(options)
   options = options or {}
   local opts = {}
-  if options.filters and options.filters ~= '' then
+  if options.filters and options.filters ~= "" then
     opts.filter = options.filters
   end
   opts.header = options.header
@@ -60,7 +60,7 @@ end
 function OrgAgenda.agenda(options)
   options = options or {}
   local opts = get_shared_opts(options)
-  opts.from = get_date(options.from, 'from')
+  opts.from = get_date(options.from, "from")
   opts.span = options.span
   orgmode.agenda:agenda(opts)
 end
@@ -108,7 +108,7 @@ function OrgAgenda.get_headline_at_cursor()
   local headline = orgmode.agenda:get_headline_at_cursor()
 
   if headline then
-    local file = require('orgmode.api').load(headline.file.filename)
+    local file = require("orgmode.api").load(headline.file.filename)
     return file:get_headline_on_line(headline:get_range().start_line)
   end
 end

@@ -1,16 +1,16 @@
-local config = require('orgmode.config')
-local ts_utils = require('orgmode.utils.treesitter')
-local utils = require('orgmode.utils')
-local org = require('orgmode')
+local config = require("orgmode.config")
+local ts_utils = require("orgmode.utils.treesitter")
+local utils = require("orgmode.utils")
+local org = require("orgmode")
 
 ---@class OrgEditSpecial
 ---@field files OrgFiles
 local EditSpecial = {
-  context_var = '__org_edit_special_ctx',
-  aborted_var = '__org_edit_special_aborted',
+  context_var = "__org_edit_special_ctx",
+  aborted_var = "__org_edit_special_aborted",
   block_types = {
-    SRC = require('orgmode.objects.edit_special.types.src'),
-    src = require('orgmode.objects.edit_special.types.src'),
+    SRC = require("orgmode.objects.edit_special.types.src"),
+    src = require("orgmode.objects.edit_special.types.src"),
   },
 }
 
@@ -28,7 +28,7 @@ function EditSpecial:_parse_position()
   local nearest_block_node_info = self:_get_nearest_block_node()
 
   if not nearest_block_node_info then
-    utils.echo_warning('No block node found near cursor')
+    utils.echo_warning("No block node found near cursor")
     self.block_type = nil
 
     return
@@ -53,16 +53,16 @@ function EditSpecial:get_context(bufnr)
   local exists, ctx = pcall(vim.api.nvim_buf_get_var, bufnr or self.org_bufnr, self.context_var)
   ---@cast ctx table
   if not exists then
-    error('Unable to find context for edit special action', 0)
+    error("Unable to find context for edit special action", 0)
   end
 
   if not vim.api.nvim_buf_is_valid(ctx.org_bufnr) then
-    error('Org buffer associated with edit special no longer valid', 0)
+    error("Org buffer associated with edit special no longer valid", 0)
   end
 
   ctx.file = org.files:get(ctx.filename)
   if not ctx.file then
-    error('Edit special callback with invalid file: ' .. (ctx.filename or '?'), 0)
+    error("Edit special callback with invalid file: " .. (ctx.filename or "?"), 0)
   end
 
   ctx.start_extmark_pos = vim.api.nvim_buf_get_extmark_by_id(ctx.org_bufnr, ctx.extmark_ns, ctx.start_extmark, {})
@@ -94,14 +94,14 @@ function EditSpecial:init()
 
   self:_set_context(bufnr, ctx)
 
-  config:setup_mappings('edit_src', bufnr)
+  config:setup_mappings("edit_src", bufnr)
 
-  local edit_special_augroup = vim.api.nvim_create_augroup('org_edit_special', { clear = true })
-  vim.api.nvim_create_autocmd('BufWipeout', {
+  local edit_special_augroup = vim.api.nvim_create_augroup("org_edit_special", { clear = true })
+  vim.api.nvim_create_autocmd("BufWipeout", {
     buffer = bufnr,
     group = edit_special_augroup,
     callback = function()
-      require('orgmode').action('org_mappings._edit_special_callback')
+      require("orgmode").action("org_mappings._edit_special_callback")
     end,
     once = true,
   })
@@ -148,7 +148,7 @@ function EditSpecial:done()
   local ok, aborted = pcall(vim.api.nvim_buf_get_var, ctx.bufnr, self.aborted_var)
   if ok and aborted then
     block:abort()
-    utils.echo_info('Aborting SRC block edits')
+    utils.echo_info("Aborting SRC block edits")
 
     return
   end
@@ -172,14 +172,14 @@ function EditSpecial:_get_nearest_block_node()
   if not current_node then
     return
   end
-  local block_node = ts_utils.parents_until(current_node, 'block')
+  local block_node = ts_utils.parents_until(current_node, "block")
   if not block_node then
     return
   end
 
   -- Block might not have contents yet, which is fine
   local children_nodes = self.file:get_ts_matches(
-    '(block name: (expr) @name parameter: (expr) @parameters contents: (contents)? @contents)',
+    "(block name: (expr) @name parameter: (expr) @parameters contents: (contents)? @contents)",
     block_node
   )[1]
   if not children_nodes or not children_nodes.name or not children_nodes.parameters then

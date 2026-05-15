@@ -1,6 +1,6 @@
-local config = require('orgmode.config')
-local utils = require('orgmode.utils')
-local Promise = require('orgmode.utils.promise')
+local config = require("orgmode.config")
+local utils = require("orgmode.utils")
+local Promise = require("orgmode.utils.promise")
 local id_counter = 0
 
 ---@class OrgCaptureWindowOpts
@@ -36,7 +36,7 @@ function CaptureWindow:open()
   self._resolve_fn = nil
   return self.template:compile():next(function(content)
     if not content then
-      return utils.echo_info('Canceled.')
+      return utils.echo_info("Canceled.")
     end
     self._window = utils.open_tmp_org_window(16, config.win_split_mode, config.win_border, self:_on_close())
     vim.api.nvim_buf_set_lines(0, 0, -1, true, content)
@@ -79,7 +79,7 @@ function CaptureWindow:focus()
   if self._bufnr then
     local win = vim.fn.bufwinnr(self._bufnr)
     if win > -1 then
-      vim.cmd(('%dwincd w'):format(win))
+      vim.cmd(("%dwincd w"):format(win))
     end
   end
   return self

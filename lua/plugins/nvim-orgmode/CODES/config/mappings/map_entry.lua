@@ -23,7 +23,7 @@ function MapEntry.action(handler, opts)
     opts.args = nil
   end
 
-  local formatted_action = ('<cmd>lua require("orgmode").action(%s)<CR>'):format(table.concat(action, ','))
+  local formatted_action = ('<cmd>lua require("orgmode").action(%s)<CR>'):format(table.concat(action, ","))
 
   return MapEntry:new(formatted_action, opts)
 end
@@ -31,8 +31,8 @@ end
 function MapEntry.text_object(handler, opts)
   return MapEntry:new((':<C-U>lua require("orgmode.org.text_objects").%s()<CR>'):format(handler), {
     opts = opts,
-    type = 'operator',
-    modes = { 'x' },
+    type = "operator",
+    modes = { "x" },
   })
 end
 
@@ -50,24 +50,24 @@ end
 ---@param opts? table<string, any>
 function MapEntry:new(handler, opts)
   opts = opts or {}
-  vim.validate('handler', handler, { 'string', 'function' })
-  vim.validate('modes', opts.modes, 'table', true)
-  vim.validate('desc', opts.desc, 'string', true)
-  vim.validate('help_desc', opts.help_desc, 'string', true)
-  vim.validate('type', opts.type, 'string', true)
+  vim.validate("handler", handler, { "string", "function" })
+  vim.validate("modes", opts.modes, "table", true)
+  vim.validate("desc", opts.desc, "string", true)
+  vim.validate("help_desc", opts.help_desc, "string", true)
+  vim.validate("type", opts.type, "string", true)
 
   local data = {}
   data.provided_opts = opts
   data.handler = handler
-  data.opts = vim.tbl_extend('keep', opts.opts or {}, {
+  data.opts = vim.tbl_extend("keep", opts.opts or {}, {
     nowait = true,
     silent = true,
     buffer = true,
   })
   data.help_desc = data.opts.help_desc
   data.opts.help_desc = nil
-  data.modes = opts.modes or { 'n' }
-  data.type = opts.type or 'action'
+  data.modes = opts.modes or { "n" }
+  data.type = opts.type or "action"
   setmetatable(data, self)
   self.__index = self
   return data
@@ -87,36 +87,36 @@ function MapEntry:attach(default_mapping, user_mapping, opts)
     return
   end
 
-  if type(mapping) == 'string' then
+  if type(mapping) == "string" then
     mapping = { mapping }
   end
 
-  if type(mapping) ~= 'table' then
+  if type(mapping) ~= "table" then
     error(
-      'Invalid mapping provided for ' .. tostring(self.handler) .. '. Only string and array of strings can be provided',
+      "Invalid mapping provided for " .. tostring(self.handler) .. ". Only string and array of strings can be provided",
       0
     )
   end
 
-  local map_opts = vim.tbl_extend('force', self.opts, opts or {})
+  local map_opts = vim.tbl_extend("force", self.opts, opts or {})
 
-  local prefix = ''
+  local prefix = ""
   if map_opts.prefix then
     prefix = map_opts.prefix
     map_opts.prefix = nil
   end
 
-  if type(user_mapping) == 'table' and user_mapping.desc then
+  if type(user_mapping) == "table" and user_mapping.desc then
     map_opts.desc = user_mapping.desc
   end
 
   for _, map in ipairs(mapping) do
-    if prefix ~= '' then
-      map = map:gsub('<prefix>', prefix)
+    if prefix ~= "" then
+      map = map:gsub("<prefix>", prefix)
     end
     vim.keymap.set(self.modes, map, self.handler, map_opts)
-    if self.type == 'operator' then
-      vim.keymap.set('o', map, (':normal v%s<CR>'):format(map), map_opts)
+    if self.type == "operator" then
+      vim.keymap.set("o", map, (":normal v%s<CR>"):format(map), map_opts)
     end
   end
 end

@@ -1,4 +1,4 @@
-local utils = require('orgmode.utils')
+local utils = require("orgmode.utils")
 ---@alias OrgAgendaSortingStrategy
 ---| 'time-up'
 ---| 'time-down'
@@ -45,7 +45,7 @@ end
 ---@param b SortableEntry
 function SortingStrategy.time_down(a, b)
   local time_up = SortingStrategy.time_up(a, b)
-  if type(time_up) == 'boolean' then
+  if type(time_up) == "boolean" then
     return not time_up
   end
 end
@@ -72,7 +72,7 @@ end
 
 function SortingStrategy.priority_up(a, b)
   local priority_down = SortingStrategy.priority_down(a, b)
-  if type(priority_down) == 'boolean' then
+  if type(priority_down) == "boolean" then
     return not priority_down
   end
 end
@@ -85,16 +85,16 @@ function SortingStrategy.tag_up(a, b)
   end
   local a_tags = a.headline:tags_to_string(true)
   local b_tags = b.headline:tags_to_string(true)
-  if a_tags == '' and b_tags == '' then
+  if a_tags == "" and b_tags == "" then
     return
   end
   if a_tags == b_tags then
     return
   end
-  if a_tags == '' then
+  if a_tags == "" then
     return false
   end
-  if b_tags == '' then
+  if b_tags == "" then
     return true
   end
   return a_tags < b_tags
@@ -104,7 +104,7 @@ end
 ---@param b SortableEntry
 function SortingStrategy.tag_down(a, b)
   local tag_up = SortingStrategy.tag_up(a, b)
-  if type(tag_up) == 'boolean' then
+  if type(tag_up) == "boolean" then
     return not tag_up
   end
 end
@@ -135,7 +135,7 @@ end
 ---@param b SortableEntry
 function SortingStrategy.todo_state_down(a, b)
   local todo_state_up = SortingStrategy.todo_state_up(a, b)
-  if type(todo_state_up) == 'boolean' then
+  if type(todo_state_up) == "boolean" then
     return not todo_state_up
   end
 end
@@ -155,7 +155,7 @@ end
 ---@param b SortableEntry
 function SortingStrategy.category_down(a, b)
   local category_up = SortingStrategy.category_up(a, b)
-  if type(category_up) == 'boolean' then
+  if type(category_up) == "boolean" then
     return not category_up
   end
 end
@@ -186,7 +186,7 @@ end
 ---@param b SortableEntry
 function SortingStrategy.clocked_down(a, b)
   local clocked_up = SortingStrategy.clocked_up(a, b)
-  if type(clocked_up) == 'boolean' then
+  if type(clocked_up) == "boolean" then
     return not clocked_up
   end
 end
@@ -214,9 +214,9 @@ local function sort(items, strategies, make_entry)
     local entry_b = make_entry(b)
 
     for _, fn in ipairs(strategies) do
-      local sorting_fn = SortingStrategy[fn:gsub('-', '_')]
+      local sorting_fn = SortingStrategy[fn:gsub("-", "_")]
       if not sorting_fn then
-        utils.echo_error('Unknown sorting strategy: ' .. fn)
+        utils.echo_error("Unknown sorting strategy: " .. fn)
         break
       end
       local result = sorting_fn(entry_a, entry_b)

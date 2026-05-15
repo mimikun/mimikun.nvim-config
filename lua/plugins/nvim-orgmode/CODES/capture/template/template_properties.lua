@@ -5,10 +5,10 @@ local TemplateProperties = {}
 function TemplateProperties:new(opts)
   opts = opts or {}
 
-  vim.validate('empty_lines', opts.empty_lines, { 'table', 'number' }, true)
+  vim.validate("empty_lines", opts.empty_lines, { "table", "number" }, true)
 
   local empty_lines = opts.empty_lines or {}
-  if type(empty_lines) == 'number' then
+  if type(empty_lines) == "number" then
     empty_lines = { before = empty_lines, after = empty_lines }
   else
     empty_lines.before = empty_lines.before or 0

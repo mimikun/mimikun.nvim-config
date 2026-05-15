@@ -6,17 +6,17 @@ local query_cache = {}
 function M.restart_highlights(bufnr)
   bufnr = bufnr or 0
   vim.treesitter.stop(bufnr)
-  vim.treesitter.start(bufnr, 'org')
+  vim.treesitter.start(bufnr, "org")
 end
 
 function M.parse_current_file()
-  return vim.treesitter.get_parser(0, 'org', {}):parse()
+  return vim.treesitter.get_parser(0, "org", {}):parse()
 end
 
 ---@param opts? vim.treesitter.get_node.Opts
 function M.get_node(opts)
   opts = opts or {}
-  opts.lang = opts.lang or 'org'
+  opts.lang = opts.lang or "org"
   return vim.treesitter.get_node(opts)
 end
 
@@ -36,13 +36,13 @@ end
 
 -- walks the tree to find a headline
 function M.find_headline(node)
-  if node:type() == 'headline' then
+  if node:type() == "headline" then
     return node
   end
 
-  if node:type() == 'section' then
+  if node:type() == "section" then
     -- The headline is always the first child of a section
-    return node:field('headline')[1]
+    return node:field("headline")[1]
   end
 
   if node:parent() then
@@ -61,19 +61,19 @@ function M.find_item_or_headline(node)
   end
 
   local node_type = node:type()
-  if node_type == 'headline' or node_type == 'listitem' then
+  if node_type == "headline" or node_type == "listitem" then
     return node
   end
 
-  if node_type == 'list' then
+  if node_type == "list" then
     -- Move right one character to pick up the current listitem
     vim.cmd([[norm l]])
     return M.find_item_or_headline(M.get_node_at_cursor())
   end
 
-  if node_type == 'section' then
+  if node_type == "section" then
     -- The headline is always the first child of a section
-    return node:field('headline')[1]
+    return node:field("headline")[1]
   end
   return M.find_item_or_headline(node:parent())
 end
@@ -101,7 +101,7 @@ function M.closest_node(node, node_type)
   if not node then
     return nil
   end
-  local types = type(node_type) == 'table' and node_type or { node_type }
+  local types = type(node_type) == "table" and node_type or { node_type }
 
   for _, t in ipairs(types) do
     if node:type() == t then
@@ -129,7 +129,7 @@ end
 function M.get_query(query)
   local ts_query = query_cache[query]
   if not ts_query then
-    ts_query = vim.treesitter.query.parse('org', query)
+    ts_query = vim.treesitter.query.parse("org", query)
     query_cache[query] = ts_query
   end
   return ts_query
@@ -155,11 +155,11 @@ end
 ---@return boolean
 function M.is_date_in_drawer(node, drawer, source)
   if
-    (node:parent() and node:parent():type() == 'contents')
-    and (node:parent():parent() and node:parent():parent():type() == 'drawer')
+    (node:parent() and node:parent():type() == "contents")
+    and (node:parent():parent() and node:parent():parent():type() == "drawer")
   then
     local drawer_node = node:parent():parent() --[[@as TSNode]]
-    local drawer_name = vim.treesitter.get_node_text(drawer_node:field('name')[1], source or 0)
+    local drawer_name = vim.treesitter.get_node_text(drawer_node:field("name")[1], source or 0)
     return drawer_name:lower() == drawer
   end
 
@@ -170,7 +170,7 @@ function M.node_to_lsp_range(node)
   local start_line, start_col, end_line, end_col = vim.treesitter.get_node_range(node)
   local rtn = {}
   rtn.start = { line = start_line, character = start_col }
-  rtn['end'] = { line = end_line, character = end_col }
+  rtn["end"] = { line = end_line, character = end_col }
   return rtn
 end
 
@@ -196,13 +196,13 @@ function M.memoize_by_buf_tick(fn, options)
   options = options or {}
 
   ---@type table<string, {result: any, last_tick: integer}>
-  local cache = setmetatable({}, { __mode = 'kv' })
+  local cache = setmetatable({}, { __mode = "kv" })
   local key_fn = options.key or function(a)
     return a
   end
 
   return function(bufnr, ...)
-    local key = key_fn(bufnr, ...) or ''
+    local key = key_fn(bufnr, ...) or ""
     local tick = vim.api.nvim_buf_get_changedtick(bufnr)
 
     if cache[key] then

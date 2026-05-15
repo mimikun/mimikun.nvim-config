@@ -1,6 +1,6 @@
-local utils = require('orgmode.utils')
-local OrgLinkUrl = require('orgmode.org.links.url')
-local link_utils = require('orgmode.org.links.utils')
+local utils = require("orgmode.utils")
+local OrgLinkUrl = require("orgmode.org.links.url")
+local link_utils = require("orgmode.org.links.utils")
 
 ---@class OrgLinkHeadline:OrgLinkType
 ---@field private files OrgFiles
@@ -17,7 +17,7 @@ end
 
 ---@return string
 function OrgLinkHeadline:get_name()
-  return 'headline'
+  return "headline"
 end
 
 ---@param link string
@@ -30,9 +30,9 @@ function OrgLinkHeadline:follow(link)
 
   local org_file = self.files:load_file_sync(opts.file_path)
 
-  if org_file and vim.trim(opts.headline) ~= '' then
+  if org_file and vim.trim(opts.headline) ~= "" then
     local headlines = org_file:find_headlines_by_title(opts.headline)
-    return link_utils.goto_oneof_headlines(headlines, opts.file_path, 'No headline found with title: ' .. opts.headline)
+    return link_utils.goto_oneof_headlines(headlines, opts.file_path, "No headline found with title: " .. opts.headline)
   end
 
   return link_utils.open_file_and_search(opts.file_path, opts.headline)
@@ -55,11 +55,11 @@ function OrgLinkHeadline:autocomplete(context)
   local headlines = vim.tbl_filter(function(headline)
     return context.matcher(headline:get_title(), opts.headline)
   end, file:get_headlines())
-  local prefix = opts.type == 'internal' and '' or opts.link_url:get_path_with_protocol() .. '::'
+  local prefix = opts.type == "internal" and "" or opts.link_url:get_path_with_protocol() .. "::"
 
   return vim.tbl_map(function(headline)
     local title = headline:get_title()
-    return prefix .. '*' .. title
+    return prefix .. "*" .. title
   end, headlines)
 end
 
@@ -72,8 +72,8 @@ function OrgLinkHeadline:_parse(link)
   local target = link_url:get_target()
   local path = link_url:get_path()
 
-  local file_path_headline = target and target:match('^%*(.*)$')
-  local current_file_headline = path and path:match('^%*(.*)$')
+  local file_path_headline = target and target:match("^%*(.*)$")
+  local current_file_headline = path and path:match("^%*(.*)$")
 
   if file_path_headline then
     local file_path = link_url:get_file_path()
@@ -84,7 +84,7 @@ function OrgLinkHeadline:_parse(link)
       headline = file_path_headline,
       file_path = file_path,
       link_url = link_url,
-      type = 'file',
+      type = "file",
     }
   end
 
@@ -93,7 +93,7 @@ function OrgLinkHeadline:_parse(link)
       headline = current_file_headline,
       file_path = utils.current_file_path(),
       link_url = link_url,
-      type = 'internal',
+      type = "internal",
     }
   end
 

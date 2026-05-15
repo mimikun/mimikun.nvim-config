@@ -1,5 +1,5 @@
-local Table = require('orgmode.files.elements.table')
-local Duration = require('orgmode.objects.duration')
+local Table = require("orgmode.files.elements.table")
+local Duration = require("orgmode.objects.duration")
 
 ---@class OrgClockReport
 ---@field from OrgDate
@@ -26,22 +26,22 @@ end
 function ClockReport:get_table_report(start_line)
   local report = self:generate_report()
   local data = {
-    { 'File', 'Headline', 'Time' },
-    'hr',
-    { '', 'ALL Total time', report.total_duration:to_string() },
-    'hr',
+    { "File", "Headline", "Time" },
+    "hr",
+    { "", "ALL Total time", report.total_duration:to_string() },
+    "hr",
   }
 
   for _, file in ipairs(report.files_with_clocks) do
-    table.insert(data, { { value = file.name }, 'File time', file.total_duration:to_string() })
+    table.insert(data, { { value = file.name }, "File time", file.total_duration:to_string() })
     for _, headline in ipairs(file.headlines) do
       table.insert(data, {
-        '',
+        "",
         { value = headline:get_title(), reference = headline },
         headline:get_logbook():get_total(self.from, self.to):to_string(),
       })
     end
-    table.insert(data, 'hr')
+    table.insert(data, "hr")
   end
 
   return Table.from_list(data, start_line, 0):compile()
@@ -55,7 +55,7 @@ function ClockReport:generate_report()
     if #file_clocks.headlines > 0 then
       total_duration = total_duration + file_clocks.total_duration.minutes
       table.insert(files_with_clocks, {
-        name = orgfile:get_category() .. '.org',
+        name = orgfile:get_category() .. ".org",
         total_duration = file_clocks.total_duration,
         headlines = file_clocks.headlines,
       })

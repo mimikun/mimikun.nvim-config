@@ -27,7 +27,7 @@ local rgb_string_to_hsl -- defined below
 -- @return               an instance of Color
 -----------------------------------------------------------------------------
 local function new(H, S, L)
-  if type(H) == 'string' and H:sub(1, 1) == '#' and H:len() == 7 then
+  if type(H) == "string" and H:sub(1, 1) == "#" and H:len() == 7 then
     H, S, L = rgb_string_to_hsl(H)
   end
   assert(Color_mt)
@@ -42,7 +42,7 @@ M.new = new
 -- @return string|nil
 -----------------------------------------------------------------------------
 local function validate(color_hex)
-  if type(color_hex) == 'string' and color_hex:len() == 7 and color_hex:sub(1, 1) == '#' then
+  if type(color_hex) == "string" and color_hex:len() == 7 and color_hex:sub(1, 1) == "#" then
     return color_hex
   end
   return nil
@@ -160,9 +160,9 @@ M.rgb_string_to_hsl = rgb_string_to_hsl
 function Color:to_rgb()
   local r, g, b = hsl_to_rgb(self.H, self.S, self.L)
   local rgb = { hsl_to_rgb(self.H, self.S, self.L) }
-  local buffer = '#'
+  local buffer = "#"
   for i, v in ipairs(rgb) do
-    buffer = buffer .. string.format('%02x', math.floor(v * 255 + 0.5))
+    buffer = buffer .. string.format("%02x", math.floor(v * 255 + 0.5))
   end
   return buffer
 end

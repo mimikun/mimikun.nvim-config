@@ -1,9 +1,9 @@
-local org = require('orgmode')
-local utils = require('orgmode.utils')
-local fs = require('orgmode.utils.fs')
-local Url = require('orgmode.org.hyperlinks.url')
-local Link = require('orgmode.org.hyperlinks.link')
-local config = require('orgmode.config')
+local org = require("orgmode")
+local utils = require("orgmode.utils")
+local fs = require("orgmode.utils.fs")
+local Url = require("orgmode.org.hyperlinks.url")
+local Link = require("orgmode.org.hyperlinks.link")
+local config = require("orgmode.config")
 local Hyperlinks = {
   stored_links = {},
 }
@@ -26,7 +26,7 @@ function Hyperlinks.find_by_filepath(url)
   --TODO integrate with orgmode.utils.fs or orgmode.objects.url
   local valid_filenames = {}
   for _, f in ipairs(filenames) do
-    if f:find('^' .. file_base) then
+    if f:find("^" .. file_base) then
       if url.realpath then
         f = f:gsub(file_base, url.path)
       end
@@ -35,7 +35,7 @@ function Hyperlinks.find_by_filepath(url)
   end
 
   local protocol = url.protocol
-  local prefix = protocol and protocol == 'file' and 'file:' or ''
+  local prefix = protocol and protocol == "file" and "file:" or ""
 
   return vim.tbl_map(function(path)
     return prefix .. path
@@ -45,20 +45,20 @@ end
 ---@param url OrgUrl
 ---@return OrgHeadline[]
 function Hyperlinks.find_by_custom_id_property(url)
-  local custom_id = url:get_custom_id() or ''
+  local custom_id = url:get_custom_id() or ""
   local file = get_file_from_url(url)
-  return file:find_headlines_with_property_matching('CUSTOM_ID', custom_id)
+  return file:find_headlines_with_property_matching("CUSTOM_ID", custom_id)
 end
 
 ---@param url OrgUrl
 ---@return fun(headlines: OrgHeadline[]): string[]
 function Hyperlinks.as_custom_id_anchors(url)
-  local prefix = url:is_file_custom_id() and url:get_file_with_protocol() .. '::' or ''
+  local prefix = url:is_file_custom_id() and url:get_file_with_protocol() .. "::" or ""
   return function(headlines)
     return vim.tbl_map(function(headline)
       ---@cast headline OrgHeadline
-      local custom_id = headline:get_property('custom_id', false)
-      return ('%s#%s'):format(prefix, custom_id)
+      local custom_id = headline:get_property("custom_id", false)
+      return ("%s#%s"):format(prefix, custom_id)
     end, headlines)
   end
 end
@@ -67,11 +67,11 @@ end
 ---@param omit_prefix? boolean
 ---@return fun(headlines: OrgHeadline[]): string[]
 function Hyperlinks.as_headline_anchors(url, omit_prefix)
-  local prefix = url:is_file_headline() and url:get_file_with_protocol() .. '::' or ''
+  local prefix = url:is_file_headline() and url:get_file_with_protocol() .. "::" or ""
   return function(headlines)
     return vim.tbl_map(function(headline)
-      local title = (omit_prefix and '' or '*') .. headline:get_title()
-      return ('%s%s'):format(prefix, title)
+      local title = (omit_prefix and "" or "*") .. headline:get_title()
+      return ("%s%s"):format(prefix, title)
     end, headlines)
   end
 end
@@ -96,7 +96,7 @@ function Hyperlinks.find_by_plain_title(url)
 end
 
 local function as_dedicated_anchor_pattern(anchor_str)
-  return string.format('<<<?(%s[^>]*)>>>?', anchor_str):lower()
+  return string.format("<<<?(%s[^>]*)>>>?", anchor_str):lower()
 end
 
 ---@param url OrgUrl
@@ -172,12 +172,12 @@ function Hyperlinks.get_link_to_headline(headline, path)
   if config.org_id_link_to_org_use_id then
     local id = headline:id_get_or_create()
     if id then
-      return ('id:%s::*%s'):format(id, title)
+      return ("id:%s::*%s"):format(id, title)
     end
   end
 
   path = path or utils.current_file_path()
-  return ('file:%s::*%s'):format(path, title)
+  return ("file:%s::*%s"):format(path, title)
 end
 
 ---@param file OrgFile
@@ -188,12 +188,12 @@ function Hyperlinks.get_link_to_file(file, path)
   if config.org_id_link_to_org_use_id then
     local id = file:id_get_or_create()
     if id then
-      return ('id:%s::*%s'):format(id, title)
+      return ("id:%s::*%s"):format(id, title)
     end
   end
 
   path = path or file.filename
-  return ('file:%s::*%s'):format(path, title)
+  return ("file:%s::*%s"):format(path, title)
 end
 
 ---@param headline OrgHeadline
@@ -217,8 +217,8 @@ end
 
 ---@return OrgLink|nil, table | nil
 function Hyperlinks.get_link_under_cursor()
-  local line = vim.fn.getline('.')
-  local col = vim.fn.col('.') or 0
+  local line = vim.fn.getline(".")
+  local col = vim.fn.col(".") or 0
   return Link.at_pos(line, col)
 end
 

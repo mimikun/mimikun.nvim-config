@@ -1,5 +1,5 @@
-local utils = require('orgmode.utils')
-local Promise = require('orgmode.utils.promise')
+local utils = require("orgmode.utils")
+local Promise = require("orgmode.utils.promise")
 
 ---@class OrgBabelTangle
 ---@field file OrgFile
@@ -35,18 +35,18 @@ function Tangle:tangle()
 
   for _, info in ipairs(valid_blocks) do
     if tangle_info[info.filename] then
-      table.insert(tangle_info[info.filename], '')
+      table.insert(tangle_info[info.filename], "")
     else
       tangle_info[info.filename] = {}
     end
 
-    local do_noweb = info.header_args[':noweb'] == 'yes' or info.header_args[':noweb'] == 'tangle'
+    local do_noweb = info.header_args[":noweb"] == "yes" or info.header_args[":noweb"] == "tangle"
     local parsed_content = info.content
 
     if do_noweb then
       parsed_content = {}
       for _, line in ipairs(info.content) do
-        local noweb_ref = line:match('^%s*<<(.*)>>%s*$')
+        local noweb_ref = line:match("^%s*<<(.*)>>%s*$")
         if noweb_ref then
           vim.list_extend(parsed_content, block_content_by_name[noweb_ref] or {})
         else
@@ -55,9 +55,9 @@ function Tangle:tangle()
       end
     end
 
-    if info.header_args[':mkdirp'] == 'yes' then
-      local path = vim.fn.fnamemodify(info.filename, ':h')
-      vim.fn.mkdir(path, 'p')
+    if info.header_args[":mkdirp"] == "yes" then
+      local path = vim.fn.fnamemodify(info.filename, ":h")
+      vim.fn.mkdir(path, "p")
     end
 
     if info.name then
@@ -68,17 +68,17 @@ function Tangle:tangle()
 
   local promises = {}
   for filename, content in pairs(tangle_info) do
-    table.insert(promises, utils.writefile(filename, table.concat(self:_remove_obsolete_indent(content), '\n')))
+    table.insert(promises, utils.writefile(filename, table.concat(self:_remove_obsolete_indent(content), "\n")))
   end
   Promise.all(promises):wait()
-  utils.echo_info(('Tangled %d blocks from %s'):format(#valid_blocks, vim.fn.fnamemodify(self.file.filename, ':t')))
+  utils.echo_info(("Tangled %d blocks from %s"):format(#valid_blocks, vim.fn.fnamemodify(self.file.filename, ":t")))
 end
 
 function Tangle:_remove_obsolete_indent(content)
   local dedent_amount = nil
   for _, line in ipairs(content) do
-    if vim.trim(line) ~= '' then
-      local _, indent = line:find('^%s*')
+    if vim.trim(line) ~= "" then
+      local _, indent = line:find("^%s*")
       if not dedent_amount then
         dedent_amount = indent or 0
       else

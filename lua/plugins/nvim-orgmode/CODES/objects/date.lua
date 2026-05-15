@@ -1,12 +1,12 @@
 ---@type OrgDateSpan
-local spans = { d = 'day', m = 'month', y = 'year', h = 'hour', w = 'week', M = 'min' }
-local config = require('orgmode.config')
-local utils = require('orgmode.utils')
-local ts_utils = require('orgmode.utils.treesitter')
-local Range = require('orgmode.files.elements.range')
-local pattern = '([<%[])(%d%d%d%d%-%d?%d%-%d%d[^>%]]*)([>%]])'
-local date_format = '%Y-%m-%d'
-local time_format = '%H:%M'
+local spans = { d = "day", m = "month", y = "year", h = "hour", w = "week", M = "min" }
+local config = require("orgmode.config")
+local utils = require("orgmode.utils")
+local ts_utils = require("orgmode.utils.treesitter")
+local Range = require("orgmode.files.elements.range")
+local pattern = "([<%[])(%d%d%d%d%-%d?%d%-%d%d[^>%]]*)([>%]])"
+local date_format = "%Y-%m-%d"
+local time_format = "%H:%M"
 
 ---@alias OrgDateSpan 'hour' | 'day' | 'week' | 'month' | 'year' | string
 
@@ -76,25 +76,25 @@ OrgDate.__index = OrgDate
 ---@param format? string
 ---@return osdate
 local function os_date(timestamp, format)
-  if format and vim.fn.has('win32') == 1 then
-    local locale = os.setlocale(nil, 'time')
+  if format and vim.fn.has("win32") == 1 then
+    local locale = os.setlocale(nil, "time")
     local utf8_locale
     if locale then
-      if vim.endswith(locale, 'UTF-8') then
+      if vim.endswith(locale, "UTF-8") then
         utf8_locale = locale
       else
-        utf8_locale = locale:gsub('%.[^.]+$', '') .. '.UTF-8'
+        utf8_locale = locale:gsub("%.[^.]+$", "") .. ".UTF-8"
       end
     end
-    local changed_locale = utf8_locale and os.setlocale(utf8_locale, 'time')
+    local changed_locale = utf8_locale and os.setlocale(utf8_locale, "time")
     if changed_locale then
       local date = os.date(format, timestamp)
-      os.setlocale(locale, 'time')
+      os.setlocale(locale, "time")
       return date --[[@as osdate]]
     end
   end
 
-  return os.date(format or '*t', timestamp) --[[@as osdate]]
+  return os.date(format or "*t", timestamp) --[[@as osdate]]
 end
 
 ---@param date string
@@ -103,8 +103,8 @@ end
 ---@param data OrgDateOpts
 ---@return OrgDate
 local function parse_datetime(date, time, time_end, adjustments, data)
-  local date_parts = vim.split(date, '-')
-  local time_parts = vim.split(time, ':')
+  local date_parts = vim.split(date, "-")
+  local time_parts = vim.split(time, ":")
 
   ---@type OrgDateOpts
   local opts = {
@@ -116,7 +116,7 @@ local function parse_datetime(date, time, time_end, adjustments, data)
   }
   opts.adjustments = adjustments
   if time_end then
-    local time_end_parts = vim.split(time_end, ':')
+    local time_end_parts = vim.split(time_end, ":")
     opts.timestamp_end = os.time({
       year = tonumber(date_parts[1]) or 0,
       month = tonumber(date_parts[2]) or 0,
@@ -125,7 +125,7 @@ local function parse_datetime(date, time, time_end, adjustments, data)
       min = tonumber(time_end_parts[2]) or 0,
     })
   end
-  opts = vim.tbl_extend('force', opts, data or {})
+  opts = vim.tbl_extend("force", opts, data or {})
   return OrgDate:new(opts)
 end
 
@@ -134,7 +134,7 @@ end
 ---@param data OrgDateOpts
 ---@return OrgDate
 local function parse_date(date, adjustments, data)
-  local date_parts = vim.split(date, '-')
+  local date_parts = vim.split(date, "-")
   ---@type OrgDateOpts
   local opts = {
     year = tonumber(date_parts[1]) or 0,
@@ -142,7 +142,7 @@ local function parse_date(date, adjustments, data)
     day = tonumber(date_parts[3]) or 0,
   }
   opts.adjustments = adjustments
-  opts = vim.tbl_extend('force', opts, data or {})
+  opts = vim.tbl_extend("force", opts, data or {})
   return OrgDate:new(opts)
 end
 
@@ -168,9 +168,9 @@ function OrgDate:new(opts)
   data.wday = date_info.wday
 
   data.active = opts.active or false
-  data.type = opts.type or 'NONE'
+  data.type = opts.type or "NONE"
   data.range = opts.range
-  data.dayname = os_date(data.timestamp, '%a') --[[@as string]]
+  data.dayname = os_date(data.timestamp, "%a") --[[@as string]]
   data.adjustments = opts.adjustments or {}
   data.timestamp_end = opts.timestamp_end
   data.is_date_range_start = opts.is_date_range_start or false
@@ -199,7 +199,7 @@ function OrgDate:set(opts)
     related_date = self.related_date,
   }
 
-  if type(opts.date_only) == 'boolean' then
+  if type(opts.date_only) == "boolean" then
     data.date_only = opts.date_only
   end
 
@@ -255,7 +255,7 @@ end
 ---@return OrgDate
 function OrgDate.tomorrow(opts)
   local today = OrgDate.today(opts)
-  return today:adjust('+1d')
+  return today:adjust("+1d")
 end
 
 ---@param timestamp number
@@ -273,7 +273,7 @@ function OrgDate.from_timestamp(timestamp, opts)
     data.min = date.min
   end
   if opts then
-    data = vim.tbl_extend('force', opts, data)
+    data = vim.tbl_extend("force", opts, data)
   end
   return OrgDate:new(data)
 end
@@ -290,7 +290,7 @@ function OrgDate.from_node(node, source, opts)
   opts.range = opts.range or Range.from_node(node)
   source = source or 0
   if not opts.type then
-    opts.type = ts_utils.is_date_in_drawer(node, 'logbook', source) and 'LOGBOOK' or 'NONE'
+    opts.type = ts_utils.is_date_in_drawer(node, "logbook", source) and "LOGBOOK" or "NONE"
   end
   return OrgDate.from_org_date(vim.treesitter.get_node_text(node, source), opts)
 end
@@ -301,13 +301,13 @@ end
 ---@return OrgDate[]
 function OrgDate.from_org_date(datestr, opts)
   opts = opts or {}
-  local from_open, from, from_close, delimiter, to_open, to, to_close = datestr:match(pattern .. '(%-%-)' .. pattern)
+  local from_open, from, from_close, delimiter, to_open, to, to_close = datestr:match(pattern .. "(%-%-)" .. pattern)
   if not delimiter then
     if not OrgDate.is_valid_date_string(datestr:sub(2, -2)) then
       return {}
     end
-    local is_active = datestr:sub(1, 1) == '<' and datestr:sub(-1) == '>'
-    local dateval = datestr:gsub('^[%[<]', ''):gsub('[%]>]', '')
+    local is_active = datestr:sub(1, 1) == "<" and datestr:sub(-1) == ">"
+    local dateval = datestr:gsub("^[%[<]", ""):gsub("[%]>]", "")
     opts = opts or {}
     opts.active = is_active
     return { OrgDate.from_string(dateval, opts) }
@@ -316,8 +316,8 @@ function OrgDate.from_org_date(datestr, opts)
   local line = opts.range.start_line
   local start_date = OrgDate.from_string(
     from,
-    vim.tbl_extend('force', opts or {}, {
-      active = from_open == '<' and from_close == '>',
+    vim.tbl_extend("force", opts or {}, {
+      active = from_open == "<" and from_close == ">",
       is_date_range_start = true,
       range = Range:new({
         start_line = line,
@@ -330,8 +330,8 @@ function OrgDate.from_org_date(datestr, opts)
 
   local end_date = OrgDate.from_string(
     to,
-    vim.tbl_extend('force', opts or {}, {
-      active = to_open == '<' and to_close == '>',
+    vim.tbl_extend("force", opts or {}, {
+      active = to_open == "<" and to_close == ">",
       is_date_range_end = true,
       range = Range:new({
         start_line = line,
@@ -352,7 +352,7 @@ end
 ---@param datestr string
 ---@return boolean
 function OrgDate.is_valid_date_string(datestr)
-  return datestr:match('^%d%d%d%d%-%d%d%-%d%d%s+') or datestr:match('^%d%d%d%d%-%d%d%-%d%d$')
+  return datestr:match("^%d%d%d%d%-%d%d%-%d%d%s+") or datestr:match("^%d%d%d%d%-%d%d%-%d%d$")
 end
 
 ---@param value any
@@ -368,19 +368,19 @@ function OrgDate.from_string(datestr, opts)
   if not OrgDate.is_valid_date_string(datestr) then
     return nil
   end
-  local parts = vim.split(datestr, '%s+')
+  local parts = vim.split(datestr, "%s+")
   local date = table.remove(parts, 1)
   local time = nil
   local time_end = nil
   local adjustments = {}
   for _, part in ipairs(parts) do
-    if part:match('%d?%d:%d%d%-%d?%d:%d%d') then
-      local times = vim.split(part, '-')
+    if part:match("%d?%d:%d%d%-%d?%d:%d%d") then
+      local times = vim.split(part, "-")
       time = times[1]
       time_end = times[2]
-    elseif part:match('%d?%d:%d%d') then
+    elseif part:match("%d?%d:%d%d") then
       time = part
-    elseif part:match('[%.%+%-]+%d+[hdwmy]?') then
+    elseif part:match("[%.%+%-]+%d+[hdwmy]?") then
       table.insert(adjustments, part)
     end
   end
@@ -397,13 +397,13 @@ function OrgDate:parse_parts()
   local result = {}
   local counter = 1
   local patterns = {
-    { type = 'date', rgx = '^%d%d%d%d%-%d%d%-%d%d$' },
-    { type = 'dayname', rgx = '^%a%a%a$' },
-    { type = 'time', rgx = '^%d?%d:%d%d$' },
-    { type = 'time_range', rgx = '^%d?%d:%d%d%-%d?%d:%d%d$' },
-    { type = 'adjustment', rgx = '^[%.%+%-]+%d+[hdwmy]?$' },
+    { type = "date", rgx = "^%d%d%d%d%-%d%d%-%d%d$" },
+    { type = "dayname", rgx = "^%a%a%a$" },
+    { type = "time", rgx = "^%d?%d:%d%d$" },
+    { type = "time_range", rgx = "^%d?%d:%d%d%-%d?%d:%d%d$" },
+    { type = "adjustment", rgx = "^[%.%+%-]+%d+[hdwmy]?$" },
   }
-  for space, item in string.gmatch(self:to_string(), '(%s*)(%S+)') do
+  for space, item in string.gmatch(self:to_string(), "(%s*)(%S+)") do
     local from = counter + space:len()
     for _, dt_pattern in ipairs(patterns) do
       if item:match(dt_pattern.rgx) then
@@ -424,17 +424,17 @@ end
 function OrgDate:to_string()
   local format = date_format
   if self.dayname then
-    format = format .. ' %a'
+    format = format .. " %a"
   end
 
   local date = tostring(os_date(self.timestamp, format))
 
   if self:has_time() then
-    date = date .. ' ' .. self:format_time()
+    date = date .. " " .. self:format_time()
   end
 
   if #self.adjustments > 0 then
-    date = date .. ' ' .. table.concat(self.adjustments, ' ')
+    date = date .. " " .. table.concat(self.adjustments, " ")
   end
 
   return date
@@ -452,13 +452,13 @@ end
 ---@param active boolean | nil
 ---@return string
 function OrgDate:to_wrapped_string(active)
-  if type(active) ~= 'boolean' then
+  if type(active) ~= "boolean" then
     active = self.active
   end
   local date = self:to_string()
-  local open = active and '<' or '['
-  local close = active and '>' or ']'
-  return string.format('%s%s%s', open, date, close)
+  local open = active and "<" or "["
+  local close = active and ">" or "]"
+  return string.format("%s%s%s", open, date, close)
 end
 
 ---@param format string
@@ -470,11 +470,11 @@ end
 ---@return string
 function OrgDate:format_time()
   if not self:has_time() then
-    return ''
+    return ""
   end
   local t = self:format(time_format)
   if self.timestamp_end then
-    t = t .. '-' .. os_date(self.timestamp_end, time_format)
+    t = t .. "-" .. os_date(self.timestamp_end, time_format)
   end
   return t
 end
@@ -510,17 +510,17 @@ end
 ---@param value string
 ---@return table
 function OrgDate:_parse_adjustment(value)
-  local operation, amount, span = value:match('^([%+%-])(%d+)([hdwmyM]?)')
+  local operation, amount, span = value:match("^([%+%-])(%d+)([hdwmyM]?)")
   if not operation or not amount then
-    return { span = 'day', amount = 0 }
+    return { span = "day", amount = 0 }
   end
-  if not span or span == '' then
-    span = 'd'
+  if not span or span == "" then
+    span = "d"
   end
   return {
     span = spans[span],
     amount = tonumber(amount),
-    is_negative = operation == '-',
+    is_negative = operation == "-",
   }
 end
 
@@ -545,10 +545,10 @@ function OrgDate:start_of(span)
     return self:set(opts[span])
   end
 
-  if span == 'week' then
+  if span == "week" then
     local this = self
     while this.wday ~= config:get_week_start_day_number() do
-      this = this:adjust('-1d')
+      this = this:adjust("-1d")
     end
     return this:set(opts.day)
   end
@@ -572,17 +572,17 @@ function OrgDate:end_of(span)
     return self:set(opts[span])
   end
 
-  if span == 'week' then
+  if span == "week" then
     local this = self
     while this.wday ~= config:get_week_end_day_number() do
-      this = this:adjust('+1d')
+      this = this:adjust("+1d")
     end
     return this:set(opts.day)
   end
 
-  if span == 'month' then
+  if span == "month" then
     local date = os_date(self.timestamp)
-    return self:set({ day = OrgDate._days_of_month(date) }):end_of('day')
+    return self:set({ day = OrgDate._days_of_month(date) }):end_of("day")
   end
 
   return self
@@ -625,14 +625,14 @@ function OrgDate:add(opts)
   ---@diagnostic disable-next-line: assign-type-mismatch
   local date = os_date(self.timestamp)
   for opt, val in pairs(opts) do
-    if opt == 'week' then
-      opt = 'day'
+    if opt == "week" then
+      opt = "day"
       val = val * 7
     end
     date[opt] = date[opt] + val
   end
-  if opts['month'] then
-    date['day'] = math.min(date['day'], OrgDate._days_of_month(date))
+  if opts["month"] then
+    date["day"] = math.min(date["day"], OrgDate._days_of_month(date))
   end
   return self:set(date)
 end
@@ -688,7 +688,7 @@ end
 ---@return number
 function OrgDate:get_comparable_timestamp()
   if self.date_only then
-    return self:start_of('day').timestamp
+    return self:start_of("day").timestamp
   end
   return self.timestamp
 end
@@ -776,7 +776,7 @@ end
 
 ---@return boolean
 function OrgDate:is_obsolete_range_end()
-  return self.is_date_range_end and self.related_date:is_same(self, 'day')
+  return self.is_date_range_end and self.related_date:is_same(self, "day")
 end
 
 ---@return boolean
@@ -820,7 +820,7 @@ function OrgDate:is_in_date_range(date)
     if ranges_same_day then
       return false
     end
-    return date:is_between(self, self.related_date:subtract({ day = 1 }), 'day')
+    return date:is_between(self, self.related_date:subtract({ day = 1 }), "day")
   end
   return false
 end
@@ -842,7 +842,7 @@ end
 ---@param span? 'day' | 'minute'
 ---@return number
 function OrgDate:diff(from, span)
-  span = span or 'day'
+  span = span or "day"
   local to_date = self:start_of(span)
   local from_date = from:start_of(span)
   local diff = to_date.timestamp - from_date.timestamp
@@ -886,37 +886,37 @@ function OrgDate:humanize(from)
   from = from or OrgDate.now()
   local diff = self:diff(from)
   if diff == 0 then
-    return 'Today'
+    return "Today"
   end
   if diff < 0 then
-    return math.abs(diff) .. ' d. ago'
+    return math.abs(diff) .. " d. ago"
   end
-  return 'In ' .. diff .. ' d.'
+  return "In " .. diff .. " d."
 end
 
 ---@return boolean
 function OrgDate:is_deadline()
-  return self.active and self.type == 'DEADLINE'
+  return self.active and self.type == "DEADLINE"
 end
 
 ---@return boolean
 function OrgDate:is_none()
-  return self.active and self.type == 'NONE'
+  return self.active and self.type == "NONE"
 end
 
 ---@return boolean
 function OrgDate:is_logbook()
-  return self.type == 'LOGBOOK'
+  return self.type == "LOGBOOK"
 end
 
 ---@return boolean
 function OrgDate:is_scheduled()
-  return self.active and self.type == 'SCHEDULED'
+  return self.active and self.type == "SCHEDULED"
 end
 
 ---@return boolean
 function OrgDate:is_closed()
-  return self.type == 'CLOSED'
+  return self.type == "CLOSED"
 end
 
 ---@return boolean
@@ -936,7 +936,7 @@ function OrgDate:get_negative_adjustment()
     return nil
   end
   for _, adj in ipairs(self.adjustments) do
-    if adj:match('^%-%d+') then
+    if adj:match("^%-%d+") then
       return self:_parse_adjustment(adj)
     end
   end
@@ -969,7 +969,7 @@ function OrgDate:get_repeater()
   end
 
   for _, adj in ipairs(self.adjustments) do
-    if adj:match('^[%+%.]?%+%d+') then
+    if adj:match("^[%+%.]?%+%d+") then
       return adj
     end
   end
@@ -1004,14 +1004,14 @@ function OrgDate:apply_repeater()
   end
 
   -- Repeater relative to completion time
-  if repeater:match('^%.%+%d+') then
+  if repeater:match("^%.%+%d+") then
     -- Strip the '.' from the repeater
     local offset = repeater:sub(2)
     return date:set_todays_date():adjust(offset)
   end
 
   -- Repeater relative to deadline/scheduled date
-  if repeater:match('^%+%+%d') then
+  if repeater:match("^%+%+%d") then
     -- Strip the '+' from the repeater
     local offset = repeater:sub(2)
     repeat
@@ -1035,9 +1035,9 @@ function OrgDate:repeats_on(date, repeat_count)
   if repeat_count == 0 then
     return false
   end
-  repeater = repeater:gsub('^%.', ''):gsub('^%+%+', '+')
-  local repeat_date = self:start_of('day')
-  local date_start = date:start_of('day')
+  repeater = repeater:gsub("^%.", ""):gsub("^%+%+", "+")
+  local repeat_date = self:start_of("day")
+  local date_start = date:start_of("day")
   local counter = 0
   while repeat_date.timestamp < date_start.timestamp do
     if repeat_count and counter >= repeat_count then
@@ -1046,7 +1046,7 @@ function OrgDate:repeats_on(date, repeat_count)
     counter = counter + 1
     repeat_date = repeat_date:adjust(repeater)
   end
-  return repeat_date:is_same(date, 'day')
+  return repeat_date:is_same(date, "day")
 end
 
 ---@param date OrgDate
@@ -1056,7 +1056,7 @@ function OrgDate:apply_repeater_until(date)
     return self
   end
 
-  repeater = repeater:gsub('^%.', ''):gsub('^%+%+', '+')
+  repeater = repeater:gsub("^%.", ""):gsub("^%+%+", "+")
   local repeat_date = self
 
   while repeat_date.timestamp < date.timestamp do
@@ -1076,7 +1076,7 @@ function OrgDate:get_adjusted_date()
 
   if self:is_deadline() then
     local warning_amount = config.org_deadline_warning_days
-    local span = 'day'
+    local span = "day"
     if adj then
       warning_amount = adj.amount
       span = adj.span
@@ -1092,7 +1092,7 @@ end
 
 ---@return string
 function OrgDate:get_week_number()
-  return self:format('%V')
+  return self:format("%V")
 end
 
 return OrgDate

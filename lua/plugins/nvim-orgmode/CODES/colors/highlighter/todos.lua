@@ -1,7 +1,7 @@
-local highlights = require('orgmode.colors.highlights')
-local utils = require('orgmode.utils')
-local Promise = require('orgmode.utils.promise')
-local tree_utils = require('orgmode.utils.treesitter')
+local highlights = require("orgmode.colors.highlights")
+local utils = require("orgmode.utils")
+local Promise = require("orgmode.utils.promise")
+local tree_utils = require("orgmode.utils.treesitter")
 
 ---@class OrgTodosHighlighter
 local OrgTodos = {}
@@ -15,7 +15,7 @@ function OrgTodos:new()
 end
 
 function OrgTodos:_add_highlights()
-  local query_files = vim.treesitter.query.get_files('org', 'highlights')
+  local query_files = vim.treesitter.query.get_files("org", "highlights")
   if not query_files or #query_files == 0 then
     return
   end
@@ -49,8 +49,8 @@ function OrgTodos:_add_highlights()
     for _, line_part in ipairs(line_parts) do
       utils.concat(all_lines, line_part)
     end
-    vim.treesitter.query.set('org', 'highlights', table.concat(all_lines, '\n'))
-    if vim.bo.filetype == 'org' then
+    vim.treesitter.query.set("org", "highlights", table.concat(all_lines, "\n"))
+    if vim.bo.filetype == "org" then
       tree_utils.restart_highlights()
     end
   end)

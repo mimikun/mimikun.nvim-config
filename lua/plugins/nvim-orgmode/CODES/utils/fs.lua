@@ -1,21 +1,21 @@
-local utils = require('orgmode.utils')
+local utils = require("orgmode.utils")
 
 local M = {}
 
 ---@param path_str string
 ---@return string | false
 function M.substitute_path(path_str)
-  if path_str:match('^/') then
+  if path_str:match("^/") then
     return path_str
-  elseif path_str:match('^~/') then
-    local home_path = os.getenv('HOME')
-    return home_path and path_str:gsub('^~', home_path) or false
-  elseif path_str:match('^%./') then
-    local base = vim.fn.fnamemodify(utils.current_file_path(), ':p:h')
-    return base .. '/' .. path_str:gsub('^%./', '')
-  elseif path_str:match('^%.%./') then
-    local base = vim.fn.fnamemodify(utils.current_file_path(), ':p:h')
-    return base .. '/' .. path_str
+  elseif path_str:match("^~/") then
+    local home_path = os.getenv("HOME")
+    return home_path and path_str:gsub("^~", home_path) or false
+  elseif path_str:match("^%./") then
+    local base = vim.fn.fnamemodify(utils.current_file_path(), ":p:h")
+    return base .. "/" .. path_str:gsub("^%./", "")
+  elseif path_str:match("^%.%./") then
+    local base = vim.fn.fnamemodify(utils.current_file_path(), ":p:h")
+    return base .. "/" .. path_str
   end
   return false
 end
@@ -26,26 +26,26 @@ end
 ---@param source_path string
 ---@param long_path string
 function M.convert_path(source_path, long_path)
-  if source_path:match('^/') then
+  if source_path:match("^/") then
     return long_path
   end
 
-  if source_path:match('^~/') then
-    local home_path = os.getenv('HOME')
+  if source_path:match("^~/") then
+    local home_path = os.getenv("HOME")
     if home_path then
-      return long_path:gsub('^' .. vim.pesc(home_path), '~')
+      return long_path:gsub("^" .. vim.pesc(home_path), "~")
     end
     return long_path
   end
 
-  if source_path:match('^%./') then
-    local base = vim.fn.fnamemodify(utils.current_file_path(), ':p:h')
-    return long_path:gsub('^' .. vim.pesc(base), '.')
+  if source_path:match("^%./") then
+    local base = vim.fn.fnamemodify(utils.current_file_path(), ":p:h")
+    return long_path:gsub("^" .. vim.pesc(base), ".")
   end
 
-  if source_path:match('^%.%./') then
-    local base = vim.fn.fnamemodify(utils.current_file_path(), ':p:h:h')
-    return long_path:gsub('^' .. vim.pesc(base), '..')
+  if source_path:match("^%.%./") then
+    local base = vim.fn.fnamemodify(utils.current_file_path(), ":p:h:h")
+    return long_path:gsub("^" .. vim.pesc(base), "..")
   end
 
   return long_path
@@ -61,24 +61,24 @@ function M.get_real_path(filepath)
     return false
   end
   local real = vim.uv.fs_realpath(substituted)
-  if real and filepath:sub(-1, -1) == '/' then
+  if real and filepath:sub(-1, -1) == "/" then
     -- make sure if filepath gets a trailing slash, the realpath gets one, too.
-    real = real .. '/'
+    real = real .. "/"
   end
   return real or false
 end
 
 function M.get_current_file_dir()
   local current_file = utils.current_file_path()
-  local current_dir = vim.fn.fnamemodify(current_file, ':p:h')
-  return current_dir or ''
+  local current_dir = vim.fn.fnamemodify(current_file, ":p:h")
+  return current_dir or ""
 end
 
 ---@param paths string[]
 ---@return string[]
 function M.trim_common_root(paths)
   local filepaths = vim.tbl_map(function(value)
-    return vim.split(vim.fn.fnamemodify(value, ':h'), '/', { trimempty = true, plain = true })
+    return vim.split(vim.fn.fnamemodify(value, ":h"), "/", { trimempty = true, plain = true })
   end, paths)
 
   table.sort(filepaths, function(a, b)
@@ -107,13 +107,13 @@ function M.trim_common_root(paths)
 
   if #common_root == 0 then
     return vim.tbl_map(function(path)
-      return path:gsub('^/', '')
+      return path:gsub("^/", "")
     end, paths)
   end
 
-  local root = table.concat(common_root, '/') .. '/'
-  if vim.fn.has('win32') == 0 then
-    root = '/' .. root
+  local root = table.concat(common_root, "/") .. "/"
+  if vim.fn.has("win32") == 0 then
+    root = "/" .. root
   end
   local result = {}
   for _, path in ipairs(paths) do

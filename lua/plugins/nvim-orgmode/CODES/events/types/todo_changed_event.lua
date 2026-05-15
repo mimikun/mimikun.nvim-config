@@ -4,7 +4,7 @@
 ---@field old_todo_state? string
 ---@field was_done? boolean
 local TodoChangedEvent = {
-  type = 'orgmode.todo_changed',
+  type = "orgmode.todo_changed",
 }
 
 ---@param headline OrgHeadline

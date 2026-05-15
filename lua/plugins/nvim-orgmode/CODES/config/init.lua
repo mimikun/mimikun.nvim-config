@@ -1,11 +1,11 @@
 local instance = {}
-local utils = require('orgmode.utils')
-local fs = require('orgmode.utils.fs')
-local defaults = require('orgmode.config.defaults')
+local utils = require("orgmode.utils")
+local fs = require("orgmode.utils.fs")
+local defaults = require("orgmode.config.defaults")
 ---@type table<string, OrgMapEntry>
-local mappings = require('orgmode.config.mappings')
-local TodoKeywords = require('orgmode.objects.todo_keywords')
-local PriorityState = require('orgmode.objects.priority_state')
+local mappings = require("orgmode.config.mappings")
+local TodoKeywords = require("orgmode.objects.todo_keywords")
+local PriorityState = require("orgmode.objects.priority_state")
 
 ---@class OrgConfig:OrgConfigOpts
 ---@field opts table
@@ -16,7 +16,7 @@ local Config = {}
 ---@param opts? table
 function Config:new(opts)
   local data = {
-    opts = vim.tbl_deep_extend('force', defaults, opts or {}),
+    opts = vim.tbl_deep_extend("force", defaults, opts or {}),
     todo_keywords = nil,
     priorities = nil,
   }
@@ -32,11 +32,11 @@ function Config:__index(key)
 end
 
 function Config:install_grammar()
-  return require('orgmode.utils.treesitter.install').install()
+  return require("orgmode.utils.treesitter.install").install()
 end
 
 function Config:reinstall_grammar()
-  return require('orgmode.utils.treesitter.install').reinstall()
+  return require("orgmode.utils.treesitter.install").reinstall()
 end
 
 ---@param opts table
@@ -50,7 +50,7 @@ function Config:extend(opts)
     opts.org_priority_lowest = self.opts.org_priority_lowest
     opts.org_priority_default = self.opts.org_priority_default
   end
-  self.opts = vim.tbl_deep_extend('force', self.opts, opts)
+  self.opts = vim.tbl_deep_extend("force", self.opts, opts)
   if self.org_startup_indented then
     self.org_adapt_indentation = not self.org_indent_mode_turns_off_org_adapt_indentation
   end
@@ -66,44 +66,44 @@ function Config:_are_priorities_valid(opts)
     -- assert that all three options are set
     if not (high and low and default) then
       utils.echo_warning(
-        'org_priority_highest, org_priority_lowest and org_priority_default can only be set together.'
-          .. 'Falling back to default priorities'
+        "org_priority_highest, org_priority_lowest and org_priority_default can only be set together."
+          .. "Falling back to default priorities"
       )
       return false
     end
 
     -- numbers
-    if type(high) == 'number' and type(low) == 'number' and type(default) == 'number' then
+    if type(high) == "number" and type(low) == "number" and type(default) == "number" then
       if high < 0 or low < 0 or default < 0 then
         utils.echo_warning(
-          'org_priority_highest, org_priority_lowest and org_priority_default cannot be negative.'
-            .. 'Falling back to default priorities'
+          "org_priority_highest, org_priority_lowest and org_priority_default cannot be negative."
+            .. "Falling back to default priorities"
         )
         return false
       end
       if high > low then
         utils.echo_warning(
-          'org_priority_highest cannot be bigger than org_priority_lowest. Falling back to default priorities'
+          "org_priority_highest cannot be bigger than org_priority_lowest. Falling back to default priorities"
         )
         return false
       end
       if default < high or default > low then
         utils.echo_warning(
-          'org_priority_default must be bigger than org_priority_highest and smaller than org_priority_lowest.'
-            .. 'Falling back to default priorities'
+          "org_priority_default must be bigger than org_priority_highest and smaller than org_priority_lowest."
+            .. "Falling back to default priorities"
         )
         return false
       end
     -- one-char strings
     elseif
-      (type(high) == 'string' and #high == 1)
-      and (type(low) == 'string' and #low == 1)
-      and (type(default) == 'string' and #default == 1)
+      (type(high) == "string" and #high == 1)
+      and (type(low) == "string" and #low == 1)
+      and (type(default) == "string" and #default == 1)
     then
-      if not high:match('%a') or not low:match('%a') or not default:match('%a') then
+      if not high:match("%a") or not low:match("%a") or not default:match("%a") then
         utils.echo_warning(
-          'org_priority_highest, org_priority_lowest and org_priority_default must be letters.'
-            .. 'Falling back to default priorities'
+          "org_priority_highest, org_priority_lowest and org_priority_default must be letters."
+            .. "Falling back to default priorities"
         )
         return false
       end
@@ -113,22 +113,22 @@ function Config:_are_priorities_valid(opts)
       default = string.byte(default)
       if high > low then
         utils.echo_warning(
-          'org_priority_highest cannot be bigger than org_priority_lowest. Falling back to default priorities'
+          "org_priority_highest cannot be bigger than org_priority_lowest. Falling back to default priorities"
         )
         return false
       end
       if default < high or default > low then
         utils.echo_warning(
-          'org_priority_default must be bigger than org_priority_highest and smaller than org_priority_lowest.'
-            .. 'Falling back to default priorities'
+          "org_priority_default must be bigger than org_priority_highest and smaller than org_priority_lowest."
+            .. "Falling back to default priorities"
         )
         return false
       end
     else
       utils.echo_warning(
-        'org_priority_highest, org_priority_lowest and org_priority_default must be either of type'
+        "org_priority_highest, org_priority_lowest and org_priority_default must be either of type"
           .. "'number' or of type 'string' of length one. All three options need to agree on this type."
-          .. 'Falling back to default priorities'
+          .. "Falling back to default priorities"
       )
       return false
     end
@@ -150,26 +150,26 @@ end
 ---@return string|number
 function Config:get_agenda_span()
   local span = self.opts.org_agenda_span
-  local valid_spans = { 'day', 'month', 'week', 'year' }
-  if type(span) == 'string' and not vim.tbl_contains(valid_spans, span) then
+  local valid_spans = { "day", "month", "week", "year" }
+  if type(span) == "string" and not vim.tbl_contains(valid_spans, span) then
     utils.echo_warning(
       string.format(
-        'Invalid agenda span %s. Valid spans: %s. Falling back to week',
+        "Invalid agenda span %s. Valid spans: %s. Falling back to week",
         span,
-        table.concat(valid_spans, ', ')
+        table.concat(valid_spans, ", ")
       )
     )
-    span = 'week'
+    span = "week"
   end
-  if type(span) == 'number' and span < 0 then
+  if type(span) == "number" and span < 0 then
     utils.echo_warning(
       string.format(
-        'Invalid agenda span number %d. Must be 0 or more. Falling back to week',
+        "Invalid agenda span number %d. Must be 0 or more. Falling back to week",
         span,
-        table.concat(valid_spans, ', ')
+        table.concat(valid_spans, ", ")
       )
     )
-    span = 'week'
+    span = "week"
   end
   return span
 end
@@ -236,15 +236,15 @@ end
 
 --- Setup the foldlevel for a given org file
 function Config:setup_foldlevel()
-  if self.org_startup_folded == 'overview' then
+  if self.org_startup_folded == "overview" then
     vim.opt_local.foldlevel = 0
-  elseif self.org_startup_folded == 'content' then
+  elseif self.org_startup_folded == "content" then
     vim.opt_local.foldlevel = 1
-  elseif self.org_startup_folded == 'showeverything' then
+  elseif self.org_startup_folded == "showeverything" then
     vim.opt_local.foldlevel = 99
-  elseif self.org_startup_folded ~= 'inherit' then
+  elseif self.org_startup_folded ~= "inherit" then
     utils.echo_warning("Invalid option passed for 'org_startup_folded'!")
-    self.opts.org_startup_folded = 'overview'
+    self.opts.org_startup_folded = "overview"
     self:setup_foldlevel()
   end
 end
@@ -257,14 +257,14 @@ function Config:parse_archive_location(file, archive_loc)
 
   archive_loc = archive_loc or self.opts.org_archive_location
   -- TODO: Support archive to headline
-  local parts = vim.split(archive_loc, '::')
+  local parts = vim.split(archive_loc, "::")
   local archive_location = vim.trim(parts[1])
-  if not archive_location:find('%%s') then
-    return vim.fn.fnamemodify(archive_location, ':p')
+  if not archive_location:find("%%s") then
+    return vim.fn.fnamemodify(archive_location, ":p")
   end
 
-  local file_path = vim.fn.fnamemodify(file, ':p:h')
-  local file_name = vim.fn.fnamemodify(file, ':t')
+  local file_path = vim.fn.fnamemodify(file, ":p:h")
+  local file_name = vim.fn.fnamemodify(file, ":t")
   local archive_filename = string.format(archive_location, file_name)
 
   -- If org_archive_location is defined as relative path (example: "archive/%s_archive")
@@ -272,14 +272,14 @@ function Config:parse_archive_location(file, archive_loc)
   local is_full_path = fs.substitute_path(archive_filename)
 
   if not is_full_path then
-    return string.format('%s/%s', file_path, archive_filename)
+    return string.format("%s/%s", file_path, archive_filename)
   end
 
-  return vim.fn.fnamemodify(archive_filename, ':p')
+  return vim.fn.fnamemodify(archive_filename, ":p")
 end
 
 function Config:is_archive_file(file)
-  return vim.fn.fnamemodify(file, ':e') == 'org_archive'
+  return vim.fn.fnamemodify(file, ":e") == "org_archive"
 end
 
 function Config:exclude_tags(tags)
@@ -319,7 +319,7 @@ function Config:get_priorities()
   end
 
   local priorities = {
-    [self.opts.org_priority_highest] = { type = 'highest', hl_group = '@org.priority.highest' },
+    [self.opts.org_priority_highest] = { type = "highest", hl_group = "@org.priority.highest" },
   }
 
   local current_prio = PriorityState:new(
@@ -329,19 +329,19 @@ function Config:get_priorities()
   )
   while current_prio:as_num() < current_prio:default_as_num() do
     current_prio:decrease()
-    priorities[current_prio.priority] = { type = 'high', hl_group = '@org.priority.high' }
+    priorities[current_prio.priority] = { type = "high", hl_group = "@org.priority.high" }
   end
 
   -- we need to overwrite the default value set by the first loop
-  priorities[self.opts.org_priority_default] = { type = 'default', hl_group = '@org.priority.default' }
+  priorities[self.opts.org_priority_default] = { type = "default", hl_group = "@org.priority.default" }
 
   while current_prio:as_num() < current_prio:lowest_as_num() do
     current_prio:decrease()
-    priorities[current_prio.priority] = { type = 'low', hl_group = '@org.priority.low' }
+    priorities[current_prio.priority] = { type = "low", hl_group = "@org.priority.low" }
   end
 
   -- we need to overwrite the lowest value set by the second loop
-  priorities[self.opts.org_priority_lowest] = { type = 'lowest', hl_group = '@org.priority.lowest' }
+  priorities[self.opts.org_priority_lowest] = { type = "lowest", hl_group = "@org.priority.lowest" }
 
   -- Cache priorities to avoid unnecessary recalculations
   self.priorities = priorities
@@ -353,7 +353,7 @@ function Config:setup_ts_predicates()
   local todo_keywords = self:get_todo_keywords():keys()
   local valid_priorities = self:get_priorities()
 
-  vim.treesitter.query.add_predicate('org-is-todo-keyword?', function(match, _, source, predicate)
+  vim.treesitter.query.add_predicate("org-is-todo-keyword?", function(match, _, source, predicate)
     local node = match[predicate[2]]
     node = node and node[#node]
     if node then
@@ -366,14 +366,14 @@ function Config:setup_ts_predicates()
 
   local org_cycle_separator_lines = math.max(self.opts.org_cycle_separator_lines, 0)
 
-  vim.treesitter.query.add_directive('org-set-fold-offset!', function(match, _, bufnr, pred, metadata)
+  vim.treesitter.query.add_directive("org-set-fold-offset!", function(match, _, bufnr, pred, metadata)
     if org_cycle_separator_lines == 0 then
       return
     end
     local capture_id = pred[2]
     local section_node = match[capture_id]
     section_node = section_node and section_node[#section_node]
-    if not capture_id or not section_node or section_node:type() ~= 'section' then
+    if not capture_id or not section_node or section_node:type() ~= "section" then
       return
     end
     if not metadata[capture_id] then
@@ -386,7 +386,7 @@ function Config:setup_ts_predicates()
     local empty_lines = 0
     while end_row > start_row do
       local line = vim.api.nvim_buf_get_lines(bufnr, end_row - 1, end_row, false)[1]
-      if vim.trim(line) ~= '' then
+      if vim.trim(line) ~= "" then
         break
       end
       empty_lines = empty_lines + 1
@@ -400,7 +400,7 @@ function Config:setup_ts_predicates()
     metadata[capture_id].range = range
   end, { force = true, all = true })
 
-  vim.treesitter.query.add_predicate('org-is-valid-priority?', function(match, _, source, predicate)
+  vim.treesitter.query.add_predicate("org-is-valid-priority?", function(match, _, source, predicate)
     ---@type TSNode | nil
     local node = match[predicate[2]]
     node = node and node[#node]
@@ -415,37 +415,37 @@ function Config:setup_ts_predicates()
     return valid_priorities[text] and valid_priorities[text].type == type
   end, { force = true, all = true })
 
-  vim.treesitter.query.add_directive('org-set-block-language!', function(match, _, bufnr, pred, metadata)
+  vim.treesitter.query.add_directive("org-set-block-language!", function(match, _, bufnr, pred, metadata)
     local lang_node = match[pred[2]]
     lang_node = lang_node and lang_node[#lang_node]
     if not lang_node then
       return
     end
     local text = vim.treesitter.get_node_text(lang_node, bufnr)
-    if not text or vim.trim(text) == '' then
+    if not text or vim.trim(text) == "" then
       return
     end
-    metadata['injection.language'] = self:detect_filetype(text)
+    metadata["injection.language"] = self:detect_filetype(text)
   end, { force = true, all = true })
 
-  vim.treesitter.query.add_directive('org-set-inline-block-language!', function(match, _, bufnr, pred, metadata)
+  vim.treesitter.query.add_directive("org-set-inline-block-language!", function(match, _, bufnr, pred, metadata)
     local lang_node = match[pred[2]]
     lang_node = lang_node and lang_node[#lang_node]
     if not lang_node then
       return
     end
     local text = vim.treesitter.get_node_text(lang_node, bufnr)
-    if not text or vim.trim(text) == '' then
+    if not text or vim.trim(text) == "" then
       return
     end
     -- Remove `src_` part: src_lua -> lua
     text = text:sub(5)
     -- Remove opening brackend and parameters: lua[params]{ -> lua
-    text = text:gsub('[%{%[].*', '')
-    metadata['injection.language'] = self:detect_filetype(text)
+    text = text:gsub("[%{%[].*", "")
+    metadata["injection.language"] = self:detect_filetype(text)
   end, { force = true, all = true })
 
-  vim.treesitter.query.add_predicate('org-is-headline-level?', function(match, _, _, predicate)
+  vim.treesitter.query.add_predicate("org-is-headline-level?", function(match, _, _, predicate)
     local node = match[predicate[2]]
     node = node and node[#node]
     if not node then
@@ -462,8 +462,8 @@ end
 ---@param prepend_content? any
 ---@return table
 function Config:respect_blank_before_new_entry(content, option, prepend_content)
-  if self.opts.org_blank_before_new_entry[option or 'heading'] then
-    table.insert(content, 1, prepend_content or '')
+  if self.opts.org_blank_before_new_entry[option or "heading"] then
+    table.insert(content, 1, prepend_content or "")
   end
   return content
 end
@@ -484,10 +484,10 @@ end
 ---@return string
 function Config:get_indent(amount, bufnr)
   if self:should_indent(bufnr) then
-    return string.rep(' ', amount)
+    return string.rep(" ", amount)
   end
 
-  return ''
+  return ""
 end
 
 ---@param bufnr number
@@ -509,9 +509,9 @@ end
 function Config:parse_header_args(args)
   local results = {}
   local current_argument = nil
-  local list = vim.split(args, '%s+')
+  local list = vim.split(args, "%s+")
   for _, param in ipairs(list) do
-    local is_header_argument = param:sub(1, 1) == ':'
+    local is_header_argument = param:sub(1, 1) == ":"
     if is_header_argument then
       results[param:lower()] = {}
       current_argument = param:lower()
@@ -521,7 +521,7 @@ function Config:parse_header_args(args)
   end
 
   for name, value in pairs(results) do
-    results[name] = table.concat(value, ' ')
+    results[name] = table.concat(value, " ")
   end
 
   return results
@@ -534,11 +534,11 @@ function Config:use_property_inheritance(property_name)
 
   local use_inheritance = self.opts.org_use_property_inheritance or false
 
-  if type(use_inheritance) == 'table' then
+  if type(use_inheritance) == "table" then
     return vim.tbl_contains(use_inheritance, function(value)
       return vim.stricmp(value, property_name) == 0
     end, { predicate = true })
-  elseif type(use_inheritance) == 'string' then
+  elseif type(use_inheritance) == "string" then
     local regex = vim.regex(use_inheritance)
     return regex:match_str(property_name) and true or false
   else
@@ -558,15 +558,15 @@ function Config:get_repeat_count()
     return 0
   end
 
-  if self.org_agenda_show_future_repeats == 'next' then
+  if self.org_agenda_show_future_repeats == "next" then
     return 1
   end
-  if type(self.org_agenda_show_future_repeats) == 'number' and self.org_agenda_show_future_repeats >= 0 then
+  if type(self.org_agenda_show_future_repeats) == "number" and self.org_agenda_show_future_repeats >= 0 then
     return self.org_agenda_show_future_repeats
   end
 
   utils.echo_error({
-    'Invalid value for `org_agenda_show_future_repeats`',
+    "Invalid value for `org_agenda_show_future_repeats`",
     'Either boolean, positive number or "next" expected',
     'Defaulting to "true"',
   })
@@ -590,7 +590,7 @@ function Config:detect_filetype(filetype_name, use_ftmatch)
   local filetype = self:_get_filetype_name(name)
 
   if use_ftmatch then
-    local filename = '__org__detect_filetype__.' .. filetype
+    local filename = "__org__detect_filetype__." .. filetype
     local ft = vim.filetype.match({ filename = filename })
     if ft then
       self._ft_map[name] = ft
@@ -606,16 +606,16 @@ end
 ---@param filetype string
 function Config:_get_filetype_name(filetype)
   local map = {
-    ['emacs-lisp'] = 'lisp',
-    elisp = 'lisp',
-    js = 'javascript',
-    ts = 'typescript',
-    md = 'markdown',
-    ex = 'elixir',
-    pl = 'perl',
-    sh = 'bash',
-    shell = 'bash',
-    uxn = 'uxntal',
+    ["emacs-lisp"] = "lisp",
+    elisp = "lisp",
+    js = "javascript",
+    ts = "typescript",
+    md = "markdown",
+    ex = "elixir",
+    pl = "perl",
+    sh = "bash",
+    shell = "bash",
+    uxn = "uxntal",
   }
   if map[filetype] then
     return map[filetype]

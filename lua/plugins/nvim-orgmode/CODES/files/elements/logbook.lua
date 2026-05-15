@@ -1,7 +1,7 @@
-local Range = require('orgmode.files.elements.range')
-local utils = require('orgmode.utils')
-local Date = require('orgmode.objects.date')
-local Duration = require('orgmode.objects.duration')
+local Range = require("orgmode.files.elements.range")
+local utils = require("orgmode.utils")
+local Date = require("orgmode.objects.date")
+local Duration = require("orgmode.objects.duration")
 
 ---@class OrgLogbook
 ---@field range OrgRange
@@ -81,16 +81,16 @@ function Logbook:get_total_with_active()
 end
 
 function Logbook:add_clock_in()
-  local indent = vim.fn.getline(self.range.start_line):match('^%s*')
+  local indent = vim.fn.getline(self.range.start_line):match("^%s*")
   local line = self.range.start_line
   local date = Date.now({ active = false })
-  local content = string.format('%sCLOCK: %s', indent, date:to_wrapped_string())
+  local content = string.format("%sCLOCK: %s", indent, date:to_wrapped_string())
   table.insert(self.items, {
     start_time = date,
     end_time = nil,
   })
-  vim.api.nvim_call_function('append', { line, content })
-  utils.echo_info(string.format('Clock starts at %s', date:to_wrapped_string()))
+  vim.api.nvim_call_function("append", { line, content })
+  utils.echo_info(string.format("Clock starts at %s", date:to_wrapped_string()))
 end
 
 function Logbook:clock_out()
@@ -103,10 +103,10 @@ function Logbook:clock_out()
   local date = Date.now({ active = false })
   active_item.end_time = date
   active_item.duration = Duration.from_seconds(date.timestamp - active_item.start_time.timestamp)
-  local minutes = active_item.duration:to_string('HH:MM')
-  line = string.format('%s--%s => %s', line, date:to_wrapped_string(), minutes)
-  utils.echo_info(string.format('Clock stopped at %s after %s', date:to_wrapped_string(), minutes))
-  vim.api.nvim_call_function('setline', { line_nr, line })
+  local minutes = active_item.duration:to_string("HH:MM")
+  line = string.format("%s--%s => %s", line, date:to_wrapped_string(), minutes)
+  utils.echo_info(string.format("Clock stopped at %s after %s", date:to_wrapped_string(), minutes))
+  vim.api.nvim_call_function("setline", { line_nr, line })
 end
 
 function Logbook:cancel_active_clock()
@@ -135,10 +135,10 @@ function Logbook:recalculate_estimate(line)
   if not item or not item.end_time then
     return
   end
-  local content = vim.fn.getline(line):gsub('%s*=>%s*[%-%+]?%d+:%d+%s*$', '')
-  content = string.format('%s => %s', content, item.duration:to_string('HH:MM'))
+  local content = vim.fn.getline(line):gsub("%s*=>%s*[%-%+]?%d+:%d+%s*$", "")
+  content = string.format("%s => %s", content, item.duration:to_string("HH:MM"))
   local view = vim.fn.winsaveview() or {}
-  vim.api.nvim_call_function('setline', { line, content })
+  vim.api.nvim_call_function("setline", { line, content })
   vim.fn.winrestview(view)
 end
 
@@ -162,10 +162,10 @@ function Logbook.new_from_headline(headline)
 
   local date = Date.now({ active = false })
   local content = {
-    string.format('%s:LOGBOOK:', indent),
-    string.format('%s:END:', indent),
+    string.format("%s:LOGBOOK:", indent),
+    string.format("%s:END:", indent),
   }
-  vim.api.nvim_call_function('append', { append_line, content })
+  vim.api.nvim_call_function("append", { append_line, content })
 
   return Logbook:new({
     range = Range:new({ start_line = append_line + 1, end_line = append_line + 3 }),
@@ -184,12 +184,12 @@ function Logbook._parse_clocks(lines, node, dates)
   local items = {}
   local range = Range.from_node(node)
   for i, drawer_prop in ipairs({ unpack(lines, 2, #lines - 1) }) do
-    local prop_name, _ = drawer_prop:match('^%s*:?([^:]-):%s*(.*)$')
-    if prop_name and prop_name:upper() == 'CLOCK' then
+    local prop_name, _ = drawer_prop:match("^%s*:?([^:]-):%s*(.*)$")
+    if prop_name and prop_name:upper() == "CLOCK" then
       local dates_for_line = {}
       for _, clock_date in ipairs(dates) do
         if clock_date.range.start_line == range.start_line + i then
-          clock_date.type = 'LOGBOOK'
+          clock_date.type = "LOGBOOK"
           table.insert(dates_for_line, clock_date)
         end
       end

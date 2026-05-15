@@ -1,7 +1,7 @@
 ---@class OrgClockedInEvent: OrgEvent
 ---@field headline? OrgHeadline
 local ClockedInEvent = {
-  type = 'orgmode.clocked_in',
+  type = "orgmode.clocked_in",
 }
 ClockedInEvent.__index = ClockedInEvent
 

@@ -1,14 +1,14 @@
-local config = require('orgmode.config')
-local AgendaView = require('orgmode.agenda.view.init')
-local Files = require('orgmode.files')
-local AgendaLine = require('orgmode.agenda.view.line')
-local AgendaFilter = require('orgmode.agenda.filter')
-local AgendaLineToken = require('orgmode.agenda.view.token')
-local utils = require('orgmode.utils')
-local agenda_highlights = require('orgmode.colors.highlights')
+local config = require("orgmode.config")
+local AgendaView = require("orgmode.agenda.view.init")
+local Files = require("orgmode.files")
+local AgendaLine = require("orgmode.agenda.view.line")
+local AgendaFilter = require("orgmode.agenda.filter")
+local AgendaLineToken = require("orgmode.agenda.view.token")
+local utils = require("orgmode.utils")
+local agenda_highlights = require("orgmode.colors.highlights")
 local hl_map = agenda_highlights.get_agenda_hl_map()
-local SortingStrategy = require('orgmode.agenda.sorting_strategy')
-local Promise = require('orgmode.utils.promise')
+local SortingStrategy = require("orgmode.agenda.sorting_strategy")
+local Promise = require("orgmode.utils.promise")
 
 ---@class OrgAgendaTodosTypeOpts
 ---@field files OrgFiles
@@ -51,16 +51,16 @@ function OrgAgendaTodosType:new(opts)
     highlighter = opts.highlighter,
     agenda_filter = opts.agenda_filter,
     filter = opts.filter and AgendaFilter:new():parse(opts.filter, true) or nil,
-    tag_filter = opts.tag_filter and AgendaFilter:new({ types = { 'tags' } }):parse(opts.tag_filter, true) or nil,
-    category_filter = opts.category_filter and AgendaFilter:new({ types = { 'categories' } })
+    tag_filter = opts.tag_filter and AgendaFilter:new({ types = { "tags" } }):parse(opts.tag_filter, true) or nil,
+    category_filter = opts.category_filter and AgendaFilter:new({ types = { "categories" } })
       :parse(opts.category_filter, true) or nil,
     header = opts.header,
     subheader = opts.subheader,
     agenda_files = opts.agenda_files,
     todo_only = opts.todo_only == nil and true or opts.todo_only,
-    sorting_strategy = opts.sorting_strategy or vim.tbl_get(config.org_agenda_sorting_strategy, 'todo') or {},
+    sorting_strategy = opts.sorting_strategy or vim.tbl_get(config.org_agenda_sorting_strategy, "todo") or {},
     id = opts.id,
-    remove_tags = type(opts.remove_tags) == 'boolean' and opts.remove_tags or config.org_agenda_remove_tags,
+    remove_tags = type(opts.remove_tags) == "boolean" and opts.remove_tags or config.org_agenda_remove_tags,
   }, OrgAgendaTodosType)
   this.valid_filters = vim.tbl_filter(function(filter)
     return filter and true or false
@@ -99,7 +99,7 @@ function OrgAgendaTodosType:_get_header()
   if self.header then
     return self.header
   end
-  return 'Global list of TODO items of type: ALL'
+  return "Global list of TODO items of type: ALL"
 end
 
 ---@param bufnr? number
@@ -117,12 +117,12 @@ function OrgAgendaTodosType:render(bufnr)
 
   agendaView:add_line(AgendaLine:single_token({
     content = self:_get_header(),
-    hl_group = '@org.agenda.header',
+    hl_group = "@org.agenda.header",
   }))
   if self.subheader then
     agendaView:add_line(AgendaLine:single_token({
       content = self.subheader,
-      hl_group = '@org.agenda.header',
+      hl_group = "@org.agenda.header",
     }))
   end
 
@@ -141,11 +141,11 @@ end
 function OrgAgendaTodosType:_build_line(headline, metadata)
   local line = AgendaLine:new({
     headline = headline,
-    line_hl_group = headline:is_clocked_in() and 'Visual' or nil,
+    line_hl_group = headline:is_clocked_in() and "Visual" or nil,
     metadata = metadata,
   })
   line:add_token(AgendaLineToken:new({
-    content = '  ' .. utils.pad_right(('%s:'):format(headline:get_category()), metadata.category_length),
+    content = "  " .. utils.pad_right(("%s:"):format(headline:get_category()), metadata.category_length),
   }))
 
   local todo, _, todo_type = headline:get_todo()
@@ -156,9 +156,9 @@ function OrgAgendaTodosType:_build_line(headline, metadata)
     }))
   end
   local priority = headline:get_priority()
-  if priority ~= '' then
+  if priority ~= "" then
     line:add_token(AgendaLineToken:new({
-      content = ('[#%s]'):format(tostring(priority)),
+      content = ("[#%s]"):format(tostring(priority)),
       hl_group = hl_map.priority[priority].hl_group,
     }))
   end
@@ -170,8 +170,8 @@ function OrgAgendaTodosType:_build_line(headline, metadata)
     local tags_string = headline:tags_to_string()
     line:add_token(AgendaLineToken:new({
       content = tags_string,
-      virt_text_pos = 'right_align',
-      hl_group = '@org.agenda.tag',
+      virt_text_pos = "right_align",
+      hl_group = "@org.agenda.tag",
     }))
   end
   return line

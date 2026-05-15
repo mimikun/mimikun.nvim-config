@@ -1,4 +1,4 @@
-local org = require('orgmode')
+local org = require("orgmode")
 
 local Source = {}
 
@@ -7,11 +7,11 @@ Source.new = function()
 end
 
 function Source:enabled()
-  return vim.bo.filetype == 'org'
+  return vim.bo.filetype == "org"
 end
 
 function Source:get_trigger_characters(_)
-  return { '#', '+', ':', '*', '.', '/' }
+  return { "#", "+", ":", "*", ".", "/" }
 end
 
 function Source:get_completions(ctx, callback)
@@ -39,16 +39,16 @@ function Source:get_completions(ctx, callback)
   end
 
   -- Does not contain dot to avoid stopping on file paths
-  local triggers = { '#', '+', ':', '*', '/' }
+  local triggers = { "#", "+", ":", "*", "/" }
 
   local getInsertTextOffset = function(word)
-    if #word > 1 and word:sub(1, 2) == '#+' then
+    if #word > 1 and word:sub(1, 2) == "#+" then
       return 0
     end
     local word_length = #word + 1
     while word_length > 0 do
       local char = word:sub(word_length - 1, word_length - 1)
-      if vim.tbl_contains(triggers, char) or char:match('%s') then
+      if vim.tbl_contains(triggers, char) or char:match("%s") then
         return word_length
       end
       word_length = word_length - 1

@@ -1,4 +1,4 @@
-local config = require('orgmode.config')
+local config = require("orgmode.config")
 
 ---@class OrgMenuOption
 ---@field label string Description of the action
@@ -30,7 +30,7 @@ function Menu:new(data)
   opts.title = data.title
   opts.prompt = data.prompt
   opts.items = data.items or {}
-  opts.separator = vim.tbl_deep_extend('force', { icon = '-', length = 80 }, data.separator or {})
+  opts.separator = vim.tbl_deep_extend("force", { icon = "-", length = 80 }, data.separator or {})
 
   setmetatable(opts, self)
   self.__index = self
@@ -39,14 +39,14 @@ end
 
 ---@param option OrgMenuOption
 function Menu:_validate_option(option)
-  vim.validate('label', option.label, 'string')
-  vim.validate('key', option.key, 'string')
-  vim.validate('action', option.action, 'function', true)
+  vim.validate("label", option.label, "string")
+  vim.validate("key", option.key, "string")
+  vim.validate("action", option.action, "function", true)
 end
 
 ---@param items OrgMenuItem[]?
 function Menu:_validate_items(items)
-  vim.validate('items', items, 'table', true)
+  vim.validate("items", items, "table", true)
   if not items then
     return
   end
@@ -64,17 +64,17 @@ end
 
 ---@param separator OrgMenuSeparator?
 function Menu:_validate_separator(separator)
-  vim.validate('separator', separator, 'table', true)
+  vim.validate("separator", separator, "table", true)
   if separator then
-    vim.validate('icon', separator.icon, 'string', true)
-    vim.validate('length', separator.length, 'number', true)
+    vim.validate("icon", separator.icon, "string", true)
+    vim.validate("length", separator.length, "number", true)
   end
 end
 
 ---@param data OrgMenuOpts
 function Menu:_validate_data(data)
-  vim.validate('title', data.title, 'string')
-  vim.validate('prompt', data.prompt, 'string')
+  vim.validate("title", data.title, "string")
+  vim.validate("prompt", data.prompt, "string")
   self:_validate_items(data.items)
   self:_validate_separator(data.separator)
 end
@@ -88,7 +88,7 @@ end
 ---@param separator? OrgMenuSeparator
 function Menu:add_separator(separator)
   self:_validate_separator(separator)
-  table.insert(self.items, vim.tbl_deep_extend('force', self.separator, separator or {}))
+  table.insert(self.items, vim.tbl_deep_extend("force", self.separator, separator or {}))
 end
 
 ---@class OrgMenuData
@@ -98,7 +98,7 @@ end
 
 ---@param data OrgMenuData
 function Menu._default_menu(data)
-  local content = { data.title, string.rep('-', #data.title) }
+  local content = { data.title, string.rep("-", #data.title) }
   local valid_keys = {}
 
   for _, item in ipairs(data.items) do
@@ -108,15 +108,15 @@ function Menu._default_menu(data)
     else
       ---@cast item OrgMenuOption
       valid_keys[item.key] = item
-      table.insert(content, string.format('%s %s', item.key, item.label))
+      table.insert(content, string.format("%s %s", item.key, item.label))
     end
   end
 
-  table.insert(content, data.prompt .. ': ')
+  table.insert(content, data.prompt .. ": ")
 
-  vim.cmd(string.format('echon "%s"', table.concat(content, '\\n')))
+  vim.cmd(string.format('echon "%s"', table.concat(content, "\\n")))
   local char = vim.fn.nr2char(vim.fn.getchar())
-  vim.cmd('redraw!')
+  vim.cmd("redraw!")
 
   local entry = valid_keys[char]
   if not entry or not entry.action then

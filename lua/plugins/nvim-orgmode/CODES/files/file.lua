@@ -1,17 +1,17 @@
-local Promise = require('orgmode.utils.promise')
-local utils = require('orgmode.utils')
-local ts_utils = require('orgmode.utils.treesitter')
-local Headline = require('orgmode.files.headline')
+local Promise = require("orgmode.utils.promise")
+local utils = require("orgmode.utils")
+local ts_utils = require("orgmode.utils.treesitter")
+local Headline = require("orgmode.files.headline")
 local ts = vim.treesitter
-local config = require('orgmode.config')
-local Block = require('orgmode.files.elements.block')
-local Hyperlink = require('orgmode.org.links.hyperlink')
-local Range = require('orgmode.files.elements.range')
-local Footnote = require('orgmode.objects.footnote')
-local Memoize = require('orgmode.utils.memoize')
-local Buffers = require('orgmode.state.buffers')
+local config = require("orgmode.config")
+local Block = require("orgmode.files.elements.block")
+local Hyperlink = require("orgmode.org.links.hyperlink")
+local Range = require("orgmode.files.elements.range")
+local Footnote = require("orgmode.objects.footnote")
+local Memoize = require("orgmode.utils.memoize")
+local Buffers = require("orgmode.state.buffers")
 
-local is_nightly = vim.fn.has('nvim-0.13') == 1
+local is_nightly = vim.fn.has("nvim-0.13") == 1
 
 ---@class OrgFileMetadata
 ---@field mtime number File modified time in nanoseconds
@@ -37,7 +37,7 @@ local OrgFile = {}
 local memoize = Memoize:new(OrgFile, function(self)
   return {
     file = self,
-    id = table.concat({ 'file', self.root and self.root:id() or '' }, '_'),
+    id = table.concat({ "file", self.root and self.root:id() or "" }, "_"),
   }
 end)
 
@@ -51,7 +51,7 @@ function OrgFile:new(opts)
     index = 0,
     buf = opts.buf or -1,
     lines = opts.lines or {},
-    content = table.concat(opts.lines or {}, '\n'),
+    content = table.concat(opts.lines or {}, "\n"),
     metadata = {
       mtime = stat and stat.mtime.nsec or 0,
       mtime_sec = stat and stat.mtime.sec or 0,
@@ -70,7 +70,7 @@ end
 function OrgFile.load(filename)
   local bufnr = Buffers.get_buffer_by_filename(filename)
 
-  if bufnr > -1 and vim.api.nvim_buf_is_loaded(bufnr) and vim.bo[bufnr].filetype == 'org' then
+  if bufnr > -1 and vim.api.nvim_buf_is_loaded(bufnr) and vim.bo[bufnr].filetype == "org" then
     return Promise.resolve(OrgFile:new({
       filename = filename,
       buf = bufnr,
@@ -141,7 +141,7 @@ function OrgFile:update(action)
   local is_same_file = self.filename == utils.current_file_path()
   if is_same_file then
     return Promise.resolve(action(self)):next(function(result)
-      vim.cmd(':silent! w')
+      vim.cmd(":silent! w")
       return result
     end)
   end
@@ -247,34 +247,34 @@ function OrgFile:get_ts_captures(query, node)
   return matches
 end
 
-memoize('get_headlines')
+memoize("get_headlines")
 ---@return OrgHeadline[]
 function OrgFile:get_headlines()
   if self:is_archive_file() then
     return {}
   end
-  local matches = self:get_ts_captures('(section (headline) @headline)')
+  local matches = self:get_ts_captures("(section (headline) @headline)")
   return vim.tbl_map(function(node)
     return Headline:new(node, self)
   end, matches)
 end
 
-memoize('get_top_level_headlines')
+memoize("get_top_level_headlines")
 ---@return OrgHeadline[]
 function OrgFile:get_top_level_headlines()
   if self:is_archive_file() then
     return {}
   end
-  local matches = self:get_ts_captures('(document (section (headline) @headline))')
+  local matches = self:get_ts_captures("(document (section (headline) @headline))")
   return vim.tbl_map(function(node)
     return Headline:new(node, self)
   end, matches)
 end
 
-memoize('get_headlines_including_archived')
+memoize("get_headlines_including_archived")
 ---@return OrgHeadline[]
 function OrgFile:get_headlines_including_archived()
-  local matches = self:get_ts_captures('(section (headline) @headline)')
+  local matches = self:get_ts_captures("(section (headline) @headline)")
   return vim.tbl_map(function(node)
     return Headline:new(node, self)
   end, matches)
@@ -285,9 +285,9 @@ end
 ---@return OrgHeadline[]
 function OrgFile:find_headlines_by_title(title, exact)
   return vim.tbl_filter(function(item)
-    local pattern = '^' .. vim.pesc(title:lower())
+    local pattern = "^" .. vim.pesc(title:lower())
     if exact then
-      pattern = pattern .. '$'
+      pattern = pattern .. "$"
     end
     return item:get_title():lower():match(pattern)
   end, self:get_headlines())
@@ -301,21 +301,21 @@ function OrgFile:find_headline_by_title(title)
   end)
 end
 
-memoize('get_todo_keywords')
+memoize("get_todo_keywords")
 function OrgFile:get_todo_keywords()
-  local todo_directives = self:_get_directive('todo', true)
+  local todo_directives = self:_get_directive("todo", true)
 
   if not todo_directives then
     return config:get_todo_keywords()
   end
 
-  if type(todo_directives) ~= 'table' then
+  if type(todo_directives) ~= "table" then
     todo_directives = { todo_directives }
   end
 
   local keywords_data = {}
   for _, directive in ipairs(todo_directives) do
-    local keywords = vim.split(vim.trim(directive), '%s+')
+    local keywords = vim.split(vim.trim(directive), "%s+")
     table.insert(keywords_data, keywords)
   end
 
@@ -355,17 +355,17 @@ function OrgFile:apply_search(search, todo_only)
     local level = item:get_level()
 
     return search:check({
-      props = vim.tbl_extend('keep', {}, properties, {
+      props = vim.tbl_extend("keep", {}, properties, {
         category = item:get_category(),
         deadline = deadline and deadline:to_wrapped_string(true),
         scheduled = scheduled and scheduled:to_wrapped_string(true),
         closed = closed and closed:to_wrapped_string(false),
         priority = priority,
-        todo = item:get_todo() or '',
+        todo = item:get_todo() or "",
         level = level,
       }),
       tags = item:get_tags(),
-      todo = item:get_todo() or '',
+      todo = item:get_todo() or "",
     })
   end, self:get_headlines())
 end
@@ -395,7 +395,7 @@ end
 function OrgFile:find_headlines_with_property_matching(property_name, term)
   return vim.tbl_filter(function(item)
     local property = item:get_property(property_name)
-    return property and property:lower():match('^' .. vim.pesc(term:lower()))
+    return property and property:lower():match("^" .. vim.pesc(term:lower()))
   end, self:get_headlines())
 end
 
@@ -410,7 +410,7 @@ function OrgFile:find_headlines_with_property(property_name, term)
   end, self:get_headlines())
 end
 
-memoize('get_opened_headlines')
+memoize("get_opened_headlines")
 ---@return OrgHeadline[]
 function OrgFile:get_opened_headlines()
   if self:is_archive_file() then
@@ -425,7 +425,7 @@ end
 --- Check if this file is an org archive file
 --- @return boolean
 function OrgFile:is_archive_file()
-  return vim.fn.fnamemodify(self.filename, ':e') == 'org_archive'
+  return vim.fn.fnamemodify(self.filename, ":e") == "org_archive"
 end
 
 function OrgFile:closest_headline_node(cursor)
@@ -441,17 +441,17 @@ function OrgFile:closest_headline_node(cursor)
     return nil
   end
 
-  if node:type() == 'headline' then
+  if node:type() == "headline" then
     return node
   end
 
-  if node:type() == 'section' then
-    return node:field('headline')[1]
+  if node:type() == "section" then
+    return node:field("headline")[1]
   end
 
-  while node and node:type() ~= 'headline' do
-    if node:type() == 'section' then
-      node = node:field('headline')[1]
+  while node and node:type() ~= "headline" do
+    if node:type() == "section" then
+      node = node:field("headline")[1]
       break
     end
     node = node:parent()
@@ -464,7 +464,7 @@ end
 function OrgFile:get_closest_headline(cursor)
   local node = self:closest_headline_node(cursor)
   if not node then
-    error('No headline found', 0)
+    error("No headline found", 0)
   end
   return Headline:new(node, self)
 end
@@ -494,7 +494,7 @@ end
 ---@return string
 function OrgFile:get_node_text(node, range)
   if not node then
-    return ''
+    return ""
   end
   local opts = {}
   if range then
@@ -503,7 +503,7 @@ function OrgFile:get_node_text(node, range)
 
   local _, _, _, end_col = node:range()
   local text = ts.get_node_text(node, self:get_source(), opts)
-  if is_nightly and end_col == 0 and text:sub(-1) == '\n' then
+  if is_nightly and end_col == 0 and text:sub(-1) == "\n" then
     return text:sub(1, -2)
   end
   return text
@@ -514,10 +514,10 @@ end
 ---@return string[]
 function OrgFile:get_node_text_list(node, range)
   local node_text = self:get_node_text(node, range)
-  if node_text == '' then
+  if node_text == "" then
     return {}
   end
-  return vim.split(self:get_node_text(node, range), '\n', { plain = true })
+  return vim.split(self:get_node_text(node, range), "\n", { plain = true })
 end
 
 ---@param node? TSNode
@@ -530,7 +530,7 @@ function OrgFile:set_node_text(node, text, front_trim)
   end
   local bufnr = self:get_valid_bufnr()
   local start_row, start_col, end_row, end_col = node:range()
-  local replacement = vim.split(text, '\n', { plain = true })
+  local replacement = vim.split(text, "\n", { plain = true })
   if string.len(text) == 0 then
     replacement = {}
     if front_trim then
@@ -581,8 +581,8 @@ end
 ---@param filename string
 function OrgFile._load_buffer(filename)
   local bufnr = vim.fn.bufadd(filename)
-  vim.api.nvim_set_option_value('modeline', false, { buf = bufnr })
-  vim.api.nvim_set_option_value('swapfile', false, { buf = bufnr })
+  vim.api.nvim_set_option_value("modeline", false, { buf = bufnr })
+  vim.api.nvim_set_option_value("swapfile", false, { buf = bufnr })
   vim.fn.bufload(bufnr)
   return bufnr
 end
@@ -592,45 +592,45 @@ end
 function OrgFile:get_valid_bufnr()
   local bufnr = self:bufnr()
   if bufnr < 0 then
-    error('[orgmode] No valid buffer for file ' .. self.filename .. ' to edit', 0)
+    error("[orgmode] No valid buffer for file " .. self.filename .. " to edit", 0)
   end
   -- Do not consider unloaded buffers as valid
   -- Treesitter is not working in them
   if not vim.api.nvim_buf_is_loaded(bufnr) then
     error(
-      '[orgmode] Cannot edit buffer ' .. tostring(bufnr) .. ' for file ' .. self.filename .. ', it is not loaded',
+      "[orgmode] Cannot edit buffer " .. tostring(bufnr) .. " for file " .. self.filename .. ", it is not loaded",
       0
     )
   end
   return bufnr
 end
 
-memoize('get_filetags')
+memoize("get_filetags")
 --- Get tags list applied on file level via #+FILETAGS
 --- @return string[]
 function OrgFile:get_filetags()
-  return utils.parse_tags_string(self:_get_directive('filetags'))
+  return utils.parse_tags_string(self:_get_directive("filetags"))
 end
 
-memoize('get_blocks')
+memoize("get_blocks")
 --- @return OrgBlock[]
 function OrgFile:get_blocks()
-  local matches = self:get_ts_captures('(block) @block')
+  local matches = self:get_ts_captures("(block) @block")
   return vim.tbl_map(function(node)
     return Block:new(node, self)
   end, matches)
 end
 
 function OrgFile:get_header_args()
-  local header_args_prop = self:get_directive_property('header-args')
+  local header_args_prop = self:get_directive_property("header-args")
   if not header_args_prop then
-    return vim.tbl_extend('force', {}, config.org_babel_default_header_args)
+    return vim.tbl_extend("force", {}, config.org_babel_default_header_args)
   end
   local header_args = config:parse_header_args(header_args_prop)
-  return vim.tbl_extend('force', config.org_babel_default_header_args, header_args)
+  return vim.tbl_extend("force", config.org_babel_default_header_args, header_args)
 end
 
-memoize('get_directive_property')
+memoize("get_directive_property")
 --- @param name string
 --- @return string | nil
 function OrgFile:get_directive_property(name)
@@ -638,30 +638,30 @@ function OrgFile:get_directive_property(name)
   return properties[name:lower()]
 end
 
-memoize('get_directive_properties')
+memoize("get_directive_properties")
 ---@return table<string, string>
 function OrgFile:get_directive_properties()
   self:parse(true)
   local properties = {}
-  local directives_body = self.root:field('body')[1]
+  local directives_body = self.root:field("body")[1]
   if not directives_body then
     return properties
   end
-  local directives = directives_body:field('directive')
+  local directives = directives_body:field("directive")
   if not directives or #directives == 0 then
     return properties
   end
 
   for _, directive in ipairs(directives) do
-    local name = directive:field('name')[1]
-    local value = directive:field('value')[1]
+    local name = directive:field("name")[1]
+    local value = directive:field("value")[1]
 
     if name and value then
       local name_text = self:get_node_text(name)
-      if name_text:lower() == 'property' then
-        local value_items = vim.split(self:get_node_text(value), '%s+')
+      if name_text:lower() == "property" then
+        local value_items = vim.split(self:get_node_text(value), "%s+")
         if #value_items > 1 then
-          properties[value_items[1]:lower()] = table.concat({ unpack(value_items, 2) }, ' ')
+          properties[value_items[1]:lower()] = table.concat({ unpack(value_items, 2) }, " ")
         end
       end
     end
@@ -670,18 +670,18 @@ function OrgFile:get_directive_properties()
   return properties
 end
 
-memoize('get_drawer')
+memoize("get_drawer")
 ---@return table<string, string> | nil
 function OrgFile:get_drawer(name)
   self:parse(true)
-  local document_body = self.root:field('body')[1]
+  local document_body = self.root:field("body")[1]
   if not document_body then
     return nil
   end
 
   local drawer = utils.find(ts_utils.get_named_children(document_body), function(node)
-    if node:type() == 'drawer' then
-      local drawer_name = node:field('name')[1]
+    if node:type() == "drawer" then
+      local drawer_name = node:field("name")[1]
       if drawer_name and self:get_node_text(drawer_name):lower() == name:lower() then
         return true
       end
@@ -696,20 +696,20 @@ function OrgFile:get_drawer(name)
   return drawer
 end
 
-memoize('get_properties')
+memoize("get_properties")
 ---@return table<string, string>, table<string, OrgRange>, TSNode | nil
 function OrgFile:get_properties()
-  local property_drawer = self:get_drawer('properties')
+  local property_drawer = self:get_drawer("properties")
   if not property_drawer then
     return {}, {}, nil
   end
   local properties = {}
   local properties_ranges = {}
-  local contents_node = property_drawer:field('contents')[1]
+  local contents_node = property_drawer:field("contents")[1]
   local contents = self:get_node_text_list(contents_node)
   local start_line = contents_node and contents_node:start() or 0
   for i, line in ipairs(contents) do
-    local property_name, property_value = line:match('^%s*:([^:]-):%s*(.*)$')
+    local property_name, property_value = line:match("^%s*:([^:]-):%s*(.*)$")
     if property_name and property_value then
       properties[property_name:lower()] = property_value
       properties_ranges[property_name:lower()] = Range.from_line(start_line + i)
@@ -718,7 +718,7 @@ function OrgFile:get_properties()
   return properties, properties_ranges, property_drawer
 end
 
-memoize('get_property')
+memoize("get_property")
 ---@return string | nil, OrgRange
 function OrgFile:get_property(name)
   local property_drawer, properties_ranges = self:get_properties()
@@ -746,13 +746,13 @@ function OrgFile:set_property(name, value)
   end
 
   local _, _, properties_drawer = self:get_properties()
-  local property = (':%s: %s'):format(name, value)
+  local property = (":%s: %s"):format(name, value)
 
   if not properties_drawer then
     vim.api.nvim_buf_set_lines(bufnr, 0, 0, false, {
-      ':PROPERTIES:',
+      ":PROPERTIES:",
       property,
-      ':END:',
+      ":END:",
     })
     self:parse()
     return self
@@ -771,33 +771,33 @@ function OrgFile:set_property(name, value)
   return self
 end
 
-memoize('get_category')
+memoize("get_category")
 --- Get the category name for this file
 --- If no category is set, the filename without extension is returned
 --- @return string
 function OrgFile:get_category()
-  local category = self:_get_directive('category')
+  local category = self:_get_directive("category")
   if category then
     return category
   end
 
-  return vim.fn.fnamemodify(self.filename, ':t:r') or ''
+  return vim.fn.fnamemodify(self.filename, ":t:r") or ""
 end
 
-memoize('get_title')
+memoize("get_title")
 --- Get the title for this file
 --- If no title is set, the filename without extension is returned
 --- @return string
 function OrgFile:get_title()
-  local title = self:_get_directive('title')
+  local title = self:_get_directive("title")
   if title then
     return title
   end
 
-  return vim.fn.fnamemodify(self.filename, ':t:r') or ''
+  return vim.fn.fnamemodify(self.filename, ":t:r") or ""
 end
 
-memoize('get_opened_unfinished_headlines')
+memoize("get_opened_unfinished_headlines")
 ---@return OrgHeadline[]
 function OrgFile:get_opened_unfinished_headlines()
   if self:is_archive_file() then
@@ -814,11 +814,11 @@ end
 --- If this file is an archive file, it returns null
 --- @return string | nil
 function OrgFile:get_archive_file_location()
-  local archive_location = self:_get_directive('archive')
+  local archive_location = self:_get_directive("archive")
   return config:parse_archive_location(self.filename, archive_location)
 end
 
-memoize('get_links')
+memoize("get_links")
 ---@return OrgHyperlink[]
 function OrgFile:get_links()
   self:parse(true)
@@ -845,7 +845,7 @@ function OrgFile:find_footnote_definition(footnote_reference)
   ]]):format(footnote_reference.label))
 
   for _, match in ts_query:iter_captures(self.root, self:get_source()) do
-    if match and match:type() == 'fndef' then
+    if match and match:type() == "fndef" then
       return Footnote.from_node(match, self:get_source())
     end
   end
@@ -861,7 +861,7 @@ function OrgFile:find_footnote_reference(footnote_definition)
 
   local matches = {}
   for _, match in ts_query:iter_captures(self.root, self:get_source()) do
-    if match:type() == 'fnref' then
+    if match:type() == "fnref" then
       table.insert(matches, match)
     end
   end
@@ -870,7 +870,7 @@ function OrgFile:find_footnote_reference(footnote_definition)
   end
 end
 
-memoize('get_directive')
+memoize("get_directive")
 ---@param directive_name string
 ---@return string[] | string | nil
 function OrgFile:get_directive(directive_name)
@@ -880,12 +880,12 @@ end
 --- Get headline id or create a new one if it doesn't exist
 --- @return string
 function OrgFile:id_get_or_create()
-  local id = self:get_property('id')
+  local id = self:get_property("id")
   if id then
     return id
   end
-  local org_id = require('orgmode.org.id').new()
-  self:set_property('ID', org_id)
+  local org_id = require("orgmode.org.id").new()
+  self:set_property("ID", org_id)
   return org_id
 end
 
@@ -895,11 +895,11 @@ end
 ---@return  string[] | string | nil
 function OrgFile:_get_directive(directive_name, all_matches)
   self:parse(true)
-  local directives_body = self.root:field('body')[1]
+  local directives_body = self.root:field("body")[1]
   if not directives_body then
     return nil
   end
-  local directives = directives_body:field('directive')
+  local directives = directives_body:field("directive")
   if not directives or #directives == 0 then
     return nil
   end
@@ -907,8 +907,8 @@ function OrgFile:_get_directive(directive_name, all_matches)
   if all_matches then
     local results = {}
     for _, directive in ipairs(directives) do
-      local name = directive:field('name')[1]
-      local value = directive:field('value')[1]
+      local name = directive:field("name")[1]
+      local value = directive:field("value")[1]
 
       if name and value then
         local name_text = self:get_node_text(name)
@@ -921,8 +921,8 @@ function OrgFile:_get_directive(directive_name, all_matches)
   end
 
   for _, directive in ipairs(directives) do
-    local name = directive:field('name')[1]
-    local value = directive:field('value')[1]
+    local name = directive:field("name")[1]
+    local value = directive:field("value")[1]
 
     if name and value then
       local name_text = self:get_node_text(name)
@@ -937,7 +937,7 @@ end
 
 function OrgFile:_update_lines(lines)
   self.lines = lines
-  self.content = table.concat(lines, '\n')
+  self.content = table.concat(lines, "\n")
   self:parse()
   return self
 end
@@ -947,7 +947,7 @@ end
 ---@return string[]
 function OrgFile:_get_lines(bufnr)
   local lines = vim.api.nvim_buf_get_lines(bufnr, 0, -1, false)
-  if #lines == 1 and lines[1] == '' then
+  if #lines == 1 and lines[1] == "" then
     lines = {}
   end
   return lines
@@ -960,12 +960,12 @@ function OrgFile:_get_parser()
 
   if bufnr > -1 then
     -- Always get the fresh parser for the buffer
-    return ts.get_parser(bufnr, 'org', {})
+    return ts.get_parser(bufnr, "org", {})
   end
 
   -- In case the buffer got unloaded, go back to string parser
-  if not self.parser or self:is_modified() or type(self.parser:source()) == 'number' then
-    return ts.get_string_parser(self.content, 'org', {})
+  if not self.parser or self:is_modified() or type(self.parser:source()) == "number" then
+    return ts.get_string_parser(self.content, "org", {})
   end
 
   return self.parser

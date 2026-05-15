@@ -1,4 +1,4 @@
-local fs = require('orgmode.utils.fs')
+local fs = require("orgmode.utils.fs")
 
 ---@class OrgLinkUrl
 ---@field url string
@@ -19,19 +19,19 @@ end
 
 ---@return string | nil
 function OrgLinkUrl:get_file_path()
-  if self.protocol == 'file' then
+  if self.protocol == "file" then
     return self:get_real_path() or self.path
   end
 
   local first_char = self.path:sub(1, 1)
 
-  if first_char == '/' then
+  if first_char == "/" then
     return self:get_real_path() or self.path
   end
 
   if
-    (first_char == '.' and (self.path:sub(1, 3) == '../' or self.path:sub(1, 2) == './'))
-    or (first_char == '~' and self.path:sub(2, 2) == '/')
+    (first_char == "." and (self.path:sub(1, 3) == "../" or self.path:sub(1, 2) == "./"))
+    or (first_char == "~" and self.path:sub(2, 2) == "/")
   then
     return self:get_real_path() or self.path
   end
@@ -41,11 +41,11 @@ end
 
 ---@return string
 function OrgLinkUrl:get_path_with_protocol()
-  if not self.protocol or self.protocol == '' then
+  if not self.protocol or self.protocol == "" then
     return self.path
   end
 
-  return ('%s:%s'):format(self.protocol, self.path)
+  return ("%s:%s"):format(self.protocol, self.path)
 end
 
 ---@return string
@@ -65,7 +65,7 @@ end
 
 ---@return boolean
 function OrgLinkUrl:is_id()
-  return self.protocol == 'id'
+  return self.protocol == "id"
 end
 
 ---@return string | nil
@@ -87,7 +87,7 @@ end
 
 ---@private
 function OrgLinkUrl:_parse()
-  self.protocol = self.url:match('^(%w+):')
+  self.protocol = self.url:match("^(%w+):")
   self.path = self.protocol and self.url:sub(#self.protocol + 2) or self.url
 
   self:_parse_target()
@@ -95,12 +95,12 @@ end
 
 ---@private
 function OrgLinkUrl:_parse_target()
-  local path_and_target = vim.split(self.path, '::', { plain = true })
+  local path_and_target = vim.split(self.path, "::", { plain = true })
   if #path_and_target < 2 then
     return
   end
   self.path = vim.trim(path_and_target[1])
-  self.target = vim.trim(table.concat({ unpack(path_and_target, 2, #path_and_target) }, ''))
+  self.target = vim.trim(table.concat({ unpack(path_and_target, 2, #path_and_target) }, ""))
 end
 
 return OrgLinkUrl

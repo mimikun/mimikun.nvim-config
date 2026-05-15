@@ -13,7 +13,7 @@ function OrgCompletionProperties:new(opts)
 end
 
 function OrgCompletionProperties:get_name()
-  return 'properties'
+  return "properties"
 end
 
 ---@param context OrgCompletionContext
@@ -29,13 +29,13 @@ end
 ---@return string[]
 function OrgCompletionProperties:get_results(_)
   return {
-    ':PROPERTIES:',
-    ':END:',
-    ':LOGBOOK:',
-    ':STYLE:',
-    ':REPEAT_TO_STATE:',
-    ':CUSTOM_ID:',
-    ':CATEGORY:',
+    ":PROPERTIES:",
+    ":END:",
+    ":LOGBOOK:",
+    ":STYLE:",
+    ":REPEAT_TO_STATE:",
+    ":CUSTOM_ID:",
+    ":CATEGORY:",
   }
 end
 

@@ -1,4 +1,4 @@
-local ts_utils = require('orgmode.utils.treesitter')
+local ts_utils = require("orgmode.utils.treesitter")
 
 ---@class OrgListitem
 ---@field listitem TSNode
@@ -17,24 +17,24 @@ function Listitem:new(listitem_node, file)
 end
 
 function Listitem:get_new_checkbox_value(action, current_value, total_child_checkboxes, checked_child_checkboxes)
-  if action == 'on' then
-    return '[X]'
-  elseif action == 'off' then
-    return '[ ]'
-  elseif action == 'toggle' then
-    return (current_value == '[X]' or current_value == '[x]') and '[ ]' or '[X]'
-  elseif action == 'children' then
+  if action == "on" then
+    return "[X]"
+  elseif action == "off" then
+    return "[ ]"
+  elseif action == "toggle" then
+    return (current_value == "[X]" or current_value == "[x]") and "[ ]" or "[X]"
+  elseif action == "children" then
     if #checked_child_checkboxes == 0 then
-      return '[ ]'
+      return "[ ]"
     elseif #checked_child_checkboxes == #total_child_checkboxes then
-      return '[X]'
+      return "[X]"
     end
   end
-  return '[-]'
+  return "[-]"
 end
 
 function Listitem:checkbox()
-  local checkbox = self.listitem:field('checkbox')[1]
+  local checkbox = self.listitem:field("checkbox")[1]
   if not checkbox then
     return nil
   end
@@ -43,12 +43,12 @@ function Listitem:checkbox()
 end
 
 function Listitem:update_checkbox(action)
-  action = action or 'toggle'
+  action = action or "toggle"
 
   local checkbox = self:checkbox()
   local total_child_checkboxes = self:child_checkboxes() or {}
   local checked_child_checkboxes = vim.tbl_filter(function(box)
-    return box:match('%[%w%]')
+    return box:match("%[%w%]")
   end, total_child_checkboxes)
 
   if checkbox then
@@ -64,10 +64,10 @@ function Listitem:update_checkbox(action)
 
   self:update_cookie(total_child_checkboxes, checked_child_checkboxes)
 
-  local parent_list = ts_utils.closest_node(self.listitem, 'list')
-  local parent_listitem = ts_utils.closest_node(parent_list, 'listitem')
+  local parent_list = ts_utils.closest_node(self.listitem, "list")
+  local parent_listitem = ts_utils.closest_node(parent_list, "listitem")
   if parent_listitem then
-    Listitem:new(parent_listitem, self.file):update_checkbox('children')
+    Listitem:new(parent_listitem, self.file):update_checkbox("children")
   else
     local parent_headline = self.file:get_closest_headline_or_nil()
     if parent_headline then
@@ -77,19 +77,19 @@ function Listitem:update_checkbox(action)
 end
 
 function Listitem:child_checkboxes()
-  local contents = self.listitem:field('contents')
+  local contents = self.listitem:field("contents")
   for _, content in ipairs(contents) do
-    if content:type() == 'list' then
+    if content:type() == "list" then
       return vim.tbl_map(function(node)
         local text = self.file:get_node_text(node)
-        return text:match('%[.%]')
+        return text:match("%[.%]")
       end, ts_utils.get_named_children(content))
     end
   end
 end
 
 function Listitem:cookie()
-  local content = self.listitem:field('contents')[1]
+  local content = self.listitem:field("contents")[1]
   -- The cookie should be the last thing on the line
   local cookie_node = content:named_child(content:named_child_count() - 1)
   if not cookie_node then
@@ -97,7 +97,7 @@ function Listitem:cookie()
   end
 
   local text = self.file:get_node_text(cookie_node)
-  if text:match('%[%d*/%d*%]') or text:match('%[%d?%d?%d?%%%]') then
+  if text:match("%[%d*/%d*%]") or text:match("%[%d?%d?%d?%%%]") then
     return cookie_node
   end
 end
@@ -106,10 +106,10 @@ function Listitem:update_cookie(total_child_checkboxes, checked_child_checkboxes
   local cookie = self:cookie()
   if cookie then
     local new_cookie_val
-    if self.file:get_node_text(cookie):find('%%') then
-      new_cookie_val = ('[%d%%]'):format((#checked_child_checkboxes / #total_child_checkboxes) * 100)
+    if self.file:get_node_text(cookie):find("%%") then
+      new_cookie_val = ("[%d%%]"):format((#checked_child_checkboxes / #total_child_checkboxes) * 100)
     else
-      new_cookie_val = ('[%d/%d]'):format(#checked_child_checkboxes, #total_child_checkboxes)
+      new_cookie_val = ("[%d/%d]"):format(#checked_child_checkboxes, #total_child_checkboxes)
     end
     self.file:set_node_text(cookie, new_cookie_val)
   end
@@ -118,13 +118,13 @@ end
 ---@param line string
 ---@return string
 function Listitem._increase(line)
-  return '  ' .. line
+  return "  " .. line
 end
 ---
 ---@param line string
 ---@return string
 function Listitem._decrease(line)
-  local repl, _ = line:gsub('^  ', '', 1)
+  local repl, _ = line:gsub("^  ", "", 1)
   return repl
 end
 

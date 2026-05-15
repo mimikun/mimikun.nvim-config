@@ -1,14 +1,14 @@
-local utils = require('orgmode.utils')
-local ts_utils = require('orgmode.utils.treesitter')
-local Date = require('orgmode.objects.date')
-local Range = require('orgmode.files.elements.range')
-local config = require('orgmode.config')
-local PriorityState = require('orgmode.objects.priority_state')
-local indent = require('orgmode.org.indent')
-local Logbook = require('orgmode.files.elements.logbook')
-local OrgId = require('orgmode.org.id')
-local Memoize = require('orgmode.utils.memoize')
-local EventManager = require('orgmode.events')
+local utils = require("orgmode.utils")
+local ts_utils = require("orgmode.utils.treesitter")
+local Date = require("orgmode.objects.date")
+local Range = require("orgmode.files.elements.range")
+local config = require("orgmode.config")
+local PriorityState = require("orgmode.objects.priority_state")
+local indent = require("orgmode.org.indent")
+local Logbook = require("orgmode.files.elements.logbook")
+local OrgId = require("orgmode.org.id")
+local Memoize = require("orgmode.utils.memoize")
+local EventManager = require("orgmode.events")
 local events = EventManager.event
 
 ---@alias OrgPlanDateTypes 'DEADLINE' | 'SCHEDULED' | 'CLOSED'
@@ -23,7 +23,7 @@ local memoize = Memoize:new(Headline, function(self)
   ---@cast self OrgHeadline
   return {
     file = self.file,
-    id = table.concat({ 'headline', self.headline:id() }, '_'),
+    id = table.concat({ "headline", self.headline:id() }, "_"),
   }
 end)
 
@@ -59,22 +59,22 @@ function Headline:refresh()
   return self
 end
 
-memoize('get_level')
+memoize("get_level")
 ---@return number
 function Headline:get_level()
-  local _, end_col = self:_get_child_node('stars'):end_()
+  local _, end_col = self:_get_child_node("stars"):end_()
   return end_col
 end
 
-memoize('get_priority')
+memoize("get_priority")
 ---@return string, TSNode | nil
 function Headline:get_priority()
-  local item = self:_get_child_node('item')
+  local item = self:_get_child_node("item")
 
-  local priority_node = item and item:field('priority')[1]
+  local priority_node = item and item:field("priority")[1]
 
   if not priority_node then
-    return '', nil
+    return "", nil
   end
 
   local value = self.file:get_node_text(priority_node)
@@ -82,7 +82,7 @@ function Headline:get_priority()
   local priority = value:sub(3, -2)
 
   if not config:get_priorities()[priority] then
-    return '', nil
+    return "", nil
   end
 
   return priority, priority_node
@@ -96,21 +96,21 @@ function Headline:promote(amount, recursive, dryRun)
   amount = math.min(amount or 1, self:get_level() - 1)
   recursive = recursive or false
   if self:get_level() == 1 then
-    utils.echo_warning('Cannot demote top level heading.')
+    utils.echo_warning("Cannot demote top level heading.")
     return {}
   end
 
   return self:_handle_promote_demote(recursive, function(start_line, lines)
     for i, line in ipairs(lines) do
-      if line:sub(1, 1) == '*' then
+      if line:sub(1, 1) == "*" then
         lines[i] = line:sub(1 + amount)
-      elseif vim.trim(line:sub(1, amount)) == '' then
+      elseif vim.trim(line:sub(1, amount)) == "" then
         if config:should_indent(self.file:bufnr()) then
           lines[i] = line:sub(1 + amount)
         else
-          line, _ = line:gsub('^%s+', '')
+          line, _ = line:gsub("^%s+", "")
           local indent_amount = indent.indentexpr(start_line + i, self.file:bufnr())
-          lines[i] = string.rep(' ', indent_amount) .. line
+          lines[i] = string.rep(" ", indent_amount) .. line
         end
       end
     end
@@ -128,15 +128,15 @@ function Headline:demote(amount, recursive, dryRun)
 
   return self:_handle_promote_demote(recursive, function(start_line, lines)
     for i, line in ipairs(lines) do
-      if line:sub(1, 1) == '*' then
-        lines[i] = string.rep('*', amount) .. line
+      if line:sub(1, 1) == "*" then
+        lines[i] = string.rep("*", amount) .. line
       else
         if config:should_indent(self.file:bufnr()) then
           lines[i] = self:_apply_indent(line, amount)
         else
-          line, _ = line:gsub('^%s+', '')
+          line, _ = line:gsub("^%s+", "")
           local indent_amount = indent.indentexpr(start_line + i, self.file:bufnr())
-          lines[i] = string.rep(' ', indent_amount) .. line
+          lines[i] = string.rep(" ", indent_amount) .. line
         end
       end
     end
@@ -179,7 +179,7 @@ end
 
 ---@return OrgLogbook | nil
 function Headline:get_logbook()
-  local drawer = self:get_drawer('logbook')
+  local drawer = self:get_drawer("logbook")
   if drawer then
     return Logbook.from_node(drawer, self.file, self:get_non_plan_dates())
   end
@@ -189,7 +189,7 @@ end
 ---@return OrgDate | nil
 function Headline:get_closed_date()
   local dates = self:get_plan_dates()
-  return vim.tbl_get(dates, 'CLOSED', 1)
+  return vim.tbl_get(dates, "CLOSED", 1)
 end
 
 function Headline:get_priority_sort_value()
@@ -200,7 +200,7 @@ end
 
 function Headline:is_archived()
   return #vim.tbl_filter(function(tag)
-    return tag:upper() == 'ARCHIVE'
+    return tag:upper() == "ARCHIVE"
   end, self:get_tags()) > 0
 end
 
@@ -216,10 +216,10 @@ function Headline:has_tag(tag)
   return false
 end
 
-memoize('get_category')
+memoize("get_category")
 --- @return string
 function Headline:get_category()
-  local category = self:get_property('category', true)
+  local category = self:get_property("category", true)
 
   if category then
     return category
@@ -228,14 +228,14 @@ function Headline:get_category()
   return self.file:get_category()
 end
 
-memoize('get_outline_path')
+memoize("get_outline_path")
 --- @return string
 function Headline:get_outline_path()
   local inner_to_outer_parent_headlines = {}
   local parent_section = self:node():parent():parent()
 
   while parent_section do
-    local headline_node = parent_section:field('headline')[1]
+    local headline_node = parent_section:field("headline")[1]
     if headline_node then
       local headline = Headline:new(headline_node, self.file)
       local headline_title = headline:get_title()
@@ -246,7 +246,7 @@ function Headline:get_outline_path()
 
   -- reverse headline order
   local outer_to_inner_parent_headlines = utils.reverse(inner_to_outer_parent_headlines)
-  local outline_path = table.concat(outer_to_inner_parent_headlines, '/')
+  local outline_path = table.concat(outer_to_inner_parent_headlines, "/")
   return outline_path
 end
 
@@ -255,7 +255,7 @@ function Headline:set_tags(tags)
   ---@type TSNode
   local predecessor = nil
   for _, node in ipairs(ts_utils.get_named_children(self:node())) do
-    if node:type() ~= 'tag_list' then
+    if node:type() ~= "tag_list" then
       predecessor = node
     end
   end
@@ -268,18 +268,18 @@ function Headline:set_tags(tags)
   local txt = self.file:get_node_text(predecessor)
   local pred_end_row, pred_end_col, _ = predecessor:end_()
   local line = vim.api.nvim_buf_get_lines(bufnr, pred_end_row, pred_end_row + 1, false)[1]
-  local stars = line:match('^%*+%s*')
+  local stars = line:match("^%*+%s*")
   local end_col = line:len()
 
-  local text = ''
+  local text = ""
   tags = vim
     .trim(tags)
-    :gsub('[%s:-]+', ':') -- Convert all whitespace, existing colons and hyphens into a single colon
-    :gsub('^:', '')
-    :gsub(':$', '')
+    :gsub("[%s:-]+", ":") -- Convert all whitespace, existing colons and hyphens into a single colon
+    :gsub("^:", "")
+    :gsub(":$", "")
 
-  if tags ~= '' then
-    tags = ':' .. tags .. ':'
+  if tags ~= "" then
+    tags = ":" .. tags .. ":"
 
     local to_col = config.org_tags_column
     local tags_width = vim.api.nvim_strwidth(tags)
@@ -288,7 +288,7 @@ function Headline:set_tags(tags)
     end
 
     local spaces = math.max(to_col - (vim.api.nvim_strwidth(txt) + stars:len()), 1)
-    text = string.rep(' ', spaces) .. tags
+    text = string.rep(" ", spaces) .. tags
   end
 
   vim.api.nvim_buf_set_text(bufnr, pred_end_row, pred_end_col, pred_end_row, end_col, { text })
@@ -348,18 +348,18 @@ end
 function Headline:set_priority(priority)
   local _, priority_node = self:get_priority()
   if priority_node then
-    local text = (vim.trim(priority) == '') and '' or ('[#%s]'):format(priority)
+    local text = (vim.trim(priority) == "") and "" or ("[#%s]"):format(priority)
     return self:_set_node_text(priority_node, text)
   end
 
   local todo, todo_node = self:get_todo()
   if todo then
-    return self:_set_node_text(todo_node, ('%s [#%s]'):format(todo, priority))
+    return self:_set_node_text(todo_node, ("%s [#%s]"):format(todo, priority))
   end
 
-  local stars = self:_get_child_node('stars')
+  local stars = self:_get_child_node("stars")
   local _, level = stars:end_()
-  return self:_set_node_text(stars, ('%s [#%s]'):format(('*'):rep(level), priority))
+  return self:_set_node_text(stars, ("%s [#%s]"):format(("*"):rep(level), priority))
 end
 
 ---@param keyword string
@@ -370,19 +370,19 @@ function Headline:set_todo(keyword)
     return self:update_parent_cookie()
   end
 
-  local stars = self:_get_child_node('stars')
+  local stars = self:_get_child_node("stars")
   local _, level = stars:end_()
-  self:_set_node_text(stars, ('%s %s'):format(('*'):rep(level), keyword))
+  self:_set_node_text(stars, ("%s %s"):format(("*"):rep(level), keyword))
   return self:update_parent_cookie()
 end
 
-memoize('get_todo')
+memoize("get_todo")
 --- Returns the headlines todo keyword, it's node,
 --- it's type (todo or done) and it's index in the todo_keywords list
 --- @return string | nil, TSNode | nil, string | nil, number | nil
 function Headline:get_todo()
   -- A valid keyword can only be the first child
-  local first_item_node = self:_get_child_node('item')
+  local first_item_node = self:_get_child_node("item")
   local todo_node = first_item_node and first_item_node:named_child(0)
   if not todo_node then
     return nil, nil, nil
@@ -402,41 +402,41 @@ end
 ---@return boolean
 function Headline:is_todo()
   local _, _, type = self:get_todo()
-  return type == 'TODO'
+  return type == "TODO"
 end
 
 ---@return boolean
 function Headline:is_done()
   local _, _, type = self:get_todo()
-  return type == 'DONE'
+  return type == "DONE"
 end
 
-memoize('get_title')
+memoize("get_title")
 ---@return string, number
 function Headline:get_title()
-  local title_node = self:_get_child_node('item')
-  local title = self.file:get_node_text(title_node) or ''
+  local title_node = self:_get_child_node("item")
+  local title = self.file:get_node_text(title_node) or ""
   local word, todo_node = self:get_todo()
   local offset = title_node and select(2, title_node:start()) or 0
   if todo_node and word then
-    local new_title = title:gsub('^' .. vim.pesc(word) .. '%s*', '')
+    local new_title = title:gsub("^" .. vim.pesc(word) .. "%s*", "")
     offset = offset + (title:len() - new_title:len())
     title = new_title
   end
   local priority, priority_node = self:get_priority()
   if priority_node then
-    local new_title = title:gsub('^' .. vim.pesc(('[#%s]'):format(priority)) .. '%s*', '')
+    local new_title = title:gsub("^" .. vim.pesc(("[#%s]"):format(priority)) .. "%s*", "")
     offset = offset + title:len() - new_title:len()
     title = new_title
   end
   return title, offset
 end
 
-memoize('get_own_properties')
+memoize("get_own_properties")
 ---@return table<string, string>, TSNode | nil
 function Headline:get_own_properties()
   local section = self:node():parent()
-  local properties_node = section and section:field('property_drawer')[1]
+  local properties_node = section and section:field("property_drawer")[1]
 
   if not properties_node then
     return {}, nil
@@ -446,11 +446,11 @@ function Headline:get_own_properties()
 
   if properties_node then
     for _, node in ipairs(ts_utils.get_named_children(properties_node)) do
-      local name = node:field('name')[1]
-      local value = node:field('value')[1]
+      local name = node:field("name")[1]
+      local value = node:field("value")[1]
 
       if name then
-        properties[self.file:get_node_text(name):lower()] = self.file:get_node_text(value) or ''
+        properties[self.file:get_node_text(name):lower()] = self.file:get_node_text(value) or ""
       end
     end
   end
@@ -458,7 +458,7 @@ function Headline:get_own_properties()
   return properties, properties_node
 end
 
-memoize('get_properties')
+memoize("get_properties")
 ---@return table<string, string>, TSNode | nil
 function Headline:get_properties()
   local properties, own_properties_node = self:get_own_properties()
@@ -469,7 +469,7 @@ function Headline:get_properties()
 
   local parent_section = self:node():parent():parent()
   while parent_section do
-    local headline_node = parent_section:field('headline')[1]
+    local headline_node = parent_section:field("headline")[1]
     if headline_node then
       local headline = Headline:new(headline_node, self.file)
       for name, value in pairs(headline:get_own_properties()) do
@@ -505,12 +505,12 @@ function Headline:set_property(name, value)
   local _, properties = self:get_own_properties()
   if not properties then
     local append_line = self:get_append_line()
-    local property_drawer = self:_apply_indent({ ':PROPERTIES:', ':END:' }) --[[ @as string[] ]]
+    local property_drawer = self:_apply_indent({ ":PROPERTIES:", ":END:" }) --[[ @as string[] ]]
     vim.api.nvim_buf_set_lines(bufnr, append_line, append_line, false, property_drawer)
     _, properties = self:refresh():get_own_properties()
   end
 
-  local property = (':%s: %s'):format(name, value)
+  local property = (":%s: %s"):format(name, value)
   local existing_property, property_node = self:get_property(name, false)
   if existing_property then
     return self:_set_node_text(property_node, property)
@@ -550,10 +550,10 @@ function Headline:get_property(property_name, search_parents)
   local _, properties = self:get_own_properties()
   if properties then
     for _, node in ipairs(ts_utils.get_named_children(properties)) do
-      local name = node:field('name')[1]
-      local value = node:field('value')[1]
+      local name = node:field("name")[1]
+      local value = node:field("value")[1]
       if name and self.file:get_node_text(name):lower() == property_name:lower() then
-        return value and self.file:get_node_text(value) or '', node
+        return value and self.file:get_node_text(value) or "", node
       end
     end
   end
@@ -568,7 +568,7 @@ function Headline:get_property(property_name, search_parents)
 
   local parent_section = self:node():parent():parent()
   while parent_section do
-    local headline_node = parent_section:field('headline')[1]
+    local headline_node = parent_section:field("headline")[1]
     if headline_node then
       local headline = Headline:new(headline_node, self.file)
       local property, property_node = headline:get_property(property_name, false)
@@ -586,12 +586,12 @@ function Headline:matches_search_term(term)
   if self:get_title():lower():match(term) then
     return true
   end
-  local body = self.file:get_node_text(self:node():parent():field('body')[1])
+  local body = self.file:get_node_text(self:node():parent():field("body")[1])
   return body:lower():match(term) ~= nil
 end
 
 function Headline:content()
-  return self.file:get_node_text_list(self:node():parent():field('body')[1])
+  return self.file:get_node_text_list(self:node():parent():field("body")[1])
 end
 
 ---@return OrgDate[]
@@ -605,16 +605,16 @@ end
 ---@return OrgDate | nil
 function Headline:get_scheduled_date()
   local dates = self:get_plan_dates()
-  return vim.tbl_get(dates, 'SCHEDULED', 1)
+  return vim.tbl_get(dates, "SCHEDULED", 1)
 end
 
 ---@return OrgDate | nil
 function Headline:get_deadline_date()
   local dates = self:get_plan_dates()
-  return vim.tbl_get(dates, 'DEADLINE', 1)
+  return vim.tbl_get(dates, "DEADLINE", 1)
 end
 
-memoize('get_tags')
+memoize("get_tags")
 ---@return string[], TSNode | nil
 function Headline:get_tags()
   local tags, own_tags_node = self:get_own_tags()
@@ -625,9 +625,9 @@ function Headline:get_tags()
   local parent_tags = {}
   local parent_section = self:node():parent():parent()
   while parent_section do
-    local headline = parent_section:field('headline')[1]
+    local headline = parent_section:field("headline")[1]
     if headline then
-      local node = headline:field('tags')[1]
+      local node = headline:field("tags")[1]
       if node then
         local parent_tags_list = utils.parse_tags_string(self.file:get_node_text(node))
         utils.concat(parent_tags, utils.reverse(parent_tags_list), true)
@@ -652,14 +652,14 @@ function Headline:get_parent_headline()
     return nil
   end
 
-  local headline = parent_section:field('headline')[1]
+  local headline = parent_section:field("headline")[1]
   return Headline:new(headline, self.file)
 end
 
-memoize('get_own_tags')
+memoize("get_own_tags")
 ---@return string[], TSNode | nil
 function Headline:get_own_tags()
-  local node = self:_get_child_node('tags')
+  local node = self:_get_child_node("tags")
   if node then
     return utils.parse_tags_string(self.file:get_node_text(node)), node
   end
@@ -686,21 +686,21 @@ end
 ---@return OrgHeadline | nil
 function Headline:get_prev_headline_same_level()
   local prev_section = self:node():parent():prev_named_sibling()
-  if not prev_section or prev_section:type() ~= 'section' then
+  if not prev_section or prev_section:type() ~= "section" then
     return nil
   end
 
-  return Headline:new(prev_section:field('headline')[1], self.file)
+  return Headline:new(prev_section:field("headline")[1], self.file)
 end
 
 ---@return OrgHeadline | nil
 function Headline:get_next_headline_same_level()
   local next_section = self:node():parent():next_named_sibling()
-  if not next_section or next_section:type() ~= 'section' then
+  if not next_section or next_section:type() ~= "section" then
     return nil
   end
 
-  return Headline:new(next_section:field('headline')[1], self.file)
+  return Headline:new(next_section:field("headline")[1], self.file)
 end
 
 ---@return number
@@ -710,7 +710,7 @@ function Headline:get_append_line()
     local row = properties:end_()
     return row
   end
-  local plan = self:node():parent():field('plan')[1]
+  local plan = self:node():parent():field("plan")[1]
   if plan then
     local _, _, has_plan_dates = self:get_plan_dates()
     if has_plan_dates then
@@ -722,10 +722,10 @@ function Headline:get_append_line()
   return row
 end
 
-memoize('get_plan_dates')
+memoize("get_plan_dates")
 ---@return OrgTable<OrgPlanDateTypes, OrgDate[]>,OrgTable<OrgPlanDateTypes, TSNode>, boolean
 function Headline:get_plan_dates()
-  local plan = self:node():parent():field('plan')[1]
+  local plan = self:node():parent():field("plan")[1]
   local dates = {}
   local dates_nodes = {}
   local has_plan_dates = false
@@ -734,18 +734,18 @@ function Headline:get_plan_dates()
     return dates, dates_nodes, has_plan_dates
   end
 
-  local valid_plan_types = { 'SCHEDULED', 'DEADLINE', 'CLOSED', 'NONE' }
+  local valid_plan_types = { "SCHEDULED", "DEADLINE", "CLOSED", "NONE" }
 
   for _, node in ipairs(ts_utils.get_named_children(plan)) do
-    local name_node = node:field('name')[1]
+    local name_node = node:field("name")[1]
     local name = name_node and self.file:get_node_text(name_node)
-    local timestamp = node:field('timestamp')[1]
+    local timestamp = node:field("timestamp")[1]
 
     if not name or not vim.tbl_contains(valid_plan_types, name:upper()) then
-      name = 'NONE'
+      name = "NONE"
     end
 
-    if name ~= 'NONE' then
+    if name ~= "NONE" then
       has_plan_dates = true
     end
     dates[name:upper()] = Date.from_node(timestamp, self.file:get_source(), {
@@ -756,7 +756,7 @@ function Headline:get_plan_dates()
   return dates, dates_nodes, has_plan_dates
 end
 
-memoize('get_all_dates')
+memoize("get_all_dates")
 ---Return all dates including the ones added to the body of the headline
 ---@return OrgDate[]
 function Headline:get_all_dates()
@@ -767,7 +767,7 @@ function Headline:get_all_dates()
   return vim.list_extend(plan_dates, body_dates_list)
 end
 
-memoize('get_non_plan_dates')
+memoize("get_non_plan_dates")
 ---@return OrgDate[]
 function Headline:get_non_plan_dates()
   local headline_node = self:node()
@@ -776,15 +776,15 @@ function Headline:get_non_plan_dates()
     return {}
   end
 
-  local body_node = section:field('body')[1]
-  local property_node = section:field('property_drawer')[1]
+  local body_node = section:field("body")[1]
+  local property_node = section:field("property_drawer")[1]
   local matches = {}
 
-  local headline_matches = self.file:get_ts_captures('(item (timestamp) @timestamp)', headline_node)
+  local headline_matches = self.file:get_ts_captures("(item (timestamp) @timestamp)", headline_node)
   vim.list_extend(matches, headline_matches)
 
   if property_node then
-    local property_matches = self.file:get_ts_captures('(property (value (timestamp) @timestamp))', property_node)
+    local property_matches = self.file:get_ts_captures("(property (value (timestamp) @timestamp))", property_node)
     vim.list_extend(matches, property_matches)
   end
 
@@ -820,7 +820,7 @@ end
 
 ---@return boolean
 function Headline:has_child_headlines()
-  return self:node():parent():field('subsection')[1] ~= nil
+  return self:node():parent():field("subsection")[1] ~= nil
 end
 
 ---@return boolean
@@ -831,12 +831,12 @@ function Headline:is_one_line()
   return start_row == end_row or (start_row + 1 == end_row and end_col == 0)
 end
 
-memoize('get_child_headlines')
+memoize("get_child_headlines")
 ---@return OrgHeadline[]
 function Headline:get_child_headlines()
-  local child_sections = self:node():parent():field('subsection')
+  local child_sections = self:node():parent():field("subsection")
   local headlines = vim.tbl_map(function(child_section)
-    return Headline:new(child_section:field('headline')[1], self.file)
+    return Headline:new(child_section:field("headline")[1], self.file)
   end, child_sections)
 
   return headlines
@@ -855,7 +855,7 @@ function Headline:get_valid_dates_for_agenda()
     if date.active and not date:is_closed() and not date:is_obsolete_range_end() then
       table.insert(dates, date)
       if not date:is_none() and date.related_date then
-        local new_date = date:clone({ type = 'NONE' })
+        local new_date = date:clone({ type = "NONE" })
         table.insert(dates, new_date)
       end
     end
@@ -865,50 +865,50 @@ end
 
 ---@param date OrgDate
 function Headline:set_deadline_date(date)
-  return self:_add_date('DEADLINE', date, true)
+  return self:_add_date("DEADLINE", date, true)
 end
 
 ---@param date OrgDate
 function Headline:set_scheduled_date(date)
-  return self:_add_date('SCHEDULED', date, true)
+  return self:_add_date("SCHEDULED", date, true)
 end
 
 ---@param date? OrgDate
 function Headline:set_closed_date(date)
   local dates = self:get_plan_dates()
-  if vim.tbl_get(dates, 'CLOSED', 1) then
+  if vim.tbl_get(dates, "CLOSED", 1) then
     return
   end
-  return self:_add_date('CLOSED', date or Date.now(), false)
+  return self:_add_date("CLOSED", date or Date.now(), false)
 end
 
 function Headline:remove_closed_date()
-  return self:_remove_date('CLOSED')
+  return self:_remove_date("CLOSED")
 end
 
 function Headline:remove_deadline_date()
-  return self:_remove_date('DEADLINE')
+  return self:_remove_date("DEADLINE")
 end
 
 function Headline:remove_scheduled_date()
-  return self:_remove_date('SCHEDULED')
+  return self:_remove_date("SCHEDULED")
 end
 
 function Headline:get_cookie()
-  local cookie = self:_parse_title_part('%[%d*/%d*%]')
+  local cookie = self:_parse_title_part("%[%d*/%d*%]")
   if cookie then
     return cookie
   end
-  return self:_parse_title_part('%[%d?%d?%d?%%%]')
+  return self:_parse_title_part("%[%d?%d?%d?%%%]")
 end
 
 function Headline:_set_cookie(cookie, num, denum)
   -- Update the cookie
   local new_cookie_val
-  if self.file:get_node_text(cookie):find('%%') then
-    new_cookie_val = ('[%d%%]'):format((num / denum) * 100)
+  if self.file:get_node_text(cookie):find("%%") then
+    new_cookie_val = ("[%d%%]"):format((num / denum) * 100)
   else
-    new_cookie_val = ('[%d/%d]'):format(num, denum)
+    new_cookie_val = ("[%d/%d]"):format(num, denum)
   end
   return self:_set_node_text(cookie, new_cookie_val)
 end
@@ -929,14 +929,14 @@ function Headline:update_cookie()
 
   -- Count checked boxes from all lists
   local num_checked_boxes, num_boxes = 0, 0
-  local body = section:field('body')[1]
+  local body = section:field("body")[1]
   if body then
     for node in body:iter_children() do
-      if node:type() == 'list' then
+      if node:type() == "list" then
         local boxes = self:child_checkboxes(node)
         num_boxes = num_boxes + #boxes
         local checked_boxes = vim.tbl_filter(function(box)
-          return box:match('%[%w%]')
+          return box:match("%[%w%]")
         end, boxes)
         num_checked_boxes = num_checked_boxes + #checked_boxes
       end
@@ -982,7 +982,7 @@ end
 function Headline:child_checkboxes(list_node)
   return vim.tbl_map(function(node)
     local text = self.file:get_node_text(node)
-    return text:match('%[.%]')
+    return text:match("%[.%]")
   end, ts_utils.get_named_children(list_node))
 end
 
@@ -992,14 +992,14 @@ function Headline:get_drawer(name)
   if not section then
     return nil
   end
-  local body = section:field('body')[1]
+  local body = section:field("body")[1]
   if not body then
     return nil
   end
 
   for _, node in ipairs(ts_utils.get_named_children(body)) do
-    if node:type() == 'drawer' then
-      local drawer_name = node:field('name')
+    if node:type() == "drawer" then
+      local drawer_name = node:field("name")
       if #drawer_name and string.lower(self.file:get_node_text(drawer_name[1])) == string.lower(name) then
         return node
       end
@@ -1017,15 +1017,15 @@ function Headline:get_drawer_append_line(name)
   if not drawer then
     local bufnr = self.file:get_valid_bufnr()
     local append_line = self:get_append_line()
-    local new_drawer = self:_apply_indent({ ':' .. name .. ':', ':END:' }) --[[ @as string[] ]]
+    local new_drawer = self:_apply_indent({ ":" .. name .. ":", ":END:" }) --[[ @as string[] ]]
     vim.api.nvim_buf_set_lines(bufnr, append_line, append_line, false, new_drawer)
     drawer = self:get_drawer(name)
   end
-  local name_row = drawer and drawer:field('name')[1]:end_() or 0
+  local name_row = drawer and drawer:field("name")[1]:end_() or 0
   return name_row + 1
 end
 
-memoize('get_range')
+memoize("get_range")
 ---@return OrgRange
 function Headline:get_range()
   return Range.from_node(self:node():parent())
@@ -1036,10 +1036,10 @@ function Headline:get_lines()
   return self.file:get_node_text_list(self:node():parent())
 end
 
-memoize('get_headline_line_content')
+memoize("get_headline_line_content")
 ---@return string
 function Headline:get_headline_line_content()
-  local line = self.file:get_node_text(self:node()):gsub('\n', '')
+  local line = self.file:get_node_text(self:node()):gsub("\n", "")
   return line
 end
 
@@ -1056,12 +1056,12 @@ function Headline:is_same(other_headline)
 end
 
 function Headline:id_get_or_create()
-  local id_prop = self:get_property('ID', false)
+  local id_prop = self:get_property("ID", false)
   if id_prop then
     return vim.trim(id_prop)
   end
   local org_id = OrgId.new()
-  self:set_property('ID', org_id)
+  self:set_property("ID", org_id)
   return org_id
 end
 
@@ -1071,7 +1071,7 @@ end
 ---@private
 function Headline:_add_date(type, date, active)
   local _, date_nodes, has_plan_dates = self:get_plan_dates()
-  local text = type .. ': ' .. date:to_wrapped_string(active)
+  local text = type .. ": " .. date:to_wrapped_string(active)
   if not has_plan_dates then
     local start_line = self:node():start()
     vim.fn.appendbufline(self.file:get_valid_bufnr(), start_line + 1, self:_apply_indent(text) --[[@as string]])
@@ -1084,7 +1084,7 @@ function Headline:_add_date(type, date, active)
   local keys = vim.tbl_keys(date_nodes)
   local other_types = vim.tbl_filter(function(t)
     return t ~= type
-  end, { 'DEADLINE', 'SCHEDULED', 'CLOSED' })
+  end, { "DEADLINE", "SCHEDULED", "CLOSED" })
   local last_child = date_nodes[keys[#keys]]
   for _, date_type in ipairs(other_types) do
     if date_nodes[date_type] then
@@ -1093,7 +1093,7 @@ function Headline:_add_date(type, date, active)
     end
   end
   local ptext = self.file:get_node_text(last_child)
-  return self:_set_node_text(last_child, ptext .. ' ' .. text)
+  return self:_set_node_text(last_child, ptext .. " " .. text)
 end
 
 ---@param type OrgPlanDateTypes
@@ -1104,10 +1104,10 @@ function Headline:_remove_date(type)
     return
   end
   local line_nr = date_nodes[type]:start()
-  self.file:set_node_text(date_nodes[type], '', true)
+  self.file:set_node_text(date_nodes[type], "", true)
   local bufnr = self.file:get_valid_bufnr()
   local cur_line = vim.api.nvim_buf_get_lines(bufnr, line_nr, line_nr + 1, false)[1]
-  if vim.trim(cur_line) == '' then
+  if vim.trim(cur_line) == "" then
     vim.fn.deletebufline(bufnr, line_nr + 1)
   end
   return self:refresh()
@@ -1118,11 +1118,11 @@ end
 function Headline:_apply_indent(text, amount)
   local indent_text = self:get_indent(amount)
 
-  if indent_text == '' then
+  if indent_text == "" then
     return text
   end
 
-  if type(text) ~= 'table' then
+  if type(text) ~= "table" then
     return indent_text .. text
   end
 
@@ -1156,15 +1156,15 @@ end
 ---@private
 ---@return TSNode | nil, string
 function Headline:_parse_title_part(pattern)
-  for _, node in ipairs(ts_utils.get_named_children(self:_get_child_node('item'))) do
-    local text = self.file:get_node_text(node) or ''
+  for _, node in ipairs(ts_utils.get_named_children(self:_get_child_node("item"))) do
+    local text = self.file:get_node_text(node) or ""
     local match = text:match(pattern)
     if match then
       return node, match
     end
   end
 
-  return nil, ''
+  return nil, ""
 end
 
 ---@private
@@ -1176,7 +1176,7 @@ function Headline:_handle_promote_demote(recursive, modifier, dryRun)
     local parent = self:node():parent()
     local text = self.file:get_node_text(parent)
     local start = parent and parent:start()
-    local lines = modifier(start, vim.split(text, '\n', { plain = true }))
+    local lines = modifier(start, vim.split(text, "\n", { plain = true }))
     if dryRun then
       return lines
     end
@@ -1189,7 +1189,7 @@ function Headline:_handle_promote_demote(recursive, modifier, dryRun)
 
   local first_child_section = nil
   for _, node in ipairs(ts_utils.get_named_children(self:node():parent())) do
-    if node:type() == 'section' then
+    if node:type() == "section" then
       first_child_section = node
       break
     end

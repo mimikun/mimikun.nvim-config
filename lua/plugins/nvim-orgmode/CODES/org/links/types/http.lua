@@ -13,7 +13,7 @@ end
 
 ---@return string
 function OrgLinkHttp:get_name()
-  return 'http'
+  return "http"
 end
 
 ---@param link string
@@ -37,7 +37,7 @@ end
 ---@param link string
 ---@return string | nil
 function OrgLinkHttp:_parse(link)
-  local is_url = link:match('^https?:.+$')
+  local is_url = link:match("^https?:.+$")
   if is_url then
     return link
   end

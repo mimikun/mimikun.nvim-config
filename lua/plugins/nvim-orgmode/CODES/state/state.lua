@@ -1,10 +1,10 @@
-local utils = require('orgmode.utils')
-local Promise = require('orgmode.utils.promise')
+local utils = require("orgmode.utils")
+local Promise = require("orgmode.utils.promise")
 
 ---@class OrgState
 local OrgState = { data = {}, _ctx = { loaded = false, saved = false, curr_loader = nil, savers = 0, dirty = false } }
 
-local cache_path = vim.fs.normalize(vim.fn.stdpath('cache') .. '/org-cache.json', { expand_env = false })
+local cache_path = vim.fs.normalize(vim.fn.stdpath("cache") .. "/org-cache.json", { expand_env = false })
 
 ---Returns the current OrgState singleton
 ---@return OrgState
@@ -50,7 +50,7 @@ function OrgState:save()
     :catch(function(err_msg)
       self._ctx.savers = self._ctx.savers - 1
       vim.schedule_wrap(function()
-        utils.echo_warning('Failed to save current state! Error: ' .. err_msg)
+        utils.echo_warning("Failed to save current state! Error: " .. err_msg)
       end)
     end)
 end
@@ -90,7 +90,7 @@ function OrgState:load()
       if not success then
         local err_msg = vim.deepcopy(decoded)
         vim.schedule(function()
-          utils.echo_warning('OrgState cache load failure, error: ' .. vim.inspect(err_msg))
+          utils.echo_warning("OrgState cache load failure, error: " .. vim.inspect(err_msg))
           -- Try to 'repair' the cache by saving the current state
           self._ctx.dirty = true
           self:save()
@@ -99,7 +99,7 @@ function OrgState:load()
       -- Because the state cache repair happens potentially after the data has
       -- been added to the cache, we need to ensure the decoded table is set to
       -- empty if we got an error back on the json decode operation.
-      if type(decoded) ~= 'table' then
+      if type(decoded) ~= "table" then
         decoded = {}
       end
 
@@ -107,14 +107,14 @@ function OrgState:load()
       -- were saved into the state. We want to preference the newer values in
       -- the state and still get whatever values may not have been set in the
       -- interim of the load operation.
-      self.data = vim.tbl_deep_extend('force', decoded, self.data)
+      self.data = vim.tbl_deep_extend("force", decoded, self.data)
       self._ctx.curr_loader = nil
       return self
     end)
     :catch(function(err)
       -- If the file didn't exist then go ahead and save
       -- our current cache and as a side effect create the file
-      if type(err) == 'string' and err:match([[^ENOENT.*]]) then
+      if type(err) == "string" and err:match([[^ENOENT.*]]) then
         self._ctx.dirty = true
         self:save()
         return self
@@ -155,7 +155,7 @@ function OrgState:load_sync(timeout)
   end
 
   if err == nil and state == nil then
-    error('Did not load OrgState in time')
+    error("Did not load OrgState in time")
   end
 
   return state

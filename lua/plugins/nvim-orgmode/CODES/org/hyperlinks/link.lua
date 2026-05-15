@@ -1,5 +1,5 @@
-local Url = require('orgmode.org.hyperlinks.url')
-local Range = require('orgmode.files.elements.range')
+local Url = require("orgmode.org.hyperlinks.url")
+local Range = require("orgmode.files.elements.range")
 
 ---@class OrgLink
 ---@field url OrgUrl
@@ -7,7 +7,7 @@ local Range = require('orgmode.files.elements.range')
 ---@field range? OrgRange
 local Link = {}
 
-local pattern = '%[%[([^%]]+.-)%]%]'
+local pattern = "%[%[([^%]]+.-)%]%]"
 
 ---@deprecated Use OrgHyperlink instead ('orgmode.org.links.hyperlink')
 ---@param str string
@@ -15,8 +15,8 @@ local pattern = '%[%[([^%]]+.-)%]%]'
 ---@return OrgLink
 function Link:new(str, range)
   local this = setmetatable({}, { __index = Link })
-  local parts = vim.split(str, '][', { plain = true })
-  this.url = Url:new(parts[1] or '')
+  local parts = vim.split(str, "][", { plain = true })
+  this.url = Url:new(parts[1] or "")
   this.desc = parts[2]
   this.range = range
   return this
@@ -25,9 +25,9 @@ end
 ---@return string
 function Link:to_str()
   if self.desc then
-    return string.format('[[%s][%s]]', self.url:to_string(), self.desc)
+    return string.format("[[%s][%s]]", self.url:to_string(), self.desc)
   else
-    return string.format('[[%s]]', self.url:to_string())
+    return string.format("[[%s]]", self.url:to_string())
   end
 end
 

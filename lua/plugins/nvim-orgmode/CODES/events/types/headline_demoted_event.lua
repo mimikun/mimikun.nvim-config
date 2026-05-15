@@ -3,7 +3,7 @@
 ---@field headline OrgHeadline
 ---@field old_level number
 local HeadlineDemotedEvent = {
-  type = 'orgmode.headline_demoted',
+  type = "orgmode.headline_demoted",
 }
 
 ---@param headline OrgHeadline

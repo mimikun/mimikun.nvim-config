@@ -1,10 +1,10 @@
-local org = require('orgmode')
-local Table = require('orgmode.files.elements.table')
+local org = require("orgmode")
+local Table = require("orgmode.files.elements.table")
 
 local function format_line(linenr)
   local line_text = vim.fn.getline(linenr)
 
-  if line_text:match('^%*+%s') then
+  if line_text:match("^%*+%s") then
     local headline = org.files:get_closest_headline_or_nil({ linenr, 1 })
     if headline then
       headline:align_tags()
@@ -29,7 +29,7 @@ end
 local formatexpr_cache = {}
 
 local function format()
-  if vim.tbl_contains({ 'i', 'R', 'ic', 'ix' }, vim.fn.mode()) then
+  if vim.tbl_contains({ "i", "R", "ic", "ix" }, vim.fn.mode()) then
     -- `formatexpr` is also called when exceeding `textwidth` in insert mode
     -- fall back to internal formatting
     return 1
@@ -65,7 +65,7 @@ local function format()
   end
 
   for line in pairs(formatexpr_cache) do
-    vim.cmd(('%dnormal! gqq'):format(line))
+    vim.cmd(("%dnormal! gqq"):format(line))
   end
 
   formatexpr_cache = {}

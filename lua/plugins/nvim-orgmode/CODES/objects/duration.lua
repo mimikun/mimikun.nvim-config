@@ -2,12 +2,12 @@
 ---@field parts table
 ---@field minutes number
 local Duration = {}
-local hour_minute_pattern = '(%d+):(%d+)$'
+local hour_minute_pattern = "(%d+):(%d+)$"
 
 local parse_hours_minutes = function(str, on_end)
   local pattern = hour_minute_pattern
   if not on_end then
-    pattern = '^' .. pattern
+    pattern = "^" .. pattern
   end
   local hh, mm = str:match(pattern)
   if not hh or not mm then
@@ -25,47 +25,47 @@ end
 
 local valid_formats = {
   {
-    format = 'HH:MM',
+    format = "HH:MM",
     parse = function(str)
       return parse_hours_minutes(str, false)
     end,
   },
   {
-    format = '%d(hdwmy)+',
+    format = "%d(hdwmy)+",
     parse = function(str)
       local map = {
         h = {
-          name = 'hours',
+          name = "hours",
           calc = function(val)
             return tonumber(val) * 60
           end,
         },
         d = {
-          name = 'days',
+          name = "days",
           calc = function(val)
             return tonumber(val) * 60 * 24
           end,
         },
         w = {
-          name = 'weeks',
+          name = "weeks",
           calc = function(val)
             return tonumber(val) * 60 * 24 * 7
           end,
         },
         m = {
-          name = 'months',
+          name = "months",
           calc = function(val)
             return tonumber(val) * 60 * 24 * 30
           end,
         },
         y = {
-          name = 'years',
+          name = "years",
           calc = function(val)
             return tonumber(val) * 60 * 24 * 365
           end,
         },
         min = {
-          name = 'minutes',
+          name = "minutes",
           calc = function(val)
             return tonumber(val)
           end,
@@ -82,10 +82,10 @@ local valid_formats = {
         result.parts.minutes = hours_minutes.parts.minutes
         result.minutes = hours_minutes.minutes
 
-        str = vim.trim(str:gsub(hour_minute_pattern, ''))
+        str = vim.trim(str:gsub(hour_minute_pattern, ""))
       end
 
-      for num, type in string.gmatch(str, '(%d+)([%a]+)') do
+      for num, type in string.gmatch(str, "(%d+)([%a]+)") do
         if not num or not type or not map[type:lower()] then
           return nil
         end
@@ -135,10 +135,10 @@ function Duration:to_string(format)
   local hour_minute_format = function()
     local hours = math.floor(self.minutes / 60)
     local minutes = self.minutes % 60
-    return string.format('%d:%02d', hours, minutes)
+    return string.format("%d:%02d", hours, minutes)
   end
   local formats = {
-    ['HH:MM'] = hour_minute_format,
+    ["HH:MM"] = hour_minute_format,
     default = function()
       -- Less than 24 hours
       if self.minutes < 1440 then
@@ -148,10 +148,10 @@ function Duration:to_string(format)
       local delta = self.minutes
 
       local durations = {
-        { name = 'y', val = 24 * 60 * 365 },
-        { name = 'm', val = 24 * 60 * 30 },
-        { name = 'w', val = 24 * 60 * 7 },
-        { name = 'd', val = 24 * 60 },
+        { name = "y", val = 24 * 60 * 365 },
+        { name = "m", val = 24 * 60 * 30 },
+        { name = "w", val = 24 * 60 * 7 },
+        { name = "d", val = 24 * 60 },
       }
       local result = {}
 
@@ -159,16 +159,16 @@ function Duration:to_string(format)
         local amount = math.floor(delta / duration.val)
         delta = delta - (amount * duration.val)
         if amount > 0 then
-          table.insert(result, string.format('%d%s', amount, duration.name))
+          table.insert(result, string.format("%d%s", amount, duration.name))
         end
       end
 
       if delta > 0 then
         local hour_minute_duration = from_minutes(delta)
-        table.insert(result, hour_minute_duration:to_string('HH:MM'))
+        table.insert(result, hour_minute_duration:to_string("HH:MM"))
       end
 
-      return table.concat(result, ' ')
+      return table.concat(result, " ")
     end,
   }
 

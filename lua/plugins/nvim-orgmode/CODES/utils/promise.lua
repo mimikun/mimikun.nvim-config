@@ -34,7 +34,7 @@ end
 local Promise = {}
 Promise.__index = Promise
 
-local PromiseStatus = { Pending = 'pending', Fulfilled = 'fulfilled', Rejected = 'rejected' }
+local PromiseStatus = { Pending = "pending", Fulfilled = "fulfilled", Rejected = "rejected" }
 
 local is_promise = function(v)
   return getmetatable(v) == Promise
@@ -45,8 +45,8 @@ local new_empty_userdata = function()
 end
 
 local new_pending = function(on_fullfilled, on_rejected)
-  vim.validate('on_fullfilled', on_fullfilled, 'function', true)
-  vim.validate('on_rejected', on_rejected, 'function', true)
+  vim.validate("on_fullfilled", on_fullfilled, "function", true)
+  vim.validate("on_rejected", on_rejected, "function", true)
   local tbl = {
     _status = PromiseStatus.Pending,
     _queued = {},
@@ -58,7 +58,7 @@ local new_pending = function(on_fullfilled, on_rejected)
   local self = setmetatable(tbl, Promise)
 
   local userdata = new_empty_userdata()
-  self._unhandled_detector = setmetatable({ [self] = userdata }, { __mode = 'k' })
+  self._unhandled_detector = setmetatable({ [self] = userdata }, { __mode = "k" })
   getmetatable(userdata).__gc = function()
     if self._status ~= PromiseStatus.Rejected or self._handled then
       return
@@ -68,11 +68,11 @@ local new_pending = function(on_fullfilled, on_rejected)
       local value = self._value:unpack()
       -- Do not report keyboard interrupt errors as unhandled.
       -- There is no way to handle pressed "<C-c>" while waiting for a promise.
-      if value == 'Keyboard interrupt' then
+      if value == "Keyboard interrupt" then
         return
       end
-      local values = vim.inspect({ value }, { newline = '', indent = '' })
-      error('unhandled promise rejection: ' .. values, 0)
+      local values = vim.inspect({ value }, { newline = "", indent = "" })
+      error("unhandled promise rejection: " .. values, 0)
     end)
   end
 
@@ -83,7 +83,7 @@ end
 --- @param executor fun(resolve:fun(...:any),reject:fun(...:any))
 --- @return OrgPromise
 function Promise.new(executor)
-  vim.validate('executor', executor, 'function')
+  vim.validate("executor", executor, "function")
 
   local self = new_pending()
 
@@ -223,8 +223,8 @@ end
 --- @param on_rejected (fun(...:any):any)?: A callback on rejected.
 --- @return OrgPromise
 function Promise.next(self, on_fullfilled, on_rejected)
-  vim.validate('on_fullfilled', on_fullfilled, 'function', true)
-  vim.validate('on_rejected', on_rejected, 'function', true)
+  vim.validate("on_fullfilled", on_fullfilled, "function", true)
+  vim.validate("on_rejected", on_rejected, "function", true)
   local promise = new_pending(on_fullfilled, on_rejected)
   table.insert(self._queued, promise)
   vim.schedule(function()
@@ -249,7 +249,7 @@ end
 --- @param on_finally fun()
 --- @return OrgPromise
 function Promise.finally(self, on_finally)
-  vim.validate('on_finally', on_finally, 'function', true)
+  vim.validate("on_finally", on_finally, "function", true)
   return self
     :next(function(...)
       on_finally()
@@ -296,12 +296,12 @@ function Promise.wait(self, timeout)
   end
 
   if code == -1 then
-    return error('promise timeout of ' .. tostring(timeout) .. 'ms reached')
+    return error("promise timeout of " .. tostring(timeout) .. "ms reached")
   elseif code == -2 then
-    return error('promise interrupted')
+    return error("promise interrupted")
   end
 
-  return error('promise failed with unknown reason')
+  return error("promise failed with unknown reason")
 end
 
 --- Equivalents to JavaScript's Promise.all.
@@ -309,7 +309,7 @@ end
 --- @param list any[]: promise or non-promise values
 --- @return OrgPromise
 function Promise.all(list)
-  vim.validate('list', list, 'table')
+  vim.validate("list", list, "table")
   return Promise.new(function(resolve, reject)
     local remain = #list
     if remain == 0 then
@@ -340,9 +340,9 @@ end
 --- @param concurrency? number: limit number of concurrent items processing
 --- @return OrgPromise
 function Promise.map(callback, list, concurrency)
-  vim.validate('list', list, 'table')
-  vim.validate('callback', callback, 'function')
-  vim.validate('concurrency', concurrency, 'number', true)
+  vim.validate("list", list, "table")
+  vim.validate("callback", callback, "function")
+  vim.validate("concurrency", concurrency, "number", true)
 
   local results = {}
   local processing = 0
@@ -391,7 +391,7 @@ end
 --- @param list any[]: promise or non-promise values
 --- @return OrgPromise
 function Promise.race(list)
-  vim.validate('list', list, 'table')
+  vim.validate("list", list, "table")
   return Promise.new(function(resolve, reject)
     for _, e in ipairs(list) do
       Promise.resolve(e)
@@ -410,7 +410,7 @@ end
 --- @param list any[]: promise or non-promise values
 --- @return OrgPromise
 function Promise.any(list)
-  vim.validate('list', list, 'table')
+  vim.validate("list", list, "table")
   return Promise.new(function(resolve, reject)
     local remain = #list
     if remain == 0 then
@@ -440,7 +440,7 @@ end
 --- @param list any[]: promise or non-promise values
 --- @return OrgPromise
 function Promise.all_settled(list)
-  vim.validate('list', list, 'table')
+  vim.validate("list", list, "table")
   return Promise.new(function(resolve)
     local remain = #list
     if remain == 0 then

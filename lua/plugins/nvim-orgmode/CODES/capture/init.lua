@@ -1,15 +1,15 @@
-local utils = require('orgmode.utils')
-local fs = require('orgmode.utils.fs')
-local config = require('orgmode.config')
-local Templates = require('orgmode.capture.templates')
-local Template = require('orgmode.capture.template')
-local Menu = require('orgmode.ui.menu')
-local Range = require('orgmode.files.elements.range')
-local CaptureWindow = require('orgmode.capture.window')
-local Date = require('orgmode.objects.date')
-local Datetree = require('orgmode.capture.template.datetree')
-local Input = require('orgmode.ui.input')
-local Promise = require('orgmode.utils.promise')
+local utils = require("orgmode.utils")
+local fs = require("orgmode.utils.fs")
+local config = require("orgmode.config")
+local Templates = require("orgmode.capture.templates")
+local Template = require("orgmode.capture.template")
+local Menu = require("orgmode.ui.menu")
+local Range = require("orgmode.files.elements.range")
+local CaptureWindow = require("orgmode.capture.window")
+local Date = require("orgmode.objects.date")
+local Datetree = require("orgmode.capture.template.datetree")
+local Input = require("orgmode.ui.input")
+local Promise = require("orgmode.utils.promise")
 
 ---@alias OrgOnCaptureClose fun(capture:OrgCapture, opts:OrgProcessCaptureOpts)
 ---@alias OrgOnCaptureCancel fun(capture:OrgCapture)
@@ -44,7 +44,7 @@ end
 
 ---@private
 function Capture:setup_mappings()
-  local maps = config:get_mappings('capture', vim.api.nvim_get_current_buf())
+  local maps = config:get_mappings("capture", vim.api.nvim_get_current_buf())
   if not maps then
     return
   end
@@ -91,7 +91,7 @@ end
 function Capture:open_template_by_shortcut(shortcut)
   local template = self.templates:get_list()[shortcut]
   if not template then
-    return utils.echo_error('No capture template with shortcut ' .. shortcut)
+    return utils.echo_error("No capture template with shortcut " .. shortcut)
   end
   return self:open_template(template)
 end
@@ -104,13 +104,13 @@ function Capture:on_refile_close(capture_window)
   end
   if capture_window:is_modified() then
     local choice =
-      vim.fn.confirm(string.format('Do you want to refile this to %s?', opts.destination_file.filename), '&Yes\n&No')
+      vim.fn.confirm(string.format("Do you want to refile this to %s?", opts.destination_file.filename), "&Yes\n&No")
     vim.cmd([[redraw!]])
     if choice ~= 1 then
       if self.on_cancel_refile then
         self.on_cancel_refile(self)
       end
-      return utils.echo_info('Canceled.')
+      return utils.echo_info("Canceled.")
     end
   end
 
@@ -193,7 +193,7 @@ function Capture:_refile_from_capture_buffer(opts)
 
   destination_file:update_sync(function(file)
     if not destination_headline and opts.template.regexp then
-      local line = vim.fn.search(opts.template.regexp, 'ncw')
+      local line = vim.fn.search(opts.template.regexp, "ncw")
       if line > 0 then
         return vim.api.nvim_buf_set_lines(file:bufnr(), line, line, false, lines)
       end
@@ -206,7 +206,7 @@ function Capture:_refile_from_capture_buffer(opts)
   if self.on_post_refile then
     self.on_post_refile(self, opts)
   end
-  utils.echo_info(('Wrote %s'):format(destination_file.filename))
+  utils.echo_info(("Wrote %s"):format(destination_file.filename))
   self:kill(false, opts.capture_window.id)
   return true
 end
@@ -259,7 +259,7 @@ function Capture:_refile_from_org_file(opts)
         if is_same_file then
           local item_range = source_headline:get_range()
           return vim.cmd(
-            string.format('silent! %d,%d move %s', item_range.start_line, item_range.end_line, target_line)
+            string.format("silent! %d,%d move %s", item_range.start_line, item_range.end_line, target_line)
           )
         end
 
@@ -273,7 +273,7 @@ function Capture:_refile_from_org_file(opts)
         vim.api.nvim_buf_set_lines(0, item_range.start_line - 1, item_range.end_line, false, {})
       end
 
-      utils.echo_info(opts.message or ('Wrote %s'):format(destination_file.filename))
+      utils.echo_info(opts.message or ("Wrote %s"):format(destination_file.filename))
       return target_line + 1
     end)
 end
@@ -283,7 +283,7 @@ function Capture:refile_file_headline_to_archive(headline)
   local file = headline.file
 
   if file:is_archive_file() then
-    return utils.echo_warning('This file is already an archive file.')
+    return utils.echo_warning("This file is already an archive file.")
   end
 
   local archive_location = file:get_archive_file_location()
@@ -291,9 +291,9 @@ function Capture:refile_file_headline_to_archive(headline)
     return
   end
 
-  local archive_directory = vim.fn.fnamemodify(archive_location, ':p:h')
+  local archive_directory = vim.fn.fnamemodify(archive_location, ":p:h")
   if vim.fn.isdirectory(archive_directory) == 0 then
-    vim.fn.mkdir(archive_directory, 'p')
+    vim.fn.mkdir(archive_directory, "p")
   end
   if not vim.uv.fs_stat(archive_location) then
     vim.fn.writefile({}, archive_location)
@@ -308,19 +308,19 @@ function Capture:refile_file_headline_to_archive(headline)
     :_refile_from_org_file({
       source_headline = headline,
       destination_file = destination_file,
-      message = ('Archived to %s'):format(destination_file.filename),
+      message = ("Archived to %s"):format(destination_file.filename),
     })
     :next(function(target_line)
       destination_file = self.files:get(archive_location)
       return destination_file:update(function(archive_file)
         local archived_headline = archive_file:get_closest_headline({ target_line, 0 })
-        archived_headline:set_property('ARCHIVE_TIME', Date.now():to_string())
-        archived_headline:set_property('ARCHIVE_FILE', file.filename)
-        if outline_path ~= '' then
-          archived_headline:set_property('ARCHIVE_OLPATH', outline_path)
+        archived_headline:set_property("ARCHIVE_TIME", Date.now():to_string())
+        archived_headline:set_property("ARCHIVE_FILE", file.filename)
+        if outline_path ~= "" then
+          archived_headline:set_property("ARCHIVE_OLPATH", outline_path)
         end
-        archived_headline:set_property('ARCHIVE_CATEGORY', headline_category)
-        archived_headline:set_property('ARCHIVE_TODO', todo_state or '')
+        archived_headline:set_property("ARCHIVE_CATEGORY", headline_category)
+        archived_headline:set_property("ARCHIVE_TODO", todo_state or "")
       end)
     end)
 end
@@ -390,18 +390,18 @@ end
 function Capture:get_destination()
   local valid_destinations = self:_get_autocompletion_files()
 
-  return Input.open('Enter destination: ', '', function(arg_lead)
+  return Input.open("Enter destination: ", "", function(arg_lead)
     return self:autocomplete_refile(arg_lead, valid_destinations)
   end):next(function(destination)
     if not destination then
       return false
     end
 
-    local path = destination:match('^.*%.org/?')
-    local headline_title = path and destination:sub(#path + 1) or ''
+    local path = destination:match("^.*%.org/?")
+    local headline_title = path and destination:sub(#path + 1) or ""
 
-    if not vim.endswith(path, '/') then
-      path = path .. '/'
+    if not vim.endswith(path, "/") then
+      path = path .. "/"
     end
 
     if not valid_destinations[path] then
@@ -416,12 +416,12 @@ function Capture:get_destination()
       file = destination_file,
     }
 
-    if not headline_title or vim.trim(headline_title) == '' then
+    if not headline_title or vim.trim(headline_title) == "" then
       return result
     end
 
     local headlines = vim.tbl_filter(function(item)
-      local pattern = '^' .. vim.pesc(headline_title:lower()) .. '$'
+      local pattern = "^" .. vim.pesc(headline_title:lower()) .. "$"
       return item:get_title():lower():match(pattern)
     end, destination_file:get_opened_unfinished_headlines())
 
@@ -447,7 +447,7 @@ function Capture:autocomplete_refile(arg_lead, files)
     return vim.tbl_keys(files)
   end
 
-  local filename = arg_lead:match('^.*%.org/')
+  local filename = arg_lead:match("^.*%.org/")
 
   local selected_file = filename and files[filename]
 
@@ -457,18 +457,18 @@ function Capture:autocomplete_refile(arg_lead, files)
 
   local headlines = selected_file:get_opened_unfinished_headlines()
   local result = vim.tbl_map(function(headline)
-    return string.format('%s%s', filename, headline:get_title())
+    return string.format("%s%s", filename, headline:get_title())
   end, headlines)
 
   return vim.tbl_filter(function(item)
-    return item:match(string.format('^%s', vim.pesc(arg_lead)))
+    return item:match(string.format("^%s", vim.pesc(arg_lead)))
   end, result)
 end
 
 function Capture:build_note_capture(title)
   return CaptureWindow:new({
     template = Template:new({
-      template = '# ' .. title .. '\n\n%?',
+      template = "# " .. title .. "\n\n%?",
     }),
     on_finish = function(content)
       local result = {}
@@ -478,7 +478,7 @@ function Capture:build_note_capture(title)
       local trim_obsolete = true
 
       for _, line in ipairs(content) do
-        local is_non_empty_line = not line:match('^%s*#%s') and vim.trim(line) ~= ''
+        local is_non_empty_line = not line:match("^%s*#%s") and vim.trim(line) ~= ""
 
         if trim_obsolete and is_non_empty_line then
           trim_obsolete = false
@@ -494,7 +494,7 @@ function Capture:build_note_capture(title)
       end
 
       local has_non_empty_line = vim.tbl_filter(function(line)
-        return vim.trim(line) ~= ''
+        return vim.trim(line) ~= ""
       end, result)
 
       if has_non_empty_line then
@@ -504,7 +504,7 @@ function Capture:build_note_capture(title)
       return nil
     end,
     on_open = function(capture_window)
-      local maps = config:get_mappings('note', vim.api.nvim_get_current_buf())
+      local maps = config:get_mappings("note", vim.api.nvim_get_current_buf())
       if not maps then
         return
       end
@@ -526,10 +526,10 @@ function Capture:build_note_capture(title)
       local is_modified = vim.bo.modified
 
       if is_modified then
-        local choice = vim.fn.confirm('Do you want to capture this note?', '&Yes\n&No')
+        local choice = vim.fn.confirm("Do you want to capture this note?", "&Yes\n&No")
         vim.cmd([[redraw!]])
         if choice ~= 1 then
-          return utils.echo_info('Canceled.')
+          return utils.echo_info("Canceled.")
         end
       end
 
@@ -576,28 +576,28 @@ function Capture:_get_refile_vars(capture_window)
 
   local file = opts.template:get_target()
   if vim.fn.filereadable(file) == 0 then
-    local choice = vim.fn.confirm(('Refile destination %s does not exist. Create now?'):format(file), '&Yes\n&No')
+    local choice = vim.fn.confirm(("Refile destination %s does not exist. Create now?"):format(file), "&Yes\n&No")
     if choice ~= 1 then
-      utils.echo_error('Cannot proceed without a valid refile destination')
+      utils.echo_error("Cannot proceed without a valid refile destination")
       return false
     end
-    vim.fn.mkdir(vim.fn.fnamemodify(file, ':h'), 'p')
+    vim.fn.mkdir(vim.fn.fnamemodify(file, ":h"), "p")
     vim.fn.writefile({}, file)
   end
 
   opts.destination_file = self.files:get(file)
   if opts.template.headline then
     local template_headline = opts.template.headline
-    if type(template_headline) == 'function' then
+    if type(template_headline) == "function" then
       local ok, resolved_headline = pcall(template_headline)
       if not ok then
-        utils.echo_error('Failed to resolve capture template headline')
+        utils.echo_error("Failed to resolve capture template headline")
         return false
       end
       template_headline = resolved_headline
     end
-    if type(template_headline) ~= 'string' then
-      utils.echo_error('Capture template headline function must return a string')
+    if type(template_headline) ~= "string" then
+      utils.echo_error("Capture template headline function must return a string")
       return false
     end
 
@@ -614,7 +614,7 @@ end
 ---@deprecated
 ---@private
 function Capture:_setup_closing_note()
-  return self:build_note_capture('Insert note for closed todo item')
+  return self:build_note_capture("Insert note for closed todo item")
 end
 
 ---@private
@@ -639,13 +639,13 @@ function Capture:_create_menu_items(templates)
       local item = {
         key = key,
       }
-      if type(template) == 'string' then
-        item.label = template .. '...'
+      if type(template) == "string" then
+        item.label = template .. "..."
         item.action = function()
           self:_create_prompt(self:_get_subtemplates(key, templates))
         end
       elseif vim.tbl_count(template.subtemplates) > 0 then
-        item.label = template.description .. '...'
+        item.label = template.description .. "..."
         item.action = function()
           self:_create_prompt(template.subtemplates)
         end
@@ -677,7 +677,7 @@ function Capture:_get_autocompletion_files()
   local result = {}
 
   for i, filename in ipairs(filenames) do
-    result[filename .. '/'] = valid_destinations[i]
+    result[filename .. "/"] = valid_destinations[i]
   end
 
   return result
@@ -687,13 +687,13 @@ end
 ---@param templates table<string, OrgCaptureTemplate>
 function Capture:_create_prompt(templates)
   local menu = Menu:new({
-    title = 'Select a capture template',
+    title = "Select a capture template",
     items = self:_create_menu_items(templates),
-    prompt = 'Template key',
+    prompt = "Template key",
   })
   menu:add_separator()
-  menu:add_option({ label = 'Quit', key = 'q' })
-  menu:add_separator({ icon = ' ', length = 1 })
+  menu:add_option({ label = "Quit", key = "q" })
+  menu:add_separator({ icon = " ", length = 1 })
   return menu:open()
 end
 

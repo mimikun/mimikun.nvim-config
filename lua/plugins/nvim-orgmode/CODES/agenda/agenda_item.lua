@@ -1,12 +1,12 @@
-local Highlights = require('orgmode.colors.highlights')
+local Highlights = require("orgmode.colors.highlights")
 local hl_map = Highlights.get_agenda_hl_map()
-local config = require('orgmode.config')
+local config = require("orgmode.config")
 local FUTURE_DEADLINE_AS_WARNING_DAYS = math.floor(config.org_deadline_warning_days / 2)
 local function add_padding(datetime)
   if datetime:len() >= 10 then
-    return datetime .. ' '
+    return datetime .. " "
   end
-  return datetime .. ' ' .. config.org_agenda_time_grid.time_separator .. ' '
+  return datetime .. " " .. config.org_agenda_time_grid.time_separator .. " "
 end
 
 ---@class OrgAgendaItem
@@ -38,7 +38,7 @@ function AgendaItem:new(headline_date, headline, date, index)
   opts.is_valid = false
   opts.is_today = date:is_today()
   opts.repeats_on_date = false
-  opts.is_same_day = headline_date:is_same(date, 'day')
+  opts.is_same_day = headline_date:is_same(date, "day")
   if not opts.is_same_day then
     local repeat_count = config:get_repeat_count()
     opts.repeats_on_date = headline_date:repeats_on(date, repeat_count)
@@ -46,7 +46,7 @@ function AgendaItem:new(headline_date, headline, date, index)
   end
   opts.is_in_date_range = headline_date:is_none() and headline_date:is_in_date_range(date)
   opts.date_range_days = headline_date:get_date_range_days()
-  opts.label = ''
+  opts.label = ""
   if opts.repeats_on_date then
     opts.real_date = opts.headline_date:apply_repeater_until(opts.date)
   end
@@ -98,11 +98,11 @@ function AgendaItem:_is_valid_for_today()
     if self.is_same_day then
       return true
     end
-    if self.headline_date:is_before(self.date, 'day') then
+    if self.headline_date:is_before(self.date, "day") then
       return not self.headline:is_done()
     end
     return not self.headline:is_done()
-      and self.date:is_between(self.headline_date:get_adjusted_date(), self.headline_date, 'day')
+      and self.date:is_between(self.headline_date:get_adjusted_date(), self.headline_date, "day")
   end
 
   if self.headline:is_done() and config.org_agenda_skip_scheduled_if_done then
@@ -113,13 +113,13 @@ function AgendaItem:_is_valid_for_today()
     if self.is_same_day then
       return true
     end
-    if self.headline_date:is_before(self.date, 'day') and not self.headline:is_done() then
+    if self.headline_date:is_before(self.date, "day") and not self.headline:is_done() then
       return true
     end
     return false
   end
 
-  if self.headline_date:get_adjusted_date():is_same_or_before(self.date, 'day') and not self.headline:is_done() then
+  if self.headline_date:get_adjusted_date():is_same_or_before(self.date, "day") and not self.headline:is_done() then
     return true
   end
 
@@ -154,29 +154,29 @@ function AgendaItem:_is_valid_for_date()
 end
 
 function AgendaItem:_generate_label()
-  local time = self.headline_date:has_time() and add_padding(self:_format_time(self.headline_date)) or ''
+  local time = self.headline_date:has_time() and add_padding(self:_format_time(self.headline_date)) or ""
   if self.headline_date:is_deadline() then
     if self.is_same_day then
-      return time .. 'Deadline:'
+      return time .. "Deadline:"
     end
-    return self.headline_date:humanize(self.date) .. ':'
+    return self.headline_date:humanize(self.date) .. ":"
   end
 
   if self.headline_date:is_scheduled() then
     if self.is_same_day then
-      return time .. 'Scheduled:'
+      return time .. "Scheduled:"
     end
 
     local diff = math.abs(self.date:diff(self.headline_date))
 
-    return 'Sched. ' .. diff .. 'x:'
+    return "Sched. " .. diff .. "x:"
   end
 
   if self.headline_date.is_date_range_start then
     if not self.is_in_date_range then
       return time
     end
-    local range = string.format('(%d/%d):', self.date:diff(self.headline_date) + 1, self.date_range_days)
+    local range = string.format("(%d/%d):", self.date:diff(self.headline_date) + 1, self.date_range_days)
     if not self.is_same_day then
       return range
     end
@@ -184,7 +184,7 @@ function AgendaItem:_generate_label()
   end
 
   if self.headline_date.is_date_range_end then
-    local range = string.format('(%d/%d):', self.date_range_days, self.date_range_days)
+    local range = string.format("(%d/%d):", self.date_range_days, self.date_range_days)
     return time .. range
   end
 
@@ -207,8 +207,8 @@ function AgendaItem:_format_time(date)
   -- does not have a time range (e.g. <2023-09-24 Sun 10:00-11:00)
   -- example: <2023-09-24 Sun 10:00>--<2023-09-24 Sun 11:00>
   -- result: 10:00-11:00
-  if date_range_end and date_range_end:is_same(date, 'day') and date_range_end:has_time() then
-    return formatted_time .. '-' .. date_range_end:format_time()
+  if date_range_end and date_range_end:is_same(date, "day") and date_range_end:has_time() then
+    return formatted_time .. "-" .. date_range_end:format_time()
   end
 
   return formatted_time
@@ -220,7 +220,7 @@ function AgendaItem:get_hlgroup()
     if self.headline:is_done() then
       return hl_map.ok
     end
-    if self.is_today and self.headline_date:is_after(self.date, 'day') then
+    if self.is_today and self.headline_date:is_after(self.date, "day") then
       local diff = math.abs(self.date:diff(self.headline_date))
       if diff <= FUTURE_DEADLINE_AS_WARNING_DAYS then
         return hl_map.upcoming_deadline
@@ -232,7 +232,7 @@ function AgendaItem:get_hlgroup()
   end
 
   if self.headline_date:is_scheduled() then
-    if self.headline_date:is_past('day') and not self.headline:is_done() then
+    if self.headline_date:is_past("day") and not self.headline:is_done() then
       return hl_map.warning
     end
 

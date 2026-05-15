@@ -1,4 +1,4 @@
-local ts_utils = require('orgmode.utils.treesitter')
+local ts_utils = require("orgmode.utils.treesitter")
 local TextObjects = {}
 
 local function get_range_for_node_range(start_line, end_line, end_col)
@@ -17,7 +17,7 @@ local function get_current_section_range()
   if not node then
     return
   end
-  while node and node:type() ~= 'section' do
+  while node and node:type() ~= "section" do
     node = node:parent()
   end
   if not node then
@@ -25,9 +25,9 @@ local function get_current_section_range()
   end
   local start_line, _, end_line, end_col = node:range()
   local children = ts_utils.get_named_children(node)
-  if children[#children]:type() == 'section' then
+  if children[#children]:type() == "section" then
     for _, child in ipairs(children) do
-      if child:type() == 'section' then
+      if child:type() == "section" then
         local s, _, _, ec = child:range()
         end_line = s
         end_col = ec
@@ -46,17 +46,17 @@ local function do_selection(ranges, exclude_stars)
   local end_range = ranges.end_range
   local col = 1
   if exclude_stars then
-    local _, offset = vim.fn.getline(start_range):find('^%*+%s*')
+    local _, offset = vim.fn.getline(start_range):find("^%*+%s*")
     col = col + offset
   end
   vim.fn.cursor({ start_range, col })
-  local down_motion = ''
+  local down_motion = ""
   if (end_range - start_range) > 0 then
-    down_motion = string.format('%dgg', end_range)
+    down_motion = string.format("%dgg", end_range)
   end
-  local visual_mode = exclude_stars and 'v' or 'V'
-  local goto_line_end = exclude_stars and '$' or ''
-  vim.cmd(string.format('norm!%s%s%s', visual_mode, down_motion, goto_line_end))
+  local visual_mode = exclude_stars and "v" or "V"
+  local goto_line_end = exclude_stars and "$" or ""
+  vim.cmd(string.format("norm!%s%s%s", visual_mode, down_motion, goto_line_end))
 end
 
 local function current_heading(exclude_stars)
@@ -67,7 +67,7 @@ local function current_heading(exclude_stars)
 end
 
 local function current_subtree(exclude_stars)
-  local node = ts_utils.closest_node(ts_utils.get_node_at_cursor(), 'section')
+  local node = ts_utils.closest_node(ts_utils.get_node_at_cursor(), "section")
   if not node then
     return
   end
@@ -83,7 +83,7 @@ local function current_heading_from_root(exclude_stars)
   end
   while node do
     local parent = node:parent()
-    if not parent or parent:type() == 'document' then
+    if not parent or parent:type() == "document" then
       break
     end
     node = parent
@@ -99,7 +99,7 @@ local function current_subtree_from_root(exclude_stars)
   end
   while node do
     local parent = node:parent()
-    if not parent or parent:type() == 'document' then
+    if not parent or parent:type() == "document" then
       break
     end
     node = parent

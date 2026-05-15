@@ -1,6 +1,6 @@
 ---@diagnostic disable: inject-field
-local OrgAgendaTodosType = require('orgmode.agenda.types.todo')
-local Input = require('orgmode.ui.input')
+local OrgAgendaTodosType = require("orgmode.agenda.types.todo")
+local Input = require("orgmode.ui.input")
 
 ---@class OrgAgendaSearchTypeOpts:OrgAgendaTodosTypeOpts
 ---@field headline_query? string
@@ -22,17 +22,17 @@ function OrgAgendaSearchType:new(opts)
 end
 
 function OrgAgendaSearchType:prepare()
-  if not self.headline_query or self.headline_query == '' then
+  if not self.headline_query or self.headline_query == "" then
     return self:get_search_term()
   end
 end
 
 function OrgAgendaSearchType:get_file_headlines(file)
-  return file:find_headlines_matching_search_term(self.headline_query or '', false, true)
+  return file:find_headlines_matching_search_term(self.headline_query or "", false, true)
 end
 
 function OrgAgendaSearchType:get_search_term()
-  return Input.open('Enter search term: ', self.headline_query or ''):next(function(value)
+  return Input.open("Enter search term: ", self.headline_query or ""):next(function(value)
     if not value then
       return false
     end

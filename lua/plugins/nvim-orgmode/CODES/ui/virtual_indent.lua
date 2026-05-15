@@ -1,11 +1,11 @@
-local tree_utils = require('orgmode.utils.treesitter')
+local tree_utils = require("orgmode.utils.treesitter")
 ---@class OrgVirtualIndent
 ---@field private _ns_id number extmarks namespace id
 ---@field private _bufnr integer Buffer VirtualIndent is attached to
 ---@field private _attached boolean Whether or not VirtualIndent is attached for its buffer
 ---@field private _bufnrs table<integer, OrgVirtualIndent> Buffers with VirtualIndent attached
 local VirtualIndent = {
-  _ns_id = vim.api.nvim_create_namespace('orgmode.ui.indent'),
+  _ns_id = vim.api.nvim_create_namespace("orgmode.ui.indent"),
   _bufnrs = {},
 }
 VirtualIndent.__index = VirtualIndent
@@ -30,15 +30,15 @@ end
 function VirtualIndent.toggle_buffer_indent_mode(bufnr)
   bufnr = bufnr or vim.api.nvim_get_current_buf()
   local instance = VirtualIndent:new(bufnr)
-  local message = ''
+  local message = ""
   if vim.b[bufnr].org_indent_mode then
-    message = 'disabled'
+    message = "disabled"
     instance:detach()
   else
-    message = 'enabled'
+    message = "enabled"
     instance:attach()
   end
-  require('orgmode.utils').echo_info('Org-Indent mode ' .. message .. ' in current buffer')
+  require("orgmode.utils").echo_info("Org-Indent mode " .. message .. " in current buffer")
 end
 
 function VirtualIndent:_delete_old_extmarks(start_line, end_line)
@@ -48,7 +48,7 @@ function VirtualIndent:_delete_old_extmarks(start_line, end_line)
     self._ns_id,
     { start_line, 0 },
     { end_line, 0 },
-    { type = 'virt_text' }
+    { type = "virt_text" }
   )
   if not ok then
     old_extmarks = {}
@@ -65,7 +65,7 @@ function VirtualIndent:_get_indent_size(line, tree_has_errors)
     local linenr = line
     while linenr > 0 do
       -- We offset `linenr` by 1 because it's 0-indexed and `getline` is 1-indexed
-      local _, level = vim.fn.getline(linenr + 1):find('^%*+')
+      local _, level = vim.fn.getline(linenr + 1):find("^%*+")
       if level then
         -- If the current line is a headline we should return no virtual indentation, otherwise
         -- return virtual indentation
@@ -81,7 +81,7 @@ function VirtualIndent:_get_indent_size(line, tree_has_errors)
     local headline_line = headline:start()
 
     if headline_line ~= line then
-      local _, level = headline:field('stars')[1]:end_()
+      local _, level = headline:field("stars")[1]:end_()
       return level + 1
     end
   end
@@ -119,8 +119,8 @@ function VirtualIndent:set_indent(start_line, end_line, ignore_ts)
     if indent > 0 then
       -- NOTE: `ephemeral = true` is not implemented for `inline` virt_text_pos :(
       pcall(vim.api.nvim_buf_set_extmark, self._bufnr, self._ns_id, line, 0, {
-        virt_text = { { string.rep(' ', indent), 'OrgIndent' } },
-        virt_text_pos = 'inline',
+        virt_text = { { string.rep(" ", indent), "OrgIndent" } },
+        virt_text_pos = "inline",
         right_gravity = false,
         priority = 110,
       })

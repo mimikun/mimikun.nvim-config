@@ -1,5 +1,5 @@
-local utils = require('orgmode.utils')
-local TodoKeyword = require('orgmode.objects.todo_keywords.todo_keyword')
+local utils = require("orgmode.utils")
+local TodoKeyword = require("orgmode.objects.todo_keywords.todo_keyword")
 
 ---@class OrgTodoKeywords
 ---@field org_todo_keywords string[][]|string[]
@@ -14,7 +14,7 @@ TodoKeywords.__index = TodoKeywords
 function TodoKeywords:new(opts)
   -- Support both single sequence (string[]) and multiple sequences (string[][])
   local normalized_keywords = opts.org_todo_keywords
-  if type(normalized_keywords[1]) ~= 'table' then
+  if type(normalized_keywords[1]) ~= "table" then
     normalized_keywords = { normalized_keywords }
   end
 
@@ -149,13 +149,13 @@ function TodoKeywords:_parse_sequence(keywords, seq_idx, used_shortcuts, keyword
   local seq_keywords = {}
 
   for i, keyword in ipairs(todo) do
-    local todo_keyword = self:_create_keyword(keyword, 'TODO', keyword_offset + i, seq_idx, used_shortcuts)
+    local todo_keyword = self:_create_keyword(keyword, "TODO", keyword_offset + i, seq_idx, used_shortcuts)
     table.insert(list, todo_keyword)
     table.insert(seq_keywords, todo_keyword)
   end
 
   for i, keyword in ipairs(done) do
-    local todo_keyword = self:_create_keyword(keyword, 'DONE', keyword_offset + #todo + i, seq_idx, used_shortcuts)
+    local todo_keyword = self:_create_keyword(keyword, "DONE", keyword_offset + #todo + i, seq_idx, used_shortcuts)
     table.insert(list, todo_keyword)
     table.insert(seq_keywords, todo_keyword)
   end
@@ -169,28 +169,28 @@ end
 ---@return string
 function TodoKeywords:_get_hl(keyword, type)
   if not self.org_todo_keyword_faces[keyword] then
-    return type == 'TODO' and '@org.keyword.todo' or '@org.keyword.done'
+    return type == "TODO" and "@org.keyword.todo" or "@org.keyword.done"
   end
-  return ('@org.keyword.face.%s'):format(keyword:gsub('%-', ''))
+  return ("@org.keyword.face.%s"):format(keyword:gsub("%-", ""))
 end
 
 ---@private
 ---@param keywords string[]
 ---@return string[], string[]
 function TodoKeywords:_split_todo_and_done(keywords)
-  local has_separator = vim.tbl_contains(keywords, '|')
+  local has_separator = vim.tbl_contains(keywords, "|")
   if not has_separator then
     return { unpack(keywords, 1, #keywords - 1) }, { keywords[#keywords] }
   end
 
-  local type = 'TODO'
+  local type = "TODO"
   local by_type = {
     TODO = {},
     DONE = {},
   }
   for _, keyword in ipairs(keywords) do
-    if keyword == '|' then
-      type = 'DONE'
+    if keyword == "|" then
+      type = "DONE"
     else
       table.insert(by_type[type], keyword)
     end

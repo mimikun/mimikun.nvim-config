@@ -3,7 +3,7 @@
 ---@field line? number
 ---@field action 'line_to_headline' | 'headline_to_line' | 'line_to_child_headline'
 local HeadingToggledEvent = {
-  type = 'orgmode.heading_toggled',
+  type = "orgmode.heading_toggled",
 }
 HeadingToggledEvent.__index = HeadingToggledEvent
 

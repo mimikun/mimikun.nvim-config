@@ -38,11 +38,11 @@ setmetatable(Org, {
 })
 
 function Org:new()
-  require('orgmode.org.global')(self)
+  require("orgmode.org.global")(self)
   self.initialized = false
   self.setup_called = false
   self:setup_autocmds()
-  require('orgmode.config'):setup_ts_predicates()
+  require("orgmode.config"):setup_ts_predicates()
   return self
 end
 
@@ -50,36 +50,36 @@ function Org:init()
   if self.initialized then
     return
   end
-  self.buffers = require('orgmode.state.buffers').init()
-  require('orgmode.events').init()
-  self.highlighter = require('orgmode.colors.highlighter'):new()
-  require('orgmode.colors.highlights').define_highlights()
-  self.files = require('orgmode.files')
+  self.buffers = require("orgmode.state.buffers").init()
+  require("orgmode.events").init()
+  self.highlighter = require("orgmode.colors.highlighter"):new()
+  require("orgmode.colors.highlights").define_highlights()
+  self.files = require("orgmode.files")
     :new({
-      paths = require('orgmode.config').org_agenda_files,
+      paths = require("orgmode.config").org_agenda_files,
     })
     :load_sync(true, 20000)
-  self.links = require('orgmode.org.links'):new({ files = self.files })
-  self.agenda = require('orgmode.agenda'):new({
+  self.links = require("orgmode.org.links"):new({ files = self.files })
+  self.agenda = require("orgmode.agenda"):new({
     files = self.files,
     highlighter = self.highlighter,
     links = self.links,
   })
-  self.capture = require('orgmode.capture'):new({
+  self.capture = require("orgmode.capture"):new({
     files = self.files,
   })
-  self.completion = require('orgmode.org.autocompletion'):new({ files = self.files, links = self.links })
-  self.org_mappings = require('orgmode.org.mappings'):new({
+  self.completion = require("orgmode.org.autocompletion"):new({ files = self.files, links = self.links })
+  self.org_mappings = require("orgmode.org.mappings"):new({
     capture = self.capture,
     agenda = self.agenda,
     files = self.files,
     links = self.links,
     completion = self.completion,
   })
-  self.clock = require('orgmode.clock'):new({
+  self.clock = require("orgmode.clock"):new({
     files = self.files,
   })
-  self.statusline_debounced = require('orgmode.utils').debounce('statusline', function()
+  self.statusline_debounced = require("orgmode.utils").debounce("statusline", function()
     return self.clock:get_statusline()
   end, 300)
   self.initialized = true
@@ -92,42 +92,42 @@ function Org:reload(file)
 end
 
 function Org:setup_autocmds()
-  local org_augroup = vim.api.nvim_create_augroup('orgmode_nvim', { clear = true })
-  vim.api.nvim_create_autocmd('BufWinEnter', {
-    pattern = { '*.org', '*.org_archive' },
+  local org_augroup = vim.api.nvim_create_augroup("orgmode_nvim", { clear = true })
+  vim.api.nvim_create_autocmd("BufWinEnter", {
+    pattern = { "*.org", "*.org_archive" },
     group = org_augroup,
     callback = function(event)
-      if not vim.bo[event.buf].filetype or vim.bo[event.buf].filetype == '' then
-        vim.bo[event.buf].filetype = 'org'
+      if not vim.bo[event.buf].filetype or vim.bo[event.buf].filetype == "" then
+        vim.bo[event.buf].filetype = "org"
       end
     end,
   })
-  vim.api.nvim_create_autocmd('BufWritePost', {
-    pattern = { '*.org', '*.org_archive' },
+  vim.api.nvim_create_autocmd("BufWritePost", {
+    pattern = { "*.org", "*.org_archive" },
     group = org_augroup,
     callback = function(event)
-      self:reload(vim.fn.fnamemodify(event.file, ':p'))
+      self:reload(vim.fn.fnamemodify(event.file, ":p"))
     end,
   })
-  vim.api.nvim_create_autocmd('FileType', {
-    pattern = 'org',
+  vim.api.nvim_create_autocmd("FileType", {
+    pattern = "org",
     group = org_augroup,
     callback = function()
-      self:reload(vim.fn.expand('<afile>:p'))
+      self:reload(vim.fn.expand("<afile>:p"))
     end,
   })
-  vim.api.nvim_create_autocmd('ColorScheme', {
-    pattern = '*',
+  vim.api.nvim_create_autocmd("ColorScheme", {
+    pattern = "*",
     group = org_augroup,
     callback = function()
       if self.initialized then
-        require('orgmode.colors.highlights').define_highlights()
+        require("orgmode.colors.highlights").define_highlights()
       end
     end,
   })
 
-  vim.api.nvim_create_autocmd({ 'BufNew' }, {
-    pattern = { '*.org', '*.org_archive' },
+  vim.api.nvim_create_autocmd({ "BufNew" }, {
+    pattern = { "*.org", "*.org_archive" },
     group = org_augroup,
     callback = function(event)
       if self.buffers then
@@ -136,8 +136,8 @@ function Org:setup_autocmds()
     end,
   })
 
-  vim.api.nvim_create_autocmd('BufWipeout', {
-    pattern = { '*.org', '*.org_archive' },
+  vim.api.nvim_create_autocmd("BufWipeout", {
+    pattern = { "*.org", "*.org_archive" },
     group = org_augroup,
     callback = function(event)
       if self.buffers then
@@ -151,21 +151,21 @@ end
 ---@return Org
 function Org.setup(opts)
   opts = opts or {}
-  local config = require('orgmode.config'):extend(opts)
+  local config = require("orgmode.config"):extend(opts)
   config:install_grammar()
   instance = Org:new()
   instance.setup_called = true
   vim.defer_fn(function()
     if config.notifications.enabled and #vim.api.nvim_list_uis() > 0 then
       Org.files:load():next(vim.schedule_wrap(function()
-        instance.notifications = require('orgmode.notifications')
+        instance.notifications = require("orgmode.notifications")
           :new({
             files = Org.files,
           })
           :start_timer()
       end))
     end
-    config:setup_mappings('global')
+    config:setup_mappings("global")
   end, 1)
   return instance
 end
@@ -181,7 +181,7 @@ function Org._set_dot_repeat(cmd, opts)
   vim.cmd(
     string.format(
       [[silent! call repeat#set("\<cmd>lua require('orgmode').action(%s)\<CR>")]],
-      table.concat(repeat_action, ',')
+      table.concat(repeat_action, ",")
     )
   )
 end
@@ -189,7 +189,7 @@ end
 ---@param cmd string
 ---@param opts? any
 function Org.action(cmd, opts)
-  local parts = vim.split(cmd, '.', { plain = true })
+  local parts = vim.split(cmd, ".", { plain = true })
   if #parts < 2 then
     return
   end
@@ -208,10 +208,10 @@ function Org.action(cmd, opts)
     local success, result = pcall(method, item, opts)
     if not success then
       if result.message then
-        return require('orgmode.utils').echo_error(result.message)
+        return require("orgmode.utils").echo_error(result.message)
       end
-      if type(result) == 'string' then
-        return require('orgmode.utils').echo_error(result)
+      if type(result) == "string" then
+        return require("orgmode.utils").echo_error(result)
       end
     end
     Org._set_dot_repeat(cmd, opts)
@@ -221,12 +221,12 @@ end
 
 function Org.cron(opts)
   local ok, result = pcall(function()
-    local config = require('orgmode.config'):extend(opts or {})
+    local config = require("orgmode.config"):extend(opts or {})
     if not config.notifications.cron_enabled then
       return vim.cmd([[qa!]])
     end
     Org.files:load_sync(true, 20000)
-    instance.notifications = require('orgmode.notifications')
+    instance.notifications = require("orgmode.notifications")
       :new({
         files = Org.files,
       })
@@ -234,7 +234,7 @@ function Org.cron(opts)
   end)
 
   if not ok then
-    require('orgmode.utils').system_notification('Orgmode failed to run cron: ' .. tostring(result))
+    require("orgmode.utils").system_notification("Orgmode failed to run cron: " .. tostring(result))
     return vim.cmd([[qa!]])
   end
 end
@@ -263,9 +263,9 @@ end
 
 function _G.orgmode.statusline()
   if not instance or not instance.initialized then
-    return ''
+    return ""
   end
-  return instance.statusline_debounced() or ''
+  return instance.statusline_debounced() or ""
 end
 
 return Org

@@ -37,7 +37,7 @@ function OrgBuffers.get_buffer_by_filename(filename)
 
   -- If filename does not have an org extension, return the buffer only if it has correct filetype
   if not OrgBuffers._is_valid_file_name(resolved_filename) then
-    if vim.bo[bufnr].filetype == 'org' then
+    if vim.bo[bufnr].filetype == "org" then
       return bufnr
     end
 
@@ -114,8 +114,8 @@ end
 ---@private
 ---@param filename string
 function OrgBuffers._is_valid_file_name(filename)
-  filename = filename or ''
-  return filename:sub(-4) == '.org' or filename:sub(-12) == '.org_archive'
+  filename = filename or ""
+  return filename:sub(-4) == ".org" or filename:sub(-12) == ".org_archive"
 end
 
 return OrgBuffers

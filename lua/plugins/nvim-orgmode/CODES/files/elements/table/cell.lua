@@ -1,4 +1,4 @@
-local utils = require('orgmode.utils')
+local utils = require("orgmode.utils")
 
 ---@class OrgTableCell
 ---@field row OrgTableRow
@@ -30,11 +30,11 @@ end
 ---@return OrgTableCell
 function TableCell:compile()
   local width = self.row.table.cols_width[self.col]
-  local val = ''
+  local val = ""
   if self.row.is_separator then
-    val = string.format('-%s-', string.rep('-', width))
+    val = string.format("-%s-", string.rep("-", width))
   else
-    val = string.format(' %s ', utils.pad_right(self.value, width))
+    val = string.format(" %s ", utils.pad_right(self.value, width))
   end
   local start_col = self.row.table.start_col + 2
   if self.col > 1 then
@@ -43,7 +43,7 @@ function TableCell:compile()
   end
   self.range.start_col = start_col
   self.range.end_col = start_col + self.len - 1
-  if self.value == '' then
+  if self.value == "" then
     self.range.end_col = self.range.start_col
   end
   self.content = val
@@ -66,7 +66,7 @@ function TableCell.from_row_item(data, col_number, row)
     value = nil,
     reference = nil,
   }
-  if type(data) == 'table' then
+  if type(data) == "table" then
     cell_data.value = data.value
     cell_data.reference = data.reference
   else

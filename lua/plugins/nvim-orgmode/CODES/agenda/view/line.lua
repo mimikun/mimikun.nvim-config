@@ -1,7 +1,7 @@
-local colors = require('orgmode.colors')
-local Range = require('orgmode.files.elements.range')
-local OrgAgendaLineToken = require('orgmode.agenda.view.token')
-local utils = require('orgmode.utils')
+local colors = require("orgmode.colors")
+local Range = require("orgmode.files.elements.range")
+local OrgAgendaLineToken = require("orgmode.agenda.view.token")
+local utils = require("orgmode.utils")
 ---@class OrgAgendaLineOpts
 ---@field headline? OrgHeadline
 ---@field highlighter? OrgHighlighter
@@ -31,7 +31,7 @@ function OrgAgendaLine:new(opts)
     highlighter = opts.highlighter,
     hl_group = opts.hl_group,
     line_hl_group = opts.line_hl_group,
-    separator = opts.separator or ' ',
+    separator = opts.separator or " ",
     metadata = opts.metadata or {},
   }, OrgAgendaLine)
 end

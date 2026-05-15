@@ -13,7 +13,7 @@ function OrgCompletionHyperlinks:new(opts)
 end
 
 function OrgCompletionHyperlinks:get_name()
-  return 'hyperlinks'
+  return "hyperlinks"
 end
 
 ---@param context OrgCompletionContext

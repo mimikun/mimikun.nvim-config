@@ -1,11 +1,11 @@
-local OrgPosition = require('orgmode.api.position')
-local config = require('orgmode.config')
-local PriorityState = require('orgmode.objects.priority_state')
-local Date = require('orgmode.objects.date')
-local Calendar = require('orgmode.objects.calendar')
-local Promise = require('orgmode.utils.promise')
-local org = require('orgmode')
-local Buffers = require('orgmode.state.buffers')
+local OrgPosition = require("orgmode.api.position")
+local config = require("orgmode.config")
+local PriorityState = require("orgmode.objects.priority_state")
+local Date = require("orgmode.objects.date")
+local Calendar = require("orgmode.objects.calendar")
+local Promise = require("orgmode.utils.promise")
+local org = require("orgmode")
+local Buffers = require("orgmode.state.buffers")
 
 ---@class OrgApiHeadline
 ---@field title string headline title without todo keyword, tags and priority. Ex. `* TODO I am a headline  :SOMETAG:` returns `I am a headline`
@@ -103,7 +103,7 @@ end
 function OrgHeadline:set_tags(tags)
   return self:_do_action(function()
     local headline = org.files:get_closest_headline()
-    headline:set_tags(string.format(':%s:', table.concat(tags, ':')))
+    headline:set_tags(string.format(":%s:", table.concat(tags, ":")))
   end)
 end
 
@@ -151,7 +151,7 @@ function OrgHeadline:set_deadline(date)
     local headline = org.files:get_closest_headline()
     local deadline_date = headline:get_deadline_date()
     if not date then
-      return Calendar.new({ date = deadline_date or Date.today(), clearable = true, title = 'Set deadline' })
+      return Calendar.new({ date = deadline_date or Date.today(), clearable = true, title = "Set deadline" })
         :open()
         :next(function(new_date, cleared)
           if cleared then
@@ -164,22 +164,22 @@ function OrgHeadline:set_deadline(date)
         end)
     end
 
-    if type(date) == 'string' then
-      if date == '' then
+    if type(date) == "string" then
+      if date == "" then
         return headline:remove_deadline_date()
       end
       local date_instance = Date.from_string(date)
       if date_instance then
         return headline:set_deadline_date(date_instance)
       end
-      error('Invalid string format for deadline date', 0)
+      error("Invalid string format for deadline date", 0)
     end
 
     if Date.is_date_instance(date) then
       return headline:set_deadline_date(date)
     end
 
-    error('Invalid argument to set_deadline', 0)
+    error("Invalid argument to set_deadline", 0)
   end)
 end
 
@@ -191,7 +191,7 @@ function OrgHeadline:set_scheduled(date)
     local headline = org.files:get_closest_headline()
     local scheduled_date = headline:get_scheduled_date()
     if not date then
-      return Calendar.new({ date = scheduled_date or Date.today(), clearable = true, title = 'Set schedule' })
+      return Calendar.new({ date = scheduled_date or Date.today(), clearable = true, title = "Set schedule" })
         :open()
         :next(function(new_date, cleared)
           if cleared then
@@ -204,22 +204,22 @@ function OrgHeadline:set_scheduled(date)
         end)
     end
 
-    if type(date) == 'string' then
-      if date == '' then
+    if type(date) == "string" then
+      if date == "" then
         return headline:remove_scheduled_date()
       end
       local date_instance = Date.from_string(date)
       if date_instance then
         return headline:set_scheduled_date(date_instance)
       end
-      error('Invalid string format for schedule date', 0)
+      error("Invalid string format for schedule date", 0)
     end
 
     if Date.is_date_instance(date) then
       return headline:set_scheduled_date(date)
     end
 
-    error('Invalid argument to set_scheduled', 0)
+    error("Invalid argument to set_scheduled", 0)
   end)
 end
 
@@ -243,12 +243,12 @@ end
 --- Get headline id or create a new one if it doesn't exist
 --- @return string
 function OrgHeadline:id_get_or_create()
-  local id = self:get_property('id')
+  local id = self:get_property("id")
   if id then
     return id
   end
-  local org_id = require('orgmode.org.id').new()
-  self:set_property('ID', org_id)
+  local org_id = require("orgmode.org.id").new()
+  self:set_property("ID", org_id)
   return org_id
 end
 

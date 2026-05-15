@@ -1,8 +1,8 @@
-local Range = require('orgmode.files.elements.range')
-local TableRow = require('orgmode.files.elements.table.row')
-local ts_utils = require('orgmode.utils.treesitter')
-local utils = require('orgmode.utils')
-local config = require('orgmode.config')
+local Range = require("orgmode.files.elements.range")
+local TableRow = require("orgmode.files.elements.table.row")
+local ts_utils = require("orgmode.utils.treesitter")
+local utils = require("orgmode.utils")
+local config = require("orgmode.config")
 
 ---@class OrgTable
 ---@field cols_width number[]
@@ -38,14 +38,14 @@ function Table.from_current_node(cursor)
   -- If column is less than indentation of table, we will miss it.
   if not cursor then
     cursor = vim.api.nvim_win_get_cursor(0)
-    cursor[2] = vim.fn.col('$')
+    cursor[2] = vim.fn.col("$")
   end
   local node = ts_utils.get_node_at_cursor(cursor)
   if not node then
     return nil
   end
-  if node:type() ~= 'table' then
-    node = ts_utils.closest_node(node, 'table')
+  if node:type() ~= "table" then
+    node = ts_utils.closest_node(node, "table")
   end
 
   if not node then
@@ -55,15 +55,15 @@ function Table.from_current_node(cursor)
   local rows = {}
 
   for row in node:iter_children() do
-    if row:type() == 'hr' then
-      table.insert(rows, 'hr')
+    if row:type() == "hr" then
+      table.insert(rows, "hr")
     end
-    if row:type() == 'row' then
+    if row:type() == "row" then
       local row_data = {}
       for cell in row:iter_children() do
-        if cell:type() == 'cell' then
-          local cell_val = ''
-          local cell_content = cell:field('contents')
+        if cell:type() == "cell" then
+          local cell_val = ""
+          local cell_content = cell:field("contents")
           if cell_content and #cell_content > 0 then
             cell_val = vim.treesitter.get_node_text(cell_content[1], 0)
           end
@@ -87,7 +87,7 @@ function Table:reformat()
   local _, start_col = self.node:range()
   local indent = config:get_indent(start_col, vim.api.nvim_get_current_buf())
   local contents = vim.tbl_map(function(line)
-    return ('%s%s'):format(indent, line)
+    return ("%s%s"):format(indent, line)
   end, self:draw())
 
   local view = vim.fn.winsaveview() or {}
@@ -97,22 +97,22 @@ function Table:reformat()
 end
 
 function Table:handle_cr()
-  if vim.fn.col('.') == vim.fn.col('$') then
+  if vim.fn.col(".") == vim.fn.col("$") then
     return false
   end
 
-  local line = vim.fn.line('.') or 0
+  local line = vim.fn.line(".") or 0
   local indent_amount = vim.fn.indent(line) or 0
   local indent = config:get_indent(indent_amount, vim.api.nvim_get_current_buf())
-  vim.api.nvim_buf_set_lines(0, line, line, true, { ('%s|'):format(indent) })
-  local tbl = Table.from_current_node({ line, vim.fn.col('.') })
+  vim.api.nvim_buf_set_lines(0, line, line, true, { ("%s|"):format(indent) })
+  local tbl = Table.from_current_node({ line, vim.fn.col(".") })
   if tbl then
     tbl:reformat()
   end
-  vim.api.nvim_feedkeys(utils.esc('<Down>'), 'n', true)
+  vim.api.nvim_feedkeys(utils.esc("<Down>"), "n", true)
   vim.schedule(function()
     vim.cmd([[norm! F|]])
-    vim.api.nvim_feedkeys(utils.esc('<Right><Right>'), 'n', true)
+    vim.api.nvim_feedkeys(utils.esc("<Right><Right>"), "n", true)
   end)
   return true
 end

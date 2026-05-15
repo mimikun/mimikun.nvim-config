@@ -1,4 +1,4 @@
-local config = require('orgmode.config')
+local config = require("orgmode.config")
 
 ---@alias OrgFoldtextLineValue false | { col: number, hl_group: string }
 
@@ -13,7 +13,7 @@ local OrgFoldtext = {}
 function OrgFoldtext:new(opts)
   local data = {
     highlighter = opts.highlighter,
-    cache = setmetatable({}, { __mode = 'k' }),
+    cache = setmetatable({}, { __mode = "k" }),
     cache_tick = {},
   }
   setmetatable(data, self)
@@ -41,9 +41,9 @@ function OrgFoldtext:_highlight(bufnr, line, value)
   end
 
   vim.api.nvim_buf_set_extmark(bufnr, self.highlighter.namespace, line, value.col, {
-    hl_mode = 'combine',
+    hl_mode = "combine",
     virt_text = { { config.org_ellipsis, value.hl_group } },
-    virt_text_pos = 'overlay',
+    virt_text_pos = "overlay",
     ephemeral = self.highlighter._ephemeral,
   })
 end
@@ -61,11 +61,11 @@ function OrgFoldtext:on_line(bufnr, line, winid)
     -- foldclosed() and col() are window-local, so execute in the correct window
     vim.api.nvim_win_call(winid, function()
       is_fold_open = vim.fn.foldclosed(lnum) == -1
-      line_end = vim.fn.col({ lnum, '$' }) or 0
+      line_end = vim.fn.col({ lnum, "$" }) or 0
     end)
   else
     is_fold_open = vim.fn.foldclosed(lnum) == -1
-    line_end = vim.fn.col({ lnum, '$' }) or 0
+    line_end = vim.fn.col({ lnum, "$" }) or 0
   end
 
   local cache_entry = self.cache[bufnr] and self.cache[bufnr][line]
@@ -95,14 +95,14 @@ function OrgFoldtext:on_line(bufnr, line, winid)
 
   local col = line_end
 
-  local hl_group = 'Comment'
+  local hl_group = "Comment"
   local captures_at_pos = vim.treesitter.get_captures_at_pos(bufnr, line, col - 2)
 
   if #captures_at_pos > 0 then
     for i = #captures_at_pos, 1, -1 do
       local capture = captures_at_pos[i]
-      if capture.capture ~= 'spell' then
-        hl_group = table.concat({ '@', capture.capture, '.', capture.lang }, '')
+      if capture.capture ~= "spell" then
+        hl_group = table.concat({ "@", capture.capture, ".", capture.lang }, "")
         break
       end
     end

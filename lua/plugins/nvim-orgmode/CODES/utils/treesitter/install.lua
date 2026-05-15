@@ -1,17 +1,17 @@
-local Promise = require('orgmode.utils.promise')
-local utils = require('orgmode.utils')
+local Promise = require("orgmode.utils.promise")
+local utils = require("orgmode.utils")
 local uv = vim.uv
 local M = {
-  compilers = { 'tree-sitter', vim.fn.getenv('CC'), 'cc', 'gcc', 'clang', 'cl', 'zig' },
+  compilers = { "tree-sitter", vim.fn.getenv("CC"), "cc", "gcc", "clang", "cl", "zig" },
 }
 
-local required_version = '2.0.4'
+local required_version = "2.0.4"
 
 function M.install()
   local version_info = M.get_version_info()
 
   if not version_info.installed then
-    return M.run('install')
+    return M.run("install")
   end
 
   if #version_info.parser_locations > 1 then
@@ -23,7 +23,7 @@ function M.install()
   end
 
   if version_info.outdated then
-    return M.run('update')
+    return M.run("update")
   end
 
   if version_info.version_mismatch then
@@ -35,21 +35,21 @@ end
 
 function M.notify_conflicting_parsers(conflicting_parsers)
   local list = vim.tbl_map(function(parser)
-    return ('- `%s`'):format(parser)
+    return ("- `%s`"):format(parser)
   end, conflicting_parsers)
   utils.notify(
-    ('Multiple org parsers found in these locations:\n%s\nDelete unused ones to avoid conflicts.'):format(
-      table.concat(list, '\n')
+    ("Multiple org parsers found in these locations:\n%s\nDelete unused ones to avoid conflicts."):format(
+      table.concat(list, "\n")
     ),
     {
-      level = 'warn',
+      level = "warn",
       timeout = 5000,
     }
   )
 end
 
 function M.reinstall()
-  return M.run('reinstall')
+  return M.run("reinstall")
 end
 
 function M.get_version_info()
@@ -86,11 +86,11 @@ function M.get_version_info()
 end
 
 function M.get_parser_locations()
-  local runtime_files = vim.api.nvim_get_runtime_file('parser/org.so', true)
+  local runtime_files = vim.api.nvim_get_runtime_file("parser/org.so", true)
   local parser_locations = {}
   local valid_paths = {}
   for _, runtime_file in ipairs(runtime_files) do
-    local path = vim.fn.fnamemodify(runtime_file, ':p')
+    local path = vim.fn.fnamemodify(runtime_file, ":p")
     if not valid_paths[path] then
       valid_paths[path] = path
       table.insert(parser_locations, path)
@@ -110,13 +110,13 @@ function M.get_parser_locations()
 end
 
 function M.not_installed()
-  local ok, result, err = pcall(vim.treesitter.language.add, 'org')
+  local ok, result, err = pcall(vim.treesitter.language.add, "org")
   return not ok or (not result and err ~= nil)
 end
 
 function M._write_lock_file(content)
   local lock_file = M.get_lock_file()
-  local file = assert(io.open(lock_file, 'w'))
+  local file = assert(io.open(lock_file, "w"))
   file:write(vim.json.encode(content))
   file:close()
 end
@@ -124,81 +124,81 @@ end
 function M.get_installed_version()
   local lock_file = M.get_lock_file()
   if not vim.uv.fs_stat(lock_file) then
-    M._write_lock_file({ version = '1.3.4' })
-    return '1.3.4'
+    M._write_lock_file({ version = "1.3.4" })
+    return "1.3.4"
   end
-  local lock_file_handle = assert(io.open(lock_file, 'r'))
-  local file_content = vim.json.decode(lock_file_handle:read('*a'))
+  local lock_file_handle = assert(io.open(lock_file, "r"))
+  local file_content = vim.json.decode(lock_file_handle:read("*a"))
   lock_file_handle:close()
   return file_content.version
 end
 
 function M.get_package_path()
   -- Path to this source file, removing the leading '@'
-  local source = string.sub(debug.getinfo(1, 'S').source, 2)
+  local source = string.sub(debug.getinfo(1, "S").source, 2)
 
   -- Path to the package root
-  return vim.fn.fnamemodify(source, ':p:h:h:h:h:h')
+  return vim.fn.fnamemodify(source, ":p:h:h:h:h:h")
 end
 
 function M.get_lock_file()
-  return vim.fs.joinpath(M.get_package_path(), '.org-ts-lock.json')
+  return vim.fs.joinpath(M.get_package_path(), ".org-ts-lock.json")
 end
 
 function M.get_parser_path()
-  return vim.fs.joinpath(M.get_package_path(), 'parser', 'org.so')
+  return vim.fs.joinpath(M.get_package_path(), "parser", "org.so")
 end
 
 function M.select_compiler_args(compiler)
-  if compiler == 'tree-sitter' then
+  if compiler == "tree-sitter" then
     return {
-      'build',
-      '-o',
-      'parser.so',
+      "build",
+      "-o",
+      "parser.so",
     }
   end
-  if string.match(compiler, 'cl$') or string.match(compiler, 'cl.exe$') then
+  if string.match(compiler, "cl$") or string.match(compiler, "cl.exe$") then
     return {
-      '/Fe:',
-      'parser.so',
-      '/Isrc',
-      'src/parser.c',
-      'src/scanner.c',
-      '-Os',
-      '/std:c11',
-      '/utf-8',
-      '/LD',
+      "/Fe:",
+      "parser.so",
+      "/Isrc",
+      "src/parser.c",
+      "src/scanner.c",
+      "-Os",
+      "/std:c11",
+      "/utf-8",
+      "/LD",
     }
-  elseif string.match(compiler, 'zig$') or string.match(compiler, 'zig.exe$') then
+  elseif string.match(compiler, "zig$") or string.match(compiler, "zig.exe$") then
     return {
-      'c++',
-      '-o',
-      'parser.so',
-      'src/parser.c',
-      'src/scanner.c',
-      '-lc',
-      '-Isrc',
-      '-shared',
-      '-Os',
-      '-std=c11',
+      "c++",
+      "-o",
+      "parser.so",
+      "src/parser.c",
+      "src/scanner.c",
+      "-lc",
+      "-Isrc",
+      "-shared",
+      "-Os",
+      "-std=c11",
     }
   else
     local args = {
-      '-o',
-      'parser.so',
-      '-I./src',
-      'src/parser.c',
-      'src/scanner.c',
-      '-Os',
-      '-std=c11',
+      "-o",
+      "parser.so",
+      "-I./src",
+      "src/parser.c",
+      "src/scanner.c",
+      "-Os",
+      "-std=c11",
     }
-    if vim.fn.has('mac') == 1 then
-      table.insert(args, '-bundle')
+    if vim.fn.has("mac") == 1 then
+      table.insert(args, "-bundle")
     else
-      table.insert(args, '-shared')
+      table.insert(args, "-shared")
     end
-    if vim.fn.has('win32') == 0 then
-      table.insert(args, '-fPIC')
+    if vim.fn.has("win32") == 0 then
+      table.insert(args, "-fPIC")
     end
     return args
   end
@@ -226,25 +226,25 @@ function M.select_mv_cmd(from, to, cwd, is_win, shellslash)
   if is_win then
     local function cmdpath(p)
       if shellslash then
-        local r = p:gsub('/', '\\')
+        local r = p:gsub("/", "\\")
         return r
       end
       return p
     end
 
     return {
-      cmd = 'cmd',
+      cmd = "cmd",
       opts = {
-        args = { '/C', 'move', '/Y', cmdpath(from), cmdpath(to) },
+        args = { "/C", "move", "/Y", cmdpath(from), cmdpath(to) },
         cwd = cwd,
       },
     }
   end
 
   return {
-    cmd = 'mv',
+    cmd = "mv",
     opts = {
-      args = { '-f', from, to },
+      args = { "-f", from, to },
       cwd = cwd,
     },
   }
@@ -256,25 +256,25 @@ function M.get_path(url, type)
   local is_local_path = vim.fn.isdirectory(local_path) == 1
 
   if is_local_path then
-    utils.notify('Using local version of tree-sitter grammar...', { id = 'orgmode-treesitter-install' })
+    utils.notify("Using local version of tree-sitter grammar...", { id = "orgmode-treesitter-install" })
     return Promise.resolve(local_path)
   end
 
-  local path = vim.fs.joinpath(vim.fn.stdpath('cache'), 'tree-sitter-org')
-  vim.fn.delete(path, 'rf')
+  local path = vim.fs.joinpath(vim.fn.stdpath("cache"), "tree-sitter-org")
+  vim.fn.delete(path, "rf")
 
   local msg = {
-    install = 'Installing',
-    update = 'Updating',
-    reinstall = 'Reinstalling',
+    install = "Installing",
+    update = "Updating",
+    reinstall = "Reinstalling",
   }
 
-  utils.notify(('%s tree-sitter grammar...'):format(msg[type]), { id = 'orgmode-treesitter-install' })
-  return M.exe('git', {
-    args = { 'clone', '--filter=blob:none', '--depth=1', '--branch=' .. required_version, url, path },
+  utils.notify(("%s tree-sitter grammar..."):format(msg[type]), { id = "orgmode-treesitter-install" })
+  return M.exe("git", {
+    args = { "clone", "--filter=blob:none", "--depth=1", "--branch=" .. required_version, url, path },
   }):next(function(code)
     if code ~= 0 then
-      error('[orgmode] Failed to clone tree-sitter-org', 0)
+      error("[orgmode] Failed to clone tree-sitter-org", 0)
     end
     return path
   end)
@@ -283,18 +283,18 @@ end
 ---@param type? 'install' | 'update' | 'reinstall''
 ---@return OrgPromise<boolean>
 function M.run(type)
-  local url = 'https://github.com/nvim-orgmode/tree-sitter-org'
+  local url = "https://github.com/nvim-orgmode/tree-sitter-org"
   local compiler = vim.tbl_filter(function(exe)
     return exe ~= vim.NIL and vim.fn.executable(exe) == 1
   end, M.compilers)[1]
 
   if not compiler then
-    error('[orgmode] No C compiler found for installing tree-sitter grammar', 0)
+    error("[orgmode] No C compiler found for installing tree-sitter grammar", 0)
   end
 
   local compiler_args = M.select_compiler_args(compiler)
   local ts_grammar_dir = nil
-  local is_win = vim.fn.has('win32') == 1
+  local is_win = vim.fn.has("win32") == 1
   local shellslash = is_win and vim.opt.shellslash:get() or false
 
   return M.get_path(url, type)
@@ -307,30 +307,30 @@ function M.run(type)
     end)
     :next(function(code)
       if code ~= 0 then
-        error('[orgmode] Failed to compile parser', 0)
+        error("[orgmode] Failed to compile parser", 0)
       end
-      local move_cmd = M.select_mv_cmd('parser.so', M.get_parser_path(), ts_grammar_dir or '', is_win, shellslash)
+      local move_cmd = M.select_mv_cmd("parser.so", M.get_parser_path(), ts_grammar_dir or "", is_win, shellslash)
       return M.exe(move_cmd.cmd, move_cmd.opts)
     end)
     :next(function(code)
       if code ~= 0 then
-        error('[orgmode] Failed to move generated tree-sitter parser to runtime folder', 0)
+        error("[orgmode] Failed to move generated tree-sitter parser to runtime folder", 0)
       end
       return M._write_lock_file({ version = required_version })
     end)
     :next(vim.schedule_wrap(function()
-      local msg = { 'Tree-sitter grammar installed!' }
+      local msg = { "Tree-sitter grammar installed!" }
 
-      if type == 'update' then
+      if type == "update" then
         msg = {
-          'Tree-sitter grammar updated!',
-          'Please restart Neovim to apply the changes.',
+          "Tree-sitter grammar updated!",
+          "Please restart Neovim to apply the changes.",
         }
       end
       utils.notify(msg, {
-        id = 'orgmode-treesitter-install',
+        id = "orgmode-treesitter-install",
       })
-      vim.treesitter.language.add('org')
+      vim.treesitter.language.add("org")
       return true
     end))
     :wait(60000)

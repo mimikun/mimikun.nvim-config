@@ -16,24 +16,24 @@ function OrgCompletionDirectives:get_start(context)
 end
 
 function OrgCompletionDirectives:get_name()
-  return 'directives'
+  return "directives"
 end
 
 ---@return string[]
 function OrgCompletionDirectives:get_results(_)
   return {
-    '#+title',
-    '#+author',
-    '#+email',
-    '#+name',
-    '#+filetags',
-    '#+archive',
-    '#+options',
-    '#+category',
-    '#+begin_src',
-    '#+begin_example',
-    '#+end_src',
-    '#+end_example',
+    "#+title",
+    "#+author",
+    "#+email",
+    "#+name",
+    "#+filetags",
+    "#+archive",
+    "#+options",
+    "#+category",
+    "#+begin_src",
+    "#+begin_example",
+    "#+end_src",
+    "#+end_example",
   }
 end
 

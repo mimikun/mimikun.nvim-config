@@ -12,11 +12,11 @@ local AgendaFilter = {}
 function AgendaFilter:new(opts)
   opts = opts or {}
   local data = {
-    value = '',
+    value = "",
     available_values = {},
     values = {},
-    term = '',
-    types = opts.types or { 'tags', 'categories' },
+    term = "",
+    types = opts.types or { "tags", "categories" },
     parsed = false,
   }
   setmetatable(data, self)
@@ -26,7 +26,7 @@ end
 
 ---@return boolean
 function AgendaFilter:should_filter()
-  return vim.trim(self.value) ~= ''
+  return vim.trim(self.value) ~= ""
 end
 
 ---@param headline OrgHeadline
@@ -35,7 +35,7 @@ function AgendaFilter:matches(headline)
   if not self:should_filter() then
     return true
   end
-  local term_match = vim.trim(self.term) == ''
+  local term_match = vim.trim(self.term) == ""
   local values_match_empty = #self.values == 0
 
   if not term_match then
@@ -57,18 +57,18 @@ end
 ---@return boolean
 function AgendaFilter:_match(headline)
   local filters = {}
-  if vim.tbl_contains(self.types, 'tags') then
+  if vim.tbl_contains(self.types, "tags") then
     table.insert(filters, function(tag)
       return headline:has_tag(tag)
     end)
   end
-  if vim.tbl_contains(self.types, 'categories') then
+  if vim.tbl_contains(self.types, "categories") then
     table.insert(filters, function(category)
       return headline:matches_category(category)
     end)
   end
   for _, value in ipairs(self.values) do
-    if value.operator == '-' then
+    if value.operator == "-" then
       for _, filter in ipairs(filters) do
         if filter(value.value) then
           return false
@@ -90,30 +90,30 @@ end
 ---@param filter string
 ---@param skip_check? boolean do not check if given values exist in the current view
 function AgendaFilter:parse(filter, skip_check)
-  filter = filter or ''
+  filter = filter or ""
   self.value = filter
   self.values = {}
-  local search_rgx = '/[^/]*/?'
+  local search_rgx = "/[^/]*/?"
   local search_term = filter:match(search_rgx)
   if search_term then
-    search_term = search_term:gsub('^/*', ''):gsub('/*$', '')
+    search_term = search_term:gsub("^/*", ""):gsub("/*$", "")
   end
-  filter = filter:gsub(search_rgx, '')
-  for operator, tag_cat in string.gmatch(filter, '([%+%-]*)([^%-%+]+)') do
+  filter = filter:gsub(search_rgx, "")
+  for operator, tag_cat in string.gmatch(filter, "([%+%-]*)([^%-%+]+)") do
     local val = vim.trim(tag_cat)
-    if val ~= '' then
+    if val ~= "" then
       if self.available_values[val] or skip_check then
         table.insert(self.values, { operator = operator, value = val })
       end
     end
   end
-  self.term = search_term or ''
+  self.term = search_term or ""
   return self
 end
 
 function AgendaFilter:reset()
-  self.value = ''
-  self.term = ''
+  self.value = ""
+  self.term = ""
   self.parsed = false
 end
 
@@ -126,10 +126,10 @@ function AgendaFilter:parse_available_filters(agenda_views)
   for _, agenda_view in ipairs(agenda_views) do
     for _, line in ipairs(agenda_view:get_lines()) do
       if line.headline then
-        if vim.tbl_contains(self.types, 'categories') then
+        if vim.tbl_contains(self.types, "categories") then
           values[line.headline:get_category()] = true
         end
-        if vim.tbl_contains(self.types, 'tags') then
+        if vim.tbl_contains(self.types, "tags") then
           for _, tag in ipairs(line.headline:get_tags()) do
             values[tag] = true
           end

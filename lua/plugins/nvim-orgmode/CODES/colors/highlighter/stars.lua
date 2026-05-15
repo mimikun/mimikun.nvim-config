@@ -1,5 +1,5 @@
-local ts_utils = require('orgmode.utils.treesitter')
-local config = require('orgmode.config')
+local ts_utils = require("orgmode.utils.treesitter")
+local config = require("orgmode.config")
 
 ---@class OrgStarsHighlighter
 ---@field highlighter OrgHighlighter
@@ -25,7 +25,7 @@ function OrgStars:on_line(bufnr, line)
     pos = { line, 0 },
   })
 
-  if not node or node:type() ~= 'stars' then
+  if not node or node:type() ~= "stars" then
     return
   end
 
@@ -38,7 +38,7 @@ function OrgStars:on_line(bufnr, line)
   vim.api.nvim_buf_set_extmark(bufnr, self.highlighter.namespace, line, 0, {
     end_row = line,
     end_col = end_col - 1,
-    hl_group = '@org.leading_stars',
+    hl_group = "@org.leading_stars",
     ephemeral = true,
   })
 end

@@ -1,4 +1,4 @@
-local utils = require('orgmode.utils')
+local utils = require("orgmode.utils")
 
 ---@class OrgDatetree
 ---@field files OrgFiles
@@ -55,7 +55,7 @@ function Datetree:_get_datetree_destination(template)
     end
     local content = {}
     for i = (#result + 1), #tree do
-      table.insert(content, string.rep('*', i) .. ' ' .. date:format(tree[i].format))
+      table.insert(content, string.rep("*", i) .. " " .. date:format(tree[i].format))
     end
 
     return {
@@ -174,53 +174,53 @@ function Datetree:_get_tree_by_type(opts)
     -- then month, which is 2nd match, and then day, which is first.
     day = {
       {
-        format = '%Y',
-        pattern = '^(%d%d%d%d)$',
+        format = "%Y",
+        pattern = "^(%d%d%d%d)$",
         order = { 1 },
       },
       {
-        format = '%Y-%m %B',
-        pattern = '^(%d%d%d%d)%-(%d%d).*$',
+        format = "%Y-%m %B",
+        pattern = "^(%d%d%d%d)%-(%d%d).*$",
         order = { 1, 2 },
       },
       {
-        format = '%Y-%m-%d %A',
-        pattern = '^(%d%d%d%d)%-(%d%d)%-(%d%d).*$',
+        format = "%Y-%m-%d %A",
+        pattern = "^(%d%d%d%d)%-(%d%d)%-(%d%d).*$",
         order = { 1, 2, 3 },
       },
     },
     month = {
       {
-        format = '%Y',
-        pattern = '^(%d%d%d%d)$',
+        format = "%Y",
+        pattern = "^(%d%d%d%d)$",
         order = { 1 },
       },
       {
-        format = '%Y-%m %B',
-        pattern = '^(%d%d%d%d)%-(%d%d).*$',
+        format = "%Y-%m %B",
+        pattern = "^(%d%d%d%d)%-(%d%d).*$",
         order = { 1, 2 },
       },
     },
     week = {
       {
-        format = '%Y',
-        pattern = '^(%d%d%d%d)$',
+        format = "%Y",
+        pattern = "^(%d%d%d%d)$",
         order = { 1 },
       },
       {
-        format = '%Y-W%V',
-        pattern = '^(%d%d%d%d)%-W(%d%d).*$',
+        format = "%Y-W%V",
+        pattern = "^(%d%d%d%d)%-W(%d%d).*$",
         order = { 1, 2 },
       },
       {
-        format = '%Y-%m-%d %A',
-        pattern = '^(%d%d%d%d)%-(%d%d)%-(%d%d).*$',
+        format = "%Y-%m-%d %A",
+        pattern = "^(%d%d%d%d)%-(%d%d)%-(%d%d).*$",
         order = { 1, 2, 3 },
       },
     },
   }
 
-  if opts.tree_type == 'custom' and opts.tree then
+  if opts.tree_type == "custom" and opts.tree then
     return opts.tree
   end
 

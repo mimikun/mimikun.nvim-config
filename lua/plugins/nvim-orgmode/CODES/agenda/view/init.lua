@@ -1,4 +1,4 @@
-local colors = require('orgmode.colors')
+local colors = require("orgmode.colors")
 
 ---@class OrgAgendaView
 ---@field bufnr number
@@ -39,7 +39,7 @@ end
 ---@param line_nr? number
 ---@return boolean
 function OrgAgendaView:is_in_range(line_nr)
-  line_nr = line_nr or vim.fn.line('.')
+  line_nr = line_nr or vim.fn.line(".")
   return line_nr >= self.start_line and line_nr <= self.end_line
 end
 

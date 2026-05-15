@@ -1,4 +1,4 @@
-local Promise = require('orgmode.utils.promise')
+local Promise = require("orgmode.utils.promise")
 local uv = vim.uv
 local utils = {}
 local debounce_timers = {}
@@ -8,7 +8,7 @@ local debounce_timers = {}
 function utils.readfile(file, opts)
   opts = opts or {}
   return Promise.new(function(resolve, reject)
-    uv.fs_open(file, 'r', 438, function(err1, fd)
+    uv.fs_open(file, "r", 438, function(err1, fd)
       if err1 then
         return reject(err1)
       end
@@ -31,8 +31,8 @@ function utils.readfile(file, opts)
             if opts.raw then
               result = data
             else
-              local lines = vim.split(data, '[\r\n]')
-              if lines[#lines] == '' then
+              local lines = vim.split(data, "[\r\n]")
+              if lines[#lines] == "" then
                 table.remove(lines, #lines)
               end
               result = lines
@@ -58,7 +58,7 @@ end
 ---@return OrgPromise<integer> bytes
 function utils.writefile(file, data, opts)
   return Promise.new(function(resolve, reject)
-    local flags = opts and opts.excl and 'wx' or 'w'
+    local flags = opts and opts.excl and "wx" or "w"
     uv.fs_open(file, flags, 438, function(err1, fd)
       if err1 then
         return reject(err1)
@@ -86,12 +86,12 @@ function utils.writefile(file, data, opts)
 end
 
 function utils.system_notification(message)
-  if vim.fn.executable('notify-send') == 1 then
-    uv.spawn('notify-send', { args = { message } })
+  if vim.fn.executable("notify-send") == 1 then
+    uv.spawn("notify-send", { args = { message } })
   end
 
-  if vim.fn.executable('terminal-notifier') == 1 then
-    uv.spawn('terminal-notifier', { args = { '-message', message } })
+  if vim.fn.executable("terminal-notifier") == 1 then
+    uv.spawn("terminal-notifier", { args = { "-message", message } })
   end
 end
 
@@ -100,14 +100,14 @@ end
 ---@param store_in_history? boolean
 ---@return nil
 function utils.echo_warning(msg, additional_msg, store_in_history)
-  return utils._echo(msg, 'WarningMsg', additional_msg, store_in_history)
+  return utils._echo(msg, "WarningMsg", additional_msg, store_in_history)
 end
 
 ---@param msg string|table
 ---@param additional_msg? table
 ---@param store_in_history? boolean
 function utils.echo_error(msg, additional_msg, store_in_history)
-  return utils._echo(msg, 'ErrorMsg', additional_msg, store_in_history)
+  return utils._echo(msg, "ErrorMsg", additional_msg, store_in_history)
 end
 
 ---@param msg string|table
@@ -121,10 +121,10 @@ end
 ---@return nil
 function utils._echo(msg, hl, additional_msg, store_in_history)
   vim.cmd([[redraw!]])
-  if type(msg) == 'table' then
-    msg = table.concat(msg, '\n')
+  if type(msg) == "table" then
+    msg = table.concat(msg, "\n")
   end
-  local msg_item = { string.format('[orgmode] %s', msg) }
+  local msg_item = { string.format("[orgmode] %s", msg) }
   if hl then
     table.insert(msg_item, hl)
   end
@@ -133,7 +133,7 @@ function utils._echo(msg, hl, additional_msg, store_in_history)
     msg_list = utils.concat(msg_list, additional_msg)
   end
   local store = true
-  if type(store_in_history) == 'boolean' then
+  if type(store_in_history) == "boolean" then
     store = store_in_history
   end
   return vim.api.nvim_echo(msg_list, store, {})
@@ -142,7 +142,7 @@ end
 ---@param word string
 ---@return string
 function utils.capitalize(word)
-  return (word:gsub('^%l', string.upper))
+  return (word:gsub("^%l", string.upper))
 end
 
 ---@param isoweekday number
@@ -234,8 +234,8 @@ end
 
 function utils.parse_tags_string(tags)
   local parsed_tags = {}
-  for _, tag in ipairs(vim.split(tags or '', ':')) do
-    if tag:find('^[\128-\255%w_%%@#]+$') then
+  for _, tag in ipairs(vim.split(tags or "", ":")) do
+    if tag:find("^[\128-\255%w_%%@#]+$") then
       table.insert(parsed_tags, tag)
     end
   end
@@ -243,20 +243,20 @@ function utils.parse_tags_string(tags)
 end
 
 function utils.tags_to_string(taglist, sorted)
-  local tags = ''
+  local tags = ""
   local tags_list = taglist
   if #taglist > 0 then
     if sorted then
       tags_list = vim.deepcopy(taglist)
       table.sort(tags_list)
     end
-    tags = ':' .. table.concat(tags_list, ':') .. ':'
+    tags = ":" .. table.concat(tags_list, ":") .. ":"
   end
   return tags
 end
 
 function utils.ensure_array(val)
-  if type(val) ~= 'table' then
+  if type(val) ~= "table" then
     return { val }
   end
   return val
@@ -264,15 +264,15 @@ end
 
 function utils.humanize_minutes(minutes)
   if minutes == 0 then
-    return 'Now'
+    return "Now"
   end
   local is_past = minutes < 0
   local minutes_abs = math.abs(minutes)
   if minutes_abs < 60 then
     if is_past then
-      return string.format('%d min ago', minutes_abs)
+      return string.format("%d min ago", minutes_abs)
     end
-    return string.format('in %d min', minutes_abs)
+    return string.format("in %d min", minutes_abs)
   end
 
   local hours = math.floor(minutes_abs / 60)
@@ -280,15 +280,15 @@ function utils.humanize_minutes(minutes)
 
   if remaining_minutes == 0 then
     if is_past then
-      return string.format('%d hr ago', hours)
+      return string.format("%d hr ago", hours)
     end
-    return string.format('in %d hr', hours)
+    return string.format("in %d hr", hours)
   end
 
   if is_past then
-    return string.format('%d hr and %d min ago', hours, remaining_minutes)
+    return string.format("%d hr and %d min ago", hours, remaining_minutes)
   end
-  return string.format('in %d hr and %d min', hours, remaining_minutes)
+  return string.format("in %d hr and %d min", hours, remaining_minutes)
 end
 
 function utils.debounce(name, fn, ms)
@@ -318,7 +318,7 @@ end
 function utils.profile(name)
   local start_time = uv.hrtime()
   return function()
-    return print(name, string.format('%.2f', (uv.hrtime() - start_time) / 1000000))
+    return print(name, string.format("%.2f", (uv.hrtime() - start_time) / 1000000))
   end
 end
 
@@ -327,15 +327,15 @@ end
 ---@param split_chars? string[]
 ---@return string[]
 function utils.prompt_autocomplete(arg_lead, list, split_chars)
-  split_chars = split_chars or { '+', '-', ':', '&', '|' }
-  local split_chars_str = vim.pesc(table.concat(split_chars, ''))
-  local split_rgx = string.format('[%s]', split_chars_str)
-  local match_rgx = string.format('[^%s]*$', split_chars_str)
+  split_chars = split_chars or { "+", "-", ":", "&", "|" }
+  local split_chars_str = vim.pesc(table.concat(split_chars, ""))
+  local split_rgx = string.format("[%s]", split_chars_str)
+  local match_rgx = string.format("[^%s]*$", split_chars_str)
   local parts = vim.split(arg_lead, split_rgx)
-  local base = arg_lead:gsub(match_rgx, '')
+  local base = arg_lead:gsub(match_rgx, "")
   local last = arg_lead:match(match_rgx)
   local matches = vim.tbl_filter(function(tag)
-    return tag:match('^' .. vim.pesc(last)) and not vim.tbl_contains(parts, tag)
+    return tag:match("^" .. vim.pesc(last)) and not vim.tbl_contains(parts, tag)
   end, list)
 
   return vim.tbl_map(function(tag)
@@ -372,8 +372,8 @@ end
 ---@param border string|table
 function utils.open_window(name, height, split_mode, border)
   local cmd_by_split_mode = {
-    horizontal = string.format('%dsplit %s', height, name),
-    vertical = string.format('vsplit %s', name),
+    horizontal = string.format("%dsplit %s", height, name),
+    vertical = string.format("vsplit %s", name),
   }
 
   if cmd_by_split_mode[split_mode] then
@@ -382,48 +382,48 @@ function utils.open_window(name, height, split_mode, border)
     return
   end
 
-  if split_mode == 'auto' then
+  if split_mode == "auto" then
     local winwidth = utils.winwidth()
     if (winwidth / 2) >= 80 then
       vim.cmd(cmd_by_split_mode.vertical)
-      vim.w.org_window_split_mode = 'vertical'
+      vim.w.org_window_split_mode = "vertical"
     else
       vim.cmd(cmd_by_split_mode.horizontal)
-      vim.w.org_window_split_mode = 'horizontal'
+      vim.w.org_window_split_mode = "horizontal"
     end
     return
   end
 
-  if type(split_mode) == 'function' then
+  if type(split_mode) == "function" then
     return split_mode(name)
   end
 
-  if split_mode == 'float' then
+  if split_mode == "float" then
     return utils.open_float(name, { border = border })
   end
 
-  if type(split_mode) == 'table' and split_mode[1] == 'float' then
+  if type(split_mode) == "table" and split_mode[1] == "float" then
     return utils.open_float(name, { scale = split_mode[2], border = border })
   end
 
-  return vim.cmd(string.format('%s %s', split_mode, name))
+  return vim.cmd(string.format("%s %s", split_mode, name))
 end
 
 function utils.open_tmp_org_window(height, split_mode, border, on_close)
   local prev_winnr = vim.api.nvim_get_current_win()
-  utils.open_window(vim.fn.tempname() .. '.org', height or 16, split_mode, border)
+  utils.open_window(vim.fn.tempname() .. ".org", height or 16, split_mode, border)
   vim.cmd([[setlocal filetype=org bufhidden=wipe nobuflisted nolist noswapfile nofoldenable]])
   local bufnr = vim.api.nvim_get_current_buf()
-  local augroup = vim.api.nvim_create_augroup('OrgTmpWindow_' .. bufnr, { clear = true })
+  local augroup = vim.api.nvim_create_augroup("OrgTmpWindow_" .. bufnr, { clear = true })
 
   if on_close then
-    vim.api.nvim_create_autocmd('BufWipeout', {
+    vim.api.nvim_create_autocmd("BufWipeout", {
       buffer = bufnr,
       group = augroup,
       callback = on_close,
       once = true,
     })
-    vim.api.nvim_create_autocmd('VimLeavePre', {
+    vim.api.nvim_create_autocmd("VimLeavePre", {
       group = augroup,
       callback = on_close,
       once = true,
@@ -435,13 +435,13 @@ function utils.open_tmp_org_window(height, split_mode, border, on_close)
       return
     end
     if utils.is_single_win() then
-      return vim.cmd('q!')
+      return vim.cmd("q!")
     end
     return pcall(vim.api.nvim_win_close, 0, true)
   end
 
   return function()
-    vim.api.nvim_create_augroup('OrgTmpWindow_' .. bufnr, { clear = true })
+    vim.api.nvim_create_augroup("OrgTmpWindow_" .. bufnr, { clear = true })
     close_win()
     if prev_winnr and vim.api.nvim_win_is_valid(prev_winnr) then
       vim.api.nvim_set_current_win(prev_winnr)
@@ -454,7 +454,7 @@ end
 function utils.open_float(name, opts)
   opts = opts or { scale = nil, border = nil }
   opts.scale = opts.scale or 0.7
-  opts.border = opts.border or 'single'
+  opts.border = opts.border or "single"
   -- Make sure number is between 0 and 1
   local scale = math.min(math.max(0, opts.scale), 1)
   local bufnr = vim.api.nvim_create_buf(false, false)
@@ -466,7 +466,7 @@ function utils.open_float(name, opts)
   local col = math.floor(((vim.o.columns - width) / 2))
 
   vim.api.nvim_open_win(bufnr, true, {
-    relative = 'editor',
+    relative = "editor",
     width = width,
     height = height,
     row = row,
@@ -482,7 +482,7 @@ function utils.pad_right(str, amount)
   if spaces == 0 then
     return str
   end
-  return string.format('%s%s', str, string.rep(' ', spaces))
+  return string.format("%s%s", str, string.rep(" ", spaces))
 end
 
 function utils.is_list(value)
@@ -501,7 +501,7 @@ function utils.flatten(t)
     local n = #_t
     for i = 1, n do
       local v = _t[i]
-      if type(v) == 'table' and utils.is_list(v) then
+      if type(v) == "table" and utils.is_list(v) then
         _tbl_flatten(v)
       elseif v then
         table.insert(result, v)
@@ -520,28 +520,28 @@ function utils.edit_file(filename)
   return {
     open = function()
       local bufnr = vim.fn.bufadd(filename) or -1
-      vim.api.nvim_buf_set_var(bufnr, 'org_tmp_edit_window', true)
+      vim.api.nvim_buf_set_var(bufnr, "org_tmp_edit_window", true)
       vim.api.nvim_open_win(bufnr, true, {
-        relative = 'editor',
+        relative = "editor",
         width = 1,
         -- Use height of 2 to resolve winbar issues
         height = 2,
         row = 99999,
         col = 99999,
         zindex = 1,
-        style = 'minimal',
+        style = "minimal",
         focusable = false,
         hide = true,
       })
-      vim.api.nvim_set_option_value('swapfile', false, { buf = bufnr })
+      vim.api.nvim_set_option_value("swapfile", false, { buf = bufnr })
     end,
     close = function()
-      vim.cmd('silent! w')
+      vim.cmd("silent! w")
       vim.b.org_tmp_edit_window = nil
       if buf_not_already_loaded then
-        vim.cmd('silent! bw!')
+        vim.cmd("silent! bw!")
       else
-        vim.cmd('silent! q!')
+        vim.cmd("silent! q!")
       end
       vim.api.nvim_set_current_win(cur_win)
     end,
@@ -564,8 +564,8 @@ end
 ---@param filename string
 ---@return boolean
 function utils.is_org_file(filename)
-  local ext = vim.fn.fnamemodify(filename, ':e')
-  return ext == 'org' or ext == 'org_archive'
+  local ext = vim.fn.fnamemodify(filename, ":e")
+  return ext == "org" or ext == "org_archive"
 end
 
 function utils.sorted_pairs(t)
@@ -582,7 +582,7 @@ end
 function utils.goto_headline(headline)
   local current_file_path = utils.current_file_path()
   if headline.file.filename ~= current_file_path then
-    vim.cmd(string.format('edit %s', headline.file.filename))
+    vim.cmd(string.format("edit %s", headline.file.filename))
   else
     vim.cmd([[normal! m']]) -- add link source to jumplist
   end
@@ -592,19 +592,19 @@ end
 
 ---@return string
 function utils.get_visual_selection()
-  return table.concat(vim.fn.getregion(vim.fn.getpos('v'), vim.fn.getpos('.')), '\n')
+  return table.concat(vim.fn.getregion(vim.fn.getpos("v"), vim.fn.getpos(".")), "\n")
 end
 
 ---@param msg string|string[]
 ---@param opts? { level?: 'info' | 'warn' | 'error', id: string  }
 ---@return string
 function utils.notify(msg, opts)
-  opts = vim.tbl_extend('force', {
-    title = 'Orgmode',
-    level = 'info',
+  opts = vim.tbl_extend("force", {
+    title = "Orgmode",
+    level = "info",
   }, opts or {})
 
-  local message = type(msg) == 'table' and table.concat(msg, '\n') or msg --[[@as string]]
+  local message = type(msg) == "table" and table.concat(msg, "\n") or msg --[[@as string]]
   vim.notify(message, vim.log.levels[opts.level:upper()], opts)
 end
 
@@ -613,7 +613,7 @@ end
 ---@param ... T
 ---@return T
 function utils.if_nil(...)
-  local nargs = select('#', ...)
+  local nargs = select("#", ...)
   for i = 1, nargs do
     local v = select(i, ...)
     if v ~= nil then
@@ -631,7 +631,7 @@ function utils.is_single_win()
   if #wins == 1 then
     return true
   end
-  local ok, ui2 = pcall(require, 'vim._core.ui2')
+  local ok, ui2 = pcall(require, "vim._core.ui2")
   if not ok then
     return false
   end

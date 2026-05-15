@@ -28,9 +28,6 @@ Orgmode clone written in Lua for Neovim
 Use your favourite package manager. We recommend [[https://github.com/folke/lazy.nvim][lazy.nvim]]:
 #+BEGIN_SRC lua
 {
-  'nvim-orgmode/orgmode',
-  event = 'VeryLazy',
-  ft = { 'org' },
   config = function()
     -- Setup orgmode
     require('orgmode').setup({

@@ -2,36 +2,36 @@
 ---@field private markup OrgMarkupHighlighter
 local OrgLatex = {
   valid_capture_names = {
-    ['latex.plain'] = true,
-    ['latex.bracket.start'] = true,
-    ['latex.bracket.end'] = true,
-    ['latex.curly.start'] = true,
-    ['latex.curly.end'] = true,
-    ['latex.square.start'] = true,
-    ['latex.square.end'] = true,
+    ["latex.plain"] = true,
+    ["latex.bracket.start"] = true,
+    ["latex.bracket.end"] = true,
+    ["latex.curly.start"] = true,
+    ["latex.curly.end"] = true,
+    ["latex.square.start"] = true,
+    ["latex.square.end"] = true,
   },
 }
 
 local latex_pairs = {
-  ['('] = ')',
-  [')'] = '(',
-  ['{'] = '}',
-  ['}'] = '{',
-  ['['] = ']',
-  [']'] = '[',
+  ["("] = ")",
+  [")"] = "(",
+  ["{"] = "}",
+  ["}"] = "{",
+  ["["] = "]",
+  ["]"] = "[",
 }
 
 local valid_start_ids = {
-  ['latex_('] = true,
-  ['latex_{'] = true,
-  ['latex_['] = true,
+  ["latex_("] = true,
+  ["latex_{"] = true,
+  ["latex_["] = true,
 }
 
 local valid_end_ids = {
-  ['latex_)'] = true,
-  ['latex_}'] = true,
-  ['latex_]'] = true,
-  ['latex_str'] = true,
+  ["latex_)"] = true,
+  ["latex_}"] = true,
+  ["latex_]"] = true,
+  ["latex_str"] = true,
 }
 
 ---@param opts { markup: OrgMarkupHighlighter }
@@ -47,13 +47,13 @@ end
 ---@param entry OrgMarkupNode
 ---@return boolean
 function OrgLatex:is_valid_start_node(entry)
-  return entry.type == 'latex' and valid_start_ids[entry.id]
+  return entry.type == "latex" and valid_start_ids[entry.id]
 end
 
 ---@param entry OrgMarkupNode
 ---@return boolean
 function OrgLatex:is_valid_end_node(entry)
-  return entry.type == 'latex' and valid_end_ids[entry.id]
+  return entry.type == "latex" and valid_end_ids[entry.id]
 end
 
 ---@param node TSNode
@@ -63,22 +63,22 @@ function OrgLatex:parse_node(node, name)
     return false
   end
   local node_type = node:type()
-  if node_type ~= 'str' and not latex_pairs[node_type] then
+  if node_type ~= "str" and not latex_pairs[node_type] then
     return false
   end
   local prev_sibling = node:prev_sibling()
 
-  if not prev_sibling or prev_sibling:type() ~= '\\' then
+  if not prev_sibling or prev_sibling:type() ~= "\\" then
     return false
   end
 
-  local is_self_contained = node_type == 'str'
+  local is_self_contained = node_type == "str"
 
-  local id = table.concat({ 'latex', node_type }, '_')
-  local seek_id = table.concat({ 'latex', latex_pairs[node_type] or 'str' }, '_')
+  local id = table.concat({ "latex", node_type }, "_")
+  local seek_id = table.concat({ "latex", latex_pairs[node_type] or "str" }, "_")
 
   local info = {
-    type = 'latex',
+    type = "latex",
     char = node_type,
     id = id,
     seek_id = seek_id,
@@ -108,7 +108,7 @@ function OrgLatex:highlight(highlights, bufnr)
     vim.api.nvim_buf_set_extmark(bufnr, namespace, entry.from.line, entry.from.start_col - 1, {
       ephemeral = ephemeral,
       end_col = entry.to.end_col,
-      hl_group = '@org.latex',
+      hl_group = "@org.latex",
       spell = false,
       priority = 110 + entry.from.start_col,
     })
@@ -126,7 +126,7 @@ function OrgLatex:prepare_highlights(highlights)
       start_col = entry.from.start_col,
       end_col = entry.to.end_col,
       ephemeral = ephemeral,
-      hl_group = '@org.latex',
+      hl_group = "@org.latex",
       spell = false,
       priority = 110 + entry.from.start_col,
     })

@@ -9,8 +9,8 @@ vim.bo.lisp = false
 vim.bo.smartindent = false
 vim.bo.autoindent = true
 vim.b.undo_indent = table.concat({
-  'setlocal indentexpr<',
-  'lisp<',
-  'smartindent<',
-  'autoindent<',
-}, ' ')
+  "setlocal indentexpr<",
+  "lisp<",
+  "smartindent<",
+  "autoindent<",
+}, " ")

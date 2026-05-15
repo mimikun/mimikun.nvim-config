@@ -6,7 +6,7 @@
 ---@field memoized_methods table<string, fun(self: table, ...): any>
 ---@field methods_to_memoize table<string, boolean>
 local Memoize = {
-  cache = setmetatable({}, { __mode = 'k' }),
+  cache = setmetatable({}, { __mode = "k" }),
 }
 Memoize.__index = Memoize
 
@@ -32,7 +32,7 @@ function Memoize:setup()
     local method = self.class[key]
 
     -- Not memoizable or not required to be memoized
-    if type(method) ~= 'function' or not self.methods_to_memoize[key] then
+    if type(method) ~= "function" or not self.methods_to_memoize[key] then
       return method
     end
 
@@ -44,7 +44,7 @@ function Memoize:setup()
     self.memoized_methods[key] = function(method_self, ...)
       local memoize_key = self.key_getter(method_self)
       local cache = self:_get_cache_for_key(memoize_key)
-      local arg_key = key .. '_' .. table.concat({ ... }, '_')
+      local arg_key = key .. "_" .. table.concat({ ... }, "_")
 
       if not cache[arg_key] then
         local value = vim.F.pack_len(method(method_self, ...))

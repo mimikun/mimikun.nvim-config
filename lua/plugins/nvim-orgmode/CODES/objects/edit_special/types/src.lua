@@ -1,10 +1,10 @@
-local config = require('orgmode.config')
-local es_utils = require('orgmode.objects.edit_special.utils')
-local utils = require('orgmode.utils')
+local config = require("orgmode.config")
+local es_utils = require("orgmode.objects.edit_special.utils")
+local utils = require("orgmode.utils")
 
 local EditSpecialSrc = {
-  extmark_ns = vim.api.nvim_create_namespace('org_edit_special_extmark'),
-  hl_ns = vim.api.nvim_create_namespace('org_edit_special_hl'),
+  extmark_ns = vim.api.nvim_create_namespace("org_edit_special_extmark"),
+  hl_ns = vim.api.nvim_create_namespace("org_edit_special_hl"),
 }
 
 function EditSpecialSrc:new(opts)
@@ -22,7 +22,7 @@ function EditSpecialSrc:new(opts)
 end
 
 function EditSpecialSrc:_update_content(action, block_start_line, content)
-  local block_indent = string.rep(vim.opt.expandtab:get() and ' ' or '\t', config.org_edit_src_content_indentation)
+  local block_indent = string.rep(vim.opt.expandtab:get() and " " or "\t", config.org_edit_src_content_indentation)
 
   -- Treesitter doesn't seem to report leading tabs correctly (for example, text offset by a tab character
   -- will have its column reported as 0)
@@ -33,20 +33,20 @@ function EditSpecialSrc:_update_content(action, block_start_line, content)
 
   -- Not quite what Emacs does, but assume that the leading space of the entire block is consistent
   -- and strip that off
-  local whitespace_re = '^[\t%s]+'
-  local block_leading_whitespace = string.match(block_start_line_text, whitespace_re) or ''
+  local whitespace_re = "^[\t%s]+"
+  local block_leading_whitespace = string.match(block_start_line_text, whitespace_re) or ""
 
-  if action == 'remove' then
+  if action == "remove" then
     return vim.tbl_map(function(line)
-      local new_line = string.gsub(line, '^' .. block_leading_whitespace, '')
+      local new_line = string.gsub(line, "^" .. block_leading_whitespace, "")
       if #new_line < #line then
-        new_line = string.gsub(new_line, '^' .. block_indent, '')
+        new_line = string.gsub(new_line, "^" .. block_indent, "")
       end
       return new_line
     end, content)
-  elseif action == 'add' then
+  elseif action == "add" then
     return vim.tbl_map(function(line)
-      return line == '' and line or (block_leading_whitespace .. block_indent .. line)
+      return line == "" and line or (block_leading_whitespace .. block_indent .. line)
     end, content)
   end
 end
@@ -58,7 +58,7 @@ end
 function EditSpecialSrc:_highlight_contents(range)
   self:clear_highlights()
   local start_row, start_col, end_row, end_col = unpack(range)
-  vim.highlight.range(self.org_bufnr, self.hl_ns, 'OrgEditSrcHighlight', { start_row, start_col }, { end_row, end_col })
+  vim.highlight.range(self.org_bufnr, self.hl_ns, "OrgEditSrcHighlight", { start_row, start_col }, { end_row, end_col })
 end
 
 function EditSpecialSrc:abort()
@@ -79,14 +79,14 @@ function EditSpecialSrc:init()
 
   local bufnr = es_utils.make_temp_buf()
   if not bufnr or not vim.api.nvim_buf_is_valid(bufnr) then
-    utils.echo_info('Cancel editing source block, invalid buffer')
+    utils.echo_info("Cancel editing source block, invalid buffer")
     return
   end
 
-  vim.cmd('e ' .. vim.fn.tempname())
+  vim.cmd("e " .. vim.fn.tempname())
 
   local ctx = {
-    block_type = 'SRC',
+    block_type = "SRC",
     bufnr = bufnr,
     end_extmark = end_extmark,
     extmark_ns = self.extmark_ns,
@@ -103,12 +103,12 @@ function EditSpecialSrc:init()
     content = vim.api.nvim_buf_get_lines(self.org_bufnr, content_start_line, content_end_line, false)
   end
 
-  content = self:_update_content('remove', block_start_line, content)
+  content = self:_update_content("remove", block_start_line, content)
 
-  vim.api.nvim_set_option_value('bufhidden', 'wipe', { buf = bufnr })
-  vim.api.nvim_set_option_value('filetype', ft, { buf = bufnr })
+  vim.api.nvim_set_option_value("bufhidden", "wipe", { buf = bufnr })
+  vim.api.nvim_set_option_value("filetype", ft, { buf = bufnr })
   vim.api.nvim_buf_set_lines(bufnr, 0, -1, false, content)
-  vim.api.nvim_set_option_value('modified', false, { buf = ctx.bufnr })
+  vim.api.nvim_set_option_value("modified", false, { buf = ctx.bufnr })
 
   self:_highlight_contents({
     block_start_line + 1,
@@ -130,7 +130,7 @@ function EditSpecialSrc:write(ctx)
   end
 
   local new_content = vim.api.nvim_buf_get_lines(ctx.bufnr, 0, -1, false)
-  new_content = self:_update_content('add', ctx.start_extmark_pos[1], new_content)
+  new_content = self:_update_content("add", ctx.start_extmark_pos[1], new_content)
 
   vim.api.nvim_buf_set_lines(ctx.org_bufnr, content_start, content_end, false, new_content)
 

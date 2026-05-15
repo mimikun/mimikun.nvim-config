@@ -1,5 +1,5 @@
-local Events = require('orgmode.events.types')
-local Listeners = require('orgmode.events.listeners')
+local Events = require("orgmode.events.types")
+local Listeners = require("orgmode.events.listeners")
 
 ---@class OrgEventManager
 ---@field private initialized boolean

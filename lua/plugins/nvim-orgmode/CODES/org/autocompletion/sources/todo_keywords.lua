@@ -1,4 +1,4 @@
-local config = require('orgmode.config')
+local config = require("orgmode.config")
 
 ---@class OrgCompletionTodoKeywords:OrgCompletionSource
 ---@field private pattern vim.regex
@@ -13,7 +13,7 @@ function OrgCompletionTodoKeywords:new()
 end
 
 function OrgCompletionTodoKeywords:get_name()
-  return 'todo_keywords'
+  return "todo_keywords"
 end
 
 ---@param context OrgCompletionContext

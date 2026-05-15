@@ -1,7 +1,7 @@
-local utils = require('orgmode.utils')
-local fs = require('orgmode.utils.fs')
-local OrgLinkUrl = require('orgmode.org.links.url')
-local link_utils = require('orgmode.org.links.utils')
+local utils = require("orgmode.utils")
+local fs = require("orgmode.utils.fs")
+local OrgLinkUrl = require("orgmode.org.links.url")
+local link_utils = require("orgmode.org.links.utils")
 
 ---@class OrgLinkHeadlineSearch:OrgLinkType
 ---@field private files OrgFiles
@@ -18,7 +18,7 @@ end
 
 ---@return string
 function OrgLinkHeadlineSearch:get_name()
-  return 'headline'
+  return "headline"
 end
 
 ---@param link string
@@ -30,14 +30,14 @@ function OrgLinkHeadlineSearch:follow(link)
   end
 
   local file = self.files:load_file_sync(opts.file_path)
-  local is_file_only = opts.type == 'file' and not opts.target
+  local is_file_only = opts.type == "file" and not opts.target
 
   if file then
     if is_file_only then
       return link_utils.goto_file(file)
     end
 
-    local pattern = ('<<<?(%s[^>]*)>>>?'):format(opts.headline_text):lower()
+    local pattern = ("<<<?(%s[^>]*)>>>?"):format(opts.headline_text):lower()
     local headlines = file:find_headlines_matching_search_term(pattern, true)
     if #headlines == 0 then
       headlines = file:find_headlines_by_title(opts.headline_text)
@@ -46,14 +46,14 @@ function OrgLinkHeadlineSearch:follow(link)
     return link_utils.goto_oneof_headlines(
       headlines,
       file.filename,
-      'No headline found with title: ' .. opts.headline_text
+      "No headline found with title: " .. opts.headline_text
     )
   end
 
   local search_text = opts.headline_text
 
   if is_file_only then
-    search_text = ''
+    search_text = ""
   end
 
   return link_utils.open_file_and_search(opts.file_path, search_text)
@@ -67,7 +67,7 @@ function OrgLinkHeadlineSearch:autocomplete(context)
     return {}
   end
 
-  if opts.type == 'file' and not opts.target then
+  if opts.type == "file" and not opts.target then
     local filenames = self.files:filenames()
     local valid_filenames = {}
     for _, f in ipairs(filenames) do
@@ -77,7 +77,7 @@ function OrgLinkHeadlineSearch:autocomplete(context)
       end
     end
 
-    local prefix = opts.link_url:get_protocol() == 'file' and 'file:' or ''
+    local prefix = opts.link_url:get_protocol() == "file" and "file:" or ""
 
     return vim.tbl_map(function(path)
       return prefix .. path
@@ -90,7 +90,7 @@ function OrgLinkHeadlineSearch:autocomplete(context)
     return {}
   end
 
-  local pattern = ('<<<?(%s[^>]*)>>>?'):format(opts.headline_text):lower()
+  local pattern = ("<<<?(%s[^>]*)>>>?"):format(opts.headline_text):lower()
   local headlines = vim.tbl_map(function(headline)
     return headline:get_title()
   end, file:find_headlines_matching_search_term(pattern, true))
@@ -106,7 +106,7 @@ function OrgLinkHeadlineSearch:autocomplete(context)
     end, matching_headlines),
     true
   )
-  local prefix = opts.type == 'internal' and '' or opts.link_url:get_path_with_protocol() .. '::'
+  local prefix = opts.type == "internal" and "" or opts.link_url:get_path_with_protocol() .. "::"
 
   return vim.tbl_map(function(headline_title)
     return prefix .. headline_title
@@ -130,7 +130,7 @@ function OrgLinkHeadlineSearch:_parse(link)
       file_path = file_path or utils.current_file_path(),
       link_url = link_url,
       target = target,
-      type = file_path and 'file' or 'internal',
+      type = file_path and "file" or "internal",
     }
   end
 

@@ -6,7 +6,7 @@
 ---@field private fuzzy_match? boolean does completeopt has fuzzy option
 ---@field menu string
 local OrgCompletion = {
-  menu = '[Org]',
+  menu = "[Org]",
 }
 OrgCompletion.__index = OrgCompletion
 
@@ -17,7 +17,7 @@ function OrgCompletion:new(opts)
     links = opts.links,
     sources = {},
     sources_by_name = {},
-    fuzzy_match = vim.tbl_contains(vim.opt_local.completeopt:get(), 'fuzzy'),
+    fuzzy_match = vim.tbl_contains(vim.opt_local.completeopt:get(), "fuzzy"),
   }, OrgCompletion)
   this:setup_builtin_sources()
   this:register_frameworks()
@@ -25,18 +25,18 @@ function OrgCompletion:new(opts)
 end
 
 function OrgCompletion:setup_builtin_sources()
-  self:add_source(require('orgmode.org.autocompletion.sources.todo_keywords'):new())
-  self:add_source(require('orgmode.org.autocompletion.sources.tags'):new({ completion = self }))
-  self:add_source(require('orgmode.org.autocompletion.sources.plan'):new({ completion = self }))
-  self:add_source(require('orgmode.org.autocompletion.sources.directives'):new())
-  self:add_source(require('orgmode.org.autocompletion.sources.properties'):new({ completion = self }))
-  self:add_source(require('orgmode.org.autocompletion.sources.hyperlinks'):new({ completion = self }))
+  self:add_source(require("orgmode.org.autocompletion.sources.todo_keywords"):new())
+  self:add_source(require("orgmode.org.autocompletion.sources.tags"):new({ completion = self }))
+  self:add_source(require("orgmode.org.autocompletion.sources.plan"):new({ completion = self }))
+  self:add_source(require("orgmode.org.autocompletion.sources.directives"):new())
+  self:add_source(require("orgmode.org.autocompletion.sources.properties"):new({ completion = self }))
+  self:add_source(require("orgmode.org.autocompletion.sources.hyperlinks"):new({ completion = self }))
 end
 
 ---@param source OrgCompletionSource
 function OrgCompletion:add_source(source)
   if self.sources_by_name[source:get_name()] then
-    error('Completion source ' .. source:get_name() .. ' already exists', 0)
+    error("Completion source " .. source:get_name() .. " already exists", 0)
   end
   self.sources_by_name[source:get_name()] = source
   table.insert(self.sources, source)
@@ -46,7 +46,7 @@ end
 ---@return OrgCompletionItem
 function OrgCompletion:complete(context)
   local results = {}
-  context.base = context.base or ''
+  context.base = context.base or ""
   if not context.matcher then
     context.matcher = self:_build_matcher(context)
   end
@@ -105,14 +105,14 @@ end
 ---@return fun(value: string, pattern: string):boolean
 function OrgCompletion:_build_matcher(context)
   return function(value, pattern)
-    pattern = pattern or ''
-    if pattern == '' then
+    pattern = pattern or ""
+    if pattern == "" then
       return true
     end
     if context.fuzzy then
       return #vim.fn.matchfuzzy({ value }, pattern) > 0
     end
-    return value:find('^' .. vim.pesc(pattern)) ~= nil
+    return value:find("^" .. vim.pesc(pattern)) ~= nil
   end
 end
 
@@ -127,7 +127,7 @@ function OrgCompletion:is_headline_line(line)
 end
 
 function OrgCompletion:register_frameworks()
-  require('orgmode.org.autocompletion.cmp')
+  require("orgmode.org.autocompletion.cmp")
 end
 
 ---@param arg_lead string

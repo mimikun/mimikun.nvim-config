@@ -1,5 +1,5 @@
-local Range = require('orgmode.files.elements.range')
-local ts_utils = require('orgmode.utils.treesitter')
+local Range = require("orgmode.files.elements.range")
+local ts_utils = require("orgmode.utils.treesitter")
 
 ---@class OrgFootnote
 ---@field label string
@@ -28,13 +28,13 @@ end
 ---@param source? number | string
 ---@return OrgFootnote | nil
 function OrgFootnote.from_node(node, source)
-  local fnode = ts_utils.closest_node(ts_utils.get_node(), { 'fnref', 'fndef' })
+  local fnode = ts_utils.closest_node(ts_utils.get_node(), { "fnref", "fndef" })
   if not fnode then
     return nil
   end
 
-  local text = vim.treesitter.get_node_text(fnode:field('label')[1], source or 0)
-  return OrgFootnote:new(text, Range.from_node(node), fnode:type() == 'fnref')
+  local text = vim.treesitter.get_node_text(fnode:field("label")[1], source or 0)
+  return OrgFootnote:new(text, Range.from_node(node), fnode:type() == "fnref")
 end
 
 ---@return OrgFootnote | nil

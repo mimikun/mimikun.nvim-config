@@ -1,6 +1,6 @@
 ---@class OrgBabel
 local Babel = {}
-local Tangle = require('orgmode.babel.tangle')
+local Tangle = require("orgmode.babel.tangle")
 
 ---@param file OrgFile
 function Babel.tangle(file)

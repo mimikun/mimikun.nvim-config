@@ -1,7 +1,7 @@
 ---@diagnostic disable: invisible
-local OrgHeadline = require('orgmode.api.headline')
-local org = require('orgmode')
-local Buffers = require('orgmode.state.buffers')
+local OrgHeadline = require("orgmode.api.headline")
+local org = require("orgmode")
+local Buffers = require("orgmode.state.buffers")
 
 ---@class OrgApiFile
 ---@field category string current file category name. By default it's only filename without extension unless defined differently via #+CATEGORY directive

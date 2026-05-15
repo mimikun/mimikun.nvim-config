@@ -1,4 +1,4 @@
-local utils = require('orgmode.utils')
+local utils = require("orgmode.utils")
 
 ---@class OrgPriorityState
 ---@field high_priority string
@@ -27,21 +27,21 @@ end
 
 ---@return string|nil
 function PriorityState:prompt_user()
-  local prompt = string.format('Priority %s-%s, <Space> to remove: ', self.high_priority, self.low_priority)
+  local prompt = string.format("Priority %s-%s, <Space> to remove: ", self.high_priority, self.low_priority)
   local choice = vim.fn.input(prompt)
 
-  if choice == '' then
+  if choice == "" then
     utils.echo_warning(string.format("Priority must be between '%s' and '%s'", self.high_priority, self.low_priority))
     return nil
   end
 
   choice = string.upper(choice)
   if #choice > 1 and tonumber(choice) == nil then
-    utils.echo_warning(string.format('Only numeric priorities can be multiple characters long'))
+    utils.echo_warning(string.format("Only numeric priorities can be multiple characters long"))
     return nil
   end
   local choicenum = string.byte(choice)
-  if choice ~= ' ' and (choicenum < string.byte(self.high_priority) or choicenum > string.byte(self.low_priority)) then
+  if choice ~= " " and (choicenum < string.byte(self.high_priority) or choicenum > string.byte(self.low_priority)) then
     utils.echo_warning(string.format("Priority must be between '%s' and '%s'", self.high_priority, self.low_priority))
     return nil
   end
@@ -51,12 +51,12 @@ end
 
 ---@return number
 function PriorityState:get_sort_value()
-  return -1 * string.byte(self.priority == '' and self.default_priority or self.priority)
+  return -1 * string.byte(self.priority == "" and self.default_priority or self.priority)
 end
 
 ---@return string
 function PriorityState:increase()
-  if self.priority == '' then
+  if self.priority == "" then
     self.priority = self.default_priority
     if not self.start_with_default then
       self.priority = self:_apply(-1)
@@ -72,7 +72,7 @@ end
 
 ---@return string
 function PriorityState:decrease()
-  if self.priority == '' then
+  if self.priority == "" then
     self.priority = self.default_priority
     if not self.start_with_default then
       self.priority = self:_apply(1)
@@ -123,7 +123,7 @@ end
 
 ---@return boolean
 function PriorityState._is_number(prio)
-  return type(tonumber(prio)) == 'number'
+  return type(tonumber(prio)) == "number"
 end
 
 return PriorityState

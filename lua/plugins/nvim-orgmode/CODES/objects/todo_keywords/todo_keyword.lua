@@ -28,25 +28,25 @@ end
 
 function TodoKeyword:empty()
   return setmetatable({
-    keyword = '',
-    value = '',
-    type = '',
+    keyword = "",
+    value = "",
+    type = "",
     index = 1,
     has_fast_access = false,
-    hl = '',
+    hl = "",
     sequence_index = 1,
   }, self)
 end
 
 function TodoKeyword:is_empty()
-  return self.keyword == ''
+  return self.keyword == ""
 end
 
 function TodoKeyword:parse()
   self.value = self.keyword
   self.shortcut = self.keyword:sub(1, 1):lower()
 
-  local value, shortcut = self.keyword:match('(.*)%((.)[^%)]*%)$')
+  local value, shortcut = self.keyword:match("(.*)%((.)[^%)]*%)$")
   if value and shortcut then
     self.value = value
     self.shortcut = shortcut

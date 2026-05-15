@@ -1,7 +1,7 @@
-local config = require('orgmode.config')
-local VirtualIndent = require('orgmode.ui.virtual_indent')
-local ts_utils = require('orgmode.utils.treesitter')
-local utils = require('orgmode.utils')
+local config = require("orgmode.config")
+local VirtualIndent = require("orgmode.ui.virtual_indent")
+local ts_utils = require("orgmode.utils.treesitter")
+local utils = require("orgmode.utils")
 ---@type vim.treesitter.Query
 local query = nil
 
@@ -11,7 +11,7 @@ local function get_indent_pad(linenr, bufnr)
     if not headline then
       return 0
     end
-    local _, level = headline:field('stars')[1]:end_()
+    local _, level = headline:field("stars")[1]:end_()
     return level + 1
   end
   return 0
@@ -32,11 +32,11 @@ local function get_indent_for_match(matches, linenr, mode, bufnr)
   match = match or {}
   prev_line_match = prev_line_match or {}
 
-  if match.type == 'headline' then
+  if match.type == "headline" then
     -- We ensure we check headlines (even if a bit redundant) to ensure nothing else is checked below
     return 0
   end
-  if match.type == 'listitem' then
+  if match.type == "listitem" then
     -- We first figure out the indent of the first line of a listitem. Then we
     -- check if we're on the first line or a "hanging" line. In the latter
     -- case, we add the overhang.
@@ -44,7 +44,7 @@ local function get_indent_for_match(matches, linenr, mode, bufnr)
     local parent_linenr = match.nesting_parent_linenr
     if parent_linenr then
       local parent_match = matches[parent_linenr]
-      if parent_match.type == 'listitem' then
+      if parent_match.type == "listitem" then
         -- Nested listitem. We recursively find the correct indent for this
         -- based on its parents correct indentation level.
         first_line_indent = vim.fn.indent(parent_linenr) + parent_match.overhang
@@ -63,8 +63,8 @@ local function get_indent_for_match(matches, linenr, mode, bufnr)
     return indent
   end
   -- node type is nil while inserting!
-  local is_inserting = (not match.type) or mode:match('^[iR]')
-  if is_inserting and prev_line_match.type == 'listitem' and linenr - prev_linenr < 3 then
+  local is_inserting = (not match.type) or mode:match("^[iR]")
+  if is_inserting and prev_line_match.type == "listitem" and linenr - prev_linenr < 3 then
     -- While inserting, we also count the non-listitem line *after* a listitem as
     -- part of the listitem. Keep in mind that double empty lines end a list as
     -- per Orgmode syntax.
@@ -78,7 +78,7 @@ local function get_indent_for_match(matches, linenr, mode, bufnr)
     end
     return indent
   end
-  if match.indent_type == 'block' then
+  if match.indent_type == "block" then
     -- Blocks do some precalculation of their own against the intended indent level of the parent. As such we just want
     -- to return their indent without any other modifications.
     return match.indent
@@ -88,7 +88,7 @@ local function get_indent_for_match(matches, linenr, mode, bufnr)
 end
 
 local get_matches = ts_utils.memoize_by_buf_tick(function(bufnr)
-  local tree = vim.treesitter.get_parser(bufnr, 'org', {}):parse()
+  local tree = vim.treesitter.get_parser(bufnr, "org", {}):parse()
   if not tree or not #tree then
     return false
   end
@@ -107,19 +107,19 @@ local get_matches = ts_utils.memoize_by_buf_tick(function(bufnr)
       node = node,
       parent = node:parent(),
       line_nr = range.start.line + 1,
-      line_end_nr = range['end'].line,
+      line_end_nr = range["end"].line,
       name = query.captures[id],
       indent = vim.fn.indent(range.start.line + 1),
     }
 
-    if type == 'headline' then
-      local _, level = node:field('stars')[1]:end_()
+    if type == "headline" then
+      local _, level = node:field("stars")[1]:end_()
       opts.stars = level
       opts.indent = opts.indent + opts.stars + 1
       matches[range.start.line + 1] = opts
     end
 
-    if type == 'listitem' then
+    if type == "listitem" then
       local content = node:named_child(1)
       if content then
         local content_linenr, content_indent = content:start()
@@ -133,22 +133,22 @@ local get_matches = ts_utils.memoize_by_buf_tick(function(bufnr)
       end
 
       local parent = node:parent()
-      while parent and parent:type() ~= 'section' and parent:type() ~= 'listitem' do
+      while parent and parent:type() ~= "section" and parent:type() ~= "listitem" do
         parent = parent:parent()
       end
       local prev_sibling = node:prev_sibling()
       opts.prev_sibling_linenr = prev_sibling and (prev_sibling:start() + 1)
       opts.nesting_parent_linenr = parent and (parent:start() + 1)
 
-      for i = range.start.line, range['end'].line - 1 do
+      for i = range.start.line, range["end"].line - 1 do
         matches[i + 1] = opts
       end
     end
 
-    if type == 'block' then
-      opts.indent_type = 'block'
+    if type == "block" then
+      opts.indent_type = "block"
       local parent = node:parent()
-      while parent and parent:type() ~= 'section' and parent:type() ~= 'listitem' do
+      while parent and parent:type() ~= "section" and parent:type() ~= "listitem" do
         parent = parent:parent()
       end
       -- We want to find the difference in indentation level between the item to be indented and the parent node.
@@ -159,7 +159,7 @@ local get_matches = ts_utils.memoize_by_buf_tick(function(bufnr)
       local parent_indent = get_indent_for_match(matches, start, mode, bufnr)
 
       -- We want to align to the listitem body, not the bullet
-      if parent and parent:type() == 'listitem' then
+      if parent and parent:type() == "listitem" then
         local parent_linenr = parent:start() + 1
         parent_indent = parent_indent + matches[parent_linenr].overhang
       else
@@ -170,22 +170,22 @@ local get_matches = ts_utils.memoize_by_buf_tick(function(bufnr)
       local header_indent_diff = curr_header_indent - parent_indent
       local new_header_indent = curr_header_indent - header_indent_diff
       -- Ensure the block footer is properly aligned with the header
-      matches[range.start.line + 1] = vim.tbl_deep_extend('force', opts, {
+      matches[range.start.line + 1] = vim.tbl_deep_extend("force", opts, {
         indent = new_header_indent,
       })
-      matches[range['end'].line] = vim.tbl_deep_extend('force', opts, {
+      matches[range["end"].line] = vim.tbl_deep_extend("force", opts, {
         indent = new_header_indent,
       })
 
       local content_indent_pad
       -- Only include the header line and the content. Do not include the footer in the loop.
-      for i = range.start.line + 1, range['end'].line - 2 do
+      for i = range.start.line + 1, range["end"].line - 2 do
         local linenr = i + 1
         local line_content = vim.api.nvim_buf_get_lines(bufnr, linenr - 1, linenr, true)[1]
         -- If the line is blank, we should ignore it as `vim.fn.indent` will return a 0 indent for
         -- it which may be less indented than the header indentation. We shouldn't factor in blank
         -- lines for indentation.
-        if not line_content:match('^$') then
+        if not line_content:match("^$") then
           local curr_indent = vim.fn.indent(linenr)
           -- Correctly align the pad to the new header position if it was underindented
           local new_indent_pad = new_header_indent - curr_indent
@@ -212,14 +212,14 @@ local get_matches = ts_utils.memoize_by_buf_tick(function(bufnr)
       -- content until the most underindented content is equal in indention to the header and footer.
       --
       -- Only loop the content.
-      for i = range.start.line + 1, range['end'].line - 2 do
-        matches[i + 1] = vim.tbl_deep_extend('force', opts, {
+      for i = range.start.line + 1, range["end"].line - 2 do
+        matches[i + 1] = vim.tbl_deep_extend("force", opts, {
           indent = vim.fn.indent(i + 1) + (content_indent_pad or 0),
         })
       end
-    elseif type == 'paragraph' or type == 'drawer' or type == 'property_drawer' then
-      opts.indent_type = 'other'
-      for i = range.start.line, range['end'].line - 1 do
+    elseif type == "paragraph" or type == "drawer" or type == "property_drawer" then
+      opts.indent_type = "other"
+      for i = range.start.line, range["end"].line - 1 do
         matches[i + 1] = opts
       end
     end
@@ -248,7 +248,7 @@ local buf_indentexpr_cache = {}
 local function indentexpr(linenr, bufnr)
   linenr = linenr or vim.v.lnum
   local mode = vim.fn.mode()
-  query = query or vim.treesitter.query.get('org', 'org_indent')
+  query = query or vim.treesitter.query.get("org", "org_indent")
 
   bufnr = bufnr or vim.api.nvim_get_current_buf()
 
@@ -272,20 +272,20 @@ local function indentexpr(linenr, bufnr)
 
   if match then
     -- Attempt to calculate indentation from the block filetype
-    if match.indent_type == 'block' and linenr > match.line_nr and linenr < match.line_end_nr then
-      local block_parameters = match.node:field('parameter')
+    if match.indent_type == "block" and linenr > match.line_nr and linenr < match.line_end_nr then
+      local block_parameters = match.node:field("parameter")
 
       if block_parameters and block_parameters[1] then
         local block_ft = vim.treesitter.get_node_text(block_parameters[1], bufnr)
 
         if block_ft and block_ft ~= vim.bo.filetype then
-          local curr_indentexpr = vim.filetype.get_option(block_ft, 'indentexpr') --[[@as string]]
+          local curr_indentexpr = vim.filetype.get_option(block_ft, "indentexpr") --[[@as string]]
 
-          if curr_indentexpr and curr_indentexpr ~= '' then
-            curr_indentexpr = curr_indentexpr:gsub('%(%)$', '')
+          if curr_indentexpr and curr_indentexpr ~= "" then
+            curr_indentexpr = curr_indentexpr:gsub("%(%)$", "")
 
             local buf_shiftwidth = vim.bo.shiftwidth
-            vim.bo.shiftwidth = vim.filetype.get_option(block_ft, 'shiftwidth')
+            vim.bo.shiftwidth = vim.filetype.get_option(block_ft, "shiftwidth")
             local ok, block_ft_indent = pcall(function()
               return vim.fn[curr_indentexpr]()
             end)
@@ -309,12 +309,12 @@ local function foldtext()
   local line = vim.fn.getline(vim.v.foldstart)
 
   if config:hide_leading_stars(vim.api.nvim_get_current_buf()) then
-    line = vim.fn.substitute(line, '\\(^\\*\\+\\)', '\\=repeat(" ", len(submatch(0))-1) . "*"', '') or ''
+    line = vim.fn.substitute(line, "\\(^\\*\\+\\)", '\\=repeat(" ", len(submatch(0))-1) . "*"', "") or ""
   end
 
-  if vim.opt.conceallevel:get() > 0 and string.find(line, '[[', 1, true) then
-    line = string.gsub(line, '%[%[(.-)%]%[?(.-)%]?%]', function(link, text)
-      if text == '' then
+  if vim.opt.conceallevel:get() > 0 and string.find(line, "[[", 1, true) then
+    line = string.gsub(line, "%[%[(.-)%]%[?(.-)%]?%]", function(link, text)
+      if text == "" then
         return link
       else
         return text

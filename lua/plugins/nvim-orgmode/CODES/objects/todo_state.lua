@@ -1,5 +1,5 @@
-local config = require('orgmode.config')
-local TodoKeyword = require('orgmode.objects.todo_keywords.todo_keyword')
+local config = require("orgmode.config")
+local TodoKeyword = require("orgmode.objects.todo_keywords.todo_keyword")
 
 ---@class OrgTodoState
 ---@field current_state OrgTodoKeyword | nil
@@ -41,12 +41,12 @@ function TodoState:open_fast_access()
     end
 
     local entry = {}
-    table.insert(entry, { '[' })
-    table.insert(entry, { todo.shortcut, 'Title' })
-    table.insert(entry, { ']' })
-    table.insert(entry, { ' ' })
+    table.insert(entry, { "[" })
+    table.insert(entry, { todo.shortcut, "Title" })
+    table.insert(entry, { "]" })
+    table.insert(entry, { " " })
     table.insert(entry, { todo.value, todo.hl })
-    table.insert(entry, { '  ' })
+    table.insert(entry, { "  " })
 
     table.insert(sequences[seq_idx], entry)
   end
@@ -61,16 +61,16 @@ function TodoState:open_fast_access()
     end
 
     -- Add a newline after each sequence (except the last one)
-    table.insert(output, { '\n' })
+    table.insert(output, { "\n" })
   end
 
   vim.api.nvim_echo(output, true, {})
 
   local raw = vim.fn.nr2char(vim.fn.getchar())
   local char = string.lower(raw)
-  vim.cmd('redraw!')
+  vim.cmd("redraw!")
 
-  if char == ' ' then
+  if char == " " then
     return TodoKeyword:empty()
   end
 
@@ -156,7 +156,7 @@ end
 ---@param initial_todo_keyword string | nil The initial TODO keyword of the headline
 ---@return OrgTodoKeyword | ''
 function TodoState:get_reset_todo(headline, initial_todo_keyword)
-  local repeat_to_state = (headline and headline:get_property('REPEAT_TO_STATE'))
+  local repeat_to_state = (headline and headline:get_property("REPEAT_TO_STATE"))
     or config.opts.org_todo_repeat_to_state
   local todo_keyword = self.todos:find(repeat_to_state)
 
@@ -174,7 +174,7 @@ function TodoState:get_reset_todo(headline, initial_todo_keyword)
     local seq_idx = self.current_state.sequence_index
     local seq = self.todos:sequence(seq_idx)
     for _, keyword in ipairs(seq) do
-      if keyword.type == 'TODO' then
+      if keyword.type == "TODO" then
         return keyword
       end
     end

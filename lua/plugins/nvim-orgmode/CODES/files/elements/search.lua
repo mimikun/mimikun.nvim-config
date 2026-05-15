@@ -1,6 +1,6 @@
 --TODO: Support regex search
 
-local Date = require('orgmode.objects.date')
+local Date = require("orgmode.objects.date")
 
 ---@class OrgSearch
 ---@field term string
@@ -70,23 +70,23 @@ TodoMatch.__index = TodoMatch
 
 ---@type table<OrgPropertyMatchOperator, fun(a: string|number|OrgDate, b: string|number|OrgDate): boolean>
 local OPERATORS = {
-  ['='] = function(a, b)
+  ["="] = function(a, b)
     local result = a == b
     return result
   end,
-  ['<='] = function(a, b)
+  ["<="] = function(a, b)
     return a <= b
   end,
-  ['<'] = function(a, b)
+  ["<"] = function(a, b)
     return a < b
   end,
-  ['>='] = function(a, b)
+  [">="] = function(a, b)
     return a >= b
   end,
-  ['>'] = function(a, b)
+  [">"] = function(a, b)
     return a > b
   end,
-  ['<>'] = function(a, b)
+  ["<>"] = function(a, b)
     return a ~= b
   end,
 }
@@ -96,7 +96,7 @@ local OPERATORS = {
 ---@param pattern string
 ---@return string?, string
 local function parse_pattern(input, pattern)
-  local value = input:match('^' .. pattern)
+  local value = input:match("^" .. pattern)
   if value then
     return value, input:sub(#value + 1)
   else
@@ -195,7 +195,7 @@ function Search:_parse()
   -- Parse the sequence of ORs
   self.or_items, input = parse_delimited_sequence(input, function(i)
     return OrItem:parse(i)
-  end, '%|')
+  end, "%|")
 
   -- If the sequence failed to parse, reset the array
   self.or_items = self.or_items or {}
@@ -225,7 +225,7 @@ function OrItem:parse(input)
 
   and_items, input = parse_delimited_sequence(input, function(i)
     return AndItem:parse(i)
-  end, '%&')
+  end, "%&")
 
   if not and_items then
     return nil, original_input
@@ -272,11 +272,11 @@ function AndItem:parse(input)
   local operator
   local original_input = input
 
-  operator, input = parse_pattern(input, '[%+%-]?')
+  operator, input = parse_pattern(input, "[%+%-]?")
 
   -- A '+' operator is implied if none is present
-  if operator == '' then
-    operator = '+'
+  if operator == "" then
+    operator = "+"
   end
 
   while operator do
@@ -294,16 +294,16 @@ function AndItem:parse(input)
       end
     end
 
-    if operator == '+' then
+    if operator == "+" then
       table.insert(and_item.contains, matchable)
-    elseif operator == '-' then
+    elseif operator == "-" then
       table.insert(and_item.excludes, matchable)
     else
       -- This should never happen if I wrote the operator pattern correctly
     end
 
     -- Attempt to parse the next operator
-    operator, input = parse_pattern(input, '[%+%-]')
+    operator, input = parse_pattern(input, "[%+%-]")
   end
 
   return and_item, input
@@ -342,7 +342,7 @@ end
 ---@return OrgTagMatch?, string
 function TagMatch:parse(input)
   local tag
-  tag, input = parse_pattern(input, '[\128-\255%w_%%@#]+')
+  tag, input = parse_pattern(input, "[\128-\255%w_%%@#]+")
   if not tag then
     return nil, input
   end
@@ -354,7 +354,7 @@ end
 ---@return boolean
 function TagMatch:match(item)
   local item_tags = item.tags
-  if type(item_tags) == 'string' then
+  if type(item_tags) == "string" then
     return item_tags == self.value
   end
 
@@ -374,7 +374,7 @@ function PropertyMatch:parse(input)
   local name, operator, string_str, number_str, date_str
   local original_input = input
 
-  name, input = parse_pattern(input, '([^%-%+=<>&]+)[=<>]+')
+  name, input = parse_pattern(input, "([^%-%+=<>&]+)[=<>]+")
   if not name then
     return nil, original_input
   end
@@ -386,7 +386,7 @@ function PropertyMatch:parse(input)
   end
 
   -- Number property
-  number_str, input = parse_pattern(input, '%d+')
+  number_str, input = parse_pattern(input, "%d+")
   if number_str then
     local number = tonumber(number_str) --[[@as number]]
     return PropertyNumberMatch:new(name, operator, number), input
@@ -398,18 +398,18 @@ function PropertyMatch:parse(input)
     date_str = date_str:sub(2, -2)
     ---@type string?, OrgDate?
     local date_content, date_value
-    if date_str == '<today>' then
+    if date_str == "<today>" then
       date_value = Date.today()
-    elseif date_str == '<tomorrow>' then
+    elseif date_str == "<tomorrow>" then
       date_value = Date.tomorrow()
     else
       -- Parse relative formats (e.g. <+1d>) as well as absolute
-      date_content = date_str:match('^<([%+%-]%d+[dmyhwM])>$')
+      date_content = date_str:match("^<([%+%-]%d+[dmyhwM])>$")
       if date_content then
         date_value = Date.today()
         date_value = date_value:adjust(date_content)
       else
-        date_content = date_str:match('^<([^>]+)>$')
+        date_content = date_str:match("^<([^>]+)>$")
         if date_content then
           date_value = Date.from_string(date_content)
         end
@@ -441,7 +441,7 @@ end
 ---@param input string
 ---@return OrgPropertyMatchOperator, string
 function PropertyMatch:_parse_operator(input)
-  return parse_pattern_choice(input, '%=', '%<%>', '%<%=', '%<', '%>%=', '%>') --[[@as OrgPropertyMatchOperator]]
+  return parse_pattern_choice(input, "%=", "%<%>", "%<%=", "%<", "%>%=", "%>") --[[@as OrgPropertyMatchOperator]]
 end
 
 ---Constructs a PropertyNumberMatch
@@ -503,7 +503,7 @@ function PropertyDateMatch:match(item)
   end
 
   -- Extract the content between the braces/brackets
-  local date_content = item_value:match('^[<%[]([^>%]]+)[>%]]$')
+  local date_content = item_value:match("^[<%[]([^>%]]+)[>%]]$")
   if not date_content then
     return false
   end
@@ -537,7 +537,7 @@ end
 ---@param item OrgSearchable
 ---@return boolean
 function PropertyStringMatch:match(item)
-  local item_value = item.props[self.name] or ''
+  local item_value = item.props[self.name] or ""
   return OPERATORS[self.operator](item_value, self.value)
 end
 
@@ -561,7 +561,7 @@ function TodoMatch:parse(input)
   -- Parse the '/' or '/!' prefix that indicates a TodoMatch
   ---@type string?
   local prefix
-  prefix, input = parse_pattern(input, '%/[%!]?')
+  prefix, input = parse_pattern(input, "%/[%!]?")
   if not prefix then
     return nil, original_input
   end
@@ -572,10 +572,10 @@ function TodoMatch:parse(input)
   orItems, input = parse_delimited_sequence(input, function(i)
     ---@type string?
     local operator
-    operator, i = parse_pattern(i, '[%+%-]?')
+    operator, i = parse_pattern(i, "[%+%-]?")
 
-    if operator == '' then
-      operator = '+'
+    if operator == "" then
+      operator = "+"
     end
 
     local andItems = {}
@@ -583,7 +583,7 @@ function TodoMatch:parse(input)
     while operator do
       ---@type string?
       local value
-      value, i = parse_pattern(i, '%w+')
+      value, i = parse_pattern(i, "%w+")
       if not value then
         break
       end
@@ -592,11 +592,11 @@ function TodoMatch:parse(input)
         value = value,
       })
 
-      operator, i = parse_pattern(i, '[%+%-]')
+      operator, i = parse_pattern(i, "[%+%-]")
     end
 
     return andItems, i
-  end, '%|')
+  end, "%|")
 
   if not orItems or #orItems == 0 then
     return nil, original_input
@@ -615,10 +615,10 @@ function TodoMatch:match(item)
   for _, orItem in ipairs(self.orItems) do
     local validItems = true
     for _, andItem in ipairs(orItem) do
-      if andItem.operator == '-' and item_todo == andItem.value then
+      if andItem.operator == "-" and item_todo == andItem.value then
         validItems = false
         break
-      elseif andItem.operator == '+' and item_todo ~= andItem.value then
+      elseif andItem.operator == "+" and item_todo ~= andItem.value then
         validItems = false
         break
       end

@@ -1,9 +1,9 @@
-local utils = require('orgmode.utils')
+local utils = require("orgmode.utils")
 local link_utils = {}
 
 local external_filetypes = {
   -- pdf is considered a valid filetype even though it cannot be correctly read
-  'pdf',
+  "pdf",
 }
 
 ---@param filename string
@@ -14,7 +14,7 @@ local function edit_file(filename)
     vim.ui.open(filename)
     return false
   end
-  vim.cmd(('edit %s'):format(filename))
+  vim.cmd(("edit %s"):format(filename))
   return true
 end
 
@@ -32,7 +32,7 @@ end
 function link_utils.goto_oneof_headlines(headlines, file_path, error_message)
   if #headlines == 0 then
     if file_path ~= utils.current_file_path() then
-      vim.cmd(('edit %s'):format(file_path))
+      vim.cmd(("edit %s"):format(file_path))
     end
     utils.echo_warning(error_message)
     return true
@@ -50,7 +50,7 @@ function link_utils.goto_oneof_headlines(headlines, file_path, error_message)
   for i, h in ipairs(headlines) do
     table.insert(
       options,
-      string.format('%d) %-' .. longest_headline .. 's (%s)', i, h:get_headline_line_content(), h.file.filename)
+      string.format("%d) %-" .. longest_headline .. "s (%s)", i, h:get_headline_line_content(), h.file.filename)
     )
   end
   vim.cmd([[echo "Multiple targets found. Select target:"]])
@@ -67,7 +67,7 @@ end
 ---@param search_text string | nil
 ---@return boolean
 function link_utils.open_file_and_search(file_path, search_text)
-  if not file_path or file_path == '' then
+  if not file_path or file_path == "" then
     return true
   end
   if file_path ~= utils.current_file_path() then
@@ -78,13 +78,13 @@ function link_utils.open_file_and_search(file_path, search_text)
     end
   end
 
-  if not search_text or search_text == '' then
+  if not search_text or search_text == "" then
     return true
   end
 
-  local result = vim.fn.search(search_text, 'W')
+  local result = vim.fn.search(search_text, "W")
   if result == 0 then
-    utils.echo_warning(string.format('No match found for expression: %s', search_text))
+    utils.echo_warning(string.format("No match found for expression: %s", search_text))
   end
   return true
 end

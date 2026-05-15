@@ -1,9 +1,9 @@
-local Promise = require('orgmode.utils.promise')
-local OrgFile = require('orgmode.files.file')
-local utils = require('orgmode.utils')
-local config = require('orgmode.config')
-local ts_utils = require('orgmode.utils.treesitter')
-local Listitem = require('orgmode.files.elements.listitem')
+local Promise = require("orgmode.utils.promise")
+local OrgFile = require("orgmode.files.file")
+local utils = require("orgmode.utils")
+local config = require("orgmode.config")
+local ts_utils = require("orgmode.utils.treesitter")
+local Listitem = require("orgmode.files.elements.listitem")
 
 ---@class OrgFilesOpts
 ---@field paths string | string[]
@@ -55,13 +55,13 @@ end
 ---@return OrgPromise<OrgFiles>
 function OrgFiles:load(force)
   if not force and self.load_state then
-    if self.load_state == 'loading' then
+    if self.load_state == "loading" then
       self:ensure_loaded()
     end
     return Promise.resolve(self)
   end
 
-  self.load_state = 'loading'
+  self.load_state = "loading"
   return Promise.map(function(filename, index)
     return self:load_file(filename):next(function(orgfile)
       if orgfile then
@@ -71,7 +71,7 @@ function OrgFiles:load(force)
       return orgfile
     end)
   end, self:_files(true), 50):next(function()
-    self.load_state = 'loaded'
+    self.load_state = "loaded"
     return self
   end)
 end
@@ -140,7 +140,7 @@ end
 function OrgFiles:get_current_file()
   local filename = utils.current_file_path()
   local orgfile = self:load_file_sync(filename)
-  assert(orgfile, 'Current file not found or not an org file')
+  assert(orgfile, "Current file not found or not an org file")
   return orgfile
 end
 
@@ -170,7 +170,7 @@ end
 ---@return OrgPromise<OrgFile | false>
 function OrgFiles:load_file(filename, opts)
   opts = opts or {}
-  filename = vim.fn.resolve(vim.fn.fnamemodify(filename, ':p'))
+  filename = vim.fn.resolve(vim.fn.fnamemodify(filename, ":p"))
 
   local persist_if_required = function(file)
     ---@cast file OrgFile
@@ -209,7 +209,7 @@ end
 ---@return OrgFile
 function OrgFiles:get(filename)
   local file = self:load_file_sync(filename)
-  assert(file, 'File ' .. filename .. ' not found or is in invalid format')
+  assert(file, "File " .. filename .. " not found or is in invalid format")
   return file
 end
 
@@ -221,19 +221,19 @@ end
 ---@return OrgHeadline
 function OrgFiles:get_closest_headline(cursor)
   local file = self:load_file_sync(utils.current_file_path())
-  assert(file, 'Current file is not a valid org file')
+  assert(file, "Current file is not a valid org file")
   local headline = file:get_closest_headline(cursor)
-  assert(headline, 'No headline found')
+  assert(headline, "No headline found")
   return headline
 end
 
 function OrgFiles:get_closest_listitem()
   local get_listitem_node = function()
     local node_at_cursor = ts_utils.get_node_at_cursor()
-    if node_at_cursor and node_at_cursor:type() == 'list' then
+    if node_at_cursor and node_at_cursor:type() == "list" then
       return node_at_cursor:named_child(0)
     end
-    return ts_utils.closest_node(node_at_cursor, 'listitem')
+    return ts_utils.closest_node(node_at_cursor, "listitem")
   end
 
   local node = get_listitem_node()
@@ -317,7 +317,7 @@ end
 function OrgFiles:find_headlines_matching_search_term(term, no_escape, search_extra_files)
   local headlines = {}
   local ignore_archive_flag = search_extra_files
-    and vim.tbl_contains(config.org_agenda_text_search_extra_files, 'agenda-archives')
+    and vim.tbl_contains(config.org_agenda_text_search_extra_files, "agenda-archives")
   for _, orgfile in ipairs(self:all()) do
     for _, headline in ipairs(orgfile:find_headlines_matching_search_term(term, no_escape, ignore_archive_flag)) do
       table.insert(headlines, headline)
@@ -337,11 +337,11 @@ function OrgFiles:update_file(filename, action)
 end
 
 function OrgFiles:ensure_loaded()
-  if self.load_state == 'loaded' then
+  if self.load_state == "loaded" then
     return true
   end
   vim.wait(5000, function()
-    return self.load_state == 'loaded'
+    return self.load_state == "loaded"
   end, 5)
 end
 
@@ -349,11 +349,11 @@ end
 ---@param paths string | string[] | nil
 ---@return string[]
 function OrgFiles:_setup_paths(paths)
-  if not paths or paths == '' or (type(paths) == 'table' and vim.tbl_isempty(paths)) then
+  if not paths or paths == "" or (type(paths) == "table" and vim.tbl_isempty(paths)) then
     return {}
   end
 
-  if type(paths) ~= 'table' then
+  if type(paths) ~= "table" then
     return { paths }
   end
 
@@ -369,7 +369,7 @@ function OrgFiles:_files(skip_resolve)
         return path
       end
       return vim.fn.resolve(path)
-    end, vim.fn.glob(vim.fn.fnamemodify(file, ':p'), false, true))
+    end, vim.fn.glob(vim.fn.fnamemodify(file, ":p"), false, true))
   end, self.paths)
 
   all_files = utils.flatten(all_files)
@@ -380,7 +380,7 @@ function OrgFiles:_files(skip_resolve)
     end
 
     local stat = vim.uv.fs_stat(file)
-    return stat and stat.type == 'file' or false
+    return stat and stat.type == "file" or false
   end, all_files)
 end
 

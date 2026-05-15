@@ -1,4 +1,4 @@
-local OrgAgendaTagsType = require('orgmode.agenda.types.tags')
+local OrgAgendaTagsType = require("orgmode.agenda.types.tags")
 
 ---@class OrgAgendaTagsTodoType:OrgAgendaTagsType
 local OrgAgendaTagsTodoType = {}

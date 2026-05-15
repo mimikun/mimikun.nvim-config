@@ -1,4 +1,4 @@
-local config = require('orgmode.config')
+local config = require("orgmode.config")
 
 ---@class OrgCompletionPlan:OrgCompletionSource
 ---@field completion OrgCompletion
@@ -16,14 +16,14 @@ function OrgCompletionPlan:new(opts)
 end
 
 function OrgCompletionPlan:get_name()
-  return 'plan'
+  return "plan"
 end
 
 ---@param context OrgCompletionContext
 ---@return number | nil
 function OrgCompletionPlan:get_start(context)
-  local prev_line = vim.fn.getline(vim.fn.line('.') - 1)
-  if not self.completion:is_headline_line(prev_line) or self.completion:is_headline_line(vim.fn.getline('.')) then
+  local prev_line = vim.fn.getline(vim.fn.line(".") - 1)
+  if not self.completion:is_headline_line(prev_line) or self.completion:is_headline_line(vim.fn.getline(".")) then
     return nil
   end
 
@@ -33,9 +33,9 @@ end
 ---@return string[]
 function OrgCompletionPlan:get_results(_)
   return {
-    'DEADLINE:',
-    'SCHEDULED:',
-    'CLOSED:',
+    "DEADLINE:",
+    "SCHEDULED:",
+    "CLOSED:",
   }
 end
 

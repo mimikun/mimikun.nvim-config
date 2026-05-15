@@ -11,7 +11,7 @@ local OrgHighlighter = {}
 
 function OrgHighlighter:new()
   local data = {
-    namespace = vim.api.nvim_create_namespace('org_custom_highlighter'),
+    namespace = vim.api.nvim_create_namespace("org_custom_highlighter"),
     buffers = {},
     parsing = {},
     -- Use ephemeral for highlights. Added to config to allow toggling from tests.
@@ -25,10 +25,10 @@ end
 
 ---@private
 function OrgHighlighter:_setup()
-  self.stars = require('orgmode.colors.highlighter.stars'):new({ highlighter = self })
-  self.markup = require('orgmode.colors.highlighter.markup'):new({ highlighter = self })
-  self.todos = require('orgmode.colors.highlighter.todos'):new()
-  self.foldtext = require('orgmode.colors.highlighter.foldtext'):new({ highlighter = self })
+  self.stars = require("orgmode.colors.highlighter.stars"):new({ highlighter = self })
+  self.markup = require("orgmode.colors.highlighter.markup"):new({ highlighter = self })
+  self.todos = require("orgmode.colors.highlighter.todos"):new()
+  self.foldtext = require("orgmode.colors.highlighter.foldtext"):new({ highlighter = self })
 
   vim.api.nvim_set_decoration_provider(self.namespace, {
     on_win = function(...)
@@ -65,12 +65,12 @@ function OrgHighlighter:_parse_tree(bufnr, win, range)
 end
 
 function OrgHighlighter:_on_win(_, win, bufnr, topline, botline)
-  local is_org_buffer = vim.bo[bufnr].filetype == 'org'
+  local is_org_buffer = vim.bo[bufnr].filetype == "org"
   if not is_org_buffer then
     return false
   end
   if not self.buffers[bufnr] then
-    self.buffers[bufnr] = { language_tree = vim.treesitter.get_parser(bufnr, 'org') }
+    self.buffers[bufnr] = { language_tree = vim.treesitter.get_parser(bufnr, "org") }
     self:_parse_tree(bufnr, win, false)
     self.buffers[bufnr].language_tree:register_cbs({
       on_detach = function(buf)

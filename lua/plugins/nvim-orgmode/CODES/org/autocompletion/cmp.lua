@@ -1,9 +1,9 @@
-local has_cmp, cmp = pcall(require, 'cmp')
+local has_cmp, cmp = pcall(require, "cmp")
 if not has_cmp then
   return
 end
 
-local org = require('orgmode')
+local org = require("orgmode")
 
 local Source = {}
 
@@ -13,15 +13,15 @@ Source.new = function()
 end
 
 Source.get_debug_name = function()
-  return 'orgmode'
+  return "orgmode"
 end
 
 function Source:is_available()
-  return vim.bo.filetype == 'org'
+  return vim.bo.filetype == "org"
 end
 
 function Source:get_trigger_characters(_)
-  return { '#', '+', ':', '*', '.', '/' }
+  return { "#", "+", ":", "*", ".", "/" }
 end
 
 function Source:complete(params, callback)
@@ -48,4 +48,4 @@ function Source:complete(params, callback)
   })
 end
 
-cmp.register_source('orgmode', Source.new())
+cmp.register_source("orgmode", Source.new())

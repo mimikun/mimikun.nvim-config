@@ -1,4 +1,4 @@
-local Range = require('orgmode.files.elements.range')
+local Range = require("orgmode.files.elements.range")
 ---@class OrgAgendaLineTokenOpts
 ---@field content string
 ---@field highlighter? OrgHighlighter
@@ -33,8 +33,8 @@ function OrgAgendaLineToken:get_highlights()
     local range = self.range
     if self.trim_for_hl then
       range = self.range:clone()
-      local start_offset = self.content:match('^%s*')
-      local end_offset = self.content:match('%s*$')
+      local start_offset = self.content:match("^%s*")
+      local end_offset = self.content:match("%s*$")
       range.start_col = range.start_col + (start_offset and #start_offset or 0)
       range.end_col = range.end_col - (end_offset and #end_offset or 0)
     end

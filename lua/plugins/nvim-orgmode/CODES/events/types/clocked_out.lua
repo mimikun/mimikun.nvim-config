@@ -1,7 +1,7 @@
 ---@class OrgClockedOutEvent: OrgEvent
 ---@field headline? OrgHeadline
 local ClockedOutEvent = {
-  type = 'orgmode.clocked_out',
+  type = "orgmode.clocked_out",
 }
 ClockedOutEvent.__index = ClockedOutEvent
 

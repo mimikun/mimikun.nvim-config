@@ -1,5 +1,5 @@
-local Range = require('orgmode.files.elements.range')
-local TableCell = require('orgmode.files.elements.table.cell')
+local Range = require("orgmode.files.elements.range")
+local TableCell = require("orgmode.files.elements.table.cell")
 ---@class OrgTableRow
 ---@field table OrgTable
 ---@field cells OrgTableCell[]
@@ -36,8 +36,8 @@ function TableRow:compile()
   for _, cell in ipairs(self.cells) do
     table.insert(row_content, cell:compile():to_string())
   end
-  local separator = self.is_separator and '+' or '|'
-  self.content = '|' .. table.concat(row_content, separator) .. '|'
+  local separator = self.is_separator and "+" or "|"
+  self.content = "|" .. table.concat(row_content, separator) .. "|"
   return self
 end
 
@@ -51,7 +51,7 @@ function TableRow:populate_missing_cells()
   local cell_count = #self.cells
   if #self.table.cols_width > cell_count then
     for j = 1, total_cells - cell_count do
-      self:add_cell(TableCell.from_row_item('', cell_count + j, self))
+      self:add_cell(TableCell.from_row_item("", cell_count + j, self))
     end
   end
 end
@@ -69,10 +69,10 @@ function TableRow.from_table_item(row, line, parent_table)
   local table_row = TableRow:new({
     table = parent_table,
     line = line,
-    is_separator = type(row) == 'string' and row == 'hr',
+    is_separator = type(row) == "string" and row == "hr",
   })
-  if type(row) == 'string' then
-    table_row:add_cell(TableCell.from_row_item('', 1, table_row))
+  if type(row) == "string" then
+    table_row:add_cell(TableCell.from_row_item("", 1, table_row))
   else
     for col_nr, cell_data in ipairs(row) do
       table_row:add_cell(TableCell.from_row_item(cell_data, col_nr, table_row))

@@ -15,7 +15,7 @@ function OrgCompletionTags:new(opts)
 end
 
 function OrgCompletionTags:get_name()
-  return 'tags'
+  return "tags"
 end
 
 ---@param context OrgCompletionContext
@@ -30,7 +30,7 @@ end
 ---@return string[]
 function OrgCompletionTags:get_results(_)
   return vim.tbl_map(function(tag)
-    return table.concat({ ':', tag, ':' }, '')
+    return table.concat({ ":", tag, ":" }, "")
   end, self.completion.files:get_tags())
 end
 
