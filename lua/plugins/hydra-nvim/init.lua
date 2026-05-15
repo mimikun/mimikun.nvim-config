@@ -2,8 +2,6 @@
 local spec = {
   "nvimtools/hydra.nvim",
   --lazy = false,
-  --ft = require("plugins.hydra-nvim.ft"),
-  --cmd = require("plugins.hydra-nvim.cmds"),
   --keys = require("plugins.hydra-nvim.keys"),
   event = require("plugins.hydra-nvim.events"),
   --dependencies = require("plugins.hydra-nvim.dependencies"),
