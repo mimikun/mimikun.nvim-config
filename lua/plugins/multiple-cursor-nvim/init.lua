@@ -10,8 +10,8 @@ local spec = {
     local opts = require("plugins.multiple-cursor-nvim.opts")
     require("multiple-cursor").setup(opts)
   end,
-  --cond = false,
-  --enabled = false,
+  cond = false,
+  enabled = false,
 }
 
 return spec
