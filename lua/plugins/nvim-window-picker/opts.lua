@@ -78,12 +78,14 @@ local opts = {
         "NvimTree",
         "neo-tree",
         "notify",
+        "neo-tree-popup", 
         "snacks_notif",
       },
 
       -- if the file type is one of following, the window will be ignored
       buftype = {
         "terminal",
+          "quickfix",
       },
     },
 
