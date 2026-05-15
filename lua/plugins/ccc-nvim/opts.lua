@@ -137,7 +137,12 @@ local default = {
 
 ---@type table
 local opts = {
-  -- TODO: it
+  -- Your preferred settings
+  -- Example: enable highlighter
+  highlighter = {
+    auto_enable = true,
+    lsp = true,
+  },
 }
 
 return opts
