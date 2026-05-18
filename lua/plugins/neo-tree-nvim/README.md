@@ -1,55 +1,4 @@
-## Installation
-
-There are also some optional plugins that work with Neo-tree:
-
-### lazy.nvim example:
-
 ```lua
-return {
-  {
-    "nvim-neo-tree/neo-tree.nvim",
-    branch = "v3.x",
-cmd="Neotree",
-    dependencies = {
-      "nvim-lua/plenary.nvim",
-      "MunifTanjim/nui.nvim",
-      "nvim-tree/nvim-web-devicons", 
-      "folke/snacks.nvim",
-"3rd/image.nvim",
-    },
-    lazy = false, -- neo-tree will lazily load itself
-    config = function()
-
-  ---@module 'neo-tree'
-  ---@type neotree.Config
-  local opts = {
-    -- options go here
-  }
-require('neo-tree').setup({
-  -- options go here
-})
-end,
-  }
-}
-```
-
-<details>
-  <summary>
-    lazy.nvim example with all optional plugins:
-  </summary>
-
-```lua
-return {
-  {
-    "antosha417/nvim-lsp-file-operations",
-    dependencies = {
-      "nvim-lua/plenary.nvim",
-      "nvim-neo-tree/neo-tree.nvim", -- makes sure that this loads after Neo-tree.
-    },
-    config = function()
-      require("lsp-file-operations").setup()
-    end,
-  },
   {
     "s1n7ax/nvim-window-picker",
     version = "2.*",
@@ -68,8 +17,7 @@ return {
         },
       })
     end,
-  },
-}
+  }
 ```
 
 
