@@ -12,6 +12,7 @@ local keys = {
     --noremap = true,
     silent = true,
   },
+--vim.keymap.set("n", "<leader>e", "<Cmd>Neotree<CR>")
 }
 
 return keys
