@@ -1,109 +1,11 @@
-# Neo-tree.nvim
-
-Neo-tree is a Neovim plugin to browse the file system and other tree like
-structures in whatever style suits you, including sidebars, floating windows,
-netrw split style, or all of them at once!
-
-This screenshot shows Neo-tree opened in the traditional sidebar layout:
-
-![Neo-tree file system
-sidebar](https://github.com/nvim-neo-tree/resources/blob/main/images/Neo-tree-with-right-aligned-symbols.png)
-
-<details>
-  <summary>
-    Neo-tree filesystem screenshot, Netrw Style
-  </summary>
-
-The below screenshot shows Neo-tree opened "netrw style" (`:Neotree
-position=current`). When opened in this way, there is more room so the extra
-detail columns can be shown. This screenshot also shows how the contents can be
-sorted on any column. In this example, we are sorted on "Size" descending:
-
-![Neo-tree file system
-details](https://github.com/nvim-neo-tree/resources/blob/main/images/Neo-tree-with-file-details-and-sort.png)
-
-</details>
-
-### Breaking Changes BAD :bomb: :imp:
-
-The biggest and most important feature of Neo-tree is that we will never
-knowingly push a breaking change and interrupt your day. Bugs happen, but
-breaking changes can always be avoided. When breaking changes are needed, there
-will be a new branch that you can opt into, when it is a good time for you.
-
-See [What is a Breaking Change?](#what-is-a-breaking-change) for details.
-
-See [Changelog 3.0](https://github.com/nvim-neo-tree/neo-tree.nvim/wiki/Changelog#30)
-for breaking changes and deprecations in 3.0.
-
-### User Experience GOOD :slightly_smiling_face: :thumbsup:
-
-Aside from being polite about breaking changes, Neo-tree is also focused on the
-little details of user experience. Everything should work exactly as you would
-expect a sidebar to work without all of the glitchy behavior that is normally
-accepted in (neo)vim sidebars. I can't stand glitchy behavior, and neither
-should you!
-
-- Neo-tree won't let other buffers take over its window.
-- Neo-tree won't leave its window scrolled to the last line when there is plenty
-  of room to display the whole tree.
-- Neo-tree does not need to be manually refreshed
-  (set `use_libuv_file_watcher = true`)
-- Neo-tree can intelligently follow the current file
-  (set `follow_current_file.enabled = true`)
-- Neo-tree can sync its clipboard across multiple trees, either globally
-  (within the same Neovim instance) or universally (across all Neovim
-  instances). Try `clipboard.sync = "global" | "universal"`.
-- Neo-tree is thoughtful about maintaining or setting focus on the right node
-- Neo-tree windows in different tabs are completely separate
-- `respect_gitignore` actually works!
-
-> [!NOTE]
-> Neo-tree is meant to be smooth, efficient, stable, and intuitive. If you find
-> anything janky, slow, broken, or unintuitive, please open an issue so we can
-> fix it.
-
 ## Installation
-
-This plugin relies upon these two excellent library plugins:
-
-- [MunifTanjim/nui.nvim](https://github.com/MunifTanjim/nui.nvim) for all UI
-components, including the tree!
-- [nvim-lua/plenary.nvim](https://github.com/nvim-lua/plenary.nvim) for backend
-utilities, such as scanning the filesystem.
 
 There are also some optional plugins that work with Neo-tree:
 
-- [nvim-tree/nvim-web-devicons](https://github.com/nvim-tree/nvim-web-devicons)
-  for file icons.
 - [antosha417/nvim-lsp-file-operations](https://github.com/antosha417/nvim-lsp-file-operations)
   for LSP-enhanced renames/etc.
-- [folke/snacks.nvim](https://github.com/folke/snacks.nvim) for image previews,
-  see Preview Mode section.
-- [snacks.rename](https://github.com/folke/snacks.nvim/blob/main/docs/rename.md#neo-treenvim)
-  can also work with Neo-tree
-- [3rd/image.nvim](https://github.com/3rd/image.nvim) for image previews.
-  - If both snacks.nvim and image.nvim are installed. Neo-tree currently will try
-    to preview with snacks.nvim first, then try image.nvim.
 - [s1n7ax/nvim-window-picker](https://github.com/s1n7ax/nvim-window-picker) for
   `_with_window_picker` keymaps.
-
-### vim.pack example (requires Neovim 0.12)
-
-```lua
-vim.pack.add({
-  {
-    src = 'https://github.com/nvim-neo-tree/neo-tree.nvim',
-    version = vim.version.range('3')
-  },
-  -- dependencies
-  "https://github.com/nvim-lua/plenary.nvim",
-  "https://github.com/MunifTanjim/nui.nvim",
-  -- optional, but recommended
-  "https://github.com/nvim-tree/nvim-web-devicons",
-})
-```
-
 
 ### lazy.nvim example:
 
@@ -112,12 +14,26 @@ return {
   {
     "nvim-neo-tree/neo-tree.nvim",
     branch = "v3.x",
+cmd="Neotree",
     dependencies = {
       "nvim-lua/plenary.nvim",
       "MunifTanjim/nui.nvim",
-      "nvim-tree/nvim-web-devicons", -- optional, but recommended
+      "nvim-tree/nvim-web-devicons", 
+      "folke/snacks.nvim",
+"3rd/image.nvim",
     },
     lazy = false, -- neo-tree will lazily load itself
+    config = function()
+
+  ---@module 'neo-tree'
+  ---@type neotree.Config
+  local opts = {
+    -- options go here
+  }
+require('neo-tree').setup({
+  -- options go here
+})
+end,
   }
 }
 ```
@@ -129,15 +45,6 @@ return {
 
 ```lua
 return {
-  {
-    "nvim-neo-tree/neo-tree.nvim",
-    branch = "v3.x",
-    dependencies = {
-      "nvim-lua/plenary.nvim",
-      "MunifTanjim/nui.nvim",
-      "nvim-tree/nvim-web-devicons",
-    },
-  },
   {
     "antosha417/nvim-lsp-file-operations",
     dependencies = {
@@ -170,104 +77,6 @@ return {
 }
 ```
 
-</details>
-
-<details>
-  <summary>
-    Packer.nvim example:
-  </summary>
-
-```lua
-use({
-  "nvim-neo-tree/neo-tree.nvim",
-  branch = "v3.x",
-  requires = {
-    "nvim-lua/plenary.nvim",
-    "MunifTanjim/nui.nvim",
-    "nvim-tree/nvim-web-devicons", -- optional, but recommended
-  }
-})
-```
-
-</details>
-
-
-<details>
-  <summary>
-    mini.deps example:
-  </summary>
-
-```lua
-local add = MiniDeps.add
-
-add({
-  source = 'nvim-neo-tree/neo-tree.nvim',
-  checkout = 'v3.x',
-  depends = {
-    "nvim-lua/plenary.nvim",
-    "MunifTanjim/nui.nvim",
-    "nvim-tree/nvim-web-devicons", -- optional, but recommended
-  }
-})
-```
-
-</details>
-
-### Manual installation via `:h packages`
-
-See [doc/install.sh](doc/install.sh) and [doc/install.ps1](doc/install.ps1) for
-POSIX/Windows respectively.
-
-## Post-install: Try it out!
-
-Try `:Neotree` to open Neo-tree as a sidebar, and press `?` while in Neo-tree to
-open the keyboard help.
-
-> [!TIP]
-> You can `:checkhealth neo-tree` to ensure you have all the required
-> dependencies. It can also check that your config table looks correct. This is
-> still in its early stages, so please file issues if you'd like to see more
-> checks added or a check isn't working properly.
-
-## Configuration
-
-```lua
-require('neo-tree').setup({
-  -- options go here
-})
-```
-
-<details>
-  <summary>
-    💤 lazy.nvim/Neovim distro users:
-  </summary>
-
-The table passed into `setup()` has a type of `neotree.Config`. If you're on a
-distro using lazy.nvim (e.g. LazyVim) or you just like the syntax, you might
-want to consider using lazy.nvim's `opts` instead:
-
-```lua
-return {
-  "nvim-neo-tree/neo-tree.nvim",
-  branch = "v3.x",
-  dependencies = {
-    "nvim-lua/plenary.nvim",
-    "MunifTanjim/nui.nvim",
-    "nvim-tree/nvim-web-devicons", -- optional, but recommended
-  },
-  lazy = false, -- neo-tree will lazily load itself
-  ---@module 'neo-tree'
-  ---@type neotree.Config
-  opts = {
-    -- options go here
-  }
-}
-```
-
-</details>
-
-> [!NOTE]
-> You do not need to call `setup()` for Neo-tree and its commands to work. `setup()` is only for configuration.
 
 <details>
   <summary>
@@ -276,6 +85,7 @@ return {
 
 ```lua
 vim.keymap.set("n", "<leader>e", "<Cmd>Neotree<CR>")
+
 require("neo-tree").setup({
   close_if_last_window = false, -- Close Neo-tree if it is the last window left in the tab
   popup_border_style = "NC", -- or "" to use 'winborder' on Neovim v0.11+
@@ -983,150 +793,3 @@ When preview mode is not using floats, the window will have the window local
 variable `neo_tree_preview` set to `1` to indicate that it is being used as a
 preview window. You can refer to this in statusline and winbar configs to mark a
 window as being used as a preview.
-
-#### Image Support in Preview Mode
-
-If you have
-[folke/snacks.nvim](https://github.com/folke/snacks.nvim/blob/main/docs/image.md)
-or [3rd/image.nvim](https://github.com/3rd/image.nvim) installed, preview mode
-supports image rendering by default using kitty graphics protocol or ueberzug
-([Video](https://user-images.githubusercontent.com/41065736/277180763-b7152637-f310-43a5-b8c3-4bcba135629d.mp4)).
-
-However, if you do not want this feature, you can disable it by setting
-`use_snacks_image = false` or `use_image_nvim = false` in the mappings config
-mentioned above.
-
-## Configuration and Customization
-
-This is designed to be flexible. The way that is achieved is by making
-everything a function, or a string that identifies a built-in function. All of
-the built-in functions can be replaced with your own implementation, or you can
-add new ones.
-
-Each node in the tree is created from the renderer specified for the given node
-type, and each renderer is a list of component configs to be rendered in order.
-Each component is a function, either built-in or specified in your config. Those
-functions simply return the text and highlight group for the component.
-
-Additionally, there is an events system that you can hook into. If you want to
-show some new data point related to your files, gather it in the `before_render`
-event, create a component to display it, and reference that component in the
-renderer for the `file` and/or `directory` type.
-
-Details on how to configure everything is in the help file at `:h
-neo-tree-configuration` or online at
-[neo-tree.txt](https://github.com/nvim-neo-tree/neo-tree.nvim/blob/main/doc/neo-tree.txt)
-
-Recipes for customizations can be found on the
-[wiki](https://github.com/nvim-neo-tree/neo-tree.nvim/wiki/Recipes). Recipes
-include things like adding a component to show the
-[Harpoon](https://github.com/ThePrimeagen/harpoon) index for files, or
-responding to the `"file_opened"` event to auto clear the search when you open a
-file.
-
-## Why?
-
-There are many tree plugins for (Neo)vim, so why make another one? Well, I
-wanted something that was:
-
-1. Easy to maintain and enhance.
-2. Stable.
-3. Easy to customize.
-
-### Easy to maintain and enhance
-
-This plugin is designed to grow and be flexible. This is accomplished by making
-the code as decoupled and functional as possible. Hopefully new contributors
-will find it easy to work with.
-
-One big difference between this plugin and the ones that came before it, which
-is also what finally pushed me over the edge into making a new plugin, is that
-we now have libraries to build upon that did not exist when other tree plugins
-were created. Most notably, [nui.nvim](https://github.com/MunifTanjim/nui.nvim)
-and [plenary.nvm](https://github.com/nvim-lua/plenary.nvim). Building upon
-shared libraries will go a long way in making neo-tree easy to maintain.
-
-### Stable
-
-This project will have releases and release tags that follow a simplified
-Semantic Versioning scheme. The quickstart instructions will always refer to the
-latest stable major version. Following the **main** branch is for contributors
-and those that always want bleeding edge. There will be branches for **v1.x**,
-**v2.x**, etc which will receive updates after a short testing period in
-**main**. You should be safe to follow those branches and be sure your tree
-won't break in an update. There will also be tags for each release pushed to
-those branches named **v1.1**, **v1.2**, etc. If stability is critical to you,
-or a bug accidentally makes it into **v3.x**, you can use those tags instead.
-It's possible we may backport bug fixes to those tags, but no guarantees on
-that.
-
-There will never be a breaking change within a major version (1.x, 2.x, etc.) If
-a breaking change is needed, there will be depracation warnings in the prior
-major version, and the breaking change will happen in the next major version.
-
-### Easy to Customize
-
-Neo-tree follows in the spirit of plugins like
-[lualine.nvim](https://github.com/nvim-lualine/lualine.nvim) and
-[nvim-cokeline](https://github.com/noib3/nvim-cokeline). Everything will be
-configurable and take either strings, tables, or functions. You can take sane
-defaults or build your tree items from scratch. There should be the ability to
-add any features you can think of through existing hooks in the setup function.
-
-## What is a Breaking Change?
-
-As of v1.30, a breaking change is defined as anything that _changes_ existing:
-
-- vim commands (`:Neotree`)
-- configuration options that are passed into the `setup()` function
-- `NeoTree*` highlight groups
-- lua functions exported in the following modules that are not prefixed with
-`_`:
-* `neo-tree`
-* `neo-tree.events`
-* `neo-tree.sources.manager`
-* `neo-tree.sources.*` (init.lua files)
-* `neo-tree.sources.*.commands`
-* `neo-tree.ui.renderer`
-* `neo-tree.utils`
-
-If there are other functions you would like to use that are not yet considered
-part of the public API, please open an issue so we can discuss it.
-
-## Contributions
-
-Contributions are encouraged. Please see [CONTRIBUTING](CONTRIBUTING.md) for
-more details.
-
-## Acknowledgements
-
-### Maintainers
-
-First and foremost, this project is a community endeavor and would not survive
-without the constant stream of features and bug fixes that comes from that
-community. There have been many valued contributors, but a few have stepped up
-to become maintainers that generously donate their time to guide the project,
-help out others, and manage the issues. The current list of maintainers are:
-
-- @pynappo
-
-### Past maintainers:
-
-(in alphabetical order)
-
-- @cseickel
-- @miversen33
-- @nhat-vo
-- @pysan3
-
-### Other Projects
-
-The design is heavily inspired by these excellent plugins:
-- [lualine.nvim](https://github.com/nvim-lualine/lualine.nvim)
-- [nvim-cokeline](https://github.com/noib3/nvim-cokeline)
-
-Everything I know about writing a tree control in lua, I learned from:
-- [nvim-tree.lua](https://github.com/nvim-tree/nvim-tree.lua)
-
-<!-- vim: set textwidth=80 shiftwidth=2: -->
-
