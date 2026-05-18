@@ -1,6 +1,6 @@
 ---@type table
 local cmds = {
-"Neotree",
+  "Neotree",
 }
 
 return cmds
