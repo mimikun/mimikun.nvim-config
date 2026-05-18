@@ -161,11 +161,7 @@ function M.check_config(config)
       validate("log_level", cfg.log_level, schema.ConfigLogLevel, true)
       validate("log_to_file", cfg.log_to_file, { "boolean", "string" })
       validate("open_files_in_last_window", cfg.open_files_in_last_window, "boolean")
-      validate(
-        "open_files_do_not_replace_types",
-        cfg.open_files_do_not_replace_types,
-        v.array("string")
-      )
+      validate("open_files_do_not_replace_types", cfg.open_files_do_not_replace_types, v.array("string"))
       validate("open_files_using_relative_paths", cfg.open_files_using_relative_paths, "boolean")
       validate(
         "popup_border_style",
@@ -183,11 +179,7 @@ function M.check_config(config)
         validate("show_scrolled_off_parent_node", ss.show_scrolled_off_parent_node, "boolean")
         validate("sources", ss.sources, v.array(schema.SourceSelector.Item))
         validate("content_layout", ss.content_layout, v.literal({ "start", "end", "center" }))
-        validate(
-          "tabs_layout",
-          ss.tabs_layout,
-          v.literal({ "equal", "start", "end", "center", "active" })
-        )
+        validate("tabs_layout", ss.tabs_layout, v.literal({ "equal", "start", "end", "center", "active" }))
         validate("truncation_character", ss.truncation_character, "string", false)
         validate("tabs_min_width", ss.tabs_min_width, "number", true)
         validate("tabs_max_width", ss.tabs_max_width, "number", true)
@@ -229,12 +221,7 @@ function M.check_config(config)
             validate("height", size.height, { "string", "number" })
             validate("width", size.width, { "string", "number" })
           end)
-          validate(
-            "border",
-            popup.border,
-            v.literal({ "NC", "rounded", "single", "solid", "double", "" }),
-            true
-          )
+          validate("border", popup.border, v.literal({ "NC", "rounded", "single", "solid", "double", "" }), true)
         end)
         validate("insert_as", window.insert_as, v.literal({ "child", "sibling" }), true)
         validate("mapping_options", window.mapping_options, "table") -- TODO: More specific validation
@@ -242,11 +229,7 @@ function M.check_config(config)
       end)
 
       validate("filesystem", cfg.filesystem, function(fs)
-        validate(
-          "async_directory_scan",
-          fs.async_directory_scan,
-          v.literal({ "auto", "always", "never" })
-        )
+        validate("async_directory_scan", fs.async_directory_scan, v.literal({ "auto", "always", "never" }))
         validate("scan_mode", fs.scan_mode, v.literal({ "shallow", "deep" }))
         validate("bind_to_cwd", fs.bind_to_cwd, "boolean")
         validate("cwd_target", fs.cwd_target, function(cwd_target)
@@ -291,11 +274,7 @@ function M.check_config(config)
       end)
       validate("buffers", cfg.buffers, function(buffers)
         validate("bind_to_cwd", buffers.bind_to_cwd, "boolean")
-        validate(
-          "follow_current_file",
-          buffers.follow_current_file,
-          schema.Filesystem.FollowCurrentFile
-        )
+        validate("follow_current_file", buffers.follow_current_file, schema.Filesystem.FollowCurrentFile)
         validate("group_empty_dirs", buffers.group_empty_dirs, "boolean")
         validate("show_unloaded", buffers.show_unloaded, "boolean")
         validate("terminals_first", buffers.terminals_first, "boolean")
@@ -344,9 +323,7 @@ function M.check_config(config)
     end
   end
   if verbose then
-    health.info(
-      "[verbose] Config schema checking is not comprehensive yet, unchecked keys listed below:"
-    )
+    health.info("[verbose] Config schema checking is not comprehensive yet, unchecked keys listed below:")
     if missed then
       for _, miss in ipairs(missed) do
         health.info(miss)

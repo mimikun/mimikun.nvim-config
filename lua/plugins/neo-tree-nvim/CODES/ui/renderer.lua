@@ -330,11 +330,7 @@ create_nodes = function(source_items, state, level)
     if source_items == hidden then
       local nodeData = {
         id = hidden[#hidden].id .. "_hidden_message",
-        name = "(forced to show "
-          .. #hidden
-          .. " hidden "
-          .. (#hidden > 1 and "items" or "item")
-          .. ")",
+        name = "(forced to show " .. #hidden .. " hidden " .. (#hidden > 1 and "items" or "item") .. ")",
         type = "message",
         level = level,
         is_last_child = show_indent_marker_for_message,
@@ -370,8 +366,7 @@ end
 M.render_component = function(component, item, state, remaining_width)
   local component_func = state.components[component[1]]
   if component_func then
-    local success, component_data, wanted_width =
-      pcall(component_func, component, item, state, remaining_width)
+    local success, component_data, wanted_width = pcall(component_func, component, item, state, remaining_width)
     if success then
       if component_data == nil then
         return { {} }
@@ -417,12 +412,7 @@ local prepare_node = function(item, state)
     local line = item.line
     -- Only use it once, we don't want to accidentally use stale data
     item.line = nil
-    if
-      line
-      and item.wanted_width
-      and state.longest_node
-      and item.wanted_width <= state.longest_node
-    then
+    if line and item.wanted_width and state.longest_node and item.wanted_width <= state.longest_node then
       return line
     end
   end
@@ -557,9 +547,7 @@ M.focus_node = function(state, id, do_not_focus_window, relative_movement, botto
       -- make sure we are not scrolled down if it can all fit on the screen
       local lines = vim.api.nvim_buf_line_count(state.bufnr)
       local win_height = vim.api.nvim_win_get_height(state.winid)
-      local virtual_bottom_line = vim.fn.line("w0", state.winid)
-        + win_height
-        - bottom_scroll_padding
+      local virtual_bottom_line = vim.fn.line("w0", state.winid) + win_height - bottom_scroll_padding
       if virtual_bottom_line <= linenr then
         vim.api.nvim_win_call(state.winid, function()
           vim.cmd("normal! " .. (linenr + bottom_scroll_padding) .. "zb")

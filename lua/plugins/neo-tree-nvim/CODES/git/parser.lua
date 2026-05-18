@@ -90,13 +90,7 @@ end
 ---@param skip_bubbling boolean?
 ---@param context neotree.git.JobContext?
 ---@return neotree.git.Status status
-M.parse_status_porcelain = function(
-  porcelain_version,
-  worktree_root,
-  status_iter,
-  skip_bubbling,
-  context
-)
+M.parse_status_porcelain = function(porcelain_version, worktree_root, status_iter, skip_bubbling, context)
   local git_root_dir = utils.normalize_path(worktree_root)
   if not vim.endswith(git_root_dir, utils.path_separator) then
     git_root_dir = git_root_dir .. utils.path_separator
@@ -400,12 +394,7 @@ end
 ---@param skip_bubbling boolean?
 ---@param context neotree.git.JobContext?
 ---@return string[]
-M.parse_diff_name_status_output = function(
-  worktree_root,
-  skip_bubbling,
-  diff_name_status_iter,
-  context
-)
+M.parse_diff_name_status_output = function(worktree_root, skip_bubbling, diff_name_status_iter, context)
   local worktree_root_dir = worktree_root
   if not vim.endswith(worktree_root_dir, utils.path_separator) then
     worktree_root_dir = worktree_root_dir .. utils.path_separator

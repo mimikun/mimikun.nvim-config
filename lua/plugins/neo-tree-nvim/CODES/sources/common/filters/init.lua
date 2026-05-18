@@ -245,11 +245,7 @@ end
 ---@param state neotree.State
 ---@param scroll_padding integer
 function M.setup_hooks(input, cmds, state, scroll_padding)
-  input:on(
-    { event.BufLeave, event.BufDelete },
-    utils.wrap(cmds.close, state, scroll_padding),
-    { once = true }
-  )
+  input:on({ event.BufLeave, event.BufDelete }, utils.wrap(cmds.close, state, scroll_padding), { once = true })
 
   -- hacky bugfix for quitting from the filter window
   input:on("QuitPre", function()

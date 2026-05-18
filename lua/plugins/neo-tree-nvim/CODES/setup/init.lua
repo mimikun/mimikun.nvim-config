@@ -64,12 +64,7 @@ local define_events = function()
   events.define_autocmd_event(events.VIM_AFTER_SESSION_LOAD, { "SessionLoadPost" }, 200)
   events.define_autocmd_event(events.VIM_BUFFER_ADDED, { "BufAdd" }, 200, update_opened_buffers)
   events.define_autocmd_event(events.VIM_BUFFER_CHANGED, { "BufWritePost" }, 200)
-  events.define_autocmd_event(
-    events.VIM_BUFFER_DELETED,
-    { "BufDelete" },
-    200,
-    update_opened_buffers
-  )
+  events.define_autocmd_event(events.VIM_BUFFER_DELETED, { "BufDelete" }, 200, update_opened_buffers)
   events.define_autocmd_event(events.VIM_BUFFER_ENTER, { "BufEnter", "BufWinEnter" }, 0)
   events.define_autocmd_event(
     events.VIM_BUFFER_MODIFIED_SET,
@@ -114,8 +109,7 @@ local prior_window_options = {}
 --- @param winid number | nil The window id to store the options for, defaults to current window
 local store_local_window_settings = function(winid)
   winid = winid or vim.api.nvim_get_current_win()
-  local neo_tree_settings_applied, _ =
-    pcall(vim.api.nvim_win_get_var, winid, "neo_tree_settings_applied")
+  local neo_tree_settings_applied, _ = pcall(vim.api.nvim_win_get_var, winid, "neo_tree_settings_applied")
   if neo_tree_settings_applied then
     -- don't store our own window settings
     return
@@ -528,11 +522,10 @@ M.merge_config = function(user_config)
 
   for source_name, mod_root in pairs(all_sources) do
     local module = require(mod_root)
-    default_config[source_name] = default_config[source_name]
-      or {
-        renderers = {},
-        components = {},
-      }
+    default_config[source_name] = default_config[source_name] or {
+      renderers = {},
+      components = {},
+    }
     local source_default_config = default_config[source_name]
     source_default_config.components = module.components or require(mod_root .. ".components")
     source_default_config.commands = module.commands or require(mod_root .. ".commands")
@@ -607,10 +600,7 @@ M.merge_config = function(user_config)
   end
   if not match and M.config.default_source ~= "last" then
     M.config.default_source = M.config.sources[1]
-    log.warn(
-      "Invalid default source found in configuration. Using first available source:",
-      M.config.default_source
-    )
+    log.warn("Invalid default source found in configuration. Using first available source:", M.config.default_source)
   end
 
   ---@type neotree.Config.HijackNetrwBehavior[]
@@ -621,9 +611,7 @@ M.merge_config = function(user_config)
     vim.cmd("silent! autocmd! FileExplorer *")
   elseif hijack_behavior ~= "disabled" then
     require("neo-tree.log").error(
-      "Invalid value for filesystem.hijack_netrw_behavior: '"
-        .. hijack_behavior
-        .. "', will default to 'disabled'"
+      "Invalid value for filesystem.hijack_netrw_behavior: '" .. hijack_behavior .. "', will default to 'disabled'"
     )
     M.config.filesystem.hijack_netrw_behavior = "disabled"
   end
@@ -652,8 +640,7 @@ M.merge_config = function(user_config)
     end
     local module = require(mod_root)
     if M.config.commands then
-      M.config[source_name].commands =
-        vim.tbl_extend("keep", M.config[source_name].commands or {}, M.config.commands)
+      M.config[source_name].commands = vim.tbl_extend("keep", M.config[source_name].commands or {}, M.config.commands)
     end
     manager.setup(source_name, M.config[source_name] --[[@as table]], M.config, module)
     manager.redraw(source_name)

@@ -32,11 +32,7 @@ M.diff_name_status = function(worktree_root, base, skip_bubbling)
     return nil
   end
 
-  return git_parser.parse_diff_name_status_output(
-    worktree_root,
-    skip_bubbling,
-    utils.gsplit_plain(res, "\001")
-  )
+  return git_parser.parse_diff_name_status_output(worktree_root, skip_bubbling, utils.gsplit_plain(res, "\001"))
 end
 
 ---@param worktree_root string
@@ -54,13 +50,7 @@ M.name_status_job = function(worktree_root, base, skip_bubbling, context, on_par
     local full_output = table.concat(stdout_chunks)
     local parsing_task = coroutine.create(git_parser.parse_diff_name_status_output)
     local first_output = {
-      coroutine.resume(
-        parsing_task,
-        worktree_root,
-        skip_bubbling,
-        utils.gsplit_plain(full_output, "\000"),
-        context
-      ),
+      coroutine.resume(parsing_task, worktree_root, skip_bubbling, utils.gsplit_plain(full_output, "\000"), context),
     }
     git_utils.run_coroutine_on_interval(parsing_task, context.batch_delay, first_output, on_parsed)
   end)

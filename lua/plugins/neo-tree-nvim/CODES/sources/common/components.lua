@@ -450,8 +450,7 @@ end
 M.icon = function(config, node, state)
   -- calculate default icon
   ---@type neotree.Render.Node
-  local icon =
-    { text = config.default or " ", highlight = config.highlight or highlights.FILE_ICON }
+  local icon = { text = config.default or " ", highlight = config.highlight or highlights.FILE_ICON }
   if node.type == "directory" then
     icon.highlight = highlights.DIRECTORY_ICON
     if node.loaded and not node:has_children() then
@@ -584,15 +583,13 @@ M.indent = function(config, node, state)
   local padding = config.padding or 0
   local level = node.level
   local with_markers = config.with_markers
-  local with_expanders = config.with_expanders == nil and file_nesting.is_enabled()
-    or config.with_expanders
+  local with_expanders = config.with_expanders == nil and file_nesting.is_enabled() or config.with_expanders
   local marker_highlight = config.highlight or highlights.INDENT_MARKER
   local expander_highlight = config.expander_highlight or config.highlight or highlights.EXPANDER
 
   local function get_expander()
     if with_expanders and utils.is_expandable(node) then
-      return node:is_expanded() and (config.expander_expanded or "")
-        or (config.expander_collapsed or "")
+      return node:is_expanded() and (config.expander_expanded or "") or (config.expander_collapsed or "")
     end
   end
 

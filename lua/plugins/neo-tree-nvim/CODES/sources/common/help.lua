@@ -87,10 +87,7 @@ M.show = function(state, title, prefix_key, sorter)
   table.sort(maps, sorter or default_help_sort)
   for _, val in ipairs(maps) do
     local nuiline = NuiLine()
-    nuiline:append(
-      string.format(" %14s", key_minus_prefix(val.key, prefix_key)),
-      highlights.FILTER_TERM
-    )
+    nuiline:append(string.format(" %14s", key_minus_prefix(val.key, prefix_key)), highlights.FILTER_TERM)
     nuiline:append(" -> ", highlights.DIM_TEXT)
     nuiline:append(val.mapping.text, highlights.NORMAL)
     local line = nuiline:content()

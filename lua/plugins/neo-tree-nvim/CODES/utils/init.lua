@@ -799,8 +799,7 @@ M.open_file = function(state, path, open_cmd, bufnr)
   if bufnr <= 0 then
     bufnr = nil
   else
-    local buf_cmd_lookup =
-      { edit = "b", e = "b", split = "sb", sp = "sb", vsplit = "vert sb", vs = "vert sb" }
+    local buf_cmd_lookup = { edit = "b", e = "b", split = "sb", sp = "sb", vsplit = "vert sb", vs = "vert sb" }
     local cmd_for_buf = buf_cmd_lookup[open_cmd]
     if cmd_for_buf then
       open_cmd = cmd_for_buf
@@ -1684,8 +1683,7 @@ function M.spairs(t, sorter)
     if keys[i] then
       return keys[i], t[keys[i]]
     end
-  end,
-    t
+  end, t
 end
 
 local strwidth = vim.api.nvim_strwidth

@@ -108,11 +108,7 @@ log_maker.new = function(config)
       vim.notify(message, level, title_opts)
     else
       local level_config = config.level_configs[level]
-      local console_string = ("[%s %s] %s"):format(
-        notify_prefix,
-        level_config.name:upper(),
-        message
-      )
+      local console_string = ("[%s %s] %s"):format(notify_prefix, level_config.name:upper(), message)
       vim.notify(console_string, level)
     end
   end)
@@ -385,8 +381,7 @@ log_maker.new = function(config)
   ---@param context string
   log.new = function(context)
     local new_context = vim.deepcopy(config.context)
-    local new_config =
-      vim.tbl_deep_extend("force", config, { context = vim.list_extend(new_context, { context }) })
+    local new_config = vim.tbl_deep_extend("force", config, { context = vim.list_extend(new_context, { context }) })
     return log_maker.new(new_config)
   end
 

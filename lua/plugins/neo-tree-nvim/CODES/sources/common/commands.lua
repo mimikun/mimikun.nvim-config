@@ -416,10 +416,7 @@ M.git_undo_last_commit = function(state)
         return
       end
       events.fire_event(events.GIT_EVENT)
-      popups.alert(
-        "git reset --soft HEAD~1",
-        { "Last commit undone successfully", "Changes kept in staging area" }
-      )
+      popups.alert("git reset --soft HEAD~1", { "Last commit undone successfully", "Changes kept in staging area" })
     end
   end)
 end
@@ -660,19 +657,9 @@ M.paste_from_clipboard = function(state, callback)
 
   handle_next_paste = function(item)
     if item.action == "copy" then
-      fs_actions.copy_node(
-        item.node.path,
-        folder .. utils.path_separator .. item.node.name,
-        paste_complete,
-        folder
-      )
+      fs_actions.copy_node(item.node.path, folder .. utils.path_separator .. item.node.name, paste_complete, folder)
     elseif item.action == "cut" then
-      fs_actions.move_node(
-        item.node.path,
-        folder .. utils.path_separator .. item.node.name,
-        paste_complete,
-        folder
-      )
+      fs_actions.move_node(item.node.path, folder .. utils.path_separator .. item.node.name, paste_complete, folder)
     end
   end
 
@@ -947,9 +934,7 @@ end
 local use_window_picker = function(state, path, cmd)
   local success, picker = pcall(require, "window-picker")
   if not success then
-    print(
-      "You'll need to install window-picker to use this command: https://github.com/s1n7ax/nvim-window-picker"
-    )
+    print("You'll need to install window-picker to use this command: https://github.com/s1n7ax/nvim-window-picker")
     return
   end
   local events = require("neo-tree.events")

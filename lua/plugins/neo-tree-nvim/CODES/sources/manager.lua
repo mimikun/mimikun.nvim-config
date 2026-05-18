@@ -292,12 +292,7 @@ M.subscribe = function(source_name, event)
   end
   if not utils.truthy(event.id) then
     local subscriber_info = debug.getinfo(2, "Sl")
-    event.id = ("%s.%s@%s:%s"):format(
-      sd.name,
-      event.event,
-      subscriber_info.short_src,
-      subscriber_info.currentline
-    )
+    event.id = ("%s.%s@%s:%s"):format(sd.name, event.event, subscriber_info.short_src, subscriber_info.currentline)
   end
   log.trace("subscribing to event:" .. event.id)
   sd.subscriptions[event] = true

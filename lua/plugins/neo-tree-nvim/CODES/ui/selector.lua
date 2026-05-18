@@ -80,9 +80,7 @@ local get_selector_tab_info = function(source_name, source_index, is_active, sep
   end
   local source_config = config[source_name] or {}
   local get_strlen = vim.api.nvim_strwidth
-  local text = separator_config.sources[source_index].display_name
-    or source_config.display_name
-    or source_name
+  local text = separator_config.sources[source_index].display_name or source_config.display_name or source_name
   local text_length = get_strlen(text)
   if separator_config.tabs_min_width ~= nil and text_length < separator_config.tabs_min_width then
     text = M.text_layout(text, separator_config.content_layout, separator_config.tabs_min_width)
@@ -92,10 +90,8 @@ local get_selector_tab_info = function(source_name, source_index, is_active, sep
     text = M.text_layout(text, separator_config.content_layout, separator_config.tabs_max_width)
     text_length = separator_config.tabs_max_width
   end
-  local tab_hl = is_active and separator_config.highlight_tab_active
-    or separator_config.highlight_tab
-  local sep_hl = is_active and separator_config.highlight_separator_active
-    or separator_config.highlight_separator
+  local tab_hl = is_active and separator_config.highlight_tab_active or separator_config.highlight_tab
+  local sep_hl = is_active and separator_config.highlight_separator_active or separator_config.highlight_separator
   return {
     index = source_index,
     is_active = is_active,
@@ -211,8 +207,7 @@ M.get = function()
     return
   else
     local config = require("neo-tree").config
-    local scrolled_off =
-      utils.resolve_config_option(config, "source_selector.show_scrolled_off_parent_node", false)
+    local scrolled_off = utils.resolve_config_option(config, "source_selector.show_scrolled_off_parent_node", false)
     if scrolled_off then
       local node_text = M.get_scrolled_off_node_text(state)
       if node_text ~= nil then
@@ -289,12 +284,7 @@ M.get_selector = function(state, width)
           tab.left,
           tab.right,
           tab.sep_hl,
-          text_layout(
-            tab.text,
-            tab.is_active and content_layout or nil,
-            active_tab_length,
-            trunc_char
-          ),
+          text_layout(tab.text, tab.is_active and content_layout or nil, active_tab_length, trunc_char),
           tab.tab_hl,
           calc_click_id_from_source(winid, tab.index)
         )
@@ -335,8 +325,7 @@ M.get_selector = function(state, width)
       -- only render trunc_char if there is no space for the tab
       local sep_length = tab.length - tab.text_length
       if width <= sep_length + 1 then
-        return_string = return_string
-          .. text_with_hl(trunc_char .. add_padding(width - 1), hl_background)
+        return_string = return_string .. text_with_hl(trunc_char .. add_padding(width - 1), hl_background)
         width = 0
         break
       end

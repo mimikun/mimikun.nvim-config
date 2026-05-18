@@ -97,13 +97,7 @@ function Queue:for_each(func)
         self._list:remove_node(node_to_remove)
       elseif type(result) == "table" then
         if result.handled == true then
-          log.trace(
-            "Handler",
-            node.value.id,
-            "for",
-            node.value.event,
-            "was handled, skipping the rest of the queue."
-          )
+          log.trace("Handler", node.value.id, "for", node.value.event, "was handled, skipping the rest of the queue.")
           return result
         end
       end

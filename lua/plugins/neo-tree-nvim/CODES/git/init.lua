@@ -72,10 +72,8 @@ end
 
 ---@param worktree_root string
 local delete_worktree = function(worktree_root)
-  local existing_worktree = log.assert(
-    M.worktrees[worktree_root],
-    "Could not find worktree to delete for " .. worktree_root
-  )
+  local existing_worktree =
+    log.assert(M.worktrees[worktree_root], "Could not find worktree to delete for " .. worktree_root)
   M.worktrees[existing_worktree] = nil
   -- deleting worktree, invalidate root dir lookups
   M._upward_worktree_cache = setmetatable({}, weak_kv)
@@ -149,8 +147,7 @@ end
 ---@param git_status_diff_base neotree.git.Status?
 local change_worktree_git_status = function(worktree_root, git_status, base, git_status_diff_base)
   assert(git_status)
-  local worktree =
-    assert(M.worktrees[worktree_root], "Could not find worktree for " .. worktree_root)
+  local worktree = assert(M.worktrees[worktree_root], "Could not find worktree for " .. worktree_root)
   worktree.status = git_status
   if base then
     worktree.status_diff[base] = git_status_diff_base
@@ -261,20 +258,12 @@ M.status = function(path, base_lookup, skip_bubbling, status_opts)
 
   skip_bubbling = not not skip_bubbling
   local status_iter = utils.gsplit_plain(status_text, "\000")
-  local git_status = parser.parse_status_porcelain(
-    status_porcelain_version,
-    worktree_root,
-    status_iter,
-    skip_bubbling
-  )
+  local git_status = parser.parse_status_porcelain(status_porcelain_version, worktree_root, status_iter, skip_bubbling)
 
   local git_status_over_base
   if base_lookup and base_lookup[worktree_root] then
-    git_status_over_base = require("neo-tree.git.diff").diff_name_status(
-      worktree_root,
-      base_lookup[worktree_root],
-      skip_bubbling
-    )
+    git_status_over_base =
+      require("neo-tree.git.diff").diff_name_status(worktree_root, base_lookup[worktree_root], skip_bubbling)
   end
   change_worktree_git_status(
     worktree_root,
@@ -316,14 +305,7 @@ local git_status_job = function(cmd, context, on_parsed, skip_bubbling)
     local status_iter = utils.gsplit_plain(status_text, "\000")
     local parsing_task = co.create(parser.parse_status_porcelain)
     local first_output = {
-      co.resume(
-        parsing_task,
-        context.porcelain_version,
-        context.worktree_root,
-        status_iter,
-        skip_bubbling,
-        context
-      ),
+      co.resume(parsing_task, context.porcelain_version, context.worktree_root, status_iter, skip_bubbling, context),
     }
     git_utils.run_coroutine_on_interval(
       parsing_task,
@@ -456,9 +438,7 @@ M.status_async = function(path, base_lookup, opts, callback)
 
               local untracked_setting = table.concat(stdout_chunks)
               if untracked_setting:find("no", 1, true) then
-                log.debug(
-                  "git.status_async: status.showUntrackedFiles == 'no', skipping full check"
-                )
+                log.debug("git.status_async: status.showUntrackedFiles == 'no', skipping full check")
                 callback(nil)
                 return
               end
@@ -666,8 +646,7 @@ M.find_existing_status_code = function(path, base_lookup)
   local worktree_git_status = worktree.status
 
   if worktree_git_status then
-    local worktree_status_code =
-      M._find_existing_status_code_in_git_status(worktree_git_status, worktree_root, path)
+    local worktree_status_code = M._find_existing_status_code_in_git_status(worktree_git_status, worktree_root, path)
     if worktree_status_code then
       return worktree_status_code, false
     end
@@ -677,8 +656,7 @@ M.find_existing_status_code = function(path, base_lookup)
     local base = base_lookup[worktree_root]
     local diff_status = base and worktree.status_diff[base]
     if diff_status then
-      local diff_status_code =
-        M._find_existing_status_code_in_git_status(diff_status, worktree_root, path)
+      local diff_status_code = M._find_existing_status_code_in_git_status(diff_status, worktree_root, path)
       if diff_status_code then
         return diff_status_code, true
       end

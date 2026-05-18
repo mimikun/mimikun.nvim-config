@@ -44,8 +44,7 @@ M._file_completion = function(arglead, cmdline, cursorpos)
     cmdline_before_cursor = tail
   end
 
-  local globexpr = vim.endswith(cmdline_before_cursor, "*") and cmdline_before_cursor
-    or cmdline .. "*"
+  local globexpr = vim.endswith(cmdline_before_cursor, "*") and cmdline_before_cursor or cmdline .. "*"
 
   ---Escape for globpath
   local escaped_root = input_root:gsub(",", "\\,")
@@ -107,8 +106,7 @@ local function rename_is_safe(source, destination)
   if changing_casing then
     local src_file = uv.fs_stat(src)
     -- We check that the two paths resolve to the same canonical filename and file.
-    return same_file(src_file, destination_file)
-      and uv.fs_realpath(src) == uv.fs_realpath(destination)
+    return same_file(src_file, destination_file) and uv.fs_realpath(src) == uv.fs_realpath(destination)
   end
   return false
 end
@@ -512,8 +510,7 @@ M.create_node = function(in_directory, callback, input_root)
       if not destination or destination == base then
         return
       end
-      local is_dir = vim.endswith(destination, "/")
-        or vim.endswith(destination, utils.path_separator)
+      local is_dir = vim.endswith(destination, "/") or vim.endswith(destination, utils.path_separator)
 
       if input_root then
         destination = utils.path_join(input_root, destination)
@@ -662,8 +659,7 @@ M.delete_node = function(path, callback, noconfirm)
       -- first try using native system commands, which are recursive
       local success = false
       if utils.is_windows then
-        local result =
-          vim.fn.system({ "cmd.exe", "/c", "rmdir", "/s", "/q", vim.fn.shellescape(path) })
+        local result = vim.fn.system({ "cmd.exe", "/c", "rmdir", "/s", "/q", vim.fn.shellescape(path) })
         local error = vim.v.shell_error
         if error ~= 0 then
           log.debug("Could not delete directory '", path, "' with rmdir: ", result)
@@ -810,10 +806,7 @@ M.rename_node_basename = function(source, on_rename)
   local prompt = string.format('Enter new base name for "%s":', name)
 
   local resolve_destination = function(new_base_name)
-    return parent_path
-      .. utils.path_separator
-      .. new_base_name
-      .. (extension:len() == 0 and "" or "." .. extension)
+    return parent_path .. utils.path_separator .. new_base_name .. (extension:len() == 0 and "" or "." .. extension)
   end
 
   rename_node(prompt, base_name, resolve_destination, source, on_rename)

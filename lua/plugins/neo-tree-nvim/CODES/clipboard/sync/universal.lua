@@ -205,9 +205,7 @@ function UniversalBackend:load(state)
     log.debug("Clipboard file", filename, "looks to be invalid", saved_clipboard)
     if
       require("neo-tree.ui.inputs").confirm(
-        "Neo-tree universal clipboard file for "
-          .. state.name
-          .. " seems invalid, clear out clipboard?"
+        "Neo-tree universal clipboard file for " .. state.name .. " seems invalid, clear out clipboard?"
       )
     then
       local success, delete_err = os.remove(filename)

@@ -56,21 +56,15 @@ M.ignored_job = function(context, on_parsed)
     local ls_files_iter = utils.gsplit_plain(ls_files_string, "\000")
 
     local parsing_task = co.create(git_parser.parse_ls_files_output)
-    local first_output =
-      { coroutine.resume(parsing_task, context.worktree_root, ls_files_iter, context) }
-    git_utils.run_coroutine_on_interval(
-      parsing_task,
-      context.batch_delay,
-      first_output,
-      function(success, paths)
-        if success then
-          on_parsed(paths)
-        else
-          local err = paths
-          on_parsed(nil, err)
-        end
+    local first_output = { coroutine.resume(parsing_task, context.worktree_root, ls_files_iter, context) }
+    git_utils.run_coroutine_on_interval(parsing_task, context.batch_delay, first_output, function(success, paths)
+      if success then
+        on_parsed(paths)
+      else
+        local err = paths
+        on_parsed(nil, err)
       end
-    )
+    end)
   end)
 end
 

@@ -116,8 +116,7 @@ local mark_gitignored = function(cwd, items)
     else
       -- Rely on the status
       for _, item in ipairs(items_within_root) do
-        local status =
-          git._find_existing_status_code_in_git_status(git_status, worktree_root, item.path)
+        local status = git._find_existing_status_code_in_git_status(git_status, worktree_root, item.path)
         if status == "!" then
           item.filtered_by = item.filtered_by or {}
           item.filtered_by.gitignored = true
@@ -141,8 +140,7 @@ local on_directory_loaded = function(context, dir_path)
   folder.loaded = true
 
   if state.use_libuv_file_watcher then
-    local target_path = folder.is_link and utils.path_join(folder.path, folder.link_to)
-      or folder.path
+    local target_path = folder.is_link and utils.path_join(folder.path, folder.link_to) or folder.path
     -- git folders seem to throw off fs events constantly, ignore them this time.
     if target_path:find(".git", 1, true) then
       -- https://git-scm.com/docs/gitrepository-layout
@@ -421,12 +419,8 @@ local function async_scan(context, path)
         end
         if entries then
           for _, entry in ipairs(entries) do
-            local success, item = pcall(
-              file_items.create_item,
-              ctx,
-              utils.path_join(current_dir, entry.name),
-              entry.type
-            )
+            local success, item =
+              pcall(file_items.create_item, ctx, utils.path_join(current_dir, entry.name), entry.type)
             if success then
               if ctx.recursive and item.type == "directory" then
                 ctx.directories_to_scan = ctx.directories_to_scan + 1

@@ -237,11 +237,7 @@ M.reset_search = function(state, refresh, open_current_node)
         end)
       else
         utils.open_file(state, path)
-        if
-          refresh
-          and state.current_position ~= "current"
-          and state.current_position ~= "float"
-        then
+        if refresh and state.current_position ~= "current" and state.current_position ~= "float" then
           M.navigate(state, nil, path)
         end
       end
@@ -377,8 +373,7 @@ M.setup = function(config, global_config)
     end
   end
 
-  local git_status_async_enabled = global_config.enable_git_status
-    and global_config.git_status_async
+  local git_status_async_enabled = global_config.enable_git_status and global_config.git_status_async
   --Configure events for before_render
   if config.before_render then
     --convert to new event system

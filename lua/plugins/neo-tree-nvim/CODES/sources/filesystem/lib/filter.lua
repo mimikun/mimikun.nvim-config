@@ -17,13 +17,7 @@ local M = {}
 ---@param fuzzy_finder_mode "directory"|boolean?
 ---@param use_fzy boolean?
 ---@param keep_filter_on_submit boolean?
-M.show_filter = function(
-  state,
-  search_as_you_type,
-  fuzzy_finder_mode,
-  use_fzy,
-  keep_filter_on_submit
-)
+M.show_filter = function(state, search_as_you_type, fuzzy_finder_mode, use_fzy, keep_filter_on_submit)
   local popup_options
   local winid = vim.api.nvim_get_current_win()
   local height = vim.api.nvim_win_get_height(winid)
@@ -76,13 +70,7 @@ M.show_filter = function(
     local a_score = result_scores[a.path]
     local b_score = result_scores[b.path]
     if a_score == nil or b_score == nil then
-      log.at.debug.format(
-        [[Fzy: failed to compare %s: %s, %s: %s]],
-        a.path,
-        a_score,
-        b.path,
-        b_score
-      )
+      log.at.debug.format([[Fzy: failed to compare %s: %s, %s: %s]], a.path, a_score, b.path, b_score)
       local config = require("neo-tree").config
       if config.sort_function ~= nil then
         return config.sort_function(a, b)
@@ -211,11 +199,7 @@ M.show_filter = function(
       input:unmount()
       -- If this was closed due to submit, that function will handle the reset_search
       vim.defer_fn(function()
-        if
-          fuzzy_finder_mode
-          and utils.truthy(state.search_pattern)
-          and not keep_filter_on_submit
-        then
+        if fuzzy_finder_mode and utils.truthy(state.search_pattern) and not keep_filter_on_submit then
           fs.reset_search(state, true)
         end
       end, 100)

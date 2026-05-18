@@ -133,10 +133,7 @@ M.setup = function(config, global_config)
         if not state or state.bufnr ~= bufnr then
           return
         end
-        local group = vim.api.nvim_create_augroup(
-          "neo_tree_document_symbols_follow_tree_cursor",
-          { clear = true }
-        )
+        local group = vim.api.nvim_create_augroup("neo_tree_document_symbols_follow_tree_cursor", { clear = true })
         vim.api.nvim_create_autocmd("CursorMoved", {
           group = group,
           buffer = bufnr,

@@ -101,11 +101,7 @@ M.filter_files_external = function(
   on_exit
 )
   if glob and regex then
-    log.at.warn.format(
-      "both glob and regex are set. glob will take precedence. glob: %s, regex: %s",
-      glob,
-      regex
-    )
+    log.at.warn.format("both glob and regex are set. glob will take precedence. glob: %s, regex: %s", glob, regex)
   end
   ignore = ignore or {}
   kind = kind or {}
@@ -301,8 +297,7 @@ M.fzy_sort_files = function(opts, state)
   -- The fzy score is then used to sort the results
   local chars = {}
   local regex = ".*"
-  local chars_to_escape =
-    { "%", "+", "-", "?", "[", "^", "$", "(", ")", "{", "}", "=", "!", "<", ">", "|", ":", "#" }
+  local chars_to_escape = { "%", "+", "-", "?", "[", "^", "$", "(", ")", "{", "}", "=", "!", "<", ">", "|", ":", "#" }
   for _, term in ipairs(terms) do
     for c in term:gmatch(".") do
       if not chars[c] then

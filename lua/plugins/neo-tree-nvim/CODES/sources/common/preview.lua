@@ -100,10 +100,7 @@ local function create_floating_preview_window(state)
     },
     win_options = {
       number = true,
-      winhighlight = "Normal:"
-        .. highlights.FLOAT_NORMAL
-        .. ",FloatBorder:"
-        .. highlights.FLOAT_BORDER,
+      winhighlight = "Normal:" .. highlights.FLOAT_NORMAL .. ",FloatBorder:" .. highlights.FLOAT_BORDER,
     },
   })
   options.zindex = 40
@@ -227,11 +224,7 @@ end
 function Preview:findWindow(state)
   local winid, is_neo_tree_window
   if self.config.use_float then
-    if
-      type(self.winid) == "number"
-      and vim.api.nvim_win_is_valid(self.winid)
-      and utils.is_floating(self.winid)
-    then
+    if type(self.winid) == "number" and vim.api.nvim_win_is_valid(self.winid) and utils.is_floating(self.winid) then
       return
     end
     local win = create_floating_preview_window(state)
@@ -294,10 +287,7 @@ local function try_load_image_nvim_buf(winid, bufnr)
   if #vim.api.nvim_get_autocmds({ group = image_augroup }) == 0 then
     local image_available, image = pcall(require, "image")
     if not image_available then
-      log.debug(
-        "use_image_nvim was set but image.nvim was not found. Install from:",
-        image_nvim_url
-      )
+      log.debug("use_image_nvim was set but image.nvim was not found. Install from:", image_nvim_url)
       return false
     end
     log.warn("image.nvim was not setup. Calling require('image').setup().")
@@ -341,10 +331,7 @@ events.subscribe({
     local snacks_image_ok, image = pcall(require, "snacks.image")
     if not snacks_image_ok then
       local snacks_nvim_url = "https://github.com/folke/snacks.nvim"
-      log.debug(
-        "use_snacks_image was set but snacks.nvim was not found. Install from:",
-        snacks_nvim_url
-      )
+      log.debug("use_snacks_image was set but snacks.nvim was not found. Install from:", snacks_nvim_url)
       return
     end
     local bufname = vim.api.nvim_buf_get_name(bufnr)
@@ -408,8 +395,7 @@ function Preview:setBuffer(bufnr)
       end
       local has_lang, lang = pcall(vim.treesitter.language.get_lang, ft)
       lang = has_lang and lang or ft
-      local has_parser, parser =
-        pcall(vim.treesitter.get_parser, self.bufnr, lang, { error = false })
+      local has_parser, parser = pcall(vim.treesitter.get_parser, self.bufnr, lang, { error = false })
       has_parser = has_parser and parser ~= nil
       if has_parser then
         has_parser = pcall(vim.treesitter.start, self.bufnr, lang)

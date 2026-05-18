@@ -134,12 +134,10 @@ vim.api.nvim_create_autocmd("WinClosed", {
         local buf_name, message
         if vim.startswith(filename, "[No Name]#") then
           buf_name = string.sub(filename, 11)
-          message =
-            "Cannot close because an unnamed buffer is modified. Please save or discard this file."
+          message = "Cannot close because an unnamed buffer is modified. Please save or discard this file."
         else
           buf_name = filename
-          message =
-            "Cannot close because one of the files is modified. Please save or discard changes."
+          message = "Cannot close because one of the files is modified. Please save or discard changes."
         end
         log.trace("close_if_last_window, showing unnamed modified buffer:", filename)
         vim.schedule(function()

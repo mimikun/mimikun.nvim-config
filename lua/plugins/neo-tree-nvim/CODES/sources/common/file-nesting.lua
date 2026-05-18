@@ -71,11 +71,7 @@ extension_matcher.get_children = function(item, siblings, rule)
   end
   for _, ext in pairs(rule) do
     for _, sibling in pairs(siblings) do
-      if
-        sibling.id ~= item.id
-        and sibling.exts == ext
-        and item.base .. "." .. ext == sibling.name
-      then
+      if sibling.id ~= item.id and sibling.exts == ext and item.base .. "." .. ext == sibling.name then
         table.insert(matching_files, sibling)
       end
     end

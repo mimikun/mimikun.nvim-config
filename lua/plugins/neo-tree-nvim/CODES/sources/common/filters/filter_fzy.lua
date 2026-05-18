@@ -201,9 +201,7 @@ function M.score_and_positions(needle, haystack, case_sensitive)
   for i = n, 1, -1 do
     while j >= 1 do
       if D[i][j] ~= SCORE_MIN and (match_required or D[i][j] == T[i][j]) then
-        match_required = (i ~= 1)
-          and (j ~= 1)
-          and (T[i][j] == D[i - 1][j - 1] + SCORE_MATCH_CONSECUTIVE)
+        match_required = (i ~= 1) and (j ~= 1) and (T[i][j] == D[i - 1][j - 1] + SCORE_MATCH_CONSECUTIVE)
         positions[i] = j
         j = j - 1
         break

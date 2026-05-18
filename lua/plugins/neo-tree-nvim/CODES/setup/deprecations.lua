@@ -63,8 +63,7 @@ M.migrate = function(config)
     local value = utils.get_value(config, key)
     if type(value) ~= "nil" then
       utils.set_value(config, key, nil)
-      migrations[#migrations + 1] =
-        string.format("The `%s` option has been removed.\n%s", key, desc or "")
+      migrations[#migrations + 1] = string.format("The `%s` option has been removed.\n%s", key, desc or "")
     end
   end
 
