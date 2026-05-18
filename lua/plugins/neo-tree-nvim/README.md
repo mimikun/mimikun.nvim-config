@@ -2,11 +2,6 @@
 
 There are also some optional plugins that work with Neo-tree:
 
-- [antosha417/nvim-lsp-file-operations](https://github.com/antosha417/nvim-lsp-file-operations)
-  for LSP-enhanced renames/etc.
-- [s1n7ax/nvim-window-picker](https://github.com/s1n7ax/nvim-window-picker) for
-  `_with_window_picker` keymaps.
-
 ### lazy.nvim example:
 
 ```lua
