@@ -3,7 +3,7 @@
 local opts = {
   -- options go here
 }
-    local readme = {
+local readme = {
   close_if_last_window = false, -- Close Neo-tree if it is the last window left in the tab
   popup_border_style = "NC", -- or "" to use 'winborder' on Neovim v0.11+
   clipboard = {
@@ -288,8 +288,8 @@ local opts = {
             ["<S-CR>"] = "close_keep_filter",
             ["<C-CR>"] = "close_clear_filter",
             ["<esc>"] = "close",
-          }
-        }
+          },
+        },
         -- ["<esc>"] = "noop", -- if you want to use normal mode
         -- ["key"] = function(state, scroll_padding) ... end,
       },
