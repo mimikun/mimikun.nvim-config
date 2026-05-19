@@ -9,15 +9,20 @@ local default = {
     "filesystem",
     "buffers",
     "git_status",
-    -- "document_symbols",
+    --"document_symbols",
   },
-  add_blank_line_at_top = false, -- Add a blank line at the top of the tree.
-  auto_clean_after_session_restore = false, -- Automatically clean up broken neo-tree buffers saved in sessions
+  -- Add a blank line at the top of the tree.
+  add_blank_line_at_top = false,
+  -- Automatically clean up broken neo-tree buffers saved in sessions
+  auto_clean_after_session_restore = false,
   clipboard = {
-    sync = "none", -- or "global"/"universal" to share a clipboard for each/all Neovim instance(s), respectively
+    -- or "global"/"universal" to share a clipboard for each/all Neovim instance(s), respectively
+    sync = "none",
   },
-  close_if_last_window = false, -- Close Neo-tree if it is the last window left in the tab
-  default_source = "filesystem", -- you can choose a specific source `last` here which indicates the last used source
+  -- Close Neo-tree if it is the last window left in the tab
+  close_if_last_window = false,
+  -- you can choose a specific source `last` here which indicates the last used source
+  default_source = "filesystem",
   enable_diagnostics = true,
   enable_git_status = true,
   enable_modified_markers = true, -- Show markers for files with unsaved changes.

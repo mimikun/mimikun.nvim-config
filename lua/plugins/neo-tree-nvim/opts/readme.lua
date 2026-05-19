@@ -1,31 +1,44 @@
 ---@module 'neo-tree'
 ---@type neotree.Config
 local readme = {
-  close_if_last_window = false, -- Close Neo-tree if it is the last window left in the tab
-  popup_border_style = "NC", -- or "" to use 'winborder' on Neovim v0.11+
+  -- Close Neo-tree if it is the last window left in the tab
+  close_if_last_window = false,
+  -- or "" to use 'winborder' on Neovim v0.11+
+  popup_border_style = "NC",
   clipboard = {
-    sync = "none", -- or "global"/"universal" to share a clipboard for each/all Neovim instance(s), respectively
+    -- or "global"/"universal" to share a clipboard for each/all Neovim instance(s), respectively
+    sync = "none",
   },
   enable_git_status = true,
   enable_diagnostics = true,
-  open_files_do_not_replace_types = { "terminal", "trouble", "qf" }, -- when opening files, do not use windows containing these filetypes or buftypes
+  -- when opening files, do not use windows containing these filetypes or buftypes
+  open_files_do_not_replace_types = {
+    "terminal",
+    "trouble",
+    "qf",
+  },
   open_files_using_relative_paths = false,
-  sort_case_insensitive = false, -- used when sorting files and directories in the tree
-  sort_function = nil, -- use a custom function for sorting files and directories in the tree
-  -- sort_function = function (a,b)
-  --       if a.type == b.type then
-  --           return a.path > b.path
-  --       else
-  --           return a.type > b.type
-  --       end
-  --   end , -- this sorts files and directories descendantly
+  -- used when sorting files and directories in the tree
+  sort_case_insensitive = false,
+  -- use a custom function for sorting files and directories in the tree
+  -- this sorts files and directories descendantly
+  sort_function = function(a, b)
+    --if a.type == b.type then
+    --    return a.path > b.path
+    --else
+    --    return a.type > b.type
+    --end
+
+    return nil
+  end,
   default_component_configs = {
     container = {
       enable_character_fade = true,
     },
     indent = {
       indent_size = 2,
-      padding = 1, -- extra padding on left hand side
+      -- extra padding on left hand side
+      padding = 1,
       -- indent guides
       with_markers = true,
       indent_marker = "│",
