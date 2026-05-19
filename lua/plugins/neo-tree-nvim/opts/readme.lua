@@ -28,7 +28,6 @@ local readme = {
     --else
     --    return a.type > b.type
     --end
-
     return nil
   end,
   default_component_configs = {
@@ -45,7 +44,8 @@ local readme = {
       last_indent_marker = "└",
       highlight = "NeoTreeIndentMarker",
       -- expander config, needed for nesting files
-      with_expanders = nil, -- if nil and file nesting is enabled, will enable expanders
+      -- if nil and file nesting is enabled, will enable expanders
+      with_expanders = nil,
       expander_collapsed = "",
       expander_expanded = "",
       expander_highlight = "NeoTreeExpander",
@@ -54,7 +54,8 @@ local readme = {
       folder_closed = "",
       folder_open = "",
       folder_empty = "󰜌",
-      provider = function(icon, node, state) -- default icon provider utilizes nvim-web-devicons if available
+      -- default icon provider utilizes nvim-web-devicons if available
+      provider = function(icon, node, state)
         if node.type == "file" or node.type == "terminal" then
           local success, web_devicons = pcall(require, "nvim-web-devicons")
           local name = node.type == "terminal" and "terminal" or node.name
@@ -65,11 +66,11 @@ local readme = {
           end
         end
       end,
-      -- The next two settings are only a fallback, if you use nvim-web-devicons and configure default icons there
-      -- then these will never be used.
+      -- The next two settings are only a fallback, if you use nvim-web-devicons and configure default icons there then these will never be used.
       default = "*",
       highlight = "NeoTreeFileIcon",
-      use_filtered_colors = true, -- Whether to use a different highlight when the file is filtered (hidden, dotfile, etc.).
+      -- Whether to use a different highlight when the file is filtered (hidden, dotfile, etc.).
+      use_filtered_colors = true,
     },
     modified = {
       symbol = "[+]",
@@ -77,17 +78,22 @@ local readme = {
     },
     name = {
       trailing_slash = false,
-      use_filtered_colors = true, -- Whether to use a different highlight when the file is filtered (hidden, dotfile, etc.).
+      -- Whether to use a different highlight when the file is filtered (hidden, dotfile, etc.).
+      use_filtered_colors = true,
       use_git_status_colors = true,
       highlight = "NeoTreeFileName",
     },
     git_status = {
       symbols = {
         -- Change type
-        added = "", -- or "✚"
-        modified = "", -- or ""
-        deleted = "✖", -- this can only be used in the git_status source
-        renamed = "󰁕", -- this can only be used in the git_status source
+        -- or "✚"
+        added = "",
+        -- or ""
+        modified = "",
+        -- this can only be used in the git_status source
+        deleted = "✖",
+        -- this can only be used in the git_status source
+        renamed = "󰁕",
         -- Status type
         untracked = "",
         ignored = "",
@@ -99,30 +105,37 @@ local readme = {
     -- If you don't want to use these columns, you can set `enabled = false` for each of them individually
     file_size = {
       enabled = true,
-      width = 12, -- width of the column
-      required_width = 64, -- min width of window required to show this column
+      -- width of the column
+      width = 12,
+      -- min width of window required to show this column
+      required_width = 64,
     },
     type = {
       enabled = true,
-      width = 10, -- width of the column
-      required_width = 122, -- min width of window required to show this column
+      -- width of the column
+      width = 10,
+      -- min width of window required to show this column
+      required_width = 122,
     },
     last_modified = {
       enabled = true,
-      width = 20, -- width of the column
-      required_width = 88, -- min width of window required to show this column
+      -- width of the column
+      width = 20,
+      -- min width of window required to show this column
+      required_width = 88,
     },
     created = {
       enabled = true,
-      width = 20, -- width of the column
-      required_width = 110, -- min width of window required to show this column
+      -- width of the column
+      width = 20,
+      -- min width of window required to show this column
+      required_width = 110,
     },
     symlink_target = {
       enabled = false,
     },
   },
-  -- A list of functions, each representing a global custom command
-  -- that will be available in all sources (if not overridden in `opts[source_name].commands`)
+  -- A list of functions, each representing a global custom command that will be available in all sources (if not overridden in `opts[source_name].commands`)
   -- see `:h neo-tree-custom-commands-global`
   commands = {},
   window = {
@@ -135,11 +148,13 @@ local readme = {
     mappings = {
       ["<space>"] = {
         "toggle_node",
-        nowait = false, -- disable `nowait` if you have existing combos starting with this char that you want to use
+        -- disable `nowait` if you have existing combos starting with this char that you want to use
+        nowait = false,
       },
       ["<2-LeftMouse>"] = "open",
       ["<cr>"] = "open",
-      ["<esc>"] = "cancel", -- close preview or floating neo-tree window
+      -- close preview or floating neo-tree window
+      ["<esc>"] = "cancel",
       ["P"] = {
         "toggle_preview",
         config = {
@@ -153,28 +168,32 @@ local readme = {
       -- Read `# Preview Mode` for more information
       ["l"] = "focus_preview",
       ["S"] = "open_split",
+      --["S"] = "split_with_window_picker",
       ["s"] = "open_vsplit",
-      -- ["S"] = "split_with_window_picker",
-      -- ["s"] = "vsplit_with_window_picker",
+      --["s"] = "vsplit_with_window_picker",
       ["t"] = "open_tabnew",
-      -- ["<cr>"] = "open_drop",
-      -- ["t"] = "open_tab_drop",
+      --["t"] = "open_tab_drop",
+      --["<cr>"] = "open_drop",
       ["w"] = "open_with_window_picker",
-      --["P"] = "toggle_preview", -- enter preview mode, which shows the current node without focusing
+      -- enter preview mode, which shows the current node without focusing
+      --["P"] = "toggle_preview",
       ["C"] = "close_node",
-      -- ['C'] = 'close_all_subnodes',
+      --['C'] = 'close_all_subnodes',
       ["z"] = "close_all_nodes",
       --["Z"] = "expand_all_nodes",
       --["Z"] = "expand_all_subnodes",
       ["a"] = {
         "add",
-        -- this command supports BASH style brace expansion ("x{a,b,c}" -> xa,xb,xc). see `:h neo-tree-file-actions` for details
-        -- some commands may take optional config options, see `:h neo-tree-mappings` for details
+        -- this command supports BASH style brace expansion ("x{a,b,c}" -> xa,xb,xc).
+        -- see `:h neo-tree-file-actions` for details some commands may take optional config options, see `:h neo-tree-mappings` for details
         config = {
-          show_path = "none", -- "none", "relative", "absolute"
+          -- "none", "relative", "absolute"
+          show_path = "none",
         },
       },
-      ["A"] = "add_directory", -- also accepts the optional config.show_path option like "add". this also supports BASH style brace expansion.
+      -- also accepts the optional config.show_path option like "add".
+      -- this also supports BASH style brace expansion.
+      ["A"] = "add_directory",
       ["d"] = "delete",
       ["r"] = "rename",
       ["b"] = "rename_basename",
@@ -182,79 +201,98 @@ local readme = {
       ["x"] = "cut_to_clipboard",
       ["p"] = "paste_from_clipboard",
       ["<C-r>"] = "clear_clipboard",
-      ["c"] = "copy", -- takes text input for destination, also accepts the optional config.show_path option like "add":
-      -- ["c"] = {
+      -- takes text input for destination, also accepts the optional config.show_path option like "add":
+      ["c"] = "copy",
+      --["c"] = {
       --  "copy",
       --  config = {
-      --    show_path = "none" -- "none", "relative", "absolute"
-      --  }
-      --}
-      ["m"] = "move", -- takes text input for destination, also accepts the optional config.show_path option like "add".
+      --    -- "none", "relative", "absolute"
+      --    show_path = "none",
+      --  },
+      --},
+      -- takes text input for destination, also accepts the optional config.show_path option like "add".
+      ["m"] = "move",
       ["q"] = "close_window",
       ["R"] = "refresh",
       ["?"] = "show_help",
       ["<"] = "prev_source",
       [">"] = "next_source",
       ["i"] = "show_file_details",
-      -- ["i"] = {
-      --   "show_file_details",
-      --   -- format strings of the timestamps shown for date created and last modified (see `:h os.date()`)
-      --   -- both options accept a string or a function that takes in the date in seconds and returns a string to display
-      --   -- config = {
-      --   --   created_format = "%Y-%m-%d %I:%M %p",
-      --   --   modified_format = "relative", -- equivalent to the line below
-      --   --   modified_format = function(seconds) return require('neo-tree.utils').relative_date(seconds) end
-      --   -- }
-      -- },
+      --["i"] = {
+      --  "show_file_details",
+      --  -- format strings of the timestamps shown for date created and last modified (see `:h os.date()`)
+      --  -- both options accept a string or a function that takes in the date in seconds and returns a string to display
+      --  config = {
+      --    created_format = "%Y-%m-%d %I:%M %p",
+      --    modified_format = function(seconds)
+      --      local modified_format
+      --      modified_format = "relative"
+      --      modified_format = require("neo-tree.utils").relative_date(seconds)
+      --      return modified_format
+      --    end,
+      --  },
+      --},
     },
   },
   nesting_rules = {},
   filesystem = {
     filtered_items = {
-      visible = false, -- when true, they will just be displayed differently than normal items
+      -- when true, they will just be displayed differently than normal items
+      visible = false,
       hide_dotfiles = true,
       hide_gitignored = true,
-      hide_ignored = true, -- hide files that are ignored by other gitignore-like files
+      -- hide files that are ignored by other gitignore-like files
+      hide_ignored = true,
       -- other gitignore-like files, in descending order of precedence.
       ignore_files = {
         ".neotreeignore",
         ".ignore",
-        -- ".rgignore"
+        --".rgignore"
       },
-      hide_hidden = true, -- only works on Windows for hidden files/directories
+      -- only works on Windows for hidden files/directories
+      hide_hidden = true,
       hide_by_name = {
         --"node_modules"
       },
-      hide_by_pattern = { -- uses glob style patterns
+      -- uses glob style patterns
+      hide_by_pattern = {
         --"*.meta",
         --"*/src/*/tsconfig.json",
       },
-      always_show = { -- remains visible even if other settings would normally hide it
+      -- remains visible even if other settings would normally hide it
+      always_show = {
         --".gitignored",
       },
-      always_show_by_pattern = { -- uses glob style patterns
+      -- uses glob style patterns
+      always_show_by_pattern = {
         --".env*",
       },
-      never_show = { -- remains hidden even if visible is toggled to true, this overrides always_show
+      -- remains hidden even if visible is toggled to true, this overrides always_show
+      never_show = {
         --".DS_Store",
         --"thumbs.db"
       },
-      never_show_by_pattern = { -- uses glob style patterns
+      -- uses glob style patterns
+      never_show_by_pattern = {
         --".null-ls_*",
       },
     },
     follow_current_file = {
-      enabled = false, -- This will find and focus the file in the active buffer every time
-      --               -- the current file is changed while the tree is open.
-      leave_dirs_open = false, -- `false` closes auto expanded dirs, such as with `:Neotree reveal`
+      -- This will find and focus the file in the active buffer every time
+      enabled = false,
+      -- the current file is changed while the tree is open.
+      -- `false` closes auto expanded dirs, such as with `:Neotree reveal`
+      leave_dirs_open = false,
     },
-    group_empty_dirs = false, -- when true, empty folders will be grouped together
-    hijack_netrw_behavior = "open_default", -- netrw disabled, opening a directory opens neo-tree
-    -- in whatever position is specified in window.position
-    -- "open_current",  -- netrw disabled, opening a directory opens within the
-    -- window like netrw would, regardless of window.position
-    -- "disabled",    -- netrw left alone, neo-tree does not handle opening dirs
-    use_libuv_file_watcher = false, -- This will use the OS level file watchers to detect changes
+    -- when true, empty folders will be grouped together
+    group_empty_dirs = false,
+    -- netrw disabled, opening a directory opens neo-tree
+    -- "open_default", in whatever position is specified in window.position
+    -- "open_current", netrw disabled, opening a directory opens within the window like netrw would, regardless of window.position
+    -- "disabled", netrw left alone, neo-tree does not handle opening dirs
+    hijack_netrw_behavior = "open_default",
+    -- This will use the OS level file watchers to detect changes
+    use_libuv_file_watcher = false,
     -- instead of relying on nvim autocmd events.
     window = {
       mappings = {
@@ -263,8 +301,9 @@ local readme = {
         ["H"] = "toggle_hidden",
         ["/"] = "fuzzy_finder",
         ["D"] = "fuzzy_finder_directory",
-        ["#"] = "fuzzy_sorter", -- fuzzy sorting using the fzy algorithm
-        -- ["D"] = "fuzzy_sorter_directory",
+        -- fuzzy sorting using the fzy algorithm
+        ["#"] = "fuzzy_sorter",
+        --["D"] = "fuzzy_sorter_directory",
         ["f"] = "filter_on_submit",
         ["<c-x>"] = "clear_filter",
         ["[g"] = "prev_git_modified",
@@ -272,18 +311,45 @@ local readme = {
         ["o"] = {
           "show_help",
           nowait = false,
-          config = { title = "Order by", prefix_key = "o" },
+          config = {
+            title = "Order by",
+            prefix_key = "o",
+          },
         },
-        ["oc"] = { "order_by_created", nowait = false },
-        ["od"] = { "order_by_diagnostics", nowait = false },
-        ["og"] = { "order_by_git_status", nowait = false },
-        ["om"] = { "order_by_modified", nowait = false },
-        ["on"] = { "order_by_name", nowait = false },
-        ["os"] = { "order_by_size", nowait = false },
-        ["ot"] = { "order_by_type", nowait = false },
-        -- ['<key>'] = function(state) ... end,
+        ["oc"] = {
+          "order_by_created",
+          nowait = false,
+        },
+        ["od"] = {
+          "order_by_diagnostics",
+          nowait = false,
+        },
+        ["og"] = {
+          "order_by_git_status",
+          nowait = false,
+        },
+        ["om"] = {
+          "order_by_modified",
+          nowait = false,
+        },
+        ["on"] = {
+          "order_by_name",
+          nowait = false,
+        },
+        ["os"] = {
+          "order_by_size",
+          nowait = false,
+        },
+        ["ot"] = {
+          "order_by_type",
+          nowait = false,
+        },
+        --["<key>"] = function(state)
+        --  --...
+        --end,
       },
-      fuzzy_finder_mappings = { -- define keymaps for filter popup window in fuzzy_finder_mode
+      -- define keymaps for filter popup window in fuzzy_finder_mode
+      fuzzy_finder_mappings = {
         ["<down>"] = "move_cursor_down",
         ["<C-n>"] = "move_cursor_down",
         ["<up>"] = "move_cursor_up",
@@ -291,7 +357,10 @@ local readme = {
         ["<esc>"] = "close",
         ["<S-CR>"] = "close_keep_filter",
         ["<C-CR>"] = "close_clear_filter",
-        ["<C-w>"] = { "<C-S-w>", raw = true },
+        ["<C-w>"] = {
+          "<C-S-w>",
+          raw = true,
+        },
         {
           -- normal mode mappings
           n = {
@@ -302,20 +371,27 @@ local readme = {
             ["<esc>"] = "close",
           },
         },
-        -- ["<esc>"] = "noop", -- if you want to use normal mode
-        -- ["key"] = function(state, scroll_padding) ... end,
+        -- if you want to use normal mode
+        ["<esc>"] = "noop",
+        --["key"] = function(state, scroll_padding)
+        --  --...
+        --end,
       },
     },
 
-    commands = {}, -- Add a custom command or override a global one using the same function name
+    -- Add a custom command or override a global one using the same function name
+    commands = {},
   },
   buffers = {
     follow_current_file = {
-      enabled = true, -- This will find and focus the file in the active buffer every time
-      --              -- the current file is changed while the tree is open.
-      leave_dirs_open = false, -- `false` closes auto expanded dirs, such as with `:Neotree reveal`
+      -- This will find and focus the file in the active buffer every time
+      -- the current file is changed while the tree is open.
+      enabled = true,
+      -- `false` closes auto expanded dirs, such as with `:Neotree reveal`
+      leave_dirs_open = false,
     },
-    group_empty_dirs = true, -- when true, empty folders will be grouped together
+    -- when true, empty folders will be grouped together
+    group_empty_dirs = true,
     show_unloaded = true,
     window = {
       mappings = {
@@ -326,14 +402,35 @@ local readme = {
         ["o"] = {
           "show_help",
           nowait = false,
-          config = { title = "Order by", prefix_key = "o" },
+          config = {
+            title = "Order by",
+            prefix_key = "o",
+          },
         },
-        ["oc"] = { "order_by_created", nowait = false },
-        ["od"] = { "order_by_diagnostics", nowait = false },
-        ["om"] = { "order_by_modified", nowait = false },
-        ["on"] = { "order_by_name", nowait = false },
-        ["os"] = { "order_by_size", nowait = false },
-        ["ot"] = { "order_by_type", nowait = false },
+        ["oc"] = {
+          "order_by_created",
+          nowait = false,
+        },
+        ["od"] = {
+          "order_by_diagnostics",
+          nowait = false,
+        },
+        ["om"] = {
+          "order_by_modified",
+          nowait = false,
+        },
+        ["on"] = {
+          "order_by_name",
+          nowait = false,
+        },
+        ["os"] = {
+          "order_by_size",
+          nowait = false,
+        },
+        ["ot"] = {
+          "order_by_type",
+          nowait = false,
+        },
       },
     },
   },
@@ -353,14 +450,35 @@ local readme = {
         ["o"] = {
           "show_help",
           nowait = false,
-          config = { title = "Order by", prefix_key = "o" },
+          config = {
+            title = "Order by",
+            prefix_key = "o",
+          },
         },
-        ["oc"] = { "order_by_created", nowait = false },
-        ["od"] = { "order_by_diagnostics", nowait = false },
-        ["om"] = { "order_by_modified", nowait = false },
-        ["on"] = { "order_by_name", nowait = false },
-        ["os"] = { "order_by_size", nowait = false },
-        ["ot"] = { "order_by_type", nowait = false },
+        ["oc"] = {
+          "order_by_created",
+          nowait = false,
+        },
+        ["od"] = {
+          "order_by_diagnostics",
+          nowait = false,
+        },
+        ["om"] = {
+          "order_by_modified",
+          nowait = false,
+        },
+        ["on"] = {
+          "order_by_name",
+          nowait = false,
+        },
+        ["os"] = {
+          "order_by_size",
+          nowait = false,
+        },
+        ["ot"] = {
+          "order_by_type",
+          nowait = false,
+        },
       },
     },
   },
