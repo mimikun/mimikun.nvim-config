@@ -1,43 +1,7 @@
-```lua
-  {
-    "s1n7ax/nvim-window-picker",
-    version = "2.*",
-    config = function()
-      require("window-picker").setup({
-        filter_rules = {
-          include_current_win = false,
-          autoselect_one = true,
-          -- filter using buffer options
-          bo = {
-            -- if the file type is one of following, the window will be ignored
-            filetype = { "neo-tree", "neo-tree-popup", "notify" },
-            -- if the buffer type is one of following, the window will be ignored
-            buftype = { "terminal", "quickfix" },
-          },
-        },
-      })
-    end,
-  }
-```
-
-
-<details>
-  <summary>Diagnostics icons:</summary>
-
 If you want icons for diagnostic errors, you'll need to define them somewhere.
 In Neovim v0.10+, you can configure them in vim.diagnostic.config(), like:
 
 ```lua
-vim.diagnostic.config({
-  signs = {
-    text = {
-      [vim.diagnostic.severity.ERROR] = '',
-      [vim.diagnostic.severity.WARN] = '',
-      [vim.diagnostic.severity.INFO] = '',
-      [vim.diagnostic.severity.HINT] = '󰌵',
-    },
-  }
-})
 ```
 ### Tab Completion
 
