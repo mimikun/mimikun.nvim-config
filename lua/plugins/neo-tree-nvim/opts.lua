@@ -913,9 +913,11 @@ local readme = {
       ["P"] = {
         "toggle_preview",
         config = {
-          use_float = true,
-          use_snacks_image = true,
-          use_image_nvim = true,
+          use_float = false,
+          --use_float = true,
+          --use_snacks_image = true,
+          --use_image_nvim = true,
+          --title = "Neo-tree Preview",
         },
       },
       -- Read `# Preview Mode` for more information
