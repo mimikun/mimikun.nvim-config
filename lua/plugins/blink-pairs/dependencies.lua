@@ -1,7 +1,6 @@
 ---@type LazySpec[]
 local dependencies = {
-  -- download prebuilt binaries from github releases
-  "saghen/blink.download",
+  "saghen/blink.lib",
 }
 
 return dependencies

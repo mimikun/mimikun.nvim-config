@@ -2,12 +2,13 @@
 local spec = {
   "saghen/blink.pairs",
   --lazy = false,
-  -- NOTE: recommended:only required with prebuilt binaries
   version = "*",
-  -- build from source,
-  --build = 'cargo build --release',
-  -- If you use nix, you can build from source using latest nightly rust with:
-  --build = 'nix run .#build-plugin',
+  build = function()
+    -- download prebuilt binaries from github releases, must be on a versioned release
+    --require("blink.pairs").download():pwait(60000)
+    -- build from source
+    require("blink.pairs").build():pwait(60000)
+  end,
   event = require("plugins.blink-pairs.events"),
   dependencies = require("plugins.blink-pairs.dependencies"),
   opts = require("plugins.blink-pairs.opts"),
