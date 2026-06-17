@@ -1,0 +1,19 @@
+lua/plugins/mq-nvim/init.lua
+  s_2559faf76e3314::t_6ca7db20f8692c 10-15
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.8",
+  "base_commit_sha": "0d52da3376b6d605910b55b80dfe11653121ce5a",
+  "prompts": {},
+  "sessions": {
+    "s_2559faf76e3314": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "af30e3cd-7218-41cd-8d1f-fc4035e64621",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
