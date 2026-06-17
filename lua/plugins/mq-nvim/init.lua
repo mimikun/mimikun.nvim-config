@@ -14,7 +14,21 @@ local spec = {
     vim.cmd("runtime plugin/mq.lua")
 
     local opts = require("plugins.mq-nvim.opts")
-    require("mq").setup(opts)
+
+    -- mq's dap.setup() emits an INFO notification on every startup; silence
+    -- just that message by filtering vim.notify for the duration of setup().
+    local original_notify = vim.notify
+    vim.notify = function(msg, level, notify_opts)
+      if msg == "mq: DAP adapter configured successfully" then
+        return
+      end
+      return original_notify(msg, level, notify_opts)
+    end
+    local ok, err = pcall(require("mq").setup, opts)
+    vim.notify = original_notify
+    if not ok then
+      error(err)
+    end
 
     vim.api.nvim_create_autocmd("FileType", {
       pattern = "mq",
