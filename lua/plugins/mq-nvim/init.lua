@@ -1,15 +1,18 @@
-local dir = vim.fn.stdpath("data") .. "/lazy/mq/editors/neovim"
-
 ---@type LazySpec
 local spec = {
   "harehare/mq",
-  dir = dir,
   --lazy = false,
   ft = require("plugins.mq-nvim.ft"),
   cmd = require("plugins.mq-nvim.cmds"),
   event = require("plugins.mq-nvim.events"),
   --opts = require("plugins.mq-nvim.opts"),
   config = function()
+    -- The Neovim plugin lives in a subdirectory of the harehare/mq monorepo.
+    -- lazy.nvim only adds the repo root to runtimepath, so append the
+    -- plugin subdirectory manually before requiring its Lua modules.
+    vim.opt.rtp:append(vim.fn.stdpath("data") .. "/lazy/mq/editors/neovim")
+    vim.cmd("runtime plugin/mq.lua")
+
     local opts = require("plugins.mq-nvim.opts")
     require("mq").setup(opts)
 
