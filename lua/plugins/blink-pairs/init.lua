@@ -12,8 +12,8 @@ local spec = {
   event = require("plugins.blink-pairs.events"),
   dependencies = require("plugins.blink-pairs.dependencies"),
   opts = require("plugins.blink-pairs.opts"),
-  --cond = false,
-  --enabled = false,
+  cond = false,
+  enabled = false,
 }
 
 return spec
