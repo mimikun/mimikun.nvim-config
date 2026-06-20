@@ -1,0 +1,90 @@
+--- @class FffLayoutConfig
+--- @field height number
+--- @field width number
+--- @field prompt_position string
+--- @field preview_position string
+--- @field preview_size number
+--- @field min_list_height number
+--- @field show_scrollbar boolean
+--- @field path_shorten_strategy string
+
+--- @class FffPreviewConfig
+--- @field enabled boolean
+--- @field max_size number
+--- @field chunk_size number
+--- @field binary_file_threshold number
+--- @field imagemagick_info_format_str string
+--- @field line_numbers boolean
+--- @field cursorlineopt string
+--- @field wrap_lines boolean
+--- @field filetypes table<string, table>
+
+--- @class FffKeymapsConfig
+--- @field close string
+--- @field select string
+--- @field select_split string
+--- @field select_vsplit string
+--- @field select_tab string
+--- @field move_up string|string[]
+--- @field move_down string|string[]
+--- @field preview_scroll_up string
+--- @field preview_scroll_down string
+--- @field toggle_debug string
+--- @field cycle_grep_modes string
+--- @field cycle_previous_query string
+--- @field cycle_forward_query string
+--- @field grep_jump_to_next_file string|string[]
+--- @field grep_jump_to_prev_file string|string[]
+--- @field toggle_select string
+--- @field send_to_quickfix string
+--- @field focus_list string
+--- @field focus_preview string
+
+--- @class FffFrecencyConfig
+--- @field enabled boolean
+--- @field db_path string
+
+--- @class FffHistoryConfig
+--- @field enabled boolean
+--- @field db_path string
+--- @field min_combo_count number
+--- @field combo_boost_score_multiplier number
+
+--- @class FffGrepConfig
+--- @field max_file_size number
+--- @field max_matches_per_file number
+--- @field smart_case boolean
+--- @field time_budget_ms number
+--- @field modes string[]
+--- @field trim_whitespace boolean
+--- @field location_format string
+
+--- @alias FffSelectAction 'edit' | 'split' | 'vsplit' | 'tab'
+
+--- @class FffSelectConfig
+--- @field select_window fun(current_buf: integer, action: FffSelectAction): integer|nil
+
+--- @class FffConfig
+--- @field base_path string
+--- @field prompt string
+--- @field title string
+--- @field max_results number
+--- @field max_threads number
+--- @field lazy_sync boolean
+--- @field prompt_vim_mode boolean
+--- @field follow_symlinks boolean
+--- @field enable_fs_root_scanning boolean
+--- @field enable_home_dir_scanning boolean
+--- @field layout FffLayoutConfig
+--- @field preview FffPreviewConfig
+--- @field keymaps FffKeymapsConfig
+--- @field hl table<string, string>
+--- @field frecency FffFrecencyConfig
+--- @field history FffHistoryConfig
+--- @field select FffSelectConfig
+--- @field git table
+--- @field debug table
+--- @field logging table
+--- @field wrap_around boolean
+--- @field file_picker table
+--- @field grep FffGrepConfig
