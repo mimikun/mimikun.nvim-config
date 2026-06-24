@@ -1,0 +1,298 @@
+local api = vim.api
+local ts = vim.treesitter
+local async = require("async")
+local iter = vim.iter
+local pos = require("refactoring.pos")
+local range = require("refactoring.range")
+
+local M = {}
+
+---@class refactor.print_exp.code_generation.Opts
+---@field expression string
+---@field expression_str string
+---@field debug_path string
+---@field count string
+
+---@class refactor.print_exp.CodeGeneration
+---@field print_exp {[string]: nil|fun(opts: refactor.print_exp.code_generation.Opts): string}
+
+---@class refactor.print_exp.UserCodeGeneration
+---@field print_exp? {[string]: nil|fun(opts: refactor.print_exp.code_generation.Opts): string}
+
+---@param a TSNode
+---@param b TSNode
+---@return boolean
+local function node_comp_asc(a, b)
+  local a_row, a_col, a_bytes = a:start()
+  local b_row, b_col, b_bytes = b:start()
+  if a_row ~= b_row then
+    return a_row < b_row
+  end
+
+  return (a_col < b_col or a_col + a_bytes < b_col + b_bytes)
+end
+
+-- TODO: I use the same function (with a different name) on `print_var` and
+-- `print_loc`. Maybe extract a single function into utils
+---@param buf integer
+---@param nested_lang_tree vim.treesitter.LanguageTree
+---@param start_marker string
+---@param end_marker string
+local function get_all_print_exp(buf, nested_lang_tree, start_marker, end_marker)
+  local query_error = require("refactoring.utils").query_error
+  local get_comments = require("refactoring.utils").get_comments
+
+  local lang = nested_lang_tree:lang()
+
+  local comment_query = ts.query.get(lang, "refactor_comment")
+  if not comment_query then
+    return query_error("refactor_comment", lang)
+  end
+
+  local comments = get_comments(buf, nested_lang_tree, comment_query)
+  table.sort(comments, node_comp_asc)
+  ---@type vim.Range[]
+  local all_print_exp = iter(comments)
+    :map(
+      ---@param comment TSNode
+      function(comment)
+        local text = ts.get_node_text(comment, buf)
+        local srow, _, erow, _ = comment:range()
+
+        local is_start = text:find(start_marker) ~= nil
+        if is_start then
+          return "start", pos(buf, srow, 0)
+        end
+        local is_end = text:find(end_marker) ~= nil
+        if is_end then
+          return "end", pos(buf, erow + 1, 0)
+        end
+      end
+    )
+    :filter(
+      ---@param kind 'start'|'end'|nil
+      function(kind)
+        return kind ~= nil
+      end
+    )
+    :fold(
+      {},
+      ---@param acc vim.Range|{current_start: vim.Pos}
+      ---@param kind 'start'|'end'
+      ---@param position vim.Pos
+      function(acc, kind, position)
+        if kind == "start" then
+          acc.current_start = position
+        end
+        if kind == "end" and acc.current_start ~= nil then
+          table.insert(acc, range(acc.current_start, position))
+          acc.current_start = nil
+        end
+
+        return acc
+      end
+    )
+  all_print_exp.current_start = nil
+  return all_print_exp
+end
+
+---@param range_type 'v' | 'V' | ''
+---@param config refactor.Config
+function M.print_exp(range_type, config)
+  local get_selected_range = require("refactoring.utils").get_selected_range
+  local code_gen_error = require("refactoring.utils").code_gen_error
+  local indent = require("refactoring.utils").indent
+  local apply_text_edits = require("refactoring.utils").apply_text_edits
+  local get_output_statements = require("refactoring.utils").get_output_statements
+  local query_error = require("refactoring.utils").query_error
+  local get_debug_path_for_range = require("refactoring.utils").get_debug_path_for_range
+  local get_statement_output_range = require("refactoring.debug.utils").get_statement_output_range
+  local commentstring_error = require("refactoring.utils").commentstring_error
+  local get_is_in_midline = require("refactoring.debug.utils").get_is_in_midline
+
+  local opts = config.debug.print_exp
+  local code_generation = opts.code_generation
+
+  local buf = api.nvim_get_current_buf()
+  local selected_range = get_selected_range(buf, range_type)
+  local lines = vim.fn.getregion(vim.fn.getpos("'["), vim.fn.getpos("']"), { type = range_type })
+  local expression = table.concat(lines)
+
+  local task = async.run(function()
+    local lang_tree, err1 = ts.get_parser(buf, nil, { error = false })
+    if not lang_tree then
+      ---@cast err1 -nil
+      vim.notify(err1, vim.log.levels.ERROR, { title = "refactoring.nvim" })
+      return
+    end
+
+    -- TODO: use async parsing
+    lang_tree:parse(true)
+    local nested_lang_tree = lang_tree:language_for_range({
+      selected_range.start_row,
+      selected_range.start_col,
+      selected_range.end_row,
+      selected_range.end_col,
+    })
+    local lang = nested_lang_tree:lang()
+    local output_statement_query = ts.query.get(lang, "refactor_output_statement")
+    if not output_statement_query then
+      return query_error("refactor_output_statement", lang)
+    end
+
+    local get_print_exp = code_generation.print_exp[lang]
+    if not get_print_exp then
+      return code_gen_error("print_exp", lang)
+    end
+
+    local output_statements = get_output_statements(buf, nested_lang_tree, output_statement_query)
+
+    local selected_reference_pos = opts.output_location == "below"
+        and pos(buf, selected_range.end_row, selected_range.end_col)
+      or pos(buf, selected_range.start_row, selected_range.start_col)
+    local output_range, inserted_at =
+      get_statement_output_range(buf, output_statements, opts.output_location, selected_range, selected_reference_pos)
+    if not output_range or not inserted_at then
+      return
+    end
+
+    local debug_path_for_range = get_debug_path_for_range(buf, nested_lang_tree, output_range)
+    if not debug_path_for_range then
+      return
+    end
+    debug_path_for_range = ("┆%s┆"):format(debug_path_for_range)
+
+    local start_marker = config.debug.markers.print_exp.start
+    local end_marker = config.debug.markers.print_exp["end"]
+
+    local all_print_exp = get_all_print_exp(buf, nested_lang_tree, start_marker, end_marker)
+    if not all_print_exp then
+      return
+    end
+    -- TODO: in all three `print_foo` features do not add and then remove
+    -- delimiters. Use different variables or something
+    local p = debug_path_for_range:match("┆([^┆]*)┆")
+    local matching_print_exp = iter(all_print_exp)
+      :filter(
+        ---@param r vim.Range
+        function(r)
+          local srow, scol, erow, ecol = r:to_extmark()
+          local r_lines = api.nvim_buf_get_text(buf, srow, scol, erow, ecol, {})
+          local r_text = table.concat(r_lines, "\n")
+          local current_path = r_text:match("┆([^┆]*)┆")
+          local current_expression = r_text:match("╎([^╎]*)╎")
+
+          return current_path == p and current_expression == expression
+        end
+      )
+      :totable()
+    local print_exp_before = iter(matching_print_exp)
+      :filter(
+        ---@param r vim.Range
+        function(r)
+          return r < output_range
+        end
+      )
+      :totable()
+
+    ---@type string|nil
+    local commentstring = iter(ts.language.get_filetypes(lang))
+      :map(function(ft)
+        return vim.filetype.get_option(ft, "commentstring")
+      end)
+      :find(function(cms)
+        return cms ~= ""
+      end)
+    if not commentstring then
+      return commentstring_error(lang)
+    end
+    local print_lines = {
+      commentstring:format(start_marker),
+      get_print_exp({
+        debug_path = debug_path_for_range,
+        expression_str = ("╎%s╎"):format(expression),
+        expression = expression,
+        count = ("┊%d┊"):format(#print_exp_before + 1),
+      }) .. commentstring:format(end_marker),
+    }
+
+    local output_srow = output_range:to_extmark()
+    local expandtab = vim.bo[buf].expandtab
+    local _, indent_amount = indent(expandtab, 0, api.nvim_buf_get_lines(buf, output_srow, output_srow + 1, true)[1])
+    local print_text = table.concat(print_lines, "\n")
+    print_text = indent(expandtab, indent_amount, print_text)
+    print_lines = vim.split(print_text, "\n")
+    local is_in_mid_line = get_is_in_midline(output_range, buf, opts.output_location)
+    if inserted_at == "end" then
+      table.insert(print_lines, 1, "")
+    end
+    if inserted_at == "end" and is_in_mid_line then
+      table.insert(print_lines, "")
+    end
+    if inserted_at == "start" then
+      print_lines[1] = indent(expandtab, 0, print_lines[1])
+      table.insert(print_lines, (expandtab and " " or "\t"):rep(indent_amount))
+    end
+    if inserted_at == "start" and is_in_mid_line then
+      table.insert(print_lines, 1, "")
+    end
+
+    ---@type {[integer]: refactor.TextEdit[]}
+    local text_edits_by_buf = {}
+    text_edits_by_buf[buf] = {}
+    table.insert(text_edits_by_buf[buf], { range = output_range, lines = print_lines })
+
+    iter(ipairs(matching_print_exp))
+      :filter(
+        ---@param r vim.Range
+        function(_, r)
+          return r > output_range
+        end
+      )
+      :each(
+        ---@param old_count integer
+        ---@param r vim.Range
+        function(old_count, r)
+          local srow, scol, erow, ecol = r:to_extmark()
+          if ecol == 0 then
+            erow = erow - 1
+            ecol = #api.nvim_buf_get_lines(buf, erow, erow + 1, true)[1]
+          end
+          local r_lines = api.nvim_buf_get_text(buf, srow, scol, erow, ecol, {})
+          ---@type integer?, string?, integer?
+          local i, line, debug_path_end = iter(ipairs(r_lines))
+            :map(
+              ---@param i integer
+              ---@param line string
+              function(i, line)
+                local _, e = line:find(debug_path_for_range, 1, true)
+                return i, line, e
+              end
+            )
+            :find(function(_, _, e)
+              return e ~= nil
+            end)
+          if not i or not line or not debug_path_end then
+            return
+          end
+
+          local count_start, count_end = line:find(("┊%d┊"):format(old_count), debug_path_end)
+          if not count_start or not count_end then
+            return
+          end
+
+          local update_count_srow = srow + i - 1
+          local update_count_range = range(buf, update_count_srow, count_start - 1, update_count_srow, count_end)
+          table.insert(
+            text_edits_by_buf[buf],
+            { range = update_count_range, lines = { ("┊%d┊"):format(old_count + 1) } }
+          )
+        end
+      )
+
+    apply_text_edits(text_edits_by_buf)
+  end)
+  task:raise_on_error()
+end
+
+return M
