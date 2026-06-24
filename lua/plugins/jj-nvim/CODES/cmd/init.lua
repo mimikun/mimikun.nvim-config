@@ -1,0 +1,1570 @@
+--- @class jj.cmd
+local M = {}
+
+local utils = require("jj.utils")
+local runner = require("jj.core.runner")
+local terminal = require("jj.ui.terminal")
+local editor = require("jj.ui.editor")
+local parser = require("jj.core.parser")
+
+local log_module = require("jj.cmd.log")
+local describe_module = require("jj.cmd.describe")
+local status_module = require("jj.cmd.status")
+local split_module = require("jj.cmd.split")
+local resolve_module = require("jj.cmd.resolve")
+
+-- Config for cmd module
+--- @class jj.cmd.describe.editor.keymaps
+--- @field close? string|string[] Keymaps to close the editor buffer without saving
+
+--- @class jj.cmd.describe.editor
+--- @field type? "buffer"|"input" Editor mode for describe command: "buffer" (Git-style editor) or "input" (simple input prompt)
+--- @field keymaps? jj.cmd.describe.editor.keymaps Keymaps for the describe editor only when on "buffer" mode.
+
+--- @class jj.cmd.describe
+--- @field editor? jj.cmd.describe.editor Options for the describe message editor
+
+--- @class jj.cmd.log
+--- @field close_on_edit? boolean Whether to close the log buffer when editing a change
+
+--- @class jj.cmd.log.highlights Highlights for the log buffer
+--- @field selected? table Highlights for the selected revisions in log buffer (when rebasing/squashing)
+--- @field targeted? table Highlights for the targeted revision in log buffer (when rebasing/squashing)
+
+--- @class jj.cmd.log.keymaps
+--- @field edit? string|string[] Keymaps for the log command buffer, setting a keymap to nil will disable it
+--- @field edit_immutable? string|string[]
+--- @field describe? string|string[]
+--- @field diff? string|string[]
+--- @field new? string|string[]
+--- @field new_after? string|string[]
+--- @field new_after_immutable? string|string[]
+--- @field undo? string|string[]
+--- @field redo? string|string[]
+--- @field abandon? string|string[]
+--- @field fetch? string|string[]
+--- @field push_all? string|string[]
+--- @field push? string|string[]
+--- @field open_pr? string|string[]
+--- @field open_pr_list? string|string[]
+--- @field bookmark? string|string[]
+--- @field bookmark_del? string|string[]
+--- @field rebase? string|string[]
+--- @field rebase_mode? jj.cmd.rebase.keymaps
+--- @field squash? string|string[]
+--- @field squash_mode? jj.cmd.squash.keymaps
+--- @field quick_squash? string|string[]
+--- @field summary? string|string[]
+--- @field summary_tooltip? jj.cmd.summary_tooltip.keymaps
+--- @field tag_set? string|string[]
+--- @field history? string|string[]
+--- @field change_revset? string|string[]
+--- @field duplicate? string|string[]
+--- @field duplicate_mode? jj.cmd.duplicate.keymaps
+
+--- @class jj.cmd.rebase.keymaps
+--- @field onto? string|string[]
+--- @field after? string|string[]
+--- @field before? string|string[]
+--- @field onto_immutable? string|string[]
+--- @field after_immutable? string|string[]
+--- @field before_immutable? string|string[]
+--- @field exit_mode? string|string[]
+
+--- @class jj.cmd.duplicate.keymaps
+--- @field onto? string|string[]
+--- @field after? string|string[]
+--- @field before? string|string[]
+--- @field onto_immutable? string|string[]
+--- @field after_immutable? string|string[]
+--- @field before_immutable? string|string[]
+--- @field exit_mode? string|string[]
+
+--- @class jj.cmd.squash.keymaps
+--- @field into? string|string[]
+--- @field into_immutable? string|string[]
+--- @field exit_mode? string|string[]
+
+--- @class jj.cmd.summary_tooltip.keymaps
+--- @field diff? string|string[]
+--- @field edit? string|string[]
+--- @field edit_immutable? string|string[]
+--- @field edit_file? string|string[]
+
+--- @class jj.cmd.bookmark
+--- @field prefix? string Prefix to append when creating a bookmark
+
+--- @class jj.cmd.status.keymaps
+--- @field open_file? string|string[] Keymaps for the status command buffer, setting a keymap to nil will disable it
+--- @field restore_file? string|string[]
+
+--- @class jj.cmd.floating.keymaps The floating buffer is the one shown when diffing from the log buffer
+--- @field close? string|string[] Keymaps to close the floating buffer
+--- @field hide? string|string[] Keymaps to hide the floating buffer
+
+--- @class jj.cmd.keymaps
+--- @field log? jj.cmd.log.keymaps Keymaps for the log command buffer
+--- @field status? jj.cmd.status.keymaps Keymaps for the status command buffer
+--- @field close? string|string[] Keymaps for the close keybind
+--- @field floating? jj.cmd.floating.keymaps Keymaps for the floating buffer
+
+---@class jj.cmd.split.opts
+---@field rev? string Revision to split
+---@field message? string Commit message for the new revision
+---@field filesets? string[] Filesets to include in the split
+---@field ignore_immutable? boolean Ignore immutable revisions
+---@field parallel? boolean Run operations in parallel
+---@field on_exit? fun(exit_code: number) Callback invoked when command exits
+
+--- @class jj.cmd.resolve.strategy
+--- @field name string Label shown in vim.ui.select
+--- @field args? string[] Extra args passed to jj resolve
+--- @field external? boolean Run externally instead of floating terminal
+
+---@class jj.cmd.resolve.opts
+---@field rev string|nil The revision to resolve, defaults to "@"
+---@field filesets string[]|nil The filesets to resolve, defaults to all filesets
+---@field external boolean|nil Whether to use external merge tool, if this boolean is set the command will not be ran in a floating terminal inside neovim (defaults: false)
+---@field args string[]|nil Additional arguments to pass to the resolve command
+---@field on_exit? fun(exit_code: number) Callback invoked when command exits
+
+--- @class jj.cmd.opts
+--- @field describe? jj.cmd.describe
+--- @field log? jj.cmd.log
+--- @field resolve_strategies? jj.cmd.resolve.strategy[] List of conflict resolve strategies shared across cmd integrations
+--- @field bookmark? jj.cmd.bookmark
+--- @field keymaps? jj.cmd.keymaps Keymaps for the buffers containing the  of the commands
+---
+--- @class jj.cmd.keymap_spec
+--- @field desc string
+--- @field handler function|string
+--- @field modes string[]
+--- @field args? table
+
+--- @alias jj.cmd.keymap_specs table<string, jj.cmd.keymap_spec>
+
+--- @class jj.cmd.push_opts
+--- @field bookmark? string Specific bookmark to push (default: all)
+--- @field deleted? boolean Push deleted revisions
+--- @field remote? string Specific remote to push too
+
+--- @class jj.cmd.open_pr_opts
+--- @field list_bookmarks? boolean Whether to select from all bookmarks instead of current revision
+
+--- @class jj.cmd.fetch_pr_opts
+--- @field limit? number Limit the number of PRs to select from
+
+--- @class jj.cmd.diff_history_opts
+--- @field left? string The left revision for the range
+--- @field right? string The right revision for the range
+
+--- @type jj.cmd.opts
+M.config = {
+  describe = {
+    editor = {
+      type = "buffer",
+      keymaps = {
+        close = { "<C-c>", "q" },
+      },
+    },
+  },
+  log = {
+    close_on_edit = false,
+  },
+  resolve_strategies = {},
+  bookmark = {
+    prefix = "",
+  },
+  keymaps = {
+    log = {
+      edit = "<CR>",
+      edit_immutable = "<S-CR>",
+      describe = "d",
+      diff = "<S-d>",
+      new = "n",
+      new_after = "<C-n>",
+      new_after_immutable = "<S-n>",
+      undo = "<S-u>",
+      redo = "<S-r>",
+      abandon = "a",
+      fetch = "f",
+      push_all = "<S-P>",
+      push = "p",
+      open_pr = "o",
+      open_pr_list = "<S-o>",
+      bookmark = "b",
+      bookmark_del = "B",
+      rebase = "r",
+      rebase_mode = {
+        onto = { "<CR>", "o" },
+        after = "a",
+        before = "b",
+        onto_immutable = { "<S-CR>", "<S-o>" },
+        after_immutable = "<S-a>",
+        before_immutable = "<S-b>",
+        exit_mode = { "<Esc>", "<C-c>" },
+      },
+      squash = "s",
+      squash_mode = {
+        into = "<CR>",
+        into_immutable = "<S-CR>",
+        exit_mode = { "<Esc>", "<C-c>" },
+      },
+      duplicate = "<C-y>",
+      duplicate_mode = {
+        onto = { "<CR>", "o" },
+        after = "a",
+        before = "b",
+        onto_immutable = { "<S-CR>", "<S-o>" },
+        after_immutable = "<S-a>",
+        before_immutable = "<S-b>",
+        exit_mode = { "<Esc>", "<C-c>" },
+      },
+      quick_squash = "<S-s>",
+      summary = "<S-k>",
+      summary_tooltip = {
+        diff = "<S-d>",
+        edit = "<CR>",
+        edit_immutable = "<S-CR>",
+        edit_file = "o",
+      },
+      split = "<C-s>",
+      resolve = "gr",
+      tag_set = "<S-t>",
+      history = "<S-h>",
+      change_revset = "<C-r>",
+      select_next_revision = "gj",
+      select_prev_revision = "gk",
+    },
+    status = {
+      open_file = "<CR>",
+      restore_file = "<S-x>",
+    },
+    close = { "q", "<Esc>" },
+    floating = {
+      close = "q",
+      hide = "<Esc>",
+    },
+  },
+}
+
+--- Setup the cmd module
+--- @param opts jj.cmd.opts: Options to configure the cmd module
+function M.setup(opts)
+  M.config = vim.tbl_deep_extend("force", M.config, opts or {})
+
+  require("jj.cmd.log").init_log_highlights()
+end
+
+-- Reexport log function
+M.log = log_module.log
+-- Reexport describe function
+M.describe = describe_module.describe
+-- Reexport status function
+M.status = status_module.status
+-- Rexport split function
+M.split = split_module.split
+-- Reexport resolve function
+M.resolve = resolve_module.resolve
+
+--- Merge multiple keymap arrays into one
+--- @param ... jj.core.buffer.keymap[][] Keymap arrays to merge
+--- @return jj.core.buffer.keymap[]
+function M.merge_keymaps(...)
+  local merged = {}
+  for i = 1, select("#", ...) do
+    local km_array = select(i, ...)
+    if km_array then
+      for _, km in ipairs(km_array) do
+        table.insert(merged, km)
+      end
+    end
+  end
+  return merged
+end
+
+--- Resolve_keymaps_from_specifications
+--- @param cfg table<string, string|string[]> The keymap configuration
+--- @param specs jj.cmd.keymap_specs The keymap specifications
+--- @return jj.core.buffer.keymap[]
+function M.resolve_keymaps_from_specs(cfg, specs)
+  local keymaps = {}
+
+  for key, spec in pairs(specs) do
+    -- Get the lhs of the keymap from the given config
+    local lhs = cfg[key]
+    if lhs and spec.handler then
+      -- Create the handler, wrapping it with args if provided
+      local handler = spec.handler
+      if spec.args then
+        handler = function()
+          spec.handler(unpack(spec.args))
+        end
+      end
+
+      if type(lhs) == "table" then
+        for _, key_lhs in ipairs(lhs) do
+          table.insert(keymaps, { modes = spec.modes, lhs = key_lhs, rhs = handler, opts = { desc = spec.desc } })
+        end
+      else
+        table.insert(keymaps, { modes = spec.modes, lhs = lhs, rhs = handler, opts = { desc = spec.desc } })
+      end
+    end
+  end
+
+  return keymaps
+end
+
+-- Resolve terminal keymaps from config
+--- @return jj.core.buffer.keymap[]
+function M.terminal_keymaps()
+  local cfg = M.config.keymaps.close or {}
+
+  return M.resolve_keymaps_from_specs({ close = cfg }, {
+    close = {
+      desc = "Close buffer",
+      handler = terminal.close_terminal_buffer,
+      modes = { "n" },
+    },
+  })
+end
+
+-- Resolve floating keymaps from config
+--- @return jj.core.buffer.keymap[]
+function M.floating_keymaps()
+  local cfg = M.config.keymaps.floating or {}
+
+  return M.resolve_keymaps_from_specs(cfg, {
+    close = {
+      desc = "Close floating buffer",
+      handler = terminal.close_floating_buffer,
+      modes = { "n", "v" },
+    },
+    hide = {
+      desc = "Hide floating buffer",
+      handler = terminal.hide_floating_buffer,
+      modes = { "n", "v" },
+    },
+  })
+end
+
+--- @class jj.cmd.new_opts
+--- @field show_log? boolean Whether or not to display the log command after creating a new
+--- @field with_input? boolean Whether or not to use nvim input to decide the parent of the new commit
+--- @field args? string The arguments to append to the new command
+
+-- Jujutsu new
+--- @param opts? jj.cmd.new_opts
+function M.new(opts)
+  if not utils.ensure_jj() then
+    return
+  end
+
+  opts = opts or {}
+
+  --- @param cmd string
+  local function execute_new(cmd)
+    runner.execute_command_async(cmd, function()
+      utils.notify("Command `new` was succesful.", vim.log.levels.INFO)
+      -- Show the updated log if the user requested it
+      if opts.show_log then
+        M.log()
+      end
+    end, "Failed to create new change")
+  end
+
+  -- If the user wants use input mode
+  if opts.with_input then
+    if opts.show_log then
+      M.log()
+    end
+
+    vim.ui.input({
+      prompt = "Parent(s) of the new change [default: @]",
+    }, function(input)
+      if input then
+        execute_new(string.format("jj new %s", input))
+      end
+      terminal.close_terminal_buffer()
+    end)
+  else
+    -- Otherwise follow a classic flow for inputing
+    local cmd = "jj new"
+    if opts.args then
+      cmd = string.format("jj new %s", opts.args)
+    end
+
+    execute_new(cmd)
+    -- If the show log is enabled show log
+    if opts.show_log then
+      M.log()
+    end
+  end
+end
+
+-- Jujutsu edit
+function M.edit()
+  if not utils.ensure_jj() then
+    return
+  end
+  M.log({})
+  vim.ui.input({
+    prompt = "Change to edit: ",
+    default = "",
+  }, function(input)
+    if input then
+      runner.execute_command_async(string.format("jj edit %s", input), function()
+        utils.reload_changed_file_buffers()
+        M.log({})
+      end, "Error editing change")
+    else
+      terminal.close_terminal_buffer()
+    end
+  end)
+end
+
+-- Jujutsu squash
+function M.squash()
+  if not utils.ensure_jj() then
+    return
+  end
+
+  local cmd = "jj squash"
+  runner.execute_command_async(cmd, function()
+    utils.notify("Command `squash` was succesful.", vim.log.levels.INFO)
+    if terminal.is_log_buffer_open() then
+      M.log()
+    end
+  end, "Failed to squash")
+end
+
+--- @class jj.cmd.diff_opts
+--- @field current boolean Wether or not to only diff the current buffer
+
+-- Jujutsu diff
+--- @param opts? jj.cmd.diff_opts The options for the diff command
+function M.diff(opts)
+  if not utils.ensure_jj() then
+    return
+  end
+
+  local diff_module = require("jj.diff")
+
+  if opts and opts.current then
+    local file = vim.fn.expand("%:p")
+    if file and file ~= "" then
+      diff_module.diff_current({ path = file })
+    else
+      utils.notify("Current buffer is not a file", vim.log.levels.ERROR)
+    end
+  else
+    diff_module.show_revision({ rev = "@" })
+  end
+end
+
+-- Diff history between two revisions
+--- @param opts? jj.cmd.diff_history_opts
+function M.diff_history(opts)
+  if not utils.ensure_jj() then
+    return
+  end
+
+  local diff_module = require("jj.diff")
+
+  if opts then
+    return diff_module.diff_history_revisions({ left = opts.left, right = opts.right })
+  end
+
+  -- Otherwise prompt the user for input
+  vim.ui.input({ prompt = "Range to diff with history" }, function(choice)
+    if choice then
+      local range = parser.parse_diff_range(choice)
+      if range then
+        diff_module.diff_history_revisions({ left = range.left, right = range.right })
+      else
+        utils.notify("Invalid range format. Use `left..right` or `left...right`.", vim.log.levels.ERROR)
+      end
+    else
+      terminal.close_terminal_buffer()
+    end
+  end)
+end
+
+-- Jujutsu rebase
+function M.rebase()
+  if not utils.ensure_jj() then
+    return
+  end
+
+  M.log({})
+  vim.ui.input({
+    prompt = "Rebase destination: ",
+    default = "trunk()",
+  }, function(input)
+    if input then
+      local cmd = string.format("jj rebase -d '%s'", input)
+      utils.notify(string.format("Beginning rebase on %s", input), vim.log.levels.INFO)
+      runner.execute_command_async(cmd, function()
+        utils.notify("Rebase successful.", vim.log.levels.INFO)
+        M.log({})
+      end, "Error rebasing")
+    else
+      terminal.close_terminal_buffer()
+    end
+  end)
+end
+
+-- Jujutsu create bookmark
+--- @param opts? jj.cmd.bookmark The options for the bookmark command
+function M.bookmark_create(opts)
+  if not utils.ensure_jj() then
+    return
+  end
+
+  -- Try and get the bookmark from the params
+  local bookmark_prefix = (opts and opts.prefix) or (M.config.bookmark and M.config.bookmark.prefix) or ""
+
+  M.log({})
+  vim.ui.input({
+    prompt = "Bookmark name: ",
+    default = bookmark_prefix,
+  }, function(input)
+    if input then
+      -- Get the revset
+      vim.ui.input({
+        prompt = "Revset (default: @): ",
+        default = "@",
+      }, function(revset)
+        revset = revset or "@"
+        local cmd = string.format("jj b c %s -r %s", input, revset)
+        runner.execute_command_async(cmd, function()
+          utils.notify(string.format("Bookmark `%s` created successfully for %s", input, revset), vim.log.levels.INFO)
+          M.log({})
+        end, "Error creating bookmark")
+      end)
+    else
+      terminal.close_terminal_buffer()
+    end
+  end)
+end
+
+-- Jujutsu bookmark move
+function M.bookmark_move()
+  if not utils.ensure_jj() then
+    return
+  end
+  M.log({})
+  local bookmarks = utils.get_all_bookmarks()
+  if #bookmarks == 0 then
+    utils.notify("No bookmarks found to move", vim.log.levels.ERROR)
+    return
+  end
+
+  vim.ui.select(bookmarks, {
+    prompt = "Select bookmark to move: ",
+  }, function(choice)
+    if choice then
+      vim.ui.input({
+        prompt = "New revset for bookmark '" .. choice .. "': ",
+        default = "@",
+      }, function(revset)
+        if revset then
+          local cmd = string.format("jj b m %s --to %s -B", choice, revset)
+          runner.execute_command_async(cmd, function()
+            utils.notify(string.format("Bookmark `%s` moved successfully to %s", choice, revset), vim.log.levels.INFO)
+            M.log({})
+          end, "Error moving bookmark")
+        else
+          terminal.close_terminal_buffer()
+        end
+      end)
+    else
+      terminal.close_terminal_buffer()
+    end
+  end)
+end
+
+-- Jujutsu delete bookmark
+function M.bookmark_delete()
+  if not utils.ensure_jj() then
+    return
+  end
+
+  M.log({})
+  vim.ui.input({
+    prompt = "Bookmark name: ",
+  }, function(input)
+    if input then
+      local cmd = string.format("jj b d %s", input)
+      runner.execute_command_async(cmd, function()
+        utils.notify(string.format("Bookmark `%s` deleted successfully.", input), vim.log.levels.INFO)
+        M.log({})
+      end, "Error deleting bookmark")
+    else
+      terminal.close_terminal_buffer()
+    end
+  end)
+end
+
+-- Jujutsu delete bookmark
+function M.bookmark_track()
+  if not utils.ensure_jj() then
+    return
+  end
+
+  local bookmarks = utils.get_untracked_bookmarks()
+  if #bookmarks == 0 then
+    utils.notify("No bookmarks to track")
+    return
+  end
+
+  local log_open = terminal.is_log_buffer_open()
+
+  vim.ui.select(bookmarks, { prompt = "Which bookmark do you want to track?" }, function(choice)
+    if choice then
+      runner.execute_command_async(string.format("jj bookmark track %s --quiet", vim.fn.shellescape(choice)), function()
+        utils.notify(string.format("Bookmark `%s` is now tracked.", choice))
+        if log_open then
+          M.log()
+        end
+      end, "Could not track bookmark")
+    end
+  end)
+end
+
+-- Jujutsu forget bookmark
+function M.bookmark_forget()
+  if not utils.ensure_jj() then
+    return
+  end
+
+  local bookmarks = utils.get_all_bookmarks()
+  if #bookmarks == 0 then
+    utils.notify("No bookmarks to forget", vim.log.levels.ERROR)
+    return
+  end
+
+  local log_open = terminal.is_log_buffer_open()
+
+  vim.ui.select(bookmarks, { prompt = "Which bookmark do you want to forget?" }, function(choice)
+    if choice then
+      runner.execute_command_async(
+        string.format("jj bookmark forget %s --quiet", vim.fn.shellescape(choice)),
+        function()
+          utils.notify(string.format("Bookmark `%s` is now untracked.", choice))
+          if log_open then
+            M.log()
+          end
+        end,
+        "Could not forget bookmark"
+      )
+    end
+  end)
+end
+
+-- Jujutsu undo
+function M.undo()
+  if not utils.ensure_jj() then
+    return
+  end
+
+  local cmd = "jj undo"
+  runner.execute_command_async(cmd, function()
+    utils.notify("Command `undo` was succesful.", vim.log.levels.INFO)
+    if terminal.is_log_buffer_open() then
+      M.log({})
+    end
+  end, "Failed to undo")
+end
+
+-- Jujutsu redo
+function M.redo()
+  if not utils.ensure_jj() then
+    return
+  end
+
+  local cmd = "jj redo"
+  runner.execute_command_async(cmd, function()
+    utils.notify("Command `redo` was succesful.", vim.log.levels.INFO)
+    if terminal.is_log_buffer_open() then
+      M.log({})
+    end
+  end, "Failed to redo")
+end
+
+-- Jujutsu abandon
+function M.abandon()
+  if not utils.ensure_jj() then
+    return
+  end
+
+  M.log({})
+  vim.ui.input({
+    prompt = "Change to abandon: ",
+    default = "",
+  }, function(input)
+    if input then
+      local cmd = string.format("jj abandon %s", input)
+      runner.execute_command_async(cmd, function()
+        utils.notify("Change abandoned successfully.", vim.log.levels.INFO)
+        M.log({})
+      end, "Error abandoning change")
+    else
+      terminal.close_terminal_buffer()
+    end
+  end)
+end
+
+-- Jujutsu fetch
+function M.fetch()
+  if not utils.ensure_jj() then
+    return
+  end
+
+  -- Save the lop one state to refresh
+  local log_open = terminal.is_log_buffer_open()
+
+  -- Get the list of remotes
+  local remotes = utils.get_remotes()
+  if not remotes or #remotes == 0 then
+    utils.notify("No git remotes found to fetch from", vim.log.levels.ERROR)
+    return
+  end
+
+  if #remotes > 1 then
+    -- Prompt to select a remote
+    vim.ui.select(remotes, {
+      prompt = "Select remote to fetch from: ",
+      format_item = function(item)
+        return string.format("%s (%s)", item.name, item.url)
+      end,
+    }, function(choice)
+      if choice then
+        local cmd = string.format("jj git fetch --remote %s", choice.name)
+        runner.execute_command_async(cmd, function()
+          utils.notify(string.format("Fetching from %s...", choice), vim.log.levels.INFO)
+          if log_open then
+            M.log({})
+          end
+        end, "Error fetching from remote")
+      end
+    end)
+  else
+    -- Only one remote, fetch from it directly
+    local cmd = "jj git fetch"
+    utils.notify("Fetching from remote...", vim.log.levels.INFO)
+    runner.execute_command_async(cmd, function()
+      utils.notify("Successfully fetched from remote", vim.log.levels.INFO)
+      if log_open then
+        M.log({})
+      end
+    end, "Error fetching from remote")
+  end
+end
+
+--- Parse args for `:J push`.
+--- @param args string[]
+--- @return jj.cmd.push_opts|nil opts
+--- @return string|nil err
+function M.parse_push_args(args)
+  local opts = {} --[[@as jj.cmd.push_opts]]
+  local already_set = {
+    bookmark = false,
+    remote = false,
+  }
+
+  local i = 1
+  while i <= #args do
+    local arg = args[i]
+
+    if arg == "--deleted" then
+      opts.deleted = true
+    elseif arg == "--remote" then
+      local remote = args[i + 1]
+      if not remote or remote:sub(1, 2) == "--" then
+        return nil, "Missing remote name after --remote"
+      end
+      if already_set.remote then
+        return nil, "Remote already set. Cannot specify multiple remotes."
+      end
+
+      opts.remote = remote
+      already_set.remote = true
+      i = i + 1
+    elseif arg:sub(1, 2) == "--" then
+      return nil, string.format("Unknown option: %s", arg)
+    else
+      if already_set.bookmark then
+        return nil, "Only one bookmark can be provided"
+      end
+
+      opts.bookmark = arg
+      already_set.bookmark = true
+    end
+
+    i = i + 1
+  end
+
+  if opts.deleted and opts.bookmark then
+    return nil, "Cannot specify both --deleted and a bookmark"
+  end
+
+  return opts, nil
+end
+
+-- Jujutsu push
+--- @param opts? jj.cmd.push_opts Optional push options
+function M.push(opts)
+  if not utils.ensure_jj() then
+    return
+  end
+
+  opts = opts or {}
+
+  -- Save the lop one state to refresh
+  local log_open = terminal.is_log_buffer_open()
+
+  local notify_msg = "Pushing bookmarks `ALL` bookmarks"
+
+  local cmd = "jj git push"
+  if opts.bookmark then
+    notify_msg = string.format("Pushing bookmark `%s`", opts.bookmark)
+    cmd = string.format("%s --bookmark %s", cmd, opts.bookmark)
+  elseif opts.deleted then
+    notify_msg = "Pushing deleted bookmarks"
+    cmd = cmd .. " --deleted"
+  end
+
+  if opts.remote then
+    cmd = string.format("%s --remote %s", cmd, opts.remote)
+    notify_msg = string.format("%s to remote `%s`", notify_msg, opts.remote)
+  end
+
+  utils.notify(notify_msg .. "...", vim.log.levels.INFO, 1000)
+
+  runner.execute_command_async(cmd, function()
+    utils.notify("Successfully pushed to remote", vim.log.levels.INFO)
+    if log_open then
+      M.log({})
+    end
+  end, "Error pushing to remote")
+end
+
+--- Open a PR on the remote from the current change's bookmark
+--- @param opts? jj.cmd.open_pr_opts Options for opening PR
+function M.open_pr(opts)
+  if not utils.ensure_jj() then
+    return
+  end
+
+  opts = opts or {}
+
+  if opts.list_bookmarks then
+    -- Get all bookmarks
+    local bookmarks = utils.get_all_bookmarks()
+
+    if #bookmarks == 0 then
+      utils.notify("No bookmarks found", vim.log.levels.ERROR)
+      return
+    end
+
+    -- Prompt to select a bookmark
+    vim.ui.select(bookmarks, {
+      prompt = "Select bookmark to open PR for: ",
+    }, function(choice)
+      if choice then
+        utils.open_pr_for_bookmark(choice)
+      end
+    end)
+    -- Return early
+    return
+  end
+
+  -- Get the bookmark from the current change (@)
+  local bookmark, success =
+    runner.execute_command("jj log -r @ --no-graph -T 'bookmarks'", "Failed to get current bookmark", nil, true)
+
+  if not success or not bookmark or bookmark:match("^%s*$") then
+    -- If no bookmark on @, try @-
+    bookmark, success =
+      runner.execute_command("jj log -r @- --no-graph -T 'bookmarks'", "Failed to get parent bookmark", nil, true)
+
+    if not success or not bookmark or bookmark:match("^%s*$") then
+      utils.notify("No bookmark found on @ or @- commits. Cannot open PR.", vim.log.levels.ERROR)
+      return
+    end
+  end
+
+  -- Trim and remove asterisks from bookmark
+  bookmark = bookmark:match("^%*?(.-)%*?$"):gsub("%s+", "")
+
+  -- Open the PR using the utility function
+  utils.open_pr_for_bookmark(bookmark)
+end
+
+-- Jujutsu commit
+--- @param description string|nil Commit changes in the current change
+function M.commit(description)
+  if not utils.ensure_jj() then
+    return
+  end
+
+  local should_refresh = terminal.is_log_buffer_open()
+
+  if description and description ~= "" then
+    local cmd = "jj commit --message " .. vim.fn.shellescape(description)
+    runner.execute_command_async(cmd, function()
+      utils.notify("Committed.", vim.log.levels.INFO)
+      if should_refresh then
+        vim.schedule(function()
+          M.log()
+        end)
+      end
+    end, "Failed to commit")
+    return
+  end
+
+  local editor_mode = M.config.describe.editor.type or "buffer"
+  if editor_mode == "input" then
+    M.status()
+    vim.ui.input({ prompt = "Description: ", default = "" }, function(input)
+      if input and not input:match("^%s*$") then
+        local cmd = "jj commit --message " .. vim.fn.shellescape(input)
+        runner.execute_command_async(cmd, function()
+          utils.notify("Committed.", vim.log.levels.INFO)
+          if should_refresh then
+            vim.schedule(function()
+              M.log()
+            end)
+          end
+        end, "Failed to commit")
+      elseif input then
+        utils.notify("Description cannot be empty", vim.log.levels.ERROR)
+      end
+      terminal.close_terminal_buffer()
+    end)
+    return
+  end
+
+  local text = utils.get_describe_text("@")
+  if not text then
+    return
+  end
+
+  terminal.close_terminal_buffer()
+
+  local keymaps = M.resolve_keymaps_from_specs(M.config.describe.editor.keymaps or {}, {
+    close = {
+      desc = "Close commit editor without saving",
+      handler = "<cmd>close!<CR>",
+      modes = { "n" },
+    },
+  })
+
+  editor.open_editor(text, nil, function(buf_lines)
+    local trimmed_description = utils.extract_description_from_describe(buf_lines)
+    if not trimmed_description then
+      utils.notify("Description cannot be empty", vim.log.levels.ERROR)
+      return
+    end
+    local cmd = "jj commit --message " .. vim.fn.shellescape(trimmed_description)
+    runner.execute_command_async(cmd, function()
+      utils.notify("Committed.", vim.log.levels.INFO)
+      if should_refresh then
+        vim.schedule(function()
+          M.log()
+        end)
+      end
+    end, "Failed to commit")
+  end, keymaps)
+end
+
+--- Jujutsu tag set
+--- @param rev string|nil
+function M.tag_set(rev)
+  if not utils.ensure_jj() then
+    return
+  end
+
+  local should_refresh = terminal.is_log_buffer_open()
+
+  -- If the revision is not provided, ask the user for it,
+  if not rev then
+    if not should_refresh then
+      M.log({})
+    end
+
+    vim.ui.input({ prompt = "Revision to tag: " }, function(input)
+      if input and not input:match("^%s*$") then
+        rev = input
+        M.tag_set(rev)
+      else
+      end
+    end)
+    return
+  end
+
+  -- Ask the user for the tag name
+  vim.ui.input({ prompt = "Tag name: ", default = "" }, function(input)
+    if input and not input:match("^%s*$") then
+      local cmd = string.format("jj tag set %s -r %s", input, rev)
+      runner.execute_command_async(cmd, function()
+        utils.notify(string.format("Tag `%s` set on `%s`.", input, rev), vim.log.levels.INFO)
+        if should_refresh then
+          vim.schedule(function()
+            M.log()
+          end)
+        end
+      end, "Failed to set tag")
+    elseif input then
+      utils.notify("Tag name cannot be empty", vim.log.levels.ERROR)
+    end
+  end)
+end
+
+--- Jujutsu tag delete
+--- @param tag string|nil If provided, it will delete the given tag without asking the user
+function M.tag_delete(tag)
+  if not utils.ensure_jj() then
+    return
+  end
+
+  -- If the tag is provided, delete it directly without asking the user
+  if tag then
+    local cmd = string.format("jj tag delete %s", tag)
+    runner.execute_command_async(cmd, function()
+      utils.notify(string.format("Tag `%s` deleted.", tag), vim.log.levels.INFO)
+      if terminal.is_log_buffer_open() then
+        vim.schedule(function()
+          M.log()
+        end)
+      end
+    end, "Failed to delete tag")
+    return
+  end
+
+  local should_refresh = terminal.is_log_buffer_open()
+  if not should_refresh then
+    M.log({})
+    should_refresh = true
+  end
+
+  local tags = utils.get_all_tags()
+  if #tags == 0 then
+    utils.notify("No tags found to delete", vim.log.levels.ERROR)
+    return
+  end
+
+  vim.ui.select(tags, { prompt = "Select tag to delete: " }, function(choice)
+    if choice then
+      local cmd = string.format("jj tag delete %s", choice)
+      runner.execute_command_async(cmd, function()
+        utils.notify(string.format("Tag `%s` deleted.", choice), vim.log.levels.INFO)
+        if should_refresh then
+          vim.schedule(function()
+            M.log()
+          end)
+        end
+      end, "Failed to delete tag")
+    end
+  end)
+end
+
+--- Push all tags but only on collocated reposiotries
+function M.tag_push()
+  if not utils.ensure_jj() then
+    return
+  end
+
+  local should_refresh = terminal.is_log_buffer_open()
+  local is_colocated = utils.is_colocated()
+  local has_git = utils.has_executable("git")
+
+  if not is_colocated then
+    utils.notify("Current repository is not colocated. Cannot push tags.", vim.log.levels.ERROR)
+    return
+  elseif not has_git then
+    utils.notify("Git executable not found. Cannot push tags.", vim.log.levels.ERROR)
+    return
+  end
+
+  local remotes = utils.get_remotes()
+  if not remotes or #remotes == 0 then
+    utils.notify("No git remotes found. Cannot push tags.", vim.log.levels.ERROR)
+    return
+  end
+
+  -- If many remotes we are forced to request the user what to do
+  if remotes and #remotes > 1 then
+    vim.ui.select(remotes, {
+      prompt = "Select remote to push tags to: ",
+      format_item = function(item)
+        return string.format("%s (%s)", item.name, item.url)
+      end,
+    }, function(choice)
+      if choice then
+        local tags = utils.get_all_tags()
+        if not tags or #tags == 0 then
+          utils.notify("No tags found to push", vim.log.levels.ERROR)
+          return
+        end
+
+        vim.ui.select(tags, {
+          prompt = "Select tag to push: ",
+        }, function(tag_choice)
+          if tag_choice then
+            local cmd = string.format("git push %s %s", choice.name, tag_choice)
+            runner.execute_command_async(cmd, function()
+              utils.notify(
+                string.format("Tag `%s` pushed successfully to remote `%s`.", tag_choice, choice.name),
+                vim.log.levels.INFO
+              )
+              if should_refresh then
+                vim.schedule(function()
+                  M.log()
+                end)
+              end
+            end, "Failed to push tag")
+          end
+        end)
+      end
+    end)
+  end
+
+  -- Otherwise we can push directly to the only remote
+  if remotes and #remotes == 1 then
+    local tags = utils.get_all_tags()
+    if not tags or #tags == 0 then
+      utils.notify("No tags found to push", vim.log.levels.ERROR)
+      return
+    end
+
+    vim.ui.select(tags, {
+      prompt = "Select tag to push: ",
+    }, function(tag_choice)
+      if tag_choice then
+        local cmd = string.format("git push %s %s", remotes[1].name, tag_choice)
+        runner.execute_command_async(cmd, function()
+          utils.notify(
+            string.format("Tag `%s` pushed successfully to remote `%s`.", tag_choice, remotes[1].name),
+            vim.log.levels.INFO
+          )
+          if should_refresh then
+            vim.schedule(function()
+              M.log()
+            end)
+          end
+        end, "Failed to push tag")
+      end
+    end)
+  end
+end
+
+--- Opens a picker to localy fetch a PR from a github repository
+--- @param opts? jj.cmd.fetch_pr_opts Options for fetching PRs
+function M.fetch_pr(opts)
+  if not utils.ensure_jj() then
+    return
+  end
+
+  if not utils.has_executable("git") then
+    return
+  end
+
+  if not utils.is_colocated() then
+    utils.notify("Current repository is not colocated. Cannot fetch PR.", vim.log.levels.ERROR)
+    return
+  end
+
+  -- Create a new opts table with the default limit if not provided
+  opts = vim.tbl_deep_extend("force", {
+    limit = 100,
+  }, opts or {})
+
+  -- Get the prs from github
+  local prs = utils.list_github_prs(opts)
+  if not prs or #prs == 0 then
+    return
+  end
+
+  local needs_refresh = terminal.is_log_buffer_open()
+
+  vim.ui.select(prs, {
+    prompt = "Select PR to fetch: ",
+    format_item = function(pr)
+      return string.format("#%s %s %s", pr.number, pr.title, pr.author)
+    end,
+  }, function(choice)
+    if choice then
+      utils.notify("Pulling PR #" .. choice.number .. "...", vim.log.levels.INFO)
+      local pr = choice.number
+      local count = 1
+      local max_retries = 30
+
+      -- the function that actually tries to fetch recursively
+      local function try_fetch()
+        if count > max_retries then
+          utils.notify(string.format("Failed to fetch PR #%s. Tried %d times.", pr, max_retries), vim.log.levels.ERROR)
+          return
+        end
+
+        local ref = string.format("pull/%s/head:pr-%s-%d", pr, pr, count)
+        local cmd = string.format("git fetch origin %s", ref)
+
+        runner.execute_command_async(
+          cmd,
+          function()
+            -- If we successfully pulled the PR, notify the user and refresh the log if it's open
+            runner.execute_command_async("jj git import", function()
+              utils.notify(string.format("PR #%s fetched as pr-%s-%d.", pr, pr, count), vim.log.levels.INFO)
+              if needs_refresh then
+                M.log({})
+              end
+            end, "Failed to import git refs")
+          end,
+          "",
+          nil,
+          true,
+          function()
+            -- If we errored increment the counter by one and try and fetch it again
+            count = count + 1
+            try_fetch()
+          end
+        )
+      end
+
+      -- Try and pull it once
+      try_fetch()
+    end
+  end)
+end
+
+--- Parse arguments passed to `:J resolve`
+--- @param args string[]
+--- @return jj.cmd.resolve.opts|nil opts
+--- @return string|nil err
+function M.parse_resolve_args(args)
+  local opts = { rev = "@" } --[[@as jj.cmd.resolve.opts]]
+  local already_set = {
+    rev = false,
+    tool = false,
+  }
+
+  local i = 1
+  while i <= #args do
+    local arg = args[i]
+
+    if arg == "--external" or arg == "--ext" then
+      opts.external = true
+    elseif arg == "--tool" then
+      local tool = args[i + 1]
+      if not tool or tool:sub(1, 1) == "-" then
+        return nil, "Missing value for --tool"
+      end
+      if already_set.tool then
+        return nil, "Tool already set. Cannot specify multiple tools."
+      end
+
+      opts.args = opts.args or {}
+      table.insert(opts.args, "--tool")
+      table.insert(opts.args, tool)
+      already_set.tool = true
+      i = i + 1
+    elseif arg == "--revision" or arg == "-r" then
+      local rev = args[i + 1]
+      if not rev or rev:sub(1, 1) == "-" then
+        return nil, "Missing value for --revision/-r"
+      end
+      if already_set.rev then
+        return nil, "Revision already set. Cannot specify multiple revisions."
+      end
+
+      opts.rev = rev
+      already_set.rev = true
+      i = i + 1
+    elseif arg:sub(1, 2) == "--" then
+      return nil, string.format("Unknown option: %s", arg)
+    else
+      -- Positional args are treated as filesets.
+      opts.filesets = opts.filesets or {}
+      table.insert(opts.filesets, arg)
+    end
+
+    i = i + 1
+  end
+
+  return opts, nil
+end
+
+--- @param args string|string[] jj command arguments
+function M.j(args)
+  if not utils.ensure_jj() then
+    return
+  end
+
+  local cmd = nil
+  if #args == 0 then
+    local default_cmd_str, success =
+      runner.execute_command("jj config list ui.default-command", "Error getting user's default command", nil, true)
+    if success then
+      cmd = parser.parse_default_cmd(default_cmd_str or "")
+    end
+    -- jj's built-in default command is "log"
+    if cmd == nil then
+      cmd = { "log" }
+    end
+  end
+
+  if type(args) == "string" then
+    cmd = vim.split(args, "%s+")
+  elseif cmd == nil then
+    -- If a cmd hasn't been parsed make the cmd the whole args
+    cmd = args
+  end
+
+  local subcommand = cmd[1]
+  local remaining_args = vim.list_slice(cmd, 2)
+  local remaining_args_str = table.concat(remaining_args, " ")
+
+  local handlers = {
+    describe = function()
+      M.describe(remaining_args_str ~= "" and remaining_args_str or nil)
+    end,
+    desc = function()
+      M.describe(remaining_args_str ~= "" and remaining_args_str or nil)
+    end,
+    edit = function()
+      if #remaining_args == 0 then
+        M.edit()
+      else
+        terminal.run(cmd)
+      end
+    end,
+    new = function()
+      M.new({ show_log = true, args = remaining_args_str, with_input = false })
+    end,
+    rebase = function()
+      M.rebase()
+    end,
+    undo = function()
+      M.undo()
+    end,
+    redo = function()
+      M.redo()
+    end,
+    log = function()
+      M.log({ raw_flags = remaining_args_str ~= "" and remaining_args_str or nil })
+    end,
+    split = function()
+      local opts = {
+        rev = "@",
+      }
+
+      local i = 1
+      while i <= #remaining_args do
+        local arg = remaining_args[i]
+
+        if arg == "--parallel" then
+          opts.parallel = true
+        elseif arg == "--ignore-immutable" then
+          opts.ignore_immutable = true
+        elseif arg == "--message" and remaining_args[i + 1] then
+          opts.message = remaining_args[i + 1]
+          i = i + 1
+        elseif arg == "--fileset" and remaining_args[i + 1] then
+          opts.filesets = opts.filesets or {}
+          table.insert(opts.filesets, remaining_args[i + 1])
+          i = i + 1
+        elseif arg:sub(1, 2) == "--" then
+          -- Unknown option: ignore it here.
+          utils.notify(string.format("Unknown option: %s", arg), vim.log.levels.WARN)
+          return
+        else
+          if opts.rev == "@" then
+            opts.rev = arg
+          else
+            opts.filesets = opts.filesets or {}
+            table.insert(opts.filesets, arg)
+          end
+        end
+
+        i = i + 1
+      end
+
+      require("jj.cmd.split").split(opts)
+    end,
+    diff = function()
+      if remaining_args_str == "" then
+        M.diff({ current = false })
+      else
+        local parts = parser.parse_diff_range(remaining_args_str)
+        utils.notify(vim.inspect(parts))
+        if parts then
+          require("jj.diff").diff_revisions({ left = parts.left, right = parts.right })
+        else
+          utils.notify(
+            "Invalid diff range. Format must be `<left>..<right>` or `<left>...<right>`",
+            vim.log.levels.ERROR
+          )
+        end
+      end
+    end,
+    diff_history = function()
+      if remaining_args_str == "" then
+        return M.diff_history()
+      end
+
+      -- Otherwise it means a range has been provided
+      local parts = parser.parse_diff_range(remaining_args_str)
+      if not parts then
+        utils.notify("Invalid history range. Formant must be `<left>..<right>`", vim.log.levels.ERROR)
+        return
+      end
+
+      M.diff_history({ left = parts.left, right = parts.right })
+    end,
+    status = function()
+      M.status()
+    end,
+    st = function()
+      M.status()
+    end,
+    abandon = function()
+      M.abandon()
+    end,
+    push = function()
+      local opts, err = M.parse_push_args(remaining_args)
+      if err then
+        utils.notify(err, vim.log.levels.ERROR)
+        return
+      end
+
+      M.push(opts)
+    end,
+    fetch = function()
+      M.fetch()
+    end,
+    open_pr = function()
+      if remaining_args_str:match("--list") then
+        M.open_pr({ list_bookmarks = true })
+      else
+        M.open_pr()
+      end
+    end,
+    bookmark = function()
+      if remaining_args[1] == "create" or remaining_args[1] == "c" then
+        M.bookmark_create()
+      elseif remaining_args[1] == "move" or remaining_args[1] == "m" then
+        M.bookmark_move()
+      elseif remaining_args[1] == "delete" or remaining_args[1] == "d" then
+        M.bookmark_delete()
+      elseif remaining_args[1] == "forget" or remaining_args[1] == "f" then
+        M.bookmark_forget()
+      elseif remaining_args[1] == "track" or remaining_args[1] == "t" then
+        M.bookmark_track()
+      else
+        terminal.run(cmd)
+      end
+    end,
+    annotate = function()
+      require("jj.annotate").file()
+    end,
+    annotate_line = function()
+      require("jj.annotate").line()
+    end,
+    commit = function()
+      M.commit(remaining_args_str ~= "" and remaining_args_str or nil)
+    end,
+    tag = function()
+      if remaining_args[1] == "set" or remaining_args[1] == "s" then
+        -- If the user provided a revision, set the tag on that revision, otherwise ask for it in the flow of the command
+        if remaining_args[2] then
+          M.tag_set(remaining_args[2])
+        else
+          M.tag_set(remaining_args[2])
+        end
+      elseif remaining_args[1] == "delete" or remaining_args[1] == "d" then
+        if remaining_args[2] then
+          M.tag_delete(remaining_args[2])
+        else
+          M.tag_delete()
+        end
+      end
+    end,
+    fetch_pr = function()
+      M.fetch_pr()
+    end,
+    resolve = function()
+      local opts, err = M.parse_resolve_args(remaining_args)
+      if err then
+        utils.notify(err, vim.log.levels.ERROR)
+        return
+      end
+      require("jj.cmd.resolve").resolve(opts)
+    end,
+  }
+
+  if handlers[subcommand] then
+    handlers[subcommand]()
+  else
+    -- Prepend 'jj' if cmd is an array and doesn't already start with it
+    if type(cmd) == "table" and cmd[1] ~= "jj" then
+      table.insert(cmd, 1, "jj")
+    end
+    terminal.run(cmd)
+  end
+end
+
+-- Handle J command with subcommands and direct jj passthrough
+--- @param opts table Command options from nvim_create_user_command
+local function handle_j_command(opts)
+  M.j(opts.fargs)
+end
+
+-- Register the J and Jdiff commands
+
+function M.register_command()
+  vim.api.nvim_create_user_command("J", handle_j_command, {
+    nargs = "*",
+    complete = function(arglead, _, _)
+      local subcommands = {
+        "abandon",
+        "b",
+        "bookmark",
+        "describe",
+        "diff",
+        "diff_history",
+        "edit",
+        "fetch",
+        "git",
+        "log",
+        "new",
+        "push",
+        "rebase",
+        "redo",
+        "split",
+        "squash",
+        "st",
+        "status",
+        "undo",
+        "open_pr",
+        "annotate",
+        "annotate_line",
+        "commit",
+        "tag",
+        "fetch_pr",
+        "resolve",
+      }
+      local matches = {}
+      for _, cmd in ipairs(subcommands) do
+        if cmd:match("^" .. vim.pesc(arglead)) then
+          table.insert(matches, cmd)
+        end
+      end
+      return matches
+    end,
+    desc = "Execute jj commands with subcommand support",
+  })
+end
+
+return M
