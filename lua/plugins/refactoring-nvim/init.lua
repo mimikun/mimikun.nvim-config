@@ -1,7 +1,7 @@
 ---@type LazySpec
 local spec = {
-  "mimikun/spec-template",
-  --lazy = false,
+  "ThePrimeagen/refactoring.nvim",
+  lazy = false,
   --url = "",
   --name = "",
   --dev = false,
@@ -20,7 +20,7 @@ local spec = {
   --cmd = require("plugins.refactoring-nvim.cmds"),
   --keys = require("plugins.refactoring-nvim.keys"),
   --event = require("plugins.refactoring-nvim.events"),
-  --dependencies = require("plugins.refactoring-nvim.dependencies"),
+  dependencies = require("plugins.refactoring-nvim.dependencies"),
   --init = function()
   --  -- NOTE: INIT
   --end,
@@ -29,8 +29,8 @@ local spec = {
   --  local opts = require("plugins.refactoring-nvim.opts")
   --end,
   --priority = 1000,
-  cond = false,
-  enabled = false,
+  --cond = false,
+  --enabled = false,
 }
 
 return spec

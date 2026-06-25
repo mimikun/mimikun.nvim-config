@@ -1,17 +1,3 @@
-## Installation
-
-```lua
-{
-  "ThePrimeagen/refactoring.nvim",
-  dependencies = {
-    "lewis6991/async.nvim",
-  },
-  lazy = false,
-},
-```
-
-</details>
-
 ## Configuration
 
 The default configuration can be found at [./lua/refactoring/config.lua](./lua/refactoring/config.lua), any field can be overridden:
