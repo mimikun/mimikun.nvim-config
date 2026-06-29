@@ -9,7 +9,7 @@ local spec = {
   --init = function()
   --  -- NOTE: INIT
   --end,
-  --opts = require("plugins.kulala-nvim.opts"),
+  opts = require("plugins.kulala-nvim.opts"),
   --config = function()
   --  local opts = require("plugins.kulala-nvim.opts")
   --end,
