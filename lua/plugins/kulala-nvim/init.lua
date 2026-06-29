@@ -18,8 +18,8 @@ local spec = {
   --optional = false,
   ft = require("plugins.kulala-nvim.ft"),
   --cmd = require("plugins.kulala-nvim.cmds"),
-  --keys = require("plugins.kulala-nvim.keys"),
-  --event = require("plugins.kulala-nvim.events"),
+  keys = require("plugins.kulala-nvim.keys"),
+  event = require("plugins.kulala-nvim.events"),
   --dependencies = require("plugins.kulala-nvim.dependencies"),
   --init = function()
   --  -- NOTE: INIT
