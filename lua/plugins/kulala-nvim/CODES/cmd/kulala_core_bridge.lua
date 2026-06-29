@@ -10,7 +10,9 @@ M.active_job = nil
 ---@return string|nil
 local function configured_core_path()
   local p = CONFIG.get().kulala_core.path
-  if type(p) == "string" and vim.trim(p) ~= "" then return vim.trim(p) end
+  if type(p) == "string" and vim.trim(p) ~= "" then
+    return vim.trim(p)
+  end
   return nil
 end
 
@@ -22,10 +24,14 @@ end
 function M.executable_path()
   local configured = configured_core_path()
   if configured then
-    if vim.fn.executable(configured) == 1 then return vim.fn.exepath(configured) end
+    if vim.fn.executable(configured) == 1 then
+      return vim.fn.exepath(configured)
+    end
     return nil
   end
-  if vim.fn.executable(Backend.get_bin_path()) == 1 then return vim.fn.exepath(Backend.get_bin_path()) end
+  if vim.fn.executable(Backend.get_bin_path()) == 1 then
+    return vim.fn.exepath(Backend.get_bin_path())
+  end
   return nil
 end
 
@@ -35,10 +41,14 @@ end
 
 function M.require_enabled()
   local exe = M.executable_path()
-  if exe then return exe end
+  if exe then
+    return exe
+  end
 
   local configured = configured_core_path()
-  if configured then error(("kulala_core.path is not executable: %s"):format(configured), 0) end
+  if configured then
+    error(("kulala_core.path is not executable: %s"):format(configured), 0)
+  end
   error(
     "kulala-core not found. "
       .. "Either let kulala.nvim auto-download and install kulala-core or set `kulala_core.path` in setup.",
@@ -50,19 +60,27 @@ end
 ---@return string
 local function default_kulala_core_data_dir()
   local explicit = vim.fn.getenv("KULALA_CORE_DATA_DIR")
-  if type(explicit) == "string" and explicit ~= "" then return explicit end
+  if type(explicit) == "string" and explicit ~= "" then
+    return explicit
+  end
 
   local sysname = (vim.uv.os_uname() or {}).sysname or ""
   if sysname == "Windows_NT" or vim.fn.has("win32") == 1 then
     local la = vim.fn.getenv("LOCALAPPDATA")
-    if type(la) == "string" and la ~= "" then return la:gsub("\\", "/") .. "/kulala-core" end
+    if type(la) == "string" and la ~= "" then
+      return la:gsub("\\", "/") .. "/kulala-core"
+    end
     return vim.fn.expand("~/kulala-core")
   end
 
-  if sysname == "Darwin" then return vim.fn.expand("~/Library/Application Support/kulala-core") end
+  if sysname == "Darwin" then
+    return vim.fn.expand("~/Library/Application Support/kulala-core")
+  end
 
   local xdg = vim.fn.getenv("XDG_DATA_HOME")
-  if type(xdg) == "string" and xdg ~= "" then return xdg .. "/kulala-core" end
+  if type(xdg) == "string" and xdg ~= "" then
+    return xdg .. "/kulala-core"
+  end
 
   return vim.fn.expand("~/.local/share/kulala-core")
 end
@@ -70,7 +88,9 @@ end
 ---@return string
 function M.effective_data_dir()
   local dir = CONFIG.get().kulala_core.data_dir
-  if type(dir) == "string" and dir ~= "" then return dir end
+  if type(dir) == "string" and dir ~= "" then
+    return dir
+  end
   return default_kulala_core_data_dir()
 end
 
@@ -84,8 +104,12 @@ end
 ---@return number|nil nil disables vim.system timeout (not recommended)
 local function invoke_timeout_ms()
   local t = CONFIG.get().kulala_core.timeout
-  if t == nil then return 60000 end
-  if type(t) == "number" and t > 0 then return t end
+  if t == nil then
+    return 60000
+  end
+  if type(t) == "number" and t > 0 then
+    return t
+  end
   return nil
 end
 
@@ -99,11 +123,17 @@ function M.resolve_document_paths(bufnr, explicit_path)
   local candidates = {}
 
   local function push(p)
-    if type(p) ~= "string" or p == "" then return end
+    if type(p) ~= "string" or p == "" then
+      return
+    end
     local abs = vim.fn.fnamemodify(p, ":p")
-    if abs == "" then return end
+    if abs == "" then
+      return
+    end
     for _, c in ipairs(candidates) do
-      if c == abs then return end
+      if c == abs then
+        return
+      end
     end
     table.insert(candidates, abs)
   end
@@ -123,20 +153,28 @@ function M.resolve_document_paths(bufnr, explicit_path)
   local cwd = nil
   if filepath_core then
     local d = vim.fn.fnamemodify(filepath_core, ":h")
-    if vim.fn.isdirectory(d) == 1 then cwd = d end
+    if vim.fn.isdirectory(d) == 1 then
+      cwd = d
+    end
   end
   if not cwd and #candidates > 0 then
     local d = vim.fn.fnamemodify(candidates[1], ":h")
-    if vim.fn.isdirectory(d) == 1 then cwd = d end
+    if vim.fn.isdirectory(d) == 1 then
+      cwd = d
+    end
   end
   if not cwd then
     local n = vim.api.nvim_buf_get_name(bufnr)
     if type(n) == "string" and n ~= "" then
       local d = vim.fn.fnamemodify(n, ":p:h")
-      if vim.fn.isdirectory(d) == 1 then cwd = d end
+      if vim.fn.isdirectory(d) == 1 then
+        cwd = d
+      end
     end
   end
-  if not cwd then cwd = vim.loop.cwd() end
+  if not cwd then
+    cwd = vim.loop.cwd()
+  end
 
   local display = filepath_core or candidates[1] or ""
   return filepath_core, cwd, display
@@ -145,11 +183,17 @@ end
 ---@param raw string|nil
 ---@return table|nil doc
 local function decode_document_json(raw)
-  if type(raw) ~= "string" then return nil end
+  if type(raw) ~= "string" then
+    return nil
+  end
   local trimmed = vim.trim(raw)
-  if trimmed == "" then return nil end
+  if trimmed == "" then
+    return nil
+  end
   local ok, doc = pcall(vim.json.decode, trimmed)
-  if ok and type(doc) == "table" and type(doc.blocks) == "table" then return doc end
+  if ok and type(doc) == "table" and type(doc.blocks) == "table" then
+    return doc
+  end
   return nil
 end
 
@@ -157,9 +201,13 @@ end
 ---@return table|nil
 function M.try_decode_wrapper(stdout)
   local raw = vim.trim(stdout or "")
-  if raw == "" then return nil end
+  if raw == "" then
+    return nil
+  end
   local ok, w = pcall(vim.json.decode, raw)
-  if ok and type(w) == "table" and w.type then return w end
+  if ok and type(w) == "table" and w.type then
+    return w
+  end
   return nil
 end
 
@@ -167,7 +215,9 @@ end
 ---@return boolean stopped
 function M.interrupt_active()
   local job = M.active_job
-  if not job then return false end
+  if not job then
+    return false
+  end
   M.active_job = nil
   pcall(function()
     job:kill("sigterm")
@@ -186,11 +236,17 @@ function M.invoke_async(payload, cwd, on_done)
     env = env_with_data_dir(),
   }
   local timeout_ms = invoke_timeout_ms()
-  if timeout_ms then opts.timeout = timeout_ms end
-  if type(cwd) == "string" and cwd ~= "" and vim.fn.isdirectory(cwd) == 1 then opts.cwd = cwd end
+  if timeout_ms then
+    opts.timeout = timeout_ms
+  end
+  if type(cwd) == "string" and cwd ~= "" and vim.fn.isdirectory(cwd) == 1 then
+    opts.cwd = cwd
+  end
 
   M.active_job = vim.system({ exe }, opts, function(job)
-    if M.active_job == job then M.active_job = nil end
+    if M.active_job == job then
+      M.active_job = nil
+    end
     on_done(job)
   end)
 end
@@ -214,8 +270,12 @@ end
 ---@param first table|nil
 ---@return boolean
 local function is_prompt_item(item)
-  if type(item) ~= "table" then return false end
-  if item.prompt == true then return true end
+  if type(item) ~= "table" then
+    return false
+  end
+  if item.prompt == true then
+    return true
+  end
   if
     type(item.promptId) == "string"
     and item.promptId ~= ""
@@ -228,9 +288,13 @@ local function is_prompt_item(item)
 end
 
 local function wrapper_has_prompt(wrapper)
-  if not wrapper or wrapper.type ~= "responses" or type(wrapper.data) ~= "table" then return false end
+  if not wrapper or wrapper.type ~= "responses" or type(wrapper.data) ~= "table" then
+    return false
+  end
   for _, item in ipairs(wrapper.data) do
-    if is_prompt_item(item) then return true end
+    if is_prompt_item(item) then
+      return true
+    end
   end
   return false
 end
@@ -244,7 +308,9 @@ local function catalog_from_job(job)
     return nil, vim.trim(job.stderr or "") ~= "" and vim.trim(job.stderr) or "kulala-core environments failed"
   end
   local ok, catalog = pcall(vim.json.decode, raw)
-  if ok and type(catalog) == "table" and type(catalog.environments) == "table" then return catalog, nil end
+  if ok and type(catalog) == "table" and type(catalog.environments) == "table" then
+    return catalog, nil
+  end
   if job.code ~= 0 then
     return nil, vim.trim(job.stderr or "") ~= "" and vim.trim(job.stderr) or "kulala-core environments failed"
   end
@@ -280,14 +346,20 @@ function M.parse_document(content, filepath, cwd_override)
   local cwd = cwd_override
   if not cwd and type(filepath) == "string" and filepath ~= "" then
     local d = vim.fn.fnamemodify(filepath, ":h")
-    if vim.fn.isdirectory(d) == 1 then cwd = d end
+    if vim.fn.isdirectory(d) == 1 then
+      cwd = d
+    end
   end
   local payload = { action = "parse", content = content }
-  if type(filepath) == "string" and filepath ~= "" then payload.filepath = filepath end
+  if type(filepath) == "string" and filepath ~= "" then
+    payload.filepath = filepath
+  end
   local job = M.invoke(payload, cwd)
 
   local doc = decode_document_json(job.stdout) or decode_document_json(job.stderr)
-  if doc then return doc, nil end
+  if doc then
+    return doc, nil
+  end
 
   if job.code ~= 0 then
     return nil, vim.trim(job.stderr or "") ~= "" and vim.trim(job.stderr) or "kulala-core parse failed"
@@ -314,7 +386,9 @@ local function run_result_from_job(job)
     return nil, err
   end
 
-  if not wrapper or type(wrapper) ~= "table" then return nil, "invalid kulala-core run output" end
+  if not wrapper or type(wrapper) ~= "table" then
+    return nil, "invalid kulala-core run output"
+  end
   return wrapper, nil
 end
 
@@ -343,10 +417,14 @@ end
 ---@return string|nil err
 local function continue_result_from_job(job)
   local wrapper = M.try_decode_wrapper(job.stdout)
-  if wrapper then return wrapper, nil end
+  if wrapper then
+    return wrapper, nil
+  end
   if job.code ~= 0 then
     local err = vim.trim(job.stderr or "")
-    if err == "" then err = "kulala-core continue failed (exit " .. tostring(job.code) .. ")" end
+    if err == "" then
+      err = "kulala-core continue failed (exit " .. tostring(job.code) .. ")"
+    end
     return nil, err
   end
   return nil, "invalid kulala-core continue output"
@@ -375,9 +453,13 @@ end
 ---@return table|nil
 local function decode_action_response(stdout)
   local raw = vim.trim(stdout or "")
-  if raw == "" then return nil end
+  if raw == "" then
+    return nil
+  end
   local ok, res = pcall(vim.json.decode, raw)
-  if ok and type(res) == "table" then return res end
+  if ok and type(res) == "table" then
+    return res
+  end
   return nil
 end
 
@@ -386,10 +468,14 @@ end
 ---@return string|nil
 local function decode_job_stdout(job)
   local res = decode_action_response(job.stdout)
-  if res then return res, nil end
+  if res then
+    return res, nil
+  end
   if job.code ~= 0 then
     local err = vim.trim(job.stderr or "")
-    if err == "" then err = "kulala-core subprocess failed (exit " .. tostring(job.code) .. ")" end
+    if err == "" then
+      err = "kulala-core subprocess failed (exit " .. tostring(job.code) .. ")"
+    end
     return nil, err
   end
   return nil, "invalid kulala-core output"
@@ -407,11 +493,17 @@ function M.clear_globals(key_or_keys)
     names = key_or_keys
   end
   local payload = { action = "clear_globals" }
-  if names then payload.names = names end
+  if names then
+    payload.names = names
+  end
   local job = M.invoke(payload, nil)
   local res = decode_action_response(job.stdout)
-  if res and res.success == true then return true, nil end
-  if res and res.error then return false, res.error end
+  if res and res.success == true then
+    return true, nil
+  end
+  if res and res.error then
+    return false, res.error
+  end
   if job.code ~= 0 then
     return false, vim.trim(job.stderr or "") ~= "" and vim.trim(job.stderr) or "kulala-core clear_globals failed"
   end
@@ -428,8 +520,12 @@ function M.crypto(op, args, cwd)
   local payload = vim.tbl_extend("force", { action = "crypto", op = op }, args or {})
   local job = M.invoke(payload, cwd)
   local res = decode_action_response(job.stdout)
-  if res and res.success == true and res.value ~= nil then return tostring(res.value), nil end
-  if res and res.error then return nil, res.error end
+  if res and res.success == true and res.value ~= nil then
+    return tostring(res.value), nil
+  end
+  if res and res.error then
+    return nil, res.error
+  end
   if job.code ~= 0 then
     return nil, vim.trim(job.stderr or "") ~= "" and vim.trim(job.stderr) or "kulala-core crypto failed"
   end
@@ -450,11 +546,17 @@ end
 ---@return string|nil err
 local function response_body_text(body)
   if type(body) == "table" and body.type == "json" then
-    if type(body.formatted) == "string" then return body.formatted end
+    if type(body.formatted) == "string" then
+      return body.formatted
+    end
     return vim.json.encode(body.content) or ""
   end
-  if type(body) == "table" and body.type == "text" then return body.content or "" end
-  if type(body) == "string" then return body end
+  if type(body) == "table" and body.type == "text" then
+    return body.content or ""
+  end
+  if type(body) == "string" then
+    return body
+  end
   return ""
 end
 
@@ -487,7 +589,9 @@ function M.http_request(opts, cwd)
     },
       nil
   end
-  if res and res.error then return nil, res.error end
+  if res and res.error then
+    return nil, res.error
+  end
   if job.code ~= 0 then
     return nil, vim.trim(job.stderr or "") ~= "" and vim.trim(job.stderr) or "kulala-core http_request failed"
   end
@@ -523,7 +627,9 @@ function M.apply_jq_filter(opts, cwd)
     },
       nil
   end
-  if res and res.error then return nil, res.error end
+  if res and res.error then
+    return nil, res.error
+  end
   if job.code ~= 0 then
     return nil, vim.trim(job.stderr or "") ~= "" and vim.trim(job.stderr) or "kulala-core apply_jq_filter failed"
   end
@@ -558,9 +664,13 @@ end
 ---@param bufnr integer
 ---@param position table LSP position (`line`/`character`, 0-based)
 function M.apply_completion_text_edits(items, bufnr, position)
-  if type(items) ~= "table" or type(position) ~= "table" then return end
+  if type(items) ~= "table" or type(position) ~= "table" then
+    return
+  end
   local line0 = position.line
-  if type(line0) ~= "number" then return end
+  if type(line0) ~= "number" then
+    return
+  end
 
   local line = vim.api.nvim_buf_get_lines(bufnr, line0, line0 + 1, false)[1] or ""
 
@@ -570,9 +680,13 @@ function M.apply_completion_text_edits(items, bufnr, position)
   local wins = vim.fn.win_findbuf(bufnr)
   if wins[1] then
     local cursor = vim.api.nvim_win_get_cursor(wins[1])
-    if cursor[1] - 1 == line0 then end_col0 = math.min(cursor[2], #line) end
+    if cursor[1] - 1 == line0 then
+      end_col0 = math.min(cursor[2], #line)
+    end
   end
-  if type(end_col0) ~= "number" then return end
+  if type(end_col0) ~= "number" then
+    return
+  end
 
   local start_col0 = completion_prefix_range(line, end_col0)
 
@@ -580,10 +694,14 @@ function M.apply_completion_text_edits(items, bufnr, position)
 
   for _, item in ipairs(items) do
     local new_text = item.insertText or item.label
-    if not new_text then goto continue end
+    if not new_text then
+      --goto continue
+    end
 
     -- blink.cmp + vim.snippet.expand strip a prefix that excludes `$` (e.g. `$kul` → `.prompt`).
-    if type(item.label) == "string" and item.label:match("^%$kulala") then item.insertTextFormat = plain_text end
+    if type(item.label) == "string" and item.label:match("^%$kulala") then
+      item.insertTextFormat = plain_text
+    end
 
     item.textEdit = {
       range = {
@@ -593,7 +711,6 @@ function M.apply_completion_text_edits(items, bufnr, position)
       newText = new_text,
     }
     item.insertText = nil
-    ::continue::
   end
 end
 
@@ -603,7 +720,9 @@ end
 ---@return string|nil cwd
 local function cursor_request_payload(bufnr, lsp_position)
   bufnr = bufnr or vim.api.nvim_get_current_buf()
-  if not valid_bufnr(bufnr) then return nil, nil end
+  if not valid_bufnr(bufnr) then
+    return nil, nil
+  end
   local content = table.concat(vim.api.nvim_buf_get_lines(bufnr, 0, -1, false), "\n")
   local filepath, cwd = M.resolve_document_paths(bufnr, nil)
   local line1, col1
@@ -613,7 +732,9 @@ local function cursor_request_payload(bufnr, lsp_position)
     local wins = vim.fn.win_findbuf(bufnr)
     if wins[1] then
       local cursor = vim.api.nvim_win_get_cursor(wins[1])
-      if cursor[1] == line1 then col1 = math.max(col1, cursor[2]) end
+      if cursor[1] == line1 then
+        col1 = math.max(col1, cursor[2])
+      end
     end
   else
     line1 = vim.fn.line(".")
@@ -626,7 +747,9 @@ local function cursor_request_payload(bufnr, lsp_position)
     env = require("kulala.parser.env").get_current_env() or "default",
     filetype = vim.api.nvim_get_option_value("filetype", { buf = bufnr }),
   }
-  if filepath then payload.filepath = filepath end
+  if filepath then
+    payload.filepath = filepath
+  end
   return payload, cwd
 end
 
@@ -635,11 +758,15 @@ end
 ---@return string|nil cwd
 local function buffer_payload(bufnr)
   bufnr = bufnr or vim.api.nvim_get_current_buf()
-  if not valid_bufnr(bufnr) then return nil, nil end
+  if not valid_bufnr(bufnr) then
+    return nil, nil
+  end
   local content = table.concat(vim.api.nvim_buf_get_lines(bufnr, 0, -1, false), "\n")
   local filepath, cwd = M.resolve_document_paths(bufnr, nil)
   local payload = { content = content }
-  if filepath then payload.filepath = filepath end
+  if filepath then
+    payload.filepath = filepath
+  end
   return payload, cwd
 end
 
@@ -650,11 +777,17 @@ end
 function M.clear_graphql_schema(host)
   M.require_enabled()
   local payload = { action = "clear_graphql_schema" }
-  if type(host) == "string" and host ~= "" then payload.host = host end
+  if type(host) == "string" and host ~= "" then
+    payload.host = host
+  end
   local job = M.invoke(payload, nil)
   local res = decode_action_response(job.stdout)
-  if res and res.success == true then return true, nil, res end
-  if res and res.error then return false, res.error, nil end
+  if res and res.success == true then
+    return true, nil, res
+  end
+  if res and res.error then
+    return false, res.error, nil
+  end
   if job.code ~= 0 then
     return false,
       vim.trim(job.stderr or "") ~= "" and vim.trim(job.stderr) or "kulala-core clear_graphql_schema failed",
@@ -670,12 +803,18 @@ end
 function M.graphql_introspect(bufnr)
   M.require_enabled()
   local payload, cwd = cursor_request_payload(bufnr)
-  if not payload then return nil, "invalid buffer" end
+  if not payload then
+    return nil, "invalid buffer"
+  end
   payload.action = "graphql_introspect"
   local job = M.invoke(payload, cwd)
   local res = decode_action_response(job.stdout)
-  if res and res.ok == true and type(res.host) == "string" then return res, nil end
-  if res and res.error then return res, res.error end
+  if res and res.ok == true and type(res.host) == "string" then
+    return res, nil
+  end
+  if res and res.error then
+    return res, res.error
+  end
   if job.code ~= 0 then
     return nil, vim.trim(job.stderr or "") ~= "" and vim.trim(job.stderr) or "kulala-core graphql_introspect failed"
   end
@@ -695,20 +834,30 @@ end
 function M.inspect_request_at_cursor(bufnr)
   M.require_enabled()
   local payload, cwd = cursor_request_payload(bufnr)
-  if not payload then return nil, "invalid buffer" end
+  if not payload then
+    return nil, "invalid buffer"
+  end
   payload.action = "inspect_request"
   local job = M.invoke(payload, cwd)
   local res = decode_action_response(job.stdout)
-  if res and res.ok == true and type(res.lines) == "table" then return res.lines, nil end
-  if res and res.error then return nil, res.error end
-  if res and res.prompt then return nil, "prompt required" end
+  if res and res.ok == true and type(res.lines) == "table" then
+    return res.lines, nil
+  end
+  if res and res.error then
+    return nil, res.error
+  end
+  if res and res.prompt then
+    return nil, "prompt required"
+  end
   if job.code ~= 0 then
     return nil, vim.trim(job.stderr or "") ~= "" and vim.trim(job.stderr) or "kulala-core inspect_request failed"
   end
   local out = vim.trim(job.stdout or "")
   local err = vim.trim(job.stderr or "")
   local detail = out ~= "" and out:sub(1, 200) or err:sub(1, 200)
-  if detail ~= "" then return nil, "invalid kulala-core inspect_request output: " .. detail end
+  if detail ~= "" then
+    return nil, "invalid kulala-core inspect_request output: " .. detail
+  end
   return nil, "invalid kulala-core inspect_request output"
 end
 
@@ -719,14 +868,24 @@ end
 function M.to_curl_at_cursor(bufnr, user_agent)
   M.require_enabled()
   local payload, cwd = cursor_request_payload(bufnr)
-  if not payload then return nil, "invalid buffer" end
+  if not payload then
+    return nil, "invalid buffer"
+  end
   payload.action = "to_curl"
-  if user_agent then payload.userAgent = user_agent end
+  if user_agent then
+    payload.userAgent = user_agent
+  end
   local job = M.invoke(payload, cwd)
   local res = decode_action_response(job.stdout)
-  if res and res.ok == true and type(res.curl) == "string" then return res.curl, nil end
-  if res and res.error then return nil, res.error end
-  if res and res.prompt then return nil, "prompt required" end
+  if res and res.ok == true and type(res.curl) == "string" then
+    return res.curl, nil
+  end
+  if res and res.error then
+    return nil, res.error
+  end
+  if res and res.prompt then
+    return nil, "prompt required"
+  end
   if job.code ~= 0 then
     return nil, vim.trim(job.stderr or "") ~= "" and vim.trim(job.stderr) or "kulala-core to_curl failed"
   end
@@ -739,12 +898,18 @@ end
 function M.lsp_completion(bufnr)
   M.require_enabled()
   local payload, cwd = cursor_request_payload(bufnr)
-  if not payload then return nil, "invalid buffer" end
+  if not payload then
+    return nil, "invalid buffer"
+  end
   payload.action = "lsp_completion"
   local job = M.invoke(payload, cwd)
   local res = decode_action_response(job.stdout)
-  if res and type(res.items) == "table" then return res, nil end
-  if res and res.error then return nil, res.error end
+  if res and type(res.items) == "table" then
+    return res, nil
+  end
+  if res and res.error then
+    return nil, res.error
+  end
   if job.code ~= 0 then
     return nil, vim.trim(job.stderr or "") ~= "" and vim.trim(job.stderr) or "kulala-core lsp_completion failed"
   end
@@ -758,7 +923,9 @@ function M.lsp_completion_async(bufnr, lsp_params, on_done)
   M.require_enabled()
   local position = type(lsp_params) == "table" and lsp_params.position or nil
   local payload, cwd = cursor_request_payload(bufnr, position)
-  if not payload then return invalid_buffer_async(on_done) end
+  if not payload then
+    return invalid_buffer_async(on_done)
+  end
   payload.action = "lsp_completion"
   M.invoke_async(payload, cwd, function(job)
     local res, err = decode_job_stdout(job)
@@ -778,12 +945,18 @@ end
 function M.lsp_hover(bufnr)
   M.require_enabled()
   local payload, cwd = cursor_request_payload(bufnr)
-  if not payload then return nil, "invalid buffer" end
+  if not payload then
+    return nil, "invalid buffer"
+  end
   payload.action = "lsp_hover"
   local job = M.invoke(payload, cwd)
   local res = decode_action_response(job.stdout)
-  if res and type(res.contents) == "table" then return res, nil end
-  if res and res.error then return nil, res.error end
+  if res and type(res.contents) == "table" then
+    return res, nil
+  end
+  if res and res.error then
+    return nil, res.error
+  end
   if job.code ~= 0 then
     return nil, vim.trim(job.stderr or "") ~= "" and vim.trim(job.stderr) or "kulala-core lsp_hover failed"
   end
@@ -795,7 +968,9 @@ end
 function M.lsp_hover_async(bufnr, on_done)
   M.require_enabled()
   local payload, cwd = cursor_request_payload(bufnr)
-  if not payload then return invalid_buffer_async(on_done) end
+  if not payload then
+    return invalid_buffer_async(on_done)
+  end
   payload.action = "lsp_hover"
   M.invoke_async(payload, cwd, function(job)
     local res, err = decode_job_stdout(job)
@@ -815,11 +990,15 @@ end
 function M.lsp_symbols(bufnr)
   M.require_enabled()
   local payload, cwd = buffer_payload(bufnr)
-  if not payload then return nil, "invalid buffer" end
+  if not payload then
+    return nil, "invalid buffer"
+  end
   payload.action = "lsp_symbols"
   local job = M.invoke(payload, cwd)
   local res = decode_action_response(job.stdout)
-  if type(res) == "table" then return res, nil end
+  if type(res) == "table" then
+    return res, nil
+  end
   if job.code ~= 0 then
     return nil, vim.trim(job.stderr or "") ~= "" and vim.trim(job.stderr) or "kulala-core lsp_symbols failed"
   end
@@ -831,7 +1010,9 @@ end
 function M.lsp_symbols_async(bufnr, on_done)
   M.require_enabled()
   local payload, cwd = buffer_payload(bufnr)
-  if not payload then return invalid_buffer_async(on_done) end
+  if not payload then
+    return invalid_buffer_async(on_done)
+  end
   payload.action = "lsp_symbols"
   M.invoke_async(payload, cwd, function(job)
     local res, err = decode_job_stdout(job)
@@ -851,11 +1032,15 @@ end
 function M.lsp_diagnostics(bufnr)
   M.require_enabled()
   local payload, cwd = buffer_payload(bufnr)
-  if not payload then return nil, "invalid buffer" end
+  if not payload then
+    return nil, "invalid buffer"
+  end
   payload.action = "lsp_diagnostics"
   local job = M.invoke(payload, cwd)
   local res = decode_action_response(job.stdout)
-  if type(res) == "table" then return res, nil end
+  if type(res) == "table" then
+    return res, nil
+  end
   if job.code ~= 0 then
     return nil, vim.trim(job.stderr or "") ~= "" and vim.trim(job.stderr) or "kulala-core lsp_diagnostics failed"
   end
@@ -867,7 +1052,9 @@ end
 function M.lsp_diagnostics_async(bufnr, on_done)
   M.require_enabled()
   local payload, cwd = buffer_payload(bufnr)
-  if not payload then return invalid_buffer_async(on_done) end
+  if not payload then
+    return invalid_buffer_async(on_done)
+  end
   payload.action = "lsp_diagnostics"
   M.invoke_async(payload, cwd, function(job)
     local res, err = decode_job_stdout(job)
@@ -888,8 +1075,12 @@ function M.from_curl(curl)
   M.require_enabled()
   local job = M.invoke({ action = "from_curl", curl = curl }, nil)
   local res = decode_action_response(job.stdout)
-  if res and res.ok == true and type(res.lines) == "table" then return res.lines, nil end
-  if res and res.error then return nil, res.error end
+  if res and res.ok == true and type(res.lines) == "table" then
+    return res.lines, nil
+  end
+  if res and res.error then
+    return nil, res.error
+  end
   if job.code ~= 0 then
     return nil, vim.trim(job.stderr or "") ~= "" and vim.trim(job.stderr) or "kulala-core from_curl failed"
   end
@@ -899,7 +1090,9 @@ end
 function M.websocket_start(opts, handlers, cwd)
   M.require_enabled()
   local exe = M.executable_path()
-  if not exe then return nil end
+  if not exe then
+    return nil
+  end
 
   local tmp = vim.fn.tempname() .. ".json"
   local payload = {

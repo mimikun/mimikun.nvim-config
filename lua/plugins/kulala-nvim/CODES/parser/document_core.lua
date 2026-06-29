@@ -14,15 +14,21 @@ end
 ---@return number
 local function directive_offset(doc)
   local n = doc and doc.directiveLinesRemoved
-  if type(n) == "number" and n > 0 then return n end
+  if type(n) == "number" and n > 0 then
+    return n
+  end
   return 0
 end
 
 local function block_end_line(block)
   local pos = block.position
-  if not pos then return 1 end
+  if not pos then
+    return 1
+  end
   local last = pos["end"]
-  if type(last) ~= "number" then last = pos.start end
+  if type(last) ~= "number" then
+    last = pos.start
+  end
   return last
 end
 
@@ -39,15 +45,21 @@ end
 
 local function body_to_string(body)
   local t = type(body)
-  if t == "string" then return body end
-  if t == "table" then return vim.json.encode(body) end
+  if t == "string" then
+    return body
+  end
+  if t == "table" then
+    return vim.json.encode(body)
+  end
   return ""
 end
 
 local function redirects_from_request(req)
   local out = {}
   local rr = req.responseRedirect
-  if rr and rr.filePath then table.insert(out, { file = rr.filePath, overwrite = rr.overwrite == true }) end
+  if rr and rr.filePath then
+    table.insert(out, { file = rr.filePath, overwrite = rr.overwrite == true })
+  end
   return out
 end
 
@@ -55,8 +67,12 @@ end
 ---@param http_filepath string|nil
 ---@return boolean
 local function is_external_script_path(script_filepath, http_filepath)
-  if type(script_filepath) ~= "string" or script_filepath == "" then return false end
-  if http_filepath and script_filepath == http_filepath then return false end
+  if type(script_filepath) ~= "string" or script_filepath == "" then
+    return false
+  end
+  if http_filepath and script_filepath == http_filepath then
+    return false
+  end
   return not script_filepath:match("%.http$")
 end
 
@@ -80,7 +96,9 @@ local function scripts_from_core(kulala_scripts, http_filepath)
     pre_request = { inline = {}, files = {}, priority = nil },
     post_request = { inline = {}, files = {}, priority = nil },
   }
-  if type(kulala_scripts) ~= "table" then return out end
+  if type(kulala_scripts) ~= "table" then
+    return out
+  end
 
   local mapping = { preRequest = "pre_request", postRequest = "post_request" }
   for core_key, nvim_key in pairs(mapping) do
@@ -105,7 +123,9 @@ end
 ---@return string
 local function block_display_name(block)
   for _, op in ipairs(block.operators or {}) do
-    if op.name == "name" and op.args and vim.trim(tostring(op.args)) ~= "" then return vim.trim(tostring(op.args)) end
+    if op.name == "name" and op.args and vim.trim(tostring(op.args)) ~= "" then
+      return vim.trim(tostring(op.args))
+    end
   end
   return block.name or ""
 end
@@ -138,7 +158,9 @@ function M.to_document_requests(doc, path)
 
   local function block_to_request(block)
     local req = block.request
-    if not req or not req.url or req.url == "" then return nil end
+    if not req or not req.url or req.url == "" then
+      return nil
+    end
     local method = (req.method or "GET"):upper()
     local request = Document.new_empty_document_request()
     request.shared = shared
@@ -149,7 +171,9 @@ function M.to_document_requests(doc, path)
     request.method = method
     request.url = req.url or ""
     local http_version = req.httpVersion or ""
-    if http_version:match("^HTTP/") then http_version = http_version:gsub("^HTTP/", "") end
+    if http_version:match("^HTTP/") then
+      http_version = http_version:gsub("^HTTP/", "")
+    end
     request.http_version = http_version
     request.headers, request.headers_raw = headers_from_section(req.headerSection)
     request.body = body_to_string(req.body)
@@ -182,7 +206,9 @@ function M.to_document_requests(doc, path)
       shared.file = path or ""
     elseif not block.runParentBlock and not run_children_by_parent[block.name] then
       local request = block_to_request(block)
-      if request then table.insert(requests, request) end
+      if request then
+        table.insert(requests, request)
+      end
     end
   end
 
@@ -194,7 +220,9 @@ function M.to_document_requests(doc, path)
         break
       end
     end
-    if not parent_block then goto next_run_parent end
+    if not parent_block then
+      --goto next_run_parent
+    end
 
     ---@class DocumentRequest
     local shell = Document.new_empty_document_request()
@@ -220,8 +248,9 @@ function M.to_document_requests(doc, path)
       end
     end
 
-    if #shell.nested_requests > 0 then table.insert(requests, shell) end
-    ::next_run_parent::
+    if #shell.nested_requests > 0 then
+      table.insert(requests, shell)
+    end
   end
 
   return requests

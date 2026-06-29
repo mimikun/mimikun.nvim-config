@@ -11,10 +11,12 @@ local readme = {
     -- When nil (default), auto-download and
     -- use kulala-core from GitHub releases based on the user's OS and architecture.
     path = nil,
+
     -- Subprocess timeout (ms) for kulala-core.
     -- Default is 60000 (1 minute).
     -- nil disables the vim.system timeout.
     timeout = 60000,
+
     -- Optional override for kulala-core persistence
     -- (cookies, OAuth, prompts).
     -- Default matches kulala-core CLI:
@@ -24,19 +26,24 @@ local readme = {
     --   or Support/kulala-core
     -- - Windows: %APPDATA%\kulala-core
     data_dir = nil,
+
     -- Optional override for download url
     download_url = "https://github.com/mistweaverco/kulala-core/releases/download/%s/%s",
   },
+
   -- Restore request history and UI after sourcing a vim session.
   -- Requires `set sessionoptions+=globals` in your Neovim config.
   session = {
     restore = true,
   },
+
   -- dev, test, prod, can be anything
   -- see: https://learn.microsoft.com/en-us/aspnet/core/test/http-files?view=aspnetcore-8.0#environment-files
   default_env = "default",
+
   -- `"b"` = per-buffer env (default), `"g"` = global
   environment_scope = "b",
+
   -- enable reading vscode rest client environment variables
   vscode_rest_client_environmentvars = false,
 
@@ -49,17 +56,34 @@ local readme = {
   ui = {
     -- display mode: possible values: "split", "float"
     display_mode = "split",
+
     -- split direction: possible values: "above", "right", "below", "left", fun(): "above"|"right"|"below"|"left"
     split_direction = "right",
+
     -- window options to override win_config: width/height/split/vertical.., buffer/window options
-    win_opts = { bo = {}, wo = {} }, ---@type kulala.ui.win_config
+    ---@type kulala.ui.win_config
+    win_opts = {
+      bo = {},
+      wo = {},
+    },
+
     -- default view: "body" or "headers" or "headers_body" or "verbose" or fun(response: Response)
-    default_view = "body", ---@type "body"|"headers"|"headers_body"|"verbose"|fun(response: Response)
+    ---@type "body"|"headers"|"headers_body"|"verbose"|fun(response: Response)
+    default_view = "body",
+
     -- enable winbar
     winbar = true,
+
     -- Specify the panes to be displayed by default
     -- Available panes are { "body", "headers", "headers_body", "script_output", "stats", "verbose", "report", "help" },
-    default_winbar_panes = { "body", "headers", "verbose", "script_output", "report" },
+    default_winbar_panes = {
+      "body",
+      "headers",
+      "verbose",
+      "script_output",
+      "report",
+    },
+
     -- Winbar labels
     winbar_labels = {
       body = "Body",
@@ -71,14 +95,18 @@ local readme = {
       report = "Report",
       help = "Help",
     },
+
     -- show/hide winbar keymaps in labels
     winbar_labels_keymaps = true,
+
     -- enable/disable variable info text
     -- this will show the variable name and value as float
     -- possible values: false, "float"
     show_variable_info_text = false,
+
     -- icons position: "signcolumn"|"on_request"|"above_request"|"below_request" or nil to disable
     show_icons = "on_request",
+
     -- default icons
     icons = {
       inlay = {
@@ -87,7 +115,8 @@ local readme = {
         error = "✘",
       },
       lualine = "🐼",
-      textHighlight = "WarningMsg", -- highlight group for request elapsed time
+      -- highlight group for request elapsed time
+      textHighlight = "WarningMsg",
       loadingHighlight = "Normal",
       doneHighlight = "String",
       errorHighlight = "ErrorMsg",
@@ -105,8 +134,10 @@ local readme = {
     report = {
       -- possible values: true | false | "on_error"
       show_script_output = true,
+
       -- possible values: true | false | "on_error" | "failed_only"
       show_asserts_output = true,
+
       -- possible values: true | false | "on_error"
       show_summary = true,
 
@@ -138,8 +169,15 @@ local readme = {
             or vim.tbl_deep_extend("force", snacks_picker.config.layout("telescope"), {
               reverse = true,
               layout = {
-                { { win = "list" }, { height = 1, win = "input" }, box = "vertical" },
-                { win = "preview", width = 0.6 },
+                {
+                  { win = "list" },
+                  { height = 1, win = "input" },
+                  box = "vertical",
+                },
+                {
+                  win = "preview",
+                  width = 0.6,
+                },
                 box = "horizontal",
                 width = 0.8,
               },
@@ -171,22 +209,26 @@ local readme = {
     enforce_external_script_naming_convention = true,
 
     --enable/disable/customize  LSP keymaps
-    ---@type boolean|table
-    keymaps = false, -- disabled by default, as Kulala relies on default Neovim LSP keymaps
+    ---@type boolean | table
+    -- disabled by default, as Kulala relies on default Neovim LSP keymaps
+    keymaps = false,
 
-    on_attach = nil, -- function called when Kulala LSP attaches to the buffer
+    -- function called when Kulala LSP attaches to the buffer
+    on_attach = nil,
   },
 
   -- enable/disable debug mode
   debug = 3,
+
   -- enable/disable bug reports on all errors
   generate_bug_report = false,
 
   -- set to true to enable default keymaps
   -- (see docs or lua/kulala/config/keymaps.lua)
   -- or override default keymaps as shown in the example below.
-  ---@type boolean|table
+  ---@type boolean | table
   global_keymaps = false,
+
   --[[
         {
           ["Send request"] = { -- sets global mapping
@@ -215,8 +257,9 @@ local readme = {
 
   -- Kulala UI keymaps; override with custom keymaps as required
   -- (see docs or lua/kulala/config/keymaps.lua)
-  ---@type boolean|table
+  ---@type boolean | table
   kulala_keymaps = true,
+
   --[[
         {
           ["Show headers"] = { "H", function() require("kulala.ui").show_headers() end, },
