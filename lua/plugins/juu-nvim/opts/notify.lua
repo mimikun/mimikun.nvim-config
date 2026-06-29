@@ -23,10 +23,14 @@ local notify = {
   -- Window configuration
   ---@type JuuNotifyWindowConfig | nil
   window = {
-    -- Base highlight group
+    -- Base highlight group in the notification window
+---@type string 
     normal_hl = "Comment",
-    -- Background opacity
+
+    -- Background color opacity (0-100)
+---@type number 
     winblend = 100,
+
     -- Border style
     border = "none",
     -- Stacking priority
@@ -48,6 +52,17 @@ local notify = {
       --"NvimTree"
     },
   },
+---@field border "none"|"single"|"double"|"rounded"|"solid"|"shadow"|string[] Border around the notification window
+---@field border_hl string Highlight group for notification window border
+---@field zindex number Stacking priority of the notification window
+---@field max_width number Maximum width (0 = no limit, or fraction like 0.5 for 50% of editor width)
+---@field max_height integer Maximum height (0 = no limit)
+---@field x_padding integer Padding from right edge
+---@field y_padding integer Padding from bottom edge
+---@field align "top"|"bottom"|"avoid_cursor" How to align the notification window
+---@field relative "editor"|"win" What the notification window position is relative to
+---@field tabstop integer Width of each tab character
+---@field avoid string[] Filetypes to avoid when positioning window
 
   -- Notification group configuration
   ---@type table<string, JuuNotifyGroupConfig> | nil
@@ -70,29 +85,6 @@ local notify = {
   -- View/rendering configuration
   ---@type JuuNotifyViewConfig | nil
   --view = nil,
-
-  -- Conditionally redirect notifications to another backend
-  ---@type false | fun(msg: string | nil, level: number | string | nil, opts: table | nil): (boolean | nil) | nil
-  --redirect = nil,
-}
-
-return notify
----@class JuuNotifyWindowConfig
----@field normal_hl string Base highlight group in the notification window
----@field winblend number Background color opacity (0-100)
----@field border "none"|"single"|"double"|"rounded"|"solid"|"shadow"|string[] Border around the notification window
----@field border_hl string Highlight group for notification window border
----@field zindex number Stacking priority of the notification window
----@field max_width number Maximum width (0 = no limit, or fraction like 0.5 for 50% of editor width)
----@field max_height integer Maximum height (0 = no limit)
----@field x_padding integer Padding from right edge
----@field y_padding integer Padding from bottom edge
----@field align "top"|"bottom"|"avoid_cursor" How to align the notification window
----@field relative "editor"|"win" What the notification window position is relative to
----@field tabstop integer Width of each tab character
----@field avoid string[] Filetypes to avoid when positioning window
-
----@class JuuNotifyViewConfig
 ---@field stack_upwards boolean Display notification items from bottom to top
 ---@field align "message"|"annote" How to indent messages longer than a single line
 ---@field reflow "hard"|"hyphenate"|"ellipsis"|false Reflow (wrap) messages wider than notification window
@@ -102,8 +94,16 @@ return notify
 ---@field line_margin integer Spaces to pad both sides of each non-empty line
 ---@field render_message fun(msg: string, cnt: number): (string|false|nil) How to render notification messages with counts
 
----@alias JuuNotifyDisplay string|false|fun(now: number, items: table[]): (string|false|nil) Something that can be displayed (string, false, or function)
+  -- Conditionally redirect notifications to another backend
+  ---@type false | fun(msg: string | nil, level: number | string | nil, opts: table | nil): (boolean | nil) | nil
+  --redirect = nil,
+}
 
+return notify
+
+
+
+---@alias JuuNotifyDisplay string|false|fun(now: number, items: table[]): (string|false|nil) Something that can be displayed (string, false, or function)
 ---@class JuuNotifyGroupConfig
 ---@field name JuuNotifyDisplay|nil Name of the group
 ---@field icon JuuNotifyDisplay|nil Icon of the group
