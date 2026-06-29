@@ -1,6 +1,6 @@
 ---@type LazySpec
 local spec = {
-  "mimikun/spec-template",
+  "mistweaverco/kulala.nvim",
   --lazy = false,
   --url = "",
   --name = "",
@@ -16,7 +16,7 @@ local spec = {
   --submodules = false,
   --module = false,
   --optional = false,
-  --ft = require("plugins.kulala-nvim.ft"),
+  ft = require("plugins.kulala-nvim.ft"),
   --cmd = require("plugins.kulala-nvim.cmds"),
   --keys = require("plugins.kulala-nvim.keys"),
   --event = require("plugins.kulala-nvim.events"),
@@ -28,9 +28,8 @@ local spec = {
   --config = function()
   --  local opts = require("plugins.kulala-nvim.opts")
   --end,
-  --priority = 1000,
-  cond = false,
-  enabled = false,
+  --cond = false,
+  --enabled = false,
 }
 
 return spec
