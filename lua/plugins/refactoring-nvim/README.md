@@ -1,24 +1,10 @@
-## Configuration
-
-The default configuration can be found at [./lua/refactoring/config.lua](./lua/refactoring/config.lua), any field can be overridden:
-
-- globally: `require("refactoring").setup({...})`
-- for a single call: `require("refactoring").inline_var({...})`
-- for a given buffer: `vim.b.refactor_config = {...}`
-
-### Keymaps
-
-No keymaps are created by default. These are the suggested keymaps:
-
-<details>
-<summary>Option 1: a dedicated keymap for each refactoring operation</summary>
-
 ```lua
 local keymap = vim.keymap
 
 keymap.set({ "n", "x" }, "<leader>re", function()
   return require("refactoring").extract_func()
 end, { desc = "Extract Function", expr = true })
+
 -- `_` is the default textobject for "current line"
 keymap.set("n", "<leader>ree", function()
   return require("refactoring").extract_func() .. "_"
@@ -46,6 +32,8 @@ end, { desc = "Inline function", expr = true })
 
 keymap.set({ "n", "x" }, "<leader>rs", function()
   return require("refactoring").select_refactor()
+  -- this keymap doesn't select any textobject by default, so you may need to provide one each time you use it.
+  --require("refactoring").select_refactor()
 end, { desc = "Select refactor" })
 
 -- `iw` is the builtin textobject for "in word". You can use any other textobject or even create the keymap without any textobject if you prefer to provide one yourself each time that you use the keymap
@@ -95,19 +83,3 @@ keymap.set({ "x", "n" }, "<leader>pc", function()
   return require("refactoring.debug").cleanup { restore_view = true }
 end, { desc = "Debug print clean", expr = true, remap = true })
 ```
-
-</details>
-
-<details>
-<summary>Option 2: single keymap to select refactor</summary>
-
-```lua
-local keymap = vim.keymap
-
-keymap.set({ "n", "x" }, "<leader>rs", function()
-  -- this keymap doesn't select any textobject by default, so you may need to provide one each time you use it.
-  require("refactoring").select_refactor()
-end, { desc = "Select refactor" })
-```
-
-</details>
