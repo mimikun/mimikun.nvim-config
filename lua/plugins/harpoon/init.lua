@@ -3,7 +3,7 @@ local spec = {
   "ThePrimeagen/harpoon",
   branch = "harpoon2",
   --lazy = false,
-  --keys = require("plugins.harpoon.keys"),
+  keys = require("plugins.harpoon.keys"),
   event = require("plugins.harpoon.events"),
   dependencies = require("plugins.harpoon.dependencies"),
   --init = function()
