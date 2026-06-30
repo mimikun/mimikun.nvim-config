@@ -12,9 +12,13 @@ local spec = {
   --  -- NOTE: INIT
   --end,
   --opts = require("plugins.harpoon.opts"),
-  --config = function()
-  --  local opts = require("plugins.harpoon.opts")
-  --end,
+  config = function()
+    local opts = require("plugins.harpoon.opts")
+    local harpoon = require("harpoon")
+
+    -- REQUIRED
+    harpoon:setup(opts)
+  end,
   cond = false,
   enabled = false,
 }
