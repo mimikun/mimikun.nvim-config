@@ -111,33 +111,3 @@ end, { desc = "Select refactor" })
 ```
 
 </details>
-
-### User commands
-
-The `:Refactor` command can be used to run any refactor. It supports previewing changes and offers completions for available refactors. For refactors that require additional input, extra arguments to the `:Refactor` command will be used as input.
-
-## Supported languages
-
-- C
-- C#
-- C++
-- Go
-- Java
-- JavaScript/Typescript/Jsx/Tsx
-- Lua
-- Php
-- Powershell
-- Python
-- Ruby
-- Vimscript
-
-## Adding/improving support for a language
-
-To add/improve support for a language, first do it on your local config and daily drive it for a while. To do so:
-
-1. Create the required tree-sitter queries for the language in your config directory (`~/.config/nvim/queries/<lang>/<query_name>.scm`). You can find the name of the queries required for each feature in [Features](#features) and the structure of the queries in `./queries/`. The query files should start with `;; extends` (see `:h treesitter-query-modeline-extends`).
-2. Add code generation functions required by the feature to your global config. You can see the code generation functions required by each feature in `./lua/refactoring/config.lua`
-3. After daily driving your changes for a while, open a PR to the `refactoring.nvim` repo.
-
-> [!NOTE]
-> The goal of the plugin is to keep the Lua logic as generic and language agnostic as possible. That's why all of the input language specific information comes from LSP servers and tree-sitter queries. The better the tree-sitter queries are, the better the support for a given language will be.
