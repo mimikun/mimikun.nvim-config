@@ -3,6 +3,7 @@ local spec = {
   --"HiPhish/rainbow-delimiters.nvim",
   url = "https://gitlab.com/HiPhish/rainbow-delimiters.nvim",
   --lazy = false,
+  submodules = false,
   event = require("plugins.rainbow-delimiters-nvim.events"),
   --opts = require("plugins.rainbow-delimiters-nvim.opts"),
   config = function()
