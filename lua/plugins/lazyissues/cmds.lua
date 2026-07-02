@@ -1,6 +1,6 @@
 ---@type table
 local cmds = {
-    "LazyIssues",
+  "LazyIssues",
 }
 
 return cmds

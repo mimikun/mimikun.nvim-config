@@ -1,6 +1,6 @@
 ---@type LazySpec[]
 local dependencies = {
-    "MunifTanjim/nui.nvim",
+  "MunifTanjim/nui.nvim",
 }
 
 return dependencies

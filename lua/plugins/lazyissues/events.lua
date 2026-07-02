@@ -1,6 +1,6 @@
 ---@type table
 local events = {
-    "VeryLazy",
+  "VeryLazy",
 }
 
 return events
