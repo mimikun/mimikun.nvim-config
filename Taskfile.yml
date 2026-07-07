@@ -83,3 +83,9 @@ tasks:
     cmds:
       - cmd: wsl-open $CODEBERG_URL
     silent: true
+
+  plugin-setup:
+    desc: "Vendor Neovim plugin(s) into lua/plugins (usage: task plugin-setup -- <git-url>...)"
+    cmds:
+      - "{{.TASKFILE_DIR}}/scripts/nvim-plugin-clone.sh {{.CLI_ARGS}}"
+    silent: true
