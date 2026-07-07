@@ -1,0 +1,21 @@
+scripts/nvim-plugin-clone.sh
+  s_b59f70e322d268::t_88ea57d069998f 1-179
+Taskfile.yml
+  s_b59f70e322d268::t_54604a66ce55f3 86-91
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.10",
+  "base_commit_sha": "76f027bf01643b3f35a9c20faa68e0129929717e",
+  "prompts": {},
+  "sessions": {
+    "s_b59f70e322d268": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "657dcf0a-e8e8-4755-8741-b80cd75f3fcc",
+        "model": "claude-fable-5"
+      },
+      "human_author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
