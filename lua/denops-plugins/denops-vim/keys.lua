@@ -8,7 +8,7 @@ local keys = {
     end,
     mode = "n",
     desc = "",
-    { silent = true },
+    silent = true,
   },
   ---- Interrupt the process of plugins via <C-c>
   --vim.keymap.set({ "n", "v", "x", "s", "o" }, "<C-c>", "<Cmd>call denops#interrupt()<CR><C-c>", { silent = true })

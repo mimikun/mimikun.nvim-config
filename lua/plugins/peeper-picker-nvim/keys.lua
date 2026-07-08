@@ -8,12 +8,10 @@ local keys = {
     mode = {
       "n",
     },
-    {
-      desc = "Peeper Picker",
-      --expr = true,
-      --noremap = true,
-      silent = true,
-    },
+    desc = "Peeper Picker",
+    --expr = true,
+    --noremap = true,
+    silent = true,
   },
   {
     "<leader>ph",
@@ -23,12 +21,10 @@ local keys = {
     mode = {
       "n",
     },
-    {
-      desc = "Peeper Picker History",
-      --expr = true,
-      --noremap = true,
-      silent = true,
-    },
+    desc = "Peeper Picker History",
+    --expr = true,
+    --noremap = true,
+    silent = true,
   },
 }
 

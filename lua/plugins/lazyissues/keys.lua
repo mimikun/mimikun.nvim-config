@@ -9,12 +9,10 @@ local keys = {
     mode = {
       "n",
     },
-    {
-      desc = "Issues",
-      --expr = true,
-      --noremap = true,
-      silent = true,
-    },
+    desc = "Issues",
+    --expr = true,
+    --noremap = true,
+    silent = true,
   },
 }
 

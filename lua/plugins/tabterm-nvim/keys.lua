@@ -8,10 +8,8 @@ local keys = {
     mode = {
       "n",
     },
-    {
-      desc = "Toggle tabterm",
-      silent = true,
-    },
+    desc = "Toggle tabterm",
+    silent = true,
   },
   {
     "<leader>ts",
@@ -21,10 +19,8 @@ local keys = {
     mode = {
       "n",
     },
-    {
-      desc = "New tabterm shell",
-      silent = true,
-    },
+    desc = "New tabterm shell",
+    silent = true,
   },
   {
     "<leader>tc",
@@ -34,10 +30,8 @@ local keys = {
     mode = {
       "n",
     },
-    {
-      desc = "New tabterm command",
-      silent = true,
-    },
+    desc = "New tabterm command",
+    silent = true,
   },
 }
 

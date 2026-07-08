@@ -8,11 +8,9 @@ local keys = {
     mode = {
       "x",
     },
-    {
-      desc = "Selective undo: newest change in selection",
-      noremap = true,
-      silent = true,
-    },
+    desc = "Selective undo: newest change in selection",
+    noremap = true,
+    silent = true,
   },
   {
     "gU",
@@ -22,11 +20,9 @@ local keys = {
     mode = {
       "x",
     },
-    {
-      desc = "Selective undo: last change of every selected line",
-      noremap = true,
-      silent = true,
-    },
+    desc = "Selective undo: last change of every selected line",
+    noremap = true,
+    silent = true,
   },
   {
     "gC",
@@ -36,11 +32,9 @@ local keys = {
     mode = {
       "x",
     },
-    {
-      desc = "Selective undo for character selection",
-      noremap = true,
-      silent = true,
-    },
+    desc = "Selective undo for character selection",
+    noremap = true,
+    silent = true,
   },
 }
 

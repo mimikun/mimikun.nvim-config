@@ -12,13 +12,11 @@ local keys = {
       --"x",
       --"v",
     },
-    {
-      desc = "",
-      -- TODO: it
-      --expr = true,
-      --noremap = true,
-      silent = true,
-    },
+    desc = "",
+    -- TODO: it
+    --expr = true,
+    --noremap = true,
+    silent = true,
   },
 }
 
