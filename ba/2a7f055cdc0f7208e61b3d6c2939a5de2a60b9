@@ -1,0 +1,23 @@
+scripts/check-keys-spec.lua
+  s_31601a356699f0::t_1149edd69ce1c9 1-95
+scripts/check-keys-spec.sh
+  s_31601a356699f0::t_b9baee21cd66de 1-26
+Taskfile.yml
+  s_31601a356699f0::t_e87f27d7ddf441 92-99
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.10",
+  "base_commit_sha": "ba2a7f055cdc0f7208e61b3d6c2939a5de2a60b9",
+  "prompts": {},
+  "sessions": {
+    "s_31601a356699f0": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "39c4984f-932f-4287-a872-fcbcd743c66e",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
