@@ -1,0 +1,53 @@
+lua/plugins/semgrep-nvim/.editorconfig
+  s_a6c54248a17bfc::t_321a61051ce9d3 1-14
+lua/plugins/semgrep-nvim/CODES/LICENSE
+  s_a6c54248a17bfc::t_88c8a96ad99c99 1-21
+lua/plugins/semgrep-nvim/CODES/README.md
+  s_a6c54248a17bfc::t_1f088eae0eb01f 1-213
+lua/plugins/semgrep-nvim/CODES/lua/semgrep/config.lua
+  s_a6c54248a17bfc::t_27e74a51f4b6c3 1-38
+lua/plugins/semgrep-nvim/CODES/lua/semgrep/fix.lua
+  s_a6c54248a17bfc::t_1cb17ef6f27f1a 1-89
+lua/plugins/semgrep-nvim/CODES/lua/semgrep/health.lua
+  s_a6c54248a17bfc::t_79fcfa2ba1dde8 1-42
+lua/plugins/semgrep-nvim/CODES/lua/semgrep/hover.lua
+  s_a6c54248a17bfc::t_eec33cfd2a81f3 1-90
+lua/plugins/semgrep-nvim/CODES/lua/semgrep/init.lua
+  s_a6c54248a17bfc::t_dce80514494c9b 1-104
+lua/plugins/semgrep-nvim/CODES/lua/semgrep/parser.lua
+  s_a6c54248a17bfc::t_10153de02d6dc6 1-78
+lua/plugins/semgrep-nvim/CODES/lua/semgrep/pickers.lua
+  s_a6c54248a17bfc::t_4b84546f1bc8f2 1-119
+lua/plugins/semgrep-nvim/CODES/lua/semgrep/scan.lua
+  s_a6c54248a17bfc::t_d8c279cf867b98 1-134
+lua/plugins/semgrep-nvim/CODES/lua/semgrep/store.lua
+  s_a6c54248a17bfc::t_6cae6e7296e160 1-45
+lua/plugins/semgrep-nvim/CODES/plugin/semgrep.lua
+  s_a6c54248a17bfc::t_86f3dfee506057 1-10
+lua/plugins/semgrep-nvim/stylua.toml
+  s_a6c54248a17bfc::t_295186248600e3 1-13
+lua/plugins/semgrep-nvim/cmds.lua
+  s_a6c54248a17bfc::t_8cf00e919690b3 1-14
+lua/plugins/semgrep-nvim/init.lua
+  s_a6c54248a17bfc::t_80f502ad25e17f 1-18
+lua/plugins/semgrep-nvim/keys.lua
+  s_a6c54248a17bfc::t_30997142837ef1 1-49
+lua/plugins/semgrep-nvim/opts.lua
+  s_a6c54248a17bfc::t_9204b4cfd696db 1-13
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.10",
+  "base_commit_sha": "365dd393e45b4a4062328cd4638c0bcd83fc5396",
+  "prompts": {},
+  "sessions": {
+    "s_a6c54248a17bfc": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "6741c770-dc02-4fb4-b1c9-fd8246f6a203",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
