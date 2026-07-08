@@ -1,0 +1,123 @@
+lua/plugins/lockfile-nvim/.editorconfig
+  s_a6c54248a17bfc::t_d2fe8f0309eb42 1-14
+lua/plugins/lockfile-nvim/CODES/.cargo/config.toml
+  s_a6c54248a17bfc::t_11bbc477e99404 1-9
+lua/plugins/lockfile-nvim/CODES/.github/workflows/changelog.yml
+  s_a6c54248a17bfc::t_5b149c523cc41a 1-39
+lua/plugins/lockfile-nvim/CODES/.github/workflows/ci.yml
+  s_a6c54248a17bfc::t_5dfed33917d798 1-42
+lua/plugins/lockfile-nvim/CODES/.github/workflows/release.yml
+  s_a6c54248a17bfc::t_d5b48fc487ac69 1-172
+lua/plugins/lockfile-nvim/CODES/.gitignore
+  s_a6c54248a17bfc::t_6ae6049eb56430 1-7
+lua/plugins/lockfile-nvim/CODES/CHANGELOG.md
+  s_a6c54248a17bfc::t_7962489c4c0b79 1-47
+lua/plugins/lockfile-nvim/CODES/Cargo.lock
+  s_a6c54248a17bfc::t_89e2268c593cf5 1-580
+lua/plugins/lockfile-nvim/CODES/Cargo.toml
+  s_a6c54248a17bfc::t_6afc82bfb8ff26 1-19
+lua/plugins/lockfile-nvim/CODES/LICENSE
+  s_a6c54248a17bfc::t_37c251e32431bd 1-21
+lua/plugins/lockfile-nvim/CODES/Makefile
+  s_a6c54248a17bfc::t_2c7d5709ba0b63 1-40
+lua/plugins/lockfile-nvim/CODES/README.md
+  s_a6c54248a17bfc::t_56e9eea37d1d2e 1-225
+lua/plugins/lockfile-nvim/CODES/cliff.toml
+  s_a6c54248a17bfc::t_6c9ec13d6a33db 1-57
+lua/plugins/lockfile-nvim/CODES/doc/lockfile.txt
+  s_a6c54248a17bfc::t_bc67c6ed7558e1 1-156
+lua/plugins/lockfile-nvim/CODES/lua/lockfile/analyze.lua
+  s_a6c54248a17bfc::t_a0352e06854076 1-301
+lua/plugins/lockfile-nvim/CODES/lua/lockfile/config.lua
+  s_a6c54248a17bfc::t_1b1c86631ab95f 1-93
+lua/plugins/lockfile-nvim/CODES/lua/lockfile/detect.lua
+  s_a6c54248a17bfc::t_22a6d5aaca5431 1-79
+lua/plugins/lockfile-nvim/CODES/lua/lockfile/diff.lua
+  s_a6c54248a17bfc::t_6c6bd4f9eb2bf8 1-217
+lua/plugins/lockfile-nvim/CODES/lua/lockfile/download.lua
+  s_a6c54248a17bfc::t_fe2d25f49a791b 1-284
+lua/plugins/lockfile-nvim/CODES/lua/lockfile/git.lua
+  s_a6c54248a17bfc::t_162cacd2c87502 1-53
+lua/plugins/lockfile-nvim/CODES/lua/lockfile/highlights.lua
+  s_a6c54248a17bfc::t_d91d3039ff2f90 1-16
+lua/plugins/lockfile-nvim/CODES/lua/lockfile/init.lua
+  s_a6c54248a17bfc::t_980c03b8b4d9d9 1-183
+lua/plugins/lockfile-nvim/CODES/lua/lockfile/model.lua
+  s_a6c54248a17bfc::t_540871528e7f2f 1-145
+lua/plugins/lockfile-nvim/CODES/lua/lockfile/native.lua
+  s_a6c54248a17bfc::t_d26f7e2fed6616 1-62
+lua/plugins/lockfile-nvim/CODES/lua/lockfile/parse.lua
+  s_a6c54248a17bfc::t_b52cf00148c781 1-42
+lua/plugins/lockfile-nvim/CODES/lua/lockfile/render.lua
+  s_a6c54248a17bfc::t_2935a70563c3ff 1-262
+lua/plugins/lockfile-nvim/CODES/lua/lockfile/ui.lua
+  s_a6c54248a17bfc::t_2d57a3645a991f 1-172
+lua/plugins/lockfile-nvim/CODES/lua/lockfile/util.lua
+  s_a6c54248a17bfc::t_c54aba7bee1324 1-78
+lua/plugins/lockfile-nvim/CODES/lua/lockfile/version.lua
+  s_a6c54248a17bfc::t_f6fa64743cbbdb 1-33
+lua/plugins/lockfile-nvim/CODES/plugin/lockfile.lua
+  s_a6c54248a17bfc::t_31a52223b0625f 1-27
+lua/plugins/lockfile-nvim/CODES/src/git.rs
+  s_a6c54248a17bfc::t_935af5fe1c85c5 1-70
+lua/plugins/lockfile-nvim/CODES/src/lib.rs
+  s_a6c54248a17bfc::t_ee1609fe9fa607 1-62
+lua/plugins/lockfile-nvim/CODES/src/model.rs
+  s_a6c54248a17bfc::t_fbf67346effd9f 1-120
+lua/plugins/lockfile-nvim/CODES/src/parse/cargo.rs
+  s_a6c54248a17bfc::t_0b099f7a549c97 1-140
+lua/plugins/lockfile-nvim/CODES/src/parse/gosum.rs
+  s_a6c54248a17bfc::t_15bf110c307c13 1-114
+lua/plugins/lockfile-nvim/CODES/src/parse/lazy.rs
+  s_a6c54248a17bfc::t_3e634a4420065a 1-82
+lua/plugins/lockfile-nvim/CODES/src/parse/mod.rs
+  s_a6c54248a17bfc::t_14467ed4b2c2c0 1-31
+lua/plugins/lockfile-nvim/CODES/src/parse/npm.rs
+  s_a6c54248a17bfc::t_abb89ed4b5a53c 1-224
+lua/plugins/lockfile-nvim/CODES/src/parse/pnpm.rs
+  s_a6c54248a17bfc::t_404963a7c88963 1-264
+lua/plugins/lockfile-nvim/CODES/src/parse/poetry.rs
+  s_a6c54248a17bfc::t_8d889f2fa013bf 1-131
+lua/plugins/lockfile-nvim/CODES/src/parse/uv.rs
+  s_a6c54248a17bfc::t_f513dad22eb36b 1-152
+lua/plugins/lockfile-nvim/CODES/src/parse/yarn.rs
+  s_a6c54248a17bfc::t_37114bdbe3f70e 1-117
+lua/plugins/lockfile-nvim/CODES/src/parse/yarn_classic.rs
+  s_a6c54248a17bfc::t_0173f8f5e6685f 1-210
+lua/plugins/lockfile-nvim/CODES/src/version.rs
+  s_a6c54248a17bfc::t_2d8c739f241be1 1-153
+lua/plugins/lockfile-nvim/CODES/tests/analyze_spec.lua
+  s_a6c54248a17bfc::t_3c96f2eeca7acf 1-114
+lua/plugins/lockfile-nvim/CODES/tests/diff_spec.lua
+  s_a6c54248a17bfc::t_6f4f48257e6195 1-82
+lua/plugins/lockfile-nvim/CODES/tests/render_spec.lua
+  s_a6c54248a17bfc::t_5d6847e558d278 1-71
+lua/plugins/lockfile-nvim/CODES/tests/run.lua
+  s_a6c54248a17bfc::t_d874d193a1fab1 1-63
+lua/plugins/lockfile-nvim/CODES/tests/version_spec.lua
+  s_a6c54248a17bfc::t_8780fb22a48f83 1-29
+lua/plugins/lockfile-nvim/stylua.toml
+  s_a6c54248a17bfc::t_7b850ccc1ec650 1-13
+lua/plugins/lockfile-nvim/cmds.lua
+  s_a6c54248a17bfc::t_a0f6385714edba 1-6
+lua/plugins/lockfile-nvim/init.lua
+  s_a6c54248a17bfc::t_dabf937cce1b8c 1-22
+lua/plugins/lockfile-nvim/opts.lua
+  s_a6c54248a17bfc::t_2ca6e9a9663ee9 1-20
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.10",
+  "base_commit_sha": "1ee9a20a7b65e641c9cd3596afd17b546f13655f",
+  "prompts": {},
+  "sessions": {
+    "s_a6c54248a17bfc": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "6741c770-dc02-4fb4-b1c9-fd8246f6a203",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
