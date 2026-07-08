@@ -7,12 +7,10 @@ local keys = {
       "n",
       "v",
     },
-    {
-      desc = "Calculate",
-      --expr = true,
-      --noremap = true,
-      silent = true,
-    },
+    desc = "Calculate",
+    --expr = true,
+    --noremap = true,
+    silent = true,
   },
 }
 

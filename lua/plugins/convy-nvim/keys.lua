@@ -7,10 +7,8 @@ local keys = {
       "n",
       "v",
     },
-    {
-      desc = "Convert (interactive selection)",
-      silent = true,
-    },
+    desc = "Convert (interactive selection)",
+    silent = true,
   },
   {
     "<leader>cd",
@@ -19,10 +17,8 @@ local keys = {
       "n",
       "v",
     },
-    {
-      desc = "Convert to decimal",
-      silent = true,
-    },
+    desc = "Convert to decimal",
+    silent = true,
   },
   {
     "<leader>cs",
@@ -30,10 +26,8 @@ local keys = {
     mode = {
       "v",
     },
-    {
-      desc = "Set conversion separator (visual selection)",
-      silent = true,
-    },
+    desc = "Set conversion separator (visual selection)",
+    silent = true,
   },
 }
 
