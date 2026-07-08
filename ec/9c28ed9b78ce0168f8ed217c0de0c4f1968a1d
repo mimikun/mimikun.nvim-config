@@ -1,0 +1,81 @@
+lua/plugins/ports-nvim/.editorconfig
+  s_a6c54248a17bfc::t_db325175ab5b44 1-14
+lua/plugins/ports-nvim/CODES/.github/workflows/ci.yml
+  s_a6c54248a17bfc::t_0ef2471cdf1323 1-44
+lua/plugins/ports-nvim/CODES/.gitignore
+  s_a6c54248a17bfc::t_d5c2e232ddeb48 1-4
+lua/plugins/ports-nvim/CODES/.luacheckrc
+  s_a6c54248a17bfc::t_ca20d9379ef68f 1-11
+lua/plugins/ports-nvim/CODES/.stylua.toml
+  s_a6c54248a17bfc::t_6ac4d030416c61 1-7
+lua/plugins/ports-nvim/CODES/LICENSE
+  s_a6c54248a17bfc::t_2b603b14e9d75b 1-21
+lua/plugins/ports-nvim/CODES/Makefile
+  s_a6c54248a17bfc::t_e98ff5d37ed835 1-24
+lua/plugins/ports-nvim/CODES/README.md
+  s_a6c54248a17bfc::t_f2b138ed2f8ca7 1-113
+lua/plugins/ports-nvim/CODES/doc/ports.txt
+  s_a6c54248a17bfc::t_c2fe10ca08a617 1-153
+lua/plugins/ports-nvim/CODES/ftplugin/ports.lua
+  s_a6c54248a17bfc::t_32ebfcd1fc0871 1-10
+lua/plugins/ports-nvim/CODES/lua/ports/browser.lua
+  s_a6c54248a17bfc::t_da92a5f40759d3 1-65
+lua/plugins/ports-nvim/CODES/lua/ports/config.lua
+  s_a6c54248a17bfc::t_e986eca4df1648 1-77
+lua/plugins/ports-nvim/CODES/lua/ports/detect.lua
+  s_a6c54248a17bfc::t_2f56f444ece137 1-172
+lua/plugins/ports-nvim/CODES/lua/ports/health.lua
+  s_a6c54248a17bfc::t_de0f01ebf86361 1-50
+lua/plugins/ports-nvim/CODES/lua/ports/init.lua
+  s_a6c54248a17bfc::t_a4ac5f98204e8f 1-124
+lua/plugins/ports-nvim/CODES/lua/ports/logs.lua
+  s_a6c54248a17bfc::t_39bfc898a237c3 1-106
+lua/plugins/ports-nvim/CODES/lua/ports/process.lua
+  s_a6c54248a17bfc::t_a8485a3b091df7 1-37
+lua/plugins/ports-nvim/CODES/lua/ports/scan.lua
+  s_a6c54248a17bfc::t_88655d37e56eef 1-332
+lua/plugins/ports-nvim/CODES/lua/ports/stale.lua
+  s_a6c54248a17bfc::t_656c7d99484f8d 1-71
+lua/plugins/ports-nvim/CODES/lua/ports/ui.lua
+  s_a6c54248a17bfc::t_8e689ef9b3dbf3 1-803
+lua/plugins/ports-nvim/CODES/lua/ports/util.lua
+  s_a6c54248a17bfc::t_1b8b0256221944 1-210
+lua/plugins/ports-nvim/CODES/plugin/ports.lua
+  s_a6c54248a17bfc::t_5bc132ba040469 1-82
+lua/plugins/ports-nvim/CODES/tests/detect_spec.lua
+  s_a6c54248a17bfc::t_794a82a77e80a2 1-66
+lua/plugins/ports-nvim/CODES/tests/minimal_init.lua
+  s_a6c54248a17bfc::t_d82c383cfb40ec 1-15
+lua/plugins/ports-nvim/CODES/tests/scan_spec.lua
+  s_a6c54248a17bfc::t_4d60fc99b72dda 1-55
+lua/plugins/ports-nvim/CODES/tests/stale_spec.lua
+  s_a6c54248a17bfc::t_da78eab36cccc4 1-44
+lua/plugins/ports-nvim/CODES/tests/util_spec.lua
+  s_a6c54248a17bfc::t_9db2d0e477bf41 1-85
+lua/plugins/ports-nvim/stylua.toml
+  s_a6c54248a17bfc::t_9054bf3b16baf2 1-13
+lua/plugins/ports-nvim/cmds.lua
+  s_a6c54248a17bfc::t_142a88b9a38dd1 1-6
+lua/plugins/ports-nvim/init.lua
+  s_a6c54248a17bfc::t_46131ab4a92f10 1-17
+lua/plugins/ports-nvim/keys.lua
+  s_a6c54248a17bfc::t_37340431a4e963 1-16
+lua/plugins/ports-nvim/opts.lua
+  s_a6c54248a17bfc::t_17d74d7ae72c8a 1-13
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.10",
+  "base_commit_sha": "ec9c28ed9b78ce0168f8ed217c0de0c4f1968a1d",
+  "prompts": {},
+  "sessions": {
+    "s_a6c54248a17bfc": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "6741c770-dc02-4fb4-b1c9-fd8246f6a203",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
