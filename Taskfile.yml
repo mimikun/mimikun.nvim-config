@@ -89,3 +89,11 @@ tasks:
     cmds:
       - "{{.TASKFILE_DIR}}/scripts/nvim-plugin-clone.sh {{.CLI_ARGS}}"
     silent: true
+
+  check-keys:
+    desc: "Lint lua/**/keys.lua for LazyKeysSpec violations (nested opts tables)"
+    aliases:
+      - ck
+    cmds:
+      - "{{.TASKFILE_DIR}}/scripts/check-keys-spec.sh"
+    silent: true
