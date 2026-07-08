@@ -1,0 +1,377 @@
+lua/plugins/camouflage-nvim/.editorconfig
+  s_a6c54248a17bfc::t_5a18020bab2851 1-14
+lua/plugins/camouflage-nvim/CODES/.busted
+  s_a6c54248a17bfc::t_bb2c04daa8f304 1-8
+lua/plugins/camouflage-nvim/CODES/.editorconfig
+  s_a6c54248a17bfc::t_19832164880af3 1-18
+lua/plugins/camouflage-nvim/CODES/.github/ISSUE_TEMPLATE/bug_report.yml
+  s_a6c54248a17bfc::t_4484b6a1ee3396 1-89
+lua/plugins/camouflage-nvim/CODES/.github/ISSUE_TEMPLATE/feature_request.yml
+  s_a6c54248a17bfc::t_d8b2c7d04dbd82 1-42
+lua/plugins/camouflage-nvim/CODES/.github/PULL_REQUEST_TEMPLATE.md
+  s_a6c54248a17bfc::t_80e78b9c422861 1-29
+lua/plugins/camouflage-nvim/CODES/.github/workflows/ci.yml
+  s_a6c54248a17bfc::t_d6e3603cca04b2 1-94
+lua/plugins/camouflage-nvim/CODES/.github/workflows/release.yml
+  s_a6c54248a17bfc::t_bb4b303f49fba3 1-20
+lua/plugins/camouflage-nvim/CODES/.gitignore
+  s_a6c54248a17bfc::t_93fe8282a4f660 1-36
+lua/plugins/camouflage-nvim/CODES/.luacheckrc
+  s_a6c54248a17bfc::t_9df0fdad1cf647 1-28
+lua/plugins/camouflage-nvim/CODES/.luarc.json
+  s_a6c54248a17bfc::t_484eab91b559f6 1-20
+lua/plugins/camouflage-nvim/CODES/.release-please-manifest.json
+  s_a6c54248a17bfc::t_8e74399356e7a3 1-3
+lua/plugins/camouflage-nvim/CODES/CHANGELOG.md
+  s_a6c54248a17bfc::t_82252f2c16e542 1-178
+lua/plugins/camouflage-nvim/CODES/CONTRIBUTING.md
+  s_a6c54248a17bfc::t_f37a05d8e3c4f7 1-100
+lua/plugins/camouflage-nvim/CODES/LICENSE
+  s_a6c54248a17bfc::t_3f82ad0b602c64 1-21
+lua/plugins/camouflage-nvim/CODES/Makefile
+  s_a6c54248a17bfc::t_395d0664995659 1-32
+lua/plugins/camouflage-nvim/CODES/README.md
+  s_a6c54248a17bfc::t_a45de6da845fad 1-400
+lua/plugins/camouflage-nvim/CODES/camouflage.nvim-scm-1.rockspec
+  s_a6c54248a17bfc::t_156a00ab4fa916 1-38
+lua/plugins/camouflage-nvim/CODES/doc/camouflage.txt
+  s_a6c54248a17bfc::t_1ee55455cd62bd 1-1753
+lua/plugins/camouflage-nvim/CODES/lua/camouflage/audit.lua
+  s_a6c54248a17bfc::t_2275dafeadce5a 1-630
+lua/plugins/camouflage-nvim/CODES/lua/camouflage/autocmds.lua
+  s_a6c54248a17bfc::t_4869bf07ac0e1b 1-263
+lua/plugins/camouflage-nvim/CODES/lua/camouflage/checks/badges.lua
+  s_a6c54248a17bfc::t_d84372bc73ccd9 1-175
+lua/plugins/camouflage-nvim/CODES/lua/camouflage/checks/expiry/base64url.lua
+  s_a6c54248a17bfc::t_0ba0f70e6d92bd 1-66
+lua/plugins/camouflage-nvim/CODES/lua/camouflage/checks/expiry/init.lua
+  s_a6c54248a17bfc::t_05356e5b5c50c8 1-270
+lua/plugins/camouflage-nvim/CODES/lua/camouflage/checks/expiry/jwt.lua
+  s_a6c54248a17bfc::t_cadaf973b13b84 1-167
+lua/plugins/camouflage-nvim/CODES/lua/camouflage/checks/init.lua
+  s_a6c54248a17bfc::t_8bc3f4809cf24e 1-56
+lua/plugins/camouflage-nvim/CODES/lua/camouflage/checks/registry.lua
+  s_a6c54248a17bfc::t_056773a9219fbe 1-535
+lua/plugins/camouflage-nvim/CODES/lua/camouflage/checks/store.lua
+  s_a6c54248a17bfc::t_475d2ae1035af1 1-123
+lua/plugins/camouflage-nvim/CODES/lua/camouflage/checks/weak_secret.lua
+  s_a6c54248a17bfc::t_429fd151a11329 1-477
+lua/plugins/camouflage-nvim/CODES/lua/camouflage/commands.lua
+  s_a6c54248a17bfc::t_d80da79479b324 1-236
+lua/plugins/camouflage-nvim/CODES/lua/camouflage/config.lua
+  s_a6c54248a17bfc::t_36aeddcf20ecfa 1-623
+lua/plugins/camouflage-nvim/CODES/lua/camouflage/core.lua
+  s_a6c54248a17bfc::t_3ddd022500a146 1-365
+lua/plugins/camouflage-nvim/CODES/lua/camouflage/hooks.lua
+  s_a6c54248a17bfc::t_9380a3f83f4998 1-277
+lua/plugins/camouflage-nvim/CODES/lua/camouflage/init.lua
+  s_a6c54248a17bfc::t_1527f42327a312 1-702
+lua/plugins/camouflage-nvim/CODES/lua/camouflage/init_command.lua
+  s_a6c54248a17bfc::t_181c61b5482903 1-128
+lua/plugins/camouflage-nvim/CODES/lua/camouflage/log.lua
+  s_a6c54248a17bfc::t_28ac1582361a24 1-154
+lua/plugins/camouflage-nvim/CODES/lua/camouflage/offsets.lua
+  s_a6c54248a17bfc::t_e660a15fd78522 1-44
+lua/plugins/camouflage-nvim/CODES/lua/camouflage/parsers/custom.lua
+  s_a6c54248a17bfc::t_e942da27c2beef 1-130
+lua/plugins/camouflage-nvim/CODES/lua/camouflage/parsers/dockerfile.lua
+  s_a6c54248a17bfc::t_a16d232051899e 1-377
+lua/plugins/camouflage-nvim/CODES/lua/camouflage/parsers/env.lua
+  s_a6c54248a17bfc::t_207f24ed08abe9 1-97
+lua/plugins/camouflage-nvim/CODES/lua/camouflage/parsers/hcl.lua
+  s_a6c54248a17bfc::t_35c1655369e9de 1-384
+lua/plugins/camouflage-nvim/CODES/lua/camouflage/parsers/http.lua
+  s_a6c54248a17bfc::t_df10eff0d4e2d9 1-93
+lua/plugins/camouflage-nvim/CODES/lua/camouflage/parsers/init.lua
+  s_a6c54248a17bfc::t_1d9b3fe5422062 1-337
+lua/plugins/camouflage-nvim/CODES/lua/camouflage/parsers/json.lua
+  s_a6c54248a17bfc::t_c00c40b1ddc787 1-454
+lua/plugins/camouflage-nvim/CODES/lua/camouflage/parsers/netrc.lua
+  s_a6c54248a17bfc::t_5963cc4c54ae1e 1-166
+lua/plugins/camouflage-nvim/CODES/lua/camouflage/parsers/properties.lua
+  s_a6c54248a17bfc::t_07bf00284b459f 1-98
+lua/plugins/camouflage-nvim/CODES/lua/camouflage/parsers/toml.lua
+  s_a6c54248a17bfc::t_6309a5c2dac091 1-191
+lua/plugins/camouflage-nvim/CODES/lua/camouflage/parsers/util.lua
+  s_a6c54248a17bfc::t_dfa76782ce255f 1-28
+lua/plugins/camouflage-nvim/CODES/lua/camouflage/parsers/xml.lua
+  s_a6c54248a17bfc::t_ac1ccb2900fcfc 1-386
+lua/plugins/camouflage-nvim/CODES/lua/camouflage/parsers/yaml.lua
+  s_a6c54248a17bfc::t_b260375ee08977 1-317
+lua/plugins/camouflage-nvim/CODES/lua/camouflage/policy.lua
+  s_a6c54248a17bfc::t_0fbf01efa85266 1-824
+lua/plugins/camouflage-nvim/CODES/lua/camouflage/position.lua
+  s_a6c54248a17bfc::t_2e0b38a6462436 1-164
+lua/plugins/camouflage-nvim/CODES/lua/camouflage/project_config.lua
+  s_a6c54248a17bfc::t_76f88a8384a38c 1-305
+lua/plugins/camouflage-nvim/CODES/lua/camouflage/project_config_watch.lua
+  s_a6c54248a17bfc::t_de4c0e851a01c9 1-399
+lua/plugins/camouflage-nvim/CODES/lua/camouflage/pwned/api.lua
+  s_a6c54248a17bfc::t_cd9a24dfdd82a8 1-86
+lua/plugins/camouflage-nvim/CODES/lua/camouflage/pwned/cache.lua
+  s_a6c54248a17bfc::t_d9e1f7fade5b67 1-43
+lua/plugins/camouflage-nvim/CODES/lua/camouflage/pwned/check.lua
+  s_a6c54248a17bfc::t_ea3cb11a4f2ba8 1-126
+lua/plugins/camouflage-nvim/CODES/lua/camouflage/pwned/hash.lua
+  s_a6c54248a17bfc::t_e04d1ed410ba2d 1-46
+lua/plugins/camouflage-nvim/CODES/lua/camouflage/pwned/init.lua
+  s_a6c54248a17bfc::t_1622b7b0b5bcc5 1-370
+lua/plugins/camouflage-nvim/CODES/lua/camouflage/pwned/sha1.lua
+  s_a6c54248a17bfc::t_f7fefc103430b8 1-98
+lua/plugins/camouflage-nvim/CODES/lua/camouflage/pwned/ui.lua
+  s_a6c54248a17bfc::t_a50c86289cfe8c 1-138
+lua/plugins/camouflage-nvim/CODES/lua/camouflage/reveal.lua
+  s_a6c54248a17bfc::t_1a29795e6d474a 1-596
+lua/plugins/camouflage-nvim/CODES/lua/camouflage/state.lua
+  s_a6c54248a17bfc::t_a3b425f80f780d 1-133
+lua/plugins/camouflage-nvim/CODES/lua/camouflage/styles.lua
+  s_a6c54248a17bfc::t_47c51d49ecd665 1-135
+lua/plugins/camouflage-nvim/CODES/lua/camouflage/templates/project_config.yaml
+  s_a6c54248a17bfc::t_3eff024f36e647 1-336
+lua/plugins/camouflage-nvim/CODES/lua/camouflage/treesitter.lua
+  s_a6c54248a17bfc::t_cf1930a0b5d9bd 1-642
+lua/plugins/camouflage-nvim/CODES/lua/camouflage/yank.lua
+  s_a6c54248a17bfc::t_c654318872ca8e 1-266
+lua/plugins/camouflage-nvim/CODES/lua/lualine/components/camouflage.lua
+  s_a6c54248a17bfc::t_23e93a3f4fd08a 1-65
+lua/plugins/camouflage-nvim/CODES/plugin/camouflage.lua
+  s_a6c54248a17bfc::t_48a2387783f056 1-17
+lua/plugins/camouflage-nvim/CODES/queries/http/camouflage.scm
+  s_a6c54248a17bfc::t_d5b7a821319ce8 1-5
+lua/plugins/camouflage-nvim/CODES/queries/json/camouflage.scm
+  s_a6c54248a17bfc::t_bd657a2d5d4ed8 1-6
+lua/plugins/camouflage-nvim/CODES/queries/toml/camouflage.scm
+  s_a6c54248a17bfc::t_f3c039847a29dd 1-12
+lua/plugins/camouflage-nvim/CODES/queries/xml/camouflage.scm
+  s_a6c54248a17bfc::t_7ae441033aa747 1-10
+lua/plugins/camouflage-nvim/CODES/queries/yaml/camouflage.scm
+  s_a6c54248a17bfc::t_205c7e5b77d51d 1-17
+lua/plugins/camouflage-nvim/CODES/release-please-config.json
+  s_a6c54248a17bfc::t_3c9cb7dc4612ff 1-21
+lua/plugins/camouflage-nvim/CODES/schemas/camouflage-project-config.schema.json
+  s_a6c54248a17bfc::t_725137d41bb8bc 1-707
+lua/plugins/camouflage-nvim/CODES/scripts/commit-msg
+  s_a6c54248a17bfc::t_25148011bc6a93 1-46
+lua/plugins/camouflage-nvim/CODES/scripts/setup-hooks.sh
+  s_a6c54248a17bfc::t_af7efafcbf3976 1-17
+lua/plugins/camouflage-nvim/CODES/stylua.toml
+  s_a6c54248a17bfc::t_970b8ebd87fc5b 1-6
+lua/plugins/camouflage-nvim/CODES/tests/camouflage/audit_spec.lua
+  s_a6c54248a17bfc::t_1798ff536d92c2 1-303
+lua/plugins/camouflage-nvim/CODES/tests/camouflage/autocmds_spec.lua
+  s_a6c54248a17bfc::t_3af9694265e65d 1-171
+lua/plugins/camouflage-nvim/CODES/tests/camouflage/checks/badges_spec.lua
+  s_a6c54248a17bfc::t_ab88848ead021b 1-163
+lua/plugins/camouflage-nvim/CODES/tests/camouflage/checks/expiry/init_spec.lua
+  s_a6c54248a17bfc::t_b8a9c77b3b4c09 1-177
+lua/plugins/camouflage-nvim/CODES/tests/camouflage/checks/expiry/jwt_spec.lua
+  s_a6c54248a17bfc::t_68ba052fb05b94 1-141
+lua/plugins/camouflage-nvim/CODES/tests/camouflage/checks/registry_spec.lua
+  s_a6c54248a17bfc::t_f75cc7ae0d738b 1-386
+lua/plugins/camouflage-nvim/CODES/tests/camouflage/checks/store_spec.lua
+  s_a6c54248a17bfc::t_d552d929fad76a 1-65
+lua/plugins/camouflage-nvim/CODES/tests/camouflage/checks/weak_secret_spec.lua
+  s_a6c54248a17bfc::t_c4b40b15adfceb 1-208
+lua/plugins/camouflage-nvim/CODES/tests/camouflage/commands_spec.lua
+  s_a6c54248a17bfc::t_5c29e25a2c5548 1-274
+lua/plugins/camouflage-nvim/CODES/tests/camouflage/config_spec.lua
+  s_a6c54248a17bfc::t_a794eb97bb12ca 1-243
+lua/plugins/camouflage-nvim/CODES/tests/camouflage/core_spec.lua
+  s_a6c54248a17bfc::t_65f681000528fe 1-508
+lua/plugins/camouflage-nvim/CODES/tests/camouflage/follow_cursor_spec.lua
+  s_a6c54248a17bfc::t_678993e56884a6 1-348
+lua/plugins/camouflage-nvim/CODES/tests/camouflage/helpers/contract.lua
+  s_a6c54248a17bfc::t_ffd91b5f044cb5 1-55
+lua/plugins/camouflage-nvim/CODES/tests/camouflage/hooks_spec.lua
+  s_a6c54248a17bfc::t_97066b62e8a85d 1-310
+lua/plugins/camouflage-nvim/CODES/tests/camouflage/init_command_spec.lua
+  s_a6c54248a17bfc::t_b1ae59407baf86 1-170
+lua/plugins/camouflage-nvim/CODES/tests/camouflage/init_spec.lua
+  s_a6c54248a17bfc::t_4fcbd4408c1ddf 1-358
+lua/plugins/camouflage-nvim/CODES/tests/camouflage/log_spec.lua
+  s_a6c54248a17bfc::t_67c24279aedd53 1-206
+lua/plugins/camouflage-nvim/CODES/tests/camouflage/mask_extmark_spec.lua
+  s_a6c54248a17bfc::t_9c4a6fe09dbbf8 1-200
+lua/plugins/camouflage-nvim/CODES/tests/camouflage/offsets_spec.lua
+  s_a6c54248a17bfc::t_d10b8c55248f23 1-19
+lua/plugins/camouflage-nvim/CODES/tests/camouflage/parsers/api_spec.lua
+  s_a6c54248a17bfc::t_fc2b6cfb00bd71 1-229
+lua/plugins/camouflage-nvim/CODES/tests/camouflage/parsers/custom_spec.lua
+  s_a6c54248a17bfc::t_725a2e8883a218 1-379
+lua/plugins/camouflage-nvim/CODES/tests/camouflage/parsers/dockerfile_spec.lua
+  s_a6c54248a17bfc::t_419e188ecb4546 1-228
+lua/plugins/camouflage-nvim/CODES/tests/camouflage/parsers/env_spec.lua
+  s_a6c54248a17bfc::t_9b6b6299dadd35 1-139
+lua/plugins/camouflage-nvim/CODES/tests/camouflage/parsers/hcl_spec.lua
+  s_a6c54248a17bfc::t_89fcae7797ad20 1-196
+lua/plugins/camouflage-nvim/CODES/tests/camouflage/parsers/http_spec.lua
+  s_a6c54248a17bfc::t_c81a585127ba3c 1-196
+lua/plugins/camouflage-nvim/CODES/tests/camouflage/parsers/init_spec.lua
+  s_a6c54248a17bfc::t_b481adbd5746c8 1-285
+lua/plugins/camouflage-nvim/CODES/tests/camouflage/parsers/json_spec.lua
+  s_a6c54248a17bfc::t_4a36f4c1d95342 1-295
+lua/plugins/camouflage-nvim/CODES/tests/camouflage/parsers/netrc_spec.lua
+  s_a6c54248a17bfc::t_d0c087ee0ec5ac 1-180
+lua/plugins/camouflage-nvim/CODES/tests/camouflage/parsers/offsets_contract_spec.lua
+  s_a6c54248a17bfc::t_4af97beee4cef9 1-77
+lua/plugins/camouflage-nvim/CODES/tests/camouflage/parsers/properties_spec.lua
+  s_a6c54248a17bfc::t_0c0067cec7cf66 1-99
+lua/plugins/camouflage-nvim/CODES/tests/camouflage/parsers/toml_spec.lua
+  s_a6c54248a17bfc::t_13864ce7ef2df2 1-137
+lua/plugins/camouflage-nvim/CODES/tests/camouflage/parsers/xml_spec.lua
+  s_a6c54248a17bfc::t_81e7775c9ac5a8 1-365
+lua/plugins/camouflage-nvim/CODES/tests/camouflage/parsers/yaml_spec.lua
+  s_a6c54248a17bfc::t_52525e262f2231 1-247
+lua/plugins/camouflage-nvim/CODES/tests/camouflage/policy_spec.lua
+  s_a6c54248a17bfc::t_d138d4e5bde720 1-292
+lua/plugins/camouflage-nvim/CODES/tests/camouflage/position_spec.lua
+  s_a6c54248a17bfc::t_b9f4ef540671bb 1-110
+lua/plugins/camouflage-nvim/CODES/tests/camouflage/project_config_spec.lua
+  s_a6c54248a17bfc::t_596b7367671aba 1-342
+lua/plugins/camouflage-nvim/CODES/tests/camouflage/project_config_watch_spec.lua
+  s_a6c54248a17bfc::t_5cef43582eeb68 1-68
+lua/plugins/camouflage-nvim/CODES/tests/camouflage/pwned/api_spec.lua
+  s_a6c54248a17bfc::t_5e2e749271b969 1-83
+lua/plugins/camouflage-nvim/CODES/tests/camouflage/pwned/cache_spec.lua
+  s_a6c54248a17bfc::t_b70d009cc8bbfb 1-66
+lua/plugins/camouflage-nvim/CODES/tests/camouflage/pwned/check_spec.lua
+  s_a6c54248a17bfc::t_fdc021477aff49 1-93
+lua/plugins/camouflage-nvim/CODES/tests/camouflage/pwned/hash_spec.lua
+  s_a6c54248a17bfc::t_8fc7f2f32ac928 1-99
+lua/plugins/camouflage-nvim/CODES/tests/camouflage/pwned/init_spec.lua
+  s_a6c54248a17bfc::t_ed6897296f5acb 1-276
+lua/plugins/camouflage-nvim/CODES/tests/camouflage/pwned/ui_spec.lua
+  s_a6c54248a17bfc::t_392c073f94c70d 1-169
+lua/plugins/camouflage-nvim/CODES/tests/camouflage/reveal_spec.lua
+  s_a6c54248a17bfc::t_0922c829b66e9f 1-390
+lua/plugins/camouflage-nvim/CODES/tests/camouflage/state_spec.lua
+  s_a6c54248a17bfc::t_c8c8f6fbf42784 1-234
+lua/plugins/camouflage-nvim/CODES/tests/camouflage/styles_spec.lua
+  s_a6c54248a17bfc::t_746575d4155a7c 1-291
+lua/plugins/camouflage-nvim/CODES/tests/camouflage/treesitter_queries_spec.lua
+  s_a6c54248a17bfc::t_4ef4a8919c404e 1-103
+lua/plugins/camouflage-nvim/CODES/tests/camouflage/treesitter_registry_spec.lua
+  s_a6c54248a17bfc::t_f5b3065aa468d3 1-25
+lua/plugins/camouflage-nvim/CODES/tests/camouflage/treesitter_spec.lua
+  s_a6c54248a17bfc::t_e9107e5dfd998a 1-370
+lua/plugins/camouflage-nvim/CODES/tests/camouflage/yank_spec.lua
+  s_a6c54248a17bfc::t_c03fa3877a7527 1-475
+lua/plugins/camouflage-nvim/CODES/tests/fixtures/.netrc
+  s_a6c54248a17bfc::t_21e18ef802b671 1-23
+lua/plugins/camouflage-nvim/CODES/tests/fixtures/Dockerfile
+  s_a6c54248a17bfc::t_932015ba6dc1bd 1-67
+lua/plugins/camouflage-nvim/CODES/tests/fixtures/config.json
+  s_a6c54248a17bfc::t_c748358ccb898d 1-18
+lua/plugins/camouflage-nvim/CODES/tests/fixtures/config.yaml
+  s_a6c54248a17bfc::t_0293176ae09ff0 1-34
+lua/plugins/camouflage-nvim/CODES/tests/fixtures/credentials
+  s_a6c54248a17bfc::t_f644e9995f3959 1-24
+lua/plugins/camouflage-nvim/CODES/tests/fixtures/heredoc.tf
+  s_a6c54248a17bfc::t_daead7a954029c 1-273
+lua/plugins/camouflage-nvim/CODES/tests/fixtures/main.tf
+  s_a6c54248a17bfc::t_22b81b61bbfeda 1-197
+lua/plugins/camouflage-nvim/CODES/tests/fixtures/my_credentials
+  s_a6c54248a17bfc::t_e83182a984cfba 1-7
+lua/plugins/camouflage-nvim/CODES/tests/fixtures/pom.xml
+  s_a6c54248a17bfc::t_ca530687b62adb 1-45
+lua/plugins/camouflage-nvim/CODES/tests/fixtures/secrets.tfvars
+  s_a6c54248a17bfc::t_3c75c32c1d5db5 1-147
+lua/plugins/camouflage-nvim/CODES/tests/fixtures/settings.xml
+  s_a6c54248a17bfc::t_26568612f1d857 1-52
+lua/plugins/camouflage-nvim/CODES/tests/fixtures/test.arrowconfig
+  s_a6c54248a17bfc::t_62211ca3344c14 1-14
+lua/plugins/camouflage-nvim/CODES/tests/fixtures/test.bracketed
+  s_a6c54248a17bfc::t_2862c8deaefc1b 1-14
+lua/plugins/camouflage-nvim/CODES/tests/fixtures/test.colonconfig
+  s_a6c54248a17bfc::t_1aff78abf54463 1-12
+lua/plugins/camouflage-nvim/CODES/tests/fixtures/test.env
+  s_a6c54248a17bfc::t_3cd94ecd5c011c 1-25
+lua/plugins/camouflage-nvim/CODES/tests/fixtures/test.http
+  s_a6c54248a17bfc::t_b7ca9a1f5ea159 1-99
+lua/plugins/camouflage-nvim/CODES/tests/fixtures/test.myconfig
+  s_a6c54248a17bfc::t_9b2e7d8d902811 1-8
+lua/plugins/camouflage-nvim/CODES/tests/fixtures/test.properties
+  s_a6c54248a17bfc::t_bbe6aeb17695c0 1-12
+lua/plugins/camouflage-nvim/CODES/tests/fixtures/test.secrets
+  s_a6c54248a17bfc::t_82a6366f656f96 1-13
+lua/plugins/camouflage-nvim/CODES/tests/fixtures/test.shellvars
+  s_a6c54248a17bfc::t_fa403f646fdaed 1-11
+lua/plugins/camouflage-nvim/CODES/tests/fixtures/test.toml
+  s_a6c54248a17bfc::t_a0f371efb7ea07 1-12
+lua/plugins/camouflage-nvim/CODES/tests/fixtures/web.xml
+  s_a6c54248a17bfc::t_e44fbc5f806c92 1-42
+lua/plugins/camouflage-nvim/CODES/tests/minimal_init.lua
+  s_a6c54248a17bfc::t_acbd8cb6a808ac 1-20
+lua/plugins/camouflage-nvim/WIKIS/API.md
+  s_a6c54248a17bfc::t_1b4dc603a925ee 1-446
+lua/plugins/camouflage-nvim/WIKIS/Architecture.md
+  s_a6c54248a17bfc::t_466defc6daafb2 1-235
+lua/plugins/camouflage-nvim/WIKIS/Buffer-Local-Config.md
+  s_a6c54248a17bfc::t_91b7e6909361fe 1-103
+lua/plugins/camouflage-nvim/WIKIS/Commands-and-Keymaps.md
+  s_a6c54248a17bfc::t_8ee0f442c6e9a7 1-150
+lua/plugins/camouflage-nvim/WIKIS/Configuration.md
+  s_a6c54248a17bfc::t_b62c47c51c4a5b 1-339
+lua/plugins/camouflage-nvim/WIKIS/Custom-Check-API.md
+  s_a6c54248a17bfc::t_9a8918fea6c525 1-177
+lua/plugins/camouflage-nvim/WIKIS/Custom-Parsers.md
+  s_a6c54248a17bfc::t_6e921c97a21c61 1-151
+lua/plugins/camouflage-nvim/WIKIS/Custom-Patterns.md
+  s_a6c54248a17bfc::t_0cee18f9fbad47 1-149
+lua/plugins/camouflage-nvim/WIKIS/Events-and-Hooks.md
+  s_a6c54248a17bfc::t_499cbec3182418 1-187
+lua/plugins/camouflage-nvim/WIKIS/Getting-Started.md
+  s_a6c54248a17bfc::t_d55257dcde62ec 1-144
+lua/plugins/camouflage-nvim/WIKIS/Have-I-Been-Pwned.md
+  s_a6c54248a17bfc::t_00a4eebdb1cc1a 1-163
+lua/plugins/camouflage-nvim/WIKIS/Home.md
+  s_a6c54248a17bfc::t_9e359307adb3cd 1-81
+lua/plugins/camouflage-nvim/WIKIS/Integrations.md
+  s_a6c54248a17bfc::t_788365a33db00d 1-125
+lua/plugins/camouflage-nvim/WIKIS/JWT-Expiry-Hints.md
+  s_a6c54248a17bfc::t_119c598cad951e 1-135
+lua/plugins/camouflage-nvim/WIKIS/Project-Config.md
+  s_a6c54248a17bfc::t_feaa131d92d34a 1-266
+lua/plugins/camouflage-nvim/WIKIS/Rule-Based-Policy.md
+  s_a6c54248a17bfc::t_d385f442fa7f44 1-151
+lua/plugins/camouflage-nvim/WIKIS/Security-Model.md
+  s_a6c54248a17bfc::t_2653e412d27715 1-67
+lua/plugins/camouflage-nvim/WIKIS/Supported-File-Formats.md
+  s_a6c54248a17bfc::t_8dd8803ad6ce89 1-174
+lua/plugins/camouflage-nvim/WIKIS/TreeSitter.md
+  s_a6c54248a17bfc::t_d25cd6405c7222 1-173
+lua/plugins/camouflage-nvim/WIKIS/Troubleshooting.md
+  s_a6c54248a17bfc::t_9cb9f9febb3971 1-267
+lua/plugins/camouflage-nvim/WIKIS/Weak-Secret-Check.md
+  s_a6c54248a17bfc::t_ae6a0c5208a799 1-154
+lua/plugins/camouflage-nvim/WIKIS/Workspace-Audit.md
+  s_a6c54248a17bfc::t_259ce3d794da3e 1-106
+lua/plugins/camouflage-nvim/WIKIS/_Sidebar.md
+  s_a6c54248a17bfc::t_3f4a7fd1345894 1-36
+lua/plugins/camouflage-nvim/stylua.toml
+  s_a6c54248a17bfc::t_0b3a28617267ca 1-13
+lua/plugins/camouflage-nvim/events.lua
+  s_a6c54248a17bfc::t_4b454a1ac85a16 1-7
+lua/plugins/camouflage-nvim/init.lua
+  s_a6c54248a17bfc::t_aba4ac1a19be4c 1-17
+lua/plugins/camouflage-nvim/keys.lua
+  s_a6c54248a17bfc::t_baa1acb2b14c1c 1-49
+lua/plugins/camouflage-nvim/opts.lua
+  s_a6c54248a17bfc::t_6ae0abcae355fd 1-18
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.10",
+  "base_commit_sha": "9d44aace3a88218c9a01540676ea99d7f3b32035",
+  "prompts": {},
+  "sessions": {
+    "s_a6c54248a17bfc": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "6741c770-dc02-4fb4-b1c9-fd8246f6a203",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
