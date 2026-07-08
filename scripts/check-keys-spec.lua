@@ -46,10 +46,7 @@ local function scan(path)
       for k, v in pairs(entry) do
         if type(k) == "number" and k >= 2 and type(v) == "table" then
           local lhs = tostring(entry[1])
-          table.insert(
-            violations,
-            string.format("entry #%d (%s): nested opts table at positional index %d", i, lhs, k)
-          )
+          table.insert(violations, string.format("entry #%d (%s): nested opts table at positional index %d", i, lhs, k))
         end
       end
     end
