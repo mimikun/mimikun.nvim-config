@@ -1,0 +1,123 @@
+lua/plugins/onoma-nvim/.editorconfig
+  s_a6c54248a17bfc::t_2d735cd95cb249 1-14
+lua/plugins/onoma-nvim/CODES/.github/CODEOWNERS
+  s_a6c54248a17bfc::t_aa0366325ee8b5 1
+lua/plugins/onoma-nvim/CODES/.github/dependabot.yml
+  s_a6c54248a17bfc::t_0ab7702909f752 1-21
+lua/plugins/onoma-nvim/CODES/.github/pull_request_template.md
+  s_a6c54248a17bfc::t_530630c6eea962 1
+lua/plugins/onoma-nvim/CODES/.github/release-drafter.yml
+  s_a6c54248a17bfc::t_d91c73561fb06e 1-43
+lua/plugins/onoma-nvim/CODES/.github/workflows/build.yml
+  s_a6c54248a17bfc::t_69dc8392acdc14 1-88
+lua/plugins/onoma-nvim/CODES/.github/workflows/nightly.yml
+  s_a6c54248a17bfc::t_3e2e979f186899 1-47
+lua/plugins/onoma-nvim/CODES/.github/workflows/release-drafter.yml
+  s_a6c54248a17bfc::t_4e68b2b0a66472 1-229
+lua/plugins/onoma-nvim/CODES/.github/workflows/spellcheck.yml
+  s_a6c54248a17bfc::t_0698b98b893fec 1-23
+lua/plugins/onoma-nvim/CODES/.github/workflows/vim-docs.yml
+  s_a6c54248a17bfc::t_96fa43d836c0a6 1-27
+lua/plugins/onoma-nvim/CODES/.gitignore
+  s_a6c54248a17bfc::t_160b51f021d0b0 1-2
+lua/plugins/onoma-nvim/CODES/.stylua.toml
+  s_a6c54248a17bfc::t_4817cf877e6f2c 1-5
+lua/plugins/onoma-nvim/CODES/LICENSE.md
+  s_a6c54248a17bfc::t_434b9df6ce81cc 1-21
+lua/plugins/onoma-nvim/CODES/README.md
+  s_a6c54248a17bfc::t_ed33c1cec0f69c 1-102
+lua/plugins/onoma-nvim/CODES/bridge/.cargo/config.toml
+  s_a6c54248a17bfc::t_29c78bc4506607 1-27
+lua/plugins/onoma-nvim/CODES/bridge/Cargo.lock
+  s_a6c54248a17bfc::t_9bec1f7d715ca4 1-2727
+lua/plugins/onoma-nvim/CODES/bridge/Cargo.toml
+  s_a6c54248a17bfc::t_575e4cbdec9d24 1-24
+lua/plugins/onoma-nvim/CODES/bridge/build.rs
+  s_a6c54248a17bfc::t_7fa8d629b6ed85 1-8
+lua/plugins/onoma-nvim/CODES/bridge/src/lib.rs
+  s_a6c54248a17bfc::t_5088ded307799c 1-54
+lua/plugins/onoma-nvim/CODES/bridge/src/logger/mod.rs
+  s_a6c54248a17bfc::t_9a054ce7395a44 1-81
+lua/plugins/onoma-nvim/CODES/bridge/src/logger/wrapper.rs
+  s_a6c54248a17bfc::t_03b73ed8a56d85 1-30
+lua/plugins/onoma-nvim/CODES/bridge/src/resolver/mod.rs
+  s_a6c54248a17bfc::t_852a10468b72f1 1-67
+lua/plugins/onoma-nvim/CODES/bridge/src/resolver/wrapper.rs
+  s_a6c54248a17bfc::t_1189ce8c69d0f0 1-250
+lua/plugins/onoma-nvim/CODES/bridge/src/watcher/mod.rs
+  s_a6c54248a17bfc::t_17e77625ad3436 1-60
+lua/plugins/onoma-nvim/CODES/bridge/src/watcher/wrapper.rs
+  s_a6c54248a17bfc::t_0024fb56fd1bac 1-56
+lua/plugins/onoma-nvim/CODES/build.lua
+  s_a6c54248a17bfc::t_a8c1843a25d3fa 1-2
+lua/plugins/onoma-nvim/CODES/doc/onoma.nvim.txt
+  s_a6c54248a17bfc::t_74dc8fc009541d 1-138
+lua/plugins/onoma-nvim/CODES/lazy.lua
+  s_a6c54248a17bfc::t_ef5d6812013a69 1-4
+lua/plugins/onoma-nvim/CODES/lua/bridge/download.lua
+  s_a6c54248a17bfc::t_7dc3fdf6600025 1-182
+lua/plugins/onoma-nvim/CODES/lua/bridge/git.lua
+  s_a6c54248a17bfc::t_d30ee4a0a4acca 1-135
+lua/plugins/onoma-nvim/CODES/lua/bridge/utils.lua
+  s_a6c54248a17bfc::t_6b102ff5fb796d 1-142
+lua/plugins/onoma-nvim/CODES/lua/config.lua
+  s_a6c54248a17bfc::t_f2a6e58683e986 1-139
+lua/plugins/onoma-nvim/CODES/lua/constant.lua
+  s_a6c54248a17bfc::t_0d7dfe40d2586f 1-6
+lua/plugins/onoma-nvim/CODES/lua/onoma.lua
+  s_a6c54248a17bfc::t_57e9854d229703 1-35
+lua/plugins/onoma-nvim/CODES/lua/providers/snacks/finder.lua
+  s_a6c54248a17bfc::t_7de6688ce4b289 1-62
+lua/plugins/onoma-nvim/CODES/lua/providers/snacks/format.lua
+  s_a6c54248a17bfc::t_1288fc80ade1fd 1-116
+lua/plugins/onoma-nvim/CODES/lua/providers/snacks/provider.lua
+  s_a6c54248a17bfc::t_213b6dfb4f8c89 1-76
+lua/plugins/onoma-nvim/CODES/lua/providers/telescope/finder.lua
+  s_a6c54248a17bfc::t_5a8c35cde336e4 1-62
+lua/plugins/onoma-nvim/CODES/lua/providers/telescope/format.lua
+  s_a6c54248a17bfc::t_80d52793f7fea3 1-127
+lua/plugins/onoma-nvim/CODES/lua/providers/telescope/provider.lua
+  s_a6c54248a17bfc::t_5b76c46e028272 1-61
+lua/plugins/onoma-nvim/CODES/lua/telescope/_extensions/onoma.lua
+  s_a6c54248a17bfc::t_64efcd05a84208 1-3
+lua/plugins/onoma-nvim/CODES/lua/utils/async.lua
+  s_a6c54248a17bfc::t_a960423b41eb02 1-138
+lua/plugins/onoma-nvim/CODES/lua/utils/buffer.lua
+  s_a6c54248a17bfc::t_2d5cc542eeb7ba 1-23
+lua/plugins/onoma-nvim/CODES/lua/utils/log.lua
+  s_a6c54248a17bfc::t_af13d36cfd4754 1-28
+lua/plugins/onoma-nvim/CODES/lua/utils/onoma.lua
+  s_a6c54248a17bfc::t_7ac85ce22caaa1 1-66
+lua/plugins/onoma-nvim/CODES/lua/utils/osc.lua
+  s_a6c54248a17bfc::t_18da2dcb2aff9a 1-31
+lua/plugins/onoma-nvim/CODES/lua/utils/types.lua
+  s_a6c54248a17bfc::t_8ef54a3f8297b6 1-123
+lua/plugins/onoma-nvim/CODES/typos.toml
+  s_a6c54248a17bfc::t_fcd2716a300f51 1-4
+lua/plugins/onoma-nvim/stylua.toml
+  s_a6c54248a17bfc::t_70287b074d3f1e 1-13
+lua/plugins/onoma-nvim/dependencies.lua
+  s_a6c54248a17bfc::t_539c1ed7c92035 1-6
+lua/plugins/onoma-nvim/init.lua
+  s_a6c54248a17bfc::t_151625703b8531 1-19
+lua/plugins/onoma-nvim/keys.lua
+  s_a6c54248a17bfc::t_d7eabf14b967c6 1-20
+lua/plugins/onoma-nvim/opts.lua
+  s_a6c54248a17bfc::t_8848ecb5ce6744 1-13
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.10",
+  "base_commit_sha": "40e397810ab8f881a815911784770465c699bc7c",
+  "prompts": {},
+  "sessions": {
+    "s_a6c54248a17bfc": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "6741c770-dc02-4fb4-b1c9-fd8246f6a203",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
