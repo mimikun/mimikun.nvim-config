@@ -1,0 +1,217 @@
+lua/plugins/openspec-nvim/.editorconfig
+  s_a6c54248a17bfc::t_06ccdbda78a213 1-14
+lua/plugins/openspec-nvim/CODES/.github/workflows/ci.yml
+  s_a6c54248a17bfc::t_b59652cffbb566 1-36
+lua/plugins/openspec-nvim/CODES/.gitignore
+  s_a6c54248a17bfc::t_0244f0e06fd965 1-17
+lua/plugins/openspec-nvim/CODES/DEVELOPMENT.md
+  s_a6c54248a17bfc::t_7e58d3bc9ad01c 1-84
+lua/plugins/openspec-nvim/CODES/LICENSE
+  s_a6c54248a17bfc::t_54e85ffd4adc79 1-21
+lua/plugins/openspec-nvim/CODES/Makefile
+  s_a6c54248a17bfc::t_2cc48da45e8884 1-30
+lua/plugins/openspec-nvim/CODES/README.md
+  s_a6c54248a17bfc::t_63b58ffb1f015a 1-306
+lua/plugins/openspec-nvim/CODES/doc/openspec.nvim.txt
+  s_a6c54248a17bfc::t_1e05416bf5abd7 1-221
+lua/plugins/openspec-nvim/CODES/lua/openspec/artifacts.lua
+  s_a6c54248a17bfc::t_b0f8f4fb997b34 1-284
+lua/plugins/openspec-nvim/CODES/lua/openspec/cli.lua
+  s_a6c54248a17bfc::t_16677033cf6648 1-117
+lua/plugins/openspec-nvim/CODES/lua/openspec/config.lua
+  s_a6c54248a17bfc::t_541212b15cd9d8 1-88
+lua/plugins/openspec-nvim/CODES/lua/openspec/context.lua
+  s_a6c54248a17bfc::t_f2cf3711d05136 1-173
+lua/plugins/openspec-nvim/CODES/lua/openspec/discovery.lua
+  s_a6c54248a17bfc::t_22151cf8d66d8e 1-130
+lua/plugins/openspec-nvim/CODES/lua/openspec/git.lua
+  s_a6c54248a17bfc::t_7ecdb8ae973955 1-51
+lua/plugins/openspec-nvim/CODES/lua/openspec/health.lua
+  s_a6c54248a17bfc::t_40b51dcc8701d6 1-465
+lua/plugins/openspec-nvim/CODES/lua/openspec/html.lua
+  s_a6c54248a17bfc::t_4a173e143ecb26 1-585
+lua/plugins/openspec-nvim/CODES/lua/openspec/implement.lua
+  s_a6c54248a17bfc::t_e978a3bd285107 1-1152
+lua/plugins/openspec-nvim/CODES/lua/openspec/init.lua
+  s_a6c54248a17bfc::t_a64eb3a58647b8 1-628
+lua/plugins/openspec-nvim/CODES/lua/openspec/registry.lua
+  s_a6c54248a17bfc::t_630173d839ef19 1-81
+lua/plugins/openspec-nvim/CODES/lua/openspec/tasks.lua
+  s_a6c54248a17bfc::t_0430ec2c3831db 1-257
+lua/plugins/openspec-nvim/CODES/lua/openspec/ui.lua
+  s_a6c54248a17bfc::t_b06d15392e0054 1-1268
+lua/plugins/openspec-nvim/CODES/lua/openspec/util.lua
+  s_a6c54248a17bfc::t_52333086da8a29 1-62
+lua/plugins/openspec-nvim/CODES/lua/openspec/worktree.lua
+  s_a6c54248a17bfc::t_15f9ef58816a2a 1-714
+lua/plugins/openspec-nvim/CODES/openspec/changes/archive/2026-05-31-extract-openspec-task-dashboard/design.md
+  s_a6c54248a17bfc::t_9e96463368def0 1-57
+lua/plugins/openspec-nvim/CODES/openspec/changes/archive/2026-05-31-extract-openspec-task-dashboard/proposal.md
+  s_a6c54248a17bfc::t_5a6cff5b7f7e6a 1-34
+lua/plugins/openspec-nvim/CODES/openspec/changes/archive/2026-05-31-extract-openspec-task-dashboard/roadmap.md
+  s_a6c54248a17bfc::t_56bccd65f23e60 1-243
+lua/plugins/openspec-nvim/CODES/openspec/changes/archive/2026-05-31-extract-openspec-task-dashboard/specs/openspec-nvim/spec.md
+  s_a6c54248a17bfc::t_fdcd1b320a76cc 1-73
+lua/plugins/openspec-nvim/CODES/openspec/changes/archive/2026-05-31-extract-openspec-task-dashboard/tasks.md
+  s_a6c54248a17bfc::t_650d401e0b752a 1-32
+lua/plugins/openspec-nvim/CODES/openspec/changes/archive/2026-06-07-enhance-openspec-workspace-cockpit/.openspec.yaml
+  s_a6c54248a17bfc::t_de57772e09b59f 1-2
+lua/plugins/openspec-nvim/CODES/openspec/changes/archive/2026-06-07-enhance-openspec-workspace-cockpit/design.md
+  s_a6c54248a17bfc::t_bcff38f2d9c174 1-118
+lua/plugins/openspec-nvim/CODES/openspec/changes/archive/2026-06-07-enhance-openspec-workspace-cockpit/proposal.md
+  s_a6c54248a17bfc::t_9f294a8ae958dc 1-57
+lua/plugins/openspec-nvim/CODES/openspec/changes/archive/2026-06-07-enhance-openspec-workspace-cockpit/specs/openspec-nvim/spec.md
+  s_a6c54248a17bfc::t_09404cc662e95a 1-90
+lua/plugins/openspec-nvim/CODES/openspec/changes/archive/2026-06-07-enhance-openspec-workspace-cockpit/tasks.md
+  s_a6c54248a17bfc::t_1ff8435cd94a0e 1-36
+lua/plugins/openspec-nvim/CODES/openspec/changes/archive/2026-06-11-redefine-agent-workflow-controller/.openspec.yaml
+  s_a6c54248a17bfc::t_9f9568134f2ba4 1-6
+lua/plugins/openspec-nvim/CODES/openspec/changes/archive/2026-06-11-redefine-agent-workflow-controller/design.md
+  s_a6c54248a17bfc::t_7336f9eb2f8133 1-77
+lua/plugins/openspec-nvim/CODES/openspec/changes/archive/2026-06-11-redefine-agent-workflow-controller/proposal.md
+  s_a6c54248a17bfc::t_4a10693e971b0b 1-44
+lua/plugins/openspec-nvim/CODES/openspec/changes/archive/2026-06-11-redefine-agent-workflow-controller/specs/openspec-nvim/spec.md
+  s_a6c54248a17bfc::t_e904fc0d11eba3 1-126
+lua/plugins/openspec-nvim/CODES/openspec/changes/archive/2026-06-11-redefine-agent-workflow-controller/tasks.md
+  s_a6c54248a17bfc::t_9813b00bf27df6 1-29
+lua/plugins/openspec-nvim/CODES/openspec/changes/archive/2026-06-12-add-openspec-implement-model-launcher/design.md
+  s_a6c54248a17bfc::t_240af19e46b7f1 1-62
+lua/plugins/openspec-nvim/CODES/openspec/changes/archive/2026-06-12-add-openspec-implement-model-launcher/proposal.md
+  s_a6c54248a17bfc::t_116d3f8637053e 1-21
+lua/plugins/openspec-nvim/CODES/openspec/changes/archive/2026-06-12-add-openspec-implement-model-launcher/specs/openspec-nvim/spec.md
+  s_a6c54248a17bfc::t_06072867ee6ea6 1-107
+lua/plugins/openspec-nvim/CODES/openspec/changes/archive/2026-06-12-add-openspec-implement-model-launcher/tasks.md
+  s_a6c54248a17bfc::t_d3b3d21a281f6f 1-32
+lua/plugins/openspec-nvim/CODES/openspec/changes/archive/2026-06-14-add-full-change-implementation-mode/design.md
+  s_a6c54248a17bfc::t_74fef6115e6c40 1-128
+lua/plugins/openspec-nvim/CODES/openspec/changes/archive/2026-06-14-add-full-change-implementation-mode/proposal.md
+  s_a6c54248a17bfc::t_59d982d7f5c624 1-49
+lua/plugins/openspec-nvim/CODES/openspec/changes/archive/2026-06-14-add-full-change-implementation-mode/specs/openspec-nvim/spec.md
+  s_a6c54248a17bfc::t_21da5e1c3f10fd 1-35
+lua/plugins/openspec-nvim/CODES/openspec/changes/archive/2026-06-14-add-full-change-implementation-mode/tasks.md
+  s_a6c54248a17bfc::t_07f37d228acd8a 1-25
+lua/plugins/openspec-nvim/CODES/openspec/changes/archive/2026-06-14-enhance-archive-search-navigation/.openspec.yaml
+  s_a6c54248a17bfc::t_9e7f66c5dc93f8 1-2
+lua/plugins/openspec-nvim/CODES/openspec/changes/archive/2026-06-14-enhance-archive-search-navigation/design.md
+  s_a6c54248a17bfc::t_c50bcfa9fc8c9f 1-120
+lua/plugins/openspec-nvim/CODES/openspec/changes/archive/2026-06-14-enhance-archive-search-navigation/proposal.md
+  s_a6c54248a17bfc::t_92602ef7393c58 1-47
+lua/plugins/openspec-nvim/CODES/openspec/changes/archive/2026-06-14-enhance-archive-search-navigation/specs/openspec-nvim/spec.md
+  s_a6c54248a17bfc::t_98f87cbe7ec8d5 1-190
+lua/plugins/openspec-nvim/CODES/openspec/changes/archive/2026-06-14-enhance-archive-search-navigation/tasks.md
+  s_a6c54248a17bfc::t_3611067cd66c7e 1-48
+lua/plugins/openspec-nvim/CODES/openspec/changes/archive/2026-06-24-add-codex-goal-handoff/design.md
+  s_a6c54248a17bfc::t_0a4c43affe4758 1-137
+lua/plugins/openspec-nvim/CODES/openspec/changes/archive/2026-06-24-add-codex-goal-handoff/proposal.md
+  s_a6c54248a17bfc::t_b46c89006318ef 1-40
+lua/plugins/openspec-nvim/CODES/openspec/changes/archive/2026-06-24-add-codex-goal-handoff/specs/openspec-nvim/spec.md
+  s_a6c54248a17bfc::t_badf8053aa27b0 1-216
+lua/plugins/openspec-nvim/CODES/openspec/changes/archive/2026-06-24-add-codex-goal-handoff/tasks.md
+  s_a6c54248a17bfc::t_b3e0e1bee5f4ca 1-52
+lua/plugins/openspec-nvim/CODES/openspec/changes/archive/2026-06-25-prevent-completed-implement-launch/.openspec.yaml
+  s_a6c54248a17bfc::t_49753603ef461d 1-2
+lua/plugins/openspec-nvim/CODES/openspec/changes/archive/2026-06-25-prevent-completed-implement-launch/design.md
+  s_a6c54248a17bfc::t_34309e8b93d82b 1-57
+lua/plugins/openspec-nvim/CODES/openspec/changes/archive/2026-06-25-prevent-completed-implement-launch/proposal.md
+  s_a6c54248a17bfc::t_5c3e387e9d0260 1-35
+lua/plugins/openspec-nvim/CODES/openspec/changes/archive/2026-06-25-prevent-completed-implement-launch/specs/openspec-nvim/spec.md
+  s_a6c54248a17bfc::t_e1446a22eebd9e 1-40
+lua/plugins/openspec-nvim/CODES/openspec/changes/archive/2026-06-25-prevent-completed-implement-launch/tasks.md
+  s_a6c54248a17bfc::t_1c57a3aea1c964 1-19
+lua/plugins/openspec-nvim/CODES/openspec/changes/archive/2026-06-29-validate-claude-launch-settings/.openspec.yaml
+  s_a6c54248a17bfc::t_a90cc4d84f8807 1-2
+lua/plugins/openspec-nvim/CODES/openspec/changes/archive/2026-06-29-validate-claude-launch-settings/proposal.md
+  s_a6c54248a17bfc::t_179f31ceb85739 1-42
+lua/plugins/openspec-nvim/CODES/openspec/changes/archive/2026-06-29-validate-claude-launch-settings/specs/openspec-nvim/spec.md
+  s_a6c54248a17bfc::t_2dd87d4d52a928 1-58
+lua/plugins/openspec-nvim/CODES/openspec/changes/archive/2026-07-04-add-implement-worktree/design.md
+  s_a6c54248a17bfc::t_8a1e8eea96aa08 1-210
+lua/plugins/openspec-nvim/CODES/openspec/changes/archive/2026-07-04-add-implement-worktree/proposal.md
+  s_a6c54248a17bfc::t_353092dd67ef32 1-77
+lua/plugins/openspec-nvim/CODES/openspec/changes/archive/2026-07-04-add-implement-worktree/specs/openspec-nvim/spec.md
+  s_a6c54248a17bfc::t_51cfae2da647e4 1-293
+lua/plugins/openspec-nvim/CODES/openspec/changes/archive/2026-07-04-add-implement-worktree/tasks.md
+  s_a6c54248a17bfc::t_891fbdd73edd7c 1-154
+lua/plugins/openspec-nvim/CODES/openspec/changes/archive/2026-07-04-fix-implement-completion-guard/.openspec.yaml
+  s_a6c54248a17bfc::t_730d6f13dc9ef5 1-2
+lua/plugins/openspec-nvim/CODES/openspec/changes/archive/2026-07-04-fix-implement-completion-guard/design.md
+  s_a6c54248a17bfc::t_ea9b1044e7f463 1-72
+lua/plugins/openspec-nvim/CODES/openspec/changes/archive/2026-07-04-fix-implement-completion-guard/proposal.md
+  s_a6c54248a17bfc::t_fe40cb7ec3d826 1-43
+lua/plugins/openspec-nvim/CODES/openspec/changes/archive/2026-07-04-fix-implement-completion-guard/specs/openspec-nvim/spec.md
+  s_a6c54248a17bfc::t_e02f8c80a1139e 1-92
+lua/plugins/openspec-nvim/CODES/openspec/changes/archive/2026-07-04-fix-implement-completion-guard/tasks.md
+  s_a6c54248a17bfc::t_f00d52f7ea4212 1-36
+lua/plugins/openspec-nvim/CODES/openspec/config.yaml
+  s_a6c54248a17bfc::t_6eb100730bb8d7 1-18
+lua/plugins/openspec-nvim/CODES/openspec/specs/openspec-nvim/spec.md
+  s_a6c54248a17bfc::t_2d343fe14f102d 1-926
+lua/plugins/openspec-nvim/CODES/plugin/openspec.lua
+  s_a6c54248a17bfc::t_a364ea7f6bbaf4 1-11
+lua/plugins/openspec-nvim/CODES/tests/archive_search_spec.lua
+  s_a6c54248a17bfc::t_5aee777cd6a524 1-233
+lua/plugins/openspec-nvim/CODES/tests/artifacts_spec.lua
+  s_a6c54248a17bfc::t_d5e711533ac262 1-109
+lua/plugins/openspec-nvim/CODES/tests/context_spec.lua
+  s_a6c54248a17bfc::t_8dd4151408f366 1-87
+lua/plugins/openspec-nvim/CODES/tests/discovery_spec.lua
+  s_a6c54248a17bfc::t_36b3ff71b16d42 1-43
+lua/plugins/openspec-nvim/CODES/tests/health_spec.lua
+  s_a6c54248a17bfc::t_f470d4740f8697 1-86
+lua/plugins/openspec-nvim/CODES/tests/html_spec.lua
+  s_a6c54248a17bfc::t_45aa28f68030e6 1-112
+lua/plugins/openspec-nvim/CODES/tests/implement_edge_cases_spec.lua
+  s_a6c54248a17bfc::t_d5905aee6495d6 1-265
+lua/plugins/openspec-nvim/CODES/tests/implement_spec.lua
+  s_a6c54248a17bfc::t_ff4ef15a71cf69 1-367
+lua/plugins/openspec-nvim/CODES/tests/init_implement_spec.lua
+  s_a6c54248a17bfc::t_4ecc35a33f1bb4 1-180
+lua/plugins/openspec-nvim/CODES/tests/minimal_init.lua
+  s_a6c54248a17bfc::t_d645dc05f1db2d 1-6
+lua/plugins/openspec-nvim/CODES/tests/parser_spec.lua
+  s_a6c54248a17bfc::t_ac04df39c07f0e 1-25
+lua/plugins/openspec-nvim/CODES/tests/redirect_spec.lua
+  s_a6c54248a17bfc::t_cdc4a267dbdab3 1-133
+lua/plugins/openspec-nvim/CODES/tests/selection_spec.lua
+  s_a6c54248a17bfc::t_76ca87a02da43c 1-41
+lua/plugins/openspec-nvim/CODES/tests/setup_custom_spec.lua
+  s_a6c54248a17bfc::t_96bc431103e605 1-16
+lua/plugins/openspec-nvim/CODES/tests/setup_no_keymaps_spec.lua
+  s_a6c54248a17bfc::t_202685f484ff35 1-11
+lua/plugins/openspec-nvim/CODES/tests/setup_spec.lua
+  s_a6c54248a17bfc::t_937e9d8c7dead3 1-32
+lua/plugins/openspec-nvim/CODES/tests/skills_spec.lua
+  s_a6c54248a17bfc::t_125f24476708e3 1-20
+lua/plugins/openspec-nvim/CODES/tests/task_status_spec.lua
+  s_a6c54248a17bfc::t_428c66c77f6d78 1-69
+lua/plugins/openspec-nvim/CODES/tests/ui_spec.lua
+  s_a6c54248a17bfc::t_35482604e442ac 1-106
+lua/plugins/openspec-nvim/CODES/tests/worktree_spec.lua
+  s_a6c54248a17bfc::t_312a9f34f36571 1-259
+lua/plugins/openspec-nvim/stylua.toml
+  s_a6c54248a17bfc::t_ace04a91063918 1-13
+lua/plugins/openspec-nvim/cmds.lua
+  s_a6c54248a17bfc::t_a18931f0ca8389 1-15
+lua/plugins/openspec-nvim/init.lua
+  s_a6c54248a17bfc::t_bc0a695c97152f 1-17
+lua/plugins/openspec-nvim/keys.lua
+  s_a6c54248a17bfc::t_ccd1c5acc9f879 1-49
+lua/plugins/openspec-nvim/opts.lua
+  s_a6c54248a17bfc::t_5f9caa80c6ea6d 1-16
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.10",
+  "base_commit_sha": "bc04272488e385e3714f4c18be16974ef2321edb",
+  "prompts": {},
+  "sessions": {
+    "s_a6c54248a17bfc": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "6741c770-dc02-4fb4-b1c9-fd8246f6a203",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
