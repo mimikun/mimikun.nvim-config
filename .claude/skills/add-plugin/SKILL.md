@@ -2,24 +2,46 @@
 name: add-plugin
 description: >
   Add new Neovim plugin(s) to this lazy.nvim config using
-  scripts/nvim-plugin-clone.sh: the script vendors the plugin source and
-  spec templates onto an add/<plugin> branch, then this skill fills in the
-  spec files and squashes the wip commits. Use when the user asks to add
-  or install a Neovim plugin, e.g. "/add-plugin https://github.com/author/plugin.nvim".
-argument-hint: "<git-url>..."
+  scripts/nvim-plugin-clone.sh. By default runs in **vendor-only** mode: it
+  vendors the plugin source and spec templates onto an add/<plugin> branch and
+  stops, leaving the spec `TODO` markers intact. Pass --fill to also complete
+  the lazy.nvim spec, verify it loads, and squash the wip commits. Use when the
+  user asks to add or install a Neovim plugin, e.g.
+  "/add-plugin https://github.com/author/plugin.nvim".
+argument-hint: "[--vendor-only | --fill] <git-url>..."
 ---
 
 # Add a Neovim Plugin
 
-Add each plugin given in `$ARGUMENTS` using the repository's vendoring script,
-then complete the lazy.nvim spec it scaffolds.
+Add each plugin given in `$ARGUMENTS` using the repository's vendoring script.
+
+By **default** this skill runs in **vendor-only** mode — it vendors the sources
+and stops, leaving the scaffolded lazy.nvim spec templates untouched (their
+`TODO` markers stay) for the user to complete later by hand. This is a thin
+wrapper around `scripts/nvim-plugin-clone.sh`. Pass `--fill` to also complete
+the spec, verify it loads, and squash the wip commits into one clean commit.
+
+## Modes
+
+- **vendor-only (default, or `--vendor-only`)** — do steps 1–2 only. Each URL
+  gets an `add/<dir-name>` branch with the vendored `CODES/` (and `WIKIS/` if a
+  wiki exists) plus spec templates whose `TODO` markers are left untouched
+  (marker commit + wip commits, **not** squashed). Then stop and report.
+- **`--fill`** — do vendor-only, then steps 3–6: fill in the spec, verify it
+  loads, squash the wip commits into one `feat:` commit, and hand off.
 
 ## 1. Parse & validate
 
-- Each argument must be a git URL. If the user gave a bare `author/repo` slug,
-  convert it to `https://github.com/author/repo.git` (the script rejects
-  scheme-less values).
-- If `$ARGUMENTS` is empty, ask the user which plugin(s) to add.
+- **Mode flag**: scan `$ARGUMENTS` for a mode flag and strip it before treating
+  the rest as URLs.
+  - `--fill` → fill mode (full workflow, steps 1–6).
+  - `--vendor-only`, or no flag → vendor-only mode (steps 1–2). **This is the
+    default.**
+  - If both flags appear, `--fill` wins.
+- Each remaining argument must be a git URL. If the user gave a bare
+  `author/repo` slug, convert it to `https://github.com/author/repo.git` (the
+  script rejects scheme-less values).
+- If no URLs remain, ask the user which plugin(s) to add.
 
 ## 2. Run the vendoring script
 
@@ -41,7 +63,16 @@ then complete the lazy.nvim spec it scaffolds.
   `SKIP:` lines to the user.
 - Vendored `CODES/`/`WIKIS/` stay in the branch; do not delete them.
 
-## 3. Fill in the spec (repeat per branch)
+**In vendor-only mode (the default), stop here.** Report the created
+`add/<dir-name>` branches and any `SKIP:` lines, and note that each spec still
+contains `TODO` markers — the user can finish later by editing the spec files
+by hand, or by re-running with `--fill`. Do **not** switch branches, edit spec
+files, load-test, or squash in this mode. (As always, ask before pushing or
+opening PRs.)
+
+**The remaining steps (3–6) run only in `--fill` mode.**
+
+## 3. Fill in the spec (`--fill` mode; repeat per branch)
 
 `git switch add/<dir-name>`, then research the plugin **from the vendored
 sources** — `CODES/README.md`, `CODES/doc/*.txt`, `WIKIS/` — to find:
@@ -76,14 +107,14 @@ plugin such as `lua/plugins/convy-nvim/` as the finished-state reference:
   `dependencies.lua`) and keep their `init.lua` lines commented — merged
   plugins only keep the files they require.
 
-## 4. Verify
+## 4. Verify (`--fill` mode)
 
 - `stylua --check lua/plugins/<dir-name>/*.lua` — fix any issues
   (do not run stylua over `CODES/`).
 - `nvim --headless "+Lazy! install <repo>" "+Lazy! load <repo>" +qa` — must
   load without errors. Debug and fix before reporting done.
 
-## 5. Squash the wip commits
+## 5. Squash the wip commits (`--fill` mode)
 
 `git rebase -i` is not available here; squash non-interactively into the
 empty marker commit (`<base>` is the branch the script ran from, usually
@@ -99,7 +130,7 @@ git commit --amend -n --no-edit
 The branch must end up as a single `feat: add <owner>/<repo>` commit on top
 of the base branch. Verify with `git log --oneline master..HEAD`.
 
-## 6. Hand off
+## 6. Hand off (`--fill` mode)
 
 - Return to the base branch (`git switch <base>`).
 - Report the created branches. Ask the user before pushing or opening PRs
