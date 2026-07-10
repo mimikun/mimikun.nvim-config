@@ -1,0 +1,305 @@
+*skkelua.txt*	Neovim 用 SKK 日本語入力環境 (pure Lua)
+
+License: zlib license
+
+==============================================================================
+CONTENTS                                                    *skkelua-contents*
+
+INTRODUCTION                                            |skkelua-introduction|
+INSTALL                                                      |skkelua-install|
+INTERFACE                                                  |skkelua-interface|
+  MAPPINGS                                                  |skkelua-mappings|
+  LUA API                                                    |skkelua-lua-api|
+  AUTOCMDS                                                  |skkelua-autocmds|
+OPTIONS                                                      |skkelua-options|
+COMPLETION                                                |skkelua-completion|
+INDICATOR                                                  |skkelua-indicator|
+SOURCES                                                      |skkelua-sources|
+KANATABLE                                                  |skkelua-kanatable|
+DIFFERENCES                                              |skkelua-differences|
+
+==============================================================================
+INTRODUCTION                                            *skkelua-introduction*
+
+skkelua は SKK 日本語入力環境を Neovim 上に提供するプラグインです。
+skkeleton (https://github.com/vim-skk/skkeleton) を参考に pure Lua で
+実装されており、Deno や denops.vim を必要とせず Neovim 0.10+ 単体で動作します。
+モードインジケータ (|skkelua-indicator|) を内蔵しています。
+
+Note: skkeleton とは独立したプラグインであり、skkeleton#* 関数や
+g:skkeleton#* 変数などの API 互換はありません。
+
+==============================================================================
+INSTALL                                                      *skkelua-install*
+
+Neovim 0.10 以降が必要です。プラグインマネージャで導入した後、
+辞書とトグルキーを設定してください。
+>lua
+	require("skkelua").config({
+		globalDictionaries = { "~/.skk/SKK-JISYO.L" },
+	})
+	vim.keymap.set({ "i", "c" }, "<C-j>", "<Plug>(skkelua-toggle)")
+<
+==============================================================================
+INTERFACE                                                  *skkelua-interface*
+
+------------------------------------------------------------------------------
+MAPPINGS                                                    *skkelua-mappings*
+
+<Plug>(skkelua-enable)                                *<Plug>(skkelua-enable)*
+	skkelua を有効化します。insert/cmdline/terminal モードで使えます。
+
+<Plug>(skkelua-disable)                              *<Plug>(skkelua-disable)*
+	skkelua を無効化します。
+
+<Plug>(skkelua-toggle)                                *<Plug>(skkelua-toggle)*
+	skkelua の有効・無効を切り替えます。
+
+------------------------------------------------------------------------------
+LUA API                                                      *skkelua-lua-api*
+
+require("skkelua").config({opts})                           *skkelua.config()*
+	設定を反映します。指定できるキーは |skkelua-options| を参照。
+
+require("skkelua").setup({opts})                             *skkelua.setup()*
+	config() のエイリアスです。
+
+require("skkelua").is_enabled()                         *skkelua.is_enabled()*
+	skkelua が有効かどうかを返します。
+
+require("skkelua").mode()                                     *skkelua.mode()*
+	現在の入力モードを返します。無効時は "" を返します。
+	値: "hira" / "kata" / "hankata" / "zenkaku" / "abbrev" / ""
+
+require("skkelua").phase()                                   *skkelua.phase()*
+	直近のキー処理後のフェーズを返します。
+	値: "input" / "input:okurinasi" / "input:okuriari" / "henkan" /
+	"escape" / ""
+	変換中かどうかでキーの挙動を変えたい場合に使えます:
+>lua
+	vim.keymap.set("i", "<C-y>", function()
+		local phase = require("skkelua").phase()
+		if vim.tbl_contains(
+			{ "input:okurinasi", "input:okuriari", "henkan" }, phase)
+		then
+			require("skkelua").handle("handleKey", { ["function"] = "kakutei" })
+			return ""
+		end
+		return "<C-y>"
+	end, { expr = true })
+<
+require("skkelua").register_keymap({state}, {key}, {func_name})
+                                                   *skkelua.register_keymap()*
+	入力ステート ("input" | "henkan") のキーマップを登録します。
+	{func_name} に空文字などの falsy な値を渡すと削除します。
+>lua
+	require("skkelua").register_keymap("henkan", "<BS>", "henkanBackward")
+<
+require("skkelua").register_kanatable({name}, {table}, {create})
+                                                *skkelua.register_kanatable()*
+	かな入力テーブルを登録・編集します。|skkelua-kanatable| 参照。
+
+require("skkelua").register_kanatable_file({name}, {path}, {encoding}, {create})
+                                           *skkelua.register_kanatable_file()*
+	"from,to" 形式のかなテーブルファイルを読み込みます。
+
+require("skkelua").initialize()                         *skkelua.initialize()*
+	初期化 (辞書ロード含む) を行います。呼ばなくても初回の有効化時に
+	自動で初期化されますが、起動後に呼んでおくと初回有効化が速くなります。
+
+require("skkelua").handle({func}, {opts})                   *skkelua.handle()*
+	低レベルなハンドラ呼び出しです。{func} は "enable" / "disable" /
+	"toggle" / "handleKey"。{opts} には key (文字列または配列)、
+	function (機能関数名)、expr (真ならキー列を返す) を渡せます。
+
+require("skkelua").get_default_mapped_keys()
+                                          *skkelua.get_default_mapped_keys()*
+	デフォルトでマップされるキーのリストを返します。
+	|skkelua-options| の mappedKeys を組み立てる時に使えます。
+
+補完プラグイン連携用 API ~
+                                                  *skkelua-completion-api*
+require("skkelua").get_pre_edit()
+	現在のプリエディット文字列を返します。
+require("skkelua").get_pre_edit_length()
+	プリエディットの文字数を返します。
+require("skkelua").get_prefix()
+	現在の変換入力 (かな) を返します。
+require("skkelua").get_candidates({kana}, {type})
+	見出しの変換候補を返します。
+require("skkelua").get_completion_result()
+	現在の入力に対する補完候補 ([かな, 候補リスト] の配列) を返します。
+require("skkelua").get_ranks()
+	ユーザー辞書由来の候補ランク ([候補, ランク] の配列) を返します。
+require("skkelua").complete_callback({midasi}, {word}, {type})
+	補完で確定した結果をユーザー辞書に登録します。
+
+==============================================================================
+COMPLETION                                                *skkelua-completion*
+
+変換入力中 (▽かんじ) の候補を Neovim 組み込みの補完メニューへ自動表示します。
+in-process の LSP サーバー (|vim.lsp.start()| の cmd 関数) として実装されて
+おり、外部プロセスは起動しません。
+>lua
+	require("skkelua").config({
+		completion = { enabled = true },
+	})
+<
+オプション:
+- enabled (false): 補完機能そのものの有効・無効
+- insertOnSelect (false): 候補の選択 (CTRL-N/CTRL-P でのフォーカス) と
+  同時に pre-edit を候補で置き換えます。選択を外す・CTRL-E で中止すると
+  元の pre-edit に戻ります。有効化中は buffer-local の 'completeopt' から
+  noinsert が外され noselect が足されます (無効化時に復元)
+- deferOkuri (false): 送り仮名の確定 (OkuRu など) で ▼ へ自動変換せず、
+  ▽おく*る のまま補完メニューの第一候補を自動選択・挿入します。
+  CTRL-P で選択を外すと変換前のひらがなに戻ります。
+  insertOnSelect と併用してください
+
+動作:
+- skkelua の有効化時にカレントバッファへ attach し、無効化で外れます
+- ▽ に続くかなの入力 (ひらがながトリガー文字) で自動的に補完が要求され、
+  見出しを前方一致検索した変換候補が表示されます
+- 送りあり変換の入力中 (▽おく*r) は、送りのローマ字からありうる送り仮名を
+  展開した完成形 (送り/送る/送れ...) が候補になります
+- 候補選択中 (▼送る) は引いてある全候補が並び、pum から選び直せます
+- 候補は |v:completed_item| 確定時 (CTRL-Y など) に pre-edit ごと置換され、
+  ユーザー辞書へ登録されます (以後の候補順に反映されます)
+- 候補の並びは変換と同じ辞書順 (ユーザー辞書 -> グローバル辞書のマージ順)
+  です
+- 候補の末尾には常に [辞書登録] 項目が並びます。確定すると辞書登録
+  プロンプトが開き、入力した単語がその読みでユーザー辞書へ登録されて
+  pre-edit を置き換えます。辞書に無い読みでも [辞書登録] だけの
+  補完メニューが開くため、変換キーを使わない運用でも単語登録できます
+  (送りあり入力では送り仮名が確定するまで表示されません)
+
+Note: 表示中の補完メニューの操作 (CTRL-N/CTRL-P/CTRL-Y) は Neovim 標準の
+ins-completion です。mappedKeys やバッファローカルマップで同じキーを
+skkelua に割り当てている場合は、|pumvisible()| で分岐してください。
+
+Note: |vim.lsp.completion.enable()| は最初にバッファの補完状態を作った
+呼び出しの opts で動作が固定されます。skkelua が有効なバッファに対して
+他の設定・プラグインが opts 無しで enable(true) を呼ぶと、skkelua の
+autotrigger が失われて候補が自動表示されなくなります。
+
+==============================================================================
+INDICATOR                                                  *skkelua-indicator*
+
+カーソル付近に現在の入力モードをフローティングウィンドウで表示します。
+insert モードに入ると表示され、モード変更に追従します。
+
+config() の indicator キーで設定します (括弧内はデフォルト値):
+>lua
+	require("skkelua").config({
+		indicator = {
+			enabled = true,        -- インジケータ自体の有効・無効
+			alwaysShown = true,    -- false なら skkelua 有効時のみ表示
+			fadeOutMs = 3000,      -- 表示後に閉じるまでの時間 (0 で無効)
+			eijiText = "英字",     -- モード別の表示テキスト
+			hiraText = "ひら",
+			kataText = "カタ",
+			hankataText = "半ｶﾀ",
+			zenkakuText = "全英",
+			abbrevText = "abbr",
+			border = nil,          -- nvim_open_win の border
+			                       -- (nil なら枠なし。'winborder' は適用しない)
+			row = nil,             -- nil なら border に応じて自動
+			col = 1,
+			zindex = nil,
+			ignoreFt = {},         -- 表示しない filetype
+			bufFilter = nil,       -- fun(buf): boolean で表示対象を絞る
+			useDefaultHighlight = true,
+		},
+	})
+<
+border を設定すると見た目が変わります:
+
+	border なし (デフォルト)
+		テキストの背景をモード色で塗り潰します。
+	border あり ("single" / "rounded" など。"none" / "shadow" を除く)
+		塗り潰しをやめ、枠線とテキストの文字色 (fg) をモード色に
+		します。背景はエディタと同化します。
+
+ハイライトグループ ~
+	SkkeluaIndicatorEiji / SkkeluaIndicatorHira / SkkeluaIndicatorKata /
+	SkkeluaIndicatorHankata / SkkeluaIndicatorZenkaku /
+	SkkeluaIndicatorAbbrev
+	塗り潰しデザイン (border なし) 用。カラースキームで定義されて
+	いればそれを使い、無ければ組み込みの配色を設定します。
+
+	SkkeluaIndicatorEijiBorder / SkkeluaIndicatorHiraBorder / ... /
+	SkkeluaIndicatorAbbrevBorder
+	border ありデザイン用 (枠線とテキストの文字色)。未定義なら
+	塗り潰し用グループの bg を fg に流用した定義を設定します。
+
+このインジケータは skkeleton_indicator.nvim
+(https://github.com/delphinus/skkeleton_indicator.nvim) を基に
+内蔵化したものです。
+
+==============================================================================
+SOURCES                                                      *skkelua-sources*
+
+sources オプションに指定できる辞書ソース:
+
+skk_dictionary
+	globalDictionaries で指定した SKK 形式辞書 (テキスト/JSON/msgpack)。
+user_dictionary
+	ユーザー辞書のみを使います。
+skk_server
+	skkserv に接続します (同期 TCP、タイムアウト 1 秒)。
+google_japanese_input
+	Google 日本語入力 API を使います。curl が必要です。
+
+==============================================================================
+KANATABLE                                                  *skkelua-kanatable*
+
+register_kanatable() でかな入力ルールを編集できます。
+>lua
+	require("skkelua").register_kanatable("rom", {
+		["jj"] = "escape",           -- 機能名
+		["z,"] = { "―", "" },        -- {確定文字列, 残りフィード}
+		["xn"] = false,              -- 削除
+	})
+<
+指定できる機能名: kakutei, newline, cancel, deletePreEdit, purgeCandidate,
+disable, escape, henkanFirst, henkanForward, henkanBackward, henkanInput,
+registerWord, suffix, kakuteiFeed, henkanPoint, deleteChar, prefix, abbrev,
+hirakana, katakana, hankatakana, zenkaku
+
+- deletePreEdit: 変換中の入力 (pre-edit) をマーカーごと全て削除します。
+  補完メニューの選択挿入中は挿入された候補ごと削除します。
+  変換中でなければキー本来の動作 (単語削除など) に任せます。
+  デフォルトで <C-w> に割り当てられています
+- registerWord: 変換候補を経由せず辞書登録プロンプトを開きます
+  (補完メニューの [辞書登録] 項目と同じ動作)
+
+変換キーの変更例 ~
+	Space を変換に使わず、通常の空白として入力させる:
+>lua
+	require("skkelua").register_kanatable("rom", {
+		[" "] = { " ", "" },
+	})
+	-- 代わりに <C-n> で変換を開始・送りする
+	require("skkelua").register_keymap("input", "<C-n>", "henkanFirst")
+	require("skkelua").register_keymap("henkan", "<C-n>", "henkanForward")
+<
+==============================================================================
+DIFFERENCES                                              *skkelua-differences*
+
+skkeleton (denops 版) との違い:
+
+- 独立したプラグインであり API 互換はありません
+  (skkeleton#* 関数、g:skkeleton#* 変数、User skkeleton-* autocmd、
+  <Plug>(skkeleton-*) は提供しません)。
+- Neovim 0.10+ 専用です (Vim では動作しません)。
+- モードインジケータを内蔵しています (|skkelua-indicator|)。
+- ユーザー辞書のデフォルトは stdpath("data")/skkelua/jisyo です。
+- 辞書ロードは同期です。SKK-JISYO.L 規模で数百 ms かかるため、
+  気になる場合は起動後に initialize() を呼んで事前ロードしてください。
+- YAML 辞書、Deno KV データベース (updateDatabase) は非対応です。
+- ddc.vim 用ソースは同梱しません。|skkelua-completion-api| を使って
+  補完ソースを実装できます。
+- skkserv への問い合わせは同期実行で、応答が無い場合 1 秒でタイムアウト
+  します。
+
+vim:tw=78:ts=8:noet:ft=help:norl:
