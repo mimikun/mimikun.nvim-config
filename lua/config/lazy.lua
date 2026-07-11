@@ -1,3 +1,5 @@
+local host = require("config.host")
+
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not (vim.uv or vim.loop).fs_stat(lazypath) then
   local lazyrepo = "https://github.com/folke/lazy.nvim.git"
@@ -16,6 +18,10 @@ vim.opt.rtp:prepend(lazypath)
 
 vim.g.maplocalleader = "\\"
 
+-- host azusa runs more tasks in parallel; others fall back to the default
+local concurrency = host.is("azusa") and 4
+  or (jit.os:find("Windows") and (vim.uv.available_parallelism() * 2) or nil)
+
 require("lazy").setup({
   root = vim.fn.stdpath("data") .. "/lazy",
   defaults = {
@@ -28,7 +34,7 @@ require("lazy").setup({
   },
   lockfile = vim.fn.stdpath("config") .. "/lazy-lock.json",
   ---@type number? limit the maximum amount of concurrent tasks
-  concurrency = jit.os:find("Windows") and (vim.uv.available_parallelism() * 2) or nil,
+  concurrency = concurrency,
   git = {
     -- rate of network related git operations (clone, fetch, checkout)
     throttle = {
