@@ -1,3 +1,6 @@
+-- denops is gated on host/OS; see lua/config/denops.lua for the allowlist.
+local denops_enabled = require("config.denops")
+
 ---@type LazySpec
 local spec = {
   "vim-denops/denops.vim",
@@ -137,8 +140,8 @@ local spec = {
     -- Default: 30000
     vim.g["denops#plugin#wait_timeout"] = 30000
   end,
-  --cond = false,
-  --enabled = false,
+  cond = denops_enabled,
+  enabled = denops_enabled,
 }
 
 return spec

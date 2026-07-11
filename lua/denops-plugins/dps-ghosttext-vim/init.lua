@@ -1,3 +1,6 @@
+-- denops is gated on host/OS; see lua/config/denops.lua for the allowlist.
+local denops_enabled = require("config.denops")
+
 ---@type LazySpec
 local spec = {
   "gamoutatsumi/dps-ghosttext.vim",
@@ -19,8 +22,8 @@ local spec = {
     vim.g["dps_ghosttext#disable_defaultmap"] = 0
     vim.g["dps_ghosttext#enable_autostart"] = 0
   end,
-  cond = false,
-  enabled = false,
+  cond = denops_enabled,
+  enabled = denops_enabled,
 }
 
 return spec

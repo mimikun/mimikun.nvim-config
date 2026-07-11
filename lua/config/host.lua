@@ -9,6 +9,24 @@ local M = {}
 ---@type string
 M.name = vim.uv.os_gethostname():lower()
 
+-- Lower-cased OS name, resolved once and cached for the session.
+-- e.g. "linux", "darwin", "windows_nt".
+---@type string
+M.os = vim.uv.os_uname().sysname:lower()
+
+--- Return true when the current OS matches `name` (case-insensitive).
+---
+--- @param name string OS name to compare against, e.g. "linux", "darwin".
+--- @return boolean
+---
+--- Example:
+---   if require("config.host").is_os("linux") then
+---     -- Linux-only branch
+---   end
+function M.is_os(name)
+  return M.os == name:lower()
+end
+
 --- Return true when the current host matches `name` (case-insensitive).
 ---
 --- @param name string Hostname to compare against, e.g. "azusa".
