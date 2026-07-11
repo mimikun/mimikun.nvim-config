@@ -14,8 +14,8 @@ local spec = {
     local opts = require("plugins.onoma-nvim.opts")
     require("onoma").setup(opts)
   end,
-  --cond = false,
-  --enabled = false,
+  cond = false,
+  enabled = false,
 }
 
 return spec
