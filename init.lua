@@ -41,13 +41,22 @@ local wl_clipboard = {
   cache_enabled = 0,
 }
 
--- On host "azusa", leave vim.g.clipboard unset (nil) so Neovim auto-detects
--- the clipboard provider; otherwise use the wl-clipboard provider defined above.
-local host = require("config.host")
-if host.is("azusa") then
-  vim.g.clipboard = nil
-else
+-- Select the clipboard provider from the actual display environment instead of
+-- the hostname, so every machine (pure X11, pure Wayland, WSLg, macOS, Windows)
+-- behaves correctly without a per-host allowlist.
+--
+-- Force the wl-clipboard provider only when a Wayland display is actually
+-- reachable AND wl-copy is installed. This is the WSLg case, where both DISPLAY
+-- and WAYLAND_DISPLAY are set and letting Neovim auto-detect would pick xsel and
+-- error on startup. Everywhere else leave it nil so Neovim auto-detects the
+-- native provider (xsel/xclip, pbcopy, win32yank, ...); this avoids blocking on
+-- wl-copy's background daemon, which is what freezes startup when the Wayland
+-- tools are pointed at a machine that has no Wayland server.
+local wayland_display = vim.env.WAYLAND_DISPLAY
+if wayland_display and wayland_display ~= "" and vim.fn.executable("wl-copy") == 1 then
   vim.g.clipboard = wl_clipboard
+else
+  vim.g.clipboard = nil
 end
 vim.opt.clipboard = "unnamedplus"
 vim.g.mapleader = " "
