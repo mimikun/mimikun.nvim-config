@@ -27,7 +27,8 @@ vim.g.loaded_perl_provider = 0
 vim.g.loaded_python3_provider = 0
 vim.g.loaded_ruby_provider = 0
 vim.g.loaded_node_provider = 0
-vim.g.clipboard = {
+
+local wl_clipboard = {
   name = "wl-clipboard",
   copy = {
     ["+"] = "wl-copy",
@@ -39,6 +40,15 @@ vim.g.clipboard = {
   },
   cache_enabled = 0,
 }
+
+-- On host "azusa", leave vim.g.clipboard unset (nil) so Neovim auto-detects
+-- the clipboard provider; otherwise use the wl-clipboard provider defined above.
+local host = require("config.host")
+if host.is("azusa") then
+  vim.g.clipboard = nil
+else
+  vim.g.clipboard = wl_clipboard
+end
 vim.opt.clipboard = "unnamedplus"
 vim.g.mapleader = " "
 
