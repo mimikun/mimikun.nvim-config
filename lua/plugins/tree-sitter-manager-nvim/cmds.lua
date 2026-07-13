@@ -4,6 +4,7 @@ local cmds = {
   "TSInstall",
   "TSUninstall",
   "TSUpdate",
+  "TSUpdateAll",
 }
 
 return cmds
