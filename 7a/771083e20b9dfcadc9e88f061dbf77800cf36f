@@ -1,0 +1,21 @@
+lua/plugins/tree-sitter-manager-nvim/init.lua
+  s_32e6df09894afe::t_987166e711fb97 11-17
+lua/plugins/tree-sitter-manager-nvim/cmds.lua
+  s_32e6df09894afe::t_27637181f2f7ad 7
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.12",
+  "base_commit_sha": "7a771083e20b9dfcadc9e88f061dbf77800cf36f",
+  "prompts": {},
+  "sessions": {
+    "s_32e6df09894afe": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "b70fc24f-3144-4306-9a59-55b167e01aa8",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
