@@ -1,0 +1,100 @@
+---@diagnostic disable-next-line: deprecated
+local uv = vim.uv or vim.loop
+local fzf = require("fzf-lua")
+
+---@type fzf-lua.Config|{}
+return {
+  desc     = "hide interface instead of abort",
+  keymap   = {
+    builtin = {
+      true,
+      -- NOTE: we use a custom <Esc> callback that also sends esc to fzf
+      -- so we can store the last query on the execute-silent callback
+      -- ["<Esc>"] = "hide",
+      ["<M-Esc>"] = "abort"
+    }
+  },
+  defaults = {
+    enrich = function(opts)
+      -- Do not hide if resume is disabled (#2425)
+      if opts.no_resume or opts.no_hide then return opts end
+      if opts._is_fzf_tmux then
+        fzf.utils.warn("'hide' profile cannot work with tmux, ignoring.")
+        return opts
+      end
+      opts.actions = opts.actions or {}
+      ---@diagnostic disable-next-line: unnecessary-assert
+      assert(opts.keymap)
+      assert(opts.keymap.builtin)
+      if fzf.utils.has(opts, "sk") and not fzf.utils.has(opts, "sk", { 1, 5, 3 }) then
+        -- `execute-silent` actions are bugged with skim
+        -- Set esc to hide since we aren't using the custom callback
+        opts.actions["esc"] = false
+        opts.keymap.builtin["<Esc>"] = "hide"
+        return opts
+      end
+      local histfile = opts.fzf_opts and opts.fzf_opts["--history"]
+      opts.winopts = opts.winopts or {}
+      local _on_create = opts.winopts.on_create
+      opts.winopts.on_create = function(e)
+        -- While we can use `keymap.builtin.<esc>` (to hide) this is better
+        -- as it captures the query when execute-silent action is called as
+        -- we add "{q}" as the first field index similar to `--print-query`
+        vim.keymap.set({ "t", "n" }, "<Esc>", function()
+          -- We hide the window first which happens instantly
+          -- and then send <Esc> directly to the term channel
+          fzf.hide()
+          vim.api.nvim_chan_send(vim.bo[e.bufnr].channel, "\027")
+        end, { buffer = e.bufnr, nowait = true })
+        -- Call the users' on_create?
+        if type(_on_create) == "function" then
+          _on_create(e)
+        end
+      end
+      ---@diagnostic disable: assign-type-mismatch
+      opts.actions["esc"] = {
+        fn = fzf.actions.dummy_abort,
+        desc = "hide",
+        -- NOTE: we add this so esc action isn't converted in the
+        -- `tbl_map` below preventing fzf history append on esc
+        -- exec_silent = true,
+      }
+      for k, act in pairs(opts.actions) do
+        act = type(act) == "function" and { fn = act } or act
+        act = type(act) == "table" and type(act[1]) == "function"
+            and { fn = act[1], reuse = true } or act
+        assert(type(act) == "table" and type(act.fn) == "function" or not act)
+        ---@cast act table
+        if type(act) == "table" and
+            not act.exec_silent
+            and not act.reload
+            and not act.noclose
+            and not act.reuse
+            -- ignore `false` actions (#2407)
+            and not k:match("^_")
+        then
+          local fn = act.fn
+          act.exec_silent = true
+          act.desc = act.desc or fzf.config.get_action_helpstr(act)
+          act.fn = function(...)
+            fzf.hide()
+            if fn then fn(...) end
+            -- As the process never terminates fzf history is never written
+            -- manually append to the fzf history file if needed
+            local q = FzfLua.get_last_query()
+            if histfile and type(q) == "string" and #q > 0 then
+              local fd = uv.fs_open(histfile, "a", -1)
+              if fd then
+                uv.fs_write(fd, q .. "\n", nil, function(_)
+                  uv.fs_close(fd)
+                end)
+              end
+            end
+          end
+        end
+        opts.actions[k] = act
+      end
+      return opts
+    end,
+  },
+}

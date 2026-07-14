@@ -1,0 +1,794 @@
+---@diagnostic disable-next-line: deprecated
+local uv = vim.uv or vim.loop
+local utils = require "fzf-lua.utils"
+local libuv = require "fzf-lua.libuv"
+local string_sub = string.sub
+local string_byte = string.byte
+
+local M = {}
+
+M.dot_byte = string_byte(".")
+M.colon_byte = string_byte(":")
+M.fslash_byte = string_byte("/")
+M.bslash_byte = string_byte([[\]])
+
+---@param path string?
+---@return string
+M.separator = function(path)
+  -- auto-detect separator from fully qualified paths, e.g. "C:\..." or "~/..."
+  if utils.__IS_WINDOWS and path then
+    local maybe_separators = { string_byte(path, 3), string_byte(path, 2) }
+    for _, s in ipairs(maybe_separators) do
+      if M.byte_is_separator(s) then
+        return string.char(s)
+      end
+    end
+  end
+  return string.char(utils._if_win(M.bslash_byte, M.fslash_byte))
+end
+
+M.separator_byte = function(path)
+  return string_byte(M.separator(path), 1)
+end
+
+---@param byte number
+---@return boolean
+M.byte_is_separator = function(byte)
+  if utils.__IS_WINDOWS then
+    -- path on windows can also be the result of `vim.fs.normalize`
+    -- so we need to test for the presence of both slash types
+    return byte == M.bslash_byte or byte == M.fslash_byte
+  else
+    return byte == M.fslash_byte
+  end
+end
+
+M.is_separator = function(c)
+  return M.byte_is_separator(string_byte(c, 1))
+end
+
+---@param path string
+---@return boolean
+M.ends_with_separator = function(path)
+  return M.byte_is_separator(string_byte(path, #path))
+end
+
+---@param path string
+---@return string
+function M.add_trailing(path)
+  if M.ends_with_separator(path) then
+    return path
+  end
+  return path .. M.separator(path)
+end
+
+---@param path string
+---@return string
+function M.remove_trailing(path)
+  while M.ends_with_separator(path) do
+    path = path:sub(1, #path - 1)
+  end
+  return path
+end
+
+---@param path string
+---@return boolean
+M.is_absolute = function(path)
+  return utils._if_win(
+    string_byte(path, 2) == M.colon_byte,
+    string_byte(path, 1) == M.fslash_byte)
+end
+
+---@param path string
+---@return boolean
+M.has_cwd_prefix = function(path)
+  return #path > 1
+      and string_byte(path, 1) == M.dot_byte
+      and M.byte_is_separator(string_byte(path, 2))
+end
+
+---@param path string
+---@return string
+M.strip_cwd_prefix = function(path)
+  if M.has_cwd_prefix(path) then
+    return #path > 2 and path:sub(3) or ""
+  else
+    return path
+  end
+end
+
+---@param path string
+---@return string
+M.render_crlf = function(path)
+  return (path:gsub("\n", "␊"):gsub("\r", "␍"))
+end
+
+---Get the basename|tail of the given path.
+---@param path string
+---@return string
+function M.tail(path)
+  local end_idx = M.ends_with_separator(path) and #path - 1 or #path
+  for i = end_idx, 1, -1 do
+    if M.byte_is_separator(string_byte(path, i)) then
+      return path:sub(i + 1)
+    end
+  end
+  return path
+end
+
+M.basename = M.tail
+
+---Get the path to the parent directory of the given path.
+-- Returns `nil` if the path has no parent.
+---@param path string
+---@param remove_trailing boolean?
+---@return string?
+function M.parent(path, remove_trailing)
+  path = M.remove_trailing(path)
+  for i = #path, 1, -1 do
+    if M.byte_is_separator(string_byte(path, i)) then
+      local parent = path:sub(1, i)
+      if remove_trailing then
+        parent = M.remove_trailing(parent)
+      end
+      return parent
+    end
+  end
+end
+
+---@param path string
+---@return string
+function M.normalize(path)
+  local p = M.tilde_to_HOME(path)
+  if utils.__IS_WINDOWS then
+    p = (p:gsub([[\]], [[/]]))
+  end
+  return p
+end
+
+---@param p1 string
+---@param p2 string
+---@return boolean
+function M.equals(p1, p2)
+  p1 = M.normalize(M.remove_trailing(p1))
+  p2 = M.normalize(M.remove_trailing(p2))
+  if utils.__IS_WINDOWS then
+    p1 = string.lower(p1)
+    p2 = string.lower(p2)
+  end
+  return p1 == p2
+end
+
+---@param path string
+---@param relative_to string
+---@return boolean, string?
+function M.is_relative_to(path, relative_to)
+  -- make sure paths end with a separator
+  local path_no_trailing = M.tilde_to_HOME(path)
+  path = M.add_trailing(path_no_trailing)
+  relative_to = M.add_trailing(M.tilde_to_HOME(relative_to))
+  local pidx, ridx = 1, 1
+  repeat
+    local pbyte = string_byte(path, pidx)
+    local rbyte = string_byte(relative_to, ridx)
+    if M.byte_is_separator(pbyte) and M.byte_is_separator(rbyte) then
+      -- both path and relative_to have a separator part
+      -- which may differ in length if there are multiple
+      -- separators, e.g. "/some/path" and "//some//path"
+      repeat
+        pidx = pidx + 1
+      until not M.byte_is_separator(string_byte(path, pidx))
+      repeat
+        ridx = ridx + 1
+      until not M.byte_is_separator(string_byte(relative_to, ridx))
+    elseif utils.__IS_WINDOWS and pbyte and rbyte
+        -- case insensitive matching on windows
+        and string.char(pbyte):lower() == string.char(rbyte):lower()
+        -- byte matching on Unix/BSD
+        or pbyte == rbyte then
+      -- character matches, move to next
+      pidx = pidx + 1
+      ridx = ridx + 1
+    else
+      -- characters don't match
+      return false, nil
+    end
+  until ridx > #relative_to
+  return true, pidx <= #path_no_trailing and path_no_trailing:sub(pidx) or "."
+end
+
+---Get a path relative to another path.
+---@param path string
+---@param relative_to string
+---@return string
+function M.relative_to(path, relative_to)
+  local is_relative_to, relative_path = M.is_relative_to(path, relative_to)
+  return is_relative_to and relative_path or path
+end
+
+---@param path string
+---@param no_tail boolean?
+---@return string?
+function M.extension(path, no_tail)
+  local file = no_tail and path or M.tail(path)
+  for i = #file, 1, -1 do
+    if string_byte(file, i) == M.dot_byte then
+      return file:sub(i + 1)
+    end
+  end
+end
+
+---@param paths string[]
+---@return string
+function M.join(paths)
+  -- Separator is always / (even on windows) unless we
+  -- detect it from fully qualified paths, e.g. "C:\..."
+  local separator = M.separator(paths[1])
+  local ret = ""
+  for i = 1, #paths do
+    local p = paths[i]
+    if p then
+      if i < #paths and not M.ends_with_separator(p) then
+        p = p .. separator
+      end
+      ret = ret .. p
+    end
+  end
+  return ret
+end
+
+-- I'm not sure why this happens given that neovim is single threaded
+-- but it seems that 'oldfiles' provider processing entries concurrently
+-- crashes when trying to access `vim.env.HOME' from two different entries
+-- at the same time due to being run in a coroutine (#447)
+M.HOME = function()
+  if not M.__HOME then
+    -- use 'os.getenv' instead of 'vim.env' due to (#452):
+    -- E5560: nvim_exec must not be called in a lua loop callback
+    M.__HOME = utils._if_win(os.getenv("USERPROFILE"), os.getenv("HOME"))
+  end
+  return M.__HOME
+end
+
+---@param path string
+---@return string
+function M.tilde_to_HOME(path)
+  return (path:gsub("^~", M.HOME()))
+end
+
+---@param path string
+---@return string
+function M.HOME_to_tilde(path)
+  if utils.__IS_WINDOWS then
+    local home = M.HOME()
+    if path:sub(1, #home):lower() == home:lower() then
+      path = "~" .. path:sub(#home + 1)
+    end
+  else
+    path = path:gsub("^" .. utils.lua_regex_escape(M.HOME()), "~")
+  end
+  return path
+end
+
+---@param str string
+---@param start_idx integer
+---@return integer?
+function M.find_next_separator(str, start_idx)
+  local SEPARATOR_BYTES = utils._if_win(
+    { M.fslash_byte, M.bslash_byte }, { M.fslash_byte })
+  for i = start_idx or 1, #str do
+    for _, byte in ipairs(SEPARATOR_BYTES) do
+      if string_byte(str, i) == byte then
+        return i
+      end
+    end
+  end
+end
+
+---@param s string
+---@param i? integer
+---@return integer?
+function M.utf8_char_len(s, i)
+  -- Get byte count of unicode character (RFC 3629)
+  local c = string_byte(s, i or 1)
+  if not c then
+    return
+  elseif c > 0 and c <= 127 then
+    return 1
+  elseif c >= 194 and c <= 223 then
+    return 2
+  elseif c >= 224 and c <= 239 then
+    return 3
+  elseif c >= 240 and c <= 244 then
+    return 4
+  end
+end
+
+---@param s string
+---@param from integer
+---@param to? integer
+---@return string
+local function utf8_sub(s, from, to)
+  local ret = ""
+  -- NOTE: this function is called from shorten right after finding the next
+  -- separaor that means `from` is a byte index and **NOT** a UTF8 char index
+  -- Advance to first requested UTF8 character index
+  -- local byte_i, utf8_i = 1, 1
+  -- while byte_i <= #s and utf8_i < from do
+  --   byte_i = byte_i + utf8_char_len(s, byte_i)
+  --   utf8_i = utf8_i + 1
+  -- end
+  local byte_i, utf8_i = from, from
+  -- Concat utf8 chars until "to" or end of string
+  while byte_i <= #s and (not to or utf8_i <= to) do
+    local c_len = M.utf8_char_len(s, byte_i) ---@cast c_len-?
+    local c = string_sub(s, byte_i, byte_i + c_len - 1)
+    ret = ret .. c
+    byte_i = byte_i + c_len
+    utf8_i = utf8_i + 1
+  end
+  return ret
+end
+
+function M.shorten(path, max_len, sep)
+  -- caller can specify what separator to use
+  sep = sep or M.separator(path)
+  local parts = {}
+  local start_idx = 1
+  max_len = max_len and tonumber(max_len) > 0 and max_len or 1
+  if utils.__IS_WINDOWS and M.is_absolute(path) then
+    -- do not shorten "C:\" to "C", for glob to succeed
+    -- we need the paths to start with a valid drive spec
+    table.insert(parts, path:sub(1, 2))
+    start_idx = 4
+  end
+  repeat
+    local i = M.find_next_separator(path, start_idx)
+    local end_idx = i and start_idx + math.min(i - start_idx, max_len) - 1 or nil
+    local part = utf8_sub(path, start_idx, end_idx) ---@cast i-?
+    if end_idx and part == "." and i - start_idx > 1 then
+      part = utf8_sub(path, start_idx, end_idx + 1)
+    end
+    table.insert(parts, part)
+    if i then start_idx = i + 1 end
+  until not i
+  return table.concat(parts, sep)
+end
+
+function M.lengthen(path)
+  -- we use 'glob_escape' to escape \{} (#548)
+  local separator = M.separator(path)
+  local glob_expr = utils.glob_escape(path)
+  local glob_expr_prefix = ""
+  if M.is_absolute(path) then
+    -- don't prefix with * the leading / on UNIX or C:\ on windows
+    if utils.__IS_WINDOWS then
+      glob_expr_prefix = glob_expr:sub(1, 3)
+      glob_expr = glob_expr:sub(4)
+    else
+      glob_expr_prefix = glob_expr:sub(1, 1)
+      glob_expr = glob_expr:sub(2)
+    end
+  end
+  -- replace separator with wildcard + separator
+  glob_expr = glob_expr_prefix .. glob_expr:gsub(separator, "%*" .. separator)
+  return vim.fn.glob(glob_expr):match("[^\n]+")
+      -- or string.format("<glob expand failed for '%s'>", path)
+      or string.format("<glob expand failed for '%s'>", glob_expr)
+end
+
+---@param excmd string
+---@param do_not_strip_slashes boolean?
+---@return number?, string?
+function M.parse_ctag_excmd(excmd, do_not_strip_slashes)
+  -- remove anything after excmd ;" postfix
+  excmd = excmd:gsub([[;".-$]], ";")
+  -- test for "--excmd={number|combine}"
+  local line = excmd:match("^(%d+);")
+  -- adjust for line, position cursor after ;
+  if line then excmd = excmd:sub(#line + 2) end
+  -- extract ctag
+  local tag = do_not_strip_slashes
+      and excmd:match("/.*/")
+      or excmd:match("/(.*)/")
+  return tonumber(line), tag
+end
+
+---@param raw string
+---@param opts table
+---@return fzf-lua.path.Entry
+function M.entry_to_ctag(raw, opts)
+  assert(opts._ctag)
+  local _, file, excmd = raw:match("([^\t]+)\t([^\t]+)\t(.*)")
+  if not file or not excmd then return {} end
+  file = file:match(".*" .. utils.nbsp .. "(.+)$") or file
+  local cwd = opts.cwd or opts._cwd
+  if cwd and not M.is_absolute(file) then file = M.join({ cwd, file }) end
+  if opts.path_shorten then file = M.lengthen(file) end
+  local line, tag = M.parse_ctag_excmd(excmd)
+  return {
+    path = file,
+    ctag = tag,
+    line = line or 0,
+    col = 0,
+    stripped = string.format("%s:%s %s", file, line and line .. ":" or "",
+      -- remove ctag ^$ prefix/postfix so qflist can have ts highlights
+      utils.regex_strip_anchors(tag) or ""),
+    debug = opts.debug and raw:match("^%[DEBUG]") and raw or nil,
+  } ---@as fzf-lua.path.Entry
+end
+
+---@param entry string
+---@param opts table
+---@return fzf-lua.path.Entry
+function M.entry_to_location(entry, opts)
+  local uri, line0, col0 = entry:match("^(.*://.*):(%d+):(%d+):")
+  local line = utils.tointeger(line0) or 1
+  local col = utils.tointeger(col0) or 1
+  if opts.path_shorten and uri and uri:match("file://") then
+    uri = "file://" .. M.lengthen(uri:sub(8))
+  end
+  return {
+    stripped = entry,
+    line = line,
+    col = col,
+    uri = uri,
+    range = {
+      start = {
+        line = line - 1,
+        character = col - 1,
+      },
+      ["end"] = {
+        line = line - 1,
+        character = col - 1,
+      }
+    }
+  }
+end
+
+---Test for URI, note this include non-standard URIs, some LSPs like dotnet's
+---roslyn prepend entries with "roslyn-source-generated://" (#2218)
+---@param str string
+---@return boolean
+function M.is_uri(str)
+  return str:match("^[%a%-]+://") ~= nil
+end
+
+-- path seps behavior https://github.com/neovim/neovim/pull/37729
+-- luv use `\`, `nvim_buf_get_name` use `/` (on windows, by default)
+local buf_get_name = utils.__IS_WINDOWS and
+    function(buf) return (vim.api.nvim_buf_get_name(buf):gsub([[/]], [[\]])) end
+    or vim.api.nvim_buf_get_name
+
+---@param entry string
+---@param opts fzf-lua.Config|{}?
+---@param force_uri boolean?
+---@return fzf-lua.path.Entry
+function M.entry_to_file(entry, opts, force_uri)
+  -- NOTE: see note in meta.lua:global regarding alt options
+  opts = opts and opts.__alt_opts or opts or {}
+  assert(opts)
+  if opts._fmt then
+    if type(opts._fmt._from) == "function" then
+      entry = opts._fmt._from(entry, opts)
+    end
+    if type(opts._fmt.from) == "function" then
+      entry = opts._fmt.from(entry, opts)
+    end
+  end
+  -- Remove ANSI coloring and prefixed icons
+  entry = utils.strip_ansi_coloring(entry)
+  if opts.render_crlf then
+    entry = entry:gsub("␊", "\n"):gsub("␍", "\r")
+  end
+  -- ctag processing is done separately
+  if opts._ctag then
+    return M.entry_to_ctag(entry, opts)
+  end
+  local stripped, idx = (function()
+    -- Returns the first viable path:line?:col? + rest of line
+    -- stripping until the last occurrence of utils.nbsp may err
+    -- if the line contents contains utils.nbsp (#2259)
+    local parts = utils.strsplit(entry, utils.nbsp)
+    local idx0 = 1
+    for i = 1, #parts - 1 do
+      local s = parts[i] ---@cast s string
+      if s:match(".-:%d+:") then
+        break
+      end
+      idx0 = idx0 + #s + #utils.nbsp
+    end
+    return entry:sub(idx0), idx0
+  end)()
+  -- Convert "~" to "$HOME"
+  stripped = M.tilde_to_HOME(stripped)
+  -- Prepend cwd unless entry is already a URI (e.g. nvim-jdtls "jdt://...")
+  local isURI = M.is_uri(stripped)
+  local cwd = opts.cwd or opts._cwd
+  if cwd and #cwd > 0 and not isURI and not M.is_absolute(stripped) then
+    stripped = M.join({ cwd, stripped })
+  end
+  --Force LSP jumps using `vim.lsp.util.show_document` so that LSP entries are
+  --added to the tag stack (see `:help gettagstack`)
+  if not isURI and force_uri then
+    isURI = true
+    stripped = "file://" .. stripped
+  end
+  -- Entry metadata (before `utils.nbsp`) can contain `[bufnr]` which should
+  -- be used instead of the file path, used in buffers, tabs, lines|blines
+  local bufnr0 = not opts._ctag and idx > 1 and entry:sub(1, idx):match("%[(%d+)%]") or nil
+  local bufnr = utils.tointeger(bufnr0)
+  if isURI and not bufnr then
+    -- LSP entries can appear as URIs, for example when using nvim-jdtls
+    -- references inside ".jar" files will have a prefix of "jdt://..."
+    -- we also "hack" our LSP entries to appear as URIs by prefixing the
+    -- entry with "file:// and then converting the entry to a URI that can
+    -- be used with `vim.lsp.utils.show_document` which adds the jump to
+    -- neovim's tagstack (see `:help gettagstack`)
+    return M.entry_to_location(stripped, opts)
+  end
+  local s = utils.strsplit(stripped, ":")
+  if not s[1] then return {} end
+  if utils.__IS_WINDOWS and M.is_absolute(stripped) then
+    -- adjust split for "C:\..."
+    s[1] = s[1] .. ":" .. s[2]
+    table.remove(s, 2)
+  end
+  local file, line, col
+  if isURI then
+    local loc = M.entry_to_location(stripped, opts)
+    file, line, col = loc.uri, loc.line, loc.col
+  else
+    file, line, col = s[1], s[2], s[3]
+  end
+  -- if the filename contains ':' we will have the wrong filename.
+  -- test for existence on the longest possible match on the file
+  -- system so we can accept files that end with ':', for example:
+  --   file.ext:1
+  --   file.ext:1:2
+  --   file.ext:1:2:3
+  -- the only usecase where this would fail would be when grep'ing,
+  -- if the contents of the file starts with '%d' without indents
+  -- AND the match line:col+text would match an existing file.
+  -- Probably not great for performance but this function only gets
+  -- called within previews/actions so it's not that bad (#453)
+  if #s > 1 then
+    local newfile = file
+    for i = 2, #s do
+      newfile = ("%s:%s"):format(tostring(newfile), s[i])
+      if uv.fs_stat(newfile) then
+        file = newfile
+        line = s[i + 1]
+        col = s[i + 2]
+      end
+    end
+  end
+  local bufname
+  local terminal
+  if bufnr then
+    terminal = utils.is_term_buffer(bufnr)
+    if terminal then
+      file, line = stripped:match("([^:]+):(%d+)")
+    end
+  elseif file and #file > 0 then -- get bufnr from give path
+    local buf = vim.fn.bufnr(file)
+    if buf ~= -1 and buf_get_name(buf) == (uv.fs_realpath(file) or file) then
+      bufnr = buf
+      bufname = file
+    end
+  end
+  if opts.path_shorten and not M.is_uri(stripped) then
+    file = M.lengthen(file)
+  end
+  ---@type fzf-lua.path.Entry
+  return {
+    stripped = stripped,
+    bufnr    = bufnr,
+    bufname  = bufname or (bufnr and vim.api.nvim_buf_is_valid(bufnr)
+      and vim.api.nvim_buf_get_name(bufnr) or nil),
+    terminal = terminal,
+    path     = file,
+    line     = utils.tointeger(type(opts.line_query) == "function" and
+      (opts.line_query(FzfLua.get_info().query)) or line) or 0,
+    col      = utils.tointeger(col) or 0,
+    debug    = opts.debug and entry:match("^%[DEBUG]") and entry or nil,
+  }
+end
+
+---@overload fun(cmd: string, opts: table): string
+---@overload fun(cmd: string[], opts: table): string[]
+---@param cmd string|string[]
+---@param opts table
+---@return string|string[]
+function M.git_cwd(cmd, opts)
+  local git_args = {
+    { "cwd",          "-C" },
+    { "git_dir",      "--git-dir" },
+    { "git_worktree", "--work-tree" },
+    { "git_config",   "-c",         noexpand = true },
+  }
+  -- NOTE: we copy the opts due to a bug with Windows network drives starting with "\\"
+  -- as `vim.fn.expand` would reduce the double slash to a single slash modifying the
+  -- original `opts.cwd` ref (#1429)
+  local o = {}
+  for _, a in ipairs(git_args) do o[a[1]] = opts[a[1]] end
+  if type(cmd) == "string" then
+    local args = ""
+    for _, a in ipairs(git_args) do
+      if o[a[1]] then
+        o[a[1]] = a.noexpand and o[a[1]] or libuv.expand(o[a[1]])
+        args = args .. ("%s %s "):format(a[2], libuv.shellescape(o[a[1]]))
+      end
+    end
+    cmd = cmd:gsub("^git ", "git " .. args)
+  elseif type(cmd) == "table" then
+    local idx = 2
+    cmd = utils.tbl_deep_clone(cmd)
+    ---@cast cmd -?
+    for _, a in ipairs(git_args) do
+      if o[a[1]] then
+        o[a[1]] = a.noexpand and o[a[1]] or libuv.expand(o[a[1]])
+        ---@diagnostic disable-next-line: param-type-mismatch, redundant-parameter
+        table.insert(cmd, idx, a[2])
+        ---@diagnostic disable-next-line: param-type-mismatch, redundant-parameter
+        table.insert(cmd, idx + 1, o[a[1]])
+        idx = idx + 2
+      end
+    end
+  end
+  return cmd
+end
+
+function M.is_git_repo(opts, noerr)
+  return not not M.git_root(opts, noerr)
+end
+
+function M.git_root(opts, noerr)
+  local cmd = M.git_cwd({ "git", "rev-parse", "--show-toplevel" }, opts)
+  local output, err = utils.io_systemlist(cmd)
+  if err ~= 0 then
+    if not noerr then utils.info(table.concat(output, "\n")) end
+    return nil
+  end
+  -- On Windows, MSYS2's native git package outputs Unix-style paths
+  -- (e.g. /home/user/repo) rather than Windows-style paths. Use cygpath
+  -- to convert when available. Only run cygpath when the path is not
+  -- already a Windows absolute path to avoid unnecessary overhead
+  -- for users of git-for-windows (which already returns C:\... paths).
+  -- Ref: https://github.com/ibhagwan/fzf-lua/issues/2745
+  ---@diagnostic disable-next-line: param-type-mismatch
+  if utils.__IS_WINDOWS and not M.is_absolute(output[1]) and vim.fn.executable("cygpath") == 1 then
+    local cyg_out, rc = utils.io_systemlist({ "cygpath", "-w", output[1] })
+    if rc == 0 and cyg_out[1] then
+      return cyg_out[1]
+    end
+  end
+  return output[1]
+end
+
+---@param opts? table
+---@param noerr? boolean
+---@return boolean
+function M.is_jj_repo(opts, noerr)
+  return not not M.jj_root(opts, noerr)
+end
+
+---@param opts? table
+---@param noerr? boolean
+---@return string?
+function M.jj_root(opts, noerr)
+  local cmd = (opts and opts.cwd)
+      and { "jj", "-R", opts.cwd, "root", "--ignore-working-copy" }
+      or { "jj", "root", "--ignore-working-copy" }
+  local output, err = utils.io_systemlist(cmd)
+  if err ~= 0 then
+    if not noerr then utils.info(table.concat(output, "\n")) end
+    return nil
+  end
+  return output[1]
+end
+
+---@param str string
+---@return fzf-lua.keymap.Entry
+function M.keymap_to_entry(str)
+  local valid_modes = {
+    n = true,
+    i = true,
+    c = true,
+    v = true,
+    t = true,
+  }
+  local mode, keymap = string.match(str, "^(.-)│(.-)│")
+  if not mode or not keymap then return {} end
+  mode, keymap = vim.trim(mode), vim.trim(keymap)
+  mode = valid_modes[mode] and mode or "" -- only valid modes
+  local vmap = vim.fn.maparg(keymap, mode, false, true)
+  if vmap.callback then
+    local info = debug.getinfo(vmap.callback, "Sl")
+    if info and info.source and info.linedefined and info.linedefined > 0 then
+      local source = info.source:gsub("^@", "")
+      -- https://github.com/neovim/neovim/blob/64d55b74d83d566975e269bed0810d9008119ddf/src/nvim/lua/executor.c#L671-L680
+      if source:match("vim/") and package.preload[source:gsub("%.lua$", ""):gsub("/", ".")] then
+        source = vim.env.VIMRUNTIME .. "/lua/" .. source .. ".lua"
+      end
+      return { path = source, line = info.linedefined }
+    end
+  end
+  local cmd = ("verb %smap %s"):format(mode, keymap)
+  local output = vim.split(vim.api.nvim_exec2(cmd, { output = true }).output, "\n")
+  local file, lnum = (output[#output] or ""):match("Last set from (.-) line (%d+)")
+  if file and lnum then return { path = vim.fs.normalize(file), line = utils.tointeger(lnum) or 1 } end
+  -- if entry then return M.entry_to_file(entry, opts) end
+  return { mode = mode, key = keymap, vmap = vim.inspect(vmap) }
+end
+
+-- Minimal functionality so we can hijack during `vim.filetype.match`
+-- As of neovim 0.10 we only need to implement mode ":t"
+---@param fname string
+---@param mods string
+---@return string
+M._fnamemodify = function(fname, mods)
+  if mods == ":t" then
+    return M.tail(fname)
+  end
+  if mods == ":r" then
+    local tail = M.tail(fname)
+    return tail and tail:sub(1, 1) ~= "." and (fname:gsub("%.[^.]*$", "")) or tail
+  end
+  return fname
+end
+
+M._env = setmetatable({}, {
+  __index = function(_, index)
+    return os.getenv(index)
+  end
+})
+
+M._nvim_buf_get_lines = function() return {} end
+M._nvim_buf_line_count = function() return 0 end
+
+function M.ft_match(args)
+  if not args or not args.filename then
+    error('At least "filename" needs to be specified')
+  end
+
+  -- NOTE: code for `vim.filetype.match` is in "runtime/lua/vim/filetype.lua"
+  -- Hijack `vim.env` and `vim.fn.fnamemodify` in order to circumvent
+  -- E5560: Vimscript function must not be called in a lua loop callback
+  local _env = vim.env
+  local _fnamemodify = vim.fn.fnamemodify
+  local _nvim_buf_get_lines = vim.api.nvim_buf_get_lines
+  local _nvim_buf_line_count = vim.api.nvim_buf_line_count
+  vim.env = M._env
+  vim.fn.fnamemodify = M._fnamemodify
+  vim.api.nvim_buf_get_lines = M._nvim_buf_get_lines
+  vim.api.nvim_buf_line_count = M._nvim_buf_line_count
+  -- Normalize the path and replace "~" to prevent the internal
+  -- `normalize_path` from having to call `vim.env` or `vim.pesc`
+  local fname = M.normalize(M.tilde_to_HOME(args.filename))
+  local ok, ft, on_detect = pcall(vim.filetype.match, { filename = fname, buf = 0 })
+  vim.api.nvim_buf_get_lines = _nvim_buf_get_lines
+  vim.api.nvim_buf_line_count = _nvim_buf_line_count
+  vim.fn.fnamemodify = _fnamemodify
+  vim.env = _env
+  if ok then return ft, on_detect end
+end
+
+function M.ft_match_fast_event(args)
+  local co = coroutine.running()
+  ---@cast co thread
+  if co and vim.in_fast_event() then
+    local ft
+    vim.schedule(function()
+      -- ~~We're already scheduling, safe to use the original API~~
+      -- NOTE: apparently we're wrong, the original can fail (#2001)
+      ft = M.ft_match(args)
+      coroutine.resume(co, ft)
+    end)
+    return coroutine.yield()
+  else
+    return M.ft_match(args)
+  end
+end
+
+return M
