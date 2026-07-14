@@ -1,0 +1,69 @@
+lua/plugins/yankdown-nvim/CODES/.github/workflows/ci.yml
+  s_21042f9c4bdf77::t_08e3419e1caf00 1-193
+lua/plugins/yankdown-nvim/CODES/.github/workflows/release.yml
+  s_21042f9c4bdf77::t_73420152366511 1-39
+lua/plugins/yankdown-nvim/CODES/.gitignore
+  s_21042f9c4bdf77::t_ac7e5bf46b4dd8 1-54
+lua/plugins/yankdown-nvim/CODES/.luacheckrc
+  s_21042f9c4bdf77::t_7e9a6a94059f11 1-4
+lua/plugins/yankdown-nvim/CODES/.stylua.toml
+  s_21042f9c4bdf77::t_b17c6ffca7a3a6 1-5
+lua/plugins/yankdown-nvim/CODES/LICENSE
+  s_21042f9c4bdf77::t_eed6d1633a8418 1-21
+lua/plugins/yankdown-nvim/CODES/README.md
+  s_21042f9c4bdf77::t_23101411c6f524 1-225
+lua/plugins/yankdown-nvim/CODES/assets/demo.tape
+  s_21042f9c4bdf77::t_6de00caad762ad 1-107
+lua/plugins/yankdown-nvim/CODES/lua/yankdown/cf_html.lua
+  s_21042f9c4bdf77::t_2e9b18a1231e6c 1-83
+lua/plugins/yankdown-nvim/CODES/lua/yankdown/check.lua
+  s_21042f9c4bdf77::t_9dd48383ed5d51 1-179
+lua/plugins/yankdown-nvim/CODES/lua/yankdown/clipboard.lua
+  s_21042f9c4bdf77::t_688a12e3251f16 1-165
+lua/plugins/yankdown-nvim/CODES/lua/yankdown/convert.lua
+  s_21042f9c4bdf77::t_e4a631f619f4d7 1-30
+lua/plugins/yankdown-nvim/CODES/lua/yankdown/init.lua
+  s_21042f9c4bdf77::t_2a47559206f4cf 1-86
+lua/plugins/yankdown-nvim/CODES/lua/yankdown/native.lua
+  s_21042f9c4bdf77::t_f3a86998fcf8a2 1-9
+lua/plugins/yankdown-nvim/CODES/lua/yankdown/paste.lua
+  s_21042f9c4bdf77::t_54e3bc85ea6b79 1-89
+lua/plugins/yankdown-nvim/CODES/scripts/benchmark.lua
+  s_21042f9c4bdf77::t_e58e94fc7bfe35 1-66
+lua/plugins/yankdown-nvim/CODES/tests/integration/html_paste.lua
+  s_21042f9c4bdf77::t_b8d23eed4da189 1-43
+lua/plugins/yankdown-nvim/CODES/tests/integration/wayland_check.lua
+  s_21042f9c4bdf77::t_1e96a2a745a597 1-23
+lua/plugins/yankdown-nvim/CODES/tests/minitest.lua
+  s_21042f9c4bdf77::t_32c76428bff078 1-39
+lua/plugins/yankdown-nvim/CODES/tests/run.lua
+  s_21042f9c4bdf77::t_a3c41521c6d3a0 1-10
+lua/plugins/yankdown-nvim/CODES/tests/test_cf_html.lua
+  s_21042f9c4bdf77::t_b127da6a2fc3fd 1-144
+lua/plugins/yankdown-nvim/CODES/tests/test_check.lua
+  s_21042f9c4bdf77::t_fa6d7386b9c378 1-381
+lua/plugins/yankdown-nvim/CODES/tests/test_clipboard.lua
+  s_21042f9c4bdf77::t_1ef1e80769abdb 1-239
+lua/plugins/yankdown-nvim/CODES/tests/test_convert.lua
+  s_21042f9c4bdf77::t_e023c31564d69e 1-42
+lua/plugins/yankdown-nvim/CODES/tests/test_init.lua
+  s_21042f9c4bdf77::t_ef31e769138142 1-102
+lua/plugins/yankdown-nvim/CODES/tests/test_paste.lua
+  s_21042f9c4bdf77::t_9de3f40da57789 1-217
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.13",
+  "base_commit_sha": "95349cf6050722e37103b3daaa191b5862d7484c",
+  "prompts": {},
+  "sessions": {
+    "s_21042f9c4bdf77": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "99505b64-f31d-4416-875f-b58e743137f3",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
