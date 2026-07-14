@@ -1,0 +1,33 @@
+lua/plugins/yankdown-nvim/README.md
+  s_21042f9c4bdf77::t_23101411c6f524 1-225
+lua/plugins/yankdown-nvim/CODES/cf_html.lua
+  s_21042f9c4bdf77::t_2e9b18a1231e6c 1-83
+lua/plugins/yankdown-nvim/CODES/check.lua
+  s_21042f9c4bdf77::t_9dd48383ed5d51 1-179
+lua/plugins/yankdown-nvim/CODES/clipboard.lua
+  s_21042f9c4bdf77::t_688a12e3251f16 1-165
+lua/plugins/yankdown-nvim/CODES/convert.lua
+  s_21042f9c4bdf77::t_e4a631f619f4d7 1-30
+lua/plugins/yankdown-nvim/CODES/init.lua
+  s_21042f9c4bdf77::t_2a47559206f4cf 1-86
+lua/plugins/yankdown-nvim/CODES/native.lua
+  s_21042f9c4bdf77::t_f3a86998fcf8a2 1-9
+lua/plugins/yankdown-nvim/CODES/paste.lua
+  s_21042f9c4bdf77::t_54e3bc85ea6b79 1-89
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.13",
+  "base_commit_sha": "13da953ecb625c676606c23d0f3981f75ae3b369",
+  "prompts": {},
+  "sessions": {
+    "s_21042f9c4bdf77": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "99505b64-f31d-4416-875f-b58e743137f3",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
