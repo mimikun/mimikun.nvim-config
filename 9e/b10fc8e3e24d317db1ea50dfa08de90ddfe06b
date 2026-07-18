@@ -1,0 +1,36 @@
+lua/plugins/hardtime-nvim/opts/init.lua
+  s_a32b0404ba6236::t_db9389e7a77e31 12,16,20,28,32,36
+  s_a32b0404ba6236::t_2329dab5a13657 11
+  s_a32b0404ba6236::t_6547eb4178d49f 15
+  s_a32b0404ba6236::t_8dd82e4634fa44 19
+  s_a32b0404ba6236::t_c1020e5c556a4f 27
+  s_a32b0404ba6236::t_b14985f2adb7b4 31
+  s_a32b0404ba6236::t_da9372dc91a082 35
+  s_a32b0404ba6236::t_3c0c1bb79a606a 3-4,7-8,23-24,39-40,43-44,47-48,51-52,55-56,59-60,63-64,72-73,77
+lua/plugins/hardtime-nvim/opts/disabled_filetypes.lua
+  s_a32b0404ba6236::t_752f3284340518 1-2
+lua/plugins/hardtime-nvim/opts/disabled_keys.lua
+  s_a32b0404ba6236::t_f3f5baf3ca9f5c 1-2
+lua/plugins/hardtime-nvim/opts/resetting_keys.lua
+  s_a32b0404ba6236::t_a8748a9fa7d773 1-2
+lua/plugins/hardtime-nvim/opts/restricted_keys.lua
+  s_a32b0404ba6236::t_da3830a7355375 1-2
+lua/plugins/hardtime-nvim/opts/ui.lua
+  s_a32b0404ba6236::t_cf37b8d8b8e98a 1-2
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.14",
+  "base_commit_sha": "9eb10fc8e3e24d317db1ea50dfa08de90ddfe06b",
+  "prompts": {},
+  "sessions": {
+    "s_a32b0404ba6236": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "21679200-e1f5-487a-8b6d-3f46a0669216",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
