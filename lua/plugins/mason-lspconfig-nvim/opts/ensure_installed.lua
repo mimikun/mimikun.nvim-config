@@ -40,7 +40,8 @@ local ensure_installed = {
   -- c, css, gitcommit, go, haskell, html, java, javascript, javascriptreact, lua, markdown, php, python, ruby, rust, swift, text, toml, typescript, typescriptreact, zig
   "codebook",
   -- coq
-  "coq_lsp",
+  -- NOTE: needs opam in PATH to build
+  --"coq_lsp",
   -- cucumber
   --"cucumber_language_server",
   -- cue
@@ -117,7 +118,8 @@ local ensure_installed = {
   -- systemverilog, verilog, vhdl
   --"hdl_checker",
   -- json, yaml, yml
-  "spectral",
+  -- NOTE: upstream build script is broken
+  --"spectral",
   -- json.openapi, yaml.openapi
   --"vacuum",
   -- dockerfile, yaml.docker-compose
@@ -137,7 +139,8 @@ local ensure_installed = {
   -- hyprlang
   --"hyprls",
   -- java
-  "java_language_server",
+  -- NOTE: needs jlink from a full JDK to build
+  --"java_language_server",
   "jdtls",
   -- jinja
   "jinja_lsp",
@@ -383,7 +386,8 @@ local ensure_installed = {
   -- NOTE: markdown
   "remark_ls",
   "rumdl",
-  "grammarly",
+  -- NOTE: unmaintained upstream, peer dependency conflict
+  --"grammarly",
   "markdown_oxide",
   "mpls",
   "prosemd_lsp",
