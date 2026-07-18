@@ -5,10 +5,11 @@ local spec = {
   cmd = require("plugins.mason-lspconfig-nvim.cmds"),
   event = require("plugins.mason-lspconfig-nvim.events"),
   dependencies = require("plugins.mason-lspconfig-nvim.dependencies"),
-  opts = require("plugins.mason-lspconfig-nvim.opts"),
-  --config = function()
-  --    INIT
-  --end,
+  --opts = require("plugins.mason-lspconfig-nvim.opts"),
+  config = function()
+    local opts = require("plugins.mason-lspconfig-nvim.opts")
+    require("mason-lspconfig").setup(opts)
+  end,
   --cond = false,
   --enabled = false,
 }
