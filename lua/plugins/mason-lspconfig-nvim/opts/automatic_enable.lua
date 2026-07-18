@@ -201,7 +201,8 @@ local automatic_enable = {
   -- typst
   "tinymist",
   -- coq
-  "coq_lsp",
+  -- NOTE: needs opam in PATH to build
+  --"coq_lsp",
   -- awk
   "awk_ls",
   -- dot
