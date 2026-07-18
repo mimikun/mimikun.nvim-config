@@ -2,3 +2,6 @@ std = "selene/globals"
 
 [rules]
 shadowing = "allow"
+# lazy.nvim specs are mixed tables by design: the repo name is positional and
+# every other key (opts, keys, event, ...) is named.
+mixed_table = "allow"
