@@ -1,0 +1,117 @@
+---@class laravel.dto.class
+---@field fqn string
+---@field class string
+---@field namespace string
+---@field uses table<string, laravel.dto.class_use>
+---@field position laravel.dto.position
+---@field methods table<string, laravel.dto.method>
+---@field properties table<string, laravel.dto.property>
+
+---@class laravel.dto.method
+---@field fqn string
+---@field name string
+---@field visibility "public" | "protected" | "private"
+---@field position laravel.dto.position
+
+---@class laravel.dto.class_use
+---@field name string
+---@field position laravel.dto.position
+
+---@class laravel.dto.property
+---@field name string
+---@field visibility "public" | "protected" | "private"
+---@field position laravel.dto.position
+
+---@class laravel.dto.position
+---@field start laravel.dto.pos
+---@field end_ laravel.dto.pos
+
+---@class laravel.dto.pos
+---@field row number
+---@field col number
+
+---@class laravel.dto.models_response
+---@field models table<string, laravel.dto.model>
+---@field builderMethods laravel.dto.builder_method[]
+
+---@class laravel.dto.model
+---@field table string
+---@field class string
+---@field database string
+---@field uri string
+---@field attributes laravel.dto.model_attribute[]
+---@field relations table<string, laravel.dto.model_relation>
+---@field scopes table<string, laravel.dto.model_scope>
+---@field events table<string, laravel.dto.model_event>
+---@field observers table<string, laravel.dto.model_observer>
+
+---@class laravel.dto.model_attribute
+---@field name string
+---@field type string
+---@field cast string
+---@field title_case string
+---@field nullable boolean
+---@field unique boolean
+---@field increments boolean
+---@field fillable boolean
+---@field hidden boolean
+---@field documented boolean
+
+---@class laravel.dto.model_relation
+
+---@class laravel.dto.model_scope
+
+---@class laravel.dto.model_event
+
+---@class laravel.dto.model_observer
+
+---@class laravel.dto.builder_method
+---@field name string
+---@field parameters string[]
+---@field return string
+
+---@class laravel.dto.model_response
+---@field model laravel.dto.model
+---@field class laravel.dto.class
+
+---@class laravel.dto.paths_response
+---@field app string
+---@field base string
+---@field config string
+---@field public string
+---@field resources string
+---@field storage string
+---@field views string
+
+---@class laravel.dto.app_config
+---@field name string
+---@field value any
+---@field file string
+---@field line number
+
+---@class laravel.dto.artisan_routes
+---@field uri string
+---@field action string
+---@field controller string
+---@field method string
+---@field domain string
+---@field methods string[]
+---@field middlewares string[]
+---@field name string
+
+---@class laravel.dto.user_command
+---@field executable string
+---@field name string
+---@field display string
+---@field cmd string
+---@field desc string
+---@field opts table<string, any>
+
+---@class laravel.dto.artisan_views
+---@field key string
+---@field path string
+---@field isVendor boolean
+---@field isLivewire boolean
+
+---@class laravel.dto.composer_command
+---@field name string

@@ -1,0 +1,27 @@
+local event_utils = require("laravel.utils.event")
+
+---@type laravel.extensions.provider
+local model_info_provider = {}
+
+function model_info_provider.register(app)
+  app:singletonIf("laravel.extensions.model_info.lib")
+
+  vim.tbl_map(function(command)
+    app:addCommand("laravel.extensions.model_info." .. command.signature, command)
+  end, require("laravel.extensions.model_info.commands"))
+end
+
+function model_info_provider.boot(app)
+  local group = vim.api.nvim_create_augroup("laravel.extensions.model_info", {})
+  vim.api.nvim_create_autocmd({ "BufEnter", "BufWritePost" }, {
+    pattern = "*.php",
+    group = group,
+    callback = app:whenActive(event_utils.whenValid(function(ev)
+      ---@type laravel.extensions.model_info.lib
+      local lib = app("laravel.extensions.model_info.lib")
+      lib:handle(ev.buf)
+    end)),
+  })
+end
+
+return model_info_provider
