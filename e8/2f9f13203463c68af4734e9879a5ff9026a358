@@ -1,0 +1,19 @@
+lua/plugins/lazydev-nvim/opts/init.lua
+  s_9a8eee419c642a::t_df45453e4f54ac 14,16
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.14",
+  "base_commit_sha": "e82f9f13203463c68af4734e9879a5ff9026a358",
+  "prompts": {},
+  "sessions": {
+    "s_9a8eee419c642a": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "d04ab5a6-a31b-40ed-9a9a-4c0deeffef93",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
