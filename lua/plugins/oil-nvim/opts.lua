@@ -302,7 +302,7 @@ local opts = {
 
     -- This function defines what will never be shown, even when `show_hidden` is set
     ---@type fun(name: string, bufnr: integer): boolean
-    is_always_hidden = function(name, bufnr)
+    is_always_hidden = function(_name, _bufnr)
       return false
     end,
 
@@ -329,7 +329,7 @@ local opts = {
 
     -- Customize the highlight group for the file name
     ---@type fun(entry: oil.Entry, is_hidden: boolean, is_link_target: boolean, is_link_orphan: boolean): string | nil
-    highlight_filename = function(entry, is_hidden, is_link_target, is_link_orphan)
+    highlight_filename = function(_entry, _is_hidden, _is_link_target, _is_link_orphan)
       return nil
     end,
   },
@@ -347,19 +347,19 @@ local opts = {
   git = {
     -- Return true to automatically git add a new file
     ---@type fun(path: string): boolean
-    add = function(path)
+    add = function(_path)
       return false
     end,
 
     -- Return true to automatically git mv a moved file
     ---@type fun(src_path: string, dest_path: string): boolean
-    mv = function(src_path, dest_path)
+    mv = function(_src_path, _dest_path)
       return false
     end,
 
     -- Return true to automatically git rm a deleted file
     ---@type fun(path: string): boolean
-    rm = function(path)
+    rm = function(_path)
       return false
     end,
   },
@@ -386,7 +386,7 @@ local opts = {
     },
 
     ---@type fun(winid: integer): string
-    get_win_title = function(winid)
+    get_win_title = function(_winid)
       return nil
     end,
 
@@ -416,7 +416,7 @@ local opts = {
 
     -- A function that returns true to disable preview on a file e.g. to avoid lag
     ---@type fun(filename: string): boolean
-    disable_preview = function(filename)
+    disable_preview = function(_filename)
       return false
     end,
 

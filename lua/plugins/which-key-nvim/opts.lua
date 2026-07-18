@@ -8,7 +8,7 @@ local opts = {
     return ctx.plugin and 0 or 200
   end,
   ---@param mapping wk.Mapping
-  filter = function(mapping)
+  filter = function(_mapping)
     -- example to exclude mappings without a description
     -- return mapping.desc and mapping.desc ~= ""
     return true
@@ -113,7 +113,7 @@ local opts = {
   },
   -- expand groups when <= n mappings
   ---@type number|fun(node: wk.Node):boolean?
-  expand = function(node)
+  expand = function(_node)
     local expand
     expand = 0
     -- expand all nodes without a description

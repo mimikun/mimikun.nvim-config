@@ -4,7 +4,7 @@ local assets = {
   [".rs"] = {
     -- Asset icon
     ---@type string | fun(opts: CordOpts):string
-    icon = function(opts)
+    icon = function(_opts)
       local icon
 
       icon = "rust"
@@ -14,7 +14,7 @@ local assets = {
 
     -- Asset tooltip
     ---@type string | fun(opts: CordOpts):string
-    tooltip = function(opts)
+    tooltip = function(_opts)
       local tooltip
 
       tooltip = "Rust"
@@ -24,7 +24,7 @@ local assets = {
 
     -- Asset text
     ---@type string | fun(opts: CordOpts):string
-    text = function(opts)
+    text = function(_opts)
       local text
 
       text = "Writing in Rust"
@@ -35,7 +35,7 @@ local assets = {
   netrw = {
     -- Asset name
     ---@type string | fun(opts: CordOpts):string
-    name = function(opts)
+    name = function(_opts)
       local name
 
       name = "Netrw"
@@ -45,7 +45,7 @@ local assets = {
 
     -- Asset type
     ---@type string | fun(opts: CordOpts):string
-    type = function(opts)
+    type = function(_opts)
       local type
 
       type = "file_browser"

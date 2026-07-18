@@ -26,7 +26,7 @@ local opts = {
   -- LSP server configuration
   lsp = {
     -- Custom on_attach function
-    on_attach = function(client, bufnr)
+    on_attach = function(_client, _bufnr)
       -- Your custom on_attach logic
       return nil
     end,

@@ -47,7 +47,7 @@ local opts = {
   min_count_to_highlight = 1,
   -- should_enable: a callback that overrides all other settings to enable/disable illumination.
   -- This will be called a lot so don't do anything expensive in it.
-  should_enable = function(bufnr)
+  should_enable = function(_bufnr)
     return true
   end,
   -- case_insensitive_regex: sets regex case sensitivity

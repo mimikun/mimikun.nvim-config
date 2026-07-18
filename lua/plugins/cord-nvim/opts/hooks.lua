@@ -8,7 +8,7 @@ local quotes = {
 local hooks = {
   ---@alias CordManagerHook fun(manager: ActivityManager):nil | {fun: fun(manager: ActivityManager):nil, priority: number}
   ---@type CordManagerHook
-  ready = function(manager)
+  ready = function(_manager)
     local ready
 
     ready = nil
@@ -18,7 +18,7 @@ local hooks = {
 
   ---@alias CordEmptyHook fun():nil | {fun: fun():nil, priority: number}
   ---@type CordEmptyHook
-  shutdown = function(opts)
+  shutdown = function(_opts)
     local shutdown
 
     shutdown = nil
@@ -28,7 +28,7 @@ local hooks = {
 
   ---@alias CordHook fun(opts: CordOpts):nil | {fun: fun(opts: CordOpts):nil, priority: number}
   ---@type CordHook
-  pre_activity = function(opts)
+  pre_activity = function(_opts)
     local pre_activity
 
     pre_activity = nil
@@ -38,7 +38,7 @@ local hooks = {
 
   ---@alias CordActivityHook fun(opts: CordOpts, activity: Activity):nil | {fun: fun(opts: CordOpts, activity: Activity):nil, priority: number}
   ---@type CordActivityHook
-  post_activity = function(opts, activity)
+  post_activity = function(_opts, _activity)
     local post_activity
 
     post_activity = nil
@@ -54,7 +54,7 @@ local hooks = {
 
   ---@alias CordHook fun(opts: CordOpts):nil | {fun: fun(opts: CordOpts):nil, priority: number}
   ---@type CordHook
-  idle_enter = function(opts)
+  idle_enter = function(_opts)
     local idle_enter
 
     idle_enter = nil
@@ -64,7 +64,7 @@ local hooks = {
 
   ---@alias CordHook fun(opts: CordOpts):nil | {fun: fun(opts: CordOpts):nil, priority: number}
   ---@type CordHook
-  idle_leave = function(opts)
+  idle_leave = function(_opts)
     local idle_leave
 
     idle_leave = nil
@@ -74,7 +74,7 @@ local hooks = {
 
   ---@alias CordHook fun(opts: CordOpts):nil | {fun: fun(opts: CordOpts):nil, priority: number}
   ---@type CordHook
-  workspace_change = function(opts)
+  workspace_change = function(_opts)
     local workspace_change
 
     workspace_change = nil
@@ -84,7 +84,7 @@ local hooks = {
 
   ---@alias CordManagerHook fun(manager: ActivityManager):nil | {fun: fun(manager: ActivityManager):nil, priority: number}
   ---@type CordManagerHook
-  buf_enter = function(manager)
+  buf_enter = function(_manager)
     local buf_enter
 
     buf_enter = nil

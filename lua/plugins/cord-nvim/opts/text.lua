@@ -181,7 +181,7 @@ local text = {
 
   -- Text for dashboard activity
   ---@type string | fun(opts: CordOpts):string | boolean| nil
-  dashboard = function(opts)
+  dashboard = function(_opts)
     local dashboard
 
     dashboard = "Home"

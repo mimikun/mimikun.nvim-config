@@ -30,7 +30,7 @@ local keys = {
           client.request("workspace/executeCommand", {
             command = "homeassistant.reloadCache",
             arguments = {},
-          }, function(err, result)
+          }, function(err, _result)
             if err then
               local err_msg = type(err) == "table" and err.message or tostring(err)
               vim.notify("Failed to reload cache: " .. err_msg, vim.log.levels.ERROR)

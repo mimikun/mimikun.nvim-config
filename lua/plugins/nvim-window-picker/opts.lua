@@ -50,7 +50,7 @@ local opts = {
 
   -- if you want to manually filter out the windows, pass in a function that takes two parameters.
   -- You should return window ids that should be included in the selection
-  filter_func = function(window_ids, filters)
+  filter_func = function(_window_ids, _filters)
     -- folder the window_ids
     -- return only the ones you want to include
     -- EX:-

@@ -211,7 +211,7 @@ local opts = {
   end,
 
   -- Call this function when aerial first sets symbols on a buffer.
-  on_first_symbols = function(bufnr)
+  on_first_symbols = function(_bufnr)
     -- NOTE: it?
   end,
 
@@ -233,7 +233,7 @@ local opts = {
   --   * symbol?: specific to the lsp backend
   --   * syntax_tree?: specific to the treesitter backend
   --   * match?: specific to the treesitter backend, TS query match
-  post_parse_symbol = function(bufnr, item, ctx)
+  post_parse_symbol = function(_bufnr, _item, _ctx)
     return true
   end,
 
@@ -246,7 +246,7 @@ local opts = {
   --   * lang: info about the language
   --   * symbols?: specific to the lsp backend
   --   * syntax_tree?: specific to the treesitter backend
-  post_add_all_symbols = function(bufnr, items, ctx)
+  post_add_all_symbols = function(_bufnr, items, _ctx)
     return items
   end,
 
@@ -272,7 +272,7 @@ local opts = {
   },
 
   -- Set this function to override the highlight groups for certain symbols
-  get_highlight = function(symbol, is_icon, is_collapsed)
+  get_highlight = function(_symbol, _is_icon, _is_collapsed)
     -- return "MyHighlight" .. symbol.kind
   end,
 
@@ -299,7 +299,7 @@ local opts = {
       0.1,
     },
 
-    override = function(conf, source_winid)
+    override = function(conf, _source_winid)
       -- This is the config that will be passed to nvim_open_win.
       -- Change values here to customize the layout
       return conf

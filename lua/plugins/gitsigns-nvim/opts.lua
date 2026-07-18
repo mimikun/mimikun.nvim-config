@@ -288,7 +288,7 @@ local opts = {
 
   -- String or function used to format the virtual text of |gitsigns-config-current_line_blame|.
   ---@type string | Gitsigns.CurrentLineBlameFmtFun | fun(user: string, info: table<string,any>): [string,string][]
-  current_line_blame_formatter = function(name, info)
+  current_line_blame_formatter = function(_name, _info)
     local current_line_blame_formatter = "<author>, <author_time:%R> - <summary>"
     return current_line_blame_formatter
   end,

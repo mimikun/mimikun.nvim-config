@@ -53,7 +53,7 @@ local opts = {
   enable_update_available_warning = true,
 
   ---@type fun(bufnr: integer)
-  on_attach = function(bufnr)
+  on_attach = function(_bufnr)
     -- TODO: its
   end,
 
@@ -96,7 +96,7 @@ local opts = {
     name = "crates.nvim",
 
     ---@type fun(client: vim.lsp.Client, bufnr: integer)
-    on_attach = function(client, bufnr)
+    on_attach = function(_client, _bufnr)
       -- TODO: it
 
       -- the same on_attach function as for your other language servers can be ommited if you're using the `LspAttach` autocmd

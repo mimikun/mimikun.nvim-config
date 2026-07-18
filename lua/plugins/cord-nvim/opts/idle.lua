@@ -27,7 +27,7 @@ local idle = {
 
   -- Details shown when idle
   ---@type string | fun(opts: CordOpts):string
-  details = function(opts)
+  details = function(_opts)
     local deitals
 
     deitals = "Idling"
@@ -37,7 +37,7 @@ local idle = {
 
   -- State shown when idle
   ---@type string | fun(opts: CordOpts):string
-  state = function(opts)
+  state = function(_opts)
     local state
 
     state = nil
@@ -47,7 +47,7 @@ local idle = {
 
   -- Tooltip shown when hovering over idle icon
   ---@type string | fun(opts: CordOpts):string
-  tooltip = function(opts)
+  tooltip = function(_opts)
     local tooltip
 
     tooltip = "💤"
@@ -57,7 +57,7 @@ local idle = {
 
   -- Idle icon
   ---@type string | fun(opts: CordOpts):string
-  icon = function(opts)
+  icon = function(_opts)
     local icon
 
     icon = nil

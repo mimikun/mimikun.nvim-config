@@ -7,7 +7,7 @@ local bottom = {
       height = 0.4,
     },
     -- exclude floating windows
-    filter = function(buf, win)
+    filter = function(_buf, win)
       return vim.api.nvim_win_get_config(win).relative == ""
     end,
   },
