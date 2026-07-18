@@ -1,0 +1,686 @@
+*neojj.txt*    A jj (Jujutsu) interface for Neovim
+
+Neojj                                                                  *neojj*
+
+A Magit-style interface for jj (Jujutsu VCS) in Neovim.
+Hard fork of Neogit, adapted for jj's change-based workflow.
+
+==============================================================================
+CONTENTS                                                    *neojj-contents*
+
+  1. Introduction .......................... |neojj-introduction|
+  2. Requirements .......................... |neojj-requirements|
+  3. Setup ................................. |neojj-setup|
+  4. Commands .............................. |neojj-commands|
+  5. Configuration ......................... |neojj-configuration|
+  6. Mappings .............................. |neojj-mappings|
+  7. Popups ................................ |neojj-popups|
+  8. Status Buffer ......................... |neojj-status|
+  9. Log View .............................. |neojj-log-view|
+  10. Operations View ...................... |neojj-operations|
+  11. Highlights ........................... |neojj-highlights|
+  12. Events ............................... |neojj-events|
+  13. jj Concepts .......................... |neojj-jj-concepts|
+
+==============================================================================
+1. INTRODUCTION                                          *neojj-introduction*
+
+Neojj is a Magit-inspired interface for jj (Jujutsu VCS) in Neovim. It
+provides a rich, interactive text-based UI for performing version control
+tasks without leaving your editor.
+
+Unlike git, jj has no staging area. All file changes in the working copy
+are automatically part of the current change. This fundamental difference
+means Neojj presents a simpler, more streamlined interface: there is no
+need to stage or unstage files before committing. You simply edit files,
+and they are part of your current change.
+
+Neojj is a hard fork of Neogit, adapted to work with jj's change-based
+workflow rather than git's commit-based workflow.
+
+==============================================================================
+2. REQUIREMENTS                                          *neojj-requirements*
+
+- Neovim >= 0.10
+- jj (Jujutsu VCS) installed and available in `$PATH`
+- plenary.nvim (https://github.com/nvim-lua/plenary.nvim)
+
+Optional dependencies:
+
+- diffview.nvim or codediff.nvim   For side-by-side diff viewing
+- telescope.nvim                   For fuzzy finding menus
+- fzf-lua                         Alternative fuzzy finder
+- mini.pick                       Alternative fuzzy finder
+- snacks.nvim                     Alternative fuzzy finder (snacks.picker)
+
+==============================================================================
+3. SETUP                                                      *neojj-setup*
+
+Add Neojj to your plugin manager and call setup: >lua
+
+    require("neojj").setup({
+      -- See |neojj-configuration| for all options
+    })
+<
+==============================================================================
+4. COMMANDS                                                *neojj-commands*
+
+                                                                    *:Neojj*
+:Neojj                  Open the Neojj status buffer for the current
+                        workspace.
+
+:Neojj {popup}          Open a specific popup directly. Valid values
+                        include: commit, bookmark, change, squash, diff,
+                        fetch, push, rebase, log, remote, split, resolve,
+                        yank, help.
+
+:Neojj cwd={path}       Open the status buffer for a specific workspace
+                        path.
+
+:Neojj kind={kind}      Open with a specific window style. Valid values:
+                        `tab`, `split`, `vsplit`, `floating`, `replace`,
+                        `auto`.
+
+                                                         *:NeojjResetState*
+:NeojjResetState        Reset all persisted popup switch/option state.
+                        Useful when saved settings become stale or
+                        problematic.
+
+==============================================================================
+5. CONFIGURATION                                      *neojj-configuration*
+
+The full configuration is passed to `require("neojj").setup()`. Below are
+the available options with their defaults: >lua
+
+    require("neojj").setup({
+      -- Hides the hints at the top of the status buffer
+      disable_hint = false,
+
+      -- Disables changing the buffer highlights based on cursor position
+      disable_context_highlighting = false,
+
+      -- Disables signs for sections/items/hunks
+      disable_signs = false,
+
+      -- Disable line numbers and relative line numbers in Neojj buffers
+      disable_line_numbers = true,
+      disable_relative_line_numbers = true,
+
+      -- Changes what mode the commit editor starts in.
+      --   true    = stay in normal mode
+      --   false   = enter insert mode
+      --   "auto"  = insert mode if message is empty, else normal
+      disable_insert_on_commit = "auto",
+
+      -- Watch the .jj/ directory for changes and auto-refresh
+      filewatcher = {
+        interval = 1000,
+        enabled = true,
+      },
+
+      -- Graph style for log views:
+      --   "ascii"   standard ASCII graph
+      --   "unicode" Unicode box-drawing characters
+      --   "kitty"   Kitty-compatible graph symbols
+      graph_style = "ascii",
+
+      -- Date formatting (nil = relative dates)
+      commit_date_format = nil,
+      log_date_format = nil,
+
+      -- Persist popup switch/option values across sessions
+      remember_settings = true,
+      use_per_project_settings = true,
+      ignored_settings = {},
+
+      -- Configure highlight group features
+      highlight = {
+        italic = true,
+        bold = true,
+        underline = true,
+      },
+
+      -- Set to false to disable all default keymaps
+      use_default_keymaps = true,
+
+      -- Auto-refresh status buffer after operations
+      auto_refresh = true,
+
+      -- Default window style for opening Neojj
+      kind = "tab",
+
+      -- Floating window style
+      floating = {
+        relative = "editor",
+        width = 0.8,
+        height = 0.7,
+        style = "minimal",
+        border = "rounded",
+      },
+
+      -- Time (ms) before showing output console for slow commands
+      console_timeout = 2000,
+      auto_show_console = true,
+      auto_close_console = true,
+
+      -- Notification icon
+      notification_icon = "󰊢",
+
+      -- Status buffer options
+      status = {
+        recent_commit_count = 10,
+        HEAD_padding = 10,
+        HEAD_folded = false,
+        mode_padding = 3,
+        mode_text = {
+          M = "modified",
+          N = "new file",
+          A = "added",
+          D = "deleted",
+          C = "copied",
+          U = "updated",
+          R = "renamed",
+        },
+      },
+
+      -- Commit editor options
+      commit_editor = {
+        kind = "tab",
+        spell_check = true,
+      },
+
+      -- Log view options
+      log_view = {
+        kind = "tab",
+      },
+
+      -- Popup options
+      popup = {
+        kind = "split",
+      },
+
+      -- Preview buffer options
+      preview_buffer = {
+        kind = "floating_console",
+      },
+
+      -- Signs for fold indicators
+      signs = {
+        -- { CLOSED, OPENED }
+        hunk = { "", "" },
+        item = { ">", "v" },
+        section = { ">", "v" },
+      },
+
+      -- Integration auto-detection (set to false to disable)
+      integrations = {
+        telescope = nil,   -- Use telescope for menu selection
+        diffview = nil,    -- sindrets/diffview.nvim
+        codediff = nil,    -- esmuellert/codediff.nvim
+        fzf_lua = nil,     -- ibhagwan/fzf-lua
+        mini_pick = nil,   -- echasnovski/mini.pick
+        snacks = nil,      -- folke/snacks.nvim
+      },
+
+      -- Which diff viewer to use (nil = auto-detect)
+      diff_viewer = nil,
+
+      -- Forge (GitHub, ...) integration: annotate bookmarks with open PRs
+      -- and let "o" open the PR in the browser. Requires the forge CLI
+      -- (`gh`) to be installed; disabled silently otherwise.
+      forge = {
+        pr_integration = true,
+        hosts = {},  -- e.g. { github = { "git.yourcompany.com" } }
+      },
+
+      -- Section visibility and fold state
+      sections = {
+        modified = {
+          folded = false,
+          hidden = false,
+        },
+        conflicts = {
+          folded = false,
+          hidden = false,
+        },
+        recent = {
+          folded = true,
+          hidden = false,
+        },
+      },
+    })
+<
+==============================================================================
+6. MAPPINGS                                                *neojj-mappings*
+
+All mappings can be customized via `require("neojj").setup({ mappings = ... })`.
+
+STATUS BUFFER ~
+                                                    *neojj-mappings-status*
+  Key            Action ~
+  `j`              Move cursor down
+  `k`              Move cursor up
+  `<Tab>`          Toggle fold of current section/item
+  `<CR>`           Go to file under cursor
+  `<S-CR>`         Peek file under cursor
+  `<C-v>`          Open file in vertical split
+  `<C-x>`          Open file in horizontal split
+  `<C-t>`          Open file in new tab
+  `o`              Open tree view
+  `x`              Discard / abandon the item under cursor
+  `q`              Close the status buffer
+  `Q`              Open command input
+  `$`              Show command history
+  `Y`              Yank selected item
+  `{`              Go to previous hunk header
+  `}`              Go to next hunk header
+  `[c`             Scroll preview up
+  `]c`             Scroll preview down
+  `<C-k>`          Peek up
+  `<C-j>`          Peek down
+  `<C-r>`          Refresh buffer
+  `1` `2` `3` `4`     Set fold depth
+  `I`              Init repository
+
+POPUP TRIGGERS (from status buffer) ~
+                                                    *neojj-mappings-popups*
+  Key     Popup ~
+  `?`       Help popup (keybinding reference)
+  `b`       Bookmark popup
+  `c`       Commit popup
+  `d`       Diff popup
+  `f`       Fetch popup
+  `l`       Log popup
+  `m`       Remote popup
+  `p`       Push popup
+  `r`       Rebase popup
+  `s`       Squash popup
+  `u`       Undo popup
+  `w`       Workspace popup
+
+COMMIT EDITOR ~
+                                                    *neojj-mappings-editor*
+  Key            Action ~
+  `q`              Close editor
+  `<C-c><C-c>`     Submit (save and close)
+  `<C-c><C-k>`     Abort (discard and close)
+  `<M-p>`          Previous commit message
+  `<M-n>`          Next commit message
+  `<M-r>`          Reset commit message
+
+FINDER ~
+                                                    *neojj-mappings-finder*
+  Key            Action ~
+  `<CR>`           Select item
+  `<C-c>` / `<Esc>`  Close finder
+  `<C-n>` / `<Down>` Next item
+  `<C-p>` / `<Up>`   Previous item
+  `<Tab>`          Insert completion
+  `<C-y>`          Copy selection
+  `<Space>`        Toggle multi-select (next)
+  `<S-Space>`      Toggle multi-select (previous)
+
+==============================================================================
+7. POPUPS                                                    *neojj-popups*
+
+Popups are transient menus that appear when you press a key in the status
+buffer. Each popup presents a set of actions, switches, and options.
+
+BOOKMARK POPUP ~
+                                                  *neojj-bookmark-popup*
+  `c`   Create bookmark
+  `m`   Move bookmark to current change
+  `d`   Delete bookmark
+  `f`   Forget bookmark
+  `t`   Track remote bookmark
+
+CHANGE POPUP ~
+                                                    *neojj-change-popup*
+  `n`   New change (creates a new empty change on top of @)
+  `N`   New change on a specific revision
+  `m`   Merge (create a new change with multiple parents)
+
+COMMIT POPUP ~
+                                                    *neojj-commit-popup*
+  `c`   Commit (finalize current change, start new empty change)
+  `d`   Describe (edit description of current change)
+  `m`   Commit with inline message
+
+DIFF POPUP ~
+                                                      *neojj-diff-popup*
+  `d`   Diff of current change
+  `r`   Diff of a range of changes
+  `t`   Diff from trunk() to the working copy (@)
+  `w`   Diff of working copy
+  `c`   Diff of a specific change
+
+FETCH POPUP ~
+                                                     *neojj-fetch-popup*
+  `a`   Fetch from all remotes
+  `r`   Fetch from a specific remote
+
+HELP POPUP ~
+                                                      *neojj-help-popup*
+  Displays a reference of all available keybindings and popup triggers.
+
+LOG POPUP ~
+                                                       *neojj-log-popup*
+  `l`   Log of all changes
+  `r`   Log filtered by revset
+  `b`   Log of a specific bookmark
+  `o`   Operations log
+
+PUSH POPUP ~
+                                                      *neojj-push-popup*
+  `b`   Push a bookmark
+  `c`   Push a change
+  `a`   Push all bookmarks
+
+REBASE POPUP ~
+                                                    *neojj-rebase-popup*
+  `s`   Rebase source onto destination
+  `b`   Rebase bookmark onto destination
+  `r`   Rebase single revision onto destination
+
+REMOTE POPUP ~
+                                                    *neojj-remote-popup*
+  `a`   Add a new remote
+  `r`   Rename a remote
+  `d`   Remove a remote
+  `l`   List all remotes
+
+RESOLVE POPUP ~
+                                                   *neojj-resolve-popup*
+  `r`   Resolve a conflicted file
+  `l`   List all conflicts
+
+SPLIT POPUP ~
+                                                     *neojj-split-popup*
+  `s`   Split the current change
+  `r`   Split a specific revision
+
+SQUASH POPUP ~
+                                                    *neojj-squash-popup*
+  `p`   Squash into parent
+  `r`   Squash into a specific revision
+
+YANK POPUP ~
+                                                      *neojj-yank-popup*
+  `c`   Yank change ID
+  `C`   Yank commit ID
+  `s`   Yank subject (first line of description)
+  `m`   Yank full message (description)
+  `d`   Yank diff
+  `a`   Yank author
+
+==============================================================================
+8. STATUS BUFFER                                            *neojj-status*
+
+The status buffer is the main interface of Neojj. Open it with `:Neojj`.
+
+It displays the following sections:
+
+CURRENT CHANGE INFO ~
+
+Shows the current working copy change (@), including:
+- Change ID (the immutable, short identifier)
+- Description (if set)
+- Parent change (@-) with its change ID, description, and bookmarks
+
+MODIFIED FILES ~
+
+A single flat list of all modified files in the working copy. Unlike git,
+there is no staging area -- all changes are automatically part of the
+current change. Files can be expanded to show inline diffs with hunks.
+
+CONFLICTS ~
+
+When the current change contains merge conflicts, this section lists the
+conflicted files. Conflicts in jj are first-class: they are stored in
+changes and do not block other operations.
+
+RECENT CHANGES ~
+
+A log of recent changes in the repository, showing change IDs,
+descriptions, authors, and bookmarks.
+
+BOOKMARKS ~
+
+Lists local and tracked remote bookmarks with their associated changes.
+
+==============================================================================
+9. LOG VIEW                                              *neojj-log-view*
+
+The log view provides a detailed graph of repository history. Open it via
+the Log popup (`l` from status buffer).
+
+Features:
+- Graphical display of change history with parent relationships
+- Revset filtering for focused views
+- Bookmark and change metadata display
+- Pagination for large histories
+
+The graph style can be configured via `graph_style` in setup (see
+|neojj-configuration|).
+
+==============================================================================
+10. OPERATIONS VIEW                                     *neojj-operations*
+
+jj records every operation performed on the repository. The operations
+view lets you browse this log and perform undo/restore actions.
+
+Access via the Log popup's operations log action (`o` in the Log popup).
+
+Features:
+- Browse the full operation log
+- Undo the last operation
+- Restore the repository to any previous operation state
+
+==============================================================================
+11. HIGHLIGHTS                                          *neojj-highlights*
+
+Neojj defines the following highlight groups. If you set any of these
+before the plugin loads, your settings will be respected. Otherwise,
+sensible defaults are derived from your colorscheme.
+
+You can provide a custom color palette via `config.highlight`: >lua
+
+    require("neojj").setup({
+      highlight = {
+        italic = true,
+        bold = true,
+        underline = true,
+        -- Optional palette overrides:
+        -- bg0, bg1, bg2, bg3, grey, white, red, bg_red, line_red,
+        -- orange, bg_orange, yellow, bg_yellow, green, bg_green,
+        -- line_green, cyan, bg_cyan, blue, bg_blue, purple, bg_purple,
+        -- md_purple
+      },
+    })
+<
+
+JJ-SPECIFIC HIGHLIGHTS ~
+
+  Group                    Description ~
+  `NeojjChangeId`            Change ID (the immutable short identifier)
+  `NeojjObjectId`            Commit/object SHA hash
+  `NeojjBookmark`            Bookmark names
+  `NeojjBranch`              Local branch references
+  `NeojjBranchHead`          Accent for current HEAD in log view
+  `NeojjConflict`            Conflict markers and indicators
+  `NeojjImmutable`           Immutable changes
+  `NeojjWorkingCopy`         Working copy indicator (@)
+  `NeojjSubtleText`          De-emphasized text (timestamps, etc.)
+
+DIFF HIGHLIGHTS ~
+
+  `NeojjDiffAdd`             Added lines in diffs
+  `NeojjDiffDelete`          Deleted lines in diffs
+  `NeojjDiffContext`         Context lines in diffs
+  `NeojjDiffHeader`          Diff header lines
+  `NeojjHunkHeader`          Hunk header lines
+  `NeojjHunkMergeHeader`     Merge hunk header lines
+
+Context-aware variants (applied when cursor is within the region):
+
+  `NeojjDiffAddHighlight`    Highlighted added lines
+  `NeojjDiffDeleteHighlight` Highlighted deleted lines
+  `NeojjDiffContextHighlight` Highlighted context lines
+  `NeojjDiffHeaderHighlight` Highlighted diff header
+  `NeojjHunkHeaderHighlight` Highlighted hunk header
+
+Cursor-line variants:
+
+  `NeojjDiffAddCursor`       Cursor line in added region
+  `NeojjDiffDeleteCursor`    Cursor line in deleted region
+  `NeojjDiffContextCursor`   Cursor line in context region
+  `NeojjDiffHeaderCursor`    Cursor line on diff header
+  `NeojjHunkHeaderCursor`    Cursor line on hunk header
+
+GRAPH HIGHLIGHTS ~
+
+  `NeojjGraphAuthor`         Author name in graph view
+  `NeojjGraphRed`            Red graph lines
+  `NeojjGraphGreen`          Green graph lines
+  `NeojjGraphBlue`           Blue graph lines
+  `NeojjGraphYellow`         Yellow graph lines
+  `NeojjGraphPurple`         Purple graph lines
+  `NeojjGraphCyan`           Cyan graph lines
+  `NeojjGraphWhite`          White graph lines
+  `NeojjGraphGray`           Gray graph lines
+  `NeojjGraphOrange`         Orange graph lines
+  `NeojjGraphBlack`          Black graph lines
+  `NeojjGraphBoldRed`        Bold red graph lines
+  `NeojjGraphBoldGreen`      Bold green graph lines
+  `NeojjGraphBoldBlue`       Bold blue graph lines
+  `NeojjGraphBoldYellow`     Bold yellow graph lines
+  `NeojjGraphBoldPurple`     Bold purple graph lines
+  `NeojjGraphBoldCyan`       Bold cyan graph lines
+  `NeojjGraphBoldWhite`      Bold white graph lines
+  `NeojjGraphBoldGray`       Bold gray graph lines
+  `NeojjGraphBoldBlack`      Bold black graph lines
+
+STATUS BUFFER HIGHLIGHTS ~
+
+  `NeojjNormal`              Normal text in Neojj buffers
+  `NeojjFloat`               Normal text in floating windows
+  `NeojjFloatBorder`         Border of floating windows
+  `NeojjRemote`              Remote references
+  `NeojjFold`                Folded text
+  `NeojjFoldColumn`          Fold column
+  `NeojjSignColumn`          Sign column
+  `NeojjSectionHeader`       Section header text
+  `NeojjSectionHeaderCount`  Count number in section headers
+  `NeojjFilePath`            File paths
+  `NeojjActiveItem`          Currently active item highlight
+
+CHANGE MODE HIGHLIGHTS ~
+
+  `NeojjChangeModified`      Modified files
+  `NeojjChangeAdded`         Added files
+  `NeojjChangeDeleted`       Deleted files
+  `NeojjChangeRenamed`       Renamed files
+  `NeojjChangeUpdated`       Updated files
+  `NeojjChangeCopied`        Copied files
+  `NeojjChangeNewFile`       New files
+
+POPUP HIGHLIGHTS ~
+
+  `NeojjPopupSectionTitle`   Section headers in popups
+  `NeojjPopupBold`           Emphasized text in popups
+  `NeojjPopupSwitchKey`      Key for toggling a switch
+  `NeojjPopupSwitchEnabled`  Enabled switch flag
+  `NeojjPopupSwitchDisabled` Disabled switch flag
+  `NeojjPopupOptionKey`      Key for setting an option
+  `NeojjPopupOptionEnabled`  Option with a value set
+  `NeojjPopupOptionDisabled` Option without a value
+  `NeojjPopupActionKey`      Key that triggers an action
+  `NeojjPopupActionDisabled` Key for unimplemented action
+
+COMMAND HISTORY HIGHLIGHTS ~
+
+  `NeojjCommandText`         Command text that was run
+  `NeojjCommandTime`         Execution time
+  `NeojjCommandCodeNormal`   Successful exit status (0)
+  `NeojjCommandCodeError`    Non-zero exit status
+
+==============================================================================
+12. EVENTS                                                *neojj-events*
+
+Neojj emits autocmd events using the `User` pattern. You can listen for
+them with: >lua
+
+    vim.api.nvim_create_autocmd("User", {
+      pattern = "NeojjStatusRefreshed",
+      callback = function()
+        -- your handler
+      end,
+    })
+<
+
+Available events:
+
+  Event                       When ~
+  `NeojjStatusRefreshed`        Status buffer has been reloaded
+  `NeojjCommitComplete`         A commit/describe operation completed
+  `NeojjPushComplete`           A push operation completed
+  `NeojjFetchComplete`          A fetch operation completed
+  `NeojjSquashComplete`         A squash operation completed
+
+==============================================================================
+13. JJ CONCEPTS                                        *neojj-jj-concepts*
+
+A brief reference of jj concepts for users coming from git:
+
+CHANGE ID VS COMMIT ID ~
+
+Every change in jj has two identifiers:
+- Change ID: An immutable identifier that stays the same even when the
+  change is rewritten (amended, rebased, etc.). This is the primary way
+  to refer to changes.
+- Commit ID: A content-addressed hash (like git's SHA) that changes
+  whenever the change is rewritten.
+
+WORKING COPY (@) ~
+
+`@` refers to the current working copy change. `@-` refers to its parent.
+Unlike git, the working copy is always a change -- there is no detached
+HEAD state.
+
+NO STAGING AREA ~
+
+All file modifications in the working copy are automatically part of the
+current change. There is no `git add` equivalent. To move changes between
+revisions, use `split` or `squash`.
+
+BOOKMARKS ~
+
+Bookmarks are named pointers to changes, analogous to git branches. They
+can be local or tracked from remotes. Unlike git branches, they do not
+automatically advance on commit.
+
+OPERATIONS LOG ~
+
+Every operation (commit, rebase, bookmark move, etc.) is recorded in an
+append-only log. You can view this log and undo any operation, restoring
+the repository to a previous state.
+
+FIRST-CLASS CONFLICTS ~
+
+Conflicts in jj are stored directly in changes. They do not block other
+operations -- you can rebase, create new changes, and continue working
+even when conflicts exist. Resolve them when convenient.
+
+REVSETS ~
+
+Revsets are a functional query language for selecting changes. Examples:
+- `@`              the working copy change
+- `@-`             parent of working copy
+- `bookmarks()`    all bookmarked changes
+- `ancestors(@)`   all ancestors of working copy
+- `description(pattern)` changes matching description
+
+For full revset documentation, see `jj help revsets`.
+
+==============================================================================
+vim:tw=78:ts=8:ft=help:norl:
