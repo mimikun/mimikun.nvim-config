@@ -1,5 +1,9 @@
+-- Forward-declared so the `callback` closure below can read `opts.timeout`
+-- instead of duplicating its value.
 ---@type table
-local opts = {
+local opts
+
+opts = {
   -- Maximum time (in milliseconds) to consider key presses as repeated.
   ---@type number
   max_time = 1000,
@@ -74,7 +78,7 @@ local opts = {
   callback = function(text)
     vim.notify(text, vim.log.levels.WARN, {
       title = "Hardtime",
-      timeout = 3000,
+      timeout = opts.timeout,
     })
   end,
 }
