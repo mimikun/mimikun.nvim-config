@@ -10,9 +10,6 @@ local spec = {
     local oil = require("oil")
     local opts = require("plugins.oil-nvim.opts")
 
-    -- Toggle file detail view
-    local detail = false
-
     -- Declare a global function to retrieve the current directory
     function _G.get_oil_winbar()
       local bufnr = vim.api.nvim_win_get_buf(vim.g.statusline_winid)

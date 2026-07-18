@@ -1,5 +1,8 @@
 local oil = require("oil")
 
+-- Toggle state for the file detail view, flipped by the `gd` keymap below
+local detail = false
+
 -- Hide gitignored files and show git tracked hidden files
 -- helper function to parse output
 local function parse_output(proc)
