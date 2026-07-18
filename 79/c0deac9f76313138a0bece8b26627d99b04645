@@ -1,0 +1,24 @@
+lua/plugins/mason-lspconfig-nvim/opts/ensure_installed.lua
+  s_bd9e073a7987dd::t_4c48fb610d1a5c 389-390
+  s_bd9e073a7987dd::t_fe1fe2b6b94920 43-44
+  s_bd9e073a7987dd::t_cadae31225064a 121-122
+  s_bd9e073a7987dd::t_d7a1f5795fd489 142-143
+lua/plugins/mason-lspconfig-nvim/opts/automatic_enable.lua
+  s_bd9e073a7987dd::t_7fceecf1e6556b 204-205
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.14",
+  "base_commit_sha": "79c0deac9f76313138a0bece8b26627d99b04645",
+  "prompts": {},
+  "sessions": {
+    "s_bd9e073a7987dd": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "177c38fe-ae64-4283-99c0-41f5c851d852",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
