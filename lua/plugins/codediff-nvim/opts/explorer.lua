@@ -1,3 +1,6 @@
+-- The Nerd Font icons below use `\u{XXXX}`, a LuaJIT 2.1 escape that selene's
+-- lua51 base does not know about.
+-- selene: allow(bad_string_escape)
 -- Explorer panel configuration
 local explorer = {
   ---@type string| "left" | "bottom"

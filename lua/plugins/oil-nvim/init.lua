@@ -10,7 +10,9 @@ local spec = {
     local oil = require("oil")
     local opts = require("plugins.oil-nvim.opts")
 
-    -- Declare a global function to retrieve the current directory
+    -- Declare a global function to retrieve the current directory.
+    -- It has to be global: 'winbar' reaches it through `v:lua`.
+    -- selene: allow(global_usage)
     function _G.get_oil_winbar()
       local bufnr = vim.api.nvim_win_get_buf(vim.g.statusline_winid)
       local dir = oil.get_current_dir(bufnr)
