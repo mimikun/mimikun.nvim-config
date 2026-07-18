@@ -1,0 +1,8 @@
+tmp
+node_modules
+nvim-test
+deps
+spec/fixtures/basic/bin
+spec/fixtures/basic/cache
+spec/fixtures/basic/data
+
