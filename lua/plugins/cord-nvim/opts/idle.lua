@@ -38,9 +38,9 @@ local idle = {
   -- State shown when idle
   ---@type string | fun(opts: CordOpts):string
   state = function(_opts)
-    local state
+    local _state
 
-    state = nil
+    _state = nil
 
     return nil
   end,

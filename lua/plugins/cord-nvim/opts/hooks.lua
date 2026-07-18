@@ -1,5 +1,5 @@
 ---@type table
-local quotes = {
+local _quotes = {
   "Vanitas vanitatum et omnia vanitas.",
 }
 

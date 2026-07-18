@@ -2,7 +2,7 @@
 local text
 
 ---@type crates.UserCompletionTextConfig
-local plain = {
+local _plain = {
   ---@type string
   prerelease = " pre-release ",
 

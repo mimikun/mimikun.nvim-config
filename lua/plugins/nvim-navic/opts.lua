@@ -30,7 +30,7 @@ local default_icons = {
 }
 
 ---@type table | nil
-local vscode_like_icons = {
+local _vscode_like_icons = {
   enabled = true,
   File = " ",
   Module = " ",

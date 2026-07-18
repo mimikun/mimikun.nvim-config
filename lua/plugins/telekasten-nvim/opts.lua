@@ -1,6 +1,6 @@
-local mac_home = vim.fn.expand("$HOME/Documents/Zettelkasten")
+local _mac_home = vim.fn.expand("$HOME/Documents/Zettelkasten")
 local linux_home = vim.fn.expand("$HOME/Documents/Zettelkasten")
-local win_home = vim.fn.expand("E:/Documents/Zettelkasten")
+local _win_home = vim.fn.expand("E:/Documents/Zettelkasten")
 local home = linux_home
 
 ---@type table

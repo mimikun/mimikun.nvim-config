@@ -1,12 +1,12 @@
 local opts_max_concurrent_installers
 opts_max_concurrent_installers = 4
 
-local opts_registries
-opts_registries = {
+local _opts_registries
+_opts_registries = {
   "lua:my-registry",
   "github:mason-org/mason-registry",
 }
-opts_registries = {
+_opts_registries = {
   "github:mason-org/mason-registry",
 }
 

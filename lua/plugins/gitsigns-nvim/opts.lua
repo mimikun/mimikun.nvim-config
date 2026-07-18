@@ -103,7 +103,7 @@ current_line_blame_formatter_nc
 ---| 'changedelete'
 ---| 'untracked'
 
-local gitsigns = require("gitsigns")
+local _gitsigns = require("gitsigns")
 
 ---@type Gitsigns.Config
 local opts = {

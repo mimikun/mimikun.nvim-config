@@ -2,7 +2,7 @@
 local text
 
 ---@type crates.UserTextConfig
-local plain = {
+local _plain = {
   ---@type string
   loading = "  Loading...",
 

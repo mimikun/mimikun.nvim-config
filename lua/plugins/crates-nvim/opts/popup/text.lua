@@ -2,7 +2,7 @@
 local text
 
 ---@type crates.UserPopupTextConfig
-local plain = {
+local _plain = {
   ---@type string
   title = "# %s",
 

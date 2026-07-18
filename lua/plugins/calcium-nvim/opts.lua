@@ -3,7 +3,7 @@ local opts = {
   -- TODO: it
 }
 
-local readme = {
+local _readme = {
   -- default configuration
   notifications = true, -- notify result
   default_mode = "append", -- or `replace` the expression
@@ -16,7 +16,7 @@ local readme = {
     result_variable = "ans", -- name of the variable for the last computation result
   },
 }
-local defaults = {
+local _defaults = {
   notifications = true,
   default_mode = "append",
   scratchpad = {
