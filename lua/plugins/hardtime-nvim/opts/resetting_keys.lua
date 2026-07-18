@@ -1,4 +1,5 @@
----@type table Keys in what modes that reset the count.
+-- Keys in what modes that reset the count.
+---@type table
 local resetting_keys = {
   ["1"] = { "n", "x" },
   ["2"] = { "n", "x" },

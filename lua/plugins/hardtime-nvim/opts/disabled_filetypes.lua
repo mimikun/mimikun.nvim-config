@@ -1,4 +1,5 @@
----@type table Hardtime is disabled under these filetypes.
+-- Hardtime is disabled under these filetypes.
+---@type table
 local disabled_filetypes = {
   ["aerial"] = true,
   ["alpha"] = true,

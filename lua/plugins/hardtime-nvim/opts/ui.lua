@@ -1,4 +1,5 @@
----@type table An option to customize the popup for the `Hardtime report`.
+-- An option to customize the popup for the `Hardtime report`.
+---@type table
 local ui = {
   enter = true,
   focusable = true,

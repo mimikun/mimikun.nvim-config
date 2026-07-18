@@ -1,4 +1,5 @@
----@type table Keys in what modes are disabled.
+-- Keys in what modes are disabled.
+---@type table
 local disabled_keys = {
   ["<Up>"] = { "", "i" },
   ["<Down>"] = { "", "i" },

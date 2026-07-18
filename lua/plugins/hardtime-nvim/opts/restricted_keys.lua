@@ -1,4 +1,5 @@
----@type table Keys in what modes triggering the count mechanism.
+-- Keys in what modes triggering the count mechanism.
+---@type table
 local restricted_keys = {
   ["h"] = { "n", "x" },
   ["j"] = { "n", "x" },
