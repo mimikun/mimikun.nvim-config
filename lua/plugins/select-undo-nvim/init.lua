@@ -7,8 +7,8 @@ local spec = {
   event = require("plugins.select-undo-nvim.events"),
   --opts = require("plugins.select-undo-nvim.opts"),
   config = function()
-    local _opts = require("plugins.select-undo-nvim.opts")
-    require("select-undo").setup()
+    local opts = require("plugins.select-undo-nvim.opts")
+    require("select-undo").setup(opts)
   end,
   --cond = false,
   --enabled = false,
