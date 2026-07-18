@@ -1,0 +1,21 @@
+lua/plugins/codediff-nvim/opts/explorer.lua
+  s_357ecbaa4a3a59::t_4f8d728794c6d3 1-3
+lua/plugins/oil-nvim/init.lua
+  s_357ecbaa4a3a59::t_24ef6f6fae058e 13-15
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.14",
+  "base_commit_sha": "f521d6f78046a14dc570b5521e08ced84125619a",
+  "prompts": {},
+  "sessions": {
+    "s_357ecbaa4a3a59": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "852a3a86-ca58-4b51-bc02-1834a8e0c251",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
