@@ -1,0 +1,19 @@
+lua/plugins/select-undo-nvim/init.lua
+  s_357ecbaa4a3a59::t_e3c339a1b35e02 10-11
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.14",
+  "base_commit_sha": "c23fe55bcbe39bc9a9fb5353d2c433be6b8a62dc",
+  "prompts": {},
+  "sessions": {
+    "s_357ecbaa4a3a59": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "852a3a86-ca58-4b51-bc02-1834a8e0c251",
+        "model": "unknown"
+      },
+      "human_author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
