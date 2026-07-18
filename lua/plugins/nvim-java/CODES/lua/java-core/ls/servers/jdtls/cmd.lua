@@ -1,0 +1,187 @@
+local List = require('java-core.utils.list')
+local path = require('java-core.utils.path')
+local system = require('java-core.utils.system')
+local log = require('java-core.utils.log2')
+local err = require('java-core.utils.errors')
+local java_version_map = require('java-core.constants.java_version')
+local lsp_utils = require('java-core.utils.lsp')
+local str = require('java-core.utils.str')
+local resolver = require('pkgm.resolve')
+
+local M = {}
+
+--- Returns a function that returns the command to start jdtls
+---@param config java.Config
+function M.get_cmd(config)
+	---@param dispatchers? vim.lsp.rpc.Dispatchers
+	---@param lsp_config vim.lsp.ClientConfig
+	return function(dispatchers, lsp_config)
+		local cmd = M.get_jvm_args(config):concat(M.get_jar_args(config))
+
+		-- NOTE: eventhough we are setting the PATH env var, due to a bug, it's not
+		-- working on Windows. So just lanching 'java' will result in executing the
+		-- system java. So as a workaround, we use the absolute path to java instead
+		-- So following check is not needed when we have auto_install set to true
+		-- @see https://github.com/neovim/neovim/issues/36818
+		if not config.jdk.auto_install and not config.jdk.path then
+			M.validate_java_version(config, lsp_config.cmd_env)
+		end
+
+		log.debug('Starting jdtls with cmd', cmd)
+
+		local result = vim.lsp.rpc.start(cmd, dispatchers, {
+			cwd = lsp_config.cmd_cwd,
+			env = lsp_config.cmd_env,
+			detached = lsp_config.detached,
+		})
+
+		return result
+	end
+end
+
+---@private
+---@param config java.Config
+---@return java-core.List
+function M.get_jvm_args(config)
+	local use_lombok = config.lombok.enable
+	local jdtls_root = resolver.get_jdtls_root(config)
+	local jdtls_config = M.get_jdtls_config_path(jdtls_root)
+
+	local java_exe = 'java'
+
+	-- NOTE: eventhough we are setting the PATH env var, due to a bug, it's not
+	-- working on Windows. So we are using the absolute path to java instead
+	-- @see https://github.com/neovim/neovim/issues/36818
+	if config.jdk.auto_install or config.jdk.path then
+		local java_home = resolver.get_jdk_home(config)
+		java_exe = path.join(java_home, 'bin', 'java')
+	end
+
+	local jvm_args = List:new({
+		java_exe,
+		'-Declipse.application=org.eclipse.jdt.ls.core.id1',
+		'-Dosgi.bundles.defaultStartLevel=4',
+		'-Declipse.product=org.eclipse.jdt.ls.core.product',
+		'-Dosgi.checkConfiguration=true',
+		'-Dosgi.sharedConfiguration.area=' .. jdtls_config,
+		'-Dosgi.sharedConfiguration.area.readOnly=true',
+		'-Dosgi.configuration.cascaded=true',
+		'-Xms1G',
+		'--add-modules=ALL-SYSTEM',
+
+		'--add-opens',
+		'java.base/java.util=ALL-UNNAMED',
+
+		'--add-opens',
+		'java.base/java.lang=ALL-UNNAMED',
+	})
+
+	-- Adding lombok
+	if use_lombok then
+		jvm_args:push('-javaagent:' .. resolver.get_lombok_path(config))
+	end
+
+	return jvm_args
+end
+
+---@private
+---@param jdtls_root string
+---@return string
+function M.get_jdtls_config_path(jdtls_root)
+	local config_path = path.join(jdtls_root, system.get_config_suffix())
+
+	if vim.fn.isdirectory(config_path) == 1 then
+		return config_path
+	end
+
+	local os_config_path = path.join(jdtls_root, 'config_' .. system.get_os())
+
+	if vim.fn.isdirectory(os_config_path) == 1 then
+		return os_config_path
+	end
+
+	err.throw(('nvim-java: jdtls config directory not found at %s or %s'):format(config_path, os_config_path))
+end
+
+---@private
+---@param config java.Config
+---@param cwd? string
+---@return java-core.List
+function M.get_jar_args(config, cwd)
+	local jdtls_root = resolver.get_jdtls_root(config)
+	cwd = cwd or vim.fn.getcwd()
+
+	local launcher_reg = path.join(jdtls_root, 'plugins', 'org.eclipse.equinox.launcher_*.jar')
+	local equinox_launcher = vim.fn.glob(path.join(jdtls_root, 'plugins', 'org.eclipse.equinox.launcher_*.jar'))
+
+	if equinox_launcher == '' then
+		-- stylua: ignore
+		local msg = string.format('JDTLS equinox launcher not found. Expected path: %s. ', launcher_reg)
+		err.throw(msg)
+	end
+
+	return List:new({
+		'-jar',
+		equinox_launcher,
+
+		'-configuration',
+		lsp_utils.get_jdtls_cache_conf_path(jdtls_root),
+
+		'-data',
+		lsp_utils.get_jdtls_cache_data_path(cwd),
+	})
+end
+
+---@private
+---@param config java.Config
+---@param env table
+function M.validate_java_version(config, env)
+	local curr_ver = M.get_java_major_version(env)
+	local exp_ver = java_version_map[config.jdtls.version]
+
+	if not exp_ver then
+		err.throw(
+			str.multiline(
+				'We maintain a jdlts to java version map to provide a better error message.',
+				'The jdtls version you are using is not supported yet',
+				'Please open an issue on https://github.com/nvim-java/nvim-java/issues',
+				'OR submit a PR',
+				'Version map:',
+				'https://github.com/nvim-java/nvim-java/blob/main/lua/java-core/constants/java_version.lua'
+			)
+		)
+	end
+
+	if not (curr_ver >= exp_ver.from and curr_ver <= exp_ver.to) then
+		local msg = string.format(
+			'Java version mismatch: JDTLS %s requires Java %d <= java >= %d, but found Java %d',
+			config.jdtls.version,
+			exp_ver.from,
+			exp_ver.to,
+			curr_ver
+		)
+
+		err.throw(msg)
+	end
+end
+
+---@private
+---@param env table
+function M.get_java_major_version(env)
+	local proc = vim.system({ 'java', '-version' }, { env = env }):wait()
+	local version = proc.stderr or proc.stdout or ''
+
+	local major = version:match('version (%d+)')
+		or version:match('version "(%d+)')
+		or version:match('openjdk (%d+)')
+		or version:match('java (%d+)')
+
+	if major then
+		return tonumber(major)
+	end
+
+	local msg = 'Could not determine java version from::' .. version
+	err.throw(msg)
+end
+
+return M

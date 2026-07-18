@@ -1,0 +1,10 @@
+{
+  "tasks": [
+    {
+      "label": "run current test file",
+      "type": "shell",
+      "command": "make test FILE=${file}",
+      "problemMatcher": []
+    }
+  ]
+}

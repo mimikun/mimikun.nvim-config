@@ -1,0 +1,112 @@
+local runner_api = require('java.api.runner')
+local settings_api = require('java.api.settings')
+local profile_ui = require('java.ui.profile')
+
+local M = {}
+
+---@param custom_config java.PartialConfig | nil
+function M.setup(custom_config)
+	local default_conf = require('java.config')
+	local test_api = require('java-test')
+
+	local config = vim.tbl_deep_extend('force', default_conf, custom_config or {})
+
+	vim.g.nvim_java_config = config
+
+	----------------------------------------------------------------------
+	--                              checks                              --
+	----------------------------------------------------------------------
+	require('java.checks').run(config)
+
+	----------------------------------------------------------------------
+	--                          logger setup                            --
+	----------------------------------------------------------------------
+	if config.log then
+		require('java-core.utils.log2').setup(config.log --[[@as java-core.PartialLog2Config]])
+	end
+
+	----------------------------------------------------------------------
+	--                       package installation                       --
+	----------------------------------------------------------------------
+	local pkgm = require('pkgm.resolve')
+
+	pkgm.install('jdtls', config.jdtls)
+
+	if config.java_test.enable then
+		----------------------------------------------------------------------
+		--                               test                               --
+		----------------------------------------------------------------------
+		pkgm.install('java-test', config.java_test)
+
+		M.test = {
+			run_current_class = test_api.run_current_class,
+			debug_current_class = test_api.debug_current_class,
+
+			run_current_method = test_api.run_current_method,
+			debug_current_method = test_api.debug_current_method,
+
+			view_last_report = test_api.view_last_report,
+		}
+	end
+
+	if config.java_debug_adapter.enable then
+		----------------------------------------------------------------------
+		--                             debugger                             --
+		----------------------------------------------------------------------
+		pkgm.install('java-debug', config.java_debug_adapter)
+		require('java-dap').setup()
+
+		M.dap = {
+			config_dap = function()
+				require('java-dap').config_dap()
+			end,
+		}
+	end
+
+	if config.spring_boot_tools.enable then
+		pkgm.install('spring-boot-tools', config.spring_boot_tools)
+	end
+
+	if config.lombok.enable then
+		pkgm.install('lombok', config.lombok)
+	end
+
+	if config.jdk.auto_install then
+		pkgm.install('openjdk', config.jdk)
+	end
+
+	----------------------------------------------------------------------
+	--                               init                               --
+	----------------------------------------------------------------------
+	if config.experimental.fix_generated_sources then
+		require('java.experimental.fix-generated-sources').patch(vim.fn.getcwd())
+	end
+
+	require('java.startup.lsp_setup').setup(config)
+	require('java.startup.decompile-watcher').setup()
+	require('java-refactor').setup()
+end
+
+----------------------------------------------------------------------
+--                            Runner APIs                           --
+----------------------------------------------------------------------
+M.runner = {}
+M.runner.built_in = {}
+M.runner.built_in.run_app = runner_api.built_in.run_app
+M.runner.built_in.toggle_logs = runner_api.built_in.toggle_logs
+M.runner.built_in.stop_app = runner_api.built_in.stop_app
+M.runner.built_in.switch_app = runner_api.built_in.switch_app
+
+----------------------------------------------------------------------
+--                             Profile UI                           --
+----------------------------------------------------------------------
+M.profile = {}
+M.profile.ui = profile_ui.ui
+
+----------------------------------------------------------------------
+--                             Settings                             --
+----------------------------------------------------------------------
+M.settings = {}
+M.settings.change_runtime = settings_api.change_runtime
+
+return M
