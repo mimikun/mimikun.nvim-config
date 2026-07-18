@@ -31,7 +31,8 @@ local automatic_enable = {
   "luau_lsp",
 
   -- rust
-  "rust_analyzer",
+  -- managed by rustaceanvim
+  --"rust_analyzer",
   --"bacon_ls",
 
   -- python
@@ -47,7 +48,8 @@ local automatic_enable = {
   --"pyre",
 
   -- javascript, javascriptreact, typescript, typescriptreact
-  "vtsls",
+  -- replaced by typescript-tools.nvim
+  --"vtsls",
   "eslint",
   --"ts_ls",
   --"tsgo",
@@ -111,7 +113,8 @@ local automatic_enable = {
   --"stimulus_ls",
 
   -- eelixir, elixir, heex, surface
-  "elixirls",
+  -- managed by elixir-tools.nvim
+  --"elixirls",
   --"expert",
   --"lexical",
   --"nextls",
@@ -119,7 +122,8 @@ local automatic_enable = {
   "elp",
 
   -- java
-  "jdtls",
+  -- managed by nvim-jdtls
+  --"jdtls",
   --"java_language_server",
 
   -- c, cpp, cuda, objc, objcpp
@@ -167,7 +171,8 @@ local automatic_enable = {
   -- fish
   "fish_lsp",
   -- ps1
-  "powershell_es",
+  -- managed by powershell.nvim
+  --"powershell_es",
   -- vim
   "vimls",
 
@@ -193,7 +198,8 @@ local automatic_enable = {
   "lwc_ls",
 
   -- haskell, lhaskell
-  "hls",
+  -- managed by haskell-tools.nvim
+  --"hls",
   -- elm
   "elmls",
   -- zig, zir
