@@ -1,0 +1,21 @@
+lua/plugins/img-clip-nvim/opts.lua
+  s_d94119ca88713a::t_08ef46915d36b8 264
+  s_d94119ca88713a::t_d3ea21da1d3e62 188
+  s_d94119ca88713a::t_7fb6908fdcde8f 271
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.14",
+  "base_commit_sha": "fb3de96b2165310399b31d4070fe9af2c1c46c5a",
+  "prompts": {},
+  "sessions": {
+    "s_d94119ca88713a": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "719d1c7c-cea2-482b-9345-b65bd9ce7f5c",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
