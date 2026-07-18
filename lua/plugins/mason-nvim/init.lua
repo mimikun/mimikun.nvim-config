@@ -6,7 +6,8 @@ local spec = {
   event = require("plugins.mason-nvim.events"),
   --opts = require("plugins.mason-nvim.opts"),
   config = function()
-    require("mason").setup(require("plugins.mason-nvim.opts"))
+    local opts = require("plugins.mason-nvim.opts")
+    require("mason").setup(opts)
   end,
   --cond = false,
   --enabled = false,
