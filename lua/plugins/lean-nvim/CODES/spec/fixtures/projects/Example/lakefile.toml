@@ -1,0 +1,10 @@
+name = "example"
+defaultTargets = ["Example"]
+
+[[require]]
+name = "foo"
+path = "foo"
+
+[[lean_lib]]
+name = "Example"
+globs = ["Example", "Example.Squares", "Example.JumpToStdlib", "Example.RestartFile"]

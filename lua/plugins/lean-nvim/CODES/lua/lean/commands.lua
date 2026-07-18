@@ -1,0 +1,94 @@
+---@mod lean.commands Commands
+
+---@brief [[
+--- (Neovim) commands added by lean.nvim for interacting with Lean.
+---@brief ]]
+
+local Buffer = require 'std.nvim.buffer'
+local async = require 'std.async'
+
+local Element = require('lean.tui').Element
+local components = require 'lean.infoview.components'
+local infoview = require 'lean.infoview'
+local progress = require 'lean.progress'
+local rpc = require 'lean.rpc'
+
+local commands = {}
+
+---@param element Element
+local function show_popup(element)
+  local str = element:to_string()
+  if str:match '^%s*$' then
+    -- do not show the popup if it's the empty string
+    return
+  end
+
+  local bufnr = vim.lsp.util.open_floating_preview(
+    vim.split(str, '\n'),
+    'leaninfo',
+    { focus_id = 'lean_goal', border = 'rounded' }
+  )
+
+  local renderer = element:renderer {
+    buffer = Buffer:from_bufnr(bufnr),
+    keymaps = require 'lean.config'().infoview.mappings,
+  }
+  renderer:render()
+end
+
+---@param elements Element[]?
+---@param err LspError?
+local function show_popup_or_error(elements, err)
+  if elements and not vim.tbl_isempty(elements) then
+    show_popup(Element:concat(elements, '\n\n'))
+  elseif err then
+    show_popup(Element:new { text = vim.inspect(err) })
+  end
+end
+
+---Return the current infoview's view_options, or the config defaults.
+---@return InfoviewViewOptions
+local function current_view_options()
+  local iv = infoview.get_current_infoview()
+  if iv then
+    return iv.view_options
+  end
+  return require 'lean.config'().infoview.view_options
+end
+
+---Show the goal for the current cursor position in a popup.
+function commands.show_goal()
+  local params = vim.lsp.util.make_position_params(0, 'utf-16')
+
+  async.run(function()
+    local goal, err = components.goal_at(rpc.open(params), current_view_options())
+    show_popup_or_error(goal, err)
+  end)
+end
+
+---Show the term goal for the current cursor position in a popup.
+function commands.show_term_goal()
+  local params = vim.lsp.util.make_position_params(0, 'utf-16')
+
+  async.run(function()
+    local goal, err = components.term_goal_at(rpc.open(params), current_view_options())
+    show_popup_or_error(goal, err)
+  end)
+end
+
+---Show diagnostics for the current cursor position in a popup.
+function commands.show_line_diagnostics()
+  local params = vim.lsp.util.make_position_params(0, 'utf-16')
+
+  async.run(function()
+    local diagnostics, err
+    if progress.at(params) == progress.Kind.processing then
+      err = 'Processing...'
+    else
+      diagnostics, err = components.diagnostics_at(rpc.open(params))
+    end
+    show_popup_or_error(diagnostics, err)
+  end)
+end
+
+return commands

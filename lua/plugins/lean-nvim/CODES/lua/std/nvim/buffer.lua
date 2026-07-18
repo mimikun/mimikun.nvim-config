@@ -1,0 +1,319 @@
+---Buffer-local keymaps.
+---@class BufferKeymaps
+---@field bufnr integer The buffer number
+local BufferKeymaps = {}
+BufferKeymaps.__index = BufferKeymaps
+
+---Get buffer-local keymaps.
+---
+---See :h nvim_buf_get_keymap for details.
+---
+---@param mode string Mode for which to get keymaps.
+---@return table[] keymaps
+function BufferKeymaps:get(mode)
+  return vim.api.nvim_buf_get_keymap(self.bufnr, mode)
+end
+
+---Set a buffer-local keymap.
+---
+---See :h vim.keymap.set for details.
+---
+---@param mode string|string[] Mode(s) for the keymap.
+---@param lhs string Left-hand side of the mapping.
+---@param rhs string|function Right-hand side of the mapping.
+---@param opts? table Additional options (passed to vim.keymap.set; buffer is set automatically).
+function BufferKeymaps:set(mode, lhs, rhs, opts)
+  vim.keymap.set(mode, lhs, rhs, vim.tbl_extend('error', opts or {}, { buffer = self.bufnr }))
+end
+
+---Delete a buffer-local keymap.
+---
+---See :h vim.keymap.del for details.
+---
+---@param mode string|string[] Mode(s) for the keymap.
+---@param lhs string Left-hand side of the mapping.
+---@param opts? table Additional options (passed to vim.keymap.del; buffer is set automatically).
+function BufferKeymaps:del(mode, lhs, opts)
+  vim.keymap.del(mode, lhs, vim.tbl_extend('error', opts or {}, { buffer = self.bufnr }))
+end
+
+---Set a buffer-local keymap, but only if `lhs` isn't already mapped.
+---
+---Useful for "suggested" mappings which shouldn't clobber a user's existing
+---ones. Mappings (whether buffer-local or global) which would conflict with
+---`lhs` -- including ones whose `lhs` is a prefix of, or prefixed by, ours --
+---cause the call to be a no-op.
+---
+---@param mode string|string[] Mode(s) for the keymap.
+---@param lhs string Left-hand side of the mapping.
+---@param rhs string|function Right-hand side of the mapping.
+---@param opts? table Additional options (passed to vim.keymap.set; buffer is set automatically).
+function BufferKeymaps:set_unless_mapped(mode, lhs, rhs, opts)
+  local modes = type(mode) == 'table' and mode or { mode }
+  local already_mapped = vim.api.nvim_buf_call(self.bufnr, function()
+    for _, m in ipairs(modes) do
+      if vim.fn.mapcheck(lhs, m) ~= '' then
+        return true
+      end
+    end
+    return false
+  end)
+  if not already_mapped then
+    self:set(mode, lhs, rhs, opts)
+  end
+end
+
+---A Neovim buffer.
+---@class Buffer
+---@field bufnr integer The buffer number
+---@field b table<string, any> Buffer-local variables (alias for vim.b[bufnr])
+---@field o table<string, any> Buffer-local options (alias for vim.bo[bufnr])
+---@field keymaps BufferKeymaps Buffer-local keymaps
+local Buffer = {}
+Buffer.__index = function(self, key)
+  if key == 'o' then
+    return vim.bo[self.bufnr]
+  elseif key == 'b' then
+    return vim.b[self.bufnr]
+  elseif key == 'keymaps' then
+    return setmetatable({ bufnr = self.bufnr }, BufferKeymaps)
+  end
+  return Buffer[key]
+end
+
+---Bind to the current buffer.
+---@return Buffer
+function Buffer:current()
+  return self:from_bufnr(vim.api.nvim_get_current_buf())
+end
+
+---Bind to a Neovim buffer.
+---@param bufnr? integer buffer number, defaulting to the current one
+---@return Buffer
+function Buffer:from_bufnr(bufnr)
+  return setmetatable({ bufnr = bufnr or vim.api.nvim_get_current_buf() }, self)
+end
+
+---Bind to a Neovim buffer from its URI.
+---@param uri string the buffer's URI
+---@return Buffer
+function Buffer:from_uri(uri)
+  return self:from_bufnr(vim.uri_to_bufnr(uri))
+end
+
+---@class CreateBufferOpts
+---@field name? string the name of the new buffer
+---@field options? table<string, any> a table of buffer options
+---@field listed? boolean see :h nvim_create_buf (default true)
+---@field scratch? boolean see :h nvim_create_buf (default false)
+
+---Create a new buffer.
+---@param opts? CreateBufferOpts options for the new buffer
+---@return Buffer
+function Buffer.create(opts)
+  opts = opts or {}
+  local listed = opts.listed
+  if listed == nil then
+    listed = true
+  end
+  local scratch = opts.scratch
+  if scratch == nil then
+    scratch = false
+  end
+  local bufnr = vim.api.nvim_create_buf(listed, scratch)
+  for option, value in pairs(opts.options or {}) do
+    vim.bo[bufnr][option] = value
+  end
+  if opts.name ~= nil then
+    vim.api.nvim_buf_set_name(bufnr, opts.name)
+  end
+  return Buffer:from_bufnr(bufnr)
+end
+
+---The buffer's name.
+---@return string name
+function Buffer:name()
+  return vim.api.nvim_buf_get_name(self.bufnr)
+end
+
+---The buffer's URI.
+---@return string uri
+function Buffer:uri()
+  return vim.uri_from_bufnr(self.bufnr)
+end
+
+---Check if the buffer is loaded.
+---@return boolean
+function Buffer:is_loaded()
+  return vim.api.nvim_buf_is_loaded(self.bufnr)
+end
+
+---Check if the buffer is valid.
+---@return boolean
+function Buffer:is_valid()
+  return vim.api.nvim_buf_is_valid(self.bufnr)
+end
+
+---Delete the buffer.
+function Buffer:delete()
+  vim.api.nvim_buf_delete(self.bufnr, {})
+end
+
+---Forcibly delete the buffer.
+function Buffer:force_delete()
+  vim.api.nvim_buf_delete(self.bufnr, { force = true })
+end
+
+---Make the buffer be the current one.
+function Buffer:make_current()
+  vim.api.nvim_set_current_buf(self.bufnr)
+end
+
+---The buffer's line count.
+function Buffer:line_count()
+  return vim.api.nvim_buf_line_count(self.bufnr)
+end
+
+---Get lines from the buffer.
+---
+---Zero-indexed, like nvim_buf_get_lines().
+---
+---@param start? integer start line (default 0)
+---@param end_? integer end line (default -1, meaning the end of the buffer)
+function Buffer:lines(start, end_)
+  return vim.api.nvim_buf_get_lines(self.bufnr, start or 0, end_ or -1, true)
+end
+
+---Get a specific line from the buffer.
+---@param line integer the line number (0-indexed)
+---@param strict_indexing? boolean Whether out-of-bounds should be an error
+function Buffer:line(line, strict_indexing)
+  if strict_indexing == nil then
+    strict_indexing = true
+  end
+  return vim.api.nvim_buf_get_lines(self.bufnr, line, line + 1, strict_indexing)[1]
+end
+
+---Set lines in the buffer.
+---
+---See :h nvim_buf_set_lines for details.
+---
+---@param replacement string[]
+---@param start? integer
+---@param end_? integer
+---@param strict_indexing? boolean defaults to true
+function Buffer:set_lines(replacement, start, end_, strict_indexing)
+  vim.api.nvim_buf_set_lines(
+    self.bufnr,
+    start or 0,
+    end_ or -1,
+    strict_indexing == nil and true or strict_indexing,
+    replacement
+  )
+end
+
+---Attach a callback to a buffer.
+---
+---See :h nvim_buf_attach for details.
+---
+---@param opts table See :h nvim_buf_attach
+function Buffer:attach(opts)
+  vim.api.nvim_buf_attach(self.bufnr, false, opts)
+end
+
+---Get extmarks from the buffer.
+---
+---See :h nvim_buf_get_extmarks for details.
+---
+---@param ns_id? integer
+---@param start? integer|[integer, integer]
+---@param end_? integer|[integer, integer]
+---@param opts? table
+function Buffer:extmarks(ns_id, start, end_, opts)
+  return vim.api.nvim_buf_get_extmarks(self.bufnr, ns_id or -1, start or 0, end_ or -1, opts or {})
+end
+
+---Get a specific extmark by id from the buffer.
+---
+---See :h nvim_buf_get_extmark_by_id for details.
+---
+---Note in particular that if the extmark doesn't exist, an empty list is
+---returned.
+---
+---@param ns_id integer
+---@param id integer
+---@param opts? table
+---@return [integer, integer]|{}
+function Buffer:extmark(ns_id, id, opts)
+  return vim.api.nvim_buf_get_extmark_by_id(self.bufnr, ns_id, id, opts or {})
+end
+
+---Set an extmark in the buffer.
+---
+---See :h nvim_buf_set_extmark for details.
+---
+---@param ns_id integer
+---@param line integer
+---@param col integer
+---@param opts table
+---@return integer
+function Buffer:set_extmark(ns_id, line, col, opts)
+  return vim.api.nvim_buf_set_extmark(self.bufnr, ns_id, line, col, opts)
+end
+
+---Delete an extmark in the buffer.
+---
+---See :h nvim_buf_del_extmark for details.
+---
+---@param ns_id integer
+---@param id integer the extmark ID
+function Buffer:del_extmark(ns_id, id)
+  local ok = vim.api.nvim_buf_del_extmark(self.bufnr, ns_id, id)
+  if not ok then
+    local message = 'extmark %d does not exist in namespace %d'
+    error(message:format(id, ns_id))
+  end
+end
+
+---Clear a namespace in the buffer.
+---
+---See :h nvim_buf_clear_namespace for details.
+---
+---@param ns_id integer
+---@param start_line? integer
+---@param end_line? integer
+function Buffer:clear_namespace(ns_id, start_line, end_line)
+  vim.api.nvim_buf_clear_namespace(self.bufnr, ns_id or -1, start_line or 0, end_line or -1)
+end
+
+---Call a function with this buffer as temporary current buffer.
+---
+---See :h nvim_buf_call for details.
+---@param fun fun():any
+---@return any result the return value of the called function
+function Buffer:call(fun)
+  return vim.api.nvim_buf_call(self.bufnr, fun)
+end
+
+---Create an autocmd for this buffer.
+---
+---See nvim_create_autocmd() for details.
+---
+---@param event string|string[] The event or events.
+---@param opts table The autocmd options (callback, etc). Buffer will be set automatically.
+---@return integer autocmd_id
+function Buffer:create_autocmd(event, opts)
+  opts = vim.tbl_extend('error', { buffer = self.bufnr }, opts)
+  return vim.api.nvim_create_autocmd(event, opts)
+end
+
+---Iterate over all windows currently showing this buffer.
+---@return Iter
+function Buffer:windows()
+  local Window = require 'std.nvim.window'
+  return vim.iter(vim.fn.win_findbuf(self.bufnr)):map(function(winid)
+    return Window:from_id(winid)
+  end)
+end
+
+return Buffer

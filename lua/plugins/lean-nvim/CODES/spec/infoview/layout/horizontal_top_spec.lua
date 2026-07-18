@@ -1,0 +1,56 @@
+---@brief [[
+--- Tests for a portrait layout with the infoview on top.
+---@brief ]]
+
+local Window = require 'std.nvim.window'
+
+require 'spec.helpers'
+local fixtures = require 'spec.fixtures'
+local infoview = require 'lean.infoview'
+
+-- Emulate a 24x80 portrait display.
+vim.o.columns = 24
+vim.o.lines = 80
+
+vim.g.lean_config =
+  vim.tbl_deep_extend('force', vim.g.lean_config, { infoview = { horizontal_position = 'top' } })
+
+describe('infoview window', function()
+  assert.is.equal(1, #vim.api.nvim_tabpage_list_wins(0))
+  local lean_window = Window:current()
+
+  it('is on top with the cursor in the Lean window', function()
+    vim.cmd.edit { fixtures.project.some_existing_file, bang = true }
+
+    assert.are.same({
+      'col',
+      { -- see :h winlayout
+        { 'leaf', infoview.get_current_infoview().window.id },
+        { 'leaf', lean_window.id },
+      },
+    }, vim.fn.winlayout())
+    assert.current_window.is(lean_window)
+  end)
+
+  it('puts the infoview on top after repositioning', function()
+    assert.are.same({
+      'col',
+      { -- see :h winlayout
+        { 'leaf', infoview.get_current_infoview().window.id },
+        { 'leaf', lean_window.id },
+      },
+    }, vim.fn.winlayout())
+    vim.cmd.wincmd 'L'
+
+    infoview.reposition()
+
+    assert.are.same({
+      'col',
+      { -- see :h winlayout
+        { 'leaf', infoview.get_current_infoview().window.id },
+        { 'leaf', lean_window.id },
+      },
+    }, vim.fn.winlayout())
+    assert.current_window.is(lean_window)
+  end)
+end)

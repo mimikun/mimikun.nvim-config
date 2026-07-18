@@ -1,0 +1,15 @@
+local helpers = require 'spec.helpers'
+local lean_lsp_diagnostics = require('lean.diagnostic').lsp_diagnostics
+
+describe('diagnostics', function()
+  it(
+    'are retrieved from the server',
+    helpers.clean_buffer('example : False := by trivial', function()
+      helpers.wait_for_line_diagnostics()
+      local diags = lean_lsp_diagnostics()
+      assert.are.equal(1, #diags)
+      assert.are.equal(vim.diagnostic.severity.ERROR, diags[1].severity)
+      assert.message(diags[1].message).is_not_nil(diags[1].message:match 'Tactic .*failed')
+    end)
+  )
+end)

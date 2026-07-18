@@ -1,0 +1,47 @@
+local Window = require 'std.nvim.window'
+
+local helpers = require 'spec.helpers'
+
+vim.g.lean_config =
+  vim.tbl_deep_extend('force', vim.g.lean_config, { infoview = { autoopen = false } })
+
+describe('LeanGoal', function()
+  it(
+    'shows a popup with the goal',
+    helpers.clean_buffer('example : 2 = 2 := by sorry', function()
+      helpers.search 'sorry'
+      helpers.wait:for_processing()
+
+      local initial_window = Window:current()
+      vim.cmd.LeanGoal()
+      local popup = helpers.wait_for_new_window { initial_window }
+
+      assert.are.same({
+        '⊢ 2 = 2',
+      }, popup:buffer():lines())
+
+      popup:close()
+    end)
+  )
+end)
+
+describe('LeanTermGoal', function()
+  it(
+    'shows a popup with the term goal',
+    helpers.clean_buffer('def n : Nat := 37', function()
+      helpers.search '37'
+      helpers.wait:for_processing()
+
+      local initial_window = Window:current()
+      vim.cmd.LeanTermGoal()
+      local popup = helpers.wait_for_new_window { initial_window }
+
+      assert.are.same({
+        '▼ expected type (1:16-1:18)',
+        '⊢ Nat',
+      }, popup:buffer():lines())
+
+      popup:close()
+    end)
+  )
+end)
