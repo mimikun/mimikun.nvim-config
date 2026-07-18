@@ -1,0 +1,19 @@
+lua/plugins/oil-nvim/opts.lua
+  s_d94119ca88713a::t_2007e6b5d967e1 3-5
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.14",
+  "base_commit_sha": "070e30982aa9944726de01b8e35200ee5999b2e3",
+  "prompts": {},
+  "sessions": {
+    "s_d94119ca88713a": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "719d1c7c-cea2-482b-9345-b65bd9ce7f5c",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
