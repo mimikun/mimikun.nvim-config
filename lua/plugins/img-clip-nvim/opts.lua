@@ -185,7 +185,7 @@ local opts = {
       ---@type string | fun(context: table): string
       template = function()
         local template = "![$CURSOR]($FILE_PATH)"
-        return templates
+        return template
       end,
 
       ---@type boolean | fun(): boolean
@@ -261,14 +261,14 @@ local opts = {
    :alt: $CURSOR
    :width: 80%
     ]]
-        return templates
+        return template
       end,
     },
 
     asciidoc = {
       ---@type string | fun(context: table): string
       template = function()
-        local tempalte = 'image::$FILE_PATH[width=80%, alt="$CURSOR"]'
+        local template = 'image::$FILE_PATH[width=80%, alt="$CURSOR"]'
         return template
       end,
     },
