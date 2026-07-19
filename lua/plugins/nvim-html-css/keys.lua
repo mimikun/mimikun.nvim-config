@@ -1,24 +1,16 @@
 ---@type LazyKeysSpec[]
 local keys = {
   {
-    -- TODO: it
-    "<lhs>",
-    function()
-      -- TODO: it
-    end,
+    "<leader>cp",
+    "<cmd>HtmlCssPeek<CR>",
+    --function()
+    --end,
     mode = {
       "n",
-      -- TODO: it
-      --"x",
-      --"v",
     },
-    desc = "",
-    -- TODO: it
-    --expr = true,
-    --noremap = true,
+    desc = "Peek CSS source",
     silent = true,
   },
 }
---vim.keymap.set("n", "<leader>cp", "<cmd>HtmlCssPeek<CR>", { desc = "Peek CSS source" })
 
 return keys
