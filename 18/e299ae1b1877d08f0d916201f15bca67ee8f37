@@ -1,0 +1,19 @@
+lua/plugins/hamal-nvim/opts/stylua.toml
+  s_752e60db8db22f::t_7dd5d97702c5f5 1-13
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.14",
+  "base_commit_sha": "18e299ae1b1877d08f0d916201f15bca67ee8f37",
+  "prompts": {},
+  "sessions": {
+    "s_752e60db8db22f": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "60ed0bf3-235a-40e0-aaeb-62849aa26a3e",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
