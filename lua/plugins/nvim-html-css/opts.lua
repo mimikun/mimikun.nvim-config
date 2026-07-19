@@ -1,9 +1,5 @@
 ---@type table
 local opts = {
-  -- TODO: it
-}
-
-local readme = {
   enable_on = {
     "html",
     "htmldjango",
@@ -34,10 +30,10 @@ local readme = {
   peek = {
     enabled = true,
     border = "rounded",
-    position = "center",
-    width = 0.5,
-    height = 0.5,
-    focus = true,
+    position = "center", -- "center" | "cursor"
+    width = 0.5,         -- fraction of editor width (0.0–1.0)
+    height = 0.5,        -- fraction of editor height (0.0–1.0)
+    focus = true,        -- whether the float steals focus on open
     style = "minimal",
   },
   style_sheets = {

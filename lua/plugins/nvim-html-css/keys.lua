@@ -19,5 +19,6 @@ local keys = {
     silent = true,
   },
 }
+--vim.keymap.set("n", "<leader>cp", "<cmd>HtmlCssPeek<CR>", { desc = "Peek CSS source" })
 
 return keys
