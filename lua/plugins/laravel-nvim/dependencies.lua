@@ -1,15 +1,13 @@
 ---@type LazySpec[]
 local dependencies = {
-  -- TODO: it
-
-  --"neovim/nvim-lspconfig",
-  --"nvim-tree/nvim-web-devicons",
-  --"nvim-lua/plenary.nvim",
-  --"MunifTanjim/nui.nvim",
-  --"rcarriga/nvim-notify",
-  --"vim-denops/denops.vim",
+  "MunifTanjim/nui.nvim",
+  "nvim-lua/plenary.nvim",
+  "nvim-neotest/nvim-nio",
   --"nvim-telescope/telescope.nvim",
-  --{ "nvim-treesitter/nvim-treesitter", branch = "main" },
+  --fzf-lua
+  --snacks.nvim
+  --nvim-cmp
+  --blink.cmp
 }
 
 return dependencies

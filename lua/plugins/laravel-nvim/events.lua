@@ -1,6 +1,7 @@
 ---@type table
 local events = {
-  "VeryLazy",
+  --"VeryLazy",
+  "BufEnter composer.json",
 }
 
 return events

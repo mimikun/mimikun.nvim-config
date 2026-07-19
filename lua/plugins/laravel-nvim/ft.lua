@@ -1,6 +1,7 @@
 ---@type table
 local ft = {
-  "lua",
+  "php",
+  "blade",
 }
 
 return ft
