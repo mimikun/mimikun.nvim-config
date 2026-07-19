@@ -1,18 +1,6 @@
 ---@type table
 local opts = {
-  enable_on = {
-    "html",
-    "htmldjango",
-    "tsx",
-    "jsx",
-    "erb",
-    "svelte",
-    "vue",
-    "blade",
-    "php",
-    "templ",
-    "astro",
-  },
+  enable_on = require("plugins.nvim-html-css.ft"),
   handlers = {
     definition = {
       bind = "gd",

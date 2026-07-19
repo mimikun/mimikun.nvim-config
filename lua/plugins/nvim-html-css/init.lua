@@ -2,7 +2,7 @@
 local spec = {
   "Jezda1337/nvim-html-css",
   --lazy = false,
-  --ft = require("plugins.nvim-html-css.ft"),
+  ft = require("plugins.nvim-html-css.ft"),
   cmd = require("plugins.nvim-html-css.cmds"),
   keys = require("plugins.nvim-html-css.keys"),
   event = require("plugins.nvim-html-css.events"),

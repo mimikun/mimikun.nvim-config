@@ -1,6 +1,16 @@
 ---@type table
 local ft = {
-  "lua",
+    "html",
+    "htmldjango",
+    "tsx",
+    "jsx",
+    "erb",
+    "svelte",
+    "vue",
+    "blade",
+    "php",
+    "templ",
+    "astro",
 }
 
 return ft
