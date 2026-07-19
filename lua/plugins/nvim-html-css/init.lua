@@ -17,23 +17,16 @@ local spec = {
   --module = false,
   --optional = false,
   --ft = require("plugins.nvim-html-css.ft"),
-  --ft = require("denops-plugins.nvim-html-css.ft"),
   --cmd = require("plugins.nvim-html-css.cmds"),
-  --cmd = require("denops-plugins.nvim-html-css.cmds"),
   --keys = require("plugins.nvim-html-css.keys"),
-  --keys = require("denops-plugins.nvim-html-css.keys"),
   --event = require("plugins.nvim-html-css.events"),
-  --event = require("denops-plugins.nvim-html-css.events"),
   --dependencies = require("plugins.nvim-html-css.dependencies"),
-  --dependencies = require("denops-plugins.nvim-html-css.dependencies"),
   --init = function()
   --  -- NOTE: INIT
   --end,
   --opts = require("plugins.nvim-html-css.opts"),
-  --opts = require("denops-plugins.nvim-html-css.opts"),
   --config = function()
   --  local opts = require("plugins.nvim-html-css.opts")
-  --  local opts = require("denops-plugins.nvim-html-css.opts")
   --end,
   --priority = 1000,
   cond = false,
@@ -41,4 +34,3 @@ local spec = {
 }
 
 return spec
--- :%s/nvim-html-css/
