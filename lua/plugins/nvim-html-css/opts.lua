@@ -31,9 +31,9 @@ local opts = {
     enabled = true,
     border = "rounded",
     position = "center", -- "center" | "cursor"
-    width = 0.5,         -- fraction of editor width (0.0–1.0)
-    height = 0.5,        -- fraction of editor height (0.0–1.0)
-    focus = true,        -- whether the float steals focus on open
+    width = 0.5, -- fraction of editor width (0.0–1.0)
+    height = 0.5, -- fraction of editor height (0.0–1.0)
+    focus = true, -- whether the float steals focus on open
     style = "minimal",
   },
   style_sheets = {
