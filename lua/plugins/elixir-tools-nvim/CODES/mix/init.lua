@@ -9,7 +9,7 @@ function __Elixir_Mix_complete(_, line, _)
 end
 
 function M.commands()
-  for _, cmd in pairs { "M", "Mix" } do
+  for _, cmd in pairs({ "M", "Mix" }) do
     create_user_command(cmd, function(opts)
       M.load_command(opts.line1, opts.line2, opts.count, unpack(opts.fargs))
     end, { range = true, nargs = "*", complete = "custom,v:lua.__Elixir_Mix_complete" })

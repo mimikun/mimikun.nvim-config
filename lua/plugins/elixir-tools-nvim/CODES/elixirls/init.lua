@@ -196,10 +196,10 @@ M.on_attach = function(client, bufnr)
   vim.api.nvim_create_autocmd({ "BufEnter", "CursorHold", "InsertLeave" }, {
     buffer = bufnr,
     callback = function()
-      vim.lsp.codelens.refresh { bufnr = bufnr }
+      vim.lsp.codelens.refresh({ bufnr = bufnr })
     end,
   })
-  vim.lsp.codelens.refresh { bufnr = bufnr }
+  vim.lsp.codelens.refresh({ bufnr = bufnr })
   add_user_cmd(bufnr, "ElixirFromPipe", M.from_pipe(client), {})
   add_user_cmd(bufnr, "ElixirToPipe", M.to_pipe(client), {})
   add_user_cmd(bufnr, "ElixirRestart", M.restart(client), {})
@@ -295,12 +295,12 @@ function M.setup(opts)
     local root_dir = opts.root_dir and opts.root_dir(fname) or Utils.root_dir(fname)
     local repo_options = repo_opts(opts)
 
-    local cmd = M.command {
+    local cmd = M.command({
       path = tostring(install_dir),
       repo = repo_options.repo,
       ref = repo_options.ref,
       versions = Version.get(),
-    }
+    })
 
     if not opts.cmd and not cmd:exists() then
       if vim.g.elixirnvim_has_prompted_for_install ~= true then
@@ -327,15 +327,14 @@ function M.setup(opts)
         name = "ElixirLS",
         cmd = opts.cmd and wrap_in_table(opts.cmd) or { tostring(cmd) },
         commands = commands,
-        settings = opts.settings or M.settings {},
+        settings = opts.settings or M.settings({}),
         capabilities = opts.capabilities or capabilities,
         root_dir = root_dir,
         handlers = vim.tbl_extend("keep", {
           ["window/logMessage"] = function(err, result, ...)
             log_message(err, result, ...)
 
-            local message =
-              vim.split("[" .. vim.lsp.protocol.MessageType[result.type] .. "] " .. result.message, "\n")
+            local message = vim.split("[" .. vim.lsp.protocol.MessageType[result.type] .. "] " .. result.message, "\n")
 
             pcall(vim.api.nvim_buf_set_lines, elixir_nvim_output_bufnr, -1, -1, false, message)
           end,

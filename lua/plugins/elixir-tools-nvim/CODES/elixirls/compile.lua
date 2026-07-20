@@ -31,7 +31,7 @@ function M.compile(source_path, install_path, opts)
     end
   end
 
-  local compile = Job:new {
+  local compile = Job:new({
     command = bin.compile,
     args = { install_path },
     cwd = source_path,
@@ -41,7 +41,7 @@ function M.compile(source_path, install_path, opts)
     on_stdout = do_sync and printer or vim.schedule_wrap(printer),
     on_stderr = do_sync and printer or vim.schedule_wrap(printer),
     on_exit = vim.schedule_wrap(opts.on_exit),
-  }
+  })
 
   -- sync is just for testing
   if do_sync then

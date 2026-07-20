@@ -44,7 +44,7 @@ function M.setup(opts)
           cmd = { opts.cmd, "--stdio" }
         end
 
-        vim.lsp.start {
+        vim.lsp.start({
           name = "Credo",
           cmd = cmd,
           cmd_env = {
@@ -53,7 +53,7 @@ function M.setup(opts)
           settings = {},
           root_dir = vim.fs.dirname(file),
           on_attach = opts.on_attach or function() end,
-        }
+        })
       end
     end,
   })

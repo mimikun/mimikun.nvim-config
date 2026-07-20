@@ -55,10 +55,7 @@ function M.download_nextls(opts)
     "--fail",
     "--silent",
     "-L",
-    "https://github.com/elixir-tools/next-ls/releases/latest/download/next_ls_"
-      .. os_name
-      .. "_"
-      .. current_arch,
+    "https://github.com/elixir-tools/next-ls/releases/latest/download/next_ls_" .. os_name .. "_" .. current_arch,
     "-o",
     cache_dir .. "/nextls",
   }
@@ -86,7 +83,7 @@ function M.latest_release(owner, repo, opts)
   opts = opts or {}
   local github_host = opts.github_host or "api.github.com"
   local cache_dir = opts.cache_dir or M.cache_dir() .. "/nvim/elixir-tools.nvim/"
-  local curl_response = vim.fn.system {
+  local curl_response = vim.fn.system({
     "curl",
     "--fail",
     "--silent",
@@ -96,7 +93,7 @@ function M.latest_release(owner, repo, opts)
     "-H",
     "X-GitHub-Api-Version: 2022-11-28",
     "https://" .. github_host .. "/repos/" .. owner .. "/" .. repo .. "/releases/latest",
-  }
+  })
 
   vim.fn.mkdir(vim.fn.expand(cache_dir), "p")
 

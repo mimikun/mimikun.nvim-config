@@ -18,9 +18,10 @@ M.elixirls.open_output_panel = elixirls.open_output_panel
 
 M.credo = {}
 
-M.credo.default_bin = (
-  vim.fn.fnamemodify(debug.getinfo(1).source, ":h") .. "/../../bin/credo-language-server"
-):gsub("^@", "")
+M.credo.default_bin = (vim.fn.fnamemodify(debug.getinfo(1).source, ":h") .. "/../../bin/credo-language-server"):gsub(
+  "^@",
+  ""
+)
 
 local enabled = function(value)
   return value == nil or value == true
@@ -56,10 +57,10 @@ local define_user_command = function()
       elseif workspace_commands[subcommand] then
         local row, col = get_cursor_position()
         local uri = vim.uri_from_bufnr(0)
-        vim.lsp.buf.execute_command {
+        vim.lsp.buf.execute_command({
           command = subcommand,
           arguments = { { position = { line = row, character = col }, uri = uri } },
-        }
+        })
       else
         not_found = true
       end

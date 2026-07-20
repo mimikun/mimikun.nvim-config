@@ -5,7 +5,7 @@ local function run_command(cmd)
 end
 
 function M.workdir_path()
-  local output = run_command {
+  local output = run_command({
     "git",
     "worktree",
     "list",
@@ -14,12 +14,12 @@ function M.workdir_path()
     "-F",
     "' '",
     "'{ print $1 }'",
-  }
+  })
   return vim.fn.trim(output)
 end
 
 function M.find_file(filename)
-  local output = run_command {
+  local output = run_command({
     "git",
     "ls-tree",
     "--full-tree",
@@ -30,7 +30,7 @@ function M.find_file(filename)
     "|",
     "grep",
     filename,
-  }
+  })
   return vim.fn.trim(output)
 end
 
