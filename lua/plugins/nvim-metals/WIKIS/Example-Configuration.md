@@ -1,14 +1,3 @@
-These settings are a work in progress for using https://scalameta.org/metals with the built-in LSP support of Nvim. They are also meant to serve as an example of what a setup can look like. They aren't necessarily meant to be copied verbatim, but rather referenced, improved, tweaked, etc.
-
-Some of the examples also assume that you a few other plugins installed to show you how to utilize some of the other common plugins in the ecosystem. More than likely you'll want to use these as some of the Nvim LSP internal implementations for things like completions are a bit unpolished, especially if you're coming from other LSP implementations, like coc.nvim.
-
-**Also ensure that you have Nvim nightly installed. The latest stable release does not yet have built-in LSP support.**
-
-Here are a few other plugins that you'll often see paired with LSP configs for Nvim.
-
-* https://github.com/neovim/nvim-lspconfig (automated installation and basic setup info)
-* https://github.com/nvim-lua/completion-nvim (completions much like your familiar to with other LSP clients)
-* https://github.com/nvim-lua/telescope.nvim (offers a more interactive find references and workspace symbols)
 
 ```vim
 "-----------------------------------------------------------------------------
