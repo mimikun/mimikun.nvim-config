@@ -1,0 +1,19 @@
+lua/config/clipboard.lua
+  s_86cdc8f0618f4e::t_2b5d40baf85eab 1-95
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.14",
+  "base_commit_sha": "f5e3d78abf584b956958f2fc8da4514baa2fb7f2",
+  "prompts": {},
+  "sessions": {
+    "s_86cdc8f0618f4e": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "e00f5207-58dc-4e67-aa2d-b704219ad36e",
+        "model": "unknown"
+      },
+      "human_author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
