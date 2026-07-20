@@ -1,0 +1,25 @@
+Taskfile.yml
+  s_86cdc8f0618f4e::t_47a07462df72d4 100-107
+lua/config/options.lua
+  s_86cdc8f0618f4e::t_0bf29b36cb878e 1-1217
+scripts/check-options-sync.lua
+  s_86cdc8f0618f4e::t_02611c5cd29a14 1-125
+scripts/check-options-sync.sh
+  s_86cdc8f0618f4e::t_008f5cc6a50d6c 1-28
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.14",
+  "base_commit_sha": "809a1d9c79d92ee0fd6eb1ca5e66ff7217f30a91",
+  "prompts": {},
+  "sessions": {
+    "s_86cdc8f0618f4e": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "e00f5207-58dc-4e67-aa2d-b704219ad36e",
+        "model": "unknown"
+      },
+      "human_author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
