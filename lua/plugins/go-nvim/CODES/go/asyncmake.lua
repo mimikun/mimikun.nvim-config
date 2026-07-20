@@ -226,7 +226,7 @@ M.runjob = function(cmd, runner, args, efm)
         for _, value in ipairs(data) do
           if value ~= '' then
             if value:find('=== RUN') then
-              goto continue
+              -- goto continue
             end
 
             value = handle_color(value)
@@ -237,7 +237,7 @@ M.runjob = function(cmd, runner, args, efm)
               failed = true
               if value == 'FAIL' then
                 value = 'FAIL: ' .. cmdstr
-                goto continue
+                -- goto continue
               end
             end
             local changed = false
@@ -270,7 +270,7 @@ M.runjob = function(cmd, runner, args, efm)
               itemn = #lines
             end
           end
-          ::continue::
+          -- ::continue::
         end
       end
       _GO_NVIM_CFG.on_stdout(event, data)
