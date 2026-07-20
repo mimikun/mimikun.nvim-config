@@ -9,8 +9,8 @@ local spec = {
   dependencies = require("plugins.kotlin-nvim.dependencies"),
   --opts = require("plugins.kotlin-nvim.opts"),
   config = function()
-  local opts = require("plugins.kotlin-nvim.opts")
-        require("kotlin").setup(opts)
+    local opts = require("plugins.kotlin-nvim.opts")
+    require("kotlin").setup(opts)
   end,
   cond = false,
   enabled = false,
