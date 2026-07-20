@@ -11,6 +11,22 @@ local spec = {
   config = function()
     local opts = require("plugins.nvim-java.opts")
     require("java").setup(opts)
+-- Use `vim.lsp.config()` to override the default JDTLS settings:
+vim.lsp.config('jdtls', {
+  settings = {
+    java = {
+      configuration = {
+        runtimes = {
+          {
+            name = "JavaSE-21",
+            path = "/opt/jdk-21",
+            default = true,
+          }
+        }
+      }
+    }
+  }
+})
     vim.lsp.enable("jdtls")
   end,
   cond = false,
