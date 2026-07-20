@@ -1,6 +1,9 @@
 ---@type table
 local cmds = {
-  -- TODO: it
+  "PympleUpdateImports",
+  "PympleResolveImport",
+  "PympleBuild",
+  "PympleLogs",
 }
 
 return cmds
