@@ -97,3 +97,11 @@ tasks:
     cmds:
       - "{{.TASKFILE_DIR}}/scripts/check-keys-spec.sh"
     silent: true
+
+  check-options-sync:
+    desc: "Detect drift between Neovim's option set and lua/config/options.lua"
+    aliases:
+      - cos
+    cmds:
+      - "{{.TASKFILE_DIR}}/scripts/check-options-sync.sh"
+    silent: true
