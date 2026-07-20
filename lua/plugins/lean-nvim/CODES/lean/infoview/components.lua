@@ -5,27 +5,27 @@
 
 ---@tag lean.infoview.components
 
-local range_to_string = require('std.lsp').range_to_string
+local range_to_string = require("std.lsp").range_to_string
 
-local Element = require('lean.tui').Element
-local Locations = require 'lean.infoview.locations'
-local interactive_diagnostic = require 'lean.widget.interactive_diagnostic'
+local Element = require("lean.tui").Element
+local Locations = require("lean.infoview.locations")
+local interactive_diagnostic = require("lean.widget.interactive_diagnostic")
 local TaggedTextMsgEmbed = interactive_diagnostic.TaggedTextMsgEmbed
 local TaggedTextHighlightedMsgEmbed = interactive_diagnostic.TaggedTextHighlightedMsgEmbed
-local config = require 'lean.config'
-local diagnostic = require 'lean.diagnostic'
-local goals = require 'lean.goals'
-local interactive_goal = require 'lean.widget.interactive_goal'
-local lsp = require 'lean.lsp'
-local widgets = require 'lean.widgets'
+local config = require("lean.config")
+local diagnostic = require("lean.diagnostic")
+local goals = require("lean.goals")
+local interactive_goal = require("lean.widget.interactive_goal")
+local lsp = require("lean.lsp")
+local widgets = require("lean.widgets")
 
 local components = {
-  LSP_HAS_DIED = Element:new {
-    text = '🪦 The Lean language server is dead.',
-    hlgroups = { 'DiagnosticError' },
-  },
-  NO_INFO = Element:new { text = 'No info.', name = 'no-info' },
-  PROCESSING = Element:new { text = 'Processing file...', name = 'processing' },
+  LSP_HAS_DIED = Element:new({
+    text = "🪦 The Lean language server is dead.",
+    hlgroups = { "DiagnosticError" },
+  }),
+  NO_INFO = Element:new({ text = "No info.", name = "no-info" }),
+  PROCESSING = Element:new({ text = "Processing file...", name = "processing" }),
   EMPTY = Element.EMPTY,
 }
 
@@ -46,23 +46,23 @@ function components.interactive_diagnostics(diags, line, sess)
       end
 
       local range = diagnostic.range_of(each)
-      local element = Element:new {
-        text = ('▼ %s: %s'):format(range_to_string(range), markers[each.severity]),
-        name = 'diagnostic',
+      local element = Element:new({
+        text = ("▼ %s: %s"):format(range_to_string(range), markers[each.severity]),
+        name = "diagnostic",
         children = { TaggedTextMsgEmbed(each.message, sess) },
-      }
+      })
       if interactive_diagnostic.is_trace_message(each.message) then
         local message = each.message
         element.events.trace_search = function(ctx, query)
-          if query == '' then
-            element:set_children { TaggedTextMsgEmbed(message, sess) }
+          if query == "" then
+            element:set_children({ TaggedTextMsgEmbed(message, sess) })
           else
             local result, err = sess:highlightMatches(query, message)
             if err then
-              vim.notify(('Trace search error: %s'):format(vim.inspect(err)), vim.log.levels.ERROR)
+              vim.notify(("Trace search error: %s"):format(vim.inspect(err)), vim.log.levels.ERROR)
               return
             end
-            element:set_children { TaggedTextHighlightedMsgEmbed(result, sess) }
+            element:set_children({ TaggedTextHighlightedMsgEmbed(result, sess) })
           end
           ctx.rerender()
         end
@@ -84,11 +84,11 @@ local function wrap_goals(params, goal, children)
     local header = messages.some(#goal)
     if header then
       children = {
-        Element:foldable {
-          title = Element.title(header, 'leanInfoMultipleGoals'),
+        Element:foldable({
+          title = Element.title(header, "leanInfoMultipleGoals"),
           body = children,
           gap = 1,
-        },
+        }),
       }
     end
   end
@@ -103,10 +103,10 @@ local function wrap_goals(params, goal, children)
   end
 
   return {
-    Element:titled {
-      title = Element.title(title, 'leanInfoGoals'),
+    Element:titled({
+      title = Element.title(title, "leanInfoGoals"),
       body = children,
-    },
+    }),
   }
 end
 
@@ -127,7 +127,7 @@ end
 ---@return Element[]? goal
 ---@return LspError? error
 function components.plain_goal_at(params)
-  local plain = require 'lean.infoview.plain'
+  local plain = require("lean.infoview.plain")
   local goal, children = plain.goal(params)
   return wrap_goals(params, goal, children)
 end
@@ -151,7 +151,7 @@ end
 ---@return LspError
 local function interactive_diagnostics_for(sess, line)
   ---@type LineRange
-  local range = { start = line, ['end'] = line + 1 }
+  local range = { start = line, ["end"] = line + 1 }
   local diagnostics, err = sess:getInteractiveDiagnostics(range)
   if err then
     return {}, err

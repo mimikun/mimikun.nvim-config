@@ -1,4 +1,4 @@
-local Element = require('lean.tui').Element
+local Element = require("lean.tui").Element
 
 ---ProofWidgets' MarkdownDisplay widget.
 ---
@@ -7,5 +7,5 @@ local Element = require('lean.tui').Element
 ---@param props { contents: string }
 ---@return Element?
 return function(_ctx, props)
-  return Element:new { text = props.contents }
+  return Element:new({ text = props.contents })
 end

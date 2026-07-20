@@ -1,4 +1,4 @@
-local InteractiveExpr = require 'proofwidgets.interactive_expr'
+local InteractiveExpr = require("proofwidgets.interactive_expr")
 
 ---ProofWidgets' InteractiveExpr widget.
 ---@param ctx RenderContext

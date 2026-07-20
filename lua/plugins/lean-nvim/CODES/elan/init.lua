@@ -10,7 +10,7 @@
 
 ---@tag elan.nvim
 
-local check_output = require('std.subprocess').check_output
+local check_output = require("std.subprocess").check_output
 
 local elan = {}
 
@@ -26,7 +26,7 @@ local elan = {}
 ---Dump elan's state.
 ---@return ElanState
 function elan.state()
-  local stdout = check_output { 'elan', 'dump-state' }
+  local stdout = check_output({ "elan", "dump-state" })
   return vim.json.decode(stdout)
 end
 

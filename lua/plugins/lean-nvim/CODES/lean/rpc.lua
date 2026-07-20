@@ -7,11 +7,11 @@
 --- the below data structures.
 ---@brief ]]
 
-local Buffer = require 'std.nvim.buffer'
-local async = require 'std.async'
+local Buffer = require("std.nvim.buffer")
+local async = require("std.async")
 
-local log = require 'lean.log'
-local lsp = require 'lean.lsp'
+local log = require("lean.log")
+local lsp = require("lean.lsp")
 
 local rpc = {}
 
@@ -38,13 +38,12 @@ local WORKER_CRASHED = -32902
 ---@param client vim.lsp.Client?
 ---@return string ref_key
 local function ref_key_for(client)
-  local rpc_provider =
-    vim.tbl_get(client and client.server_capabilities or {}, 'experimental', 'rpcProvider')
+  local rpc_provider = vim.tbl_get(client and client.server_capabilities or {}, "experimental", "rpcProvider")
   local wire_format = rpc_provider and rpc_provider.rpcWireFormat
-  if wire_format == 'v1' then
-    return '__rpcref'
+  if wire_format == "v1" then
+    return "__rpcref"
   end
-  return 'p'
+  return "p"
 end
 
 ---A single RPC request record, stored in the session's history ring buffer.
@@ -98,10 +97,10 @@ end
 function SessionMetrics:record_error(method, err)
   self.call_count = self.call_count + 1
   self.error_count = self.error_count + 1
-  local code = type(err) == 'table' and err.code
-  local code_key = code or 'unknown'
+  local code = type(err) == "table" and err.code
+  local code_key = code or "unknown"
   self.errors_by_code[code_key] = (self.errors_by_code[code_key] or 0) + 1
-  self.history:push { method = method, start_ns = vim.uv.hrtime(), duration_ns = 0, error = err }
+  self.history:push({ method = method, start_ns = vim.uv.hrtime(), duration_ns = 0, error = err })
   return nil, err
 end
 
@@ -122,12 +121,12 @@ function SessionMetrics:record_call(method, start_ns, elapsed, err)
 
   if err ~= nil then
     self.error_count = self.error_count + 1
-    local code = type(err) == 'table' and err.code
-    local code_key = code or 'unknown'
+    local code = type(err) == "table" and err.code
+    local code_key = code or "unknown"
     self.errors_by_code[code_key] = (self.errors_by_code[code_key] or 0) + 1
   end
 
-  self.history:push { method = method, start_ns = start_ns, duration_ns = elapsed, error = err }
+  self.history:push({ method = method, start_ns = start_ns, duration_ns = elapsed, error = err })
 end
 
 ---Record a successful connection handshake.
@@ -189,7 +188,7 @@ function Session:new(client, buffer, uri)
     on_connected = async.event(),
     to_release = {},
     release_timer = nil,
-    metrics = SessionMetrics:new(require 'lean.config'().debug.rpc_history),
+    metrics = SessionMetrics:new(require("lean.config")().debug.rpc_history),
   }, self)
   self.keepalive_timer = vim.uv.new_timer()
   self.keepalive_timer:start(
@@ -197,7 +196,7 @@ function Session:new(client, buffer, uri)
     KEEPALIVE_PERIOD_MS,
     vim.schedule_wrap(function()
       if not self:is_closed() and self.session_id ~= nil then
-        self.client:notify('$/lean/rpc/keepAlive', {
+        self.client:notify("$/lean/rpc/keepAlive", {
           uri = self.uri,
           sessionId = self.session_id,
         })
@@ -205,14 +204,14 @@ function Session:new(client, buffer, uri)
     end)
   )
   -- Terminate RPC session when document is closed.
-  buffer:attach {
+  buffer:attach({
     on_reload = function()
       self:close_without_releasing()
     end,
     on_detach = function()
       self:close_without_releasing()
     end,
-  }
+  })
   return self
 end
 
@@ -237,7 +236,7 @@ function Session:close_without_releasing()
 end
 
 function Session:close()
-  self:release_now {}
+  self:release_now({})
   self:close_without_releasing()
 end
 
@@ -255,11 +254,11 @@ function Session:release_now(refs)
     return
   end
 
-  log:debug {
-    message = 'releasing RPC refs',
+  log:debug({
+    message = "releasing RPC refs",
     uri = self.uri,
     refs = self.to_release,
-  }
+  })
 
   ---@type RpcReleaseParams
   local params = {
@@ -267,12 +266,12 @@ function Session:release_now(refs)
     sessionId = self.session_id,
     refs = self.to_release,
   }
-  local succeeded = pcall(self.client.notify, self.client, '$/lean/rpc/release', params)
+  local succeeded = pcall(self.client.notify, self.client, "$/lean/rpc/release", params)
   if not succeeded then
-    log:warning {
-      message = 'unable to release RPC refs, which leaks a bit of memory',
+    log:warning({
+      message = "unable to release RPC refs, which leaks a bit of memory",
       params = params,
-    }
+    })
   end
   self.to_release = {}
 end
@@ -283,7 +282,7 @@ function Session:release_deferred(refs)
   if self.release_timer == nil then
     self.release_timer = vim.defer_fn(function()
       self.release_timer = nil
-      self:release_now {}
+      self:release_now({})
     end, 100)
   end
 end
@@ -306,42 +305,34 @@ function Session:call(pos, method, params)
   end
 
   if self:is_closed() then
-    return self.metrics:record_error(
-      method,
-      { code = RPC_NEEDS_RECONNECT, message = 'RPC session is closed' }
-    )
+    return self.metrics:record_error(method, { code = RPC_NEEDS_RECONNECT, message = "RPC session is closed" })
   end
-  log:trace { message = 'calling RPC method', method = method, params = params }
+  log:trace({ message = "calling RPC method", method = method, params = params })
   local start_ns = vim.uv.hrtime()
   local err, result = lsp.request(
     self.client,
-    '$/lean/rpc/call',
-    vim.tbl_extend('error', pos, { sessionId = self.session_id, method = method, params = params })
+    "$/lean/rpc/call",
+    vim.tbl_extend("error", pos, { sessionId = self.session_id, method = method, params = params })
   )
   local elapsed = vim.uv.hrtime() - start_ns
   self.metrics:record_call(method, start_ns, elapsed, err)
 
   if err ~= nil then
-    local code = type(err) == 'table' and err.code
-    if
-      code == RPC_NEEDS_RECONNECT
-      or code == CONTENT_MODIFIED
-      or code == WORKER_EXITED
-      or code == WORKER_CRASHED
-    then
+    local code = type(err) == "table" and err.code
+    if code == RPC_NEEDS_RECONNECT or code == CONTENT_MODIFIED or code == WORKER_EXITED or code == WORKER_CRASHED then
       self:close_without_releasing()
     end
   end
   local function register(obj)
-    if type(obj) == 'table' then
+    if type(obj) == "table" then
       for k, v in pairs(obj) do
-        if k == self.ref_key and type(v) ~= 'table' then
+        if k == self.ref_key and type(v) ~= "table" then
           -- Lua 5.1 workaround for unsupported __gc on tables
           -- luacheck: ignore
           local prox = newproxy(true)
           local release_ref = { [self.ref_key] = v }
           getmetatable(prox).__gc = function()
-            self:release_deferred { release_ref }
+            self:release_deferred({ release_ref })
           end
           setmetatable(obj, { [prox] = true })
         else
@@ -353,9 +344,9 @@ function Session:call(pos, method, params)
   register(result)
 
   if err then
-    local level = self:is_closed() and 'debug' or 'error'
+    local level = self:is_closed() and "debug" or "error"
     log[level](log, {
-      message = 'RPC error',
+      message = "RPC error",
       method = method,
       params = params,
       error = err,
@@ -377,14 +368,14 @@ local function connect(uri)
   sessions[uri] = sess
   if client == nil then
     sess.connected = true
-    sess.connect_err = 'Lean 4 LSP server not found'
+    sess.connect_err = "Lean 4 LSP server not found"
     sess:close_without_releasing()
     return
   end
   async.run(function()
-    log:trace { message = 'connecting to RPC', uri = uri }
+    log:trace({ message = "connecting to RPC", uri = uri })
     local connect_start = vim.uv.hrtime()
-    local err, result = lsp.request(client, '$/lean/rpc/connect', { uri = uri })
+    local err, result = lsp.request(client, "$/lean/rpc/connect", { uri = uri })
     sess.metrics:record_connect(vim.uv.hrtime() - connect_start)
     sess.connected = true
     if err ~= nil then
@@ -437,7 +428,7 @@ function ReconnectingSubsession:call(method, params)
         self.sess = sessions[uri]
         self.sess.metrics:carry_reconnects(prev_total)
       else
-        log:debug { message = 'reconnecting RPC session', uri = uri, method = method, error = err }
+        log:debug({ message = "reconnecting RPC session", uri = uri, method = method, error = err })
         connect(uri)
         self.sess = sessions[uri]
         self.sess.metrics:record_reconnect(prev_total)
@@ -516,13 +507,13 @@ end
 ---@return InteractiveGoals goals
 ---@return LspError error
 function ReconnectingSubsession:getInteractiveGoals()
-  return self:call('Lean.Widget.getInteractiveGoals', self.pos)
+  return self:call("Lean.Widget.getInteractiveGoals", self.pos)
 end
 
 ---@return InteractiveTermGoal
 ---@return LspError error
 function ReconnectingSubsession:getInteractiveTermGoal()
-  return self:call('Lean.Widget.getInteractiveTermGoal', self.pos)
+  return self:call("Lean.Widget.getInteractiveTermGoal", self.pos)
 end
 
 ---@class StrictTraceChildrenEmbed
@@ -556,7 +547,7 @@ end
 ---@return InteractiveDiagnostic[]
 ---@return LspError error
 function ReconnectingSubsession:getInteractiveDiagnostics(lineRange)
-  return self:call('Lean.Widget.getInteractiveDiagnostics', { lineRange = lineRange })
+  return self:call("Lean.Widget.getInteractiveDiagnostics", { lineRange = lineRange })
 end
 
 ---@param msg MessageData
@@ -564,24 +555,21 @@ end
 ---@return TaggedText.MsgEmbed
 ---@return LspError error
 function ReconnectingSubsession:msgToInteractive(msg, indent)
-  return self:call(
-    'Lean.Widget.InteractiveDiagnostics.msgToInteractive',
-    { msg = msg, indent = indent }
-  )
+  return self:call("Lean.Widget.InteractiveDiagnostics.msgToInteractive", { msg = msg, indent = indent })
 end
 
 ---@param children LazyTraceChildren
 ---@return TaggedText.MsgEmbed[]
 ---@return LspError error
 function ReconnectingSubsession:lazyTraceChildrenToInteractive(children)
-  return self:call('Lean.Widget.lazyTraceChildrenToInteractive', children)
+  return self:call("Lean.Widget.lazyTraceChildrenToInteractive", children)
 end
 
 ---@param info InfoWithCtx
 ---@return InfoPopup
 ---@return LspError error
 function ReconnectingSubsession:infoToInteractive(info)
-  return self:call('Lean.Widget.InteractiveDiagnostics.infoToInteractive', info)
+  return self:call("Lean.Widget.InteractiveDiagnostics.infoToInteractive", info)
 end
 
 ---@alias GoToKind 'declaration' | 'definition' | 'type'
@@ -591,7 +579,7 @@ end
 ---@return lsp.LocationLink[]
 ---@return LspError error
 function ReconnectingSubsession:getGoToLocation(kind, info)
-  return self:call('Lean.Widget.getGoToLocation', { kind = kind, info = info })
+  return self:call("Lean.Widget.getGoToLocation", { kind = kind, info = info })
 end
 
 ---@class UserWidget
@@ -608,7 +596,7 @@ end
 ---@return UserWidgets
 ---@return LspError error
 function ReconnectingSubsession:getWidgets()
-  return self:call('Lean.Widget.getWidgets', self.pos.position)
+  return self:call("Lean.Widget.getWidgets", self.pos.position)
 end
 
 ---@class WidgetSource
@@ -621,7 +609,7 @@ end
 ---@return WidgetSource
 ---@return LspError error
 function ReconnectingSubsession:getWidgetSource(hash)
-  return self:call('Lean.Widget.getWidgetSource', { pos = self.pos.position, hash = hash })
+  return self:call("Lean.Widget.getWidgetSource", { pos = self.pos.position, hash = hash })
 end
 
 ---@class rpc.GoalLocationHyp
@@ -662,7 +650,7 @@ end
 ---@return TaggedText.HighlightedMsgEmbed
 ---@return LspError error
 function ReconnectingSubsession:highlightMatches(query, msg)
-  return self:call('Lean.Widget.highlightMatches', { query = query, msg = msg })
+  return self:call("Lean.Widget.highlightMatches", { query = query, msg = msg })
 end
 
 ---@class rpc.SessionInfo

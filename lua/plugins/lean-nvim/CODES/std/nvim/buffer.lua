@@ -23,7 +23,7 @@ end
 ---@param rhs string|function Right-hand side of the mapping.
 ---@param opts? table Additional options (passed to vim.keymap.set; buffer is set automatically).
 function BufferKeymaps:set(mode, lhs, rhs, opts)
-  vim.keymap.set(mode, lhs, rhs, vim.tbl_extend('error', opts or {}, { buffer = self.bufnr }))
+  vim.keymap.set(mode, lhs, rhs, vim.tbl_extend("error", opts or {}, { buffer = self.bufnr }))
 end
 
 ---Delete a buffer-local keymap.
@@ -34,7 +34,7 @@ end
 ---@param lhs string Left-hand side of the mapping.
 ---@param opts? table Additional options (passed to vim.keymap.del; buffer is set automatically).
 function BufferKeymaps:del(mode, lhs, opts)
-  vim.keymap.del(mode, lhs, vim.tbl_extend('error', opts or {}, { buffer = self.bufnr }))
+  vim.keymap.del(mode, lhs, vim.tbl_extend("error", opts or {}, { buffer = self.bufnr }))
 end
 
 ---Set a buffer-local keymap, but only if `lhs` isn't already mapped.
@@ -49,10 +49,10 @@ end
 ---@param rhs string|function Right-hand side of the mapping.
 ---@param opts? table Additional options (passed to vim.keymap.set; buffer is set automatically).
 function BufferKeymaps:set_unless_mapped(mode, lhs, rhs, opts)
-  local modes = type(mode) == 'table' and mode or { mode }
+  local modes = type(mode) == "table" and mode or { mode }
   local already_mapped = vim.api.nvim_buf_call(self.bufnr, function()
     for _, m in ipairs(modes) do
-      if vim.fn.mapcheck(lhs, m) ~= '' then
+      if vim.fn.mapcheck(lhs, m) ~= "" then
         return true
       end
     end
@@ -71,11 +71,11 @@ end
 ---@field keymaps BufferKeymaps Buffer-local keymaps
 local Buffer = {}
 Buffer.__index = function(self, key)
-  if key == 'o' then
+  if key == "o" then
     return vim.bo[self.bufnr]
-  elseif key == 'b' then
+  elseif key == "b" then
     return vim.b[self.bufnr]
-  elseif key == 'keymaps' then
+  elseif key == "keymaps" then
     return setmetatable({ bufnr = self.bufnr }, BufferKeymaps)
   end
   return Buffer[key]
@@ -270,7 +270,7 @@ end
 function Buffer:del_extmark(ns_id, id)
   local ok = vim.api.nvim_buf_del_extmark(self.bufnr, ns_id, id)
   if not ok then
-    local message = 'extmark %d does not exist in namespace %d'
+    local message = "extmark %d does not exist in namespace %d"
     error(message:format(id, ns_id))
   end
 end
@@ -303,14 +303,14 @@ end
 ---@param opts table The autocmd options (callback, etc). Buffer will be set automatically.
 ---@return integer autocmd_id
 function Buffer:create_autocmd(event, opts)
-  opts = vim.tbl_extend('error', { buffer = self.bufnr }, opts)
+  opts = vim.tbl_extend("error", { buffer = self.bufnr }, opts)
   return vim.api.nvim_create_autocmd(event, opts)
 end
 
 ---Iterate over all windows currently showing this buffer.
 ---@return Iter
 function Buffer:windows()
-  local Window = require 'std.nvim.window'
+  local Window = require("std.nvim.window")
   return vim.iter(vim.fn.win_findbuf(self.bufnr)):map(function(winid)
     return Window:from_id(winid)
   end)

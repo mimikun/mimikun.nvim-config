@@ -4,14 +4,14 @@
 --- Support for abbreviations (unicode character replacement).
 ---@brief ]]
 
-local Buffer = require 'std.nvim.buffer'
+local Buffer = require("std.nvim.buffer")
 
 local abbreviations = {}
 
 ---The leader which begins abbreviations.
 ---@return string leader
 local function leader()
-  return require 'lean.config'().abbreviations.leader
+  return require("lean.config")().abbreviations.leader
 end
 
 local _MEMOIZED = nil
@@ -22,13 +22,13 @@ function abbreviations.load()
   if _MEMOIZED ~= nil then
     return _MEMOIZED
   end
-  local this_dir = vim.fs.dirname(debug.getinfo(2, 'S').source:sub(2))
-  local path = vim.fs.joinpath(this_dir, '../../vscode-lean/abbreviations.json')
-  local file = io.open(path, 'r')
+  local this_dir = vim.fs.dirname(debug.getinfo(2, "S").source:sub(2))
+  local path = vim.fs.joinpath(this_dir, "../../vscode-lean/abbreviations.json")
+  local file = io.open(path, "r")
   if not file then
-    error(('Unable to read abbreviations from %q'):format(path))
+    error(("Unable to read abbreviations from %q"):format(path))
   end
-  _MEMOIZED = vim.json.decode(file:read '*a')
+  _MEMOIZED = vim.json.decode(file:read("*a"))
   file:close()
   return _MEMOIZED
 end
@@ -65,34 +65,29 @@ function abbreviations.show_reverse_lookup()
   local lines
   if vim.tbl_isempty(results) then
     lines = {
-      string.format('No abbreviation found for %q.', char),
-      '',
-      'Add one by configuring:\n',
-      '  `vim.g.lean_config = { abbreviations = { extra = { ... } } }`',
+      string.format("No abbreviation found for %q.", char),
+      "",
+      "Add one by configuring:\n",
+      "  `vim.g.lean_config = { abbreviations = { extra = { ... } } }`",
     }
   else
     lines = {}
     for i = #char, 1, -1 do
       if results[i] ~= nil then
-        table.insert(lines, string.format('Type %s with:', char:sub(1, i)))
+        table.insert(lines, string.format("Type %s with:", char:sub(1, i)))
         for _, each in ipairs(results[i]) do
-          table.insert(lines, '  ' .. each)
+          table.insert(lines, "  " .. each)
         end
       end
     end
   end
-  vim.lsp.util.open_floating_preview(
-    lines,
-    'markdown',
-    { focus_id = 'lean_abbreviation_help', border = 'rounded' }
-  )
+  vim.lsp.util.open_floating_preview(lines, "markdown", { focus_id = "lean_abbreviation_help", border = "rounded" })
 end
 
-local abbr_mark_ns = vim.api.nvim_create_namespace 'lean.abbreviations'
+local abbr_mark_ns = vim.api.nvim_create_namespace("lean.abbreviations")
 
 local function get_extmark_range(abbr_ns, id, buffer)
-  local row, col, details =
-    unpack(vim.api.nvim_buf_get_extmark_by_id(buffer or 0, abbr_ns, id, { details = true }))
+  local row, col, details = unpack(vim.api.nvim_buf_get_extmark_by_id(buffer or 0, abbr_ns, id, { details = true }))
   return row, col, details and details.end_row, details and details.end_col
 end
 
@@ -107,7 +102,7 @@ local function insert_char_pre()
   local lead = leader()
 
   if abbreviations.abbr_mark then
-    if char == ' ' then
+    if char == " " then
       vim.schedule(abbreviations.convert)
       return
     end
@@ -120,13 +115,8 @@ local function insert_char_pre()
       local text = vim.api.nvim_buf_get_lines(0, row1, row1 + 1, true)[1]:sub(col1 + 1, col2)
       if text == lead then
         _clear_abbr_mark()
-        local tmp_extmark = vim.api.nvim_buf_set_extmark(
-          0,
-          abbr_mark_ns,
-          row1,
-          col1,
-          { end_line = row2, end_col = col2 }
-        )
+        local tmp_extmark =
+          vim.api.nvim_buf_set_extmark(0, abbr_mark_ns, row1, col1, { end_line = row2, end_col = col2 })
         vim.schedule(function()
           row1, col1, row2, col2 = get_extmark_range(abbr_mark_ns, tmp_extmark)
           if not row1 then
@@ -144,7 +134,7 @@ local function insert_char_pre()
     local row, col = unpack(vim.api.nvim_win_get_cursor(0))
     row = row - 1
     abbreviations.abbr_mark = vim.api.nvim_buf_set_extmark(0, abbr_mark_ns, row, col, {
-      hl_group = 'leanAbbreviationMark',
+      hl_group = "leanAbbreviationMark",
       end_line = row,
       end_col = col,
       right_gravity = false,
@@ -152,23 +142,23 @@ local function insert_char_pre()
     })
 
     local mappings = {
-      ['<CR>'] = [[<C-o>:lua require'lean.abbreviations'.convert()<CR><CR>]],
-      ['<Tab>'] = [[<Cmd>lua require'lean.abbreviations'.convert()<CR>]],
+      ["<CR>"] = [[<C-o>:lua require'lean.abbreviations'.convert()<CR><CR>]],
+      ["<Tab>"] = [[<Cmd>lua require'lean.abbreviations'.convert()<CR>]],
     }
 
     local buf = Buffer:current()
     local cleanups = vim.defaulttable(function(key)
       return function()
-        buf.keymaps:del('i', key)
+        buf.keymaps:del("i", key)
       end
     end)
 
-    for imap in vim.iter(buf.keymaps:get 'i') do
+    for imap in vim.iter(buf.keymaps:get("i")) do
       local lhs = imap.lhs
-      local rhs = imap.rhs or ''
+      local rhs = imap.rhs or ""
       if mappings[lhs] then
         cleanups[lhs] = function()
-          vim.api.nvim_buf_set_keymap(buf.bufnr, 'i', lhs, rhs, {
+          vim.api.nvim_buf_set_keymap(buf.bufnr, "i", lhs, rhs, {
             nowait = imap.nowait,
             silent = imap.silent,
             script = imap.script,
@@ -182,7 +172,7 @@ local function insert_char_pre()
     end
 
     for key, to in vim.iter(mappings) do
-      buf.keymaps:set('i', key, to)
+      buf.keymaps:set("i", key, to)
     end
 
     vim.b.cleanup_imaps = function()
@@ -195,18 +185,18 @@ local function insert_char_pre()
 end
 
 local function cmdwin_enter()
-  local came_from = vim.api.nvim_win_get_buf(vim.fn.win_getid(vim.fn.winnr '#'))
-  if vim.bo[came_from].filetype ~= 'lean' then
+  local came_from = vim.api.nvim_win_get_buf(vim.fn.win_getid(vim.fn.winnr("#")))
+  if vim.bo[came_from].filetype ~= "lean" then
     return
   end
 
-  local augroup = vim.api.nvim_create_augroup('LeanAbbreviationCmdwin', {})
-  vim.api.nvim_create_autocmd('InsertCharPre', {
+  local augroup = vim.api.nvim_create_augroup("LeanAbbreviationCmdwin", {})
+  vim.api.nvim_create_autocmd("InsertCharPre", {
     group = augroup,
     buffer = 0,
     callback = insert_char_pre,
   })
-  vim.api.nvim_create_autocmd({ 'InsertLeave', 'BufLeave' }, {
+  vim.api.nvim_create_autocmd({ "InsertLeave", "BufLeave" }, {
     group = augroup,
     buffer = 0,
     callback = abbreviations.convert,
@@ -214,13 +204,13 @@ local function cmdwin_enter()
 end
 
 local function cmdwin_leave()
-  vim.api.nvim_create_augroup('LeanAbbreviationCmdwin', {})
+  vim.api.nvim_create_augroup("LeanAbbreviationCmdwin", {})
 end
 
 ---All known abbreviations, including any extra user-configured ones.
 ---@return { [string]: string } abbreviations
 local function all_abbreviations()
-  return vim.tbl_extend('force', abbreviations.load(), require 'lean.config'().abbreviations.extra)
+  return vim.tbl_extend("force", abbreviations.load(), require("lean.config")().abbreviations.extra)
 end
 
 ---@param lead string the abbreviation leader
@@ -234,7 +224,7 @@ local function convert_abbrev(lead, all, abbrev)
   if abbrev:find(lead) == 1 then
     return lead .. convert_abbrev(lead, all, abbrev:sub(#lead + 1))
   end
-  local matchlen, fromlen, repl = 0, 99999, ''
+  local matchlen, fromlen, repl = 0, 99999, ""
   for from, to in pairs(all) do
     local curmatchlen = 0
     for i = 1, math.min(#abbrev, #from) do
@@ -265,8 +255,7 @@ function abbreviations.convert()
     return
   end
 
-  local tmp_extmark =
-    vim.api.nvim_buf_set_extmark(0, abbr_mark_ns, row1, col1, { end_line = row2, end_col = col2 })
+  local tmp_extmark = vim.api.nvim_buf_set_extmark(0, abbr_mark_ns, row1, col1, { end_line = row2, end_col = col2 })
 
   row1, col1, row2, col2 = get_extmark_range(abbr_mark_ns, tmp_extmark)
   if not row1 or row1 ~= row2 then
@@ -277,9 +266,9 @@ function abbreviations.convert()
   local converted = convert_abbrev(leader(), all_abbreviations(), text)
 
   -- Put the cursor at $CURSOR if it's present, otherwise at the end.
-  local new_cursor_col_shift, _ = converted:find '$CURSOR'
+  local new_cursor_col_shift, _ = converted:find("$CURSOR")
   if new_cursor_col_shift then
-    converted = converted:gsub('$CURSOR', '')
+    converted = converted:gsub("$CURSOR", "")
     new_cursor_col_shift = new_cursor_col_shift - 1
   else
     new_cursor_col_shift = #converted
@@ -304,10 +293,10 @@ local function global_init()
   end
   initialized = true
 
-  local augroup = vim.api.nvim_create_augroup('LeanAbbreviations', { clear = false })
-  vim.api.nvim_create_autocmd('CmdwinEnter', { group = augroup, callback = cmdwin_enter })
-  vim.api.nvim_create_autocmd('CmdwinLeave', { group = augroup, callback = cmdwin_leave })
-  vim.api.nvim_set_hl(0, 'leanAbbreviationMark', { default = true, underline = true, sp = 'Gray' })
+  local augroup = vim.api.nvim_create_augroup("LeanAbbreviations", { clear = false })
+  vim.api.nvim_create_autocmd("CmdwinEnter", { group = augroup, callback = cmdwin_enter })
+  vim.api.nvim_create_autocmd("CmdwinLeave", { group = augroup, callback = cmdwin_leave })
+  vim.api.nvim_set_hl(0, "leanAbbreviationMark", { default = true, underline = true, sp = "Gray" })
 end
 
 ---Set up abbreviation expansion in the given (Lean) buffer.
@@ -316,13 +305,13 @@ end
 ---buffers.
 ---@param bufnr integer
 function abbreviations.init(bufnr)
-  if require 'lean.config'().abbreviations.enable == false then
+  if require("lean.config")().abbreviations.enable == false then
     return
   end
   global_init()
 
-  local augroup = vim.api.nvim_create_augroup('LeanAbbreviations', { clear = false })
-  vim.api.nvim_clear_autocmds { group = augroup, buffer = bufnr }
+  local augroup = vim.api.nvim_create_augroup("LeanAbbreviations", { clear = false })
+  vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
   for event, callback in pairs(EVENTS) do
     vim.api.nvim_create_autocmd(event, {
       group = augroup,
@@ -340,7 +329,7 @@ end
 function abbreviations.enable(pattern)
   global_init()
 
-  local augroup = vim.api.nvim_create_augroup('LeanAbbreviations', { clear = false })
+  local augroup = vim.api.nvim_create_augroup("LeanAbbreviations", { clear = false })
   for event, callback in pairs(EVENTS) do
     vim.api.nvim_create_autocmd(event, {
       group = augroup,

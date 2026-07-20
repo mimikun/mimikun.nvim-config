@@ -14,14 +14,14 @@
 --- and call it directly, without needing per-widget Lua implementations.
 ---@brief ]]
 
-local dedent = require('std.text').dedent
+local dedent = require("std.text").dedent
 
-local Element = require('lean.tui').Element
-local Html = require 'proofwidgets.html'
-local Locations = require 'lean.infoview.locations'
-local goals = require 'lean.goals'
-local log = require 'lean.log'
-local rpc = require 'lean.rpc'
+local Element = require("lean.tui").Element
+local Html = require("proofwidgets.html")
+local Locations = require("lean.infoview.locations")
+local goals = require("lean.goals")
+local log = require("lean.log")
+local rpc = require("lean.rpc")
 
 ---@alias WidgetRenderer fun(ctx: RenderContext, props: any, hash: string): Element[]?
 
@@ -46,17 +46,17 @@ end
 ---@param id string the ID of the user widget we are not implementing
 ---@return Widget
 function Widget.unsupported(id)
-  return Widget:new {
+  return Widget:new({
     element = function()
-      local title = vim.uri_encode(('Add support for `%s` widgets'):format(id))
-      local msg = dedent [[
+      local title = vim.uri_encode(("Add support for `%s` widgets"):format(id))
+      local msg = dedent([[
         %q is not a supported Lean widget.
         If you think it could be, please file an issue at
         https://github.com/Julian/lean.nvim/issues/new/?title=%s
-      ]]
-      log:info { message = msg:format(id, title), id = id }
+      ]])
+      log:info({ message = msg:format(id, title), id = id })
     end,
-  }
+  })
 end
 
 ---Data and common helpers for an actively rendering widget.
@@ -95,11 +95,11 @@ function RenderContext:rpc_call(method, params)
   if err then
     local kind = vim.lsp.protocol.ErrorCodes[err.code] or tostring(err.code)
     return nil,
-      Element:titled {
-        title = Element.title('RPC Error: ' .. kind, 'ErrorMsg'),
+      Element:titled({
+        title = Element.title("RPC Error: " .. kind, "ErrorMsg"),
         gap = 1,
-        body = { Element:new { text = err.message } },
-      }
+        body = { Element:new({ text = err.message }) },
+      })
   end
   return response
 end
@@ -113,33 +113,33 @@ end
 ---@return Element
 function RenderContext:edit_link(content, range, new_text)
   local text, children
-  if type(content) == 'string' then
+  if type(content) == "string" then
     text = content
   else
     children = { content }
   end
-  return Element.link {
+  return Element.link({
     text = text,
     children = children,
-    name = 'suggestion',
+    name = "suggestion",
     action = function()
       local bufnr = vim.uri_to_bufnr(self.params.textDocument.uri)
       if not vim.api.nvim_buf_is_loaded(bufnr) then
-        log:warning {
-          message = 'Cannot apply edits to unloaded buffer',
+        log:warning({
+          message = "Cannot apply edits to unloaded buffer",
           bufnr = bufnr,
-        }
+        })
         return
       end
 
-      vim.lsp.util.apply_text_edits({ { range = range, newText = new_text } }, bufnr, 'utf-16')
+      vim.lsp.util.apply_text_edits({ { range = range, newText = new_text } }, bufnr, "utf-16")
 
       local last_window = self.get_last_window()
       if last_window and last_window:bufnr() == bufnr then
         last_window:make_current()
       end
     end,
-  }
+  })
 end
 
 ---The last window before the user visited the infoview.
@@ -147,7 +147,7 @@ end
 ---Usually this is which Lean file they were editing.
 ---@return Window? window
 function RenderContext.get_last_window()
-  local this_infoview = require('lean.infoview').get_current_infoview()
+  local this_infoview = require("lean.infoview").get_current_infoview()
   return this_infoview and this_infoview.last_window
 end
 
@@ -191,16 +191,16 @@ end
 ---@param plug string the `<Plug>` name to look up
 ---@return string?
 local function key_for_plug(plug)
-  local iv = require('lean.infoview').get_current_infoview()
+  local iv = require("lean.infoview").get_current_infoview()
   local bufnr = iv and iv.pin and iv.pin.buffer and iv.pin.buffer.bufnr
   if bufnr then
-    for _, m in ipairs(vim.api.nvim_buf_get_keymap(bufnr, 'n')) do
+    for _, m in ipairs(vim.api.nvim_buf_get_keymap(bufnr, "n")) do
       if m.rhs == plug then
         return m.lhs
       end
     end
   end
-  for _, m in ipairs(vim.api.nvim_get_keymap 'n') do
+  for _, m in ipairs(vim.api.nvim_get_keymap("n")) do
     if m.rhs == plug then
       return m.lhs
     end
@@ -211,18 +211,15 @@ end
 ---@return Element
 local function no_selection_help()
   local parts = {
-    Element.text 'Nothing selected. You can use',
-    Element.kbd(key_for_plug '<Plug>(LeanInfoviewSelect)' or 'gK'),
+    Element.text("Nothing selected. You can use"),
+    Element.kbd(key_for_plug("<Plug>(LeanInfoviewSelect)") or "gK"),
   }
-  if vim.o.mouse:find '[na]' then
-    table.insert(parts, Element.text 'or')
-    table.insert(
-      parts,
-      Element.kbd(key_for_plug '<Plug>(LeanInfoviewMouseSelect)' or '<C-LeftMouse>')
-    )
+  if vim.o.mouse:find("[na]") then
+    table.insert(parts, Element.text("or"))
+    table.insert(parts, Element.kbd(key_for_plug("<Plug>(LeanInfoviewMouseSelect)") or "<C-LeftMouse>"))
   end
-  table.insert(parts, Element.text 'in the infoview to select expressions in the goal.')
-  return Element:concat(parts, ' ')
+  table.insert(parts, Element.text("in the infoview to select expressions in the goal."))
+  return Element:concat(parts, " ")
 end
 
 ---A wrapper for widgets which interact with selected locations.
@@ -246,8 +243,8 @@ local function panel(widget_fn)
       goals = ctx:get_goals(),
       selectedLocations = selected,
     }
-    if type(props) == 'table' then
-      params = vim.tbl_extend('error', params, props)
+    if type(props) == "table" then
+      params = vim.tbl_extend("error", params, props)
     end
 
     return widget_fn(ctx, params)
@@ -266,16 +263,16 @@ local function rpc_method_from_source(source)
   -- variable.  We look for a Lean fully-qualified name (at least two
   -- dot-separated segments) that isn't one of the known constants
   -- baked into the template itself.
-  for candidate in source:gmatch '"([%w_]+%.[%w_%.]+)"' do
+  for candidate in source:gmatch('"([%w_]+%.[%w_%.]+)"') do
     if
-      candidate ~= 'react.jsx'
-      and not candidate:find '^react/'
-      and not candidate:find '^@'
-      and candidate ~= 'ProofWidgets.checkRequest'
-      and candidate ~= 'ProofWidgets.cancelRequest'
+      candidate ~= "react.jsx"
+      and not candidate:find("^react/")
+      and not candidate:find("^@")
+      and candidate ~= "ProofWidgets.checkRequest"
+      and candidate ~= "ProofWidgets.cancelRequest"
     then
       -- Strip the cancellable suffix — we call the base method directly.
-      return (candidate:gsub('%._cancellable$', ''))
+      return (candidate:gsub("%._cancellable$", ""))
     end
   end
 end
@@ -296,7 +293,7 @@ local function of_rpc_method(ctx, props, hash)
   -- "0" is Lean's sentinel hash for a widget with no JavaScript source (e.g. a
   -- panel widget saved with null props). Asking the server for that source only
   -- ever errors ("No widget module with hash 0 registered"), so don't.
-  if hash == '0' then
+  if hash == "0" then
     return
   end
 
@@ -328,14 +325,14 @@ end
 ---@param user_widget UserWidget
 ---@return Widget
 function Widget.from_user_widget(user_widget)
-  local lua_module = 'lean.widgets.' .. user_widget.id
+  local lua_module = "lean.widgets." .. user_widget.id
   local ok, widget = pcall(require, lua_module)
   if ok then
-    return Widget:new { element = widget }
+    return Widget:new({ element = widget })
   end
 
   local id = user_widget.id
-  return Widget:new {
+  return Widget:new({
     element = function(ctx, props, hash)
       local element = of_rpc_method(ctx, props, hash)
       if element then
@@ -343,7 +340,7 @@ function Widget.from_user_widget(user_widget)
       end
       Widget.unsupported(id).element()
     end,
-  }
+  })
 end
 
 ---Render a user widget instance into a TUI element.

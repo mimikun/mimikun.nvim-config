@@ -1,7 +1,7 @@
 ---@mod lean.diagnostic Diagnostics
 
-local log = require 'lean.log'
-local std = require 'std.lsp'
+local log = require("lean.log")
+local std = require("std.lsp")
 
 ---@brief [[
 --- Low-level Lean-specific diagnostic support (as in `vim.diagnostic` and its
@@ -46,7 +46,7 @@ local std = require 'std.lsp'
 
 local diagnostic = {
   ---A namespace for our diagnostic signs (replacing vim.diagnostic's built-in signs).
-  signs_ns = vim.api.nvim_create_namespace 'lean.diagnostic.signs',
+  signs_ns = vim.api.nvim_create_namespace("lean.diagnostic.signs"),
 
   ---Custom diagnostic tags provided by the language server.
   ---We use a separate diagnostic field for this to avoid confusing LSP clients with our custom tags.
@@ -71,8 +71,8 @@ local diagnostic = {
   end,
 }
 
-vim.api.nvim_set_hl(0, 'leanUnsolvedGoals', { default = true, link = 'DiagnosticInfo' })
-vim.api.nvim_set_hl(0, 'leanGoalsAccomplishedSign', { default = true, link = 'DiagnosticInfo' })
+vim.api.nvim_set_hl(0, "leanUnsolvedGoals", { default = true, link = "DiagnosticInfo" })
+vim.api.nvim_set_hl(0, "leanGoalsAccomplishedSign", { default = true, link = "DiagnosticInfo" })
 
 ---Get the sign character for a given severity.
 ---
@@ -92,22 +92,22 @@ local function severity_sign(severity, signs_text)
     end
   end
   local name = vim.diagnostic.severity[severity]
-  return name and name:sub(1, 1) or 'E'
+  return name and name:sub(1, 1) or "E"
 end
 
 ---Characters used for multi-line full-range indicators.
 local full_range_chars = {
-  top = '┌',
-  mid = '│',
-  bot = '└',
+  top = "┌",
+  mid = "│",
+  bot = "└",
 }
 
 ---@type table<vim.diagnostic.Severity, string>
 local severity_sign_hl = {
-  [vim.diagnostic.severity.ERROR] = 'DiagnosticSignError',
-  [vim.diagnostic.severity.WARN] = 'DiagnosticSignWarn',
-  [vim.diagnostic.severity.INFO] = 'DiagnosticSignInfo',
-  [vim.diagnostic.severity.HINT] = 'DiagnosticSignHint',
+  [vim.diagnostic.severity.ERROR] = "DiagnosticSignError",
+  [vim.diagnostic.severity.WARN] = "DiagnosticSignWarn",
+  [vim.diagnostic.severity.INFO] = "DiagnosticSignInfo",
+  [vim.diagnostic.severity.HINT] = "DiagnosticSignHint",
 }
 
 ---Extmark priority per severity (higher severity = higher priority).
@@ -154,7 +154,7 @@ end
 ---@return boolean
 function diagnostic.is_imports_out_of_date(diag)
   return diag.severity == vim.lsp.protocol.DiagnosticSeverity.Error
-    and vim.startswith(diag.message, 'Imports are out of date and must be rebuilt')
+    and vim.startswith(diag.message, "Imports are out of date and must be rebuilt")
     and diag.range.start.line == 0
     and diag.range.start.character == 0
 end
@@ -174,7 +174,7 @@ end
 function diagnostic.byterange_of(bufnr, diag)
   local range = diagnostic.range_of(diag)
   local start = std.position_to_byte0(range.start, bufnr)
-  local _end = std.position_to_byte0(range['end'], bufnr)
+  local _end = std.position_to_byte0(range["end"], bufnr)
   return start[1], start[2], _end[1], _end[2]
 end
 
@@ -231,7 +231,7 @@ end
 ---@param diagnostics DiagnosticWith<string>[] the raw LSP diagnostics
 function diagnostic.render_signs(buffer, diagnostics)
   local signs_config = vim.diagnostic.config() or {}
-  local signs_text = type(signs_config.signs) == 'table' and signs_config.signs.text or nil
+  local signs_text = type(signs_config.signs) == "table" and signs_config.signs.text or nil
 
   for _, diag in ipairs(diagnostics) do
     local severity = std.severity_lsp_to_vim(diag.severity)
@@ -240,16 +240,13 @@ function diagnostic.render_signs(buffer, diagnostics)
 
     -- Does this diagnostic have a multi-line fullRange that differs from range?
     local has_full_range = diag.fullRange
-      and diag.fullRange['end'].line > diag.range['end'].line
-      and not (
-        diag.fullRange.start.line == 0
-        and diag.fullRange['end'].line >= buffer:line_count() - 1
-      )
+      and diag.fullRange["end"].line > diag.range["end"].line
+      and not (diag.fullRange.start.line == 0 and diag.fullRange["end"].line >= buffer:line_count() - 1)
 
     local ok = pcall(function()
       if has_full_range then
         local start_pos = std.position_to_byte0(diag.fullRange.start, buffer.bufnr)
-        local end_pos = std.position_to_byte0(diag.fullRange['end'], buffer.bufnr)
+        local end_pos = std.position_to_byte0(diag.fullRange["end"], buffer.bufnr)
 
         local start_line = start_pos[1]
         local end_line = end_pos[1]
@@ -299,11 +296,11 @@ function diagnostic.render_signs(buffer, diagnostics)
     end)
 
     if not ok then
-      log:debug {
-        message = 'Failed to set diagnostic sign',
+      log:debug({
+        message = "Failed to set diagnostic sign",
         diagnostic = diag,
         bufnr = buffer.bufnr,
-      }
+      })
     end
   end
 end
@@ -320,14 +317,11 @@ end
 ---@return vim.Diagnostic[] diagnostics the relevant Lean diagnostics
 function diagnostic.lsp_diagnostics(opts, bufnr)
   bufnr = bufnr or 0
-  local clients = vim.lsp.get_clients { bufnr = bufnr, name = 'leanls' }
+  local clients = vim.lsp.get_clients({ bufnr = bufnr, name = "leanls" })
   local namespaces = vim.iter(clients):map(function(client)
     return vim.lsp.diagnostic.get_namespace(client.id)
   end)
-  return vim.diagnostic.get(
-    bufnr,
-    vim.tbl_extend('keep', opts or {}, { namespace = namespaces:totable() })
-  )
+  return vim.diagnostic.get(bufnr, vim.tbl_extend("keep", opts or {}, { namespace = namespaces:totable() }))
 end
 
 return diagnostic

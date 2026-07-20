@@ -1,12 +1,12 @@
-local Element = require('lean.tui').Element
+local Element = require("lean.tui").Element
 
-vim.api.nvim_set_hl(0, 'tui.table.header', { default = true, bold = true })
-vim.api.nvim_set_hl(0, 'tui.table.separator', { default = true, link = 'WinSeparator' })
+vim.api.nvim_set_hl(0, "tui.table.header", { default = true, bold = true })
+vim.api.nvim_set_hl(0, "tui.table.separator", { default = true, link = "WinSeparator" })
 
 local Table = {}
 
 -- Element:foldable prefixes titles with a 2-char arrow (▶ /▼ ).
-local FOLD_PREFIX_WIDTH = vim.fn.strdisplaywidth '▶ '
+local FOLD_PREFIX_WIDTH = vim.fn.strdisplaywidth("▶ ")
 
 ---Build the padded cell elements for a single row.
 ---@param elements Element[] cell Elements
@@ -17,21 +17,21 @@ local FOLD_PREFIX_WIDTH = vim.fn.strdisplaywidth '▶ '
 local function render_cells(elements, col_widths, widths, indent)
   local cell_elements = {}
   for c, cell in ipairs(elements) do
-    local pad = string.rep(' ', (col_widths[c] or 0) - widths[c])
+    local pad = string.rep(" ", (col_widths[c] or 0) - widths[c])
     local cell_content
     if c == 1 and indent > 0 then
-      cell_content = Element:new {
-        children = { Element.text(string.rep(' ', indent)), cell, Element:new { text = pad } },
-      }
+      cell_content = Element:new({
+        children = { Element.text(string.rep(" ", indent)), cell, Element:new({ text = pad }) },
+      })
     else
-      cell_content = Element:new { children = { cell, Element:new { text = pad } } }
+      cell_content = Element:new({ children = { cell, Element:new({ text = pad }) } })
     end
     table.insert(cell_elements, cell_content)
     if c < #elements then
-      table.insert(cell_elements, Element.text ' │ ')
+      table.insert(cell_elements, Element.text(" │ "))
     end
   end
-  return Element:new { children = cell_elements }
+  return Element:new({ children = cell_elements })
 end
 
 ---Render a plain row into result Elements.
@@ -44,17 +44,17 @@ local function render_header(elements, col_widths, widths, max_prefix)
   local sep_parts = {}
   for c, w in ipairs(col_widths) do
     local extra = c == 1 and max_prefix or 0
-    table.insert(sep_parts, string.rep('─', w + extra))
+    table.insert(sep_parts, string.rep("─", w + extra))
     if c < #col_widths then
-      table.insert(sep_parts, '─┼─')
+      table.insert(sep_parts, "─┼─")
     end
   end
   return {
-    Element:new {
-      hlgroups = { 'tui.table.header' },
+    Element:new({
+      hlgroups = { "tui.table.header" },
       children = { render_cells(elements, col_widths, widths, max_prefix) },
-    },
-    Element:new { text = table.concat(sep_parts), hlgroups = { 'tui.table.separator' } },
+    }),
+    Element:new({ text = table.concat(sep_parts), hlgroups = { "tui.table.separator" } }),
   }
 end
 
@@ -87,14 +87,14 @@ function Table.foldable(opts)
     prefix_width = FOLD_PREFIX_WIDTH,
     render = function(elements, col_widths, widths, max_prefix)
       return {
-        Element:foldable {
+        Element:foldable({
           title = render_cells(elements, col_widths, widths, 0),
           body = { Table.render(opts.children, col_widths, max_prefix) },
           open = opts.open or false,
           on_open = opts.on_open,
           on_close = opts.on_close,
           gap = 0,
-        },
+        }),
       }
     end,
   }
@@ -111,7 +111,7 @@ end
 ---@return Element
 function Table.render(rows, inherited_col_widths, inherited_prefix)
   if #rows == 0 then
-    return Element:new {}
+    return Element:new({})
   end
 
   -- Compute the max prefix width across all rows so non-prefixed
@@ -151,10 +151,10 @@ function Table.render(rows, inherited_col_widths, inherited_prefix)
     vim.list_extend(result_rows, row.render(cells[r], col_widths, cell_widths[r], max_prefix))
   end
 
-  return Element:new {
+  return Element:new({
     is_block = true,
-    children = { Element:concat(result_rows, '\n') },
-  }
+    children = { Element:concat(result_rows, "\n") },
+  })
 end
 
 return Table

@@ -3,7 +3,7 @@ vim.bo.modifiable = false
 vim.bo.undolevels = -1
 vim.wo.cursorline = false
 vim.wo.cursorcolumn = false
-vim.wo.colorcolumn = ''
+vim.wo.colorcolumn = ""
 vim.wo.number = false
 vim.wo.relativenumber = false
 vim.wo.spell = false
@@ -17,11 +17,11 @@ vim.wo.linebreak = true
 -- Note that `breakat` is a global option so we need local,
 -- and that it doesn't support unicode (neovim#13967) so things like `↦→`
 -- are unfortnately off-limits.
-vim.opt_local.breakat = ' \t,='
+vim.opt_local.breakat = " \t,="
 vim.wo.breakindent = true
-vim.wo.breakindentopt = 'shift:2'
+vim.wo.breakindentopt = "shift:2"
 
-if vim.fn.exists '&winfixbuf' ~= 0 then
+if vim.fn.exists("&winfixbuf") ~= 0 then
   local window = vim.api.nvim_get_current_win()
   -- FIXME: This is obviously ridiculous, but there's seemingly some neovim bug
   --        here which needs minimizing.

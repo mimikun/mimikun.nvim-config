@@ -1,4 +1,4 @@
-local Buffer = require 'std.nvim.buffer'
+local Buffer = require("std.nvim.buffer")
 
 local goals = {}
 
@@ -24,7 +24,7 @@ function goals.at(sess)
   local params = sess.pos
   local buffer = Buffer:from_uri(params.textDocument.uri)
   if not buffer:is_loaded() then
-    return nil, ('%s is not not loaded'):format(buffer.bufnr)
+    return nil, ("%s is not not loaded"):format(buffer.bufnr)
   end
 
   local tick = buffer.b.changedtick

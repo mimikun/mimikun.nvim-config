@@ -4,7 +4,7 @@
 
 ---@tag lean.infoview.locations
 
-local inductive = require 'std.inductive'
+local inductive = require("std.inductive")
 
 ---@alias GoalLocationHyp FVarId
 ---@alias GoalLocationHypType {[1]: FVarId, [2]: SubexprPos}
@@ -20,7 +20,7 @@ local inductive = require 'std.inductive'
 ---  - (a subexpression of) the goal type.
 ---@class GoalLocation: Inductive
 ---@field with_subexpr_pos fun(self:GoalLocation, pos:SubexprPos):GoalLocation
-local GoalLocation = inductive('GoalLocation', {
+local GoalLocation = inductive("GoalLocation", {
   hyp = {
     ---@param self GoalLocationHyp
     with_subexpr_pos = function(self)
@@ -31,14 +31,14 @@ local GoalLocation = inductive('GoalLocation', {
     ---@param self GoalLocationHypType
     ---@param pos SubexprPos
     with_subexpr_pos = function(self, pos)
-      return self { self[1][1], pos }
+      return self({ self[1][1], pos })
     end,
   },
   hypValue = {
     ---@param self GoalLocationHypValue
     ---@param pos SubexprPos
     with_subexpr_pos = function(self, pos)
-      return self { self[1][1], pos }
+      return self({ self[1][1], pos })
     end,
   },
   target = {
@@ -91,7 +91,7 @@ function Locations.at(params)
   if not last or not vim.deep_equal(last[1], params.position) then
     selected_at[params.textDocument.uri] = { params.position, {} }
   end
-  return Locations:new { params = params }
+  return Locations:new({ params = params })
 end
 
 ---Clear the selected locations for the given position.
@@ -99,7 +99,7 @@ end
 function Locations.clear(params)
   selected_at[params.textDocument.uri] = nil
 
-  local infoview = require('lean.infoview').get_current_infoview()
+  local infoview = require("lean.infoview").get_current_infoview()
   if not infoview or not infoview.window then
     return
   end
@@ -141,7 +141,7 @@ function Locations:toggle_selection(loc)
   end
   selected_at[self.params.textDocument.uri][2] = new
 
-  local infoview = require('lean.infoview').get_current_infoview()
+  local infoview = require("lean.infoview").get_current_infoview()
   if not infoview then
     return
   end
@@ -159,12 +159,12 @@ end
 ---@param location GoalsLocation
 ---@return Locations locations_in
 function Locations:in_template(location)
-  return Locations:new { params = self.params, subexpr_template = location }
+  return Locations:new({ params = self.params, subexpr_template = location })
 end
 
 ---@return GoalsLocation
 function Locations:template_with_subexpr_pos(pos)
-  assert(self.subexpr_template, 'No subexpr template set.')
+  assert(self.subexpr_template, "No subexpr template set.")
   return { -- FIXME: Add a proper GoalsLocation to clean this up.
     mvarId = self.subexpr_template.mvarId,
     loc = GoalLocation(self.subexpr_template.loc):with_subexpr_pos(pos):serialize(),

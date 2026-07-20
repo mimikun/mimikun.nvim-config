@@ -9,13 +9,13 @@
 --- definition, etc.
 ---@brief ]]
 
-local Buffer = require 'std.nvim.buffer'
-local async = require 'std.async'
+local Buffer = require("std.nvim.buffer")
+local async = require("std.async")
 
-local Element = require('lean.tui').Element
-local InteractiveCode = require 'lean.widget.interactive_code'
-local lsp = require 'lean.lsp'
-local rpc = require 'lean.rpc'
+local Element = require("lean.tui").Element
+local InteractiveCode = require("lean.widget.interactive_code")
+local lsp = require("lean.lsp")
+local rpc = require("lean.rpc")
 
 ---Apply Lean keyword highlighting to lines 1..`last_line` of the hover buffer.
 ---
@@ -38,19 +38,19 @@ local function apply_lean_syntax(buffer, last_line)
     -- it to the included language on success; bracket the include so markdown
     -- remains the buffer's effective syntax for the surrounding doc lines.
     vim.b.current_syntax = nil
-    local ok = pcall(vim.cmd.syntax, { 'include', '@LeanHoverCode', 'syntax/lean.vim' })
-    vim.b.current_syntax = 'markdown'
+    local ok = pcall(vim.cmd.syntax, { "include", "@LeanHoverCode", "syntax/lean.vim" })
+    vim.b.current_syntax = "markdown"
     if not ok then
       return
     end
-    vim.cmd.syntax {
-      'region',
-      'leanHoverCode',
+    vim.cmd.syntax({
+      "region",
+      "leanHoverCode",
       [[start=/\%^/]],
       ([[end=/\%%%dl$/]]):format(last_line),
-      'keepend',
-      'contains=@LeanHoverCode',
-    }
+      "keepend",
+      "contains=@LeanHoverCode",
+    })
   end)
 end
 
@@ -63,11 +63,11 @@ local function top_level_colon(signature)
   local depth = 0
   for i = 1, #signature do
     local c = signature:sub(i, i)
-    if c == '(' or c == '{' or c == '[' then
+    if c == "(" or c == "{" or c == "[" then
       depth = depth + 1
-    elseif c == ')' or c == '}' or c == ']' then
+    elseif c == ")" or c == "}" or c == "]" then
       depth = depth - 1
-    elseif c == ':' and depth == 0 and signature:sub(i + 1, i + 1) ~= '=' then
+    elseif c == ":" and depth == 0 and signature:sub(i + 1, i + 1) ~= "=" then
       return i
     end
   end
@@ -92,7 +92,7 @@ end
 ---@return string? signature the expression signature (without the type)
 ---@return string? doc the documentation and import info
 local function extract_hover(result)
-  local value = type(result.contents) == 'string' and result.contents or result.contents.value
+  local value = type(result.contents) == "string" and result.contents or result.contents.value
   if not value then
     return
   end
@@ -102,7 +102,7 @@ local function extract_hover(result)
   -- and for multi-line signatures the top-level `:` can be at end of a line
   -- with no trailing space.  We walk the fence tracking bracket depth so
   -- colons inside binders never split the signature.
-  local fence = value:match '^```lean\n(.-)```'
+  local fence = value:match("^```lean\n(.-)```")
   local signature
   if fence then
     local trimmed = vim.trim(fence)
@@ -118,9 +118,9 @@ local function extract_hover(result)
   -- as a Setext H2 heading (which is what `---` means immediately after a
   -- text line).  We normalize surrounding newlines so we never produce more
   -- than one blank line on either side of the separator.
-  local doc = value:match '%*%*%*\n(.+)'
+  local doc = value:match("%*%*%*\n(.+)")
   if doc then
-    doc = vim.trim(doc:gsub('\n+%*%*%*\n+', '\n\n---\n\n'))
+    doc = vim.trim(doc:gsub("\n+%*%*%*\n+", "\n\n---\n\n"))
   end
 
   return signature, doc
@@ -133,7 +133,7 @@ end
 -- InteractiveCode (same as the VS Code infoview's `TypePopupContents`):
 -- https://github.com/leanprover/vscode-lean4/blob/dd686d7/lean4-infoview/src/infoview/interactiveCode.tsx#L112
 return function()
-  local params = vim.lsp.util.make_position_params(0, 'utf-16')
+  local params = vim.lsp.util.make_position_params(0, "utf-16")
 
   async.run(function()
     local sess = rpc.open(params)
@@ -151,7 +151,7 @@ return function()
     local client = lsp.client_for()
     if client then
       local _, hover_result = async.wrap(function(handler)
-        client:request('textDocument/hover', params, handler)
+        client:request("textDocument/hover", params, handler)
       end, 1)()
       if hover_result then
         signature, doc = extract_hover(hover_result)
@@ -160,35 +160,31 @@ return function()
 
     -- Group the signature and interactive type together so we can re-apply
     -- Lean syntax to exactly the lines they occupy after rendering.
-    local lean_code = Element:new { name = 'lean_code' }
+    local lean_code = Element:new({ name = "lean_code" })
     if signature then
-      lean_code:add_child(Element:new { text = signature .. ' : ' })
+      lean_code:add_child(Element:new({ text = signature .. " : " }))
     end
     lean_code:add_child(InteractiveCode(term_goal.type, sess))
 
     local children = { lean_code }
     if doc then
-      table.insert(children, Element:new { text = '\n\n' .. doc })
+      table.insert(children, Element:new({ text = "\n\n" .. doc }))
     end
 
-    local element = Element:new { children = children }
+    local element = Element:new({ children = children })
     local str = element:to_string()
-    if str:match '^%s*$' then
+    if str:match("^%s*$") then
       return
     end
 
     vim.schedule(function()
-      local bufnr = vim.lsp.util.open_floating_preview(
-        vim.split(str, '\n'),
-        'markdown',
-        { focus_id = 'lean_hover' }
-      )
+      local bufnr = vim.lsp.util.open_floating_preview(vim.split(str, "\n"), "markdown", { focus_id = "lean_hover" })
       local buffer = Buffer:from_bufnr(bufnr)
 
-      local renderer = element:renderer {
+      local renderer = element:renderer({
         buffer = buffer,
-        keymaps = require 'lean.config'().infoview.mappings,
-      }
+        keymaps = require("lean.config")().infoview.mappings,
+      })
       renderer:render()
 
       local code_pos = renderer.positions[lean_code]

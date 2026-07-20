@@ -1,4 +1,4 @@
-local InteractiveCode = require 'lean.widget.interactive_code'
+local InteractiveCode = require("lean.widget.interactive_code")
 
 ---ProofWidgets' InteractiveCode widget.
 ---@param ctx RenderContext

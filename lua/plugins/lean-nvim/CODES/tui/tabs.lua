@@ -5,9 +5,9 @@
 --- swaps the body shown beneath the strip.
 ---@brief ]]
 
-local Element = require('lean.tui').Element
+local Element = require("lean.tui").Element
 
-vim.api.nvim_set_hl(0, 'tui.tabs.active', { default = true, bold = true })
+vim.api.nvim_set_hl(0, "tui.tabs.active", { default = true, bold = true })
 
 ---@class tui.tabs.Tab
 ---@field label string the tab's label text
@@ -27,10 +27,10 @@ return function(opts)
   local on_change = opts.on_change or function() end
 
   ---@type Element
-  local container = Element:new {}
+  local container = Element:new({})
 
   local function resolve_body(body)
-    if type(body) == 'function' then
+    if type(body) == "function" then
       return body()
     end
     return body
@@ -40,8 +40,8 @@ return function(opts)
   -- have no significant trailing spaces (keeps `dedent` tests honest).
   local function rstrip(row)
     for i = #row, 1, -1 do
-      row[i].text = row[i].text:gsub('%s+$', '')
-      if row[i].text ~= '' then
+      row[i].text = row[i].text:gsub("%s+$", "")
+      if row[i].text ~= "" then
         return
       end
       table.remove(row, i)
@@ -59,41 +59,41 @@ return function(opts)
       -- label's column never changes when switching tabs. This keeps the
       -- cursor anchored to the same label across re-renders.
       if i == active then
-        local left = (i == 1) and '╰' or '┴'
-        local right = (i == n) and '╯' or '┴'
-        table.insert(top, Element.text('╭' .. string.rep('─', w + 2) .. '╮'))
-        table.insert(middle, Element.text '│ ')
+        local left = (i == 1) and "╰" or "┴"
+        local right = (i == n) and "╯" or "┴"
+        table.insert(top, Element.text("╭" .. string.rep("─", w + 2) .. "╮"))
+        table.insert(middle, Element.text("│ "))
         table.insert(
           middle,
-          Element:new {
+          Element:new({
             text = tab.label,
-            hlgroups = { 'tui.tabs.active' },
-          }
+            hlgroups = { "tui.tabs.active" },
+          })
         )
-        table.insert(middle, Element.text ' │')
-        table.insert(bottom, Element.text(left .. string.rep('─', w + 2) .. right))
+        table.insert(middle, Element.text(" │"))
+        table.insert(bottom, Element.text(left .. string.rep("─", w + 2) .. right))
       else
         local idx = i
-        table.insert(top, Element.text(string.rep(' ', w + 4)))
-        table.insert(middle, Element.text '  ')
+        table.insert(top, Element.text(string.rep(" ", w + 4)))
+        table.insert(middle, Element.text("  "))
         table.insert(
           middle,
-          Element:new {
+          Element:new({
             text = tab.label,
-            hlgroups = { 'widgetLink' },
+            hlgroups = { "widgetLink" },
             highlightable = true,
             events = {
               click = function(ctx)
                 active = idx
                 on_change(idx)
-                container:set_children { layout() }
+                container:set_children({ layout() })
                 ctx.rerender()
               end,
             },
-          }
+          })
         )
-        table.insert(middle, Element.text '  ')
-        table.insert(bottom, Element.text(string.rep('─', w + 4)))
+        table.insert(middle, Element.text("  "))
+        table.insert(bottom, Element.text(string.rep("─", w + 4)))
       end
     end
 
@@ -108,13 +108,13 @@ return function(opts)
     -- element, the inactive top's leading whitespace gets dropped as
     -- "decorative" — pulling the active tab's box to column 0.
     return Element:concat({
-      Element:new { children = top },
-      Element:new { children = middle },
-      Element:new { children = bottom },
+      Element:new({ children = top }),
+      Element:new({ children = middle }),
+      Element:new({ children = bottom }),
       resolve_body(tabs[active].body),
-    }, '\n', { is_block = true })
+    }, "\n", { is_block = true })
   end
 
-  container:set_children { layout() }
+  container:set_children({ layout() })
   return container
 end

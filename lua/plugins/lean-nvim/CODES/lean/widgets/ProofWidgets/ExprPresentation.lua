@@ -1,4 +1,4 @@
-local ExprPresentation = require 'proofwidgets.expr_presentation'
+local ExprPresentation = require("proofwidgets.expr_presentation")
 
 ---ProofWidgets' Presentation.ExprPresentation
 ---

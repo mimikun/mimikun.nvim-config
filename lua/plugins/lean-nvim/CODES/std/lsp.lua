@@ -8,8 +8,8 @@ local lsp = {}
 ---@param bufnr integer the buffer whose position is referred to
 ---@return { [1]: integer, [2]: integer } position
 function lsp.position_to_byte0(position, bufnr)
-  local line = vim.api.nvim_buf_get_lines(bufnr, position.line, position.line + 1, false)[1] or ''
-  local ok, col = pcall(vim.str_byteindex, line, 'utf-16', position.character)
+  local line = vim.api.nvim_buf_get_lines(bufnr, position.line, position.line + 1, false)[1] or ""
+  local ok, col = pcall(vim.str_byteindex, line, "utf-16", position.character)
   return { position.line, ok and col or position.character }
 end
 
@@ -25,15 +25,15 @@ function lsp.byte_col_to_utf16(buf_line, byte_col)
   if not buf_line then
     return 0
   end
-  local ok, utf16 = pcall(vim.str_utfindex, buf_line, 'utf-16', byte_col)
+  local ok, utf16 = pcall(vim.str_utfindex, buf_line, "utf-16", byte_col)
   if ok then
     return utf16
   end
-  require('lean.log'):debug {
-    message = 'str_utfindex failed',
+  require("lean.log"):debug({
+    message = "str_utfindex failed",
     buf_line = buf_line,
     byte_col = byte_col,
-  }
+  })
   return 0
 end
 
@@ -44,27 +44,27 @@ end
 ---information.
 ---@param range lsp.Range
 function lsp.range_to_string(range)
-  return ('%d:%d-%d:%d'):format(
+  return ("%d:%d-%d:%d"):format(
     range.start.line + 1,
     range.start.character + 1,
-    range['end'].line + 1,
-    range['end'].character + 1
+    range["end"].line + 1,
+    range["end"].character + 1
   )
 end
 
 -- ~*~ vim.lsp._private_functions we still need... ~*~
 
 local format_line_ending = {
-  ['unix'] = '\n',
-  ['dos'] = '\r\n',
-  ['mac'] = '\r',
+  ["unix"] = "\n",
+  ["dos"] = "\r\n",
+  ["mac"] = "\r",
 }
 
 ---@private
 ---@param bufnr (number)
 ---@return string
 local function buf_get_line_ending(bufnr)
-  return format_line_ending[vim.bo[bufnr].fileformat] or '\n'
+  return format_line_ending[vim.bo[bufnr].fileformat] or "\n"
 end
 
 ---@private
@@ -88,7 +88,7 @@ end
 
 ---@param severity lsp.DiagnosticSeverity
 function lsp.severity_lsp_to_vim(severity)
-  if type(severity) == 'string' then
+  if type(severity) == "string" then
     severity = vim.lsp.protocol.DiagnosticSeverity[severity] ---@type integer
   end
   return severity
@@ -107,7 +107,7 @@ function lsp.tags_lsp_to_vim(diagnostic, client_id)
       tags = tags or {}
       tags.deprecated = true
     else
-      vim.lsp.log.info(string.format('Unknown DiagnosticTag %d from LSP client %d', tag, client_id))
+      vim.lsp.log.info(string.format("Unknown DiagnosticTag %d from LSP client %d", tag, client_id))
     end
   end
   return tags

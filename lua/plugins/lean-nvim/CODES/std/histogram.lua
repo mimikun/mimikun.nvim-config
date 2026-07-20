@@ -1,4 +1,4 @@
-local Stopwatch = require 'std.stopwatch'
+local Stopwatch = require("std.stopwatch")
 
 ---A simple HDR histogram for recording distributions without data loss.
 ---
@@ -87,7 +87,7 @@ end
 ---@param count? integer number of observations (default 1, must be > 0)
 function Histogram:record(value, count)
   count = count or 1
-  assert(count > 0, 'count must be positive')
+  assert(count > 0, "count must be positive")
   local idx = bucket_for(math.floor(math.max(0, value)))
   self._counts[idx] = (self._counts[idx] or 0) + count
   self._total = self._total + count

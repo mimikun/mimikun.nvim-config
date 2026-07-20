@@ -1,5 +1,5 @@
 ---@type Log
-local log = vim.schedule_wrap(require 'lean.config'().debug.log)
+local log = vim.schedule_wrap(require("lean.config")().debug.log)
 
 ---@class LogMessage: { message: string?, [string]: any }
 ---@alias Log fun(level: integer, data: LogMessage):nil
@@ -11,8 +11,8 @@ local Logger = {
     self(vim.log.levels.DEBUG, data)
   end,
   error = function(self, data)
-    local with_tb = vim.tbl_extend('keep', data, {
-      traceback = debug.traceback(data.message or '', 2),
+    local with_tb = vim.tbl_extend("keep", data, {
+      traceback = debug.traceback(data.message or "", 2),
     })
     self(vim.log.levels.ERROR, with_tb)
   end,

@@ -17,7 +17,7 @@ return function(name, defs)
   local to_obj
 
   local _, first = next(defs)
-  if type(first) ~= 'table' then
+  if type(first) ~= "table" then
     to_obj = function(_, t)
       return t
     end
@@ -35,7 +35,7 @@ return function(name, defs)
         local method = impl[method_name]
 
         if not method then
-          error(('%s method is missing for %s.%s'):format(method_name, name, constructor_name))
+          error(("%s method is missing for %s.%s"):format(method_name, name, constructor_name))
         end
         obj[method_name] = method
         impl[method_name] = nil -- so we can tell if there are any extras...
@@ -43,7 +43,7 @@ return function(name, defs)
 
       local extra = next(impl)
       if extra then
-        error(('%s method is unexpected for %s.%s'):format(extra, name, constructor_name))
+        error(("%s method is unexpected for %s.%s"):format(extra, name, constructor_name))
       end
       return function(_, ...)
         return setmetatable({ ... }, {
@@ -70,19 +70,19 @@ return function(name, defs)
   function Type.match(_, arms)
     for arm_name in pairs(arms) do
       if not constructor_names[arm_name] then
-        error(('Extraneous match arm for %s: %s'):format(name, arm_name))
+        error(("Extraneous match arm for %s: %s"):format(name, arm_name))
       end
     end
     for ctor_name in pairs(constructor_names) do
       if not arms[ctor_name] then
-        error(('Non-exhaustive match on %s: missing %s'):format(name, ctor_name))
+        error(("Non-exhaustive match on %s: missing %s"):format(name, ctor_name))
       end
     end
 
     return function(data, ...)
       local constructor_name, value = next(data)
       if not constructor_names[constructor_name] then
-        error(('Invalid %s constructor: %s'):format(name, constructor_name))
+        error(("Invalid %s constructor: %s"):format(name, constructor_name))
       end
       return arms[constructor_name](value, ...)
     end
@@ -92,7 +92,7 @@ return function(name, defs)
     __call = function(self, data, ...)
       local constructor_name, value = next(data)
       if not constructor_names[constructor_name] then
-        error(('Invalid %s constructor: %s'):format(name, constructor_name))
+        error(("Invalid %s constructor: %s"):format(name, constructor_name))
       end
       return self[constructor_name](self, value, ...)
     end,

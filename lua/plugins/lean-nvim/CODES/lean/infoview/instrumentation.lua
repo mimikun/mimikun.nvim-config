@@ -5,20 +5,20 @@
 
 ---@tag lean.infoview.instrumentation
 
-local Histogram = require 'std.histogram'
-local Ringbuf = require 'std.ringbuf'
-local humanize = require 'std.humanize'
+local Histogram = require("std.histogram")
+local Ringbuf = require("std.ringbuf")
+local humanize = require("std.humanize")
 
-local Element = require('lean.tui').Element
-local Graphic = require 'tui.graphic'
-local Table = require 'tui.table'
-local Tabs = require 'tui.tabs'
-local plot = require 'tui.plot'
+local Element = require("lean.tui").Element
+local Graphic = require("tui.graphic")
+local Table = require("tui.table")
+local Tabs = require("tui.tabs")
+local plot = require("tui.plot")
 local percentile_distribution = plot.percentile_distribution
 
-vim.api.nvim_set_hl(0, 'leanDebugTimingTrivial', { default = true, link = 'Comment' })
-vim.api.nvim_set_hl(0, 'leanDebugTimingDominant', { default = true, link = 'DiagnosticWarn' })
-vim.api.nvim_set_hl(0, 'leanDebugVisibilityFlash', { default = true, link = 'DiagnosticWarn' })
+vim.api.nvim_set_hl(0, "leanDebugTimingTrivial", { default = true, link = "Comment" })
+vim.api.nvim_set_hl(0, "leanDebugTimingDominant", { default = true, link = "DiagnosticWarn" })
+vim.api.nvim_set_hl(0, "leanDebugVisibilityFlash", { default = true, link = "DiagnosticWarn" })
 
 ---A single refresh timing record stored in the pin's history ring buffer.
 ---@class PinRefreshRecord
@@ -39,14 +39,14 @@ local FLASH_THRESHOLD_NS = 100 * MS
 
 ---Sparkline glyphs from idle (1 event/s) up to thrash (8+ events/s).
 ---Empty buckets render as a space so quiet stretches stay obvious.
-local RATE_BARS = { '▁', '▂', '▃', '▄', '▅', '▆', '▇', '█' }
+local RATE_BARS = { "▁", "▂", "▃", "▄", "▅", "▆", "▇", "█" }
 
 ---Pick the sparkline glyph for a given event count in a 1-second bucket.
 ---@param count integer
 ---@return string
 local function rate_bar(count)
   if count <= 0 then
-    return ' '
+    return " "
   end
   return RATE_BARS[math.min(count, #RATE_BARS)]
 end
@@ -55,9 +55,9 @@ end
 ---@param flashes integer
 ---@return Element
 local function flashes_element(flashes)
-  local text = ('flashes: %d'):format(flashes)
+  local text = ("flashes: %d"):format(flashes)
   if flashes > 0 then
-    return Element:new { text = text, hlgroups = { 'leanDebugVisibilityFlash' } }
+    return Element:new({ text = text, hlgroups = { "leanDebugVisibilityFlash" } })
   end
   return Element.text(text)
 end
@@ -113,9 +113,9 @@ local function duration_element(ns, total)
   if total and total > 0 then
     local fraction = ns / total
     if fraction < 0.05 then
-      return Element:new { text = formatted, hlgroups = { 'leanDebugTimingTrivial' } }
+      return Element:new({ text = formatted, hlgroups = { "leanDebugTimingTrivial" } })
     elseif fraction > 0.7 then
-      return Element:new { text = formatted, hlgroups = { 'leanDebugTimingDominant' } }
+      return Element:new({ text = formatted, hlgroups = { "leanDebugTimingDominant" } })
     end
   end
   return Element.text(formatted)
@@ -177,7 +177,7 @@ function Instrumentation:record(timing, uri, stale)
   if self._last_timestamp and now - self._last_timestamp < FLASH_THRESHOLD_NS then
     self.flashes = self.flashes + 1
   end
-  self.history:push { timing = timing, uri = uri, stale = stale, timestamp = now }
+  self.history:push({ timing = timing, uri = uri, stale = stale, timestamp = now })
   self._last_timestamp = now
 end
 
@@ -207,7 +207,7 @@ function Instrumentation:debug_element(opts)
   local top_phases = {}
   local sub_phase_data = {}
   for phase, ns in vim.spairs(latest.timing) do
-    local dot = phase:find('.', 1, true)
+    local dot = phase:find(".", 1, true)
     if dot then
       local parent = phase:sub(1, dot - 1)
       sub_phase_data[parent] = sub_phase_data[parent] or {}
@@ -222,36 +222,30 @@ function Instrumentation:debug_element(opts)
   for _, entry in ipairs(significant_top) do
     local subs = sub_phase_data[entry.name]
     -- Color phases relative to total, but not total itself.
-    local reference = entry.name ~= 'total' and total_ns or nil
+    local reference = entry.name ~= "total" and total_ns or nil
     if subs then
       local sig_subs, triv_subs = partition_phases(subs, entry.ns)
       local child_rows = {}
       for _, sub in ipairs(sig_subs) do
-        table.insert(
-          child_rows,
-          Table.row { Element.text(sub.name), duration_element(sub.ns, entry.ns) }
-        )
+        table.insert(child_rows, Table.row({ Element.text(sub.name), duration_element(sub.ns, entry.ns) }))
       end
       if #triv_subs > 0 then
         local triv_rows = {}
         for _, sub in ipairs(triv_subs) do
-          table.insert(
-            triv_rows,
-            Table.row { Element.text(sub.name), duration_element(sub.ns, entry.ns) }
-          )
+          table.insert(triv_rows, Table.row({ Element.text(sub.name), duration_element(sub.ns, entry.ns) }))
         end
         table.insert(
           child_rows,
-          Table.foldable {
+          Table.foldable({
             cells = {
-              Element:new {
-                text = ('%d trivial'):format(#triv_subs),
-                hlgroups = { 'leanDebugTimingTrivial' },
-              },
-              Element.text '',
+              Element:new({
+                text = ("%d trivial"):format(#triv_subs),
+                hlgroups = { "leanDebugTimingTrivial" },
+              }),
+              Element.text(""),
             },
             children = triv_rows,
-          }
+          })
         )
       end
       local phase_name = entry.name
@@ -260,45 +254,42 @@ function Instrumentation:debug_element(opts)
       end
       table.insert(
         detail_rows,
-        Table.foldable {
+        Table.foldable({
           cells = { Element.text(phase_name), duration_element(entry.ns, reference) },
           children = child_rows,
           open = opts.expanded[phase_name],
           on_open = track_expanded,
           on_close = track_expanded,
-        }
+        })
       )
     else
-      table.insert(
-        detail_rows,
-        Table.row { Element.text(entry.name), duration_element(entry.ns, reference) }
-      )
+      table.insert(detail_rows, Table.row({ Element.text(entry.name), duration_element(entry.ns, reference) }))
     end
   end
   if #trivial_top > 0 then
     local triv_rows = {}
     for _, entry in ipairs(trivial_top) do
-      table.insert(triv_rows, Table.row { Element.text(entry.name), duration_element(entry.ns) })
+      table.insert(triv_rows, Table.row({ Element.text(entry.name), duration_element(entry.ns) }))
     end
     table.insert(
       detail_rows,
-      Table.foldable {
+      Table.foldable({
         cells = {
-          Element:new {
-            text = ('%d trivial'):format(#trivial_top),
-            hlgroups = { 'leanDebugTimingTrivial' },
-          },
-          Element.text '',
+          Element:new({
+            text = ("%d trivial"):format(#trivial_top),
+            hlgroups = { "leanDebugTimingTrivial" },
+          }),
+          Element.text(""),
         },
         children = triv_rows,
-      }
+      })
     )
   end
   if latest.stale then
-    table.insert(detail_rows, Table.row { Element.text '(stale)', Element.text '—' })
+    table.insert(detail_rows, Table.row({ Element.text("(stale)"), Element.text("—") }))
   end
 
-  table.insert(children, Element.text(('Last refresh at %s'):format(opts.position)))
+  table.insert(children, Element.text(("Last refresh at %s"):format(opts.position)))
   table.insert(children, Table.render(detail_rows))
 
   local columns = opts.text_columns
@@ -307,21 +298,21 @@ function Instrumentation:debug_element(opts)
   local function render_times_body()
     local count = histogram:count()
     local summary_rows = {
-      Table.row { Element.text 'min', duration_element(histogram:min()) },
-      Table.row { Element.text 'p50', duration_element(histogram:value_at_quantile(50)) },
-      Table.row { Element.text 'p90', duration_element(histogram:value_at_quantile(90)) },
-      Table.row { Element.text 'p99', duration_element(histogram:value_at_quantile(99)) },
-      Table.row { Element.text 'p99.9', duration_element(histogram:value_at_quantile(99.9)) },
-      Table.row { Element.text 'max', duration_element(histogram:max()) },
+      Table.row({ Element.text("min"), duration_element(histogram:min()) }),
+      Table.row({ Element.text("p50"), duration_element(histogram:value_at_quantile(50)) }),
+      Table.row({ Element.text("p90"), duration_element(histogram:value_at_quantile(90)) }),
+      Table.row({ Element.text("p99"), duration_element(histogram:value_at_quantile(99)) }),
+      Table.row({ Element.text("p99.9"), duration_element(histogram:value_at_quantile(99.9)) }),
+      Table.row({ Element.text("max"), duration_element(histogram:max()) }),
     }
     return Element:concat({
-      Element.text(('Aggregate (%d refreshes)'):format(count)),
+      Element.text(("Aggregate (%d refreshes)"):format(count)),
       Graphic(function()
         return percentile_distribution(histogram, { columns = columns })
       end, function()
         return Table.render(summary_rows)
       end),
-    }, '\n')
+    }, "\n")
   end
 
   ---@return Element
@@ -344,23 +335,23 @@ function Instrumentation:debug_element(opts)
         end)
       )
     end
-    return Element:concat(body_children, '\n')
+    return Element:concat(body_children, "\n")
   end
 
   table.insert(children, Element.EMPTY)
   table.insert(
     children,
-    Tabs {
+    Tabs({
       active = opts.active_tab,
       on_change = opts.on_tab_change,
       tabs = {
-        { label = 'render times', body = render_times_body },
-        { label = 'refresh rate', body = refresh_rate_body },
+        { label = "render times", body = render_times_body },
+        { label = "refresh rate", body = refresh_rate_body },
       },
-    }
+    })
   )
 
-  return Element:concat(children, '\n')
+  return Element:concat(children, "\n")
 end
 
 return Instrumentation

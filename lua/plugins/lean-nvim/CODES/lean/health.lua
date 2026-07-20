@@ -4,34 +4,34 @@
 --- Support for `:checkhealth` for lean.nvim.
 ---@brief ]]
 
-local check_output = require('std.subprocess').check_output
+local check_output = require("std.subprocess").check_output
 
-local MIN_SUPPORTED_NVIM = require('lean').MIN_SUPPORTED_NVIM
+local MIN_SUPPORTED_NVIM = require("lean").MIN_SUPPORTED_NVIM
 
 local function neovim_is_new_enough()
   local version = vim.version()
   if vim.version.lt(version, MIN_SUPPORTED_NVIM) then
-    local message = 'Neovim is too old. %s is the earliest supported version.'
+    local message = "Neovim is too old. %s is the earliest supported version."
     vim.health.error(message:format(MIN_SUPPORTED_NVIM))
   else
-    vim.health.ok 'Neovim is new enough.'
+    vim.health.ok("Neovim is new enough.")
   end
-  vim.health.info(('  `vim.version()`:  %s'):format(version))
+  vim.health.info(("  `vim.version()`:  %s"):format(version))
 end
 
 local function lake_is_runnable()
-  local version = vim.trim(check_output { 'lake', '--version' })
-  vim.health.ok 'Lake is runnable.'
-  vim.health.info(('  `lake --version`:  %s'):format(version))
+  local version = vim.trim(check_output({ "lake", "--version" }))
+  vim.health.ok("Lake is runnable.")
+  vim.health.info(("  `lake --version`:  %s"):format(version))
 end
 
 local function plugin_files_have_run()
-  if require('lean').initialized then
-    vim.health.ok "lean.nvim's plugin files have run."
+  if require("lean").initialized then
+    vim.health.ok("lean.nvim's plugin files have run.")
   else
     vim.health.error("lean.nvim's plugin files have not run.", {
-      'If you use a plugin manager which lazily loads lean.nvim, '
-        .. 'ensure it sources our plugin/ directory when loading us.',
+      "If you use a plugin manager which lazily loads lean.nvim, "
+        .. "ensure it sources our plugin/ directory when loading us.",
     })
   end
 end
@@ -39,8 +39,8 @@ end
 local function no_timers()
   if not vim.tbl_isempty(vim.fn.timer_info()) then
     vim.health.warn(
-      'You have active timers, which can degrade infoview (CursorMoved) performance.',
-      { 'See https://github.com/Julian/lean.nvim/issues/92' }
+      "You have active timers, which can degrade infoview (CursorMoved) performance.",
+      { "See https://github.com/Julian/lean.nvim/issues/92" }
     )
   end
 end
@@ -50,8 +50,8 @@ return {
   ---
   ---Call me via `:checkhealth lean`.
   check = function()
-    local version = require('lean').plugin_version()
-    vim.health.start(('lean.nvim (%s)'):format(version))
+    local version = require("lean").plugin_version()
+    vim.health.start(("lean.nvim (%s)"):format(version))
     neovim_is_new_enough()
     lake_is_runnable()
     plugin_files_have_run()

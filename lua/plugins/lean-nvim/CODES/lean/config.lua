@@ -177,16 +177,16 @@ local DEFAULTS = {
 
   ---@type lean.abbreviations.Config
   abbreviations = {
-    leader = '\\',
+    leader = "\\",
     extra = {},
   },
 
   ---@type lean.ft.MergedConfig
   ft = {
     nomodifiable = {
-      '.*/src/lean/.*', -- Lean core library
-      '.*/.elan/.*', -- elan toolchains
-      '.*/.lake/.*', -- project dependencies
+      ".*/src/lean/.*", -- Lean core library
+      ".*/.elan/.*", -- elan toolchains
+      ".*/.lake/.*", -- project dependencies
     },
 
     ---Check whether a given path should be modifiable.
@@ -203,8 +203,8 @@ local DEFAULTS = {
 
   ---@type lean.goal_markers.Config
   goal_markers = {
-    unsolved = ' ⚒ ',
-    accomplished = '🎉',
+    unsolved = " ⚒ ",
+    accomplished = "🎉",
   },
 
   ---@type lean.lsp.Config
@@ -229,37 +229,37 @@ local DEFAULTS = {
     autoopen = true,
     width = 1 / 3,
     height = 1 / 3,
-    orientation = 'auto',
-    horizontal_position = 'bottom',
+    orientation = "auto",
+    horizontal_position = "bottom",
     separate_tab = false,
-    indicators = 'auto',
+    indicators = "auto",
     show_processing = true,
     show_no_info_message = false,
     update_cooldown = 50,
 
     messages = {
       goals = {
-        accomplished = 'Goals accomplished 🎉',
-        none = 'No goals.', -- between goals, or Lean <4.19 with no markers
+        accomplished = "Goals accomplished 🎉",
+        none = "No goals.", -- between goals, or Lean <4.19 with no markers
         some = function(n)
           if n == 1 then
             return nil -- a lone goal needs no header
           end
-          return ('%d goals'):format(n)
+          return ("%d goals"):format(n)
         end,
       },
     },
 
     mappings = {
-      ['K'] = 'click',
-      ['<CR>'] = 'click',
-      ['gK'] = 'select',
-      ['gd'] = 'go_to_def',
-      ['gD'] = 'go_to_decl',
-      ['gy'] = 'go_to_type',
-      ['<Esc>'] = 'clear_all',
-      ['C'] = 'clear_all',
-      ['<LocalLeader><Tab>'] = 'goto_last_window',
+      ["K"] = "click",
+      ["<CR>"] = "click",
+      ["gK"] = "select",
+      ["gd"] = "go_to_def",
+      ["gD"] = "go_to_decl",
+      ["gy"] = "go_to_type",
+      ["<Esc>"] = "clear_all",
+      ["C"] = "clear_all",
+      ["<LocalLeader><Tab>"] = "goto_last_window",
     },
 
     ---@type InfoviewViewOptions
@@ -273,20 +273,20 @@ local DEFAULTS = {
       reverse = false,
     },
     severity_markers = {
-      'error:\n',
-      'warning:\n',
-      'information:\n',
-      'hint:\n',
+      "error:\n",
+      "warning:\n",
+      "information:\n",
+      "hint:\n",
     },
   },
 
   ---@param bufnr integer
   on_imports_out_of_date = function(bufnr)
-    vim.ui.select({ 'restart', 'not now' }, {
-      prompt = 'Imports are out of date and must be rebuilt for this file.',
+    vim.ui.select({ "restart", "not now" }, {
+      prompt = "Imports are out of date and must be rebuilt for this file.",
     }, function(choice)
-      if choice == 'restart' then
-        require('lean.lsp').restart_file(bufnr)
+      if choice == "restart" then
+        require("lean.lsp").restart_file(bufnr)
       end
     end)
   end,
@@ -296,7 +296,7 @@ local DEFAULTS = {
 
   ---@type lean.progress_bars.MergedConfig
   progress_bars = {
-    character = '│',
+    character = "│",
     priority = 10,
   },
 
@@ -312,5 +312,5 @@ local DEFAULTS = {
 return function()
   ---@type lean.Config
   vim.g.lean_config = vim.g.lean_config or {}
-  return vim.tbl_deep_extend('keep', vim.g.lean_config, DEFAULTS)
+  return vim.tbl_deep_extend("keep", vim.g.lean_config, DEFAULTS)
 end

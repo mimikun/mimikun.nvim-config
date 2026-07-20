@@ -1,9 +1,9 @@
-local async = require 'std.async'
+local async = require("std.async")
 
-local Buffer = require 'std.nvim.buffer'
-local Window = require 'std.nvim.window'
+local Buffer = require("std.nvim.buffer")
+local Window = require("std.nvim.window")
 
-local log = require 'lean.log'
+local log = require("lean.log")
 
 local OverlayState -- defined after BufRenderer
 
@@ -79,8 +79,8 @@ Element.__index = Element
 ---@field parent_path? PathNode[] Path in parent element, events bubble up to the parent there
 ---@field justify_content? JustifyContent CSS `justify-content` along the block (vertical) axis, treating the window as a column flex container holding this content as its single item; defaults to 'start'
 local BufRenderer = {
-  __tui_ns = vim.api.nvim_create_namespace 'lean.tui',
-  __hl_ns = vim.api.nvim_create_namespace 'lean.highlights',
+  __tui_ns = vim.api.nvim_create_namespace("lean.tui"),
+  __hl_ns = vim.api.nvim_create_namespace("lean.highlights"),
 }
 BufRenderer.__index = BufRenderer
 
@@ -107,8 +107,8 @@ BufRenderer.__index = BufRenderer
 function Element:new(args)
   args = args or {}
   local obj = {
-    text = args.text or '',
-    name = args.name or '',
+    text = args.text or "",
+    name = args.name or "",
     hlgroups = args.hlgroups,
     url = args.url,
     highlightable = args.highlightable or false,
@@ -136,21 +136,21 @@ function Element:titled(opts)
   local has_body = body_elements and #body_elements > 0
 
   if not opts.title then
-    return has_body and self:new { children = body_elements } or nil
+    return has_body and self:new({ children = body_elements }) or nil
   end
 
   if not has_body then
     return opts.title
   end
 
-  local sep = self:new { text = string.rep('\n', opts.gap or 2) }
-  return self:new {
+  local sep = self:new({ text = string.rep("\n", opts.gap or 2) })
+  return self:new({
     children = {
       opts.title,
       sep,
-      self:new { children = body_elements },
+      self:new({ children = body_elements }),
     },
-  }
+  })
 end
 
 ---@class FoldableElementArgs: TitledElementArgs
@@ -183,8 +183,8 @@ function Element:foldable(opts)
   local on_open = opts.on_open or function() end
   local on_close = opts.on_close or function() end
   local initially_open = opts.open ~= false
-  local arrow = self:new { text = initially_open and '▼ ' or '▶ ' }
-  local body = self:new { children = body_elements }
+  local arrow = self:new({ text = initially_open and "▼ " or "▶ " })
+  local body = self:new({ children = body_elements })
 
   -- `container` and `layout` are forward-declared so the foldable handle
   -- can close over them; their values are assigned below before the handle
@@ -201,13 +201,13 @@ function Element:foldable(opts)
         return
       end
       handle.open = new_open
-      arrow.text = new_open and '▼ ' or '▶ '
+      arrow.text = new_open and "▼ " or "▶ "
       if new_open then
         on_open(handle.body)
       else
         on_close()
       end
-      container:set_children { layout(new_open) }
+      container:set_children({ layout(new_open) })
     end,
   }
 
@@ -217,25 +217,25 @@ function Element:foldable(opts)
   end
   table.insert(title_row_children, arrow)
   table.insert(title_row_children, opts.title)
-  local title_row = self:new {
+  local title_row = self:new({
     children = title_row_children,
     highlightable = true,
-    events = vim.tbl_extend('error', opts.events or {}, {
+    events = vim.tbl_extend("error", opts.events or {}, {
       click = function(ctx)
         foldable:set_open(not foldable.open)
         ctx.rerender()
       end,
     }),
-  }
+  })
 
   layout = function(open)
     if open then
-      return self:titled { title = title_row, body = { body }, gap = opts.gap }
+      return self:titled({ title = title_row, body = { body }, gap = opts.gap })
     end
     return title_row
   end
 
-  container = self:new { children = { layout(initially_open) } }
+  container = self:new({ children = { layout(initially_open) } })
   container.__foldable = foldable
   container.__state = {
     snapshot = function()
@@ -297,19 +297,18 @@ end
 ---@return Element?
 function Element:concat(elements, sep, opts)
   if #elements == 0 then
-    vim.validate('opts', opts, 'nil')
+    vim.validate("opts", opts, "nil")
     return
   elseif #elements == 1 then
-    return opts and self:new(vim.tbl_extend('error', opts, { children = { elements[1] } }))
-      or elements[1]
+    return opts and self:new(vim.tbl_extend("error", opts, { children = { elements[1] } })) or elements[1]
   end
 
-  return self:new(vim.tbl_extend('error', opts or {}, {
+  return self:new(vim.tbl_extend("error", opts or {}, {
     children = vim.iter(elements):fold(nil, function(acc, k)
       if not acc then
         return { k }
       end
-      table.insert(acc, Element:new { text = sep })
+      table.insert(acc, Element:new({ text = sep }))
       table.insert(acc, k)
       return acc
     end),
@@ -333,27 +332,27 @@ end
 function Element.select(choices, opts, on_choice)
   if not on_choice then
     on_choice = function(choice)
-      return Element:new { text = choice }
+      return Element:new({ text = choice })
     end
   end
-  opts = vim.tbl_extend('keep', opts or {}, {
+  opts = vim.tbl_extend("keep", opts or {}, {
     initial = choices[1],
     format_item = tostring,
   })
 
-  local selected = Element:new {}
+  local selected = Element:new({})
   local function update_selected(choice)
-    selected:set_children { Element:new { text = opts.format_item(choice) } }
+    selected:set_children({ Element:new({ text = opts.format_item(choice) }) })
   end
   update_selected(opts.initial)
 
-  return Element:new {
+  return Element:new({
     children = {
       selected,
-      Element:new { text = ' ▾' },
+      Element:new({ text = " ▾" }),
     },
     highlightable = true,
-    hlgroups = { 'widgetSelect' },
+    hlgroups = { "widgetSelect" },
     events = {
       click = function(ctx)
         vim.ui.select(choices, {
@@ -369,7 +368,7 @@ function Element.select(choices, opts, on_choice)
         end)
       end,
     },
-  }
+  })
 end
 
 ---Create an element which represents textual user input.
@@ -378,7 +377,7 @@ end
 ---@param key string
 ---@return Element
 function Element.kbd(key)
-  return Element:new { text = key, hlgroups = { 'widgetKbd' } }
+  return Element:new({ text = key, hlgroups = { "widgetKbd" } })
 end
 
 ---Create a title element with a highlight group.
@@ -386,7 +385,7 @@ end
 ---@param hlgroup? string the highlight group (defaults to 'Title')
 ---@return Element
 function Element.title(text, hlgroup)
-  return Element:new { text = text, hlgroups = { hlgroup or 'Title' } }
+  return Element:new({ text = text, hlgroups = { hlgroup or "Title" } })
 end
 
 ---@class ElementLinkArgs
@@ -416,14 +415,14 @@ end
 ---@param args ElementLinkArgs
 ---@return Element
 function Element.link(args)
-  vim.validate('action', args.action, 'function', true)
-  vim.validate('events', args.events, 'table', true)
-  vim.validate('url', args.url, 'string', true)
+  vim.validate("action", args.action, "function", true)
+  vim.validate("events", args.events, "table", true)
+  vim.validate("url", args.url, "string", true)
   if args.action and args.events then
-    error('Element.link: provide action or events, not both', 2)
+    error("Element.link: provide action or events, not both", 2)
   end
   if not (args.action or args.events or args.url) then
-    error('Element.link: one of action, events, or url is required', 2)
+    error("Element.link: one of action, events, or url is required", 2)
   end
   local events = args.events
   if not events then
@@ -432,17 +431,17 @@ function Element.link(args)
     end
     events = { click = action }
   end
-  local element = Element:new {
+  local element = Element:new({
     text = args.text,
     name = args.name,
     children = args.children,
     events = events,
     url = args.url,
     highlightable = true,
-    hlgroups = { 'widgetLink' },
-  }
+    hlgroups = { "widgetLink" },
+  })
   if args.url then
-    element:add_tooltip(Element:new { text = args.url })
+    element:add_tooltip(Element:new({ text = args.url }))
   end
   return element
 end
@@ -452,10 +451,10 @@ end
 ---@return Element
 function Element.noop(text)
   local noop = function() end
-  return Element:new {
+  return Element:new({
     text = text,
     events = { click = noop },
-  }
+  })
 end
 
 ---Create an Element whose contents will be resolved asynchronously.
@@ -467,17 +466,17 @@ function Element.async(name)
 
   ---Replaced if we successfully resolve the element, otherwise logs an error.
   resolve = function(_)
-    log:error {
-      message = 'Element.async was not resolved',
+    log:error({
+      message = "Element.async was not resolved",
       name = name,
-    }
+    })
   end
-  element = Element:new {
+  element = Element:new({
     name = name,
     __async_init = function(on_result)
       resolve = on_result
     end,
-  }
+  })
 
   return element, function(resolved_element)
     resolve(resolved_element)
@@ -485,7 +484,7 @@ function Element.async(name)
 end
 
 ---The empty element (with no content).
-Element.EMPTY = Element:new {}
+Element.EMPTY = Element:new({})
 
 ---@param children? Element[]
 function Element:set_children(children)
@@ -516,7 +515,7 @@ end
 ---Render the element into a string.
 ---@return string
 function Element:to_string()
-  return table.concat(self:render_lines().lines, '\n')
+  return table.concat(self:render_lines().lines, "\n")
 end
 
 ---@alias PositionMap table<Element, { start_pos: integer[], end_pos: integer[] }>
@@ -525,8 +524,8 @@ end
 ---@param renderer? BufRenderer
 ---@return { lines: string[], highlights: { hlgroup: string, start_pos: integer[], end_pos: integer[] }[], urls: { url: string, start_pos: integer[], end_pos: integer[] }[], width: integer, height: integer, positions: PositionMap }
 function Element:render_lines(renderer)
-  log:trace { message = 'rendering element to lines', name = self.name }
-  local lines = { '' }
+  log:trace({ message = "rendering element to lines", name = self.name })
+  local lines = { "" }
   local highlights = {}
   local urls = {}
   local positions = {} ---@type PositionMap
@@ -573,7 +572,7 @@ function Element:render_lines(renderer)
     for _ = 1, n do
       width = math.max(width, vim.fn.strdisplaywidth(lines[line_idx]))
       line_idx = line_idx + 1
-      lines[line_idx] = ''
+      lines[line_idx] = ""
       col = 0
       has_content = false
       apply_prefixes()
@@ -595,7 +594,7 @@ function Element:render_lines(renderer)
         if previous then
           Element.transfer_state(previous, resolved_element)
         end
-        element:set_children { resolved_element }
+        element:set_children({ resolved_element })
         renderer.pending_elements[element] = nil
         renderer:render()
       end)
@@ -636,24 +635,24 @@ function Element:render_lines(renderer)
     local start_pos = { line_idx - 1, col }
 
     local text = element.text
-    if text ~= '' and pending_break > 0 then
-      if text:match '^%s*$' then
+    if text ~= "" and pending_break > 0 then
+      if text:match("^%s*$") then
         -- Whitespace-only text between block siblings is decorative
         -- (source-formatting indentation).  Drop it without flushing so
         -- the pending break still applies to whatever comes next.
-        text = ''
+        text = ""
       else
         -- Real content arrives after a block: flush the deferred newline(s)
         -- and strip leading whitespace, matching CSS at a block boundary.
         emit_newlines(pending_break)
         pending_break = 0
-        text = text:gsub('^%s+', '')
+        text = text:gsub("^%s+", "")
       end
     end
-    if text ~= '' then
+    if text ~= "" then
       local pos = 1
       while pos <= #text do
-        local nl = text:find('\n', pos, true)
+        local nl = text:find("\n", pos, true)
         if nl then
           local chunk = text:sub(pos, nl - 1)
           lines[line_idx] = lines[line_idx] .. chunk
@@ -686,7 +685,7 @@ function Element:render_lines(renderer)
     end
 
     local hlgroups = element.hlgroups
-    if type(hlgroups) == 'function' then
+    if type(hlgroups) == "function" then
       hlgroups = hlgroups(element)
     end
     if hlgroups then
@@ -843,7 +842,7 @@ end
 ---Create a BufRenderer that renders this Element.
 ---@param obj table
 function Element:renderer(obj)
-  return BufRenderer:new(vim.tbl_extend('error', obj, { element = self }))
+  return BufRenderer:new(vim.tbl_extend("error", obj, { element = self }))
 end
 
 ---Convert an ElementEvent name to its `<Plug>` name.
@@ -853,11 +852,11 @@ end
 ---@return string
 local function event_plug_name(event)
   local pascal = event
-    :gsub('(%a)([^_]*)', function(a, b)
+    :gsub("(%a)([^_]*)", function(a, b)
       return a:upper() .. b
     end)
-    :gsub('_', '')
-  return ('<Plug>(LeanInfoview%s)'):format(pascal)
+    :gsub("_", "")
+  return ("<Plug>(LeanInfoview%s)"):format(pascal)
 end
 
 ---Create a new BufRenderer.
@@ -872,8 +871,8 @@ function BufRenderer:new(obj)
   new_renderer.__overlays = OverlayState:new(new_renderer)
   obj.buffer.o.modifiable = false
 
-  obj.buffer:create_autocmd({ 'BufEnter', 'CursorMoved' }, {
-    group = vim.api.nvim_create_augroup('WidgetPosition', { clear = false }),
+  obj.buffer:create_autocmd({ "BufEnter", "CursorMoved" }, {
+    group = vim.api.nvim_create_augroup("WidgetPosition", { clear = false }),
     callback = function()
       new_renderer:update_cursor()
     end,
@@ -888,62 +887,52 @@ function BufRenderer:new(obj)
   --
   -- We define buffer-local <Plug> mappings alongside the default keys so that
   -- any of them can be used as a remapping destination.
-  buf.keymaps:set('n', '<Plug>(LeanInfoviewEnterTooltip)', function()
+  buf.keymaps:set("n", "<Plug>(LeanInfoviewEnterTooltip)", function()
     new_renderer:enter_tooltip()
-  end, { desc = 'Enter a tooltip.' })
-  buf.keymaps:set('n', '<Plug>(LeanInfoviewParentTooltip)', function()
+  end, { desc = "Enter a tooltip." })
+  buf.keymaps:set("n", "<Plug>(LeanInfoviewParentTooltip)", function()
     new_renderer:goto_parent_tooltip()
   end, { desc = 'Go to the "parent" tooltip.' })
   buf.keymaps:set(
-    'n',
-    '<Plug>(LeanAbbreviationsReverseLookup)',
-    require('lean.abbreviations').show_reverse_lookup,
-    { desc = 'Show how to type the unicode character under the cursor.' }
+    "n",
+    "<Plug>(LeanAbbreviationsReverseLookup)",
+    require("lean.abbreviations").show_reverse_lookup,
+    { desc = "Show how to type the unicode character under the cursor." }
   )
 
   -- Register a <Plug> for every public ElementEvent so any of them can be
   -- rebound to a different key.
   local element_events = {
-    'click',
-    'select',
-    'clear',
-    'clear_all',
-    'goto_last_window',
-    'go_to_def',
-    'go_to_decl',
-    'go_to_type',
+    "click",
+    "select",
+    "clear",
+    "clear_all",
+    "goto_last_window",
+    "go_to_def",
+    "go_to_decl",
+    "go_to_type",
   }
   local element_event_set = {}
   for _, event in ipairs(element_events) do
-    buf.keymaps:set('n', event_plug_name(event), function()
+    buf.keymaps:set("n", event_plug_name(event), function()
       new_renderer:event(event)
-    end, { desc = ('Fire a %s event.'):format(event) })
+    end, { desc = ("Fire a %s event."):format(event) })
     element_event_set[event] = true
   end
 
+  buf.keymaps:set("n", "<Tab>", "<Plug>(LeanInfoviewEnterTooltip)", { remap = true, desc = "Enter a tooltip." })
+  buf.keymaps:set("n", "J", "<Plug>(LeanInfoviewEnterTooltip)", { remap = true, desc = "Enter a tooltip." })
   buf.keymaps:set(
-    'n',
-    '<Tab>',
-    '<Plug>(LeanInfoviewEnterTooltip)',
-    { remap = true, desc = 'Enter a tooltip.' }
-  )
-  buf.keymaps:set(
-    'n',
-    'J',
-    '<Plug>(LeanInfoviewEnterTooltip)',
-    { remap = true, desc = 'Enter a tooltip.' }
-  )
-  buf.keymaps:set(
-    'n',
-    '<S-Tab>',
-    '<Plug>(LeanInfoviewParentTooltip)',
+    "n",
+    "<S-Tab>",
+    "<Plug>(LeanInfoviewParentTooltip)",
     { remap = true, desc = 'Go to the "parent" tooltip.' }
   )
   buf.keymaps:set(
-    'n',
-    '<LocalLeader>\\',
-    '<Plug>(LeanAbbreviationsReverseLookup)',
-    { remap = true, desc = 'Show how to type the unicode character under the cursor.' }
+    "n",
+    "<LocalLeader>\\",
+    "<Plug>(LeanAbbreviationsReverseLookup)",
+    { remap = true, desc = "Show how to type the unicode character under the cursor." }
   )
 
   -- Ctrl+click rather than shift+click for the alternate action because
@@ -959,29 +948,29 @@ function BufRenderer:new(obj)
     end
     local line_len = #buf:line(pos.line - 1)
     local col = math.max(0, math.min(pos.column - 1, line_len))
-    local path = new_renderer:path_from_pos { pos.line - 1, col }
-    Window:from_id(pos.winid):move_cursor { pos.line, col }
+    local path = new_renderer:path_from_pos({ pos.line - 1, col })
+    Window:from_id(pos.winid):move_cursor({ pos.line, col })
     if path then
       new_renderer:event(event, path)
     end
   end
-  buf.keymaps:set('n', '<Plug>(LeanInfoviewMouseClick)', function()
-    dispatch_mouse 'click'
-  end, { desc = 'Fire a click event at the mouse position.' })
-  buf.keymaps:set('n', '<Plug>(LeanInfoviewMouseSelect)', function()
-    dispatch_mouse 'select'
-  end, { desc = 'Fire a select event at the mouse position.' })
+  buf.keymaps:set("n", "<Plug>(LeanInfoviewMouseClick)", function()
+    dispatch_mouse("click")
+  end, { desc = "Fire a click event at the mouse position." })
+  buf.keymaps:set("n", "<Plug>(LeanInfoviewMouseSelect)", function()
+    dispatch_mouse("select")
+  end, { desc = "Fire a select event at the mouse position." })
   buf.keymaps:set(
-    'n',
-    '<LeftMouse>',
-    '<Plug>(LeanInfoviewMouseClick)',
-    { remap = true, desc = 'Click on the element under the mouse.' }
+    "n",
+    "<LeftMouse>",
+    "<Plug>(LeanInfoviewMouseClick)",
+    { remap = true, desc = "Click on the element under the mouse." }
   )
   buf.keymaps:set(
-    'n',
-    '<C-LeftMouse>',
-    '<Plug>(LeanInfoviewMouseSelect)',
-    { remap = true, desc = 'Select the element under the mouse.' }
+    "n",
+    "<C-LeftMouse>",
+    "<Plug>(LeanInfoviewMouseSelect)",
+    { remap = true, desc = "Select the element under the mouse." }
   )
 
   for key, event in pairs(obj.keymaps or {}) do
@@ -989,12 +978,7 @@ function BufRenderer:new(obj)
       or function()
         new_renderer:event(event)
       end
-    buf.keymaps:set(
-      'n',
-      key,
-      rhs,
-      { remap = element_event_set[event], desc = ('Fire a %s event.'):format(event) }
-    )
+    buf.keymaps:set("n", key, rhs, { remap = element_event_set[event], desc = ("Fire a %s event."):format(event) })
   end
 
   return new_renderer
@@ -1003,7 +987,7 @@ end
 ---The window displaying this renderer was closed, but the buffer lives on.
 ---Cleans up resources that are tied to the window (e.g. terminal graphics).
 function BufRenderer:detach_window()
-  self:event 'clear_all' -- Ensure tooltips close.
+  self:event("clear_all") -- Ensure tooltips close.
   self.__overlays:close()
 end
 
@@ -1101,10 +1085,10 @@ function OverlayState:update()
 
   -- Wrap the delete+rebuild in synchronized output so the terminal
   -- renders both as one atomic frame, eliminating flicker.
-  vim.api.nvim_chan_send(2, '\x1b[?2026h')
+  vim.api.nvim_chan_send(2, "\x1b[?2026h")
   self:invalidate()
   self:render()
-  vim.api.nvim_chan_send(2, '\x1b[?2026l')
+  vim.api.nvim_chan_send(2, "\x1b[?2026l")
 end
 
 function OverlayState:render()
@@ -1113,12 +1097,12 @@ function OverlayState:render()
     return
   end
 
-  local config = require 'lean.config'()
+  local config = require("lean.config")()
   if config.graphics.enabled == false then
     return
   end
 
-  local kitty = require 'kitty'
+  local kitty = require("kitty")
   if not kitty.available() then
     if not self._waiting then
       self._waiting = true
@@ -1151,7 +1135,7 @@ function OverlayState:render()
     local row, byte_col = pos.start_pos[1], pos.start_pos[2]
     local col = byte_col
     if byte_col > 0 then
-      local line = vim.api.nvim_buf_get_lines(renderer.buffer.bufnr, row, row + 1, false)[1] or ''
+      local line = vim.api.nvim_buf_get_lines(renderer.buffer.bufnr, row, row + 1, false)[1] or ""
       col = vim.fn.strdisplaywidth(line:sub(1, byte_col))
     end
     return { row = row, col = col }
@@ -1167,12 +1151,8 @@ function OverlayState:render()
 
     for element, pos in pairs(renderer.positions) do
       if element.overlay then
-        local handle = self._images:add(
-          element.overlay.data,
-          element.overlay.width,
-          element.overlay.height,
-          element.overlay.format
-        )
+        local handle =
+          self._images:add(element.overlay.data, element.overlay.width, element.overlay.height, element.overlay.format)
         self._handles[element] = handle
         positions[handle] = display_pos(pos)
       end
@@ -1190,10 +1170,10 @@ function OverlayState:render()
 
   if next(positions) and not self._autocmd then
     local winid = win.id
-    local group = vim.api.nvim_create_augroup('LeanOverlay' .. self._id, { clear = true })
+    local group = vim.api.nvim_create_augroup("LeanOverlay" .. self._id, { clear = true })
     self._augroup = group
 
-    self._autocmd = vim.api.nvim_create_autocmd('WinScrolled', {
+    self._autocmd = vim.api.nvim_create_autocmd("WinScrolled", {
       group = group,
       pattern = tostring(winid),
       callback = function()
@@ -1203,7 +1183,7 @@ function OverlayState:render()
       end,
     })
 
-    vim.api.nvim_create_autocmd('VimResized', {
+    vim.api.nvim_create_autocmd("VimResized", {
       group = group,
       callback = function()
         if renderer.buffer:is_loaded() then
@@ -1221,23 +1201,23 @@ end
 -- packs at the start; `space-around` and `space-evenly` centre.
 ---@type table<JustifyContent, 'start'|'center'|'end'>
 local JUSTIFY_PACKING = {
-  start = 'start',
-  ['flex-start'] = 'start',
-  ['space-between'] = 'start',
-  center = 'center',
-  ['space-around'] = 'center',
-  ['space-evenly'] = 'center',
-  ['end'] = 'end',
-  ['flex-end'] = 'end',
+  start = "start",
+  ["flex-start"] = "start",
+  ["space-between"] = "start",
+  center = "center",
+  ["space-around"] = "center",
+  ["space-evenly"] = "center",
+  ["end"] = "end",
+  ["flex-end"] = "end",
 }
 
 function BufRenderer:render()
-  log:trace { message = 'rendering buffer', bufnr = self.buffer.bufnr }
+  log:trace({ message = "rendering buffer", bufnr = self.buffer.bufnr })
   if not self.buffer:is_loaded() then
-    log:warning {
-      message = 'rendering an unloaded buffer',
+    log:warning({
+      message = "rendering an unloaded buffer",
       bufnr = self.buffer.bufnr,
-    }
+    })
     return
   end
 
@@ -1247,9 +1227,9 @@ function BufRenderer:render()
 
   local result = self.element:render_lines(self)
 
-  local packing = JUSTIFY_PACKING[self.justify_content or 'start']
+  local packing = JUSTIFY_PACKING[self.justify_content or "start"]
 
-  if packing == 'center' or packing == 'end' then
+  if packing == "center" or packing == "end" then
     -- Justify the content along the block (vertical) axis within its window,
     -- as a column flexbox would. We pad from the top with real blank lines
     -- rather than virtual lines, which Neovim won't display above the first
@@ -1262,11 +1242,11 @@ function BufRenderer:render()
     -- its first line, so when the content overflows the window (slack <= 0) it
     -- stays pinned at the top whatever the packing — the only thing we can
     -- express. Otherwise 'center' splits the slack and 'end' takes all of it.
-    local pad = packing == 'center' and math.floor(slack / 2) or slack
+    local pad = packing == "center" and math.floor(slack / 2) or slack
     if pad > 0 then
       local padding = {}
       for i = 1, pad do
-        padding[i] = ''
+        padding[i] = ""
       end
       result.lines = vim.list_extend(padding, result.lines)
       -- Each element's highlight shares its `start_pos`/`end_pos` tables with
@@ -1305,11 +1285,11 @@ function BufRenderer:render()
   --      complaining about invalid buffer names, if we don't have this pcall.
   local ok, err = pcall(Buffer.set_lines, self.buffer, result.lines)
   if not ok then
-    log:error {
-      message = 'infoview failed to update',
+    log:error({
+      message = "infoview failed to update",
       bufnr = self.buffer.bufnr,
       error = err,
-    }
+    })
   end
   self.buffer.o.modifiable = false
 
@@ -1336,14 +1316,10 @@ function BufRenderer:render()
       self.path = nil
     elseif self:last_window_valid() then
       local position = self.path[#self.path].position
-      local pos = (
-        position
-        and not pos_before(position, ep.start_pos)
-        and pos_before(position, ep.end_pos)
-      )
+      local pos = (position and not pos_before(position, ep.start_pos) and pos_before(position, ep.end_pos))
           and position
         or ep.start_pos
-      self.last_window:set_cursor { pos[1] + 1, pos[2] }
+      self.last_window:set_cursor({ pos[1] + 1, pos[2] })
     end
   end
 
@@ -1365,9 +1341,7 @@ function BufRenderer:goto_parent_tooltip()
 end
 
 function BufRenderer:last_window_valid()
-  return self.last_window
-    and self.last_window:is_valid()
-    and self.last_window:bufnr() == self.buffer.bufnr
+  return self.last_window and self.last_window:is_valid() and self.last_window:bufnr() == self.buffer.bufnr
 end
 
 ---Checks if two paths are equal, ignoring auxillary metadata (e.g. offsets)
@@ -1454,7 +1428,7 @@ function BufRenderer:update_cursor(window)
 
   local path_before = self.path
   local cursor_pos = self.last_window:cursor()
-  local new_path = self:path_from_pos { cursor_pos[1] - 1, cursor_pos[2] }
+  local new_path = self:path_from_pos({ cursor_pos[1] - 1, cursor_pos[2] })
   if new_path then
     self.path = new_path
 
@@ -1521,38 +1495,34 @@ function BufRenderer:hover(force_update_highlight)
       self.tooltip.parent = self
       self.tooltip.parent_path = tt_parent_element_path
     else
-      self.tooltip = new_tooltip_element:renderer {
-        buffer = Buffer.create {
+      self.tooltip = new_tooltip_element:renderer({
+        buffer = Buffer.create({
           listed = false,
           scratch = true,
-          options = { bufhidden = 'wipe' },
-        },
+          options = { bufhidden = "wipe" },
+        }),
         keymaps = self.keymaps,
         parent = self,
         parent_path = tt_parent_element_path,
-      }
+      })
     end
 
     self.tooltip:render()
 
     -- The anchor window can be gone by the time an async update lands
     -- (e.g. the tooltip chain was dismissed while we were rendering).
-    if
-      not self.tooltip:last_window_valid()
-      and self.last_window
-      and self.last_window:is_valid()
-    then
-      self.tooltip.last_window = self.last_window:float {
+    if not self.tooltip:last_window_valid() and self.last_window and self.last_window:is_valid() then
+      self.tooltip.last_window = self.last_window:float({
         buffer = self.tooltip.buffer,
         enter = false,
         noautocmd = true, -- avoid firing update_cursor by disabling the autocmds
-        style = 'minimal',
+        style = "minimal",
         width = self.tooltip.width,
         height = self.tooltip.height,
-        border = 'rounded',
+        border = "rounded",
         bufpos = self.positions[tt_parent_element].start_pos,
         zindex = 50 + self.tooltip.buffer.bufnr, -- later tooltips are guaranteed to have greater buffer handles
-      }
+      })
     end
   end
 
@@ -1565,15 +1535,9 @@ function BufRenderer:hover(force_update_highlight)
 
   if force_update_highlight or not vim.deep_equal(old_hover_range, self.hover_range) then
     self.buffer:clear_namespace(self.__hl_ns)
-    local hlgroup = 'widgetElementHighlight'
+    local hlgroup = "widgetElementHighlight"
     if self.hover_range then
-      vim.hl.range(
-        self.buffer.bufnr,
-        self.__hl_ns,
-        hlgroup,
-        self.hover_range[1],
-        self.hover_range[2]
-      )
+      vim.hl.range(self.buffer.bufnr, self.__hl_ns, hlgroup, self.hover_range[1], self.hover_range[2])
     end
   end
 end
@@ -1590,9 +1554,7 @@ function BufRenderer:event(event, path, ...)
   -- cursor has ever moved into the buffer, when self.path is still nil.
   path = path or self.path or {}
 
-  if
-    not self.element:event(path, event, self:make_event_context(path), unpack(args)) and self.parent
-  then
+  if not self.element:event(path, event, self:make_event_context(path), unpack(args)) and self.parent then
     -- bubble up to parent
     return self.parent:event(event, self.parent_path, ...)
   end
@@ -1788,26 +1750,26 @@ end
 local function select_many(choices, opts, on_choices)
   -- This doesn't exist on `vim.ui` yet. See e.g. neovim/neovim#18161
   -- though the PR is essentially stale/abandoned.
-  opts = vim.tbl_extend('keep', opts or {}, {
+  opts = vim.tbl_extend("keep", opts or {}, {
     format_item = tostring,
     start_selected = function(_)
       return true
     end,
-    title = 'Select one or more of:',
+    title = "Select one or more of:",
   })
 
-  local modal = (opts.relative_window or Window:current()):modal {
+  local modal = (opts.relative_window or Window:current()):modal({
     enter = true,
-    style = 'minimal',
-    border = 'rounded',
+    style = "minimal",
+    border = "rounded",
     title = opts.title,
-    footer = '<Tab>: toggle, <CR>: confirm, <Esc>: cancel',
-    footer_pos = 'center',
+    footer = "<Tab>: toggle, <CR>: confirm, <Esc>: cancel",
+    footer_pos = "center",
     bufpos = { 100, 10 },
     width = 50,
     height = #choices + 2,
     zindex = 50,
-  }
+  })
   modal.window.o.winfixbuf = true
 
   local selected = vim.iter(choices):map(opts.start_selected):totable()
@@ -1817,17 +1779,17 @@ local function select_many(choices, opts, on_choices)
   ---@param choice any
   ---@return string
   local function totext(select, choice)
-    local icon = select and '✅' or '❌'
-    return (' %s %s\n'):format(icon, opts.format_item(choice))
+    local icon = select and "✅" or "❌"
+    return (" %s %s\n"):format(icon, opts.format_item(choice))
   end
 
-  local element = Element:new {
-    text = '\n',
+  local element = Element:new({
+    text = "\n",
     children = vim
       .iter(ipairs(choices))
       :map(function(i, choice)
         local self
-        self = Element:new {
+        self = Element:new({
           text = totext(selected[i], choice),
           events = {
             click = function(ctx)
@@ -1848,10 +1810,10 @@ local function select_many(choices, opts, on_choices)
             end,
           },
           keymaps = {
-            ['K'] = 'click',
-            ['<Tab>'] = 'toggle',
+            ["K"] = "click",
+            ["<Tab>"] = "toggle",
           },
-        }
+        })
         return self
       end)
       :totable(),
@@ -1871,17 +1833,17 @@ local function select_many(choices, opts, on_choices)
         modal:dismiss()
       end,
     },
-  }
+  })
 
-  local renderer = element:renderer {
+  local renderer = element:renderer({
     buffer = modal.buffer,
     keymaps = {
-      ['K'] = 'click',
-      ['<Tab>'] = 'toggle',
-      ['<CR>'] = 'make_selection',
-      ['<Esc>'] = 'clear',
+      ["K"] = "click",
+      ["<Tab>"] = "toggle",
+      ["<CR>"] = "make_selection",
+      ["<Esc>"] = "clear",
     },
-  }
+  })
   renderer:render()
   modal:attach(renderer):dismiss_on_leave()
 
@@ -1890,14 +1852,14 @@ local function select_many(choices, opts, on_choices)
   local end_line = #choices + 1
   local first_column = 5
 
-  modal.window:set_cursor { start_line, first_column }
+  modal.window:set_cursor({ start_line, first_column })
 
-  modal.buffer:create_autocmd({ 'CursorMoved', 'CursorMovedI' }, {
+  modal.buffer:create_autocmd({ "CursorMoved", "CursorMovedI" }, {
     callback = function() -- clip the cursor to the real editable region
       local row, column = unpack(modal.window:cursor())
       row = math.max(math.min(row, end_line), start_line)
       column = math.max(column, first_column)
-      modal.window:set_cursor { row, column }
+      modal.window:set_cursor({ row, column })
     end,
   })
 end
@@ -1906,7 +1868,7 @@ end
 ---@param str string
 ---@return Element
 function Element.text(str)
-  return Element:new { text = str }
+  return Element:new({ text = str })
 end
 
 return {

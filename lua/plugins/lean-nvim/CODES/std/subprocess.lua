@@ -11,7 +11,7 @@ function subprocess.check_output(...)
 
   error(
     string.format(
-      '%s exited with non-zero exit status %d.\nstderr contained:\n%s',
+      "%s exited with non-zero exit status %d.\nstderr contained:\n%s",
       vim.inspect(process.cmd),
       result.code,
       result.stderr

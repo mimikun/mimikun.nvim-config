@@ -17,24 +17,24 @@ local loogle = {}
 ---@return LoogleResult[]|nil results Loogle hits in the JSON API format
 ---@return string|nil err An error message from Loogle, in which case no results are returned
 function loogle.search(type)
-  local url = 'https://loogle.lean-lang.org/json?q=' .. vim.uri_encode(type)
+  local url = "https://loogle.lean-lang.org/json?q=" .. vim.uri_encode(type)
   local result = vim
     .system({
-      'curl',
-      '-s',
-      '-w',
-      '%{stderr}%{http_code}',
-      '-H',
-      'User-Agent: lean+nvim',
-      '-H',
-      'Accept: application/json',
+      "curl",
+      "-s",
+      "-w",
+      "%{stderr}%{http_code}",
+      "-H",
+      "User-Agent: lean+nvim",
+      "-H",
+      "Accept: application/json",
       url,
     })
     :wait()
 
   local status = tonumber(result.stderr)
   if status ~= 200 then
-    error('Loogle returned status code: ' .. (status or 'unknown'))
+    error("Loogle returned status code: " .. (status or "unknown"))
   end
 
   local body = vim.json.decode(result.stdout)
@@ -50,11 +50,11 @@ end
 ---@return string[] lines a list-like table containing a Lean file template
 function loogle.template(result)
   local lines = {
-    'import ' .. result.module,
-    '',
+    "import " .. result.module,
+    "",
   }
-  local with_name = result.name .. ' : ' .. result.type
-  vim.list_extend(lines, vim.split(with_name:gsub('\n%s*', '\n  '), '\n'))
+  local with_name = result.name .. " : " .. result.type
+  vim.list_extend(lines, vim.split(with_name:gsub("\n%s*", "\n  "), "\n"))
   return lines
 end
 

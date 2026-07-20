@@ -4,7 +4,7 @@
 --- (It's not namespaced, so it shows up here "globally".)
 ---@brief ]]
 
-local Html = require 'proofwidgets.html'
+local Html = require("proofwidgets.html")
 
 ---@class ProofStatusProps
 ---@field message string
@@ -13,7 +13,7 @@ local Html = require 'proofwidgets.html'
 ---@param ctx RenderContext
 ---@param props ProofStatusProps
 return function(ctx, props)
-  local response, err = ctx:rpc_call('ProofStatus.rpc', props)
+  local response, err = ctx:rpc_call("ProofStatus.rpc", props)
   if err then
     return err
   end

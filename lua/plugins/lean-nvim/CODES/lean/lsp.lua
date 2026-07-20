@@ -6,17 +6,17 @@
 
 local ms = vim.lsp.protocol.Methods
 
-local Buffer = require 'std.nvim.buffer'
-local async = require 'std.async'
-local std = require 'std.lsp'
+local Buffer = require("std.nvim.buffer")
+local async = require("std.async")
+local std = require("std.lsp")
 
-local log = require 'lean.log'
+local log = require("lean.log")
 
 local lsp = {
   ---A namespace where we put Lean's "silent" diagnostics.
-  silent_ns = vim.api.nvim_create_namespace 'lean.diagnostic.silent',
+  silent_ns = vim.api.nvim_create_namespace("lean.diagnostic.silent"),
   ---A namespace for Lean's unsolved goal markers.and goals accomplished ranges
-  goals_ns = vim.api.nvim_create_namespace 'lean.goal.markers',
+  goals_ns = vim.api.nvim_create_namespace("lean.goal.markers"),
 }
 
 ---@class LeanClientCapabilities : lsp.ClientCapabilities
@@ -29,7 +29,7 @@ local lsp = {
 ---@param bufnr? number
 ---@return vim.lsp.Client?
 function lsp.client_for(bufnr)
-  local clients = vim.lsp.get_clients { name = 'leanls', bufnr = bufnr or 0 }
+  local clients = vim.lsp.get_clients({ name = "leanls", bufnr = bufnr or 0 })
   return clients[1]
 end
 
@@ -44,10 +44,10 @@ function lsp.goals_accomplished_at(params)
 
   local pos = { params.position.line, 0 }
 
-  local opts = { details = true, overlap = true, type = 'highlight' }
+  local opts = { details = true, overlap = true, type = "highlight" }
   local hls = buffer:extmarks(lsp.goals_ns, pos, pos, opts)
   return vim.iter(hls):any(function(hl)
-    return hl[4].hl_group == 'leanGoalsAccomplished'
+    return hl[4].hl_group == "leanGoalsAccomplished"
   end)
 end
 
@@ -65,10 +65,10 @@ function lsp.restart_file(bufnr)
   bufnr = bufnr or 0
   local client = lsp.client_for(bufnr)
   if not client then
-    log:info {
+    log:info({
       message = "Cannot refresh file dependencies, this isn't a Lean file.",
       bufnr = bufnr,
-    }
+    })
     return
   end
   local uri = vim.uri_from_bufnr(bufnr)
@@ -78,10 +78,10 @@ function lsp.restart_file(bufnr)
     textDocument = {
       version = 0,
       uri = uri,
-      languageId = 'lean',
+      languageId = "lean",
       text = std.buf_get_full_text(bufnr),
     },
-    dependencyBuildMode = 'once',
+    dependencyBuildMode = "once",
   }
   client:notify(ms.textDocument_didOpen, params)
 end

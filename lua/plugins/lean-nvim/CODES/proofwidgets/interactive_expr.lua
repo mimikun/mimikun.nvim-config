@@ -1,7 +1,7 @@
-local async = require 'std.async'
+local async = require("std.async")
 
-local Element = require('lean.tui').Element
-local InteractiveCode = require 'lean.widget.interactive_code'
+local Element = require("lean.tui").Element
+local InteractiveCode = require("lean.widget.interactive_code")
 
 ---From https://github.com/leanprover-community/ProofWidgets4/blob/main/widget/src/interactiveExpr.tsx
 
@@ -10,14 +10,14 @@ local InteractiveCode = require 'lean.widget.interactive_code'
 ---@return Element
 return function(ctx, expr)
   local element
-  element = Element:new {}
+  element = Element:new({})
   vim.schedule(function()
     async.run(function()
-      local response, err = ctx:rpc_call('ProofWidgets.ppExprTagged', { expr = expr })
+      local response, err = ctx:rpc_call("ProofWidgets.ppExprTagged", { expr = expr })
       if err then
         return err
       end
-      element:set_children { InteractiveCode(response, ctx:subsession()) }
+      element:set_children({ InteractiveCode(response, ctx:subsession()) })
     end)
   end)
   return element

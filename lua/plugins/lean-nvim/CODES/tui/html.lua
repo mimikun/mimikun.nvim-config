@@ -1,39 +1,39 @@
-local Element = require('lean.tui').Element
-local image = require 'tui.image'
-local kitty = require 'kitty'
+local Element = require("lean.tui").Element
+local image = require("tui.image")
+local kitty = require("kitty")
 
 local html = {}
 
-vim.api.nvim_set_hl(0, 'tui.html.b', { default = true, bold = true })
-vim.api.nvim_set_hl(0, 'tui.html.i', { default = true, italic = true })
-vim.api.nvim_set_hl(0, 'tui.html.code', { default = true, link = '@markup.raw' })
-vim.api.nvim_set_hl(0, 'tui.html.hr', { default = true, link = 'WinSeparator' })
-vim.api.nvim_set_hl(0, 'tui.html.h1', { default = true, link = 'Title' })
-vim.api.nvim_set_hl(0, 'tui.html.h2', { default = true, link = '@markup.heading.2' })
-vim.api.nvim_set_hl(0, 'tui.html.h3', { default = true, link = '@markup.heading.3' })
-vim.api.nvim_set_hl(0, 'tui.html.h4', { default = true, link = '@markup.heading.4' })
-vim.api.nvim_set_hl(0, 'tui.html.h5', { default = true, link = '@markup.heading.5' })
-vim.api.nvim_set_hl(0, 'tui.html.h6', { default = true, link = '@markup.heading.6' })
-vim.api.nvim_set_hl(0, 'tui.html.del', { default = true, strikethrough = true })
-vim.api.nvim_set_hl(0, 'tui.html.u', { default = true, underline = true })
-vim.api.nvim_set_hl(0, 'tui.html.mark', { default = true, link = 'Search' })
-vim.api.nvim_set_hl(0, 'tui.html.blockquote', { default = true, link = 'Comment' })
-vim.api.nvim_set_hl(0, 'tui.html.summary', { default = true, link = 'Title' })
-vim.api.nvim_set_hl(0, 'tui.html.unsupported', { default = true, link = 'ErrorMsg' })
+vim.api.nvim_set_hl(0, "tui.html.b", { default = true, bold = true })
+vim.api.nvim_set_hl(0, "tui.html.i", { default = true, italic = true })
+vim.api.nvim_set_hl(0, "tui.html.code", { default = true, link = "@markup.raw" })
+vim.api.nvim_set_hl(0, "tui.html.hr", { default = true, link = "WinSeparator" })
+vim.api.nvim_set_hl(0, "tui.html.h1", { default = true, link = "Title" })
+vim.api.nvim_set_hl(0, "tui.html.h2", { default = true, link = "@markup.heading.2" })
+vim.api.nvim_set_hl(0, "tui.html.h3", { default = true, link = "@markup.heading.3" })
+vim.api.nvim_set_hl(0, "tui.html.h4", { default = true, link = "@markup.heading.4" })
+vim.api.nvim_set_hl(0, "tui.html.h5", { default = true, link = "@markup.heading.5" })
+vim.api.nvim_set_hl(0, "tui.html.h6", { default = true, link = "@markup.heading.6" })
+vim.api.nvim_set_hl(0, "tui.html.del", { default = true, strikethrough = true })
+vim.api.nvim_set_hl(0, "tui.html.u", { default = true, underline = true })
+vim.api.nvim_set_hl(0, "tui.html.mark", { default = true, link = "Search" })
+vim.api.nvim_set_hl(0, "tui.html.blockquote", { default = true, link = "Comment" })
+vim.api.nvim_set_hl(0, "tui.html.summary", { default = true, link = "Title" })
+vim.api.nvim_set_hl(0, "tui.html.unsupported", { default = true, link = "ErrorMsg" })
 
 html.Tag = vim.defaulttable(function(tag)
   return function(children)
-    return Element:new {
-      hlgroups = { 'tui.html.unsupported' },
-      text = ('<%s>'):format(tag),
+    return Element:new({
+      hlgroups = { "tui.html.unsupported" },
+      text = ("<%s>"):format(tag),
       children = children,
-    }
+    })
   end
 end)
 
 ---A `<br>` tag.
 function html.Tag.br(children)
-  return Element:new { text = '\n', children = children }
+  return Element:new({ text = "\n", children = children })
 end
 
 ---A `<summary>` tag rendered outside `<details>`.
@@ -41,10 +41,10 @@ end
 ---Within `<details>`, the dispatcher builds a foldable `Element:foldable`
 ---directly, bypassing this handler.
 function html.Tag.summary(children)
-  return Element:new {
-    hlgroups = { 'tui.html.summary' },
+  return Element:new({
+    hlgroups = { "tui.html.summary" },
     children = children,
-  }
+  })
 end
 
 ---Render a `<div>` element.
@@ -55,36 +55,36 @@ end
 ---and `inline` additionally make the container itself inline.
 function html.Tag.div(children, attrs)
   local display = attrs and attrs.style and attrs.style.display
-  if display == 'flex' or display == 'inline-flex' or display == 'inline' then
+  if display == "flex" or display == "inline-flex" or display == "inline" then
     for _, child in ipairs(children) do
       child.is_block = false
     end
-    return Element:new {
-      is_block = display == 'flex',
+    return Element:new({
+      is_block = display == "flex",
       children = children,
-    }
+    })
   end
-  return Element:new { is_block = true, children = children }
+  return Element:new({ is_block = true, children = children })
 end
 
 ---Render an inline `<span>` element.
 function html.Tag.span(children)
-  return Element:new { children = children }
+  return Element:new({ children = children })
 end
 
 ---Render a `<p>` paragraph as a block element.
 function html.Tag.p(children)
-  return Element:new { is_block = true, margin = 1, children = children }
+  return Element:new({ is_block = true, margin = 1, children = children })
 end
 
 ---Render bold text.
 function html.Tag.b(children)
-  return Element:new { hlgroups = { 'tui.html.b' }, children = children }
+  return Element:new({ hlgroups = { "tui.html.b" }, children = children })
 end
 
 ---Render italic text.
 function html.Tag.i(children)
-  return Element:new { hlgroups = { 'tui.html.i' }, children = children }
+  return Element:new({ hlgroups = { "tui.html.i" }, children = children })
 end
 
 ---An alias for `<b>`.
@@ -122,19 +122,19 @@ end
 function html.Tag.code(children, attrs)
   for _, child in ipairs(children) do
     if is_highlighted(child) then
-      return Element:new { children = children }
+      return Element:new({ children = children })
     end
   end
-  local lang = attrs and attrs.class and attrs.class:match 'language%-([%w_]+)'
+  local lang = attrs and attrs.class and attrs.class:match("language%-([%w_]+)")
   if lang then
-    return Element:new { name = 'tui.html.code.' .. lang, children = children }
+    return Element:new({ name = "tui.html.code." .. lang, children = children })
   end
-  return Element:new { hlgroups = { 'tui.html.code' }, children = children }
+  return Element:new({ hlgroups = { "tui.html.code" }, children = children })
 end
 
 ---Render deleted/strikethrough text.
 function html.Tag.del(children)
-  return Element:new { hlgroups = { 'tui.html.del' }, children = children }
+  return Element:new({ hlgroups = { "tui.html.del" }, children = children })
 end
 
 ---An alias for `<del>`.
@@ -142,7 +142,7 @@ html.Tag.s = html.Tag.del
 
 ---Render underlined text.
 function html.Tag.u(children)
-  return Element:new { hlgroups = { 'tui.html.u' }, children = children }
+  return Element:new({ hlgroups = { "tui.html.u" }, children = children })
 end
 
 ---An alias for `<u>`.
@@ -150,7 +150,7 @@ html.Tag.ins = html.Tag.u
 
 ---Render highlighted/marked text.
 function html.Tag.mark(children)
-  return Element:new { hlgroups = { 'tui.html.mark' }, children = children }
+  return Element:new({ hlgroups = { "tui.html.mark" }, children = children })
 end
 
 ---Render a blockquote as an indented block.
@@ -158,57 +158,57 @@ end
 ---Uses `line_prefix` so every rendered line within the blockquote gets
 ---the `│ ` bar, matching how browsers render a left border on the block.
 function html.Tag.blockquote(children)
-  return Element:new {
+  return Element:new({
     is_block = true,
     margin = 1,
-    line_prefix = { text = '│ ', hlgroup = 'tui.html.blockquote' },
+    line_prefix = { text = "│ ", hlgroup = "tui.html.blockquote" },
     children = children,
-  }
+  })
 end
 
 ---Render subscript text with Unicode sub-parentheses: ₍text₎
 function html.Tag.sub(children)
-  table.insert(children, 1, Element.text '₍')
-  table.insert(children, Element.text '₎')
-  return Element:new { children = children }
+  table.insert(children, 1, Element.text("₍"))
+  table.insert(children, Element.text("₎"))
+  return Element:new({ children = children })
 end
 
 ---Render superscript text with Unicode super-parentheses: ⁽text⁾
 function html.Tag.sup(children)
-  table.insert(children, 1, Element.text '⁽')
-  table.insert(children, Element.text '⁾')
-  return Element:new { children = children }
+  table.insert(children, 1, Element.text("⁽"))
+  table.insert(children, Element.text("⁾"))
+  return Element:new({ children = children })
 end
 
 ---`<style>` content is CSS for the browser — hide it in the TUI.
 function html.Tag.style()
-  return Element:new {}
+  return Element:new({})
 end
 
 ---`<script>` content should never be rendered as visible text.
 function html.Tag.script()
-  return Element:new {}
+  return Element:new({})
 end
 
 ---Render a horizontal rule.
 function html.Tag.hr()
-  return Element:new {
+  return Element:new({
     is_block = true,
     margin = 1,
-    text = string.rep('─', 40),
-    hlgroups = { 'tui.html.hr' },
-  }
+    text = string.rep("─", 40),
+    hlgroups = { "tui.html.hr" },
+  })
 end
 
 ---Render heading tags.
 for level = 1, 6 do
-  html.Tag['h' .. level] = function(children)
-    return Element:new {
+  html.Tag["h" .. level] = function(children)
+    return Element:new({
       is_block = true,
       margin = 1,
-      hlgroups = { 'tui.html.h' .. level },
+      hlgroups = { "tui.html.h" .. level },
       children = children,
-    }
+    })
   end
 end
 
@@ -221,10 +221,10 @@ end
 ---@param children Element[]
 ---@param attrs? table<string, any>
 function html.Tag.a(children, attrs)
-  if attrs and attrs.href and attrs.href ~= '' then
-    return Element.link { children = children, url = attrs.href }
+  if attrs and attrs.href and attrs.href ~= "" then
+    return Element.link({ children = children, url = attrs.href })
   end
-  return Element:new { children = children }
+  return Element:new({ children = children })
 end
 
 ---Clear `is_block` on the first block element in a tree.
@@ -245,7 +245,7 @@ local function clear_first_block(element)
 end
 
 -- Browsers cycle bullet markers by list depth: disc → circle → square.
-local ul_markers = { '• ', '◦ ', '▪ ' }
+local ul_markers = { "• ", "◦ ", "▪ " }
 
 ---Render an unordered list.
 ---@param children Element[]
@@ -253,20 +253,20 @@ local ul_markers = { '• ', '◦ ', '▪ ' }
 ---@param opts? { list_depth: integer }
 function html.Tag.ul(children, _attrs, opts)
   local depth = (opts and opts.list_depth or 0)
-  local indent = string.rep('  ', depth)
+  local indent = string.rep("  ", depth)
   local marker = ul_markers[depth % #ul_markers + 1]
   local items = vim
     .iter(children)
     :map(function(child)
       clear_first_block(child)
-      return Element:new { text = indent .. marker, children = { child } }
+      return Element:new({ text = indent .. marker, children = { child } })
     end)
     :totable()
-  return Element:new {
+  return Element:new({
     is_block = true,
     margin = depth == 0 and 1 or 0,
-    children = { Element:concat(items, '\n') },
-  }
+    children = { Element:concat(items, "\n") },
+  })
 end
 
 ---Render an ordered list.
@@ -275,36 +275,36 @@ end
 ---@param opts? { list_depth: integer }
 function html.Tag.ol(children, attrs, opts)
   local depth = (opts and opts.list_depth or 0)
-  local indent = string.rep('  ', depth)
+  local indent = string.rep("  ", depth)
   local start = (attrs and attrs.start and tonumber(attrs.start) or 1) - 1
   local items = vim
     .iter(children)
     :enumerate()
     :map(function(i, child)
       clear_first_block(child)
-      return Element:new { text = indent .. tostring(start + i) .. '. ', children = { child } }
+      return Element:new({ text = indent .. tostring(start + i) .. ". ", children = { child } })
     end)
     :totable()
-  return Element:new {
+  return Element:new({
     is_block = true,
     margin = depth == 0 and 1 or 0,
-    children = { Element:concat(items, '\n') },
-  }
+    children = { Element:concat(items, "\n") },
+  })
 end
 
 ---Render a list item.
 function html.Tag.li(children)
-  return Element:new { children = children }
+  return Element:new({ children = children })
 end
 
 ---Render a table data cell.
 function html.Tag.td(children)
-  return Element:new { children = children }
+  return Element:new({ children = children })
 end
 
 ---Render a table header cell.
 function html.Tag.th(children)
-  return Element:new { hlgroups = { 'tui.html.b' }, children = children }
+  return Element:new({ hlgroups = { "tui.html.b" }, children = children })
 end
 
 ---Render an `<img>` element using the Kitty graphics protocol.
@@ -315,28 +315,28 @@ end
 ---@param attrs table<string, any>
 function html.Tag.img(_children, attrs)
   if not attrs.src then
-    return Element:new {
-      hlgroups = { 'Comment' },
-      text = attrs.alt or '[img: no src]',
-    }
+    return Element:new({
+      hlgroups = { "Comment" },
+      text = attrs.alt or "[img: no src]",
+    })
   end
 
   local decoded, reason = image.decode(attrs.src)
   if not decoded then
-    return Element:new {
-      hlgroups = { 'Comment' },
+    return Element:new({
+      hlgroups = { "Comment" },
       text = attrs.alt or reason,
-    }
+    })
   end
 
   local w = (attrs.width and tonumber(attrs.width)) or decoded.width or 200
   local h = (attrs.height and tonumber(attrs.height)) or decoded.height or 200
 
   local rows = kitty.rows_for_height(h)
-  return Element:new {
-    text = string.rep('\n', rows - 1),
+  return Element:new({
+    text = string.rep("\n", rows - 1),
     overlay = { data = decoded.data, width = w, height = h, format = 100 },
-  }
+  })
 end
 
 ---Render an `<svg>` element via resvg and the Kitty graphics protocol.
@@ -346,12 +346,12 @@ end
 ---the original tree to serialize back to an SVG string.
 ---@param value { [1]: string, [2]: [string, any][], [3]: table[] }
 function html.Tag.svg(value)
-  local svg = require 'tui.svg'
+  local svg = require("tui.svg")
   if not svg.available() then
-    return Element:new {
-      hlgroups = { 'Comment' },
-      text = '[SVG: install libresvg to render]',
-    }
+    return Element:new({
+      hlgroups = { "Comment" },
+      text = "[SVG: install libresvg to render]",
+    })
   end
 
   local ok, result = pcall(function()
@@ -359,24 +359,24 @@ function html.Tag.svg(value)
     local pixels, w, h = svg.rasterize(svg_string)
     local overlay = image.from_pixels(svg_string, pixels, w, h)
     local rows = kitty.rows_for_height(overlay.height)
-    return Element:new {
-      text = string.rep('\n', rows - 1),
+    return Element:new({
+      text = string.rep("\n", rows - 1),
       overlay = overlay,
-    }
+    })
   end)
   if ok then
     return result
   end
 
-  return Element:new {
-    hlgroups = { 'WarningMsg' },
-    text = '[SVG render failed: ' .. tostring(result) .. ']',
-  }
+  return Element:new({
+    hlgroups = { "WarningMsg" },
+    text = "[SVG render failed: " .. tostring(result) .. "]",
+  })
 end
 
 ---Render preformatted text as a block element.
 function html.Tag.pre(children)
-  return Element:new { is_block = true, margin = 1, children = children }
+  return Element:new({ is_block = true, margin = 1, children = children })
 end
 
 ---Render a `<details>` foldable as a block element.
@@ -386,7 +386,7 @@ end
 ---one-element `children` list. This handler just wraps it with the
 ---tag's box model — same shape as every other Tag.* handler.
 function html.Tag.details(children)
-  return Element:new { is_block = true, margin = 1, children = children }
+  return Element:new({ is_block = true, margin = 1, children = children })
 end
 
 ---Render a `<table>` as a block element.
@@ -395,7 +395,7 @@ end
 ---raw Html tree to walk `<thead>`/`<tbody>`/`<tr>`) and passed as the
 ---one-element `children` list.
 function html.Tag.table(children)
-  return Element:new { is_block = true, margin = 1, children = children }
+  return Element:new({ is_block = true, margin = 1, children = children })
 end
 
 ---Convert an HSL triple (hue in degrees, saturation & lightness in
@@ -427,7 +427,7 @@ local function hsl_to_hex(h, s, l)
     return p
   end
 
-  return ('#%02x%02x%02x'):format(
+  return ("#%02x%02x%02x"):format(
     math.floor(channel(h + 1 / 3) * 255 + 0.5),
     math.floor(channel(h) * 255 + 0.5),
     math.floor(channel(h - 1 / 3) * 255 + 0.5)
@@ -441,7 +441,7 @@ end
 ---@return number[]
 local function css_numbers(notation)
   local nums = {}
-  for n in notation:gmatch '%d+%.?%d*' do
+  for n in notation:gmatch("%d+%.?%d*") do
     nums[#nums + 1] = tonumber(n)
   end
   return nums
@@ -461,17 +461,17 @@ local function resolve_color(value)
 
   -- Hex: expand `#rgb`/`#rgba` shorthand and strip any alpha channel,
   -- since Neovim accepts neither, leaving the `#rrggbb` it wants.
-  local hex = value:match '^#(%x+)$'
+  local hex = value:match("^#(%x+)$")
   if hex then
     if #hex == 3 or #hex == 4 then
-      return '#' .. hex:sub(1, 3):gsub('.', '%0%0')
+      return "#" .. hex:sub(1, 3):gsub(".", "%0%0")
     elseif #hex == 6 or #hex == 8 then
-      return '#' .. hex:sub(1, 6)
+      return "#" .. hex:sub(1, 6)
     end
     return nil
   end
 
-  local hsl = value:match '^hsla?%b()$'
+  local hsl = value:match("^hsla?%b()$")
   if hsl then
     local nums = css_numbers(hsl)
     if #nums >= 3 then
@@ -480,11 +480,11 @@ local function resolve_color(value)
     return nil
   end
 
-  local rgb = value:match '^rgba?%b()$'
+  local rgb = value:match("^rgba?%b()$")
   if rgb then
     local nums = css_numbers(rgb)
     if #nums >= 3 then
-      return ('#%02x%02x%02x'):format(
+      return ("#%02x%02x%02x"):format(
         math.min(math.floor(nums[1]), 255),
         math.min(math.floor(nums[2]), 255),
         math.min(math.floor(nums[3]), 255)
@@ -510,26 +510,26 @@ end
 ---@param value string
 local function apply_css_prop(hl, prop, value)
   -- Normalize camelCase → kebab-case for matching.
-  local normalized = prop:gsub('(%u)', function(c)
-    return '-' .. c:lower()
+  local normalized = prop:gsub("(%u)", function(c)
+    return "-" .. c:lower()
   end)
-  if normalized == 'color' then
+  if normalized == "color" then
     hl.fg = resolve_color(value)
-  elseif normalized == 'background-color' or normalized == 'background' then
+  elseif normalized == "background-color" or normalized == "background" then
     hl.bg = resolve_color(value)
-  elseif normalized == 'font-weight' then
+  elseif normalized == "font-weight" then
     -- CSS bold is the keyword "bold" or a numeric weight >= 700.
     local n = tonumber(value)
-    if value == 'bold' or value == 'bolder' or (n and n >= 700) then
+    if value == "bold" or value == "bolder" or (n and n >= 700) then
       hl.bold = true
     end
-  elseif normalized == 'font-style' and value == 'italic' then
+  elseif normalized == "font-style" and value == "italic" then
     hl.italic = true
-  elseif normalized == 'text-decoration' or normalized == 'text-decoration-line' then
-    if value:find 'underline' then
+  elseif normalized == "text-decoration" or normalized == "text-decoration-line" then
+    if value:find("underline") then
       hl.underline = true
     end
-    if value:find 'line%-through' then
+    if value:find("line%-through") then
       hl.strikethrough = true
     end
   end
@@ -545,7 +545,7 @@ end
 ---@return table<string, string>
 function html.parse_css(css)
   local props = {}
-  for prop, value in css:gmatch '([%w-]+)%s*:%s*([^;]+)' do
+  for prop, value in css:gmatch("([%w-]+)%s*:%s*([^;]+)") do
     props[vim.trim(prop)] = vim.trim(value)
   end
   return props
@@ -557,7 +557,7 @@ end
 local function parse_style(style)
   local hl = {}
   for prop, value in pairs(style) do
-    if type(value) == 'string' then
+    if type(value) == "string" then
       apply_css_prop(hl, prop, value)
     end
   end
@@ -577,14 +577,14 @@ local style_hl_counter = 0
 ---@param style table<string, any>
 ---@return boolean
 function html.is_hidden(style)
-  if style.display == 'none' then
+  if style.display == "none" then
     return true
   end
-  if style.visibility == 'hidden' then
+  if style.visibility == "hidden" then
     return true
   end
   local opacity = style.opacity
-  if opacity == '0' or opacity == 0 then
+  if opacity == "0" or opacity == 0 then
     return true
   end
   return false
@@ -615,7 +615,7 @@ function html._styled(element, attrs)
   local hlgroup = style_hlgroups[cache_key]
   if not hlgroup then
     style_hl_counter = style_hl_counter + 1
-    hlgroup = 'tui.html.style.' .. style_hl_counter
+    hlgroup = "tui.html.style." .. style_hl_counter
     vim.api.nvim_set_hl(0, hlgroup, hl)
     style_hlgroups[cache_key] = hlgroup
   end

@@ -1,4 +1,4 @@
-local Element = require('lean.tui').Element
+local Element = require("lean.tui").Element
 
 ---@class LLMStepSuggestion: { [1]: SuggestionText, [2]: LLMStepCheckResult }
 
@@ -18,17 +18,17 @@ local Element = require('lean.tui').Element
 return function(ctx, props)
   local blocks = vim.iter(ipairs(props.suggestions)):map(function(i, each)
     local children = {
-      i ~= 1 and Element.text '\n' or nil,
+      i ~= 1 and Element.text("\n") or nil,
     }
     table.insert(children, ctx:edit_link(each[1], props.range, each[1]))
-    if each.info and each.info ~= '' then
-      table.insert(children, Element:new { text = each.info })
+    if each.info and each.info ~= "" then
+      table.insert(children, Element:new({ text = each.info }))
     end
-    return Element:new { children = children }
+    return Element:new({ children = children })
   end)
-  return Element:foldable {
-    title = Element.title('LLMStep suggestion:', 'widgetSuggestion'),
+  return Element:foldable({
+    title = Element.title("LLMStep suggestion:", "widgetSuggestion"),
     gap = 1,
     body = blocks:totable(),
-  }
+  })
 end

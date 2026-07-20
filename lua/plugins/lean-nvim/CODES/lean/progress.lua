@@ -5,7 +5,7 @@
 ---@brief ]]
 
 local M = {
-  AUTOCMD = 'LeanProgressUpdate',
+  AUTOCMD = "LeanProgressUpdate",
 
   ---@enum LeanFileProgressKind
   Kind = {
@@ -24,7 +24,7 @@ M.proc_infos = {}
 ---@param params LeanFileProgressParams
 function M.update(params)
   M.proc_infos[params.textDocument.uri] = params.processing
-  vim.api.nvim_exec_autocmds('User', { pattern = M.AUTOCMD })
+  vim.api.nvim_exec_autocmds("User", { pattern = M.AUTOCMD })
 end
 
 ---Check if we're processing the given location, returning the kind if so.
@@ -41,7 +41,7 @@ function M.at(params)
   local line = params.position.line
   ---@type LeanFileProgressProcessingInfo?
   local info = vim.iter(infos):find(function(each)
-    return (line >= each.range.start.line) and (line <= each.range['end'].line)
+    return (line >= each.range.start.line) and (line <= each.range["end"].line)
   end)
   return info and (info.kind or M.Kind.processing)
 end
@@ -57,7 +57,7 @@ function M.percentage(bufnr)
   end
 
   local finished = vim.iter(proc_info):fold(0, function(acc, range)
-    return acc + range.range['end'].line - range.range.start.line
+    return acc + range.range["end"].line - range.range.start.line
   end)
   return 100 - 100 * finished / vim.api.nvim_buf_line_count(bufnr)
 end

@@ -6,7 +6,7 @@
 --- See https://github.com/leanprover-community/ProofWidgets4/blob/main/widget/src/cancellable.ts
 ---@brief ]]
 
-local async = require 'std.async'
+local async = require("std.async")
 
 ---@generic T
 ---@generic S
@@ -18,7 +18,7 @@ local async = require 'std.async'
 ---@return fun():nil cancel a callable which can cancel the request before it has finished
 return function(sess, name, params, callback, retries)
   async.run(function()
-    local id, err = sess:call(name .. '._cancellable', params)
+    local id, err = sess:call(name .. "._cancellable", params)
     if err then
       error(err)
     end
@@ -28,7 +28,7 @@ return function(sess, name, params, callback, retries)
     local function cancel()
       timer:stop()
       timer:close()
-      sess:call('ProofWidgets.cancelRequest', id)
+      sess:call("ProofWidgets.cancelRequest", id)
     end
 
     local remaining = retries or 10
@@ -40,8 +40,8 @@ return function(sess, name, params, callback, retries)
 
       vim.schedule(function()
         async.run(function()
-          local response = sess:call('ProofWidgets.checkRequest', id)
-          if response == 'running' then
+          local response = sess:call("ProofWidgets.checkRequest", id)
+          if response == "running" then
             return
           end
 

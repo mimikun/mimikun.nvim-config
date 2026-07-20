@@ -13,32 +13,32 @@
 --- original codepoints.
 ---@brief ]]
 
-local image = require 'tui.image'
-local kitty = require 'kitty'
-local svg = require 'tui.svg'
+local image = require("tui.image")
+local kitty = require("kitty")
+local svg = require("tui.svg")
 
-local Element = require('lean.tui').Element
-local log = require 'lean.log'
+local Element = require("lean.tui").Element
+local log = require("lean.log")
 
 local codicons = {}
 
 ---The version of vscode-codicons we download icons from.
-local REF = 'v0.0.45'
+local REF = "v0.0.45"
 
 ---Where we download icons from. Exposed (only) for use in tests.
-codicons.base_url = ('https://raw.githubusercontent.com/microsoft/vscode-codicons/%s/'):format(REF)
+codicons.base_url = ("https://raw.githubusercontent.com/microsoft/vscode-codicons/%s/"):format(REF)
 
 ---Where downloaded icons live. Exposed (only) for use in tests.
-codicons.cache_dir = vim.fs.joinpath(vim.fn.stdpath 'cache', 'lean.nvim', 'codicons', REF)
+codicons.cache_dir = vim.fs.joinpath(vim.fn.stdpath("cache"), "lean.nvim", "codicons", REF)
 
 ---Repository-relative paths for the files we download.
 ---@param filename string a filename within our cache directory
 ---@return string subpath
 local function subpath_of(filename)
-  if filename == 'mapping.json' then
-    return 'src/template/mapping.json'
+  if filename == "mapping.json" then
+    return "src/template/mapping.json"
   end
-  return 'src/icons/' .. filename
+  return "src/icons/" .. filename
 end
 
 ---Files which already failed to download; we don't retry until next session.
@@ -58,11 +58,11 @@ end
 ---@param filename string
 ---@return string? contents nil if the file isn't cached
 local function read_cached(filename)
-  local file = io.open(cache_path(filename), 'r')
+  local file = io.open(cache_path(filename), "r")
   if not file then
     return nil
   end
-  local contents = file:read '*a'
+  local contents = file:read("*a")
   file:close()
   return contents
 end
@@ -82,7 +82,7 @@ local function fetch(filename, on_done)
     in_flight[filename] = nil
     if err then
       failed[filename] = true
-      log:warning { message = 'Failed to download a codicon', filename = filename, err = err }
+      log:warning({ message = "Failed to download a codicon", filename = filename, err = err })
     end
     for _, callback in ipairs(callbacks) do
       callback()
@@ -90,12 +90,12 @@ local function fetch(filename, on_done)
   end
 
   local path = cache_path(filename)
-  vim.fn.mkdir(vim.fs.dirname(path), 'p')
+  vim.fn.mkdir(vim.fs.dirname(path), "p")
   local url = codicons.base_url .. subpath_of(filename)
-  local partial = path .. '.partial'
+  local partial = path .. ".partial"
   local ok, err = pcall(
     vim.system,
-    { 'curl', '--fail', '--silent', '--show-error', '--location', url, '--output', partial },
+    { "curl", "--fail", "--silent", "--show-error", "--location", url, "--output", partial },
     {},
     vim.schedule_wrap(function(out)
       if out.code == 0 then
@@ -122,14 +122,14 @@ local function load_codepoints()
   if codepoints then
     return codepoints
   end
-  local contents = read_cached 'mapping.json'
+  local contents = read_cached("mapping.json")
   if not contents then
     return nil
   end
   local ok, mapping = pcall(vim.json.decode, contents)
   if not ok then
-    log:error { message = 'Invalid codicon mapping', err = mapping }
-    failed['mapping.json'] = true
+    log:error({ message = "Invalid codicon mapping", err = mapping })
+    failed["mapping.json"] = true
     return nil
   end
   codepoints = {}
@@ -144,7 +144,7 @@ end
 ---Whether we can rasterize icons and display them with kitty graphics.
 ---@return boolean
 local function raster_available()
-  return require 'lean.config'().graphics.enabled ~= false and kitty.available() and svg.available()
+  return require("lean.config")().graphics.enabled ~= false and kitty.available() and svg.available()
 end
 
 ---Rasterized icons we've already built, keyed by name, color and size.
@@ -158,12 +158,12 @@ local overlays = {}
 local function raster(name, hlgroup)
   local cell = kitty.cell_size()
   local hl = vim.api.nvim_get_hl(0, { name = hlgroup, link = false })
-  local color = ('#%06x'):format(hl.fg or 0xcccccc)
+  local color = ("#%06x"):format(hl.fg or 0xcccccc)
 
-  local key = ('codicon:%s:%s:%d'):format(name, color, cell.height)
+  local key = ("codicon:%s:%s:%d"):format(name, color, cell.height)
   local overlay = overlays[key]
   if not overlay then
-    local source = read_cached(name .. '.svg')
+    local source = read_cached(name .. ".svg")
     if not source then
       return nil
     end
@@ -175,7 +175,7 @@ local function raster(name, hlgroup)
       :gsub('fill="currentColor"', ('fill="%s"'):format(color), 1)
     local ok, pixels, width, height = pcall(svg.rasterize, source)
     if not ok then
-      log:error { message = 'Failed to rasterize a codicon', name = name, err = pixels }
+      log:error({ message = "Failed to rasterize a codicon", name = name, err = pixels })
       return nil
     end
     overlay = image.from_pixels(key, pixels, width, height)
@@ -183,7 +183,7 @@ local function raster(name, hlgroup)
   end
 
   local columns = math.ceil(overlay.width / cell.width)
-  return Element:new { text = (' '):rep(columns), overlay = overlay }
+  return Element:new({ text = (" "):rep(columns), overlay = overlay })
 end
 
 ---An element displaying the icon's Nerd Font glyph.
@@ -195,7 +195,7 @@ local function glyph(name)
   if not codepoint then
     return nil
   end
-  return Element:new { text = vim.fn.nr2char(codepoint, 1) }
+  return Element:new({ text = vim.fn.nr2char(codepoint, 1) })
 end
 
 ---@class CodiconOpts
@@ -225,7 +225,7 @@ function codicons.element(name, opts)
   ---@return Element?
   local function resolve()
     if want_raster then
-      local element = raster(name, opts.hlgroup or 'widgetLink')
+      local element = raster(name, opts.hlgroup or "widgetLink")
       if element then
         return element
       end
@@ -236,17 +236,17 @@ function codicons.element(name, opts)
   end
 
   local missing = {} ---@type string[]
-  local icon_file = name .. '.svg'
+  local icon_file = name .. ".svg"
   if want_raster and not failed[icon_file] and not vim.uv.fs_stat(cache_path(icon_file)) then
     table.insert(missing, icon_file)
   end
   if
     want_glyph
     and not codepoints
-    and not failed['mapping.json']
-    and not vim.uv.fs_stat(cache_path 'mapping.json')
+    and not failed["mapping.json"]
+    and not vim.uv.fs_stat(cache_path("mapping.json"))
   then
-    table.insert(missing, 'mapping.json')
+    table.insert(missing, "mapping.json")
   end
 
   if #missing == 0 then
@@ -254,8 +254,8 @@ function codicons.element(name, opts)
   end
 
   local interim = resolve() or opts.fallback
-  return Element:new {
-    name = 'codicon:' .. name,
+  return Element:new({
+    name = "codicon:" .. name,
     children = interim and { interim } or nil,
     __async_init = function(resolved)
       local remaining = #missing
@@ -268,7 +268,7 @@ function codicons.element(name, opts)
         end)
       end
     end,
-  }
+  })
 end
 
 return codicons

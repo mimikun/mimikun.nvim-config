@@ -5,21 +5,21 @@
 --- Lean's interactive goal state.
 ---@brief ]]
 
-local Buffer = require 'std.nvim.buffer'
-local Stopwatch = require 'std.stopwatch'
-local Window = require 'std.nvim.window'
-local async = require 'std.async'
-local throttle = require 'std.throttle'
-local byte_col_to_utf16 = require('std.lsp').byte_col_to_utf16
+local Buffer = require("std.nvim.buffer")
+local Stopwatch = require("std.stopwatch")
+local Window = require("std.nvim.window")
+local async = require("std.async")
+local throttle = require("std.throttle")
+local byte_col_to_utf16 = require("std.lsp").byte_col_to_utf16
 
-local Element = require('lean.tui').Element
-local Instrumentation = require 'lean.infoview.instrumentation'
-local Locations = require 'lean.infoview.locations'
-local components = require 'lean.infoview.components'
-local interactive_goal = require 'lean.widget.interactive_goal'
-local log = require 'lean.log'
-local progress = require 'lean.progress'
-local rpc = require 'lean.rpc'
+local Element = require("lean.tui").Element
+local Instrumentation = require("lean.infoview.instrumentation")
+local Locations = require("lean.infoview.locations")
+local components = require("lean.infoview.components")
+local interactive_goal = require("lean.widget.interactive_goal")
+local log = require("lean.log")
+local progress = require("lean.progress")
+local rpc = require("lean.rpc")
 
 ---Convert a buffer position to a human-readable (1, 1)-indexed string.
 ---Takes the workspace into account in order to return a relative path.
@@ -29,11 +29,7 @@ local rpc = require 'lean.rpc'
 local function position_to_string(buffer, pos)
   local workspace = vim.lsp.buf.list_workspace_folders()[1] or vim.uv.cwd()
   local filename = vim.uri_to_fname(buffer:uri())
-  return ('%s at %d:%d'):format(
-    vim.fs.relpath(workspace, filename) or filename,
-    pos[1] + 1,
-    pos[2] + 1
-  )
+  return ("%s at %d:%d"):format(vim.fs.relpath(workspace, filename) or filename, pos[1] + 1, pos[2] + 1)
 end
 
 ---@param name string
@@ -44,13 +40,13 @@ local function has_name(name)
   end
 end
 
-local is_goal = has_name 'goal-type'
-local is_hypothesis = has_name 'hyp'
-local is_suggestion = has_name 'suggestion'
+local is_goal = has_name("goal-type")
+local is_hypothesis = has_name("hyp")
+local is_suggestion = has_name("suggestion")
 
 local function is_link(element)
   local hlgroups = element.hlgroups
-  return type(hlgroups) == 'table' and vim.tbl_contains(hlgroups, 'widgetLink')
+  return type(hlgroups) == "table" and vim.tbl_contains(hlgroups, "widgetLink")
 end
 
 local function is_trace_diagnostic(element)
@@ -106,7 +102,7 @@ end
 ---@type lean.infoview.MergedConfig
 local options = setmetatable({}, {
   __index = function(_, key)
-    return require 'lean.config'().infoview[key]
+    return require("lean.config")().infoview[key]
   end,
 })
 
@@ -116,24 +112,24 @@ local options = setmetatable({}, {
 ---@type nil|fun():boolean
 local autoopen_fn = nil
 
-local FOCUS_AUGROUP = vim.api.nvim_create_augroup('LeanInfoviewFocus', {})
+local FOCUS_AUGROUP = vim.api.nvim_create_augroup("LeanInfoviewFocus", {})
 
 ---Track death of the Lean language server in each buffer it was attached to.
 ---
 ---Sets a buffer-local flag which is consulted at render time (rather than
 ---eagerly mutating pin contents here) so that asynchronous updates racing
 ---with the server's death can't resurrect stale contents from it.
-local DEATH_AUGROUP = vim.api.nvim_create_augroup('LeanInfoviewDeath', {})
+local DEATH_AUGROUP = vim.api.nvim_create_augroup("LeanInfoviewDeath", {})
 
 ---The `leanls` client for an autocmd's client ID, if that's who it is.
 ---@param args table autocmd callback args
 ---@return vim.lsp.Client?
 local function leanls_from(args)
   local client = vim.lsp.get_client_by_id(args.data.client_id)
-  return client and client.name == 'leanls' and client or nil
+  return client and client.name == "leanls" and client or nil
 end
 
-vim.api.nvim_create_autocmd('LspDetach', {
+vim.api.nvim_create_autocmd("LspDetach", {
   group = DEATH_AUGROUP,
   callback = function(args)
     if not leanls_from(args) then
@@ -151,7 +147,7 @@ vim.api.nvim_create_autocmd('LspDetach', {
   end,
 })
 
-vim.api.nvim_create_autocmd('LspAttach', {
+vim.api.nvim_create_autocmd("LspAttach", {
   group = DEATH_AUGROUP,
   callback = function(args)
     if not leanls_from(args) then
@@ -194,7 +190,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
 ---@field private __debug_expanded table<string, boolean>
 ---@field private __debug_active_tab integer index of the currently selected debug tab
 ---@field private __debug_timer? uv.uv_timer_t periodic redraw timer for live charts
-local Pin = { __extmark_ns = vim.api.nvim_create_namespace 'lean.pins' }
+local Pin = { __extmark_ns = vim.api.nvim_create_namespace("lean.pins") }
 Pin.__index = Pin
 
 local __next_buffer_id = 0
@@ -239,142 +235,142 @@ end
 function Infoview:__setup_pin_keymaps(buffer)
   local mappings = {
     {
-      'GoToGoal',
+      "GoToGoal",
       function()
         self:move_cursor_to_goal()
       end,
-      '<LocalLeader>g',
-      'Move to the first goal.',
+      "<LocalLeader>g",
+      "Move to the first goal.",
     },
     {
-      'NextGoal',
+      "NextGoal",
       function()
-        self:__goto('next', is_goal)
+        self:__goto("next", is_goal)
       end,
-      ']g',
-      'Move to the next goal.',
+      "]g",
+      "Move to the next goal.",
     },
     {
-      'PrevGoal',
+      "PrevGoal",
       function()
-        self:__goto('prev', is_goal)
+        self:__goto("prev", is_goal)
       end,
-      '[g',
-      'Move to the previous goal.',
+      "[g",
+      "Move to the previous goal.",
     },
     {
-      'NextHypothesis',
+      "NextHypothesis",
       function()
-        self:__goto('next', is_hypothesis)
+        self:__goto("next", is_hypothesis)
       end,
-      ']h',
-      'Move to the next hypothesis.',
+      "]h",
+      "Move to the next hypothesis.",
     },
     {
-      'PrevHypothesis',
+      "PrevHypothesis",
       function()
-        self:__goto('prev', is_hypothesis)
+        self:__goto("prev", is_hypothesis)
       end,
-      '[h',
-      'Move to the previous hypothesis.',
+      "[h",
+      "Move to the previous hypothesis.",
     },
     {
-      'GoToSuggestion',
+      "GoToSuggestion",
       function()
         self:move_cursor_to_suggestion()
       end,
-      '<LocalLeader>S',
-      'Move to the first suggestion.',
+      "<LocalLeader>S",
+      "Move to the first suggestion.",
     },
     {
-      'AcceptSuggestion',
+      "AcceptSuggestion",
       function()
         self:accept_suggestion()
       end,
-      '<LocalLeader>s',
-      'Accept the first suggestion.',
+      "<LocalLeader>s",
+      "Accept the first suggestion.",
     },
     {
-      'NextSuggestion',
+      "NextSuggestion",
       function()
-        self:__goto('next', is_suggestion)
+        self:__goto("next", is_suggestion)
       end,
-      ']s',
-      'Move to the next suggestion.',
+      "]s",
+      "Move to the next suggestion.",
     },
     {
-      'PrevSuggestion',
+      "PrevSuggestion",
       function()
-        self:__goto('prev', is_suggestion)
+        self:__goto("prev", is_suggestion)
       end,
-      '[s',
-      'Move to the previous suggestion.',
+      "[s",
+      "Move to the previous suggestion.",
     },
     {
-      'NextLink',
+      "NextLink",
       function()
-        self:__goto('next', is_link)
+        self:__goto("next", is_link)
       end,
-      ']l',
-      'Move to the next link.',
+      "]l",
+      "Move to the next link.",
     },
     {
-      'PrevLink',
+      "PrevLink",
       function()
-        self:__goto('prev', is_link)
+        self:__goto("prev", is_link)
       end,
-      '[l',
-      'Move to the previous link.',
+      "[l",
+      "Move to the previous link.",
     },
     {
-      'TraceSearch',
+      "TraceSearch",
       function()
         self:trace_search()
       end,
-      '<LocalLeader>/',
-      'Search through trace messages in the diagnostic under the cursor.',
+      "<LocalLeader>/",
+      "Search through trace messages in the diagnostic under the cursor.",
     },
     {
-      'NextTraceDiagnostic',
+      "NextTraceDiagnostic",
       function()
-        self:__goto('next', is_trace_diagnostic)
+        self:__goto("next", is_trace_diagnostic)
       end,
-      ']t',
-      'Move to the next trace diagnostic.',
+      "]t",
+      "Move to the next trace diagnostic.",
     },
     {
-      'PrevTraceDiagnostic',
+      "PrevTraceDiagnostic",
       function()
-        self:__goto('prev', is_trace_diagnostic)
+        self:__goto("prev", is_trace_diagnostic)
       end,
-      '[t',
-      'Move to the previous trace diagnostic.',
+      "[t",
+      "Move to the previous trace diagnostic.",
     },
     {
-      'ViewOptions',
+      "ViewOptions",
       function()
         self:select_view_options()
       end,
-      '<LocalLeader>v',
-      'Change the infoview view options.',
+      "<LocalLeader>v",
+      "Change the infoview view options.",
     },
   }
 
   for _, m in ipairs(mappings) do
-    local plug = '<Plug>(LeanInfoview' .. m[1] .. ')'
-    buffer.keymaps:set('n', plug, m[2], { desc = m[4] })
-    buffer.keymaps:set('n', m[3], plug, { remap = true, desc = m[4] })
+    local plug = "<Plug>(LeanInfoview" .. m[1] .. ")"
+    buffer.keymaps:set("n", plug, m[2], { desc = m[4] })
+    buffer.keymaps:set("n", m[3], plug, { remap = true, desc = m[4] })
   end
 
   -- Show/hide current pin extmark when entering/leaving this pin's window.
-  local pin_augroup = vim.api.nvim_create_augroup('LeanInfoviewShowPin', { clear = false })
-  buffer:create_autocmd('WinEnter', {
+  local pin_augroup = vim.api.nvim_create_augroup("LeanInfoviewShowPin", { clear = false })
+  buffer:create_autocmd("WinEnter", {
     group = pin_augroup,
     callback = function()
-      self:__maybe_show_pin_extmark 'current'
+      self:__maybe_show_pin_extmark("current")
     end,
   })
-  buffer:create_autocmd('WinLeave', {
+  buffer:create_autocmd("WinLeave", {
     group = pin_augroup,
     callback = function()
       self.pin:__hide_extmark()
@@ -387,15 +383,14 @@ end
 ---@return Infoview
 function Infoview:new(obj)
   obj = obj or {}
-  log:trace { message = 'creating new infoview', obj = obj }
-  local config = require 'lean.config'
+  log:trace({ message = "creating new infoview", obj = obj })
+  local config = require("lean.config")
   local view_options = vim.deepcopy(config().infoview.view_options)
   local new_infoview = setmetatable({
     pins = {},
     __win_event_disable = false,
     view_options = view_options,
-    __contents_for = view_options.use_widgets == false and contents_for_plain
-      or contents_for_interactive,
+    __contents_for = view_options.use_widgets == false and contents_for_plain or contents_for_interactive,
     __orientation_pref = obj.orientation or options.orientation,
     __width = res_dim(obj.width or options.width, vim.o.columns),
     __height = res_dim(obj.height or options.height, vim.o.lines),
@@ -403,10 +398,10 @@ function Infoview:new(obj)
     __separate_tab = obj.separate_tab or options.separate_tab,
   }, self)
 
-  new_infoview.pin = Pin:new {
-    id = '1',
+  new_infoview.pin = Pin:new({
+    id = "1",
     infoview = new_infoview,
-  }
+  })
 
   new_infoview:__show_pin_in_main_window(new_infoview.pin)
 
@@ -420,13 +415,13 @@ function Infoview:__show_pin_in_main_window(pin)
     self.__win_event_disable = true
     self.window.o.winfixbuf = false
     self.window:set_buffer(pin.buffer)
-    pin.buffer.o.filetype = 'leaninfo'
+    pin.buffer.o.filetype = "leaninfo"
     pin.window = self.window
     self.__win_event_disable = false
   end
 
-  pin.buffer:create_autocmd('BufHidden', {
-    group = vim.api.nvim_create_augroup('LeanInfoviewMainPin', { clear = false }),
+  pin.buffer:create_autocmd("BufHidden", {
+    group = vim.api.nvim_create_augroup("LeanInfoviewMainPin", { clear = false }),
     callback = function()
       if self.pin == pin then
         self:__was_closed()
@@ -436,17 +431,17 @@ function Infoview:__show_pin_in_main_window(pin)
 end
 
 function Infoview:__should_be_vertical()
-  if self.__separate_tab or self.__orientation_pref == 'horizontal' then
+  if self.__separate_tab or self.__orientation_pref == "horizontal" then
     return false
   else
     local ch_aspect_ratio = 2.5 -- characters are 2.5x taller than they are wide
-    return vim.o.columns > ch_aspect_ratio * vim.o.lines or self.__orientation_pref == 'vertical'
+    return vim.o.columns > ch_aspect_ratio * vim.o.lines or self.__orientation_pref == "vertical"
   end
 end
 
 ---Open this infoview if it isn't already open
 function Infoview:open()
-  log:trace { message = 'opening infoview', id = self.window and self.window.id or nil }
+  log:trace({ message = "opening infoview", id = self.window and self.window.id or nil })
   if self.window then
     return
   end
@@ -454,16 +449,16 @@ function Infoview:open()
   local window_before_split = Window:current()
 
   if self:__should_be_vertical() then
-    self.__orientation = 'vertical'
-    vim.cmd('botright ' .. self.__width .. 'vsplit')
+    self.__orientation = "vertical"
+    vim.cmd("botright " .. self.__width .. "vsplit")
   else
-    self.__orientation = 'horizontal'
+    self.__orientation = "horizontal"
     if self.__separate_tab then
       vim.cmd.tabnew()
-    elseif self.__horizontal_position == 'bottom' then
-      vim.cmd('botright ' .. self.__height .. 'split')
+    elseif self.__horizontal_position == "bottom" then
+      vim.cmd("botright " .. self.__height .. "split")
     else
-      vim.cmd('topleft ' .. self.__height .. 'split')
+      vim.cmd("topleft " .. self.__height .. "split")
 
       -- FIXME: If vim is first starting and we're creating a new topmost
       --        window neovim seems to want to put the cursor in it. This seems
@@ -471,7 +466,7 @@ function Infoview:open()
       --        below we call `:make_current` immediately.
       --        It seems pretty likely there's some Neovim bug here which needs
       --        minimizing.
-      if vim.fn.has 'vim_starting' == 1 then
+      if vim.fn.has("vim_starting") == 1 then
         vim.schedule(function()
           window_before_split:make_current()
         end)
@@ -484,14 +479,14 @@ function Infoview:open()
   -- Set the filetype now. Any earlier, and only buffer-local options will be
   -- properly set in the infoview, since the buffer isn't actually shown in a
   -- window until we show it.
-  self.pin.buffer.o.filetype = 'leaninfo'
+  self.pin.buffer.o.filetype = "leaninfo"
   self.pin.window = self.window
 
   window_before_split:make_current()
 
-  vim.api.nvim_create_autocmd('WinClosed', {
+  vim.api.nvim_create_autocmd("WinClosed", {
     pattern = tostring(self.window.id),
-    group = vim.api.nvim_create_augroup('LeanInfoviewClose', { clear = false }),
+    group = vim.api.nvim_create_augroup("LeanInfoviewClose", { clear = false }),
     once = true,
     callback = function()
       self:__was_closed()
@@ -514,7 +509,7 @@ end
 ---Move this infoview's window to the right of the tab, then size it properly.
 function Infoview:move_to_right()
   self.window:call(function()
-    vim.cmd.wincmd 'L'
+    vim.cmd.wincmd("L")
   end)
   self.window:set_width(options.width)
 end
@@ -522,7 +517,7 @@ end
 ---Move this infoview's window to the top of the tab, then size it properly.
 function Infoview:move_to_top()
   self.window:call(function()
-    vim.cmd.wincmd 'K'
+    vim.cmd.wincmd("K")
   end)
   self.window:set_height(res_dim(options.height, vim.o.lines))
 end
@@ -530,7 +525,7 @@ end
 ---Move this infoview's window to the bottom of the tab, then size it properly.
 function Infoview:move_to_bottom()
   self.window:call(function()
-    vim.cmd.wincmd 'J'
+    vim.cmd.wincmd("J")
   end)
   self.window:set_height(res_dim(options.height, vim.o.lines))
 end
@@ -546,7 +541,7 @@ function Infoview:reposition()
 
   -- Resize but don't move window layouts if there are more than 2 windows.
   if #vim.api.nvim_tabpage_list_wins(0) ~= 2 then
-    if orientation == 'col' then
+    if orientation == "col" then
       self.window:set_height(res_dim(options.height, vim.o.lines))
     else
       self.window:set_width(res_dim(options.width, vim.o.columns))
@@ -556,11 +551,11 @@ function Infoview:reposition()
   end
 
   if self:__should_be_vertical() then
-    if orientation == 'col' then
+    if orientation == "col" then
       self:move_to_right()
     end
-  elseif orientation == 'row' then
-    if self.__horizontal_position == 'bottom' then
+  elseif orientation == "row" then
+    if self.__horizontal_position == "bottom" then
       self:move_to_bottom()
     else
       self:move_to_top()
@@ -604,7 +599,7 @@ end
 ---@param n? integer the goal number to move to, defaulting to the first
 function Infoview:move_cursor_to_goal(n)
   if not self.window then
-    log:error { message = 'Moving cursor in closed infoview.' }
+    log:error({ message = "Moving cursor in closed infoview." })
     return
   end
 
@@ -615,7 +610,7 @@ function Infoview:move_cursor_to_goal(n)
 
   -- Navigate semantically via the element tree when goals are available
   -- (interactive widgets). This handles any goal prefix, not just '⊢ '.
-  for each_goal in root:filter(has_name 'interactive-goal') do
+  for each_goal in root:filter(has_name("interactive-goal")) do
     local goal = each_goal:find(is_goal)
     if goal then
       n = n - 1
@@ -631,10 +626,10 @@ function Infoview:move_cursor_to_goal(n)
   -- Fallback for plain (non-widget) goals, or when the element tree
   -- hasn't been fully populated yet (e.g. still loading).
   for i, line in ipairs(renderer.buffer:lines()) do
-    if line:find '^⊢ ' then
+    if line:find("^⊢ ") then
       n = n - 1
       if n == 0 then
-        self.window:set_cursor { i, #'⊢ ' }
+        self.window:set_cursor({ i, #"⊢ " })
         renderer:update_cursor(self.window)
         return
       end
@@ -653,7 +648,7 @@ end
 function Infoview:accept_suggestion(n)
   local path = self:__nth_path(is_suggestion, n)
   if path then
-    self.pin.__renderer:event('click', path)
+    self.pin.__renderer:event("click", path)
   end
 end
 
@@ -678,18 +673,18 @@ function Infoview:trace_search()
     return element.events and element.events.trace_search
   end)
   if not has_handler then
-    vim.notify('No trace diagnostic under cursor.', vim.log.levels.INFO)
+    vim.notify("No trace diagnostic under cursor.", vim.log.levels.INFO)
     return
   end
 
-  vim.ui.input({ prompt = 'Trace search: ', default = self.__last_trace_query }, function(query)
+  vim.ui.input({ prompt = "Trace search: ", default = self.__last_trace_query }, function(query)
     if query == nil then
       return
     end
-    self.__last_trace_query = query ~= '' and query or nil
-    renderer:event('trace_search', nil, query)
-    if query ~= '' then
-      vim.fn.setreg('/', query)
+    self.__last_trace_query = query ~= "" and query or nil
+    renderer:event("trace_search", nil, query)
+    if query ~= "" then
+      vim.fn.setreg("/", query)
     end
   end)
 end
@@ -721,14 +716,14 @@ function Infoview:__goto(direction, predicate)
     local current_idx = renderer.path[level].idx
 
     local children = parent:children():enumerate()
-    if direction == 'prev' then
+    if direction == "prev" then
       children = children:rev()
     end
 
     local target_path
     children
       :filter(function(idx, _)
-        if direction == 'next' then
+        if direction == "next" then
           return idx > current_idx
         else
           return idx < current_idx
@@ -737,7 +732,7 @@ function Infoview:__goto(direction, predicate)
       :find(function(idx, child)
         local base_path = vim.list_slice(renderer.path, 1, level - 1)
         table.insert(base_path, { idx = idx, name = child.name })
-        target_path = find_descendant_path(child, predicate, base_path, direction == 'prev')
+        target_path = find_descendant_path(child, predicate, base_path, direction == "prev")
         return target_path
       end)
 
@@ -764,43 +759,43 @@ function Infoview:select_view_options()
   ---@type FilterSelection[]
   local choices = {
     {
-      name = 'show instances',
-      description = 'Show hypotheses which are instances of Lean type classes?',
-      option = 'show_instances',
+      name = "show instances",
+      description = "Show hypotheses which are instances of Lean type classes?",
+      option = "show_instances",
     },
     {
-      name = 'show types',
-      description = 'Show hypotheses which are types (rather than terms)?',
-      option = 'show_types',
+      name = "show types",
+      description = "Show hypotheses which are types (rather than terms)?",
+      option = "show_types",
     },
     {
-      name = 'show inaccessible names',
-      description = 'Show inaccessible names (those containing ✝)?',
-      option = 'show_hidden_assumptions',
+      name = "show inaccessible names",
+      description = "Show inaccessible names (those containing ✝)?",
+      option = "show_hidden_assumptions",
     },
     {
-      name = 'show let bodies',
-      description = 'Show the bodies of let-values?',
-      option = 'show_let_values',
+      name = "show let bodies",
+      description = "Show the bodies of let-values?",
+      option = "show_let_values",
     },
     {
-      name = 'show term goals',
+      name = "show term goals",
       description = 'Show "expected type" goals?',
-      option = 'show_term_goals',
+      option = "show_term_goals",
     },
     {
-      name = 'reverse order',
-      description = 'Show hypotheses from bottom-to-top rather than top-to-bottom?',
-      option = 'reverse',
+      name = "reverse order",
+      description = "Show hypotheses from bottom-to-top rather than top-to-bottom?",
+      option = "reverse",
     },
     {
-      name = 'use widgets',
-      description = 'Use interactive widgets or plain text goals?',
-      option = 'use_widgets',
+      name = "use widgets",
+      description = "Use interactive widgets or plain text goals?",
+      option = "use_widgets",
     },
   }
 
-  require('lean.tui').select_many(choices, {
+  require("lean.tui").select_many(choices, {
     format_item = function(item)
       return item.name
     end,
@@ -810,7 +805,7 @@ function Infoview:select_view_options()
     start_selected = function(choice)
       return self.view_options[choice.option]
     end,
-    title = 'View Options',
+    title = "View Options",
     relative_window = self.window,
   }, function(selected, unselected)
     for each in vim.iter(selected) do
@@ -819,8 +814,7 @@ function Infoview:select_view_options()
     for each in vim.iter(unselected) do
       self.view_options[each.option] = false
     end
-    self.__contents_for = self.view_options.use_widgets and contents_for_interactive
-      or contents_for_plain
+    self.__contents_for = self.view_options.use_widgets and contents_for_interactive or contents_for_plain
   end)
 end
 
@@ -855,7 +849,7 @@ function Infoview:wait(timeout_ms)
   if succeeded then
     return
   end
-  error(('Pins %s are still processing.'):format(vim.inspect(pins)))
+  error(("Pins %s are still processing."):format(vim.inspect(pins)))
 end
 
 ---API for opening an auxilliary window relative to the current infoview window.
@@ -870,21 +864,21 @@ function Infoview:__open_win(buffer)
   local window_before_split = Window:current()
   self:enter()
 
-  if self.__orientation == 'vertical' then
-    vim.cmd('leftabove ' .. self.__width .. 'vsplit')
+  if self.__orientation == "vertical" then
+    vim.cmd("leftabove " .. self.__width .. "vsplit")
   elseif self.__separate_tab then
     vim.cmd.tabnew()
   else
-    vim.cmd('leftabove ' .. self.__height .. 'split')
+    vim.cmd("leftabove " .. self.__height .. "split")
   end
   local new_win = Window:current()
-  if self.__orientation == 'vertical' then
+  if self.__orientation == "vertical" then
     new_win:set_width(self.__width)
   elseif not self.__separate_tab then
     new_win:set_height(self.__height)
   end
   new_win:set_buffer(buffer)
-  buffer.o.filetype = 'leaninfo'
+  buffer.o.filetype = "leaninfo"
 
   window_before_split:make_current()
   self.__win_event_disable = false
@@ -899,28 +893,28 @@ function Infoview:__update_winhighlight()
   end
 
   if self.pin.paused then
-    self.window.o.winhighlight = 'NormalNC:leanInfoPaused'
+    self.window.o.winhighlight = "NormalNC:leanInfoPaused"
   else
     local params = self.pin.__position_params
     if params then
       local buffer = Buffer:from_uri(params.textDocument.uri)
       if buffer.b.lean_imports_out_of_date then
-        self.window.o.winhighlight = 'NormalNC:leanInfoImportsOutOfDate'
+        self.window.o.winhighlight = "NormalNC:leanInfoImportsOutOfDate"
       else
-        self.window.o.winhighlight = ''
+        self.window.o.winhighlight = ""
       end
     else
-      self.window.o.winhighlight = ''
+      self.window.o.winhighlight = ""
     end
   end
 end
 
 function Infoview:__resize_windows()
-  log:debug { message = 'resizing infoview windows', window = self.window.id }
+  log:debug({ message = "resizing infoview windows", window = self.window.id })
 
   local valid_windows = {}
 
-  for _, win in pairs { self.window, self.__diff_pin and self.__diff_pin.window } do
+  for _, win in pairs({ self.window, self.__diff_pin and self.__diff_pin.window }) do
     if win and win:is_valid() then
       table.insert(valid_windows, win)
     end
@@ -931,7 +925,7 @@ function Infoview:__resize_windows()
   end
 
   for _, win in pairs(valid_windows) do
-    if self.__orientation == 'vertical' then
+    if self.__orientation == "vertical" then
       win:set_width(self.__width)
     elseif not self.__separate_tab then
       win:set_height(self.__height)
@@ -959,7 +953,7 @@ function Infoview:pins_for(uri)
 end
 
 function Infoview:__update()
-  log:debug { message = 'updating infoview', window = self.window and self.window.id or nil }
+  log:debug({ message = "updating infoview", window = self.window and self.window.id or nil })
 
   if self.__win_event_disable then
     return
@@ -996,9 +990,9 @@ function Infoview:__refresh_diff()
     self.__diff_pin.window = self:__open_win(self.__diff_pin.buffer)
   end
 
-  for _, win in pairs { self.__diff_pin.window, self.window } do
+  for _, win in pairs({ self.__diff_pin.window, self.window }) do
     win:call(vim.cmd.diffthis)
-    win.o.foldmethod = 'manual'
+    win.o.foldmethod = "manual"
     win.o.wrap = true
   end
 
@@ -1059,7 +1053,7 @@ end
 ---@param end_line? number
 function Infoview:get_lines(start_line, end_line)
   if not self.window then
-    error 'infoview is not open'
+    error("infoview is not open")
   end
   return self.pin:get_lines(start_line, end_line)
 end
@@ -1069,7 +1063,7 @@ end
 ---@return string? line the infoview contents at the given line
 function Infoview:get_line(line)
   if not self.window then
-    error 'infoview is not open'
+    error("infoview is not open")
   end
   return self.pin:get_line(line)
 end
@@ -1079,7 +1073,7 @@ end
 ---@param end_line? number
 function Infoview:get_diff_lines(start_line, end_line)
   if not self.__diff_pin or not self.__diff_pin.window then
-    error 'diff window is not open'
+    error("diff window is not open")
   end
   return self.__diff_pin:get_lines(start_line, end_line)
 end
@@ -1096,7 +1090,7 @@ end
 ---Update the info contents.
 local function update_current_infoview()
   if
-    vim.bo.filetype ~= 'lean' or vim.api.nvim_win_get_config(0).relative ~= '' -- floating window
+    vim.bo.filetype ~= "lean" or vim.api.nvim_win_get_config(0).relative ~= "" -- floating window
   then
     return
   end
@@ -1110,10 +1104,10 @@ end
 ---Set the currently active Lean buffer to update the infoview.
 function Infoview:focus_on_current_buffer()
   if self.window then
-    vim.api.nvim_create_autocmd({ 'CursorMoved', 'CursorMovedI' }, {
+    vim.api.nvim_create_autocmd({ "CursorMoved", "CursorMovedI" }, {
       callback = update_current_infoview,
       buffer = 0,
-      group = vim.api.nvim_create_augroup('LeanInfoviewUpdate', {}),
+      group = vim.api.nvim_create_augroup("LeanInfoviewUpdate", {}),
     })
   end
 end
@@ -1123,10 +1117,10 @@ function Infoview:add_pin()
   local old_pin = self.pin
   table.insert(self.pins, old_pin)
   old_pin.window = self:__open_win(old_pin.buffer)
-  self.pin = Pin:new {
+  self.pin = Pin:new({
     id = tostring(#self.pins + 1),
     infoview = self,
-  }
+  })
   self:__show_pin_in_main_window(self.pin)
   old_pin:__show_extmark(old_pin.id)
   self:__maybe_show_pin_extmark(self.pin.id)
@@ -1139,15 +1133,15 @@ end
 ---@param pos {integer, integer} 0-indexed { row, col } byte position
 function Infoview:__set_diff_pin(buffer, pos)
   if not self.__diff_pin then
-    self.__diff_pin = Pin:new {
-      id = 'diff',
+    self.__diff_pin = Pin:new({
+      id = "diff",
       infoview = self,
-    }
-    self.__diff_pin:__show_extmark(nil, 'leanDiffPinned')
+    })
+    self.__diff_pin:__show_extmark(nil, "leanDiffPinned")
 
     -- Make sure we notice even if someone manually :q's the diff window.
-    self.__diff_pin.buffer:create_autocmd('BufHidden', {
-      group = vim.api.nvim_create_augroup('LeanInfoviewClose', { clear = false }),
+    self.__diff_pin.buffer:create_autocmd("BufHidden", {
+      group = vim.api.nvim_create_augroup("LeanInfoviewClose", { clear = false }),
       callback = function()
         if not self.__win_event_disable then
           vim.schedule(function()
@@ -1182,11 +1176,11 @@ end
 
 ---Show a pin extmark if it is appropriate based on configuration.
 function Infoview:__maybe_show_pin_extmark(...)
-  if not options.indicators or options.indicators == 'never' then
+  if not options.indicators or options.indicators == "never" then
     return
   end
   -- self.pins is apparently all *other* pins, so we check it's empty
-  if options.indicators == 'auto' and #self.pins == 0 then
+  if options.indicators == "auto" and #self.pins == 0 then
     return
   end
   self.pin:__show_extmark(...)
@@ -1245,27 +1239,27 @@ function Pin:new(obj)
   obj.paused = nil
 
   __next_buffer_id = __next_buffer_id + 1
-  local pin_buffer = Buffer.create {
-    name = 'lean://infoview/' .. __next_buffer_id,
+  local pin_buffer = Buffer.create({
+    name = "lean://infoview/" .. __next_buffer_id,
     listed = false,
     scratch = true,
-    options = { bufhidden = 'hide' },
-  }
+    options = { bufhidden = "hide" },
+  })
 
-  local pin_element = Element:new { name = 'pin' }
+  local pin_element = Element:new({ name = "pin" })
   pin_element.events = {
     goto_last_window = function()
       obj.infoview:jump_to_last_window()
     end,
   }
 
-  local pin_renderer = pin_element:renderer {
+  local pin_renderer = pin_element:renderer({
     buffer = pin_buffer,
     keymaps = options.mappings,
-  }
+  })
 
   local new_pin = setmetatable(
-    vim.tbl_extend('keep', obj, {
+    vim.tbl_extend("keep", obj, {
       paused = paused,
       __data_element = Element.EMPTY,
       __element = pin_element,
@@ -1333,14 +1327,14 @@ function Pin:__open_debug()
 
   if not self.__debug then
     __next_buffer_id = __next_buffer_id + 1
-    local buffer = Buffer.create {
-      name = 'lean://debug/' .. __next_buffer_id,
+    local buffer = Buffer.create({
+      name = "lean://debug/" .. __next_buffer_id,
       listed = false,
       scratch = true,
-      options = { bufhidden = 'hide' },
-    }
-    local element = Element:new { name = 'debug-timing' }
-    self.__debug = element:renderer { buffer = buffer, keymaps = options.mappings }
+      options = { bufhidden = "hide" },
+    })
+    local element = Element:new({ name = "debug-timing" })
+    self.__debug = element:renderer({ buffer = buffer, keymaps = options.mappings })
     self.__debug_expanded = {}
     self.__debug_active_tab = self.__debug_active_tab or 1
   end
@@ -1352,17 +1346,17 @@ function Pin:__open_debug()
     iv.__win_event_disable = true
     local window_before_split = Window:current()
     self.window:make_current()
-    vim.cmd 'belowright split'
+    vim.cmd("belowright split")
     local new_win = Window:current()
     new_win:set_buffer(self.__debug.buffer)
-    self.__debug.buffer.o.filetype = 'leaninfo'
+    self.__debug.buffer.o.filetype = "leaninfo"
     window_before_split:make_current()
     iv.__win_event_disable = false
 
     local pin = self
-    vim.api.nvim_create_autocmd('WinClosed', {
+    vim.api.nvim_create_autocmd("WinClosed", {
       pattern = tostring(new_win.id),
-      group = vim.api.nvim_create_augroup('LeanDebugClose', { clear = false }),
+      group = vim.api.nvim_create_augroup("LeanDebugClose", { clear = false }),
       once = true,
       callback = function()
         if pin.__debug_autocmd then
@@ -1385,8 +1379,8 @@ function Pin:__open_debug()
           Buffer:from_uri(params.textDocument.uri),
           { params.position.line, params.position.character }
         )
-      or '(unknown)'
-    return self.__instrumentation:debug_element {
+      or "(unknown)"
+    return self.__instrumentation:debug_element({
       expanded = self.__debug_expanded,
       active_tab = self.__debug_active_tab,
       on_tab_change = function(i)
@@ -1394,11 +1388,11 @@ function Pin:__open_debug()
       end,
       position = position,
       text_columns = self.window and self.window:text_width(),
-    }
+    })
   end
 
   -- Render current state.
-  self.__debug.element:set_children { build_debug_element() }
+  self.__debug.element:set_children({ build_debug_element() })
   self.__debug:render()
 
   -- Re-render either on refresh or on a periodic tick so the time-based
@@ -1412,17 +1406,17 @@ function Pin:__open_debug()
     -- Skip while the user has any kind of selection (visual or select mode)
     -- so we don't yank the selection out from under them as we rewrite the
     -- buffer.
-    if vim.fn.mode():match '^[vV\22sS\19]' then
+    if vim.fn.mode():match("^[vV\22sS\19]") then
       return
     end
-    self.__debug.element:set_children { build_debug_element() }
+    self.__debug.element:set_children({ build_debug_element() })
     self.__debug:render()
   end
 
   -- Listen for future refreshes (idempotent).
   if not self.__debug_autocmd then
-    self.__debug_autocmd = vim.api.nvim_create_autocmd('User', {
-      pattern = 'LeanPinRefreshed',
+    self.__debug_autocmd = vim.api.nvim_create_autocmd("User", {
+      pattern = "LeanPinRefreshed",
       callback = rerender,
     })
   end
@@ -1506,7 +1500,7 @@ function Pin:__update_extmark_style(buffer, line, col)
   if not buf_line then
     end_col = 0
   elseif col < #buf_line then
-    end_col = vim.str_byteindex(buf_line, 'utf-16', byte_col_to_utf16(buf_line, col + 1))
+    end_col = vim.str_byteindex(buf_line, "utf-16", byte_col_to_utf16(buf_line, col + 1))
   end
 
   self.__extmark = buffer:set_extmark(self.__extmark_ns, line, col, {
@@ -1514,7 +1508,7 @@ function Pin:__update_extmark_style(buffer, line, col)
     end_col = end_col,
     hl_group = self.__extmark_hl_group,
     virt_text = self.__extmark_virt_text,
-    virt_text_pos = 'right_align',
+    virt_text_pos = "right_align",
   })
   self.__extmark_buffer = buffer
 end
@@ -1540,11 +1534,7 @@ function Pin:update_position()
   ---@type lsp.TextDocumentPositionParams
   self.__position_params = { textDocument = { uri = uri }, position = new_pos }
 
-  pcall(
-    vim.api.nvim_buf_set_name,
-    self.buffer.bufnr,
-    'lean://infoview/' .. position_to_string(buffer, extmark_pos)
-  )
+  pcall(vim.api.nvim_buf_set_name, self.buffer.bufnr, "lean://infoview/" .. position_to_string(buffer, extmark_pos))
 end
 
 ---Return the current pin position read directly from the extmark.
@@ -1567,9 +1557,9 @@ function Pin:__extmark_pos()
 end
 
 function Pin:__show_extmark(name, hlgroup)
-  self.__extmark_hl_group = hlgroup or 'leanPinned'
+  self.__extmark_hl_group = hlgroup or "leanPinned"
   if name then
-    self.__extmark_virt_text = { { '← ' .. name, 'Comment' } }
+    self.__extmark_virt_text = { { "← " .. name, "Comment" } }
   else
     self.__extmark_virt_text = nil
   end
@@ -1629,7 +1619,7 @@ end
 local function wrap_content_blocks(blocks, params)
   if vim.tbl_isempty(blocks) then
     local bufnr = vim.uri_to_bufnr(params.textDocument.uri)
-    if vim.tbl_isempty(vim.lsp.get_clients { bufnr = bufnr, name = 'leanls' }) then
+    if vim.tbl_isempty(vim.lsp.get_clients({ bufnr = bufnr, name = "leanls" })) then
       return components.LSP_HAS_DIED
     elseif options.show_no_info_message then
       return components.NO_INFO
@@ -1639,7 +1629,7 @@ local function wrap_content_blocks(blocks, params)
   end
 
   local new_data_element
-  new_data_element = Element:concat(blocks, '\n\n', {
+  new_data_element = Element:concat(blocks, "\n\n", {
     ---@type EventCallbacks
     events = {
       clear_all = function(ctx) ---@param ctx ElementEventContext
@@ -1672,14 +1662,14 @@ local function contents_for_processing(params)
         interactive_goal.diagnostics(start),
       })
       :flatten(1)
-    return Element:concat(blocks:totable(), '\n\n') or Element.EMPTY
+    return Element:concat(blocks:totable(), "\n\n") or Element.EMPTY
   end
 
   if processing == progress.Kind.fatal_error then
-    log:debug {
-      message = 'progress.Kind.fatal_error diagnostics',
+    log:debug({
+      message = "progress.Kind.fatal_error diagnostics",
       params = params,
-    }
+    })
     return wrap_content_blocks(interactive_goal.diagnostics(params), params)
   end
 end
@@ -1700,11 +1690,11 @@ function contents_for_interactive(params, view_options, sw)
     return element
   end
 
-  local sess = sw:time('rpc_open', rpc.open, params)
+  local sess = sw:time("rpc_open", rpc.open, params)
 
   local phases = {
     {
-      'goals',
+      "goals",
       function()
         return components.goal_at(sess, view_options)
       end,
@@ -1712,26 +1702,26 @@ function contents_for_interactive(params, view_options, sw)
   }
   if view_options.show_term_goals then
     phases[#phases + 1] = {
-      'term_goals',
+      "term_goals",
       function()
         return components.term_goal_at(sess, view_options)
       end,
     }
   end
   phases[#phases + 1] = {
-    'user_widgets',
+    "user_widgets",
     function()
       return components.user_widgets_at(sess)
     end,
   }
   phases[#phases + 1] = {
-    'diagnostics',
+    "diagnostics",
     function()
       return components.diagnostics_at(sess)
     end,
   }
 
-  local results = sw:concurrent('rpcs', phases)
+  local results = sw:concurrent("rpcs", phases)
 
   local blocks = {}
   for _, result in ipairs(results) do
@@ -1753,12 +1743,11 @@ function contents_for_plain(params, view_options, sw)
     return element
   end
 
-  local plain = require 'lean.infoview.plain'
+  local plain = require("lean.infoview.plain")
 
-  local goals = sw:time('goals', components.plain_goal_at, params) or {}
-  local term_goals = view_options.show_term_goals and sw:time('term_goals', plain.term_goal, params)
-    or {}
-  local diags = sw:time('diagnostics', interactive_goal.diagnostics, params) or {}
+  local goals = sw:time("goals", components.plain_goal_at, params) or {}
+  local term_goals = view_options.show_term_goals and sw:time("term_goals", plain.term_goal, params) or {}
+  local diags = sw:time("diagnostics", interactive_goal.diagnostics, params) or {}
 
   local blocks = vim.iter({ goals, term_goals, diags }):flatten(1):totable()
 
@@ -1767,7 +1756,7 @@ end
 
 function Pin:update()
   async.run(function()
-    log:trace { message = 'updating pin', id = self.id, paused = self.paused, loading = self.loading }
+    log:trace({ message = "updating pin", id = self.id, paused = self.paused, loading = self.loading })
     local iv = self.__infoview
     if not iv.window then
       return
@@ -1785,7 +1774,7 @@ function Pin:update()
     local sw = self.__instrumentation:stopwatch()
     local uri = params.textDocument.uri
 
-    sw:open 'setup'
+    sw:open("setup")
     iv:__update_winhighlight()
 
     if not self.loading then
@@ -1797,19 +1786,19 @@ function Pin:update()
     local tick = self.__tick
     sw:close()
 
-    local new_data_element = sw:time('content', iv.render_contents, iv, params, sw)
+    local new_data_element = sw:time("content", iv.render_contents, iv, params, sw)
 
     if new_data_element == components.LSP_HAS_DIED then
-      iv.window.o.winhighlight = 'NormalNC:leanInfoLSPDead'
+      iv.window.o.winhighlight = "NormalNC:leanInfoLSPDead"
     end
 
     if self.__tick ~= tick or not self.__infoview then
       self.__instrumentation:record(sw:finish(), uri, true)
-      vim.api.nvim_exec_autocmds('User', { pattern = 'LeanPinRefreshed' })
+      vim.api.nvim_exec_autocmds("User", { pattern = "LeanPinRefreshed" })
       return
     end
 
-    sw:open 'commit'
+    sw:open("commit")
     self.loading = false
     -- Carry over user-toggled foldable state so a refresh doesn't snap
     -- expanded traces (etc.) back to their server-default collapsed state.
@@ -1817,15 +1806,15 @@ function Pin:update()
     -- so an overlapping update that already committed is honored.
     Element.transfer_state(self.__data_element, new_data_element)
     self.__data_element = new_data_element
-    self.__element:set_children { self.__data_element }
+    self.__element:set_children({ self.__data_element })
     iv.__last_trace_query = nil
     sw:close()
 
-    sw:time('render', self.render, self)
+    sw:time("render", self.render, self)
 
     self.__instrumentation:record(sw:finish(), uri, false)
 
-    vim.api.nvim_exec_autocmds('User', { pattern = 'LeanPinRefreshed' })
+    vim.api.nvim_exec_autocmds("User", { pattern = "LeanPinRefreshed" })
 
     if iv.window and not iv.window:is_current() and self == iv.pin then
       iv:move_cursor_to_goal()
@@ -1872,7 +1861,7 @@ end
 
 ---@private
 function infoview.__update_pin_positions(_, bufnr, tick, _, _, _, _, _, _)
-  log:debug { message = 'updating pin positions', bufnr = bufnr, tick = tick }
+  log:debug({ message = "updating pin positions", bufnr = bufnr, tick = tick })
   local uri = vim.uri_from_bufnr(bufnr)
   for _, each in pairs(infoview._by_tabpage) do
     for _, pin in pairs(each:pins_for(uri)) do
@@ -1907,15 +1896,15 @@ local function infoview_bufenter()
   -- Open an infoview for the current buffer if it isn't already open.
   local tabpage = vim.api.nvim_get_current_tabpage()
   if not infoview._by_tabpage[tabpage] and should_autoopen() then
-    log:debug { message = 'opening infoview', tabpage = tabpage }
-    local new_infoview = Infoview:new {}
+    log:debug({ message = "opening infoview", tabpage = tabpage })
+    local new_infoview = Infoview:new({})
     infoview._by_tabpage[tabpage] = new_infoview
     new_infoview:open()
   end
 
   local buffer = Buffer:current()
   if not attached_buffers[buffer.bufnr] then
-    buffer:attach { on_lines = infoview.__update_pin_positions }
+    buffer:attach({ on_lines = infoview.__update_pin_positions })
     attached_buffers[buffer.bufnr] = true
   end
   update_current_infoview()
@@ -1931,9 +1920,9 @@ function infoview.init(bufnr)
   if user and user.infoview and user.infoview.mappings ~= nil then
     vim.deprecate(
       "lean.nvim's `infoview.mappings` configuration option",
-      'buffer-local `<Plug>(LeanInfoview*)` mappings',
-      'v2026.9.1',
-      'lean.nvim'
+      "buffer-local `<Plug>(LeanInfoview*)` mappings",
+      "v2026.9.1",
+      "lean.nvim"
     )
   end
 
@@ -1947,9 +1936,9 @@ function infoview.init(bufnr)
   end
 
   -- in case we are re-entering a buffer, clear old autocmds first
-  vim.api.nvim_clear_autocmds { group = FOCUS_AUGROUP, buffer = bufnr }
+  vim.api.nvim_clear_autocmds({ group = FOCUS_AUGROUP, buffer = bufnr })
 
-  vim.api.nvim_create_autocmd('BufEnter', {
+  vim.api.nvim_create_autocmd("BufEnter", {
     callback = infoview_bufenter,
     buffer = bufnr,
     group = FOCUS_AUGROUP,
@@ -1958,7 +1947,7 @@ function infoview.init(bufnr)
   -- WinEnter is necessary for the edge case where you have
   -- a file open in a tab with an infoview and move to a
   -- new window in a new tab with that same file but no infoview
-  vim.api.nvim_create_autocmd({ 'BufEnter', 'WinEnter' }, {
+  vim.api.nvim_create_autocmd({ "BufEnter", "WinEnter" }, {
     callback = function()
       local current_infoview = infoview.get_current_infoview()
       if not current_infoview then
@@ -1997,7 +1986,7 @@ function infoview.open()
   local tabpage = vim.api.nvim_get_current_tabpage()
   local current_infoview = infoview.get_current_infoview()
   if not current_infoview then
-    current_infoview = Infoview:new {}
+    current_infoview = Infoview:new({})
     infoview._by_tabpage[tabpage] = current_infoview
   end
   current_infoview:open()
@@ -2030,7 +2019,7 @@ end
 ---window so the infoview can later jump back.
 ---@return Infoview?
 local function open_for_current_lean_buffer()
-  if vim.bo.filetype ~= 'lean' then
+  if vim.bo.filetype ~= "lean" then
     return
   end
   local iv = infoview.open()
@@ -2067,7 +2056,7 @@ end
 
 ---Toggle whether "auto-diff" mode is active for the current infoview.
 function infoview.toggle_auto_diff_pin(clear)
-  if vim.bo.filetype ~= 'lean' then
+  if vim.bo.filetype ~= "lean" then
     return
   end
   local current_infoview = infoview.open()
@@ -2153,21 +2142,21 @@ local function goto_step(direction, predicate)
 end
 
 ---Move the infoview cursor to the next goal.
-infoview.next_goal = goto_step('next', is_goal)
+infoview.next_goal = goto_step("next", is_goal)
 ---Move the infoview cursor to the previous goal.
-infoview.prev_goal = goto_step('prev', is_goal)
+infoview.prev_goal = goto_step("prev", is_goal)
 ---Move the infoview cursor to the next hypothesis.
-infoview.next_hypothesis = goto_step('next', is_hypothesis)
+infoview.next_hypothesis = goto_step("next", is_hypothesis)
 ---Move the infoview cursor to the previous hypothesis.
-infoview.prev_hypothesis = goto_step('prev', is_hypothesis)
+infoview.prev_hypothesis = goto_step("prev", is_hypothesis)
 ---Move the infoview cursor to the next suggestion.
-infoview.next_suggestion = goto_step('next', is_suggestion)
+infoview.next_suggestion = goto_step("next", is_suggestion)
 ---Move the infoview cursor to the previous suggestion.
-infoview.prev_suggestion = goto_step('prev', is_suggestion)
+infoview.prev_suggestion = goto_step("prev", is_suggestion)
 ---Move the infoview cursor to the next link.
-infoview.next_link = goto_step('next', is_link)
+infoview.next_link = goto_step("next", is_link)
 ---Move the infoview cursor to the previous link.
-infoview.prev_link = goto_step('prev', is_link)
+infoview.prev_link = goto_step("prev", is_link)
 
 ---@class infoview.ContentsAtOpts
 ---@field buf? integer buffer handle, defaulting to the current buffer
@@ -2184,9 +2173,9 @@ infoview.prev_link = goto_step('prev', is_link)
 ---@param opts? infoview.ContentsAtOpts
 ---@return Element? element the result, only when called synchronously
 function infoview.contents_at(position, opts)
-  vim.validate('position', position, 'table')
+  vim.validate("position", position, "table")
   opts = opts or {}
-  vim.validate('opts', opts, 'table')
+  vim.validate("opts", opts, "table")
 
   local buf = Buffer:from_bufnr(opts.buf or 0)
   local callback = opts.callback
@@ -2205,7 +2194,7 @@ function infoview.contents_at(position, opts)
 
   local iv = infoview.get_current_infoview()
   if not iv then
-    error 'infoview.contents_at: no infoview is open'
+    error("infoview.contents_at: no infoview is open")
   end
 
   ---Wait for processing to finish at the given position, then fetch contents.
@@ -2213,7 +2202,7 @@ function infoview.contents_at(position, opts)
     while progress.at(position_params) do
       local event = async.event()
       local autocmd
-      autocmd = vim.api.nvim_create_autocmd('User', {
+      autocmd = vim.api.nvim_create_autocmd("User", {
         pattern = progress.AUTOCMD,
         once = true,
         callback = function()
@@ -2250,7 +2239,7 @@ function infoview.contents_at(position, opts)
     return result ~= nil
   end)
   if not succeeded then
-    error(('infoview.contents_at: timed out after %dms waiting for contents'):format(timeout))
+    error(("infoview.contents_at: timed out after %dms waiting for contents"):format(timeout))
   end
   return result
 end

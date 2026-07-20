@@ -1,7 +1,7 @@
-local async = require 'std.async'
+local async = require("std.async")
 
-local Element = require('lean.tui').Element
-local Html = require 'proofwidgets.html'
+local Element = require("lean.tui").Element
+local Html = require("proofwidgets.html")
 
 --- Implements ProofWidgets.RefreshComponent
 ---
@@ -22,12 +22,12 @@ local Html = require 'proofwidgets.html'
 return function(ctx, props)
   local cancelled = false
 
-  local element = Element:new {
+  local element = Element:new({
     __async_init = function(rerender)
       -- Start the monitor call (fire-and-forget). It loops forever server-side
       -- and cancels the background computation when the RPC session closes.
       async.run(function()
-        ctx:rpc_call('ProofWidgets.RefreshComponent.monitor', props)
+        ctx:rpc_call("ProofWidgets.RefreshComponent.monitor", props)
       end)
 
       -- Poll for new HTML frames. Bail as soon as a newer element has
@@ -36,10 +36,8 @@ return function(ctx, props)
       async.run(function()
         local idx = 0
         while not cancelled do
-          local response, err = ctx:rpc_call(
-            'ProofWidgets.RefreshComponent.awaitRefresh',
-            { state = props.state, oldIdx = idx }
-          )
+          local response, err =
+            ctx:rpc_call("ProofWidgets.RefreshComponent.awaitRefresh", { state = props.state, oldIdx = idx })
           if err or not response or cancelled then
             break
           end
@@ -48,7 +46,7 @@ return function(ctx, props)
         end
       end)
     end,
-  }
+  })
 
   element.__state = {
     snapshot = function()

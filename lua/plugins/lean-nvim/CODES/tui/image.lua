@@ -1,5 +1,5 @@
 ---Image decoding, caching, and overlay creation for terminal graphics display.
-local ffi = require 'ffi'
+local ffi = require("ffi")
 
 local image = {}
 
@@ -17,7 +17,7 @@ local function png_dimensions(data)
     return nil
   end
   -- PNG signature: 0x89 P N G
-  if data:sub(1, 4) ~= '\137PNG' then
+  if data:sub(1, 4) ~= "\137PNG" then
     return nil
   end
   -- IHDR chunk: bytes 17-24 contain width and height as 4-byte big-endian.
@@ -57,13 +57,13 @@ end
 ---@return { data: string, width: integer?, height: integer?, format: integer }? decoded
 ---@return string? reason on failure
 function image.decode(src)
-  if src:match '^https?://' then
-    return nil, '[img: remote URLs not supported]'
+  if src:match("^https?://") then
+    return nil, "[img: remote URLs not supported]"
   end
 
-  local _, payload = src:match '^data:([^;]+);base64,(.+)$'
+  local _, payload = src:match("^data:([^;]+);base64,(.+)$")
   if not payload then
-    return nil, '[img: unsupported src format]'
+    return nil, "[img: unsupported src format]"
   end
 
   local cached = cache[src]
@@ -73,7 +73,7 @@ function image.decode(src)
 
   local ok, raw = pcall(vim.base64.decode, payload)
   if not ok then
-    return nil, '[img: invalid base64 payload]'
+    return nil, "[img: invalid base64 payload]"
   end
   local w, h = png_dimensions(raw)
   local overlay = { data = raw, width = w, height = h, format = 100 }
@@ -96,8 +96,7 @@ function image.from_pixels(key, pixels, width, height)
   if cached then
     return cached
   end
-  local overlay =
-    { data = ffi.string(pixels, width * height * 4), width = width, height = height, format = 32 }
+  local overlay = { data = ffi.string(pixels, width * height * 4), width = width, height = height, format = 32 }
   cache_put(key, overlay)
   return overlay
 end

@@ -5,12 +5,12 @@
 --- Returns nil when kitty graphics are unavailable.
 ---@brief ]]
 
-local ffi = require 'ffi'
+local ffi = require("ffi")
 
-local image = require 'tui.image'
-local kitty = require 'kitty'
+local image = require("tui.image")
+local kitty = require("kitty")
 
-local Element = require('lean.tui').Element
+local Element = require("lean.tui").Element
 
 local plot = {}
 
@@ -238,7 +238,7 @@ function plot.scatter(data, opts)
   local plot_bottom = h - PADDING.bottom - 1
 
   -- Allocate RGBA buffer (initialized to 0 = transparent black).
-  local buf = ffi.new('char[?]', w * h * 4)
+  local buf = ffi.new("char[?]", w * h * 4)
 
   -- Draw axes.
   hline(buf, w, h, plot_left, plot_right, plot_bottom, COLOR_AXIS)
@@ -279,17 +279,7 @@ function plot.scatter(data, opts)
 
   -- Connect points with lines.
   for i = 1, #points - 1 do
-    draw_line(
-      buf,
-      w,
-      h,
-      points[i][1],
-      points[i][2],
-      points[i + 1][1],
-      points[i + 1][2],
-      COLOR_LINE,
-      LINE_THICKNESS
-    )
+    draw_line(buf, w, h, points[i][1], points[i][2], points[i + 1][1], points[i + 1][2], COLOR_LINE, LINE_THICKNESS)
   end
 
   -- Draw data points on top, but only when sparse enough that
@@ -304,13 +294,13 @@ function plot.scatter(data, opts)
   -- Unique key per render — the data changes every refresh so caching
   -- across renders would return stale images.
   plot_id = plot_id + 1
-  local overlay = image.from_pixels(('plot:%d'):format(plot_id), buf, w, h)
+  local overlay = image.from_pixels(("plot:%d"):format(plot_id), buf, w, h)
   local rows = kitty.rows_for_height(h)
 
-  local img_element = Element:new {
-    text = string.rep('\n', rows - 1),
+  local img_element = Element:new({
+    text = string.rep("\n", rows - 1),
     overlay = overlay,
-  }
+  })
 
   -- Build column-aligned label text below the image.
   if #label_columns == 0 then
@@ -327,7 +317,7 @@ function plot.scatter(data, opts)
     -- Center the label on the gridline column.
     local start = math.max(cursor, lbl.col - math.floor(#lbl.text / 2))
     if start > cursor then
-      table.insert(parts, string.rep(' ', start - cursor))
+      table.insert(parts, string.rep(" ", start - cursor))
     end
     table.insert(parts, lbl.text)
     cursor = start + #lbl.text
@@ -335,16 +325,16 @@ function plot.scatter(data, opts)
 
   return Element:concat({
     img_element,
-    Element:new { text = table.concat(parts), hlgroups = { 'Comment' } },
-  }, '\n')
+    Element:new({ text = table.concat(parts), hlgroups = { "Comment" } }),
+  }, "\n")
 end
 
 -- Standard HDR histogram percentile markers with their 1/(1-p) x-values.
 local PERCENTILE_MARKERS = {
-  { pct = 50, x = 2, label = '50%' },
-  { pct = 90, x = 10, label = '90%' },
-  { pct = 99, x = 100, label = '99%' },
-  { pct = 99.9, x = 1000, label = '99.9%' },
+  { pct = 50, x = 2, label = "50%" },
+  { pct = 90, x = 10, label = "90%" },
+  { pct = 99, x = 100, label = "99%" },
+  { pct = 99.9, x = 1000, label = "99.9%" },
 }
 
 ---Render an HDR-style percentile distribution plot.
@@ -419,7 +409,7 @@ function plot.percentile_distribution(histogram, opts)
   local plot_top = PADDING.top
   local plot_bottom = h - PADDING.bottom - 1
 
-  local buf = ffi.new('char[?]', w * h * 4)
+  local buf = ffi.new("char[?]", w * h * 4)
 
   -- Draw axes.
   hline(buf, w, h, plot_left, plot_right, plot_bottom, COLOR_AXIS)
@@ -452,27 +442,17 @@ function plot.percentile_distribution(histogram, opts)
   end
 
   for i = 1, #points - 1 do
-    draw_line(
-      buf,
-      w,
-      h,
-      points[i][1],
-      points[i][2],
-      points[i + 1][1],
-      points[i + 1][2],
-      COLOR_LINE,
-      LINE_THICKNESS
-    )
+    draw_line(buf, w, h, points[i][1], points[i][2], points[i + 1][1], points[i + 1][2], COLOR_LINE, LINE_THICKNESS)
   end
 
   plot_id = plot_id + 1
-  local overlay = image.from_pixels(('plot:%d'):format(plot_id), buf, w, h)
+  local overlay = image.from_pixels(("plot:%d"):format(plot_id), buf, w, h)
   local rows = kitty.rows_for_height(h)
 
-  local img_element = Element:new {
-    text = string.rep('\n', rows - 1),
+  local img_element = Element:new({
+    text = string.rep("\n", rows - 1),
     overlay = overlay,
-  }
+  })
 
   if #label_columns == 0 then
     return img_element
@@ -491,7 +471,7 @@ function plot.percentile_distribution(histogram, opts)
       break
     end
     if start > cursor then
-      table.insert(parts, string.rep(' ', start - cursor))
+      table.insert(parts, string.rep(" ", start - cursor))
     end
     table.insert(parts, lbl.text)
     cursor = start + #lbl.text
@@ -499,8 +479,8 @@ function plot.percentile_distribution(histogram, opts)
 
   return Element:concat({
     img_element,
-    Element:new { text = table.concat(parts), hlgroups = { 'Comment' } },
-  }, '\n')
+    Element:new({ text = table.concat(parts), hlgroups = { "Comment" } }),
+  }, "\n")
 end
 
 return plot

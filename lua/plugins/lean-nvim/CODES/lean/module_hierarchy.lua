@@ -8,22 +8,22 @@
 --- imports it.
 ---@brief ]]
 
-local Buffer = require 'std.nvim.buffer'
-local Tab = require 'std.nvim.tab'
-local Window = require 'std.nvim.window'
-local async = require 'std.async'
+local Buffer = require("std.nvim.buffer")
+local Tab = require("std.nvim.tab")
+local Window = require("std.nvim.window")
+local async = require("std.async")
 
-local Element = require('lean.tui').Element
-local lsp = require 'lean.lsp'
+local Element = require("lean.tui").Element
+local lsp = require("lean.lsp")
 
 ---Buffer-local key bindings for the hierarchy panel. Defined here (not via
 ---`infoview.mappings`) because that runtime variable is on the deprecation
 ---path -- see commit 892006e9, scheduled for removal in v2026.9.1.
 local PANEL_KEYMAPS = {
-  ['<Tab>'] = 'click',
-  ['<CR>'] = 'go_to_def',
-  ['gd'] = 'go_to_def',
-  ['<LocalLeader><Tab>'] = 'goto_last_window',
+  ["<Tab>"] = "click",
+  ["<CR>"] = "go_to_def",
+  ["gd"] = "go_to_def",
+  ["<LocalLeader><Tab>"] = "goto_last_window",
 }
 
 ---@class LeanModule
@@ -50,20 +50,20 @@ local module_hierarchy = {}
 function module_hierarchy.describe_import_kind(kind)
   local parts = {}
   if kind.isPrivate then
-    table.insert(parts, 'private')
+    table.insert(parts, "private")
   end
   if kind.isAll then
-    table.insert(parts, 'all')
+    table.insert(parts, "all")
   end
-  if kind.metaKind == 'meta' then
-    table.insert(parts, 'meta')
-  elseif kind.metaKind == 'full' then
-    table.insert(parts, 'meta + non-meta')
+  if kind.metaKind == "meta" then
+    table.insert(parts, "meta")
+  elseif kind.metaKind == "full" then
+    table.insert(parts, "meta + non-meta")
   end
   if #parts == 0 then
     return nil
   end
-  return '[' .. table.concat(parts, ', ') .. ']'
+  return "[" .. table.concat(parts, ", ") .. "]"
 end
 
 ---LSP `MethodNotFound` error code; emitted when the server doesn't recognize a
@@ -79,12 +79,12 @@ local METHOD_NOT_FOUND = -32601
 local function request(bufnr, method, params)
   local client = lsp.client_for(bufnr)
   if not client then
-    return nil, 'No Lean LSP client attached.'
+    return nil, "No Lean LSP client attached."
   end
   local err, result = lsp.request(client, method, params)
   if err then
     if err.code == METHOD_NOT_FOUND then
-      return nil, 'requires Lean 4.22 or newer.'
+      return nil, "requires Lean 4.22 or newer."
     end
     return nil, err.message or vim.inspect(err)
   end
@@ -97,7 +97,7 @@ end
 ---@return string? err
 function module_hierarchy.prepare(bufnr)
   bufnr = bufnr or 0
-  return request(bufnr, '$/lean/prepareModuleHierarchy', {
+  return request(bufnr, "$/lean/prepareModuleHierarchy", {
     textDocument = { uri = vim.uri_from_bufnr(bufnr) },
   })
 end
@@ -108,7 +108,7 @@ end
 ---@return LeanImport[]? imports
 ---@return string? err
 function module_hierarchy.imports(module, bufnr)
-  return request(bufnr or 0, '$/lean/moduleHierarchy/imports', { module = module })
+  return request(bufnr or 0, "$/lean/moduleHierarchy/imports", { module = module })
 end
 
 ---Get the modules that import a given module.
@@ -117,10 +117,10 @@ end
 ---@return LeanImport[]? imports
 ---@return string? err
 function module_hierarchy.imported_by(module, bufnr)
-  return request(bufnr or 0, '$/lean/moduleHierarchy/importedBy', { module = module })
+  return request(bufnr or 0, "$/lean/moduleHierarchy/importedBy", { module = module })
 end
 
-local INDENT = '  '
+local INDENT = "  "
 
 ---Build a foldable tree node for a module and its (lazily-fetched) children.
 ---@param mod LeanModule
@@ -131,25 +131,22 @@ local INDENT = '  '
 ---@param description? string annotation shown to the right (e.g. "[private]")
 ---@return Element
 local function tree_node(mod, fetch, bufnr, open_in, depth, description)
-  local title_children = { Element:new { text = mod.name } }
+  local title_children = { Element:new({ text = mod.name }) }
   if description then
-    table.insert(
-      title_children,
-      Element:new { text = ' ' .. description, hlgroups = { 'Comment' } }
-    )
+    table.insert(title_children, Element:new({ text = " " .. description, hlgroups = { "Comment" } }))
   end
-  local title = Element:new { children = title_children }
+  local title = Element:new({ children = title_children })
 
   local fetched = false
   local child_indent = INDENT:rep(depth + 1)
-  return Element:foldable {
+  return Element:foldable({
     title = title,
     body = {},
     open = false,
     gap = 1,
     -- The indent is part of the title row (not an outer wrapper) so clicks
     -- and gd fire from any column on the line, not just past the indent.
-    before_arrow = depth > 0 and Element:new { text = INDENT:rep(depth) } or nil,
+    before_arrow = depth > 0 and Element:new({ text = INDENT:rep(depth) }) or nil,
     events = {
       go_to_def = function()
         open_in(mod.uri)
@@ -162,13 +159,13 @@ local function tree_node(mod, fetch, bufnr, open_in, depth, description)
       fetched = true
       local imports, err = fetch(mod, bufnr)
       if err then
-        body:set_children {
-          Element:new { text = child_indent .. err, hlgroups = { 'ErrorMsg' } },
-        }
+        body:set_children({
+          Element:new({ text = child_indent .. err, hlgroups = { "ErrorMsg" } }),
+        })
       elseif #imports == 0 then
-        body:set_children {
-          Element:new { text = child_indent .. '(none)', hlgroups = { 'Comment' } },
-        }
+        body:set_children({
+          Element:new({ text = child_indent .. "(none)", hlgroups = { "Comment" } }),
+        })
       else
         local child_nodes = vim
           .iter(imports)
@@ -183,10 +180,10 @@ local function tree_node(mod, fetch, bufnr, open_in, depth, description)
             )
           end)
           :totable()
-        body:set_children { Element:concat(child_nodes, '\n') }
+        body:set_children({ Element:concat(child_nodes, "\n") })
       end
     end,
-  }
+  })
 end
 
 ---Open panels, keyed by tabpage id so each tab tracks its own. We only ever
@@ -199,7 +196,7 @@ local panels = {}
 local show
 
 ---Namespace for the loading-state orange bars.
-local LOADING_NS = vim.api.nvim_create_namespace 'lean.module_hierarchy.loading'
+local LOADING_NS = vim.api.nvim_create_namespace("lean.module_hierarchy.loading")
 
 ---Fill the panel buffer with a placeholder + sign-column orange bars matching
 ---the pattern Lean uses for in-progress regions (`leanProgressBar`). Cleared
@@ -208,11 +205,11 @@ local LOADING_NS = vim.api.nvim_create_namespace 'lean.module_hierarchy.loading'
 ---@param win Window
 ---@param kind 'imports'|'imported_by'
 local function show_loading(buf, win, kind)
-  local label = ('Loading %s...'):format(kind == 'imports' and 'imports' or 'importers')
+  local label = ("Loading %s..."):format(kind == "imports" and "imports" or "importers")
   local height = win:height()
   local lines = { label }
   for _ = 2, height do
-    table.insert(lines, '')
+    table.insert(lines, "")
   end
 
   buf.o.modifiable = true
@@ -220,11 +217,11 @@ local function show_loading(buf, win, kind)
   buf.o.modifiable = false
 
   -- Reuse the progress bar sign so loading looks like in-progress Lean files.
-  local options = require 'lean.config'().progress_bars
+  local options = require("lean.config")().progress_bars
   for line = 0, height - 1 do
     buf:set_extmark(LOADING_NS, line, 0, {
       sign_text = options.character,
-      sign_hl_group = 'leanProgressBar',
+      sign_hl_group = "leanProgressBar",
       priority = options.priority,
     })
   end
@@ -253,7 +250,7 @@ show = function(kind)
   local source_win = Window:current()
   local source_buf = source_win:buffer()
   if not lsp.client_for(source_buf.bufnr) then
-    vim.notify('Module hierarchy: No Lean LSP client attached.', vim.log.levels.WARN)
+    vim.notify("Module hierarchy: No Lean LSP client attached.", vim.log.levels.WARN)
     return
   end
 
@@ -267,17 +264,17 @@ show = function(kind)
   end
 
   local fetch, title_prefix
-  if kind == 'imports' then
-    fetch, title_prefix = module_hierarchy.imports, 'Imports of '
+  if kind == "imports" then
+    fetch, title_prefix = module_hierarchy.imports, "Imports of "
   else
-    fetch, title_prefix = module_hierarchy.imported_by, 'Importers of '
+    fetch, title_prefix = module_hierarchy.imported_by, "Importers of "
   end
 
   ---Open the given module file in the source window the panel was opened from.
   ---@param uri lsp.DocumentUri
   local function open_in(uri)
     if not source_win:is_valid() then
-      vim.notify('Module hierarchy: source window is gone, cannot jump.', vim.log.levels.WARN)
+      vim.notify("Module hierarchy: source window is gone, cannot jump.", vim.log.levels.WARN)
       return
     end
     source_win:make_current()
@@ -287,16 +284,16 @@ show = function(kind)
   -- Open the panel synchronously so the user sees immediate acknowledgment;
   -- populate it from the LSP response below. Loading bars sit in the sign
   -- column until the tree replaces them.
-  local buf = Buffer.create {
+  local buf = Buffer.create({
     scratch = true,
     listed = false,
-    options = { bufhidden = 'wipe', filetype = 'leaninfo' },
-  }
-  local win = source_win:split { buffer = buf, enter = true, direction = 'right' }
+    options = { bufhidden = "wipe", filetype = "leaninfo" },
+  })
+  local win = source_win:split({ buffer = buf, enter = true, direction = "right" })
   panels[tab_id] = { kind = kind, win = win }
   show_loading(buf, win, kind)
 
-  vim.api.nvim_create_autocmd('WinClosed', {
+  vim.api.nvim_create_autocmd("WinClosed", {
     pattern = tostring(win.id),
     once = true,
     callback = function()
@@ -306,9 +303,9 @@ show = function(kind)
     end,
   })
 
-  buf.keymaps:set('n', 'r', function()
+  buf.keymaps:set("n", "r", function()
     if not source_win:is_valid() then
-      vim.notify('Module hierarchy: source window is gone, cannot refresh.', vim.log.levels.WARN)
+      vim.notify("Module hierarchy: source window is gone, cannot refresh.", vim.log.levels.WARN)
       return
     end
     source_win:make_current()
@@ -316,12 +313,12 @@ show = function(kind)
       win:force_close()
     end)
     show(kind)
-  end, { desc = 'Refresh the module hierarchy.' })
+  end, { desc = "Refresh the module hierarchy." })
 
   async.run(function()
     local mod, err = module_hierarchy.prepare(source_buf.bufnr)
     if not mod then
-      vim.notify(('Module hierarchy: %s'):format(err or 'not available'), vim.log.levels.WARN)
+      vim.notify(("Module hierarchy: %s"):format(err or "not available"), vim.log.levels.WARN)
       pcall(function()
         win:force_close()
       end)
@@ -331,9 +328,9 @@ show = function(kind)
     local imports, fetch_err = fetch(mod, source_buf.bufnr)
     local children
     if fetch_err then
-      children = { Element:new { text = fetch_err, hlgroups = { 'ErrorMsg' } } }
+      children = { Element:new({ text = fetch_err, hlgroups = { "ErrorMsg" } }) }
     elseif #imports == 0 then
-      children = { Element:new { text = '(none)', hlgroups = { 'Comment' } } }
+      children = { Element:new({ text = "(none)", hlgroups = { "Comment" } }) }
     else
       children = vim
         .iter(imports)
@@ -350,24 +347,24 @@ show = function(kind)
         :totable()
     end
 
-    local tree = Element:concat(children, '\n')
-    local root = Element:new {
+    local tree = Element:concat(children, "\n")
+    local root = Element:new({
       children = {
-        Element:new {
+        Element:new({
           children = {
-            Element:new { text = title_prefix, hlgroups = { 'Comment' } },
+            Element:new({ text = title_prefix, hlgroups = { "Comment" } }),
             Element.title(mod.name),
           },
-        },
-        Element:new { text = '\n' },
-        Element:new {
-          text = '<Tab> toggle · <CR> open · r refresh',
-          hlgroups = { 'Comment' },
-        },
-        Element:new { text = '\n\n' },
+        }),
+        Element:new({ text = "\n" }),
+        Element:new({
+          text = "<Tab> toggle · <CR> open · r refresh",
+          hlgroups = { "Comment" },
+        }),
+        Element:new({ text = "\n\n" }),
         tree,
       },
-    }
+    })
 
     -- The user may have closed the panel while we were waiting on the LSP.
     if not buf:is_valid() or not win:is_valid() then
@@ -379,11 +376,11 @@ show = function(kind)
 
     -- Land the cursor on the first tree node so <Tab>/<CR> work immediately.
     local first = buf:call(function()
-      return vim.fn.search('[▶▼]', 'cnW')
+      return vim.fn.search("[▶▼]", "cnW")
     end)
     if first > 0 then
       pcall(function()
-        win:set_cursor { first, 0 }
+        win:set_cursor({ first, 0 })
       end)
     end
   end)
@@ -391,12 +388,12 @@ end
 
 ---Show the imports of the current module in a tree view.
 function module_hierarchy.show_imports()
-  show 'imports'
+  show("imports")
 end
 
 ---Show the modules that import the current module in a tree view.
 function module_hierarchy.show_imported_by()
-  show 'imported_by'
+  show("imported_by")
 end
 
 return module_hierarchy

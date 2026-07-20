@@ -1,16 +1,16 @@
-local Buffer = require 'std.nvim.buffer'
+local Buffer = require("std.nvim.buffer")
 
-local progress = require 'lean.progress'
+local progress = require("lean.progress")
 
 local progress_bars = {}
 
-local ns = vim.api.nvim_create_namespace 'lean.progress'
+local ns = vim.api.nvim_create_namespace("lean.progress")
 
 ---@param buffer Buffer
 local function _update(buffer)
   buffer:clear_namespace(ns)
 
-  local options = require 'lean.config'().progress_bars
+  local options = require("lean.config")().progress_bars
 
   -- The buffer may have been edited (shrunk) between the LSP fileProgress
   -- notification and this scheduled update, and LSP end positions are
@@ -19,12 +19,12 @@ local function _update(buffer)
 
   for _, proc_info in ipairs(progress.proc_infos[buffer:uri()]) do
     local start_line = proc_info.range.start.line
-    local end_line = math.min(proc_info.range['end'].line, last_line)
+    local end_line = math.min(proc_info.range["end"].line, last_line)
 
     for line = start_line, end_line do
       buffer:set_extmark(ns, line, 0, {
         sign_text = options.character,
-        sign_hl_group = 'leanProgressBar',
+        sign_hl_group = "leanProgressBar",
         priority = options.priority,
       })
     end
@@ -35,7 +35,7 @@ end
 local timers = {}
 
 function progress_bars.update(params)
-  if require 'lean.config'().progress_bars.enable == false then
+  if require("lean.config")().progress_bars.enable == false then
     return
   end
   local buffer = Buffer:from_uri(params.textDocument.uri)
@@ -78,15 +78,15 @@ end
 ---buffers.
 ---@param bufnr integer
 function progress_bars.init(bufnr)
-  if require 'lean.config'().progress_bars.enable == false then
+  if require("lean.config")().progress_bars.enable == false then
     return
   end
 
-  vim.api.nvim_set_hl(0, 'leanProgressBar', { default = true, fg = 'orange', ctermfg = 215 })
+  vim.api.nvim_set_hl(0, "leanProgressBar", { default = true, fg = "orange", ctermfg = 215 })
 
-  local group = vim.api.nvim_create_augroup('LeanProgressBars', { clear = false })
-  vim.api.nvim_clear_autocmds { group = group, buffer = bufnr }
-  vim.api.nvim_create_autocmd('LspDetach', {
+  local group = vim.api.nvim_create_augroup("LeanProgressBars", { clear = false })
+  vim.api.nvim_clear_autocmds({ group = group, buffer = bufnr })
+  vim.api.nvim_create_autocmd("LspDetach", {
     group = group,
     buffer = bufnr,
     callback = function()

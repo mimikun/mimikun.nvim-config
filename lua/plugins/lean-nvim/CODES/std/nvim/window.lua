@@ -1,4 +1,4 @@
-local Buffer = require 'std.nvim.buffer'
+local Buffer = require("std.nvim.buffer")
 
 ---A Neovim window.
 ---@class Window
@@ -6,7 +6,7 @@ local Buffer = require 'std.nvim.buffer'
 ---@field o table<string, any> Window-local options (alias for vim.wo[id])
 local Window = {}
 Window.__index = function(self, key)
-  if key == 'o' then
+  if key == "o" then
     return vim.wo[self.id]
   end
   return Window[key]
@@ -45,7 +45,7 @@ end
 ---Return the tab the window is on.
 ---@return Tab tab
 function Window:tab()
-  return require('std.nvim.tab'):from_id(vim.api.nvim_win_get_tabpage(self.id))
+  return require("std.nvim.tab"):from_id(vim.api.nvim_win_get_tabpage(self.id))
 end
 
 ---@class SplitOpts
@@ -57,8 +57,8 @@ end
 ---@param opts? SplitOpts
 ---@return Window
 function Window:split(opts)
-  opts = vim.tbl_extend('keep', opts or {}, { enter = false })
-  local direction = opts.direction or vim.o.splitright and 'right' or 'left'
+  opts = vim.tbl_extend("keep", opts or {}, { enter = false })
+  local direction = opts.direction or vim.o.splitright and "right" or "left"
 
   local config = { win = self.id, split = direction }
   local bufnr = opts.buffer and opts.buffer.bufnr or 0
@@ -77,7 +77,7 @@ end
 local function open_float(opts, anchor)
   opts = opts or {}
   local bufnr = opts.buffer and opts.buffer.bufnr or 0
-  local config = vim.tbl_extend('error', anchor, opts)
+  local config = vim.tbl_extend("error", anchor, opts)
   config.buffer, config.enter = nil, nil
   local id = vim.api.nvim_open_win(bufnr, opts.enter or false, config)
   return Window:from_id(id)
@@ -87,14 +87,14 @@ end
 ---@param opts? table
 ---@return Window
 function Window.editor_float(opts)
-  return open_float(opts or {}, { relative = 'editor' })
+  return open_float(opts or {}, { relative = "editor" })
 end
 
 ---Open a new floating window relative to this one.
 ---@param opts? table
 ---@return Window
 function Window:float(opts)
-  return open_float(opts or {}, { relative = 'win', win = self.id })
+  return open_float(opts or {}, { relative = "win", win = self.id })
 end
 
 ---Open a `Modal` anchored to this window.
@@ -104,8 +104,8 @@ end
 ---@param opts? ModalOpts
 ---@return Modal
 function Window:modal(opts)
-  opts = vim.tbl_extend('error', { relative_to = self }, opts or {})
-  return require('tui.modal').open(opts)
+  opts = vim.tbl_extend("error", { relative_to = self }, opts or {})
+  return require("tui.modal").open(opts)
 end
 
 ---Return the window's current cursor position.
@@ -206,7 +206,7 @@ function Window:move_cursor(pos)
   if vim.deep_equal(self:cursor(), start) then
     return
   end
-  vim.api.nvim_exec_autocmds('CursorMoved', { buffer = self:bufnr() })
+  vim.api.nvim_exec_autocmds("CursorMoved", { buffer = self:bufnr() })
 end
 
 ---Get the window's configuration.

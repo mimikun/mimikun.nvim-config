@@ -11,19 +11,16 @@
 
 ---@tag lean.nvim
 
-local Buffer = require 'std.nvim.buffer'
-local check_output = require('std.subprocess').check_output
+local Buffer = require("std.nvim.buffer")
+local check_output = require("std.subprocess").check_output
 
 --- The minimum Neovim version supported by lean.nvim.
-local MIN_SUPPORTED_NVIM = '0.11.5'
+local MIN_SUPPORTED_NVIM = "0.11.5"
 
 local nvim_version = vim.version()
 if vim.version.lt(nvim_version, MIN_SUPPORTED_NVIM) then
   vim.notify(
-    ('lean.nvim requires Neovim %s or later (you have %s).'):format(
-      MIN_SUPPORTED_NVIM,
-      nvim_version
-    ),
+    ("lean.nvim requires Neovim %s or later (you have %s)."):format(MIN_SUPPORTED_NVIM, nvim_version),
     vim.log.levels.WARN
   )
 end
@@ -32,175 +29,175 @@ local lean = {
   MIN_SUPPORTED_NVIM = MIN_SUPPORTED_NVIM,
   mappings = {
     {
-      '<LocalLeader>i',
-      'LeanInfoviewToggle',
-      { desc = 'Toggle showing the infoview.' },
+      "<LocalLeader>i",
+      "LeanInfoviewToggle",
+      { desc = "Toggle showing the infoview." },
     },
     {
-      '<LocalLeader>p',
-      'LeanInfoviewPinTogglePause',
-      { desc = 'Toggle pausing infoview pins.' },
+      "<LocalLeader>p",
+      "LeanInfoviewPinTogglePause",
+      { desc = "Toggle pausing infoview pins." },
     },
     {
-      '<LocalLeader>x',
-      'LeanInfoviewAddPin',
-      { desc = 'Add an infoview pin.' },
+      "<LocalLeader>x",
+      "LeanInfoviewAddPin",
+      { desc = "Add an infoview pin." },
     },
     {
-      '<LocalLeader>c',
-      'LeanInfoviewClearPins',
-      { desc = 'Clear all infoview pins.' },
+      "<LocalLeader>c",
+      "LeanInfoviewClearPins",
+      { desc = "Clear all infoview pins." },
     },
     {
-      '<LocalLeader>dx',
-      'LeanInfoviewSetDiffPin',
-      { desc = 'Set an infoview diff pin.' },
+      "<LocalLeader>dx",
+      "LeanInfoviewSetDiffPin",
+      { desc = "Set an infoview diff pin." },
     },
     {
-      '<LocalLeader>dc',
-      'LeanInfoviewClearDiffPin',
-      { desc = 'Clear all infoview diff pins.' },
+      "<LocalLeader>dc",
+      "LeanInfoviewClearDiffPin",
+      { desc = "Clear all infoview diff pins." },
     },
     {
-      '<LocalLeader>dd',
-      'LeanInfoviewToggleAutoDiffPin',
+      "<LocalLeader>dd",
+      "LeanInfoviewToggleAutoDiffPin",
       { desc = 'Toggle "auto-diff" mode in the infoview.' },
     },
     {
-      '<LocalLeader>dt',
-      'LeanInfoviewToggleNoClearAutoDiffPin',
+      "<LocalLeader>dt",
+      "LeanInfoviewToggleNoClearAutoDiffPin",
       { desc = 'Toggle "auto-diff" mode and clear any existing pins.' },
     },
     {
-      '<LocalLeader>w',
-      'LeanInfoviewEnableWidgets',
-      { desc = 'Enable infoview widgets.' },
+      "<LocalLeader>w",
+      "LeanInfoviewEnableWidgets",
+      { desc = "Enable infoview widgets." },
     },
     {
-      '<LocalLeader>W',
-      'LeanInfoviewDisableWidgets',
-      { desc = 'Disable infoview widgets.' },
+      "<LocalLeader>W",
+      "LeanInfoviewDisableWidgets",
+      { desc = "Disable infoview widgets." },
     },
     {
-      '<LocalLeader>v',
-      'LeanInfoviewViewOptions',
-      { desc = 'Change the infoview view options.' },
+      "<LocalLeader>v",
+      "LeanInfoviewViewOptions",
+      { desc = "Change the infoview view options." },
     },
     {
-      '<LocalLeader><Tab>',
-      'LeanGotoInfoview',
-      { desc = 'Jump to the current infoview.' },
+      "<LocalLeader><Tab>",
+      "LeanGotoInfoview",
+      { desc = "Jump to the current infoview." },
     },
     {
-      '<LocalLeader>s',
-      'LeanInfoviewAcceptSuggestion',
-      { desc = 'Accept the first infoview suggestion.' },
+      "<LocalLeader>s",
+      "LeanInfoviewAcceptSuggestion",
+      { desc = "Accept the first infoview suggestion." },
     },
     {
-      '<LocalLeader>\\',
-      'LeanAbbreviationsReverseLookup',
-      { desc = 'Show how to type the unicode character under the cursor.' },
+      "<LocalLeader>\\",
+      "LeanAbbreviationsReverseLookup",
+      { desc = "Show how to type the unicode character under the cursor." },
     },
     {
-      '<LocalLeader>r',
-      'LeanRestartFile',
-      { desc = 'Restart the Lean server for the current file.' },
+      "<LocalLeader>r",
+      "LeanRestartFile",
+      { desc = "Restart the Lean server for the current file." },
     },
     {
-      'K',
-      'LeanHover',
-      { desc = 'Show interactive hover information.' },
+      "K",
+      "LeanHover",
+      { desc = "Show interactive hover information." },
     },
   },
 }
 
 local commands = {
   LeanRestartFile = function()
-    require('lean.lsp').restart_file()
+    require("lean.lsp").restart_file()
   end,
   LeanRefreshFileDependencies = function()
-    require('lean.lsp').restart_file()
+    require("lean.lsp").restart_file()
   end,
 
   LeanGoal = function()
-    require('lean.commands').show_goal()
+    require("lean.commands").show_goal()
   end,
   LeanTermGoal = function()
-    require('lean.commands').show_term_goal()
+    require("lean.commands").show_term_goal()
   end,
   LeanLineDiagnostics = function()
-    require('lean.commands').show_line_diagnostics()
+    require("lean.commands").show_line_diagnostics()
   end,
 
   LeanHover = function()
-    if require 'lean.config'().lsp.enhanced_handlers.hover then
-      require 'lean.hover'()
+    if require("lean.config")().lsp.enhanced_handlers.hover then
+      require("lean.hover")()
     else
       vim.lsp.buf.hover()
     end
   end,
 
   LeanGotoInfoview = function()
-    require('lean.infoview').go_to()
+    require("lean.infoview").go_to()
   end,
   LeanInfoviewToggle = function()
-    require('lean.infoview').toggle()
+    require("lean.infoview").toggle()
   end,
 
   LeanInfoviewViewOptions = function()
-    require('lean.infoview').select_view_options()
+    require("lean.infoview").select_view_options()
   end,
 
   LeanInfoviewPinTogglePause = function()
-    require('lean.infoview').pin_toggle_pause()
+    require("lean.infoview").pin_toggle_pause()
   end,
   LeanInfoviewAddPin = function()
-    require('lean.infoview').add_pin()
+    require("lean.infoview").add_pin()
   end,
   LeanInfoviewClearPins = function()
-    require('lean.infoview').clear_pins()
+    require("lean.infoview").clear_pins()
   end,
 
   LeanInfoviewSetDiffPin = function()
-    require('lean.infoview').set_diff_pin()
+    require("lean.infoview").set_diff_pin()
   end,
   LeanInfoviewClearDiffPin = function()
-    require('lean.infoview').clear_diff_pin()
+    require("lean.infoview").clear_diff_pin()
   end,
   LeanInfoviewToggleAutoDiffPin = function()
-    require('lean.infoview').toggle_auto_diff_pin(true)
+    require("lean.infoview").toggle_auto_diff_pin(true)
   end,
   LeanInfoviewToggleNoClearAutoDiffPin = function()
-    require('lean.infoview').toggle_auto_diff_pin(false)
+    require("lean.infoview").toggle_auto_diff_pin(false)
   end,
 
   LeanInfoviewEnableWidgets = function()
-    require('lean.infoview').enable_widgets()
+    require("lean.infoview").enable_widgets()
   end,
   LeanInfoviewDisableWidgets = function()
-    require('lean.infoview').disable_widgets()
+    require("lean.infoview").disable_widgets()
   end,
   LeanInfoviewOpenDebug = function()
-    require('lean.infoview').open_debug()
+    require("lean.infoview").open_debug()
   end,
 
   LeanInfoviewAcceptSuggestion = function()
-    require('lean.infoview').accept_suggestion()
+    require("lean.infoview").accept_suggestion()
   end,
 
   LeanAbbreviationsReverseLookup = function()
-    require('lean.abbreviations').show_reverse_lookup()
+    require("lean.abbreviations").show_reverse_lookup()
   end,
 
   LeanSorryFill = function()
-    require('lean.sorry').fill()
+    require("lean.sorry").fill()
   end,
 
   LeanModuleImports = function()
-    require('lean.module_hierarchy').show_imports()
+    require("lean.module_hierarchy").show_imports()
   end,
   LeanModuleImportedBy = function()
-    require('lean.module_hierarchy').show_imported_by()
+    require("lean.module_hierarchy").show_imported_by()
   end,
 }
 
@@ -222,11 +219,11 @@ function lean.init()
   -- Telescope may not have been loadable the first time we ran, so retry it
   -- on each call until it appears.
   if not telescope_initialized then
-    local ok, telescope = pcall(require, 'telescope')
+    local ok, telescope = pcall(require, "telescope")
     if ok then
       telescope_initialized = true
-      telescope.load_extension 'lean_abbreviations'
-      telescope.load_extension 'loogle'
+      telescope.load_extension("lean_abbreviations")
+      telescope.load_extension("loogle")
     end
   end
 
@@ -235,8 +232,8 @@ function lean.init()
   end
   lean.initialized = true
 
-  if require 'lean.config'().lsp.enable ~= false then
-    vim.lsp.enable 'leanls'
+  if require("lean.config")().lsp.enable ~= false then
+    vim.lsp.enable("leanls")
   end
 
   for name, fn in pairs(commands) do
@@ -253,12 +250,12 @@ end
 ---@deprecated
 ---@param opts lean.Config Configuration options
 function lean.setup(opts)
-  vim.deprecate('require("lean").setup', 'vim.g.lean_config', 'v2026.9.1', 'lean.nvim')
+  vim.deprecate('require("lean").setup', "vim.g.lean_config", "v2026.9.1", "lean.nvim")
 
   opts = opts or {}
 
   if vim.g.lean_config then
-    opts = vim.tbl_deep_extend('force', vim.g.lean_config, opts)
+    opts = vim.tbl_deep_extend("force", vim.g.lean_config, opts)
   end
   vim.g.lean_config = opts
 
@@ -267,7 +264,7 @@ function lean.setup(opts)
   -- Our `plugin/` files may already have enabled the server before this
   -- function ran (with config which didn't yet disable it).
   if opts.lsp and opts.lsp.enable == false then
-    vim.lsp.enable('leanls', false)
+    vim.lsp.enable("leanls", false)
   end
 end
 
@@ -276,10 +273,10 @@ end
 ---Assumes your `lean.nvim` comes from a `git` repository.
 ---@return string|nil version
 function lean.plugin_version()
-  local this_file = debug.getinfo(1, 'S').source:sub(2)
+  local this_file = debug.getinfo(1, "S").source:sub(2)
   local lean_nvim_root = vim.fs.dirname(vim.fs.dirname(vim.fs.dirname(this_file)))
-  local git = vim.fs.joinpath(lean_nvim_root, '.git')
-  local result = vim.system({ 'git', '--git-dir', git, 'describe', '--tags', '--always' }):wait()
+  local git = vim.fs.joinpath(lean_nvim_root, ".git")
+  local result = vim.system({ "git", "--git-dir", git, "describe", "--tags", "--always" }):wait()
   if result.code == 0 then
     return vim.trim(result.stdout)
   end
@@ -294,10 +291,10 @@ function lean.use_suggested_mappings(bufnr)
   local buf = Buffer:from_bufnr(bufnr or 0)
   for _, each in ipairs(lean.mappings) do
     local lhs, cmd, more_opts = unpack(each)
-    local mode = each.mode or 'n'
-    local plug = ('<Plug>(%s)'):format(cmd)
+    local mode = each.mode or "n"
+    local plug = ("<Plug>(%s)"):format(cmd)
     buf.keymaps:set(mode, plug, vim.cmd[cmd], { desc = more_opts.desc })
-    buf.keymaps:set(mode, lhs, plug, vim.tbl_extend('error', more_opts, { remap = true }))
+    buf.keymaps:set(mode, lhs, plug, vim.tbl_extend("error", more_opts, { remap = true }))
   end
 end
 
@@ -312,13 +309,13 @@ function lean.current_search_paths()
     root = vim.fn.getcwd()
   end
 
-  local prefix = vim.trim(check_output({ 'lean', '--print-prefix' }, { cwd = root }))
+  local prefix = vim.trim(check_output({ "lean", "--print-prefix" }, { cwd = root }))
 
-  local paths = { vim.fs.joinpath(prefix, 'src/lean') }
-  local result = vim.system({ 'lake', 'env' }, { cwd = root }):wait()
+  local paths = { vim.fs.joinpath(prefix, "src/lean") }
+  local result = vim.system({ "lake", "env" }, { cwd = root }):wait()
   if result.code == 0 then
-    local src_path = result.stdout:match 'LEAN_SRC_PATH=(.-)\n'
-    vim.list_extend(paths, vim.split(src_path, ':'))
+    local src_path = result.stdout:match("LEAN_SRC_PATH=(.-)\n")
+    vim.list_extend(paths, vim.split(src_path, ":"))
   end
 
   return vim
@@ -327,7 +324,7 @@ function lean.current_search_paths()
       -- Sigh. `vim.fs.joinpath` does not do the right thing with absolute paths.
       -- "Interestingly", while Python and Rust get this right, JS seems not to.
       -- So languages seem to "argue" here. *Obviously* the JS way is wrong.
-      path = path:sub(1, 1) == '/' and path or vim.fs.joinpath(root, path)
+      path = path:sub(1, 1) == "/" and path or vim.fs.joinpath(root, path)
       return vim.fs.normalize(path)
     end)
     :totable()

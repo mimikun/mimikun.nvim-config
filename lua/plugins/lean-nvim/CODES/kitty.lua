@@ -1,5 +1,5 @@
 ---Kitty graphics protocol support: detection, image transmission, and placement.
-local ffi = require 'ffi'
+local ffi = require("ffi")
 
 local kitty = {}
 
@@ -15,9 +15,9 @@ local function detect_from_env()
     return true
   end
   -- WezTerm, Ghostty, and others set TERM or TERM_PROGRAM.
-  local term = vim.env.TERM or ''
-  local term_program = vim.env.TERM_PROGRAM or ''
-  if term:find('kitty', 1, true) or term_program == 'WezTerm' or term_program == 'ghostty' then
+  local term = vim.env.TERM or ""
+  local term_program = vim.env.TERM_PROGRAM or ""
+  if term:find("kitty", 1, true) or term_program == "WezTerm" or term_program == "ghostty" then
     return true
   end
   return false
@@ -28,8 +28,8 @@ local QUERY_ID = 99999
 local function send_raw(data)
   if vim.env.TMUX then
     -- Wrap in tmux DCS passthrough; inner ESCs must be doubled
-    local escaped = data:gsub('\x1b', '\x1b\x1b')
-    vim.api.nvim_chan_send(2, '\x1bPtmux;' .. escaped .. '\x1b\\')
+    local escaped = data:gsub("\x1b", "\x1b\x1b")
+    vim.api.nvim_chan_send(2, "\x1bPtmux;" .. escaped .. "\x1b\\")
   else
     vim.api.nvim_chan_send(2, data)
   end
@@ -40,15 +40,15 @@ end
 ---Requires Neovim to forward APC responses via TermResponse (recent feature).
 ---@param on_detected? fun() callback when support is confirmed
 local function probe(on_detected)
-  vim.api.nvim_create_autocmd('TermResponse', {
-    group = vim.api.nvim_create_augroup('LeanKittyDetect', { clear = true }),
+  vim.api.nvim_create_autocmd("TermResponse", {
+    group = vim.api.nvim_create_augroup("LeanKittyDetect", { clear = true }),
     callback = function(ev)
       local data = ev.data
-      if type(data) ~= 'table' then
+      if type(data) ~= "table" then
         return
       end
-      local seq = data.sequence or data[1] or ''
-      if seq:find('i=' .. QUERY_ID, 1, true) and seq:find('OK', 1, true) then
+      local seq = data.sequence or data[1] or ""
+      if seq:find("i=" .. QUERY_ID, 1, true) and seq:find("OK", 1, true) then
         graphics_supported = true
         if on_detected then
           on_detected()
@@ -58,7 +58,7 @@ local function probe(on_detected)
     end,
   })
   -- Query: transmit a 1x1 transparent pixel with a=q (query).
-  send_raw(string.format('\x1b_Gi=%d,s=1,v=1,a=q,t=d,f=24;AAAA\x1b\\', QUERY_ID))
+  send_raw(string.format("\x1b_Gi=%d,s=1,v=1,a=q,t=d,f=24;AAAA\x1b\\", QUERY_ID))
 end
 
 ---Callbacks registered to fire when graphics support is confirmed.
@@ -95,7 +95,7 @@ end
 ---(or any image data) there just paints escape codes into the window, and even
 ---a genuine Kitty host terminal can't display through it.
 local function detection_wanted()
-  if require 'lean.config'().graphics.enabled == false then
+  if require("lean.config")().graphics.enabled == false then
     return false
   end
   if vim.env.ZELLIJ then
@@ -113,7 +113,7 @@ if detection_wanted() then
   elseif not vim.env.TMUX and #vim.api.nvim_list_uis() > 0 then
     probe(notify_available)
   else
-    vim.api.nvim_create_autocmd('UIEnter', {
+    vim.api.nvim_create_autocmd("UIEnter", {
       once = true,
       callback = function()
         if not graphics_supported and detection_wanted() then
@@ -152,7 +152,7 @@ pcall(
 local cell_size_cache
 
 -- TIOCGWINSZ: macOS = 0x40087468, Linux = 0x5413.
-local TIOCGWINSZ = jit.os == 'Linux' and 0x5413 or 0x40087468
+local TIOCGWINSZ = jit.os == "Linux" and 0x5413 or 0x40087468
 
 ---Query the terminal for cell pixel dimensions.
 ---@return { width: integer, height: integer }
@@ -161,7 +161,7 @@ function kitty.cell_size()
     return cell_size_cache
   end
 
-  local ok, ws = pcall(ffi.new, 'struct kitty_winsize')
+  local ok, ws = pcall(ffi.new, "struct kitty_winsize")
   if ok then
     local rc = ffi.C.ioctl(2, TIOCGWINSZ, ws)
     if rc == 0 and ws.ws_xpixel > 0 and ws.ws_ypixel > 0 then
@@ -177,8 +177,8 @@ function kitty.cell_size()
   return cell_size_cache
 end
 
-vim.api.nvim_create_autocmd('VimResized', {
-  group = vim.api.nvim_create_augroup('LeanKittyCellSize', { clear = true }),
+vim.api.nvim_create_autocmd("VimResized", {
+  group = vim.api.nvim_create_augroup("LeanKittyCellSize", { clear = true }),
   callback = function()
     cell_size_cache = nil
   end,
@@ -217,14 +217,14 @@ local function transmit(data, width, height, format)
     local header
     if i == 1 then
       if format == 100 then
-        header = string.format('\x1b_Ga=t,i=%d,f=100,m=%d;', id, more)
+        header = string.format("\x1b_Ga=t,i=%d,f=100,m=%d;", id, more)
       else
-        header = string.format('\x1b_Ga=t,i=%d,f=32,s=%d,v=%d,m=%d;', id, width, height, more)
+        header = string.format("\x1b_Ga=t,i=%d,f=32,s=%d,v=%d,m=%d;", id, width, height, more)
       end
     else
-      header = string.format('\x1b_Gm=%d;', more)
+      header = string.format("\x1b_Gm=%d;", more)
     end
-    vim.api.nvim_chan_send(CHANNEL, header .. chunk .. '\x1b\\')
+    vim.api.nvim_chan_send(CHANNEL, header .. chunk .. "\x1b\\")
   end
 
   return id
@@ -233,7 +233,7 @@ end
 ---Delete a Kitty image by ID (removes image data and all placements).
 ---@param id integer
 local function delete(id)
-  vim.api.nvim_chan_send(CHANNEL, string.format('\x1b_Ga=d,d=i,i=%d;\x1b\\', id))
+  vim.api.nvim_chan_send(CHANNEL, string.format("\x1b_Ga=d,d=i,i=%d;\x1b\\", id))
 end
 
 ---Place an already-transmitted image at a screen position with clipping.
@@ -243,7 +243,7 @@ local function place(id, src_y, src_w, src_h, screen_row, screen_col, display_ro
   vim.api.nvim_chan_send(
     CHANNEL,
     string.format(
-      '\x1b7\x1b[%d;%dH\x1b_Ga=p,i=%d,p=1,x=0,y=%d,w=%d,h=%d,r=%d,c=%d;\x1b\\\x1b8',
+      "\x1b7\x1b[%d;%dH\x1b_Ga=p,i=%d,p=1,x=0,y=%d,w=%d,h=%d,r=%d,c=%d;\x1b\\\x1b8",
       screen_row,
       screen_col,
       id,

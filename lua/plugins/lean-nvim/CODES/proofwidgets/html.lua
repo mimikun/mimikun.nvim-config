@@ -1,10 +1,10 @@
-local inductive = require 'std.inductive'
+local inductive = require("std.inductive")
 
-local Element = require('lean.tui').Element
-local InteractiveCode = require 'lean.widget.interactive_code'
-local MakeEditLink = require 'proofwidgets.make_edit_link'
-local Table = require 'tui.table'
-local tui_html = require 'tui.html'
+local Element = require("lean.tui").Element
+local InteractiveCode = require("lean.widget.interactive_code")
+local MakeEditLink = require("proofwidgets.make_edit_link")
+local Table = require("tui.table")
+local tui_html = require("tui.html")
 local Tag = tui_html.Tag
 
 ---@class HtmlElement
@@ -30,18 +30,13 @@ local function render_details(self, value, ctx, opts)
   local _, raw_attrs, children = unpack(value)
 
   local initially_open = vim.iter(raw_attrs):any(function(attr)
-    return attr[1] == 'open'
+    return attr[1] == "open"
   end)
 
   local summary_children
   local body_elements = {}
   for _, child in ipairs(children) do
-    if
-      not summary_children
-      and type(child) == 'table'
-      and child.element
-      and child.element[1] == 'summary'
-    then
+    if not summary_children and type(child) == "table" and child.element and child.element[1] == "summary" then
       summary_children = vim
         .iter(child.element[3])
         :map(function(c)
@@ -53,15 +48,15 @@ local function render_details(self, value, ctx, opts)
     end
   end
 
-  return Element:foldable {
-    title = Element:new {
-      hlgroups = { 'tui.html.summary' },
-      children = summary_children or { Element.text 'Details' },
-    },
+  return Element:foldable({
+    title = Element:new({
+      hlgroups = { "tui.html.summary" },
+      children = summary_children or { Element.text("Details") },
+    }),
     body = body_elements,
     open = initially_open,
     gap = 1,
-  }
+  })
 end
 
 local SECTION_ROW_TYPES = {
@@ -97,20 +92,16 @@ end
 local function collect_table_rows(self, table_children, ctx, opts)
   local rows = {}
   for _, child in ipairs(table_children) do
-    if type(child) == 'table' and child.element then
+    if type(child) == "table" and child.element then
       local tag = child.element[1]
       local RowType = SECTION_ROW_TYPES[tag]
       if RowType then
         for _, section_child in ipairs(child.element[3]) do
-          if
-            type(section_child) == 'table'
-            and section_child.element
-            and section_child.element[1] == 'tr'
-          then
+          if type(section_child) == "table" and section_child.element and section_child.element[1] == "tr" then
             table.insert(rows, RowType(render_tr_cells(self, section_child.element[3], ctx, opts)))
           end
         end
-      elseif tag == 'tr' then
+      elseif tag == "tr" then
         table.insert(rows, Table.row(render_tr_cells(self, child.element[3], ctx, opts)))
       end
     end
@@ -119,16 +110,16 @@ local function collect_table_rows(self, table_children, ctx, opts)
 end
 
 ---@alias Html HtmlElement | HtmlText | HtmlComponent
-local Html = inductive('Html', {
+local Html = inductive("Html", {
   ---@param text string
   ---@param _ctx RenderContext
   ---@param opts? { in_pre: boolean }
   ---@return Element
   text = function(_, text, _ctx, opts)
     if not opts or not opts.in_pre then
-      text = text:gsub('%s+', ' ')
+      text = text:gsub("%s+", " ")
     end
-    return Element:new { text = text }
+    return Element:new({ text = text })
   end,
 
   ---@param value { [1]: string, [2]: string, [3]:  any, [4]: Html[] }
@@ -148,55 +139,55 @@ local Html = inductive('Html', {
       :totable()
 
     if props.fmt then
-      return Element:new {
+      return Element:new({
         children = {
           InteractiveCode(props.fmt, ctx:subsession()),
-          Element:new { children = children },
+          Element:new({ children = children }),
         },
-      }
+      })
     elseif props.edit then
       return MakeEditLink(props, children, ctx)
     elseif props.state and props.cancelTk then
-      local RefreshComponent = require 'lean.widgets.ProofWidgets.RefreshComponent'
+      local RefreshComponent = require("lean.widgets.ProofWidgets.RefreshComponent")
       return RefreshComponent(ctx, props)
-    elseif props.contents and type(props.contents) == 'string' then
-      return Element:new { text = props.contents, children = children }
+    elseif props.contents and type(props.contents) == "string" then
+      return Element:new({ text = props.contents, children = children })
     elseif props.expr then
-      local response, rpc_err = ctx:rpc_call('ProofWidgets.ppExprTagged', { expr = props.expr })
+      local response, rpc_err = ctx:rpc_call("ProofWidgets.ppExprTagged", { expr = props.expr })
       if rpc_err then
         return rpc_err
       end
       if response then
-        return Element:new {
+        return Element:new({
           children = {
             InteractiveCode(response, ctx:subsession()),
-            Element:new { children = children },
+            Element:new({ children = children }),
           },
-        }
+        })
       end
     elseif props.msg then
-      local interactive_diagnostic = require 'lean.widget.interactive_diagnostic'
+      local interactive_diagnostic = require("lean.widget.interactive_diagnostic")
       local sess = ctx:subsession()
       local response, err = sess:msgToInteractive(props.msg, 0)
       if err then
-        return Element:new { text = vim.inspect(err), children = children }
+        return Element:new({ text = vim.inspect(err), children = children })
       end
-      return Element:new {
+      return Element:new({
         children = {
           interactive_diagnostic.TaggedTextMsgEmbed(response, sess),
-          Element:new { children = children },
+          Element:new({ children = children }),
         },
-      }
+      })
     elseif props.summary and props.filtered then
-      local FilterDetails = require 'lean.widgets.ProofWidgets.FilterDetails'
+      local FilterDetails = require("lean.widgets.ProofWidgets.FilterDetails")
       -- FilterDetails *is* a <details> upstream, so it inherits its box model.
-      return Tag.details { FilterDetails(ctx, props), unpack(children) }
+      return Tag.details({ FilterDetails(ctx, props), unpack(children) })
     end
 
-    return Element:new {
+    return Element:new({
       text = vim.inspect(props),
       children = children,
-    }
+    })
   end,
 
   ---@param value { [1]: string, [2]: [string, any][], [3]: Html[] }
@@ -213,13 +204,13 @@ local Html = inductive('Html', {
 
     -- Normalize CSS string styles to tables so downstream code only
     -- handles one format.
-    if type(attrs.style) == 'string' then
+    if type(attrs.style) == "string" then
       attrs.style = tui_html.parse_css(attrs.style)
     end
 
     -- Elements with display:none or visibility:hidden render as empty.
     if attrs.style and tui_html.is_hidden(attrs.style) then
-      return Element:new {}
+      return Element:new({})
     end
 
     local result
@@ -227,32 +218,32 @@ local Html = inductive('Html', {
     -- Tags whose handlers need the raw Html tree (to split `<summary>`,
     -- walk `<thead>`/`<tbody>`/`<tr>`, serialize SVG) get pre-built here
     -- and handed to the Tag handler as its children list.
-    if tag == 'svg' then
+    if tag == "svg" then
       result = Tag.svg(value)
-    elseif tag == 'details' then
-      result = Tag.details { render_details(self, value, ctx, opts) }
-    elseif tag == 'table' then
+    elseif tag == "details" then
+      result = Tag.details({ render_details(self, value, ctx, opts) })
+    elseif tag == "table" then
       local rows = collect_table_rows(self, children, ctx, opts)
-      result = Tag.table { Table.render(rows) }
+      result = Tag.table({ Table.render(rows) })
     else
-      if tag == 'pre' then
-        opts = vim.tbl_extend('force', opts or {}, { in_pre = true })
+      if tag == "pre" then
+        opts = vim.tbl_extend("force", opts or {}, { in_pre = true })
       end
 
       -- CSS white-space: pre/pre-wrap also preserves whitespace,
       -- matching how the <pre> tag works.
       if attrs.style and not (opts and opts.in_pre) then
-        local ws = attrs.style['white-space'] or attrs.style.whiteSpace
-        if ws == 'pre' or ws == 'pre-wrap' or ws == 'pre-line' then
-          opts = vim.tbl_extend('force', opts or {}, { in_pre = true })
+        local ws = attrs.style["white-space"] or attrs.style.whiteSpace
+        if ws == "pre" or ws == "pre-wrap" or ws == "pre-line" then
+          opts = vim.tbl_extend("force", opts or {}, { in_pre = true })
         end
       end
 
       local current_opts = opts
-      if tag == 'ul' or tag == 'ol' then
+      if tag == "ul" or tag == "ol" then
         -- Children of this list see an incremented depth (for nested lists),
         -- but the current list's tag handler uses the current depth.
-        opts = vim.tbl_extend('force', opts or {}, {
+        opts = vim.tbl_extend("force", opts or {}, {
           list_depth = ((opts and opts.list_depth) or 0) + 1,
         })
       end
@@ -270,7 +261,7 @@ local Html = inductive('Html', {
 
     -- Wire the title attribute to a tooltip.
     if attrs.title then
-      result:add_tooltip(Element:new { text = attrs.title })
+      result:add_tooltip(Element:new({ text = attrs.title }))
     end
 
     return result

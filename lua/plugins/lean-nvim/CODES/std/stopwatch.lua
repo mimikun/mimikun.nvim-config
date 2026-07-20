@@ -54,7 +54,7 @@ end
 ---Close the current phase, recording its duration.
 function Stopwatch:close()
   local elapsed = self._clock() - table.remove(self._starts)
-  local key = table.concat(self._stack, '.')
+  local key = table.concat(self._stack, ".")
   table.remove(self._stack)
   self._result[key] = elapsed
 end
@@ -73,9 +73,9 @@ end
 ---@param phases { [1]: string, [2]: fun(): ... }[]  ordered (name, fn) pairs
 ---@return any[][] results  one result tuple per phase, in input order
 function Stopwatch:concurrent(wall_name, phases)
-  local async = require 'std.async'
+  local async = require("std.async")
 
-  local prefix = #self._stack > 0 and table.concat(self._stack, '.') .. '.' or ''
+  local prefix = #self._stack > 0 and table.concat(self._stack, ".") .. "." or ""
 
   local fns = {}
   for i, phase in ipairs(phases) do

@@ -5,7 +5,7 @@
 --- otherwise falls back to a text Element.
 ---@brief ]]
 
-local kitty = require 'kitty'
+local kitty = require("kitty")
 
 ---Render a graphical element if kitty is available, otherwise a text fallback.
 ---

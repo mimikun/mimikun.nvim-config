@@ -1,5 +1,5 @@
-local Buffer = require 'std.nvim.buffer'
-local Window = require 'std.nvim.window'
+local Buffer = require("std.nvim.buffer")
+local Window = require("std.nvim.window")
 
 ---@class ModalOpts
 ---@field buffer? Buffer  buffer to display (default: a fresh scratch buffer)
@@ -33,8 +33,8 @@ Modal.__index = Modal
 ---@param opts? ModalOpts
 ---@return Modal
 function Modal.open(opts)
-  opts = vim.tbl_extend('keep', opts or {}, { enter = true })
-  opts.buffer = opts.buffer or Buffer.create { listed = false, scratch = true }
+  opts = vim.tbl_extend("keep", opts or {}, { enter = true })
+  opts.buffer = opts.buffer or Buffer.create({ listed = false, scratch = true })
 
   local target = opts.relative_to
   opts.relative_to = nil
@@ -63,7 +63,7 @@ end
 ---teardown is needed.
 ---@return Modal self
 function Modal:dismiss_on_leave()
-  self.buffer:create_autocmd('WinLeave', {
+  self.buffer:create_autocmd("WinLeave", {
     callback = function()
       self:dismiss()
     end,

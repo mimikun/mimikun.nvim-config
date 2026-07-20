@@ -1,8 +1,8 @@
 ---From https://github.com/leanprover-community/ProofWidgets4/blob/main/widget/src/exprPresentation.tsx
 
-local Element = require('lean.tui').Element
-local Html = require 'proofwidgets.html'
-local InteractiveExpr = require 'proofwidgets.interactive_expr'
+local Element = require("lean.tui").Element
+local Html = require("proofwidgets.html")
+local InteractiveExpr = require("proofwidgets.interactive_expr")
 
 ---@alias SelectedPresentation
 ---| { tag: "auto" }
@@ -24,7 +24,7 @@ local InteractiveExpr = require 'proofwidgets.interactive_expr'
 ---@param expr ExprWithCtx
 ---@return Element
 return function(ctx, expr)
-  local response, err = ctx:rpc_call('ProofWidgets.getExprPresentations', { expr = expr })
+  local response, err = ctx:rpc_call("ProofWidgets.getExprPresentations", { expr = expr })
   if err then
     return err
   end
@@ -33,34 +33,34 @@ return function(ctx, expr)
     table.insert(presentations, each)
     presentations[each.name] = each
   end
-  table.insert(presentations, { name = 'none', userName = 'Default' })
+  table.insert(presentations, { name = "none", userName = "Default" })
 
   local selection_name
   if #response.presentations > 0 then
     selection_name = presentations[1].name
   else
-    selection_name = 'none'
+    selection_name = "none"
   end
 
   local selection
-  selection = { tag = 'auto' } ---@type SelectedPresentation
+  selection = { tag = "auto" } ---@type SelectedPresentation
 
   local function selection_to_child()
-    if selection.tag == 'auto' then
+    if selection.tag == "auto" then
       return Html(presentations[1].html, ctx)
-    elseif selection.name ~= 'none' then
+    elseif selection.name ~= "none" then
       return Html(presentations[selection.name].html, ctx)
-    elseif selection.name == 'none' then
+    elseif selection.name == "none" then
       return InteractiveExpr(ctx, expr)
     end
   end
 
-  local element = Element:new { children = { selection_to_child() } }
+  local element = Element:new({ children = { selection_to_child() } })
 
-  return Element:new {
+  return Element:new({
     children = {
       element,
-      Element.text '\t\t\t\t', -- FIXME: really we need Element:flex
+      Element.text("\t\t\t\t"), -- FIXME: really we need Element:flex
       Element.select(
         presentations,
         { ---@type SelectionOpts<SelectedPresentation>
@@ -71,10 +71,10 @@ return function(ctx, expr)
         },
         ---@param choice ExprPresentationData
         function(choice)
-          selection = { tag = 'manual', name = choice.name }
-          element:set_children { selection_to_child() }
+          selection = { tag = "manual", name = choice.name }
+          element:set_children({ selection_to_child() })
         end
       ),
     },
-  }
+  })
 end

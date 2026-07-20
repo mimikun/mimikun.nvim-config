@@ -1,1 +1,1 @@
-require('lean').init()
+require("lean").init()

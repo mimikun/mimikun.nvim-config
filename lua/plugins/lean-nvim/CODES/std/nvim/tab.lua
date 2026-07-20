@@ -1,4 +1,4 @@
-local Window = require 'std.nvim.window'
+local Window = require("std.nvim.window")
 
 ---A Neovim tab.
 ---@class Tab

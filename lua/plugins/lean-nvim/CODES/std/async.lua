@@ -47,7 +47,7 @@ function async.capture_errors(fn)
     error(err, 2)
   end
   if #errors == 0 then
-    error('async.capture_errors: expected coroutine errors but none occurred', 2)
+    error("async.capture_errors: expected coroutine errors but none occurred", 2)
   end
   return errors
 end
@@ -73,7 +73,7 @@ end
 function async.wrap(fn, argc)
   return function(...)
     local co = coroutine.running()
-    assert(co, 'async.wrap: must be called from a coroutine')
+    assert(co, "async.wrap: must be called from a coroutine")
     local args = { ... }
     args[argc] = function(...)
       local ok, err = coroutine.resume(co, ...)
@@ -106,7 +106,7 @@ function async.join(fns)
   end
 
   local co = coroutine.running()
-  assert(co, 'async.join: must be called from a coroutine')
+  assert(co, "async.join: must be called from a coroutine")
 
   local remaining = n
   local first_err = nil
@@ -122,7 +122,7 @@ function async.join(fns)
         first_err = first_err or ret
       end
       remaining = remaining - 1
-      if remaining == 0 and coroutine.status(co) == 'suspended' then
+      if remaining == 0 and coroutine.status(co) == "suspended" then
         local rok, rerr = coroutine.resume(co)
         if not rok then
           rethrow(co, rerr)
@@ -164,7 +164,7 @@ function async.event()
         return
       end
       local co = coroutine.running()
-      assert(co, 'event.wait: must be called from a coroutine')
+      assert(co, "event.wait: must be called from a coroutine")
       table.insert(waiters, co)
       coroutine.yield()
     end,

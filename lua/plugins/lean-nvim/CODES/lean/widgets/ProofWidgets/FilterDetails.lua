@@ -1,5 +1,5 @@
-local Element = require('lean.tui').Element
-local Html = require 'proofwidgets.html'
+local Element = require("lean.tui").Element
+local Html = require("proofwidgets.html")
 
 ---ProofWidgets's FilterDetails widget.
 ---
@@ -16,13 +16,13 @@ return function(ctx, props)
   local filter
 
   local function refresh()
-    body:set_children { Html(is_filtered and props.filtered or props.all, ctx) }
-    filter.text = is_filtered and 'show more' or 'show less'
+    body:set_children({ Html(is_filtered and props.filtered or props.all, ctx) })
+    filter.text = is_filtered and "show more" or "show less"
   end
 
-  body = Element:new {
+  body = Element:new({
     children = { Html(is_filtered and props.filtered or props.all, ctx) },
-  }
+  })
   -- The foldable container owns its own `__state` for open/close. Filter
   -- state lives on `body` (the foldable's stable walk target), so both
   -- handles coexist along the path `transfer_state` already traverses.
@@ -39,24 +39,24 @@ return function(ctx, props)
     end,
   }
 
-  filter = Element.link {
-    text = is_filtered and 'show more' or 'show less',
+  filter = Element.link({
+    text = is_filtered and "show more" or "show less",
     action = function(click_ctx)
       is_filtered = not is_filtered
       refresh()
       click_ctx.rerender()
     end,
-  }
+  })
 
-  return Element:foldable {
-    title = Element:new {
+  return Element:foldable({
+    title = Element:new({
       children = {
         Html(props.summary, ctx),
-        Element.text '\t\t\t\t',
+        Element.text("\t\t\t\t"),
         filter,
       },
-    },
+    }),
     body = { body },
     gap = 1,
-  }
+  })
 end

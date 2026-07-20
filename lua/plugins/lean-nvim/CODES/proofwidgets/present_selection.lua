@@ -1,5 +1,5 @@
-local Element = require('lean.tui').Element
-local ExprPresentation = require 'proofwidgets.expr_presentation'
+local Element = require("lean.tui").Element
+local ExprPresentation = require("proofwidgets.expr_presentation")
 
 ---@param ctx RenderContext
 ---@param loc GoalsLocation
@@ -10,9 +10,9 @@ return function(ctx, loc)
     return {}
   end
   local params = { locations = { { goal.ctx, loc } } }
-  local response, err = ctx:rpc_call('ProofWidgets.goalsLocationsToExprs', params)
+  local response, err = ctx:rpc_call("ProofWidgets.goalsLocationsToExprs", params)
   if err then
     return err
   end
-  return Element:new { children = { ExprPresentation(ctx, response.exprs[1]) } }
+  return Element:new({ children = { ExprPresentation(ctx, response.exprs[1]) } })
 end

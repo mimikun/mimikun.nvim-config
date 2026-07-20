@@ -1,19 +1,19 @@
-local Element = require('lean.tui').Element
+local Element = require("lean.tui").Element
 
 ---@alias ErrorDescription { code: string, explanationUrl: string }
 
 ---@param ctx RenderContext
 ---@param props ErrorDescription
 return function(_, props)
-  return Element:new {
+  return Element:new({
     children = {
-      Element.text '\n\nError code: ',
+      Element.text("\n\nError code: "),
       Element.text(props.code),
-      Element.text '\n',
-      Element.link {
-        text = 'View explanation',
+      Element.text("\n"),
+      Element.link({
+        text = "View explanation",
         url = props.explanationUrl,
-      },
+      }),
     },
-  }
+  })
 end
