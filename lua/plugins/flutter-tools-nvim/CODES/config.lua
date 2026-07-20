@@ -56,14 +56,12 @@ local fmt = string.format
 --- @param prefs table user preferences
 local function validate_prefs(prefs)
   if prefs.flutter_path and prefs.flutter_lookup_cmd then
-    vim.schedule(
-      function()
-        ui.notify(
-          'Only one of "flutter_path" and "flutter_lookup_cmd" are required. Please remove one of the keys',
-          ui.ERROR
-        )
-      end
-    )
+    vim.schedule(function()
+      ui.notify(
+        'Only one of "flutter_path" and "flutter_lookup_cmd" are required. Please remove one of the keys',
+        ui.ERROR
+      )
+    end)
   end
   vim.validate("outline", prefs.outline, "table", true)
   vim.validate("dev_log", prefs.dev_log, "table", true)
@@ -134,7 +132,9 @@ local config = {
   outline = setmetatable({
     auto_open = false,
   }, {
-    __index = function(_, k) return k == "open_cmd" and get_split_cmd(0.3, 40) or nil end,
+    __index = function(_, k)
+      return k == "open_cmd" and get_split_cmd(0.3, 40) or nil
+    end,
   }),
   dev_log = setmetatable({
     filter = nil,
@@ -142,7 +142,9 @@ local config = {
     notify_errors = false,
     focus_on_open = true,
   }, {
-    __index = function(_, k) return k == "open_cmd" and get_split_cmd(0.4, 50) or nil end,
+    __index = function(_, k)
+      return k == "open_cmd" and get_split_cmd(0.4, 50) or nil
+    end,
   }),
   dev_tools = {
     autostart = false,
@@ -158,7 +160,9 @@ local deprecations = {
   lsp = {
     nested = {
       color = {
-        when = function() return vim.fn.has("nvim-0.12") == 1 end,
+        when = function()
+          return vim.fn.has("nvim-0.12") == 1
+        end,
         message = "plugin-managed document colors are deprecated and will be removed when flutter-tools.nvim requires Neovim 0.12+. On Neovim 0.12+, use vim.lsp.document_color.enable() instead",
       },
     },
@@ -166,10 +170,9 @@ local deprecations = {
 }
 
 local function notify_deprecation(key, message)
-  vim.defer_fn(
-    function() ui.notify(fmt("%s is deprecated: %s", key, message), ui.WARN, { once = true }) end,
-    1000
-  )
+  vim.defer_fn(function()
+    ui.notify(fmt("%s is deprecated: %s", key, message), ui.WARN, { once = true })
+  end, 1000)
 end
 
 local function should_notify_deprecation(deprecation)
@@ -177,7 +180,9 @@ local function should_notify_deprecation(deprecation)
 end
 
 local function handle_nested_deprecation(prefix, value, deprecation)
-  if type(value) ~= "table" or type(deprecation.nested) ~= "table" then return end
+  if type(value) ~= "table" or type(deprecation.nested) ~= "table" then
+    return
+  end
   for key, nested_value in pairs(value) do
     local nested_deprecation = deprecation.nested[key]
     if nested_deprecation then
@@ -191,22 +196,30 @@ end
 
 local function handle_deprecation(key, value, conf)
   local deprecation = deprecations[key]
-  if not deprecation then return end
+  if not deprecation then
+    return
+  end
   if deprecation.message and should_notify_deprecation(deprecation) then
     notify_deprecation(key, deprecation.message)
   end
   handle_nested_deprecation(key, value, deprecation)
-  if deprecation.fallback then conf[deprecation.fallback] = value end
+  if deprecation.fallback then
+    conf[deprecation.fallback] = value
+  end
 end
 
 ---@param project flutter.ProjectConfig | flutter.ProjectConfig[]
 function M.setup_project(project)
-  if not utils.islist(project) then project = { project } end
+  if not utils.islist(project) then
+    project = { project }
+  end
   project_config = project
 end
 
 function M.set(user_config)
-  if not user_config or type(user_config) ~= "table" then return config end
+  if not user_config or type(user_config) ~= "table" then
+    return config
+  end
   validate_prefs(user_config)
   for key, value in pairs(user_config) do
     handle_deprecation(key, value, user_config)
@@ -218,7 +231,9 @@ end
 ---@module "flutter-tools.config"
 return setmetatable(M, {
   __index = function(_, k)
-    if k == "project" then return project_config end
+    if k == "project" then
+      return project_config
+    end
     return config[k]
   end,
 })

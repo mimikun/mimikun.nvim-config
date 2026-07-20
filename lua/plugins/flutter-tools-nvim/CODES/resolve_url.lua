@@ -22,13 +22,17 @@ local function find_file(path)
     local file_path = vim.fs.joinpath(dir_path, path)
 
     -- If the file is found, return true and the path
-    if vim.fn.filereadable(file_path) == 1 then return true, file_path end
+    if vim.fn.filereadable(file_path) == 1 then
+      return true, file_path
+    end
 
     -- Move to the parent directory
     local parent = vim.fn.fnamemodify(dir_path, ":h")
 
     -- If we reach the root directory, break out of the loop
-    if dir_path == parent then break end
+    if dir_path == parent then
+      break
+    end
 
     -- Continue searching in the parent directory
     dir_path = parent
@@ -86,7 +90,9 @@ end
 function M.resolve_url(uri)
   -- Extract package name
   local package_name = uri:match("([%w_]+)/.*")
-  if not package_name then return uri end
+  if not package_name then
+    return uri
+  end
 
   -- Fetch package map
   local found, package_map = get_package_map()

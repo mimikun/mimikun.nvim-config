@@ -32,7 +32,9 @@ end
 
 local function device_show()
   local device = commands.current_device()
-  if device then set_decoration_item("device", device) end
+  if device then
+    set_decoration_item("device", device)
+  end
 end
 
 function M.statusline.device()
@@ -66,18 +68,24 @@ end
 function M.statusline.project_config()
   api.nvim_create_autocmd("User", {
     pattern = utils.events.PROJECT_CONFIG_CHANGED,
-    callback = function(args) set_decoration_item("project_config", args.data) end,
+    callback = function(args)
+      set_decoration_item("project_config", args.data)
+    end,
   })
 end
 
 ---@param config table<string, table<string, boolean>>
 function M.apply(config)
-  if not config or vim.tbl_isempty(config) then return end
+  if not config or vim.tbl_isempty(config) then
+    return
+  end
   for name, conf in pairs(config) do
     if M[name] and conf and type(conf) == "table" then
       for key, enabled in pairs(conf) do
         local func = M[name][key]
-        if func and enabled then func() end
+        if func and enabled then
+          func()
+        end
       end
     end
   end

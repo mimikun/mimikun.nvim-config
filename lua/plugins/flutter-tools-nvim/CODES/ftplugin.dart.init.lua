@@ -1,5 +1,7 @@
 -- See section 'DISABLING' in :h ftplugin
-if vim.b.flutter_tools_did_ftplugin then return end
+if vim.b.flutter_tools_did_ftplugin then
+  return
+end
 vim.b.flutter_tools_did_ftplugin = 1
 
 require("flutter-tools.lsp").attach()
@@ -11,4 +13,6 @@ vim.opt.includeexpr = "v:lua.require('flutter-tools.resolve_url').resolve_url(v:
 
 local full_path = vim.fn.expand("%:p")
 -- Prevent writes to files in the pub cache and FVM folder.
-if path.is_flutter_dependency_path(full_path) then vim.opt_local.modifiable = false end
+if path.is_flutter_dependency_path(full_path) then
+  vim.opt_local.modifiable = false
+end

@@ -11,9 +11,13 @@ function M.exists(filename)
   return stat and stat.type or false
 end
 
-function M.is_dir(filename) return M.exists(filename) == "directory" end
+function M.is_dir(filename)
+  return M.exists(filename) == "directory"
+end
 
-function M.is_file(filename) return M.exists(filename) == "file" end
+function M.is_file(filename)
+  return M.exists(filename) == "file"
+end
 
 local uname = uv.os_uname()
 M.is_mac = uname.sysname == "Darwin"
@@ -24,9 +28,13 @@ M.path_sep = M.is_windows and "\\" or "/"
 
 local is_fs_root
 if M.is_windows then
-  is_fs_root = function(path) return path:match("^%a:$") end
+  is_fs_root = function(path)
+    return path:match("^%a:$")
+  end
 else
-  is_fs_root = function(path) return path == "/" end
+  is_fs_root = function(path)
+    return path == "/"
+  end
 end
 
 function M.is_absolute(filename)
@@ -42,9 +50,13 @@ do
   local strip_dir_pat = M.path_sep .. "([^" .. M.path_sep .. "]+)$"
   local strip_sep_pat = M.path_sep .. "$"
   M.dirname = function(path)
-    if not path then return end
+    if not path then
+      return
+    end
     local result = path:gsub(strip_sep_pat, ""):gsub(strip_dir_pat, "")
-    if #result == 0 then return "/" end
+    if #result == 0 then
+      return "/"
+    end
     return result
   end
 end
@@ -53,8 +65,7 @@ end
 ---@vararg string
 ---@return string
 function M.join(...)
-  local result =
-    table.concat(utils.flatten({ ... }), M.path_sep):gsub(M.path_sep .. "+", M.path_sep)
+  local result = table.concat(utils.flatten({ ... }), M.path_sep):gsub(M.path_sep .. "+", M.path_sep)
   return result
 end
 
@@ -65,10 +76,16 @@ function M.traverse_parents(path, cb)
   -- Just in case our algo is buggy, don't infinite loop.
   for _ = 1, 100 do
     dir = M.dirname(dir)
-    if not dir then return end
+    if not dir then
+      return
+    end
     -- If we can't ascend further, then stop looking.
-    if cb(dir, path) then return dir, path end
-    if is_fs_root(dir) then break end
+    if cb(dir, path) then
+      return dir, path
+    end
+    if is_fs_root(dir) then
+      break
+    end
   end
 end
 
@@ -76,8 +93,12 @@ end
 function M.iterate_parents(path)
   path = uv.fs_realpath(path)
   local function it(_, v)
-    if not v then return end
-    if is_fs_root(v) then return end
+    if not v then
+      return
+    end
+    if is_fs_root(v) then
+      return
+    end
     return M.dirname(v), path
   end
   return it, path, path
@@ -86,10 +107,16 @@ end
 ---@param root string?
 ---@param path string?
 function M.is_descendant(root, path)
-  if not root then return false end
-  if not path then return false end
+  if not root then
+    return false
+  end
+  if not path then
+    return false
+  end
 
-  local function cb(dir, _) return dir == root end
+  local function cb(dir, _)
+    return dir == root
+  end
 
   local dir, _ = M.traverse_parents(path, cb)
 
@@ -98,16 +125,22 @@ end
 
 function M.search_ancestors(startpath, func)
   vim.validate("func", func, "function")
-  if func(startpath) then return startpath end
+  if func(startpath) then
+    return startpath
+  end
   for path in M.iterate_parents(startpath) do
-    if func(path) then return path end
+    if func(path) then
+      return path
+    end
   end
 end
 
 local function find_nearest_root(patterns, startpath)
   local function matcher(path)
     for _, pattern in ipairs(patterns) do
-      if M.exists(vim.fn.glob(M.join(path, pattern))) then return path end
+      if M.exists(vim.fn.glob(M.join(path, pattern))) then
+        return path
+      end
     end
   end
   return M.search_ancestors(startpath, matcher)
@@ -118,11 +151,17 @@ end
 ---@param pubspec_path string
 ---@return boolean
 local function is_pub_workspace_member(pubspec_path)
-  if not M.is_file(pubspec_path) then return false end
+  if not M.is_file(pubspec_path) then
+    return false
+  end
   local content = vim.fn.readfile(pubspec_path)
-  if not content then return false end
+  if not content then
+    return false
+  end
   for _, line in ipairs(content) do
-    if line:lower():match("^resolution%s*:%s*workspace") then return true end
+    if line:lower():match("^resolution%s*:%s*workspace") then
+      return true
+    end
   end
   return false
 end
@@ -132,11 +171,17 @@ end
 ---@param pubspec_path string
 ---@return boolean
 local function is_pub_workspace_root(pubspec_path)
-  if not M.is_file(pubspec_path) then return false end
+  if not M.is_file(pubspec_path) then
+    return false
+  end
   local content = vim.fn.readfile(pubspec_path)
-  if not content then return false end
+  if not content then
+    return false
+  end
   for _, line in ipairs(content) do
-    if line:lower():match("^workspace%s*:") then return true end
+    if line:lower():match("^workspace%s*:") then
+      return true
+    end
   end
   return false
 end
@@ -147,22 +192,32 @@ end
 ---@return string|nil
 function M.find_root(patterns, startpath)
   local root = find_nearest_root(patterns, startpath)
-  if not root then return nil end
+  if not root then
+    return nil
+  end
 
   local pubspec_path = M.join(root, "pubspec.yaml")
-  if not is_pub_workspace_member(pubspec_path) then return root end
+  if not is_pub_workspace_member(pubspec_path) then
+    return root
+  end
 
   -- Workspace member, traverse upward to find the workspace root
   local parent = M.dirname(root)
-  if not parent or parent == root then return root end
+  if not parent or parent == root then
+    return root
+  end
 
   -- Check parent directly first (iterate_parents skips the starting path)
   local workspace_pubspec = M.join(parent, "pubspec.yaml")
-  if is_pub_workspace_root(workspace_pubspec) then return parent end
+  if is_pub_workspace_root(workspace_pubspec) then
+    return parent
+  end
 
   for dir in M.iterate_parents(parent) do
     workspace_pubspec = M.join(dir, "pubspec.yaml")
-    if is_pub_workspace_root(workspace_pubspec) then return dir end
+    if is_pub_workspace_root(workspace_pubspec) then
+      return dir
+    end
   end
 
   return root
@@ -176,11 +231,7 @@ end
 
 function M.get_absolute_path(input_path)
   -- Check if the provided path is an absolute path
-  if
-    vim.fn.isdirectory(input_path) == 1
-    and not input_path:match("^/")
-    and not input_path:match("^%a:[/\\]")
-  then
+  if vim.fn.isdirectory(input_path) == 1 and not input_path:match("^/") and not input_path:match("^%a:[/\\]") then
     -- It's a relative path, so expand it to an absolute path
     local absolute_path = vim.fn.fnamemodify(input_path, ":p")
     return absolute_path
@@ -194,7 +245,9 @@ function M.is_flutter_dependency_path(full_path)
   local path_parts = { [[.pub-cache]], [[Pub\Cache]], [[/fvm/versions/]] }
   if full_path then
     for _, path_part in ipairs(path_parts) do
-      if full_path:find(path_part, nil, true) then return true end
+      if full_path:find(path_part, nil, true) then
+        return true
+      end
     end
   end
   return false

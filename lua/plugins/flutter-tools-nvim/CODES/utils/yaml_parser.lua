@@ -38,16 +38,24 @@ local function select(list, pred)
   local selected = {}
   for i = 0, #list do
     local v = list[i]
-    if v and pred(v, i) then tinsert(selected, v) end
+    if v and pred(v, i) then
+      tinsert(selected, v)
+    end
   end
   return selected
 end
 
-local function startswith(haystack, needle) return ssub(haystack, 1, #needle) == needle end
+local function startswith(haystack, needle)
+  return ssub(haystack, 1, #needle) == needle
+end
 
-local function ltrim(str) return smatch(str, "^%s*(.-)$") end
+local function ltrim(str)
+  return smatch(str, "^%s*(.-)$")
+end
 
-local function rtrim(str) return smatch(str, "^(.-)%s*$") end
+local function rtrim(str)
+  return smatch(str, "^(.-)%s*$")
+end
 
 -------------------------------------------------------------------------------
 -- Implementation.
@@ -55,7 +63,9 @@ local function rtrim(str) return smatch(str, "^(.-)%s*$") end
 local class = { __meta = {} }
 function class.__meta.__call(cls, ...)
   local self = setmetatable({}, cls)
-  if cls.__init then cls.__init(self, ...) end
+  if cls.__init then
+    cls.__init(self, ...)
+  end
   return self
 end
 
@@ -84,10 +94,16 @@ local types = {
 }
 
 local Null = types.null
-function Null.__tostring() return "yaml.null" end
+function Null.__tostring()
+  return "yaml.null"
+end
 function Null.isnull(v)
-  if v == nil then return true end
-  if type(v) == "table" and getmetatable(v) == Null then return true end
+  if v == nil then
+    return true
+  end
+  if type(v) == "table" and getmetatable(v) == Null then
+    return true
+  end
   return false
 end
 local null = Null()
@@ -124,8 +140,12 @@ function types.timestamp:__tostring()
 end
 
 function types.timestamp:gettz()
-  if not self.timezone then return "" end
-  if self.timezone == 0 then return "Z" end
+  if not self.timezone then
+    return ""
+  end
+  if self.timezone == 0 then
+    return "Z"
+  end
   local sign = self.timezone > 0
   local z = sign and self.timezone or -self.timezone
   local zh = math.floor(z)
@@ -135,17 +155,23 @@ end
 
 local function countindent(line)
   local _, j = sfind(line, "^%s+")
-  if not j then return 0, line end
+  if not j then
+    return 0, line
+  end
   return j, ssub(line, j + 1)
 end
 
 local function parsestring(line, stopper)
   stopper = stopper or ""
   local q = ssub(line, 1, 1)
-  if q == " " or q == "\t" then return parsestring(ssub(line, 2)) end
+  if q == " " or q == "\t" then
+    return parsestring(ssub(line, 2))
+  end
   if q == "'" then
     local i = sfind(line, "'", 2, true)
-    if not i then return nil, line end
+    if not i then
+      return nil, line
+    end
     return ssub(line, 2, i - 1), ssub(line, i + 1)
   end
   if q == '"' then
@@ -184,7 +210,9 @@ local function parsestring(line, stopper)
     return nil, line
   end
   if q == "-" or q == ":" then
-    if ssub(line, 2, 2) == " " or #line == 1 then return nil, line end
+    if ssub(line, 2, 2) == " " or #line == 1 then
+      return nil, line
+    end
   end
   local buf = ""
   while #line > 0 do
@@ -203,7 +231,9 @@ local function parsestring(line, stopper)
   return rtrim(buf), line
 end
 
-local function isemptyline(line) return line == "" or sfind(line, "^%s*$") or sfind(line, "^%s*#") end
+local function isemptyline(line)
+  return line == "" or sfind(line, "^%s*$") or sfind(line, "^%s*#")
+end
 
 local function equalsline(line, needle)
   return startswith(line, needle) and isemptyline(ssub(line, #needle + 1))
@@ -245,7 +275,9 @@ local function parseflowstyle(line, lines)
       line = ssub(line, 2)
     elseif c == "," then
       local value = tremove(stack)
-      if value.t == ":" or value.t == "{" or value.t == "[" then error() end
+      if value.t == ":" or value.t == "{" or value.t == "[" then
+        error()
+      end
       if stack[#stack].t == ":" then
         -- map
         local key = tremove(stack)
@@ -261,7 +293,9 @@ local function parseflowstyle(line, lines)
       line = ssub(line, 2)
     elseif c == "}" then
       if stack[#stack].t == "{" then
-        if #stack == 1 then break end
+        if #stack == 1 then
+          break
+        end
         stack[#stack].t = "}"
         line = ssub(line, 2)
       else
@@ -269,7 +303,9 @@ local function parseflowstyle(line, lines)
       end
     elseif c == "]" then
       if stack[#stack].t == "[" then
-        if #stack == 1 then break end
+        if #stack == 1 then
+          break
+        end
         stack[#stack].t = "]"
         line = ssub(line, 2)
       else
@@ -277,7 +313,9 @@ local function parseflowstyle(line, lines)
       end
     else
       local s, rest = parsestring(line, ",{}[]")
-      if not s then error("invalid flowstyle line: " .. line) end
+      if not s then
+        error("invalid flowstyle line: " .. line)
+      end
       tinsert(stack, { v = s, t = "s" })
       line = rest
     end
@@ -286,14 +324,18 @@ local function parseflowstyle(line, lines)
 end
 
 local function parseblockstylestring(line, lines, indent)
-  if #lines == 0 then error("failed to find multi-line scalar content") end
+  if #lines == 0 then
+    error("failed to find multi-line scalar content")
+  end
   local s = {}
   local firstindent = -1
   local endline = -1
   for i = 1, #lines do
     local ln = lines[i]
     local idt = countindent(ln)
-    if idt <= indent then break end
+    if idt <= indent then
+      break
+    end
     if ln == "" then
       tinsert(s, "")
     else
@@ -344,8 +386,12 @@ local function parseblockstylestring(line, lines, indent)
       eonl = eonl + 1
     end
   end
-  if striptrailing then eonl = 0 end
-  if newlineatend then eonl = eonl + 1 end
+  if striptrailing then
+    eonl = 0
+  end
+  if newlineatend then
+    eonl = eonl + 1
+  end
   for i = endline, 1, -1 do
     tremove(lines, i)
   end
@@ -354,11 +400,19 @@ end
 
 local function parsetimestamp(line)
   local _, p1, y, m, d = sfind(line, "^(%d%d%d%d)%-(%d%d)%-(%d%d)")
-  if not p1 then return nil, line end
-  if p1 == #line then return types.timestamp(y, m, d), "" end
+  if not p1 then
+    return nil, line
+  end
+  if p1 == #line then
+    return types.timestamp(y, m, d), ""
+  end
   local _, p2, h, i, s = sfind(line, "^[Tt ](%d+):(%d+):(%d+)", p1 + 1)
-  if not p2 then return types.timestamp(y, m, d), ssub(line, p1 + 1) end
-  if p2 == #line then return types.timestamp(y, m, d, h, i, s), "" end
+  if not p2 then
+    return types.timestamp(y, m, d), ssub(line, p1 + 1)
+  end
+  if p2 == #line then
+    return types.timestamp(y, m, d, h, i, s), ""
+  end
   local _, p3, f = sfind(line, "^%.(%d+)", p2 + 1)
   if not p3 then
     p3 = p2
@@ -369,7 +423,9 @@ local function parsetimestamp(line)
   if p4 then
     z = tonumber(z)
     local _, p5, zi = sfind(line, "^:(%d+)", p4 + 1)
-    if p5 then z = z + tonumber(zi) / 60 end
+    if p5 then
+      z = z + tonumber(zi) / 60
+    end
     z = zs == "-" and -tonumber(z) or tonumber(z)
   elseif zc == "Z" then
     p4 = p3 + 1
@@ -386,24 +442,36 @@ local function parsescalar(line, lines, indent)
   line = gsub(line, "^%s*#.*$", "") -- comment only -> ''
   line = gsub(line, "^%s*", "") -- trim head spaces
 
-  if line == "" or line == "~" then return null end
+  if line == "" or line == "~" then
+    return null
+  end
 
   local ts, _ = parsetimestamp(line)
-  if ts then return ts end
+  if ts then
+    return ts
+  end
 
   local s, _ = parsestring(line)
   -- startswith quote ... string
   -- not startswith quote ... maybe string
-  if s and (startswith(line, '"') or startswith(line, "'")) then return s end
+  if s and (startswith(line, '"') or startswith(line, "'")) then
+    return s
+  end
 
   if startswith("!", line) then -- unexpected tagchar
     error("unsupported line: " .. line)
   end
 
-  if equalsline(line, "{}") then return {} end
-  if equalsline(line, "[]") then return {} end
+  if equalsline(line, "{}") then
+    return {}
+  end
+  if equalsline(line, "[]") then
+    return {}
+  end
 
-  if startswith(line, "{") or startswith(line, "[") then return parseflowstyle(line, lines) end
+  if startswith(line, "{") or startswith(line, "[") then
+    return parseflowstyle(line, lines)
+  end
 
   if startswith(line, "|") or startswith(line, ">") then
     return parseblockstylestring(line, lines, indent)
@@ -438,7 +506,9 @@ local parsemap -- : func
 
 local function parseseq(line, lines, indent)
   local seq = setmetatable({}, types.seq)
-  if line ~= "" then error() end
+  if line ~= "" then
+    error()
+  end
   while #lines > 0 do
     -- Check for a new document
     line = lines[1]
@@ -460,7 +530,9 @@ local function parseseq(line, lines, indent)
     local i, j = sfind(line, "%-%s+")
     if not i then
       i, j = sfind(line, "%-$")
-      if not i then return seq end
+      if not i then
+        return seq
+      end
     end
     local rest = ssub(line, j + 1)
 
@@ -506,7 +578,9 @@ local function parseseq(line, lines, indent)
 end
 
 local function parseset(line, lines, indent)
-  if not isemptyline(line) then error("not seq line: " .. line) end
+  if not isemptyline(line) then
+    error("not seq line: " .. line)
+  end
   local set = setmetatable({}, types.set)
   while #lines > 0 do
     -- Check for a new document
@@ -529,7 +603,9 @@ local function parseset(line, lines, indent)
     local i, j = sfind(line, "%?%s+")
     if not i then
       i, j = sfind(line, "%?$")
-      if not i then return set end
+      if not i then
+        return set
+      end
     end
     local rest = ssub(line, j + 1)
 
@@ -564,7 +640,9 @@ local function parseset(line, lines, indent)
 end
 
 function parsemap(line, lines, indent)
-  if not isemptyline(line) then error("not map line: " .. line) end
+  if not isemptyline(line) then
+    error("not map line: " .. line)
+  end
   local map = setmetatable({}, types.map)
   while #lines > 0 do
     -- Check for a new document
@@ -644,9 +722,13 @@ end
 
 -- : (list<str>)->dict
 local function parsedocuments(lines)
-  lines = select(lines, function(s) return not isemptyline(s) end)
+  lines = select(lines, function(s)
+    return not isemptyline(s)
+  end)
 
-  if sfind(lines[1], "^%%YAML") then tremove(lines, 1) end
+  if sfind(lines[1], "^%%YAML") then
+    tremove(lines, 1)
+  end
 
   local root = {}
   local in_document = false
@@ -708,7 +790,9 @@ local function parse(source)
   end
 
   local docs = parsedocuments(lines)
-  if #docs == 1 then return docs[1] end
+  if #docs == 1 then
+    return docs[1]
+  end
 
   return docs
 end

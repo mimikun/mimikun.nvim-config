@@ -65,7 +65,9 @@ end
 ---
 ---@param rgba RGBA
 ---@return string 6 digit hex
-function M.rgba_to_hex(rgba, bg_rgb) return rgb_to_hex(M.rgba_to_rgb(rgba, bg_rgb)) end
+function M.rgba_to_hex(rgba, bg_rgb)
+  return rgb_to_hex(M.rgba_to_rgb(rgba, bg_rgb))
+end
 
 --- Returns a table containing the RGB values encoded inside 24 least
 --- significant bits of the number rgb_24bit
@@ -85,7 +87,9 @@ end
 ---@param rgb RGB
 ---@return number lightness in the range [0,100]
 function M.perceived_lightness(rgb)
-  local function gamma_encode(v) return v / 255 end
+  local function gamma_encode(v)
+    return v / 255
+  end
 
   local function linearize(v)
     return v <= 0.04045 and v / 12.92 or math.pow((v + 0.055) / 1.055, 2.4)
@@ -169,16 +173,24 @@ end
 function M.on_document_color(err, result, ctx, conf)
   local client_id = ctx.client_id
   local bufnr = ctx.bufnr
-  if err then return ui.notify(err, ui.ERROR) end
-  if not bufnr or not client_id then return end
+  if err then
+    return ui.notify(err, ui.ERROR)
+  end
+  if not bufnr or not client_id then
+    return
+  end
   M.buf_clear_color(client_id, bufnr)
-  if not result then return end
+  if not result then
+    return
+  end
   M.buf_color(client_id, bufnr, result, conf)
 end
 
 local function get_background_color()
   local normal_bg = utils.get_hl("Normal", "bg")
-  if not normal_bg then return end
+  if not normal_bg then
+    return
+  end
   return M.decode_24bit_rgb(normal_bg)
 end
 
@@ -191,21 +203,31 @@ end
 function M.buf_color(client_id, bufnr, color_infos, _)
   vim.validate("bufnr", bufnr, "number", true)
   vim.validate("color_infos", color_infos, "table", true)
-  if not color_infos or not bufnr then return end
+  if not color_infos or not bufnr then
+    return
+  end
   local c = config.lsp.color
 
   local background_color = c.background_color or get_background_color()
   -- FIXME: currently background_color is required to derive the rgb values for the colors
   -- till there is a good solution for this transparent backgrounds won't work with lsp colors
-  if not background_color then return end
+  if not background_color then
+    return
+  end
 
   for _, color_info in ipairs(color_infos) do
     local rgba, range = color_info.color, color_info.range
     local r, g, b, a = rgba.red * 255, rgba.green * 255, rgba.blue * 255, rgba.alpha
     local rgb = M.rgba_to_rgb({ r = r, g = g, b = b, a = a }, background_color)
-    if c.background then color_background(client_id, bufnr, range, rgb) end
-    if c.foreground then color_foreground(client_id, bufnr, range, rgb) end
-    if c.virtual_text then color_virtual_text(client_id, bufnr, range, rgb, c.virtual_text_str) end
+    if c.background then
+      color_background(client_id, bufnr, range, rgb)
+    end
+    if c.foreground then
+      color_foreground(client_id, bufnr, range, rgb)
+    end
+    if c.virtual_text then
+      color_virtual_text(client_id, bufnr, range, rgb, c.virtual_text_str)
+    end
   end
 end
 
@@ -215,7 +237,9 @@ end
 function M.buf_clear_color(client_id, bufnr)
   vim.validate("client_id", client_id, "number", true)
   vim.validate("bufnr", bufnr, "number", true)
-  if api.nvim_buf_is_valid(bufnr) then api.nvim_buf_clear_namespace(bufnr, CLIENT_NS, 0, -1) end
+  if api.nvim_buf_is_valid(bufnr) then
+    api.nvim_buf_clear_namespace(bufnr, CLIENT_NS, 0, -1)
+  end
 end
 
 return M

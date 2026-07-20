@@ -39,9 +39,13 @@ local function first_marker_index(lines, lnum, offset)
   -- so this function makes it one based to correctly
   -- access the line
   local line = lines[lnum + 1]
-  if not line then return -1 end
+  if not line then
+    return -1
+  end
   local index = line:find("%S")
-  if not index then return -1 end
+  if not index then
+    return -1
+  end
   return index - offset
 end
 
@@ -61,8 +65,7 @@ local function get_guide_character(lnum, end_line, parent_start, indent_size, ch
       return markers.middle .. markers.horizontal:rep(child_indent)
     end
   end
-  return lnum ~= end_line and markers.vertical
-    or markers.bottom .. markers.horizontal:rep(indent_size)
+  return lnum ~= end_line and markers.vertical or markers.bottom .. markers.horizontal:rep(indent_size)
 end
 
 -- Marshal the lsp flutter outline into a table of lines and characters
@@ -84,7 +87,9 @@ end
 ---@return table<number, table>?
 local function collect_guides(lines, data, guides)
   guides = guides or {}
-  if not data.children or vim.tbl_isempty(data.children) then return end
+  if not data.children or vim.tbl_isempty(data.children) then
+    return
+  end
   if data.kind == widget_kind then
     -- add one to the start line number because we want each marker to start beneath the symbol
     local start_lnum = data.range.start.line + 1
@@ -129,25 +134,20 @@ local function render_guides(bufnum, guides, conf)
   -- would it be more performant to do some sort of diff and patched
   -- update rather than replace the namespace each time, similar to Dart Code
   api.nvim_buf_clear_namespace(bufnum, widget_outline_ns_id, 0, -1)
-  if not guides then return end
+  if not guides then
+    return
+  end
   for lnum, guide in pairs(guides) do
     for start, character in pairs(guide) do
-      local success, msg =
-        pcall(api.nvim_buf_set_extmark, bufnum, widget_outline_ns_id, lnum, start, {
-          virt_text = { { character, hl_group } },
-          virt_text_pos = "overlay",
-          hl_mode = "combine",
-        })
+      local success, msg = pcall(api.nvim_buf_set_extmark, bufnum, widget_outline_ns_id, lnum, start, {
+        virt_text = { { character, hl_group } },
+        virt_text_pos = "overlay",
+        hl_mode = "combine",
+      })
       if not success and conf.debug then
         local name = api.nvim_buf_get_name(bufnum)
         ui.notify(
-          fmt(
-            "error drawing widget guide for %s at line %d, col %d.\nbecause: %s",
-            name,
-            lnum,
-            start,
-            msg
-          ),
+          fmt("error drawing widget guide for %s at line %d, col %d.\nbecause: %s", name, lnum, start, msg),
           ui.ERROR
         )
       end
@@ -163,17 +163,16 @@ function M.setup()
 end
 
 local function is_buf_valid(bufnum)
-  return bufnum
-    and api.nvim_buf_is_valid(bufnum)
-    and not vim.wo.previewwindow
-    and vim.bo.buftype == ""
+  return bufnum and api.nvim_buf_is_valid(bufnum) and not vim.wo.previewwindow and vim.bo.buftype == ""
 end
 
 function M.widget_guides(_, data, _, _)
   local conf = config.widget_guides
   if conf.enabled then
     local bufnum = vim.uri_to_bufnr(data.uri)
-    if not is_buf_valid(bufnum) then return end
+    if not is_buf_valid(bufnum) then
+      return
+    end
     -- TODO: should this be limited to the view port using vim.fn.line('w0'|'w$')
     -- although ideally having to track what the current visible
     -- segment of a buffer is and trying to apply the extmarks in

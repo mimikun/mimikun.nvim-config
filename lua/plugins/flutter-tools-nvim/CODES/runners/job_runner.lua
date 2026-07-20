@@ -23,18 +23,11 @@ local command_keys = {
   brightness = "b",
 }
 
-function JobRunner:is_running() return run_job ~= nil end
+function JobRunner:is_running()
+  return run_job ~= nil
+end
 
-function JobRunner:run(
-  opts,
-  paths,
-  args,
-  cwd,
-  on_run_data,
-  on_run_exit,
-  is_flutter_project,
-  project_config
-)
+function JobRunner:run(opts, paths, args, cwd, on_run_data, on_run_exit, is_flutter_project, project_config)
   local command, command_args
   if is_flutter_project then
     command = paths.flutter_bin
@@ -50,15 +43,19 @@ function JobRunner:run(
     command = command,
     args = command_args,
     cwd = cwd,
-    on_start = function() utils.emit_event(utils.events.APP_STARTED) end,
+    on_start = function()
+      utils.emit_event(utils.events.APP_STARTED)
+    end,
     on_stdout = vim.schedule_wrap(function(_, data, _)
       on_run_data(false, data)
       dev_tools.handle_log(data)
     end),
-    on_stderr = vim.schedule_wrap(function(_, data, _) on_run_data(true, data) end),
-    on_exit = vim.schedule_wrap(
-      function(j, _) on_run_exit(j:result(), args, opts, project_config) end
-    ),
+    on_stderr = vim.schedule_wrap(function(_, data, _)
+      on_run_data(true, data)
+    end),
+    on_exit = vim.schedule_wrap(function(j, _)
+      on_run_exit(j:result(), args, opts, project_config)
+    end),
   })
   run_job:start()
 end
@@ -72,7 +69,9 @@ function JobRunner:send(cmd, quiet)
   end
 end
 
-function JobRunner:cleanup() run_job = nil end
+function JobRunner:cleanup()
+  run_job = nil
+end
 
 function JobRunner:attach(paths, args, cwd, on_run_data, on_run_exit)
   local command = paths.flutter_bin
@@ -82,13 +81,19 @@ function JobRunner:attach(paths, args, cwd, on_run_data, on_run_exit)
     command = command,
     args = command_args,
     cwd = cwd,
-    on_start = function() utils.emit_event(utils.events.APP_STARTED) end,
+    on_start = function()
+      utils.emit_event(utils.events.APP_STARTED)
+    end,
     on_stdout = vim.schedule_wrap(function(_, data, _)
       on_run_data(false, data)
       dev_tools.handle_log(data)
     end),
-    on_stderr = vim.schedule_wrap(function(_, data, _) on_run_data(true, data) end),
-    on_exit = vim.schedule_wrap(function(j, _) on_run_exit(j:result(), args) end),
+    on_stderr = vim.schedule_wrap(function(_, data, _)
+      on_run_data(true, data)
+    end),
+    on_exit = vim.schedule_wrap(function(j, _)
+      on_run_exit(j:result(), args)
+    end),
   })
   run_job:start()
 end

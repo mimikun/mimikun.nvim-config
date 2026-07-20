@@ -40,19 +40,27 @@ local has_notified_new_flutter_version = false
 local function use_debugger_runner(force_debug)
   if force_debug or config.debugger.enabled then
     local dap_ok, _ = pcall(require, "dap")
-    if dap_ok then return true end
+    if dap_ok then
+      return true
+    end
     ui.notify("debugger runner was request but nvim-dap is not installed!", ui.ERROR)
     return false
   end
   return false
 end
 
-function M.current_device() return current_device end
+function M.current_device()
+  return current_device
+end
 
-function M.is_running() return runner ~= nil and runner:is_running() end
+function M.is_running()
+  return runner ~= nil and runner:is_running()
+end
 
 local function match_error_string(line)
-  if not line then return false end
+  if not line then
+    return false
+  end
   -- match the error string if no devices are setup
   if line:match("No supported devices connected") ~= nil then
     -- match the error string returned if multiple devices are matched
@@ -67,7 +75,9 @@ end
 local function has_recoverable_error(lines)
   for _, line in pairs(lines) do
     local match, msg = match_error_string(line)
-    if match then return match, msg end
+    if match then
+      return match, msg
+    end
   end
   return false, nil
 end
@@ -75,12 +85,16 @@ end
 ---Handle output from flutter run command
 ---@param is_err boolean if this is stdout or stderr
 local function on_run_data(is_err, data)
-  if is_err and config.dev_log.notify_errors then ui.notify(data, ui.ERROR, { timeout = 5000 }) end
+  if is_err and config.dev_log.notify_errors then
+    ui.notify(data, ui.ERROR, { timeout = 5000 })
+  end
   dev_log.log(data)
 end
 
 local function shutdown()
-  if runner then runner:cleanup() end
+  if runner then
+    runner:cleanup()
+  end
   runner = nil
   current_device = nil
   utils.emit_event(utils.events.PROJECT_CONFIG_CHANGED)
@@ -102,7 +116,9 @@ local function on_run_exit(result, cli_args, opts, project_config, launch_config
       lines = lines,
       on_select = function(device)
         vim.list_extend(cli_args, { "-d", device.id })
-        if launch_config then vim.list_extend(launch_config.args, { "-d", device.id }) end
+        if launch_config then
+          vim.list_extend(launch_config.args, { "-d", device.id })
+        end
         opts = opts or {}
         opts.cli_args = cli_args
 
@@ -132,7 +148,9 @@ local function select_project_config(callback)
   vim.ui.select(project_config, {
     prompt = "Select a project configuration",
     format_item = function(item)
-      if item.name then return item.name end
+      if item.name then
+        return item.name
+      end
       return vim.inspect(item)
     end,
   }, function(selected)
@@ -159,12 +177,24 @@ local function get_run_args(opts, conf)
   local dev_url = dev_tools.get_url()
   local additional_args = conf and conf.additional_args
 
-  if not use_debugger_runner(opts.force_debug) then vim.list_extend(args, { "run" }) end
-  if not cmd_args and device then vim.list_extend(args, { "-d", device }) end
-  if web_port then vim.list_extend(args, { "--web-port", web_port }) end
-  if cmd_args then vim.list_extend(args, cmd_args) end
-  if flavor then vim.list_extend(args, { "--flavor", flavor }) end
-  if target then vim.list_extend(args, { "--target", target }) end
+  if not use_debugger_runner(opts.force_debug) then
+    vim.list_extend(args, { "run" })
+  end
+  if not cmd_args and device then
+    vim.list_extend(args, { "-d", device })
+  end
+  if web_port then
+    vim.list_extend(args, { "--web-port", web_port })
+  end
+  if cmd_args then
+    vim.list_extend(args, cmd_args)
+  end
+  if flavor then
+    vim.list_extend(args, { "--flavor", flavor })
+  end
+  if target then
+    vim.list_extend(args, { "--target", target })
+  end
   if dart_define_from_file then
     vim.list_extend(args, { "--dart-define-from-file", dart_define_from_file })
   end
@@ -180,8 +210,12 @@ local function get_run_args(opts, conf)
       vim.list_extend(args, { "--release" })
     end -- else default to debug
   end
-  if dev_url then vim.list_extend(args, { "--devtools-server-address", dev_url }) end
-  if additional_args then vim.list_extend(args, additional_args) end
+  if dev_url then
+    vim.list_extend(args, { "--devtools-server-address", dev_url })
+  end
+  if additional_args then
+    vim.list_extend(args, additional_args)
+  end
   return args
 end
 
@@ -189,14 +223,18 @@ end
 --- @return Device?
 local function get_device_from_args(args)
   for i = 1, #args - 1 do
-    if args[i] == "-d" then return { id = args[i + 1] } end
+    if args[i] == "-d" then
+      return { id = args[i + 1] }
+    end
   end
 end
 
 --@return table?
 local function parse_yaml(str)
   local ok, yaml = pcall(parser.parse, str)
-  if not ok then return nil end
+  if not ok then
+    return nil
+  end
   return yaml
 end
 
@@ -206,11 +244,15 @@ local function has_flutter_dependency_in_pubspec(cwd)
   -- we assume that the project is a flutter project.
   local default_has_flutter_dependency = true
   local pubspec_path = vim.fn.glob(path.join(cwd, "pubspec.yaml"))
-  if pubspec_path == "" then return default_has_flutter_dependency end
+  if pubspec_path == "" then
+    return default_has_flutter_dependency
+  end
   local pubspec_content = vim.fn.readfile(pubspec_path)
   local joined_content = table.concat(pubspec_content, "\n")
   local pubspec = parse_yaml(joined_content)
-  if not pubspec then return default_has_flutter_dependency end
+  if not pubspec then
+    return default_has_flutter_dependency
+  end
   --https://github.com/Dart-Code/Dart-Code/blob/43914cd2709d77668e19a4edf3500f996d5c307b/src/shared/utils/fs.ts#L183
   return (
     pubspec.dependencies
@@ -264,10 +306,14 @@ local function run(opts, project_conf, launch_config)
     local run_args
     if is_flutter_project then
       ui.notify("Starting flutter project...")
-      if default_run_args then run_args = default_run_args.flutter end
+      if default_run_args then
+        run_args = default_run_args.flutter
+      end
     else
       ui.notify("Starting dart project...")
-      if default_run_args then run_args = default_run_args.dart end
+      if default_run_args then
+        run_args = default_run_args.dart
+      end
     end
 
     if run_args then
@@ -285,17 +331,7 @@ local function run(opts, project_conf, launch_config)
       end
 
       runner = use_debugger_runner(opts.force_debug) and debugger_runner or job_runner
-      runner:run(
-        opts,
-        paths,
-        args,
-        cwd,
-        on_run_data,
-        on_run_exit,
-        is_flutter_project,
-        project_conf,
-        launch_config
-      )
+      runner:run(opts, paths, args, cwd, on_run_data, on_run_exit, is_flutter_project, project_conf, launch_config)
     end)
   end)
 end
@@ -305,13 +341,15 @@ end
 ---@param project_conf flutter.ProjectConfig?
 ---@param launch_config dap.Configuration?
 function M.run(opts, project_conf, launch_config)
-  if M.is_running() then return ui.notify("Flutter is already running!") end
+  if M.is_running() then
+    return ui.notify("Flutter is already running!")
+  end
   if project_conf then
     run(opts, project_conf, launch_config)
   else
-    select_project_config(
-      function(selected_project_conf) run(opts, selected_project_conf, launch_config) end
-    )
+    select_project_config(function(selected_project_conf)
+      run(opts, selected_project_conf, launch_config)
+    end)
   end
 end
 
@@ -320,7 +358,9 @@ local function attach(opts)
   opts = opts or {}
   executable.get(function(paths)
     local args = opts.cli_args or opts.args or {}
-    if not use_debugger_runner() then table.insert(args, 1, "attach") end
+    if not use_debugger_runner() then
+      table.insert(args, 1, "attach")
+    end
 
     local cwd = config_utils.get_cwd()
     ui.notify("Attaching flutter project...")
@@ -332,9 +372,13 @@ end
 --- Attach to a running app
 ---@param opts AttachOpts
 function M.attach(opts)
-  if type(opts) == "string" then opts = { args = opts ~= "" and vim.split(opts, " ") or {} } end
+  if type(opts) == "string" then
+    opts = { args = opts ~= "" and vim.split(opts, " ") or {} }
+  end
   opts = opts or {}
-  if M.is_running() then return ui.notify("Flutter is already running!") end
+  if M.is_running() then
+    return ui.notify("Flutter is already running!")
+  end
   attach(opts)
 end
 
@@ -345,19 +389,25 @@ end
 local function send(cmd, quiet, on_send, on_response)
   if M.is_running() and runner then
     runner:send(cmd, quiet, on_response)
-    if on_send then on_send() end
+    if on_send then
+      on_send()
+    end
   elseif not quiet then
     ui.notify("Sorry! Flutter is not running")
   end
 end
 
 ---@param quiet boolean?
-function M.reload(quiet) send("reload", quiet) end
+function M.reload(quiet)
+  send("reload", quiet)
+end
 
 ---@param quiet boolean?
 function M.restart(quiet)
   send("restart", quiet, function()
-    if not quiet then ui.notify("Restarting...", nil, { timeout = 1500 }) end
+    if not quiet then
+      ui.notify("Restarting...", nil, { timeout = 1500 })
+    end
   end)
 end
 
@@ -381,22 +431,34 @@ function M.change_target_platform(quiet)
 end
 
 ---@param quiet boolean?
-function M.brightness(quiet) send("brightness", quiet) end
+function M.brightness(quiet)
+  send("brightness", quiet)
+end
 
 ---@param quiet boolean?
-function M.visual_debug(quiet) send("visual_debug", quiet) end
+function M.visual_debug(quiet)
+  send("visual_debug", quiet)
+end
 
 ---@param quiet boolean?
-function M.performance_overlay(quiet) send("performance_overlay", quiet) end
+function M.performance_overlay(quiet)
+  send("performance_overlay", quiet)
+end
 
 ---@param quiet boolean?
-function M.repaint_rainbow(quiet) send("repaint_rainbow", quiet) end
+function M.repaint_rainbow(quiet)
+  send("repaint_rainbow", quiet)
+end
 
 ---@param quiet boolean?
-function M.slow_animations(quiet) send("slow_animations", quiet) end
+function M.slow_animations(quiet)
+  send("slow_animations", quiet)
+end
 
 ---@param quiet boolean?
-function M.detach(quiet) send("detach", quiet) end
+function M.detach(quiet)
+  send("detach", quiet)
+end
 
 function M.copy_profiler_url()
   if not M.is_running() then
@@ -417,16 +479,24 @@ function M.copy_profiler_url()
 end
 
 ---@param quiet boolean?
-function M.open_dev_tools(quiet) send("open_dev_tools", quiet) end
+function M.open_dev_tools(quiet)
+  send("open_dev_tools", quiet)
+end
 
 ---@param quiet boolean
-function M.generate(quiet) send("generate", quiet) end
+function M.generate(quiet)
+  send("generate", quiet)
+end
 
 ---@param quiet boolean
-function M.inspect_widget(quiet) send("inspect_widget", quiet) end
+function M.inspect_widget(quiet)
+  send("inspect_widget", quiet)
+end
 
 ---@param quiet boolean
-function M.paint_baselines(quiet) send("paint_baselines", quiet) end
+function M.paint_baselines(quiet)
+  send("paint_baselines", quiet)
+end
 
 -----------------------------------------------------------------------------//
 -- Pub commands
@@ -479,7 +549,9 @@ function M.pub_upgrade(cmd_args)
     executable.flutter(function(cmd)
       local notify_timeout = 10000
       local args = { "pub", "upgrade" }
-      if cmd_args then vim.list_extend(args, cmd_args) end
+      if cmd_args then
+        vim.list_extend(args, cmd_args)
+      end
       pub_upgrade_job = Job:new({
         command = cmd,
         args = args,
@@ -573,8 +645,12 @@ end
 local function set_args_from_project_config(args, project_conf)
   local flavor = project_conf and project_conf.flavor
   local device = project_conf and project_conf.device
-  if flavor then vim.list_extend(args, { "--flavor", flavor }) end
-  if device then vim.list_extend(args, { "-d", device }) end
+  if flavor then
+    vim.list_extend(args, { "--flavor", flavor })
+  end
+  if device then
+    vim.list_extend(args, { "-d", device })
+  end
 end
 
 ---@type Job?

@@ -49,7 +49,9 @@ local function dart_sdk_root(paths)
     -- On Linux installations with snap the dart SDK can be further nested inside a bin directory
     -- so it's /bin/cache/dart-sdk whereas else where it is /cache/dart-sdk
     local segments = { paths.flutter_sdk, "cache" }
-    if not path.is_dir(path.join(unpack(segments))) then table.insert(segments, 2, "bin") end
+    if not path.is_dir(path.join(unpack(segments))) then
+      table.insert(segments, 2, "bin")
+    end
     if path.is_dir(path.join(unpack(segments))) then
       -- remove the /cache/ directory as it's already part of the SDK path above
       segments[#segments] = nil
@@ -63,7 +65,9 @@ local function dart_sdk_root(paths)
     return path.join(flutter_bin, dart_sdk)
   end
 
-  if utils.executable("dart") then return fn.resolve(fn.exepath("dart")) end
+  if utils.executable("dart") then
+    return fn.resolve(fn.exepath("dart"))
+  end
 
   return ""
 end
@@ -78,7 +82,9 @@ end
 ---@return flutter.internal.Paths?
 local function get_default_binaries()
   local flutter_bin = fn.resolve(fn.exepath("flutter"))
-  if #flutter_bin <= 0 then return nil end
+  if #flutter_bin <= 0 then
+    return nil
+  end
   return {
     flutter_bin = flutter_bin,
     dart_bin = fn.resolve(fn.exepath("dart")),
@@ -97,13 +103,9 @@ local function path_from_lookup_cmd(lookup_cmd, callback)
 
   local job = Job:new({ command = cmd, args = args })
 
-  job:after_failure(
-    vim.schedule_wrap(
-      function()
-        ui.notify(string.format("Error running %s", lookup_cmd), ui.ERROR, { timeout = 5000 })
-      end
-    )
-  )
+  job:after_failure(vim.schedule_wrap(function()
+    ui.notify(string.format("Error running %s", lookup_cmd), ui.ERROR, { timeout = 5000 })
+  end))
 
   job:after_success(vim.schedule_wrap(function(j, _)
     local result = j:result()
@@ -123,24 +125,29 @@ local function path_from_lookup_cmd(lookup_cmd, callback)
 end
 
 local function flutter_bin_from_fvm()
-  local fvm_root =
-    fs.dirname(fs.find(".fvm", { path = uv.cwd(), upward = true, type = "directory" })[1])
+  local fvm_root = fs.dirname(fs.find(".fvm", { path = uv.cwd(), upward = true, type = "directory" })[1])
 
   local binary_name = path.is_windows and "flutter.bat" or "flutter"
   local flutter_bin_symlink = path.join(fvm_root, ".fvm", "flutter_sdk", "bin", binary_name)
   flutter_bin_symlink = fn.exepath(flutter_bin_symlink)
 
   local flutter_bin = uv.fs_realpath(flutter_bin_symlink)
-  if path.exists(flutter_bin_symlink) and path.exists(flutter_bin) then return flutter_bin end
+  if path.exists(flutter_bin_symlink) and path.exists(flutter_bin) then
+    return flutter_bin
+  end
 end
 
 --- Reset the internally cached SDK paths.
-function M.reset_paths() cached_paths = nil end
+function M.reset_paths()
+  cached_paths = nil
+end
 
 --- Fetch the paths to the users binaries.
 ---@param callback fun(paths: flutter.Paths):nil
 function M.get(callback)
-  if cached_paths then return callback(cached_paths) end
+  if cached_paths then
+    return callback(cached_paths)
+  end
   if config.fvm then
     local flutter_bin = flutter_bin_from_fvm()
     if flutter_bin then
@@ -205,13 +212,17 @@ end
 --- Fetch the path to the users flutter installation.
 ---@param callback fun(flutter_bin: string):nil
 function M.flutter(callback)
-  M.get(function(paths) callback(paths.flutter_bin) end)
+  M.get(function(paths)
+    callback(paths.flutter_bin)
+  end)
 end
 
 --- Fetch the path to the users dart installation.
 ---@param callback fun(dart_bin: string):nil
 function M.dart(callback)
-  M.get(function(paths) callback(paths.dart_bin) end)
+  M.get(function(paths)
+    callback(paths.dart_bin)
+  end)
 end
 
 return M

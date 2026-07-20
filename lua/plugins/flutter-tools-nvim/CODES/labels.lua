@@ -33,11 +33,15 @@ end
 --- returns a function which handles rendering floating labels
 function M.closing_tags(err, response, _)
   local opts = config.closing_tags
-  if err or not opts.enabled then return end
+  if err or not opts.enabled then
+    return
+  end
   local uri = response.uri
   -- This check is meant to prevent stray events from over-writing labels that
   -- don't match the current buffer.
-  if uri ~= vim.uri_from_bufnr(0) then return end
+  if uri ~= vim.uri_from_bufnr(0) then
+    return
+  end
   render_labels(response.labels, opts)
 end
 

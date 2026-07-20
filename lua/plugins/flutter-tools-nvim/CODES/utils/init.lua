@@ -7,14 +7,20 @@ local path = lazy.require("flutter-tools.utils.path") ---@module "flutter-tools.
 
 --- if every item in a table is an empty value return true
 function M.list_is_empty(tbl)
-  if not tbl then return true end
+  if not tbl then
+    return true
+  end
   return table.concat(tbl) == ""
 end
 
 function M.buf_valid(bufnr, name)
   local target = bufnr or name
-  if not target then return false end
-  if bufnr then return api.nvim_buf_is_loaded(bufnr) end
+  if not target then
+    return false
+  end
+  if bufnr then
+    return api.nvim_buf_is_loaded(bufnr)
+  end
   return vim.fn.bufexists(target) > 0 and vim.fn.buflisted(target) > 0
 end
 
@@ -24,7 +30,9 @@ local colorscheme_group = api.nvim_create_augroup("FlutterToolsColorscheme", { c
 ---@param name string
 ---@param opts table
 function M.highlight(name, opts)
-  local function hl() api.nvim_set_hl(0, name, opts) end
+  local function hl()
+    api.nvim_set_hl(0, name, opts)
+  end
   hl()
   api.nvim_create_autocmd("ColorScheme", { callback = hl, group = colorscheme_group })
 end
@@ -48,7 +56,9 @@ end
 ---@return T?
 function M.find(list, compare)
   for _, item in ipairs(list) do
-    if compare(item) then return item end
+    if compare(item) then
+      return item
+    end
   end
 end
 
@@ -73,11 +83,15 @@ function M.merge(t1, t2, skip)
 end
 
 function M.remove_newlines(str)
-  if not str or type(str) ~= "string" then return str end
+  if not str or type(str) ~= "string" then
+    return str
+  end
   return str:gsub("[\n\r]", "")
 end
 
-function M.executable(bin) return fn.executable(bin) > 0 end
+function M.executable(bin)
+  return fn.executable(bin) > 0
+end
 
 ---Get the attribute value of a specified highlight
 ---@param name string
@@ -89,7 +103,9 @@ function M.get_hl(name, attribute)
     return hl[attribute]
   else
     local ok, hl = pcall(api.nvim_get_hl_by_name, name, true)
-    if not ok then return end
+    if not ok then
+      return
+    end
     hl.foreground = hl.foreground and "#" .. bit.tohex(hl.foreground, 6)
     hl.background = hl.background and "#" .. bit.tohex(hl.background, 6)
     local attr = ({ bg = "background", fg = "foreground" })[attribute] or attribute
@@ -98,15 +114,23 @@ function M.get_hl(name, attribute)
 end
 
 function M.open_command()
-  if path.is_mac then return "open", {} end
-  if path.is_linux then return "xdg-open", {} end
-  if path.is_windows then return "cmd.exe", { "/c", "start" } end
+  if path.is_mac then
+    return "open", {}
+  end
+  if path.is_linux then
+    return "xdg-open", {}
+  end
+  if path.is_windows then
+    return "cmd.exe", { "/c", "start" }
+  end
   return nil, nil
 end
 
 ---@param lines string[]
 ---@return string
-function M.join(lines) return table.concat(lines, "\n") end
+function M.join(lines)
+  return table.concat(lines, "\n")
+end
 
 ---Create an lsp handler compatible with the new handler signature
 ---see: https://github.com/neovim/neovim/pull/15504/
@@ -147,6 +171,8 @@ function M.emit_event(event, opts)
 end
 
 M.islist = vim.islist
-M.flatten = function(t) return vim.iter(t):flatten():totable() end
+M.flatten = function(t)
+  return vim.iter(t):flatten():totable()
+end
 
 return M

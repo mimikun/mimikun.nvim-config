@@ -38,8 +38,12 @@ end
 ---@param device_type number
 ---@return Device?
 function M.parse(line, device_type)
-  if line:find("Manufacturer") and line:find("Platform") then return end
-  if line:find("crashdata") then return end
+  if line:find("Manufacturer") and line:find("Platform") then
+    return
+  end
+  if line:find("crashdata") then
+    return
+  end
   local parts = vim.split(line, "•")
   local is_emulator = device_type == EMULATOR
   local name_index = not is_emulator and 1 or 2
@@ -61,20 +65,21 @@ end
 ---@param device_type integer?
 ---@return SelectionEntry[]
 function M.to_selection_entries(result, device_type)
-  if not result or #result < 1 then return {} end
-  if not device_type then device_type = DEVICE end
+  if not result or #result < 1 then
+    return {}
+  end
+  if not device_type then
+    device_type = DEVICE
+  end
   local devices = get_devices(result, device_type)
   if #devices == 0 then
-    return vim.tbl_map(
-      function(item)
-        return {
-          text = item,
-          type = ui.entry_type.INFO,
-          data = nil,
-        }
-      end,
-      result
-    )
+    return vim.tbl_map(function(item)
+      return {
+        text = item,
+        type = ui.entry_type.INFO,
+        data = nil,
+      }
+    end, result)
   end
   return vim.tbl_map(function(device)
     local has_platform = device.platform and device.platform ~= ""
@@ -91,18 +96,26 @@ end
 -----------------------------------------------------------------------------//
 
 ---@param job Job
-local function handle_launch(job) ui.notify(utils.join(job:result())) end
+local function handle_launch(job)
+  ui.notify(utils.join(job:result()))
+end
 
 function M.close_emulator()
-  if M.emulator_job then M.emulator_job:shutdown() end
+  if M.emulator_job then
+    M.emulator_job:shutdown()
+  end
 end
 
 ---@param emulator table
 function M.launch_emulator(emulator)
-  if not emulator then return end
+  if not emulator then
+    return
+  end
   executable.flutter(function(cmd)
     args = { "emulator", "--launch", emulator.id }
-    if emulator.cold_boot then table.insert(args, "--cold") end
+    if emulator.cold_boot then
+      table.insert(args, "--cold")
+    end
     M.emulator_job = Job:new({ command = cmd, args = args })
     M.emulator_job:after_success(vim.schedule_wrap(handle_launch))
     M.emulator_job:start()
@@ -116,7 +129,9 @@ local function show_emulators(result)
     ui.select({
       title = "Flutter emulators",
       lines = lines,
-      on_select = function(emulator) M.launch_emulator(emulator) end,
+      on_select = function(emulator)
+        M.launch_emulator(emulator)
+      end,
     })
   end
 end
@@ -124,12 +139,12 @@ end
 function M.list_emulators()
   executable.flutter(function(cmd)
     local job = Job:new({ command = cmd, args = { "emulators" } })
-    job:after_success(vim.schedule_wrap(function(j) show_emulators(j:result()) end))
-    job:after_failure(
-      vim.schedule_wrap(
-        function(j) return ui.notify(utils.join(j:stderr_result()), ui.ERROR, { timeout = 5000 }) end
-      )
-    )
+    job:after_success(vim.schedule_wrap(function(j)
+      show_emulators(j:result())
+    end))
+    job:after_failure(vim.schedule_wrap(function(j)
+      return ui.notify(utils.join(j:stderr_result()), ui.ERROR, { timeout = 5000 })
+    end))
     job:start()
   end)
 end
@@ -144,7 +159,9 @@ local function show_devices(job)
     ui.select({
       title = "Flutter devices",
       lines = lines,
-      on_select = function(device) commands.run({ device = device }) end,
+      on_select = function(device)
+        commands.run({ device = device })
+      end,
     })
   end
 end

@@ -39,7 +39,9 @@ local icons = setmetatable({
   ENUM_CONSTANT = "",
   DEFAULT = "",
 }, {
-  __index = function(t, _) return t.DEFAULT end,
+  __index = function(t, _)
+    return t.DEFAULT
+  end,
 })
 
 local HL_PREFIX = "FlutterToolsOutline"
@@ -81,12 +83,16 @@ local state = setmetatable({
 })
 
 M.outlines = setmetatable({}, {
-  __index = function() return {} end,
+  __index = function()
+    return {}
+  end,
 })
 -----------------------------------------------------------------------------//
 ---@param name string
 ---@param group string
-local function hl_link(name, group) api.nvim_set_hl(0, HL_PREFIX .. name, { link = group }) end
+local function hl_link(name, group)
+  api.nvim_set_hl(0, HL_PREFIX .. name, { link = group })
+end
 
 ---@param name string
 ---@param value string
@@ -138,7 +144,9 @@ end
 local function parse_outline(result, node, indent, marker)
   indent = indent or ""
   marker = marker or ""
-  if not node then return end
+  if not node then
+    return
+  end
   local range = node.codeRange
   local element = node.element or {}
   local text = {}
@@ -176,7 +184,9 @@ local function parse_outline(result, node, indent, marker)
   })
 
   local children = node.children
-  if not children or vim.tbl_isempty(children) then return end
+  if not children or vim.tbl_isempty(children) then
+    return
+  end
 
   local parent_marker = marker == markers.middle and markers.vertical or " "
   indent = indent .. " " .. parent_marker
@@ -190,7 +200,9 @@ end
 local function get_outline_content()
   local buf = api.nvim_get_current_buf()
   local outline = M.outlines[vim.uri_from_bufnr(buf)]
-  if not outline or vim.tbl_isempty(outline) then return false end
+  if not outline or vim.tbl_isempty(outline) then
+    return false
+  end
   local lines = {}
   local highlights = {}
   for _, item in ipairs(outline) do
@@ -212,10 +224,14 @@ end
 local function refresh_outline(buf, lines, highlights, outline_uri)
   vim.bo[buf].modifiable = true
   local ok = pcall(api.nvim_buf_set_lines, buf, 0, -1, false, lines)
-  if not ok then return end
+  if not ok then
+    return
+  end
   vim.bo[buf].modifiable = false
   vim.b[buf].outline_uri = outline_uri
-  if highlights then ui.add_highlights(state.outline_buf, highlights) end
+  if highlights then
+    ui.add_highlights(state.outline_buf, highlights)
+  end
 end
 
 local function is_outline_open()
@@ -224,7 +240,9 @@ local function is_outline_open()
 end
 
 local function highlight_current_item(item)
-  if not utils.buf_valid(state.outline_buf) then return end
+  if not utils.buf_valid(state.outline_buf) then
+    return
+  end
   ui.clear_highlights(state.outline_buf, outline_ns_id)
   ui.add_highlights(state.outline_buf, {
     {
@@ -238,21 +256,21 @@ end
 
 local function set_current_item()
   local curbuf = api.nvim_get_current_buf()
-  if
-    not utils.buf_valid(state.outline_buf)
-    or not is_outline_open()
-    or curbuf == state.outline_buf
-  then
+  if not utils.buf_valid(state.outline_buf) or not is_outline_open() or curbuf == state.outline_buf then
     return
   end
   local uri = vim.uri_from_bufnr(curbuf)
   local outline = M.outlines[uri]
-  if vim.tbl_isempty(outline) then return end
+  if vim.tbl_isempty(outline) then
+    return
+  end
   local cursor = api.nvim_win_get_cursor(0)
   local lnum = cursor[1] - 1
   local column = cursor[2] - 1
   local current_item
-  if not lnum or not column then return end
+  if not lnum or not column then
+    return
+  end
   for _, item in ipairs(outline) do
     if
       item
@@ -265,7 +283,9 @@ local function set_current_item()
   end
   if current_item then
     local item_buf = vim.uri_to_bufnr(outline.uri)
-    if item_buf ~= curbuf then return end
+    if item_buf ~= curbuf then
+      return
+    end
     highlight_current_item(current_item)
     local win = fn.bufwinid(state.outline_buf)
     -- nvim_win_set_cursor is a 1,0 based method i.e.
@@ -283,9 +303,13 @@ local function setup_autocommands()
     group = AUGROUP,
     pattern = utils.events.OUTLINE_CHANGED,
     callback = function()
-      if not utils.buf_valid(state.outline_buf) then return end
+      if not utils.buf_valid(state.outline_buf) then
+        return
+      end
       local ok, lines, highlights, outline = get_outline_content()
-      if not ok or not lines or not outline then return end
+      if not ok or not lines or not outline then
+        return
+      end
       refresh_outline(state.outline_buf, lines, highlights, outline.uri)
     end,
   })
@@ -304,10 +328,14 @@ end
 local function select_outline_item()
   local line = fn.line(".")
   local uri = vim.b.outline_uri
-  if not uri then return ui.notify("Sorry! this item can't be opened", ui.WARN) end
+  if not uri then
+    return ui.notify("Sorry! this item can't be opened", ui.WARN)
+  end
   local outline = M.outlines[uri]
   local item = outline[line]
-  if not item then return ui.notify("Sorry! this item can't be opened", ui.WARN) end
+  if not item then
+    return ui.notify("Sorry! this item can't be opened", ui.WARN)
+  end
   vim.cmd("drop " .. vim.uri_to_fname(uri))
   api.nvim_win_set_cursor(0, { item.start_line + 1, item.start_col + 1 })
 end
@@ -344,7 +372,9 @@ local function setup_outline_window(buf, win, lines, highlights, _)
 end
 
 function M.close()
-  if api.nvim_win_is_valid(state.outline_win) then api.nvim_win_close(state.outline_win, true) end
+  if api.nvim_win_is_valid(state.outline_win) then
+    api.nvim_win_close(state.outline_win, true)
+  end
 end
 
 function M.toggle()
@@ -387,14 +417,18 @@ end
 function M.document_outline(_, data, _, _)
   local outline = data.outline or {}
   local result = {}
-  if not outline.children or #outline.children == 0 then return end
+  if not outline.children or #outline.children == 0 then
+    return
+  end
   for _, item in ipairs(outline.children) do
     parse_outline(result, item)
   end
   result.uri = data.uri
   M.outlines[data.uri] = result
   utils.emit_event(utils.events.OUTLINE_CHANGED)
-  if config.outline.auto_open and not state.outline_buf then M.open({ go_back = true }) end
+  if config.outline.auto_open and not state.outline_buf then
+    M.open({ go_back = true })
+  end
 end
 
 return M

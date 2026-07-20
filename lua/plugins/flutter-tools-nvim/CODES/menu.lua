@@ -23,7 +23,9 @@ local function execute_command(bufnr)
   local cmd = selection.command
   if cmd then
     local success, msg = pcall(cmd)
-    if not success then ui.notify(msg, ui.ERROR) end
+    if not success then
+      ui.notify(msg, ui.ERROR)
+    end
   end
 end
 
@@ -39,7 +41,9 @@ local function command_entry_maker(max_width)
     })
 
     local items = { { en.label, "Type" } }
-    if has_hint then table.insert(items, { en.hint, "Comment" }) end
+    if has_hint then
+      table.insert(items, { en.hint, "Comment" })
+    end
     return displayer(items)
   end
   return function(entry)
@@ -274,7 +278,9 @@ local function execute_fvm_use(bufnr)
   local cmd = selection.command
   if cmd then
     local success, msg = pcall(cmd, selection.ordinal)
-    if not success then ui.notify(msg, ui.ERROR) end
+    if not success then
+      ui.notify(msg, ui.ERROR)
+    end
   end
 end
 

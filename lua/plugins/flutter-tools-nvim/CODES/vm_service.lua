@@ -81,7 +81,9 @@ local function create_frame(payload)
 end
 
 local function parse_frame(data)
-  if #data < 2 then return nil, data end
+  if #data < 2 then
+    return nil, data
+  end
 
   local b1 = string.byte(data, 1)
   local b2 = string.byte(data, 2)
@@ -91,11 +93,15 @@ local function parse_frame(data)
 
   local header_len = 2
   if payload_len == 126 then
-    if #data < 4 then return nil, data end
+    if #data < 4 then
+      return nil, data
+    end
     payload_len = bit.lshift(string.byte(data, 3), 8) + string.byte(data, 4)
     header_len = 4
   elseif payload_len == 127 then
-    if #data < 10 then return nil, data end
+    if #data < 10 then
+      return nil, data
+    end
     payload_len = 0
     for i = 3, 10 do
       payload_len = bit.lshift(payload_len, 8) + string.byte(data, i)
@@ -104,10 +110,14 @@ local function parse_frame(data)
   end
 
   local has_mask = bit.band(b2, 0x80) > 0
-  if has_mask then header_len = header_len + 4 end
+  if has_mask then
+    header_len = header_len + 4
+  end
 
   local total_len = header_len + payload_len
-  if #data < total_len then return nil, data end
+  if #data < total_len then
+    return nil, data
+  end
 
   local payload = data:sub(header_len + 1, total_len)
   local remaining = data:sub(total_len + 1)
@@ -117,12 +127,16 @@ end
 
 local function handle_message(message)
   local ok, data = pcall(vim.json.decode, message)
-  if not ok then return end
+  if not ok then
+    return
+  end
 
   if data.id and pending_requests[data.id] then
     local callback = pending_requests[data.id]
     pending_requests[data.id] = nil
-    vim.schedule(function() callback(data.error, data.result) end)
+    vim.schedule(function()
+      callback(data.error, data.result)
+    end)
     return
   end
 
@@ -130,7 +144,9 @@ local function handle_message(message)
     local stream_id = data.params.streamId
     local event = data.params.event
     if event_handlers[stream_id] then
-      vim.schedule(function() event_handlers[stream_id](event) end)
+      vim.schedule(function()
+        event_handlers[stream_id](event)
+      end)
     end
   end
 end
@@ -140,7 +156,9 @@ local function parse_uri(uri)
   if not protocol then
     protocol, rest = uri:match("^(https?)://(.+)$")
   end
-  if not rest then return nil, nil, nil end
+  if not rest then
+    return nil, nil, nil
+  end
 
   local host_port, path = rest:match("^([^/]+)(/.*)$")
   if not host_port then
@@ -154,17 +172,23 @@ local function parse_uri(uri)
     port = (protocol == "wss" or protocol == "https") and 443 or 80
   end
 
-  if not path:match("/ws$") then path = path:gsub("/$", "") .. "/ws" end
+  if not path:match("/ws$") then
+    path = path:gsub("/$", "") .. "/ws"
+  end
 
   return host, tonumber(port), path
 end
 
 function M.connect(uri, on_connect, on_error)
-  if connected then M.disconnect() end
+  if connected then
+    M.disconnect()
+  end
 
   local host, port, path = parse_uri(uri)
   if not host or not port then
-    if on_error then on_error("Invalid URI: " .. uri) end
+    if on_error then
+      on_error("Invalid URI: " .. uri)
+    end
     return
   end
 
@@ -175,7 +199,9 @@ function M.connect(uri, on_connect, on_error)
   tcp:connect(host, port, function(err)
     if err then
       vim.schedule(function()
-        if on_error then on_error("Connection failed: " .. tostring(err)) end
+        if on_error then
+          on_error("Connection failed: " .. tostring(err))
+        end
       end)
       return
     end
@@ -185,7 +211,9 @@ function M.connect(uri, on_connect, on_error)
     tcp:read_start(function(read_err, chunk)
       if read_err then
         vim.schedule(function()
-          if on_error then on_error("Read error: " .. tostring(read_err)) end
+          if on_error then
+            on_error("Read error: " .. tostring(read_err))
+          end
         end)
         M.disconnect()
         return
@@ -201,7 +229,9 @@ function M.connect(uri, on_connect, on_error)
           handshake_complete = true
           connected = true
           vim.schedule(function()
-            if on_connect then on_connect() end
+            if on_connect then
+              on_connect()
+            end
           end)
         end
         return
@@ -210,14 +240,15 @@ function M.connect(uri, on_connect, on_error)
       read_buffer = read_buffer .. chunk
       while true do
         local frame, remaining = parse_frame(read_buffer)
-        if not frame then break end
+        if not frame then
+          break
+        end
         read_buffer = remaining
 
         if frame.opcode == OPCODE_TEXT then
           handle_message(frame.payload)
         elseif frame.opcode == OPCODE_PING then
-          local pong = string.char(0x8A, 0x80 + #frame.payload)
-            .. mask_payload(frame.payload, generate_mask_key())
+          local pong = string.char(0x8A, 0x80 + #frame.payload) .. mask_payload(frame.payload, generate_mask_key())
           tcp:write(pong)
         elseif frame.opcode == OPCODE_CLOSE then
           M.disconnect()
@@ -230,7 +261,9 @@ end
 
 function M.request(method, params, callback)
   if not connected or not tcp then
-    if callback then callback("Not connected", nil) end
+    if callback then
+      callback("Not connected", nil)
+    end
     return
   end
 
@@ -244,7 +277,9 @@ function M.request(method, params, callback)
     params = params or {},
   })
 
-  if callback then pending_requests[id] = callback end
+  if callback then
+    pending_requests[id] = callback
+  end
 
   tcp:write(create_frame(message))
 end
@@ -254,14 +289,18 @@ function M.stream_listen(stream_id, handler, callback)
   M.request("streamListen", { streamId = stream_id }, callback)
 end
 
-function M.is_connected() return connected end
+function M.is_connected()
+  return connected
+end
 
 function M.disconnect()
   connected = false
   handshake_complete = false
 
   for _, callback in pairs(pending_requests) do
-    vim.schedule(function() callback("Service connection closed", nil) end)
+    vim.schedule(function()
+      callback("Service connection closed", nil)
+    end)
   end
   pending_requests = {}
   event_handlers = {}

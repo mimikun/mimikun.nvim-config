@@ -25,7 +25,9 @@ local command_requests = {
   quit = "terminate",
 }
 
-function DebuggerRunner:is_running() return dap.session() ~= nil end
+function DebuggerRunner:is_running()
+  return dap.session() ~= nil
+end
 
 ---@param paths table<string, string>
 ---@param is_flutter_project boolean
@@ -46,8 +48,12 @@ local function register_debug_adapter(paths, is_flutter_project)
     local repl = require("dap.repl")
     repl.commands = vim.tbl_extend("force", repl.commands, {
       custom_commands = {
-        [".hot-reload"] = function() dap.session():request("hotReload") end,
-        [".hot-restart"] = function() dap.session():request("hotRestart") end,
+        [".hot-reload"] = function()
+          dap.session():request("hotReload")
+        end,
+        [".hot-restart"] = function()
+          dap.session():request("hotRestart")
+        end,
       },
     })
   else
@@ -109,20 +115,26 @@ end
 
 local function get_current_value(cmd)
   local service_activation_params = vm_service_extensions.get_request_params(cmd)
-  if not service_activation_params or not service_activation_params.params.isolateId then return end
+  if not service_activation_params or not service_activation_params.params.isolateId then
+    return
+  end
 
   service_activation_params.params = {
     isolateId = service_activation_params.params.isolateId,
   }
   dap.session():request("callService", service_activation_params, function(err, result)
-    if err then return end
+    if err then
+      return
+    end
     vm_service_extensions.set_service_extensions_state(result.method, result.value)
   end)
 end
 
 local function handle_inspect_event(isolate_id)
   local session = dap.session()
-  if not session or not isolate_id then return end
+  if not session or not isolate_id then
+    return
+  end
 
   local inspector_group = "flutter-tools-inspector"
 
@@ -136,7 +148,9 @@ local function handle_inspect_event(isolate_id)
   }
 
   session:request("callService", params, function(err, result)
-    if err or not result then return end
+    if err or not result then
+      return
+    end
 
     local widget_data = result.result or result
     local location = widget_data.creationLocation
@@ -171,12 +185,20 @@ local function register_dap_listeners(on_run_data, on_run_exit)
   end
 
   local handle_termination = function()
-    if next(before_start_logs) ~= nil then on_run_exit(before_start_logs) end
-    if vm_service.is_connected() then vm_service.disconnect() end
+    if next(before_start_logs) ~= nil then
+      on_run_exit(before_start_logs)
+    end
+    if vm_service.is_connected() then
+      vm_service.disconnect()
+    end
   end
 
-  dap.listeners.before["event_exited"][plugin_identifier] = function(_, _) handle_termination() end
-  dap.listeners.before["event_terminated"][plugin_identifier] = function(_, _) handle_termination() end
+  dap.listeners.before["event_exited"][plugin_identifier] = function(_, _)
+    handle_termination()
+  end
+  dap.listeners.before["event_terminated"][plugin_identifier] = function(_, _)
+    handle_termination()
+  end
 
   dap.listeners.before["event_app.started"][plugin_identifier] = function(_, _)
     started = true
@@ -209,10 +231,7 @@ local function register_dap_listeners(on_run_data, on_run_exit)
     end
   end
 
-  dap.listeners.before["event_flutter.serviceExtensionStateChanged"][plugin_identifier] = function(
-    _,
-    body
-  )
+  dap.listeners.before["event_flutter.serviceExtensionStateChanged"][plugin_identifier] = function(_, body)
     if body and body.extension and body.value then
       vm_service_extensions.set_service_extensions_state(body.extension, body.value)
     end
@@ -234,19 +253,18 @@ function DebuggerRunner:run(
   ---@type dap.Configuration
   local selected_launch_config = nil
 
-  register_dap_listeners(
-    function(started, before_start_logs, body)
-      if body and body.output then
-        for line in body.output:gmatch("[^\r\n]+") do
-          if not started then table.insert(before_start_logs, line) end
-          on_run_data(body.category == "sterr", line)
+  register_dap_listeners(function(started, before_start_logs, body)
+    if body and body.output then
+      for line in body.output:gmatch("[^\r\n]+") do
+        if not started then
+          table.insert(before_start_logs, line)
         end
+        on_run_data(body.category == "sterr", line)
       end
-    end,
-    function(before_start_logs)
-      on_run_exit(before_start_logs, args, opts, project_config, selected_launch_config)
     end
-  )
+  end, function(before_start_logs)
+    on_run_exit(before_start_logs, args, opts, project_config, selected_launch_config)
+  end)
 
   register_debug_adapter(paths, is_flutter_project)
   local launch_configurations = {}
@@ -276,26 +294,25 @@ function DebuggerRunner:run(
     ui.notify("No launch configuration for DAP found", ui.ERROR)
     return
   else
-    require("dap.ui").pick_if_many(
-      launch_configurations,
-      "Select launch configuration",
-      function(item)
-        return fmt("%s : %s | %s", item.name, item.program or item.cwd, vim.inspect(item.args))
-      end,
-      function(launch_config)
-        if not launch_config then return end
-        launch_config = vim.deepcopy(launch_config)
-        if not launch_config.cwd then launch_config.cwd = cwd end
-        launch_config.args = vim.list_extend(launch_config.args or {}, args or {})
-        launch_config.dartSdkPath = paths.dart_sdk
-        launch_config.flutterSdkPath = paths.flutter_sdk
-        if config.debugger.evaluate_to_string_in_debug_views then
-          launch_config.evaluateToStringInDebugViews = true
-        end
-        selected_launch_config = launch_config
-        dap.run(launch_config)
+    require("dap.ui").pick_if_many(launch_configurations, "Select launch configuration", function(item)
+      return fmt("%s : %s | %s", item.name, item.program or item.cwd, vim.inspect(item.args))
+    end, function(launch_config)
+      if not launch_config then
+        return
       end
-    )
+      launch_config = vim.deepcopy(launch_config)
+      if not launch_config.cwd then
+        launch_config.cwd = cwd
+      end
+      launch_config.args = vim.list_extend(launch_config.args or {}, args or {})
+      launch_config.dartSdkPath = paths.dart_sdk
+      launch_config.flutterSdkPath = paths.flutter_sdk
+      if config.debugger.evaluate_to_string_in_debug_views then
+        launch_config.evaluateToStringInDebugViews = true
+      end
+      selected_launch_config = launch_config
+      dap.run(launch_config)
+    end)
   end
 end
 
@@ -304,17 +321,23 @@ function DebuggerRunner:attach(paths, args, cwd, on_run_data, on_run_exit)
   register_dap_listeners(function(started, before_start_logs, body)
     if body and body.output then
       for line in body.output:gmatch("[^\r\n]+") do
-        if not started then table.insert(before_start_logs, line) end
+        if not started then
+          table.insert(before_start_logs, line)
+        end
         on_run_data(body.category == "sterr", line)
       end
     end
-  end, function(before_start_logs) on_run_exit(before_start_logs, args) end)
+  end, function(before_start_logs)
+    on_run_exit(before_start_logs, args)
+  end)
 
   register_debug_adapter(paths, true)
   local launch_configurations = {}
   local launch_configuration_count = 0
   register_default_configurations(paths, true)
-  if config.debugger.register_configurations then config.debugger.register_configurations(paths) end
+  if config.debugger.register_configurations then
+    config.debugger.register_configurations(paths)
+  end
   local all_configurations = require("dap").configurations.dart
   if not all_configurations then
     ui.notify("No launch configuration for DAP found", ui.ERROR)
@@ -331,25 +354,24 @@ function DebuggerRunner:attach(paths, args, cwd, on_run_data, on_run_exit)
     ui.notify("No launch configuration for DAP found", ui.ERROR)
     return
   else
-    require("dap.ui").pick_if_many(
-      launch_configurations,
-      "Select launch configuration",
-      function(item)
-        return fmt("%s : %s | %s", item.name, item.program or item.cwd, vim.inspect(item.args))
-      end,
-      function(launch_config)
-        if not launch_config then return end
-        launch_config = vim.deepcopy(launch_config)
-        if not launch_config.cwd then launch_config.cwd = cwd end
-        launch_config.args = vim.list_extend(launch_config.args or {}, args or {})
-        launch_config.dartSdkPath = paths.dart_sdk
-        launch_config.flutterSdkPath = paths.flutter_sdk
-        if config.debugger.evaluate_to_string_in_debug_views then
-          launch_config.evaluateToStringInDebugViews = true
-        end
-        dap.run(launch_config)
+    require("dap.ui").pick_if_many(launch_configurations, "Select launch configuration", function(item)
+      return fmt("%s : %s | %s", item.name, item.program or item.cwd, vim.inspect(item.args))
+    end, function(launch_config)
+      if not launch_config then
+        return
       end
-    )
+      launch_config = vim.deepcopy(launch_config)
+      if not launch_config.cwd then
+        launch_config.cwd = cwd
+      end
+      launch_config.args = vim.list_extend(launch_config.args or {}, args or {})
+      launch_config.dartSdkPath = paths.dart_sdk
+      launch_config.flutterSdkPath = paths.flutter_sdk
+      if config.debugger.evaluate_to_string_in_debug_views then
+        launch_config.evaluateToStringInDebugViews = true
+      end
+      dap.run(launch_config)
+    end)
   end
 end
 
@@ -369,7 +391,9 @@ function DebuggerRunner:send(cmd, quiet, on_response)
       if err and not quiet then
         ui.notify("Error calling service " .. cmd .. ": " .. err, ui.ERROR)
       end
-      if response and on_response then on_response(response) end
+      if response and on_response then
+        on_response(response)
+      end
     end)
     return
   end
@@ -379,7 +403,9 @@ function DebuggerRunner:send(cmd, quiet, on_response)
 end
 
 function DebuggerRunner:cleanup()
-  if dap.session() then dap.terminate() end
+  if dap.session() then
+    dap.terminate()
+  end
 end
 
 return DebuggerRunner

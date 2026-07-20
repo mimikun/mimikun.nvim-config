@@ -18,7 +18,9 @@ local fs = vim.fs
 ---@return string?
 local function convert_to_file_name(class_name)
   local starts_uppercase = class_name:find("^%u")
-  if not starts_uppercase then return end
+  if not starts_uppercase then
+    return
+  end
   local file_name = class_name:gsub("(%u)", "_%1"):lower()
   -- Removes first underscore
   file_name = file_name:sub(2)
@@ -69,7 +71,9 @@ function M.rename(new_name, opts)
     local handler = client.handlers["textDocument/rename"] or lsp.handlers["textDocument/rename"]
     client.request("textDocument/rename", params, function(...)
       handler(...)
-      if result then lsp.util.apply_workspace_edit(result, client.offset_encoding) end
+      if result then
+        lsp.util.apply_workspace_edit(result, client.offset_encoding)
+      end
 
       -- Save all modified buffers after applying workspace edits
       vim.cmd("silent! wa")
@@ -137,7 +141,9 @@ function M.rename(new_name, opts)
         prompt_opts.default = cword
       end
       ui.input(prompt_opts, function(input)
-        if not input or #input == 0 then return end
+        if not input or #input == 0 then
+          return
+        end
         rename_fix_imports(input)
       end)
     end, bufnr)
@@ -153,7 +159,9 @@ function M.rename(new_name, opts)
       default = cword,
     }
     ui.input(prompt_opts, function(input)
-      if not input or #input == 0 then return end
+      if not input or #input == 0 then
+        return
+      end
       rename_fix_imports(input)
     end)
   end

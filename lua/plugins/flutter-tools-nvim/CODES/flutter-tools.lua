@@ -22,10 +22,16 @@ end
 
 local function setup_commands()
   -- Commands
-  command("FlutterRun", function(data) commands.run_command(data.args) end, { nargs = "*" })
-  command("FlutterDebug", function(data) commands.run_command(data.args, true) end, { nargs = "*" })
+  command("FlutterRun", function(data)
+    commands.run_command(data.args)
+  end, { nargs = "*" })
+  command("FlutterDebug", function(data)
+    commands.run_command(data.args, true)
+  end, { nargs = "*" })
   command("FlutterLspRestart", lsp.restart)
-  command("FlutterAttach", function(data) commands.attach(data.args) end, { nargs = "*" })
+  command("FlutterAttach", function(data)
+    commands.attach(data.args)
+  end, { nargs = "*" })
   command("FlutterDetach", commands.detach)
   command("FlutterReload", commands.reload)
   command("FlutterRestart", commands.restart)
@@ -46,7 +52,9 @@ local function setup_commands()
   command("FlutterOpenDevTools", commands.open_dev_tools)
   command("FlutterInspectWidget", commands.inspect_widget)
   command("FlutterPubGet", commands.pub_get)
-  command("FlutterPubUpgrade", function(data) commands.pub_upgrade_command(data.args) end, {
+  command("FlutterPubUpgrade", function(data)
+    commands.pub_upgrade_command(data.args)
+  end, {
     nargs = "*",
   })
   --- Log
@@ -55,7 +63,9 @@ local function setup_commands()
   --- LSP
   command("FlutterSuper", lsp.dart_lsp_super)
   command("FlutterReanalyze", lsp.dart_reanalyze)
-  command("FlutterRename", function() require("flutter-tools.lsp.rename").rename() end)
+  command("FlutterRename", function()
+    require("flutter-tools.lsp.rename").rename()
+  end)
 end
 
 local _setup_started = false
@@ -66,8 +76,12 @@ local function start()
     _setup_started = true
     setup_commands()
     dap.setup(config)
-    if config.widget_guides.enabled then guides.setup() end
-    if config.decorations then decorations.apply(config.decorations) end
+    if config.widget_guides.enabled then
+      guides.setup()
+    end
+    if config.decorations then
+      decorations.apply(config.decorations)
+    end
   end
 end
 
@@ -88,36 +102,48 @@ local function setup_autocommands()
     autocmd({ "BufEnter", "TextChanged", "InsertLeave" }, {
       group = AUGROUP,
       pattern = { "*.dart" },
-      callback = function() lsp.document_color() end,
+      callback = function()
+        lsp.document_color()
+      end,
     })
     -- NOTE: we piggyback of this event to check for when the server is first initialized
     autocmd({ "User" }, {
       group = AUGROUP,
       pattern = utils.events.LSP_ANALYSIS_COMPLETED,
       once = true,
-      callback = function() lsp.document_color() end,
+      callback = function()
+        lsp.document_color()
+      end,
     })
   end
 
   autocmd({ "BufWritePost" }, {
     group = AUGROUP,
     pattern = { "*.dart" },
-    callback = function() commands.reload(true) end,
+    callback = function()
+      commands.reload(true)
+    end,
   })
   autocmd({ "BufWritePost" }, {
     group = AUGROUP,
     pattern = { "*/pubspec.yaml" },
-    callback = function() commands.pub_get() end,
+    callback = function()
+      commands.pub_get()
+    end,
   })
   autocmd({ "BufEnter" }, {
     group = AUGROUP,
     pattern = { log.filename },
-    callback = function() log.__resurrect() end,
+    callback = function()
+      log.__resurrect()
+    end,
   })
   autocmd({ "VimLeavePre" }, {
     group = AUGROUP,
     pattern = { "*" },
-    callback = function() dev_tools.stop() end,
+    callback = function()
+      dev_tools.stop()
+    end,
   })
 end
 

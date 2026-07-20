@@ -69,7 +69,9 @@ end
 ---@type flutter.VmServiceExtensions
 return {
   set_service_extensions_state = function(extension, value)
-    if extension and value then service_extensions_state[extension] = value end
+    if extension and value then
+      service_extensions_state[extension] = value
+    end
     if extension == state_key_active_dev_tools_server_address then
       dev_tools.set_devtools_url(value)
     elseif extension == state_key_connected_vm_service_uri then
@@ -96,6 +98,8 @@ return {
     service_extensions_isolateid = {}
   end,
   set_isolate_id = function(extension, isolate_id)
-    if extension and isolate_id then service_extensions_isolateid[extension] = isolate_id end
+    if extension and isolate_id then
+      service_extensions_isolateid[extension] = isolate_id
+    end
   end,
 }

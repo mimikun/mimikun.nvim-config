@@ -23,15 +23,21 @@ local M = {
 ---@param user table|function
 ---@return table
 local function merge_config(default, user)
-  if type(user) == "function" then return user(default) end
-  if not user or vim.tbl_isempty(user) then return default end
+  if type(user) == "function" then
+    return user(default)
+  end
+  if not user or vim.tbl_isempty(user) then
+    return default
+  end
   return vim.tbl_deep_extend("force", default or {}, user or {})
 end
 
 local function create_debug_log(level)
   return function(msg)
     local levels = require("flutter-tools.config").debug_levels
-    if level <= levels.DEBUG then require("flutter-tools.ui").notify(msg, level) end
+    if level <= levels.DEBUG then
+      require("flutter-tools.ui").notify(msg, level)
+    end
   end
 end
 
@@ -42,7 +48,9 @@ end
 local function handle_progress(err, result, ctx)
   -- Call the existing handler for progress so plugins can also handle the event
   -- but only whilst not editing the buffer as dartls can be spammy
-  if api.nvim_get_mode().mode ~= "i" then vim.lsp.handlers["$/progress"](err, result, ctx) end
+  if api.nvim_get_mode().mode ~= "i" then
+    vim.lsp.handlers["$/progress"](err, result, ctx)
+  end
   -- NOTE: this event gets called whenever the analysis server has completed some work
   -- rather than just when the server has started.
   if result and result.value and result.value.kind == "end" then
@@ -54,16 +62,22 @@ local function handle_super(err, result)
   if err then
     return vim.notify("Error when finding super" .. vim.inspect(err), vim.log.levels.ERROR)
   end
-  if not result or vim.tbl_isempty(result) then return end
+  if not result or vim.tbl_isempty(result) then
+    return
+  end
   local client = lsp_utils.get_dartls_client()
-  if not client then return end
+  if not client then
+    return
+  end
   local locations = {}
   local win = api.nvim_get_current_win()
   local from = vim.fn.getpos(".")
   local bufnr = api.nvim_get_current_buf()
   from[1] = bufnr
   local tagname = vim.fn.expand("<cword>")
-  if result then locations = vim.islist(result) and result or { result } end
+  if result then
+    locations = vim.islist(result) and result or { result }
+  end
   local items = vim.lsp.util.locations_to_items(locations, client.offset_encoding)
   if vim.tbl_isempty(items) then
     vim.notify("No locations found", vim.log.levels.INFO)
@@ -119,15 +133,9 @@ local function get_defaults(opts)
     handlers = {
       -- TODO: can this be replaced with the initialized capability
       ["$/progress"] = handle_progress,
-      ["dart/textDocument/publishClosingLabels"] = utils.lsp_handler(
-        require("flutter-tools.labels").closing_tags
-      ),
-      ["dart/textDocument/publishOutline"] = utils.lsp_handler(
-        require("flutter-tools.outline").document_outline
-      ),
-      ["dart/textDocument/publishFlutterOutline"] = utils.lsp_handler(
-        require("flutter-tools.guides").widget_guides
-      ),
+      ["dart/textDocument/publishClosingLabels"] = utils.lsp_handler(require("flutter-tools.labels").closing_tags),
+      ["dart/textDocument/publishOutline"] = utils.lsp_handler(require("flutter-tools.outline").document_outline),
+      ["dart/textDocument/publishFlutterOutline"] = utils.lsp_handler(require("flutter-tools.guides").widget_guides),
       ["textDocument/documentColor"] = require("flutter-tools.lsp.color").on_document_color,
       ["dart/reanalyze"] = function() end, -- returns: None
       ["dart/textDocument/super"] = handle_super,
@@ -161,7 +169,9 @@ function M.restart()
     lsp.stop_client(client.id)
     local client_id = lsp.start_client(client.config)
     for _, buf in pairs(bufs) do
-      if client_id then lsp.buf_attach_client(buf, client_id) end
+      if client_id then
+        lsp.buf_attach_client(buf, client_id)
+      end
     end
   end
 end
@@ -176,7 +186,9 @@ function M.get_project_root_dir()
     local root_path = lsp_utils.is_valid_path(current_buffer_path)
         and path.find_root(conf.root_patterns, current_buffer_path)
       or nil
-    if root_path ~= nil then return root_path end
+    if root_path ~= nil then
+      return root_path
+    end
   end
   local client = lsp_utils.get_dartls_client()
   return client and client.config.root_dir or nil
@@ -186,7 +198,9 @@ end
 -- sending this request. Ideally we would wait till the server is ready.
 M.document_color = function()
   local client = lsp_utils.get_dartls_client()
-  if client and client.server_capabilities.colorProvider then color.document_color() end
+  if client and client.server_capabilities.colorProvider then
+    color.document_color()
+  end
 end
 M.on_document_color = color.on_document_color
 
@@ -218,7 +232,9 @@ function M.dart_lsp_super()
   client.request("dart/textDocument/super", params, nil, 0)
 end
 
-function M.dart_reanalyze() lsp.buf_request(0, "dart/reanalyze") end
+function M.dart_reanalyze()
+  lsp.buf_request(0, "dart/reanalyze")
+end
 
 ---@param user_config table
 ---@param callback fun(table)
@@ -266,7 +282,9 @@ end
 
 --- Checks if buffer path is valid for attaching LSP
 local function is_valid_path(buffer_path)
-  if buffer_path == "" then return false end
+  if buffer_path == "" then
+    return false
+  end
 
   local start_index, _, uri_prefix = buffer_path:find("^(%w+://).*")
   -- Do not attach LSP if file URI prefix is not file.
@@ -284,7 +302,9 @@ function M.attach()
   local buf = api.nvim_get_current_buf()
   local buffer_path = api.nvim_buf_get_name(buf)
 
-  if not is_valid_path(buffer_path) then return end
+  if not is_valid_path(buffer_path) then
+    return
+  end
 
   get_server_config(user_config, function(c)
     c.root_dir = M.get_project_root_dir()

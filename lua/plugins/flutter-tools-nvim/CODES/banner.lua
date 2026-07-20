@@ -57,7 +57,9 @@ local function detect_banners(lines)
       banners.has_flutter_new_version = true
     end
 
-    if nil ~= line:match(M.PATTERNS.FLUTTER_WELCOME) then banners.has_flutter_welcome = true end
+    if nil ~= line:match(M.PATTERNS.FLUTTER_WELCOME) then
+      banners.has_flutter_welcome = true
+    end
   end
 
   return banners
@@ -128,13 +130,17 @@ end
 ---@param on_cleared fun(detected_banners: flutter.DetectedBanners)
 function M.clear_startup_banners(is_flutter_project, on_cleared)
   if nil ~= cached_banners then
-    vim.schedule(function() on_cleared(cached_banners) end)
+    vim.schedule(function()
+      on_cleared(cached_banners)
+    end)
     return
   end
 
   table.insert(on_cleared_listeners, on_cleared)
 
-  if not has_started_cleansing then do_clear_banners(is_flutter_project) end
+  if not has_started_cleansing then
+    do_clear_banners(is_flutter_project)
+  end
 end
 
 --- Reset the internally cached banners.
