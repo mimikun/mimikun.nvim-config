@@ -1,6 +1,6 @@
 ---@type table
 local ft = {
-  "lua",
+  "kotlin",
 }
 
 return ft
