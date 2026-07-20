@@ -95,8 +95,7 @@ local function version_satisfies_constraint(version, min_version, max_version)
     local parsed_version = vim.version.parse(version)
     local parsed_min_version = vim.version.parse(min_version)
     local parsed_max_version = vim.version.parse(max_version)
-    return vim.version.ge(parsed_version, parsed_min_version)
-      and vim.version.le(parsed_version, parsed_max_version)
+    return vim.version.ge(parsed_version, parsed_min_version) and vim.version.le(parsed_version, parsed_max_version)
   end
 end
 
@@ -127,36 +126,18 @@ M.check = function()
     if not installed then
       local err_msg = ("%s: not found."):format(req_bin.name)
       if req_bin.optional then
-        warn(
-          ("%s %s"):format(
-            err_msg,
-            ("Install %s for extended capabilities"):format(req_bin.url)
-          )
-        )
+        warn(("%s %s"):format(err_msg, ("Install %s for extended capabilities"):format(req_bin.url)))
       else
-        error(
-          ("%s %s"):format(
-            err_msg,
-            ("pymple.nvim will not work without %s installed."):format(
-              req_bin.url
-            )
-          )
-        )
+        error(("%s %s"):format(err_msg, ("pymple.nvim will not work without %s installed."):format(req_bin.url)))
       end
     else
       version = version or "(unknown version)"
       if
         (req_bin.min_version or req_bin.max_version)
         and version ~= "(unknown version)"
-        and not version_satisfies_constraint(
-          version,
-          req_bin.min_version,
-          req_bin.max_version
-        )
+        and not version_satisfies_constraint(version, req_bin.min_version, req_bin.max_version)
       then
-        error(
-          ("%s: installed version %s is too old."):format(req_bin.name, version)
-        )
+        error(("%s: installed version %s is too old."):format(req_bin.name, version))
       else
         ok(("%s: found %s"):format(req_bin.name, version))
       end

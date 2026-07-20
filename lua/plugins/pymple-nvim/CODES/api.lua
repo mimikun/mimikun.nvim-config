@@ -33,37 +33,22 @@ M.resolve_import_under_cursor = function()
   log.debug("Symbol under cursor: " .. symbol)
   local is_identifier, node_type = utils.is_cursor_node_identifier()
   if not is_identifier then
-    print_err(
-      string.format(
-        "Cursor must be on an importable symbol, not `%s`.",
-        node_type
-      )
-    )
+    print_err(string.format("Cursor must be on an importable symbol, not `%s`.", node_type))
     return
   end
 
-  local candidates =
-    resolve_imports.resolve_python_import(symbol, vim.fn.expand("%"))
+  local candidates = resolve_imports.resolve_python_import(symbol, vim.fn.expand("%"))
   log.debug("Candidates: " .. vim.inspect(candidates))
 
   if candidates == nil then
     return
   end
   if #candidates == 0 then
-    print_err(
-      string.format(
-        "No results in the current environment for symbol `%s`.",
-        symbol
-      )
-    )
+    print_err(string.format("No results in the current environment for symbol `%s`.", symbol))
     return
   elseif #candidates == 1 then
     local final_import = utils.to_import_statement(candidates[1])
-    utils.add_import_to_buffer(
-      final_import,
-      0,
-      config.user_config.add_import_to_buf.autosave
-    )
+    utils.add_import_to_buffer(final_import, 0, config.user_config.add_import_to_buf.autosave)
   else
     local candidate_statements = {}
     for _, candidate in ipairs(candidates) do
@@ -78,10 +63,7 @@ M.resolve_import_under_cursor = function()
           width = #longest_candidate + TELESCOPE_WIDTH_PADDING + #symbol + 1,
           height = math.max(
             TELESCOPE_MIN_HEIGHT,
-            math.min(
-              #candidate_statements + TELESCOPE_HEIGHT_PADDING,
-              TELESCOPE_MAX_HEIGHT
-            )
+            math.min(#candidate_statements + TELESCOPE_HEIGHT_PADDING, TELESCOPE_MAX_HEIGHT)
           ),
         },
       })
@@ -93,11 +75,7 @@ M.resolve_import_under_cursor = function()
       if selected then
         local statement = selected
         log.debug("Selected import: " .. statement)
-        utils.add_import_to_buffer(
-          statement,
-          0,
-          config.user_config.add_import_to_buf.autosave
-        )
+        utils.add_import_to_buffer(statement, 0, config.user_config.add_import_to_buf.autosave)
         log.debug("Added import for " .. symbol .. ": " .. statement)
       end
     end)
@@ -110,15 +88,9 @@ end
 ---@param opts UpdateImportsOptions: Options for the update imports operation
 M.update_imports = function(source, destination, opts)
   log.debug(
-    "Updating imports from "
-      .. source
-      .. " to "
-      .. destination
-      .. " in filetypes: "
-      .. vim.inspect(opts.filetypes)
+    "Updating imports from " .. source .. " to " .. destination .. " in filetypes: " .. vim.inspect(opts.filetypes)
   )
-  local root = project.root
-    or utils.find_project_root(source, config.user_config.python.root_markers)
+  local root = project.root or utils.find_project_root(source, config.user_config.python.root_markers)
   local r_jobs = udim.prepare_jobs(source, destination, opts.filetypes, root)
   if #r_jobs == 0 then
     log.info("No jobs to run.")
@@ -126,28 +98,22 @@ M.update_imports = function(source, destination, opts)
   end
   local imports_count = udim_utils.count_imports_in_rjobs(r_jobs)
   local files = udim_utils.get_files_from_rjobs(r_jobs)
-  local confirmation_dialog = udim_ui.get_confirmation_dialog(
-    imports_count,
-    #files,
-    function(item)
-      if item.text == "Yes" then
-        udim.run_jobs(r_jobs)
-      elseif item.text == "Preview changes" then
-        local sender, receiver = async.control.channel.mpsc()
-        local preview_window =
-          udim_ui.get_preview_window(r_jobs, imports_count, #files)
-        preview_window:mount()
-        udim.async_dry_run_jobs(r_jobs, sender)
-        async.run(function()
-          preview_window:render_preview(receiver)
-        end)
-        vim.api.nvim_buf_set_var(preview_window.bufnr, "modifiable", false)
-      end
-    end,
-    function()
-      log.debug("Confirmation dialog closed.")
+  local confirmation_dialog = udim_ui.get_confirmation_dialog(imports_count, #files, function(item)
+    if item.text == "Yes" then
+      udim.run_jobs(r_jobs)
+    elseif item.text == "Preview changes" then
+      local sender, receiver = async.control.channel.mpsc()
+      local preview_window = udim_ui.get_preview_window(r_jobs, imports_count, #files)
+      preview_window:mount()
+      udim.async_dry_run_jobs(r_jobs, sender)
+      async.run(function()
+        preview_window:render_preview(receiver)
+      end)
+      vim.api.nvim_buf_set_var(preview_window.bufnr, "modifiable", false)
     end
-  )
+  end, function()
+    log.debug("Confirmation dialog closed.")
+  end)
   local mini_files_installed, mini_files = pcall(require, "mini.files")
   -- Close mini.files if it's open
   if mini_files_installed then

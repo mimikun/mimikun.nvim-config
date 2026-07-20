@@ -42,23 +42,11 @@ M.SED_INPLACE_ARGS = sed_inplace_args
 ---@param range number[]: The range of lines to run the sed command on
 ---@return Job: The job that was started
 function M.sed(pattern, file_path, range)
-  local sed_command = string.format(
-    '%s %s "%s,%s%s" %s',
-    sed_binary,
-    sed_inplace_args,
-    range[1],
-    range[2],
-    pattern,
-    file_path
-  )
+  local sed_command =
+    string.format('%s %s "%s,%s%s" %s', sed_binary, sed_inplace_args, range[1], range[2], pattern, file_path)
   local job = Job:new({ command = utils.SHELL, args = { "-c", sed_command } })
 
-  log.debug(
-    "Open file descriptors: "
-      .. fs.get_open_file_descriptors()
-      .. "/"
-      .. fs.max_open_file_descriptors
-  )
+  log.debug("Open file descriptors: " .. fs.get_open_file_descriptors() .. "/" .. fs.max_open_file_descriptors)
   -- while fs.get_open_file_descriptors() >= fs.max_open_file_descriptors do
   --   -- if we're close to the limit, wait a bit
   --   vim.wait(100)
@@ -74,16 +62,10 @@ end
 function M.multi_sed(patterns, file_path, range)
   local ranged_patterns = {}
   for _, pattern in ipairs(patterns) do
-    table.insert(
-      ranged_patterns,
-      string.format("%s,%s" .. pattern, range[1], range[2])
-    )
+    table.insert(ranged_patterns, string.format("%s,%s" .. pattern, range[1], range[2]))
   end
-  local sed_command = string.format(
-    sed_binary .. " " .. sed_inplace_args .. ' "%s" %s',
-    table.concat(ranged_patterns, "; "),
-    file_path
-  )
+  local sed_command =
+    string.format(sed_binary .. " " .. sed_inplace_args .. ' "%s" %s', table.concat(ranged_patterns, "; "), file_path)
   log.debug("Running sed command: " .. sed_command)
   local job = Job:new({ command = utils.SHELL, args = { "-c", sed_command } })
   job:sync()

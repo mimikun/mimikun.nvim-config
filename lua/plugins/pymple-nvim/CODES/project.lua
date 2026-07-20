@@ -11,10 +11,7 @@ local cache = {}
 
 ---@return string | nil
 local function venv()
-  local venv_location = utils.get_virtual_environment(
-    vim.fn.getcwd(),
-    config.user_config.python.virtual_env_names
-  )
+  local venv_location = utils.get_virtual_environment(vim.fn.getcwd(), config.user_config.python.virtual_env_names)
   if venv_location == nil then
     log.warn("No virtual environment found.")
   end
@@ -25,13 +22,9 @@ end
 ---@return string | nil
 local function root_dir()
   local cwd = vim.fn.getcwd()
-  local p_root =
-    utils.find_project_root(cwd, config.user_config.python.root_markers)
+  local p_root = utils.find_project_root(cwd, config.user_config.python.root_markers)
   if p_root == nil then
-    log.warn(
-      "No project root found. Defaulting to current working directory: ",
-      cwd
-    )
+    log.warn("No project root found. Defaulting to current working directory: ", cwd)
   end
   log.debug("Project root: ", p_root)
   return p_root

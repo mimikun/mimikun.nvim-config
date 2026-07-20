@@ -11,11 +11,7 @@ local function setup_update_imports()
       print_err("Usage: PympleUpdateImports <source> <destination>")
       return
     end
-    api.update_imports(
-      args.fargs[1],
-      args.fargs[2],
-      config.user_config.update_imports
-    )
+    api.update_imports(args.fargs[1], args.fargs[2], config.user_config.update_imports)
   end, {
     desc = [[Update all imports in workspace after renaming `source` to
     `destination`]],

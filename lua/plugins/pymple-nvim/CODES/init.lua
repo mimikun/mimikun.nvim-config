@@ -25,10 +25,7 @@ local function setup(opts)
   config:set_user_config(opts)
 
   -- Setup logging
-  if
-    config.user_config.logging.file ~= nil
-    or config.user_config.logging.console ~= nil
-  then
+  if config.user_config.logging.file ~= nil or config.user_config.logging.console ~= nil then
     log.new(config.user_config.logging, true)
     log.info("--------------------------------------------------------------")
     log.info("---                   NEW PYMPLE SESSION                   ---")

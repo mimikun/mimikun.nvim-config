@@ -109,8 +109,7 @@ function M.build()
   if install_gg() then
     utils.print_info("gg installed successfully")
   else
-    local message =
-      "Failed to install gg. Try installing it manually: https://crates.io/crates/grip-grab"
+    local message = "Failed to install gg. Try installing it manually: https://crates.io/crates/grip-grab"
     utils.print_err(message)
     return
   end

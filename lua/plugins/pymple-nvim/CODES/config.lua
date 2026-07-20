@@ -170,9 +170,7 @@ end
 
 ---@return boolean
 function M:validate_configuration()
-  if
-    not vim.tbl_contains(self.user_config.update_imports.filetypes, "python")
-  then
+  if not vim.tbl_contains(self.user_config.update_imports.filetypes, "python") then
     utils.print_err(
       "Your configuration is invalid: `update_imports.filetypes` must at least contain the value `python`."
     )

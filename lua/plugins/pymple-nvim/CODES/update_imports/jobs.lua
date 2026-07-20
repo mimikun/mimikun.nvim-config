@@ -8,8 +8,7 @@ local M = {}
 -- to be formatted using the full import path to the renamed file/dir
 -- local SPLIT_IMPORT_REGEX =
 --   [[from\s+%s\s+import\s+\(?\n?[\sa-zA-Z0-9_,\n]+\)?\s*$]]
-local SPLIT_IMPORT_REGEX =
-  [[from\s+%s\s+import\s+(?:\([\sa-zA-Z0-9_,]*%s[\sa-zA-Z0-9_,]*\)\s*|[\w,]*%s[\w,]*)]]
+local SPLIT_IMPORT_REGEX = [[from\s+%s\s+import\s+(?:\([\sa-zA-Z0-9_,]*%s[\sa-zA-Z0-9_,]*\)\s*|[\w,]*%s[\w,]*)]]
 
 ---@param filetypes string[]
 ---@return string[]
@@ -35,10 +34,7 @@ local make_gg_args = function(import_path, filetypes, split)
       "--json",
       "-U",
       table.concat(build_filetypes_args(filetypes), " "),
-      string.format(
-        "'%s'",
-        SPLIT_IMPORT_REGEX:format(utils.escape_import_path(head), tail, tail)
-      ),
+      string.format("'%s'", SPLIT_IMPORT_REGEX:format(utils.escape_import_path(head), tail, tail)),
       ".",
     }, " ")
   else
@@ -58,26 +54,12 @@ M.make_gg_args = make_gg_args
 ---@param destination_import_path string: The import path to replace with
 ---@param split boolean: Whether to look for split import or not (default: false)
 ---@return string[]
-local make_sed_patterns = function(
-  source_import_path,
-  destination_import_path,
-  split
-)
+local make_sed_patterns = function(source_import_path, destination_import_path, split)
   if split then
-    local s_head, s_tail =
-      utils.split_import_on_last_separator(source_import_path)
-    local d_head, d_tail =
-      utils.split_import_on_last_separator(destination_import_path)
-    local sed_args_base = "s/"
-      .. utils.escape_import_path(s_head)
-      .. "/"
-      .. utils.escape_import_path(d_head)
-      .. "/"
-    local sed_args_module = "s/"
-      .. utils.escape_import_path(s_tail)
-      .. "/"
-      .. utils.escape_import_path(d_tail)
-      .. "/"
+    local s_head, s_tail = utils.split_import_on_last_separator(source_import_path)
+    local d_head, d_tail = utils.split_import_on_last_separator(destination_import_path)
+    local sed_args_base = "s/" .. utils.escape_import_path(s_head) .. "/" .. utils.escape_import_path(d_head) .. "/"
+    local sed_args_module = "s/" .. utils.escape_import_path(s_tail) .. "/" .. utils.escape_import_path(d_tail) .. "/"
     return { sed_args_base, sed_args_module }
   end
   return {
@@ -126,11 +108,7 @@ function ReplaceJob:run_on_files()
   for _, t in ipairs(self.targets) do
     for _, sr in ipairs(t.results) do
       async.run(function()
-        jobs.multi_sed(
-          self.sed_patterns,
-          t.path,
-          { sr.line_start, sr.line_end + 1 }
-        )
+        jobs.multi_sed(self.sed_patterns, t.path, { sr.line_start, sr.line_end + 1 })
       end)
     end
   end
@@ -151,15 +129,8 @@ function ReplaceJob:run_on_lines()
       local line_before = sr.line
       local line_after = line_before
       for _, pattern in ipairs(self.sed_patterns) do
-        local handle = assert(
-          io.popen(
-            "echo '"
-              .. line_after
-              .. string.format("' | %s '", jobs.SED_BINARY)
-              .. pattern
-              .. "'"
-          )
-        )
+        local handle =
+          assert(io.popen("echo '" .. line_after .. string.format("' | %s '", jobs.SED_BINARY) .. pattern .. "'"))
         -- sed adds a newline at the end of the line
         line_after = assert(handle:read("*a")):gsub("\n$", "")
         handle:close()
@@ -181,15 +152,8 @@ function ReplaceJob:async_run_on_lines(channel)
       local line_before = sr.line
       local line_after = line_before
       for _, pattern in ipairs(self.sed_patterns) do
-        local handle = assert(
-          io.popen(
-            'echo "'
-              .. line_after
-              .. string.format('" | %s "', jobs.SED_BINARY)
-              .. pattern
-              .. '"'
-          )
-        )
+        local handle =
+          assert(io.popen('echo "' .. line_after .. string.format('" | %s "', jobs.SED_BINARY) .. pattern .. '"'))
         -- sed adds a newline at the end of the line
         line_after = assert(handle:read("*a")):gsub("\n$", "")
         handle:close()

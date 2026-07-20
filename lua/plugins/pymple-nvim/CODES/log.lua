@@ -39,8 +39,7 @@ local function maybe_trim_logfile(logfile, max_lines)
   num_lines = tonumber(string.match(num_lines, "%d+"))
   if num_lines > max_lines then
     local lines_to_delete = num_lines - max_lines
-    local sed_command =
-      string.format("sed -i '' '1,%dd' %s", lines_to_delete, logfile)
+    local sed_command = string.format("sed -i '' '1,%dd' %s", lines_to_delete, logfile)
 
     local sysname = vim.uv.os_uname().sysname
     if sysname == "Linux" then
@@ -108,13 +107,7 @@ log.new = function(config, standalone)
 
     -- Output to console
     if config.console.enabled then
-      local console_string = string.format(
-        "[%-6s%s] %s: %s",
-        nameupper,
-        os.date("%H:%M:%S"),
-        lineinfo,
-        msg
-      )
+      local console_string = string.format("[%-6s%s] %s: %s", nameupper, os.date("%H:%M:%S"), lineinfo, msg)
 
       if level_config.hl then
         vim.cmd(string.format("echohl %s", level_config.hl))
@@ -122,9 +115,7 @@ log.new = function(config, standalone)
 
       local split_console = vim.split(console_string, "\n")
       for _, v in ipairs(split_console) do
-        vim.cmd(
-          string.format([[echom "[%s] %s"]], PLUGIN_NAME, vim.fn.escape(v, '"'))
-        )
+        vim.cmd(string.format([[echom "[%s] %s"]], PLUGIN_NAME, vim.fn.escape(v, '"')))
       end
 
       if level_config.hl then
@@ -135,8 +126,7 @@ log.new = function(config, standalone)
     -- Output to log file
     if config.file.enabled then
       local fp = io.open(outfile, "a")
-      local str =
-        string.format("[%-6s%s] %s: %s\n", nameupper, os.date(), lineinfo, msg)
+      local str = string.format("[%-6s%s] %s: %s\n", nameupper, os.date(), lineinfo, msg)
       fp:write(str)
       fp:close()
     end

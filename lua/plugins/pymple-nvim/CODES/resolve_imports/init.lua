@@ -25,10 +25,7 @@ local function build_symbol_regexes(symbol, regexes)
   regexes = regexes or IMPORTABLE_SYMBOLS_PATTERNS
   local additional_args = ""
   for _, pattern in ipairs(regexes) do
-    additional_args = additional_args
-      .. "-e "
-      .. string.format(pattern, symbol)
-      .. " "
+    additional_args = additional_args .. "-e " .. string.format(pattern, symbol) .. " "
   end
   return additional_args
 end
@@ -76,37 +73,21 @@ end
 ---@return string[] | nil: list of candidates
 function M.resolve_python_import(symbol, current_file_path)
   local py_sys_paths = utils.get_python_sys_paths() or {}
-  local root = project.root
-    or utils.find_project_root(
-      current_file_path,
-      config.user_config.python.root_markers
-    )
+  local root = project.root or utils.find_project_root(current_file_path, config.user_config.python.root_markers)
   if root then
     table.insert(py_sys_paths, root)
   end
   local target_paths = utils.deduplicate_list(py_sys_paths)
   local gg_flags
-  if
-    health.version_satisfies_constraint(PYMPLE_BINARIES["gg"], "0.5.3", nil)
-  then
+  if health.version_satisfies_constraint(PYMPLE_BINARIES["gg"], "0.5.3", nil) then
     gg_flags = "-fCHGA -t pystrict -I "
   else
     gg_flags = "-fCHGAD -t pystrict -I "
   end
-  local gg_args = gg_flags
-    .. current_file_path
-    .. " "
-    .. build_symbol_regexes(symbol, IMPORTABLE_SYMBOLS_PATTERNS)
-  local fd_args = '-H -I -p "/'
-    .. symbol
-    .. "/__init__.py$|/"
-    .. symbol
-    .. ".py$"
-    .. '"'
-    .. " "
+  local gg_args = gg_flags .. current_file_path .. " " .. build_symbol_regexes(symbol, IMPORTABLE_SYMBOLS_PATTERNS)
+  local fd_args = '-H -I -p "/' .. symbol .. "/__init__.py$|/" .. symbol .. ".py$" .. '"' .. " "
   local candidate_paths = jobs.find_import_candidates(gg_args, target_paths)
-  local modules_paths =
-    jobs.find_import_modules_candidates(fd_args, target_paths)
+  local modules_paths = jobs.find_import_modules_candidates(fd_args, target_paths)
   log.debug("Modules: " .. vim.inspect(modules_paths))
   log.debug("Candidates: " .. vim.inspect(candidate_paths))
   candidate_paths = filter_candidates(candidate_paths)

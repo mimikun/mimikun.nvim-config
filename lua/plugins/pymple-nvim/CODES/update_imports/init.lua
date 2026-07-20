@@ -19,8 +19,7 @@ local function make_split_imports_job(source, destination, filetypes)
     return nil
   end
 
-  local sed_patterns =
-    update_imports_jobs.make_sed_patterns(source, destination, split)
+  local sed_patterns = update_imports_jobs.make_sed_patterns(source, destination, split)
 
   return update_imports_jobs.ReplaceJob.new(sed_patterns, gg_results)
 end
@@ -39,8 +38,7 @@ local function make_monolithic_imports_job(source, destination, filetypes)
     return nil
   end
 
-  local sed_patterns =
-    update_imports_jobs.make_sed_patterns(source, destination, false)
+  local sed_patterns = update_imports_jobs.make_sed_patterns(source, destination, false)
 
   return update_imports_jobs.ReplaceJob.new(sed_patterns, gg_results)
 end
@@ -54,11 +52,7 @@ M.make_monolithic_imports_job = make_monolithic_imports_job
 ---@return ReplaceJob[]
 function M.prepare_jobs(source, destination, filetypes, python_root)
   local s, d = unpack(
-    utils.map(
-      utils.to_python_reference_path,
-      utils.make_files_relative({ source, destination }, python_root),
-      {}
-    )
+    utils.map(utils.to_python_reference_path, utils.make_files_relative({ source, destination }, python_root), {})
   )
   --- @type ReplaceJob[]
   local replace_jobs = {}

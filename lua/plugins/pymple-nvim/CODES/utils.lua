@@ -103,8 +103,7 @@ M.find_project_root = find_project_root
 ---@param python_symbol string | nil: The symbol to reference
 ---@return string: The python reference path
 function M.to_python_reference_path(module_path, python_symbol)
-  local result, _ =
-    module_path:gsub("/", "."):gsub("%.py$", ""):gsub(".__init__", "")
+  local result, _ = module_path:gsub("/", "."):gsub("%.py$", ""):gsub(".__init__", "")
   if python_symbol then
     result = result .. "." .. python_symbol
   end
@@ -191,8 +190,7 @@ local function find_docstring_end_line_number_in_lines(lines)
   return nil
 end
 
-M.find_docstring_end_line_number_in_lines =
-  find_docstring_end_line_number_in_lines
+M.find_docstring_end_line_number_in_lines = find_docstring_end_line_number_in_lines
 
 ---Finds the end line number of a file docstring
 ---@param buf number: The buffer number
@@ -215,13 +213,7 @@ function M.add_import_to_buffer(statement, buf, autosave)
     -- add 2 to the docstring height to account for the empty line after the docstring
     insert_on_line = docstring_height + 1
   end
-  vim.api.nvim_buf_set_lines(
-    buf or 0,
-    insert_on_line,
-    insert_on_line,
-    false,
-    { statement }
-  )
+  vim.api.nvim_buf_set_lines(buf or 0, insert_on_line, insert_on_line, false, { statement })
   if autosave then
     vim.cmd.write()
   end
@@ -268,17 +260,8 @@ function M.get_python_sys_paths(cmd_executor)
   local paths = vim.split(result, ",")
   local clean_paths = {}
   for _, path in ipairs(paths) do
-    local p = path
-      :gsub("%[", "")
-      :gsub("%]", "")
-      :gsub("'", "")
-      :gsub(" ", "")
-      :gsub("\n", "")
-    if
-      p ~= ""
-      and vim.fn.fnamemodify(p, ":e") ~= "zip"
-      and vim.fn.fnamemodify(p, ":t") ~= "lib-dynload"
-    then
+    local p = path:gsub("%[", ""):gsub("%]", ""):gsub("'", ""):gsub(" ", ""):gsub("\n", "")
+    if p ~= "" and vim.fn.fnamemodify(p, ":e") ~= "zip" and vim.fn.fnamemodify(p, ":t") ~= "lib-dynload" then
       table.insert(clean_paths, p)
     end
   end
@@ -503,10 +486,7 @@ function M.shorten_path(path, max_length)
     end
   end
   local last_segment = segments[#segments]
-  local shortest_length = path_prefix:len()
-    + 2 * #shortest_path_segments
-    - 1
-    + last_segment:len()
+  local shortest_length = path_prefix:len() + 2 * #shortest_path_segments - 1 + last_segment:len()
   -- best we can do
   if shortest_length >= max_length then
     return path_prefix .. table.concat(shortest_path_segments, "/")

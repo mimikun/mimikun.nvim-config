@@ -23,11 +23,7 @@ for _, required_binary in ipairs(health.required_binaries) do
     and version
     and version ~= "(unknown version)"
     and (required_binary.min_version or required_binary.max_version)
-    and not health.version_satisfies_constraint(
-      version,
-      required_binary.min_version,
-      required_binary.max_version
-    )
+    and not health.version_satisfies_constraint(version, required_binary.min_version, required_binary.max_version)
   then
     utils.print_err(
       string.format(
