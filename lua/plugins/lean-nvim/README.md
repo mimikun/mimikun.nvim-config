@@ -1,27 +1,3 @@
-<div align="center">
-  <div>
-    <div><img alt="lean.nvim" src="https://github.com/user-attachments/assets/727b689d-56f6-48e8-8fe5-a7a5d82b91c5" width="400px"/></div>
-    <div><h1>lean.nvim</h1></div>
-  </div>
-  <table>
-    <tr>
-      <td>
-        <strong><a href="https://neovim.io">Neovim</a> support for the <a href="https://lean-lang.org/">Lean Theorem Prover</a></strong>
-      </td>
-    </tr>
-  </table>
-
-[![Lua](https://img.shields.io/badge/Lua-blue.svg?style=for-the-badge&logo=lua)](http://www.lua.org)
-[![Neovim](https://img.shields.io/badge/Neovim%200.11+-green.svg?style=for-the-badge&logo=neovim)](https://neovim.io)
-[![MIT](https://img.shields.io/badge/MIT-yellow.svg?style=for-the-badge)](https://opensource.org/licenses/MIT)
-<a href="https://dotfyle.com/plugins/Julian/lean.nvim">
-<img alt="dotfiles using lean.nvim" src="https://dotfyle.com/plugins/Julian/lean.nvim/shield?style=for-the-badge" />
-</a>
-
-</div>
-
-https://github.com/user-attachments/assets/d17554ae-bcce-4f73-ac34-38ae556caf45
-
 ## Installation
 
 If you are using neovim 0.12 or later, you can install and configure `lean.nvim` using
