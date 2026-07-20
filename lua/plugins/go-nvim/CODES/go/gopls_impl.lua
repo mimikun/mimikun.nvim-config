@@ -1,7 +1,7 @@
 local api = vim.api
 local lsp = vim.lsp
 
-local util = require('go.utils')
+local util = require("go.utils")
 
 local log = util.log
 local trace = util.trace
@@ -10,28 +10,28 @@ local M = {}
 
 M.config = {
   enabled = true,
-  prefix = '  ',
-  prefix_highlight = 'Comment',
-  separator = ', ',
-  highlight = 'Constant',
-  loadfile = true,     -- should we load the implementations file and get details
-  debounce = 1000,     -- delay in ms
+  prefix = "  ",
+  prefix_highlight = "Comment",
+  separator = ", ",
+  highlight = "Constant",
+  loadfile = true, -- should we load the implementations file and get details
+  debounce = 1000, -- delay in ms
   virt_text_pos = nil, -- default to eol
-  autocmd = { 'BufEnter', 'TextChanged', 'CursorMoved', 'CursorHold' },
+  autocmd = { "BufEnter", "TextChanged", "CursorMoved", "CursorHold" },
 }
 
 local finding_impls = false
 
 local function get_document_symbols(client, bufnr, callback)
   local params = vim.lsp.util.make_position_params(0, client.offset_encoding)
-  client:request('textDocument/documentSymbol', params, callback, bufnr)
+  client:request("textDocument/documentSymbol", params, callback, bufnr)
 end
 
 local function get_implementations(client, bufnr, position, callback, ctx)
   local params = vim.lsp.util.make_position_params(0, client.offset_encoding)
   params.position = position
-  trace('Getting implementations:', params, ctx)
-  client:request('textDocument/implementation', params, callback, bufnr)
+  trace("Getting implementations:", params, ctx)
+  client:request("textDocument/implementation", params, callback, bufnr)
   util.yield_for(100)
 end
 
@@ -43,23 +43,23 @@ local function find_potential_implementations(symbols, ctx)
     local cur_line = api.nvim_win_get_cursor(0)[1]
     -- no need to check if the symbol is not in the current screen
     if line < cur_line - 60 or line > cur_line + 60 then -- 60 lines above and below is my best guess
-      trace('Ignoring symbol:', symbol, line, cur_line)
-      goto continue
+      trace("Ignoring symbol:", symbol, line, cur_line)
+      -- goto continue
     end
 
-    trace('Checking symbol:', symbol)
+    trace("Checking symbol:", symbol)
     local kind = vim.lsp.protocol.SymbolKind[symbol.kind]
-    if kind == 'Interface' or kind == 'Struct' or kind == 'TypeAlias' then
+    if kind == "Interface" or kind == "Struct" or kind == "TypeAlias" then
       potential[symbol.name] = symbol
     end
-    ::continue::
+    -- ::continue::
   end
-  trace('Potential implementations:', potential)
+  trace("Potential implementations:", potential)
   return potential
 end
 
 local function show_virtual_text(bufnr, line, implementations)
-  trace('Showing virtual text:', bufnr, line, implementations)
+  trace("Showing virtual text:", bufnr, line, implementations)
   if not M.config.enabled or vim.tbl_isempty(implementations) then
     return
   end
@@ -72,7 +72,7 @@ local function show_virtual_text(bufnr, line, implementations)
   local virtual_text_opts = {
     virt_text = {
       { M.config.prefix, M.config.prefix_highlight },
-      { text,            M.config.highlight },
+      { text, M.config.highlight },
     },
   }
   if M.config.virt_text_pos then
@@ -80,27 +80,27 @@ local function show_virtual_text(bufnr, line, implementations)
   end
 
   if not M.bufnr or not M.bufnr.ns then
-    M.bufnr = { ns = api.nvim_create_namespace('lsp_impl'), ids = {}, text = {} }
+    M.bufnr = { ns = api.nvim_create_namespace("lsp_impl"), ids = {}, text = {} }
   end
   -- check if the virtual text is already shown
   if M.bufnr.text[line] == text and text then
-    trace('Virtual text already shown:', bufnr, line, text)
+    trace("Virtual text already shown:", bufnr, line, text)
     return
   end
   local deleted = api.nvim_buf_del_extmark(bufnr, M.bufnr.ns, M.bufnr.ids[line] or 0)
   if not deleted then
-    log('Failed delete extmark', bufnr, M.bufnr.ns, M.bufnr.ids, line)
+    log("Failed delete extmark", bufnr, M.bufnr.ns, M.bufnr.ids, line)
   end
   local id = api.nvim_buf_set_extmark(bufnr, M.bufnr.ns, line - 1, 0, virtual_text_opts)
 
-  log('Showing virtual text:', virtual_text_opts, bufnr, line - 1)
+  log("Showing virtual text:", virtual_text_opts, bufnr, line - 1)
   table.insert(M.bufnr.ids, id)
   M.bufnr.text[line] = text
   M.bufnr.ids[line] = id
 end
 
 local update_virtual_text, update_timer = util.debounce(function(bufnr)
-  local client = lsp.get_clients({ bufnr = bufnr, name = 'gopls' })[1]
+  local client = lsp.get_clients({ bufnr = bufnr, name = "gopls" })[1]
   if not client then
     return
   end
@@ -110,7 +110,7 @@ local update_virtual_text, update_timer = util.debounce(function(bufnr)
   end
   local function handle_document_symbols(err, result, ctx)
     if err then
-      log('Error getting document symbols:', err)
+      log("Error getting document symbols:", err)
       return
     end -- Handle error
 
@@ -121,17 +121,17 @@ local update_virtual_text, update_timer = util.debounce(function(bufnr)
 
       local function handle_implementations(err, impl_result, ctx)
         if err then
-          log('Error getting implementations:', err)
+          log("Error getting implementations:", err)
           return
         end -- Handle error
         if vim.fn.empty(impl_result) == 1 then
           return
         end
-        trace('Got implementations:', ctx, impl_result)
+        trace("Got implementations:", ctx, impl_result)
 
         local implementations = {}
         for _, impls in ipairs(impl_result or {}) do
-          trace('Checking impl location:', impls)
+          trace("Checking impl location:", impls)
           local uri = impls.uri
           local filename = vim.uri_to_fname(uri)
           local target_bufnr = vim.uri_to_bufnr(uri)
@@ -152,8 +152,8 @@ local update_virtual_text, update_timer = util.debounce(function(bufnr)
           end
           -- sometime the result is `type interfacename interface{`
           -- so we need to remove the `type` and anything after `interface`
-          text = text:gsub('^%s*type%s*', ''):gsub('%s*interface.*', ''):gsub('%s*struct.*', '')
-          trace('Checking impl symbol:', filename, line, col, text)
+          text = text:gsub("^%s*type%s*", ""):gsub("%s*interface.*", ""):gsub("%s*struct.*", "")
+          trace("Checking impl symbol:", filename, line, col, text)
           table.insert(implementations, { text, filename, line, col })
         end
 
@@ -162,7 +162,7 @@ local update_virtual_text, update_timer = util.debounce(function(bufnr)
         end
       end
 
-      trace('Getting implementations for:', symbol_name, position, potential_implementations)
+      trace("Getting implementations for:", symbol_name, position, potential_implementations)
       coroutine.wrap(get_implementations)(client, bufnr, position, handle_implementations, ctx)
     end
 
@@ -176,7 +176,7 @@ local function attach(bufnr)
   vim.api.nvim_create_autocmd(M.config.autocmd, {
     buffer = bufnr,
     callback = function(ev)
-      if ev.event == 'BufWritePost' then
+      if ev.event == "BufWritePost" then
         finding_impls = false -- enforce to find implementations
       end
       update_virtual_text(bufnr)
@@ -185,12 +185,12 @@ local function attach(bufnr)
 end
 
 M.setup = function(opts)
-  M.config = vim.tbl_deep_extend('force', M.config, opts or {})
+  M.config = vim.tbl_deep_extend("force", M.config, opts or {})
 
-  vim.api.nvim_create_autocmd('LspAttach', {
+  vim.api.nvim_create_autocmd("LspAttach", {
     callback = function(ev)
       local bufnr = ev.buf
-      local client = lsp.get_clients({ bufnr = bufnr, name = 'gopls' })
+      local client = lsp.get_clients({ bufnr = bufnr, name = "gopls" })
       if client then
         attach(bufnr)
       end

@@ -57,7 +57,7 @@ function alt_getopt.get_ordered_opts(arg, sh_opts, long_opts)
     local a = arg[i]
     if type(a) ~= 'string' then
       log('failed to decode', type(a), a)
-      goto continue
+      -- goto continue
     end
     if a == '--' then
       i = i + 1
@@ -126,7 +126,7 @@ function alt_getopt.get_ordered_opts(arg, sh_opts, long_opts)
     end
 
     i = i + 1
-    ::continue::
+    -- ::continue::
   end
 
   return opts, i, optarg, unparsed

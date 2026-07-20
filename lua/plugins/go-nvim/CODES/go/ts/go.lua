@@ -1,34 +1,29 @@
-local nodes = require('go.ts.nodes')
+local nodes = require("go.ts.nodes")
 
-local log = require('go.utils').log
-local warn = require('go.utils').warn
-local info = require('go.utils').info
-local debug = require('go.utils').debug
-local trace = require('go.utils').trace
-
+local log = require("go.utils").log
+local warn = require("go.utils").warn
+local info = require("go.utils").info
+local debug = require("go.utils").debug
+local trace = require("go.utils").trace
 
 local M = {
-  query_struct = '(type_spec name:(type_identifier) @definition.struct type: (struct_type))',
-  query_package = '(package_clause (package_identifier)@package.name)@package.clause',
-  query_struct_id = '(type_spec name:(type_identifier) @definition.struct  (struct_type))',
-  query_em_struct_id = '(field_declaration name:(field_identifier) @definition.struct (struct_type))',
-  query_struct_block =
-  [[((type_declaration (type_spec name:(type_identifier) @struct.name type: (struct_type)))@struct.declaration)]],
+  query_struct = "(type_spec name:(type_identifier) @definition.struct type: (struct_type))",
+  query_package = "(package_clause (package_identifier)@package.name)@package.clause",
+  query_struct_id = "(type_spec name:(type_identifier) @definition.struct  (struct_type))",
+  query_em_struct_id = "(field_declaration name:(field_identifier) @definition.struct (struct_type))",
+  query_struct_block = [[((type_declaration (type_spec name:(type_identifier) @struct.name type: (struct_type)))@struct.declaration)]],
   query_struct_block_type = [[((type_spec name:(type_identifier) @struct.name type: (struct_type))@struct.declaration)]], -- type(struct1, struct2)
   -- query_type_declaration = [[((type_declaration (type_spec name:(type_identifier)@type_decl.name type:(type_identifier)@type_decl.type))@type_decl.declaration)]], -- rename to gotype so not confuse with type
   query_type_declaration = [[((type_declaration (type_spec name:(type_identifier)@type_decl.name)))]],
-  query_em_struct_block =
-  [[(field_declaration name:(field_identifier)@struct.name type: (struct_type)) @struct.declaration]],
+  query_em_struct_block = [[(field_declaration name:(field_identifier)@struct.name type: (struct_type)) @struct.declaration]],
   query_struct_block_from_id = [[(((type_spec name:(type_identifier) type: (struct_type)))@block.struct_from_id)]],
   -- query_em_struct = "(field_declaration name:(field_identifier) @definition.struct type: (struct_type))",
-  query_interface_id =
-  [[((type_declaration (type_spec name:(type_identifier) @interface.name type:(interface_type)))@interface.declaration)]],
+  query_interface_id = [[((type_declaration (type_spec name:(type_identifier) @interface.name type:(interface_type)))@interface.declaration)]],
   -- query_interface_method = [[((method_spec name: (field_identifier)@method.name)@interface.method.declaration)]],
   query_interface_method = [[((method_elem name: (field_identifier)@method.name)@interface.method.declaration)]], --
   -- this is a breaking change require TS parser update
-  query_func = '((function_declaration name: (identifier)@function.name) @function.declaration)',
-  query_method =
-  '(method_declaration receiver: (parameter_list (parameter_declaration name:(identifier)@method.receiver.name type:(type_identifier)@method.receiver.type)) name:(field_identifier)@method.name)@method.declaration',
+  query_func = "((function_declaration name: (identifier)@function.name) @function.declaration)",
+  query_method = "(method_declaration receiver: (parameter_list (parameter_declaration name:(identifier)@method.receiver.name type:(type_identifier)@method.receiver.type)) name:(field_identifier)@method.name)@method.declaration",
   query_method_name = [[((method_declaration
      receiver: (parameter_list)@method.receiver
      name: (field_identifier)@method.name
@@ -140,17 +135,17 @@ local M = {
 }
 
 local function get_name_defaults()
-  return { ['func'] = 'function', ['if'] = 'if', ['else'] = 'else', ['for'] = 'for' }
+  return { ["func"] = "function", ["if"] = "if", ["else"] = "else", ["for"] = "for" }
 end
 
 M.get_struct_node_at_pos = function(bufnr)
-  local query = M.query_struct_block .. ' ' .. M.query_em_struct_block .. ' ' .. M.query_struct_block_type
+  local query = M.query_struct_block .. " " .. M.query_em_struct_block .. " " .. M.query_struct_block_type
   local bufn = bufnr or vim.api.nvim_get_current_buf()
   local ns = nodes.nodes_at_cursor(query, get_name_defaults(), bufn)
   if ns == nil then
-    debug('struct not found')
+    debug("struct not found")
   else
-    log('struct node', ns)
+    log("struct node", ns)
     return ns[#ns]
   end
 end
@@ -160,9 +155,9 @@ M.get_type_node_at_pos = function(bufnr)
   local bufn = bufnr or vim.api.nvim_get_current_buf()
   local ns = nodes.nodes_at_cursor(query, get_name_defaults(), bufn)
   if ns == nil then
-    debug('type not found')
+    debug("type not found")
   else
-    log('type node', ns)
+    log("type node", ns)
     return ns[#ns]
   end
 end
@@ -173,7 +168,7 @@ M.get_interface_node_at_pos = function(bufnr)
   local bufn = bufnr or vim.api.nvim_get_current_buf()
   local ns = nodes.nodes_at_cursor(query, get_name_defaults(), bufn)
   if ns == nil then
-    debug('interface not found')
+    debug("interface not found")
   else
     return ns[#ns]
   end
@@ -185,22 +180,22 @@ M.get_interface_method_node_at_pos = function(bufnr)
 
   local ns = nodes.nodes_at_cursor(query, get_name_defaults(), bufnr)
   if ns == nil then
-    warn('interface method not found')
+    warn("interface method not found")
   else
     return ns[#ns]
   end
 end
 
 M.get_func_method_node_at_pos = function(bufnr)
-  local query = M.query_func .. ' ' .. M.query_method_name
+  local query = M.query_func .. " " .. M.query_method_name
   -- local query = require("go.ts.go").query_method_name
-  log('query', query)
+  log("query", query)
 
   local bufn = bufnr or vim.api.nvim_get_current_buf()
 
   local ns = nodes.nodes_at_cursor(query, get_name_defaults(), bufn)
   if ns == nil then
-    log('function not found')
+    log("function not found")
     return nil
   end
   return ns[#ns]
@@ -226,18 +221,18 @@ end
 
 M.get_tbl_testcase_node_name = function(bufnr)
   local bufn = bufnr or vim.api.nvim_get_current_buf()
-  local parser = vim.treesitter.get_parser(bufn, 'go')
+  local parser = vim.treesitter.get_parser(bufn, "go")
   if not parser then
-    return warn('treesitter parser not found for' .. vim.fn.bufname(bufn))
+    return warn("treesitter parser not found for" .. vim.fn.bufname(bufn))
   end
-  if vim.fn.has('nvim-0.11') ~= 1 then
-    warn('please update to nvim 0.11 or later to use this feature')
+  if vim.fn.has("nvim-0.11") ~= 1 then
+    warn("please update to nvim 0.11 or later to use this feature")
   end
   local tree = parser:parse()
   tree = tree[1]
 
-  local tbl_case_query = vim.treesitter.query.parse('go', M.query_tbl_testcase_node)
-  local tbl_case_kv_query = vim.treesitter.query.parse('go', M.query_tbl_kv_node)
+  local tbl_case_query = vim.treesitter.query.parse("go", M.query_tbl_testcase_node)
+  local tbl_case_kv_query = vim.treesitter.query.parse("go", M.query_tbl_kv_node)
 
   local curr_row, _ = unpack(vim.api.nvim_win_get_cursor(0))
   curr_row = curr_row - 1
@@ -246,7 +241,7 @@ M.get_tbl_testcase_node_name = function(bufnr)
     for id, nodes in pairs(match) do
       local name = tbl_case_query.captures[id] or tbl_case_query.captures[pattern]
       local get_tc_block = function(node, range_checker)
-        if name == 'test.block' then
+        if name == "test.block" then
           local start_row, _, end_row, _ = node:range()
 
           if not range_checker(start_row, end_row, curr_row) then
@@ -259,9 +254,9 @@ M.get_tbl_testcase_node_name = function(bufnr)
       end
       for _, node in pairs(nodes) do
         local n = get_tc_block(node, function(start_row, end_row, curr_row)
-          if (start_row <= curr_row and curr_row <= end_row) then -- curr_row starts from 1
-            trace('valid node:', node)                            -- the nvim manual is out of sync for release version
-            return true                                           -- cursor is in the same line, this is a strong match
+          if start_row <= curr_row and curr_row <= end_row then -- curr_row starts from 1
+            trace("valid node:", node) -- the nvim manual is out of sync for release version
+            return true -- cursor is in the same line, this is a strong match
           end
         end)
         if n then
@@ -275,36 +270,36 @@ M.get_tbl_testcase_node_name = function(bufnr)
             local id
             for i2, nodes2 in pairs(match2) do
               local name2 = tbl_case_kv_query.captures[i2] -- or tbl_case_kv_query.captures[pattern2]
-              for i, n2 in pairs(nodes2) do                -- the order is abit random
+              for i, n2 in pairs(nodes2) do -- the order is abit random
                 -- if name2 == 'test.name' then
                 local start_row2, _, end_row2, _ = n2:range()
-                if name2 == 'test.nameid' then
+                if name2 == "test.nameid" then
                   id = vim.treesitter.get_node_text(n2, bufn)
-                  if id == 'name' then
+                  if id == "name" then
                     result[name2] = id
                   end
-                elseif name2 == 'test.name' then
+                elseif name2 == "test.name" then
                   local tc_name2 = vim.treesitter.get_node_text(n2, bufn)
-                  if id == 'name' then
-                    log('found node', name2, tc_name2)
+                  if id == "name" then
+                    log("found node", name2, tc_name2)
                     tc_name = tc_name2
                   elseif start_row2 <= curr_row and curr_row <= end_row2 then -- curr_row starts
                     guess = tc_name2
                   end
                 else
-                  trace('found node', name2, n2:range())
+                  trace("found node", name2, n2:range())
                 end
 
-                trace('node type name', i2, i, name2, id, start_row2, end_row2, curr_row, tc_name, guess)
+                trace("node type name", i2, i, name2, id, start_row2, end_row2, curr_row, tc_name, guess)
               end
             end
           end
           local testcase = tc_name or guess
           if testcase then
-            testcase = string.gsub(testcase, '"', '')
+            testcase = string.gsub(testcase, '"', "")
             return testcase
           else
-            debug('testcase not found')
+            debug("testcase not found")
           end
         end
       end
@@ -315,12 +310,12 @@ end
 
 M.get_sub_testcase_name = function(bufnr)
   local bufn = bufnr or vim.api.nvim_get_current_buf()
-  local parser = vim.treesitter.get_parser(bufn, 'go')
+  local parser = vim.treesitter.get_parser(bufn, "go")
   if not parser then
-    return warn('treesitter parser not found for ' .. vim.fn.bufname(bufn))
+    return warn("treesitter parser not found for " .. vim.fn.bufname(bufn))
   end
 
-  local sub_case_query = vim.treesitter.query.parse('go', M.query_sub_testcase_node)
+  local sub_case_query = vim.treesitter.query.parse("go", M.query_sub_testcase_node)
   local tree = parser:parse()
   tree = tree[1]
 
@@ -329,19 +324,19 @@ M.get_sub_testcase_name = function(bufnr)
   for id, node in sub_case_query:iter_captures(tree:root(), bufn, 0, -1) do
     local name = sub_case_query.captures[id]
     -- tc_run is the first capture of a match, so we can use it to check if we are inside a test
-    if name == 'tc.run' then
+    if name == "tc.run" then
       local start_row, _, end_row, _ = node:range()
-      if (start_row < curr_row and curr_row <= end_row + 1) then
+      if start_row < curr_row and curr_row <= end_row + 1 then
         is_inside_test = true
       else
         is_inside_test = false
       end
-      goto continue
+      -- goto continue
     end
-    if name == 'tc.name' and is_inside_test then
-      return string.gsub(vim.treesitter.get_node_text(node, bufn), '"', '')
+    if name == "tc.name" and is_inside_test then
+      return string.gsub(vim.treesitter.get_node_text(node, bufn), '"', "")
     end
-    ::continue::
+    -- ::continue::
   end
   return nil
 end
@@ -349,11 +344,11 @@ end
 M.get_string_node = function(bufnr)
   local query = M.query_string_literal
   local bufn = bufnr or vim.api.nvim_get_current_buf()
-  local ns = nodes.nodes_at_cursor(query, get_name_defaults(), bufn, 'value')
+  local ns = nodes.nodes_at_cursor(query, get_name_defaults(), bufn, "value")
   if ns == nil then
-    debug('struct not found')
+    debug("struct not found")
   else
-    log('struct node', ns[#ns])
+    log("struct node", ns[#ns])
     return ns[#ns]
   end
 end
@@ -363,15 +358,14 @@ M.get_import_node_at_pos = function(bufnr)
 
   local cur_node = vim.treesitter.get_node({ bufnr = bufnr })
   if not cur_node then
-    vim.notify('cursor not in a node or TS parser not init correctly', vim.log.levels.INFO)
+    vim.notify("cursor not in a node or TS parser not init correctly", vim.log.levels.INFO)
     return
   end
-
 
   local parent_is_import = function(node)
     local n = node
     while n do
-      if n:type() == 'import_spec' then
+      if n:type() == "import_spec" then
         return true
       end
       n = n:parent()
@@ -388,11 +382,11 @@ M.get_module_at_pos = function(bufnr)
   log(node)
   if node then
     local module = vim.treesitter.get_node_text(node, vim.api.nvim_get_current_buf())
-    module = string.gsub(module, '"', '')
-    log('module', vim.inspect(module))
+    module = string.gsub(module, '"', "")
+    log("module", vim.inspect(module))
     return module
   else
-    warn('module not found')
+    warn("module not found")
   end
 end
 
@@ -409,7 +403,7 @@ M.get_package_node_at_pos = function(bufnr)
 
   local ns = nodes.nodes_at_cursor(query, get_name_defaults(), bufn)
   if ns == nil then
-    warn('package not found')
+    warn("package not found")
   else
     return ns[#ns]
   end
@@ -423,7 +417,7 @@ function M.in_func()
   local expr = current_node
 
   while expr do
-    if expr:type() == 'function_declaration' or expr:type() == 'method_declaration' then
+    if expr:type() == "function_declaration" or expr:type() == "method_declaration" then
       return true
     end
     expr = expr:parent()

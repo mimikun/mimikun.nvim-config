@@ -338,7 +338,7 @@ function M.gather_diff_context(diff_text, callback)
       if files_pending == 0 then
         callback(table.concat(all_context, '\n\n'))
       end
-      goto continue
+      -- goto continue
     end
 
     local symbols = {}
@@ -380,7 +380,7 @@ function M.gather_diff_context(diff_text, callback)
       end
     end
 
-    ::continue::
+    -- ::continue::
   end
 end
 
