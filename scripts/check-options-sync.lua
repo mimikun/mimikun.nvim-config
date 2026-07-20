@@ -98,7 +98,14 @@ end)
 
 if #missing == 0 and #stale == 0 then
   local total = #sorted_keys(nvim_names)
-  print(string.format("OK: %s covers all %d Neovim options (%s).", OPTIONS_FILE, total, vim.version() and tostring(vim.version()) or "?"))
+  print(
+    string.format(
+      "OK: %s covers all %d Neovim options (%s).",
+      OPTIONS_FILE,
+      total,
+      vim.version() and tostring(vim.version()) or "?"
+    )
+  )
   os.exit(0)
 end
 
