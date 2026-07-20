@@ -10,4 +10,3 @@ require("config.mappings")
 require("config.usercmds")
 require("config.neovide")
 vim.cmd.colorscheme("tokyonight")
-
