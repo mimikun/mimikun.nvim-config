@@ -8,29 +8,29 @@
 --- LSP helper functions
 ---@brief ]]
 
-local Types = require('haskell-tools.types.internal')
+local Types = require("haskell-tools.types.internal")
 
 ---@class haskell-tools.lsp.Helpers
 local LspHelpers = {}
 
 LspHelpers.get_clients = vim.lsp.get_clients
 
-LspHelpers.haskell_client_name = 'haskell-tools.nvim'
+LspHelpers.haskell_client_name = "haskell-tools.nvim"
 
 ---@param bufnr number the buffer to get clients for
 ---@return vim.lsp.Client[] haskell_clients
 ---@see util.get_clients
 function LspHelpers.get_active_hls_clients(bufnr)
-  return LspHelpers.get_clients { bufnr = bufnr, name = LspHelpers.haskell_client_name }
+  return LspHelpers.get_clients({ bufnr = bufnr, name = LspHelpers.haskell_client_name })
 end
 
 ---@return string[] cmd The command to invoke haskell-language-server
 LspHelpers.get_hls_cmd = function()
-  local HTConfig = require('haskell-tools.config.internal')
+  local HTConfig = require("haskell-tools.config.internal")
   local cmd = Types.evaluate(HTConfig.hls.cmd)
   ---@cast cmd string[]
-  assert(type(cmd) == 'table', 'haskell-tools: hls.cmd should evaluate to a string[]')
-  assert(#cmd > 0, 'haskell-tools: hls.cmd evaluates to an empty list.')
+  assert(type(cmd) == "table", "haskell-tools: hls.cmd should evaluate to a string[]")
+  assert(#cmd > 0, "haskell-tools: hls.cmd evaluates to an empty list.")
   return cmd
 end
 
@@ -41,22 +41,22 @@ local function get_hls_version()
   if vim.fn.executable(hls_bin) ~= 1 then
     return nil
   end
-  local handle = io.popen(hls_bin .. ' --version')
+  local handle = io.popen(hls_bin .. " --version")
   if not handle then
     return nil
   end
-  local output, error_msg = handle:read('*a')
+  local output, error_msg = handle:read("*a")
   handle:close()
   if error_msg then
     return nil
   end
-  local version_str = output:match('version:%s([^%s]*)%s.*')
+  local version_str = output:match("version:%s([^%s]*)%s.*")
   if not version_str then
     return nil
   end
   local function parse_version()
     local version = {}
-    for str in string.gmatch(version_str, '([^%.]+)') do
+    for str in string.gmatch(version_str, "([^%.]+)") do
       table.insert(version, tonumber(str))
     end
     return #version > 1 and version

@@ -6,10 +6,10 @@
 --- Inspired by rust-tools.nvim's hover_actions
 ---@brief ]]
 
-local log = require('haskell-tools.log.internal')
+local log = require("haskell-tools.log.internal")
 local lsp_util = vim.lsp.util
-local HtParser = require('haskell-tools.parser')
-local HtProjectHelpers = require('haskell-tools.project.helpers')
+local HtParser = require("haskell-tools.parser")
+local HtProjectHelpers = require("haskell-tools.project.helpers")
 
 local hover = {}
 
@@ -37,19 +37,19 @@ end
 local function delete_plug_mappings(bufnr)
   vim
     .iter({
-      '',
-      'Docs',
-      'Source',
-      'Definition',
-      'TypeDefinition',
-      'References',
+      "",
+      "Docs",
+      "Source",
+      "Definition",
+      "TypeDefinition",
+      "References",
     })
     :map(function(suffix)
-      return '<Plug>HaskellHoverAction' .. suffix
+      return "<Plug>HaskellHoverAction" .. suffix
     end)
     :each(function(mapping)
       pcall(function()
-        vim.keymap.del('n', mapping, { buffer = bufnr })
+        vim.keymap.del("n", mapping, { buffer = bufnr })
       end)
     end)
 end
@@ -79,13 +79,13 @@ local function format_location(location, current_file)
   -- remove *
   -- replace quotes with markdown backticks
   -- decode url-encoded characters
-  local formatted_location = ('%s')
+  local formatted_location = ("%s")
     :format(location)
-    :gsub('%*', '') -- remove *
-    :gsub('‘', '`') -- markdown backticks
-    :gsub('’', '`')
-    :gsub('%%(%x%x)', hex_to_char) -- decode url-encoded characters
-  local file_location = formatted_location:match('(.*).hs:')
+    :gsub("%*", "") -- remove *
+    :gsub("‘", "`") -- markdown backticks
+    :gsub("’", "`")
+    :gsub("%%(%x%x)", hex_to_char) -- decode url-encoded characters
+  local file_location = formatted_location:match("(.*).hs:")
   if not file_location then
     return formatted_location
   end
@@ -93,14 +93,14 @@ local function format_location(location, current_file)
   if is_current_buf then
     return formatted_location:sub(#current_file + 2)
   end
-  local path = file_location .. '.hs'
+  local path = file_location .. ".hs"
   local package_path = HtProjectHelpers.match_package_root(path)
   if package_path then
     return formatted_location:sub(#package_path + 2) -- trim package path + first '/'
   end
   local project_path = HtProjectHelpers.match_project_root(path)
   if project_path then
-    formatted_location = formatted_location:sub(#project_path + 2):gsub('/', ':', 1) -- trim project path + first '/'
+    formatted_location = formatted_location:sub(#project_path + 2):gsub("/", ":", 1) -- trim project path + first '/'
   end
   return formatted_location
 end
@@ -111,8 +111,8 @@ local function mk_location(result)
   local range_start = result.range and result.range.start or {}
   local line = range_start.line
   local character = range_start.character
-  local uri = result.uri and result.uri:gsub('file://', '')
-  return line and character and uri and uri .. ':' .. tostring(line + 1) .. ':' .. tostring(character + 1) or ''
+  local uri = result.uri and result.uri:gsub("file://", "")
+  return line and character and uri and uri .. ":" .. tostring(line + 1) .. ":" .. tostring(character + 1) or ""
 end
 
 ---Is the result's start location the same as the params location?
@@ -130,7 +130,7 @@ end
 ---@param action function
 ---@param bufnr integer
 local function create_plug_mapping(suffix, action, bufnr)
-  vim.keymap.set('n', '<Plug>HaskellHoverAction' .. suffix, action, { buffer = bufnr, noremap = true, silent = true })
+  vim.keymap.set("n", "<Plug>HaskellHoverAction" .. suffix, action, { buffer = bufnr, noremap = true, silent = true })
 end
 
 ---LSP handler for textDocument/hover
@@ -140,8 +140,8 @@ end
 ---@return number|nil bufnr
 ---@return number|nil winnr
 function hover.on_hover(_, result, ctx, config)
-  local ht = require('haskell-tools')
-  local HTConfig = require('haskell-tools.config.internal')
+  local ht = require("haskell-tools")
+  local HTConfig = require("haskell-tools.config.internal")
   config = config or {}
   config.focus_id = ctx.method
   if vim.api.nvim_get_current_buf() ~= ctx.bufnr then
@@ -149,36 +149,36 @@ function hover.on_hover(_, result, ctx, config)
     return
   end
   if not (result and result.contents) then
-    vim.notify('No information available')
+    vim.notify("No information available")
     return
   end
   local markdown_lines = lsp_util.convert_input_to_markdown_lines(result.contents)
   if vim.tbl_isempty(markdown_lines) then
-    log.debug('No hover information available.')
-    vim.notify('No information available')
+    log.debug("No hover information available.")
+    vim.notify("No information available")
     return
   end
   local current_bufnr = vim.api.nvim_get_current_buf()
   local to_remove = {}
   local actions = {}
   _state.commands = {}
-  local func_name = vim.fn.expand('<cword>')
+  local func_name = vim.fn.expand("<cword>")
   ---@cast func_name string
   local _, signatures = HtParser.try_get_signatures_from_markdown(func_name, result.contents.value)
   for _, signature in pairs(signatures) do
-    table.insert(actions, 1, string.format('%d. Hoogle search: `%s`', #actions + 1, signature))
+    table.insert(actions, 1, string.format("%d. Hoogle search: `%s`", #actions + 1, signature))
     local action = function()
-      log.debug { 'Hover: Hoogle search for signature', signature }
-      ht.hoogle.hoogle_signature { search_term = signature }
+      log.debug({ "Hover: Hoogle search for signature", signature })
+      ht.hoogle.hoogle_signature({ search_term = signature })
       close_hover()
     end
     table.insert(_state.commands, action)
   end
-  local cword = vim.fn.expand('<cword>')
-  table.insert(actions, 1, string.format('%d. Hoogle search: `%s`', #actions + 1, cword))
+  local cword = vim.fn.expand("<cword>")
+  table.insert(actions, 1, string.format("%d. Hoogle search: `%s`", #actions + 1, cword))
   table.insert(_state.commands, function()
-    log.debug { 'Hover: Hoogle search for cword', cword }
-    ht.hoogle.hoogle_signature { search_term = cword }
+    log.debug({ "Hover: Hoogle search for cword", cword })
+    ht.hoogle.hoogle_signature({ search_term = cword })
   end)
   local params = ctx.params
   local found_location = false
@@ -186,33 +186,33 @@ function hover.on_hover(_, result, ctx, config)
   local found_documentation = false
   local found_source = false
   for i, value in ipairs(markdown_lines) do
-    if vim.startswith(value, '[Documentation]') and not found_documentation then
+    if vim.startswith(value, "[Documentation]") and not found_documentation then
       found_documentation = true
       table.insert(to_remove, 1, i)
-      table.insert(actions, 1, string.format('%d. Open documentation in browser', #actions + 1))
-      local uri = string.match(value, '%[Documentation%]%((.+)%)')
+      table.insert(actions, 1, string.format("%d. Open documentation in browser", #actions + 1))
+      local uri = string.match(value, "%[Documentation%]%((.+)%)")
       local action = function()
-        log.debug { 'Hover: Open documentation in browser', uri }
+        log.debug({ "Hover: Open documentation in browser", uri })
         HTConfig.tools.open_url(uri)
         close_hover()
       end
       table.insert(_state.commands, action)
-      create_plug_mapping('Docs', action, current_bufnr)
-    elseif vim.startswith(value, '[Source]') and not found_source then
+      create_plug_mapping("Docs", action, current_bufnr)
+    elseif vim.startswith(value, "[Source]") and not found_source then
       found_source = true
       table.insert(to_remove, 1, i)
-      table.insert(actions, 1, string.format('%d. View source in browser', #actions + 1))
-      local uri = string.match(value, '%[Source%]%((.+)%)')
+      table.insert(actions, 1, string.format("%d. View source in browser", #actions + 1))
+      local uri = string.match(value, "%[Source%]%((.+)%)")
       local action = function()
-        log.debug { 'Hover: View source in browser', uri }
+        log.debug({ "Hover: View source in browser", uri })
         HTConfig.tools.open_url(uri)
         close_hover()
       end
       table.insert(_state.commands, action)
-      create_plug_mapping('Source', action, current_bufnr)
+      create_plug_mapping("Source", action, current_bufnr)
     end
-    local location = string.match(value, '*Defined [ia][nt] (.+)')
-    local current_file = params.textDocument.uri:gsub('file://', '')
+    local location = string.match(value, "*Defined [ia][nt] (.+)")
+    local current_file = params.textDocument.uri:gsub("file://", "")
     local results, err, definition_results
     ---@type function
     if location ~= nil and not found_location then
@@ -222,41 +222,41 @@ function hover.on_hover(_, result, ctx, config)
       if not err and results ~= nil and #results >= 0 then
         definition_results = results[1] and results[1].result or {}
         if #definition_results > 0 then
-          local location_suffix = ('%s'):format(format_location(location, current_file))
+          local location_suffix = ("%s"):format(format_location(location, current_file))
           local definition_result = definition_results[1]
           if not is_same_position(params, definition_result) then
-            log.debug { 'Hover: definition location', location_suffix }
-            table.insert(actions, 1, string.format('%d. Go to definition at ' .. location_suffix, #actions + 1))
+            log.debug({ "Hover: definition location", location_suffix })
+            table.insert(actions, 1, string.format("%d. Go to definition at " .. location_suffix, #actions + 1))
             local action = function()
-              log.debug { 'Hover: Go to definition', definition_result }
+              log.debug({ "Hover: Go to definition", definition_result })
               local client = vim.lsp.get_client_by_id(ctx.client_id)
-              local encoding = client and client.offset_encoding or 'utf-8'
+              local encoding = client and client.offset_encoding or "utf-8"
               vim.lsp.util.show_document(definition_result, encoding, { focus = true })
               close_hover()
             end
             table.insert(_state.commands, action)
-            create_plug_mapping('Definition', action, current_bufnr)
+            create_plug_mapping("Definition", action, current_bufnr)
           end
         else -- Display Hoogle search instead
-          local pkg = location:match('‘(.+)’')
-          local search_term = pkg and pkg .. '.' .. cword or cword
-          table.insert(actions, 1, string.format('%d. Hoogle search: `%s`', #actions + 1, search_term))
+          local pkg = location:match("‘(.+)’")
+          local search_term = pkg and pkg .. "." .. cword or cword
+          table.insert(actions, 1, string.format("%d. Hoogle search: `%s`", #actions + 1, search_term))
           table.insert(_state.commands, function()
-            log.debug { 'Hover: Hoogle search for definition', search_term }
-            ht.hoogle.hoogle_signature { search_term = search_term }
+            log.debug({ "Hover: Hoogle search for definition", search_term })
+            ht.hoogle.hoogle_signature({ search_term = search_term })
           end)
         end
-        table.insert(actions, 1, string.format('%d. Find references', #actions + 1))
+        table.insert(actions, 1, string.format("%d. Find references", #actions + 1))
         local references_action = function()
-          local reference_params = vim.tbl_deep_extend('force', params, { context = { includeDeclaration = true } })
-          log.debug { 'Hover: Find references', reference_params }
+          local reference_params = vim.tbl_deep_extend("force", params, { context = { includeDeclaration = true } })
+          log.debug({ "Hover: Find references", reference_params })
           -- We don't call vim.lsp.buf.references() because the location params may have changed
           ---@diagnostic disable-next-line: missing-parameter
           vim.lsp.buf_request(0, vim.lsp.protocol.Methods.textDocument_references, reference_params)
           close_hover()
         end
         table.insert(_state.commands, references_action)
-        create_plug_mapping('References', references_action, current_bufnr)
+        create_plug_mapping("References", references_action, current_bufnr)
       end
     end
     if not found_type_definition then
@@ -268,18 +268,18 @@ function hover.on_hover(_, result, ctx, config)
           local type_definition_result = type_definition_results[1]
           local type_def_suffix = format_location(mk_location(type_definition_result), current_file)
           if not is_same_position(params, result) then
-            log.debug { 'Hover: type definition location', type_def_suffix }
-            table.insert(actions, 1, string.format('%d. Go to type definition at ' .. type_def_suffix, #actions + 1))
+            log.debug({ "Hover: type definition location", type_def_suffix })
+            table.insert(actions, 1, string.format("%d. Go to type definition at " .. type_def_suffix, #actions + 1))
             local typedef_action = function()
               -- We don't call vim.lsp.buf.typeDefinition() because the location params may have changed
-              log.debug { 'Hover: Go to type definition', type_definition_result }
+              log.debug({ "Hover: Go to type definition", type_definition_result })
               local client = vim.lsp.get_client_by_id(ctx.client_id)
-              local encoding = client and client.offset_encoding or 'utf-8'
+              local encoding = client and client.offset_encoding or "utf-8"
               vim.lsp.util.show_document(type_definition_result, encoding, { focus = true })
               close_hover()
             end
             table.insert(_state.commands, typedef_action)
-            create_plug_mapping('TypeDefinition', typedef_action, current_bufnr)
+            create_plug_mapping("TypeDefinition", typedef_action, current_bufnr)
           end
         end
       end
@@ -292,20 +292,20 @@ function hover.on_hover(_, result, ctx, config)
     table.insert(markdown_lines, 1, action)
   end
   if #actions > 0 then
-    table.insert(markdown_lines, #actions + 1, '')
-    table.insert(markdown_lines, #actions + 1, '')
+    table.insert(markdown_lines, #actions + 1, "")
+    table.insert(markdown_lines, #actions + 1, "")
   end
   local opts = HTConfig.tools.hover
-  config = vim.tbl_extend('keep', {
+  config = vim.tbl_extend("keep", {
     border = opts.border,
     stylize_markdown = opts.stylize_markdown,
     focusable = true,
-    focus_id = 'haskell-tools-hover',
-    close_events = { 'CursorMoved', 'BufHidden', 'InsertCharPre' },
+    focus_id = "haskell-tools-hover",
+    close_events = { "CursorMoved", "BufHidden", "InsertCharPre" },
   }, config or {})
-  local hover_bufnr, winnr = lsp_util.open_floating_preview(markdown_lines, 'markdown', config)
+  local hover_bufnr, winnr = lsp_util.open_floating_preview(markdown_lines, "markdown", config)
   if opts.stylize_markdown == false then
-    vim.bo[hover_bufnr].filetype = 'markdown'
+    vim.bo[hover_bufnr].filetype = "markdown"
   end
   if opts.auto_focus == true then
     vim.api.nvim_set_current_win(winnr)
@@ -316,7 +316,7 @@ function hover.on_hover(_, result, ctx, config)
   end
 
   _state.winnr = winnr
-  vim.keymap.set('n', '<Esc>', close_hover, { buffer = hover_bufnr, noremap = true, silent = true })
+  vim.keymap.set("n", "<Esc>", close_hover, { buffer = hover_bufnr, noremap = true, silent = true })
   vim.api.nvim_buf_attach(hover_bufnr, false, {
     on_detach = function()
       _state.winnr = nil
@@ -327,10 +327,10 @@ function hover.on_hover(_, result, ctx, config)
     return hover_bufnr, winnr
   end
 
-  vim.api.nvim_set_option_value('cursorline', true, { win = winnr })
+  vim.api.nvim_set_option_value("cursorline", true, { win = winnr })
 
   -- run the command under the cursor
-  vim.keymap.set('n', '<CR>', function()
+  vim.keymap.set("n", "<CR>", function()
     local win = vim.api.nvim_get_current_win()
     local line = vim.api.nvim_win_get_cursor(win)[1]
     run_command(line)
@@ -339,9 +339,9 @@ function hover.on_hover(_, result, ctx, config)
   local function run_command_mapping()
     run_command(math.max(vim.v.count, 1))
   end
-  create_plug_mapping('', run_command_mapping, current_bufnr)
-  vim.api.nvim_create_autocmd('WinClosed', {
-    group = vim.api.nvim_create_augroup('HaskellHoverAction', { clear = true }),
+  create_plug_mapping("", run_command_mapping, current_bufnr)
+  vim.api.nvim_create_autocmd("WinClosed", {
+    group = vim.api.nvim_create_augroup("HaskellHoverAction", { clear = true }),
     pattern = tostring(winnr),
     callback = function()
       delete_plug_mappings(current_bufnr)
@@ -353,12 +353,12 @@ end
 
 --- Sends the request to hls to get hover actions and handle it
 function hover.hover_actions()
-  local LspHelpers = require('haskell-tools.lsp.helpers')
+  local LspHelpers = require("haskell-tools.lsp.helpers")
   local clients = LspHelpers.get_active_hls_clients(vim.api.nvim_get_current_buf())
   if #clients == 0 then
     return
   end
-  local params = lsp_util.make_position_params(0, clients[1].offset_encoding or 'utf-8')
+  local params = lsp_util.make_position_params(0, clients[1].offset_encoding or "utf-8")
   return vim.lsp.buf_request(0, vim.lsp.protocol.Methods.textDocument_hover, params, hover.on_hover)
 end
 

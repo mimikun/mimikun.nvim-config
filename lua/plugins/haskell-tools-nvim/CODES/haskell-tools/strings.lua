@@ -15,7 +15,7 @@ local Strings = {}
 ---@param str string
 ---@return string trimmed
 Strings.trim = function(str)
-  return (str:match('^%s*(.*)') or str):gsub('%s*$', '')
+  return (str:match("^%s*(.*)") or str):gsub("%s*$", "")
 end
 
 return Strings

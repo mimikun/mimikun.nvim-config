@@ -17,9 +17,9 @@ local HtParser = {}
 local function pp_signature(sig)
   local pp_sig = sig
     and sig
-      :gsub('\n', ' ') -- join lines
-      :gsub('forall .*%.%s', '') -- hoogle cannot search for `forall a.`
-      :gsub('^%s*(.-)%s*$', '%1') -- trim
+      :gsub("\n", " ") -- join lines
+      :gsub("forall .*%.%s", "") -- hoogle cannot search for `forall a.`
+      :gsub("^%s*(.-)%s*$", "%1") -- trim
   return pp_sig
 end
 
@@ -31,13 +31,13 @@ end
 HtParser.try_get_signatures_from_markdown = function(func_name, docs)
   local all_sigs = {}
   ---@type boolean, string|nil
-  local ok, raw_func_sig = pcall(string.match, docs, '```haskell\n' .. func_name .. '%s::%s([^```]*)')
+  local ok, raw_func_sig = pcall(string.match, docs, "```haskell\n" .. func_name .. "%s::%s([^```]*)")
   if not ok then
     return nil, {}
   end
-  for code_block in docs:gmatch('```haskell\n([^```]*)\n```') do
+  for code_block in docs:gmatch("```haskell\n([^```]*)\n```") do
     ---@type string|nil
-    local sig = code_block:match('::%s([^```]*)')
+    local sig = code_block:match("::%s([^```]*)")
     local pp_sig = sig and pp_signature(sig)
     if sig and not vim.tbl_contains(all_sigs, pp_sig) then
       table.insert(all_sigs, pp_sig)
@@ -49,7 +49,7 @@ end
 ---@param str string
 ---@return integer indent
 HtParser.get_indent = function(str)
-  return #(str:match('^(%s+)%S') or '')
+  return #(str:match("^(%s+)%S") or "")
 end
 
 return HtParser

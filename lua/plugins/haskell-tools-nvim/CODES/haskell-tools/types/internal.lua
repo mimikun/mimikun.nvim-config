@@ -23,7 +23,7 @@ local Types = {}
 ---@param value (fun():T)|T
 ---@return T
 Types.evaluate = function(value)
-  if type(value) == 'function' then
+  if type(value) == "function" then
     return value()
   end
   return value

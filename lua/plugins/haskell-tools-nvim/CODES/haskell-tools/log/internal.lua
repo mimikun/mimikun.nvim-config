@@ -22,13 +22,13 @@ local Log = {
 
 local LARGE = 1e9
 
-local log_date_format = '%F %H:%M:%S'
+local log_date_format = "%F %H:%M:%S"
 
 local function format_log(arg)
-  return vim.inspect(arg, { newline = '' })
+  return vim.inspect(arg, { newline = "" })
 end
 
-local HTConfig = require('haskell-tools.config.internal')
+local HTConfig = require("haskell-tools.config.internal")
 
 local logfilename = HTConfig.tools.log.logfile
 
@@ -40,7 +40,7 @@ end
 
 ---Open the haskell-tools.nvim log file.
 function Log.nvim_open_logfile()
-  vim.cmd('e ' .. Log.get_logfile())
+  vim.cmd("e " .. Log.get_logfile())
 end
 
 local logfile, openerr
@@ -56,9 +56,9 @@ local function open_logfile()
     return false
   end
 
-  logfile, openerr = io.open(logfilename, 'a+')
+  logfile, openerr = io.open(logfilename, "a+")
   if not logfile then
-    local err_msg = string.format('Failed to open haskell-tools.nvim log file: %s', openerr)
+    local err_msg = string.format("Failed to open haskell-tools.nvim log file: %s", openerr)
     vim.notify(err_msg, vim.log.levels.ERROR)
     return false
   end
@@ -66,12 +66,12 @@ local function open_logfile()
   local log_info = vim.uv.fs_stat(logfilename)
   if log_info and log_info.size > LARGE then
     local warn_msg =
-      string.format('haskell-tools.nvim log is large (%d MB): %s', log_info.size / (1000 * 1000), logfilename)
+      string.format("haskell-tools.nvim log is large (%d MB): %s", log_info.size / (1000 * 1000), logfilename)
     vim.notify(warn_msg, vim.log.levels.WARN)
   end
 
   -- Start message for logging
-  logfile:write(string.format('[START][%s] haskell-tools.nvim logging initiated\n', os.date(log_date_format)))
+  logfile:write(string.format("[START][%s] haskell-tools.nvim logging initiated\n", os.date(log_date_format)))
   return true
 end
 
@@ -86,7 +86,7 @@ end
 
 -- Open the haskell-language-server log file
 function Log.nvim_open_hls_logfile()
-  vim.cmd('e ' .. Log.get_hls_logfile())
+  vim.cmd("e " .. Log.get_hls_logfile())
 end
 
 local log_levels = vim.deepcopy(vim.log.levels)
@@ -100,14 +100,14 @@ end
 function Log.set_level(level)
   ---@type integer | nil
   local levelnr
-  if type(level) == 'string' then
+  if type(level) == "string" then
     levelnr = log_levels[string.upper(level)]
   else
     levelnr = level
   end
   if not levelnr then
     vim.schedule(function()
-      vim.notify(string.format('haskell-tools: Invalid log level: %d', level), vim.log.levels.WARN)
+      vim.notify(string.format("haskell-tools: Invalid log level: %d", level), vim.log.levels.WARN)
     end)
     return
   end
@@ -122,33 +122,33 @@ for level, levelnr in pairs(vim.log.levels) do
     if Log.level == vim.log.levels.OFF or not open_logfile() then
       return false
     end
-    local argc = select('#', ...)
+    local argc = select("#", ...)
     if levelnr < Log.level then
       return false
     end
     if argc == 0 then
       return true
     end
-    local info = debug.getinfo(2, 'Sl')
-    local fileinfo = string.format('%s:%s', info.short_src, info.currentline)
+    local info = debug.getinfo(2, "Sl")
+    local fileinfo = string.format("%s:%s", info.short_src, info.currentline)
     local parts = {
-      table.concat({ level, '|', os.date(log_date_format), '|', fileinfo, '|' }, ' '),
+      table.concat({ level, "|", os.date(log_date_format), "|", fileinfo, "|" }, " "),
     }
     for i = 1, argc do
       local arg = select(i, ...)
       if arg == nil then
-        table.insert(parts, '<nil>')
-      elseif type(arg) == 'string' then
+        table.insert(parts, "<nil>")
+      elseif type(arg) == "string" then
         table.insert(parts, arg)
       else
         table.insert(parts, format_log(arg))
       end
     end
-    logfile:write(table.concat(parts, ' '), '\n')
+    logfile:write(table.concat(parts, " "), "\n")
     logfile:flush()
   end
 end
 
-Log.debug { 'Config', HTConfig }
+Log.debug({ "Config", HTConfig })
 
 return Log

@@ -40,19 +40,19 @@ end
 ---@class HaskellTools
 local HaskellTools = {
   ---@type haskell-tools.Hls
-  lsp = lazy_require('haskell-tools.lsp'),
+  lsp = lazy_require("haskell-tools.lsp"),
   ---@type haskell-tools.Hoogle
-  hoogle = lazy_require('haskell-tools.hoogle'),
+  hoogle = lazy_require("haskell-tools.hoogle"),
   ---@type haskell-tools.Repl
-  repl = lazy_require('haskell-tools.repl'),
+  repl = lazy_require("haskell-tools.repl"),
   ---@type haskell-tools.Project
-  project = lazy_require('haskell-tools.project'),
+  project = lazy_require("haskell-tools.project"),
   ---@type haskell-tools.FastTags
-  tags = lazy_require('haskell-tools.tags'),
+  tags = lazy_require("haskell-tools.tags"),
   ---@type haskell-tools.Dap
-  dap = lazy_require('haskell-tools.dap'),
+  dap = lazy_require("haskell-tools.dap"),
   ---@type haskell-tools.Log
-  log = lazy_require('haskell-tools.log'),
+  log = lazy_require("haskell-tools.log"),
 }
 
 return HaskellTools

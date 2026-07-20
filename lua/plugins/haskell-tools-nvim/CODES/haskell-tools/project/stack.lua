@@ -8,10 +8,10 @@
 --- Helper functions related to stack projects
 ---@brief ]]
 
-local Strings = require('haskell-tools.strings')
-local HtParser = require('haskell-tools.parser')
-local Dap = require('haskell-tools.dap.internal')
-local OS = require('haskell-tools.os')
+local Strings = require("haskell-tools.strings")
+local HtParser = require("haskell-tools.parser")
+local Dap = require("haskell-tools.dap.internal")
+local OS = require("haskell-tools.os")
 
 ---@class haskell-tools.project.stack.Helper
 local Helper = {}
@@ -19,7 +19,7 @@ local Helper = {}
 ---@param str string
 ---@return boolean is_yaml_comment
 local function is_yaml_comment(str)
-  return vim.startswith(Strings.trim(str), '#')
+  return vim.startswith(Strings.trim(str), "#")
 end
 
 ---@class haskell-tools.project.stack.EntryPointParserData
@@ -50,32 +50,32 @@ local function parse_exe_list_line(data, state)
   local next_line = lines[idx + 1]
   local indent = HtParser.get_indent(line)
   state.exe_indent = state.exe_indent or indent
-  state.exe_name = indent == state.exe_indent and line:match('%s*(.+):') or state.exe_name
+  state.exe_name = indent == state.exe_indent and line:match("%s*(.+):") or state.exe_name
   if state.parsing_exe then
-    local main = line:match('main:%s+(.+)%.hs')
-    if not main and line:match('main:') and next_line then
-      main = next_line:match('%s+(.+)%.hs')
+    local main = line:match("main:%s+(.+)%.hs")
+    if not main and line:match("main:") and next_line then
+      main = next_line:match("%s+(.+)%.hs")
     end
     if main then
-      table.insert(state.mains, main .. '.hs')
+      table.insert(state.mains, main .. ".hs")
     end
-    local source_dir = line:match('source%-dirs:%s+(.+)')
+    local source_dir = line:match("source%-dirs:%s+(.+)")
     if source_dir then
       -- Single source directory
       state.parsing_source_dirs = false
     end
     if state.parsing_source_dirs then
-      source_dir = line:match('%s+%-%s*(.*)') or line:match('%s+(.*)')
+      source_dir = line:match("%s+%-%s*(.*)") or line:match("%s+(.*)")
     end
     if source_dir then
       table.insert(state.source_dirs, source_dir)
     end
-    local is_source_dir_list = not source_dir and line:match('source%-dirs:') ~= nil
+    local is_source_dir_list = not source_dir and line:match("source%-dirs:") ~= nil
     state.parsing_source_dirs = is_source_dir_list
       or (
         state.parsing_source_dirs
         and next_line
-        and (next_line:match('^%s+%-') or HtParser.get_indent(next_line) > indent)
+        and (next_line:match("^%s+%-") or HtParser.get_indent(next_line) > indent)
       )
   end
   if state.parsing_exe and (not next_line or HtParser.get_indent(next_line) == 0 or indent <= state.exe_indent) then
@@ -95,7 +95,7 @@ end
 ---@param state haskell-tools.project.stack.EntryPointParserState
 local function get_entrypoint_from_line(data, state)
   local line = data.line
-  state.package_name = state.package_name or line:match('^name:%s*(.+)')
+  state.package_name = state.package_name or line:match("^name:%s*(.+)")
   local indent = HtParser.get_indent(line)
   if indent == 0 then
     state.parsing_exe_list = false
@@ -119,12 +119,12 @@ local function parse_package_entrypoints(package_file)
     parsing_exe = false,
     parsing_source_dirs = false,
   }
-  local package_dir = vim.fn.fnamemodify(package_file, ':h') or package_file
+  local package_dir = vim.fn.fnamemodify(package_file, ":h") or package_file
   local content = OS.read_file_async(package_file)
   if not content then
     return state.entry_points
   end
-  local lines = vim.split(content, '\n') or {}
+  local lines = vim.split(content, "\n") or {}
   for idx, line in ipairs(lines) do
     if not is_yaml_comment(line) then
       ---@type haskell-tools.project.stack.EntryPointParserData
@@ -136,7 +136,7 @@ local function parse_package_entrypoints(package_file)
       }
       get_entrypoint_from_line(data, state)
     end
-    if line:match('^executables:') or line:match('^tests:') then
+    if line:match("^executables:") or line:match("^tests:") then
       state.parsing_exe_list = true
     end
   end
@@ -149,7 +149,7 @@ end
 ---@async
 function Helper.parse_package_entrypoints(package_path)
   local entry_points = {}
-  for _, package_file in pairs(vim.fn.glob(vim.fs.joinpath(package_path, 'package.yaml'), true, true)) do
+  for _, package_file in pairs(vim.fn.glob(vim.fs.joinpath(package_path, "package.yaml"), true, true)) do
     vim.list_extend(entry_points, parse_package_entrypoints(package_file))
   end
   return entry_points

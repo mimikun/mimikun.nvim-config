@@ -1,6 +1,6 @@
 local HtCommands = {}
 
-local ht = require('haskell-tools')
+local ht = require("haskell-tools")
 
 ---@class haskell-tools.Subcommand
 ---
@@ -17,10 +17,10 @@ local ht = require('haskell-tools')
 ---@param arg_lead string
 local function complete_haskell_files(arg_lead)
   return vim
-    .iter(vim.list_extend(vim.fn.getcompletion(arg_lead, 'file'), vim.fn.getcompletion(arg_lead, 'buffer')))
+    .iter(vim.list_extend(vim.fn.getcompletion(arg_lead, "file"), vim.fn.getcompletion(arg_lead, "buffer")))
     :filter(function(file_path)
-      local ext = vim.fn.fnamemodify(file_path, ':e')
-      return ext == 'hs' or ext == ''
+      local ext = vim.fn.fnamemodify(file_path, ":e")
+      return ext == "hs" or ext == ""
     end)
     :totable()
 end
@@ -28,11 +28,11 @@ end
 ---@param args? string[]
 ---@return string?
 local function get_single_opt_arg(args)
-  if type(args) ~= 'table' then
+  if type(args) ~= "table" then
     return
   end
   if #args > 1 then
-    require('haskell-tools.log.internal').warn { 'Too many arguments!', args }
+    require("haskell-tools.log.internal").warn({ "Too many arguments!", args })
   end
   return #args > 0 and args[1] or nil
 end
@@ -43,7 +43,7 @@ local function get_filepath_arg(args)
   if not args or #args == 0 then
     return vim.api.nvim_buf_get_name(0)
   end
-  assert(type(args[1]) == 'string', 'filepath is not a string')
+  assert(type(args[1]) == "string", "filepath is not a string")
   local filepath = vim.fn.expand(args[1])
   ---@cast filepath string
   return filepath
@@ -68,13 +68,13 @@ local command_tbl = {
   },
   hover = {
     impl = function()
-      local hover = require('haskell-tools.lsp.hover')
+      local hover = require("haskell-tools.lsp.hover")
       hover.hover_actions()
     end,
   },
   definition = {
     impl = function()
-      local lsp_definition = require('haskell-tools.lsp.definition')
+      local lsp_definition = require("haskell-tools.lsp.definition")
       vim.lsp.buf.definition()
       local win = vim.api.nvim_get_current_win()
       vim.lsp.buf_request_all(0, vim.lsp.protocol.Methods.textDocument_definition, function(client)
@@ -102,20 +102,20 @@ local function register_subcommand_tbl(name, subcmd_tbl, enable)
 Haskell %s: Expected subcommand.
 Available subcommands:
 %s
-]]):format(name, table.concat(vim.tbl_keys(subcmd_tbl), ', ')),
+]]):format(name, table.concat(vim.tbl_keys(subcmd_tbl), ", ")),
           vim.log.levels.ERROR
         )
       end
     end,
     complete = function(subcmd_arg_lead)
-      local subcmd, next_arg_lead = subcmd_arg_lead:match('^(%S+)%s(.*)$')
+      local subcmd, next_arg_lead = subcmd_arg_lead:match("^(%S+)%s(.*)$")
       if subcmd and next_arg_lead and subcmd_tbl[subcmd] and enable(subcmd) and subcmd_tbl[subcmd].complete then
         return subcmd_tbl[subcmd].complete(next_arg_lead)
       end
       local enabled_subcommands = vim.iter(subcmd_tbl):map(function(subcmd_name)
         return enable(subcmd_name) and subcmd_name or nil
       end)
-      if subcmd_arg_lead and subcmd_arg_lead ~= '' then
+      if subcmd_arg_lead and subcmd_arg_lead ~= "" then
         return enabled_subcommands
           ---@param subcmd_name string
           :map(function(subcmd_name)
@@ -141,19 +141,19 @@ local hls_subcommands = {
   },
   stop = {
     impl = function()
-      local LspHelpers = require('haskell-tools.lsp.helpers')
+      local LspHelpers = require("haskell-tools.lsp.helpers")
       local hls_clients = LspHelpers.get_active_hls_clients(0)
       for _, client in ipairs(hls_clients) do
-        vim.cmd.lsp { 'stop', client.name }
+        vim.cmd.lsp({ "stop", client.name })
       end
     end,
   },
   restart = {
     impl = function()
-      local LspHelpers = require('haskell-tools.lsp.helpers')
+      local LspHelpers = require("haskell-tools.lsp.helpers")
       local hls_clients = LspHelpers.get_active_hls_clients(0)
       for _, client in ipairs(hls_clients) do
-        vim.cmd.lsp { 'restart', client.name }
+        vim.cmd.lsp({ "restart", client.name })
       end
     end,
   },
@@ -161,19 +161,19 @@ local hls_subcommands = {
 
 ---@return boolean tf True if the current buffer has an active haskell-language-server LSP client
 local function buf_has_active_hls_client()
-  local hls_clients = require('haskell-tools.lsp.helpers').get_active_hls_clients(0)
+  local hls_clients = require("haskell-tools.lsp.helpers").get_active_hls_clients(0)
   return #hls_clients > 0
 end
 
 local function is_hls_subcommand_enabled(subcmd_name)
   if buf_has_active_hls_client() then
-    return subcmd_name == 'evalAll' or subcmd_name == 'stop' or subcmd_name == 'restart'
+    return subcmd_name == "evalAll" or subcmd_name == "stop" or subcmd_name == "restart"
   else
-    return subcmd_name == 'start'
+    return subcmd_name == "start"
   end
 end
 
-register_subcommand_tbl('hls', hls_subcommands, is_hls_subcommand_enabled)
+register_subcommand_tbl("hls", hls_subcommands, is_hls_subcommand_enabled)
 
 ---@type table<string, haskell-tools.Subcommand>
 local repl_subcommands = {
@@ -218,7 +218,7 @@ local repl_subcommands = {
 }
 
 -- TODO: Smarter completions. load, quit and reload should only be suggested when a repl is active
-register_subcommand_tbl('repl', repl_subcommands)
+register_subcommand_tbl("repl", repl_subcommands)
 
 local log_command_tbl = {
   openHlsLog = {
@@ -228,14 +228,14 @@ local log_command_tbl = {
   },
   openLog = {
     impl = function()
-      require('haskell-tools').log.nvim_open_logfile()
+      require("haskell-tools").log.nvim_open_logfile()
     end,
   },
   setLevel = {
     impl = function(args)
       local level = vim.fn.expand(args[1])
       ---@cast level string
-      require('haskell-tools').log.set_level(tonumber(level) or level)
+      require("haskell-tools").log.set_level(tonumber(level) or level)
     end,
     complete = function(arg_lead)
       local levels = vim.tbl_keys(vim.log.levels)
@@ -246,7 +246,7 @@ local log_command_tbl = {
   },
 }
 
-register_subcommand_tbl('log', log_command_tbl)
+register_subcommand_tbl("log", log_command_tbl)
 
 ---@generic K, V
 ---@param predicate fun(V):boolean
@@ -268,16 +268,16 @@ local function haskell_cmd(opts)
   local args = #fargs > 1 and vim.list_slice(fargs, 2, #fargs) or {}
   local command = command_tbl[cmd]
   if not command then
-    vim.notify('Haskell: Unknown command: ' .. cmd, vim.log.levels.ERROR)
+    vim.notify("Haskell: Unknown command: " .. cmd, vim.log.levels.ERROR)
     return
   end
   command.impl(args, opts)
 end
 
 function HtCommands.init()
-  vim.api.nvim_create_user_command('Haskell', haskell_cmd, {
-    nargs = '+',
-    desc = 'haskell-tools.nvim commands',
+  vim.api.nvim_create_user_command("Haskell", haskell_cmd, {
+    nargs = "+",
+    desc = "haskell-tools.nvim commands",
     complete = function(arg_lead, cmdline, _)
       local commands = cmdline:match("^['<,'>]*Haskell!") ~= nil
           -- bang!

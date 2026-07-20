@@ -1,1 +1,1 @@
-require('haskell-tools.internal').common_ftplugin()
+require("haskell-tools.internal").common_ftplugin()

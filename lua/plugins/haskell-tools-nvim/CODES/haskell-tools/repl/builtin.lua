@@ -8,7 +8,7 @@
 ---Utility functions for the ghci repl module.
 ---@brief ]]
 
-local log = require('haskell-tools.log.internal')
+local log = require("haskell-tools.log.internal")
 
 ---@class haskell-tools.repl.builtin
 ---@field bufnr number
@@ -44,7 +44,7 @@ end
 ---@return nil
 local function buf_create_repl(bufnr, cmd, opts)
   vim.api.nvim_win_set_buf(0, bufnr)
-  opts = vim.tbl_extend('force', { term = true }, opts or {})
+  opts = vim.tbl_extend("force", { term = true }, opts or {})
   local function delete_repl_buf()
     local winid = vim.fn.bufwinid(bufnr)
     if winid ~= nil then
@@ -54,9 +54,9 @@ local function buf_create_repl(bufnr, cmd, opts)
   end
   if opts.delete_buffer_on_exit then
     opts.on_exit = function(_, exit_code, _)
-      log.debug('repl.builtin: exit')
+      log.debug("repl.builtin: exit")
       if exit_code ~= 0 then
-        local msg = 'repl.builtin: non-zero exit code: ' .. exit_code
+        local msg = "repl.builtin: non-zero exit code: " .. exit_code
         log.warn(msg)
         vim.notify(msg, vim.log.levels.WARN)
       end
@@ -64,20 +64,20 @@ local function buf_create_repl(bufnr, cmd, opts)
     end
     local repl_log = function(logger)
       return function(_, data, name)
-        logger { 'repl.builtin', data, name }
+        logger({ "repl.builtin", data, name })
       end
     end
     opts.on_stdout = repl_log(log.debug)
     opts.on_stderr = repl_log(log.warn)
     opts.on_stdin = repl_log(log.debug)
   end
-  log.debug { 'repl.builtin: Opening terminal', cmd, opts }
+  log.debug({ "repl.builtin: Opening terminal", cmd, opts })
 
   local job_id = vim.fn.jobstart(cmd, opts)
 
   if not job_id then
-    log.error('repl.builtin: Failed to open a terminal')
-    vim.notify('haskell-tools: Could not start the repl.', vim.log.levels.ERROR)
+    log.error("repl.builtin: Failed to open a terminal")
+    vim.notify("haskell-tools: Could not start the repl.", vim.log.levels.ERROR)
     delete_repl_buf()
     return
   end
@@ -86,33 +86,33 @@ local function buf_create_repl(bufnr, cmd, opts)
     job_id = job_id,
     cmd = cmd,
   }
-  log.debug { 'repl.builtin: Created repl.', BuiltinRepl }
+  log.debug({ "repl.builtin: Created repl.", BuiltinRepl })
 end
 
 ---Create a split
 ---@param size function|number|nil
 local function create_split(size)
-  size = size and (type(size) == 'function' and size() or size) or vim.o.lines / 3
+  size = size and (type(size) == "function" and size() or size) or vim.o.lines / 3
   local args = vim.empty_dict() or {}
   table.insert(args, size)
-  table.insert(args, 'split')
-  vim.cmd(table.concat(args, ' '))
+  table.insert(args, "split")
+  vim.cmd(table.concat(args, " "))
 end
 
 ---Create a vertical split
 ---@param size function|number?
 local function create_vsplit(size)
-  size = size and (type(size) == 'function' and size() or size) or vim.o.columns / 2
+  size = size and (type(size) == "function" and size() or size) or vim.o.columns / 2
   local args = vim.empty_dict() or {}
   table.insert(args, size)
-  table.insert(args, 'vsplit')
-  vim.cmd(table.concat(args, ' '))
+  table.insert(args, "vsplit")
+  vim.cmd(table.concat(args, " "))
 end
 
 ---Create a new tab
 ---@param _ any
 local function create_tab(_)
-  vim.cmd('tabnew')
+  vim.cmd("tabnew")
 end
 
 ---@param mk_repl_cmd fun(string):(string[]?)
@@ -130,42 +130,42 @@ return function(mk_repl_cmd, options)
   local function create_or_toggle(create_win, mk_cmd, opts)
     local cmd = mk_cmd()
     if cmd == nil then
-      local err_msg = 'haskell-tools.repl.builtin: Could not create a repl command.'
+      local err_msg = "haskell-tools.repl.builtin: Could not create a repl command."
       log.error(err_msg)
       vim.notify(err_msg, vim.log.levels.ERROR)
       return
     end
     if is_new_cmd(cmd) then
-      log.debug { 'repl.builtin: New command', cmd }
+      log.debug({ "repl.builtin: New command", cmd })
       Handler.quit()
     end
     if is_repl_loaded() then
       local repl = BuiltinRepl
       ---@cast repl haskell-tools.repl.builtin
-      log.debug('repl.builtin: is loaded')
+      log.debug("repl.builtin: is loaded")
       local winid = vim.fn.bufwinid(repl.bufnr)
       if winid ~= -1 then
-        log.debug('repl.builtin: Hiding window ' .. winid)
+        log.debug("repl.builtin: Hiding window " .. winid)
         vim.api.nvim_win_hide(winid)
       else
         create_win()
         vim.api.nvim_set_current_buf(repl.bufnr)
         winid = vim.fn.bufwinid(repl.bufnr)
         if winid ~= nil then
-          log.debug('repl.builtin: Created window ' .. winid)
+          log.debug("repl.builtin: Created window " .. winid)
           vim.api.nvim_set_current_win(winid)
         end
       end
       return
     end
-    log.debug('repl.builtin: is not loaded')
+    log.debug("repl.builtin: is not loaded")
     opts = opts or vim.empty_dict()
     local bufnr = vim.api.nvim_create_buf(true, true)
     create_win()
     vim.api.nvim_set_current_buf(bufnr)
     local winid = vim.fn.bufwinid(bufnr)
     if winid ~= nil then
-      log.debug('repl.builtin: Created window ' .. winid)
+      log.debug("repl.builtin: Created window " .. winid)
       vim.api.nvim_set_current_win(winid)
     end
     buf_create_repl(bufnr, cmd, opts)
@@ -210,7 +210,7 @@ return function(mk_repl_cmd, options)
     end,
   }
 
-  log.debug { 'repl.builtin setup', options }
+  log.debug({ "repl.builtin setup", options })
   ---@private
   Handler.go_back = options.auto_focus ~= true
 
@@ -218,8 +218,8 @@ return function(mk_repl_cmd, options)
   ---@param _ table?
   function Handler.toggle(filepath, _)
     local cur_win = vim.api.nvim_get_current_win()
-    if filepath and not vim.endswith(filepath, '.hs') then
-      local err_msg = 'haskell-tools.repl.builtin: Not a Haskell file: ' .. filepath
+    if filepath and not vim.endswith(filepath, ".hs") then
+      local err_msg = "haskell-tools.repl.builtin: Not a Haskell file: " .. filepath
       log.error(err_msg)
       vim.notify(err_msg, vim.log.levels.ERROR)
       return
@@ -243,10 +243,10 @@ return function(mk_repl_cmd, options)
   ---@return nil
   function Handler.quit()
     when_repl_loaded(function(repl)
-      log.debug('repl.builtin: sending quit to repl.')
-      local success, result = pcall(Handler.send_cmd, ':q')
+      log.debug("repl.builtin: sending quit to repl.")
+      local success, result = pcall(Handler.send_cmd, ":q")
       if not success then
-        log.warn { 'repl.builtin: Could not send quit command', result }
+        log.warn({ "repl.builtin: Could not send quit command", result })
       end
       local winid = vim.fn.bufwinid(repl.bufnr)
       if winid ~= -1 then
@@ -261,7 +261,7 @@ return function(mk_repl_cmd, options)
   ---@return nil
   function Handler.send_cmd(txt)
     when_repl_loaded(function(repl)
-      local cr = '\13'
+      local cr = "\13"
       local repl_winid = vim.fn.bufwinid(repl.bufnr)
       local function repl_set_cursor()
         if repl_winid ~= -1 then
@@ -273,7 +273,7 @@ return function(mk_repl_cmd, options)
       repl_set_cursor()
       if not Handler.go_back and repl_winid ~= nil then
         vim.api.nvim_set_current_win(repl_winid)
-        vim.cmd('startinsert')
+        vim.cmd("startinsert")
       end
     end)
   end

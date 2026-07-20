@@ -16,7 +16,7 @@ local Deps = {}
 ---@return any result Return value of on_available or on_not_available
 function Deps.if_available(modname, on_available, on_not_available)
   local has_mod, mod = pcall(require, modname)
-  if has_mod and type(on_available) == 'function' then
+  if has_mod and type(on_available) == "function" then
     return on_available(mod)
   elseif has_mod then
     return on_available
@@ -24,7 +24,7 @@ function Deps.if_available(modname, on_available, on_not_available)
   if not on_not_available then
     return nil
   end
-  if type(on_not_available) == 'function' then
+  if type(on_not_available) == "function" then
     return on_not_available()
   end
   return on_not_available
@@ -39,7 +39,7 @@ function Deps.require_or_err(modname, plugin_name)
   return Deps.if_available(modname, function(mod)
     return mod
   end, function()
-    error('haskell-tools: This plugin requires the ' .. plugin_name .. ' plugin.')
+    error("haskell-tools: This plugin requires the " .. plugin_name .. " plugin.")
   end)
 end
 
@@ -51,30 +51,30 @@ end
 
 ---@return boolean
 function Deps.has_telescope()
-  return Deps.has('telescope')
+  return Deps.has("telescope")
 end
 
 ---@return unknown
 ---@require
 function Deps.require_telescope(modname)
-  return Deps.require_or_err(modname, 'nvim-telescope/telescope.nvim')
+  return Deps.require_or_err(modname, "nvim-telescope/telescope.nvim")
 end
 
 ---@return unknown
 ---@require
 function Deps.require_toggleterm(modname)
-  return Deps.require_or_err(modname, 'akinsho/toggleterm')
+  return Deps.require_or_err(modname, "akinsho/toggleterm")
 end
 
 ---@return boolean
 function Deps.has_toggleterm()
-  return Deps.has('toggleterm')
+  return Deps.has("toggleterm")
 end
 
 ---@return unknown
 ---@require
 function Deps.require_iron(modname)
-  return Deps.require_or_err(modname, 'hkupty/iron.nvim')
+  return Deps.require_or_err(modname, "hkupty/iron.nvim")
 end
 
 return Deps

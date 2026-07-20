@@ -8,17 +8,17 @@
 ---@brief ]]
 local eval = {}
 
-local LspHelpers = require('haskell-tools.lsp.helpers')
+local LspHelpers = require("haskell-tools.lsp.helpers")
 
 ---@param bufnr number The buffer number
 ---@return table[] The `evalCommand` lenses, in reverse order
 local function get_eval_command_lenses(bufnr, exclude_lines)
   exclude_lines = exclude_lines or {}
   local eval_cmd_lenses = {}
-  for _, result in ipairs(vim.lsp.codelens.get { bufnr = bufnr }) do
+  for _, result in ipairs(vim.lsp.codelens.get({ bufnr = bufnr })) do
     ---@diagnostic disable-next-line: undefined-field
     local lens = result.lens
-    if lens.command.command:match('evalCommand') and not vim.tbl_contains(exclude_lines, lens.range.start.line) then
+    if lens.command.command:match("evalCommand") and not vim.tbl_contains(exclude_lines, lens.range.start.line) then
       table.insert(eval_cmd_lenses, 1, lens)
     end
   end
@@ -32,7 +32,7 @@ end
 ---@return nil
 local function go(client, bufnr, lens, exclude_lines)
   local command = lens.command
-  client.request_sync('workspace/executeCommand', command, 1000, bufnr)
+  client.request_sync("workspace/executeCommand", command, 1000, bufnr)
   exclude_lines[#exclude_lines + 1] = lens.range.start.line
   local new_lenses = get_eval_command_lenses(bufnr, exclude_lines)
   if #new_lenses > 0 then
@@ -46,7 +46,7 @@ function eval.all(bufnr)
   bufnr = bufnr or vim.api.nvim_win_get_buf(0)
   local clients = LspHelpers.get_active_hls_clients(bufnr)
   if not clients or #clients == 0 then
-    vim.notify('No haskell-tools LSP client attached.', vim.log.levels.ERROR)
+    vim.notify("No haskell-tools LSP client attached.", vim.log.levels.ERROR)
     return
   end
   local client = clients[1]

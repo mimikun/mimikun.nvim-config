@@ -8,11 +8,11 @@
 --- Utility functions for analysing a project.
 ---@brief ]]
 
-local log = require('haskell-tools.log.internal')
-local Strings = require('haskell-tools.strings')
-local OS = require('haskell-tools.os')
-local cabal = require('haskell-tools.project.cabal')
-local stack = require('haskell-tools.project.stack')
+local log = require("haskell-tools.log.internal")
+local Strings = require("haskell-tools.strings")
+local OS = require("haskell-tools.os")
+local cabal = require("haskell-tools.project.cabal")
+local stack = require("haskell-tools.project.stack")
 
 ---@class haskell-tools.project.Helpers
 local HtProjectHelpers = {}
@@ -22,8 +22,8 @@ local HtProjectHelpers = {}
 --- Taken from nvim-lspconfig
 local function strip_archive_subpath(path)
   -- Matches regex from zip.vim / tar.vim
-  path = vim.fn.substitute(path, 'zipfile://\\(.\\{-}\\)::[^\\\\].*$', '\\1', '') or path
-  path = vim.fn.substitute(path, 'tarfile:\\(.\\{-}\\)::.*$', '\\1', '') or path
+  path = vim.fn.substitute(path, "zipfile://\\(.\\{-}\\)::[^\\\\].*$", "\\1", "") or path
+  path = vim.fn.substitute(path, "tarfile:\\(.\\{-}\\)::.*$", "\\1", "") or path
   return path
 end
 
@@ -50,8 +50,8 @@ local function iterate_parents(startpath)
   ---@return string|nil path
   ---@return string|nil startpath
   local function it(_, path)
-    local next = vim.fn.fnamemodify(path, ':h')
-    if not next or vim.fn.isdirectory(next) == 0 or next == path or next == '/nix/store' then
+    local next = vim.fn.fnamemodify(path, ":h")
+    if not next or vim.fn.isdirectory(next) == 0 or next == path or next == "/nix/store" then
       return
     end
     if vim.uv.fs_realpath(next) then
@@ -99,15 +99,15 @@ end
 ---@param path string
 ---@return string escaped_path
 local function escape_glob_wildcards(path)
-  local escaped_path = path:gsub('([%[%]%?%*])', '\\%1')
+  local escaped_path = path:gsub("([%[%]%?%*])", "\\%1")
   return escaped_path
 end
 
 ---Get the root of a cabal multi-package project for a path
-HtProjectHelpers.match_cabal_multi_project_root = root_pattern('cabal.project')
+HtProjectHelpers.match_cabal_multi_project_root = root_pattern("cabal.project")
 
 ---Get the root of a cabal package for a path
-HtProjectHelpers.match_cabal_package_root = root_pattern('*.cabal')
+HtProjectHelpers.match_cabal_package_root = root_pattern("*.cabal")
 
 ---Get the root of the cabal project for a path
 ---@param path string File path
@@ -116,37 +116,37 @@ HtProjectHelpers.match_cabal_project_root = function(path)
 end
 
 ---Get the root of the stack project for a path
-HtProjectHelpers.match_stack_project_root = root_pattern('stack.yaml')
+HtProjectHelpers.match_stack_project_root = root_pattern("stack.yaml")
 
 ---Get the root of the project for a path
-HtProjectHelpers.match_project_root = root_pattern('cabal.project', 'stack.yaml')
+HtProjectHelpers.match_project_root = root_pattern("cabal.project", "stack.yaml")
 
 ---Get the root of the package for a path
-HtProjectHelpers.match_package_root = root_pattern('*.cabal', 'package.yaml')
+HtProjectHelpers.match_package_root = root_pattern("*.cabal", "package.yaml")
 
 ---Get the directory containing a haskell-language-server hie.yaml
-HtProjectHelpers.match_hie_yaml = root_pattern('hie.yaml')
+HtProjectHelpers.match_hie_yaml = root_pattern("hie.yaml")
 
 ---Get the package.yaml for a given path
 ---@param path string
 ---@return string|nil package_yaml_path
 function HtProjectHelpers.get_package_yaml(path)
-  local match = root_pattern('package.yaml')
+  local match = root_pattern("package.yaml")
   local dir = match(path)
-  return dir and dir .. '/package.yaml'
+  return dir and dir .. "/package.yaml"
 end
 
 ---Get the *.cabal for a given path
 ---@param path string
 ---@return string|nil cabal_file_path
 function HtProjectHelpers.get_package_cabal(path)
-  local match = root_pattern('*.cabal')
+  local match = root_pattern("*.cabal")
   local dir = match(path)
   if not dir then
     return nil
   end
   dir = escape_glob_wildcards(dir)
-  for _, pattern in ipairs(vim.fn.glob(vim.fs.joinpath(dir, '*.cabal'), true, true)) do
+  for _, pattern in ipairs(vim.fn.glob(vim.fs.joinpath(dir, "*.cabal"), true, true)) do
     if pattern then
       return pattern
     end
@@ -157,9 +157,9 @@ end
 ---@param path string
 ---@return boolean is_cabal_project
 function HtProjectHelpers.is_cabal_project(path)
-  local get_root = root_pattern('*.cabal', 'cabal.project')
+  local get_root = root_pattern("*.cabal", "cabal.project")
   if get_root(path) ~= nil then
-    log.debug('Detected cabal project.')
+    log.debug("Detected cabal project.")
     return true
   end
   return false
@@ -170,7 +170,7 @@ end
 ---@return boolean is_stack_project
 function HtProjectHelpers.is_stack_project(path)
   if HtProjectHelpers.match_stack_project_root(path) ~= nil then
-    log.debug('Detected stack project.')
+    log.debug("Detected stack project.")
     return true
   end
   return false
@@ -181,7 +181,7 @@ end
 ---@return string|nil package_name
 function HtProjectHelpers.get_package_name(path)
   local package_path = HtProjectHelpers.match_package_root(path)
-  return package_path and vim.fn.fnamemodify(package_path, ':t')
+  return package_path and vim.fn.fnamemodify(package_path, ":t")
 end
 
 ---Parse the package paths (absolute) from a project file
@@ -194,26 +194,26 @@ function HtProjectHelpers.parse_package_paths(project_file)
   if not content then
     return package_paths
   end
-  local project_dir = vim.fn.fnamemodify(project_file, ':h')
-  local lines = vim.split(content, '\n') or {}
+  local project_dir = vim.fn.fnamemodify(project_file, ":h")
+  local lines = vim.split(content, "\n") or {}
   local packages_start = false
   for _, line in ipairs(lines) do
     if packages_start then
-      local is_indented = line:match('^%s') ~= nil
-      local is_yaml_list_elem = line:match('^%-') ~= nil
+      local is_indented = line:match("^%s") ~= nil
+      local is_yaml_list_elem = line:match("^%-") ~= nil
       if not (is_indented or is_yaml_list_elem) then
         return package_paths
       end
     end
     if packages_start then
       local trimmed = Strings.trim(line)
-      local pkg_rel_path = trimmed:match('/(.+)')
+      local pkg_rel_path = trimmed:match("/(.+)")
       local pkg_path = vim.fs.joinpath(project_dir, pkg_rel_path)
       if vim.fn.isdirectory(pkg_path) == 1 then
         package_paths[#package_paths + 1] = pkg_path
       end
     end
-    if line:match('packages:') then
+    if line:match("packages:") then
       packages_start = true
     end
   end
@@ -236,14 +236,14 @@ end
 ---@async
 function HtProjectHelpers.parse_project_entrypoints(project_root)
   local entry_points = {}
-  local project_file = vim.fs.joinpath(project_root, 'cabal.project')
+  local project_file = vim.fs.joinpath(project_root, "cabal.project")
   if vim.fn.filereadable(project_file) == 1 then
     for _, package_path in pairs(HtProjectHelpers.parse_package_paths(project_file)) do
       vim.list_extend(entry_points, cabal.parse_package_entrypoints(package_path))
     end
     return entry_points
   end
-  project_file = vim.fs.joinpath(project_root, 'stack.yaml')
+  project_file = vim.fs.joinpath(project_root, "stack.yaml")
   if vim.fn.filereadable(project_file) == 1 then
     for _, package_path in pairs(HtProjectHelpers.parse_package_paths(project_file)) do
       vim.list_extend(entry_points, stack.parse_package_entrypoints(package_path))
@@ -257,7 +257,7 @@ end
 ---@return boolean is_cabal_file
 HtProjectHelpers.is_cabal_file = function(bufnr)
   local filetype = vim.bo[bufnr].filetype
-  return filetype == 'cabal' or filetype == 'cabalproject'
+  return filetype == "cabal" or filetype == "cabalproject"
 end
 
 return HtProjectHelpers
