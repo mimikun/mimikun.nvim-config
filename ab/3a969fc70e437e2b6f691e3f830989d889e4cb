@@ -1,0 +1,19 @@
+lua/config/stylua.toml
+  s_86cdc8f0618f4e::t_a4611a1522d4ca 1-13
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.14",
+  "base_commit_sha": "ab3a969fc70e437e2b6f691e3f830989d889e4cb",
+  "prompts": {},
+  "sessions": {
+    "s_86cdc8f0618f4e": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "e00f5207-58dc-4e67-aa2d-b704219ad36e",
+        "model": "unknown"
+      },
+      "human_author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
