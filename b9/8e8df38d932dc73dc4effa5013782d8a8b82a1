@@ -1,0 +1,31 @@
+lua/config/neovide-docs/01_Display.md
+  s_86cdc8f0618f4e::t_177a2d3bcdf9f0 1-400
+lua/config/neovide-docs/02_Functionality.md
+  s_86cdc8f0618f4e::t_bfd167c50bcf46 1-125
+lua/config/neovide-docs/03_Input-Settings.md
+  s_86cdc8f0618f4e::t_17ec60cdb4b3a2 1-145
+lua/config/neovide-docs/04_Cursor-Settings.md
+  s_86cdc8f0618f4e::t_f2f57234c34f5d 1-87
+lua/config/neovide-docs/05_Cursor-Particles.md
+  s_86cdc8f0618f4e::t_b9471bb6c47d8a 1-24
+lua/config/neovide-docs/06_Particle-Settings.md
+  s_86cdc8f0618f4e::t_221b9477de98b2 1-64
+lua/config/neovide-docs/07_Long-Long-Long.md
+  s_86cdc8f0618f4e::t_c7f8706dc43ec2 1-19
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.14",
+  "base_commit_sha": "b98e8df38d932dc73dc4effa5013782d8a8b82a1",
+  "prompts": {},
+  "sessions": {
+    "s_86cdc8f0618f4e": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "e00f5207-58dc-4e67-aa2d-b704219ad36e",
+        "model": "unknown"
+      },
+      "human_author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
