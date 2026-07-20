@@ -1,0 +1,23 @@
+lua/config/denops.lua
+  s_86cdc8f0618f4e::t_a71de67e2b83bf 9-10
+lua/config/host.lua
+  s_86cdc8f0618f4e::t_70c7688b1925df 1,3-8,34-71,78,90,101-191
+lua/config/lazy.lua
+  s_86cdc8f0618f4e::t_e76f9d2353abd6 22
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.14",
+  "base_commit_sha": "e5142052eb10478de315e2552e89322e9ff6bd99",
+  "prompts": {},
+  "sessions": {
+    "s_86cdc8f0618f4e": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "e00f5207-58dc-4e67-aa2d-b704219ad36e",
+        "model": "unknown"
+      },
+      "human_author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
