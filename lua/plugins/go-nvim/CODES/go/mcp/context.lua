@@ -1,5 +1,5 @@
 local M = {}
-local log = require('go.utils').log
+local log = require("go.utils").log
 
 --- Parse a unified diff to extract changed file/line info
 ---@param diff_text string
@@ -7,12 +7,12 @@ local log = require('go.utils').log
 function M.parse_diff_hunks(diff_text)
   local hunks = {}
   local current_file = nil
-  for line in diff_text:gmatch('[^\n]+') do
-    local file = line:match('^%+%+%+ b/(.+%.go)$')
+  for line in diff_text:gmatch("[^\n]+") do
+    local file = line:match("^%+%+%+ b/(.+%.go)$")
     if file then
       current_file = file
     end
-    local start, count = line:match('^@@ %-[%d,]+ %+(%d+),?(%d*) @@')
+    local start, count = line:match("^@@ %-[%d,]+ %+(%d+),?(%d*) @@")
     if start and current_file then
       count = tonumber(count) or 1
       table.insert(hunks, {
@@ -34,8 +34,8 @@ local function ensure_buffer(filepath)
   end
   local bufnr = vim.fn.bufadd(filepath)
   vim.fn.bufload(bufnr)
-  if vim.bo[bufnr].filetype == '' then
-    vim.bo[bufnr].filetype = 'go'
+  if vim.bo[bufnr].filetype == "" then
+    vim.bo[bufnr].filetype = "go"
   end
   return bufnr
 end
@@ -54,7 +54,7 @@ local function read_line(filepath, lnum)
     end
   end
   -- Fall back to reading from disk
-  local f = io.open(filepath, 'r')
+  local f = io.open(filepath, "r")
   if not f then
     return nil
   end
@@ -74,7 +74,7 @@ end
 ---@param fname string
 ---@return boolean
 local function is_test_file(fname)
-  return fname:match('_test%.go$') ~= nil
+  return fname:match("_test%.go$") ~= nil
 end
 
 --- Format a reference location, including line text for non-test files
@@ -83,18 +83,18 @@ end
 ---@return string
 local function format_ref_location(uri, line)
   local fpath = vim.uri_to_fname(uri)
-  local fname = vim.fn.fnamemodify(fpath, ':.')
+  local fname = vim.fn.fnamemodify(fpath, ":.")
   local lnum = line + 1
 
   if is_test_file(fname) then
-    return string.format('\t- %s:%d', fname, lnum)
+    return string.format("\t- %s:%d", fname, lnum)
   end
 
   local text = read_line(fpath, lnum)
   if text then
-    return string.format('\t- %s:%d  `%s`', fname, lnum, text)
+    return string.format("\t- %s:%d  `%s`", fname, lnum, text)
   end
-  return string.format('\t- %s:%d', fname, lnum)
+  return string.format("\t- %s:%d", fname, lnum)
 end
 
 --- Format a caller location, including line text for non-test files
@@ -104,18 +104,18 @@ end
 ---@return string
 local function format_caller_location(uri, line, caller_name)
   local fpath = vim.uri_to_fname(uri)
-  local fname = vim.fn.fnamemodify(fpath, ':.')
+  local fname = vim.fn.fnamemodify(fpath, ":.")
   local lnum = line + 1
 
   if is_test_file(fname) then
-    return string.format('\t- %s:%d — %s()', fname, lnum, caller_name)
+    return string.format("\t- %s:%d — %s()", fname, lnum, caller_name)
   end
 
   local text = read_line(fpath, lnum)
   if text then
-    return string.format('\t- %s:%d — %s()  `%s`', fname, lnum, caller_name, text)
+    return string.format("\t- %s:%d — %s()  `%s`", fname, lnum, caller_name, text)
   end
-  return string.format('\t- %s:%d — %s()', fname, lnum, caller_name)
+  return string.format("\t- %s:%d — %s()", fname, lnum, caller_name)
 end
 
 --- Use treesitter to find symbols (functions, types, methods) at given lines
@@ -125,7 +125,7 @@ end
 ---@return table[] symbols [{name, kind, line, col}]
 function M.find_symbols_in_range(bufnr, start_line, end_line)
   local symbols = {}
-  local ok, parser = pcall(vim.treesitter.get_parser, bufnr, 'go')
+  local ok, parser = pcall(vim.treesitter.get_parser, bufnr, "go")
   if not ok or not parser then
     return symbols
   end
@@ -141,17 +141,17 @@ function M.find_symbols_in_range(bufnr, start_line, end_line)
     (type_declaration (type_spec name: (type_identifier) @type_name)) @type
   ]]
 
-  local qok, query = pcall(vim.treesitter.query.parse, 'go', query_text)
+  local qok, query = pcall(vim.treesitter.query.parse, "go", query_text)
   if not qok then
     return symbols
   end
 
   for id, node, _ in query:iter_captures(root, bufnr, start_line, end_line + 1) do
     local name = query.captures[id]
-    if name == 'func_name' or name == 'method_name' or name == 'type_name' then
+    if name == "func_name" or name == "method_name" or name == "type_name" then
       local text = vim.treesitter.get_node_text(node, bufnr)
       local row, col = node:start()
-      local kind = name:match('^(%w+)_')
+      local kind = name:match("^(%w+)_")
       table.insert(symbols, { name = text, kind = kind, line = row, col = col })
     end
   end
@@ -168,11 +168,11 @@ function M.get_symbol_context_via_lsp(bufnr, line, col, callback)
   local pending = 3
 
   -- Find an attached gopls client for this buffer
-  local clients = vim.lsp.get_clients({ bufnr = bufnr, name = 'gopls' })
+  local clients = vim.lsp.get_clients({ bufnr = bufnr, name = "gopls" })
   if #clients == 0 then
-    clients = vim.lsp.get_clients({ name = 'gopls' })
+    clients = vim.lsp.get_clients({ name = "gopls" })
     if #clients == 0 then
-      callback('(no gopls LSP client available)')
+      callback("(no gopls LSP client available)")
       return
     end
     vim.lsp.buf_attach_client(bufnr, clients[1].id)
@@ -188,14 +188,14 @@ function M.get_symbol_context_via_lsp(bufnr, line, col, callback)
   local function check_done()
     pending = pending - 1
     if pending <= 0 then
-      callback(table.concat(results, '\n'))
+      callback(table.concat(results, "\n"))
     end
   end
 
   -- 1. References
   local ref_params = make_params()
   ref_params.context = { includeDeclaration = false }
-  vim.lsp.buf_request(bufnr, 'textDocument/references', ref_params, function(err, result)
+  vim.lsp.buf_request(bufnr, "textDocument/references", ref_params, function(err, result)
     if not err and result and #result > 0 then
       -- Partition into non-test (high value) and test refs, dedup both
       local non_test_refs = {}
@@ -203,8 +203,8 @@ function M.get_symbol_context_via_lsp(bufnr, line, col, callback)
       local seen = {}
       for _, ref in ipairs(result) do
         local fpath = vim.uri_to_fname(ref.uri)
-        local fname = vim.fn.fnamemodify(fpath, ':.')
-        local key = string.format('- %s:%d', fname, ref.range.start.line + 1)
+        local fname = vim.fn.fnamemodify(fpath, ":.")
+        local key = string.format("- %s:%d", fname, ref.range.start.line + 1)
         if not seen[key] then
           seen[key] = true
           if is_test_file(fname) then
@@ -227,29 +227,29 @@ function M.get_symbol_context_via_lsp(bufnr, line, col, callback)
       for idx, ref in ipairs(test_refs) do
         if idx > remaining then
           local skipped = #test_refs - remaining
-          table.insert(refs, string.format('  ... and %d more test refs', skipped))
+          table.insert(refs, string.format("  ... and %d more test refs", skipped))
           break
         end
         table.insert(refs, format_ref_location(ref.uri, ref.range.start.line))
       end
-      table.insert(results, '\n* References (' .. #result .. '):\n' .. table.concat(refs, '\n'))
+      table.insert(results, "\n* References (" .. #result .. "):\n" .. table.concat(refs, "\n"))
     end
     check_done()
   end)
 
   -- 2. Incoming calls (who calls this?)
-  vim.lsp.buf_request(bufnr, 'textDocument/prepareCallHierarchy', make_params(), function(err, result)
+  vim.lsp.buf_request(bufnr, "textDocument/prepareCallHierarchy", make_params(), function(err, result)
     if err or not result or #result == 0 then
       check_done()
       return
     end
-    vim.lsp.buf_request(bufnr, 'callHierarchy/incomingCalls', { item = result[1] }, function(err2, calls)
+    vim.lsp.buf_request(bufnr, "callHierarchy/incomingCalls", { item = result[1] }, function(err2, calls)
       if not err2 and calls and #calls > 0 then
         -- Partition callers: non-test first
         local non_test_calls = {}
         local test_calls = {}
         for _, call in ipairs(calls) do
-          local fname = vim.fn.fnamemodify(vim.uri_to_fname(call.from.uri), ':.')
+          local fname = vim.fn.fnamemodify(vim.uri_to_fname(call.from.uri), ":.")
           if is_test_file(fname) then
             table.insert(test_calls, call)
           else
@@ -259,9 +259,7 @@ function M.get_symbol_context_via_lsp(bufnr, line, col, callback)
         local max_callers = 15
         local callers = {}
         for _, call in ipairs(non_test_calls) do
-          table.insert(callers, format_caller_location(
-            call.from.uri, call.from.range.start.line, call.from.name
-          ))
+          table.insert(callers, format_caller_location(call.from.uri, call.from.range.start.line, call.from.name))
           if #callers >= max_callers then
             break
           end
@@ -270,21 +268,19 @@ function M.get_symbol_context_via_lsp(bufnr, line, col, callback)
         for idx, call in ipairs(test_calls) do
           if idx > remaining then
             local skipped = #test_calls - remaining
-            table.insert(callers, string.format('  ... and %d more test callers', skipped))
+            table.insert(callers, string.format("  ... and %d more test callers", skipped))
             break
           end
-          table.insert(callers, format_caller_location(
-            call.from.uri, call.from.range.start.line, call.from.name
-          ))
+          table.insert(callers, format_caller_location(call.from.uri, call.from.range.start.line, call.from.name))
         end
-        table.insert(results, '\n* Callers (' .. #calls .. '):\n' .. table.concat(callers, '\n'))
+        table.insert(results, "\n* Callers (" .. #calls .. "):\n" .. table.concat(callers, "\n"))
       end
       check_done()
     end)
   end)
 
   -- 3. Implementations (for interfaces/methods)
-  vim.lsp.buf_request(bufnr, 'textDocument/implementation', make_params(), function(err, result)
+  vim.lsp.buf_request(bufnr, "textDocument/implementation", make_params(), function(err, result)
     if not err and result and #result > 0 then
       local impls = {}
       for _, impl in ipairs(result) do
@@ -293,7 +289,7 @@ function M.get_symbol_context_via_lsp(bufnr, line, col, callback)
           break
         end
       end
-      table.insert(results, '\n* Implementations (' .. #result .. '):\n' .. table.concat(impls, '\n'))
+      table.insert(results, "\n* Implementations (" .. #result .. "):\n" .. table.concat(impls, "\n"))
     end
     check_done()
   end)
@@ -310,7 +306,7 @@ function M.gather_diff_context(diff_text, callback)
   local hunks = M.parse_diff_hunks(diff_text)
 
   if #hunks == 0 then
-    callback('(no changed Go symbols detected)')
+    callback("(no changed Go symbols detected)")
     return
   end
 
@@ -324,19 +320,19 @@ function M.gather_diff_context(diff_text, callback)
   local files_pending = vim.tbl_count(by_file)
 
   if files_pending == 0 then
-    callback('(no changed Go files)')
+    callback("(no changed Go files)")
     return
   end
 
   for file, file_hunks in pairs(by_file) do
-    local abs_path = vim.fn.getcwd() .. '/' .. file
+    local abs_path = vim.fn.getcwd() .. "/" .. file
     local bufnr = ensure_buffer(abs_path)
 
     if not bufnr then
-      log('mcp/context: cannot load file', abs_path)
+      log("mcp/context: cannot load file", abs_path)
       files_pending = files_pending - 1
       if files_pending == 0 then
-        callback(table.concat(all_context, '\n\n'))
+        callback(table.concat(all_context, "\n\n"))
       end
       -- goto continue
     end
@@ -351,29 +347,31 @@ function M.gather_diff_context(diff_text, callback)
 
     local symbol_list = vim.tbl_values(symbols)
     if #symbol_list == 0 then
-      table.insert(all_context,
-        string.format('## File: %s\n(changed lines do not contain function/type declarations)', file))
+      table.insert(
+        all_context,
+        string.format("## File: %s\n(changed lines do not contain function/type declarations)", file)
+      )
       files_pending = files_pending - 1
       if files_pending == 0 then
-        callback(table.concat(all_context, '\n\n'))
+        callback(table.concat(all_context, "\n\n"))
       end
     else
       local syms_pending = #symbol_list
       for _, sym in ipairs(symbol_list) do
-        local header = string.format('### Symbol: `%s` (%s) in %s:%d', sym.name, sym.kind, file, sym.line + 1)
+        local header = string.format("### Symbol: `%s` (%s) in %s:%d", sym.name, sym.kind, file, sym.line + 1)
 
         M.get_symbol_context_via_lsp(bufnr, sym.line, sym.col, function(ctx)
           if ctx and #ctx > 0 then
-            table.insert(all_context, header .. '\n' .. ctx)
+            table.insert(all_context, header .. "\n" .. ctx)
           else
-            table.insert(all_context, header .. '\n(no callers/references found — possibly unexported or unused)')
+            table.insert(all_context, header .. "\n(no callers/references found — possibly unexported or unused)")
           end
 
           syms_pending = syms_pending - 1
           if syms_pending == 0 then
             files_pending = files_pending - 1
             if files_pending == 0 then
-              callback(table.concat(all_context, '\n\n'))
+              callback(table.concat(all_context, "\n\n"))
             end
           end
         end)
@@ -390,15 +388,15 @@ end
 function M.gather_buffer_context(bufnr, callback)
   local line_count = vim.api.nvim_buf_line_count(bufnr)
   local symbols = M.find_symbols_in_range(bufnr, 0, line_count - 1)
-  local file = vim.fn.fnamemodify(vim.api.nvim_buf_get_name(bufnr), ':.')
+  local file = vim.fn.fnamemodify(vim.api.nvim_buf_get_name(bufnr), ":.")
 
   if #symbols == 0 then
-    callback('(no function/type declarations found in buffer)')
+    callback("(no function/type declarations found in buffer)")
     return
   end
 
   if #symbols > 15 then
-    log('mcp/context: truncating symbols from', #symbols, 'to 15')
+    log("mcp/context: truncating symbols from", #symbols, "to 15")
     local truncated = {}
     for i = 1, 15 do
       truncated[i] = symbols[i]
@@ -410,22 +408,21 @@ function M.gather_buffer_context(bufnr, callback)
   local pending = #symbols
 
   for _, sym in ipairs(symbols) do
-    local header = string.format('* Symbol: `%s` (%s) in %s:%d', sym.name, sym.kind, file, sym.line + 1)
+    local header = string.format("* Symbol: `%s` (%s) in %s:%d", sym.name, sym.kind, file, sym.line + 1)
 
     M.get_symbol_context_via_lsp(bufnr, sym.line, sym.col, function(ctx)
       if ctx and #ctx > 0 then
-        table.insert(all_ctx, header .. '\n' .. ctx)
+        table.insert(all_ctx, header .. "\n" .. ctx)
       else
-        table.insert(all_ctx, header .. '\n(no callers/references found)')
+        table.insert(all_ctx, header .. "\n(no callers/references found)")
       end
 
       pending = pending - 1
       if pending == 0 then
-        callback(table.concat(all_ctx, '\n\n'))
+        callback(table.concat(all_ctx, "\n\n"))
       end
     end)
   end
 end
 
 return M
-
