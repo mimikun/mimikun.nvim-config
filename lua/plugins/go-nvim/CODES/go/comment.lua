@@ -2,49 +2,49 @@
 -- for func name(args) rets {}
 -- add cmts // name : rets
 local comment = {}
-local placeholder = _GO_NVIM_CFG.comment_placeholder or ''
-local ulog = require('go.utils').log
+local placeholder = _GO_NVIM_CFG.comment_placeholder or ""
+local ulog = require("go.utils").log
 local api = vim.api
 
 local gen_comment = function()
   local comments = nil
 
-  local ns = require('go.ts.go').get_package_node_at_pos()
+  local ns = require("go.ts.go").get_package_node_at_pos()
   if ns ~= nil and next(ns) ~= nil then
     -- ulog("parnode" .. vim.inspect(ns))
-    comments = '// Package ' .. ns.name .. ' provides ' .. ns.name
+    comments = "// Package " .. ns.name .. " provides " .. ns.name
     return comments, ns
   end
-  ns = require('go.ts.go').get_func_method_node_at_pos()
+  ns = require("go.ts.go").get_func_method_node_at_pos()
   if ns ~= nil and next(ns) ~= nil then
     -- ulog("parnode" .. vim.inspect(ns))
-    comments = '// ' .. ns.name .. ' ' .. ns.type
+    comments = "// " .. ns.name .. " " .. ns.type
     return comments, ns
   end
-  ns = require('go.ts.go').get_struct_node_at_pos()
+  ns = require("go.ts.go").get_struct_node_at_pos()
   if ns ~= nil and next(ns) ~= nil then
-    comments = '// ' .. ns.name .. ' ' .. ns.type
+    comments = "// " .. ns.name .. " " .. ns.type
     return comments, ns
   end
-  ns = require('go.ts.go').get_interface_node_at_pos()
+  ns = require("go.ts.go").get_interface_node_at_pos()
   if ns ~= nil and next(ns) ~= nil then
     -- ulog("parnode" .. vim.inspect(ns))
-    comments = '// ' .. ns.name .. ' ' .. ns.type
+    comments = "// " .. ns.name .. " " .. ns.type
     return comments, ns
   end
 
-  ns = require('go.ts.go').get_type_node_at_pos()
+  ns = require("go.ts.go").get_type_node_at_pos()
   if ns ~= nil and next(ns) ~= nil then
     -- ulog("parnode" .. vim.inspect(ns))
-    comments = '// ' .. ns.name .. ' ' .. ns.type
+    comments = "// " .. ns.name .. " " .. ns.type
     return comments, ns
   end
-  return ''
+  return ""
 end
 
 local wrap_comment = function(comment_line, ns)
   if string.len(comment_line) > 0 and placeholder ~= nil and string.len(placeholder) > 0 then
-    return comment_line .. ' ' .. placeholder, ns
+    return comment_line .. " " .. placeholder, ns
   end
   return comment_line, ns
 end
@@ -57,12 +57,12 @@ comment.gen = function()
   if ns == nil then
     -- nothing found
     ns = vim.treesitter.get_node({ bufnr = bufnr })
-    local node_text = require('go.utils').get_node_text(ns, bufnr)
+    local node_text = require("go.utils").get_node_text(ns, bufnr)
 
     local line = api.nvim_get_current_line()
-    local regex = '^(%s+)'
+    local regex = "^(%s+)"
     local q = line:match(regex)
-    c = (q or '') .. '// ' .. node_text
+    c = (q or "") .. "// " .. node_text
     c, _ = wrap_comment(c, {})
     vim.fn.append(row - 1, c)
     vim.fn.cursor(row, #c + 1)
@@ -70,14 +70,14 @@ comment.gen = function()
   end
   ulog(vim.inspect(ns))
   row, col = ns.dim.s.r, ns.dim.s.c
-  ulog('set cursor ' .. tostring(row))
+  ulog("set cursor " .. tostring(row))
   api.nvim_win_set_cursor(0, { row, col })
   -- insert doc
   vim.fn.append(row - 1, c)
   -- set curosr
   vim.fn.cursor(row, #c + 1)
   -- enter into insert mode
-  api.nvim_command('startinsert!')
+  api.nvim_command("startinsert!")
   return c
 end
 
@@ -101,11 +101,11 @@ local function get_declaration_at_cursor()
 
   -- Try each node type in order
   local getters = {
-    { fn = require('go.ts.go').get_package_node_at_pos, kind = 'package' },
-    { fn = require('go.ts.go').get_func_method_node_at_pos, kind = 'function' },
-    { fn = require('go.ts.go').get_struct_node_at_pos, kind = 'struct' },
-    { fn = require('go.ts.go').get_interface_node_at_pos, kind = 'interface' },
-    { fn = require('go.ts.go').get_type_node_at_pos, kind = 'type' },
+    { fn = require("go.ts.go").get_package_node_at_pos, kind = "package" },
+    { fn = require("go.ts.go").get_func_method_node_at_pos, kind = "function" },
+    { fn = require("go.ts.go").get_struct_node_at_pos, kind = "struct" },
+    { fn = require("go.ts.go").get_interface_node_at_pos, kind = "interface" },
+    { fn = require("go.ts.go").get_type_node_at_pos, kind = "type" },
   }
 
   for _, g in ipairs(getters) do
@@ -122,32 +122,32 @@ end
 comment.gen_ai = function()
   local ns, source, kind = get_declaration_at_cursor()
   if not ns or not source then
-    vim.notify('go.nvim [AI Comment]: no Go declaration found at cursor', vim.log.levels.WARN)
+    vim.notify("go.nvim [AI Comment]: no Go declaration found at cursor", vim.log.levels.WARN)
     return
   end
 
-  local file = vim.fn.expand('%:t') or ''
-  local user_msg = string.format('File: %s\nKind: %s\n\n```go\n%s\n```', file, kind, source)
+  local file = vim.fn.expand("%:t") or ""
+  local user_msg = string.format("File: %s\nKind: %s\n\n```go\n%s\n```", file, kind, source)
 
-  vim.notify('go.nvim [AI Comment]: generating …', vim.log.levels.INFO)
+  vim.notify("go.nvim [AI Comment]: generating …", vim.log.levels.INFO)
 
-  require('go.ai').request(comment_system_prompt, user_msg, { max_tokens = 300 }, function(resp)
+  require("go.ai").request(comment_system_prompt, user_msg, { max_tokens = 300 }, function(resp)
     -- Strip markdown fences if present
-    resp = resp:gsub('^```%w*\n?', ''):gsub('\n?```$', '')
+    resp = resp:gsub("^```%w*\n?", ""):gsub("\n?```$", "")
     resp = vim.trim(resp)
 
     -- Split into lines and validate each starts with "//"
-    local lines = vim.split(resp, '\n', { plain = true })
+    local lines = vim.split(resp, "\n", { plain = true })
     local comment_lines = {}
     for _, line in ipairs(lines) do
       line = vim.trim(line)
-      if line:match('^//') then
+      if line:match("^//") then
         table.insert(comment_lines, line)
       end
     end
 
     if #comment_lines == 0 then
-      vim.notify('go.nvim [AI Comment]: LLM returned no valid comment lines', vim.log.levels.WARN)
+      vim.notify("go.nvim [AI Comment]: LLM returned no valid comment lines", vim.log.levels.WARN)
       return
     end
 

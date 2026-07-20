@@ -1,18 +1,18 @@
-local runner = require('go.runner')
-local utils = require('go.utils')
+local runner = require("go.runner")
+local utils = require("go.utils")
 local log = utils.log
 local M = {}
 
 function M.run(args)
-  require('go.install').install('govulncheck')
+  require("go.install").install("govulncheck")
   args = args or {}
 
-  local cmd = { 'govulncheck' }
+  local cmd = { "govulncheck" }
   local pkg
   if #args > 1 then
     pkg = args[2]
   else
-    pkg = './...'
+    pkg = "./..."
   end
   vim.list_extend(cmd, { pkg })
   log(cmd)
@@ -24,7 +24,7 @@ function M.run(args)
       end)
     end,
   }
-  log('running', cmd)
+  log("running", cmd)
   runner.run(cmd, opts)
   return cmd, opts
 end

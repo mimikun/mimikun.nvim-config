@@ -23,7 +23,7 @@ local function get_enclosing_func(bufnr)
   end
   local expr = current_node
   while expr do
-    if expr:type() == 'function_declaration' or expr:type() == 'method_declaration' then
+    if expr:type() == "function_declaration" or expr:type() == "method_declaration" then
       break
     end
     expr = expr:parent()
@@ -32,13 +32,13 @@ local function get_enclosing_func(bufnr)
     return nil, nil
   end
 
-  local func_text = vim.treesitter.get_node_text(expr, bufnr) or ''
+  local func_text = vim.treesitter.get_node_text(expr, bufnr) or ""
 
   -- Extract function name
-  local name_node = expr:field('name')
-  local func_name = ''
+  local name_node = expr:field("name")
+  local func_name = ""
   if name_node and name_node[1] then
-    func_name = vim.treesitter.get_node_text(name_node[1], bufnr) or ''
+    func_name = vim.treesitter.get_node_text(name_node[1], bufnr) or ""
   end
 
   -- Extract line range (0-based from treesitter, convert to 1-based)
@@ -58,12 +58,12 @@ M.get_enclosing_func = get_enclosing_func
 --- @param callback function    Called with (expanded_prompt, context_attachments)
 ---   context_attachments is a string of code blocks (may be empty)
 function M.expand(prompt, source_bufnr, callback)
-  local has_buffer = prompt:find('/buffer', 1, true) ~= nil
-  local has_file = prompt:find('/file', 1, true) ~= nil
-  local has_function = prompt:find('/function', 1, true) ~= nil
+  local has_buffer = prompt:find("/buffer", 1, true) ~= nil
+  local has_file = prompt:find("/file", 1, true) ~= nil
+  local has_function = prompt:find("/function", 1, true) ~= nil
 
   if not (has_buffer or has_file or has_function) then
-    callback(prompt, '')
+    callback(prompt, "")
     return
   end
 
@@ -73,11 +73,11 @@ function M.expand(prompt, source_bufnr, callback)
   -- /function is synchronous: inline the function body directly
   if has_function then
     local func_text = get_enclosing_func(source_bufnr)
-    if func_text and func_text ~= '' then
-      result = plain_replace(result, '/function', string.format('\n```go\n%s\n```\n', func_text))
+    if func_text and func_text ~= "" then
+      result = plain_replace(result, "/function", string.format("\n```go\n%s\n```\n", func_text))
     else
-      vim.notify('go.nvim [AI]: /function — no enclosing function found', vim.log.levels.WARN)
-      result = plain_replace(result, '/function', '')
+      vim.notify("go.nvim [AI]: /function — no enclosing function found", vim.log.levels.WARN)
+      result = plain_replace(result, "/function", "")
     end
   end
 
@@ -92,8 +92,8 @@ function M.expand(prompt, source_bufnr, callback)
     for _, b in ipairs(vim.api.nvim_list_bufs()) do
       if vim.api.nvim_buf_is_loaded(b) and vim.bo[b].buflisted then
         local name = vim.api.nvim_buf_get_name(b)
-        if name ~= '' then
-          local short = vim.fn.fnamemodify(name, ':~:.')
+        if name ~= "" then
+          local short = vim.fn.fnamemodify(name, ":~:.")
           table.insert(items, { bufnr = b, display = short })
           if b == source_bufnr then
             default_idx = #items
@@ -102,8 +102,8 @@ function M.expand(prompt, source_bufnr, callback)
       end
     end
     if #items == 0 then
-      vim.notify('go.nvim [AI]: /buffer — no listed buffers', vim.log.levels.WARN)
-      cb(plain_replace(text, '/buffer', ''))
+      vim.notify("go.nvim [AI]: /buffer — no listed buffers", vim.log.levels.WARN)
+      cb(plain_replace(text, "/buffer", ""))
       return
     end
     -- Move default to first position
@@ -112,19 +112,19 @@ function M.expand(prompt, source_bufnr, callback)
       table.insert(items, 1, def)
     end
     vim.ui.select(items, {
-      prompt = 'Select buffer (/buffer):',
+      prompt = "Select buffer (/buffer):",
       format_item = function(item)
         return item.display
       end,
     }, function(choice)
       if choice then
         local buf_lines = vim.api.nvim_buf_get_lines(choice.bufnr, 0, -1, false)
-        local content = table.concat(buf_lines, '\n')
-        local ft = vim.bo[choice.bufnr].filetype or 'go'
-        text = plain_replace(text, '/buffer', '`' .. choice.display .. '`')
-        table.insert(attachments, string.format('## Buffer: %s\n```%s\n%s\n```', choice.display, ft, content))
+        local content = table.concat(buf_lines, "\n")
+        local ft = vim.bo[choice.bufnr].filetype or "go"
+        text = plain_replace(text, "/buffer", "`" .. choice.display .. "`")
+        table.insert(attachments, string.format("## Buffer: %s\n```%s\n%s\n```", choice.display, ft, content))
       else
-        text = plain_replace(text, '/buffer', '')
+        text = plain_replace(text, "/buffer", "")
       end
       cb(text)
     end)
@@ -138,19 +138,19 @@ function M.expand(prompt, source_bufnr, callback)
     end
     local current_file = vim.api.nvim_buf_get_name(source_bufnr)
     local cwd = vim.fn.getcwd()
-    local go_files = vim.fn.glob(cwd .. '/**/*.go', false, true)
+    local go_files = vim.fn.glob(cwd .. "/**/*.go", false, true)
     local items = {}
     local default_idx = 1
     for _, f in ipairs(go_files) do
-      local rel = vim.fn.fnamemodify(f, ':.')
+      local rel = vim.fn.fnamemodify(f, ":.")
       table.insert(items, { path = f, display = rel })
       if f == current_file then
         default_idx = #items
       end
     end
     if #items == 0 then
-      vim.notify('go.nvim [AI]: /file — no Go files found in workspace', vim.log.levels.WARN)
-      cb(plain_replace(text, '/file', ''))
+      vim.notify("go.nvim [AI]: /file — no Go files found in workspace", vim.log.levels.WARN)
+      cb(plain_replace(text, "/file", ""))
       return
     end
     if default_idx > 1 then
@@ -158,23 +158,23 @@ function M.expand(prompt, source_bufnr, callback)
       table.insert(items, 1, def)
     end
     vim.ui.select(items, {
-      prompt = 'Select file (/file):',
+      prompt = "Select file (/file):",
       format_item = function(item)
         return item.display
       end,
     }, function(choice)
       if choice then
-        local fh = io.open(choice.path, 'r')
+        local fh = io.open(choice.path, "r")
         if fh then
-          local content = fh:read('*a')
+          local content = fh:read("*a")
           fh:close()
-          text = plain_replace(text, '/file', '`' .. choice.display .. '`')
-          table.insert(attachments, string.format('## File: %s\n```go\n%s\n```', choice.display, content))
+          text = plain_replace(text, "/file", "`" .. choice.display .. "`")
+          table.insert(attachments, string.format("## File: %s\n```go\n%s\n```", choice.display, content))
         else
-          text = plain_replace(text, '/file', '`' .. choice.display .. '`')
+          text = plain_replace(text, "/file", "`" .. choice.display .. "`")
         end
       else
-        text = plain_replace(text, '/file', '')
+        text = plain_replace(text, "/file", "")
       end
       cb(text)
     end)
@@ -183,7 +183,7 @@ function M.expand(prompt, source_bufnr, callback)
   -- Chain: resolve_buffer → resolve_file → callback
   resolve_buffer(result, function(after_buffer)
     resolve_file(after_buffer, function(after_file)
-      callback(after_file, table.concat(attachments, '\n\n'))
+      callback(after_file, table.concat(attachments, "\n\n"))
     end)
   end)
 end
@@ -192,7 +192,9 @@ end
 --- @param prompt string
 --- @return boolean
 function M.has_macros(prompt)
-  return prompt:find('/buffer', 1, true) ~= nil or prompt:find('/file', 1, true) ~= nil or prompt:find('/function', 1, true) ~= nil
+  return prompt:find("/buffer", 1, true) ~= nil
+    or prompt:find("/file", 1, true) ~= nil
+    or prompt:find("/function", 1, true) ~= nil
 end
 
 return M

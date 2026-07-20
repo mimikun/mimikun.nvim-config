@@ -1,16 +1,16 @@
 local M = {
   _client = nil,
   _config = {
-    gopls_cmd = { 'gopls', 'mcp' },
+    gopls_cmd = { "gopls", "mcp" },
     root_dir = nil,
   },
 }
-local client_mod = require('go.mcp.client')
+local client_mod = require("go.mcp.client")
 
 function M.setup(opts)
   opts = opts or {}
   M._config = {
-    gopls_cmd = opts.gopls_cmd or { 'gopls', 'mcp' },
+    gopls_cmd = opts.gopls_cmd or { "gopls", "mcp" },
     root_dir = opts.root_dir,
   }
 end

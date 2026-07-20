@@ -94,7 +94,7 @@ For every critique, provide:
 
 --- Build the full review guidelines block (audit + dimensions + output instructions)
 function M.review_guidelines()
-  return M.audit_categories .. '\n' .. M.review_dimensions .. '\n' .. M.output_critique_format
+  return M.audit_categories .. "\n" .. M.review_dimensions .. "\n" .. M.output_critique_format
 end
 
 return M

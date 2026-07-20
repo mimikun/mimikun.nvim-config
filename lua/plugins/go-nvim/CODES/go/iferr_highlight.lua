@@ -19,7 +19,7 @@ local query_string = [[
 
 local query = nil
 local augroup_id = nil
-local namespace = vim.api.nvim_create_namespace('go_iferr_highlight')
+local namespace = vim.api.nvim_create_namespace("go_iferr_highlight")
 
 local function highlight_buffer(bufnr)
   if not query then
@@ -28,7 +28,7 @@ local function highlight_buffer(bufnr)
 
   vim.api.nvim_buf_clear_namespace(bufnr, namespace, 0, -1)
 
-  local parser = vim.treesitter.get_parser(bufnr, 'go')
+  local parser = vim.treesitter.get_parser(bufnr, "go")
   if not parser then
     return
   end
@@ -45,7 +45,7 @@ local function highlight_buffer(bufnr)
         vim.api.nvim_buf_set_extmark(bufnr, namespace, start_row, start_col, {
           end_row = end_row,
           end_col = end_col,
-          hl_group = 'Comment',
+          hl_group = "Comment",
           priority = 128,
         })
       end
@@ -55,7 +55,7 @@ end
 
 local function clear_all_go_buffers()
   for _, bufnr in ipairs(vim.api.nvim_list_bufs()) do
-    if vim.api.nvim_buf_is_loaded(bufnr) and vim.bo[bufnr].filetype == 'go' then
+    if vim.api.nvim_buf_is_loaded(bufnr) and vim.bo[bufnr].filetype == "go" then
       vim.api.nvim_buf_clear_namespace(bufnr, namespace, 0, -1)
     end
   end
@@ -63,7 +63,7 @@ end
 
 local function highlight_all_go_buffers()
   for _, bufnr in ipairs(vim.api.nvim_list_bufs()) do
-    if vim.api.nvim_buf_is_loaded(bufnr) and vim.bo[bufnr].filetype == 'go' then
+    if vim.api.nvim_buf_is_loaded(bufnr) and vim.bo[bufnr].filetype == "go" then
       highlight_buffer(bufnr)
     end
   end
@@ -80,22 +80,22 @@ function M.setup(config)
   end
 
   if not query then
-    local ok, parsed_query = pcall(vim.treesitter.query.parse, 'go', query_string)
+    local ok, parsed_query = pcall(vim.treesitter.query.parse, "go", query_string)
     if not ok then
-      vim.notify('go.nvim: Failed to parse iferr highlight query', vim.log.levels.ERROR)
+      vim.notify("go.nvim: Failed to parse iferr highlight query", vim.log.levels.ERROR)
       return
     end
     query = parsed_query
   end
 
   if not augroup_id then
-    augroup_id = vim.api.nvim_create_augroup('GoIfErrHighlight', { clear = true })
+    augroup_id = vim.api.nvim_create_augroup("GoIfErrHighlight", { clear = true })
 
-    vim.api.nvim_create_autocmd({ 'BufEnter', 'BufWritePost', 'TextChanged', 'InsertLeave' }, {
+    vim.api.nvim_create_autocmd({ "BufEnter", "BufWritePost", "TextChanged", "InsertLeave" }, {
       group = augroup_id,
-      pattern = '*.go',
+      pattern = "*.go",
       callback = function(event)
-        if vim.bo[event.buf].filetype == 'go' then
+        if vim.bo[event.buf].filetype == "go" then
           -- Delay to ensure treesitter has parsed the buffer
           vim.defer_fn(function()
             highlight_buffer(event.buf)
@@ -112,12 +112,12 @@ function M.toggle()
   if _GO_NVIM_CFG then
     _GO_NVIM_CFG.iferr_less_highlight = not _GO_NVIM_CFG.iferr_less_highlight
     M.setup(_GO_NVIM_CFG)
-    vim.notify('If-err highlighting ' .. (_GO_NVIM_CFG.iferr_less_highlight and 'enabled' or 'disabled'))
+    vim.notify("If-err highlighting " .. (_GO_NVIM_CFG.iferr_less_highlight and "enabled" or "disabled"))
   end
 end
 
-vim.api.nvim_create_user_command('GoToggleIferrLessHighlight', M.toggle, {
-  desc = 'Toggle if-err less highlighting in Go files',
+vim.api.nvim_create_user_command("GoToggleIferrLessHighlight", M.toggle, {
+  desc = "Toggle if-err less highlighting in Go files",
 })
 
 return M

@@ -3,13 +3,13 @@
 -- Session files are JSON, organized by workspace folder name, with append-mode entries.
 local M = {}
 
-local utils = require('go.utils')
+local utils = require("go.utils")
 local log = utils.log
 
 --- Get the session directory under stdpath('cache')
 --- @return string
 local function session_dir()
-  return vim.fn.stdpath('cache') .. '/go_nvim_ai'
+  return vim.fn.stdpath("cache") .. "/go_nvim_ai"
 end
 
 --- Derive a safe filename from the current workspace/folder path.
@@ -18,9 +18,9 @@ end
 local function workspace_key()
   local cwd = vim.fn.getcwd()
   -- Strip trailing slash, replace path separators and colons with underscores
-  local key = cwd:gsub('[/\\:]+$', ''):gsub('[/\\:]', '_'):gsub('^_+', '')
-  if key == '' then
-    key = 'default'
+  local key = cwd:gsub("[/\\:]+$", ""):gsub("[/\\:]", "_"):gsub("^_+", "")
+  if key == "" then
+    key = "default"
   end
   return key
 end
@@ -28,14 +28,14 @@ end
 --- Get the full path to the session file for the current workspace.
 --- @return string
 function M.session_file()
-  return session_dir() .. '/' .. workspace_key() .. '.json'
+  return session_dir() .. "/" .. workspace_key() .. ".json"
 end
 
 --- Ensure the session directory exists.
 local function ensure_dir()
   local dir = session_dir()
   if vim.fn.isdirectory(dir) == 0 then
-    vim.fn.mkdir(dir, 'p')
+    vim.fn.mkdir(dir, "p")
   end
 end
 
@@ -43,20 +43,20 @@ end
 --- @return table  { entries = { ... } }
 local function read_session()
   local path = M.session_file()
-  local f = io.open(path, 'r')
+  local f = io.open(path, "r")
   if not f then
     return { entries = {} }
   end
-  local content = f:read('*a')
+  local content = f:read("*a")
   f:close()
-  if content == '' then
+  if content == "" then
     return { entries = {} }
   end
   local ok, data = pcall(vim.json.decode, content)
-  if ok and type(data) == 'table' and type(data.entries) == 'table' then
+  if ok and type(data) == "table" and type(data.entries) == "table" then
     return data
   end
-  log('[GoAI session]: corrupt session file, resetting:', path)
+  log("[GoAI session]: corrupt session file, resetting:", path)
   return { entries = {} }
 end
 
@@ -67,12 +67,12 @@ local function write_session(data)
   local path = M.session_file()
   local ok, json = pcall(vim.json.encode, data)
   if not ok then
-    log('[GoAI session]: failed to encode session data')
+    log("[GoAI session]: failed to encode session data")
     return
   end
-  local f = io.open(path, 'w')
+  local f = io.open(path, "w")
   if not f then
-    log('[GoAI session]: failed to open session file for writing:', path)
+    log("[GoAI session]: failed to open session file for writing:", path)
     return
   end
   f:write(json)
@@ -92,7 +92,7 @@ function M.append(entry)
   entry.workspace = vim.fn.getcwd()
   table.insert(data.entries, entry)
   write_session(data)
-  log('[GoAI session]: appended entry, command:', entry.command, 'total:', #data.entries)
+  log("[GoAI session]: appended entry, command:", entry.command, "total:", #data.entries)
 end
 
 --- Get the last response_id for a given command type (for Copilot Responses API chaining).
@@ -106,7 +106,7 @@ function M.last_response_id(command)
   local data = read_session()
   for i = #data.entries, 1, -1 do
     local e = data.entries[i]
-    if e.response_id and e.response_id ~= '' then
+    if e.response_id and e.response_id ~= "" then
       if not command or e.command == command then
         return e.response_id
       end
@@ -191,7 +191,7 @@ function M.info()
   -- Count by command type
   local cmd_counts = {}
   for _, e in ipairs(entries) do
-    local c = e.command or 'unknown'
+    local c = e.command or "unknown"
     cmd_counts[c] = (cmd_counts[c] or 0) + 1
   end
   info.commands = cmd_counts
@@ -205,10 +205,10 @@ function M.list_all()
   if vim.fn.isdirectory(dir) == 0 then
     return {}
   end
-  local files = vim.fn.glob(dir .. '/*.json', false, true)
+  local files = vim.fn.glob(dir .. "/*.json", false, true)
   local result = {}
   for _, f in ipairs(files) do
-    local key = vim.fn.fnamemodify(f, ':t:r')
+    local key = vim.fn.fnamemodify(f, ":t:r")
     local size = vim.fn.getfsize(f)
     table.insert(result, { file = f, workspace_key = key, size_bytes = size })
   end
@@ -225,7 +225,7 @@ function M.auto_trim()
   if days and days > 0 then
     local removed = M.trim(days)
     if removed > 0 then
-      log('[GoAI session]: auto-trimmed', removed, 'entries older than', days, 'days')
+      log("[GoAI session]: auto-trimmed", removed, "entries older than", days, "days")
     end
   end
 end
@@ -237,7 +237,7 @@ function M.last_response(command)
   local data = read_session()
   for i = #data.entries, 1, -1 do
     local e = data.entries[i]
-    if e.role == 'assistant' and e.content and e.content ~= '' then
+    if e.role == "assistant" and e.content and e.content ~= "" then
       if not command or e.command == command then
         return e
       end

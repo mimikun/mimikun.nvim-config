@@ -1,13 +1,13 @@
 -- GoCodeReview: AI-powered code review for go.nvim
 local M = {}
 
-local provider = require('go.ai.provider')
-local macros = require('go.ai.macros')
-local ui = require('go.ai.ui')
-local prompts = require('go.prompts')
-local utils = require('go.utils')
+local provider = require("go.ai.provider")
+local macros = require("go.ai.macros")
+local ui = require("go.ai.ui")
+local prompts = require("go.prompts")
+local utils = require("go.utils")
 local log = utils.log
-local session = require('go.ai.session')
+local session = require("go.ai.session")
 
 -- ─── System prompts ──────────────────────────────────────────────────────────
 
@@ -181,21 +181,21 @@ M.explain_system_prompt = explain_system_prompt
 --- @return string
 function M.detect_default_branch()
   -- Check remote HEAD first (most reliable)
-  local h = vim.fn.systemlist('git symbolic-ref refs/remotes/origin/HEAD 2>/dev/null')
+  local h = vim.fn.systemlist("git symbolic-ref refs/remotes/origin/HEAD 2>/dev/null")
   if vim.v.shell_error == 0 and h[1] then
-    local branch = h[1]:match('refs/remotes/origin/(.+)')
+    local branch = h[1]:match("refs/remotes/origin/(.+)")
     if branch then
       return branch
     end
   end
   -- Fallback: check if main or master exists locally
-  for _, name in ipairs({ 'main', 'master' }) do
-    vim.fn.system('git rev-parse --verify ' .. name .. ' 2>/dev/null')
+  for _, name in ipairs({ "main", "master" }) do
+    vim.fn.system("git rev-parse --verify " .. name .. " 2>/dev/null")
     if vim.v.shell_error == 0 then
       return name
     end
   end
-  return 'main'
+  return "main"
 end
 
 --- Get the unified diff of a file against a branch.
@@ -203,16 +203,16 @@ end
 --- @param branch string  Branch name to diff against
 --- @param callback function  Called with (diff_text, err_msg)
 local function get_git_diff(filepath, branch, callback)
-  local rel = vim.fn.fnamemodify(filepath, ':.')
-  vim.system({ 'git', 'diff', '-U10', branch .. '...HEAD', '--', rel }, { text = true }, function(result)
+  local rel = vim.fn.fnamemodify(filepath, ":.")
+  vim.system({ "git", "diff", "-U10", branch .. "...HEAD", "--", rel }, { text = true }, function(result)
     vim.schedule(function()
       if result.code ~= 0 then
-        callback(nil, 'git diff failed: ' .. (result.stderr or ''):gsub('%s+$', ''))
+        callback(nil, "git diff failed: " .. (result.stderr or ""):gsub("%s+$", ""))
         return
       end
-      local diff = vim.trim(result.stdout or '')
-      if diff == '' then
-        callback(nil, 'no changes against ' .. branch)
+      local diff = vim.trim(result.stdout or "")
+      if diff == "" then
+        callback(nil, "no changes against " .. branch)
         return
       end
       callback(diff, nil)
@@ -224,34 +224,38 @@ end
 --- @param branch string  Branch name to diff against
 --- @param callback function  Called with (diff_text, err_msg)
 local function get_git_diff_all(branch, callback)
-  vim.system({ 'git', 'diff', '-U5', '--stat', branch .. '...HEAD', '--', '*.go' }, { text = true }, function(stat_result)
-    vim.schedule(function()
-      -- Get the stat summary
-      local stat = ''
-      if stat_result.code == 0 then
-        stat = vim.trim(stat_result.stdout or '')
-      end
-      -- Now get the actual diff
-      vim.system({ 'git', 'diff', '-U5', branch .. '...HEAD', '--', '*.go' }, { text = true }, function(result)
-        vim.schedule(function()
-          if result.code ~= 0 then
-            callback(nil, 'git diff failed: ' .. (result.stderr or ''):gsub('%s+$', ''))
-            return
-          end
-          local diff = vim.trim(result.stdout or '')
-          if diff == '' then
-            callback(nil, 'no Go file changes against ' .. branch)
-            return
-          end
-          -- Prepend stat summary for context
-          if stat ~= '' then
-            diff = '--- File stats ---\n' .. stat .. '\n\n--- Diff ---\n' .. diff
-          end
-          callback(diff, nil)
+  vim.system(
+    { "git", "diff", "-U5", "--stat", branch .. "...HEAD", "--", "*.go" },
+    { text = true },
+    function(stat_result)
+      vim.schedule(function()
+        -- Get the stat summary
+        local stat = ""
+        if stat_result.code == 0 then
+          stat = vim.trim(stat_result.stdout or "")
+        end
+        -- Now get the actual diff
+        vim.system({ "git", "diff", "-U5", branch .. "...HEAD", "--", "*.go" }, { text = true }, function(result)
+          vim.schedule(function()
+            if result.code ~= 0 then
+              callback(nil, "git diff failed: " .. (result.stderr or ""):gsub("%s+$", ""))
+              return
+            end
+            local diff = vim.trim(result.stdout or "")
+            if diff == "" then
+              callback(nil, "no Go file changes against " .. branch)
+              return
+            end
+            -- Prepend stat summary for context
+            if stat ~= "" then
+              diff = "--- File stats ---\n" .. stat .. "\n\n--- Diff ---\n" .. diff
+            end
+            callback(diff, nil)
+          end)
         end)
       end)
-    end)
-  end)
+    end
+  )
 end
 
 -- ─── Response parsing ────────────────────────────────────────────────────────
@@ -269,7 +273,7 @@ function M.handle_response(response, filename)
 
   -- 1) Look for a fenced JSON code block
   do
-    local s, e, cap = response:find('```json%s*\n(.-)\n?```')
+    local s, e, cap = response:find("```json%s*\n(.-)\n?```")
     if s then
       json_str = cap
       json_fence_start = s
@@ -279,14 +283,14 @@ function M.handle_response(response, filename)
 
   -- 2) Fallback: find the outermost [ ... ] array by bracket depth
   if not json_str then
-    local start = response:find('%[%s*{')
+    local start = response:find("%[%s*{")
     if start then
       local depth = 0
       for pos = start, #response do
         local ch = response:sub(pos, pos)
-        if ch == '[' then
+        if ch == "[" then
           depth = depth + 1
-        elseif ch == ']' then
+        elseif ch == "]" then
           depth = depth - 1
           if depth == 0 then
             json_str = response:sub(start, pos)
@@ -300,76 +304,76 @@ function M.handle_response(response, filename)
   if json_str then
     json_str = vim.trim(json_str)
     local ok, findings = pcall(vim.json.decode, json_str)
-    if ok and type(findings) == 'table' then
+    if ok and type(findings) == "table" then
       if #findings == 0 then
-        vim.notify('[GoCodeReview]: great job! No issues found.', vim.log.levels.INFO)
+        vim.notify("[GoCodeReview]: great job! No issues found.", vim.log.levels.INFO)
         return
       end
 
       local qflist = {}
-      local severity_map = { error = 'E', warning = 'W', info = 'I' }
+      local severity_map = { error = "E", warning = "W", info = "I" }
       for _, item in ipairs(findings) do
         local parts = {}
-        if item.violation and item.violation ~= '' then
-          table.insert(parts, '[' .. item.violation .. ']')
+        if item.violation and item.violation ~= "" then
+          table.insert(parts, "[" .. item.violation .. "]")
         end
-        if item.principle and item.principle ~= '' then
+        if item.principle and item.principle ~= "" then
           table.insert(parts, item.principle)
         end
-        if item.message and item.message ~= '' then
+        if item.message and item.message ~= "" then
           table.insert(parts, item.message)
         end
-        if item.refactor and item.refactor ~= '' then
-          table.insert(parts, 'Refactor: ' .. item.refactor)
+        if item.refactor and item.refactor ~= "" then
+          table.insert(parts, "Refactor: " .. item.refactor)
         end
         table.insert(qflist, {
-          filename = item.file or filename or vim.fn.expand('%'),
+          filename = item.file or filename or vim.fn.expand("%"),
           lnum = tonumber(item.line) or 1,
           col = tonumber(item.col) or 1,
-          text = table.concat(parts, ' '),
-          type = severity_map[item.severity] or 'W',
+          text = table.concat(parts, " "),
+          type = severity_map[item.severity] or "W",
         })
       end
 
-      vim.fn.setqflist({}, 'r', { title = 'GoCodeReview', items = qflist })
-      vim.cmd('copen')
-      vim.notify(string.format('[GoCodeReview]: %d issue(s) added to quickfix', #qflist), vim.log.levels.INFO)
+      vim.fn.setqflist({}, "r", { title = "GoCodeReview", items = qflist })
+      vim.cmd("copen")
+      vim.notify(string.format("[GoCodeReview]: %d issue(s) added to quickfix", #qflist), vim.log.levels.INFO)
 
       -- Show surrounding markdown prose (if any) in a float
       local md_parts = {}
       if json_fence_start then
         local before = vim.trim(response:sub(1, json_fence_start - 1))
         local after = vim.trim(response:sub(json_fence_end + 1))
-        if before ~= '' then
+        if before ~= "" then
           table.insert(md_parts, before)
         end
-        if after ~= '' then
+        if after ~= "" then
           table.insert(md_parts, after)
         end
       end
       if #md_parts > 0 then
-        ui.show_markdown_float(table.concat(md_parts, '\n\n'))
+        ui.show_markdown_float(table.concat(md_parts, "\n\n"))
       end
       return
     end
   end
 
   -- No JSON found — treat as plain text / markdown response
-  response = response:gsub('^```%w*\n?', ''):gsub('\n?```$', '')
+  response = response:gsub("^```%w*\n?", ""):gsub("\n?```$", "")
   response = vim.trim(response)
 
-  local lines = vim.split(response, '\n', { plain = true })
+  local lines = vim.split(response, "\n", { plain = true })
 
   -- Detect "no issues" case: single non-quickfix line
-  if #lines == 1 and not lines[1]:match('^[^:]+:%d+:') then
-    vim.notify('go.nvim [CodeReview]: ' .. lines[1], vim.log.levels.INFO)
+  if #lines == 1 and not lines[1]:match("^[^:]+:%d+:") then
+    vim.notify("go.nvim [CodeReview]: " .. lines[1], vim.log.levels.INFO)
     return
   end
 
   -- Check if any line looks like quickfix format
   local has_qf_line = false
   for _, line in ipairs(lines) do
-    if vim.trim(line):match('^[^:]+:%d+:') then
+    if vim.trim(line):match("^[^:]+:%d+:") then
       has_qf_line = true
       break
     end
@@ -384,21 +388,21 @@ function M.handle_response(response, filename)
   local qflist = {}
   for _, line in ipairs(lines) do
     line = vim.trim(line)
-    if line ~= '' then
-      local fname, lnum, col, text = line:match('^([^:]+):(%d+):(%d+):%s*(.+)$')
+    if line ~= "" then
+      local fname, lnum, col, text = line:match("^([^:]+):(%d+):(%d+):%s*(.+)$")
       if not fname then
-        fname, lnum, text = line:match('^([^:]+):(%d+):%s*(.+)$')
+        fname, lnum, text = line:match("^([^:]+):(%d+):%s*(.+)$")
         col = 1
       end
       if fname and lnum and text then
-        local type_char = 'W'
-        local severity = text:match('^(%a+):')
+        local type_char = "W"
+        local severity = text:match("^(%a+):")
         if severity then
           local sl = severity:lower()
-          if sl == 'error' then
-            type_char = 'E'
-          elseif sl == 'suggestion' or sl == 'info' or sl == 'note' then
-            type_char = 'I'
+          if sl == "error" then
+            type_char = "E"
+          elseif sl == "suggestion" or sl == "info" or sl == "note" then
+            type_char = "I"
           end
         end
         table.insert(qflist, {
@@ -409,13 +413,13 @@ function M.handle_response(response, filename)
           type = type_char,
         })
       else
-        if line ~= '' then
+        if line ~= "" then
           table.insert(qflist, {
             filename = filename,
             lnum = 1,
             col = 1,
             text = line,
-            type = 'W',
+            type = "W",
           })
         end
       end
@@ -423,13 +427,13 @@ function M.handle_response(response, filename)
   end
 
   if #qflist == 0 then
-    vim.notify('[GoCodeReview]: great job! No issues found.', vim.log.levels.INFO)
+    vim.notify("[GoCodeReview]: great job! No issues found.", vim.log.levels.INFO)
     return
   end
 
-  vim.fn.setqflist({}, 'r', { title = 'GoCodeReview', items = qflist })
-  vim.cmd('copen')
-  vim.notify(string.format('[GoCodeReview]: %d issue(s) added to quickfix', #qflist), vim.log.levels.INFO)
+  vim.fn.setqflist({}, "r", { title = "GoCodeReview", items = qflist })
+  vim.cmd("copen")
+  vim.notify(string.format("[GoCodeReview]: %d issue(s) added to quickfix", #qflist), vim.log.levels.INFO)
 end
 
 -- ─── Entry point ─────────────────────────────────────────────────────────────
@@ -445,14 +449,17 @@ end
 function M.run(opts)
   local cfg = _GO_NVIM_CFG.ai or {}
   if not cfg.enable then
-    vim.notify('go.nvim [AI]: AI is disabled. Set ai = { enable = true } in go.nvim setup to use GoCodeReview', vim.log.levels.WARN)
+    vim.notify(
+      "go.nvim [AI]: AI is disabled. Set ai = { enable = true } in go.nvim setup to use GoCodeReview",
+      vim.log.levels.WARN
+    )
     return
   end
 
-  local fargs = (type(opts) == 'table' and opts.fargs) or {}
-  local alt_getopt = require('go.alt_getopt')
-  local sh_opts = 'dbem:h:' -- d:diff, b:brief, e:explain, m:message, h:history (with optional arg)
-  local long_opts = { diff = 'd', brief = 'b', explain = 'e', message = 'm', history = 'h' }
+  local fargs = (type(opts) == "table" and opts.fargs) or {}
+  local alt_getopt = require("go.alt_getopt")
+  local sh_opts = "dbem:h:" -- d:diff, b:brief, e:explain, m:message, h:history (with optional arg)
+  local long_opts = { diff = "d", brief = "b", explain = "e", message = "m", history = "h" }
   local opts_tbl, optind, unparsed = alt_getopt.get_opts(fargs, sh_opts, long_opts)
   local diff_mode = false
   local diff_branch = nil
@@ -465,7 +472,7 @@ function M.run(opts)
     if opts_tbl.d then
       diff_mode = true
       -- branch after -d/--diff
-      if unparsed and #unparsed > 0 and not unparsed[1]:match('^%-') then
+      if unparsed and #unparsed > 0 and not unparsed[1]:match("^%-") then
         diff_branch = unparsed[1]
         table.remove(unparsed, 1)
       end
@@ -476,21 +483,21 @@ function M.run(opts)
     if opts_tbl.e then
       explain_mode = true
       -- branch after -e/--explain
-      if unparsed and #unparsed > 0 and not unparsed[1]:match('^%-') then
+      if unparsed and #unparsed > 0 and not unparsed[1]:match("^%-") then
         diff_branch = unparsed[1]
         table.remove(unparsed, 1)
       end
     end
-    if opts_tbl.m and type(opts_tbl.m) == 'string' then
-      change_message = opts_tbl.m:gsub('\\n', '\n')
+    if opts_tbl.m and type(opts_tbl.m) == "string" then
+      change_message = opts_tbl.m:gsub("\\n", "\n")
     elseif opts_tbl.m then
       -- message after -m/--message
       if unparsed and #unparsed > 0 then
-        change_message = table.concat(unparsed, ' '):gsub('\\n', '\n')
+        change_message = table.concat(unparsed, " "):gsub("\\n", "\n")
         unparsed = {}
       end
     end
-    if opts_tbl.h and type(opts_tbl.h) == 'string' and opts_tbl.h:match('^%d+$') then
+    if opts_tbl.h and type(opts_tbl.h) == "string" and opts_tbl.h:match("^%d+$") then
       history_pairs = tonumber(opts_tbl.h)
     elseif opts_tbl.h then
       history_pairs = 0
@@ -498,7 +505,7 @@ function M.run(opts)
   end
 
   local source_bufnr = vim.api.nvim_get_current_buf()
-  local filename = vim.fn.expand('%:p')
+  local filename = vim.fn.expand("%:p")
 
   local function continue_review(msg, skip_source)
     local cm = msg
@@ -506,29 +513,29 @@ function M.run(opts)
     -- Explain mode: summarize the full PR diff in markdown
     if explain_mode then
       local branch = diff_branch or M.detect_default_branch()
-      vim.notify('[GoCodeReview]: explaining changes against ' .. branch .. ' …', vim.log.levels.INFO)
+      vim.notify("[GoCodeReview]: explaining changes against " .. branch .. " …", vim.log.levels.INFO)
       get_git_diff_all(branch, function(diff, err)
         if err then
-          vim.notify('[GoCodeReview]: ' .. err, vim.log.levels.WARN)
+          vim.notify("[GoCodeReview]: " .. err, vim.log.levels.WARN)
           return
         end
-        local user_msg = ''
-        if cm and cm ~= '' then
-          user_msg = '## Change Description\n' .. cm .. '\n\n'
+        local user_msg = ""
+        if cm and cm ~= "" then
+          user_msg = "## Change Description\n" .. cm .. "\n\n"
         end
-        user_msg = user_msg .. string.format('Base branch: %s\n\n```diff\n%s\n```', branch, diff)
+        user_msg = user_msg .. string.format("Base branch: %s\n\n```diff\n%s\n```", branch, diff)
         local req_opts = { max_tokens = 2000 }
         if history_pairs > 0 then
-          req_opts.history = session.recent_messages('explain', history_pairs)
+          req_opts.history = session.recent_messages("explain", history_pairs)
         end
-        local prev_id = session.last_response_id('explain')
+        local prev_id = session.last_response_id("explain")
         if prev_id then
           req_opts.previous_response_id = prev_id
         end
-        session.append({ command = 'explain', role = 'user', content = user_msg })
+        session.append({ command = "explain", role = "user", content = user_msg })
         provider.request(explain_system_prompt, user_msg, req_opts, function(resp, response_id)
-          session.append({ command = 'explain', role = 'assistant', content = resp, response_id = response_id })
-          ui.show_markdown_float(resp, ' PR Explain ')
+          session.append({ command = "explain", role = "assistant", content = resp, response_id = response_id })
+          ui.show_markdown_float(resp, " PR Explain ")
         end)
       end)
       return
@@ -536,27 +543,27 @@ function M.run(opts)
 
     if diff_mode then
       local branch = diff_branch or M.detect_default_branch()
-      vim.notify('[GoCodeReview]: diffing against ' .. branch .. ' …', vim.log.levels.INFO)
+      vim.notify("[GoCodeReview]: diffing against " .. branch .. " …", vim.log.levels.INFO)
       get_git_diff(filename, branch, function(diff, err)
         if err then
-          vim.notify('[GoCodeReview]: ' .. err, vim.log.levels.WARN)
+          vim.notify("[GoCodeReview]: " .. err, vim.log.levels.WARN)
           return
         end
-        local short_name = vim.fn.expand('%:t')
-        local user_msg = ''
-        if cm and cm ~= '' then
-          user_msg = '## Change Description\n' .. cm .. '\n\n'
+        local short_name = vim.fn.expand("%:t")
+        local user_msg = ""
+        if cm and cm ~= "" then
+          user_msg = "## Change Description\n" .. cm .. "\n\n"
         end
-        user_msg = user_msg .. string.format('File: %s\nBase branch: %s\n\n```diff\n%s\n```', short_name, branch, diff)
+        user_msg = user_msg .. string.format("File: %s\nBase branch: %s\n\n```diff\n%s\n```", short_name, branch, diff)
         local sys = brief and diff_review_system_prompt_short or diff_review_system_prompt
         local req_opts = { max_tokens = 1500 }
-        local prev_id = session.last_response_id('review')
+        local prev_id = session.last_response_id("review")
         if prev_id then
           req_opts.previous_response_id = prev_id
         end
-        session.append({ command = 'review', role = 'user', content = user_msg })
+        session.append({ command = "review", role = "user", content = user_msg })
         provider.request(sys, user_msg, req_opts, function(resp, response_id)
-          session.append({ command = 'review', role = 'assistant', content = resp, response_id = response_id })
+          session.append({ command = "review", role = "assistant", content = resp, response_id = response_id })
           M.handle_response(resp, filename)
         end)
       end)
@@ -566,7 +573,7 @@ function M.run(opts)
     -- Full-file / visual-selection review
     local lines
     local start_line = 1
-    if type(opts) == 'table' and opts.range and opts.range == 2 then
+    if type(opts) == "table" and opts.range and opts.range == 2 then
       lines = vim.api.nvim_buf_get_lines(0, opts.line1 - 1, opts.line2, false)
       start_line = opts.line1
     else
@@ -574,47 +581,47 @@ function M.run(opts)
     end
 
     if #lines == 0 and not skip_source then
-      vim.notify('[GoCodeReview]: buffer is empty', vim.log.levels.WARN)
+      vim.notify("[GoCodeReview]: buffer is empty", vim.log.levels.WARN)
       return
     end
 
-    local short_name = vim.fn.expand('%:t')
-    local user_msg = ''
-    if cm and cm ~= '' then
-      user_msg = '## Change Description\n' .. cm .. '\n\n'
+    local short_name = vim.fn.expand("%:t")
+    local user_msg = ""
+    if cm and cm ~= "" then
+      user_msg = "## Change Description\n" .. cm .. "\n\n"
     end
     if not skip_source then
       local numbered = {}
       for i_line, line in ipairs(lines) do
-        table.insert(numbered, string.format('L%d| %s', start_line + i_line - 1, line))
+        table.insert(numbered, string.format("L%d| %s", start_line + i_line - 1, line))
       end
-      local code = table.concat(numbered, '\n')
-      user_msg = user_msg .. string.format('File: %s\n\n```go\n%s\n```', short_name, code)
+      local code = table.concat(numbered, "\n")
+      user_msg = user_msg .. string.format("File: %s\n\n```go\n%s\n```", short_name, code)
     end
 
-    vim.notify('[GoCodeReview]: reviewing …', vim.log.levels.INFO)
+    vim.notify("[GoCodeReview]: reviewing …", vim.log.levels.INFO)
 
     local sys = brief and code_review_system_prompt_short or code_review_system_prompt
     local req_opts = { max_tokens = 1500 }
     if history_pairs > 0 then
-      req_opts.history = session.recent_messages('review', history_pairs)
+      req_opts.history = session.recent_messages("review", history_pairs)
     end
-    local prev_id = session.last_response_id('review')
+    local prev_id = session.last_response_id("review")
     if prev_id then
       req_opts.previous_response_id = prev_id
     end
-    session.append({ command = 'review', role = 'user', content = user_msg })
+    session.append({ command = "review", role = "user", content = user_msg })
     provider.request(sys, user_msg, req_opts, function(resp, response_id)
-      session.append({ command = 'review', role = 'assistant', content = resp, response_id = response_id })
+      session.append({ command = "review", role = "assistant", content = resp, response_id = response_id })
       M.handle_response(resp, filename)
     end)
   end
 
-  if change_message and change_message ~= '' then
+  if change_message and change_message ~= "" then
     local has_macro = macros.has_macros(change_message)
     macros.expand(change_message, source_bufnr, function(expanded_msg, ctx_attachments)
-      if ctx_attachments and ctx_attachments ~= '' then
-        expanded_msg = expanded_msg .. '\n\n' .. ctx_attachments
+      if ctx_attachments and ctx_attachments ~= "" then
+        expanded_msg = expanded_msg .. "\n\n" .. ctx_attachments
       end
       continue_review(expanded_msg, has_macro)
     end)

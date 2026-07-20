@@ -1,9 +1,9 @@
 -- env fileread
-local util = require('go.utils')
+local util = require("go.utils")
 local log = util.log
 local M = {}
 local vfn = vim.fn
-local sep = require('go.utils').sep()
+local sep = require("go.utils").sep()
 
 -- get env file name with path
 function M.envfile(f)
@@ -11,7 +11,7 @@ function M.envfile(f)
     return f
   end
   local workfolder = util.get_gopls_workspace_folders()[1] or vfn.getcwd()
-  local goenv = workfolder .. sep .. (f or '.env')
+  local goenv = workfolder .. sep .. (f or ".env")
 
   if vfn.filereadable(goenv) == 1 then
     return goenv
@@ -24,12 +24,12 @@ function M.append(env, val)
     return
   end
   if oldval == vim.NIL then
-    util.notify('failed to get env var: ' .. env)
+    util.notify("failed to get env var: " .. env)
   end
   if oldval:find(val) then -- presented
     return
   end
-  local newval = oldval .. ':' .. val
+  local newval = oldval .. ":" .. val
   vfn.setenv(env, newval)
 end
 
@@ -38,10 +38,10 @@ end
 function M.load_env(envfile, setToEnv)
   setToEnv = setToEnv or true
   local t = type(envfile)
-  if t == 'nil' then
+  if t == "nil" then
     -- load from .env
     envfile = M.envfile()
-  elseif t == 'string' then
+  elseif t == "string" then
     envfile = M.envfile(envfile)
   end
   if vfn.filereadable(envfile) == 0 then
@@ -50,7 +50,7 @@ function M.load_env(envfile, setToEnv)
   local lines = util.lines_from(envfile)
   local envs = {}
   for _, line in ipairs(lines) do
-    for k, v in string.gmatch(line, '([%w_]+)=([%w%c%p%z]+)') do
+    for k, v in string.gmatch(line, "([%w_]+)=([%w%c%p%z]+)") do
       envs[k] = v
     end
   end
@@ -67,27 +67,27 @@ end
 
 -- best effort to enabl $GOBIN
 function M.setup()
-  local home = 'HOME'
+  local home = "HOME"
   if util.is_windows() then
-    home = 'USERPROFILE'
+    home = "USERPROFILE"
   end
-  local gohome = vfn.getenv('GOHOME')
-  local gobin = vfn.getenv('GOBIN')
+  local gohome = vfn.getenv("GOHOME")
+  local gobin = vfn.getenv("GOBIN")
   local user_home = vfn.getenv(home)
   if gobin == vim.NIL then
     if gohome == vim.NIL then
       if user_home == vim.NIL then
-        util.notify('failed to setup $GOBIN')
+        util.notify("failed to setup $GOBIN")
         return
       end
-      gobin = user_home .. sep .. 'go' .. sep .. 'bin'
+      gobin = user_home .. sep .. "go" .. sep .. "bin"
     else
-      local gohome1 = vim.split(gohome, ':')[1]
-      gobin = gohome1 .. require('go.utils').sep() .. 'bin'
-      vfn.setenv('GOBIN', gobin)
+      local gohome1 = vim.split(gohome, ":")[1]
+      gobin = gohome1 .. require("go.utils").sep() .. "bin"
+      vfn.setenv("GOBIN", gobin)
     end
   end
-  M.append('PATH', gobin)
+  M.append("PATH", gobin)
 end
 
 return M

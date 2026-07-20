@@ -80,15 +80,15 @@ local launch_json_content = [[
 }
 ]]
 
-local util = require('go.utils')
+local util = require("go.utils")
 local log = util.log
 local M = {}
-local sep = require('go.utils').sep()
+local sep = require("go.utils").sep()
 local vfn = vim.fn
 function M.vs_launch()
   local workfolder = vim.lsp.buf.list_workspace_folders()[1] or vfn.getcwd()
 
-  local launch_json = _GO_NVIM_CFG.launch_json or (workfolder .. sep .. '.vscode' .. sep .. 'launch.json')
+  local launch_json = _GO_NVIM_CFG.launch_json or (workfolder .. sep .. ".vscode" .. sep .. "launch.json")
   log(launch_json)
   if vfn.filereadable(launch_json) == 1 then
     return true, launch_json
@@ -99,10 +99,10 @@ end
 
 function M.config()
   local workfolder = vim.lsp.buf.list_workspace_folders()[1] or vfn.getcwd()
-  local launch_json = _GO_NVIM_CFG.launch_json or (workfolder .. sep .. '.vscode' .. sep .. 'launch.json')
-  local launch_dir = string.match(launch_json, '.*' .. sep)
+  local launch_json = _GO_NVIM_CFG.launch_json or (workfolder .. sep .. ".vscode" .. sep .. "launch.json")
+  local launch_dir = string.match(launch_json, ".*" .. sep)
 
-  local cmd = 'e ' .. launch_json
+  local cmd = "e " .. launch_json
 
   if vfn.isdirectory(launch_dir) == 0 then
     vfn.mkdir(launch_dir)
@@ -113,7 +113,7 @@ function M.config()
   end
 
   -- vfn.writefile(launch_json_content, launch_json)
-  local contents = vfn.split(launch_json_content, '\n')
+  local contents = vfn.split(launch_json_content, "\n")
   vfn.writefile(contents, launch_json)
   vim.cmd(cmd)
 end
@@ -123,15 +123,15 @@ function M.load()
     return
   end
 
-  local dap = require('dap')
-  local launch = require('dap.ext.vscode').load_launchjs
+  local dap = require("dap")
+  local launch = require("dap.ext.vscode").load_launchjs
   launch(_GO_NVIM_CFG.launch_json)
   _GO_NVIM_CFG.launch_json_loaded = true
   log(dap.configurations)
   for lang, lang_cfgs in pairs(dap.configurations) do
-    if lang == 'go' then
+    if lang == "go" then
       for i, cfg in ipairs(lang_cfgs) do
-        if cfg.mode == 'auto' then
+        if cfg.mode == "auto" then
           -- dap does not support auto mode
           dap.configurations[lang][i].mode = nil
         end

@@ -1,8 +1,8 @@
-local runner = require('go.runner')
-local utils = require('go.utils')
+local runner = require("go.runner")
+local utils = require("go.utils")
 local M = {}
 
-local util = require('go.utils')
+local util = require("go.utils")
 local log = util.log
 local vfn = vim.fn
 local api = vim.api
@@ -10,14 +10,14 @@ local api = vim.api
 function M.watch(args)
   args = args or {}
 
-  local cmd = { 'gotestsum', '--watch' }
+  local cmd = { "gotestsum", "--watch" }
   vim.list_extend(cmd, args)
 
   local opts = {
     update_buffer = true,
     on_exit = function()
       vim.schedule(function()
-        vim.notify('watch stopped')
+        vim.notify("watch stopped")
       end)
     end,
     on_chunk = function(err, lines)
@@ -25,10 +25,10 @@ function M.watch(args)
         return
       end
       for _, line in ipairs(lines) do
-        if line:match('Errors') then
-          vim.notify(vfn.join(lines, ', '), vim.log.levels.ERROR)
+        if line:match("Errors") then
+          vim.notify(vfn.join(lines, ", "), vim.log.levels.ERROR)
           return
-        elseif line:match('PASS') or line:match('DONE') then
+        elseif line:match("PASS") or line:match("DONE") then
           vim.notify(line, vim.log.levels.INFO)
         end
       end
@@ -41,14 +41,14 @@ end
 local test_result = {}
 local test_panel
 local show_panel = function()
-  local panel = util.load_plugin('guihua.lua', 'guihua.panel')
+  local panel = util.load_plugin("guihua.lua", "guihua.panel")
   if not panel then
-    vim.notify('guihua not installed')
+    vim.notify("guihua not installed")
     return
   end
   if test_panel == nil or not test_panel:is_open() then
     test_panel = panel:new({
-      header = '  󰏖  go test   ',
+      header = "  󰏖  go test   ",
       render = function(buf)
         -- log(test_result)
         return test_result
@@ -94,21 +94,21 @@ local function handle_data_out(_, data, ev)
 end
 
 function M.run(...)
-  if not require('go.install').install('gotestsum') then
-    util.warn('please wait for gotstssum to be installed and re-run the command')
+  if not require("go.install").install("gotestsum") then
+    util.warn("please wait for gotstssum to be installed and re-run the command")
     return
   end
   local args = { ... }
   test_result = {}
 
-  local cmd = { 'gotestsum', unpack(args) }
+  local cmd = { "gotestsum", unpack(args) }
   log(cmd)
 
   vfn.jobstart(cmd, {
     on_stdout = handle_data_out,
     on_exit = function(e, data, _)
       if data ~= 0 then
-        log('no packege info data ' .. e .. tostring(data))
+        log("no packege info data " .. e .. tostring(data))
         return
       end
       -- show_panel()

@@ -2,15 +2,15 @@
 -- Re-exports from submodules for backward compatibility.
 local M = {}
 
-local utils = require('go.utils')
+local utils = require("go.utils")
 local log = utils.log
-local provider = require('go.ai.provider')
-local macros = require('go.ai.macros')
-local ui = require('go.ai.ui')
-local review_mod = require('go.ai.review')
-local chat_mod = require('go.ai.chat')
-local edit_mod = require('go.ai.edit')
-local session_mod = require('go.ai.session')
+local provider = require("go.ai.provider")
+local macros = require("go.ai.macros")
+local ui = require("go.ai.ui")
+local review_mod = require("go.ai.review")
+local chat_mod = require("go.ai.chat")
+local edit_mod = require("go.ai.edit")
+local session_mod = require("go.ai.session")
 
 -- ─── Command catalog & validation ──────────────────────────────────────────
 
@@ -205,17 +205,17 @@ local system_prompt = system_prompt_base .. command_catalog
 
 --- Build the user message with workspace context
 local function build_user_message(request)
-  local file = vim.fn.expand('%:t') or ''
-  local ft = vim.bo.filetype or ''
-  return string.format('Current file: %s (filetype: %s)\nRequest: %s', file, ft, request)
+  local file = vim.fn.expand("%:t") or ""
+  local ft = vim.bo.filetype or ""
+  return string.format("Current file: %s (filetype: %s)\nRequest: %s", file, ft, request)
 end
 
 --- Validate that the LLM response is a known go.nvim command
 local function validate_response(cmd_str)
-  if cmd_str:match('^echo ') then
+  if cmd_str:match("^echo ") then
     return true
   end
-  local cmd_name = cmd_str:match('^:?(%S+)')
+  local cmd_name = cmd_str:match("^:?(%S+)")
   return cmd_name and valid_cmd_set[cmd_name] == true
 end
 
@@ -227,44 +227,44 @@ local range_commands = {
 
 --- Process the LLM response: validate, confirm, execute
 local function handle_response(cmd_str, confirm, range_prefix)
-  cmd_str = cmd_str:gsub('^```%w*\n?', ''):gsub('\n?```$', '')
+  cmd_str = cmd_str:gsub("^```%w*\n?", ""):gsub("\n?```$", "")
   cmd_str = vim.trim(cmd_str)
-  cmd_str = cmd_str:match('^([^\n]+)') or cmd_str
+  cmd_str = cmd_str:match("^([^\n]+)") or cmd_str
 
-  log('go.nvim [AI]: LLM response:', cmd_str)
+  log("go.nvim [AI]: LLM response:", cmd_str)
 
   if not validate_response(cmd_str) then
-    log('go.nvim [AI]: unrecognised command:', cmd_str)
-    vim.notify('go.nvim [AI]: unrecognised command: ' .. cmd_str, vim.log.levels.WARN)
+    log("go.nvim [AI]: unrecognised command:", cmd_str)
+    vim.notify("go.nvim [AI]: unrecognised command: " .. cmd_str, vim.log.levels.WARN)
     return
   end
 
-  if cmd_str:match('^echo ') then
+  if cmd_str:match("^echo ") then
     vim.cmd(cmd_str)
     return
   end
 
-  if range_prefix and range_prefix ~= '' then
-    local cmd_name = cmd_str:match('^:?(%S+)')
+  if range_prefix and range_prefix ~= "" then
+    local cmd_name = cmd_str:match("^:?(%S+)")
     if cmd_name and range_commands[cmd_name] then
       cmd_str = range_prefix .. cmd_str
     end
   end
 
-  log('go.nvim [AI]: executing:', cmd_str)
+  log("go.nvim [AI]: executing:", cmd_str)
 
   if not confirm then
     vim.cmd(cmd_str)
     return
   end
 
-  vim.ui.select({ 'Yes', 'Edit', 'No' }, {
-    prompt = string.format('Run  %s  ?', cmd_str),
+  vim.ui.select({ "Yes", "Edit", "No" }, {
+    prompt = string.format("Run  %s  ?", cmd_str),
   }, function(choice)
-    if choice == 'Yes' then
+    if choice == "Yes" then
       vim.cmd(cmd_str)
-    elseif choice == 'Edit' then
-      vim.api.nvim_feedkeys(':' .. cmd_str, 'n', false)
+    elseif choice == "Edit" then
+      vim.api.nvim_feedkeys(":" .. cmd_str, "n", false)
     end
   end)
 end
@@ -275,37 +275,40 @@ end
 function M.run(opts)
   local cfg = _GO_NVIM_CFG.ai or {}
   if not cfg.enable then
-    vim.notify('go.nvim [AI]: AI is disabled. Set ai = { enable = true } in go.nvim setup to use GoAI', vim.log.levels.WARN)
+    vim.notify(
+      "go.nvim [AI]: AI is disabled. Set ai = { enable = true } in go.nvim setup to use GoAI",
+      vim.log.levels.WARN
+    )
     return
   end
 
   local prompt
-  local range_prefix = ''
+  local range_prefix = ""
   local full_catalog = false
 
-  if type(opts) == 'table' then
+  if type(opts) == "table" then
     local fargs = opts.fargs or {}
     local filtered = {}
     for _, arg in ipairs(fargs) do
-      if arg == '-f' then
+      if arg == "-f" then
         full_catalog = true
       else
         table.insert(filtered, arg)
       end
     end
-    prompt = table.concat(filtered, ' ')
+    prompt = table.concat(filtered, " ")
     if opts.range and opts.range == 2 then
-      range_prefix = string.format('%d,%d', opts.line1, opts.line2)
+      range_prefix = string.format("%d,%d", opts.line1, opts.line2)
     end
   else
-    prompt = opts or ''
+    prompt = opts or ""
   end
 
   local source_bufnr = vim.api.nvim_get_current_buf()
 
-  if prompt == '' then
-    vim.ui.input({ prompt = 'go.nvim AI> ' }, function(input)
-      if input and input ~= '' then
+  if prompt == "" then
+    vim.ui.input({ prompt = "go.nvim AI> " }, function(input)
+      if input and input ~= "" then
         M._dispatch(input, range_prefix, full_catalog, source_bufnr)
       end
     end)
@@ -318,25 +321,25 @@ end
 --- Dispatch the natural language request to the configured LLM provider
 function M._dispatch(prompt, range_prefix, full_catalog, source_bufnr)
   local cfg = _GO_NVIM_CFG.ai or {}
-  local prov = cfg.provider or 'copilot'
+  local prov = cfg.provider or "copilot"
   local confirm = cfg.confirm ~= false -- default true
 
   macros.expand(prompt, source_bufnr or vim.api.nvim_get_current_buf(), function(expanded, ctx_attachments)
-    vim.notify('go.nvim [AI]: thinking …', vim.log.levels.INFO)
+    vim.notify("go.nvim [AI]: thinking …", vim.log.levels.INFO)
 
     local sys_prompt = full_catalog and system_prompt or system_prompt_base
     local user_msg = build_user_message(expanded)
-    if ctx_attachments and ctx_attachments ~= '' then
-      user_msg = user_msg .. '\n\n' .. ctx_attachments
+    if ctx_attachments and ctx_attachments ~= "" then
+      user_msg = user_msg .. "\n\n" .. ctx_attachments
     end
 
     local function on_resp(resp)
       handle_response(resp, confirm, range_prefix)
     end
 
-    if prov == 'copilot' then
+    if prov == "copilot" then
       provider.send_copilot(sys_prompt, user_msg, {}, on_resp)
-    elseif prov == 'openai' then
+    elseif prov == "openai" then
       provider.send_openai(sys_prompt, user_msg, {}, on_resp)
     else
       vim.notify('go.nvim [AI]: unknown provider "' .. prov .. '"', vim.log.levels.ERROR)

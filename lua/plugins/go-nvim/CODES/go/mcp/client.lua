@@ -1,6 +1,6 @@
 local M = {}
 local uv = vim.uv
-local log = require('go.utils').log
+local log = require("go.utils").log
 local json = vim.json
 
 ---@class McpClient
@@ -14,14 +14,14 @@ function M.new(opts)
   local self = setmetatable({}, McpClient)
   self.pending = {}
   self.next_id = 1
-  self.buffer = ''
+  self.buffer = ""
   self.ready = false
   self:_start(opts)
   return self
 end
 
 function McpClient:_start(opts)
-  local cmd = opts.cmd or { 'gopls', 'mcp' }
+  local cmd = opts.cmd or { "gopls", "mcp" }
   self.stdin = uv.new_pipe(false)
   self.stdout = uv.new_pipe(false)
   local stderr = uv.new_pipe(false)
@@ -36,17 +36,17 @@ function McpClient:_start(opts)
     stdio = { self.stdin, self.stdout, stderr },
     cwd = opts.root_dir or vim.fn.getcwd(),
   }, function(code, signal)
-    log('gopls mcp exited', code, signal)
+    log("gopls mcp exited", code, signal)
   end)
 
   if not self.handle then
-    error('Failed to start gopls mcp: ' .. cmd[1])
+    error("Failed to start gopls mcp: " .. cmd[1])
   end
 
   -- Read stdout for JSON-RPC responses
   self.stdout:read_start(function(err, data)
     if err then
-      log('mcp read error:', err)
+      log("mcp read error:", err)
       return
     end
     if data then
@@ -56,23 +56,23 @@ function McpClient:_start(opts)
 
   stderr:read_start(function(_, data)
     if data then
-      log('mcp stderr:', data)
+      log("mcp stderr:", data)
     end
   end)
 
   -- Send MCP initialize
-  self:request('initialize', {
-    protocolVersion = '2025-03-26',
+  self:request("initialize", {
+    protocolVersion = "2025-03-26",
     capabilities = {},
-    clientInfo = { name = 'go.nvim', version = '1.0.0' },
+    clientInfo = { name = "go.nvim", version = "1.0.0" },
   }, function(err, result)
     if not err then
       self.ready = true
       -- Send initialized notification
-      self:notify('notifications/initialized', {})
-      log('MCP initialized, server:', result)
+      self:notify("notifications/initialized", {})
+      log("MCP initialized, server:", result)
     else
-      log('MCP init error:', err)
+      log("MCP init error:", err)
     end
   end)
 end
@@ -81,7 +81,7 @@ end
 function McpClient:_on_data(data)
   self.buffer = self.buffer .. data
   while true do
-    local nl = self.buffer:find('\n')
+    local nl = self.buffer:find("\n")
     if not nl then
       break
     end
@@ -115,21 +115,21 @@ function McpClient:request(method, params, callback)
   self.pending[id] = callback
 
   local msg = json.encode({
-    jsonrpc = '2.0',
+    jsonrpc = "2.0",
     id = id,
     method = method,
     params = params,
-  }) .. '\n'
+  }) .. "\n"
 
   self.stdin:write(msg)
 end
 
 function McpClient:notify(method, params)
   local msg = json.encode({
-    jsonrpc = '2.0',
+    jsonrpc = "2.0",
     method = method,
     params = params,
-  }) .. '\n'
+  }) .. "\n"
   self.stdin:write(msg)
 end
 
@@ -138,14 +138,14 @@ end
 ---@param arguments table
 ---@param callback function(err, result)
 function McpClient:call_tool(tool_name, arguments, callback)
-  self:request('tools/call', {
+  self:request("tools/call", {
     name = tool_name,
     arguments = arguments,
   }, callback)
 end
 
 function McpClient:list_tools(callback)
-  self:request('tools/list', {}, callback)
+  self:request("tools/list", {}, callback)
 end
 
 function McpClient:shutdown()
@@ -155,7 +155,7 @@ function McpClient:shutdown()
     if self.stderr then
       self.stderr:close()
     end
-    self.handle:kill('sigterm')
+    self.handle:kill("sigterm")
   end
 end
 

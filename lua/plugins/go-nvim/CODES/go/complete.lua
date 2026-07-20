@@ -3,38 +3,38 @@ local go = {}
 -- go.dbg_complete = function(arglead, cmdline, cursorpos)
 go.dbg_complete = function(_, _, _)
   local testopts = {
-    '--help',
-    '--test',
-    '--nearest',
-    '--file',
-    '--package',
-    '--attach',
-    '--stop',
-    '--restart',
-    '--breakpoint',
-    '--tag',
+    "--help",
+    "--test",
+    "--nearest",
+    "--file",
+    "--package",
+    "--attach",
+    "--stop",
+    "--restart",
+    "--breakpoint",
+    "--tag",
   }
   return testopts
 end
 
 go.tools_complete = function(_, _, _)
-  local gotools = require('go.install').tools
+  local gotools = require("go.install").tools
   table.sort(gotools)
   return gotools
 end
 
 go.impl_complete = function(arglead, cmdline, cursorpos)
-  return require('go.impl').complete(arglead, cmdline, cursorpos)
+  return require("go.impl").complete(arglead, cmdline, cursorpos)
 end
 
 go.modify_tags_complete = function(_, _, _)
   local opts = {
-    '-add-tags',
-    '-add-options',
-    '-remove-tags',
-    '-remove-options',
-    '-clear-tags',
-    '-clear-options',
+    "-add-tags",
+    "-add-options",
+    "-remove-tags",
+    "-remove-options",
+    "-clear-tags",
+    "-clear-options",
   }
   return opts
 end
@@ -44,12 +44,12 @@ end
 -- go.add_tags_complete = function(arglead, line, pos)
 go.add_tags_complete = function(arglead, line, _)
   -- print("lead: ",arglead, "L", line, "p" )
-  local transf = { 'camelcase', 'snakecase', 'lispcase', 'pascalcase', 'titlecase', 'keep' }
-  local options = { '-transform', '-add-options' }
+  local transf = { "camelcase", "snakecase", "lispcase", "pascalcase", "titlecase", "keep" }
+  local options = { "-transform", "-add-options" }
   local ret = {}
-  if #vim.split(line, '%s+') >= 2 then
-    if vim.startswith('-transform', arglead) then
-      return '-transform'
+  if #vim.split(line, "%s+") >= 2 then
+    if vim.startswith("-transform", arglead) then
+      return "-transform"
     end
     table.foreach(transf, function(_, tag)
       if vim.startswith(tag, arglead) then
@@ -63,9 +63,9 @@ go.add_tags_complete = function(arglead, line, _)
   end
 
   local opts = {
-    'json',
-    'json.yml',
-    '-transform',
+    "json",
+    "json.yml",
+    "-transform",
   }
   return opts
 end

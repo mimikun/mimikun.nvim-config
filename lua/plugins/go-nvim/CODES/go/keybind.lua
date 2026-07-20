@@ -2,7 +2,7 @@ local rhs_options = {}
 
 function rhs_options:new()
   local instance = {
-    cmd = '',
+    cmd = "",
     options = { noremap = false, silent = false, expr = false, nowait = false },
   }
   setmetatable(instance, self)
@@ -16,17 +16,17 @@ function rhs_options:map_cmd(cmd_string)
 end
 
 function rhs_options:map_cr(cmd_string)
-  self.cmd = (':%s<CR>'):format(cmd_string)
+  self.cmd = (":%s<CR>"):format(cmd_string)
   return self
 end
 
 function rhs_options:map_args(cmd_string)
-  self.cmd = (':%s<Space>'):format(cmd_string)
+  self.cmd = (":%s<Space>"):format(cmd_string)
   return self
 end
 
 function rhs_options:map_cu(cmd_string)
-  self.cmd = (':<C-u>%s<CR>'):format(cmd_string)
+  self.cmd = (":<C-u>%s<CR>"):format(cmd_string)
   return self
 end
 
@@ -74,15 +74,15 @@ end
 
 function pbind.nvim_load_mapping(mapping)
   for key, value in pairs(mapping) do
-    local mode, keymap = key:match('([^|]*)|?(.*)')
-    if type(value) == 'string' then
+    local mode, keymap = key:match("([^|]*)|?(.*)")
+    if type(value) == "string" then
       value = pbind.map_cr(value):with_noremap():with_silent()
     end
-    if type(value) == 'table' and value.f then
-      local m = value.m or 'n'
+    if type(value) == "table" and value.f then
+      local m = value.m or "n"
       vim.keymap.set(m, key, value.f)
     end
-    if type(value) == 'table' and value.cmd then
+    if type(value) == "table" and value.cmd then
       local rhs = value.cmd
       local options = value.options
       vim.api.nvim_set_keymap(mode, keymap, rhs, options)

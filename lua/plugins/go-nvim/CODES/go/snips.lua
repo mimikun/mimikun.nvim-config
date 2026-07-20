@@ -1,19 +1,19 @@
 -- first version: from https://github.com/arsham/shark
-local ls = require('luasnip')
-local fmt = require('luasnip.extras.fmt').fmt
-local ok, ts_locals = pcall(require, 'nvim-treesitter.locals')
+local ls = require("luasnip")
+local fmt = require("luasnip.extras.fmt").fmt
+local ok, ts_locals = pcall(require, "nvim-treesitter.locals")
 if not ok then
-  ts_locals = require('guihua.ts_obsolete.locals')
+  ts_locals = require("guihua.ts_obsolete.locals")
 end
-local rep = require('luasnip.extras').rep
-local ai = require('luasnip.nodes.absolute_indexer')
+local rep = require("luasnip.extras").rep
+local ai = require("luasnip.nodes.absolute_indexer")
 
 local M = {}
 
 M.go_err_snippet = function(args, _, _, spec)
   local err_name = args[1][1]
   local index = spec and spec.index or nil
-  local msg = spec and spec[1] or ''
+  local msg = spec and spec[1] or ""
   if spec and spec[2] then
     err_name = err_name .. spec[2]
   end
@@ -25,10 +25,10 @@ M.go_err_snippet = function(args, _, _, spec)
         nil,
         fmt('internal.GrpcError({},\n\t\tcodes.{}, "{}", "{}", {})', {
           ls.t(err_name),
-          ls.i(1, 'Internal'),
-          ls.i(2, 'Description'),
-          ls.i(3, 'Field'),
-          ls.i(4, 'fields'),
+          ls.i(1, "Internal"),
+          ls.i(2, "Description"),
+          ls.i(3, "Field"),
+          ls.i(4, "fields"),
         })
       ),
       ls.t(err_name),
@@ -43,18 +43,18 @@ local function transform(text, info)
     return ls.sn(info.index, fmt(template, ls.i(1, default)))
   end
   local new_sn = function(default)
-    return string_sn('{}', default)
+    return string_sn("{}", default)
   end
 
   -- cutting the name if exists.
   if text:find([[^[^\[]*string$]]) then
-    text = 'string'
-  elseif text:find('^[^%[]*map%[[^%]]+') then
-    text = 'map'
-  elseif text:find('%[%]') then
-    text = 'slice'
+    text = "string"
+  elseif text:find("^[^%[]*map%[[^%]]+") then
+    text = "map"
+  elseif text:find("%[%]") then
+    text = "slice"
   elseif text:find([[ ?chan +[%a%d]+]]) then
-    return ls.t('nil')
+    return ls.t("nil")
   end
 
   -- separating the type from the name if exists.
@@ -63,34 +63,34 @@ local function transform(text, info)
     text = type
   end
 
-  if text == 'int' or text == 'int64' or text == 'int32' then
-    return new_sn('0')
-  elseif text == 'float32' or text == 'float64' then
-    return new_sn('0')
-  elseif text == 'error' then
+  if text == "int" or text == "int64" or text == "int32" then
+    return new_sn("0")
+  elseif text == "float32" or text == "float64" then
+    return new_sn("0")
+  elseif text == "error" then
     if not info then
-      return ls.t('err')
+      return ls.t("err")
     end
 
     info.index = info.index + 1
     return M.go_err_snippet({ { info.err_name } }, nil, nil, { index = info.index })
-  elseif text == 'bool' then
+  elseif text == "bool" then
     info.index = info.index + 1
-    return ls.c(info.index, { ls.i(1, 'false'), ls.i(2, 'true') })
-  elseif text == 'string' then
-    return string_sn('"{}"', '')
-  elseif text == 'map' or text == 'slice' then
-    return ls.t('nil')
-  elseif string.find(text, '*', 1, true) then
-    return new_sn('nil')
+    return ls.c(info.index, { ls.i(1, "false"), ls.i(2, "true") })
+  elseif text == "string" then
+    return string_sn('"{}"', "")
+  elseif text == "map" or text == "slice" then
+    return ls.t("nil")
+  elseif string.find(text, "*", 1, true) then
+    return new_sn("nil")
   end
 
-  text = text:match('[^ ]+$')
-  if text == 'context.Context' then
-    text = 'context.Background()'
+  text = text:match("[^ ]+$")
+  if text == "context.Context" then
+    text = "context.Background()"
   else
     -- when the type is concrete
-    text = text .. '{}'
+    text = text .. "{}"
   end
 
   return ls.t(text)
@@ -106,7 +106,7 @@ local handlers = {
     for idx = 0, count - 1 do
       table.insert(result, transform(get_node_text(node:named_child(idx), 0), info))
       if idx ~= count - 1 then
-        table.insert(result, ls.t({ ', ' }))
+        table.insert(result, ls.t({ ", " }))
       end
     end
 
@@ -127,8 +127,8 @@ local function set_query()
   end
   query_is_set = true
   vim.treesitter.query.set(
-    'go',
-    'LuaSnip_Result',
+    "go",
+    "LuaSnip_Result",
     [[
       [
         (method_declaration result: (_) @id)
@@ -147,10 +147,10 @@ local function return_value_nodes(info)
   local function_node
   for _, scope in ipairs(scope_tree) do
     if
-      scope:type() == 'function_declaration'
-      or scope:type() == 'method_declaration'
-      or scope:type() == 'method_declaration'
-      or scope:type() == 'func_literal'
+      scope:type() == "function_declaration"
+      or scope:type() == "method_declaration"
+      or scope:type() == "method_declaration"
+      or scope:type() == "func_literal"
     then
       function_node = scope
       break
@@ -161,16 +161,16 @@ local function return_value_nodes(info)
     return
   end
 
-  local query = (vim.fn.has('nvim-0.9') == 1) and vim.treesitter.query.get('go', 'LuaSnip_Result')
+  local query = (vim.fn.has("nvim-0.9") == 1) and vim.treesitter.query.get("go", "LuaSnip_Result")
   for _, node in query:iter_captures(function_node, 0) do
     if handlers[node:type()] then
       return handlers[node:type()](node, info)
     end
   end
-  return ls.t({ '' })
+  return ls.t({ "" })
 end
 
-local is_in_function = require('go.ts.go').in_func()
+local is_in_function = require("go.ts.go").in_func()
 
 ---Transforms the given arguments into nodes wrapped in a snippet node.
 M.make_return_nodes = function(args)
@@ -179,28 +179,28 @@ M.make_return_nodes = function(args)
   return ls.sn(nil, return_value_nodes(info))
 end
 M.make_default_return_nodes = function()
-  local info = { index = 0, err_name = 'nil' }
+  local info = { index = 0, err_name = "nil" }
 
   return ls.sn(nil, return_value_nodes(info))
 end
 
 M.fill_return = function()
-  local info = { index = 0, err_name = 'nil' }
+  local info = { index = 0, err_name = "nil" }
   return ls.sn(nil, return_value_nodes(info))
 end
 
 ---Runs the command in shell.
 -- @param command string
 -- @return table
-M.shell = require('go.utils').run_command
+M.shell = require("go.utils").run_command
 
 M.last_lua_module_section = function(args)
-  local text = args[1][1] or ''
-  local split = vim.split(text, '.', { plain = true })
+  local text = args[1][1] or ""
+  local split = vim.split(text, ".", { plain = true })
 
   local options = {}
   for len = 0, #split - 1 do
-    local node = ls.t(table.concat(vim.list_slice(split, #split - len, #split), '_'))
+    local node = ls.t(table.concat(vim.list_slice(split, #split - len, #split), "_"))
     table.insert(options, node)
   end
 
@@ -210,8 +210,8 @@ M.last_lua_module_section = function(args)
 end
 
 function M.is_in_test_file()
-  local filename = vim.fn.expand('%:p')
-  return vim.endswith(filename, '_test.go')
+  local filename = vim.fn.expand("%:p")
+  return vim.endswith(filename, "_test.go")
 end
 
 function M.is_in_test_function()
@@ -221,11 +221,11 @@ end
 M.create_t_run = function(args)
   return ls.sn(1, {
     ls.c(1, {
-      ls.t({ '' }),
+      ls.t({ "" }),
       ls.sn(
         nil,
         fmt('\tt.Run("{}", {}{})\n{}', {
-          ls.i(1, 'Case'),
+          ls.i(1, "Case"),
           ls.t(args[1]),
           rep(1),
           ls.d(2, M.create_t_run, ai[1]),
@@ -240,13 +240,13 @@ M.mirror_t_run_funcs = function(args)
   for _, v in ipairs(args[1]) do
     local name = v:match('^%s*t%.Run%s*%(%s*".*", (.*)%)')
     if name then
-      local node = string.format('func %s(t *testing.T) {{\n\tt.Parallel()\n}}\n\n', name)
+      local node = string.format("func %s(t *testing.T) {{\n\tt.Parallel()\n}}\n\n", name)
       table.insert(strs, node)
     end
   end
-  local str = table.concat(strs, '')
+  local str = table.concat(strs, "")
   if #str == 0 then
-    return ls.sn(1, ls.t(''))
+    return ls.sn(1, ls.t(""))
   end
   return ls.sn(1, fmt(str, {}))
 end
