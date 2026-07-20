@@ -2,18 +2,18 @@
 
 local api = vim.api
 
-local ui = require('jdtls.ui')
-local util = require('jdtls.util')
+local ui = require("jdtls.ui")
+local util = require("jdtls.util")
 
 local with_java_executable = util.with_java_executable
 local with_classpaths = util.with_classpaths
 local resolve_classname = util.resolve_classname
 local execute_command = util.execute_command
 
-local jdtls_dap = require('jdtls.dap')
-local setup = require('jdtls.setup')
+local jdtls_dap = require("jdtls.dap")
+local setup = require("jdtls.setup")
 
-local offset_encoding = 'utf-16'
+local offset_encoding = "utf-16"
 
 local M = {
   setup_dap = jdtls_dap.setup_dap,
@@ -24,7 +24,7 @@ local M = {
   setup = setup,
   settings = {
     jdt_uri_timeout_ms = 5000,
-  }
+  },
 }
 
 --- Start the language server (if not started), and attach the current buffer.
@@ -36,7 +36,6 @@ local M = {
 function M.start_or_attach(config, opts, start_opts)
   return setup.start_or_attach(config, opts, start_opts)
 end
-
 
 local request = function(bufnr, method, params, handler)
   local clients = util.get_clients({ bufnr = bufnr, name = "jdtls" })
@@ -60,10 +59,8 @@ local request = function(bufnr, method, params, handler)
   end
 end
 
-local highlight_ns = api.nvim_create_namespace('jdtls_hl')
+local highlight_ns = api.nvim_create_namespace("jdtls_hl")
 M.jol_path = nil
-
-
 
 local function java_apply_workspace_edit(command)
   for _, argument in ipairs(command.arguments) do
@@ -71,12 +68,11 @@ local function java_apply_workspace_edit(command)
   end
 end
 
-
 local function java_generate_to_string_prompt(_, outer_ctx)
   local params = outer_ctx.params
-  local bufnr = assert(outer_ctx.bufnr, '`outer_ctx` must have bufnr property')
+  local bufnr = assert(outer_ctx.bufnr, "`outer_ctx` must have bufnr property")
   require("jdtls.async").run(function()
-    local err, result = request(bufnr, 'java/checkToStringStatus', params)
+    local err, result = request(bufnr, "java/checkToStringStatus", params)
     if err then
       print("Could not execute java/checkToStringStatus: " .. err.message)
       return
@@ -85,19 +81,17 @@ local function java_generate_to_string_prompt(_, outer_ctx)
       return
     end
     if result.exists then
-      local prompt = string.format(
-        "Method 'toString()' already exists in '%s'. Do you want to replace it?",
-        result.type
-      )
-      local choice = ui.pick_one({"Replace", "Cancel"}, prompt, tostring)
+      local prompt =
+        string.format("Method 'toString()' already exists in '%s'. Do you want to replace it?", result.type)
+      local choice = ui.pick_one({ "Replace", "Cancel" }, prompt, tostring)
       if choice == "Cancel" then
         return
       end
     end
-    local fields = ui.pick_many(result.fields, 'Include item in toString?', function(x)
-      return string.format('%s: %s', x.name, x.type)
+    local fields = ui.pick_many(result.fields, "Include item in toString?", function(x)
+      return string.format("%s: %s", x.name, x.type)
     end)
-    local e, edit = request(bufnr, 'java/generateToString', { context = params; fields = fields; })
+    local e, edit = request(bufnr, "java/generateToString", { context = params, fields = fields })
     if e then
       print("Could not execute java/generateToString: " .. e.message)
     elseif edit then
@@ -106,11 +100,10 @@ local function java_generate_to_string_prompt(_, outer_ctx)
   end)
 end
 
-
 local function java_generate_constructors_prompt(_, outer_ctx)
-  local bufnr = assert(outer_ctx.bufnr, '`outer_ctx` must have bufnr property')
+  local bufnr = assert(outer_ctx.bufnr, "`outer_ctx` must have bufnr property")
   require("jdtls.async").run(function()
-    local err0, status = request(bufnr, 'java/checkConstructorsStatus', outer_ctx.params)
+    local err0, status = request(bufnr, "java/checkConstructorsStatus", outer_ctx.params)
     if err0 then
       print("Could not execute java/checkConstructorsStatus: " .. err0.message)
       return
@@ -120,8 +113,8 @@ local function java_generate_constructors_prompt(_, outer_ctx)
     end
     local constructors = status.constructors
     if #status.constructors > 1 then
-      constructors = ui.pick_many(status.constructors, 'Include super class constructor(s): ', function(x)
-        return string.format('%s(%s)', x.name, table.concat(x.parameters, ','))
+      constructors = ui.pick_many(status.constructors, "Include super class constructor(s): ", function(x)
+        return string.format("%s(%s)", x.name, table.concat(x.parameters, ","))
       end)
       if not constructors or #constructors == 0 then
         return
@@ -133,19 +126,19 @@ local function java_generate_constructors_prompt(_, outer_ctx)
       local opts = {
         is_selected = function(item)
           return item.isSelected
-        end
+        end,
       }
-      fields = ui.pick_many(status.fields, 'Include field to initialize by constructor(s): ', function(x)
-        return string.format('%s: %s', x.name, x.type)
+      fields = ui.pick_many(status.fields, "Include field to initialize by constructor(s): ", function(x)
+        return string.format("%s: %s", x.name, x.type)
       end, opts)
     end
 
     local params = {
       context = outer_ctx.params,
       constructors = constructors,
-      fields = fields
+      fields = fields,
     }
-    local err1, edit = request(bufnr, 'java/generateConstructors', params)
+    local err1, edit = request(bufnr, "java/generateConstructors", params)
     if err1 then
       print("Could not execute java/generateConstructors: " .. err1.message)
     elseif edit then
@@ -154,35 +147,33 @@ local function java_generate_constructors_prompt(_, outer_ctx)
   end)
 end
 
-
 local function java_generate_delegate_methods_prompt(_, outer_ctx)
-  local bufnr = assert(outer_ctx.bufnr, '`outer_ctx` must have bufnr property')
+  local bufnr = assert(outer_ctx.bufnr, "`outer_ctx` must have bufnr property")
   require("jdtls.async").run(function()
-    local err0, status = request(bufnr, 'java/checkDelegateMethodsStatus', outer_ctx.params)
+    local err0, status = request(bufnr, "java/checkDelegateMethodsStatus", outer_ctx.params)
     if err0 then
-      print('Could not execute java/checkDelegateMethodsStatus: ', err0.message)
+      print("Could not execute java/checkDelegateMethodsStatus: ", err0.message)
       return
     end
     if not status or not status.delegateFields or #status.delegateFields == 0 then
-      print('All delegatable methods are already implemented.')
+      print("All delegatable methods are already implemented.")
       return
     end
 
-    local field = #status.delegateFields == 1 and status.delegateFields[1] or ui.pick_one(
-      status.delegateFields,
-      'Select target to generate delegates for.',
-      function(x) return string.format('%s: %s', x.field.name, x.field.type) end
-    )
+    local field = #status.delegateFields == 1 and status.delegateFields[1]
+      or ui.pick_one(status.delegateFields, "Select target to generate delegates for.", function(x)
+        return string.format("%s: %s", x.field.name, x.field.type)
+      end)
     if not field then
       return
     end
     if #field.delegateMethods == 0 then
-      print('All delegatable methods are already implemented.')
+      print("All delegatable methods are already implemented.")
       return
     end
 
-    local methods = ui.pick_many(field.delegateMethods, 'Generate delegate for method:', function(x)
-      return string.format('%s(%s)', x.name, table.concat(x.parameters, ','))
+    local methods = ui.pick_many(field.delegateMethods, "Generate delegate for method:", function(x)
+      return string.format("%s(%s)", x.name, table.concat(x.parameters, ","))
     end)
     if not methods or #methods == 0 then
       return
@@ -190,31 +181,27 @@ local function java_generate_delegate_methods_prompt(_, outer_ctx)
 
     local params = {
       context = outer_ctx.params,
-      delegateEntries = vim.tbl_map(
-        function(x)
-          return {
-            field = field.field,
-            delegateMethod = x
-          }
-        end,
-        methods
-      ),
+      delegateEntries = vim.tbl_map(function(x)
+        return {
+          field = field.field,
+          delegateMethod = x,
+        }
+      end, methods),
     }
-    local err1, workspace_edit = request(bufnr, 'java/generateDelegateMethods', params)
+    local err1, workspace_edit = request(bufnr, "java/generateDelegateMethods", params)
     if err1 then
-      print('Could not execute java/generateDelegateMethods', err1.message)
+      print("Could not execute java/generateDelegateMethods", err1.message)
     elseif workspace_edit then
       vim.lsp.util.apply_workspace_edit(workspace_edit, offset_encoding)
     end
   end)
 end
 
-
 local function java_hash_code_equals_prompt(_, outer_ctx)
-  local bufnr = assert(outer_ctx.bufnr, '`outer_ctx` must have bufnr property')
+  local bufnr = assert(outer_ctx.bufnr, "`outer_ctx` must have bufnr property")
   local params = outer_ctx.params
   require("jdtls.async").run(function()
-    local _, result = request(bufnr, 'java/checkHashCodeEqualsStatus', params)
+    local _, result = request(bufnr, "java/checkHashCodeEqualsStatus", params)
     if not result then
       vim.notify("No result", vim.log.levels.INFO)
       return
@@ -222,10 +209,10 @@ local function java_hash_code_equals_prompt(_, outer_ctx)
       vim.notify(string.format("The operation is not applicable to the type %", result.type), vim.log.levels.WARN)
       return
     end
-    local fields = ui.pick_many(result.fields, 'Include item in equals/hashCode?', function(x)
-      return string.format('%s: %s', x.name, x.type)
+    local fields = ui.pick_many(result.fields, "Include item in equals/hashCode?", function(x)
+      return string.format("%s: %s", x.name, x.type)
     end)
-    local err, edit = request(bufnr, 'java/generateHashCodeEquals', { context = params; fields = fields; })
+    local err, edit = request(bufnr, "java/generateHashCodeEquals", { context = params, fields = fields })
     if err then
       print("Could not execute java/generateHashCodeEquals: " .. err.message)
     elseif edit then
@@ -234,10 +221,9 @@ local function java_hash_code_equals_prompt(_, outer_ctx)
   end)
 end
 
-
 local function handle_refactor_workspace_edit(err, result, ctx)
   if err then
-    print('Error getting refactoring edit: ' .. err.message)
+    print("Error getting refactoring edit: " .. err.message)
     return
   end
   if not result then
@@ -259,15 +245,14 @@ local function handle_refactor_workspace_edit(err, result, ctx)
   end
 end
 
-
 local function move_file(command, code_action_params)
   local uri = command.arguments[3].uri
   local params = {
-    moveKind = 'moveResource';
-    sourceUris = { uri, },
-    params = vim.NIL
+    moveKind = "moveResource",
+    sourceUris = { uri },
+    params = vim.NIL,
   }
-  request(0, 'java/getMoveDestinations', params, function(err, result, ctx)
+  request(0, "java/getMoveDestinations", params, function(err, result, ctx)
     assert(not err, err and err.message or vim.inspect(err))
     if result and result.errorMessage then
       print(result.errorMessage)
@@ -277,42 +262,35 @@ local function move_file(command, code_action_params)
       print("Couldn't find any destination packages")
       return
     end
-    local destinations = vim.tbl_filter(
-      function(x) return not x.isDefaultPackage end,
-      result.destinations
-    )
-    ui.pick_one_async(
-      destinations,
-      'Target package> ',
-      function(x)
-        local name = x.project .. ' » ' .. (x.isParentOfSelectedFile and '* ' or '') .. x.displayName
-        local sourceset = string.match(x.path, "src/(%a+)/")
-        return (sourceset and sourceset or x.path) .. " » " .. name
-      end,
-      function(x)
-        local move_params = {
-          moveKind = 'moveResource',
-          sourceUris = { uri, },
-          params = code_action_params,
-          destination = x,
-          updateReferences = true
-        }
-        request(ctx.bufnr, 'java/move', move_params, function(move_err, refactor_edit)
-          handle_refactor_workspace_edit(move_err, refactor_edit)
-        end)
-      end
-    )
+    local destinations = vim.tbl_filter(function(x)
+      return not x.isDefaultPackage
+    end, result.destinations)
+    ui.pick_one_async(destinations, "Target package> ", function(x)
+      local name = x.project .. " » " .. (x.isParentOfSelectedFile and "* " or "") .. x.displayName
+      local sourceset = string.match(x.path, "src/(%a+)/")
+      return (sourceset and sourceset or x.path) .. " » " .. name
+    end, function(x)
+      local move_params = {
+        moveKind = "moveResource",
+        sourceUris = { uri },
+        params = code_action_params,
+        destination = x,
+        updateReferences = true,
+      }
+      request(ctx.bufnr, "java/move", move_params, function(move_err, refactor_edit)
+        handle_refactor_workspace_edit(move_err, refactor_edit)
+      end)
+    end)
   end)
 end
 
-
 local function move_instance_method(command, code_action_params)
   local params = {
-    moveKind = 'moveInstanceMethod';
-    sourceUris = { command.arguments[2].textDocument.uri, };
-    params = code_action_params
+    moveKind = "moveInstanceMethod",
+    sourceUris = { command.arguments[2].textDocument.uri },
+    params = code_action_params,
   }
-  request(0, 'java/getMoveDestinations', params, function(err, result, ctx)
+  request(0, "java/getMoveDestinations", params, function(err, result, ctx)
     assert(not err, err and err.message or vim.inspect(err))
     if result and result.errorMessage then
       print(result.errorMessage)
@@ -322,131 +300,105 @@ local function move_instance_method(command, code_action_params)
       print("Couldn't find any destinations")
       return
     end
-    ui.pick_one_async(
-      result.destinations,
-      'Destination> ',
-      function(x)
-        local prefix
-        if x.isField then
-          prefix = '[Field]            '
-        else
-          prefix = '[Method Parameter] '
-        end
-        return prefix .. x.type .. ' ' .. x.name
-      end,
-      function(x)
-        params.destination = x
-        params.updateReferences = true
-        request(ctx.bufnr, 'java/move', params, function(move_err, refactor_edit)
-          handle_refactor_workspace_edit(move_err, refactor_edit)
-        end)
+    ui.pick_one_async(result.destinations, "Destination> ", function(x)
+      local prefix
+      if x.isField then
+        prefix = "[Field]            "
+      else
+        prefix = "[Method Parameter] "
       end
-    )
+      return prefix .. x.type .. " " .. x.name
+    end, function(x)
+      params.destination = x
+      params.updateReferences = true
+      request(ctx.bufnr, "java/move", params, function(move_err, refactor_edit)
+        handle_refactor_workspace_edit(move_err, refactor_edit)
+      end)
+    end)
   end)
 end
 
 local function search_symbols(project, enclosing_type_name, on_selection)
   local params = {
-    query = '*',
+    query = "*",
     projectName = project,
     sourceOnly = true,
   }
-  request(0, 'java/searchSymbols', params, function(err, result, ctx)
+  request(0, "java/searchSymbols", params, function(err, result, ctx)
     assert(not err, err and err.message or vim.inspect(err))
     if not result or #result == 0 then
       print("Couldn't find any destinations")
       return
     end
     if enclosing_type_name then
-      result = vim.tbl_filter(
-        function(x)
-          if x.containerName then
-            return enclosing_type_name == x.containerName .. '.' .. x.name
-          else
-            return enclosing_type_name == x.name
-          end
-        end,
-        result
-      )
+      result = vim.tbl_filter(function(x)
+        if x.containerName then
+          return enclosing_type_name == x.containerName .. "." .. x.name
+        else
+          return enclosing_type_name == x.name
+        end
+      end, result)
     end
-    ui.pick_one_async(
-      result,
-      'Destination> ',
-      function(x) return x.containerName .. ' » ' .. x.name end,
-      function(x)
-        on_selection(x, ctx.bufnr)
-      end
-    )
+    ui.pick_one_async(result, "Destination> ", function(x)
+      return x.containerName .. " » " .. x.name
+    end, function(x)
+      on_selection(x, ctx.bufnr)
+    end)
   end)
 end
 
-
 local function move_static_member(command, code_action_params)
   local member = command.arguments[3]
-  search_symbols(
-    member.projectName,
-    member.enclosingTypeName,
-    function(picked, bufnr)
-      local move_params = {
-        moveKind = 'moveStaticMember',
-        sourceUris = { command.arguments[2].uri },
-        params = code_action_params,
-        destination = picked
-      }
-      request(bufnr, 'java/move', move_params, function(move_err, refactor_edit)
-        handle_refactor_workspace_edit(move_err, refactor_edit)
-      end)
-    end
-  )
+  search_symbols(member.projectName, member.enclosingTypeName, function(picked, bufnr)
+    local move_params = {
+      moveKind = "moveStaticMember",
+      sourceUris = { command.arguments[2].uri },
+      params = code_action_params,
+      destination = picked,
+    }
+    request(bufnr, "java/move", move_params, function(move_err, refactor_edit)
+      handle_refactor_workspace_edit(move_err, refactor_edit)
+    end)
+  end)
 end
 
 local function move_type(command, code_action_params)
   local info = command.arguments[3]
   if not info.supportedDestinationKinds or #info.supportedDestinationKinds == 0 then
-    print('No available destinations')
+    print("No available destinations")
     return
   end
-  ui.pick_one_async(
-    info.supportedDestinationKinds,
-    'Action> ',
-    function(x)
-      if x == 'newFile' then
-        return string.format('Move type `%s` to new file', info.displayName)
-      else
-        return string.format('Move type `%s` to another class', info.displayName)
-      end
-    end,
-    function(x)
-      if x == 'newFile' then
+  ui.pick_one_async(info.supportedDestinationKinds, "Action> ", function(x)
+    if x == "newFile" then
+      return string.format("Move type `%s` to new file", info.displayName)
+    else
+      return string.format("Move type `%s` to another class", info.displayName)
+    end
+  end, function(x)
+    if x == "newFile" then
+      local move_params = {
+        moveKind = "moveTypeToNewFile",
+        sourceUris = { command.arguments[2].textDocument.uri },
+        params = code_action_params,
+      }
+      request(0, "java/move", move_params, function(move_err, refactor_edit)
+        handle_refactor_workspace_edit(move_err, refactor_edit)
+      end)
+    else
+      search_symbols(info.projectName, info.enclosingTypeName, function(picked, bufnr)
         local move_params = {
-          moveKind = 'moveTypeToNewFile',
-          sourceUris = { command.arguments[2].textDocument.uri },
-          params = code_action_params
+          moveKind = "moveTypeToClass",
+          sourceUris = { command.arguments[2].uri },
+          params = code_action_params,
+          destination = picked,
         }
-        request(0, 'java/move', move_params, function(move_err, refactor_edit)
+        request(bufnr, "java/move", move_params, function(move_err, refactor_edit)
           handle_refactor_workspace_edit(move_err, refactor_edit)
         end)
-      else
-        search_symbols(
-          info.projectName,
-          info.enclosingTypeName,
-          function(picked, bufnr)
-            local move_params = {
-              moveKind = 'moveTypeToClass',
-              sourceUris = { command.arguments[2].uri },
-              params = code_action_params,
-              destination = picked
-            }
-            request(bufnr, 'java/move', move_params, function(move_err, refactor_edit)
-              handle_refactor_workspace_edit(move_err, refactor_edit)
-            end)
-          end
-        )
-      end
+      end)
     end
-  )
+  end)
 end
-
 
 ---@return {tabSize: integer, insertSpaces: boolean}
 local function format_opts()
@@ -455,7 +407,6 @@ local function format_opts()
     insertSpaces = vim.bo.expandtab,
   }
 end
-
 
 ---@param bufnr integer
 ---@param signature table
@@ -494,7 +445,7 @@ local function change_signature_prompt(bufnr, signature, cmd_name, code_action_p
                 type = matches[1],
                 name = matches[2],
                 defaultValue = matches[3],
-                originalIndex = new_param_idx
+                originalIndex = new_param_idx,
               })
               new_param_idx = new_param_idx + 1
             end
@@ -521,10 +472,10 @@ local function change_signature_prompt(bufnr, signature, cmd_name, code_action_p
           return_type,
           parameters,
           signature.exceptions,
-          preview
+          preview,
         },
       }
-      request(bufnr, 'java/getRefactorEdit', params, handle_refactor_workspace_edit)
+      request(bufnr, "java/getRefactorEdit", params, handle_refactor_workspace_edit)
     end,
   })
   vim.bo[edit_buf].bufhidden = "wipe"
@@ -547,11 +498,7 @@ local function change_signature_prompt(bufnr, signature, cmd_name, code_action_p
     "Parameters:",
   }
   for _, param in ipairs(signature.parameters) do
-    table.insert(lines, string.format("- %d: %s %s",
-      param.originalIndex,
-      param.type,
-      param.name
-    ))
+    table.insert(lines, string.format("- %d: %s %s", param.originalIndex, param.type, param.name))
   end
   local comment_start = #lines + 1
   vim.list_extend(lines, {
@@ -570,10 +517,10 @@ local function change_signature_prompt(bufnr, signature, cmd_name, code_action_p
   })
   api.nvim_buf_set_lines(edit_buf, 0, -1, true, lines)
   local highlights = {
-    {0, "Access type:", "Identifier"},
-    {1, "Name:", "Identifier"},
-    {2, "Return type:", "Identifier"},
-    {3, "Parameters:", "Identifier"},
+    { 0, "Access type:", "Identifier" },
+    { 1, "Name:", "Identifier" },
+    { 2, "Return type:", "Identifier" },
+    { 3, "Parameters:", "Identifier" },
   }
   for _, hl in ipairs(highlights) do
     api.nvim_buf_set_extmark(edit_buf, highlight_ns, hl[1], 0, {
@@ -584,10 +531,9 @@ local function change_signature_prompt(bufnr, signature, cmd_name, code_action_p
   end
   api.nvim_buf_set_extmark(edit_buf, highlight_ns, comment_start, 0, {
     hl_group = "Comment",
-    end_row = #lines
+    end_row = #lines,
   })
 end
-
 
 ---@param bufnr integer
 ---@param command table
@@ -613,22 +559,19 @@ local function change_signature(bufnr, command, code_action_params)
   client:request("java/getChangeSignatureInfo", code_action_params, on_signature, bufnr)
 end
 
-
-
-
 ---@param after_refactor? function
 local function java_apply_refactoring_command(command, outer_ctx, after_refactor)
   local cmd = command.arguments[1]
   local bufnr = outer_ctx.bufnr
   local code_action_params = outer_ctx.params
 
-  if cmd == 'moveFile' then
+  if cmd == "moveFile" then
     return move_file(command, code_action_params)
-  elseif cmd == 'moveInstanceMethod' then
+  elseif cmd == "moveInstanceMethod" then
     return move_instance_method(command, code_action_params)
-  elseif cmd == 'moveStaticMember' then
+  elseif cmd == "moveStaticMember" then
     return move_static_member(command, code_action_params)
-  elseif cmd == 'moveType' then
+  elseif cmd == "moveType" then
     return move_type(command, code_action_params)
   elseif cmd == "changeSignature" then
     return change_signature(bufnr, command, code_action_params)
@@ -646,39 +589,37 @@ local function java_apply_refactoring_command(command, outer_ctx, after_refactor
     end
   end
   if not vim.tbl_contains(setup.extendedClientCapabilities.inferSelectionSupport, cmd) then
-    request(bufnr, 'java/getRefactorEdit', params, apply_refactor)
+    request(bufnr, "java/getRefactorEdit", params, apply_refactor)
     return
   end
   local range = code_action_params.range
-  if not (range.start.character == range['end'].character and range.start.line == range['end'].line) then
-    request(bufnr, 'java/getRefactorEdit', params, apply_refactor)
+  if not (range.start.character == range["end"].character and range.start.line == range["end"].line) then
+    request(bufnr, "java/getRefactorEdit", params, apply_refactor)
     return
   end
 
-  request(bufnr, 'java/inferSelection', params, function(err, selection_info, ctx)
+  request(bufnr, "java/inferSelection", params, function(err, selection_info, ctx)
     assert(not err, vim.inspect(err))
     if not selection_info or #selection_info == 0 then
-      print('No selection found that could be extracted')
+      print("No selection found that could be extracted")
       return
     end
     if #selection_info == 1 then
       params.commandArguments = selection_info
-      request(ctx.bufnr, 'java/getRefactorEdit', params, apply_refactor)
+      request(ctx.bufnr, "java/getRefactorEdit", params, apply_refactor)
     else
-      ui.pick_one_async(
-        selection_info,
-        'Choices:',
-        function(x) return x.name end,
-        function(selection)
-          if not selection then return end
-          params.commandArguments = {selection}
-          request(ctx.bufnr, 'java/getRefactorEdit', params, apply_refactor)
+      ui.pick_one_async(selection_info, "Choices:", function(x)
+        return x.name
+      end, function(selection)
+        if not selection then
+          return
         end
-      )
+        params.commandArguments = { selection }
+        request(ctx.bufnr, "java/getRefactorEdit", params, apply_refactor)
+      end)
     end
   end)
 end
-
 
 local function java_action_rename(command, ctx)
   local target = command.arguments[1]
@@ -690,7 +631,7 @@ local function java_action_rename(command, ctx)
   end
 
   local lines = vim.api.nvim_buf_get_lines(ctx.bufnr, 0, -1, true)
-  local content = table.concat(lines, '\n')
+  local content = table.concat(lines, "\n")
 
   local byteidx = vim.fn.byteidx(content, target.offset)
   local line = vim.fn.byte2line(byteidx)
@@ -699,11 +640,10 @@ local function java_action_rename(command, ctx)
   api.nvim_win_set_cursor(win, { line, col + 1 })
 end
 
-
 local function java_action_organize_imports(_, ctx)
-  request(0, 'java/organizeImports', ctx.params, function(err, resp)
+  request(0, "java/organizeImports", ctx.params, function(err, resp)
     if err then
-      print('Error on organize imports: ' .. err.message)
+      print("Error on organize imports: " .. err.message)
       return
     end
     if resp then
@@ -711,7 +651,6 @@ local function java_action_organize_imports(_, ctx)
     end
   end)
 end
-
 
 local function find_last(str, pattern)
   local idx = nil
@@ -726,7 +665,6 @@ local function find_last(str, pattern)
   return idx
 end
 
-
 local function java_choose_imports(resp)
   local uri = resp[1]
   local selections = resp[2]
@@ -736,31 +674,35 @@ local function java_choose_imports(resp)
 
     local buf = vim.uri_to_bufnr(uri)
     api.nvim_win_set_buf(0, buf)
-    api.nvim_win_set_cursor(0, {start.line + 1, start.character})
-    api.nvim_command('normal! zvzz')
+    api.nvim_win_set_cursor(0, { start.line + 1, start.character })
+    api.nvim_command("normal! zvzz")
     api.nvim_buf_add_highlight(
-      0, highlight_ns, 'IncSearch', start.line, start.character, selection.range['end'].character)
+      0,
+      highlight_ns,
+      "IncSearch",
+      start.line,
+      start.character,
+      selection.range["end"].character
+    )
     api.nvim_command("redraw")
 
     local candidates = selection.candidates
     local fqn = candidates[1].fullyQualifiedName
-    local type_name = fqn:sub(find_last(fqn, '%.') + 1)
-    local choice = #candidates == 1 and candidates[1] or ui.pick_one(
-      candidates,
-      'Choose type ' .. type_name .. ' to import',
-      function(x) return x.fullyQualifiedName end
-    )
+    local type_name = fqn:sub(find_last(fqn, "%.") + 1)
+    local choice = #candidates == 1 and candidates[1]
+      or ui.pick_one(candidates, "Choose type " .. type_name .. " to import", function(x)
+        return x.fullyQualifiedName
+      end)
     api.nvim_buf_clear_namespace(0, highlight_ns, 0, -1)
     table.insert(choices, choice)
   end
   return choices
 end
 
-
 local function java_override_methods(_, context)
-  local bufnr = assert(context.bufnr, '`context` must have bufnr property')
+  local bufnr = assert(context.bufnr, "`context` must have bufnr property")
   require("jdtls.async").run(function()
-    local err1, result1 = request(bufnr, 'java/listOverridableMethods', context.params)
+    local err1, result1 = request(bufnr, "java/listOverridableMethods", context.params)
     if err1 then
       vim.notify("Error getting overridable methods: " .. err1.message, vim.log.levels.WARN)
       return
@@ -771,7 +713,12 @@ local function java_override_methods(_, context)
     end
 
     local fmt = function(method)
-      return string.format("%s(%s) class: %s", method.name, table.concat(method.parameters, ", "), method.declaringClass)
+      return string.format(
+        "%s(%s) class: %s",
+        method.name,
+        table.concat(method.parameters, ", "),
+        method.declaringClass
+      )
     end
 
     local selected = ui.pick_many(result1.methods, "Method to override", fmt)
@@ -782,9 +729,9 @@ local function java_override_methods(_, context)
 
     local params = {
       context = context.params,
-      overridableMethods = selected
+      overridableMethods = selected,
     }
-    local err2, result2 = request(context.bufnr, 'java/addOverridableMethods', params)
+    local err2, result2 = request(context.bufnr, "java/addOverridableMethods", params)
     if err2 ~= nil then
       print("Error getting workspace edits: " .. err2.message)
       return
@@ -795,37 +742,36 @@ local function java_override_methods(_, context)
   end)
 end
 
-
 M.commands = {
-  ['java.apply.workspaceEdit'] = java_apply_workspace_edit;
-  ['java.action.generateToStringPrompt'] = java_generate_to_string_prompt;
-  ['java.action.hashCodeEqualsPrompt'] = java_hash_code_equals_prompt;
-  ['java.action.applyRefactoringCommand'] = java_apply_refactoring_command;
-  ['java.action.rename'] = java_action_rename;
-  ['java.action.organizeImports'] = java_action_organize_imports;
-  ['java.action.organizeImports.chooseImports'] = java_choose_imports;
-  ['java.action.generateConstructorsPrompt'] = java_generate_constructors_prompt;
-  ['java.action.generateDelegateMethodsPrompt'] = java_generate_delegate_methods_prompt;
-  ['java.action.overrideMethodsPrompt'] = java_override_methods;
-  ['_java.test.askClientForChoice'] = function(args)
+  ["java.apply.workspaceEdit"] = java_apply_workspace_edit,
+  ["java.action.generateToStringPrompt"] = java_generate_to_string_prompt,
+  ["java.action.hashCodeEqualsPrompt"] = java_hash_code_equals_prompt,
+  ["java.action.applyRefactoringCommand"] = java_apply_refactoring_command,
+  ["java.action.rename"] = java_action_rename,
+  ["java.action.organizeImports"] = java_action_organize_imports,
+  ["java.action.organizeImports.chooseImports"] = java_choose_imports,
+  ["java.action.generateConstructorsPrompt"] = java_generate_constructors_prompt,
+  ["java.action.generateDelegateMethodsPrompt"] = java_generate_delegate_methods_prompt,
+  ["java.action.overrideMethodsPrompt"] = java_override_methods,
+  ["_java.test.askClientForChoice"] = function(args)
     local prompt = args[1]
     local choices = args[2]
     local pick_many = args[3]
     return require("jdtls.tests")._ask_client_for_choice(prompt, choices, pick_many)
   end,
-  ['_java.test.advancedAskClientForChoice'] = function(args)
+  ["_java.test.advancedAskClientForChoice"] = function(args)
     local prompt = args[1]
     local choices = args[2]
     -- local advanced_action = args[3]
     local pick_many = args[4]
     return require("jdtls.tests")._ask_client_for_choice(prompt, choices, pick_many)
   end,
-  ['_java.test.askClientForInput'] = function(args)
+  ["_java.test.askClientForInput"] = function(args)
     local prompt = args[1]
     local default = args[2]
     local result = vim.fn.input({
-      prompt = prompt .. ': ',
-      default = default
+      prompt = prompt .. ": ",
+      default = default,
     })
     return result and result or vim.NIL
   end,
@@ -839,20 +785,19 @@ M.commands = {
       title = "References",
       items = items,
     }
-    vim.fn.setqflist({}, ' ', list)
+    vim.fn.setqflist({}, " ", list)
     vim.cmd("botright copen")
-  end
+  end,
 }
 
 if vim.lsp.commands then
   for k, v in pairs(M.commands) do
-    vim.lsp.commands[k] = v  -- luacheck: ignore 122
+    vim.lsp.commands[k] = v -- luacheck: ignore 122
   end
 end
 
-
-if not vim.lsp.handlers['workspace/executeClientCommand'] then
-  vim.lsp.handlers['workspace/executeClientCommand'] = function(_, params, ctx)  -- luacheck: ignore 122
+if not vim.lsp.handlers["workspace/executeClientCommand"] then
+  vim.lsp.handlers["workspace/executeClientCommand"] = function(_, params, ctx) -- luacheck: ignore 122
     local client = vim.lsp.get_client_by_id(ctx.client_id) or {}
     local commands = client.commands or {}
     local global_commands = vim.lsp.commands or M.commands
@@ -867,12 +812,11 @@ if not vim.lsp.handlers['workspace/executeClientCommand'] then
     else
       return vim.lsp.rpc_response_error(
         vim.lsp.protocol.ErrorCodes.MethodNotFound,
-        'Command ' .. params.command .. ' not supported on client'
+        "Command " .. params.command .. " not supported on client"
       )
     end
   end
 end
-
 
 local function make_code_action_params(from_selection)
   local params
@@ -882,26 +826,26 @@ local function make_code_action_params(from_selection)
     params = vim.lsp.util.make_range_params(0, offset_encoding)
   end
   params.context = {
-    diagnostics = {}
+    diagnostics = {},
   }
   return params
 end
-
 
 --- Organize the imports in the current buffer
 function M.organize_imports()
   java_action_organize_imports(nil, { params = make_code_action_params(false) })
 end
 
-
 ---@private
 function M._complete_compile()
-  return 'full\nincremental'
+  return "full\nincremental"
 end
 
 --- @param on_compile_result? fun(result: table[]): nil Callback to be called when the compile result is received.
 local function on_build_result(on_compile_result)
-  on_compile_result = on_compile_result or  function() vim.cmd('copen') end
+  on_compile_result = on_compile_result or function()
+    vim.cmd("copen")
+  end
   return function(err, result, ctx)
     local CompileWorkspaceStatus = {
       FAILED = 0,
@@ -909,10 +853,10 @@ local function on_build_result(on_compile_result)
       WITHERROR = 2,
       CANCELLED = 3,
     }
-    assert(not err, 'Error trying to build project(s): ' .. vim.inspect(err))
+    assert(not err, "Error trying to build project(s): " .. vim.inspect(err))
     if result == CompileWorkspaceStatus.SUCCEED then
-      vim.fn.setqflist({}, 'r', { title = 'jdtls'; items = {} })
-      print('Compile successful')
+      vim.fn.setqflist({}, "r", { title = "jdtls", items = {} })
+      print("Compile successful")
     else
       local project_config_errors = {}
       local compile_errors = {}
@@ -921,11 +865,13 @@ local function on_build_result(on_compile_result)
         local fname = api.nvim_buf_get_name(d.bufnr)
         local stat = vim.loop.fs_stat(fname)
         local items
-        if (vim.endswith(fname, 'build.gradle')
-            or vim.endswith(fname, 'pom.xml')
-            or (stat and stat.type == 'directory')) then
+        if
+          vim.endswith(fname, "build.gradle")
+          or vim.endswith(fname, "pom.xml")
+          or (stat and stat.type == "directory")
+        then
           items = project_config_errors
-        elseif vim.fn.fnamemodify(fname, ':e') == 'java' then
+        elseif vim.fn.fnamemodify(fname, ":e") == "java" then
           items = compile_errors
         end
         if d.severity == vim.diagnostic.severity.ERROR and items then
@@ -933,7 +879,7 @@ local function on_build_result(on_compile_result)
         end
       end
       local items = #project_config_errors > 0 and project_config_errors or compile_errors
-      vim.fn.setqflist({}, 'r', { title = 'jdtls'; items = vim.diagnostic.toqflist(items) })
+      vim.fn.setqflist({}, "r", { title = "jdtls", items = vim.diagnostic.toqflist(items) })
       if #items > 0 then
         local reverse_status = {
           [0] = "FAILED",
@@ -941,17 +887,18 @@ local function on_build_result(on_compile_result)
           [2] = "WITHERROR",
           [3] = "CANCELLED",
         }
-        print(string.format('Compile error. (%s)', reverse_status[result]))
+        print(string.format("Compile error. (%s)", reverse_status[result]))
         on_compile_result(items)
       else
-        print("Compile error, but no error diagnostics available."
-          .. " Save all pending changes and try running compile again."
-          .. " If you used incremental mode, try a full rebuild.")
+        print(
+          "Compile error, but no error diagnostics available."
+            .. " Save all pending changes and try running compile again."
+            .. " If you used incremental mode, try a full rebuild."
+        )
       end
     end
   end
 end
-
 
 --- Compile the Java workspace
 --- If there are compile errors they'll be shown in the quickfix list.
@@ -960,17 +907,16 @@ end
 ---|"incremental"
 ---@param on_compile_result? fun(result: table[]): nil Callback to be called when the compile result is received.
 function M.compile(type, on_compile_result)
-  request(0, 'java/buildWorkspace', type == 'full', on_build_result(on_compile_result))
+  request(0, "java/buildWorkspace", type == "full", on_build_result(on_compile_result))
 end
-
 
 ---@param mode nil|"prompt"|"all"
 local function pick_projects(mode)
   local command = {
-    command = 'java.project.getAll',
+    command = "java.project.getAll",
   }
   local bufnr = api.nvim_get_current_buf()
-  assert(coroutine.running(), '`pick_projects` must be called within coroutine')
+  assert(coroutine.running(), "`pick_projects` must be called within coroutine")
   local err, projects = util.execute_command(command, nil, bufnr)
   if err then
     error(err.message or vim.inspect(err))
@@ -981,17 +927,12 @@ local function pick_projects(mode)
   elseif #projects == 1 then
     selection = projects
   else
-    selection = ui.pick_many(
-      projects,
-      'Projects> ',
-      function(project)
-        return project
-      end
-    )
+    selection = ui.pick_many(projects, "Projects> ", function(project)
+      return project
+    end)
   end
   return selection
 end
-
 
 --- Trigger a rebuild of one or more projects.
 ---
@@ -1003,10 +944,12 @@ function M.build_projects(opts)
     local selection = pick_projects(opts.select_mode or "prompt")
     if selection and next(selection) then
       local params = {
-        identifiers = vim.tbl_map(function(project) return { uri = project } end, selection),
-        isFullBuild = opts.full_build == nil and true or opts.full_build
+        identifiers = vim.tbl_map(function(project)
+          return { uri = project }
+        end, selection),
+        isFullBuild = opts.full_build == nil and true or opts.full_build,
       }
-      request(bufnr, 'java/buildProjects', params, on_build_result(opts.on_compile_result))
+      request(bufnr, "java/buildProjects", params, on_build_result(opts.on_compile_result))
     end
   end)
 end
@@ -1020,9 +963,9 @@ end
 --- module of the current buffer.
 function M.update_project_config()
   local params = { uri = vim.uri_from_bufnr(0) }
-  request(0, 'java/projectConfigurationUpdate', params, function(err)
+  request(0, "java/projectConfigurationUpdate", params, function(err)
     if err then
-      print('Could not update project configuration: ' .. err.message)
+      print("Could not update project configuration: " .. err.message)
     end
   end)
 end
@@ -1038,9 +981,11 @@ function M.update_projects_config(opts)
     local selection = pick_projects(opts.select_mode or "prompt")
     if selection and next(selection) then
       local params = {
-        identifiers = vim.tbl_map(function(project) return { uri = project } end, selection)
+        identifiers = vim.tbl_map(function(project)
+          return { uri = project }
+        end, selection),
       }
-      vim.lsp.buf_notify(bufnr, 'java/projectConfigurationsUpdate', params)
+      vim.lsp.buf_notify(bufnr, "java/projectConfigurationsUpdate", params)
     end
   end)
 end
@@ -1052,9 +997,7 @@ end
 ---|"all"
 ---|"prompt"
 
-
 ---@alias jdtls.extract.opts {visual?: boolean, name?: string|fun(): string}
-
 
 ---@param entity string
 ---@param opts? jdtls.extract.opts
@@ -1063,11 +1006,11 @@ local function extract(entity, opts)
   if type(opts) == "boolean" then
     -- bwc, param changed from boolean to table
     opts = {
-      visual = opts
+      visual = opts,
     }
   end
   local params = make_code_action_params(opts.visual or false)
-  local command = { arguments = { entity }, }
+  local command = { arguments = { entity } }
   local after_refactor = function()
     local name = opts.name
     if type(name) == "function" then
@@ -1083,35 +1026,34 @@ end
 --- Extract a constant from the expression under the cursor
 ---@param opts? jdtls.extract.opts
 function M.extract_constant(opts)
-  extract('extractConstant', opts)
+  extract("extractConstant", opts)
 end
 
 --- Extract a variable from the expression under the cursor
 ---@param opts? jdtls.extract.opts
 function M.extract_variable(opts)
-  extract('extractVariable', opts)
+  extract("extractVariable", opts)
 end
 
 --- Extract a local variable from the expression under the cursor and replace all occurrences
 ---@param opts? jdtls.extract.opts
 function M.extract_variable_all(opts)
-  extract('extractVariableAllOccurrence', opts)
+  extract("extractVariableAllOccurrence", opts)
 end
 
 --- Extract a method
 ---@param opts? jdtls.extract.opts
 function M.extract_method(opts)
-  extract('extractMethod', opts)
+  extract("extractMethod", opts)
 end
-
 
 --- Jump to the super implementation of the method under the cursor
 function M.super_implementation()
   local params = {
-    type = 'superImplementation',
+    type = "superImplementation",
     position = vim.lsp.util.make_position_params(0, offset_encoding),
   }
-  request(0, 'java/findLinks', params, function(err, result)
+  request(0, "java/findLinks", params, function(err, result)
     assert(not err, vim.inspect(err))
     if result and #result == 1 then
       if vim.lsp.util.show_document then
@@ -1121,25 +1063,23 @@ function M.super_implementation()
         vim.lsp.util.jump_to_location(result[1], offset_encoding, true)
       end
     else
-      assert(result == nil or #result == 0, 'Expected one or zero results for `findLinks`')
-      vim.notify('No result found')
+      assert(result == nil or #result == 0, "Expected one or zero results for `findLinks`")
+      vim.notify("No result found")
     end
   end)
 end
-
 
 --- Run the `javap` tool in a terminal buffer.
 --- Sets the classpath based on the current project.
 function M.javap()
   with_classpaths(function(resp)
     local classname = resolve_classname()
-    local cp = table.concat(resp.classpaths, ':')
+    local cp = table.concat(resp.classpaths, ":")
     local buf = api.nvim_create_buf(false, true)
     api.nvim_win_set_buf(0, buf)
-    vim.fn.termopen({'javap', '-c', '--class-path', cp, classname})
+    vim.fn.termopen({ "javap", "-c", "--class-path", cp, classname })
   end)
 end
-
 
 --- Run the `jshell` tool in a terminal buffer.
 --- Sets the classpath based on the current project.
@@ -1153,15 +1093,14 @@ function M.jshell()
         table.insert(classpaths, path)
       end
     end
-    local cp = table.concat(classpaths, ':')
-    with_java_executable(resolve_classname(), '', function(java_exec)
+    local cp = table.concat(classpaths, ":")
+    with_java_executable(resolve_classname(), "", function(java_exec)
       api.nvim_win_set_buf(0, buf)
-      local jshell = java_exec and (vim.fn.fnamemodify(java_exec, ":p:h") .. '/jshell') or "jshell"
-      vim.fn.termopen(jshell, { env = { ["CLASSPATH"] = cp }})
+      local jshell = java_exec and (vim.fn.fnamemodify(java_exec, ":p:h") .. "/jshell") or "jshell"
+      vim.fn.termopen(jshell, { env = { ["CLASSPATH"] = cp } })
     end, bufnr)
   end)
 end
-
 
 --- Run the `jol` tool in a terminal buffer to print the class layout
 --- You must configure `jol_path` to point to the `jol` jar file:
@@ -1189,20 +1128,27 @@ end
 ---|"internals"
 ---@param classname? string fully qualified class name. Defaults to the current class.
 function M.jol(mode, classname)
-  mode = mode or 'estimates'
+  mode = mode or "estimates"
   local jol = assert(M.jol_path, [[Path to jol must be set using `lua require('jdtls').jol_path = 'path/to/jol.jar'`]])
   with_classpaths(function(resp)
     local resolved_classname = resolve_classname()
-    local cp = table.concat(resp.classpaths, ':')
-    with_java_executable(resolved_classname, '', function(java_exec)
+    local cp = table.concat(resp.classpaths, ":")
+    with_java_executable(resolved_classname, "", function(java_exec)
       local buf = api.nvim_create_buf(false, true)
       api.nvim_win_set_buf(0, buf)
       vim.fn.termopen({
-        java_exec, '-Djdk.attach.allowAttachSelf', '-jar', jol, mode, '-cp', cp, classname or resolved_classname})
+        java_exec,
+        "-Djdk.attach.allowAttachSelf",
+        "-jar",
+        jol,
+        mode,
+        "-cp",
+        cp,
+        classname or resolved_classname,
+      })
     end)
   end)
 end
-
 
 --- Open `jdt://` uri or decompile class contents and load them into the buffer
 ---
@@ -1226,7 +1172,7 @@ function M.open_classfile(buf, fname)
   end
   vim.bo[buf].modifiable = true
   vim.bo[buf].swapfile = false
-  vim.bo[buf].buftype = 'nofile'
+  vim.bo[buf].buftype = "nofile"
   local class_fn = uri:match("contents/[^/]+/[%a%d._-]+/([^?]+)") or ""
   local class_ext = vim.fn.fnamemodify(class_fn, ":e")
   local filetype = "java"
@@ -1252,14 +1198,14 @@ function M.open_classfile(buf, fname)
   else
     vim.lsp.buf_attach_client(buf, client.id)
   end
-  assert(client, 'Must have a `jdtls` client to load class file or jdt uri')
+  assert(client, "Must have a `jdtls` client to load class file or jdt uri")
 
   local content
   local function handler(err, result)
     assert(not err, vim.inspect(err))
     assert(result, "jdtls client must return result for java/classFileContents")
     content = result
-    local normalized = string.gsub(result, '\r\n', '\n')
+    local normalized = string.gsub(result, "\r\n", "\n")
     local source_lines = vim.split(normalized, "\n", { plain = true })
     api.nvim_buf_set_lines(buf, 0, -1, false, source_lines)
     vim.bo[buf].modifiable = false
@@ -1268,25 +1214,26 @@ function M.open_classfile(buf, fname)
   if use_cmd then
     local command = {
       command = "java.decompile",
-      arguments = { uri }
+      arguments = { uri },
     }
     execute_command(command, handler)
   else
     local params = {
-      uri = uri
+      uri = uri,
     }
     client:request("java/classFileContents", params, handler, buf)
   end
   -- Need to block. Otherwise logic could run that sets the cursor to a position
   -- that's still missing.
-  vim.wait(timeout_ms, function() return content ~= nil end)
+  vim.wait(timeout_ms, function()
+    return content ~= nil
+  end)
 end
-
 
 ---@private
 function M._complete_set_runtime()
   local client
-  for _, c in pairs(util.get_clients({name = "jdtls"})) do
+  for _, c in pairs(util.get_clients({ name = "jdtls" })) do
     if c.config.settings.java then
       client = c
       break
@@ -1296,7 +1243,12 @@ function M._complete_set_runtime()
     return {}
   end
   local runtimes = (client.config.settings.java.configuration or {}).runtimes or {}
-  return table.concat(vim.tbl_map(function(runtime) return runtime.name end, runtimes), '\n')
+  return table.concat(
+    vim.tbl_map(function(runtime)
+      return runtime.name
+    end, runtimes),
+    "\n"
+  )
 end
 
 --- Change the Java runtime.
@@ -1305,20 +1257,20 @@ end
 ---@param runtime nil|string Java runtime. Prompts for runtime if nil
 function M.set_runtime(runtime)
   local client
-  for _, c in pairs(util.get_clients({name = "jdtls"})) do
+  for _, c in pairs(util.get_clients({ name = "jdtls" })) do
     if c.config.settings.java then
       client = c
       break
     end
   end
   if not client then
-    vim.notify('No LSP client found with settings for java', vim.log.levels.ERROR)
+    vim.notify("No LSP client found with settings for java", vim.log.levels.ERROR)
     return
   end
   local runtimes = (client.config.settings.java.configuration or {}).runtimes or {}
   if #runtimes == 0 then
     vim.notify(
-      'No runtimes found in `config.settings.java.configuration.runtimes`. You need to add runtime paths to change the runtime',
+      "No runtimes found in `config.settings.java.configuration.runtimes`. You need to add runtime paths to change the runtime",
       vim.log.levels.WARN
     )
     return
@@ -1335,41 +1287,33 @@ function M.set_runtime(runtime)
     end
     if not match then
       vim.notify(
-        'Provided runtime `' .. runtime .. '` not found in `config.settings.java.configuration.runtimes`',
+        "Provided runtime `" .. runtime .. "` not found in `config.settings.java.configuration.runtimes`",
         vim.log.levels.WARN
       )
       return
     end
-    client:notify('workspace/didChangeConfiguration', { settings = client.config.settings })
+    client:notify("workspace/didChangeConfiguration", { settings = client.config.settings })
   else
-    ui.pick_one_async(
-      runtimes,
-      'Runtime> ',
-      function(r)
-        return r.name .. ' (' .. r.path .. ')'
-      end,
-      function(selected_runtime)
-        if not selected_runtime then
-          return
-        end
-        selected_runtime.default = true
-        for _, r in pairs(runtimes) do
-          if r ~= selected_runtime then
-            r.default = nil
-          end
-        end
-        client:notify('workspace/didChangeConfiguration', { settings = client.config.settings })
+    ui.pick_one_async(runtimes, "Runtime> ", function(r)
+      return r.name .. " (" .. r.path .. ")"
+    end, function(selected_runtime)
+      if not selected_runtime then
+        return
       end
-    )
+      selected_runtime.default = true
+      for _, r in pairs(runtimes) do
+        if r ~= selected_runtime then
+          r.default = nil
+        end
+      end
+      client:notify("workspace/didChangeConfiguration", { settings = client.config.settings })
+    end)
   end
 end
-
-
 
 ---@class jdtls.ExtendedDocumentSymbol : lsp.DocumentSymbol
 ---@field uri string?
 ---@field __parent jdtls.ExtendedDocumentSymbol?
-
 
 --- Queries the symbols of the current class - including those inherited from
 --- base classes - and shows the result using ui.select.
@@ -1417,10 +1361,10 @@ function M.extended_symbols()
     local range = item.range
     api.nvim_win_set_cursor(win, {
       range.start.line + 1,
-      range.start.character
+      range.start.character,
     })
     api.nvim_win_call(win, function()
-      vim.cmd('normal! zvzz')
+      vim.cmd("normal! zvzz")
     end)
   end
 
@@ -1452,9 +1396,9 @@ function M.extended_symbols()
       end
       if next(path) then
         local reverse_path = vim.iter(path):rev():totable()
-        return string.format('[%s] %s: %s', kind, table.concat(reverse_path, ' » '), item.name)
+        return string.format("[%s] %s: %s", kind, table.concat(reverse_path, " » "), item.name)
       else
-        return string.format('[%s] %s', kind, item.name)
+        return string.format("[%s] %s", kind, item.name)
       end
     end
     ui.pick_one_async(items, prompt, format_item, jump)
@@ -1486,6 +1430,5 @@ function M.extended_symbols()
     client:request(method, params, on_response, bufnr)
   end
 end
-
 
 return M

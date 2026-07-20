@@ -4,14 +4,20 @@ local M = {}
 ---@param client vim.lsp.Client
 ---@return vim.lsp.Client
 function M.add_client_methods(client)
-  if vim.fn.has('nvim-0.11') == 1 then
+  if vim.fn.has("nvim-0.11") == 1 then
     return client
   end
 
   return setmetatable({
-    request = function(_, ...) return client.request(...) end,
-    notify = function (_, ...) return client.notify(...) end,
-    stop = function (_, ...) return client.stop(...) end,
+    request = function(_, ...)
+      return client.request(...)
+    end,
+    notify = function(_, ...)
+      return client.notify(...)
+    end,
+    stop = function(_, ...)
+      return client.stop(...)
+    end,
   }, { __index = client })
 end
 
@@ -22,16 +28,14 @@ function M.get_clients(...)
   return vim.tbl_map(M.add_client_methods, clients)
 end
 
-
 ---@return fun(client: vim.lsp.Client):boolean
 local function has_command_predicate(command)
   return function(client)
     local command_provider = client.server_capabilities.executeCommandProvider
-    local commands = type(command_provider) == 'table' and command_provider.commands or {}
+    local commands = type(command_provider) == "table" and command_provider.commands or {}
     return vim.tbl_contains(commands, command.command)
   end
 end
-
 
 function M.execute_command(command, callback, bufnr)
   local has_command = has_command_predicate(command)
@@ -41,13 +45,16 @@ function M.execute_command(command, callback, bufnr)
   end
   local num_clients = vim.tbl_count(clients)
   if num_clients == 0 then
-    vim.notify('No LSP client found that supports ' .. command.command, vim.log.levels.ERROR)
+    vim.notify("No LSP client found that supports " .. command.command, vim.log.levels.ERROR)
     return
   end
   if num_clients > 1 then
     vim.notify(
-      'Multiple LSP clients found that support ' .. command.command .. ' you should have at most one JDTLS server running',
-      vim.log.levels.WARN)
+      "Multiple LSP clients found that support "
+        .. command.command
+        .. " you should have at most one JDTLS server running",
+      vim.log.levels.WARN
+    )
   end
 
   local co
@@ -59,12 +66,11 @@ function M.execute_command(command, callback, bufnr)
       end
     end
   end
-  clients[1]:request('workspace/executeCommand', command, callback, bufnr)
+  clients[1]:request("workspace/executeCommand", command, callback, bufnr)
   if co then
     return coroutine.yield()
   end
 end
-
 
 ---@param mainclass string
 ---@param project string
@@ -94,12 +100,12 @@ function M.with_java_executable(mainclass, project, fn, bufnr)
   if vim.tbl_contains(supported_commands, resolve_java_executable) then
     params = {
       command = resolve_java_executable,
-      arguments = { mainclass, project }
+      arguments = { mainclass, project },
     }
     ---@param err lsp.ResponseError?
     on_response = function(err, java_exec)
       if err then
-        print('Could not resolve java executable: ' .. err.message)
+        print("Could not resolve java executable: " .. err.message)
       elseif java_exec then
         fn(java_exec)
       else
@@ -113,14 +119,14 @@ function M.with_java_executable(mainclass, project, fn, bufnr)
       arguments = {
         vim.uri_from_bufnr(bufnr),
         {
-          setting
-        }
-      }
+          setting,
+        },
+      },
     }
     ---@param err lsp.ResponseError?
     on_response = function(err, settings)
       if err then
-        print('Could not resolve java executable from settings: ' .. err.message)
+        print("Could not resolve java executable from settings: " .. err.message)
       else
         fn(settings[setting] .. "/bin/java")
       end
@@ -129,15 +135,14 @@ function M.with_java_executable(mainclass, project, fn, bufnr)
   client:request("workspace/executeCommand", params, on_response, bufnr)
 end
 
-
 function M.with_classpaths(fn)
   local bufnr = api.nvim_get_current_buf()
   local uri = vim.uri_from_bufnr(bufnr)
   require("jdtls.async").run(function()
     local is_test_file_cmd = {
-      command = 'java.project.isTestFile',
-      arguments = { uri }
-    };
+      command = "java.project.isTestFile",
+      arguments = { uri },
+    }
     local options
     if vim.startswith(uri, "jdt://") then
       options = vim.fn.json_encode({ scope = "runtime" })
@@ -145,29 +150,28 @@ function M.with_classpaths(fn)
       local err, is_test_file = M.execute_command(is_test_file_cmd, nil, bufnr)
       assert(not err, vim.inspect(err))
       options = vim.fn.json_encode({
-        scope = is_test_file and 'test' or 'runtime';
+        scope = is_test_file and "test" or "runtime",
       })
     end
     local cmd = {
-      command = 'java.project.getClasspaths';
-      arguments = { uri, options };
+      command = "java.project.getClasspaths",
+      arguments = { uri, options },
     }
     local err1, resp = M.execute_command(cmd, nil, bufnr)
     if err1 then
-      print('Error executing java.project.getClasspaths: ' .. err1.message)
+      print("Error executing java.project.getClasspaths: " .. err1.message)
     else
       fn(resp)
     end
   end)
 end
 
-
 function M.resolve_classname()
   local bufnr = api.nvim_get_current_buf()
   local lines = api.nvim_buf_get_lines(bufnr, 0, -1, true)
   local pkgname
   for _, line in ipairs(lines) do
-    local match = line:match('package ([a-z0-9_\\.]+);')
+    local match = line:match("package ([a-z0-9_\\.]+);")
     if match then
       pkgname = match
       break
@@ -178,11 +182,14 @@ function M.resolve_classname()
   if vim.startswith(fname, "jdt://") then
     local parser, err = vim.treesitter.get_parser(bufnr, nil, { error = false })
     assert(parser, err)
-    local query = vim.treesitter.query.parse(parser:lang(), [[
+    local query = vim.treesitter.query.parse(
+      parser:lang(),
+      [[
       (class_declaration
         name: (identifier) @name
       )
-    ]])
+    ]]
+    )
     local tree = parser:parse()[1]
     assert(tree, "Must be able to parse buffer")
     local root = tree:root()
@@ -191,19 +198,18 @@ function M.resolve_classname()
       class_node = node
     end
     if class_node then
-      classname =  vim.treesitter.get_node_text(class_node, bufnr)
+      classname = vim.treesitter.get_node_text(class_node, bufnr)
     else
       error("Couldn't find class declaration in: " .. fname)
     end
   else
-    classname = vim.fn.fnamemodify(fname, ':t:r')
+    classname = vim.fn.fnamemodify(fname, ":t:r")
   end
   if pkgname then
-    return pkgname .. '.' .. classname
+    return pkgname .. "." .. classname
   else
     return classname
   end
 end
-
 
 return M

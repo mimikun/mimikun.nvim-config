@@ -1,6 +1,5 @@
 ---@mod jdtls.tests Functions which require vscode-java-test
 
-
 local api = vim.api
 local M = {}
 
@@ -12,12 +11,12 @@ function M.generate(opts)
   local win = api.nvim_get_current_win()
   local cursor = api.nvim_win_get_cursor(win) -- (1, 0) indexed
   local lnum = cursor[1]
-  local line = api.nvim_buf_get_lines(bufnr, lnum -1, lnum, true)[1]
+  local line = api.nvim_buf_get_lines(bufnr, lnum - 1, lnum, true)[1]
   local byteoffset = vim.fn.line2byte(lnum) + vim.str_byteindex(line, cursor[2], true)
   local command = {
     title = "Generate tests",
     command = "vscode.java.test.generateTests",
-    arguments = {vim.uri_from_bufnr(bufnr), byteoffset},
+    arguments = { vim.uri_from_bufnr(bufnr), byteoffset },
   }
   ---@param result? lsp.WorkspaceEdit
   local on_result = function(err, result)
@@ -53,7 +52,6 @@ function M.generate(opts)
   end
   require("jdtls.util").execute_command(command, on_result, bufnr)
 end
-
 
 --- Go to the related subjects
 --- If in a test file, this will jump to classes the test might cover
@@ -107,39 +105,42 @@ function M.goto_subjects(opts)
   if opts.goto_tests == nil then
     local is_testfile_cmd = {
       command = "java.project.isTestFile",
-      arguments = { vim.uri_from_bufnr(bufnr) }
+      arguments = { vim.uri_from_bufnr(bufnr) },
     }
     util.execute_command(is_testfile_cmd, function(err, is_testfile)
       assert(not err, err)
       local command = {
         command = "vscode.java.test.navigateToTestOrTarget",
-        arguments = { vim.uri_from_bufnr(bufnr), not is_testfile }
+        arguments = { vim.uri_from_bufnr(bufnr), not is_testfile },
       }
       require("jdtls.util").execute_command(command, on_result, bufnr)
     end, bufnr)
   else
     local command = {
       command = "vscode.java.test.navigateToTestOrTarget",
-      arguments = { vim.uri_from_bufnr(bufnr), opts.goto_tests }
+      arguments = { vim.uri_from_bufnr(bufnr), opts.goto_tests },
     }
     require("jdtls.util").execute_command(command, on_result, bufnr)
   end
 end
 
-
 ---@private
 function M._ask_client_for_choice(prompt, choices, pick_many)
   local label = function(x)
-    local description = x.description and (' ' .. x.description) or ''
+    local description = x.description and (" " .. x.description) or ""
     return x.label .. description
   end
   local ui = require("jdtls.ui")
   if pick_many then
     local opts = {
-      is_selected = function(x) return x.picked end
+      is_selected = function(x)
+        return x.picked
+      end,
     }
     local result = ui.pick_many(choices, prompt, label, opts)
-    return vim.tbl_map(function(x) return x.value or x.label end, result)
+    return vim.tbl_map(function(x)
+      return x.value or x.label
+    end, result)
   else
     local co, is_main = coroutine.running()
     local choice
@@ -154,6 +155,5 @@ function M._ask_client_for_choice(prompt, choices, pick_many)
     return choice and (choice.value or choice.label) or vim.NIL
   end
 end
-
 
 return M

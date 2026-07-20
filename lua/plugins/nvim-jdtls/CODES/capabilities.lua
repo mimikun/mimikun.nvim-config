@@ -13,6 +13,6 @@ return {
     "extractMethod",
     "extractVariable",
     "extractConstant",
-    "extractVariableAllOccurrence"
+    "extractVariableAllOccurrence",
   },
 }

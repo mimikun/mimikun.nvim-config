@@ -11,14 +11,13 @@ function M.pick_one_async(items, prompt, label_fn, cb)
   cb(result)
 end
 
-
 ---@generic T
 ---@param items T[]
 ---@param prompt string
 ---@param label_fn fun(item: T): string
 ---@result T|nil
 function M.pick_one(items, prompt, label_fn)
-  local choices = {prompt}
+  local choices = { prompt }
   for i, item in ipairs(items) do
     table.insert(choices, string.format("%d: %s", i, label_fn(item)))
   end
@@ -29,7 +28,6 @@ function M.pick_one(items, prompt, label_fn)
   return items[choice]
 end
 
-
 local function index_of(xs, term)
   for i, x in pairs(xs) do
     if x == term then
@@ -38,7 +36,6 @@ local function index_of(xs, term)
   end
   return -1
 end
-
 
 ---@param index integer
 ---@param choices string[]
@@ -56,7 +53,6 @@ local function mark_selected(index, choices, items, selected)
     table.remove(selected, idx)
   end
 end
-
 
 function M.pick_many(items, prompt, label_f, opts)
   if not items or #items == 0 then
@@ -109,6 +105,5 @@ function M.pick_many(items, prompt, label_f, opts)
   end
   return selected
 end
-
 
 return M

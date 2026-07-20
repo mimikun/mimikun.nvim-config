@@ -2,7 +2,7 @@
 
 local api = vim.api
 local uv = vim.loop
-local util = require('jdtls.util')
+local util = require("jdtls.util")
 local resolve_classname = util.resolve_classname
 local with_java_executable = util.with_java_executable
 local M = {}
@@ -10,13 +10,13 @@ local default_config_overrides = {}
 
 local function fetch_needs_preview(mainclass, project, cb, bufnr)
   local params = {
-    command = 'vscode.java.checkProjectSettings',
+    command = "vscode.java.checkProjectSettings",
     arguments = vim.fn.json_encode({
       className = mainclass,
       projectName = project,
       inheritedOptions = true,
-      expectedOptions = { ['org.eclipse.jdt.core.compiler.problem.enablePreviewFeatures'] = 'enabled' }
-    })
+      expectedOptions = { ["org.eclipse.jdt.core.compiler.problem.enablePreviewFeatures"] = "enabled" },
+    }),
   }
   util.execute_command(params, function(err, use_preview)
     assert(not err, err and (err.message or vim.inspect(err)))
@@ -24,13 +24,14 @@ local function fetch_needs_preview(mainclass, project, cb, bufnr)
   end, bufnr)
 end
 
-
 local function enrich_dap_config(config_, on_config)
-  if config_.mainClass
+  if
+    config_.mainClass
     and config_.projectName
     and config_.modulePaths ~= nil
     and config_.classPaths ~= nil
-    and config_.javaExec then
+    and config_.javaExec
+  then
     on_config(config_)
     return
   end
@@ -39,7 +40,7 @@ local function enrich_dap_config(config_, on_config)
     config.mainClass = resolve_classname()
   end
   local bufnr = api.nvim_get_current_buf()
-  util.execute_command({command = 'vscode.java.resolveMainClass'}, function(err, mainclasses)
+  util.execute_command({ command = "vscode.java.resolveMainClass" }, function(err, mainclasses)
     assert(not err, err and (err.message or vim.inspect(err)))
 
     if not config.projectName then
@@ -55,25 +56,26 @@ local function enrich_dap_config(config_, on_config)
         end
       end
     end
-    config.projectName = config.projectName or ''
+    config.projectName = config.projectName or ""
     with_java_executable(config.mainClass, config.projectName, function(java_exec)
       config.javaExec = config.javaExec or java_exec
       local params = {
-        command = 'vscode.java.resolveClasspath',
-        arguments = { config.mainClass, config.projectName }
+        command = "vscode.java.resolveClasspath",
+        arguments = { config.mainClass, config.projectName },
       }
       util.execute_command(params, function(err1, paths)
         assert(not err1, err1 and (err1.message or vim.inspect(err1)))
         if paths then
           config.modulePaths = config.modulePaths or paths[1]
-          config.classPaths = config.classPaths or vim.tbl_filter(
-            function(x)
+          config.classPaths = config.classPaths
+            or vim.tbl_filter(function(x)
               return vim.fn.isdirectory(x) == 1 or vim.fn.filereadable(x) == 1
-            end,
-            paths[2]
-          )
+            end, paths[2])
         else
-          vim.notify("Could not resolve classpaths. Project may have compile errors or unresolved dependencies", vim.log.levels.WARN)
+          vim.notify(
+            "Could not resolve classpaths. Project may have compile errors or unresolved dependencies",
+            vim.log.levels.WARN
+          )
         end
         on_config(config)
       end, bufnr)
@@ -81,13 +83,10 @@ local function enrich_dap_config(config_, on_config)
   end, bufnr)
 end
 
-
 local function start_debug_adapter(callback, config)
   -- User could trigger debug session for another project, open in another buffer
   local jdtls = vim.tbl_filter(function(client)
-    return client.name == 'jdtls'
-      and client.config
-      and client.config.root_dir == config.cwd
+    return client.name == "jdtls" and client.config and client.config.root_dir == config.cwd
   end, util.get_clients())[1]
   local bufnr
   if jdtls then
@@ -95,26 +94,24 @@ local function start_debug_adapter(callback, config)
   else
     bufnr = vim.api.nvim_get_current_buf()
   end
-  util.execute_command({command = 'vscode.java.startDebugSession'}, function(err0, port)
+  util.execute_command({ command = "vscode.java.startDebugSession" }, function(err0, port)
     assert(not err0, vim.inspect(err0))
 
     callback({
-      type = 'server';
-      host = '127.0.0.1';
-      port = port;
-      enrich_config = enrich_dap_config;
+      type = "server",
+      host = "127.0.0.1",
+      port = port,
+      enrich_config = enrich_dap_config,
     })
   end, bufnr)
 end
-
 
 local TestKind = {
   None = -1,
   JUnit = 0,
   JUnit5 = 1,
-  TestNG = 2
+  TestNG = 2,
 }
-
 
 local LegacyTestLevel = {
   Root = 0,
@@ -133,15 +130,14 @@ local TestLevel = {
   Method = 6,
 }
 
-
 local function make_request_args(lens, uri)
-  local methodname = ''
-  local name_parts = vim.split(lens.fullName, '#')
+  local methodname = ""
+  local name_parts = vim.split(lens.fullName, "#")
   local classname = name_parts[1]
   if #name_parts > 1 then
     methodname = name_parts[2]
     if lens.paramTypes and #lens.paramTypes > 0 then
-      methodname = string.format('%s(%s)', methodname, table.concat(lens.paramTypes, ','))
+      methodname = string.format("%s(%s)", methodname, table.concat(lens.paramTypes, ","))
     end
   end
   -- Format changes with https://github.com/microsoft/vscode-java-test/pull/1257
@@ -154,9 +150,9 @@ local function make_request_args(lens, uri)
       testLevel = lens.testLevel,
     }
     if lens.testKind == TestKind.TestNG or lens.testLevel == TestLevel.Class then
-      req_arguments.testNames = { lens.fullName, }
+      req_arguments.testNames = { lens.fullName }
     elseif lens.testLevel then
-      req_arguments.testNames = { lens.jdtHandler, }
+      req_arguments.testNames = { lens.jdtHandler }
     end
   else
     req_arguments = {
@@ -172,20 +168,19 @@ local function make_request_args(lens, uri)
       testKind = lens.kind,
     }
     if lens.level == LegacyTestLevel.Method then
-      req_arguments['start'] = lens.location.range['start']
-      req_arguments['end'] = lens.location.range['end']
+      req_arguments["start"] = lens.location.range["start"]
+      req_arguments["end"] = lens.location.range["end"]
     end
   end
   return req_arguments
 end
 
-
 local function fetch_candidates(context, on_candidates)
-  local cmd_codelens = 'vscode.java.test.search.codelens'
-  local cmd_find_tests = 'vscode.java.test.findTestTypesAndMethods'
+  local cmd_codelens = "vscode.java.test.search.codelens"
+  local cmd_find_tests = "vscode.java.test.findTestTypesAndMethods"
   local client = nil
   local params = {
-    arguments = { context.uri };
+    arguments = { context.uri },
   }
   local clients = util.get_clients({ bufnr = context.bufnr })
   if not next(clients) then
@@ -193,7 +188,7 @@ local function fetch_candidates(context, on_candidates)
   end
   for _, c in ipairs(clients) do
     local command_provider = c.server_capabilities.executeCommandProvider
-    local commands = type(command_provider) == 'table' and command_provider.commands or {}
+    local commands = type(command_provider) == "table" and command_provider.commands or {}
     if vim.tbl_contains(commands, cmd_codelens) then
       params.command = cmd_codelens
       client = c
@@ -206,22 +201,22 @@ local function fetch_candidates(context, on_candidates)
   end
   if not client then
     local msg = (
-      'No LSP client found that supports resolving possible test cases. '
-        .. 'Did you add the JAR files of vscode-java-test to `config.init_options.bundles`?')
+      "No LSP client found that supports resolving possible test cases. "
+      .. "Did you add the JAR files of vscode-java-test to `config.init_options.bundles`?"
+    )
     vim.notify(msg, vim.log.levels.WARN)
     return
   end
 
   local handler = function(err, result)
     if err then
-      vim.notify('Error fetching test candidates: ' .. (err.message or vim.inspect(err)), vim.log.levels.ERROR)
+      vim.notify("Error fetching test candidates: " .. (err.message or vim.inspect(err)), vim.log.levels.ERROR)
     else
       on_candidates(result or {})
     end
   end
-  client:request('workspace/executeCommand', params, handler, context.bufnr)
+  client:request("workspace/executeCommand", params, handler, context.bufnr)
 end
-
 
 local function merge_unique(xs, ys)
   local result = {}
@@ -240,20 +235,23 @@ local function merge_unique(xs, ys)
   return result
 end
 
-
 local function fetch_launch_args(lens, context, on_launch_args)
   local req_arguments = make_request_args(lens, context.uri)
   local cmd_junit_args = {
-    command = 'vscode.java.test.junit.argument',
+    command = "vscode.java.test.junit.argument",
     arguments = { vim.fn.json_encode(req_arguments) },
   }
   util.execute_command(cmd_junit_args, function(err, launch_args)
     if err then
-      print('Error retrieving launch arguments: ' .. (err.message or vim.inspect(err)))
+      print("Error retrieving launch arguments: " .. (err.message or vim.inspect(err)))
     elseif not launch_args then
-      error((
-        'Server must return launch_args as response to "vscode.java.test.junit.argument" command. '
-        .. 'Check server logs via `:JdtShowlogs`. Sent: ' .. vim.inspect(req_arguments)))
+      error(
+        (
+          'Server must return launch_args as response to "vscode.java.test.junit.argument" command. '
+          .. "Check server logs via `:JdtShowlogs`. Sent: "
+          .. vim.inspect(req_arguments)
+        )
+      )
     elseif launch_args.errorMessage then
       vim.notify(launch_args.errorMessage, vim.log.levels.WARN)
     else
@@ -267,19 +265,15 @@ local function fetch_launch_args(lens, context, on_launch_args)
       -- See https://github.com/microsoft/vscode-java-test/issues/1073
       --
       -- That is why `java.project.getClasspaths` is used as well.
-      local options = vim.fn.json_encode({ scope = 'test'; })
+      local options = vim.fn.json_encode({ scope = "test" })
       local cmd = {
-        command = 'java.project.getClasspaths',
+        command = "java.project.getClasspaths",
         arguments = { vim.uri_from_bufnr(context.bufnr), options },
       }
       util.execute_command(cmd, function(err1, resp)
         if err1 then
-          local msg = string.format(
-            "%s bufnr=%d fname=%s",
-            err1.message,
-            context.bufnr,
-            api.nvim_buf_get_name(context.bufnr)
-          )
+          local msg =
+            string.format("%s bufnr=%d fname=%s", err1.message, context.bufnr, api.nvim_buf_get_name(context.bufnr))
           error(msg)
         end
         launch_args.classpath = merge_unique(launch_args.classpath, resp.classpaths)
@@ -289,10 +283,9 @@ local function fetch_launch_args(lens, context, on_launch_args)
   end, context.bufnr)
 end
 
-
 local function get_method_lens_above_cursor(lenses_tree, lnum)
   local result = {
-    best_match = nil
+    best_match = nil,
   }
   local find_nearest
   find_nearest = function(lenses)
@@ -317,7 +310,6 @@ local function get_method_lens_above_cursor(lenses_tree, lnum)
   return result.best_match
 end
 
-
 local function get_first_class_lens(lenses)
   for _, lens in pairs(lenses) do
     -- compatibility for versions prior to
@@ -335,11 +327,11 @@ end
 ---
 ---@return string? path
 local function testng_runner()
-  local vscode_runner = 'com.microsoft.java.test.runner-jar-with-dependencies.jar'
-  local client = util.get_clients({name='jdtls'})[1]
+  local vscode_runner = "com.microsoft.java.test.runner-jar-with-dependencies.jar"
+  local client = util.get_clients({ name = "jdtls" })[1]
   local bundles = client and client.config.init_options.bundles or {}
   for _, jar_path in pairs(bundles) do
-    local parts = vim.split(jar_path, '/')
+    local parts = vim.split(jar_path, "/")
     if parts[#parts] == vscode_runner then
       return jar_path
     end
@@ -357,47 +349,46 @@ end
 
 local function make_config(lens, launch_args, config_overrides)
   local config = {
-    name = lens.fullName;
-    type = 'java';
-    request = 'launch';
-    mainClass = launch_args.mainClass;
-    projectName = launch_args.projectName;
-    cwd = launch_args.workingDirectory;
-    classPaths = launch_args.classpath;
-    modulePaths = launch_args.modulepath;
-    vmArgs = table.concat(launch_args.vmArguments, ' ');
-    noDebug = false;
+    name = lens.fullName,
+    type = "java",
+    request = "launch",
+    mainClass = launch_args.mainClass,
+    projectName = launch_args.projectName,
+    cwd = launch_args.workingDirectory,
+    classPaths = launch_args.classpath,
+    modulePaths = launch_args.modulepath,
+    vmArgs = table.concat(launch_args.vmArguments, " "),
+    noDebug = false,
   }
-  config = vim.tbl_extend('force', config, config_overrides or default_config_overrides)
+  config = vim.tbl_extend("force", config, config_overrides or default_config_overrides)
   if lens.testKind == TestKind.TestNG or lens.kind == TestKind.TestNG then
     local jar = testng_runner()
     if jar then
-      config.mainClass = 'com.microsoft.java.test.runner.Launcher'
+      config.mainClass = "com.microsoft.java.test.runner.Launcher"
       -- 1234 is a placeholder for the actual port, set later in `run`.
-      config.args = string.format('1234 testng %s', lens.fullName)
-      table.insert(config.classPaths, jar);
+      config.args = string.format("1234 testng %s", lens.fullName)
+      table.insert(config.classPaths, jar)
     else
       local msg = (
         "Using basic TestNG integration. "
-        .. "For better test results add com.microsoft.java.test.runner-jar-with-dependencies.jar to one of the `bundles` folders")
+        .. "For better test results add com.microsoft.java.test.runner-jar-with-dependencies.jar to one of the `bundles` folders"
+      )
       vim.notify(msg)
-      config.mainClass = 'org.testng.TestNG'
+      config.mainClass = "org.testng.TestNG"
       -- id is in the format <project>@<class>#<method>
-      local parts = vim.split(lens.id, '@')
-      parts  = vim.split(parts[2], '#')
+      local parts = vim.split(lens.id, "@")
+      parts = vim.split(parts[2], "#")
       if #parts > 1 then
-        config.args = string.format('-testclass %s -methods %s.%s', parts[1], parts[1], parts[2])
+        config.args = string.format("-testclass %s -methods %s.%s", parts[1], parts[1], parts[2])
       else
-        config.args = string.format('-testclass %s', parts[1])
+        config.args = string.format("-testclass %s", parts[1])
       end
     end
   else
-    config.args = table.concat(launch_args.programArguments, ' ');
+    config.args = table.concat(launch_args.programArguments, " ")
   end
   return config
 end
-
-
 
 ---@param bufnr? integer
 ---@return JdtDapContext
@@ -405,54 +396,52 @@ local function make_context(bufnr)
   bufnr = assert((bufnr == nil or bufnr == 0) and api.nvim_get_current_buf() or bufnr)
   return {
     bufnr = bufnr,
-    uri = vim.uri_from_bufnr(bufnr)
+    uri = vim.uri_from_bufnr(bufnr),
   }
 end
-
 
 local function maybe_repeat(lens, config, context, opts, items)
   if not opts.until_error then
     return
   end
   if opts.until_error > 0 and #items == 0 then
-    print('`until_error` set and no tests failed. Repeating.', opts.until_error)
+    print("`until_error` set and no tests failed. Repeating.", opts.until_error)
     opts.until_error = opts.until_error - 1
     local repeat_test = function()
       M.experimental.run(lens, config, context, opts)
     end
     vim.defer_fn(repeat_test, 2000)
   elseif opts.until_error <= 0 then
-    print('Stopping repeat, `until_error` reached', opts.until_error)
+    print("Stopping repeat, `until_error` reached", opts.until_error)
   end
 end
 
-
 ---@param opts JdtTestOpts
 local function run(lens, config, context, opts)
-  local ok, dap = pcall(require, 'dap')
+  local ok, dap = pcall(require, "dap")
   if not ok then
-    vim.notify('`nvim-dap` must be installed to run and debug methods')
+    vim.notify("`nvim-dap` must be installed to run and debug methods")
     return
   end
-  config = vim.tbl_extend('force', config, opts.config or {})
+  config = vim.tbl_extend("force", config, opts.config or {})
   local test_results
   local server = nil
 
-  if lens.kind == TestKind.TestNG or lens.testKind == TestKind.TestNG  then
-    local testng = require('jdtls.testng')
+  if lens.kind == TestKind.TestNG or lens.testKind == TestKind.TestNG then
+    local testng = require("jdtls.testng")
     local run_opts = {}
     if config.mainClass == "com.microsoft.java.test.runner.Launcher" then
       function run_opts.before(conf)
         server = assert(uv.new_tcp(), "uv.new_tcp() must return handle")
         test_results = testng.mk_test_results(context.bufnr)
-        server:bind('127.0.0.1', 0)
+        server:bind("127.0.0.1", 0)
         server:listen(128, function(err2)
           assert(not err2, err2)
           local sock = assert(vim.loop.new_tcp(), "uv.new_tcp must return handle")
           server:accept(sock)
           sock:read_start(test_results.mk_reader(sock))
         end)
-        conf.args = conf.args:gsub('^([0-9]+)', server:getsockname().port);
+        conf.args = conf.args:gsub("^([0-9]+)", server:getsockname().port)
         return conf
       end
 
@@ -477,21 +466,21 @@ local function run(lens, config, context, opts)
     return
   end
 
-  local junit = require('jdtls.junit')
+  local junit = require("jdtls.junit")
   dap.run(config, {
     before = function(conf)
       server = assert(uv.new_tcp(), "uv.new_tcp() must return handle")
       test_results = junit.mk_test_results(context.bufnr)
-      server:bind('127.0.0.1', 0)
+      server:bind("127.0.0.1", 0)
       server:listen(128, function(err2)
         assert(not err2, err2)
         local sock = assert(vim.loop.new_tcp(), "uv.new_tcp must return handle")
         server:accept(sock)
         sock:read_start(test_results.mk_reader(sock))
       end)
-      conf.args = conf.args:gsub('-port ([0-9]+)', '-port ' .. server:getsockname().port);
+      conf.args = conf.args:gsub("-port ([0-9]+)", "-port " .. server:getsockname().port)
       return conf
-    end;
+    end,
     after = function()
       if server then
         server:shutdown()
@@ -502,10 +491,9 @@ local function run(lens, config, context, opts)
       if opts.after_test then
         opts.after_test(items, tests)
       end
-    end;
+    end,
   })
 end
-
 
 --- API of these methods is unstable and might change in the future
 M.experimental = {
@@ -524,7 +512,7 @@ function M.test_class(opts)
   fetch_candidates(context, function(lenses)
     local lens = get_first_class_lens(lenses)
     if not lens then
-      vim.notify('No test class found')
+      vim.notify("No test class found")
       return
     end
     fetch_launch_args(lens, context, function(launch_args)
@@ -533,7 +521,6 @@ function M.test_class(opts)
     end)
   end)
 end
-
 
 --- Debug the nearest test method in the current buffer
 --- @param opts nil|JdtTestOpts
@@ -544,7 +531,7 @@ function M.test_nearest_method(opts)
   fetch_candidates(context, function(lenses)
     local lens = get_method_lens_above_cursor(lenses, lnum)
     if not lens then
-      vim.notify('No suitable test method found')
+      vim.notify("No suitable test method found")
       return
     end
     fetch_launch_args(lens, context, function(launch_args)
@@ -556,7 +543,7 @@ end
 
 local function populate_candidates(list, lenses)
   for _, v in pairs(lenses) do
-    table.insert(list,  v)
+    table.insert(list, v)
     if v.children ~= nil then
       populate_candidates(list, v.children)
     end
@@ -573,23 +560,19 @@ function M.pick_test(opts)
     local candidates = {}
     populate_candidates(candidates, lenses)
 
-    require('jdtls.ui').pick_one_async(
-      candidates,
-      'Tests> ',
-      function(lens) return lens.fullName end,
-      function(lens)
-        if not lens then
-          return
-        end
-        fetch_launch_args(lens, context, function(launch_args)
-          local config = make_config(lens, launch_args, opts.config_overrides)
-          run(lens, config, context, opts)
-        end)
+    require("jdtls.ui").pick_one_async(candidates, "Tests> ", function(lens)
+      return lens.fullName
+    end, function(lens)
+      if not lens then
+        return
       end
-    )
+      fetch_launch_args(lens, context, function(launch_args)
+        local config = make_config(lens, launch_args, opts.config_overrides)
+        run(lens, config, context, opts)
+      end)
+    end)
   end)
 end
-
 
 local hotcodereplace_type = {
   ERROR = "ERROR",
@@ -599,22 +582,21 @@ local hotcodereplace_type = {
   BUILD_COMPLETE = "BUILD_COMPLETE",
 }
 
-
 --- Discover executable main functions in the project
 ---@param opts nil|JdtMainConfigOpts See |JdtMainConfigOpts|
 ---@param callback fun(configurations: table[])
 function M.fetch_main_configs(opts, callback)
   opts = opts or {}
-  if type(opts) == 'function' then
-    vim.notify('First argument to `fetch_main_configs` changed to a `opts` table', vim.log.levels.WARN)
+  if type(opts) == "function" then
+    vim.notify("First argument to `fetch_main_configs` changed to a `opts` table", vim.log.levels.WARN)
     callback = opts
     opts = {}
   end
   local configurations = {}
   local bufnr = api.nvim_get_current_buf()
-  local jdtls = util.get_clients({ bufnr = bufnr, name = "jdtls"})[1]
+  local jdtls = util.get_clients({ bufnr = bufnr, name = "jdtls" })[1]
   local root_dir = jdtls and jdtls.config and jdtls.config.root_dir
-  util.execute_command({command = 'vscode.java.resolveMainClass'}, function(err, mainclasses)
+  util.execute_command({ command = "vscode.java.resolveMainClass" }, function(err, mainclasses)
     assert(not err, vim.inspect(err))
 
     local remaining = #mainclasses
@@ -627,31 +609,42 @@ function M.fetch_main_configs(opts, callback)
       local project = mc.projectName
       with_java_executable(mainclass, project, function(java_exec)
         fetch_needs_preview(mainclass, project, function(use_preview)
-          util.execute_command({command = 'vscode.java.resolveClasspath', arguments = { mainclass, project }}, function(err1, paths)
-            remaining = remaining - 1
-            if err1 then
-              print(string.format('Could not resolve classpath and modulepath for %s/%s: %s', project, mainclass, err1.message))
-              return
-            end
-            local config = {
-              cwd = root_dir;
-              type = 'java';
-              name = 'Launch ' .. (project or '') .. ': ' .. mainclass;
-              projectName = project;
-              mainClass = mainclass;
-              modulePaths = paths[1];
-              classPaths = paths[2];
-              javaExec = java_exec;
-              request = 'launch';
-              console = 'integratedTerminal';
-              vmArgs = use_preview and '--enable-preview' or nil;
-            }
-            config = vim.tbl_extend('force', config, opts.config_overrides or default_config_overrides)
-            table.insert(configurations, config)
-            if remaining == 0 then
-              callback(configurations)
-            end
-          end, bufnr)
+          util.execute_command(
+            { command = "vscode.java.resolveClasspath", arguments = { mainclass, project } },
+            function(err1, paths)
+              remaining = remaining - 1
+              if err1 then
+                print(
+                  string.format(
+                    "Could not resolve classpath and modulepath for %s/%s: %s",
+                    project,
+                    mainclass,
+                    err1.message
+                  )
+                )
+                return
+              end
+              local config = {
+                cwd = root_dir,
+                type = "java",
+                name = "Launch " .. (project or "") .. ": " .. mainclass,
+                projectName = project,
+                mainClass = mainclass,
+                modulePaths = paths[1],
+                classPaths = paths[2],
+                javaExec = java_exec,
+                request = "launch",
+                console = "integratedTerminal",
+                vmArgs = use_preview and "--enable-preview" or nil,
+              }
+              config = vim.tbl_extend("force", config, opts.config_overrides or default_config_overrides)
+              table.insert(configurations, config)
+              if remaining == 0 then
+                callback(configurations)
+              end
+            end,
+            bufnr
+          )
         end, bufnr)
       end, bufnr)
     end
@@ -661,15 +654,13 @@ end
 ---@class JdtMainConfigOpts
 ---@field config_overrides nil|JdtDapConfig Overrides for the |dap-configuration|, see |JdtDapConfig|
 
-
-
 --- Discover main classes in the project and setup |dap-configuration| entries for Java for them.
 ---@param opts nil|JdtSetupMainConfigOpts See |JdtSetupMainConfigOpts|
 function M.setup_dap_main_class_configs(opts)
   opts = opts or {}
-  local status, dap = pcall(require, 'dap')
+  local status, dap = pcall(require, "dap")
   if not status then
-    print('nvim-dap is not available')
+    print("nvim-dap is not available")
     return
   end
   if dap.providers and dap.providers.configs then
@@ -677,7 +668,7 @@ function M.setup_dap_main_class_configs(opts)
     dap.providers.configs["jdtls"] = nil
   end
   if opts.verbose then
-    vim.notify('Fetching debug configurations')
+    vim.notify("Fetching debug configurations")
   end
   local on_ready = opts.on_ready or function() end
   M.fetch_main_configs(opts, function(configurations)
@@ -692,7 +683,7 @@ function M.setup_dap_main_class_configs(opts)
     end
     dap.configurations.java = dap_configurations
     if opts.verbose then
-      vim.notify(string.format('Updated %s debug configuration(s)', #configurations))
+      vim.notify(string.format("Updated %s debug configuration(s)", #configurations))
     end
     on_ready()
   end)
@@ -702,14 +693,12 @@ end
 ---@field verbose nil|boolean Print notifications on start and once finished. Default is false.
 ---@field on_ready nil|function Callback called when the configurations got updated
 
-
-
 --- Register a |dap-adapter| for java. Requires nvim-dap
 ---@param opts nil|JdtSetupDapOpts See |JdtSetupDapOpts|
 function M.setup_dap(opts)
-  local status, dap = pcall(require, 'dap')
+  local status, dap = pcall(require, "dap")
   if not status then
-    print('nvim-dap is not available')
+    print("nvim-dap is not available")
     return
   end
   if dap.adapters.java then
@@ -719,16 +708,14 @@ function M.setup_dap(opts)
   default_config_overrides = opts.config_overrides or {}
 
   -- Silence warnings for custom events from java-debug
-  dap.listeners.before["event_processid"]["jdtls"] = function()
-  end
-  dap.listeners.before["event_telemetry"]["jdtls"] = function()
-  end
+  dap.listeners.before["event_processid"]["jdtls"] = function() end
+  dap.listeners.before["event_telemetry"]["jdtls"] = function() end
 
-  dap.listeners.before['event_hotcodereplace']['jdtls'] = function(session, body)
+  dap.listeners.before["event_hotcodereplace"]["jdtls"] = function(session, body)
     if body.changeType == hotcodereplace_type.BUILD_COMPLETE then
-      if opts.hotcodereplace == 'auto' then
-        vim.notify('Applying code changes')
-        session:request('redefineClasses', nil, function(err)
+      if opts.hotcodereplace == "auto" then
+        vim.notify("Applying code changes")
+        session:request("redefineClasses", nil, function(err)
           assert(not err, vim.inspect(err))
         end)
       end
@@ -739,7 +726,7 @@ function M.setup_dap(opts)
   dap.adapters.java = start_debug_adapter
 
   if dap.providers and dap.providers.configs then
-    dap.providers.configs["jdtls"] = function (bufnr)
+    dap.providers.configs["jdtls"] = function(bufnr)
       if vim.bo[bufnr].filetype ~= "java" then
         return {}
       end

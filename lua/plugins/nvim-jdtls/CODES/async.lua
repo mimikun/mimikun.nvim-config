@@ -1,6 +1,5 @@
 local M = {}
 
-
 --- Runs the given function in a coroutine, shows uncaught errors using vim.notify
 ---
 ---@param fn function
@@ -17,6 +16,5 @@ function M.run(fn)
     end)()
   end
 end
-
 
 return M
