@@ -1,0 +1,19 @@
+lua/config/neovide.lua
+  s_86cdc8f0618f4e::t_4ca5ef6f0ba5d5 1-83
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.14",
+  "base_commit_sha": "45c52c15d65e88468af89c964184b984eca85e41",
+  "prompts": {},
+  "sessions": {
+    "s_86cdc8f0618f4e": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "e00f5207-58dc-4e67-aa2d-b704219ad36e",
+        "model": "unknown"
+      },
+      "human_author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
