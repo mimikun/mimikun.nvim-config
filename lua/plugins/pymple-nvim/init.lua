@@ -6,11 +6,8 @@ local spec = {
   --ft = require("plugins.pymple-nvim.ft"),
   --cmd = require("plugins.pymple-nvim.cmds"),
   --keys = require("plugins.pymple-nvim.keys"),
-  --event = require("plugins.pymple-nvim.events"),
-  --dependencies = require("plugins.pymple-nvim.dependencies"),
-  --init = function()
-  --  -- NOTE: INIT
-  --end,
+  event = require("plugins.pymple-nvim.events"),
+  dependencies = require("plugins.pymple-nvim.dependencies"),
   --opts = require("plugins.pymple-nvim.opts"),
   config = function()
     local opts = require("plugins.pymple-nvim.opts")
