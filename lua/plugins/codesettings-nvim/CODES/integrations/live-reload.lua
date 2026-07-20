@@ -1,8 +1,8 @@
-local Util = require('codesettings.util')
+local Util = require("codesettings.util")
 
 local M = {}
 
-M.augroup_name = 'CodesettingsLiveReload'
+M.augroup_name = "CodesettingsLiveReload"
 
 ---@type number|nil
 local augroup = nil
@@ -13,7 +13,7 @@ local debounce_timers = {}
 ---Reload settings for all active LSP clients
 ---@param filepath string the config file that changed
 local function reload_settings(filepath)
-  local Settings = require('codesettings.settings')
+  local Settings = require("codesettings.settings")
 
   local settings = Settings.new():load(filepath)
   if not settings then
@@ -23,7 +23,7 @@ local function reload_settings(filepath)
   local clients = vim.lsp.get_clients()
 
   if #clients == 0 then
-    Util.info('settings file changed but no LSP clients are running')
+    Util.info("settings file changed but no LSP clients are running")
     return
   end
   local updated_clients = false
@@ -31,14 +31,14 @@ local function reload_settings(filepath)
   for _, client in ipairs(clients) do
     local client_settings = settings:schema(client.name)
     if client_settings and vim.tbl_count(client_settings:totable()) > 0 then
-      client.config.settings = vim.tbl_deep_extend('force', client.config.settings or {}, client_settings:totable())
+      client.config.settings = vim.tbl_deep_extend("force", client.config.settings or {}, client_settings:totable())
       Util.did_change_configuration(client, client.config)
       updated_clients = true
     end
   end
 
   if not updated_clients then
-    Util.info('settings file changed but no settings found for running LSP servers')
+    Util.info("settings file changed but no settings found for running LSP servers")
   end
 end
 
@@ -58,7 +58,7 @@ function M.setup()
     return
   end
   augroup = vim.api.nvim_create_augroup(M.augroup_name, { clear = true })
-  vim.api.nvim_create_autocmd('BufWritePost', {
+  vim.api.nvim_create_autocmd("BufWritePost", {
     group = augroup,
     pattern = config_files,
     callback = function(args)
@@ -69,7 +69,7 @@ function M.setup()
       end
 
       -- check if the feature is still enabled
-      if not require('codesettings.config').live_reload then
+      if not require("codesettings.config").live_reload then
         vim.schedule(function()
           vim.api.nvim_del_augroup_by_id(augroup)
         end)

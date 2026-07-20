@@ -1,9 +1,9 @@
-local Util = require('codesettings.util')
+local Util = require("codesettings.util")
 
 return function()
   local configs = Util.get_local_configs({ only_exists = false })
   if #configs == 0 then
-    Util.warn('No local configuration files found')
+    Util.warn("No local configuration files found")
     return
   end
   local function edit_file(path)
@@ -13,13 +13,13 @@ return function()
     edit_file(configs[1])
   else
     vim.ui.select(configs, {
-      prompt = 'Select a configuration file to edit',
+      prompt = "Select a configuration file to edit",
       format_item = function(item)
-        local relpath = vim.fn.fnamemodify(item, ':~:.')
+        local relpath = vim.fn.fnamemodify(item, ":~:.")
         if Util.exists(item) then
-          return '  edit ' .. relpath
+          return "  edit " .. relpath
         else
-          return '  create ' .. relpath
+          return "  create " .. relpath
         end
       end,
     }, function(choice)

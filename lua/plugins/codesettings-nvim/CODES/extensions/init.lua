@@ -19,8 +19,8 @@
 ---@param ... any Arguments
 ---@return C, T
 local function safe_call(fn, self, ...)
-  if type(fn) ~= 'function' then
-    error('Attempted to call a non-function')
+  if type(fn) ~= "function" then
+    error("Attempted to call a non-function")
   end
   local metatable = getmetatable(self or {})
   if metatable ~= nil and (metatable.object == fn or metatable.leaf == fn) then
@@ -32,13 +32,13 @@ end
 ---@param ext any
 ---@return boolean
 local function is_extension(ext)
-  if type(ext) ~= 'table' then
+  if type(ext) ~= "table" then
     return false
   end
-  if ext.object ~= nil and type(ext.object) ~= 'function' then
+  if ext.object ~= nil and type(ext.object) ~= "function" then
     return false
   end
-  if ext.leaf ~= nil and type(ext.leaf) ~= 'function' then
+  if ext.leaf ~= nil and type(ext.leaf) ~= "function" then
     return false
   end
   -- valid extension must have at least one of object or leaf
@@ -51,30 +51,30 @@ end
 ---@param ext string|CodesettingsLoaderExtension|fun():CodesettingsLoaderExtension
 ---@return CodesettingsLoaderExtension
 local function to_extension(ext)
-  if type(ext) == 'string' then
+  if type(ext) == "string" then
     local ok, extension = pcall(require, ext)
     if not ok then
       error(extension)
     end
-    if type(extension) == 'function' then
+    if type(extension) == "function" then
       extension = extension()
     end
     if not is_extension(extension) then
-      error(string.format('Module %q is not a valid CodesettingsLoaderExtension', ext))
+      error(string.format("Module %q is not a valid CodesettingsLoaderExtension", ext))
     end
     return extension
-  elseif type(ext) == 'table' and is_extension(ext) then
+  elseif type(ext) == "table" and is_extension(ext) then
     return ext
-  elseif type(ext) == 'function' then
+  elseif type(ext) == "function" then
     local ok, extension = pcall(ext)
     if not ok or not is_extension(extension) then
-      error('Function did not return a valid CodesettingsLoaderExtension')
+      error("Function did not return a valid CodesettingsLoaderExtension")
     end
     return extension
   else
     error(
       string.format(
-        'Invalid extension type; expected string or CodesettingsLoaderExtension table, got: %s',
+        "Invalid extension type; expected string or CodesettingsLoaderExtension table, got: %s",
         vim.inspect(ext)
       )
     )
@@ -86,11 +86,11 @@ local M = {}
 ---@enum CodesettingsLoaderExtensionControl
 M.Control = {
   ---Continue recursion (for objects) or leave leaf unchanged
-  CONTINUE = 'continue',
+  CONTINUE = "continue",
   ---Skip recursion (objects only)
-  SKIP = 'skip',
+  SKIP = "skip",
   ---Replace this node/leaf with provided replacement value (can be nil)
-  REPLACE = 'replace',
+  REPLACE = "replace",
 }
 
 ---@param extensions (string|CodesettingsLoaderExtension)[]
@@ -128,7 +128,7 @@ function M.traverse(node, path, parent, key, list_idx, extensions)
   vim.iter(extensions):each(function(ext)
     local ctx = { parent = parent, path = path, key = key, list_idx = list_idx }
 
-    if type(node) == 'table' and ext.object then
+    if type(node) == "table" and ext.object then
       local c, r = safe_call(ext.object, ext, node, ctx)
       if c == M.Control.SKIP then
         skip_node = true
@@ -137,7 +137,7 @@ function M.traverse(node, path, parent, key, list_idx, extensions)
         replacement = r
         node = r -- Update node so next extension sees the replacement
       end
-    elseif type(node) ~= 'table' and ext.leaf then
+    elseif type(node) ~= "table" and ext.leaf then
       local c, r = safe_call(ext.leaf, ext, node, ctx)
       if c == M.Control.REPLACE then
         replace_node = true
@@ -155,7 +155,7 @@ function M.traverse(node, path, parent, key, list_idx, extensions)
   end
 
   -- Recurse into children if this is a table/list
-  if type(node) == 'table' then
+  if type(node) == "table" then
     if vim.islist(node) then
       vim.iter(ipairs(node)):each(function(i, v)
         node[i] = M.traverse(v, { unpack(path), i }, node, i, i, extensions)

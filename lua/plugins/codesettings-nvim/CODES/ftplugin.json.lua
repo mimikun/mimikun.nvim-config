@@ -7,12 +7,12 @@ if vim.g.codesettings_jsonc_setup_done and vim.g.codesettings_jsonls_setup_done 
   return
 end
 
-local Config = require('codesettings.config')
+local Config = require("codesettings.config")
 
 if Config.jsonc_filetype and not vim.g.codesettings_jsonc_setup_done then
-  require('codesettings.integrations.jsonc').setup()
+  require("codesettings.integrations.jsonc").setup()
 end
 
 if Config.jsonls_integration and not vim.g.codesettings_jsonls_setup_done then
-  require('codesettings.integrations.jsonls').setup()
+  require("codesettings.integrations.jsonls").setup()
 end

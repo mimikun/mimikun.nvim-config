@@ -1,4 +1,4 @@
-local Control = require('codesettings.extensions').Control
+local Control = require("codesettings.extensions").Control
 
 ---@class CodesettingsNeoconfExtension: CodesettingsLoaderExtension
 local M = {}
@@ -29,14 +29,14 @@ local function transform_neoconf_to_codesettings(node)
     node.codesettings = node.codesettings or {}
 
     -- Map filetype_jsonc
-    local filetype_jsonc = vim.tbl_get(node, 'neoconf', 'filetype_jsonc')
+    local filetype_jsonc = vim.tbl_get(node, "neoconf", "filetype_jsonc")
     if filetype_jsonc ~= nil then
       node.codesettings.jsonc_filetype = filetype_jsonc
     end
 
     -- Map lua_ls integration
-    local lua_ls_enabled = vim.tbl_get(node, 'neoconf', 'plugins', 'lua_ls', 'enabled')
-    local lua_ls_neovim = vim.tbl_get(node, 'neoconf', 'plugins', 'lua_ls', 'enabled_for_neovim_config')
+    local lua_ls_enabled = vim.tbl_get(node, "neoconf", "plugins", "lua_ls", "enabled")
+    local lua_ls_neovim = vim.tbl_get(node, "neoconf", "plugins", "lua_ls", "enabled_for_neovim_config")
     if lua_ls_enabled ~= nil then
       node.codesettings.lua_ls_integration = lua_ls_enabled
     elseif lua_ls_neovim ~= nil then
@@ -44,7 +44,7 @@ local function transform_neoconf_to_codesettings(node)
     end
 
     -- Map jsonls integration
-    local jsonls_enabled = vim.tbl_get(node, 'neoconf', 'plugins', 'jsonls', 'enabled')
+    local jsonls_enabled = vim.tbl_get(node, "neoconf", "plugins", "jsonls", "enabled")
     if jsonls_enabled ~= nil then
       node.codesettings.jsonls_integration = jsonls_enabled
     end
@@ -54,9 +54,9 @@ local function transform_neoconf_to_codesettings(node)
   end
 
   -- Flatten lspconfig settings into root
-  if node.lspconfig and type(node.lspconfig) == 'table' then
+  if node.lspconfig and type(node.lspconfig) == "table" then
     for _, server_settings in pairs(node.lspconfig) do
-      if type(server_settings) == 'table' then
+      if type(server_settings) == "table" then
         -- Merge server settings directly into root
         for key, value in pairs(server_settings) do
           node[key] = value
@@ -83,7 +83,7 @@ function M.object(node, ctx)
     return Control.CONTINUE
   end
 
-  if type(node) ~= 'table' then
+  if type(node) ~= "table" then
     return Control.CONTINUE
   end
 

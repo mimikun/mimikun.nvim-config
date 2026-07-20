@@ -1,6 +1,6 @@
-local Extensions = require('codesettings.extensions')
-local TerminalObjects = require('codesettings.generated.terminal-objects')
-local Util = require('codesettings.util')
+local Extensions = require("codesettings.extensions")
+local TerminalObjects = require("codesettings.generated.terminal-objects")
+local Util = require("codesettings.util")
 
 local M = {}
 
@@ -30,7 +30,7 @@ function M.load_all(opts)
 end
 
 local function is_map(t)
-  return type(t) == 'table' and not vim.islist(t)
+  return type(t) == "table" and not vim.islist(t)
 end
 
 local function merge_set(parent, key, value)
@@ -46,7 +46,7 @@ local function set_by_path(t, parts, value)
   local node = t
   for i = 1, #parts - 1 do
     local p = parts[i]
-    if type(node[p]) ~= 'table' or vim.islist(node[p]) then
+    if type(node[p]) ~= "table" or vim.islist(node[p]) then
       node[p] = {}
     end
     node = node[p]
@@ -59,7 +59,7 @@ end
 ---@param current_path string? internal recursion use: current property path for tracking terminal objects
 ---@return table expanded the expanded table
 function M.expand(tbl, current_path)
-  if type(tbl) ~= 'table' then
+  if type(tbl) ~= "table" then
     return tbl
   end
 
@@ -72,19 +72,19 @@ function M.expand(tbl, current_path)
     local v = value
 
     -- Build the path for this key
-    local key_path = current_path and (current_path .. '.' .. key) or key
+    local key_path = current_path and (current_path .. "." .. key) or key
 
     -- Recurse into map-like tables, but never into JSON Schema "properties" tables.
-    if is_map(v) and key ~= 'properties' then
+    if is_map(v) and key ~= "properties" then
       v = M.expand(v, key_path)
     end
 
     -- Only expand dotted keys if:
     -- 1. The key contains a dot
     -- 2. We're NOT inside a terminal object
-    if type(key) == 'string' and key:find('%.') and not is_terminal then
+    if type(key) == "string" and key:find("%.") and not is_terminal then
       local parts = {}
-      for part in key:gmatch('[^.]+') do
+      for part in key:gmatch("[^.]+") do
         parts[#parts + 1] = part
       end
       set_by_path(out, parts, v)
@@ -100,14 +100,14 @@ end
 ---@param key string the key to split, like 'rust-analyzer.cargo.loadOutDirsFromCheck'
 ---@return string[] parts the parts of the key
 function M.path(key)
-  if not key or key == '' then
+  if not key or key == "" then
     return {}
   end
-  if type(key) ~= 'string' then
+  if type(key) ~= "string" then
     return { key }
   end
   local parts = {}
-  for part in string.gmatch(key, '[^.]+') do
+  for part in string.gmatch(key, "[^.]+") do
     table.insert(parts, part)
   end
   return parts
@@ -126,8 +126,8 @@ function Settings:set(key, value)
   local parts = M.path(key)
 
   if #parts == 0 then
-    if type(value) ~= 'table' then
-      error('cannot set root settings to non-table value')
+    if type(value) ~= "table" then
+      error("cannot set root settings to non-table value")
     end
     self._settings = value
     return
@@ -136,7 +136,7 @@ function Settings:set(key, value)
   local node = self._settings
   for i = 1, #parts - 1, 1 do
     local part = parts[i]
-    if type(node[part]) ~= 'table' then
+    if type(node[part]) ~= "table" then
       node[part] = {}
     end
     node = node[part]
@@ -150,8 +150,8 @@ function Settings:get(key)
   ---@type table|string|boolean|number|nil
   local node = self._settings
 
-  for _, part in ipairs(M.path(key or '')) do
-    if type(node) ~= 'table' then
+  for _, part in ipairs(M.path(key or "")) do
+    if type(node) ~= "table" then
       node = nil
       break
     end
@@ -168,7 +168,7 @@ end
 ---@return CodesettingsSettings? settings the subtable wrapped in a Settings object, or nil if the
 function Settings:get_subtable(key)
   local value = self:get(key)
-  if type(value) ~= 'table' then
+  if type(value) ~= "table" then
     return nil
   end
   return M.new(value)
@@ -180,16 +180,16 @@ end
 ---@return CodesettingsSettings settings a new Settings object containing only the keys defined in the schema
 function Settings:schema(lsp_name_or_schema)
   -- NB: inline require to avoid circular dependency
-  local Schema = require('codesettings.schema')
+  local Schema = require("codesettings.schema")
   local schema
-  if type(lsp_name_or_schema) == 'string' then
+  if type(lsp_name_or_schema) == "string" then
     schema = Schema.load(lsp_name_or_schema)
   else
     schema = lsp_name_or_schema
     -- quick smoke test to make sure this is actually
     -- a CodesettingsSchema object
-    if schema.properties == nil or type(schema.properties) ~= 'function' then
-      error('expected CodesettingsSchema object')
+    if schema.properties == nil or type(schema.properties) ~= "function" then
+      error("expected CodesettingsSchema object")
     end
   end
   local settings = M.new()
@@ -211,16 +211,16 @@ end
 ---@return CodesettingsSettings
 function Settings:load(file, opts)
   if not Util.exists(file) then
-    Util.error('file does not exist: ' .. tostring(file))
+    Util.error("file does not exist: " .. tostring(file))
     return self
   end
   local data = Util.read_file(file)
   local ok, json = pcall(Util.json_decode, data)
   if not ok then
-    Util.error('failed to parse json settings from %s: %s', file, json)
+    Util.error("failed to parse json settings from %s: %s", file, json)
     return self
   end
-  local Config = require('codesettings.config')
+  local Config = require("codesettings.config")
   json = Extensions.apply(M.expand(json), opts and opts.loader_extensions or Config.loader_extensions or {})
   self:merge(M.new(json))
   return self

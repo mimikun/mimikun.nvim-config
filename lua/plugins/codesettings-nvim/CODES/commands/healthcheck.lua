@@ -1,3 +1,3 @@
 return function()
-  vim.cmd('checkhealth codesettings')
+  vim.cmd("checkhealth codesettings")
 end

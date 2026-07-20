@@ -1,4 +1,4 @@
-local Schema = require('codesettings.schema')
+local Schema = require("codesettings.schema")
 
 ---Raw schema definition for codesettings configuration
 ---This is the single source of truth for both JSON schema and Lua types
@@ -25,7 +25,7 @@ local M = {}
 ---@param t any
 ---@return boolean
 function M.is_function_type(t)
-  return type(t) == 'table' and t.args ~= nil and t.ret ~= nil
+  return type(t) == "table" and t.args ~= nil and t.ret ~= nil
 end
 
 function M.function_type(args, ret)
@@ -35,21 +35,21 @@ end
 ---@type table<string, CodesettingsSchemaValue> JSON Schema properties for codesettings configuration
 M.properties = {
   config_file_paths = {
-    type = 'array',
-    items = { type = 'string', description = 'List of relative config file paths to look for' },
-    description = 'Look for these config files',
-    default = { '.vscode/settings.json', 'codesettings.json', 'lspsettings.json' },
+    type = "array",
+    items = { type = "string", description = "List of relative config file paths to look for" },
+    description = "Look for these config files",
+    default = { ".vscode/settings.json", "codesettings.json", "lspsettings.json" },
     overridable = true,
   },
   merge_lists = {
-    type = 'CodesettingsMergeListsBehavior',
+    type = "CodesettingsMergeListsBehavior",
     description = [[How to merge lists; 'append' (default), 'prepend' or 'replace']],
-    enum = { 'replace', 'append', 'prepend' },
-    default = 'append',
+    enum = { "replace", "append", "prepend" },
+    default = "append",
     overridable = true,
   },
   root_dir = {
-    type = { 'string', M.function_type({}, 'string'), 'null' },
+    type = { "string", M.function_type({}, "string"), "null" },
     description = [[Provide your own root dir; can be a string or function returning a string.
 It should be/return the full absolute path to the root directory.
 If not set, defaults to `require('codesettings.util').get_root()`]],
@@ -57,22 +57,22 @@ If not set, defaults to `require('codesettings.util').get_root()`]],
     overridable = true,
   },
   loader_extensions = {
-    type = 'array',
+    type = "array",
     items = {
-      type = { 'string', 'CodesettingsLoaderExtension', M.function_type({}, 'CodesettingsLoaderExtension') },
-      description = 'List of module paths, or inline extension instances',
+      type = { "string", "CodesettingsLoaderExtension", M.function_type({}, "CodesettingsLoaderExtension") },
+      description = "List of module paths, or inline extension instances",
     },
-    description = 'List of loader extensions to use when loading settings; `string` values will be `require`d',
-    default = { 'codesettings.extensions.vscode' },
+    description = "List of loader extensions to use when loading settings; `string` values will be `require`d",
+    default = { "codesettings.extensions.vscode" },
     overridable = true,
   },
   jsonls_integration = {
-    type = 'boolean',
-    description = 'Integrate with jsonls to provide LSP completion for LSP settings based on schemas',
+    type = "boolean",
+    description = "Integrate with jsonls to provide LSP completion for LSP settings based on schemas",
     default = true,
   },
   lua_ls_integration = {
-    type = { 'boolean', M.function_type({}, 'boolean') },
+    type = { "boolean", M.function_type({}, "boolean") },
     description = [[Set up library paths for `lua_ls` automatically to pick up the generated type
 annotations provided by codesettings.nvim; to enable for only your nvim config,
 you can also do something like:
@@ -83,13 +83,13 @@ This integration also works for emmylua_ls]],
     default = true,
   },
   jsonc_filetype = {
-    type = 'boolean',
+    type = "boolean",
     description = [[Set filetype to jsonc when opening a file specified by `config_file_paths`,
 make sure you have the json tree-sitter parser installed for highlighting]],
     default = true,
   },
   nls = {
-    type = { 'boolean', 'string', 'table', M.function_type({ 'string' }, 'table') },
+    type = { "boolean", "string", "table", M.function_type({ "string" }, "table") },
     description = [[Controls %placeholder% string substitution in LSP schema descriptions.
 - true (default): use bundled English NLS files
 - false: disable substitution (raw %placeholders% visible)
@@ -101,7 +101,7 @@ Note that only certain schemas support this, see the bundled *.nls.json files at
     default = true,
   },
   live_reload = {
-    type = 'boolean',
+    type = "boolean",
     description = [[Enable live reloading of settings when config files change
 via the `workspace/didChangeConfiguration` notification; after notifying,
 an autocmd `User CodesettingsFilesChanged` will be emitted. You
@@ -128,13 +128,13 @@ end
 ---@param types string|table
 ---@return string|table
 local function filter_function_types(types)
-  if type(types) == 'string' then
+  if type(types) == "string" then
     return types
   end
 
   if M.is_function_type(types) then
     -- Single function type - return nil to filter it out
-    return 'null'
+    return "null"
   end
 
   -- Array of types
@@ -146,7 +146,7 @@ local function filter_function_types(types)
   end
 
   if #filtered == 0 then
-    return 'null'
+    return "null"
   elseif #filtered == 1 then
     return filtered[1]
   else
@@ -200,12 +200,12 @@ function M.jsonschema()
   -- NB: here we want to return the canonical schema,
   -- which means we should look for a top-level `codesettings` property
   return Schema.from_table({
-    ['$schema'] = 'http://json-schema.org/draft-07/schema#',
-    type = 'object',
+    ["$schema"] = "http://json-schema.org/draft-07/schema#",
+    type = "object",
     properties = {
       codesettings = {
-        type = 'object',
-        description = 'Configuration for codesettings.nvim',
+        type = "object",
+        description = "Configuration for codesettings.nvim",
         properties = properties,
       },
     },

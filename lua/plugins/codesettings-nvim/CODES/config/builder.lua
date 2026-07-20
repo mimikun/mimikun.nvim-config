@@ -1,5 +1,5 @@
-local Config = require('codesettings.config')
-local ConfigSchema = require('codesettings.config.schema')
+local Config = require("codesettings.config")
+local ConfigSchema = require("codesettings.config.schema")
 
 local M = {}
 
@@ -25,17 +25,17 @@ local builder_mt = {
         -- Helper to build validation types from schema type (handles unions, functions, null)
         local function build_validation_types(schema_type)
           local val_types = {}
-          local types = type(schema_type) == 'table' and schema_type or { schema_type }
+          local types = type(schema_type) == "table" and schema_type or { schema_type }
 
           for _, t in ipairs(types) do
             if ConfigSchema.is_function_type(t) then
-              table.insert(val_types, 'function')
-            elseif t == 'null' then
-              table.insert(val_types, 'nil')
-            elseif type(t) == 'string' and t:match('^%u') then
+              table.insert(val_types, "function")
+            elseif t == "null" then
+              table.insert(val_types, "nil")
+            elseif type(t) == "string" and t:match("^%u") then
               -- Custom type name (starts with uppercase) - map to 'table'
               -- Examples: 'CodesettingsLoaderExtension', 'CodesettingsMergeListsBehavior'
-              table.insert(val_types, 'table')
+              table.insert(val_types, "table")
             else
               table.insert(val_types, t)
             end
@@ -53,11 +53,11 @@ local builder_mt = {
               end
             end
             return false
-          end, 'one of: ' .. table.concat(prop.enum, ', '))
+          end, "one of: " .. table.concat(prop.enum, ", "))
         end
 
         -- Basic type validation
-        if prop.type == 'array' then
+        if prop.type == "array" then
           vim.validate(key, value, function(v)
             if not vim.islist(v) then
               return false
@@ -68,7 +68,7 @@ local builder_mt = {
               if #item_validation_types > 0 then
                 for _, item in ipairs(v) do
                   -- Use vim.validate to check if item matches any of the allowed types
-                  local ok = pcall(vim.validate, 'item', item, item_validation_types)
+                  local ok = pcall(vim.validate, "item", item, item_validation_types)
                   if not ok then
                     return false
                   end
@@ -76,10 +76,10 @@ local builder_mt = {
               end
             end
             return true
-          end, 'array')
-        elseif prop.type == 'string' or prop.type == 'boolean' then
+          end, "array")
+        elseif prop.type == "string" or prop.type == "boolean" then
           vim.validate(key, value, prop.type)
-        elseif type(prop.type) == 'table' then
+        elseif type(prop.type) == "table" then
           -- Handle union types (e.g., { 'string', { args = {}, ret = 'string' }, 'null' })
           validation_types = build_validation_types(prop.type)
           if #validation_types > 0 then
@@ -87,8 +87,8 @@ local builder_mt = {
           end
         end
 
-        if prop.type == 'object' and type(value) == 'table' then
-          self._config[key] = vim.tbl_deep_extend('force', self._config[key] or {}, value)
+        if prop.type == "object" and type(value) == "table" then
+          self._config[key] = vim.tbl_deep_extend("force", self._config[key] or {}, value)
         else
           self._config[key] = value
         end
@@ -129,7 +129,7 @@ end
 ---have overridden some options like `root_dir` or `config_file_paths`).
 ---@return CodesettingsSettings
 function ConfigBuilder:local_settings()
-  return require('codesettings').local_settings(self:build())
+  return require("codesettings").local_settings(self:build())
 end
 
 ---Load the local settings and merge them into the given LSP config,
@@ -139,7 +139,7 @@ end
 ---@param config table the LSP config to merge the vscode settings into
 ---@return table config the merged config
 function ConfigBuilder:with_local_settings(lsp_name, config)
-  return require('codesettings').with_local_settings(lsp_name, config, self:build())
+  return require("codesettings").with_local_settings(lsp_name, config, self:build())
 end
 
 return M

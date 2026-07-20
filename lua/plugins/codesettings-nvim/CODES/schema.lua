@@ -1,5 +1,5 @@
-local NLS = require('codesettings.nls')
-local Util = require('codesettings.util')
+local NLS = require("codesettings.nls")
+local Util = require("codesettings.util")
 
 local M = {}
 
@@ -16,7 +16,7 @@ Schema.__index = Schema
 ---@param schema table|nil
 ---@return CodesettingsSchema
 function M.new(schema)
-  local schema_obj = type(schema) == 'table' and schema or {}
+  local schema_obj = type(schema) == "table" and schema or {}
   return setmetatable({ _schema = schema_obj }, Schema)
 end
 
@@ -35,10 +35,10 @@ function M.load(lsp_name)
     return _cache[lsp_name]
   end
 
-  local schema_file = Util.runtime_file('after/codesettings-schemas/' .. lsp_name .. '.json')
+  local schema_file = Util.runtime_file("after/codesettings-schemas/" .. lsp_name .. ".json")
   if not schema_file then
-    local alt_name = string.gsub(lsp_name, '%-', '_')
-    schema_file = Util.runtime_file('after/codesettings-schemas/' .. alt_name .. '.json')
+    local alt_name = string.gsub(lsp_name, "%-", "_")
+    schema_file = Util.runtime_file("after/codesettings-schemas/" .. alt_name .. ".json")
   end
 
   if not schema_file then
@@ -47,10 +47,10 @@ function M.load(lsp_name)
 
   local settings_tbl = {}
   local ok, data = pcall(vim.fn.readfile, schema_file)
-  if ok and type(data) == 'table' then
-    local json_str = table.concat(data, '\n')
+  if ok and type(data) == "table" then
+    local json_str = table.concat(data, "\n")
     local ok2, json = pcall(vim.fn.json_decode, json_str)
-    if ok2 and type(json) == 'table' then
+    if ok2 and type(json) == "table" then
       settings_tbl = json
     end
   end
@@ -73,16 +73,16 @@ end
 ---@return table
 function Schema:defaults_table()
   local function extract(node)
-    if type(node) ~= 'table' then
+    if type(node) ~= "table" then
       return nil
     end
-    if node.type == 'object' and node.properties then
+    if node.type == "object" and node.properties then
       local t = {}
       for k, v in pairs(node.properties) do
         t[k] = extract(v)
       end
       return t
-    elseif node.type == 'array' and node.default ~= nil then
+    elseif node.type == "array" and node.default ~= nil then
       return vim.deepcopy(node.default)
     elseif node.default ~= nil then
       return vim.deepcopy(node.default)
@@ -97,16 +97,16 @@ end
 ---@return CodesettingsSchema schema flattened schema
 function Schema:flatten()
   local function flatten_properties(node, prefix, out)
-    if type(node) ~= 'table' then
+    if type(node) ~= "table" then
       return
     end
     local props = node.properties
-    if type(props) ~= 'table' then
+    if type(props) ~= "table" then
       return
     end
     for name, def in pairs(props) do
-      local key = prefix and (prefix .. '.' .. name) or name
-      if def.type == 'object' and def.properties then
+      local key = prefix and (prefix .. "." .. name) or name
+      if def.type == "object" and def.properties then
         flatten_properties(def, key, out)
       else
         out[key] = vim.deepcopy(def)
@@ -132,17 +132,17 @@ end
 function Schema:properties()
   local properties = {}
   local function collect(prefix, node)
-    if type(node) ~= 'table' then
+    if type(node) ~= "table" then
       return
     end
     local props = node.properties
-    if type(props) ~= 'table' then
+    if type(props) ~= "table" then
       return
     end
     for name, def in pairs(props) do
-      local full = prefix and (prefix .. '.' .. name) or name
+      local full = prefix and (prefix .. "." .. name) or name
       properties[full] = true
-      if type(def) == 'table' and def.properties then
+      if type(def) == "table" and def.properties then
         collect(full, def)
       end
     end

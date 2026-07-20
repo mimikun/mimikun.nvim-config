@@ -6,33 +6,33 @@
 local SpecialCases = {
   eslint = function(settings)
     -- vscode schema has all properties under `eslint.*`, but the LSP expects just the subtable
-    return settings:schema('eslint'):get_subtable('eslint') or settings
+    return settings:schema("eslint"):get_subtable("eslint") or settings
   end,
   nixd = function(settings)
     -- nixd vscode plugin nests the settings under `nix.serverSettings`, but the LSP expects just the subtable
-    local vscode_table = settings:get_subtable('nix.serverSettings')
+    local vscode_table = settings:get_subtable("nix.serverSettings")
     if vscode_table then
       settings:merge(vscode_table)
-      settings:set('nix.serverSettings', nil)
+      settings:set("nix.serverSettings", nil)
     end
-    return settings:schema('nixd')
+    return settings:schema("nixd")
   end,
   tinymist = function(settings)
-    return settings:schema('tinymist'):get_subtable('tinymist') or settings
+    return settings:schema("tinymist"):get_subtable("tinymist") or settings
   end,
   jsonls = function(settings)
-    local schemas = settings:get('json.schemas')
-    if not schemas or type(schemas) ~= 'table' then
+    local schemas = settings:get("json.schemas")
+    if not schemas or type(schemas) ~= "table" then
       return settings
     end
-    local root = require('codesettings.util').get_root()
+    local root = require("codesettings.util").get_root()
     for i, schema in ipairs(schemas) do
-      if type(schema.url) == 'string' then
-        if vim.startswith(schema.url, '~') then
+      if type(schema.url) == "string" then
+        if vim.startswith(schema.url, "~") then
           -- expand tilde
           local path = vim.fs.normalize(schema.url)
           schemas[i].url = path
-        elseif not schema.url:match('^%w+://') and not vim.startswith(schema.url, '/') then
+        elseif not schema.url:match("^%w+://") and not vim.startswith(schema.url, "/") then
           -- if there is no scheme like https:// and if not already an absolute path, resolve it to one
           -- make sure the path exists first so we don't inadvertently resolve something that isn't actually
           -- a file path in case of false positives here; if the file doesn't exist anyway, there is no harm
@@ -44,7 +44,7 @@ local SpecialCases = {
         end
       end
     end
-    settings:set('json.schemas', schemas)
+    settings:set("json.schemas", schemas)
     return settings
   end,
 }
@@ -73,7 +73,7 @@ local M = {}
 ---@return CodesettingsSettings config settings object, if any local config files were found, empty Settings object otherwise
 function M.local_settings(opts)
   opts = opts or {}
-  local Settings = require('codesettings.settings')
+  local Settings = require("codesettings.settings")
   return Settings.load_all(opts)
 end
 
@@ -91,8 +91,8 @@ function M.with_local_settings(lsp_name, config, opts)
   else
     local_settings = local_settings:schema(lsp_name)
   end
-  local Settings = require('codesettings.settings')
-  return Settings.new(config):merge(local_settings, 'settings', opts):totable()
+  local Settings = require("codesettings.settings")
+  return Settings.new(config):merge(local_settings, "settings", opts):totable()
 end
 
 ---Start building a new custom configuration for loading local settings.
@@ -114,7 +114,7 @@ end
 ---```
 ---@return CodesettingsConfigBuilder
 function M.loader()
-  return require('codesettings.config.builder').new()
+  return require("codesettings.config.builder").new()
 end
 
 ---@class (partial) CodesettingsConfigSetupInput: CodesettingsConfig
@@ -122,10 +122,10 @@ end
 ---Setup the plugin with the given options.
 ---@param opts CodesettingsConfigSetupInput? optional config overrides for the global plugin configuration
 function M.setup(opts)
-  vim.treesitter.language.register('markdown', 'codesettings-output')
+  vim.treesitter.language.register("markdown", "codesettings-output")
 
   opts = opts or {}
-  require('codesettings.config').setup(opts)
+  require("codesettings.config").setup(opts)
 end
 
 return M

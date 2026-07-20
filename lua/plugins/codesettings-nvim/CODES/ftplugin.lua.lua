@@ -5,13 +5,13 @@ if vim.g.codesettings_lua_ls_setup_done then
   return
 end
 
-local Config = require('codesettings.config')
+local Config = require("codesettings.config")
 
 if
   Config.lua_ls_integration == false
-  or (type(Config.lua_ls_integration) == 'function' and (not Config.lua_ls_integration()))
+  or (type(Config.lua_ls_integration) == "function" and (not Config.lua_ls_integration()))
 then
   return
 end
 
-require('codesettings.integrations.luals').setup()
+require("codesettings.integrations.luals").setup()

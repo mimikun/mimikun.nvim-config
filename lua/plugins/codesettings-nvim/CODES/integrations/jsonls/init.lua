@@ -1,6 +1,6 @@
-local NLS = require('codesettings.nls')
-local Transformer = require('codesettings.integrations.jsonls.transformer')
-local Util = require('codesettings.util')
+local NLS = require("codesettings.nls")
+local Transformer = require("codesettings.integrations.jsonls.transformer")
+local Util = require("codesettings.util")
 
 local M = {}
 
@@ -33,17 +33,17 @@ function M.get_json_schemas()
   local configs = Util.get_local_configs()
 
   -- Merge all schemas into one before expanding (much faster)
-  local Settings = require('codesettings.settings')
+  local Settings = require("codesettings.settings")
   local merged = Settings.new()
 
-  local Config = require('codesettings.config')
+  local Config = require("codesettings.config")
   vim.iter(Util.get_schema_files()):each(function(schema_file)
     local ok, json = pcall(Util.read_file, schema_file)
     if not ok then
-      error('Failed to read JSON schema file: ' .. schema_file)
+      error("Failed to read JSON schema file: " .. schema_file)
     end
     local schema_tbl = Util.json_decode(json)
-    local lsp_name = vim.fn.fnamemodify(schema_file, ':t:r')
+    local lsp_name = vim.fn.fnamemodify(schema_file, ":t:r")
     local nls_table = NLS.resolve(lsp_name)
     if nls_table then
       schema_tbl = NLS.apply(schema_tbl, nls_table)
@@ -79,7 +79,7 @@ function M.setup()
     },
   }
 
-  Util.ensure_lsp_settings('jsonls', config_update)
+  Util.ensure_lsp_settings("jsonls", config_update)
 end
 
 return M

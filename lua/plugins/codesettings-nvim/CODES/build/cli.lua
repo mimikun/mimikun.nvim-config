@@ -1,18 +1,18 @@
 local build_targets = {
-  schemas = require('codesettings.build.schemas'),
-  annotations = require('codesettings.build.annotations'),
-  config = require('codesettings.build.config-schema'),
-  doc = require('codesettings.build.doc'),
-  terminals = require('codesettings.build.terminal-objects'),
+  schemas = require("codesettings.build.schemas"),
+  annotations = require("codesettings.build.annotations"),
+  config = require("codesettings.build.config-schema"),
+  doc = require("codesettings.build.doc"),
+  terminals = require("codesettings.build.terminal-objects"),
 }
 
 -- Define build order and dependencies
-local build_order = { 'schemas', 'terminals', 'annotations', 'config', 'doc' }
+local build_order = { "schemas", "terminals", "annotations", "config", "doc" }
 
 local build_dependencies = {
-  terminals = { 'schemas' },
-  annotations = { 'schemas' },
-  doc = { 'config' },
+  terminals = { "schemas" },
+  annotations = { "schemas" },
+  doc = { "config" },
 }
 
 local function get_target_names()
@@ -34,7 +34,7 @@ local function build_with_dependencies(target_name, built)
 
   local target = build_targets[target_name]
   if not target then
-    error('Unknown build target: ' .. target_name)
+    error("Unknown build target: " .. target_name)
   end
 
   -- Build dependencies first
@@ -46,7 +46,7 @@ local function build_with_dependencies(target_name, built)
   end
 
   -- Build this target
-  print('Building ' .. target_name .. '...')
+  print("Building " .. target_name .. "...")
   target.build()
   built[target_name] = true
 end
@@ -59,7 +59,7 @@ local function build_target(target_name)
     for _, name in ipairs(build_order) do
       local target = build_targets[name]
       if target then
-        print('Building ' .. name .. '...')
+        print("Building " .. name .. "...")
         target.build()
       end
     end
@@ -70,11 +70,11 @@ local function clean_target(target_name)
   if target_name then
     local target = build_targets[target_name]
     if not target then
-      error('Unknown build target: ' .. target_name)
+      error("Unknown build target: " .. target_name)
     end
     -- no-op if clean is not defined
     if target.clean then
-      print('Cleaning ' .. target_name .. '...')
+      print("Cleaning " .. target_name .. "...")
       target.clean()
     end
   else
@@ -82,7 +82,7 @@ local function clean_target(target_name)
     for _, name in ipairs(build_order) do
       local target = build_targets[name]
       if target and target.clean then
-        print('Cleaning ' .. name .. '...')
+        print("Cleaning " .. name .. "...")
         target.clean()
       end
     end
@@ -90,24 +90,24 @@ local function clean_target(target_name)
 end
 
 if #arg == 0 then
-  error('This module is a build CLI and should not be `require`d directly!')
+  error("This module is a build CLI and should not be `require`d directly!")
 end
 
-local argparse = require('argparse')
+local argparse = require("argparse")
 
-local parser = argparse('build', 'Build system for codesettings')
+local parser = argparse("build", "Build system for codesettings")
 
-local target_list = table.concat(get_target_names(), ', ')
-
-parser
-  :command('build', 'Build the specified target or all targets')
-  :argument('target', 'Build target: ' .. target_list)
-  :args('?')
+local target_list = table.concat(get_target_names(), ", ")
 
 parser
-  :command('clean', 'Clean the specified target or all targets')
-  :argument('target', 'Build target: ' .. target_list)
-  :args('?')
+  :command("build", "Build the specified target or all targets")
+  :argument("target", "Build target: " .. target_list)
+  :args("?")
+
+parser
+  :command("clean", "Clean the specified target or all targets")
+  :argument("target", "Build target: " .. target_list)
+  :args("?")
 
 local args = parser:parse()
 

@@ -10,11 +10,11 @@ local _not_found = {}
 ---@return table|nil
 local function read_json_file(path)
   local ok, data = pcall(vim.fn.readfile, path)
-  if not ok or type(data) ~= 'table' then
+  if not ok or type(data) ~= "table" then
     return nil
   end
-  local ok2, tbl = pcall(vim.fn.json_decode, table.concat(data, '\n'))
-  return ok2 and type(tbl) == 'table' and tbl or nil
+  local ok2, tbl = pcall(vim.fn.json_decode, table.concat(data, "\n"))
+  return ok2 and type(tbl) == "table" and tbl or nil
 end
 
 ---Recursively apply NLS substitution to a value.
@@ -23,16 +23,16 @@ end
 ---@param nls_table table<string, string>
 ---@return any
 function M.apply(value, nls_table)
-  if type(value) == 'string' then
-    local key = value:match('^%%(.+)%%$')
+  if type(value) == "string" then
+    local key = value:match("^%%(.+)%%$")
     if key and nls_table[key] then
       local v = nls_table[key]
-      return type(v) == 'table' and v.message or v
+      return type(v) == "table" and v.message or v
     end
     return value
   end
 
-  if type(value) == 'table' then
+  if type(value) == "table" then
     local result = {}
     for k, v in pairs(value) do
       result[k] = M.apply(v, nls_table)
@@ -55,8 +55,8 @@ function M.load_bundled(lsp_name)
     return nil
   end
 
-  local Util = require('codesettings.util')
-  local nls_file = Util.runtime_file('after/codesettings-nls/' .. lsp_name .. '.nls.json')
+  local Util = require("codesettings.util")
+  local nls_file = Util.runtime_file("after/codesettings-nls/" .. lsp_name .. ".nls.json")
   if not nls_file then
     _not_found[lsp_name] = true
     return nil
@@ -77,7 +77,7 @@ end
 ---@param lsp_name string
 ---@return table<string, string>|nil
 function M.resolve(lsp_name)
-  local nls_config = require('codesettings.config').nls
+  local nls_config = require("codesettings.config").nls
 
   if nls_config == false then
     return nil
@@ -87,15 +87,15 @@ function M.resolve(lsp_name)
     return M.load_bundled(lsp_name)
   end
 
-  if type(nls_config) == 'table' then
+  if type(nls_config) == "table" then
     return nls_config
   end
 
-  if type(nls_config) == 'string' then
-    return read_json_file(nls_config .. '/' .. lsp_name .. '.nls.json')
+  if type(nls_config) == "string" then
+    return read_json_file(nls_config .. "/" .. lsp_name .. ".nls.json")
   end
 
-  if type(nls_config) == 'function' then
+  if type(nls_config) == "function" then
     return nls_config(lsp_name)
   end
 

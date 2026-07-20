@@ -9,27 +9,27 @@ local _root_dir
 ---@return string absolute path
 function M.path(str)
   if not _root_dir then
-    _root_dir = vim.fn.system('git rev-parse --show-toplevel'):gsub('\n', '')
+    _root_dir = vim.fn.system("git rev-parse --show-toplevel"):gsub("\n", "")
     -- git based detection doesn't work in flake checks (e.g. in CI)
-    if (_root_dir or '') == '' or vim.v.shell_error ~= 0 then
+    if (_root_dir or "") == "" or vim.v.shell_error ~= 0 then
       _root_dir = assert(vim.uv.cwd())
     end
   end
-  return _root_dir .. '/' .. (str or '')
+  return _root_dir .. "/" .. (str or "")
 end
 
 ---Get schema file path for an LSP server
 ---@param lsp_name string
 ---@return string
 function M.schema_path(lsp_name)
-  return M.path('after/codesettings-schemas/' .. lsp_name .. '.json')
+  return M.path("after/codesettings-schemas/" .. lsp_name .. ".json")
 end
 
 ---Get NLS file path for an LSP server
 ---@param lsp_name string
 ---@return string
 function M.nls_path(lsp_name)
-  return M.path('after/codesettings-nls/' .. lsp_name .. '.nls.json')
+  return M.path("after/codesettings-nls/" .. lsp_name .. ".nls.json")
 end
 
 ---@class CodesettingsSchemaFile
@@ -40,12 +40,12 @@ end
 
 ---@return table<string, CodesettingsSchemaFile>
 function M.get_schemas()
-  local index = require('codesettings.build.schemas').index
+  local index = require("codesettings.build.schemas").index
   ---@type table<string, CodesettingsSchemaFile>
   local ret = {}
   for server, entry in pairs(index) do
-    local package_url = type(entry) == 'table' and entry.schema or entry --[[@as string]]
-    local nls = type(entry) == 'table' and entry.nls or nil
+    local package_url = type(entry) == "table" and entry.schema or entry --[[@as string]]
+    local nls = type(entry) == "table" and entry.nls or nil
     ret[server] = {
       name = server,
       schema_url = package_url,
@@ -60,9 +60,9 @@ end
 ---@param file string file path to write to
 ---@param data string data to write
 function M.write_file(file, data)
-  local fd = io.open(file, 'w+')
+  local fd = io.open(file, "w+")
   if not fd then
-    error(('Could not open file %s for writing'):format(file))
+    error(("Could not open file %s for writing"):format(file))
   end
   fd:write(data)
   fd:close()
@@ -78,11 +78,11 @@ end
 ---@param url string
 ---@return string
 function M.fetch(url)
-  local fd = io.popen(string.format('curl -s -k %q', url))
+  local fd = io.popen(string.format("curl -s -k %q", url))
   if not fd then
-    error(('Could not download %s'):format(url))
+    error(("Could not download %s"):format(url))
   end
-  local ret = fd:read('*a')
+  local ret = fd:read("*a")
   fd:close()
   return ret
 end
@@ -94,16 +94,16 @@ end
 function M.toml_to_table(toml)
   local tmp = os.tmpname()
   M.write_file(tmp, toml)
-  local fd = io.popen('remarshal -if toml -of json < ' .. tmp)
+  local fd = io.popen("remarshal -if toml -of json < " .. tmp)
   if not fd then
     os.remove(tmp)
-    error('Could not run remarshal (is it installed?)')
+    error("Could not run remarshal (is it installed?)")
   end
-  local json = fd:read('*a')
+  local json = fd:read("*a")
   fd:close()
   os.remove(tmp)
-  if json == '' then
-    error('remarshal produced no output')
+  if json == "" then
+    error("remarshal produced no output")
   end
   return vim.json.decode(json)
 end
@@ -115,13 +115,13 @@ end
 function M.json_format(obj)
   local tmp = os.tmpname()
   M.write_file(tmp, vim.json.encode(obj))
-  local fd = io.popen('jq -S < ' .. tmp)
+  local fd = io.popen("jq -S < " .. tmp)
   if not fd then
-    error('Could not format json')
+    error("Could not format json")
   end
-  local ret = fd:read('*a')
-  if ret == '' then
-    error('Could not format json')
+  local ret = fd:read("*a")
+  if ret == "" then
+    error("Could not format json")
   end
   fd:close()
   return ret

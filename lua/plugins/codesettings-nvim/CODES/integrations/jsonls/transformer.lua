@@ -25,7 +25,7 @@ local M = {}
 ---@param schema table A JSON schema object (decoded from JSON)
 ---@return table expanded_schema The schema with dotted keys expanded into nested form
 function M.expand_schema(schema)
-  if type(schema) ~= 'table' then
+  if type(schema) ~= "table" then
     return schema
   end
 
@@ -36,12 +36,12 @@ function M.expand_schema(schema)
   ---@param a table Base table (takes precedence where overlapping)
   ---@param b table Table to merge into `a`
   local function merge(a, b)
-    if type(a) ~= 'table' then
-      return type(b) == 'table' and b or a
+    if type(a) ~= "table" then
+      return type(b) == "table" and b or a
     end
     -- Modify in place instead of deep copying
     for k, v in pairs(b) do
-      if type(v) == 'table' and type(a[k]) == 'table' then
+      if type(v) == "table" and type(a[k]) == "table" then
         merge(a[k], v)
       elseif a[k] == nil then
         a[k] = v
@@ -69,7 +69,7 @@ function M.expand_schema(schema)
     for i = 1, #parts - 1 do
       local key = parts[i]
       if not node[key] then
-        node[key] = { type = 'object', properties = {} }
+        node[key] = { type = "object", properties = {} }
       elseif not node[key].properties then
         node[key].properties = {}
       end
@@ -83,7 +83,7 @@ function M.expand_schema(schema)
   ---`properties` into nested object definitions.
   ---@param def table The schema definition node
   local function recurse(def)
-    if type(def) ~= 'table' or type(def.properties) ~= 'table' then
+    if type(def) ~= "table" or type(def.properties) ~= "table" then
       return
     end
 
@@ -95,12 +95,12 @@ function M.expand_schema(schema)
     -- Collect dotted keys (avoid table allocation for non-dotted schemas)
     local dotted
     for k, v in pairs(def.properties) do
-      if type(k) == 'string' and k:find('.', 1, true) then
+      if type(k) == "string" and k:find(".", 1, true) then
         if not dotted then
           dotted = {}
         end
         -- Cache the split result instead of recalculating
-        table.insert(dotted, { parts = vim.split(k, '.', { plain = true }), leaf = v })
+        table.insert(dotted, { parts = vim.split(k, ".", { plain = true }), leaf = v })
       end
     end
 
@@ -124,7 +124,7 @@ function M.expand_schema(schema)
         for j = 1, i do
           local p = entry.parts[j]
           if not node[p] then
-            node[p] = { type = 'object', properties = {} }
+            node[p] = { type = "object", properties = {} }
           elseif not node[p].properties then
             node[p].properties = {}
           end
@@ -135,7 +135,7 @@ function M.expand_schema(schema)
         for j = i + 1, parts_len do
           suffix_parts[#suffix_parts + 1] = entry.parts[j]
         end
-        local suffix = table.concat(suffix_parts, '.')
+        local suffix = table.concat(suffix_parts, ".")
         node[suffix] = merge(node[suffix] or {}, entry.leaf)
       end
     end

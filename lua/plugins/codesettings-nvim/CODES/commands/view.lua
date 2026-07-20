@@ -8,10 +8,10 @@ function M.show(str)
   local hpad = 20
 
   local lines = {}
-  if type(str) == 'table' then
+  if type(str) == "table" then
     lines = str
   else
-    for s in str:gmatch('([^\n]*)\n?') do
+    for s in str:gmatch("([^\n]*)\n?") do
       table.insert(lines, s)
     end
   end
@@ -19,27 +19,27 @@ function M.show(str)
   vim.api.nvim_buf_set_lines(buf, 0, -1, true, lines)
 
   local opts = {
-    relative = 'editor',
+    relative = "editor",
     width = math.min(vim.o.columns - hpad * 2, 150),
     height = math.min(vim.o.lines - vpad * 2, 50),
-    style = 'minimal',
-    border = 'single',
+    style = "minimal",
+    border = "single",
   }
 
   opts.row = (vim.o.lines - opts.height) / 2
   opts.col = (vim.o.columns - opts.width) / 2
 
   local buf_scope = { buf = buf }
-  vim.api.nvim_set_option_value('filetype', 'codesettings-output', buf_scope)
-  vim.api.nvim_set_option_value('bufhidden', 'wipe', buf_scope)
-  vim.api.nvim_set_option_value('modifiable', false, buf_scope)
+  vim.api.nvim_set_option_value("filetype", "codesettings-output", buf_scope)
+  vim.api.nvim_set_option_value("bufhidden", "wipe", buf_scope)
+  vim.api.nvim_set_option_value("modifiable", false, buf_scope)
 
   local win = vim.api.nvim_open_win(buf, true, opts)
 
   local win_scope = { win = win }
-  vim.api.nvim_set_option_value('conceallevel', 3, win_scope)
-  vim.api.nvim_set_option_value('spell', false, win_scope)
-  vim.api.nvim_set_option_value('wrap', true, win_scope)
+  vim.api.nvim_set_option_value("conceallevel", 3, win_scope)
+  vim.api.nvim_set_option_value("spell", false, win_scope)
+  vim.api.nvim_set_option_value("wrap", true, win_scope)
 
   local function close()
     if vim.api.nvim_buf_is_valid(buf) then
@@ -50,9 +50,9 @@ function M.show(str)
     end
   end
 
-  vim.keymap.set('n', '<ESC>', close, { buffer = buf, nowait = true })
-  vim.keymap.set('n', 'q', close, { buffer = buf, nowait = true })
-  vim.api.nvim_create_autocmd({ 'BufDelete', 'BufLeave', 'BufHidden' }, {
+  vim.keymap.set("n", "<ESC>", close, { buffer = buf, nowait = true })
+  vim.keymap.set("n", "q", close, { buffer = buf, nowait = true })
+  vim.api.nvim_create_autocmd({ "BufDelete", "BufLeave", "BufHidden" }, {
     once = true,
     buffer = buf,
     callback = close,
