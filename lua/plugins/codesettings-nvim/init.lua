@@ -6,9 +6,7 @@ local spec = {
   lazy = false,
   --ft = require("plugins.codesettings-nvim.ft"),
   cmd = require("plugins.codesettings-nvim.cmds"),
-  --keys = require("plugins.codesettings-nvim.keys"),
-  --event = require("plugins.codesettings-nvim.events"),
-  --dependencies = require("plugins.codesettings-nvim.dependencies"),
+  event = require("plugins.codesettings-nvim.events"),
   --init = function()
   --  -- NOTE: INIT
   --end,
