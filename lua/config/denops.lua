@@ -6,7 +6,8 @@
 -- combinations below.
 --
 -- Add a new machine by appending an { os = ..., host = ... } entry; both are
--- compared case-insensitively via config.host.
+-- compared case-insensitively via config.host (the single source of truth for
+-- host/OS detection).
 --
 -- Usage (in a lazy.nvim spec):
 --   local denops_enabled = require("config.denops")

@@ -19,7 +19,7 @@ vim.opt.rtp:prepend(lazypath)
 vim.g.maplocalleader = "\\"
 
 -- host azusa runs more tasks in parallel; others fall back to the default
-local concurrency = host.is("azusa") and 4 or (jit.os:find("Windows") and (vim.uv.available_parallelism() * 2) or nil)
+local concurrency = host.is_azusa() and 4 or (jit.os:find("Windows") and (vim.uv.available_parallelism() * 2) or nil)
 
 require("lazy").setup({
   root = vim.fn.stdpath("data") .. "/lazy",
