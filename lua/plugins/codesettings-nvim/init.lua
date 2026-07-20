@@ -1,21 +1,9 @@
 ---@type LazySpec
 local spec = {
   "mrjones2014/codesettings.nvim",
-  --lazy = false,
-  --url = "",
-  --name = "",
-  --dev = false,
-  --dir = "",
-  --build = "",
-  --branch = "",
-  --tag = "",
-  --version = "",
-  --commit = "",
-  --main = "",
-  --pin = false,
-  --submodules = false,
-  --module = false,
-  --optional = false,
+  -- You don't need to lazy load this plugin since it already
+  -- lazy loads its constituent parts via `plugin/*` and `ftplugin/*` files
+  lazy = false,
   --ft = require("plugins.codesettings-nvim.ft"),
   --cmd = require("plugins.codesettings-nvim.cmds"),
   --keys = require("plugins.codesettings-nvim.keys"),
