@@ -7,13 +7,11 @@ local spec = {
   --keys = require("plugins.kotlin-nvim.keys"),
   --event = require("plugins.kotlin-nvim.events"),
   dependencies = require("plugins.kotlin-nvim.dependencies"),
-  --init = function()
-  --  -- NOTE: INIT
-  --end,
   --opts = require("plugins.kotlin-nvim.opts"),
-  --config = function()
-  --  local opts = require("plugins.kotlin-nvim.opts")
-  --end,
+  config = function()
+  local opts = require("plugins.kotlin-nvim.opts")
+        require("kotlin").setup(opts)
+  end,
   cond = false,
   enabled = false,
 }
