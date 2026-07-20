@@ -1,4 +1,0 @@
-include = {
-    "lua/lean/.+$",
-    "lua/tests/.+$"
-}
