@@ -206,7 +206,9 @@ local function add_commands(client, bufnr, opts)
     end
 
     require("jdtls.dap").setup_dap(opts.dap or {})
-    api.nvim_command("command! -buffer JdtUpdateDebugConfig lua require('jdtls.dap').setup_dap_main_class_configs({ verbose = true })")
+    api.nvim_command(
+      "command! -buffer JdtUpdateDebugConfig lua require('jdtls.dap').setup_dap_main_class_configs({ verbose = true })"
+    )
     local redefine_classes = function()
       local session = dap.session()
       if not session then
