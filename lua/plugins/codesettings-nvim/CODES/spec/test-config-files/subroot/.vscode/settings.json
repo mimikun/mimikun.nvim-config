@@ -1,7 +1,0 @@
-{
-  // set something different from the other config files to test with
-  "Lua.runtime.version": "Lua 5.1",
-  "Lua.workspace.library": [
-    "local"
-  ]
-}

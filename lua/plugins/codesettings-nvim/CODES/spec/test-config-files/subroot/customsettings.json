@@ -1,9 +1,0 @@
-{
-  "rust-analyzer": {
-    "cargo": {
-      "features": [
-        "feature-a"
-      ]
-    }
-  },
-}
