@@ -1,9 +1,7 @@
 ---@type LazySpec[]
 local dependencies = {
- "mfussenegger/nvim-dap",
+  "mfussenegger/nvim-dap",
   "nvim-telescope/telescope.nvim",
 }
 
 return dependencies
-
-

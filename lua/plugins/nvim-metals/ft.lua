@@ -1,6 +1,8 @@
 ---@type table
 local ft = {
-    "scala", "sbt", "java",
+  "scala",
+  "sbt",
+  "java",
 }
 
 return ft
