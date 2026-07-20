@@ -2,20 +2,7 @@
 local spec = {
   "alexpasmantier/pymple.nvim",
   --lazy = false,
-  --url = "",
-  --name = "",
-  --dev = false,
-  --dir = "",
-  --build = "",
-  --branch = "",
-  --tag = "",
-  --version = "",
-  --commit = "",
-  --main = "",
-  --pin = false,
-  --submodules = false,
-  --module = false,
-  --optional = false,
+  build = ":PympleBuild",
   --ft = require("plugins.pymple-nvim.ft"),
   --cmd = require("plugins.pymple-nvim.cmds"),
   --keys = require("plugins.pymple-nvim.keys"),
@@ -25,10 +12,10 @@ local spec = {
   --  -- NOTE: INIT
   --end,
   --opts = require("plugins.pymple-nvim.opts"),
-  --config = function()
-  --  local opts = require("plugins.pymple-nvim.opts")
-  --end,
-  --priority = 1000,
+  config = function()
+    local opts = require("plugins.pymple-nvim.opts")
+    require("pymple").setup(opts)
+  end,
   cond = false,
   enabled = false,
 }
