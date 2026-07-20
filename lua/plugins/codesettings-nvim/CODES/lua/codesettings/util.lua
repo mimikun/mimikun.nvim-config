@@ -1,0 +1,473 @@
+---@class CodesettingsUtil
+local M = {}
+
+---Read entire contents of a file
+---@param file string filepath
+---@return string contents of the file
+function M.read_file(file)
+  local fd = io.open(file, 'r')
+  if not fd then
+    error(('Could not open file %s for reading'):format(file))
+  end
+  local data = fd:read('*a')
+  fd:close()
+  return data
+end
+
+---Write all contents to file
+---@param file string file path to write to
+---@param data string data to write
+function M.write_file(file, data)
+  local fd = io.open(file, 'w+')
+  if not fd then
+    error(('Could not open file %s for writing'):format(file))
+  end
+  fd:write(data)
+  fd:close()
+end
+
+---Delete the given file
+---@param f string file path to delete
+function M.delete_file(f)
+  vim.uv.fs_unlink(f)
+end
+
+---Get fully qualified normalized path
+---@param fname string file path to normalize
+---@return string
+function M.fqn(fname)
+  fname = vim.fn.fnamemodify(fname, ':p')
+  return vim.uv.fs_realpath(fname) or fname
+end
+
+---strip off trailing slash, if any
+---@param path string?
+local function normalize_root(path)
+  -- if nil  then return nil
+  if not path then
+    return path
+  end
+
+  if vim.endswith(path, '/') and path ~= '/' then
+    return path:sub(1, -2)
+  end
+  return path
+end
+
+---Get root directory based on root markers
+---@param opts CodesettingsConfigOverrides? optional config overrides for this load
+---@return string?
+function M.get_root(opts)
+  opts = opts or {}
+  local Config = require('codesettings.config')
+  local user_root = opts.root_dir or Config.root_dir
+  if type(user_root) == 'string' then
+    return normalize_root(user_root)
+  elseif type(user_root) == 'function' then
+    return normalize_root(user_root())
+  end
+
+  local file_paths = opts.config_file_paths or Config.config_file_paths
+  local root_patterns = vim
+    .iter(file_paths)
+    :map(function(path)
+      return vim.fn.fnamemodify(path, ':t')
+    end)
+    :totable()
+  table.insert(root_patterns, '.git')
+  table.insert(root_patterns, '.jj')
+  return vim.fs.root(0, root_patterns)
+end
+
+---@class (partial) CodesettingsGetlocalConfigsOpts: CodesettingsConfigOverrides
+---@field only_exists boolean? if true, only return files that exist; true by default
+
+---Get all the local config files found in the current project based on configured paths;
+---returns fully qualified filepaths of files that exist.
+---@param opts CodesettingsGetlocalConfigsOpts? options for getting local configs
+---@return string[] configs list of fully qualified filenames
+function M.get_local_configs(opts)
+  opts = opts or {}
+
+  local root = M.get_root(opts)
+  if not root then
+    return {}
+  end
+
+  local Config = require('codesettings.config')
+  local file_paths = opts.config_file_paths or Config.config_file_paths
+  return vim
+    .iter(file_paths)
+    :map(function(path)
+      return M.fqn(root .. '/' .. path)
+    end)
+    :filter(function(path)
+      if opts.only_exists == false then
+        return true
+      end
+      return M.exists(path)
+    end)
+    :totable()
+end
+
+--- Deep merge two values, with `b` taking precedence over `a`.
+--- Tables are merged recursively; lists are merged based on config.
+---@generic T
+---@param a T first value
+---@param b T second value
+---@param config CodesettingsConfigOverrides? config options (uses Config.merge_lists if not provided)
+---@return T merged value
+function M.merge(a, b, config)
+  config = config or {}
+  local merge_lists = config.merge_lists or 'append'
+  local function can_merge(v)
+    if type(v) ~= 'table' then
+      return false
+    end
+    -- NB: vim.islist({}) returns true for empty tables, but we want to treat
+    -- empty tables as mergeable maps, not lists so that an empty settings table
+    -- gets mutated rather than replaced.
+    if vim.islist(v) and #v > 0 then
+      return false
+    end
+    return true
+  end
+
+  local values = { a, b }
+  local ret = values[1]
+  for i = 2, #values, 1 do
+    local value = values[i]
+    if can_merge(ret) and can_merge(value) then
+      for k, v in pairs(value) do
+        ret[k] = M.merge(ret[k], v, config)
+      end
+    else
+      if (ret == nil or vim.islist(ret)) and (value == nil or vim.islist(value)) then
+        if merge_lists == 'append' then
+          local out = {}
+          vim.list_extend(out, ret or {})
+          vim.list_extend(out, value or {})
+          ret = out
+        elseif merge_lists == 'prepend' then
+          local out = {}
+          vim.list_extend(out, value or {})
+          vim.list_extend(out, ret or {})
+          ret = out
+        else -- replace
+          ret = value
+        end
+      else
+        ret = value
+      end
+    end
+  end
+  return ret
+end
+
+---Check if a file exists
+---@return boolean
+function M.exists(fname)
+  local stat = vim.uv.fs_stat(fname)
+  -- not not to coerce to boolean, or false if nil
+  return (not not (stat and stat.type)) or false
+end
+
+local function parse_composite_key(key)
+  if type(key) ~= 'string' or key:sub(1, 1) ~= '[' then
+    return nil
+  end
+  local segments = {}
+  local idx = 1
+  while idx <= #key do
+    local start_pos, end_pos, segment = key:find('%[([^%]]+)%]', idx)
+    if not start_pos or start_pos ~= idx then
+      return nil
+    end
+    segment = vim.trim(segment)
+    if segment == '' then
+      return nil
+    end
+    segments[#segments + 1] = segment
+    idx = end_pos + 1
+  end
+  if idx <= #key or #segments == 0 then
+    return nil
+  end
+  return segments
+end
+
+---Expand vs code style bracketed keys
+---e.g.
+---```json
+---{
+---  "[json][jsonc][javascript][typescript][typescriptreact]": {
+---    "editor.defaultFormatter": "esbenp.prettier-vscode"
+---  }
+---}
+---```
+---is equivalent to
+---```json
+---{
+---  "json": {
+---    "editor.defaultFormatter": "esbenp.prettier-vscode"
+---  },
+---  "jsonc": {
+---    "editor.defaultFormatter": "esbenp.prettier-vscode"
+---  },
+---  "javascript": {
+---    "editor.defaultFormatter": "esbenp.prettier-vscode"
+---  },
+---  "typescript": {
+---    "editor.defaultFormatter": "esbenp.prettier-vscode"
+---  },
+---  "typescriptreact": {
+---    "editor.defaultFormatter": "esbenp.prettier-vscode"
+---  }
+---}
+---```
+---@param node table
+local function normalize_json_settings(node)
+  if type(node) ~= 'table' then
+    return
+  end
+  if vim.islist(node) then
+    for _, item in ipairs(node) do
+      normalize_json_settings(item)
+    end
+    return
+  end
+
+  local composites = {}
+  for key, value in pairs(node) do
+    normalize_json_settings(value)
+    local segments = parse_composite_key(key)
+    if segments then
+      composites[#composites + 1] = { key = key, segments = segments, value = value }
+    end
+  end
+
+  for _, composite in ipairs(composites) do
+    node[composite.key] = nil
+    for _, target_key in ipairs(composite.segments) do
+      local new_value = vim.deepcopy(composite.value)
+      local existing = node[target_key]
+      if existing ~= nil then
+        if type(existing) == 'table' and type(new_value) == 'table' then
+          node[target_key] = M.merge(existing, new_value)
+        else
+          node[target_key] = new_value
+        end
+      else
+        node[target_key] = new_value
+      end
+      normalize_json_settings(node[target_key])
+    end
+  end
+end
+
+---Decode JSON or JSONC string
+---@param json string json string
+---@return table
+function M.json_decode(json)
+  json = vim.trim(json)
+  if json == '' then
+    json = '{}'
+  end
+  local data = require('codesettings.json.jsonc').decode_jsonc(json)
+  normalize_json_settings(data)
+  return data
+end
+
+---Get first matching runtime file
+---@param path string relative path to find
+---@return string? filepath or nil if not found
+function M.runtime_file(path)
+  local files = vim.api.nvim_get_runtime_file(path, false)
+  return files[1]
+end
+
+---Get all matching runtime files
+---@param path string relative path to find
+---@return string[] filepaths
+function M.runtime_files(path)
+  return vim.api.nvim_get_runtime_file(path, true)
+end
+
+---Get runtime directory by finding a file within it
+---@param file_path string path to a file in the target directory
+---@return string? directory path or nil
+function M.runtime_dir(file_path)
+  local file = M.runtime_file(file_path)
+  return file and vim.fn.fnamemodify(file, ':h') or nil
+end
+
+local _schema_dir_cache
+
+---Get the codesettings schemas directory (cached after first lookup)
+---@return string? directory path or nil
+function M.get_schema_dir()
+  if _schema_dir_cache then
+    return _schema_dir_cache
+  end
+  local marker = M.runtime_file('after/codesettings-schemas/als.json')
+  if marker then
+    _schema_dir_cache = vim.fn.fnamemodify(marker, ':h')
+  end
+  return _schema_dir_cache
+end
+
+---Get all LSP schema files from runtime path
+---@return string[] list of schema file paths
+function M.get_schema_files()
+  local dir = M.get_schema_dir()
+  if not dir then
+    return {}
+  end
+  return vim.fn.glob(dir .. '/*.json', false, true)
+end
+
+function M.fetch(url)
+  local fd = io.popen(string.format('curl -s -k %q', url))
+  if not fd then
+    error(('Could not download %s'):format(url))
+  end
+  local ret = fd:read('*a')
+  fd:close()
+  return ret
+end
+
+---Format JSON using jq;
+---requires `jq` to be installed and available in PATH
+---@param obj table
+---@return string formatted json string
+function M.json_format(obj)
+  local tmp = os.tmpname()
+  M.write_file(tmp, vim.json.encode(obj))
+  local fd = io.popen('jq -S < ' .. tmp)
+  if not fd then
+    error('Could not format json')
+  end
+  local ret = fd:read('*a')
+  if ret == '' then
+    error('Could not format json')
+  end
+  fd:close()
+  return ret
+end
+
+local msg_prefix = '[codesettings] '
+
+---@param msg string
+---@param ... any
+function M.info(msg, ...)
+  vim.notify(('%s%s'):format(msg_prefix, msg:format(...)), vim.log.levels.INFO)
+end
+
+---@param msg string
+---@param ... any
+function M.warn(msg, ...)
+  vim.notify(('%s%s'):format(msg_prefix, msg:format(...)), vim.log.levels.WARN)
+end
+
+---@param msg string
+---@param ... any
+function M.error(msg, ...)
+  vim.notify(('%s%s'):format(msg_prefix, msg:format(...)), vim.log.levels.ERROR)
+end
+
+---Schedule a notification function call
+---@param fn function notification function (M.info, M.warn, M.error)
+---@param ... any arguments to pass to the function
+local function schedule_notify(fn, ...)
+  local args = { ... }
+  vim.schedule(function()
+    fn(unpack(args))
+  end)
+end
+
+---Tell the specified LSP server that configuration has changed via
+---`workspace/didChangeConfiguration` notification. After notifying,
+---emits a `User CodesettingsConfigChanged` autocmd with the client
+---and config in the data, so that users can handle edge cases like
+---restarting servers that don't pick up notification-based changes.
+---@param client_or_name vim.lsp.Client|string LSP client or name of the client
+---@param config vim.lsp.Config|vim.lsp.ClientConfig new settings to notify the client about
+---@param silent boolean? if true, suppress info/warn messages
+function M.did_change_configuration(client_or_name, config, silent)
+  ---@type vim.lsp.Client[]
+  local clients
+  if type(client_or_name) == 'table' then
+    -- best effort: try to make sure the table is actually a `vim.lsp.Client`
+    if not client_or_name.notify or not client_or_name.supports_method then
+      schedule_notify(M.error, 'Expected vim.lsp.Client or string')
+      return
+    end
+    clients = { client_or_name }
+  elseif type(client_or_name) == 'string' then
+    local active_clients = vim.lsp.get_clients({ name = client_or_name })
+    if #active_clients == 0 then
+      if not silent then
+        schedule_notify(M.warn, 'No active LSP client named %s', client_or_name)
+      end
+      return
+    end
+    clients = active_clients
+  else
+    M.error('Expected vim.lsp.Client or string')
+    return
+  end
+  vim.iter(clients):each(function(client)
+    ---@cast client vim.lsp.Client
+    client:notify(vim.lsp.protocol.Methods.workspace_didChangeConfiguration, {
+      settings = config.settings,
+    })
+    if not silent then
+      schedule_notify(M.info, '%s configuration reloaded', client.name)
+    end
+    vim.api.nvim_exec_autocmds('User', {
+      pattern = 'CodesettingsFilesChanged',
+      data = { client_name = client.config.name },
+    })
+  end)
+end
+
+---Ensure these LSP settings are always applied, forcing `merge_lists = 'append'`.
+---This is useful for the built-in jsonls and lua_ls integrations, which rely on
+---adding schemas and library paths, respectively.
+---@param lsp_name string name of the LSP server
+---@param config { settings: table } settings to ensure
+function M.ensure_lsp_settings(lsp_name, config)
+  local group = vim.api.nvim_create_augroup('codesettings_' .. lsp_name, { clear = true })
+
+  -- Handler function to update a client's config
+  local function update_client(client)
+    if client.name ~= lsp_name then
+      return false
+    end
+
+    -- Deep merge the config update into the client's existing config
+    client.config.settings = M.merge(client.config.settings or {}, config.settings or {}, { merge_lists = 'append' })
+
+    -- Notify the server of the configuration change
+    M.did_change_configuration(lsp_name, client.config, true)
+    return true
+  end
+
+  -- Update any already-running clients
+  for _, client in ipairs(vim.lsp.get_clients({ name = lsp_name })) do
+    update_client(client)
+  end
+
+  -- Set up autocmd for future clients
+  vim.api.nvim_create_autocmd('LspAttach', {
+    group = group,
+    callback = function(args)
+      local client = vim.lsp.get_client_by_id(args.data.client_id)
+      if client then
+        update_client(client)
+      end
+    end,
+  })
+end
+
+return M

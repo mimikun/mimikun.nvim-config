@@ -1,0 +1,14 @@
+{
+  "eslint.codeAction.disableRuleComment": {
+    "enable": true,
+    "location": "separateLine"
+  },
+  // test mixed nested and dotted paths
+  "eslint": {
+    "codeAction": {
+      "showDocumentation": {
+        "enable": true
+      }
+    }
+  }
+}

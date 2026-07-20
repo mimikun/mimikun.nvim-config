@@ -1,0 +1,360 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "description": "Julia Language Support",
+  "properties": {
+    "julia.NumThreads": {
+      "default": null,
+      "markdownDescription": "Number of threads to use for Julia processes. A value of `auto` works on Julia versions that allow for `--threads=auto`.",
+      "scope": "machine-overridable",
+      "type": [
+        "integer",
+        "string",
+        "null"
+      ]
+    },
+    "julia.additionalArgs": {
+      "default": [],
+      "description": "Additional Julia arguments.",
+      "type": "array"
+    },
+    "julia.cellDelimiters": {
+      "default": [
+        "^[ \\t]?#[ \\t]#+",
+        "^##(?!#)",
+        "^#([ \\t]?)%%",
+        "^##([ \\t]?)-",
+        "^##([ \\t]?)\\+"
+      ],
+      "description": "Cell delimiter regular expressions for Julia files.",
+      "type": "array"
+    },
+    "julia.completionmode": {
+      "default": "qualify",
+      "description": "Sets the mode for completions.",
+      "enum": [
+        "exportedonly",
+        "import",
+        "qualify"
+      ],
+      "enumDescriptions": [
+        "Show completions for the current namespace.",
+        "Show completions for the current namespace and unexported variables of `using`ed modules. Selection of an unexported variable will result in the automatic insertion of an explicit `using` statement.",
+        "Show completions for the current namespace and unexported variables of `using`ed modules. Selection of an unexported variable will complete to a qualified variable name."
+      ],
+      "scope": "window",
+      "type": "string"
+    },
+    "julia.debuggerDefaultCompiled": {
+      "default": [
+        "ALL_MODULES_EXCEPT_MAIN"
+      ],
+      "description": "Functions or modules that are set to compiled mode when setting the defaults.",
+      "scope": "window",
+      "type": "array"
+    },
+    "julia.deleteJuliaCovFiles": {
+      "default": true,
+      "description": "Delete Julia .cov files when running tests with coverage, leaving only a .lcov file behind.",
+      "scope": "window",
+      "type": "boolean"
+    },
+    "julia.editor": {
+      "default": "code",
+      "markdownDescription": "Command to open files from the REPL (via setting the `JULIA_EDITOR` environment variable).",
+      "type": "string"
+    },
+    "julia.enableCrashReporter": {
+      "default": null,
+      "description": "Enable crash reports to be sent to the julia VS Code extension developers.",
+      "scope": "window",
+      "type": [
+        "boolean",
+        "null"
+      ]
+    },
+    "julia.enableDynamicIndexing": {
+      "default": true,
+      "description": "Whether to use dynamic package indexing. Disable for reduced functionality with lower resource usage.",
+      "scope": "window",
+      "type": "boolean"
+    },
+    "julia.enableTelemetry": {
+      "default": null,
+      "description": "Enable usage data and errors to be sent to the julia VS Code extension developers.",
+      "scope": "window",
+      "type": [
+        "boolean",
+        "null"
+      ]
+    },
+    "julia.environmentPath": {
+      "default": null,
+      "markdownDescription": "Path to a julia environment. VS Code needs to be reloaded for changes to take effect. Explicitly supports substitution for the `${userHome}`, `${workspaceFolder}`, `${workspaceFolderBasename}`, `${workspaceFolder:<FOLDER_NAME>}`, `${pathSeparator}`, `${env:<ENVIRONMENT_VARIABLE>}`, `${config:<CONFIG_VARIABLE>}` tokens.",
+      "scope": "window",
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "julia.environmentVariables": {
+      "additionalProperties": {
+        "type": "string"
+      },
+      "default": {},
+      "markdownDescription": "Environment variables that are added to the Julia executable's environment for every Julia process started by this extension. Variables defined here will be merged with (and usually override) the default process environment, but various environment variables will get overridden for some processes for stability reasons.",
+      "scope": "machine",
+      "type": "object"
+    },
+    "julia.executablePath": {
+      "default": "",
+      "markdownDescription": "Points to the Julia executable. This can either be an absolute path, an executable on your PATH, or a juliaup channel (valid formats `julia +$channel`, `+$channel`).",
+      "scope": "machine-overridable",
+      "type": "string"
+    },
+    "julia.execution.codeInREPL": {
+      "default": false,
+      "description": "Print executed code in REPL and append it to the REPL history.",
+      "scope": "window",
+      "type": "boolean"
+    },
+    "julia.execution.inlineResultsForCellEvaluation": {
+      "default": false,
+      "markdownDescription": "Show separate inline results for all code blocks in a cell",
+      "scope": "window",
+      "type": "boolean"
+    },
+    "julia.execution.module": {
+      "default": "",
+      "markdownDescription": "Global override for the code execution module. Leave empty to automatically choose a context module.",
+      "scope": "global",
+      "type": "string"
+    },
+    "julia.execution.resultType": {
+      "default": "both",
+      "description": "Specifies how to show inline execution results",
+      "enum": [
+        "REPL",
+        "inline",
+        "inline, errors in REPL",
+        "both"
+      ],
+      "enumDescriptions": [
+        "Shows inline execution results in REPL",
+        "Shows inline execution results as inline bubbles",
+        "Shows inline execution results in REPL and inline bubbles"
+      ],
+      "type": "string"
+    },
+    "julia.execution.saveOnEval": {
+      "default": false,
+      "markdownDescription": "Save file before execution",
+      "scope": "window",
+      "type": "boolean"
+    },
+    "julia.focusPlotNavigator": {
+      "default": false,
+      "description": "Whether to automatically show the plot navigator when plotting.",
+      "type": "boolean"
+    },
+    "julia.inlayHints.runtime.enabled": {
+      "default": true,
+      "markdownDescription": "Enable display of runtime inlay hints. These hints are provided by packages that overload a `show` method for the `application/vnd.julia-vscode.inlayHints` MIME type.",
+      "type": "boolean"
+    },
+    "julia.inlayHints.static.enabled": {
+      "default": false,
+      "markdownDescription": "Enable display of static inlay hints.",
+      "type": "boolean"
+    },
+    "julia.inlayHints.static.parameterNames.enabled": {
+      "default": "literals",
+      "enum": [
+        "none",
+        "literals",
+        "all"
+      ],
+      "markdownDescription": "Enable name hints for function parameters:\n```julia\nfoo(#= bar: =# 42)\n```",
+      "type": "string"
+    },
+    "julia.inlayHints.static.variableTypes.enabled": {
+      "default": true,
+      "markdownDescription": "Enable type hints for variable definitions:\n```julia\nfoo #=::Int64=# = 42\n```",
+      "type": "boolean"
+    },
+    "julia.juliaup.customDepot": {
+      "default": true,
+      "markdownDescription": "If enabled and a custom Juliaup server is set via `julia.juliaup.server`, Juliaup related configuration will be stored in a server-scoped directory. If the `JULIAUP_DEPOT_PATH` environment variable is set, this setting has no effect.",
+      "scope": "language-overridable",
+      "type": "boolean"
+    },
+    "julia.juliaup.install.hint": {
+      "default": true,
+      "description": "Show Juliaup install recommendation.",
+      "scope": "machine-overridable",
+      "type": "boolean"
+    },
+    "julia.juliaup.server": {
+      "description": "Juliaup mirror. Defaults to the official sources.",
+      "scope": "resource",
+      "type": "string"
+    },
+    "julia.languageServerExecutablePath": {
+      "default": "",
+      "description": "Points to the julia executable used to launch the language server process. This overwrites julia.executablePath for the language server launch if present.",
+      "scope": "machine-overridable",
+      "type": "string"
+    },
+    "julia.languageServerJuliaupChannel": {
+      "default": "release",
+      "description": "Juliaup channel to use for the language server (e.g., 'release', 'lts', 'beta'). Can be overridden by JULIA_VSCODE_LANGUAGESERVER_CHANNEL environment variable.",
+      "scope": "machine-overridable",
+      "type": "string"
+    },
+    "julia.numTestProcesses": {
+      "default": 1,
+      "markdownDescription": "Number of processes to use for testing.",
+      "scope": "machine-overridable",
+      "type": "integer"
+    },
+    "julia.packageServer": {
+      "default": "",
+      "markdownDescription": "Julia package server. Sets the `JULIA_PKG_SERVER` environment variable *before* starting a Julia process. Leave this empty to use the systemwide default. Requires a restart of the Julia process.",
+      "scope": "machine-overridable",
+      "type": "string"
+    },
+    "julia.persistentSession.alwaysCopy": {
+      "default": false,
+      "description": "Always copy the command for connecting to an external REPL to the clipboard.",
+      "scope": "application",
+      "type": "boolean"
+    },
+    "julia.persistentSession.closeStrategy": {
+      "default": "ask",
+      "description": "Behaviour when stopping a persistent session.",
+      "enum": [
+        "ask",
+        "close",
+        "disconnect"
+      ],
+      "enumDescriptions": [
+        "Always ask",
+        "Close the tmux session",
+        "Disconnect, but keep the tmux session"
+      ],
+      "scope": "machine-overridable",
+      "type": "string"
+    },
+    "julia.persistentSession.enabled": {
+      "default": false,
+      "markdownDescription": "Experimental: Starts the interactive Julia session in a persistent `tmux` session. Note that `tmux` must be available in the shell defined with `#julia.persistentSession.shell#`.",
+      "scope": "machine-overridable",
+      "type": "boolean"
+    },
+    "julia.persistentSession.shell": {
+      "default": "/bin/sh",
+      "description": "Shell used to start the persistent session.",
+      "scope": "machine",
+      "type": "string"
+    },
+    "julia.persistentSession.shellExecutionArgument": {
+      "default": "-c",
+      "markdownDescription": "Argument to execute code in the configured shell, e.g. `-c` for sh-likes or `/c` for `cmd`. Can contain multiple arguments separated by spaces.",
+      "scope": "machine",
+      "type": "string"
+    },
+    "julia.persistentSession.tmuxSessionName": {
+      "default": "julia_vscode",
+      "markdownDescription": "Name of the `tmux` session. Explicitly supports substitution for the `${userHome}`, `${workspaceFolder}`, `${workspaceFolderBasename}`, `${workspaceFolder:<FOLDER_NAME>}`, `${pathSeparator}`, `${env:<ENVIRONMENT_VARIABLE>}`, `${config:<CONFIG_VARIABLE>} tokens.",
+      "scope": "machine-overridable",
+      "type": "string"
+    },
+    "julia.plots.defaultMimeType": {
+      "default": "image/png",
+      "description": "Default MIME type for plots. Determines whether plots are rendered as PNG or SVG by default.",
+      "enum": [
+        "image/png",
+        "image/svg+xml"
+      ],
+      "type": "string"
+    },
+    "julia.plots.path": {
+      "description": "Default directory for saving plots. Can either be relative to the current workspace or absolute.",
+      "scope": "window",
+      "type": "string"
+    },
+    "julia.repl.keepAlive": {
+      "default": false,
+      "markdownDescription": "Experimental: Keeps the terminal window around even if the underlying Julia process is terminated to help debugging of fatal errors. Try disabling this if you see rendering issues in the integrated Julia REPL.",
+      "scope": "machine-overridable",
+      "type": "boolean"
+    },
+    "julia.runtimeCompletions": {
+      "default": false,
+      "description": "Request runtime completions from the integrated REPL.",
+      "scope": "application",
+      "type": "boolean"
+    },
+    "julia.showRuntimeDiagnostics": {
+      "default": true,
+      "markdownDescription": "Enable display of runtime diagnostics. These diagnostics are provided by packages that overload a `show` method for the `application/vnd.julia-vscode.diagnostics` MIME type.",
+      "type": "boolean"
+    },
+    "julia.symbolCacheDownload": {
+      "default": null,
+      "description": "Download symbol server cache files from GitHub.",
+      "scope": "application",
+      "type": [
+        "boolean",
+        "null"
+      ]
+    },
+    "julia.symbolserverUpstream": {
+      "default": "https://julia-symbolcache.org",
+      "description": "Symbol server cache download URL.",
+      "scope": "application",
+      "type": "string"
+    },
+    "julia.trace.server": {
+      "default": "off",
+      "description": "Traces the communication between VS Code and the language server.",
+      "enum": [
+        "off",
+        "messages",
+        "verbose"
+      ],
+      "scope": "window",
+      "type": "string"
+    },
+    "julia.useCellHighlighting": {
+      "default": true,
+      "markdownDescription": "Enable highlighting of the current cell delimited by `#julia.cellDelimiters#`.",
+      "type": "boolean"
+    },
+    "julia.useCodeLens": {
+      "default": true,
+      "markdownDescription": "Enable CodeLens for showing run actions above cells delimited by `#julia.cellDelimiters#`.",
+      "type": "boolean"
+    },
+    "julia.usePlotPane": {
+      "default": true,
+      "description": "Display plots within VS Code. Might require a restart of the Julia process.",
+      "type": "boolean"
+    },
+    "julia.useProgressFrontend": {
+      "default": true,
+      "markdownDescription": "Display [progress bars](https://github.com/JunoLab/ProgressLogging.jl) within VS Code.",
+      "type": "boolean"
+    },
+    "julia.useRevise": {
+      "default": true,
+      "description": "Load Revise.jl on startup of the REPL.",
+      "type": "boolean"
+    },
+    "julia.workspace.showModules": {
+      "default": true,
+      "description": "Show top-level modules in the workspace.",
+      "scope": "application",
+      "type": "boolean"
+    }
+  }
+}

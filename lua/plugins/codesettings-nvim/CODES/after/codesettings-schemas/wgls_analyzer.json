@@ -1,0 +1,270 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "description": "WGSL/WESL support for Visual Studio Code",
+  "properties": {
+    "wgsl-analyzer.cachePriming.numThreads": {
+      "anyOf": [
+        {
+          "maximum": 255,
+          "minimum": 0,
+          "type": "number"
+        },
+        {
+          "enum": [
+            "physical",
+            "logical"
+          ],
+          "enumDescriptions": [
+            "Use the number of physical cores",
+            "Use the number of logical cores"
+          ],
+          "type": "string"
+        }
+      ],
+      "default": "physical",
+      "markdownDescription": "Number of worker threads used to warm caches when a project opens.\nUse `0` to let the server choose automatically based on the machine."
+    },
+    "wgsl-analyzer.diagnostics.nagaParsingErrors": {
+      "default": true,
+      "markdownDescription": "Controls whether to show naga's parsing errors.",
+      "type": "boolean"
+    },
+    "wgsl-analyzer.diagnostics.nagaValidationErrors": {
+      "default": true,
+      "markdownDescription": "Controls whether to show naga's validation errors.",
+      "type": "boolean"
+    },
+    "wgsl-analyzer.diagnostics.nagaVersion": {
+      "default": "0.29",
+      "enum": [
+        "0.27",
+        "0.28",
+        "0.29",
+        "main"
+      ],
+      "enumDescriptions": [
+        "Naga version 27",
+        "Naga version 28",
+        "Naga version 29",
+        "Version of Naga on main (most recent stable version)"
+      ],
+      "markdownDescription": "Naga version used for validation.",
+      "type": "string"
+    },
+    "wgsl-analyzer.diagnostics.typeErrors": {
+      "default": true,
+      "markdownDescription": "Controls whether to show type errors.",
+      "type": "boolean"
+    },
+    "wgsl-analyzer.extensions.shaderInt64": {
+      "default": true,
+      "markdownDescription": "Whether to enable u64 and i64 scalar types.",
+      "type": "boolean"
+    },
+    "wgsl-analyzer.initializeStopped": {
+      "default": false,
+      "markdownDescription": "Do not start wgsl-analyzer server when the extension is activated.",
+      "type": "boolean"
+    },
+    "wgsl-analyzer.inlayHints.enabled": {
+      "default": true,
+      "markdownDescription": "Whether to show inlay hints.",
+      "type": "boolean"
+    },
+    "wgsl-analyzer.inlayHints.parameterHints": {
+      "default": true,
+      "markdownDescription": "Whether to show inlay hints for the names of function parameters.",
+      "type": "boolean"
+    },
+    "wgsl-analyzer.inlayHints.renderColons": {
+      "default": true,
+      "markdownDescription": "Whether to render leading colons for type hints, and trailing colons for parameter hints.",
+      "type": "boolean"
+    },
+    "wgsl-analyzer.inlayHints.structLayoutHints": {
+      "default": false,
+      "markdownDescription": "Whether to show inlay hints for the layout of struct fields.",
+      "type": "boolean"
+    },
+    "wgsl-analyzer.inlayHints.typeHints": {
+      "default": true,
+      "markdownDescription": "Whether to show inlay hints for types of variable declarations.",
+      "type": "boolean"
+    },
+    "wgsl-analyzer.inlayHints.typeVerbosity": {
+      "default": "compact",
+      "enum": [
+        "full",
+        "compact",
+        "inner"
+      ],
+      "enumDescriptions": [
+        "`ref<uniform, f32, read_write>`",
+        "`ref<f32>`",
+        "`f32`"
+      ],
+      "markdownDescription": "Verbosity of type hints: `\"full\"`, `\"compact\"`, or `\"inner\"`.",
+      "type": "string"
+    },
+    "wgsl-analyzer.numThreads": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "enum": [
+            "physical",
+            "logical"
+          ],
+          "enumDescriptions": [
+            "Use the number of physical cores",
+            "Use the number of logical cores"
+          ],
+          "type": "string"
+        }
+      ],
+      "default": null,
+      "markdownDescription": "Number of worker threads for the main analysis loop.\n`null` lets the server choose automatically."
+    },
+    "wgsl-analyzer.restartServerOnConfigChange": {
+      "default": false,
+      "markdownDescription": "Whether to restart the server automatically when certain settings that require a restart are changed.",
+      "type": "boolean"
+    },
+    "wgsl-analyzer.server.extraEnv": {
+      "additionalProperties": {
+        "type": [
+          "string",
+          "number"
+        ]
+      },
+      "default": null,
+      "markdownDescription": "Extra environment variables that will be passed to the wgsl-analyzer executable. Useful for passing variables (for example, `WA_LOG`) for debugging.",
+      "type": [
+        "null",
+        "object"
+      ]
+    },
+    "wgsl-analyzer.server.path": {
+      "default": null,
+      "markdownDescription": "Path to wgsl-analyzer executable (points to bundled binary by default).",
+      "scope": "machine-overridable",
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "wgsl-analyzer.showDependenciesExplorer": {
+      "default": true,
+      "markdownDescription": "Whether to show the dependencies view.",
+      "type": "boolean"
+    },
+    "wgsl-analyzer.showRequestFailedErrorNotification": {
+      "default": true,
+      "markdownDescription": "Whether to show error notifications for failing requests.",
+      "type": "boolean"
+    },
+    "wgsl-analyzer.showSyntaxTree": {
+      "default": false,
+      "markdownDescription": "Whether to show the syntax tree view.",
+      "type": "boolean"
+    },
+    "wgsl-analyzer.showUnlinkedFileNotification": {
+      "default": true,
+      "markdownDescription": "Whether to show a notification for unlinked files asking the user to add the corresponding `wesl.toml` to the linked projects setting.",
+      "type": "boolean"
+    },
+    "wgsl-analyzer.statusBar.clickAction": {
+      "default": "openLogs",
+      "enum": [
+        "stopServer",
+        "openLogs"
+      ],
+      "enumDescriptions": [
+        "Stop Server",
+        "Open Logs"
+      ],
+      "markdownDescription": "Action to run when clicking the extension status bar item.",
+      "type": "string"
+    },
+    "wgsl-analyzer.statusBar.showStatusBar": {
+      "anyOf": [
+        {
+          "enum": [
+            "always",
+            "never"
+          ],
+          "type": "string"
+        },
+        {
+          "properties": {
+            "documentSelector": {
+              "items": {
+                "properties": {
+                  "language": {
+                    "type": "string"
+                  },
+                  "notebookType": {
+                    "type": "string"
+                  },
+                  "pattern": {
+                    "type": "string"
+                  },
+                  "scheme": {
+                    "type": "string"
+                  }
+                },
+                "type": "object"
+              },
+              "type": "array"
+            }
+          },
+          "type": "object"
+        }
+      ],
+      "default": {
+        "documentSelector": [
+          {
+            "language": "wgsl"
+          },
+          {
+            "language": "wesl"
+          },
+          {
+            "pattern": "**/wesl.toml"
+          },
+          {
+            "pattern": "extension-output-wgsl-analyzer.wgsl-analyzer*",
+            "scheme": "output"
+          }
+        ]
+      },
+      "markdownDescription": "When to show the extension status bar.\n\n`\"always\"` Always show the status bar.\n\n`\"never\"` Never show the status bar.\n\n`{ documentSelector: <DocumentSelector>[] }` Show the status bar if the open file matches any of the given document selectors.\n\nSee [VS Code -- DocumentSelector](https://code.visualstudio.com/api/references/document-selector) for more information."
+    },
+    "wgsl-analyzer.trace.extension": {
+      "default": false,
+      "markdownDescription": "Enable logging of VS Code extensions itself.\nThis settings is now deprecated.\nLog level is now controlled by the [Developer: Set Log Level...](command:workbench.action.setLogLevel) command. You can set the log level for the current session and also the default log level from there. This is also available by clicking the gear icon on the OUTPUT tab when wgsl-analyzer Client is visible or by passing the --log wgsl-analyzer.wgsl-analyzer:debug parameter to VS Code.",
+      "type": "boolean"
+    },
+    "wgsl-analyzer.trace.server": {
+      "default": "off",
+      "enum": [
+        "off",
+        "messages",
+        "verbose"
+      ],
+      "enumDescriptions": [
+        "No traces",
+        "Error only",
+        "Full log"
+      ],
+      "markdownDescription": "Server trace verbosity.\nOne of: `\"off\"`, `\"messages\"`, or `\"verbose\"`.",
+      "type": "string"
+    },
+    "wgsl-analyzer.typing.continueCommentsOnNewline": {
+      "default": true,
+      "markdownDescription": "Whether to prefix newlines after comments with the corresponding comment prefix.",
+      "type": "boolean"
+    }
+  }
+}

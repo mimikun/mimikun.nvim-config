@@ -1,0 +1,123 @@
+-- stylua: ignore
+---@meta
+
+---Codesettings plugin configuration types
+
+---Input type for config options that can be overridden per-load
+---@class (partial) CodesettingsConfigOverrides: CodesettingsOverridableConfig
+
+---Options which can be passed on a per-load basis (i.e. can override global config)
+---@class CodesettingsOverridableConfig
+--- Look for these config files
+--- 
+--- ```lua
+--- default = { ".vscode/settings.json", "codesettings.json", "lspsettings.json" }
+--- ```
+---@field config_file_paths string[]?
+--- List of loader extensions to use when loading settings; `string` values will be `require`d
+--- 
+--- ```lua
+--- default = { "codesettings.extensions.vscode" }
+--- ```
+---@field loader_extensions (string|CodesettingsLoaderExtension|fun():CodesettingsLoaderExtension)[]?
+--- How to merge lists; 'append' (default), 'prepend' or 'replace'
+--- 
+--- ```lua
+--- default = "append"
+--- ```
+---@field merge_lists CodesettingsMergeListsBehavior?
+--- Provide your own root dir; can be a string or function returning a string.
+--- It should be/return the full absolute path to the root directory.
+--- If not set, defaults to `require('codesettings.util').get_root()`
+--- 
+--- ```lua
+--- default = nil
+--- ```
+---@field root_dir string|(fun():string)|nil?
+
+---Main configuration class
+---@class CodesettingsConfig: CodesettingsOverridableConfig
+--- Set filetype to jsonc when opening a file specified by `config_file_paths`,
+--- make sure you have the json tree-sitter parser installed for highlighting
+--- 
+--- ```lua
+--- default = true
+--- ```
+---@field jsonc_filetype boolean
+--- Integrate with jsonls to provide LSP completion for LSP settings based on schemas
+--- 
+--- ```lua
+--- default = true
+--- ```
+---@field jsonls_integration boolean
+--- Enable live reloading of settings when config files change
+--- via the `workspace/didChangeConfiguration` notification; after notifying,
+--- an autocmd `User CodesettingsFilesChanged` will be emitted. You
+--- can use this autocmd to handle edge cases like restarting servers
+--- that don't respond to `workspace/didChangeConfiguration` by
+--- restarting it.
+---@field live_reload boolean
+--- Set up library paths for `lua_ls` automatically to pick up the generated type
+--- annotations provided by codesettings.nvim; to enable for only your nvim config,
+--- you can also do something like:
+--- lua_ls_integration = function()
+---   return vim.uv.cwd() == ('%%s/.config/nvim'):format(vim.env.HOME)
+--- end,
+--- This integration also works for emmylua_ls
+--- 
+--- ```lua
+--- default = true
+--- ```
+---@field lua_ls_integration boolean|(fun():boolean)
+--- Controls %placeholder% string substitution in LSP schema descriptions.
+--- - true (default): use bundled English NLS files
+--- - false: disable substitution (raw %placeholders% visible)
+--- - string: path to a directory of per-LSP NLS JSON files (e.g. "/path/to/dir" containing jsonls.nls.json, lua_ls.nls.json, etc.)
+--- - table: flat `{ ["%key%"] = "value" }` NLS table applied to all LSPs
+--- - function(lsp_name) -> table: per-LSP resolver
+--- Note that only certain schemas support this, see the bundled *.nls.json files at
+--- ./after/codesettings-nls/*.nls.json
+--- 
+--- ```lua
+--- default = true
+--- ```
+---@field nls boolean|string|table|(fun(string):table)
+
+---Builder class for constructing Codesettings configuration
+---
+---Methods are dynamically generated at runtime via metatables based on schema properties.
+---Each overridable config property gets a corresponding setter method.
+---@class CodesettingsConfigBuilder
+---@field private _config CodesettingsOverridableConfig
+--- Look for these config files
+--- 
+--- ```lua
+--- default = { ".vscode/settings.json", "codesettings.json", "lspsettings.json" }
+--- ```
+---@field config_file_paths fun(self: CodesettingsConfigBuilder, value: string[]): CodesettingsConfigBuilder
+--- List of loader extensions to use when loading settings; `string` values will be `require`d
+--- 
+--- ```lua
+--- default = { "codesettings.extensions.vscode" }
+--- ```
+---@field loader_extensions fun(self: CodesettingsConfigBuilder, value: (string|CodesettingsLoaderExtension|fun():CodesettingsLoaderExtension)[]): CodesettingsConfigBuilder
+--- How to merge lists; 'append' (default), 'prepend' or 'replace'
+--- 
+--- ```lua
+--- default = "append"
+--- ```
+---@field merge_lists fun(self: CodesettingsConfigBuilder, value: CodesettingsMergeListsBehavior): CodesettingsConfigBuilder
+--- Provide your own root dir; can be a string or function returning a string.
+--- It should be/return the full absolute path to the root directory.
+--- If not set, defaults to `require('codesettings.util').get_root()`
+--- 
+--- ```lua
+--- default = nil
+--- ```
+---@field root_dir fun(self: CodesettingsConfigBuilder, value: string|(fun():string)|nil): CodesettingsConfigBuilder
+---Return the resulting configuration table
+---@field build fun(self: CodesettingsConfigBuilder): CodesettingsConfigOverrides
+---Load the local settings using the configuration built by this builder
+---@field local_settings fun(self: CodesettingsConfigBuilder): CodesettingsSettings
+---Load and merge local settings into the given LSP config
+---@field with_local_settings fun(self: CodesettingsConfigBuilder, lsp_name: string, config: table): table

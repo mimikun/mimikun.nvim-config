@@ -1,0 +1,641 @@
+*codesettings.nvim.txt*
+                             For Neovim >= 0.11.0    Last change: 2026 July 10
+
+==============================================================================
+Table of Contents                        *codesettings.nvim-table-of-contents*
+
+1. Requirements                               |codesettings.nvim-requirements|
+  - Supported LSP Servers|codesettings.nvim-requirements-supported-lsp-servers|
+2. Installation                               |codesettings.nvim-installation|
+3. Quick start                                 |codesettings.nvim-quick-start|
+  - Rustaceanvim                  |codesettings.nvim-quick-start-rustaceanvim|
+4. Features                                       |codesettings.nvim-features|
+5. Commands                                       |codesettings.nvim-commands|
+6. API                                                 |codesettings.nvim-api|
+7. How it finds your settings   |codesettings.nvim-how-it-finds-your-settings|
+8. How merging works                     |codesettings.nvim-how-merging-works|
+9. Advanced Usage                           |codesettings.nvim-advanced-usage|
+  - One-shot Loaders       |codesettings.nvim-advanced-usage-one-shot-loaders|
+  - Loader Extensions     |codesettings.nvim-advanced-usage-loader-extensions|
+10. Performance                                |codesettings.nvim-performance|
+11. Acknowledgements                      |codesettings.nvim-acknowledgements|
+12. Links                                            |codesettings.nvim-links|
+Easily read your project’s local settings files and merge them into your
+Neovim 0.11+ native LSP configuration.
+
+This plugin makes it easy to reuse settings your team already committed to
+version control for VS Code by providing an API to merge the relevant settings
+from VS Code’s settings schema into the LSP `settings` table you pass to
+`vim.lsp.config()` (or any way you configure LSP).
+
+
+==============================================================================
+1. Requirements                               *codesettings.nvim-requirements*
+
+- Neovim 0.11+ (uses the new `vim.lsp.config()` API)
+- A JSON(C) file in your project root with LSP settings (optional; if missing, your config is returned unchanged).
+    Paths are configurable, but by default, the plugin looks for any of:
+    - `.vscode/settings.json`
+    - `codesettings.json`
+    - `lspsettings.json`
+
+
+SUPPORTED LSP SERVERS   *codesettings.nvim-requirements-supported-lsp-servers*
+
+Click to expand list ~
+
+- als <https://github.com/AdaCore/ada_language_server/tree/master/integration/vscode/ada/package.json>
+- angularls <https://github.com/angular/vscode-ng-language-service/refs/heads/tree/main/package.json>
+- astro <https://github.com/withastro/language-tools/tree/main/packages/vscode/package.json>
+- awkls <https://github.com/Beaglefoot/awk-language-server/tree/master/client/package.json>
+- basedpyright <https://github.com/DetachHead/basedpyright/tree/main/packages/vscode-pyright/package.json>
+- bashls <https://github.com/bash-lsp/bash-language-server/tree/master/vscode-client/package.json>
+- clangd <https://github.com/clangd/vscode-clangd/tree/master/package.json>
+- cssls <https://github.com/microsoft/vscode/tree/main/extensions/css-language-features/package.json> (supports i18n)
+- dartls <https://github.com/Dart-Code/Dart-Code/tree/master/package.json>
+- denols <https://github.com/denoland/vscode_deno/tree/main/package.json>
+- elixirls <https://github.com/elixir-lsp/vscode-elixir-ls/tree/master/package.json>
+- elmls <https://github.com/elm-tooling/elm-language-client-vscode/tree/master/package.json>
+- emmylua_ls <https://github.com/EmmyLuaLs/emmylua-analyzer-rust/86ae47efba57c2d70a5af18faa6e8418b0129b22/crates/emmylua_code_analysis/resources/schema.json>
+- eslint <https://github.com/microsoft/vscode-eslint/tree/main/package.json>
+- flow <https://github.com/flowtype/flow-for-vscode/tree/master/package.json>
+- fsautocomplete <https://github.com/ionide/ionide-vscode-fsharp/tree/main/release/package.json>
+- gopls <https://github.com/golang/vscode-go/tree/master/extension/package.json>
+- grammarly <https://github.com/znck/grammarly/tree/main/extension/package.json>
+- graphql <https://github.com/graphql/graphiql/refs/heads/tree/main/packages/vscode-graphql/package.json>
+- haxe_language_server <https://github.com/vshaxe/vshaxe/tree/master/package.json>
+- hhvm <https://github.com/slackhq/vscode-hack/tree/master/package.json>
+- hie <https://github.com/alanz/vscode-hie-server/tree/master/package.json>
+- hls <https://github.com/haskell/vscode-haskell/refs/heads/tree/master/package.json>
+- html <https://github.com/microsoft/vscode/tree/main/extensions/html-language-features/package.json> (supports i18n)
+- intelephense <https://github.com/bmewburn/vscode-intelephense/tree/master/package.json>
+- java_language_server <https://github.com/georgewfraser/java-language-server/tree/master/package.json>
+- jdtls <https://github.com/redhat-developer/vscode-java/tree/master/package.json>
+- jsonls <https://github.com/microsoft/vscode/tree/master/extensions/json-language-features/package.json> (supports i18n)
+- julials <https://github.com/julia-vscode/julia-vscode/tree/master/package.json>
+- kotlin_language_server <https://github.com/fwcd/vscode-kotlin/tree/master/package.json>
+- ltex <https://github.com/valentjn/vscode-ltex/tree/develop/package.json> (supports i18n)
+- lua_ls <https://github.com/LuaLS/vscode-lua/tree/master/package.json> (supports i18n)
+- luau_lsp <https://github.com/JohnnyMorganz/luau-lsp/tree/main/editors/code/package.json>
+- nickel_ls <https://github.com/tweag/nickel/refs/heads/tree/master/lsp/vscode-extension/package.json>
+- nil_ls <https://github.com/oxalica/nil/refs/heads/tree/main/editors/coc-nil/package.json>
+- nixd <https://github.com/nix-community/nixd/refs/heads/tree/main/nixd/docs/nixd-schema.json>
+- omnisharp <https://github.com/OmniSharp/omnisharp-vscode/tree/master/package.json> (supports i18n)
+- perlls <https://github.com/richterger/Perl-LanguageServer/tree/master/clients/vscode/perl/package.json>
+- perlnavigator <https://github.com/bscan/PerlNavigator/tree/main/package.json>
+- perlpls <https://github.com/FractalBoy/perl-language-server/tree/master/client/package.json>
+- powershell_es <https://github.com/PowerShell/vscode-powershell/tree/main/package.json>
+- psalm <https://github.com/psalm/psalm-vscode-plugin/tree/master/package.json>
+- puppet <https://github.com/puppetlabs/puppet-vscode/tree/main/package.json>
+- purescriptls <https://github.com/nwolverson/vscode-ide-purescript/tree/master/package.json>
+- pylsp <https://github.com/python-lsp/python-lsp-server/tree/develop/pylsp/config/schema.json>
+- pyright <https://github.com/microsoft/pyright/tree/master/packages/vscode-pyright/package.json>
+- r_language_server <https://github.com/REditorSupport/vscode-r-lsp/tree/master/package.json>
+- rescriptls <https://github.com/rescript-lang/rescript-vscode/tree/master/package.json>
+- rls <https://github.com/rust-lang/vscode-rust/tree/master/package.json>
+- rome <https://github.com/rome/tools/tree/main/editors/vscode/package.json>
+- ruff <https://github.com/astral-sh/ruff-vscode/tree/main/package.json>
+- rust_analyzer <https://github.com/rust-analyzer/rust-analyzer/tree/master/editors/code/package.json>
+- solargraph <https://github.com/castwide/vscode-solargraph/tree/master/package.json>
+- solidity_ls <https://github.com/juanfranblanco/vscode-solidity/tree/master/package.json>
+- sonarlint <https://github.com/SonarSource/sonarlint-vscode/tree/master/package.json>
+- sorbet <https://github.com/sorbet/sorbet/tree/master/vscode_extension/package.json>
+- sourcekit <https://github.com/swift-server/vscode-swift/tree/main/package.json>
+- spectral <https://github.com/stoplightio/vscode-spectral/tree/master/package.json>
+- stylelint_lsp <https://github.com/bmatcuk/coc-stylelintplus/tree/master/package.json>
+- svelte <https://github.com/sveltejs/language-tools/tree/master/packages/svelte-vscode/package.json>
+- svlangserver <https://github.com/eirikpre/VSCode-SystemVerilog/tree/master/package.json>
+- tailwindcss <https://github.com/tailwindlabs/tailwindcss-intellisense/tree/master/packages/vscode-tailwindcss/package.json>
+- terraformls <https://github.com/hashicorp/vscode-terraform/tree/master/package.json>
+- tinymist <https://github.com/Myriad-Dreamin/tinymist/refs/heads/tree/main/editors/vscode/package.json> (supports i18n)
+- ts_ls <https://github.com/microsoft/vscode/tree/main/extensions/typescript-language-features/package.json> (supports i18n)
+- typst_lsp <https://github.com/nvarner/typst-lsp/refs/heads/tree/master/editors/vscode/package.json>
+- volar <https://github.com/vuejs/language-tools/tree/master/extensions/vscode/package.json> (supports i18n)
+- vtsls <https://github.com/yioneko/vtsls/tree/main/packages/service/configuration.schema.json>
+- vuels <https://github.com/vuejs/vetur/tree/master/package.json>
+- wgls_analyzer <https://github.com/wgsl-analyzer/wgsl-analyzer/tree/main/editors/code/package.json>
+- yamlls <https://github.com/redhat-developer/vscode-yaml/tree/master/package.json>
+- zeta_note <https://github.com/artempyanykh/zeta-note-vscode/tree/main/package.json>
+- zls <https://github.com/zigtools/zls-vscode/tree/master/package.json>
+
+
+==============================================================================
+2. Installation                               *codesettings.nvim-installation*
+
+**You do not need to call .setup() unless you want to use non-default
+options.** The defaults are shown below.
+
+You do not need to lazy load `codesettings.nvim` since the plugin already lazy
+loads all of its consituent parts via the `plugin/*` and `ftplugin/*`
+mechanisms. It should have a sub-5ms impact on your startup time.
+
+- lazy.nvim (recommended)
+
+>lua
+    return {
+      'mrjones2014/codesettings.nvim',
+      -- You don't need to lazy load this plugin since it already
+      -- lazy loads its constituent parts via `plugin/*` and `ftplugin/*` files
+      lazy = false,
+      -- these are the default settings just set `opts = {}` to use defaults
+      opts = {
+        --- Look for these config files
+        config_file_paths = { '.vscode/settings.json', 'codesettings.json', 'lspsettings.json' },
+        --- Set filetype to jsonc when opening a file specified by `config_file_paths`,
+        --- make sure you have the json tree-sitter parser installed for highlighting
+        jsonc_filetype = true,
+        --- Integrate with jsonls to provide LSP completion for LSP settings based on schemas
+        jsonls_integration = true,
+        --- Enable live reloading of settings when config files change
+        --- via the `workspace/didChangeConfiguration` notification; after notifying,
+        --- an autocmd `User CodesettingsFilesChanged` will be emitted. You
+        --- can use this autocmd to handle edge cases like restarting servers
+        --- that don't respond to `workspace/didChangeConfiguration` by
+        --- restarting it.
+        live_reload = false,
+        --- List of loader extensions to use when loading settings; `string` values will be `require`d
+        loader_extensions = { 'codesettings.extensions.vscode' },
+        --- Set up library paths for `lua_ls` automatically to pick up the generated type
+        --- annotations provided by codesettings.nvim; to enable for only your nvim config,
+        --- you can also do something like:
+        --- lua_ls_integration = function()
+        ---   return vim.uv.cwd() == ('%s/.config/nvim'):format(vim.env.HOME)
+        --- end,
+        --- This integration also works for emmylua_ls
+        lua_ls_integration = true,
+        --- How to merge lists; 'append' (default), 'prepend' or 'replace'
+        merge_lists = 'append',
+        --- Controls placeholder string substitution in LSP schema descriptions.
+        --- - true (default): use bundled English NLS files
+        --- - false: disable substitution (raw placeholders visible)
+        --- - string: path to a directory of per-LSP NLS JSON files (e.g. "/path/to/dir" containing jsonls.nls.json, lua_ls.nls.json, etc.)
+        --- - table: flat `{ ["key"] = "value" }` NLS table applied to all LSPs
+        --- - function(lsp_name) -> table: per-LSP resolver
+        --- Note that only certain schemas support this, see the bundled *.nls.json files at
+        --- ./after/codesettings-nls/*.nls.json
+        nls = true,
+        --- Provide your own root dir; can be a string or function returning a string.
+        --- It should be/return the full absolute path to the root directory.
+        --- If not set, defaults to `require('codesettings.util').get_root()`
+        root_dir = nil,
+      },
+    }
+<
+
+`codesettings.nvim` can also be specified in the local JSON configuration files
+by using a top-level `codesettings` object key, and these _override the global
+plugin configuration._ For example:
+
+>jsonc
+    {
+      "codesettings.merge_lists": "replace",
+    }
+<
+
+
+==============================================================================
+3. Quick start                                 *codesettings.nvim-quick-start*
+
+**Recommended setup:** If you don’t use `before_init` for anything else, you
+can use it as a global hook to look for local config files for all LSPs:
+
+>lua
+    vim.lsp.config('*', {
+      before_init = function(_, config)
+        local codesettings = require('codesettings')
+        codesettings.with_local_settings(config.name, config)
+      end,
+    })
+<
+
+**Alternatively,** you can configure it on a per-server basis.
+
+>lua
+    -- you can also still use `before_init` here
+    -- if you want codesettings to be `require`d
+    -- lazily
+    local codesettings = require('codesettings')
+    vim.lsp.config(
+      'yamlls',
+      codesettings.with_local_settings('yamlls', {
+        settings = {
+          yaml = {
+            validate = true,
+            schemaStore = { enable = true },
+          },
+        },
+      }, {
+        -- you can also pass custom merge opts on a per-server basis
+        list_behavior = 'replace',
+      })
+    )
+    
+    -- or from a config file under `/lsp/rust-analyzer.lua` in your config directory.
+    -- if you use rustaceanvim to configure rust-analyzer, see the `rustaceanvim` section below
+    return codesettings.with_local_settings('rust-analyzer', {
+      settings = {
+        -- ...
+      },
+    })
+<
+
+
+RUSTACEANVIM                      *codesettings.nvim-quick-start-rustaceanvim*
+
+`codesettings.nvim` works with rustaceanvim
+<https://github.com/mrcjkb/rustaceanvim> >= v7.0.9. You just need a
+`before_init` hook like any other LSP.
+
+If you use a `rustaceanvim` version older than v7.0.9, you need some configuration ~
+
+Older `rustaceanvim` does its own VS Code settings loading by default, but your
+global settings override the local ones; `codesettings.nvim` does the opposite.
+To make `rustaceanvim` respect workspace files via `codesettings.nvim`, you
+need to load them manually:
+
+>lua
+    return {
+      'mrcjkb/rustaceanvim',
+      ft = 'rust',
+      version = '^6',
+      dependencies = { 'mrjones2014/codesettings.nvim' },
+      init = function()
+        vim.g.rustaceanvim = {
+          -- the rest of your settings go here...
+    
+          -- I want VS Code settings to override my settings,
+          -- not the other way around, so use codesettings.nvim
+          -- instead of rustaceanvim's built-in vscode settings loader
+          load_vscode_settings = false,
+          -- the global hook doesn't work when configuring rust-analyzer with rustaceanvim
+          settings = function(_, settings)
+            -- Note the exact way this is invoked to work with rustaceanvim:
+            -- - passed in settings are wrapped like `{ settings = settings }`
+            -- - the returned value is the `.settings` subtable
+            return require('codesettings').with_local_settings('rust-analyzer', { settings = settings }).settings
+          end,
+          default_settings = {
+            ['rust-analyzer'] = {
+              -- your global LSP settings go here
+            },
+          },
+        }
+      end,
+    }
+<
+
+Some rust-analyzer settings need to be included in the init params as well as
+the default settings, in particular for non-Cargo build systems. Here is the
+recommended `before_init` hook:
+
+>lua
+    vim.lsp.config('rust-analyzer', {
+      before_init = function(init_params, config)
+        local codesettings = require('codesettings')
+        codesettings.with_local_settings(config.name, config)
+        -- Some settings must be passed at init time, for example rust-analyzer.workspace.discoverConfig
+        if config.default_settings and config.default_settings[config.name] then
+          init_params.initializationOptions = config.default_settings[config.name]
+        end
+      end,
+    })
+<
+
+
+==============================================================================
+4. Features                                       *codesettings.nvim-features*
+
+- Minimal API: one function you call per server setup, or with a global hook (see example above)
+- `jsonc` filetype for local config files
+- Live reload: automatically reload settings when config files change (opt-in via `live_reload = true`)
+- Configure the `codesettings.nvim` plugin itself in local config JSON files
+- Supports a subset of VS Code variable interpolation <https://code.visualstudio.com/docs/reference/variables-reference> (|codesettings.nvim-loader-extensions|)
+- `jsonls` integration for schema-based completion of LSP settings in JSON(C) configuration files
+- Lua type annotations generated from schemas for autocomplete when writing LSP configs in Lua, with optional `lua_ls` integration
+- Supports custom config file names/locations
+- Custom one-shot loaders with configuration that differs from the plugin’s global config (see |codesettings.nvim-advanced-usage|)
+- Supports mixed nested and dotted key paths, for example, this project’s `codesettings.json` looks like:
+
+>jsonc
+    {
+      "Lua": {
+        "runtime.version": "LuaJIT",
+        "workspace": {
+          "library": ["${3rd}/luassert/library", "${addons}/busted/library"],
+          "checkThirdParty": false,
+        },
+        "diagnostics.globals": ["vim", "setup", "teardown"],
+      },
+    }
+<
+
+To get autocomplete in Lua files, either set `config.lua_ls_integration =
+true`, or (for `lua_ls` only, not `emmylua_ls`) use `---@module 'codesettings'`
+which will tell `lua_ls` to act as though `codesettings` has been `require`d,
+then you will have access to `---@type lsp.server_name` generated type
+annotations.
+
+>lua
+    -- for example, for lua_ls
+    vim.lsp.config('lua_ls', {
+      -- this '@module' annotation makes lua_ls import the library from codesettings,
+      -- where the annotations come from; this isn't needed if you use `lua_ls_integration = true`
+      -- and `codesettings.nvim` is loaded
+      ---@module 'codesettings'
+      -- then you will have access to the generated type annotations
+      ---@type lsp.lua_ls
+      settings = {},
+    })
+<
+
+
+==============================================================================
+5. Commands                                       *codesettings.nvim-commands*
+
+- `:Codesettings show` - show the resolved LSP config for each active LSP client; note that this only shows _active_ clients
+- `:Codesettings local` - show the resolved local config found in local config files in your project
+- `:Codesettings files` - show the config files found in your project
+- `:Codesettings edit` - edit or create a local config file based on your configured config file paths
+- `:Codesettings health` - check plugin health (alias for `:checkhealth codesettings`)
+
+
+==============================================================================
+6. API                                                 *codesettings.nvim-api*
+
+- `require('codesettings').setup(opts?: CodesettingsConfig)`
+    - Initialize the plugin. Not needed if you are only using the API, but must be called to set up additonal functionality or to configure `codesettings.nvim` itself with local files.
+- `require('codesettings').with_local_settings(lsp_name: string, config: table, opts: CodesettingsConfigOverrides?): table`
+    - Loads settings from the configured files, extracts relevant settings for the given LSP based on its schema, and deep-merges into `config.settings`. Returns the merged config.
+    - This **mutates the input config table.** This is necessary for some workflows to ensure the `vim.lsp` module sees the updated settings.
+- `require('codesettings').local_settings(opts: CodesettingsConfigOverrides?): Settings`
+    - Loads and parses the settings file(s) for the current project. Returns a `Settings` object.
+    - `Settings` object provides some methods like:
+        - `Settings:schema(lsp_name)` - Filter the settings down to only the keys that match the relevant schema e.g. `settings:schema('eslint')`
+        - `Settings:merge(settings, key, opts)` - merge another `Settings` object into this one, optionally specify a sub-key to merge, and control merge behavior with the 2nd and 3rd parameter, respectively (e.g. `{ merge_lists = 'replace' }`)
+        - `Settings:get(key)` - returns the value at the specified key; supports dot-separated key paths like `Settings:get('some.sub.property')`
+        - `Settings:get_subtable(key)` - like `Settings:get(key)`, but returns a `Settings` object if the path is a table, otherwise `nil`
+        - `Settings:clear()` - remove all values
+        - `Settings:set(key, value)` - supports dot-separated key paths like `some.sub.property`
+
+Example using `local_settings()` directly:
+
+>lua
+    local codesettings = require('codesettings')
+    local eslint_settings = c.local_settings()
+      :schema('eslint')
+      :merge({
+        eslint = {
+          codeAction = {
+            disableRuleComment = {
+              enable = true,
+              location = 'sameLine',
+            },
+          },
+        },
+      })
+      :get('eslint.codeAction') -- get the codeAction subtable
+<
+
+
+==============================================================================
+7. How it finds your settings   *codesettings.nvim-how-it-finds-your-settings*
+
+- Root discovery uses `vim.fs.root` to search upwards with markers based on your configured config file paths, as well as `.git` and `.jj` (for Jujutsu <https://github.com/jj-vcs/jj> repos)
+- The plugin checks each path in `config_file_paths` under your project root and uses any that exist
+
+
+==============================================================================
+8. How merging works                     *codesettings.nvim-how-merging-works*
+
+Follows the semantics of `vim.tbl_deep_extend('force', your_config,
+local_config)`, essentially:
+
+- The plugin deep-merges plain tables (non-list tables)
+- List/array values are appended by default; you can change this behavior in configuration or through the API
+- Your provided `config` is the base; values from the settings file override or extend it within `config.settings`
+
+
+==============================================================================
+9. Advanced Usage                           *codesettings.nvim-advanced-usage*
+
+
+ONE-SHOT LOADERS           *codesettings.nvim-advanced-usage-one-shot-loaders*
+
+`codesettings.nvim` provides a fluent `ConfigBuilder` API that lets you
+override plugin options for a single load of local settings, without affecting
+the global configuration. This is useful, for example, for multi-root projects
+where you might have a separate instance of the LSP server per-root.
+
+>lua
+    vim.lsp.config('rust-analyzer', {
+      before_init = function(init_params, config)
+        local c = require('codesettings')
+        c
+          -- starts from the plugin's global config as a base
+          .loader()
+          -- override the root directory from the LSP config, which might be a sub-root
+          :root_dir(config.root_dir)
+          -- merge local settings according to the configuration specified
+          -- by this `ConfigBuilder`
+          :with_local_settings(
+            config.name,
+            config
+          )
+        -- Some settings must be passed at init time, for example rust-analyzer.workspace.discoverConfig
+        if config.default_settings and config.default_settings[config.name] then
+          init_params.initializationOptions = config.default_settings[config.name]
+        end
+      end,
+    })
+<
+
+See codesettings.config.schema
+<https://github.com/mrjones2014/codesettings.nvim/tree/master/lua/codesettings/config/schema.lua>
+for the full available API and which settings can be overridden.
+
+
+LOADER EXTENSIONS         *codesettings.nvim-advanced-usage-loader-extensions*
+
+`codesettings.nvim` allows for custom post-processing of your local config
+files. Extensions can be registered globally, or through the `ConfigBuilder`
+for one-shot loaders. Extensions can be registered directly, or via a string
+which will be `require`d. **Only the VS Code variable interpolation extension
+(codesettings.extensions.vscode) is loaded by default. All other extensions
+must be explicitly configured.**
+
+>lua
+    -- To add additional extensions while keeping the default VS Code extension,
+    -- you must explicitly include BOTH in the list (this replaces the default):
+    require('codesettings').setup({
+      loader_extensions = {
+        'codesettings.extensions.vscode', -- Keep the default VS Code extension
+        'codesettings.extensions.env', -- Add environment variable support
+        require('some-3rdparty-ext'), -- you can also put inline extension modules
+        -- you can also put extension constructors for stateful extensions
+        function()
+          return SomeExtension.new()
+        end,
+      },
+    })
+    
+    -- Or for one-shot loaders:
+    require('codesettings')
+      .loader()
+      :loader_extensions({
+        'codesettings.extensions.vscode',
+        'codesettings.extensions.env',
+      })
+      :with_local_settings('lua_ls', {
+        -- ...
+      })
+<
+
+`codesettings.nvim` provides the following built-in loader extensions:
+
+- `codesettings.extensions.vscode` **(loaded by default)**
+    - Expand VS Code variable interpolation syntax in JSON config files.
+    - Supports a subset of VS Code variables applicable to Neovim:
+        - `${userHome}` - User’s home directory
+        - `${workspaceFolder}` - Project root directory
+        - `${workspaceFolderBasename}` - Project root directory name
+        - `${cwd}` - Current working directory
+        - `${pathSeparator}` - OS-specific path separator (`/` or `\`)
+        - `${/}` - Shorthand for `${pathSeparator}`
+    - **Note:** Variables requiring a currently open file (like `${file}`, `${relativeFile}`, etc.) or currently selected text are not supported.
+    - **Important:** If combining with `codesettings.extensions.env`, this extension must be listed **first** (see |codesettings.nvim-extension-ordering| below).
+- `codesettings.extensions.env`
+    - Expand environment variables in JSON config files.
+    - Supports `$ENV_VAR`, `${ENV_VAR}`, and `${ENV_VAR:-/some/default/path}` syntax.
+    - **Not loaded by default** - must be explicitly added to `loader_extensions`.
+- `codesettings.extensions.neoconf`
+    - Enables compatibility on a best-effort basis with existing `.neoconf.json` files.
+    - You will need to configure the plugin to look for those files via the `config_file_paths` option.
+    - **Not loaded by default** - must be explicitly added to `loader_extensions`.
+
+
+EXTENSION ORDERING ~
+
+When using multiple loader extensions, **order matters**. Extensions are
+applied sequentially, with each extension seeing the result of the previous
+extension’s transformation.
+
+**Important for VS Code + Environment Variable Extensions:**
+
+If you want to use both `codesettings.extensions.vscode` (loaded by default)
+and `codesettings.extensions.env`, you must ensure the VS Code extension runs
+**before** the env extension:
+
+>lua
+    require('codesettings').setup({
+      loader_extensions = {
+        'codesettings.extensions.vscode', -- Must be first
+        'codesettings.extensions.env', -- Then env vars
+      },
+    })
+<
+
+**Why does order matter?**
+
+Both extensions use the `${...}` syntax for variable interpolation:
+
+- VS Code extension expands specific variables like `${workspaceFolder}`, `${userHome}`, etc.
+- Env extension expands any `${VARIABLE}` to environment variables
+
+If the env extension runs first, it will expand `${workspaceFolder}` to an
+empty string (since there’s no such environment variable), and then the VS
+Code extension will see `/src` instead of `${workspaceFolder}/src`, preventing
+it from working correctly.
+
+By putting VS Code first, it expands `${workspaceFolder}` to the project root,
+and then the env extension can expand any remaining environment variables.
+
+**If you only use the default configuration** (VS Code extension only), no
+special ordering considerations are needed.
+
+**To disable the default VS Code extension:**
+
+If you don’t want VS Code variable interpolation, set `loader_extensions` to
+an empty list or your preferred extensions:
+
+>lua
+    require('codesettings').setup({
+      loader_extensions = {}, -- No extensions
+      -- or
+      loader_extensions = { 'codesettings.extensions.env' }, -- Only env vars
+    })
+<
+
+
+EXTENSION API ~
+
+The extension API expects extensions to be modules that provide at least one of
+two API functions. The types that describe an extension are:
+
+>lua
+    ---@class CodesettingsLoaderExtensionContext
+    ---@field parent table? The immediate parent table/list of this node
+    ---@field path string[] Full path from the root to this node
+    ---@field key string|integer The key/index of this node in the parent
+    ---@field list_idx integer? Index if parent is a list
+    
+    ---@class CodesettingsLoaderExtension
+    ---Optional visitor for non-leaf nodes (tables or lists). Return a control code and optional replacement value.
+    ---Note that the replacement value is only used if the control code is `REPLACE`.
+    ---@field object (fun(node:any, ctx:CodesettingsLoaderExtensionContext): CodesettingsLoaderExtensionControl, any?)?
+    ---Optional visitor for leaf nodes. Return a control code and optional replacement value.
+    ---Note that the replacement value is only used if the control code is `REPLACE`.
+    ---@field leaf (fun(value:any, ctx:CodesettingsLoaderExtensionContext): CodesettingsLoaderExtensionControl, any?)?
+    
+    ---@enum CodesettingsLoaderExtensionControl
+    M.Control = {
+      ---Continue recursion (for objects) or leave leaf unchanged
+      CONTINUE = 'continue',
+      ---Skip recursion (objects only)
+      SKIP = 'skip',
+      ---Replace this node/leaf with provided replacement value (can be nil)
+      REPLACE = 'replace',
+    }
+<
+
+Extensions support both simple table style extensions, as well as stateful
+method style extensions; they will work whether your functions need to be
+called like `extension.leaf(value, ctx)` or `extension:leaf(value, ctx)`. To
+make a stateful extension, your module should return a function that constructs
+the extension instance.
+
+See codesettings.extensions.env
+<https://github.com/mrjones2014/codesettings.nvim/tree/master/lua/codesettings/extensions/env.lua>
+for a simple example extension, and codesettings.extensions.vscode
+<https://github.com/mrjones2014/codesettings.nvim/tree/master/lua/codesettings/extensions/vscode.lua>
+for an example of a stateful extension.
+
+
+==============================================================================
+10. Performance                                *codesettings.nvim-performance*
+
+Some very basic performance benchmarks are available at ./bench/report.md
+<https://github.com/mrjones2014/codesettings.nvim/tree/master/bench/report.md>.
+They are quite minimal, but are useful as a baseline to flag and issues when
+implementing new functionality. They are updated by CI after every merge to
+`master` so they are run on GitHub Actions runners and will likely have much
+better performance on the machine you actually run Neovim on.
+
+
+==============================================================================
+11. Acknowledgements                      *codesettings.nvim-acknowledgements*
+
+This project would not exist without the hard work of some other open source
+projects!
+
+- Some parts of this plugin are based on folke’s neoconf.nvim plugin <https://github.com/folke/neoconf.nvim>
+- This plugin bundles json.lua <https://github.com/actboy168/json.lua>, a pure-Lua JSON library for parsing `jsonc` files
+
+==============================================================================
+12. Links                                            *codesettings.nvim-links*
+
+1. *jsonls integration*: https://github.com/user-attachments/assets/5d37f0bb-0e07-4c22-bc6b-16cf3e65e201
+2. *lua type annotations*: https://github.com/user-attachments/assets/86d85ff3-1467-4c0b-9542-02cc831951dc
+
+Generated by panvimdoc <https://github.com/kdheepak/panvimdoc>
+
+vim:tw=78:ts=8:noet:ft=help:norl:
