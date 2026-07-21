@@ -61,6 +61,19 @@ local spec = {
     end, {
       desc = "Re-enable autoformat-on-save",
     })
+
+    -- Toggle autoformat-on-save (mirrors the bang semantics of ConformDisable)
+    vim.api.nvim_create_user_command("ConformToggle", function(args)
+      if args.bang then
+        -- ConformToggle! flips autoformat just for this buffer
+        vim.b.disable_autoformat = not vim.b.disable_autoformat
+      else
+        vim.g.disable_autoformat = not vim.g.disable_autoformat
+      end
+    end, {
+      desc = "Toggle autoformat-on-save",
+      bang = true,
+    })
   end,
   --cond = false,
   --enabled = false,
