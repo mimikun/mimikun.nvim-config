@@ -3,52 +3,75 @@
 local opts = {
   -- Map of filetype to formatters
   formatters_by_ft = {
-    lua = {
-      "stylua",
-    },
-
-    -- Conform will run multiple formatters sequentially
-    go = {
-      "goimports",
-      "gofmt",
-    },
-
-    -- You can customize some of the format options for the filetype (:help conform.format)
-    rust = {
-      "rustfmt",
-      lsp_format = "fallback",
-    },
-
-    -- Conform will run the first available formatter
-    javascript = {
-      "prettierd",
-      "prettier",
-      stop_after_first = true,
-    },
-
-    -- You can use a function here to determine the formatters dynamically
-    python = function(bufnr)
-      if require("conform").get_formatter_info("ruff_format", bufnr).available then
-        return {
-          "ruff_format",
-        }
-      else
-        return {
-          "isort",
-          "black",
-        }
-      end
-    end,
+    -- Config / shell
+    lua = { "stylua" },
+    fish = { "fish_indent" },
+    sh = { "shfmt" },
+    bash = { "shfmt" },
+    zsh = { "beautysh" },
+    -- Data / markup
+    toml = { "tombi" },
+    yaml = { "yamlfmt" },
+    json = { "jq" },
+    xml = { "xmlformat" },
+    markdown = { "rumdl" },
+    -- Systems / compiled
+    rust = { "rustfmt" },
+    -- Conform will run multiple formatters sequentially (imports first, then gofmt)
+    go = { "goimports", "gofmt" },
+    zig = { "zigfmt" },
+    c = { "clang_format" },
+    cpp = { "clang_format" },
+    -- The Neovim filetype for C# is `cs`, not `c_sharp`
+    cs = { "clang_format" },
+    kotlin = { "ktlint" },
+    scala = { "scalafmt" },
+    java = { "google-java-format" },
+    dart = { "dart_format" },
+    swift = { "swift_format" },
+    -- Scripting / dynamic
+    python = { "ruff_format" },
+    ruby = { "rubocop" },
+    -- The Neovim filetype for ERB is `eruby`
+    eruby = { "erb_format" },
+    perl = { "perltidy" },
+    php = { "php_cs_fixer" },
+    -- Web front-end
+    javascript = { "biome" },
+    typescript = { "biome" },
+    css = { "biome" },
+    scss = { "biome" },
+    html = { "superhtml" },
+    vue = { "prettier" },
+    svelte = { "prettier" },
+    astro = { "prettier" },
+    templ = { "templ" },
+    -- Functional / ML-family
+    haskell = { "fourmolu" },
+    cabal = { "cabal_fmt" },
+    ocaml = { "ocamlformat" },
+    elixir = { "mix" },
+    elm = { "elm_format" },
+    gleam = { "gleam" },
+    fennel = { "fnlfmt" },
+    -- Infra / config-as-code
+    nix = { "nixfmt" },
+    sql = { "sqlfluff" },
+    terraform = { "terraform_fmt" },
+    hcl = { "hcl" },
+    cmake = { "gersemi" },
+    nginx = { "nginxfmt" },
+    kdl = { "kdlfmt" },
+    just = { "just" },
+    -- Typesetting
+    -- The Neovim filetype for LaTeX/.tex is `tex`
+    tex = { "tex-fmt" },
 
     -- Use the "*" filetype to run formatters on all filetypes.
-    ["*"] = {
-      "codespell",
-    },
+    ["*"] = { "typos" },
 
     -- Use the "_" filetype to run formatters on filetypes that don't have other formatters configured.
-    ["_"] = {
-      "trim_whitespace",
-    },
+    ["_"] = { "trim_whitespace" },
   },
   -- Set this to change the default values when calling conform.format()
   -- This will also affect the default values for format_on_save/format_after_save
