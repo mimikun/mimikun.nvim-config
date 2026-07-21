@@ -3,6 +3,7 @@ local cmds = {
   "Conform",
   "ConformDisable",
   "ConformEnable",
+  "ConformToggle",
   "ConformInfo",
 }
 
