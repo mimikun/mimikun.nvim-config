@@ -1,0 +1,19 @@
+DUMMY_BBB.md
+  s_f31a5819e11282::t_8f123044370c98 1
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.15",
+  "base_commit_sha": "5cffcfeb8bbb0717c59409939548e4f0aee321a1",
+  "prompts": {},
+  "sessions": {
+    "s_f31a5819e11282": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "79d7947e-b94f-438c-953d-b2e22b12809a",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
