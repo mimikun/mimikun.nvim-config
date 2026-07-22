@@ -4,7 +4,8 @@ description: >
   Create, list, and remove parallel Neovim-config git worktrees isolated by
   NVIM_APPNAME, using scripts/nvim-worktree.sh. Each worktree lives at
   ~/.config/nvim-<name> (a sibling of the main config) and gets its own
-  plugin/data dirs (lazy + treesitter copied, mason symlink-shared) plus a
+  plugin/data dirs (lazy + treesitter copied, all other data dirs like mason /
+  lazy-rocks / databases symlink-shared, whole cache dir symlink-shared) plus a
   direnv .envrc so `cd`-ing in auto-activates NVIM_APPNAME. Use when the user
   wants to work on another branch of this config in parallel without switching
   branches, e.g. "/nvim-worktree add add/prompt-nvim".
@@ -33,9 +34,11 @@ Parse `$ARGUMENTS` for the subcommand and pass it straight through.
 - **add `<branch> [name]`** — create a worktree for `<branch>` at
   `~/.config/nvim-<name>`. If `name` is omitted it is derived from the branch
   (`add/prompt-nvim` → `prompt`). The script also:
-  - seeds `~/.local/share/nvim-<name>` by copying `lazy/` + `site/` and
-    symlinking `mason/` from the main data dir (so first launch does **not**
-    re-download every plugin / LSP server / parser);
+  - seeds `~/.local/share/nvim-<name>` by copying `lazy/` + `site/` (per-branch)
+    and symlinking **every other data dir** back to the main data dir (`mason/`,
+    `lazy-rocks/`, `databases/`, `kulala.nvim/`, …), plus symlinks the whole
+    `~/.cache/nvim-<name>` → `~/.cache/nvim` — so first launch does **not**
+    re-download plugins / LSP servers / rocks or recompile parsers;
   - writes `.envrc` (`export NVIM_APPNAME=nvim-<name>`), adds `.envrc` to
     `.git/info/exclude`, and runs `direnv allow`.
 
@@ -67,8 +70,10 @@ Report to the user how to launch it:
 
 ## Caveats to surface when relevant
 
-- `mason/` is symlink-shared, so `:Mason` **uninstall** inside a worktree
-  affects the shared store (install/update is fine — shared cache).
+- Every data dir except `lazy/` + `site/` is symlink-shared (mason, lazy-rocks,
+  databases, …), and the whole cache dir is too. So a **delete/uninstall** inside
+  a worktree (e.g. `:Mason` uninstall) affects the shared store; install/update
+  is fine — it just populates the shared cache for everyone.
 - To vendor a plugin from inside a worktree via `/add-plugin`, set
   `NVIM_PLUGINS_DIR=~/.config/nvim-<name>/lua/plugins` (the clone script
   otherwise hardcodes the main config path).
