@@ -1,0 +1,21 @@
+.claude/skills/nvim-worktree/SKILL.md
+  s_f31a5819e11282::t_d30ca46f6b4f45 7-8
+  s_f31a5819e11282::t_69b0bfa0195aac 37-41
+  s_f31a5819e11282::t_71104b38b8df87 73-76
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.15",
+  "base_commit_sha": "8474e8b6865c59bbf4d9d6836560d3d28a61843f",
+  "prompts": {},
+  "sessions": {
+    "s_f31a5819e11282": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "79d7947e-b94f-438c-953d-b2e22b12809a",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
