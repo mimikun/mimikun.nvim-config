@@ -13,11 +13,16 @@ set -euo pipefail
 # .envrc + direnv are active) loads the worktree as a fully isolated config.
 #
 # Data isolation (avoids re-downloading everything on first launch, since
-# NVIM_APPNAME also redirects stdpath("data")):
-#   - lazy/ (plugins) and site/ (treesitter parsers) are real copies
-#   - mason/ (large LSP/tool binaries) is a symlink back to the main data dir
-#     so it is shared, not duplicated. Uninstalling via :Mason inside a
-#     worktree therefore affects the shared store.
+# NVIM_APPNAME also redirects stdpath("data") and stdpath("cache")):
+#   - lazy/ (plugins) and site/ (treesitter parsers) are real copies, so each
+#     worktree can diverge per-branch (plugin specs / parser sets).
+#   - every OTHER entry in the main data dir (mason/, lazy-rocks/, databases/,
+#     kulala.nvim/, cord/, loose files, ...) is symlink-shared back to the main
+#     data dir, so heavy downloads/builds are not re-fetched. Writes/deletes in
+#     any shared dir (e.g. :Mason uninstall, luarocks) affect the shared store.
+#   - the entire cache dir is a single symlink back to the main cache dir
+#     (cache is regenerable and shared-safe: luac bytecode, treesitter parsers,
+#     colorscheme cache, ...).
 #
 # Runnable from anywhere: it resolves the main config repo as the parent of
 # this script's directory, so all git commands target the right repository.
@@ -47,9 +52,9 @@ readonly STATE_HOME="${XDG_STATE_HOME:-${HOME}/.local/state}"
 readonly CACHE_HOME="${XDG_CACHE_HOME:-${HOME}/.cache}"
 readonly MAIN_APP="nvim"
 
-# Real-copy these subdirs of the main data dir; symlink-share these.
+# Real-copy these subdirs of the main data dir (per-branch isolation); every
+# other entry in the main data dir is symlink-shared instead.
 readonly COPY_DIRS=(lazy site)
-readonly LINK_DIRS=(mason)
 
 die() {
     printf 'error: %s\n' "$*" >&2
@@ -69,8 +74,19 @@ derive_name() {
     printf '%s' "${n}"
 }
 
-# Seed a fresh per-app data dir so lazy/mason/treesitter are reused, not
-# re-fetched. Existing entries are left untouched (idempotent).
+# True if $1 is one of the real-copy dirs.
+is_copy_dir() {
+    local x
+    for x in "${COPY_DIRS[@]}"; do
+        [ "${x}" = "$1" ] && return 0
+    done
+    return 1
+}
+
+# Seed a fresh per-app data dir so plugins/binaries/caches are reused, not
+# re-fetched. COPY_DIRS are real-copied (per-branch); every other entry in the
+# main data dir is symlink-shared. Existing entries are left untouched
+# (idempotent).
 seed_data() {
     local appname="$1"
     local src="${DATA_HOME}/${MAIN_APP}"
@@ -82,19 +98,41 @@ seed_data() {
     }
     mkdir -p "${dst}"
 
-    local d
-    for d in "${COPY_DIRS[@]}"; do
-        if [ -d "${src}/${d}" ] && [ ! -e "${dst}/${d}" ]; then
-            printf '  copy   %s\n' "${d}"
-            cp -r "${src}/${d}" "${dst}/${d}"
+    # `shopt -p` exits non-zero when the option is unset; guard against set -e.
+    local prev_dotglob prev_nullglob
+    prev_dotglob="$(shopt -p dotglob || true)"
+    prev_nullglob="$(shopt -p nullglob || true)"
+    shopt -s dotglob nullglob
+
+    local path base
+    for path in "${src}"/*; do
+        base="$(basename "${path}")"
+        [ -e "${dst}/${base}" ] && continue
+        if is_copy_dir "${base}" && [ -d "${path}" ]; then
+            printf '  copy   %s\n' "${base}"
+            cp -r "${path}" "${dst}/${base}"
+        else
+            printf '  link   %s -> %s\n' "${base}" "${path}"
+            ln -s "${path}" "${dst}/${base}"
         fi
     done
-    for d in "${LINK_DIRS[@]}"; do
-        if [ -e "${src}/${d}" ] && [ ! -e "${dst}/${d}" ]; then
-            printf '  link   %s -> %s\n' "${d}" "${src}/${d}"
-            ln -s "${src}/${d}" "${dst}/${d}"
-        fi
-    done
+
+    eval "${prev_dotglob}"
+    eval "${prev_nullglob}"
+}
+
+# Seed the per-app cache dir as a single symlink back to the main cache dir.
+# Cache is regenerable and shared-safe. Idempotent.
+seed_cache() {
+    local appname="$1"
+    local src="${CACHE_HOME}/${MAIN_APP}"
+    local dst="${CACHE_HOME}/${appname}"
+
+    [ -d "${src}" ] || return 0
+    [ -e "${dst}" ] && return 0
+
+    ln -s "${src}" "${dst}"
+    printf '  link   cache -> %s\n' "${src}"
 }
 
 # Write .envrc for direnv auto-activation and keep it out of git.
@@ -134,6 +172,7 @@ cmd_add() {
     printf 'creating worktree %s -> %s\n' "${appname}" "${branch}"
     git -C "${REPO_ROOT}" worktree add "${wt}" "${branch}"
     seed_data "${appname}"
+    seed_cache "${appname}"
     write_envrc "${wt}" "${appname}"
     printf 'done. launch: NVIM_APPNAME=%s nvim   (or cd %s)\n' "${appname}" "${wt}"
 }
