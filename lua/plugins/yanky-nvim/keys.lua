@@ -8,42 +8,60 @@ local keys = {
     function()
       require("snacks").picker.yanky()
     end,
-    mode = { "n", "x" },
+    mode = {
+      "n",
+      "x",
+    },
     desc = "Open Yank History",
     silent = true,
   },
   {
     "y",
     "<Plug>(YankyYank)",
-    mode = { "n", "x" },
+    mode = {
+      "n",
+      "x",
+    },
     desc = "Yank text",
     silent = true,
   },
   {
     "p",
     "<Plug>(YankyPutAfter)",
-    mode = { "n", "x" },
+    mode = {
+      "n",
+      "x",
+    },
     desc = "Put yanked text after cursor",
     silent = true,
   },
   {
     "P",
     "<Plug>(YankyPutBefore)",
-    mode = { "n", "x" },
+    mode = {
+      "n",
+      "x",
+    },
     desc = "Put yanked text before cursor",
     silent = true,
   },
   {
     "gp",
     "<Plug>(YankyGPutAfter)",
-    mode = { "n", "x" },
+    mode = {
+      "n",
+      "x",
+    },
     desc = "Put yanked text after cursor and leave cursor after",
     silent = true,
   },
   {
     "gP",
     "<Plug>(YankyGPutBefore)",
-    mode = { "n", "x" },
+    mode = {
+      "n",
+      "x",
+    },
     desc = "Put yanked text before cursor and leave cursor after",
     silent = true,
   },
@@ -120,11 +138,14 @@ local keys = {
     silent = true,
   },
   {
-    "iy",
+    "it",
     function()
       require("yanky.textobj").last_put()
     end,
-    mode = { "o", "x" },
+    mode = {
+      "o",
+      "x",
+    },
     desc = "",
     silent = true,
   },

@@ -1,10 +1,21 @@
 ---@type table
 local languages = {
-  all = { "all" },
+  all = {
+    "all",
+  },
+
   stable = require("plugins.nvim-treesitter.install.languages.stable"),
+
   unstable = require("plugins.nvim-treesitter.install.languages.unstable"),
-  unmaintained = { "unmaintained" },
-  unsupported = { "unsupported" },
+
+  unmaintained = {
+    "unmaintained",
+  },
+
+  unsupported = {
+    "unsupported",
+  },
+
   using = require("plugins.nvim-treesitter.install.languages.using"),
 }
 

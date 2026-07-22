@@ -1,30 +1,24 @@
 ---@type table
 local opts = {
-  -- TODO: it
-}
-
-local _readme = {
-  -- default configuration
-  notifications = true, -- notify result
-  default_mode = "append", -- or `replace` the expression
-  scratchpad = {
-    border = "rounded", -- floating window border style (:help 'winborder')
-    virtual_text = {
-      format = "= %s", -- virtual text format
-      highlight_group = "Comment", -- virtual text highlight group
-    },
-    result_variable = "ans", -- name of the variable for the last computation result
-  },
-}
-local _defaults = {
+  -- notify result
   notifications = true,
+
+  -- or `replace` the expression
   default_mode = "append",
+
   scratchpad = {
+    -- floating window border style (:help 'winborder')
     border = "rounded",
+
     virtual_text = {
+      -- virtual text format
       format = "= %s",
+
+      -- virtual text highlight group
       highlight_group = "Comment",
     },
+
+    -- name of the variable for the last computation result
     result_variable = "ans",
   },
 }

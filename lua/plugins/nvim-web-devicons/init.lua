@@ -5,10 +5,10 @@ local spec = {
   cmd = require("plugins.nvim-web-devicons.cmds"),
   event = require("plugins.nvim-web-devicons.events"),
   --opts = require("plugins.nvim-web-devicons.opts"),
-  --config = function()
-  --local opts = require("plugins.nvim-web-devicons.opts")
-  --require("nvim-web-devicons").setup(opts)
-  --end,
+  config = function()
+    local opts = require("plugins.nvim-web-devicons.opts")
+    require("nvim-web-devicons").setup(opts)
+  end,
   --cond = false,
   --enabled = false,
 }

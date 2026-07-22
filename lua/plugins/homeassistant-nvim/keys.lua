@@ -5,7 +5,9 @@ local keys = {
     function()
       require("homeassistant.ui.dashboard").toggle()
     end,
-    mode = "n",
+    mode = {
+      "n",
+    },
     desc = "HA Dashboard",
     silent = true,
   },
@@ -14,7 +16,9 @@ local keys = {
     function()
       require("homeassistant.ui.picker").entities()
     end,
-    mode = "n",
+    mode = {
+      "n",
+    },
     desc = "HA Entity Picker",
     silent = true,
   },
@@ -43,7 +47,9 @@ local keys = {
         vim.notify("LSP not connected", vim.log.levels.ERROR)
       end
     end,
-    mode = "n",
+    mode = {
+      "n",
+    },
     desc = "HA Reload Cache",
     silent = true,
   },
@@ -76,7 +82,9 @@ local keys = {
         vim.notify("HADebug error: " .. tostring(err), vim.log.levels.ERROR)
       end
     end,
-    mode = "n",
+    mode = {
+      "n",
+    },
     desc = "HA Debug Info",
     silent = true,
   },
@@ -85,7 +93,9 @@ local keys = {
     function()
       require("homeassistant.ui.dashboard_editor").pick_dashboard()
     end,
-    mode = "n",
+    mode = {
+      "n",
+    },
     desc = "HA Edit Dashboard",
     silent = true,
   },

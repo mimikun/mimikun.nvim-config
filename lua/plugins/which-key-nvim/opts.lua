@@ -12,7 +12,7 @@ local opts = {
   ---@param mapping wk.Mapping
   filter = function(_mapping)
     -- example to exclude mappings without a description
-    -- return mapping.desc and mapping.desc ~= ""
+    --return mapping.desc and mapping.desc ~= ""
     return true
   end,
 
@@ -116,7 +116,7 @@ local opts = {
 
     -- Additional vim.wo and vim.bo options
     bo = {
-      -- it?
+      --it
     },
 
     wo = {
@@ -163,11 +163,11 @@ local opts = {
 
   -- Expand groups holding <= n mappings.
   -- Must stay a number.
-  --
+
   -- This was a function returning 0.
   -- The function form is used directly as a condition (lua/which-key/view.lua:307-308) and 0 is truthy in Lua, so it expanded every group instead of none: the first level of the popup became a flat list of 289 rows with no group entries at all.
   -- As a number it takes the intended path (view.lua:311) and the whole leader map fits on one screen as "j -> +jump2d", "l -> +leap", "z -> +19 keymaps" and so on.
-  --
+
   -- To expand all nodes without a description instead:
   --   expand = function(node) return not node.desc end
   --expand = function(_node)
@@ -187,7 +187,10 @@ local opts = {
       function(key)
         return require("which-key.view").format(key)
       end,
-      --{ "<Space>", "SPC" },
+      --{
+      --  "<Space>",
+      --  "SPC",
+      --},
     },
 
     desc = {
@@ -245,7 +248,7 @@ local opts = {
     --- Set to `false` to disable keymap icons from rules
     ---@type wk.IconRule[] | false
     rules = {
-      -- it?
+      --it
     },
 
     -- use the highlights from mini.icons
@@ -294,11 +297,11 @@ local opts = {
   -- disable WhichKey for certain buf types and file types.
   disable = {
     ft = {
-      -- it
+      --it
     },
 
     bt = {
-      -- it
+      --it
     },
   },
 

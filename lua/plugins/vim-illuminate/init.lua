@@ -5,8 +5,10 @@ local spec = {
   cmd = require("plugins.vim-illuminate.cmds"),
   keys = require("plugins.vim-illuminate.keys"),
   event = require("plugins.vim-illuminate.events"),
+  --opts = require("plugins.vim-illuminate.opts"),
   config = function()
-    require("illuminate").configure(require("plugins.vim-illuminate.opts"))
+    local opts = require("plugins.vim-illuminate.opts")
+    require("illuminate").configure(opts)
   end,
   --cond = false,
   --enabled = false,

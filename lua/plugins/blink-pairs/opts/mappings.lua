@@ -18,8 +18,10 @@ local mappings = {
   wrap = {
     -- move closing pair via motion
     ["<C-b>"] = "motion",
+
     -- move opening pair via motion
     ["<C-S-b>"] = "motion_reverse",
+
     -- set to 'treesitter' or 'treesitter_reverse' to use treesitter instead of motions
     -- set to nil, '' or false to disable the mapping
     -- treesitter node cycling: move closing pair to next/prev TS node boundary
@@ -81,8 +83,8 @@ local mappings = {
         enter = false,
         space = false,
         when = function(ctx)
-          -- The `plaintex` filetype has no treesitter parser, so we can't disable
-          -- this pair in math environments. Thus, disable this pair completely.
+          -- The `plaintex` filetype has no treesitter parser, so we can't disable this pair in math environments.
+          -- Thus, disable this pair completely.
           -- TODO: disable inside "" strings?
           return ctx.ft ~= "plaintext"
             and ctx.ft ~= "scheme"

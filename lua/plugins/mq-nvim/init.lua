@@ -8,15 +8,14 @@ local spec = {
   --opts = require("plugins.mq-nvim.opts"),
   config = function()
     -- The Neovim plugin lives in a subdirectory of the harehare/mq monorepo.
-    -- lazy.nvim only adds the repo root to runtimepath, so append the
-    -- plugin subdirectory manually before requiring its Lua modules.
+    -- lazy.nvim only adds the repo root to runtimepath, so append the plugin subdirectory manually before requiring its Lua modules.
     vim.opt.rtp:append(vim.fn.stdpath("data") .. "/lazy/mq/editors/neovim")
     vim.cmd("runtime plugin/mq.lua")
 
     local opts = require("plugins.mq-nvim.opts")
 
-    -- mq's dap.setup() emits an INFO notification on every startup; silence
-    -- just that message by filtering vim.notify for the duration of setup().
+    -- mq's dap.setup() emits an INFO notification on every startup;
+    -- silence just that message by filtering vim.notify for the duration of setup().
     local original_notify = vim.notify
     vim.notify = function(msg, level, notify_opts)
       if msg == "mq: DAP adapter configured successfully" then
@@ -83,6 +82,7 @@ local spec = {
           silent = true,
           desc = "Start mq LSP server",
         })
+
         vim.keymap.set("n", "<leader>mS", function()
           require("mq.commands").stop_lsp()
         end, {

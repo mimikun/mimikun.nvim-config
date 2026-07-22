@@ -61,29 +61,49 @@
 ---@type UndoGlow.Config
 local opts = {
 
-  ---@type UndoGlow.Config.Animation Configuration for animations.
+  -- Configuration for animations.
+  ---@type UndoGlow.Config.Animation
   animation = {
-    ---@type boolean Whether animation is enabled.
+    -- Whether animation is enabled.
+    ---@type boolean
     enabled = true,
-    ---@type number Duration of the highlight animation in milliseconds.
+
+    -- Duration of the highlight animation in milliseconds.
+    ---@type number
     duration = 300,
-    ---@type UndoGlow.AnimationTypeString|UndoGlow.AnimationTypeFn Animation type (a string key or a custom function).
+
+    -- Animation type (a string key or a custom function).
+    ---@type UndoGlow.AnimationTypeString | UndoGlow.AnimationTypeFn
     animation_type = "zoom",
-    ---@type fps number Frames per second for the animation.
+
+    -- Frames per second for the animation.
+    ---@type number
     fps = 120,
-    ---@type UndoGlow.EasingString|UndoGlow.EasingFn Easing function (a string key or a custom function).
+
+    -- Easing function (a string key or a custom function).
+    ---@type UndoGlow.EasingString | UndoGlow.EasingFn
     easing = "in_out_cubic",
-    ---@type boolean If enabled, the highlight effect is constrained to the current active window, even if the buffer is shared across splits.
+
+    -- If enabled, the highlight effect is constrained to the current active window, even if the buffer is shared across splits.
+    ---@type boolean
     window_scoped = true,
   },
-  ---@type UndoGlow.Config.FallbackForTransparency Fallback color for when the highlight is transparent.
+
+  -- Fallback color for when the highlight is transparent.
+  ---@type UndoGlow.Config.FallbackForTransparency
   fallback_for_transparency = {
-    ---@type string Background color as a hex string.
+
+    -- Background color as a hex string.
+    ---@type string
     bg = nil,
-    ---@type string Optional foreground color as a hex string.
+
+    -- Optional foreground color as a hex string.
+    ---@type string
     fg = nil,
   },
-  ---@type integer Extmark priority to render the highlight (Default 4096)
+
+  -- Extmark priority to render the highlight (Default 4096)
+  ---@type integer
   priority = 2048 * 3,
 }
 

@@ -6,6 +6,7 @@ local spec = {
   cmd = require("plugins.indent-blankline-nvim.cmds"),
   event = require("plugins.indent-blankline-nvim.events"),
   dependencies = require("plugins.indent-blankline-nvim.dependencies"),
+  --opts = require("plugins.indent-blankline-nvim.opts"),
   config = function()
     local ibl = require("ibl")
     local hooks = require("ibl.hooks")

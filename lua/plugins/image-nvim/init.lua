@@ -8,8 +8,10 @@ local spec = {
   event = require("plugins.image-nvim.events"),
   --opts = require("plugins.image-nvim.opts"),
   config = function()
+    local opts = require("plugins.image-nvim.opts")
+
     local image = require("image")
-    image.setup(require("plugins.image-nvim.opts"))
+    image.setup(opts)
 
     vim.api.nvim_create_user_command("ImageEnable", function()
       image.enable()

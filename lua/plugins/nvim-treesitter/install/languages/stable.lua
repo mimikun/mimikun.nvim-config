@@ -3,12 +3,14 @@ local stable = {
   all = {
     "stable",
   },
+
   using = {
     "desktop",
     "editorconfig",
     "python",
     "zsh",
   },
+
   unused = {
     "inko",
     "robot",

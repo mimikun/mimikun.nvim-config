@@ -8,10 +8,13 @@ local fire_hazard = {
   damping = 0.6,
   gradient_exponent = 0,
   gamma = 1,
+
   -- if you want to actually see under the cursor
   never_draw_over_target = true,
+
   -- if you want to actually see under the cursor
   hide_target_hack = true,
+
   particle_spread = 1,
   particles_per_second = 500,
   particles_per_length = 50,

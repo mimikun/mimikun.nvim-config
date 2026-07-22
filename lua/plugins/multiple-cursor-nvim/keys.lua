@@ -5,36 +5,34 @@ local keys = {
     function()
       require("multiple-cursor").start_or_add_next()
     end,
-    mode = "n",
+    mode = {
+      "n",
+    },
     desc = "Start multi-cursor mode on word under cursor",
-    --noremap = true,
     silent = true,
   },
   {
     "<C-x>",
-    -- TODO: it
-    --function() end,
-    mode = "n",
+    mode = {
+      "n",
+    },
     desc = "MC: Skip current match",
-    --noremap = true,
     silent = true,
   },
   {
     "<C-j>",
-    -- TODO: it
-    --function() end,
-    mode = "n",
+    mode = {
+      "n",
+    },
     desc = "MC: Go to next match",
-    --noremap = true,
     silent = true,
   },
   {
     "<C-k>",
-    -- TODO: it
-    --function() end,
-    mode = "n",
+    mode = {
+      "n",
+    },
     desc = "MC: Go to previous match",
-    --noremap = true,
     silent = true,
   },
   {
@@ -48,9 +46,10 @@ local keys = {
     --    ui.notify("Start multi-cursor mode first", vim.log.levels.WARN)
     --  end
     --end,
-    mode = "n",
+    mode = {
+      "n",
+    },
     desc = "MC: Select all matches",
-    --noremap = true,
     silent = true,
   },
   {
@@ -58,9 +57,10 @@ local keys = {
     function()
       require("multiple-cursor").exit_mode()
     end,
-    mode = "n",
+    mode = {
+      "n",
+    },
     desc = "Clear all cursors and exit multi-cursor mode",
-    --noremap = true,
     silent = true,
   },
 }

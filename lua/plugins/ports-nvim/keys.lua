@@ -3,8 +3,6 @@ local keys = {
   {
     "<leader>p",
     "<cmd>Ports<cr>",
-    --function()
-    --end,
     mode = {
       "n",
     },

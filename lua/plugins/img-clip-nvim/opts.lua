@@ -291,8 +291,10 @@ local opts = {
   -- file, directory, and custom triggered options
   ---@type table | fun(): table
   files = {},
+
   ---@type table | fun(): table
   dirs = {},
+
   ---@type table | fun(): table
   custom = {},
 }

@@ -3,7 +3,9 @@ local keys = {
   {
     "-",
     "<CMD>Oil<CR>",
-    mode = "n",
+    mode = {
+      "n",
+    },
     desc = "Open parent directory",
     silent = true,
   },

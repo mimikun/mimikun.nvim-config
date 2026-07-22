@@ -4,10 +4,17 @@ local keys = {
     "]t",
     function()
       require("todo-comments").jump_next({
-        --keywords = { "ERROR", "WARNING" },
+        --[[
+        keywords = {
+          "ERROR",
+          "WARNING",
+        },
+        ]]
       })
     end,
-    mode = "n",
+    mode = {
+      "n",
+    },
     desc = "Next todo comment",
     --desc = "Next error/warning todo comment",
     silent = true,
@@ -17,7 +24,9 @@ local keys = {
     function()
       require("todo-comments").jump_prev()
     end,
-    mode = "n",
+    mode = {
+      "n",
+    },
     desc = "Previous todo comment",
     silent = true,
   },

@@ -4,21 +4,27 @@ local opts = {
   ui = {
     ---@type string | "none" | "single" | "double" | "rounded" | "solid" | "shadow"
     border = "rounded",
+
     ---@type { width: number, height: number }
     size = {
       width = 0.7,
       height = 0.8,
     },
+
     ---@type GlazeIcons
     icons = {
       ---@type string
       pending = "○",
+
       ---@type string
       running = "◐",
+
       ---@type string
       done = "●",
+
       ---@type string
       error = "✗",
+
       ---@type string
       binary = "󰆍",
     },
@@ -43,6 +49,7 @@ local opts = {
     -- Whether to auto-install missing binaries on register
     ---@type boolean
     enabled = true,
+
     -- Suppress notifications during auto-install
     ---@type boolean
     silent = false,
@@ -54,6 +61,7 @@ local opts = {
     -- Whether to auto-check for updates
     ---@type boolean
     enabled = true,
+
     -- "daily", "weekly", or hours as number
     ---@type string | number | "daily" | "weekly"
     frequency = "daily",

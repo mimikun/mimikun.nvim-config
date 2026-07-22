@@ -5,7 +5,9 @@ local keys = {
     function()
       require("persistence").load()
     end,
-    mode = "n",
+    mode = {
+      "n",
+    },
     desc = "load the session for the current directory",
     silent = true,
   },
@@ -14,16 +16,22 @@ local keys = {
     function()
       require("persistence").select()
     end,
-    mode = "n",
+    mode = {
+      "n",
+    },
     desc = "select a session to load",
     silent = true,
   },
   {
     "<leader>ql",
     function()
-      require("persistence").load({ last = true })
+      require("persistence").load({
+        last = true,
+      })
     end,
-    mode = "n",
+    mode = {
+      "n",
+    },
     desc = "load the last session",
     silent = true,
   },
@@ -32,7 +40,9 @@ local keys = {
     function()
       require("persistence").stop()
     end,
-    mode = "n",
+    mode = {
+      "n",
+    },
     desc = "stop Persistence => session won't be saved on exit",
     silent = true,
   },

@@ -29,12 +29,24 @@ local opts = {
     "StatusLineNC",
     "EndOfBuffer",
   },
+
   --- additional groups that should be cleared
   ---@type table
-  extra_groups = {},
+  extra_groups = {
+    --it
+  },
+
   --- groups you don't want to clear
   ---@type table
-  exclude_groups = {},
+  exclude_groups = {
+    --it
+  },
+
+  -- function: code to be executed after highlight groups are cleared
+  -- Also the user event "TransparentClear" will be triggered
+  on_clear = function()
+    --it
+  end,
 }
 
 return opts

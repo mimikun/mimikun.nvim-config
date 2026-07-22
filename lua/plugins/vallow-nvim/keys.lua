@@ -3,8 +3,6 @@ local keys = {
   {
     "<leader>v",
     "<cmd>Vallow<cr>",
-    --function()
-    --end,
     mode = {
       "n",
     },
@@ -14,20 +12,15 @@ local keys = {
   {
     "<leader>vr",
     "<cmd>VallowRefresh<cr>",
-    --function()
-    --end,
     mode = {
       "n",
     },
     desc = "Vallow: refresh",
     silent = true,
   },
-  --{
   {
     "<leader>vs",
     "<cmd>VallowSearch<cr>",
-    --function()
-    --end,
     mode = {
       "n",
     },

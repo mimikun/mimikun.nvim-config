@@ -14,9 +14,8 @@ local opts = {
   refresh_interval_ms = 8,
 
   -- Timeout in milliseconds to wait after the last edit before processing animations
-  -- This uses a debouncing approach: the timer restarts on each edit, and only fires
-  -- when edits stop for this duration. This properly handles multi-location atomic
-  -- edits from surround plugins and similar tools (default: 50)
+  -- This uses a debouncing approach: the timer restarts on each edit, and only fires when edits stop for this duration.
+  -- This properly handles multi-location atomic edits from surround plugins and similar tools (default: 50)
   text_change_batch_timeout_ms = 50,
 
   -- Automatic keybinding overwrites
@@ -35,16 +34,22 @@ local opts = {
     search = {
       enabled = false,
       default_animation = "pulse",
-      next_mapping = "n", -- Key for next match
-      prev_mapping = "N", -- Key for previous match
+      -- Key for next match
+      next_mapping = "n",
+
+      -- Key for previous match
+      prev_mapping = "N",
     },
 
     -- Paste operation animation
     paste = {
       enabled = true,
       default_animation = "reverse_fade",
-      paste_mapping = "p", -- Paste after cursor
-      Paste_mapping = "P", -- Paste before cursor
+      -- Paste after cursor
+      paste_mapping = "p",
+
+      -- Paste before cursor
+      Paste_mapping = "P",
     },
 
     -- Undo operation animation
@@ -97,7 +102,8 @@ local opts = {
 
   -- Virtual text display priority
   virt_text = {
-    priority = 2048, -- Higher values appear above other plugins
+    -- Higher values appear above other plugins
+    priority = 2048,
   },
 }
 

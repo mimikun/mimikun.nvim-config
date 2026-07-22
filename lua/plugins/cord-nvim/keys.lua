@@ -5,7 +5,9 @@ local keys = {
     function()
       require("cord.api.command").toggle_presence()
     end,
-    mode = "n",
+    mode = {
+      "n",
+    },
     desc = "",
     silent = true,
   },
@@ -14,7 +16,9 @@ local keys = {
     function()
       require("cord.api.command").toggle_idle_force()
     end,
-    mode = "n",
+    mode = {
+      "n",
+    },
     desc = "",
     silent = true,
   },

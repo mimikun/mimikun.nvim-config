@@ -4,7 +4,9 @@ local opts = {
 
   ---@type lazydev.Library.spec[]
   library = require("plugins.lazydev-nvim.opts.library"),
+
   integrations = require("plugins.lazydev-nvim.opts.integrations"),
+
   ---@type boolean | (fun(root:string):boolean?)
   enabled = function(root_dir)
     -- always enable unless `vim.g.lazydev_enabled = false`
@@ -15,6 +17,7 @@ local opts = {
 
     return lazydev_enabled and no_luarc_json
   end,
+
   debug = false,
 }
 

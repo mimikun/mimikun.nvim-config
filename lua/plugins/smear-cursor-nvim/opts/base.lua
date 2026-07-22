@@ -14,6 +14,7 @@ local base = {
   -- Toggles for directions
   smear_horizontally = true,
   smear_vertically = true,
+
   -- Neither horizontal nor vertical
   smear_diagonally = true,
 
@@ -26,7 +27,9 @@ local base = {
   -- Set to `true` if your font supports legacy computing symbols (block unicode symbols).
   -- Smears and particles will look a lot less blocky.
   legacy_computing_symbols_support = false,
+
   legacy_computing_symbols_support_vertical_bars = false,
+
   -- Only effective if `legacy_computing_symbols_support` is `true`
   use_diagonal_blocks = true,
 
@@ -64,7 +67,9 @@ local base = {
   windows_zindex = 300,
 
   -- List of filetypes where the plugin is disabled.
-  filetypes_disabled = {},
+  filetypes_disabled = {
+    --it
+  },
 
   -- Sets animation framerate
   -- milliseconds

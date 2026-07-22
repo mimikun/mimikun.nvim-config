@@ -132,8 +132,7 @@ local opts = {
 
   -- Before performing filesystem operations,
   -- Oil displays a confirmation popup to ensure that all operations are intentional.
-  -- When this option is `true`, the popup will be
-  -- skipped if the operations:
+  -- When this option is `true`, the popup will be skipped if the operations:
   --   * contain no deletes
   --   * contain no cross-adapter moves or copies (e.g. from local to ssh)
   --   * contain at most one copy or move
@@ -336,11 +335,15 @@ local opts = {
 
   -- Extra arguments to pass to SCP when moving/copying files over SSH
   ---@type string[]
-  extra_scp_args = {},
+  extra_scp_args = {
+    --it
+  },
 
   ---Extra arguments to pass to aws s3 when moving/copying files using aws s3
   ---@type string[]
-  extra_s3_args = {},
+  extra_s3_args = {
+    --it
+  },
 
   -- EXPERIMENTAL support for performing file operations with git
   ---@type oil.SetupGitOptions

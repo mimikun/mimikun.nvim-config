@@ -4,8 +4,7 @@ local ui = {
   ---@type BafaUserConfigUiRender | nil
   render = {
     -- Custom buffer line format function, default is nil.
-    -- The function receives a BafaUiBufferLine as argument
-    -- and should return a string to be displayed in the UI.
+    -- The function receives a BafaUiBufferLine as argument and should return a string to be displayed in the UI.
     ---@type fun(buffer_line: BafaUiBufferLine): string|nil|nil
     custom_format_buffer_line = nil,
   },
@@ -32,8 +31,7 @@ local ui = {
     -- Keys to use for jump-labels in order of preference
     -- Should be unique characters
     -- Duplicates will be ignored
-    -- require('bafa.utils.keys').protected_jump_label_keys
-    -- are also protected and will be ignored
+    -- require('bafa.utils.keys').protected_jump_label_keys are also protected and will be ignored
     -- You can customize this to your keyboard layout will also use uppercase variants of these keys if the lower-case ones are exhausted
     -- This should give us roughly 46 unique keys (minus the protected ones)
     -- That should be enough for most use-cases but when we run out of keys, only the first buffers (in order, from top to bottom) will get jump-labels assigned

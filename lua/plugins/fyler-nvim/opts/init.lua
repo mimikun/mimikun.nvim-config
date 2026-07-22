@@ -35,6 +35,7 @@ local opts = {
       enabled = true,
     },
   },
+
   -- Event hooks for custom behavior (on_highlight, on_delete, on_rename)
   ---@type fyler.HooksConfig
   hooks = {},

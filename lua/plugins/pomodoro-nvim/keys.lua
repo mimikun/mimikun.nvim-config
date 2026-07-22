@@ -2,7 +2,6 @@
 local keys = {
   {
     "<leader>ps",
-    --"<cmd>Pomodoro start<cr>",
     function()
       require("pomodoro").start(nil)
     end,
@@ -14,7 +13,6 @@ local keys = {
   },
   {
     "<leader>pp",
-    --"<cmd>Pomodoro pause<cr>",
     function()
       require("pomodoro").pause()
     end,
@@ -26,7 +24,6 @@ local keys = {
   },
   {
     "<leader>pr",
-    --"<cmd>Pomodoro resume<cr>",
     function()
       require("pomodoro").resume()
     end,
@@ -38,7 +35,6 @@ local keys = {
   },
   {
     "<leader>px",
-    --"<cmd>Pomodoro stop<cr>",
     function()
       require("pomodoro").stop()
     end,
@@ -50,7 +46,6 @@ local keys = {
   },
   {
     "<leader>pw",
-    --"<cmd>Pomodoro status<cr>",
     function()
       require("pomodoro").status()
     end,
@@ -62,7 +57,6 @@ local keys = {
   },
   {
     "<leader>pS",
-    --"<cmd>Pomodoro stats<cr>",
     function()
       require("pomodoro").stats_summary()
     end,

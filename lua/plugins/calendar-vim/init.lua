@@ -3,7 +3,7 @@ local spec = {
   "renerocksai/calendar-vim",
   --lazy = false,
   cmd = require("plugins.calendar-vim.cmds"),
-  --keys = require("plugins.calendar-vim.keys"),
+  keys = require("plugins.calendar-vim.keys"),
   --event = require("plugins.calendar-vim.events"),
   init = function()
     -- Disable standard mappings
@@ -46,7 +46,7 @@ local spec = {
     }
 
     -- Place a '*' or '+' mark after the day
-    ---@type string "left" | "left-fit" | "right"
+    ---@type string | "left" | "left-fit" | "right"
     vim.g.calendar_mark = "right"
 
     -- Specify the directory for the diary files
@@ -71,7 +71,7 @@ local spec = {
     vim.g.calendar_diary_list_curr_idx = 1
 
     -- To control the calendar navigator, set this variable
-    ---@type string "top" | "bottom" | "both" | ""
+    ---@type string | "top" | "bottom" | "both" | ""
     vim.g.calendar_navi = ""
 
     -- To set the labels for the calendar navigator, for example to change the language, use this variable.
@@ -116,14 +116,14 @@ local spec = {
     -- Acceptable values are 'title', 'statusline', and ''
     vim.g.calendar_datetime = "title"
 
-    ---@type string "markdown" | "pandoc"
+    ---@type string | "markdown" | "pandoc"
     vim.g.calendar_filetype = "pandoc"
 
     -- To control the number of months per view, set this variable.
     -- The default value is 3
     vim.g.calendar_number_of_months = 5
 
-    ---@type string "grep" | "internal"
+    ---@type string | "grep" | "internal"
     vim.g.calendar_search_grepprg = "internal"
   end,
   --cond = false,

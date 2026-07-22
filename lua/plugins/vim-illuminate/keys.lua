@@ -5,7 +5,9 @@ local keys = {
     function()
       require("illuminate").goto_next_reference()
     end,
-    mode = "n",
+    mode = {
+      "n",
+    },
     desc = "Move to next reference",
     silent = true,
   },
@@ -14,7 +16,9 @@ local keys = {
     function()
       require("illuminate").goto_prev_reference()
     end,
-    mode = "n",
+    mode = {
+      "n",
+    },
     desc = "Move to previous reference",
     silent = true,
   },
@@ -23,7 +27,9 @@ local keys = {
     function()
       require("illuminate").textobj_select()
     end,
-    mode = "o",
+    mode = {
+      "o",
+    },
     desc = "",
     silent = true,
   },
@@ -32,7 +38,9 @@ local keys = {
     function()
       require("illuminate").textobj_select()
     end,
-    mode = "x",
+    mode = {
+      "x",
+    },
     desc = "",
     silent = true,
   },

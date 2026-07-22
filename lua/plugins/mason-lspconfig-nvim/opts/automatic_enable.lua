@@ -1,14 +1,12 @@
 -- Servers to automatically enable (attach).
---
--- Allowlist form: as long as this table has NO `exclude` key, only the servers
--- listed here are enabled. Everything in `ensure_installed` stays installed but
--- never attaches. Adding an `exclude` key flips this to a denylist and makes the
--- array entries below silently inert.
+
+-- Allowlist form: as long as this table has NO `exclude` key, only the servers listed here are enabled.
+-- Everything in `ensure_installed` stays installed but never attaches.
+-- Adding an `exclude` key flips this to a denylist and makes the array entries below silently inert.
 -- See mason-lspconfig.nvim/lua/mason-lspconfig/features/automatic_enable.lua
---
--- Commented-out entries are installed alternatives, kept here so switching is a
--- one-line edit. Uncommenting one usually means commenting out its sibling,
--- otherwise both attach to the same filetype and diagnostics are duplicated.
+
+-- Commented-out entries are installed alternatives, kept here so switching is a one-line edit.
+-- Uncommenting one usually means commenting out its sibling, otherwise both attach to the same filetype and diagnostics are duplicated.
 ---@type string[]
 local automatic_enable = {
   -- NOTE: cross-language, attaches to many filetypes at once

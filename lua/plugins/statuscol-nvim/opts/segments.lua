@@ -10,14 +10,18 @@ local segments = {
     text = {
       "%C",
     },
+
     -- %@ click function label, applies to each text element
     click = "v:lua.ScFa",
+
     -- %# highlight group label, applies to each text element
     hl = "FoldColumn",
+
     -- table of booleans or functions returning a boolean
     condition = {
       true,
     },
+
     -- table of fields that configure a sign segment
     sign = {
       -- at least one of "name", "text", and "namespace" is required
@@ -27,38 +31,49 @@ local segments = {
       name = {
         ".*",
       },
+
       -- table of Lua patterns to match the extmark sign text against
       text = {
         ".*",
       },
+
       -- table of Lua patterns to match the extmark sign namespace against
       namespace = {
         ".*",
       },
+
       -- below values list the default when omitted:
       -- maximum number of signs that will be displayed in this segment
       maxwidth = 1,
+
       -- number of display cells per sign in this segment
       colwidth = 2,
+
       -- boolean or string indicating what will be drawn when no signs
       auto = false,
+
       -- matching the pattern are currently placed in the buffer.
       -- when true, signs in this segment will also be drawn on the
       wrap = false,
+
       -- virtual or wrapped part of a line (when v:virtnum != 0).
       -- character used to fill a segment with less signs than maxwidth
       fillchar = " ",
+
       -- highlight group used for fillchar (SignColumn/CursorLineSign if omitted)
       fillcharhl = nil,
+
       -- when true, show signs from lines in a closed fold on the first line
       foldclosed = false,
     },
   },
+
   -- NOTE: segments_2
   {
     --text = {
     --  "%s",
     --},
+
     sign = {
       namespace = {
         "diagnostic/signs",
@@ -68,18 +83,22 @@ local segments = {
     },
     click = "v:lua.ScSa",
   },
+
   -- NOTE: segments_3
   {
     text = {
       builtin.lnumfunc,
       --" ",
     },
+
     --condition = {
     --  true,
     --  builtin.not_empty,
     --},
+
     click = "v:lua.ScLa",
   },
+
   -- NOTE: segments_4
   {
     sign = {
@@ -93,6 +112,7 @@ local segments = {
     },
     click = "v:lua.ScSa",
   },
+
   -- permission: permission
   -- size: file size
   -- mtime: last updated time

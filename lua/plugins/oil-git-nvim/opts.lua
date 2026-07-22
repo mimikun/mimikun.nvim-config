@@ -50,15 +50,33 @@ local opts = {
 
   -- Colors (only applied if highlight groups don't exist)
   highlights = {
-    OilGitAdded = { fg = "#a6e3a1" },
-    OilGitModifiedStaged = { fg = "#f9e2af" },
-    OilGitModifiedUnstaged = { fg = "#e5c890" },
-    OilGitRenamed = { fg = "#cba6f7" },
-    OilGitDeleted = { fg = "#f38ba8" },
-    OilGitCopied = { fg = "#cba6f7" },
-    OilGitConflict = { fg = "#fab387" },
-    OilGitUntracked = { fg = "#89b4fa" },
-    OilGitIgnored = { fg = "#6c7086" },
+    OilGitAdded = {
+      fg = "#a6e3a1",
+    },
+    OilGitModifiedStaged = {
+      fg = "#f9e2af",
+    },
+    OilGitModifiedUnstaged = {
+      fg = "#e5c890",
+    },
+    OilGitRenamed = {
+      fg = "#cba6f7",
+    },
+    OilGitDeleted = {
+      fg = "#f38ba8",
+    },
+    OilGitCopied = {
+      fg = "#cba6f7",
+    },
+    OilGitConflict = {
+      fg = "#fab387",
+    },
+    OilGitUntracked = {
+      fg = "#89b4fa",
+    },
+    OilGitIgnored = {
+      fg = "#6c7086",
+    },
   },
 }
 

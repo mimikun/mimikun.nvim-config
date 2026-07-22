@@ -55,14 +55,19 @@ local opts = {
   -- Flags for creating non-existing notes
   -- create non-existing on follow
   follow_creates_nonexisting = true,
+
   -- create non-existing dailies
   dailies_create_nonexisting = true,
+
   -- create non-existing weeklies
   weeklies_create_nonexisting = true,
+
   -- create non-existing monthlies
   monthlies_create_nonexisting = true,
+
   -- create non-existing quarterlies
   quarterlies_create_nonexisting = true,
+
   -- create non-existing yearlies
   yearlies_create_nonexisting = true,
 
@@ -98,11 +103,11 @@ local opts = {
   --vim.fn.expand("~/zettelkasten/templates/yearly.md")
 
   -- image link style
-  ---@type string "wiki" | "markdown"
+  ---@type string | "wiki" | "markdown"
   image_link_style = "markdown",
 
   -- default sort option
-  ---@type string "filename" | "modified"
+  ---@type string | "filename" | "modified"
   sort = "filename",
 
   -- when linking to a note in subdir/, create a [[subdir/title]] link instead of a [[title only]] link
@@ -110,6 +115,7 @@ local opts = {
 
   -- integrate with calendar-vim
   plug_into_calendar = true,
+
   calendar_opts = {
     -- 1: 'WK01'
     -- 2: 'WK 1'
@@ -117,17 +123,17 @@ local opts = {
     -- 4: 'KW 1'
     -- 5: '1'
     -- calendar week display mode:
-    ---@type number 1 | 2 | 3 | 4 | 5
+    ---@type number | 1 | 2 | 3 | 4 | 5
     weeknm = 4,
 
     -- use monday as first day of week:
     -- 1: true
     -- 0: false
-    ---@type number 1 | 0
+    ---@type number | 1 | 0
     calendar_monday = 1,
 
     -- calendar mark placement
-    ---@type string "left" | "right" | "left-fit"
+    ---@type string | "left" | "right" | "left-fit"
     calendar_mark = "left-fit",
   },
 
@@ -135,26 +141,26 @@ local opts = {
   insert_after_inserting = true,
 
   -- Tag notation:
-  ---@type string "#tag" | "@tag" | ":tag:" | "yaml-bare"
+  ---@type string | "#tag" | "@tag" | ":tag:" | "yaml-bare"
   tag_notation = "#tag",
 
-  ---@type string "dropdown" | "ivy"
+  ---@type string | "dropdown" | "ivy"
   command_palette_theme = "ivy",
 
-  ---@type string "get_cursor" | "dropdown" | "ivy"
+  ---@type string | "get_cursor" | "dropdown" | "ivy"
   show_tags_theme = "ivy",
 
-  ---@type string "smart" | "prefer_new_note" | "always_ask"
+  ---@type string | "smart" | "prefer_new_note" | "always_ask"
   template_handling = "smart",
 
-  ---@type string "smart" | "prefer_home" | "same_as_current"
+  ---@type string | "smart" | "prefer_home" | "same_as_current"
   new_note_location = "smart",
 
   -- If `true`, telekasten will automatically update the links after a file has been renamed.
   rename_update_links = true,
 
   -- Previewer for media files (images mostly)
-  ---@type string "telescope-media-files" | "catimg-previewer" | "viu-previewer"
+  ---@type string | "telescope-media-files" | "catimg-previewer" | "viu-previewer"
   media_previewer = "telescope-media-files",
 
   -- Customize insert image and preview image files list.
@@ -171,11 +177,11 @@ local opts = {
   },
 
   -- A customizable fallback handler for urls
-  ---@type string "xdg-open" | "open" | "call jobstart('firefox --new-window {{url}}')" | nil
+  ---@type string | "xdg-open" | "open" | "call jobstart('firefox --new-window {{url}}')" | nil
   follow_url_fallback = nil,
 
   -- Specify a clipboard program to use
-  ---@type string "xsel" | "xclip" | "wl-paste" | "osascript"
+  ---@type string | "xsel" | "xclip" | "wl-paste" | "osascript"
   clipboard_program = "wl-paste",
 
   -- Make syntax available to markdown buffers and telescope previewers
@@ -184,7 +190,7 @@ local opts = {
   vaults = {
     personal = {
       -- configuration for personal vault. E.g.:
-      -- home = "/home/user/vaults/personal",
+      --home = "/home/user/vaults/personal",
     },
   },
 }

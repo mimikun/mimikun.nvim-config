@@ -2,22 +2,28 @@
 local opts = {
   -- name of the local settings files
   local_settings = ".neoconf.json",
+
   -- name of the global settings file in your Neovim config directory
   global_settings = "neoconf.json",
+
   -- import existing settings from other plugins
   import = {
     -- local .vscode/settings.json
     vscode = true,
+
     -- global/local coc-settings.json
     coc = true,
+
     -- global/local nlsp-settings.nvim json settings
     nlsp = true,
   },
+
   -- send new configuration to lsp clients when changing json settings
   live_reload = true,
-  -- set the filetype to jsonc for settings files, so you can use comments
-  -- make sure you have the jsonc treesitter parser installed!
+
+  -- set the filetype to jsonc for settings files, so you can use comments make sure you have the jsonc treesitter parser installed!
   filetype_jsonc = true,
+
   plugins = {
     -- configures lsp clients with settings in the following order:
     -- - lua settings passed in lspconfig setup
@@ -26,17 +32,22 @@ local opts = {
     lspconfig = {
       enabled = true,
     },
+
     -- configures jsonls to get completion in .neoconf.json files
     jsonls = {
       enabled = true,
+
       -- only show completion in json settings for configured lsp servers
       configured_servers_only = true,
     },
+
     -- configures lua_ls to get completion of lspconfig server settings
     lua_ls = {
       -- by default, lua_ls annotations are only enabled in your neovim config directory
       enabled_for_neovim_config = true,
-      -- explicitly enable adding annotations. Mostly relevant to put in your local .neoconf.json file
+
+      -- explicitly enable adding annotations.
+      -- Mostly relevant to put in your local .neoconf.json file
       enabled = false,
     },
   },

@@ -1,7 +1,8 @@
 ---@type table
 local opts = {
   ring = {
-    ---@type number Define the number of yanked items that will be saved and used for ring.
+    -- Define the number of yanked items that will be saved and used for ring.
+    ---@type number
     history_length = 100,
 
     ---@type string | "shada" | "sqlite" | "memory"
@@ -16,7 +17,8 @@ local opts = {
     ---@type string | "update" | "move"
     cancel_event = "update",
 
-    ---@type table Define registeres to be ignored.
+    -- Define registers to be ignored.
+    ---@type table
     ignore_registers = {
       -- black hole register
       "_",
@@ -24,6 +26,7 @@ local opts = {
 
     ---@type boolean
     update_register_on_cycle = false,
+
     permanent_wrapper = require("yanky.wrappers").remove_carriage_return,
   },
   picker = {

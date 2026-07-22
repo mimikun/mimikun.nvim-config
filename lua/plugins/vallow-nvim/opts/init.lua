@@ -3,16 +3,23 @@ local opts = {
   fallow_cmd = "fallow",
 
   -- extra CLI args forwarded verbatim
-  fallow_args = {},
+  fallow_args = {
+    --it
+  },
 
   -- Which analyses to run.
   -- Remove entries to skip them entirely.
   -- "health" automatically adds --score --hotspots --targets to fallow.
-  analyses = { "dead-code", "dupes", "health" },
+  analyses = {
+    "dead-code",
+    "dupes",
+    "health",
+  },
 
   window = {
     ---@type string | "bottom" | "top" | "left" | "right"
     position = "right",
+
     size = 0.5,
   },
 
@@ -37,8 +44,10 @@ local opts = {
     close = "q",
     jump = "<CR>",
     refresh = "r",
+
     -- unset by default; za/zo/zc/zR/zM always work
     toggle_fold = nil,
+
     next_section = "]c",
     prev_section = "[c",
     next_tab = "L",
