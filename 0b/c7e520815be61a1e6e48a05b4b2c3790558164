@@ -1,0 +1,19 @@
+DUMMY_AAA.md
+  s_f31a5819e11282::t_a357d00e81f3b6 1
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.15",
+  "base_commit_sha": "0bc7e520815be61a1e6e48a05b4b2c3790558164",
+  "prompts": {},
+  "sessions": {
+    "s_f31a5819e11282": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "79d7947e-b94f-438c-953d-b2e22b12809a",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
