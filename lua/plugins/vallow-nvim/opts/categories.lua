@@ -54,6 +54,7 @@ local categories = {
     order = 6,
     severity = "warn",
   },
+
   -- ISSUES (actual bugs — error/warn severity)
   unresolved_imports = {
     icon = "󰌶",
@@ -76,6 +77,7 @@ local categories = {
     order = 3,
     severity = "warn",
   },
+
   -- DUPLICATES
   clone_groups = {
     icon = "󰏗",
@@ -84,6 +86,7 @@ local categories = {
     order = 1,
     severity = "hint",
   },
+
   -- HEALTH
   health_complexity = {
     icon = "ƒ",
@@ -106,6 +109,7 @@ local categories = {
     order = 3,
     severity = "hint",
   },
+
   -- ARCHITECTURE
   boundary_violations = {
     icon = "󰑷",

@@ -9,8 +9,6 @@ local keys = {
       "n",
     },
     desc = "Peeper Picker",
-    --expr = true,
-    --noremap = true,
     silent = true,
   },
   {
@@ -22,8 +20,6 @@ local keys = {
       "n",
     },
     desc = "Peeper Picker History",
-    --expr = true,
-    --noremap = true,
     silent = true,
   },
 }

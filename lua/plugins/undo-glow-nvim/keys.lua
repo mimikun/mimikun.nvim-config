@@ -5,7 +5,9 @@ local keys = {
     function()
       require("undo-glow").undo()
     end,
-    mode = "n",
+    mode = {
+      "n",
+    },
     desc = "Undo with highlight",
     noremap = true,
     silent = true,
@@ -15,7 +17,9 @@ local keys = {
     function()
       require("undo-glow").redo()
     end,
-    mode = "n",
+    mode = {
+      "n",
+    },
     desc = "Redo with highlight",
     noremap = true,
     silent = true,
@@ -26,7 +30,9 @@ local keys = {
       return require("undo-glow").yanky_put("YankyPutAfter")
       --require("undo-glow").paste_below()
     end,
-    mode = "n",
+    mode = {
+      "n",
+    },
     desc = "Paste below with highlight",
     expr = true,
     silent = true,
@@ -36,7 +42,9 @@ local keys = {
     function()
       require("undo-glow").paste_above()
     end,
-    mode = "n",
+    mode = {
+      "n",
+    },
     desc = "Paste above with highlight",
     noremap = true,
     silent = true,
@@ -50,7 +58,9 @@ local keys = {
         },
       })
     end,
-    mode = "n",
+    mode = {
+      "n",
+    },
     desc = "Search next with highlight",
     noremap = true,
     silent = true,
@@ -64,7 +74,9 @@ local keys = {
         },
       })
     end,
-    mode = "n",
+    mode = {
+      "n",
+    },
     desc = "Search prev with highlight",
     noremap = true,
     silent = true,
@@ -78,7 +90,9 @@ local keys = {
         },
       })
     end,
-    mode = "n",
+    mode = {
+      "n",
+    },
     desc = "Search star with highlight",
     noremap = true,
     silent = true,
@@ -92,7 +106,9 @@ local keys = {
         },
       })
     end,
-    mode = "n",
+    mode = {
+      "n",
+    },
     desc = "Search hash with highlight",
     noremap = true,
     silent = true,
@@ -107,7 +123,10 @@ local keys = {
       end)
       return require("undo-glow").comment()
     end,
-    mode = { "n", "x" },
+    mode = {
+      "n",
+      "x",
+    },
     desc = "Toggle comment with highlight",
     expr = true,
     noremap = true,
@@ -118,7 +137,9 @@ local keys = {
     function()
       require("undo-glow").comment_textobject()
     end,
-    mode = "o",
+    mode = {
+      "o",
+    },
     desc = "Comment textobject with highlight",
     noremap = true,
     silent = true,
@@ -128,7 +149,9 @@ local keys = {
     function()
       return require("undo-glow").comment_line()
     end,
-    mode = "n",
+    mode = {
+      "n",
+    },
     desc = "Toggle comment line with highlight",
     expr = true,
     noremap = true,

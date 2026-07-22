@@ -6,7 +6,11 @@ local spec = {
   keys = require("plugins.todo-comments-nvim.keys"),
   event = require("plugins.todo-comments-nvim.events"),
   dependencies = require("plugins.todo-comments-nvim.dependencies"),
-  opts = require("plugins.todo-comments-nvim.opts"),
+  --opts = require("plugins.todo-comments-nvim.opts"),
+  config = function()
+    local opts = require("plugins.todo-comments-nvim.opts")
+    require("todo-comments").setup(opts)
+  end,
   --cond = false,
   --enabled = false,
 }

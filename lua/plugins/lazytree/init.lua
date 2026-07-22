@@ -3,7 +3,8 @@ local spec = {
   "TomDeneire/lazytree",
   --lazy = false,
   cmd = require("plugins.lazytree.cmds"),
-  opts = {},
+  event = require("plugins.lazytree.events"),
+  opts = require("plugins.lazytree.opts"),
   --cond = false,
   --enabled = false,
 }

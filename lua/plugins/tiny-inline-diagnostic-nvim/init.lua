@@ -9,6 +9,7 @@ local spec = {
   config = function()
     local opts = require("plugins.tiny-inline-diagnostic-nvim.opts")
     require("tiny-inline-diagnostic").setup(opts)
+
     -- Disable Neovim's default virtual text diagnostics
     vim.diagnostic.config({
       virtual_text = false,

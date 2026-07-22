@@ -5,7 +5,9 @@ local keys = {
     function()
       require("github-actions").dispatch_workflow()
     end,
-    mode = "n",
+    mode = {
+      "n",
+    },
     desc = "Dispatch workflow",
     silent = true,
   },
@@ -14,7 +16,9 @@ local keys = {
     function()
       require("github-actions").show_history()
     end,
-    mode = "n",
+    mode = {
+      "n",
+    },
     desc = "Show workflow history",
     silent = true,
   },
@@ -23,7 +27,9 @@ local keys = {
     function()
       require("github-actions").show_history({ pr_mode = true })
     end,
-    mode = "n",
+    mode = {
+      "n",
+    },
     desc = "Show workflow history by branch/PR",
     silent = true,
   },
@@ -32,7 +38,9 @@ local keys = {
     function()
       require("github-actions").watch_workflow()
     end,
-    mode = "n",
+    mode = {
+      "n",
+    },
     desc = "Watch running workflow",
     silent = true,
   },
@@ -41,7 +49,9 @@ local keys = {
     function()
       require("github-actions").open_workflow_url()
     end,
-    mode = "n",
+    mode = {
+      "n",
+    },
     desc = "Open workflow URL in browser",
     silent = true,
   },

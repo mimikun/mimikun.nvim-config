@@ -22,8 +22,10 @@ local kind_presets = {
       },
     },
     width = "60%",
+
     -- Horizontal alignment: 'start' | 'center' | 'end'
     col = "center",
+
     -- Vertical alignment: 'start' | 'center' | 'end'
     row = "center",
   },

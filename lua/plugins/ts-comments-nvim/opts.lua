@@ -1,4 +1,4 @@
----@alias TSCommentsSpec string|string[]|table<string,string|string[]>
+---@alias TSCommentsSpec string | string[] | table<string, string | string[]>
 
 ---@type TSCommentsOptions
 local opts = {
@@ -31,6 +31,7 @@ local opts = {
       -- default commentstring when no treesitter node matches
       "// %s",
       "/* %s */",
+
       -- specific commentstring for call_expression
       call_expression = "// %s",
       jsx_attribute = "// %s",
@@ -59,6 +60,7 @@ local opts = {
       -- default commentstring when no treesitter node matches
       "// %s",
       "/* %s */",
+
       -- specific commentstring for call_expression
       call_expression = "// %s",
       jsx_attribute = "// %s",
@@ -68,6 +70,7 @@ local opts = {
       statement_block = "// %s",
     },
     twig = "{# %s #}",
+
     -- langs can have multiple commentstrings
     typescript = {
       "// %s",

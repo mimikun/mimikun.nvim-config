@@ -4,11 +4,11 @@ local spec = {
   --lazy = false,
   event = require("plugins.surround-ui-nvim.events"),
   dependencies = require("plugins.surround-ui-nvim.dependencies"),
-  opts = require("plugins.surround-ui-nvim.opts"),
-  --config = function()
-  --local opts = require("plugins.surround-ui-nvim.opts")
-  --require("surround-ui").setup(opts)
-  --end,
+  --opts = require("plugins.surround-ui-nvim.opts"),
+  config = function()
+    local opts = require("plugins.surround-ui-nvim.opts")
+    require("surround-ui").setup(opts)
+  end,
   --cond = false,
   --enabled = false,
 }

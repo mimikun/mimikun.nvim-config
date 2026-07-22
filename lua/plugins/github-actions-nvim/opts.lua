@@ -8,6 +8,7 @@ local opts = {
       error = "",
     },
   },
+
   ---@type HistoryOptions
   history = {
     icons = {
@@ -20,14 +21,17 @@ local opts = {
       waiting = "○",
       unknown = "?",
     },
+
     ---@type HistoryBufferOptions
     buffer = {
       ---@type BufferOpenOptions
       history = {
-        ---@type string "tab" | "vsplit" | "split" | "current"
+        ---@type string | "tab" | "vsplit" | "split" | "current"
         open_mode = "tab",
+
         ---@type boolean
         buflisted = true,
+
         ---@type table<string, any>
         window_options = {
           wrap = true,
@@ -35,12 +39,15 @@ local opts = {
           cursorline = true,
         },
       },
+
       ---@type BufferOpenOptions
       logs = {
-        ---@type string "tab" | "vsplit" | "split" | "current"
+        ---@type string | "tab" | "vsplit" | "split" | "current"
         open_mode = "vsplit",
+
         ---@type boolean
         buflisted = true,
+
         ---@type table<string, any>
         window_options = {
           wrap = false,

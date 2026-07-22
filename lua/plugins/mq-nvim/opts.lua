@@ -35,7 +35,9 @@ local opts = {
     capabilities = nil,
 
     -- LSP settings
-    settings = {},
+    settings = {
+      --it
+    },
   },
 }
 

@@ -18,8 +18,12 @@ local opts = {
     find = "<leader>pp",
     history = "<leader>ph",
   },
-  ignored_dirs = {},
-  ignored_keywords = {},
+  ignored_dirs = {
+    --it
+  },
+  ignored_keywords = {
+    --it
+  },
 }
 
 return opts

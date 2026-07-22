@@ -15,7 +15,9 @@ local opts = {
 
   -- File types for which scrollbars should not be displayed.
   ---@type string[]
-  excluded_filetypes = {},
+  excluded_filetypes = {
+    --it
+  },
 
   width = 2,
 
@@ -38,12 +40,14 @@ local opts = {
         --"⎼",
       },
     },
+
     ---@type Satellite.Handlers.SearchConfig
     search = {
       -- Whether the handler is enabled
       ---@type boolean
       enable = true,
     },
+
     ---@type Satellite.Handlers.DiagnosticConfig
     diagnostic = {
       -- Whether the handler is enabled
@@ -58,6 +62,7 @@ local opts = {
 
       min_severity = vim.diagnostic.severity.HINT,
     },
+
     ---@type Satellite.Handlers.GitsignsConfig
     gitsigns = {
       -- Whether the handler is enabled
@@ -71,6 +76,7 @@ local opts = {
         delete = "-",
       },
     },
+
     ---@type Satellite.Handlers.MarksConfig
     marks = {
       -- Whether the handler is enabled
@@ -84,6 +90,7 @@ local opts = {
       ---@type string
       key = "m",
     },
+
     ---@type Satellite.Handlers.BaseConfig
     quickfix = {
       -- Whether the handler is enabled

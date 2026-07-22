@@ -10,11 +10,11 @@ local spec = {
     -- To prevent this, set `splitkeep` to either `screen` or `topline`.
     vim.opt.splitkeep = "screen"
   end,
-  opts = require("plugins.edgy-nvim.opts"),
-  --config = function()
-  --local opts = require("plugins.edgy-nvim.opts")
-  --require("edgy").setup(opts)
-  --end,
+  --opts = require("plugins.edgy-nvim.opts"),
+  config = function()
+    local opts = require("plugins.edgy-nvim.opts")
+    require("edgy").setup(opts)
+  end,
   --cond = false,
   --enabled = false,
 }

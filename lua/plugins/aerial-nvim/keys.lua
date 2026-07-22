@@ -5,7 +5,9 @@ local keys = {
     function()
       require("aerial").toggle()
     end,
-    mode = "n",
+    mode = {
+      "n",
+    },
     desc = "",
     silent = true,
   },

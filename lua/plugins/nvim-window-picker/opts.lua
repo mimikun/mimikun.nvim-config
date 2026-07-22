@@ -1,8 +1,6 @@
 ---@type table
 local opts = {
-  -- type of hints you want to get following types are supported
-  -- 'statusline-winbar' draw on 'statusline' if possible,
-  -- if not 'winbar' will be 'floating-big-letter' draw big letter on a floating window used
+  -- type of hints you want to get following types are supported 'statusline-winbar' draw on 'statusline' if possible, if not 'winbar' will be 'floating-big-letter' draw big letter on a floating window used
   ---@type string | "statusline-winbar" | "floating-big-letter"
   hint = "statusline-winbar",
 
@@ -90,13 +88,19 @@ local opts = {
     },
 
     -- filter using window options
-    wo = {},
+    wo = {
+      --it
+    },
 
     -- if the file path contains one of following names, the window will be ignored
-    file_path_contains = {},
+    file_path_contains = {
+      --it
+    },
 
     -- if the file name contains one of following names, the window will be ignored
-    file_name_contains = {},
+    file_name_contains = {
+      --it
+    },
   },
 
   -- You can pass in the highlight name or a table of content to set as highlight

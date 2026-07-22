@@ -30,16 +30,22 @@ local opts = {
   hi = {
     -- Highlight for error diagnostics
     error = "DiagnosticError",
+
     -- Highlight for warning diagnostics
     warn = "DiagnosticWarn",
+
     -- Highlight for info diagnostics
     info = "DiagnosticInfo",
+
     -- Highlight for hint diagnostics
     hint = "DiagnosticHint",
+
     -- Highlight for the arrow pointing to diagnostic
     arrow = "NonText",
+
     -- Background highlight for diagnostics
     background = "CursorLine",
+
     -- Color to blend background with (or "None")
     mixing_color = "Normal",
   },
@@ -52,6 +58,7 @@ local opts = {
     show_source = {
       -- Enable showing source names
       enabled = false,
+
       -- Only show source if multiple sources exist for the same diagnostic
       if_many = false,
     },
@@ -79,10 +86,13 @@ local opts = {
     add_messages = {
       -- Show full diagnostic messages
       messages = true,
+
       -- Show diagnostic count instead of messages when cursor not on line
       display_count = true,
+
       -- When counting, only show the most severe diagnostic
       use_max_severity = false,
+
       -- Show multiple icons for multiple diagnostics of same severity
       show_multiple_glyphs = true,
     },
@@ -91,12 +101,16 @@ local opts = {
     multilines = {
       -- Enable support for multiline diagnostic messages
       enabled = true,
+
       -- Always show messages on all lines of multiline diagnostics
       always_show = false,
+
       -- Remove leading/trailing whitespace from each line
       trim_whitespaces = false,
+
       -- Number of spaces per tab when expanding tabs
       tabstop = 4,
+
       -- Filter multiline diagnostics by severity (e.g., { vim.diagnostic.severity.ERROR })
       severity = nil,
     },
@@ -111,6 +125,7 @@ local opts = {
     show_related = {
       -- Enable displaying related diagnostics
       enabled = true,
+
       -- Maximum number of related diagnostics to show per diagnostic
       max_count = 3,
     },
@@ -129,6 +144,7 @@ local opts = {
       -- oneline: keep single line
       ---@type string | "wrap" | "none" | "oneline"
       mode = "wrap",
+
       -- Extra characters to trigger wrapping earlier
       padding = 0,
     },
@@ -137,6 +153,7 @@ local opts = {
     break_line = {
       -- Enable automatic line breaking
       enabled = false,
+
       -- Number of characters before inserting a line break
       after = 30,
     },

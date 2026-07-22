@@ -45,6 +45,7 @@ local opts = {
     width = 0.82,
 
     height = 0.6,
+
     -- Use Nerd Font glyphs for the type column.
     icons = true,
 

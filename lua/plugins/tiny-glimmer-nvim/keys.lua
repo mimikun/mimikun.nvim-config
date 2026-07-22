@@ -5,7 +5,9 @@ local keys = {
     function()
       require("tiny-glimmer").enable()
     end,
-    mode = "n",
+    mode = {
+      "n",
+    },
     desc = "Enable animations",
     silent = true,
   },
@@ -14,7 +16,9 @@ local keys = {
     function()
       require("tiny-glimmer").disable()
     end,
-    mode = "n",
+    mode = {
+      "n",
+    },
     desc = "Disable animations",
     silent = true,
   },
@@ -23,7 +27,9 @@ local keys = {
     function()
       require("tiny-glimmer").toggle()
     end,
-    mode = "n",
+    mode = {
+      "n",
+    },
     desc = "Toggle animations",
     silent = true,
   },

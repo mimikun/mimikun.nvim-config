@@ -6,6 +6,7 @@ local opts = {
   window = {
     ---@type string | "left" | "right"
     position = "left",
+
     width = 36,
     on_open = nil,
   },

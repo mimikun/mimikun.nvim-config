@@ -6,6 +6,8 @@ local spec = {
   keys = require("plugins.undo-glow-nvim.keys"),
   event = require("plugins.undo-glow-nvim.events"),
   init = function()
+    --local ug = require("undo-glow")
+
     vim.api.nvim_create_autocmd("TextYankPost", {
       desc = "Highlight when yanking (copying) text",
       callback = function()
@@ -24,6 +26,7 @@ local spec = {
         }, {
           -- Jump threshold
           steps_to_trigger = 10,
+
           -- Skip these filetypes
           ignored_ft = {
             "mason",
@@ -68,7 +71,12 @@ local spec = {
       end,
     })
   end,
-  opts = require("plugins.undo-glow-nvim.opts"),
+  --opts = require("plugins.undo-glow-nvim.opts"),
+  config = function()
+    local opts = require("plugins.undo-glow-nvim.opts")
+    require("undo-glow").setup(opts)
+  end,
+  -- TODO: it
   cond = false,
   enabled = false,
 }

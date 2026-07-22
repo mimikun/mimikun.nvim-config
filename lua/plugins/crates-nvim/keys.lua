@@ -5,7 +5,9 @@ local keys = {
     function()
       require("crates").toggle()
     end,
-    mode = "n",
+    mode = {
+      "n",
+    },
     desc = "",
     silent = true,
   },
@@ -14,7 +16,9 @@ local keys = {
     function()
       require("crates").reload()
     end,
-    mode = "n",
+    mode = {
+      "n",
+    },
     desc = "",
     silent = true,
   },
@@ -23,7 +27,9 @@ local keys = {
     function()
       require("crates").show_versions_popup()
     end,
-    mode = "n",
+    mode = {
+      "n",
+    },
     desc = "",
     silent = true,
   },
@@ -32,7 +38,9 @@ local keys = {
     function()
       require("crates").show_features_popup()
     end,
-    mode = "n",
+    mode = {
+      "n",
+    },
     desc = "",
     silent = true,
   },
@@ -41,7 +49,9 @@ local keys = {
     function()
       require("crates").show_dependencies_popup()
     end,
-    mode = "n",
+    mode = {
+      "n",
+    },
     desc = "",
     silent = true,
   },
@@ -50,7 +60,9 @@ local keys = {
     function()
       require("crates").update_crate()
     end,
-    mode = "n",
+    mode = {
+      "n",
+    },
     desc = "",
     silent = true,
   },
@@ -59,7 +71,9 @@ local keys = {
     function()
       require("crates").update_crates()
     end,
-    mode = "v",
+    mode = {
+      "v",
+    },
     desc = "",
     silent = true,
   },
@@ -68,7 +82,9 @@ local keys = {
     function()
       require("crates").update_all_crates()
     end,
-    mode = "n",
+    mode = {
+      "n",
+    },
     desc = "",
     silent = true,
   },
@@ -77,7 +93,9 @@ local keys = {
     function()
       require("crates").upgrade_crate()
     end,
-    mode = "n",
+    mode = {
+      "n",
+    },
     desc = "",
     silent = true,
   },
@@ -86,7 +104,9 @@ local keys = {
     function()
       require("crates").upgrade_crates()
     end,
-    mode = "v",
+    mode = {
+      "v",
+    },
     desc = "",
     silent = true,
   },
@@ -95,7 +115,9 @@ local keys = {
     function()
       require("crates").upgrade_all_crates()
     end,
-    mode = "n",
+    mode = {
+      "n",
+    },
     desc = "",
     silent = true,
   },
@@ -104,7 +126,9 @@ local keys = {
     function()
       require("crates").expand_plain_crate_to_inline_table()
     end,
-    mode = "n",
+    mode = {
+      "n",
+    },
     desc = "",
     silent = true,
   },
@@ -113,7 +137,9 @@ local keys = {
     function()
       require("crates").extract_crate_into_table()
     end,
-    mode = "n",
+    mode = {
+      "n",
+    },
     desc = "",
     silent = true,
   },
@@ -122,7 +148,9 @@ local keys = {
     function()
       require("crates").open_homepage()
     end,
-    mode = "n",
+    mode = {
+      "n",
+    },
     desc = "",
     silent = true,
   },
@@ -131,7 +159,9 @@ local keys = {
     function()
       require("crates").open_repository()
     end,
-    mode = "n",
+    mode = {
+      "n",
+    },
     desc = "",
     silent = true,
   },
@@ -140,7 +170,9 @@ local keys = {
     function()
       require("crates").open_documentation()
     end,
-    mode = "n",
+    mode = {
+      "n",
+    },
     desc = "",
     silent = true,
   },
@@ -149,7 +181,9 @@ local keys = {
     function()
       require("crates").open_crates_io()
     end,
-    mode = "n",
+    mode = {
+      "n",
+    },
     desc = "",
     silent = true,
   },
@@ -158,7 +192,9 @@ local keys = {
     function()
       require("crates").open_lib_rs()
     end,
-    mode = "n",
+    mode = {
+      "n",
+    },
     desc = "",
     silent = true,
   },

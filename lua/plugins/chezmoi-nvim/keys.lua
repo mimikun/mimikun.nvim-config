@@ -6,7 +6,9 @@ local keys = {
     function()
       require("chezmoi.pick").telescope()
     end,
-    mode = "n",
+    mode = {
+      "n",
+    },
     desc = "Search all chezmoi files",
     silent = true,
   },
@@ -24,7 +26,9 @@ local keys = {
       }
       require("chezmoi.pick").telescope(targets, args)
     end,
-    mode = "n",
+    mode = {
+      "n",
+    },
     desc = "Search only neovim config files",
     silent = true,
   },
@@ -35,7 +39,9 @@ local keys = {
     function()
       require("chezmoi.pick").snacks()
     end,
-    mode = "n",
+    mode = {
+      "n",
+    },
     desc = "Search all chezmoi files",
     silent = true,
   },
@@ -53,7 +59,9 @@ local keys = {
       }
       require("chezmoi.pick").snacks(targets, args)
     end,
-    mode = "n",
+    mode = {
+      "n",
+    },
     desc = "Search only neovim config files",
     silent = true,
   },
@@ -65,7 +73,9 @@ local keys = {
     function()
       require("chezmoi.pick").fzf()
     end,
-    mode = "n",
+    mode = {
+      "n",
+    },
     desc = "Search all chezmoi files",
     silent = true,
   },
@@ -83,7 +93,9 @@ local keys = {
       }
       require("chezmoi.pick").fzf(targets, args)
     end,
-    mode = "n",
+    mode = {
+      "n",
+    },
     desc = "Search only neovim config files",
     silent = true,
   },
@@ -95,7 +107,9 @@ local keys = {
     function()
       require("chezmoi.pick").mini()
     end,
-    mode = "n",
+    mode = {
+      "n",
+    },
     desc = "Search all chezmoi files",
     silent = true,
   },
@@ -113,7 +127,9 @@ local keys = {
       }
       require("chezmoi.pick").mini(targets, args)
     end,
-    mode = "n",
+    mode = {
+      "n",
+    },
     desc = "Search only neovim config files",
     silent = true,
   },

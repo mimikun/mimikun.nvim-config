@@ -11,7 +11,6 @@ local spec = {
     --vim.cmd.colorscheme("matugen")
   end,
   priority = 1000,
-  --optional = false,
   --cond = false,
   --enabled = false,
 }

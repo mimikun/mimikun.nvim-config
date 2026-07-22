@@ -10,14 +10,18 @@ local spec = {
     require("tree-sitter-manager").setup(opts)
 
     -- Update all installed parsers at once (wrapper around `:TSUpdate!`).
-    -- The plugin's `:TSUpdate` requires either an argument or a bang; this
-    -- provides a memorable, argument-less command for a full update.
+    -- The plugin's `:TSUpdate` requires either an argument or a bang;
+    -- this provides a memorable, argument-less command for a full update.
     vim.api.nvim_create_user_command("TSUpdateAll", function()
-      vim.cmd.TSUpdate({ bang = true })
-    end, { desc = "Update all installed treesitter parsers" })
+      vim.cmd.TSUpdate({
+        bang = true,
+      })
+    end, {
+      desc = "Update all installed treesitter parsers",
+    })
   end,
-  --cond = false,
-  --enabled = false,
+  cond = false,
+  enabled = false,
 }
 
 return spec

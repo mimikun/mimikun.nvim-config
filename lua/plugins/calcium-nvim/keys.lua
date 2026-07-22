@@ -8,8 +8,6 @@ local keys = {
       "v",
     },
     desc = "Calculate",
-    --expr = true,
-    --noremap = true,
     silent = true,
   },
 }

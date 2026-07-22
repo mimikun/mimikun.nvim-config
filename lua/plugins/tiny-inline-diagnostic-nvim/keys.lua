@@ -5,7 +5,9 @@ local keys = {
     function()
       require("tiny-inline-diagnostic").enable()
     end,
-    mode = "n",
+    mode = {
+      "n",
+    },
     desc = "Enable diagnostics",
     silent = true,
   },
@@ -14,7 +16,9 @@ local keys = {
     function()
       require("tiny-inline-diagnostic").disable()
     end,
-    mode = "n",
+    mode = {
+      "n",
+    },
     desc = "Disable diagnostics",
     silent = true,
   },
@@ -23,7 +27,9 @@ local keys = {
     function()
       require("tiny-inline-diagnostic").toggle()
     end,
-    mode = "n",
+    mode = {
+      "n",
+    },
     desc = "Toggle diagnostics",
     silent = true,
   },
@@ -32,7 +38,9 @@ local keys = {
     function()
       require("tiny-inline-diagnostic").toggle_cursor_only()
     end,
-    mode = "n",
+    mode = {
+      "n",
+    },
     desc = "Toggle cursor-only diagnostics",
     silent = true,
   },
@@ -41,7 +49,9 @@ local keys = {
     function()
       require("tiny-inline-diagnostic").reset()
     end,
-    mode = "n",
+    mode = {
+      "n",
+    },
     desc = "Reset diagnostic options",
     silent = true,
   },

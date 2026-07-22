@@ -6,8 +6,11 @@ local opts = {
   override = {
     zsh = {
       icon = "",
+
       color = "#428850",
+
       cterm_color = "65",
+
       name = "Zsh",
     },
   },
@@ -43,7 +46,9 @@ local opts = {
   override_by_filename = {
     [".gitignore"] = {
       icon = "",
+
       color = "#f1502f",
+
       name = "Gitignore",
     },
   },
@@ -52,7 +57,9 @@ local opts = {
   override_by_extension = {
     ["log"] = {
       icon = "",
+
       color = "#81e043",
+
       name = "Log",
     },
   },
@@ -61,8 +68,11 @@ local opts = {
   override_by_operating_system = {
     ["apple"] = {
       icon = "",
+
       color = "#A2AAAD",
+
       cterm_color = "248",
+
       name = "Apple",
     },
   },
