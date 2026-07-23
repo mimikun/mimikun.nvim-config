@@ -68,7 +68,12 @@ local opts = {
     tex = { "tex-fmt" },
 
     -- Use the "*" filetype to run formatters on all filetypes.
-    ["*"] = { "typos" },
+    -- Disabled: as a conform formatter, typos runs with `--write-changes` and
+    -- auto-"fixes" default-dictionary false positives (e.g. Clojure `edn` ->
+    -- `end`), corrupting files on save. Typo checking is a linter's job, not a
+    -- formatter's; it will move to nvim-lint (planned), which only reports
+    -- diagnostics without rewriting the buffer. Kept here for reference.
+    -- ["*"] = { "typos" },
 
     -- Use the "_" filetype to run formatters on filetypes that don't have other formatters configured.
     ["_"] = { "trim_whitespace" },
