@@ -1,0 +1,19 @@
+lua/plugins/conform-nvim/opts.lua
+  s_e5586c8765bdd7::t_20f5fe62a083b2 70-73
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.15",
+  "base_commit_sha": "16fd8762bbb73f55a6f6a6eeb5a3e7ba5aec3353",
+  "prompts": {},
+  "sessions": {
+    "s_e5586c8765bdd7": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "0a0e3434-0932-4f2c-ae9d-4d64ea2e6016",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
