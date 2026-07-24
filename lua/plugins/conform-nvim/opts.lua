@@ -147,6 +147,13 @@ local opts = {
         "2",
       },
     },
+    -- rumdl defaults its cache to ./.rumdl_cache, which litters every working directory when formatting via stdin.
+    -- Caching brings no benefit here (stdin has no file identity to key on), so disable it.
+    rumdl = {
+      append_args = {
+        "--no-cache",
+      },
+    },
   },
 }
 
