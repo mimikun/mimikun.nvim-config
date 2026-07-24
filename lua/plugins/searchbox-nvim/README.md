@@ -14,7 +14,7 @@ Neovim `v0.5.1` is the minimum version required. `v0.7` or greater is recommende
 
 ### Dependencies
 
-- [nui.nvim](https://github.com/MunifTanjim/nui.nvim)
+* [nui.nvim](https://github.com/MunifTanjim/nui.nvim)
 
 ### Installation
 
@@ -123,15 +123,15 @@ You can tweak the behaviour of the search if you pass any of these properties:
 * `position_y`: Refers to the row where the popup window will be placed. It sets the `popup.row` option in nui.input.
 * `window_width`: Width of the popup window.
 * `modifier`: Apply a "search modifier" at the beginning of the search pattern. It won't be visible in the search input. Possible values:
-  - `ignore-case`: Make the search case insensitive. Applies the pattern \c.
-  - `case-sensitive`: Make the search case sensitive. Applies the pattern \C.
-  - `no-magic`: Act as if the option `nomagic` is used. Applies the pattern \M.
-  - `magic`: Act as if the option `magic` is on. Applies the pattern \m.
-  - `very-magic`: Anything that isn't alphanumeric has a special meaning. Applies the pattern \v.
-  - `very-no-magic`: Only the backslash and the terminating character has special meaning. Applies the pattern \V.
-  - `plain`: Is an alias for `very-no-magic`.
-  - `disabled`: Is the default. Don't apply any modifier.
-  - `:`: It acts as a prefix. Use it to add your own modifier to the search. Example, `:\C\V` will make the search `very-no-magic` and also case sensitive. See `:help /magic` to know more about possible patterns.
+  * `ignore-case`: Make the search case insensitive. Applies the pattern \c.
+  * `case-sensitive`: Make the search case sensitive. Applies the pattern \C.
+  * `no-magic`: Act as if the option `nomagic` is used. Applies the pattern \M.
+  * `magic`: Act as if the option `magic` is on. Applies the pattern \m.
+  * `very-magic`: Anything that isn't alphanumeric has a special meaning. Applies the pattern \v.
+  * `very-no-magic`: Only the backslash and the terminating character has special meaning. Applies the pattern \V.
+  * `plain`: Is an alias for `very-no-magic`.
+  * `disabled`: Is the default. Don't apply any modifier.
+  * `:`: It acts as a prefix. Use it to add your own modifier to the search. Example, `:\C\V` will make the search `very-no-magic` and also case sensitive. See `:help /magic` to know more about possible patterns.
 
 Other arguments are exclusive to one type of search.
 
@@ -169,7 +169,7 @@ Because whitespace acts like a separator between the arguments if you want to us
 
 > Note that escaping is especially funny inside a lua string, so you might need to use `\\`.
 
-Is worth mention that argument parsing is done manually inside the plugin. Complex escape sequences are not taken into account. Just `\"` and `\'` to avoid conflict in quoted arguments, and `\ ` to escape whitespace in a string argument without quotes.
+Is worth mention that argument parsing is done manually inside the plugin. Complex escape sequences are not taken into account. Just `\"` and `\'` to avoid conflict in quoted arguments, and `\` to escape whitespace in a string argument without quotes.
 
 Not being able to use whitespace freely makes it difficult to use `default_value` with this api, that's why it gets a special treatment. There is no `default_value` argument, instead everything that follows the `--` argument is considered part of the search term.
 
@@ -259,13 +259,13 @@ Search and replace within the range of the selected text, and look for an exact 
 
 Confirm every match of search and replace.
 
-- Normal mode:
+* Normal mode:
 
 ```vim
 :SearchBoxReplace confirm=menu<CR>
 ```
 
-- Visual mode:
+* Visual mode:
 
 ```vim
 :SearchBoxReplace confirm=menu visual_mode=true<CR>
@@ -365,19 +365,19 @@ require('searchbox').setup({
 })
 ```
 
-- `defaults` is a "global config", allows you to set some properties for all inputs. So you don't have to declare them using the command api or the lua api.
+* `defaults` is a "global config", allows you to set some properties for all inputs. So you don't have to declare them using the command api or the lua api.
 
-- `popup` is passed directly to `nui.popup`. You can check the valid keys in their documentation: [popup.options](https://github.com/MunifTanjim/nui.nvim/tree/main/lua/nui/popup#options)
+* `popup` is passed directly to `nui.popup`. You can check the valid keys in their documentation: [popup.options](https://github.com/MunifTanjim/nui.nvim/tree/main/lua/nui/popup#options)
 
-- `grep_options` are the settings for the grep input.
+* `grep_options` are the settings for the grep input.
 
-  - `executable` is the external program that will execute the search.
-  - `flags` can be string or list of strings, it will be provided to the program as extra arguments before the search term.
-  - `show_progress` display the number of matches found during search. It can have three possible values: popup, echo or disabled.
-  - `quickfix_window` shows the quickfix window after the search done.
-  - `quickfix_format` is the pattern that will be used to parse the output of the program. See [errorformat](https://neovim.io/doc/user/quickfix/#errorformat) for more details.
+  * `executable` is the external program that will execute the search.
+  * `flags` can be string or list of strings, it will be provided to the program as extra arguments before the search term.
+  * `show_progress` display the number of matches found during search. It can have three possible values: popup, echo or disabled.
+  * `quickfix_window` shows the quickfix window after the search done.
+  * `quickfix_format` is the pattern that will be used to parse the output of the program. See [errorformat](https://neovim.io/doc/user/quickfix/#errorformat) for more details.
 
-- `hooks` must be functions. They will be executed during the "lifecycle" of the input.
+* `hooks` must be functions. They will be executed during the "lifecycle" of the input.
 
 *before_mount* and *after_mount* receive the instance of the input, so you can do anything with it.
 
@@ -484,7 +484,7 @@ command! -nargs=1 Grep lua require('searchbox').run_grep(<q-args>)
 
 ## Caveats
 
-It's very possible that I can't simulate every feature of the built-in search (`/` and  `?`).
+It's very possible that I can't simulate every feature of the built-in search (`/` and `?`).
 
 ## Alternatives
 
@@ -501,4 +501,3 @@ If you want to improve the UI it will be better if you contribute to [nui.nvim](
 If you find this useful and want to support my efforts, you can donate in [ko-fi.com/vonheikemen](https://ko-fi.com/vonheikemen).
 
 [![buy me a coffee](https://res.cloudinary.com/vonheikemen/image/upload/v1726766343/gzu1l1mx3ou7jmp0tkvt.webp)](https://ko-fi.com/vonheikemen)
-

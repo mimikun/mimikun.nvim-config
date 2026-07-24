@@ -1,7 +1,7 @@
 local M = {}
 
 local bool = function(value)
-  local variants = {['true'] = true, ['false'] = false}
+  local variants = { ["true"] = true, ["false"] = false }
 
   if variants[value] == nil and #value > 0 then
     return false
@@ -15,11 +15,11 @@ local str = function(value)
 end
 
 local bool_or_str = function(value)
-  if value == '' then
+  if value == "" then
     return nil
   end
 
-  local variants = {['true'] = true, ['false'] = false}
+  local variants = { ["true"] = true, ["false"] = false }
 
   if variants[value] == nil then
     return value
@@ -29,8 +29,8 @@ local bool_or_str = function(value)
 end
 
 local escape_space = function(value)
-  if vim.endswith(value, '\\') then
-    return value:sub(1, #value - 1) .. ' '
+  if vim.endswith(value, "\\") then
+    return value:sub(1, #value - 1) .. " "
   end
 
   return value
@@ -49,7 +49,7 @@ local to_opts = {
   position_relative = str,
   position_x = str,
   position_y = str,
-  window_width = str
+  window_width = str,
 }
 
 local parse_options = function(args)
@@ -64,7 +64,7 @@ local parse_options = function(args)
 end
 
 local quoted_arg = function(current_arg, all_args, quote)
-  local pos = {all_args:find(current_arg)}
+  local pos = { all_args:find(current_arg) }
   local first_quote = pos[2] + 1
   local cursor = first_quote
 
@@ -72,15 +72,15 @@ local quoted_arg = function(current_arg, all_args, quote)
     local last_quote = all_args:find(quote, cursor)
     if last_quote == nil then
       local substr = all_args:sub(first_quote)
-      return {substr:len(), substr}
+      return { substr:len(), substr }
     end
 
     local arg_value = all_args:sub(first_quote, last_quote - 1)
 
-    if vim.endswith(arg_value, '\\') then
+    if vim.endswith(arg_value, "\\") then
       cursor = last_quote + 1
     else
-      return {last_quote, arg_value}
+      return { last_quote, arg_value }
     end
   end
 end
@@ -91,25 +91,23 @@ local parse_input = function(input)
   local prev_arg = nil
 
   -- `--` means stop. If it's the first thing, don't parse anything
-  if input:sub(1, 3) == '-- ' then
+  if input:sub(1, 3) == "-- " then
     opts.default_value = input:sub(4)
     return opts
   end
 
-  local first_word = input:match('^([a-z_]+=)')
+  local first_word = input:match("^([a-z_]+=)")
 
   -- If input doesn't begin with any known argument
   -- don't bother, just return input as `default_value`
-  if first_word == nil or
-    to_opts[first_word:sub(1, #first_word - 1)] == nil
-  then
+  if first_word == nil or to_opts[first_word:sub(1, #first_word - 1)] == nil then
     opts.default_value = input
     return opts
   end
 
   while true do
     local section = input:sub(cursor)
-    local section_end = section:find(' ')
+    local section_end = section:find(" ")
     local is_last = section_end == nil
     local arg = nil
 
@@ -121,19 +119,19 @@ local parse_input = function(input)
       arg = section:sub(1, section_end)
     end
 
-    local delimeter = arg:find('=')
+    local delimeter = arg:find("=")
     local split
     if delimeter then
       split = {
         arg:sub(1, delimeter - 1),
-        arg:sub(delimeter + 1)
+        arg:sub(delimeter + 1),
       }
     else
-      split = {arg}
+      split = { arg }
     end
 
     -- User said stop. We stop.
-    if prev_arg == nil and split[2] == nil and split[1] == '--' then
+    if prev_arg == nil and split[2] == nil and split[1] == "--" then
       opts.default_value = input:sub(cursor + section_end + 1)
       return opts
     end
@@ -145,11 +143,11 @@ local parse_input = function(input)
       -- Are we dealing with a quoted argument?
       local first_char = split[2]:sub(1, 1)
       if first_char == "'" or first_char == '"' then
-        local res = quoted_arg(split[1] .. '=' .. first_char, input, first_char)
+        local res = quoted_arg(split[1] .. "=" .. first_char, input, first_char)
         cursor = res[1] + 2
         opts[split[1]] = res[2]
       else
-        if vim.endswith(split[2], '\\') then
+        if vim.endswith(split[2], "\\") then
           prev_arg = split[1]
           opts[split[1]] = escape_space(split[2])
         else
@@ -167,7 +165,7 @@ local parse_input = function(input)
         opts[prev_arg] = prev_val .. new_arg
 
         -- Make sure we don't end up here again if we don't need to
-        if not vim.endswith(split[1], '\\') then
+        if not vim.endswith(split[1], "\\") then
           prev_arg = nil
         end
       end
@@ -193,11 +191,10 @@ M.run = function(search_type, line1, line2, count, input)
   end
 
   if line2 == count then
-    opts.range = {line1, line2}
+    opts.range = { line1, line2 }
   end
 
-  require('searchbox')[search_type](opts)
+  require("searchbox")[search_type](opts)
 end
 
 return M
-
