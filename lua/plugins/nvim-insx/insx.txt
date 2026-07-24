@@ -1,0 +1,531 @@
+*nvim-insx* *insx*
+
+Flexible key mapping manager.
+
+
+
+==============================================================================
+CONTENTS                                                         *insx-contents*
+
+INTRODUCTION                                                        |insx-intro|
+MODE SUPPORT                                                 |insx-mode-support|
+FUNCTION                                                         |insx-function|
+TYPINGS                                                           |insx-typings|
+CUSTOM RECIPE                                               |insx-custom-recipe|
+BUILT-IN RECIPE                                           |insx-built_in-recipe|
+TIPS                                                                 |insx-tips|
+VARIABLE                                                         |insx-variable|
+
+
+==============================================================================
+INTRODUCTION                                                       *insx-intro*
+
+This plugin makes it easy to define & manage complex mappings.
+
+The concept is the following features:
+
+- Absence of support for dot-repeat
+- Focus on the advanced functionality
+
+
+This plugin comes with a built-in preset.
+You can define general pairwise functionality like this.
+
+>lua
+  require('insx.preset.standard').setup({
+    ...
+  })
+<
+
+The standard preset has configuration options.
+You can see it in |insx-typings| section. Please check it out.
+
+
+
+==============================================================================
+MODE-SUPPORT                                                 *insx-mode-support*
+
+This plugin accept |insx.Mode| as a mode specifier.
+
+But tested only in `i` and `c` mode.
+
+
+
+==============================================================================
+FUNCTION                                                         *insx-function*
+
+## Public API
+
+                                                                 *insx#expand()*
+insx#expand(char): return~
+
+  Same as |insx.expand()|.
+
+                                                                 *insx#detect()*
+insx#detect(char): return~
+
+  Same as |insx.detect()|.
+
+                                                                    *insx.add()*
+require('insx').add(char, recipe_source_like, option)~
+
+  Add a recipe for a specific char.
+
+  - `char`: string
+    - The character for the mapping.
+  - `recipe_source_like`: |insx.RecipeSourceLike|
+    - See |insx.RecipeSourceLike|
+  - `option`: { mode?: |insx.Mode| | |insx.Mode|[] }?
+    - Specify the mode for the mapping.
+
+                                                                *insx.compose()*
+require('insx').compose(recipe_source_likes): return~
+
+  Compose multiple recipes into a single recipe.
+
+  - `recipe_source_likes`: |insx.RecipeSourceLike|[]
+    - The list of |insx.RecipeSourceLike|.
+  - `return`
+    - The composed |insx.RecipeSource|.
+
+                                                                   *insx.with()*
+require('insx').with(recipe_source_like, overrides): return~
+
+  Refine the present recipe by integrating an override object,
+  which provides the ability to enhance `priority`, `action`, or `enabled` elements.
+
+  - `recipe_source_like`: |insx.RecipeSourceLike|
+    - The recipe to override.
+  - `overrides`: |insx.Override|[]
+    - The `enabled`, `action` or both can be specified as override object.
+  - `return`
+    - The enhanced |insx.RecipeSource|.
+
+  ----- >lua
+  local insx = require('insx')
+  insx.add('(', insx.with(require('insx.preset.auto_pair')({
+    open = '(',
+    close = ')'
+  }), {
+    insx.with.priority(10),
+    insx.with.filetype({ 'html', 'markdown' }),
+    insx.with.in_string(false),
+    insx.with.in_comment(false),
+    insx.with.undopoint(),
+  }))
+<  -----
+
+  This method also provides built-in override helpers.
+
+  - `insx.with.match(pattern: string)`
+  - `insx.with.nomatch(pattern: string)`
+    - Enhance enabled function with vim regex pattern.
+  - `insx.with.filetype(filetypes: filetype|filetype[])`
+    - Enhance enabled function with filetype.
+  - `insx.with.in_string(in_or_out: boolean)`
+  - `insx.with.in_comment(in_or_out: boolean)`
+    - Enhance enabled function with syntax or not.
+  - `insx.with.undopoint(pre_or_post?: boolean)`
+    - Enhance action function with undopoint.
+  - `insx.with.priority(priority: number)`
+    - Enhance priority value.
+
+                                                                  *insx.clear()*
+require('insx').clear()~
+  Clear all managed mappings.
+  NOTE: If mapping was hijacked, it would not be cleared.
+
+                                                                 *insx.expand()*
+require('insx').expand(char): return~
+  Create sequence of keys that can be feed using |nvim_feedkeys|.
+
+  - `char`: string
+    - The character for mapping.
+  - `return`: string?
+    - Return the sendable key notation. (this is applied the replace_termcodes).
+
+                                                                 *insx.detect()*
+require('insx').detect(char): return~
+  Return current available recipes.
+  NOTE: If the recipe has no `enabled` key, it is always available. We
+        recommend to implement `enabled` key as much as possible.
+
+  - `char`: string
+    - The character for the mapping (it is not a form of keycodes).
+  - `return`: insx.Recipe[]
+    - Current available recipes.
+
+                                                                 *insx.dedent()*
+require('insx').dedent(str): return~
+  Return de-indentation string.
+
+  - `str`: string
+    - The indentation string.
+  - `return`: string
+    - The de-indented string.
+
+                                                                    *insx.esc()*
+require('insx').esc(str): return~
+  Return escaped string for vim-regex.
+
+  - `str`: string
+    - The string to escape.
+  - `return`: string
+    - The escaped string.
+
+
+
+==============================================================================
+TYPINGS                                                           *insx-typings*
+
+*insx.Mode*
+*insx.Enabled*
+*insx.Action*
+*insx.RecipeSource*
+*insx.RecipeSourceLike*
+*insx.Recipe*
+*insx.Context*
+*insx.Override*
+*insx.preset.standard.Config*
+>lua
+  ---@alias insx.Mode 'x' | 'i' | 'c' | 'n' | 'o' | 's'
+
+  ---@alias insx.Enabled fun(ctx: insx.Context): nil
+  ---@alias insx.Action fun(ctx: insx.Context): nil
+
+  ---@class insx.RecipeSource
+  ---@field public priority? integer
+  ---@field public enabled? insx.Enabled
+  ---@field public action insx.Action
+
+  ---@alias insx.RecipeSourceLike insx.RecipeSource|insx.Action|string
+
+  ---@class insx.Recipe
+  ---@field public index integer
+  ---@field public priority integer
+  ---@field public enabled insx.Enabled
+  ---@field public action insx.Action
+
+  ---@class insx.Context
+  ---@field public filetype string
+  ---@field public char string
+  ---@field public mode fun(): string
+  ---@field public row fun(): integer 0-origin index
+  ---@field public col fun(): integer 0-origin utf8 byte index
+  ---@field public off fun(): integer 0-origin utf8 byte index
+  ---@field public text fun(): string
+  ---@field public after fun(): string
+  ---@field public before fun(): string
+  ---@field public match fun(pattern: string): string[]?
+  ---@field public search fun(pattern: string): { [1]: integer, [2]: integer, matches: string[] }?
+  ---@field public send fun(keys: insx.kit.Vim.Keymap.KeysSpecifier): nil
+  ---@field public delete fun(pattern: string): nil
+  ---@field public backspace fun(pattern: string): nil
+  ---@field public remove fun(pattern: string): nil
+  ---@field public move fun(row: integer, col: integer): nil
+  ---@field public substr fun(str: string, i: integer, j: integer): string # char base substr function.
+  ---@field public next fun(): nil
+
+  ---@class insx.Override
+  ---@field public priority? number
+  ---@field public enabled? fun(enabled: insx.Enabled, ctx: insx.Context): boolean?
+  ---@field public action? fun(action: insx.Action, ctx: insx.Context): nil
+
+  ---@class insx.preset.standard.Config
+  ---@field public cmdline? { enabled?: boolean }
+  ---@field public spacing? { enabled?: boolean }
+  ---@field public fast_break? { enabled?: boolean, split?: boolean, html_attrs?: boolean, arguments?: boolean }
+  ---@field public fast_wrap? { enabled?: boolean }
+<
+
+
+==============================================================================
+CUSTOM RECIPE                                               *insx-custom-recipe*
+
+The recipe is `insx.RecipeSource`.
+
+----- >lua
+  -- The example recipe.
+  local function your_recipe(option)
+    return {
+      ---@param ctx insx.Context
+      action = function(ctx)
+        -- Memoizing cursor position.
+        local row, col = ctx.row(), ctx.col()
+
+        -- You can feed key-sequence via `ctx.send(...)`
+        ctx.send('<CR>') -- The `ctx.send` is look like a `synchronous` function.
+
+        -- Remove indent if need.
+        if ctx.text():match('^%s+') then
+          ctx.send('<C-w>')
+        end
+
+        -- Move to memoized cursor position.
+        ctx.move(row, col)
+      end,
+
+      ---@param ctx insx.Context
+      enabled = function(ctx)
+        -- This recipe works only if the cursor is EOL.
+        return ctx.after() == ''
+      end
+    }
+  end
+<  -----
+
+
+==============================================================================
+BUILT-IN RECIPE                                           *insx-built_in-recipe*
+
+The built-in modules provide pre-defined recipes.
+
+The recipes are:
+  - typed as |insx.RecipeSource|
+  - able to be registered via `require('insx').add(char, insx.RecipeSource)`
+
+
+
+                                                          *insx-recipe-snippet*
+require('insx.recipe.snippet'): fun(option): insx.RecipeSource~
+
+  This recipe helps you create automatic snippet expansion.
+
+  - `option.pattern`: string
+    - The vim regex pattern to determine expand or not.
+  - `option.content`: string
+    - The snippet string.
+
+  ----- >lua
+  require('insx.recipe.snippet').expand = function(params)
+    vim.snippet.expand(params.content)
+  end
+
+  local insx = require('insx')
+  insx.add('<Space>', require('insx.recipe.snippet')({
+    pattern = [[^\s*\zsif\%#$]],
+    content = insx.dedent [[
+      if $1 then
+        $0
+      end
+    ]]
+  }))
+<  -----
+                                                        *insx-recipe-substitute*
+require('insx.recipe.substitute'): fun(option): insx.RecipeSource~
+
+  This recipe helps you create simple snippets like extensions in userland.
+
+  - `option.pattern`: string
+    - The vim regex pattern to determine expand or not.
+  - `option.replace`: string
+    - The replacement text.
+
+  ----- >lua
+  -- auto html tags.
+  require('insx').add('>', require('insx.recipe.substitute')({
+    pattern = [[<\(\w\+\).\{-}\%#]],
+    replace = [[\0>\%#</\1>]]
+  }))
+  -- delete html tags.
+  require('insx').add('<BS>', require('insx.recipe.substitute')({
+    pattern = [[<\(\w\+\).\{-}>\%#</.\{-}>]],
+    replace = [[\%#]]
+  }))
+<  -----
+                                                         *insx-recipe-auto_pair*
+require('insx.recipe.auto_pair'): fun(option): insx.RecipeSource~
+
+  This recipe provides a basic auto-pairs feature.
+  NOTE: This recipe exports the preset for `strings`.
+
+  - `option.open`: string
+    - The open token of balanced pair like `(` .
+  - `option.close`: string
+    - The close token of balanced pair like `)` .
+
+  ----- >lua
+  require('insx').add('(', require('insx.recipe.auto_pair')({
+    open = '(',
+    close = ')'
+  }))
+  require('insx').add('(', require('insx.recipe.auto_pair').strings({
+    open = [[']],
+    close = [[']],
+  })) -- preset for strings.
+<  -----
+
+                                                       *insx-recipe-delete_pair*
+require('insx.recipe.delete_pair'): fun(option): insx.RecipeSource~
+
+  This recipe provides a basic delete-pairs feature.
+  NOTE: This recipe exports the preset for `strings`.
+
+  - `option.open_pat`: string
+    - The open token of balanced pair like `(` .
+  - `option.close_pat`: string
+    - The close token of balanced pair like `)` .
+
+  ----- >lua
+  local esc = require('insx').helper.regex.esc
+  require('insx').add('<BS>', require('insx.recipe.auto_pair')({
+    open_pat = esc('('),
+    close_pat = esc(')')
+  }))
+  require('insx').add('<BS>', require('insx.recipe.auto_pair').strings({
+    open_pat = esc([[']]),
+    close_pat = esc([[']])
+  })) -- preset for strings.
+<  -----
+
+                                                         *insx-recipe-jump_next*
+require('insx.recipe.jump_next'): fun(option): insx.RecipeSource~
+
+  This recipe provides a cursor movement feature for the next pattern.
+
+  - `option.jump_pat`: string|string[]
+    - The jump patterns of string or string array.
+    - You can use this recipe to achieve `exit pair feature` .
+
+----- >lua
+  local esc = require('insx').helper.regex.esc
+  require('insx').add(')', require('insx.recipe.jump_next')({
+    jump_pat = {
+      [[\%#]] .. esc(')') .. [[\zs]]
+    }
+  }))
+<  -----
+
+                                                        *insx-recipe-fast_break*
+require('insx.recipe.fast_break'): fun(option): insx.RecipeSource~
+
+  This recipe provides a pair break feature.
+
+  - `option.open_pat`: string
+    - The open token of balanced pair like `(` .
+  - `option.close_pat`: string
+    - The close token of balanced pair like `)` .
+  - `option.arguments`: boolean
+    - Specify enables or not the splitjoin.vim like behavior for arguments.
+  - `option.html_attrs`: boolean
+    - Specify enables or not the splitjoin.vim like behavior for HTML attributes.
+  - `option.html_tags`: boolean
+    - Specify enables or not the splitjoin.vim like behavior for HTML tags.
+  ----- >lua
+  local esc = require('insx').helper.regex.esc
+  require('insx').add('<CR>', require('insx.recipe.fast_break')({
+    open_pat = esc('('),
+    close_pat = esc(')'),
+    arguments = true,
+    html_attrs = true,
+    html_tags = true,
+  }))
+<  -----
+
+  You can use the following recipes.
+
+    - basic break
+      - require('insx.recipe.fast_break.basic'): fun(option): insx.RecipeSource~
+    - fast_break.arguments
+      require('insx.recipe.fast_break.arguments'): fun(option): insx.RecipeSource~
+    - fast_break.html_attrs
+      require('insx.recipe.fast_break.html_attrs'): fun(option): insx.RecipeSource~
+    - fast_break.html_tags
+      require('insx.recipe.fast_break.html_tags'): fun(option): insx.RecipeSource~
+
+                                                         *insx-recipe-fast_wrap*
+require('insx.recipe.fast_wrap'): fun(option): insx.RecipeSource~
+
+  This recipe provides the ability to wrap the next token on the fly.
+  NOTE: We strongly suggest utilizing this recipe
+        in conjunction with vim-matchup for an enhanced experience.
+
+    1. Check the next token is `string`.
+    2. Check the next token is matched to the pairwise_pat.
+    3. Jump the nearest next_pat token.
+
+  - `option.close`: string
+    - The close token like `)` .
+  - `option.pairwise_pat`: string|string[]
+    - The pattern is an array for deciding to use `%` or not.
+  - `option.next_pat`: string|string[]
+    - The pattern is an array for fallback.
+  ----- >lua
+  require('insx').add('<C-]>', require('insx.recipe.fast_wrap')({
+    close = ')'
+  }))
+<  -----
+
+                                             *insx-recipe-pair_spacing.increase*
+require('insx.recipe.pair_spacing').increase: fun(option): insx.RecipeSource~
+
+  This recipe provides the feature that increases and adjusts whitespaces
+  between pairs.
+
+  - `option.open_pat`: string
+    - The open token of balanced pair like `(` .
+  - `option.close_pat`: string
+    - The close token of balanced pair like `)` .
+  ----- >lua
+  local esc = require('insx').helper.regex.esc
+  require('insx').add('<Space>', require('insx.recipe.pair_spacing').increase({
+    open_pat = esc('('),
+    close_pat = esc(')')
+  }))
+<  -----
+
+                                             *insx-recipe-pair_spacing.decrease*
+require('insx.recipe.pair_spacing').decrease: fun(option): insx.RecipeSource~
+
+  This recipe provides the feature that decreases and adjusts whitespaces
+  between pairs.
+
+  - `option.open_pat`: string
+    - The open token of balanced pair like `(` .
+  - `option.close_pat`: string
+    - The close token of balanced pair like `)` .
+  ----- >lua
+  local esc = require('insx').helper.regex.esc
+  require('insx').add('<BS>', require('insx.recipe.pair_spacing').decrease({
+    open_pat = esc('('),
+    close_pat = esc(')')
+  }))
+<  -----
+
+
+
+==============================================================================
+VARIABLE                                                        *insx-variable*
+
+## Buffer Variables
+
+                                           *insx-variable.buffer.insx_disabled*
+vim.b.insx_disabled: boolean~
+
+  This variable is used to disable the insx feature in the current buffer.
+
+
+
+==============================================================================
+TIPS                                                                 *insx-tips*
+
+How to add the undopoint?~
+
+  You can enhance built-in recipe as follows.
+
+  ----- >lua
+  local insx = require('insx')
+  insx.add(
+    insx.with(require('insx.recipe.fast_wrap')({
+      ...
+    }), {
+      insx.with.undopoint(false)
+    })
+  )
+<  -----
+
+
+
+==============================================================================
+ vim:tw=78:ts=4:et:ft=help:norl:
+
