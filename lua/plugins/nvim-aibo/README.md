@@ -1,0 +1,751 @@
+# 🐶 Aibo
+
+[![Neovim](https://img.shields.io/badge/Neovim-0.10.0+-blueviolet.svg?style=flat-square&logo=Neovim&logoColor=white)](https://neovim.io/)
+[![Lua](https://img.shields.io/badge/Lua-5.1+-blue.svg?style=flat-square&logo=lua)](https://www.lua.org/)
+[![MIT License](https://img.shields.io/badge/license-MIT-green.svg?style=flat-square)](LICENSE)
+[![Check](https://github.com/lambdalisue/vim-aibo/actions/workflows/check.yml/badge.svg)](https://github.com/lambdalisue/vim-aibo/actions/workflows/check.yml)
+[![Test](https://github.com/lambdalisue/vim-aibo/actions/workflows/test.yml/badge.svg)](https://github.com/lambdalisue/vim-aibo/actions/workflows/test.yml)
+
+AI Bot Integration and Orchestration for Neovim
+
+> [!WARNING]
+> This plugin is currently in **beta stage**. The API and features may change.
+
+https://github.com/user-attachments/assets/ebd1e774-eb9b-4feb-bec5-0a237030fd6a
+
+<div align="right">
+<sup>You can find more screencasts in <a href="https://github.com/lambdalisue/nvim-aibo/wiki/Screencast" target="_blank">Screencast</a> page of the repository Wiki</sup>
+</div>
+
+## Concept
+
+Aibo (from Japanese "companion") is designed as your AI companion in Neovim, providing seamless integration with AI assistants while also supporting any interactive CLI tool.
+
+- Pure Lua implementation for Neovim 0.10.0+
+- **Optimized for AI assistants** with built-in support:
+  - Claude (with mode switching, verbose toggle, todo management)
+  - Codex (with transcript view, navigation controls)
+  - Ollama (with model completion, thinking mode)
+  - Works with Gemini and other AI CLI tools
+- **Also works with any interactive CLI tool**:
+  - Programming REPLs (python, node, irb, ghci)
+  - Database clients (psql, mysql, sqlite3)
+  - Custom interactive tools
+- Floating window interface with console and transparent prompt overlay
+- Tool-specific configurations and key mappings
+- Intelligent command completion for supported AI tools
+
+## Requirements
+
+- Neovim 0.10.0 or later
+- An AI assistant CLI tool (claude, codex, ollama, etc.) or any other interactive CLI tool
+
+## Installation
+
+Use your preferred plugin manager.
+
+### lazy.nvim
+
+```lua
+{
+  'lambdalisue/nvim-aibo',
+  -- Optional: setup can be omitted for default configuration
+  config = function()
+    require('aibo').setup()
+  end,
+}
+```
+
+### packer.nvim
+
+```lua
+use {
+  'lambdalisue/nvim-aibo',
+  -- Optional: setup can be omitted for default configuration
+  config = function()
+    require('aibo').setup()
+  end,
+}
+```
+
+## Health Check
+
+Run `:checkhealth aibo` to verify your installation and diagnose any issues.
+
+## Usage
+
+### Basic Command Syntax
+
+```vim
+:Aibo [options] <command> [arguments...]
+```
+
+Where:
+
+- `[options]` - Aibo-specific options (e.g., `-opener`, `-stay`, `-toggle`)
+- `<command>` - Any interactive CLI tool command
+- `[arguments...]` - Arguments passed directly to the CLI tool
+
+This opens a terminal console running the interactive CLI tool with a floating prompt window overlay.
+
+### Examples
+
+```vim
+" AI assistants with specialized support and smart completions
+:Aibo claude
+:Aibo claude --continue
+:Aibo claude --model sonnet
+:Aibo claude --permission-mode plan
+:Aibo codex
+:Aibo codex --model claude-3.5-sonnet
+:Aibo codex resume --last
+:Aibo ollama run llama3
+:Aibo ollama run qwen3:latest --verbose
+:Aibo gemini
+
+" Also works with any interactive CLI tool
+:Aibo python -i                 " Python REPL
+:Aibo node --interactive        " Node.js REPL
+:Aibo psql mydatabase          " PostgreSQL client
+:Aibo sqlite3 data.db          " SQLite client
+:Aibo my-custom-cli-tool       " Your custom tool
+```
+
+> [!NOTE]
+> All Aibo commands support quoted strings for options with spaces.
+>
+> - Double quotes (`"`) interpret escape sequences: `-prefix="Line 1\nLine 2"`
+> - Single quotes (`'`) treat everything literally: `-prefix='Literal\n'`
+> - Example: `-opener="botright split"` or `-prefix='Question: '`
+
+> [!WARNING]
+>
+> **Key mapping difference:** To prevent unintended interrupts from the Vimmer's habit of hitting `<Esc>` repeatedly, `<Esc>` is NOT mapped in Aibo buffers. Instead:
+>
+> - Use `<C-c>` to send `<Esc>` to the AI tool (works in both normal and insert mode)
+> - Use `g<C-c>` to send the interrupt signal (original `<C-c>` behavior, normal mode only)
+
+Type in the prompt buffer and press `<CR>` in normal mode to submit. The prompt clears automatically for the next message. You can also use `<C-Enter>` or `<F5>` to submit even while in insert mode, which is particularly useful for continuous typing.
+
+> [!TIP]
+> When focused on the console window, entering insert mode automatically opens the prompt window for input. This provides a seamless workflow - just press `i` in the console to start typing your next message.
+
+To close the session, use `:bdelete!` or `:bwipeout!` on the console buffer.
+
+### Window Control Options
+
+```vim
+" Open with custom window command
+:Aibo -opener=vsplit claude
+:Aibo -opener="botright split" claude
+
+" Stay in current window after opening
+:Aibo -stay claude
+
+" Toggle visibility of existing console
+:Aibo -toggle claude
+
+" Focus on existing console or open new one
+:Aibo -focus claude
+```
+
+> [!TIP]
+> While Aibo provides predefined `-opener` completions, you can use any valid Vim window command. To dynamically size windows based on your terminal dimensions, use Neovim's [`<C-r>=`](https://neovim.io/doc/user/cmdline.html#c_CTRL-R_%3D) expression register:
+>
+> ```vim
+> :Aibo -opener="<C-r>=&columns * 2 / 3<CR>vsplit" claude
+> ```
+>
+> For better usability, we recommend defining custom commands or mappings:
+>
+> ```lua
+> -- Custom command for Claude with proportional window
+> vim.api.nvim_create_user_command('Claude', function(opts)
+>   local width = math.floor(vim.o.columns * 2 / 3)
+>   vim.cmd(string.format('Aibo -opener="%dvsplit" claude %s', width, opts.args))
+> end, { nargs = '*' })
+> ```
+>
+> ```lua
+> -- Key mapping for quick access with dynamic sizing
+> vim.keymap.set('n', '<leader>ai', function()
+>   local width = math.floor(vim.o.columns * 2 / 3)
+>   vim.cmd(string.format('Aibo -opener="%dvsplit" claude', width))
+> end, { desc = 'Open Claude AI assistant' })
+> ```
+
+### Intelligent Command Completion
+
+The plugin provides comprehensive tab completion for all supported interactive CLI tools:
+
+- **Tool names**: Press `<Tab>` after `:Aibo ` to see available tools (claude, codex, ollama, or any custom tool)
+- **Subcommands**: For ollama, complete `run` subcommand
+- **Arguments**: Complete available flags and options for each tool
+- **Values**: Complete predefined values for arguments (models, modes, etc.)
+- **Models**: For ollama, automatically completes locally installed model names
+- **Files/Directories**: Intelligent completion for file and directory arguments
+
+Examples:
+
+```vim
+:Aibo <Tab>                     " Shows: claude, codex, ollama
+:Aibo claude --<Tab>            " Shows all Claude arguments
+:Aibo claude --model <Tab>      " Shows: sonnet, opus, haiku, etc.
+:Aibo ollama <Tab>              " Shows: run
+:Aibo ollama run <Tab>          " Shows installed models and flags
+:Aibo ollama run qwen<Tab>      " Completes to: qwen3:latest
+:Aibo codex --sandbox <Tab>     " Shows: none, read-only, restricted, full
+```
+
+### Sending Content to Interactive CLI
+
+You can send buffer content directly to an interactive CLI console using the `:AiboSend` command:
+
+````vim
+" Send whole buffer to prompt
+:AiboSend
+
+" Send selected lines (visual mode)
+:'<,'>AiboSend
+
+" Send with options
+:AiboSend -input    " Open prompt and enter insert mode
+:AiboSend -submit   " Send and submit immediately
+:AiboSend -replace  " Replace prompt content instead of appending
+
+" Combine input and submit options
+:AiboSend -input -submit  " Submit and immediately reopen for more input
+
+" Send specific line range
+:10,20AiboSend
+
+" Add prefix and suffix to content
+:AiboSend -prefix="Question: " -suffix=" Please explain."
+:'<,'>AiboSend -prefix="```python\n" -suffix="\n```"
+
+" Combine multiple options
+:AiboSend -prefix="Review this code:\n" -submit
+````
+
+This is particularly useful for sending code snippets, error messages, or other content to the interactive CLI without manual copy-paste. The prefix and suffix options help format your input consistently.
+
+## Configuration
+
+### Basic Setup
+
+```lua
+require('aibo').setup({
+  submit_delay = 500,         -- Delay in milliseconds (default: 500)
+  submit_key = '<CR>',        -- Key to send after submit (default: '<CR>')
+  prompt_height = 10,         -- Prompt window height (default: 10)
+  prompt_blend_insert = 10,   -- Prompt transparency in Insert mode 0-100 (default: 10)
+  prompt_blend_normal = 30,   -- Prompt transparency in Normal mode 0-100 (default: 30)
+  -- prompt_blend = 20,       -- DEPRECATED: Use prompt_blend_insert/normal instead
+  termcode_mode = 'hybrid',   -- Terminal escape sequence mode: 'hybrid', 'xterm', or 'csi-n' (default: 'hybrid')
+  disable_startinsert_on_startup = false, -- Disable auto insert in prompt window when first opened (default: false)
+  disable_startinsert_on_insert = false,  -- Disable auto insert in prompt when entering insert from console (default: false)
+})
+```
+
+### Advanced Configuration
+
+The plugin works without any configuration, but you can customize it using `setup()`.
+The setup function can be called multiple times to update configuration:
+
+```lua
+require('aibo').setup({
+  -- Prompt buffer configuration
+  prompt = {
+    no_default_mappings = false,  -- Set to true to disable default keymaps
+    on_attach = function(bufnr, info)
+      -- Custom setup for prompt buffers
+      -- Runs AFTER ftplugin files
+      -- info.type = "prompt"
+      -- info.tool = tool name (e.g., "claude")
+      -- info.aibo = aibo instance
+    end,
+  },
+
+  -- Console buffer configuration
+  console = {
+    no_default_mappings = false,
+    on_attach = function(bufnr, info)
+      -- Custom setup for console buffers
+      -- info.type = "console"
+      -- info.cmd = command being executed
+      -- info.args = command arguments
+      -- info.job_id = terminal job ID
+    end,
+  },
+
+  -- Tool-specific overrides, keyed by the tool name aibo dispatches on (the
+  -- first word of the invoked command, e.g. "claude", "codex", "gemini", or
+  -- a custom wrapper like "ollama" for `:Aibo ollama launch claude ...`).
+  tools = {
+    claude = {
+      no_default_mappings = false,
+      on_attach = function(bufnr, info)
+        -- Custom setup for Claude buffers
+        -- Called after prompt/console on_attach
+      end,
+
+      -- Live "/" completion: probes `claude` directly (does not speak ACP
+      -- itself), no adapter, no Node.js, no npm. On by default -- there is
+      -- no static fallback, so setting this to `false` means no "/"
+      -- completion at all for this tool.
+      completion = {
+        claude = true,
+        -- claude = { cmd = { "claude" }, timeout = 10000 },
+        -- claude = false,
+      },
+    },
+    codex = {
+      -- Live "/" completion: probes `codex app-server` directly (does not
+      -- speak ACP itself). On by default, same reasoning as Claude.
+      completion = {
+        codex = true,
+        -- codex = { cmd = { "codex" }, timeout = 10000 },
+        -- codex = false,
+      },
+    },
+    gemini = {
+      -- Gemini CLI speaks the Agent Client Protocol (ACP) natively, so its
+      -- live "/" completion goes through the generic ACP client
+      -- (`completion/acp.lua`) instead of a tool-specific protocol -- the
+      -- source key is "acp", not "gemini". On by default, same reasoning.
+      completion = {
+        acp = true,
+        -- acp = { cmd = { "gemini", "--acp" }, timeout = 10000 },
+        -- acp = false,
+      },
+    },
+    -- A custom tool profile can opt into any completion module, not just
+    -- the one matching its own name -- e.g. a wrapper that launches a
+    -- claude-flavored model can reuse Claude's probe:
+    -- ["my-ollama-wrapper"] = {
+    --   completion = { claude = true },
+    -- },
+  },
+
+  -- Live "/" completion sources, one key per tool. Each source probes the
+  -- agent's own live command/skill list -- no static table, no disk scan --
+  -- so it needs no manual updates and can't drift out of sync. No prompt is
+  -- ever sent, so it consumes no tokens.
+  completion = {
+    -- Claude does not speak ACP itself; probes `claude` directly. Needs
+    -- nothing beyond a logged-in `claude` already on PATH -- no adapter,
+    -- no Node.js, no npm. On by default: there is no static fallback, so
+    -- setting this to `false` means no "/" completion at all for Claude.
+    claude = true,
+    -- claude = {
+    --   cmd = { "claude" }, -- command to probe, looked up on PATH
+    --   timeout = 10000,    -- probe timeout (ms)
+    -- },
+    -- claude = false,      -- disable "/" completion for Claude entirely
+
+    -- Codex does not speak ACP itself; probes `codex app-server` directly.
+    -- Needs nothing beyond `codex` already on PATH. On by default: there is
+    -- no static fallback, so `false` means no "/" completion for Codex.
+    codex = true,
+    -- codex = {
+    --   cmd = { "codex" },
+    --   timeout = 10000,
+    -- },
+    -- codex = false,       -- disable "/" completion for Codex entirely
+
+    -- Generic Agent Client Protocol (ACP) client, for agents that speak ACP
+    -- natively. Currently used by Gemini CLI (`gemini --acp`). On by
+    -- default: same reasoning as Claude/Codex -- no static fallback.
+    acp = true,
+    -- acp = {
+    --   cmd = { "gemini", "--acp" },
+    --   timeout = 10000,
+    -- },
+    -- acp = false,         -- disable "/" completion for Gemini entirely
+  },
+})
+```
+
+#### Callback Order
+
+When both buffer type and tool-specific `on_attach` callbacks are defined, both are called in this order:
+
+1. Buffer type `on_attach` (e.g., `prompt.on_attach`)
+2. Tool-specific `on_attach` (e.g., `tools.claude.on_attach`)
+
+### Customizing Keymaps
+
+Default keymaps are defined in ftplugin files. You can customize them in several ways:
+
+#### 1. Using ftplugin files
+
+Create your own ftplugin files in `~/.config/nvim/after/ftplugin/` to customize mappings:
+
+```lua
+-- ~/.config/nvim/after/ftplugin/aibo-prompt.lua
+local bufnr = vim.api.nvim_get_current_buf()
+local opts = { buffer = bufnr, nowait = true, silent = true }
+
+-- Add your custom mappings using <Plug>(aibo-send) pattern
+vim.keymap.set({ 'n', 'i' }, '<C-j>', '<Plug>(aibo-send)<Down>', opts)
+vim.keymap.set({ 'n', 'i' }, '<C-k>', '<Plug>(aibo-send)<Up>', opts)
+```
+
+```lua
+-- ~/.config/nvim/after/ftplugin/aibo-tool-claude.lua
+local bufnr = vim.api.nvim_get_current_buf()
+local opts = { buffer = bufnr, nowait = true, silent = true }
+
+-- Add leader-based mappings using <Plug>(aibo-send) pattern
+vim.keymap.set({ 'n', 'i' }, '<leader>a', '<Plug>(aibo-send)<Tab>', opts)
+vim.keymap.set({ 'n', 'i' }, '<leader>m', '<Plug>(aibo-send)<S-Tab>', opts)
+vim.keymap.set({ 'n', 'i' }, '<leader>t', '<Plug>(aibo-send)<C-t>', opts)
+```
+
+#### 2. Using on_attach callback
+
+Configure mappings through the setup function:
+
+```lua
+require('aibo').setup({
+  prompt = {
+    on_attach = function(bufnr)
+      local opts = { buffer = bufnr, nowait = true, silent = true }
+      -- Add your own using <Plug>(aibo-send) pattern
+      vim.keymap.set({ 'n', 'i' }, '<C-j>', '<Plug>(aibo-send)<Down>', opts)
+      vim.keymap.set({ 'n', 'i' }, '<C-k>', '<Plug>(aibo-send)<Up>', opts)
+    end,
+  },
+})
+```
+
+#### 3. Disable defaults and set your own
+
+```lua
+require('aibo').setup({
+  prompt = {
+    no_default_mappings = true,
+    on_attach = function(bufnr)
+      local opts = { buffer = bufnr, nowait = true, silent = true }
+      -- Set your own mappings using <Plug> mappings
+      vim.keymap.set('n', '<Enter>', '<Plug>(aibo-submit)', opts)
+      vim.keymap.set('n', '<C-q>', '<Plug>(aibo-submit)<Cmd>q<CR>', opts)
+      vim.keymap.set({ 'n', 'i' }, '<C-c>', '<Plug>(aibo-send)<Esc>', opts)
+    end,
+  },
+})
+```
+
+## Key Mappings
+
+> [!NOTE]
+>
+> `<C-g><C-o>` enters a special mode where you can press any single key to send it to the terminal. Useful for sending arbitrary keys not mapped by default.
+>
+> `<C-g>i` (or `<C-g><C-i>`) enters Direct mode, where every key you press is forwarded to the terminal until you press `<Esc>`. `<Esc>` itself is never forwarded — press `<C-c>` while in Direct mode to send ESC to the tool. While active, a 5-line window with a thick red border appears at the top of the console explaining the mode; the prompt window (if shown) is hidden for the duration and reopened in the same state afterwards.
+
+### Console Buffer
+
+Most keys use the `<Plug>(aibo-send)<Key>` pattern to send keys directly to the terminal:
+
+| Key          | Action                          | Implementation                |
+| ------------ | ------------------------------- | ----------------------------- |
+| `<CR>`       | Jump to diff location or submit | `<Plug>(aibo-jump-or-submit)` |
+| `<C-Enter>`  | Submit to the tool              | `<Plug>(aibo-submit)`         |
+| `<F5>`       | Submit to the tool              | `<Plug>(aibo-submit)`         |
+| `<C-c>`      | Send ESC to terminal            | `<Plug>(aibo-send)<Esc>`      |
+| `g<C-c>`     | Send interrupt signal           | `<Plug>(aibo-send)<C-c>`  |
+| `<C-l>`      | Clear terminal                  | `<Plug>(aibo-send)<C-l>`  |
+| `<C-n>`      | Navigate to next in history     | `<Plug>(aibo-send)<C-n>`  |
+| `<C-p>`      | Navigate to previous in history | `<Plug>(aibo-send)<C-p>`  |
+| `<Down>`     | Send down arrow                 | `<Plug>(aibo-send)<Down>` |
+| `<Up>`       | Send up arrow                   | `<Plug>(aibo-send)<Up>`   |
+| `<C-g><C-o>` | Send any single key (n)         | `<Plug>(aibo-send)`       |
+| `<C-g>i` / `<C-g><C-i>` | Enter Direct mode (n) | `<Plug>(aibo-direct)` |
+
+### Prompt Buffer
+
+| Key           | Action                             | Implementation                  |
+| ------------- | ---------------------------------- | ------------------------------- |
+| `<CR>`        | Submit content (n)                 | `<Plug>(aibo-submit)`           |
+| `<Esc>`       | Close prompt window (n)            | `<Cmd>q<CR>`                    |
+| `<C-Enter>`\* | Submit and close (n/i)             | `<Plug>(aibo-submit)<Cmd>q<CR>` |
+| `<F5>`        | Submit and close (n/i)             | `<Plug>(aibo-submit)<Cmd>q<CR>` |
+| `<C-p>`       | Previous history or completion (i) | `<Plug>(aibo-history-prev)`     |
+| `<C-n>`       | Next history or completion (i)     | `<Plug>(aibo-history-next)`     |
+| `<C-g><C-o>`  | Send any single key (n/i)          | `<Plug>(aibo-send)`             |
+| `<C-g>i` / `<C-g><C-i>` | Enter Direct mode (n/i) | `<Plug>(aibo-direct)` |
+
+> [!NOTE]
+> `<C-p>` and `<C-n>` in insert mode intelligently switch between history navigation and completion menu navigation. When the completion popup menu is visible, they navigate the completion menu. When the popup is not visible, they navigate through your prompt history.
+
+Plus all console buffer mappings (with `<Plug>(aibo-send)<Key>` pattern).
+
+### Tool-Specific (Claude)
+
+All Claude-specific keys use the `<Plug>(aibo-send)` pattern to send keys directly to the Claude CLI:
+
+| Key                  | Action                                            |
+| -------------------- | ------------------------------------------------- |
+| `<Tab>`              | Toggle think                                      |
+| `<S-Tab>`\* / `<F2>` | Switch mode                                       |
+| `<C-o>`              | Toggle verbose                                    |
+| `<C-t>`              | Show todo                                         |
+| `<C-_>` / `<C-->`    | Undo                                              |
+| `<C-v>`              | Paste                                             |
+| `<C-u>`              | Clear line (move to end, then clear to beginning) |
+
+### Tool-Specific (Codex)
+
+| Key          | Action                                            |
+| ------------ | ------------------------------------------------- |
+| `<C-t>`      | Show transcript                                   |
+| `<C-v>`      | Paste                                             |
+| `<C-u>`      | Clear line (move to end, then clear to beginning) |
+| `<Home>`     | Home                                              |
+| `<End>`      | End                                               |
+| `<PageUp>`   | Page up                                           |
+| `<PageDown>` | Page down                                         |
+
+> [!IMPORTANT]
+> Some key combinations (`<C-Enter>`, `<S-Tab>`) require modern terminal emulators like Kitty, WezTerm, or Ghostty. Use alternatives like `<F5>` or `:w` if these don't work.
+
+## Customization
+
+### Custom Highlight Groups
+
+The plugin defines custom highlight groups for the prompt window that change based on the current mode (Insert vs Normal):
+
+```vim
+" Customize prompt window colors
+highlight AiboPromptNormal guibg=#1e1e2e guifg=#cdd6f4
+highlight AiboPromptBorder guifg=#7aa2f7
+highlight AiboPromptTitle guifg=#7aa2f7
+highlight AiboPromptInsertBorder guifg=#e0af68
+highlight AiboPromptInsertTitle guifg=#e0af68
+```
+
+By default, these are linked to:
+
+- `AiboPromptNormal` → `Normal` (inherits your normal background/foreground)
+- `AiboPromptBorder` → `DiagnosticInfo` (border in Normal mode)
+- `AiboPromptTitle` → `DiagnosticInfo` (title in Normal mode)
+- `AiboPromptInsertBorder` → `DiagnosticWarn` (border in Insert mode)
+- `AiboPromptInsertTitle` → `DiagnosticWarn` (title in Insert mode)
+
+### Using <Plug> Mappings
+
+All functionality is exposed through `<Plug>` mappings defined in ftplugin files:
+
+```lua
+-- In your configuration or on_attach callback
+local opts = { buffer = bufnr, nowait = true, silent = true }
+vim.keymap.set('n', '<C-j>', '<Plug>(aibo-submit)', opts)
+vim.keymap.set('n', '<C-k>', '<Plug>(aibo-submit)<Cmd>q<CR>', opts)
+```
+
+### Available <Plug> Mappings
+
+#### Core Mappings (Console and Prompt Buffers)
+
+| <Plug> Mapping                | Description                                         |
+| ----------------------------- | --------------------------------------------------- |
+| `<Plug>(aibo-send)`           | Prefix for sending keys to terminal (see below)     |
+| `<Plug>(aibo-submit)`         | Submit content to terminal                          |
+| `<Plug>(aibo-jump)`           | Alias for `<Plug>(aibo-jump:tabdrop)`. Remap to change default opener |
+| `<Plug>(aibo-jump:edit)`      | Jump to diff location in current window             |
+| `<Plug>(aibo-jump:split)`     | Jump to diff location in horizontal split           |
+| `<Plug>(aibo-jump:vsplit)`    | Jump to diff location in vertical split             |
+| `<Plug>(aibo-jump:tabnew)`    | Jump to diff location in new tab                    |
+| `<Plug>(aibo-jump:drop)`     | Jump to diff location, reuse existing window        |
+| `<Plug>(aibo-jump:tabdrop)` | Jump to diff location, reuse existing tab or open new tab |
+| `<Plug>(aibo-jump-or-submit)` | Jump to diff location, or submit if not on diff line|
+| `<Plug>(aibo-history-prev)`   | Navigate to previous prompt history entry           |
+| `<Plug>(aibo-history-next)`   | Navigate to next prompt history entry               |
+
+The `<Plug>(aibo-send)` mapping is designed to be used as a prefix followed by a key:
+
+- `<Plug>(aibo-send)<Esc>` - Send ESC to terminal
+- `<Plug>(aibo-send)<C-c>` - Send interrupt signal
+- `<Plug>(aibo-send)<C-l>` - Send clear screen
+- `<Plug>(aibo-send)<C-n>` - Send next history
+- `<Plug>(aibo-send)<C-p>` - Send previous history
+- `<Plug>(aibo-send)<Down>` - Send down arrow
+- `<Plug>(aibo-send)<Up>` - Send up arrow
+- `<Plug>(aibo-send)<Tab>` - Send tab (Claude: accept)
+- `<Plug>(aibo-send)<S-Tab>` - Send shift-tab (Claude: mode switch)
+- And any other key you want to send to the terminal
+
+#### Jump to Diff Location
+
+When the cursor is on a diff hunk line in the console buffer (supported for Claude, Codex, and Gemini CLI), `<Plug>(aibo-jump)` opens the corresponding file at the exact line number. By default, `<CR>` is mapped to `<Plug>(aibo-jump-or-submit)`, which jumps if on a diff line and submits otherwise.
+
+`<Plug>(aibo-jump)` defaults to `<Plug>(aibo-jump:tabdrop)` (reuse existing tab or open new tab). You can customize the opener by remapping it:
+
+```lua
+-- Use horizontal split instead of new tab for jump
+vim.keymap.set('n', '<Plug>(aibo-jump)', '<Plug>(aibo-jump:split)', {
+  buffer = bufnr,
+  remap = true,
+})
+```
+
+This also affects `<Plug>(aibo-jump-or-submit)`, since it delegates to `<Plug>(aibo-jump)` internally.
+
+#### Claude Tool
+
+Uses `<Plug>(aibo-send)<Key>` pattern (defined in `ftplugin/aibo-tool-claude.lua`):
+
+```lua
+vim.keymap.set({ "n", "i" }, "<Tab>", "<Plug>(aibo-send)<Tab>", opts)
+vim.keymap.set({ "n", "i" }, "<S-Tab>", "<Plug>(aibo-send)<S-Tab>", opts)
+vim.keymap.set({ "n", "i" }, "<F2>", "<Plug>(aibo-send)<F2>", opts)
+vim.keymap.set({ "n", "i" }, "<C-o>", "<Plug>(aibo-send)<C-o>", opts)
+vim.keymap.set({ "n", "i" }, "<C-t>", "<Plug>(aibo-send)<C-t>", opts)
+vim.keymap.set({ "n", "i" }, "<C-_>", "<Plug>(aibo-send)<C-_>", opts)
+vim.keymap.set({ "n", "i" }, "<C-v>", "<Plug>(aibo-send)<C-v>", opts)
+vim.keymap.set({ "n", "i" }, "<C-u>", "<Plug>(aibo-send)<End><Plug>(aibo-send)<C-u>", opts)
+```
+
+#### Codex Tool
+
+Uses `<Plug>(aibo-send)<Key>` pattern (defined in `ftplugin/aibo-tool-codex.lua`):
+
+```lua
+vim.keymap.set({ "n", "i" }, "<C-t>", "<Plug>(aibo-send)<C-t>", opts)
+vim.keymap.set({ "n", "i" }, "<Home>", "<Plug>(aibo-send)<Home>", opts)
+vim.keymap.set({ "n", "i" }, "<End>", "<Plug>(aibo-send)<End>", opts)
+vim.keymap.set({ "n", "i" }, "<PageUp>", "<Plug>(aibo-send)<PageUp>", opts)
+vim.keymap.set({ "n", "i" }, "<PageDown>", "<Plug>(aibo-send)<PageDown>", opts)
+vim.keymap.set("n", "q", "<Plug>(aibo-send)q", opts)
+```
+
+### Tool-Specific Setup
+
+Configure tool-specific behavior through setup:
+
+```lua
+require('aibo').setup({
+  tools = {
+    claude = {
+      no_default_mappings = true,  -- Disable Claude-specific defaults
+      on_attach = function(bufnr, info)
+        local opts = { buffer = bufnr, nowait = true, silent = true }
+        -- Set your own Claude-specific mappings using <Plug>(aibo-send) pattern
+        vim.keymap.set({ 'n', 'i' }, '<leader>a', '<Plug>(aibo-send)<Tab>', opts)
+        vim.keymap.set({ 'n', 'i' }, '<leader>m', '<Plug>(aibo-send)<S-Tab>', opts)
+        vim.keymap.set({ 'n', 'i' }, '<leader>v', '<Plug>(aibo-send)<C-o>', opts)
+      end,
+    },
+  },
+})
+```
+
+### Adding New Tools
+
+Define custom tools with their own configuration:
+
+```lua
+require('aibo').setup({
+  tools = {
+    myai = {
+      no_default_mappings = false,
+      on_attach = function(bufnr, info)
+        local opts = { buffer = bufnr, nowait = true, silent = true }
+        -- Use <Plug>(aibo-send) pattern to send keys to your AI tool
+        vim.keymap.set({ 'n', 'i' }, '<C-g>', '<Plug>(aibo-send)<C-g>', opts)
+        vim.keymap.set({ 'n', 'i' }, '<F6>', '<Plug>(aibo-send)<F6>', opts)
+      end,
+    },
+  },
+})
+```
+
+### Sending Keys to Terminal
+
+**Recommended approach:** Use the `<Plug>(aibo-send)<Key>` pattern for most cases:
+
+```lua
+local opts = { buffer = bufnr, nowait = true, silent = true }
+vim.keymap.set({ 'n', 'i' }, '<C-g>', '<Plug>(aibo-send)<C-g>', opts)
+```
+
+This automatically handles key conversion and sends the correct terminal sequences.
+
+**Advanced usage:** For programmatic key sending, use `aibo.resolve()` instead of `vim.api.nvim_replace_termcodes()`.
+
+The built-in `nvim_replace_termcodes()` returns Neovim's internal key representations (e.g., `\x80\x6B\x75` for `<Up>`), which terminal programs cannot understand. The `aibo.resolve()` function converts Vim key notation to actual ANSI escape sequences (e.g., `\27[A` for `<Up>`) that terminals expect.
+
+#### Correct Usage
+
+```lua
+local aibo = require('aibo')
+
+-- Send navigation keys
+vim.keymap.set('n', '<leader>au', function()
+  aibo.send(aibo.resolve('<Up>'), bufnr)
+end, { buffer = bufnr, desc = 'Send Up arrow' })
+
+-- Send control sequences
+vim.keymap.set('n', '<leader>ac', function()
+  aibo.send(aibo.resolve('<C-c>'), bufnr)
+end, { buffer = bufnr, desc = 'Interrupt process' })
+
+-- Send multiple keys
+vim.keymap.set('n', '<leader>ah', function()
+  local keys = aibo.resolve('<Home><S-End>')
+  aibo.send(keys, bufnr)
+end, { buffer = bufnr, desc = 'Select to end of line' })
+```
+
+#### Incorrect Usage (Will Not Work)
+
+```lua
+-- ❌ This sends Neovim's internal codes, not terminal sequences!
+vim.keymap.set('n', '<leader>au', function()
+  local up = vim.api.nvim_replace_termcodes('<Up>', true, false, true)
+  aibo.send(up, bufnr)  -- Sends "\x80\x6B\x75" instead of "\27[A"
+end, { buffer = bufnr })
+```
+
+#### Supported Key Formats
+
+- **Navigation**: `<Up>`, `<Down>`, `<Left>`, `<Right>`, `<Home>`, `<End>`
+- **Pages**: `<PageUp>`, `<PageDown>`
+- **Function**: `<F1>` through `<F12>`
+- **Control**: `<C-a>`, `<C-c>`, `<C-l>`, etc.
+- **Modified**: `<S-Tab>`, `<C-Left>`, `<A-Up>`, `<C-S-F5>`, etc.
+- **Special**: `<CR>`, `<Tab>`, `<Esc>`, `<Space>`, `<BS>`
+
+#### Terminal Compatibility Modes
+
+The `termcode_mode` configuration controls how modified control characters are encoded:
+
+- **`hybrid`** (default): Uses traditional xterm sequences where widely supported (e.g., `\27[Z` for `<S-Tab>`), falls back to modern CSI sequences for others
+- **`xterm`**: Strictly uses traditional xterm sequences, returns `nil` for unsupported combinations
+- **`csi-n`**: Consistently uses modern CSI n;mu format (e.g., `\27[9;2u` for `<S-Tab>`)
+
+Most users should use the default `hybrid` mode. Use `xterm` for older terminals or `csi-n` for modern terminals with full modifier support.
+
+## License
+
+MIT License
+
+## Contributing
+
+We welcome contributions! Please see [CONTRIBUTING.md](CONTRIBUTING.md) for:
+
+- Development setup and workflow
+- Architecture documentation
+- Testing guidelines
+- API documentation
+- Code style guide
+
+For quick reference:
+
+1. Fork and clone the repository
+2. Create a feature branch
+3. Make your changes with tests
+4. Submit a pull request
+
+Report issues and submit pull requests on [GitHub](https://github.com/lambdalisue/nvim-aibo)
