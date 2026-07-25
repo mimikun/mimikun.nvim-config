@@ -1,0 +1,339 @@
+local x = require("deck.x")
+local notify = require("deck.notify")
+local IO = require("deck.kit.IO")
+local Git = require("deck.x.Git")
+local Async = require("deck.kit.Async")
+
+--[=[@doc
+  category = "source"
+  name = "git"
+  desc = "Show git launcher."
+  example = """
+    deck.start(require('deck.builtin.source.git.changeset')({
+      cwd = vim.fn.getcwd(),
+    }))
+  """
+
+  [[options]]
+  name = "cwd"
+  type = "string"
+  desc = "Target git root."
+]=]
+---@param option { cwd: string }
+return function(option)
+  local git = Git.new(option.cwd)
+  ---@type deck.Source
+  return {
+    name = "git",
+    events = {
+      BufWinEnter = function(ctx, env)
+        if not env.first then
+          ctx.execute()
+        end
+      end,
+    },
+    execute = function(execute_context)
+      Async.run(function()
+        local branches = git:branch():await() --[=[@as deck.x.Git.Branch[]]=]
+
+        local menu = {}
+
+        table.insert(menu, {
+          columns = {
+            "status",
+            { "show current status", "Comment" },
+          },
+          execute = function()
+            require("deck").start(require("deck.builtin.source.git.status")({
+              cwd = option.cwd,
+            }))
+          end,
+        })
+
+        table.insert(menu, {
+          columns = {
+            "branch",
+            { "show branches", "Comment" },
+          },
+          execute = function()
+            require("deck").start(require("deck.builtin.source.git.branch")({
+              cwd = option.cwd,
+            }))
+          end,
+        })
+
+        table.insert(menu, {
+          columns = {
+            "worktree",
+            { "show worktrees", "Comment" },
+          },
+          execute = function()
+            require("deck").start(require("deck.builtin.source.git.worktree")({
+              cwd = option.cwd,
+            }))
+          end,
+        })
+
+        table.insert(menu, {
+          columns = {
+            "log",
+            { "show logs", "Comment" },
+          },
+          execute = function()
+            require("deck").start(require("deck.builtin.source.git.log")({
+              cwd = option.cwd,
+            }))
+          end,
+        })
+
+        local prev_buf = execute_context.get_prev_buf()
+        local prev_file = vim.fs.normalize(vim.api.nvim_buf_get_name(prev_buf))
+        if prev_file ~= "" and vim.fn.filereadable(prev_file) == 1 and prev_file:find(git.cwd, 1, true) == 1 then
+          table.insert(menu, {
+            columns = {
+              "log/file",
+              { ("show logs for %s"):format(vim.fn.fnamemodify(prev_file, ":.")), "Comment" },
+            },
+            execute = function()
+              require("deck").start(require("deck.builtin.source.git.log")({
+                cwd = option.cwd,
+                paths = { prev_file },
+              }))
+            end,
+          })
+        end
+
+        table.insert(menu, {
+          columns = {
+            "reflog",
+            { "show reflogs", "Comment" },
+          },
+          execute = function()
+            require("deck").start(require("deck.builtin.source.git.reflog")({
+              cwd = option.cwd,
+            }))
+          end,
+        })
+
+        table.insert(menu, {
+          columns = {
+            "stash",
+            { "show stashes", "Comment" },
+          },
+          execute = function()
+            local ctx = require("deck").start(require("deck.builtin.source.git.stash")({
+              cwd = option.cwd,
+            }))
+            ctx.set_preview_mode(true)
+          end,
+        })
+
+        table.insert(menu, {
+          columns = {
+            "remote",
+            { "show remotes", "Comment" },
+          },
+          execute = function()
+            require("deck").start(require("deck.builtin.source.git.remote")({
+              cwd = option.cwd,
+            }))
+          end,
+        })
+
+        table.insert(menu, {
+          columns = {
+            "@ fetch --all --prune",
+            { "fetch all branches and prune", "Comment" },
+          },
+          execute = function()
+            git:exec_print({ "git", "fetch", "--all", "--prune" })
+          end,
+        })
+
+        local current_branch = vim.iter(branches):find(function(branch)
+          return branch.current
+        end) --[=[@as deck.x.Git.Branch?]=]
+
+        if current_branch then
+          if current_branch.upstream then
+            table.insert(menu, {
+              columns = {
+                "@ pull",
+                {
+                  ("pull `%s` from `%s`"):format(current_branch.name, current_branch.upstream),
+                  "Comment",
+                },
+              },
+              ---@param action_ctx deck.Context
+              execute = function(action_ctx)
+                git:exec_print({ "git", "pull", current_branch.remotename, current_branch.name }):next(function()
+                  action_ctx.execute()
+                end)
+              end,
+            })
+          end
+          table.insert(menu, {
+            columns = {
+              "@ push",
+              {
+                ("push `%s` %s"):format(current_branch.name, current_branch.track or "up-to-date"),
+                "Comment",
+              },
+            },
+            ---@param action_ctx deck.Context
+            execute = function(action_ctx)
+              git
+                :push({
+                  branch = current_branch,
+                })
+                :next(function()
+                  action_ctx.execute()
+                end)
+            end,
+          })
+          table.insert(menu, {
+            columns = {
+              "@ push --force",
+              {
+                ("push --force `%s` %s"):format(current_branch.name, current_branch.track or "up-to-date"),
+                "Comment",
+              },
+            },
+            ---@param action_ctx deck.Context
+            execute = function(action_ctx)
+              git
+                :push({
+                  branch = current_branch,
+                  force = true,
+                })
+                :next(function()
+                  action_ctx.execute()
+                end)
+            end,
+          })
+          table.insert(menu, {
+            columns = {
+              "@ open browser",
+              {
+                ("open browser `%s`"):format(current_branch.name),
+                "Comment",
+              },
+            },
+            execute = function()
+              Async.run(function()
+                for _, remote in
+                  ipairs(git:remote():await() --[=[@type deck.x.Git.Remote[]]=])
+                do
+                  if remote.name == current_branch.remotename then
+                    local browser_url = Git.to_browser_url(remote.fetch_url)
+                    if browser_url then
+                      vim.ui.open(("%s/tree/%s"):format(browser_url, current_branch.name))
+                      return
+                    end
+                  end
+                end
+                notify.add_message("default", { { { "No remote url found", "WarningMsg" } } })
+              end)
+            end,
+          })
+        end
+
+        local git_dir = git:get_git_dir()
+        local is_rebasing = (
+          IO.is_directory(IO.join(git_dir, "rebase-apply")):await()
+          or IO.is_directory(IO.join(git_dir, "rebase-merge")):await()
+        )
+        if is_rebasing then
+          table.insert(menu, {
+            columns = {
+              "@ rebase --continue",
+              { "continue commit", "Comment" },
+            },
+            execute = function(ctx)
+              git
+                :exec_print({ "git", "rebase", "--continue" }, {
+                  env = {
+                    GIT_EDITOR = "true",
+                  },
+                })
+                :next(function()
+                  ctx.execute()
+                end)
+            end,
+          })
+          table.insert(menu, {
+            columns = {
+              "@ rebase --skip",
+              { "skip commit", "Comment" },
+            },
+            execute = function(ctx)
+              git:exec_print({ "git", "rebase", "--skip" }):next(function()
+                ctx.execute()
+              end)
+            end,
+          })
+          table.insert(menu, {
+            columns = {
+              "@ rebase --abort",
+              { "abort rebase", "Comment" },
+            },
+            execute = function(ctx)
+              git:exec_print({ "git", "rebase", "--abort" }):next(function()
+                ctx.execute()
+              end)
+            end,
+          })
+        end
+
+        local is_merging = IO.exists(IO.join(git_dir, "MERGE_HEAD")):await()
+        if is_merging then
+          table.insert(menu, {
+            columns = {
+              "@ merge --continue",
+              { "continue merge", "Comment" },
+            },
+            execute = function(ctx)
+              git
+                :exec_print({ "git", "merge", "--continue" }, {
+                  env = {
+                    GIT_EDITOR = "true",
+                  },
+                })
+                :next(function()
+                  ctx.execute()
+                end)
+            end,
+          })
+          table.insert(menu, {
+            columns = {
+              "@ merge --abort",
+              { "abort merge", "Comment" },
+            },
+            execute = function(ctx)
+              git:exec_print({ "git", "merge", "--abort" }):next(function()
+                ctx.execute()
+              end)
+            end,
+          })
+        end
+
+        local display_texts, highlights = x.create_aligned_display_texts(menu, function(item)
+          return item.columns
+        end, { sep = " │ " })
+
+        for i, item in ipairs(menu) do
+          execute_context.item({
+            display_text = display_texts[i],
+            highlights = highlights[i],
+            data = {},
+            actions = {
+              { name = "default", execute = item.execute },
+            },
+          })
+        end
+
+        execute_context.done()
+      end)
+    end,
+  }
+end
