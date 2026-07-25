@@ -1,0 +1,19 @@
+lua/plugins/mason-lspconfig-nvim/init.lua
+  s_d5a153bfc70fef::t_80a9afb955636b 10-25
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.16",
+  "base_commit_sha": "101e769639004935134e31726df09e85bb84752a",
+  "prompts": {},
+  "sessions": {
+    "s_d5a153bfc70fef": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "1a745483-d8d4-4829-be81-7b76ade056b1",
+        "model": "claude-opus-5"
+      },
+      "human_author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
