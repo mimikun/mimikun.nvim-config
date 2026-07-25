@@ -876,7 +876,7 @@ vim.opt.showfulltag = false
 vim.opt.showmatch = false
 
 -- message on status line to show current mode
-vim.opt.showmode = false
+vim.opt.showmode = true
 
 -- tells when the tab pages line is displayed
 vim.opt.showtabline = 1
