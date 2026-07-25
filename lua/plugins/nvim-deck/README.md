@@ -1,43 +1,6 @@
 # Intro
 
-_nvim-deck_ : A plugin for displaying, filtering, and selecting items from
-customizable lists.
-
-<!-- panvimdoc-ignore-start -->
-
-# Demo
-
-<details>
-  <summary>Open project files</summary>
-  <video src="https://github.com/user-attachments/assets/69581231-6bb1-46fb-8320-ed4de9caa13e"></video>
-</details>
-<details>
-  <summary>Grep and Replace</summary>
-  <video src="https://github.com/user-attachments/assets/f038e149-f9ff-42ec-9114-9a84dfe88426"></video>
-</details>
-<details>
-  <summary>Git integration</summary>
-  <video src="https://github.com/user-attachments/assets/997bb045-d0b4-49f8-a09b-f1391c2a769b"></video>
-</details>
-
-<!-- panvimdoc-ignore-end -->
-
-# Concept
-
-nvim-deck revolves around four core concepts:
-
-- Source:
-  - A source provides a list of items to display.
-- Item:
-  - An item represents a single entry from the source, containing data and
-    display text.
-- Action:
-  - Actions define what happens when the user interacts with an item.
-- Context:
-  - Context represents the current state, The user can control deck UI via
-    invoke context methods.
-
-# Features
+## Features
 
 - Built-in Git integration.
   - `:Deck git` to open the git launcher.
@@ -48,7 +11,7 @@ nvim-deck revolves around four core concepts:
 - Highly customizable: sources, actions, previewers, decorators, views, and
   matchers.
 
-# Why nvim-deck?
+## Why nvim-deck?
 
 - Use normal-window by default
   - IMO, floating-window is fancy but normal window is more handy for edit &
@@ -60,13 +23,13 @@ nvim-deck revolves around four core concepts:
   - Instead of this, nvim-deck allows you to customize by controlling
     |deck.Context| object.
 
-# Dependencies
+## Dependencies
 
 ### Required
 
 - Neovim stable or later
 
-### Optional
+#### Optional
 
 - [ripgrep](https://github.com/BurntSushi/ripgrep): grep and finding files
 - [folke/snacks.nvim](https://github.com/folke/snacks.nvim): previewing images
@@ -74,7 +37,7 @@ nvim-deck revolves around four core concepts:
   icons
 - [Nerd Fonts](https://www.nerdfonts.com): icons
 
-# Setup
+## Setup
 
 Here’s an example of how to set up `nvim-deck`:
 
@@ -171,11 +134,11 @@ vim.keymap.set('n', '<Leader>n', function()
 end)
 ```
 
-# Development Guideline
+## Development Guideline
 
 If you create nvim-deck source or action, we recommend to follow guidelines.
 
-### Register alias action for common action names.
+### Register alias action for common action names
 
 nvim-deck supports the concept of duck-typing.
 
@@ -213,7 +176,7 @@ The `source.default` action will be shown in action picker. The user can have a
 unified experience across many different sources just by writing
 `ctx.keymap('n', '<CR>', deck.action_mapping('default'))`.
 
-# Customization
+## Customization
 
 !!! We strongly recommend using `lua-language-server` !!!
 
@@ -241,7 +204,7 @@ vim.api.nvim_create_autocmd('User', {
 })
 ```
 
-### Source
+#### Source
 
 The source is typed as |deck.Source|. The source can be executed by
 `deck.start()`.
@@ -269,7 +232,7 @@ require('deck').start({
 })
 ```
 
-### Action
+#### Action
 
 The action is typed as |deck.Action| and can be registered below four different
 levels.
@@ -351,7 +314,7 @@ require('deck').register_action({
 
 Note: The same name actions are chosen in the order of 1 -> 2 -> 3 -> 4.
 
-### StartPreset
+#### StartPreset
 
 The start-preset is typed as |deck.StartPreset| and can be registered globally.
 
@@ -368,7 +331,7 @@ require('deck').register_start_preset('recent', {
 })
 ```
 
-### Decorator
+#### Decorator
 
 `nvim-deck` has `decorator` concept. It's designed to decorate the deck-buffer
 via `nvim_buf_set_extmark`. The below example shows how to create your own
@@ -413,7 +376,7 @@ require('deck').register_decorator({
 })
 ```
 
-### Previewer
+#### Previewer
 
 `nvim-deck` has `previewer` concept. It's designed to show the item preview.
 
@@ -450,13 +413,13 @@ ctx.item({
 })
 ```
 
-# Built-in
+## Built-in
 
-## Sources
+### Sources
 
 <!-- auto-generate-s:source -->
 
-### buffers
+#### buffers
 
 Show buffers.
 
@@ -472,7 +435,7 @@ deck.start(require('deck.builtin.source.buffers')({
 }))
 ```
 
-### colorscheme
+#### colorscheme
 
 Show colorschemes.
 
@@ -482,7 +445,7 @@ _No options_
 deck.start(require('deck.builtin.source.colorschemes')())
 ```
 
-### deck.actions
+#### deck.actions
 
 Show available actions from |deck.Context|
 
@@ -496,7 +459,7 @@ deck.start(require('deck.builtin.source.deck.actions')({
 }))
 ```
 
-### deck.history
+#### deck.history
 
 Show deck.start history.
 
@@ -506,7 +469,7 @@ _No options_
 deck.start(require('deck.builtin.source.deck.history')())
 ```
 
-### deck.notify
+#### deck.notify
 
 Show deck.notify history.
 
@@ -516,7 +479,7 @@ _No options_
 deck.start(require('deck.builtin.source.deck.notify')())
 ```
 
-### dirs
+#### dirs
 
 Show dirs under specified root directory.
 
@@ -532,7 +495,7 @@ deck.start(require('deck.builtin.source.dirs')({
 }))
 ```
 
-### explorer
+#### explorer
 
 Explorer source.
 
@@ -551,7 +514,7 @@ Explorer source.
       And you can customize explorer option dynamically via `require('deck.builtin.source.explorer').customize = function(option) ... end`.
 ```
 
-### files
+#### files
 
 Show files under specified root directory.
 
@@ -567,7 +530,7 @@ deck.start(require('deck.builtin.source.files')({
 }))
 ```
 
-### git
+#### git
 
 Show git launcher.
 
@@ -581,7 +544,7 @@ deck.start(require('deck.builtin.source.git.changeset')({
 }))
 ```
 
-### git.branch
+#### git.branch
 
 Show git branches
 
@@ -595,7 +558,7 @@ deck.start(require('deck.builtin.source.git.branch')({
 }))
 ```
 
-### git.changeset
+#### git.changeset
 
 Show git changeset for specified revision.
 
@@ -613,7 +576,7 @@ deck.start(require('deck.builtin.source.git.changeset')({
 }))
 ```
 
-### git.log
+#### git.log
 
 Show git log.
 
@@ -629,7 +592,7 @@ deck.start(require('deck.builtin.source.git.log')({
 }))
 ```
 
-### git.reflog
+#### git.reflog
 
 Show git reflog.
 
@@ -644,7 +607,7 @@ deck.start(require('deck.builtin.source.git.reflog')({
 }))
 ```
 
-### git.remote
+#### git.remote
 
 Show git remotes.
 
@@ -658,7 +621,7 @@ deck.start(require('deck.builtin.source.git.remote')({
 }))
 ```
 
-### git.stash
+#### git.stash
 
 Show git stash list.
 
@@ -672,7 +635,7 @@ deck.start(require('deck.builtin.source.git.stash')({
 }))
 ```
 
-### git.status
+#### git.status
 
 Show git status.
 
@@ -686,7 +649,7 @@ deck.start(require('deck.builtin.source.git.status')({
 }))
 ```
 
-### git.worktree
+#### git.worktree
 
 Show git worktree list.
 
@@ -700,7 +663,7 @@ deck.start(require('deck.builtin.source.git.worktree')({
 }))
 ```
 
-### grep
+#### grep
 
 Grep files under specified root directory. (required `ripgrep`)
 
@@ -718,7 +681,7 @@ deck.start(require('deck.builtin.source.grep')({
 }))
 ```
 
-### helpgrep
+#### helpgrep
 
 Live grep all helptags. (required `ripgrep`)
 
@@ -728,7 +691,7 @@ _No options_
 deck.start(require('deck.builtin.source.helpgrep')())
 ```
 
-### items
+#### items
 
 Listing any provided items.
 
@@ -744,7 +707,7 @@ deck.start(require('deck.builtin.source.items')({
 }))
 ```
 
-### lines
+#### lines
 
 Show buffer lines.
 
@@ -756,7 +719,7 @@ deck.start(require('deck.builtin.source.lines')({
 }))
 ```
 
-### recent_dirs
+#### recent_dirs
 
 List recent directories.
 
@@ -778,7 +741,7 @@ deck.start(require('deck.builtin.source.recent_dirs')({
 }))
 ```
 
-### recent_files
+#### recent_files
 
 List recent files.
 
@@ -805,7 +768,7 @@ deck.start(require('deck.builtin.source.recent_files')({
 
 <!-- auto-generate-e:source -->
 
-## Actions
+### Actions
 
 <!-- auto-generate-s:action -->
 
@@ -906,7 +869,7 @@ deck.start(require('deck.builtin.source.recent_files')({
 
 <!-- auto-generate-e:action -->
 
-## Autocmd
+### Autocmd
 
 <!-- auto-generate-s:autocmd -->
 
@@ -924,7 +887,7 @@ deck.start(require('deck.builtin.source.recent_files')({
 
 <!-- auto-generate-e:autocmd -->
 
-# API
+## API
 
 <!-- auto-generate-s:api -->
 
@@ -940,7 +903,7 @@ Create action mapping function for ctx.keymap.
 
 | Name         | Type              | Description                                      |
 | ------------ | ----------------- | ------------------------------------------------ |
-| action_names | string\\|string[] | action name or action names to use for mappings. |
+| action_names | string\\ | string[] |
 
 &nbsp;
 
@@ -948,7 +911,7 @@ Create action mapping function for ctx.keymap.
 
 <!-- panvimdoc-ignore-start -->
 
-### deck.alias_action(alias_name, alias_action_name): |deck.Action|
+#### deck.alias_action(alias_name, alias_action_name): |deck.Action|
 
 <!-- panvimdoc-ignore-end -->
 
@@ -965,7 +928,7 @@ Create alias action.
 
 <!-- panvimdoc-ignore-start -->
 
-### deck.get_actions(): |deck.Action|[]
+#### deck.get_actions(): |deck.Action|[]
 
 <!-- panvimdoc-ignore-end -->
 
@@ -977,7 +940,7 @@ _No arguments_ &nbsp;
 
 <!-- panvimdoc-ignore-start -->
 
-### deck.get_context(bufnr): |deck.Context|?
+#### deck.get_context(bufnr): |deck.Context|?
 
 <!-- panvimdoc-ignore-end -->
 
@@ -993,7 +956,7 @@ Get deck context by buffer.
 
 <!-- panvimdoc-ignore-start -->
 
-### deck.get_decorators(): |deck.Decorator|[]
+#### deck.get_decorators(): |deck.Decorator|[]
 
 <!-- panvimdoc-ignore-end -->
 
@@ -1005,7 +968,7 @@ _No arguments_ &nbsp;
 
 <!-- panvimdoc-ignore-start -->
 
-### deck.get_history(): |deck.Context|[]
+#### deck.get_history(): |deck.Context|[]
 
 <!-- panvimdoc-ignore-end -->
 
@@ -1017,7 +980,7 @@ _No arguments_ &nbsp;
 
 <!-- panvimdoc-ignore-start -->
 
-### deck.get_previewers(): |deck.Previewer|[]
+#### deck.get_previewers(): |deck.Previewer|[]
 
 <!-- panvimdoc-ignore-end -->
 
@@ -1029,7 +992,7 @@ _No arguments_ &nbsp;
 
 <!-- panvimdoc-ignore-start -->
 
-### deck.get_start_presets(): |deck.StartPreset|[]
+#### deck.get_start_presets(): |deck.StartPreset|[]
 
 <!-- panvimdoc-ignore-end -->
 
@@ -1041,7 +1004,7 @@ _No arguments_ &nbsp;
 
 <!-- panvimdoc-ignore-start -->
 
-### deck.lsp_util_apply_workspace_edit(workspace_edit, encoding)
+#### deck.lsp_util_apply_workspace_edit(workspace_edit, encoding)
 
 <!-- panvimdoc-ignore-end -->
 
@@ -1061,7 +1024,7 @@ the user can save buffers individually.
 
 <!-- panvimdoc-ignore-start -->
 
-### deck.register_action(action)
+#### deck.register_action(action)
 
 <!-- panvimdoc-ignore-end -->
 
@@ -1077,7 +1040,7 @@ Register action.
 
 <!-- panvimdoc-ignore-start -->
 
-### deck.register_decorator(decorator)
+#### deck.register_decorator(decorator)
 
 <!-- panvimdoc-ignore-end -->
 
@@ -1093,7 +1056,7 @@ Register decorator.
 
 <!-- panvimdoc-ignore-start -->
 
-### deck.register_previewer(previewer)
+#### deck.register_previewer(previewer)
 
 <!-- panvimdoc-ignore-end -->
 
@@ -1109,7 +1072,7 @@ Register previewer.
 
 <!-- panvimdoc-ignore-start -->
 
-### deck.register_start_preset(name, start_fn)
+#### deck.register_start_preset(name, start_fn)
 
 <!-- panvimdoc-ignore-end -->
 
@@ -1126,7 +1089,7 @@ Register start_preset.
 
 <!-- panvimdoc-ignore-start -->
 
-### deck.register_start_preset(start_preset)
+#### deck.register_start_preset(start_preset)
 
 <!-- panvimdoc-ignore-end -->
 
@@ -1142,7 +1105,7 @@ Register start_preset.
 
 <!-- panvimdoc-ignore-start -->
 
-### deck.remove_actions(predicate)
+#### deck.remove_actions(predicate)
 
 <!-- panvimdoc-ignore-end -->
 
@@ -1158,7 +1121,7 @@ Remove specific action.
 
 <!-- panvimdoc-ignore-start -->
 
-### deck.remove_decorators(predicate)
+#### deck.remove_decorators(predicate)
 
 <!-- panvimdoc-ignore-end -->
 
@@ -1174,7 +1137,7 @@ Remove specific decorator.
 
 <!-- panvimdoc-ignore-start -->
 
-### deck.remove_previewers(predicate)
+#### deck.remove_previewers(predicate)
 
 <!-- panvimdoc-ignore-end -->
 
@@ -1190,7 +1153,7 @@ Remove previewer.
 
 <!-- panvimdoc-ignore-start -->
 
-### deck.remove_start_presets(predicate)
+#### deck.remove_start_presets(predicate)
 
 <!-- panvimdoc-ignore-end -->
 
@@ -1206,7 +1169,7 @@ Remove specific start_preset.
 
 <!-- panvimdoc-ignore-start -->
 
-### deck.setup(config)
+#### deck.setup(config)
 
 <!-- panvimdoc-ignore-end -->
 
@@ -1222,7 +1185,7 @@ Setup deck globally.
 
 <!-- panvimdoc-ignore-start -->
 
-### deck.start(sources, start_config): |deck.Context|
+#### deck.start(sources, start_config): |deck.Context|
 
 <!-- panvimdoc-ignore-end -->
 
@@ -1230,7 +1193,7 @@ Start deck with given sources.
 
 | Name         | Type                        | Description                 |
 | ------------ | --------------------------- | --------------------------- |
-| source       | deck.Source\\|deck.Source[] | source or sources to start. |
+| source | deck.Source\\ | deck.Source[] |
 | start_config | deck.StartConfigSpecifier   | start configuration.        |
 
 &nbsp;
@@ -1239,7 +1202,7 @@ Start deck with given sources.
 
 <!-- panvimdoc-ignore-start -->
 
-### deck.ui_select(items, opts, on_choice)
+#### deck.ui_select(items, opts, on_choice)
 
 <!-- panvimdoc-ignore-end -->
 
@@ -1256,7 +1219,7 @@ items. Set `vim.ui.select = require('deck').ui_select` to use it globally.
 
 <!-- auto-generate-e:api -->
 
-# Type
+## Type
 
 <!-- auto-generate-s:type -->
 
