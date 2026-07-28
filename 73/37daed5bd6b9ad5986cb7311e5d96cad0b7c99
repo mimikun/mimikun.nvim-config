@@ -1,0 +1,21 @@
+lua/plugins/leap-nvim/opts.lua
+  s_e50cb237397537::t_b0e87af7ab0171 3-12
+lua/plugins/leap-nvim/init.lua
+  s_e50cb237397537::t_9e8b4699d53713 4,9-19
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.16",
+  "base_commit_sha": "7337daed5bd6b9ad5986cb7311e5d96cad0b7c99",
+  "prompts": {},
+  "sessions": {
+    "s_e50cb237397537": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "1bdf6d98-42c7-4499-9d48-ab6d7a2eb198",
+        "model": "claude-opus-5"
+      },
+      "human_author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
