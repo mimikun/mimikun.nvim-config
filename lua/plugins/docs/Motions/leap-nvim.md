@@ -94,15 +94,30 @@ was lost. Recorded here so the gap is not rediscovered as a regression.
 
 ## mini.jump2d
 
-Merged but disabled: `lua/plugins/mini-jump2d/init.lua` has `cond = false`,
-and its keys are not decided yet.
+| Key | Mode | Binding |
+| --- | --- | --- |
+| `<leader>jj` | n,x,o | `builtin_opts.word_start` |
 
-`cond = false` is what keeps the plugin on disk. lazy.nvim resolves `cond`
-before `enabled` (`lua/lazy/core/meta.lua:352` then `:355`), and the `cond`
-pass registers the plugin in `spec.ignore_installed`, which excludes it from
-`Config.to_clean`. A plugin carrying only `enabled = false` is not protected
-and `:Lazy clean` will delete its directory.
+One binding on purpose. `line_start`, `single_character` and
+`default_spotter` are left unbound until there is a concrete reason to add
+them; adding later breaks nothing, because `<leader>j` is otherwise unused.
 
-If `<CR>` is kept as `mappings.start_jumping`, the plugin restores `<CR>`
+`<leader>j`, not `<leader>l`: leap took the whole `<leader>l` namespace, and
+mixing the two plugins under one prefix is what made the old flash bindings
+hard to reason about.
+
+The binding uses the `<Cmd>...<CR>` string form rather than a Lua function.
+Upstream does the same for operator-pending mode, where a plain function
+breaks dot-repeat (`neovim/neovim#23406`).
+
+`mappings.start_jumping` is set to the empty string, so the plugin installs
+no `<CR>` mapping of its own. Its default `<CR>` restores itself
 buffer-locally for `qf` buffers and the command-line window, but not for
-help or man, where `<CR>` is the built-in tag jump.
+help or man, where `<CR>` is the built-in tag jump — that gap is the reason
+this config binds a `<leader>` key instead.
+
+One lazy.nvim detail worth keeping in mind if the plugin is ever disabled
+again: `cond = false` keeps it on disk, `enabled = false` alone does not.
+lazy resolves `cond` before `enabled` (`lua/lazy/core/meta.lua:352` then
+`:355`), and the `cond` pass registers the plugin in
+`spec.ignore_installed`, which excludes it from `Config.to_clean`.
