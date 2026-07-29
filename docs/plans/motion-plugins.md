@@ -192,6 +192,25 @@ hop も master には存在しない。つまり「一括削除」の実体は�
 しか存在しない。2-char jump のレシピ自体は flash の upstream README と同一
 （`README.md:701-741`）なので内容としては失われないが、消す前に判断が要る。
 
+**2026-07-29 追記 — 削除前の転記。** レシピ本体が upstream README
+（`CODES/README.md:703-744`）とバイト単位で同一であることを確認した（`Flash` という
+ローカル変数を `require("flash")` に置換した差分のみ）。よってレシピは失われない。
+README に存在しないのはキー割り当てだけなので、それをここに残して両ブランチを削除した。
+
+| キー | mode | 機能 |
+| --- | --- | --- |
+| `<leader>ls` | n,x,o | `flash.jump()` |
+| `<leader>lS` | n,x,o | `flash.treesitter()` |
+| `<leader>lr` | o | `flash.remote()` |
+| `<leader>lR` | o,x | `flash.treesitter_search()` |
+| `<leader>lh` | n | 2-char jump（HopWord 相当） |
+| `<leader><c-s>` | c | `flash.toggle()` ← leader が `<Space>` なので事実上のバグ |
+| `<leader><c-space>` | n,x,o | treesitter incremental selection |
+
+MYOLDCFG は同じレシピを `<leader>hs` / `<leader>hS` / `<leader>hh` に割り当てた旧版。
+つまり **`<leader>l*` は leap ではなく flash の名前空間**として始まっている。
+移動系のキー体系を決め直すときの出発点はこの表。
+
 ## 作業骨組み
 
 ```text
