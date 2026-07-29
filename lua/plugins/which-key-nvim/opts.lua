@@ -14,8 +14,14 @@ local opts = {
     return true
   end,
   --- You can add any mappings here, or use `require('which-key').add()` later
+  --- Group labels. Without these the first level of the popup shows a bare
+  --- "+" and gives no hint what a prefix holds, so the prefix has to be
+  --- memorised even though which-key is open.
   ---@type wk.Spec
-  spec = {},
+  spec = {
+    { "<leader>j", group = "jump2d" },
+    { "<leader>l", group = "leap" },
+  },
   -- show a warning when issues were detected with your mappings
   notify = true,
   -- Which-key automatically sets up triggers for your mappings.
