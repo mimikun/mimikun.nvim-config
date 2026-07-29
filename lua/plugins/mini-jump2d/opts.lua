@@ -52,10 +52,8 @@ local opts = {
   },
 
   -- Module mappings. Use `''` (empty string) to disable one.
-  -- Disabled: the jump is bound in keys.lua instead. Keeping the default
-  -- <CR> here would shadow the built-in tag jump in help and man buffers,
-  -- which the plugin does not correct for (it only reverts <CR> for qf
-  -- buffers and the command-line window).
+  -- Disabled: the jump is bound in keys.lua instead.
+  -- Keeping the default <CR> here would shadow the built-in tag jump in help and man buffers, which the plugin does not correct for (it only reverts <CR> for qf buffers and the command-line window).
   mappings = {
     start_jumping = "",
   },
