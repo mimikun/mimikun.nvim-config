@@ -117,16 +117,19 @@ local opts = {
     "alphanum",
     "mod",
   },
-  -- expand groups when <= n mappings
+  -- Expand groups holding <= n mappings. Must stay a number.
+  --
+  -- This was a function returning 0. The function form is used directly as a
+  -- condition (lua/which-key/view.lua:307-308) and 0 is truthy in Lua, so it
+  -- expanded every group instead of none: the first level of the popup became
+  -- a flat list of 289 rows with no group entries at all. As a number it takes
+  -- the intended path (view.lua:311) and the whole leader map fits on one
+  -- screen as "j -> +jump2d", "l -> +leap", "z -> +19 keymaps" and so on.
+  --
+  -- To expand all nodes without a description instead:
+  --   expand = function(node) return not node.desc end
   ---@type number|fun(node: wk.Node):boolean?
-  expand = function(_node)
-    local expand
-    expand = 0
-    -- expand all nodes without a description
-    --expand = not node.desc
-
-    return expand
-  end,
+  expand = 0,
   -- Functions/Lua Patterns for formatting the labels
   ---@type table<string, ({[1]:string, [2]:string}|fun(str:string):string)[]>
   replace = {
