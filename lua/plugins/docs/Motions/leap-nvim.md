@@ -97,14 +97,21 @@ was lost. Recorded here so the gap is not rediscovered as a regression.
 | Key | Mode | Binding |
 | --- | --- | --- |
 | `<leader>jj` | n,x,o | `builtin_opts.word_start` |
+| `<leader>jl` | n,x,o | `builtin_opts.line_start` |
+| `<leader>jc` | n,x,o | `builtin_opts.single_character` |
 
-One binding on purpose. `line_start`, `single_character` and
-`default_spotter` are left unbound until there is a concrete reason to add
-them; adding later breaks nothing, because `<leader>j` is otherwise unused.
+`builtin_opts.query` stays unbound: it is a search-first jump driven by
+`vim.fn.input`, which duplicates leap's `s` and feels nothing like it.
+
+All three are bound up front rather than added when a need appears. Deferred
+config changes do not survive the gap between deciding and doing; an unused
+binding costs one line to delete, so binding now is the cheaper error.
 
 `<leader>j`, not `<leader>l`: leap took the whole `<leader>l` namespace, and
 mixing the two plugins under one prefix is what made the old flash bindings
-hard to reason about.
+hard to reason about. which-key labels both prefixes (see
+`lua/plugins/which-key-nvim/opts.lua`, `spec`) so neither has to be recalled
+from memory.
 
 The binding uses the `<Cmd>...<CR>` string form rather than a Lua function.
 Upstream does the same for operator-pending mode, where a plain function
