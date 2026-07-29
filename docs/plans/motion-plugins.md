@@ -215,8 +215,13 @@ MYOLDCFG は同じレシピを `<leader>hs` / `<leader>hS` / `<leader>hh` に割
 
 ```text
 1. mini.jump2d を追加            … 2-hop jump（ラベル先行）
-   ├ 導入方法        : TBD  (add-plugin スキル / 手書き spec)
+   ├ 導入方法        : 済  nvim-plugin-clone.sh で add/mini-jump2d を作成（2026-07-29）
+   │                        URL は nvim-mini/mini.jump2d（oil-nvim が nvim-mini/mini.icons
+   │                        を使っている慣習に合わせた）
    └ キーマップ      : TBD  (<leader>lh 踏襲 / <CR> デフォルト / 別)
+                             ※ 設定は本人が手で書く。<CR> は qf と cmdwin だけ
+                                プラグイン側が自動 revert する（jump2d.lua:783-789）。
+                                help / man は未対応なのでタグジャンプが潰れる
 
 2. leap-nvim を拡張              … 検索先行 + treesitter + remote + f/t
    ├ 現状は s / gs の 2 つだけ
@@ -226,9 +231,10 @@ MYOLDCFG は同じレシピを `<leader>hs` / `<leader>hS` / `<leader>hh` に割
 3. ドキュメント                   … lua/plugins/docs/Integrations/
    └ 対象            : TBD  (mini-jump2d.md / leap-nvim.md)
 
-4. 旧ブランチの後始末
-   ├ add/flash-nvim  : TBD  (削除 / MYOLDCFG のため残す)
-   └ add/hop-nvim    : TBD  (削除 / 残す)
+4. 旧ブランチの後始末            … 済（2026-07-29）
+   ├ add/flash-nvim  : 削除  PR #58 クローズ済み、remote / local とも削除
+   │                        キー割り当ては上の表に転記して保存
+   └ add/hop-nvim    : 削除  PR #91 クローズ済み、remote 削除（local は元々無し）
 ```
 
 ## 参考 — MYCFG に残っていた設定バグ
