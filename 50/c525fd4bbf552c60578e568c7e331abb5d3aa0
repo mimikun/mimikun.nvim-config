@@ -1,0 +1,19 @@
+scripts/nvim-worktree.sh
+  s_7920ecb8f726f4::t_cfae6292e7c2bd 37,40,43-46,79-83,88,92-124,215,233-234
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.16",
+  "base_commit_sha": "50c525fd4bbf552c60578e568c7e331abb5d3aa0",
+  "prompts": {},
+  "sessions": {
+    "s_7920ecb8f726f4": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "acaa20fe-0293-48a9-af93-193fabbdeec0",
+        "model": "claude-opus-5"
+      },
+      "human_author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
