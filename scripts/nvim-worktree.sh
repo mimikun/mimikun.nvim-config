@@ -34,9 +34,15 @@ set -euo pipefail
 #
 # Examples:
 #   scripts/nvim-worktree.sh add add/prompt-nvim       # -> ~/.config/nvim-prompt
+#   scripts/nvim-worktree.sh add add/nvim-notify       # -> ~/.config/nvim-notify
 #   scripts/nvim-worktree.sh add feature/x myconfig    # -> ~/.config/nvim-myconfig
 #   scripts/nvim-worktree.sh remove prompt             # remove worktree + data
+#   scripts/nvim-worktree.sh remove nvim-prompt        # same; both forms work
 #   scripts/nvim-worktree.sh list
+#
+# `remove` accepts the short name or the full appname, and resolves whichever
+# one actually exists on disk (so worktrees created by older versions of this
+# script, which could produce a doubled 'nvim-nvim-' prefix, stay removable).
 #
 # Note: `remove` deletes the worktree and its per-app data/state/cache dirs but
 # NEVER deletes the git branch (merging to master stays a manual decision).
@@ -70,11 +76,50 @@ usage() {
 }
 
 # Derive a short app name from a branch: add/prompt-nvim -> prompt
+#
+# A leading 'nvim-' is stripped as well, so add/nvim-notify yields 'notify'
+# (-> ~/.config/nvim-notify) rather than 'nvim-notify' (-> nvim-nvim-notify).
+# Without that, every branch for a plugin whose name already starts with 'nvim-'
+# produced a doubled prefix, which `remove` then could not resolve.
 derive_name() {
     local n="${1##*/}"   # after last slash
     n="${n%-nvim}"       # strip trailing -nvim
     n="${n%.nvim}"       # strip trailing .nvim
+    n="${n#nvim-}"       # strip leading nvim-
     printf '%s' "${n}"
+}
+
+# Resolve a user-supplied name to an NVIM_APPNAME. Both the short name
+# ('notify') and the full appname ('nvim-notify') are accepted, but those two
+# readings collide whenever a short name itself starts with 'nvim-' -- exactly
+# what earlier versions of this script derived for branches like add/nvim-notify
+# (short name 'nvim-notify', appname 'nvim-nvim-notify'). Stripping the prefix
+# blindly resolves such input to a directory that does not exist, so probe the
+# filesystem and only fall back to the string rule when nothing matches. The
+# literal reading is tried first, since that is what the caller typed.
+resolve_appname() {
+    local input="$1"
+    local candidates=()
+    case "${input}" in
+        nvim-*) candidates+=("${input}") ;;
+    esac
+    candidates+=("nvim-${input}")
+
+    local c
+    local found=()
+    for c in "${candidates[@]}"; do
+        if [ -e "${CONFIG_HOME}/${c}" ] || [ -e "${DATA_HOME}/${c}" ]; then
+            found+=("${c}")
+        fi
+    done
+
+    case "${#found[@]}" in
+        0) printf '%s' "${candidates[0]}" ;;
+        1) printf '%s' "${found[0]}" ;;
+        *) printf 'note: %s is ambiguous (%s); using %s\n' \
+               "${input}" "${found[*]}" "${found[0]}" >&2
+           printf '%s' "${found[0]}" ;;
+    esac
 }
 
 # True if $1 is one of the real-copy dirs.
@@ -167,6 +212,7 @@ cmd_add() {
     local branch="${1:-}"
     [ -n "${branch}" ] || die "add: <branch> required"
     local name="${2:-$(derive_name "${branch}")}"
+    [ -n "${name}" ] || die "add: cannot derive a name from '${branch}'; pass one explicitly"
     local appname="nvim-${name}"
     local wt="${CONFIG_HOME}/${appname}"
 
@@ -184,8 +230,8 @@ cmd_remove() {
     local name="${1:-}"
     [ -n "${name}" ] || die "remove: <name> required"
     shift || true
-    name="${name#nvim-}"   # accept either 'prompt' or 'nvim-prompt'
-    local appname="nvim-${name}"
+    local appname
+    appname="$(resolve_appname "${name}")"
     local wt="${CONFIG_HOME}/${appname}"
 
     printf 'removing worktree %s\n' "${wt}"
