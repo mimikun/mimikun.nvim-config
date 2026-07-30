@@ -1,0 +1,19 @@
+lua/plugins/nvim-notify/init.lua
+  s_7920ecb8f726f4::t_ce40eae0be0fd3 16-21
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.16",
+  "base_commit_sha": "7d40780044a7c53d5c326b446f98ba31539f829a",
+  "prompts": {},
+  "sessions": {
+    "s_7920ecb8f726f4": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "acaa20fe-0293-48a9-af93-193fabbdeec0",
+        "model": "claude-opus-5"
+      },
+      "human_author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
