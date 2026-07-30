@@ -62,7 +62,10 @@ die() {
 }
 
 usage() {
-    sed -n '5,40p' "${BASH_SOURCE[0]}" | sed 's/^# \{0,1\}//'
+    # Print the whole header comment block, ending at the first blank line.
+    # Anchoring to that instead of a hardcoded line range means adding header
+    # lines cannot silently truncate the help text.
+    sed -n '4,/^$/p' "${BASH_SOURCE[0]}" | sed 's/^# \{0,1\}//'
     exit "${1:-0}"
 }
 
