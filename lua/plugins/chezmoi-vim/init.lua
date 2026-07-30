@@ -9,8 +9,8 @@ local spec = {
     -- Setting `false` makes this plugin create and use temporary buffer for making builtin filetype detection override wrong filetype
     vim.g["chezmoi#use_tmp_buffer"] = true
   end,
-  --cond = false,
-  --enabled = false,
+  cond = false,
+  enabled = false,
 }
 
 return spec
