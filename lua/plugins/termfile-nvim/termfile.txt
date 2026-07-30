@@ -1,0 +1,148 @@
+*termfile.txt*  Persistent terminal sessions backed by *.term files
+
+==============================================================================
+INTRODUCTION                                                     *termfile.nvim*
+
+termfile.nvim turns `*.term` files into persistent terminal sessions.
+
+Opening a `.term` file launches a terminal instead of displaying the file's
+contents. The file itself stores the raw output stream the terminal produced
+(escape sequences, colors and all). Reopening the file replays that stream into
+a fresh terminal, which re-renders it -- colors included -- natively. Because
+the terminal is a normal buffer backed by a real file, it works with file
+pickers, |:buffers|, grep, and sessions.
+
+The plugin defines NO commands and requires NO manual invocation. Everything is
+driven by autocommands installed on load.
+
+==============================================================================
+HOW SESSIONS CONTINUE                                        *termfile-continue*
+
+A shell process cannot be frozen and thawed: when Neovim quits, the shell is
+killed. Reopening therefore starts a NEW shell. What persists is the terminal's
+raw output, which is replayed to reproduce the previous session's screen.
+
+To keep that replayed screen honest, the new shell is started in the previous
+working directory. The directory travels inside the recording itself as an
+invisible OSC 7 escape sequence (`ESC ] 7 ; file://host/path ST`), the standard
+way terminals report a shell's directory -- so there is no side-channel
+metadata file.
+
+Because replay reproduces the raw stream literally, a session that ended inside
+a full-screen program (vim, htop, ...) or just after `clear` will replay those
+control sequences too, so its restored history may look sparse. Ordinary shell
+output round-trips faithfully.
+
+==============================================================================
+USAGE                                                            *termfile-usage*
+
+Create and open a terminal session: >
+    :e watcher.term
+<
+A terminal opens. Quit Neovim whenever you like; on exit the session's output is
+written back into `watcher.term`. Reopening the file replays that output in color
+and starts a fresh shell in the same working directory.
+
+==============================================================================
+CONFIGURATION                                                   *termfile-config*
+
+Configuration is optional. To override defaults: >
+    require("termfile").setup({
+      shell = nil,
+      restore = true,
+      delimiter = "\n",
+      max_bytes = 256 * 1024,
+      start_insert = false,
+      default_win_opts = "global",
+      auto_save = true,
+      pattern = "*.term",
+    })
+<
+                                                        *termfile-config-shell*
+shell ~
+    Shell to launch. `nil` uses Neovim's 'shell'. May be a string or a list
+    such as `{ "/bin/bash", "--login" }`.
+
+                                                      *termfile-config-restore*
+restore ~
+    When `true`, replay the recorded output when a `.term` file is reopened.
+
+                                                     *termfile-config-delimiter*
+delimiter ~
+    Text inserted between restored output and the new shell prompt. Defaults
+    to a newline (`"\n"`). Set it to an empty string to append the prompt
+    directly, as in earlier versions.
+
+                                                    *termfile-config-max_bytes*
+max_bytes ~
+    Maximum bytes of recorded output kept per file. Older output beyond this is
+    trimmed from the front.
+
+                                                 *termfile-config-start_insert*
+start_insert ~
+    When `true`, enter terminal insert-mode automatically when a `.term`
+    buffer becomes the current window.
+
+                                             *termfile-config-default_win_opts*
+default_win_opts ~
+    Window-local options applied when a window stops showing a `.term` buffer.
+    Defaults to `"global"`, which resets 'number' and 'relativenumber' to their
+    global fallback values with `:setlocal option<`. Configuration written with
+    `vim.opt` behaves like `:set` and updates these fallbacks, so every user's
+    own normal-window defaults are respected without taking a snapshot of a
+    particular window.
+
+    A table may be provided to apply explicit values instead: >lua
+        default_win_opts = {
+          number = true,
+          relativenumber = true,
+        }
+<
+    This is useful when a configuration sets only window-local values with
+    `vim.wo` or `vim.opt_local`, which do not update the global fallbacks. Any
+    valid window-local option may be included in the table.
+
+                                                    *termfile-config-auto_save*
+auto_save ~
+    When `true`, persist session output on buffer unload, on write, and on
+    Neovim exit.
+
+                                                      *termfile-config-pattern*
+pattern ~
+    Filename glob that identifies terminal-session files. Defaults to
+    `*.term`.
+
+==============================================================================
+COMPATIBILITY                                                   *termfile-compat*
+
+A `.term` buffer is a real built-in terminal, so it behaves like one ('number'
+and 'relativenumber' disabled, non-editable output, automatic resize) and fires
+|TermOpen|. Terminal plugins that attach on |TermOpen| and drive the shell via
+`vim.bo.channel` work with it unchanged, for example editable-term.nvim
+(https://github.com/xb-bx/editable-term.nvim). No extra configuration is needed
+on either side.
+
+Snacks picker normally excludes buffers with 'buftype' set to `terminal` when
+choosing the main window in which to open a file. termfile.nvim sets
+`b:snacks_main = true` on every managed buffer, which Snacks treats as an
+explicit preference before applying that filter. A picker opened from a
+`.term` window can therefore replace that terminal with the selected file
+instead of choosing an unrelated window or creating a split. This buffer
+variable is harmless when Snacks is not installed.
+
+==============================================================================
+IMPLEMENTATION                                                    *termfile-impl*
+
+The terminal is a built-in terminal started with >lua
+    jobstart(shell, { term = true, on_stdout = record })
+<
+`term = true` renders the output; because an `on_stdout` callback is also set,
+Neovim hands us the same raw bytes, so the exact stream (colors included) is
+recorded while it is drawn. On reopen the recording is replayed by `cat`-ing it
+into the terminal before the shell starts.
+
+The buffer is renamed from `term://...` back to its `.term` path to preserve its
+filename. On unload, write, and exit the recording (capped to `max_bytes`) is
+written back to the file with an appended OSC 7 directory sequence.
+
+vim:tw=78:ts=8:ft=help:norl:
