@@ -1,6 +1,10 @@
-## Recipes
+# Integrations
 
-### Lualine — drop-in
+## yal212/pomodoro.nvim
+
+### nvim-lualine/lualine.nvim
+
+#### drop-in
 
 ```lua
 require("lualine").setup({
@@ -17,7 +21,7 @@ require("lualine").setup({
 })
 ```
 
-### Lualine — colored by phase
+#### colored by phase
 
 ```lua
 local function pomo()
@@ -44,7 +48,9 @@ require("lualine").setup({
 vim.o.statusline = "%f %m %= %{v:lua.require('pomodoro').statusline()} "
 ```
 
-### System notification on break (macOS)
+### Other
+
+#### System notification on break (macOS)
 
 ```lua
 require("pomodoro").setup({
@@ -64,7 +70,7 @@ require("pomodoro").setup({
 })
 ```
 
-### System notification on break (Linux)
+#### System notification on break (Linux)
 
 ```lua
 require("pomodoro").setup({
@@ -80,7 +86,7 @@ require("pomodoro").setup({
 })
 ```
 
-### Lock yourself out of distractions while working
+#### Lock yourself out of distractions while working
 
 ```lua
 require("pomodoro").setup({
@@ -98,7 +104,7 @@ require("pomodoro").setup({
 })
 ```
 
-### Ding when a phase ends
+#### Ding when a phase ends
 
 ```lua
 require("pomodoro").setup({
@@ -114,9 +120,9 @@ require("pomodoro").setup({
 })
 ```
 
-## FAQ
+### FAQ
 
-### How do I turn persistence off, or move the stats file?
+#### How do I turn persistence off, or move the stats file?
 
 ```lua
 require("pomodoro").setup({
@@ -128,4 +134,3 @@ require("pomodoro").setup({
   },
 })
 ```
-
