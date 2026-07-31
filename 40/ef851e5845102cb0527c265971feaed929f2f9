@@ -1,0 +1,20 @@
+filetype.lua
+  s_73c9f6d2d362bc::t_ba165833d73950 15-22
+  s_73c9f6d2d362bc::t_f201e4484568a8 6,12
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.18",
+  "base_commit_sha": "40ef851e5845102cb0527c265971feaed929f2f9",
+  "prompts": {},
+  "sessions": {
+    "s_73c9f6d2d362bc": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "87f364b8-66f1-41dd-9136-b974d0840df8",
+        "model": "claude-opus-5"
+      },
+      "human_author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
