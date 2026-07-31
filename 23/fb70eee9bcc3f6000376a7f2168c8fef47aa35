@@ -1,0 +1,25 @@
+.kiro/steering/tech.md
+  s_f0947220f95ed2::t_4b89be464294d7 274-276
+  s_f0947220f95ed2::t_6ad11f0f2e8157 67,74-100,102-124
+  s_f0947220f95ed2::t_3372ee21a821d2 298-305
+  s_f0947220f95ed2::t_81442802110278 228-238,241-255
+  s_f0947220f95ed2::t_f6018c00a4e819 101
+  s_f0947220f95ed2::t_0ba0ae3ca77eef 3-5
+  s_f0947220f95ed2::t_3b27c3e3a31d2d 19-29
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.18",
+  "base_commit_sha": "23fb70eee9bcc3f6000376a7f2168c8fef47aa35",
+  "prompts": {},
+  "sessions": {
+    "s_f0947220f95ed2": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "85c73224-6125-4c62-aa8e-373232010164",
+        "model": "claude-opus-5"
+      },
+      "human_author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
