@@ -1,0 +1,31 @@
+.kiro/steering/structure.md
+  s_f0947220f95ed2::t_c56ca5b849a214 342-343,345-359,366-367
+  s_f0947220f95ed2::t_ae9e3f8030b243 326-330
+  s_f0947220f95ed2::t_7ca505c3944e96 129
+  s_f0947220f95ed2::t_b71f48b78d3e2a 183-189,191-198,201-202
+  s_f0947220f95ed2::t_4128dcaeeee148 3-5,9-11,13-23,25,37,39-41,48,53-58,65-66,74-93,97-106
+  s_f0947220f95ed2::t_b52a1d38dfb25e 217-219,223,226-227
+  s_f0947220f95ed2::t_fbe65b5b4a8915 296-317
+  s_f0947220f95ed2::t_c42fed24280af2 166-174,177-178
+  s_f0947220f95ed2::t_acd819a93f738e 113
+  s_f0947220f95ed2::t_21d098c60e8e51 107
+  s_f0947220f95ed2::t_29eb6db3264cb6 179
+  s_f0947220f95ed2::t_3bae8d9f39ab64 203
+  s_f0947220f95ed2::t_10c99d5dab0b8a 228
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.18",
+  "base_commit_sha": "3e5f79132b0baafe86f2000362a6b1cc8dbbe918",
+  "prompts": {},
+  "sessions": {
+    "s_f0947220f95ed2": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "85c73224-6125-4c62-aa8e-373232010164",
+        "model": "claude-opus-5"
+      },
+      "human_author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
