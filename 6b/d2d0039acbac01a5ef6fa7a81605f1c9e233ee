@@ -1,0 +1,23 @@
+.kiro/steering/product.md
+  s_f0947220f95ed2::t_8e679341c43825 3-5
+  s_f0947220f95ed2::t_e6f2294bfaf5a0 14-19
+  s_f0947220f95ed2::t_3daae04fcb8616 88-92
+  s_f0947220f95ed2::t_02f29fd4bf2851 36-41
+  s_f0947220f95ed2::t_5788731841f9be 66-69,71,75-76,78-79
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.18",
+  "base_commit_sha": "6bd2d0039acbac01a5ef6fa7a81605f1c9e233ee",
+  "prompts": {},
+  "sessions": {
+    "s_f0947220f95ed2": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "85c73224-6125-4c62-aa8e-373232010164",
+        "model": "claude-opus-5"
+      },
+      "human_author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
