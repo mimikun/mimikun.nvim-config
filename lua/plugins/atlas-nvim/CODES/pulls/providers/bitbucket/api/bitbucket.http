@@ -1,0 +1,164 @@
+@workspace = emrearmaganxxx
+@repo_slug = atlas
+
+### Current user (GET /user)
+GET https://api.bitbucket.org/2.0/user
+Authorization: Basic {{BITBUCKET_USER}}:{{BITBUCKET_TOKEN}}
+Content-Type: application/json
+Accept: application/json
+
+### Workspaces (GET /user/workspaces)
+GET https://api.bitbucket.org/2.0/user/workspaces
+Authorization: Basic {{BITBUCKET_USER}}:{{BITBUCKET_TOKEN}}
+Content-Type: application/json
+Accept: application/json
+
+### Repositories in workspace (GET /repositories/{workspace})
+GET https://api.bitbucket.org/2.0/repositories/{{workspace}}?sort=-updated_on&pagelen=50
+Authorization: Basic {{BITBUCKET_USER}}:{{BITBUCKET_TOKEN}}
+Content-Type: application/json
+Accept: application/json
+
+### Repository detail (GET /repositories/{workspace}/{repo_slug})
+GET https://api.bitbucket.org/2.0/repositories/{{workspace}}/{{repo_slug}}
+Authorization: Basic {{BITBUCKET_USER}}:{{BITBUCKET_TOKEN}}
+Content-Type: application/json
+Accept: application/json
+
+> {%
+  const mainBranch = response.body?.mainbranch?.name;
+  const branchesUrl = response.body?.links?.branches?.href;
+  const tagsUrl = response.body?.links?.tags?.href;
+  if (mainBranch) {
+    client.global.set("bitbucket_main_branch", String(mainBranch));
+  }
+  if (branchesUrl) {
+    client.global.set("bitbucket_branches_url", String(branchesUrl));
+  }
+  if (tagsUrl) {
+    client.global.set("bitbucket_tags_url", String(tagsUrl));
+  }
+%}
+
+### README candidate (GET /repositories/{workspace}/{repo_slug}/src/{ref}/{path})
+GET https://api.bitbucket.org/2.0/repositories/{{workspace}}/{{repo_slug}}/src/{{bitbucket_main_branch}}/README.md
+Authorization: Basic {{BITBUCKET_USER}}:{{BITBUCKET_TOKEN}}
+Content-Type: application/json
+Accept: text/plain
+
+### Pull requests list (GET /repositories/{workspace}/{repo_slug}/pullrequests)
+GET https://api.bitbucket.org/2.0/repositories/{{workspace}}/{{repo_slug}}/pullrequests?state=OPEN&pagelen=10
+Authorization: Basic {{BITBUCKET_USER}}:{{BITBUCKET_TOKEN}}
+Content-Type: application/json
+Accept: application/json
+
+> {%
+  const pr = response.body?.values?.[0];
+  if (!pr) throw new Error("No OPEN pull requests found");
+  const prId = pr.id;
+  const sourceHash = pr.source?.commit?.hash;
+  const destinationHash = pr.destination?.commit?.hash;
+  const commentsUrl = pr?.links?.comments?.href;
+  const activityUrl = pr?.links?.activity?.href;
+  const commitsUrl = pr?.links?.commits?.href;
+  const statusesUrl = pr?.links?.statuses?.href;
+  const mergeUrl = pr?.links?.merge?.href;
+  const approveUrl = pr?.links?.approve?.href;
+  const requestChangesUrl = pr?.links?.["request-changes"]?.href;
+  if (!prId) throw new Error("PR id missing");
+  if (!sourceHash) throw new Error("Source commit hash missing");
+  client.global.set("bitbucket_pr_id", String(prId));
+  client.global.set("bitbucket_commit_hash", String(sourceHash));
+  client.global.set("bitbucket_source_commit_hash", String(sourceHash));
+  if (destinationHash) {
+    client.global.set("bitbucket_destination_commit_hash", String(destinationHash));
+  }
+  if (commentsUrl) {
+    client.global.set("bitbucket_comments_url", String(commentsUrl));
+  }
+  if (activityUrl) {
+    client.global.set("bitbucket_activity_url", String(activityUrl));
+  }
+  if (commitsUrl) {
+    client.global.set("bitbucket_commits_url", String(commitsUrl));
+  }
+  if (statusesUrl) {
+    client.global.set("bitbucket_pr_statuses_url", String(statusesUrl));
+  }
+  if (mergeUrl) {
+    client.global.set("bitbucket_merge_url", String(mergeUrl));
+  }
+  if (approveUrl) {
+    client.global.set("bitbucket_approve_url", String(approveUrl));
+  }
+  if (requestChangesUrl) {
+    client.global.set("bitbucket_request_changes_url", String(requestChangesUrl));
+  }
+%}
+
+### Pull request detail (GET /repositories/{workspace}/{repo_slug}/pullrequests/{id})
+GET https://api.bitbucket.org/2.0/repositories/{{workspace}}/{{repo_slug}}/pullrequests/{{bitbucket_pr_id}}
+Authorization: Basic {{BITBUCKET_USER}}:{{BITBUCKET_TOKEN}}
+Content-Type: application/json
+Accept: application/json
+
+> {%
+  const pr = response.body;
+
+  const diffstatUrl = pr?.links?.diffstat?.href;
+  const diffUrl = pr?.links?.diff?.href;
+
+  if (!diffstatUrl) throw new Error("diffstat URL missing");
+  if (!diffUrl) throw new Error("diff URL missing");
+
+  client.global.set("bitbucket_diffstat_url", diffstatUrl);
+  client.global.set("bitbucket_diff_url", diffUrl);
+%}
+
+### Branches
+GET {{bitbucket_branches_url}}
+Authorization: Basic {{BITBUCKET_USER}}:{{BITBUCKET_TOKEN}}
+Content-Type: application/json
+Accept: application/json
+
+### Tags
+GET {{bitbucket_tags_url}}
+Authorization: Basic {{BITBUCKET_USER}}:{{BITBUCKET_TOKEN}}
+Content-Type: application/json
+Accept: application/json
+
+### Pull request comments
+GET {{bitbucket_comments_url}}
+Authorization: Basic {{BITBUCKET_USER}}:{{BITBUCKET_TOKEN}}
+Content-Type: application/json
+Accept: application/json
+
+### Pull request activity
+GET {{bitbucket_activity_url}}
+Authorization: Basic {{BITBUCKET_USER}}:{{BITBUCKET_TOKEN}}
+Content-Type: application/json
+Accept: application/json
+
+### Pull request commits
+GET {{bitbucket_commits_url}}
+Authorization: Basic {{BITBUCKET_USER}}:{{BITBUCKET_TOKEN}}
+Content-Type: application/json
+Accept: application/json
+
+### Pull request statuses
+GET {{bitbucket_pr_statuses_url}}
+Authorization: Basic {{BITBUCKET_USER}}:{{BITBUCKET_TOKEN}}
+Content-Type: application/json
+Accept: application/json
+
+### Diff stats
+GET {{bitbucket_diffstat_url}}
+Authorization: Basic {{BITBUCKET_USER}}:{{BITBUCKET_TOKEN}}
+Content-Type: application/json
+Accept: application/json
+
+### Diff 
+GET {{bitbucket_diff_url}}
+Authorization: Basic {{BITBUCKET_USER}}:{{BITBUCKET_TOKEN}}
+Content-Type: application/json
+Accept: text/plain

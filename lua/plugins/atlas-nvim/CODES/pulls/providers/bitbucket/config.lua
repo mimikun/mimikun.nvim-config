@@ -1,0 +1,50 @@
+-- Example:
+--   require("atlas").setup({
+--     pulls = {
+--       providers = {
+--         bitbucket = {
+--           user  = vim.env.BITBUCKET_USER,
+--           token = vim.env.BITBUCKET_TOKEN,
+--           cache_ttl = 300,
+--           views = {
+--             {
+--               name = "All",
+--               key  = "1",
+--               repos = {
+--                 { workspace = "acme", repo = "core" },
+--                 { workspace = "acme", repo = "web" },
+--               },
+--             },
+--             {
+--               name = "Reviewing",
+--               key  = "2",
+--               layout = "compact",
+--               repos = { { workspace = "acme", repo = "core" } },
+--               filter = function(pr, ctx)
+--                 if ctx.user == nil then return true end
+--                 for _, r in ipairs(pr._raw and pr._raw.reviewers or {}) do
+--                   if r.uuid == ctx.user.id then return true end
+--                 end
+--                 return false
+--               end,
+--             },
+--           },
+--         },
+--       },
+--     },
+--   })
+
+---@class AtlasBitbucketRepoRef
+---@field workspace string
+---@field repo string
+
+---@class AtlasBitbucketViewConfig : AtlasPullsViewConfig
+---@field repos AtlasBitbucketRepoRef[]|nil
+---@field filter? fun(pr: PullRequest, ctx: { user: PullsUser|nil }): boolean|nil
+---@field status? "OPEN"|"MERGED"|"DECLINED"|"SUPERSEDED"
+
+---@class AtlasBitbucketConfig
+---@field user string
+---@field token string
+---@field cache_ttl number|nil
+---@field views AtlasBitbucketViewConfig[]|nil

@@ -1,0 +1,196 @@
+@jira_issue_key = KAN-2
+@jira_project_key = KAN
+@jira_project_id = 10000
+@jira_query = KAN
+
+### Get current user
+GET {{JIRA_BASE_URL}}/rest/api/3/myself
+Authorization: Basic {{JIRA_EMAIL}}:{{JIRA_TOKEN}}
+Accept: application/json
+Content-Type: application/json
+
+### Search projects for current user
+GET {{JIRA_BASE_URL}}/rest/api/3/project/search?maxResults=50&status=live
+Authorization: Basic {{JIRA_EMAIL}}:{{JIRA_TOKEN}}
+Accept: application/json
+
+### Check CREATE_ISSUES permission in bulk
+POST {{JIRA_BASE_URL}}/rest/api/3/permissions/check
+Authorization: Basic {{JIRA_EMAIL}}:{{JIRA_TOKEN}}
+Content-Type: application/json
+Accept: application/json
+
+{
+  "projectPermissions": [
+    {
+      "permissions": [
+        "CREATE_ISSUES"
+      ],
+      "projects": ["{{jira_project_id}}"]
+    }
+  ]
+}
+
+### Search issues
+POST {{JIRA_BASE_URL}}/rest/api/3/search/jql
+Authorization: Basic {{JIRA_EMAIL}}:{{JIRA_TOKEN}}
+Content-Type: application/json
+Accept: application/json
+
+{
+  "jql": "project = {{jira_project_key}} ORDER BY updated DESC",
+  "fields": ["summary", "status", "project", "assignee", "reporter", "parent", "priority", "issuetype", "duedate", "customfield_10016"],
+  "nextPageToken": "",
+  "maxResults": 1
+}
+
+### Search issue picker (query ticket)
+GET {{JIRA_BASE_URL}}/rest/api/3/issue/picker?query={{jira_query}}&showSubTasks=true&showSubTaskParent=true
+Authorization: Basic {{JIRA_EMAIL}}:{{JIRA_TOKEN}}
+Accept: application/json
+
+### Get JQL autocomplete data
+GET {{JIRA_BASE_URL}}/rest/api/3/jql/autocompletedata
+Authorization: Basic {{JIRA_EMAIL}}:{{JIRA_TOKEN}}
+Accept: application/json
+
+### Get custom fields
+GET {{JIRA_BASE_URL}}/rest/api/3/field/search?type=custom&startAt=0&maxResults=100
+Authorization: Basic {{JIRA_EMAIL}}:{{JIRA_TOKEN}}
+Accept: application/json
+
+### Get issue details
+GET {{JIRA_BASE_URL}}/rest/api/3/issue/{{jira_issue_key}}
+Authorization: Basic {{JIRA_EMAIL}}:{{JIRA_TOKEN}}
+Accept: application/json
+
+### Get issue history
+GET {{JIRA_BASE_URL}}/rest/api/3/issue/{{jira_issue_key}}/changelog?startAt=0&maxResults=100
+Authorization: Basic {{JIRA_EMAIL}}:{{JIRA_TOKEN}}
+Accept: application/json
+
+### Get transitions
+GET {{JIRA_BASE_URL}}/rest/api/3/issue/{{jira_issue_key}}/transitions
+Authorization: Basic {{JIRA_EMAIL}}:{{JIRA_TOKEN}}
+Accept: application/json
+
+> {%
+  const firstTransitionId = response.body?.transitions?.[0]?.id;
+  if (firstTransitionId) {
+    client.global.set("jira_transition_id", String(firstTransitionId));
+  }
+%}
+
+### Transition issue
+POST {{JIRA_BASE_URL}}/rest/api/3/issue/{{jira_issue_key}}/transitions
+Authorization: Basic {{JIRA_EMAIL}}:{{JIRA_TOKEN}}
+Content-Type: application/json
+Accept: application/json
+
+{
+  "transition": {
+    "id": "{{jira_transition_id}}"
+  }
+}
+
+### Get assignable users
+GET {{JIRA_BASE_URL}}/rest/api/3/user/assignable/search?issueKey={{jira_issue_key}}&query=
+Authorization: Basic {{JIRA_EMAIL}}:{{JIRA_TOKEN}}
+Accept: application/json
+
+> {%
+  const firstAccountId = response.body?.[0]?.accountId;
+  if (firstAccountId) {
+    client.global.set("jira_account_id", String(firstAccountId));
+  }
+%}
+
+### Assign issue
+PUT {{JIRA_BASE_URL}}/rest/api/3/issue/{{jira_issue_key}}/assignee
+Authorization: Basic {{JIRA_EMAIL}}:{{JIRA_TOKEN}}
+Content-Type: application/json
+Accept: application/json
+
+{
+  "accountId": "{{jira_account_id}}"
+}
+
+### Get comments
+GET {{JIRA_BASE_URL}}/rest/api/3/issue/{{jira_issue_key}}/comment
+Authorization: Basic {{JIRA_EMAIL}}:{{JIRA_TOKEN}}
+Accept: application/json
+
+> {%
+  const firstCommentId = response.body?.comments?.[0]?.id;
+  if (firstCommentId) {
+    client.global.set("jira_comment_id", String(firstCommentId));
+  }
+%}
+
+### Add comment
+POST {{JIRA_BASE_URL}}/rest/api/3/issue/{{jira_issue_key}}/comment
+Authorization: Basic {{JIRA_EMAIL}}:{{JIRA_TOKEN}}
+Content-Type: application/json
+Accept: application/json
+
+{
+  "body": {
+    "type": "doc",
+    "version": 1,
+    "content": [
+      {
+        "type": "paragraph",
+        "content": [
+          {
+            "type": "text",
+            "text": "This is a comment from atlas.nvim"
+          }
+        ]
+      }
+    ]
+  }
+}
+
+### Edit comment
+PUT {{JIRA_BASE_URL}}/rest/api/3/issue/{{jira_issue_key}}/comment/{{jira_comment_id}}
+Authorization: Basic {{JIRA_EMAIL}}:{{JIRA_TOKEN}}
+Content-Type: application/json
+Accept: application/json
+
+{
+  "body": {
+    "type": "doc",
+    "version": 1,
+    "content": [
+      {
+        "type": "paragraph",
+        "content": [
+          {
+            "type": "text",
+            "text": "Updated comment text"
+          }
+        ]
+      }
+    ]
+  }
+}
+
+### Get create metadata (issue types)
+GET {{JIRA_BASE_URL}}/rest/api/3/issue/createmeta?projectKeys={{jira_project_key}}&expand=projects.issuetypes
+Authorization: Basic {{JIRA_EMAIL}}:{{JIRA_TOKEN}}
+Accept: application/json
+
+### Create issue
+POST {{JIRA_BASE_URL}}/rest/api/3/issue
+Authorization: Basic {{JIRA_EMAIL}}:{{JIRA_TOKEN}}
+Content-Type: application/json
+Accept: application/json
+
+{
+  "fields": {
+    "project": {
+      "key": "{{jira_project_key}}"
+    },
+    "summary": "New issue from atlas.nvim",
+  }
+}
