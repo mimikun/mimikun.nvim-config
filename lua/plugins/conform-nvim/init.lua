@@ -16,6 +16,15 @@ local spec = {
 
     conform.setup(opts)
 
+    -- dpezto/chezmoi-template.nvim
+    for ft, formatters in pairs(opts.formatters_by_ft) do
+      if type(formatters) == "table" then
+        opts.formatters_by_ft[ft] = function(bufnr)
+          return vim.api.nvim_buf_get_name(bufnr):match("%.age$") and { "chezmoi" } or formatters
+        end
+      end
+    end
+
     -- Define some user_commands
     -- Run async formatting
     vim.api.nvim_create_user_command("Conform", function(args)
