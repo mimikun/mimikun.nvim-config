@@ -1,5 +1,8 @@
 # Product Vision
 
+<!-- updated_at: 2026-07-31 — synced: catalog-era claims replaced with the current
+     active-plugin model; options philosophy corrected -->
+
 ## Purpose
 
 Personal Neovim configuration focused on modularity, extensibility, and maintainability. Designed for multi-language development with emphasis on lazy-loading performance and plugin ecosystem exploration.
@@ -8,8 +11,12 @@ Personal Neovim configuration focused on modularity, extensibility, and maintain
 
 ### For User
 
-- **Zero-startup overhead**: Plugins disabled by default, opt-in activation model
-- **Experimentation-friendly**: 330+ curated plugins available as exploration catalog
+- **Deferred-by-default startup**: every spec inherits `lazy = true`; nothing loads
+  without a trigger
+- **Portable across machines**: one config runs on Linux, WSL, Windows and macOS,
+  branching on detected capability rather than per-machine forks
+- **Experimentation-friendly**: plugins are vendored one-subdirectory-at-a-time and
+  can be parked with `cond = false` instead of deleted
 - **Multi-language support**: Dedicated LSP and filetype configurations for Rust, Haskell, Java, Go, TypeScript, etc.
 - **Task-driven workflow**: Automated daily routines (morning-routine: clean fetch → delete branches → pull → new patch branch)
 
@@ -26,8 +33,12 @@ Personal Neovim configuration focused on modularity, extensibility, and maintain
 - **Lazy.nvim foundation**: Modern plugin manager with auto-installation
 - **Lazy-by-default**: All plugins configured with `lazy = true`
 - **Active plugin specs**: Plugin imports enabled in `lua/config/lazy.lua` (plugins, colorschemes, denops-plugins)
-- **Colorscheme catalog**: 12 colorscheme options documented in `lua/colorschemes/colorschemes-list.md`
-- **Denops ecosystem**: Dedicated `lua/denops-plugins/` category for Denops-based plugins
+- **Scaffolded vendoring**: `task plugin-setup -- <url>` clones the source and lays
+  down the spec skeleton, so adding a plugin is a filled-in template, not a blank file
+- **Colorscheme catalog**: candidates tracked in `lua/colorschemes/colorschemes-list.md`;
+  active theme is tokyonight
+- **Denops ecosystem**: Dedicated `lua/denops-plugins/` category, gated off by default
+  and enabled only on machines with Deno (`lua/config/denops.lua`)
 
 ### Development Environment
 
@@ -52,15 +63,20 @@ Personal Neovim configuration focused on modularity, extensibility, and maintain
 
 ### Maintainability
 
-- Clear module boundaries (after/ftplugin, after/lsp, lua/plugins, lua/colorschemes)
+- Clear module boundaries (lua/config one-concern modules, after/ftplugin, after/lsp,
+  lua/plugins, lua/colorschemes)
+- Silent-failure classes caught by drift guards (`task check-keys`, `task check-options-sync`)
+  rather than by review
 - TODOs tracked in place (rust-analyzer, LSP configs)
-- EditorConfig enforcement
+- EditorConfig + StyLua + Selene enforcement, all clean
 
 ### User Experience
 
-- Minimal default configuration (only essential options)
+- Explicit configuration over implicit defaults: `lua/config/options.lua` states every
+  option, so "unset" is a visible decision rather than an omission
 - Progressive disclosure (start minimal, enable features as needed)
-- Documentation accessibility (CLAUDE.md, neovim_tips/)
+- Documentation accessibility (CLAUDE.md, neovim_tips/, docs/, per-plugin notes under
+  `lua/plugins/docs/`)
 
 ## Active Plugins
 
@@ -69,6 +85,9 @@ Active plugins are cataloged in `lua/plugins/` (one subdirectory per plugin). Ru
 ## Out of Scope
 
 - Pre-configured IDE-like experience (user enables what they need)
-- Opinionated keybindings (minimal defaults: Space leader, double-Esc nohlsearch)
-- One-size-fits-all plugin selection (catalog approach over defaults)
+- Opinionated global keybindings — `lua/config/mappings.lua` holds only double-Esc
+  nohlsearch; everything else is scoped to the plugin that owns it via its `keys.lua`
+- One-size-fits-all plugin selection (vendor per plugin, park with `cond = false`)
+- Per-machine config forks — machine differences are expressed as capability checks
+  inside the one config
 
