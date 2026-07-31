@@ -27,11 +27,11 @@ local modules = {
 
   -- Snacks preview masking
   ---@type boolean
-  snacks_previewer = false,
+  snacks_previewer = true,
 
   -- Oil.nvim preview masking
   ---@type boolean
-  oil_previewer = false,
+  oil_previewer = true,
 
   -- With ecolog-v1.nvim integration
   -- Mask LSP completions and hover

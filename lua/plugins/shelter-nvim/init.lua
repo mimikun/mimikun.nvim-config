@@ -3,6 +3,7 @@ local spec = {
   "ph1losof/shelter.nvim",
   lazy = false,
   cmd = require("plugins.shelter-nvim.cmds"),
+  keys = require("plugins.shelter-nvim.keys"),
   event = require("plugins.shelter-nvim.events"),
   dependencies = require("plugins.shelter-nvim.dependencies"),
   --opts = require("plugins.shelter-nvim.opts"),
