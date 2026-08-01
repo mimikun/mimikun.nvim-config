@@ -90,6 +90,22 @@ tasks:
       - "{{.TASKFILE_DIR}}/scripts/nvim-plugin-clone.sh {{.CLI_ARGS}}"
     silent: true
 
+  colorscheme-setup:
+    desc: "Vendor colorscheme(s) into lua/colorschemes (usage: task colorscheme-setup -- <git-url>...)"
+    env:
+      NVIM_PLUGINS_DIR: "{{.TASKFILE_DIR}}/lua/colorschemes"
+    cmds:
+      - "{{.TASKFILE_DIR}}/scripts/nvim-plugin-clone.sh {{.CLI_ARGS}}"
+    silent: true
+
+  denops-plugin-setup:
+    desc: "Vendor denops plugin(s) into lua/denops-plugins (usage: task denops-plugin-setup -- <git-url>...)"
+    env:
+      NVIM_PLUGINS_DIR: "{{.TASKFILE_DIR}}/lua/denops-plugins"
+    cmds:
+      - "{{.TASKFILE_DIR}}/scripts/nvim-plugin-clone.sh {{.CLI_ARGS}}"
+    silent: true
+
   check-keys:
     desc: "Lint lua/**/keys.lua for LazyKeysSpec violations (nested opts tables)"
     aliases:
