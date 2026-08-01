@@ -1,0 +1,13 @@
+# yaml-language-server: $schema=https://json.schemastore.org/lazydocker.json
+# cyberdream theme for lazydocker
+gui:
+    border: rounded
+    theme:
+        activeBorderColor:
+            - "#008c99"
+        inactiveBorderColor:
+            - "#7b8496"
+        selectedLineBgColor:
+            - "#acacac"
+        optionsTextColor:
+            - "#acacac"
