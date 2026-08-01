@@ -1,0 +1,492 @@
+*cyberdream.txt*
+                                      For Neovim >= 0.9.0    Last change: 2026
+
+==============================================================================
+Table of Contents                               *cyberdream-table-of-contents*
+
+  - Features                                             |cyberdream-features|
+  - Installation                                     |cyberdream-installation|
+  - Usage                                                   |cyberdream-usage|
+  - Configuring                                       |cyberdream-configuring|
+  - Extras                                                 |cyberdream-extras|
+  - ‍ Recipes                                       |cyberdream-‍-recipes|
+  - Palette                                               |cyberdream-palette|
+  - Contributing                                     |cyberdream-contributing|
+1. Links                                                    |cyberdream-links|
+
+A high-contrast, futuristic & vibrant theme for neovim
+
+
+
+
+
+
+
+
+
+
+
+<img src="https://github.com/scottmckendry/cyberdream.nvim/assets/39483124/0a0595a9-4d4d-4fc3-9bb3-dab2eb3b3e04"<img src="https://github.com/scottmckendry/cyberdream.nvim/assets/39483124/ac6f5b6e-458b-4087-bbe3-745c1033cfb0"<img src="https://github.com/scottmckendry/cyberdream.nvim/assets/39483124/e7721a7d-26a9-4bcb-b72b-18c44defd7c6"<img src="https://github.com/scottmckendry/cyberdream.nvim/assets/39483124/18c40e4c-e1f7-40c6-be82-f82c011338bd"<img src="https://github.com/scottmckendry/cyberdream.nvim/assets/39483124/80def4be-476e-4f1d-9e2a-cd141264fecd"
+FEATURES                                                 *cyberdream-features*
+
+- **Transparency-first design** - all design decisions are made with transparency in mind.
+- **High contrast** - Colours have been carefully chosen to be cohesive and easy on the eyes while still being easy to distinguish.
+- **Terminal Support** - Several included |cyberdream-terminal-themes| to enhance your cyberdream experience.
+- **Extensions** - Support for a variety of popular plugins out of the box. Can be toggled on or off to maximise performance.
+
+Supported Plugins/Extensions ~
+
+  -----------------------------------------------------------------------
+  Plugin                                 Highlights
+  -------------------------------------- --------------------------------
+  alpha-nvim                             alpha
+
+  blink.cmp                              blinkcmp
+
+  dashboard-nvim                         dashboard
+
+  nvim-dap-ui                            dapui
+
+  fzf-lua                                fzflua
+
+  gitsigns.nvim                          gitsigns
+
+  gitpad.nvim                            gitpad
+
+  grapple.nvim                           grapple
+
+  grug-far.nvim                          grugfar
+
+  heirline-components.nvim               heirline
+
+  helpview.nvim                          helpview
+
+  hop.nvim                               hop
+
+  indent-blankline.nvim                  indentblankline
+
+  kubectl.nvim                           kubectl
+
+  lazy.nvim                              lazy
+
+  leap.nvim                              leap
+
+  lualine.nvim                           lualine
+
+  markview.nvim                          markview
+
+  mini.nvim                              mini
+
+  noice.nvim                             noice
+
+  nvim-cmp                               cmp
+
+  nvim-notify                            notify
+
+  nvim-treesitter                        treesitter
+
+  nvim-treesitter-context                treesittercontext
+
+  rainbow-delimiters.nvim                rainbow_delimiters
+
+  render-markdown.nvim                   markdown
+
+  telescope.nvim                         telescope
+
+  trouble.nvim                           trouble
+
+  which-key.nvim                         whichkey
+  -----------------------------------------------------------------------
+
+INSTALLATION                                         *cyberdream-installation*
+
+Lazy1:
+
+>lua
+    {
+        "scottmckendry/cyberdream.nvim",
+        lazy = false,
+        priority = 1000,
+    }
+<
+
+Packer:
+
+>lua
+    use { "scottmckendry/cyberdream.nvim" }
+<
+
+Lualine (optional):
+
+>lua
+    {
+        require("lualine").setup({
+            -- ... other config
+            options = {
+                theme = "auto", -- "auto" will set the theme dynamically based on the colorscheme
+            },
+            -- ... other config
+        })
+    }
+<
+
+See my personal lualine config here
+<https://github.com/scottmckendry/nix/blob/0fc0b9ce9f87283c35c261af74bfd222ef5886f8/nvim/lua/plugins/lualine.lua>
+for an example.
+
+
+USAGE                                                       *cyberdream-usage*
+
+>lua
+    vim.cmd("colorscheme cyberdream")
+<
+
+
+CONFIGURING                                           *cyberdream-configuring*
+
+Calling `setup` is optional, but allows you to configure the theme to your
+liking. Below is an example of all the available configuration options with
+their default values:
+
+>lua
+    require("cyberdream").setup({
+        -- Set light or dark variant
+        variant = "default", -- use "light" for the light variant. Also accepts "auto" to set dark or light colors based on the current value of `vim.o.background`
+    
+        -- Enable transparent background
+        transparent = false,
+    
+        -- Reduce the overall saturation of colours for a more muted look
+        saturation = 1, -- accepts a value between 0 and 1. 0 will be fully desaturated (greyscale) and 1 will be the full color (default)
+    
+        -- Enable italics comments
+        italic_comments = false,
+    
+        -- Replace all fillchars with ' ' for the ultimate clean look
+        hide_fillchars = false,
+    
+        -- Apply a modern borderless look to pickers like Telescope, Snacks Picker & Fzf-Lua
+        borderless_pickers = false,
+    
+        -- Set terminal colors used in `:terminal`
+        terminal_colors = true,
+    
+        -- Improve start up time by caching highlights. Generate cache with :CyberdreamBuildCache and clear with :CyberdreamClearCache
+        cache = false,
+    
+        -- Override highlight groups with your own colour values
+        highlights = {
+            -- Highlight groups to override, adding new groups is also possible
+            -- See `:h highlight-groups` for a list of highlight groups or run `:hi` to see all groups and their current values
+    
+            -- Example:
+            Comment = { fg = "#696969", bg = "NONE", italic = true },
+    
+            -- More examples can be found in `lua/cyberdream/extensions/*.lua`
+        },
+    
+        -- Override a highlight group entirely using the built-in colour palette
+        overrides = function(colors) -- NOTE: This function nullifies the `highlights` option
+            -- Example:
+            return {
+                Comment = { fg = colors.green, bg = "NONE", italic = true },
+                ["@property"] = { fg = colors.magenta, bold = true },
+            }
+        end,
+    
+        -- Override colors
+        colors = {
+            -- For a list of colors see `lua/cyberdream/colours.lua`
+    
+            -- Override colors for both light and dark variants
+            bg = "#000000",
+            green = "#00ff00",
+    
+            -- If you want to override colors for light or dark variants only, use the following format:
+            dark = {
+                magenta = "#ff00ff",
+                fg = "#eeeeee",
+            },
+            light = {
+                red = "#ff5c57",
+                cyan = "#5ef1ff",
+            },
+        },
+    
+        -- Disable or enable colorscheme extensions
+        extensions = {
+            telescope = true,
+            notify = true,
+            mini = true,
+            ...
+        },
+    
+        -- Alternatively, you can use 'default' to set all extensions at once
+        -- cache = true, -- Use cache for fastest loads
+        -- extensions = {
+        --     default = false, -- Disable all by default
+        --     base = true, -- Enable all built-in hl groups (you probably want this)
+        --
+        --     -- Now enable only what you want to use
+        --     telescope = true,
+        --     cmp = true,
+        --     gitsigns = true,
+        -- },
+    })
+<
+
+
+  [!NOTE] For a complete list of extensions, see the table in `config.lua`
+  <lua/cyberdream/config.lua>.
+
+EXTRAS                                                     *cyberdream-extras*
+
+We’ve cooked up some wonderful extras to enhance your cyberdream experience.
+Mostly terminal themes and a few other goodies!
+
+- **Alacritty**
+- **Base16/Stylix**
+- **Fish**
+- **Foot**
+- **Ghostty**
+- **GitUI**
+- **Helix**
+- **K9s**
+- **Kitty**
+- **Lazydocker**
+- **Lazygit**
+- **lsd**
+- **OpenCode**
+- **Posting**
+- **Pywal**
+- **Rio**
+- **Superfile**
+- **Textmate/Bat/Sublime/Delta**
+- **Tilix**
+- **Tmux**
+- **Vicinae**
+- **Vim**
+- **Vivid**
+- **Warp**
+- **Wezterm**
+- **Windows Terminal**
+- **Yazi**
+- **Zed**
+- **Zellij**
+
+Using the Nix Flake ~
+
+For Nix users, this repository includes a `flake.nix` that exposes all extra
+themes through the `extras` output. This makes it easy to integrate cyberdream
+themes into your NixOS or home-manager configuration.
+
+
+HOW IT WORKS ~
+
+The flake automatically discovers all directories in the `extras/` folder and
+makes them available as outputs. You can reference any extra theme directly in
+your Nix configuration.
+
+
+SETUP ~
+
+Add cyberdream to your flake inputs:
+
+>nix
+    {
+      inputs = {
+        nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+        cyberdream.url = "github:scottmckendry/cyberdream.nvim";
+      };
+    }
+<
+
+
+EXAMPLE USAGE WITH HOME MANAGER ~
+
+There are several approaches you can use depending on the program:
+
+
+USING EXTRACONFIG FOR PROGRAMS WITH CUSTOM CONFIG OPTIONS
+
+>nix
+    { inputs, ... }:
+    {
+      # Alacritty - parse TOML and merge with settings
+      programs.alacritty = {
+        enable = true;
+        settings = builtins.fromTOML (builtins.readFile "${inputs.cyberdream.extras.alacritty}/alacritty.toml");
+      };
+    
+      # Kitty - append theme config
+      programs.kitty = {
+        enable = true;
+        extraConfig = builtins.readFile "${inputs.cyberdream.extras.kitty}/kitty.conf";
+      };
+    
+      # Tmux - append theme config
+      programs.tmux = {
+        enable = true;
+        extraConfig = builtins.readFile "${inputs.cyberdream.extras.tmux}/tmux.conf";
+      };
+    }
+<
+
+
+USING XDG.CONFIGFILE FOR DIRECT FILE PLACEMENT
+
+>nix
+    { inputs, ... }:
+    {
+      # Yazi - link theme file directly
+      xdg.configFile."yazi/theme.toml".source = "${inputs.cyberdream.extras.yazi}/cyberdream.toml";
+    
+      # Zellij - link theme file directly
+      xdg.configFile."zellij/themes/cyberdream.kdl".source = "${inputs.cyberdream.extras.zellij}/cyberdream.kdl";
+    }
+<
+
+
+USING PROGRAM-SPECIFIC THEME OPTIONS
+
+>nix
+    { inputs, ... }:
+    {
+      # Bat - register as a custom theme
+      programs.bat = {
+        enable = true;
+        config = {
+          theme = "cyberdream";
+        };
+        themes = {
+          cyberdream = {
+            src = inputs.cyberdream;
+            file = "extras/textmate/cyberdream.tmTheme";
+          };
+        };
+      };
+    }
+<
+
+
+AVAILABLE EXTRAS ~
+
+All directories in the `extras/` folder are available through
+`inputs.cyberdream.extras.<name>`. See the list above for all available themes.
+
+
+‍ RECIPES                                           *cyberdream-‍-recipes*
+
+Include these alongside the `setup` function to add additional functionality to
+the theme.
+
+
+MAP A KEY TO TOGGLE BETWEEN LIGHT AND DARK MODE
+
+>lua
+    -- Add a custom keybinding to toggle the colorscheme
+    vim.api.nvim_set_keymap("n", "<leader>tt", ":CyberdreamToggleMode<CR>", { noremap = true, silent = true })
+<
+
+
+CREATE AN AUTOCMD TO HOOK INTO THE TOGGLE EVENT AND RUN CUSTOM CODE
+
+>lua
+    -- The event data property will contain a string with either "default" or "light" respectively
+    vim.api.nvim_create_autocmd("User", {
+        pattern = "CyberdreamToggleMode",
+        callback = function(event)
+            -- Your custom code here!
+            -- For example, notify the user that the colorscheme has been toggled
+            print("Switched to " .. event.data .. " mode!")
+        end,
+    })
+<
+
+
+PALETTE                                                   *cyberdream-palette*
+
+Dark ~
+
+  ----------------------------------------------------------------------------
+                                                      Hex       Color
+  --------------------------------------------------- --------- --------------
+  [#16181a]                                           #16181a   bg
+
+  [#1e2124]                                           #1e2124   bg_alt
+
+  [#3c4048]                                           #3c4048   bg_highlight
+
+  [#ffffff]                                           #ffffff   fg
+
+  [#7b8496]                                           #7b8496   grey
+
+  [#5ea1ff]                                           #5ea1ff   blue
+
+  [#5eff6c]                                           #5eff6c   green
+
+  [#5ef1ff]                                           #5ef1ff   cyan
+
+  [#ff6e5e]                                           #ff6e5e   red
+
+  [#f1ff5e]                                           #f1ff5e   yellow
+
+  [#ff5ef1]                                           #ff5ef1   magenta
+
+  [#ff5ea0]                                           #ff5ea0   pink
+
+  [#ffbd5e]                                           #ffbd5e   orange
+
+  [#bd5eff]                                           #bd5eff   purple
+  ----------------------------------------------------------------------------
+Light ~
+
+  ----------------------------------------------------------------------------
+                                                      Hex       Color
+  --------------------------------------------------- --------- --------------
+  [#ffffff]                                           #ffffff   bg
+
+  [#eaeaea]                                           #eaeaea   bg_alt
+
+  [#acacac]                                           #acacac   bg_highlight
+
+  [#16181a]                                           #16181a   fg
+
+  [#7b8496]                                           #7b8496   grey
+
+  [#0057d1]                                           #0057d1   blue
+
+  [#008b0c]                                           #008b0c   green
+
+  [#008c99]                                           #008c99   cyan
+
+  [#d11500]                                           #d11500   red
+
+  [#997b00]                                           #997b00   yellow
+
+  [#d100bf]                                           #d100bf   magenta
+
+  [#f40064]                                           #f40064   pink
+
+  [#d17c00]                                           #d17c00   orange
+
+  [#a018ff]                                           #a018ff   purple
+  ----------------------------------------------------------------------------
+
+CONTRIBUTING                                         *cyberdream-contributing*
+
+Contributions are welcome! Please read the contributing guidelines
+<CONTRIBUTING.md> to get started.
+
+1. For Lazyvim users, refer to the LazyVim docs
+<http://www.lazyvim.org/plugins/colorscheme> for specific instructions.
+
+==============================================================================
+1. Links                                                    *cyberdream-links*
+
+1. *terminal*: https://github.com/scottmckendry/cyberdream.nvim/assets/39483124/b6727dd0-cd45-4f6c-94cd-92fb0dadcfae
+2. *image*: https://github.com/scottmckendry/cyberdream.nvim/assets/39483124/c0188d60-d62b-4a15-965d-a19757c484e6
+
+Generated by panvimdoc <https://github.com/kdheepak/panvimdoc>
+
+vim:tw=78:ts=8:noet:ft=help:norl:

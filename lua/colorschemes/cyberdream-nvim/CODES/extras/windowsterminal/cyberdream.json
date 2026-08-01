@@ -1,0 +1,23 @@
+{
+    "name": "Cyberdream",
+    "cursorColor": "#ffffff",
+    "selectionBackground": "#3c4048",
+    "background": "#16181a",
+    "foreground": "#ffffff",
+    "black": "#16181a",
+    "blue": "#5ea1ff",
+    "cyan": "#5ef1ff",
+    "green": "#5eff6c",
+    "purple": "#bd5eff",
+    "red": "#ff6e5e",
+    "white": "#ffffff",
+    "yellow": "#f1ff5e",
+    "brightBlack": "#3c4048",
+    "brightBlue": "#5ea1ff",
+    "brightCyan": "#5ef1ff",
+    "brightGreen": "#5eff6c",
+    "brightPurple": "#bd5eff",
+    "brightRed": "#ff6e5e",
+    "brightWhite": "#ffffff",
+    "brightYellow": "#f1ff5e"
+}
