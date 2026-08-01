@@ -1,0 +1,21 @@
+.claude/skills/add-plugin/SKILL.md
+  s_f3a88456b1e2ae::t_718296ab8ac5d0 172-175
+  s_f3a88456b1e2ae::t_bb8ca3949e0e66 4-9,11,33-46,55-65,76-88,93-94,98-100,124-126,133,137-138,143-145,152,156-157,166-167
+  s_f3a88456b1e2ae::t_fd213bf7d92f49 176
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.19",
+  "base_commit_sha": "7493754b586485d92da2809f2f6694d118a28441",
+  "prompts": {},
+  "sessions": {
+    "s_f3a88456b1e2ae": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "c525b5f0-aa8d-45c4-85f3-4ae16ff2af3c",
+        "model": "claude-opus-5"
+      },
+      "human_author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
