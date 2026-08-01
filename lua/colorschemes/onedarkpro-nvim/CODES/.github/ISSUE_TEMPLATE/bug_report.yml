@@ -1,0 +1,182 @@
+name: Bug Report
+description: If you've already asked for help with a problem and confirmed something is broken with the plugin itself, create a bug report.
+title: "[Bug]: "
+labels: ["bug"]
+assignees: olimorris
+
+body:
+    - type: markdown
+      attributes:
+        value: |
+          Thanks for taking the time to fill out this bug report! This form may seem onerous but it makes a resolution much quicker for you and I.
+    - type: markdown
+      attributes:
+        value: |
+          ## Test with a `minimal.lua` file
+          I know the temptation is to skip this step but please don't. So many issues with the colorscheme are caused by other plugins overwriting highlight groups. This step helps to determine if the issue is actually with the plugin.
+
+          Firstly, test and run Neovim with the minimal config below. Be sure to add your OneDarkPro config, saving to a `minimal.lua` file and adding any additional plugins you may need:
+          ```lua
+          local root = vim.fn.fnamemodify("./.repro", ":p")
+
+          -- set stdpaths to use .repro
+          for _, name in ipairs({ "config", "data", "state", "cache" }) do
+            vim.env[("XDG_%s_HOME"):format(name:upper())] = root .. "/" .. name
+          end
+
+          -- bootstrap lazy
+          local lazypath = root .. "/plugins/lazy.nvim"
+          if not vim.loop.fs_stat(lazypath) then
+            vim.fn.system({
+              "git",
+              "clone",
+              "--filter=blob:none",
+              "--single-branch",
+              "https://github.com/folke/lazy.nvim.git",
+              lazypath,
+            })
+          end
+          vim.opt.runtimepath:prepend(lazypath)
+
+          -- install plugins
+          local plugins = {
+            {
+              "olimorris/onedarkpro.nvim",
+              opts = {
+                -- Your OneDarkPro config goes here
+              },
+              config = true
+            },
+
+            { "nvim-treesitter/nvim-treesitter", build = ":TSUpdate" },
+
+            -- Delete if you do not require LSP
+            {
+              "VonHeikemen/lsp-zero.nvim",
+              branch = "v2.x",
+              dependencies = {
+                -- LSP Support
+                {"neovim/nvim-lspconfig"},             -- Required
+                {                                      -- Optional
+                  "williamboman/mason.nvim",
+                  build = function()
+                    pcall(vim.cmd, "MasonUpdate")
+                  end,
+                },
+                {"williamboman/mason-lspconfig.nvim"}, -- Optional
+
+                -- Autocompletion
+                {"hrsh7th/nvim-cmp"},     -- Required
+                {"hrsh7th/cmp-nvim-lsp"}, -- Required
+                {"L3MON4D3/LuaSnip"},     -- Required
+              },
+              config = function()
+                local lsp = require("lsp-zero").preset({})
+
+                lsp.on_attach(function(client, bufnr)
+                  lsp.default_keymaps({buffer = bufnr})
+                end)
+
+                lsp.ensure_installed({ "lua_ls" })
+
+                -- (Optional) Configure lua language server for neovim
+                require("lspconfig").lua_ls.setup(lsp.nvim_lua_ls())
+
+                lsp.setup()
+              end
+            }
+
+            -- add any other plugins here
+          }
+
+          require("lazy").setup(plugins, {
+            root = root .. "/plugins",
+          })
+
+          -- setup treesitter
+          local ok, treesitter = pcall(require, "nvim-treesitter.configs")
+          if ok then
+            treesitter.setup({
+              ensure_installed = "all",
+              ignore_install = { "phpdoc" }, -- list of parser which cause issues or crashes
+              highlight = { enable = true },
+            })
+          end
+
+          vim.cmd("colorscheme onedark")
+          ```
+
+          Once you"ve updated for your config, run Neovim with this command:
+          ```sh
+          nvim --clean -u minimal.lua
+          ```
+          > **Note:** You may need to do this a couple of times for Treesitter to fully download and sync
+
+    - type: textarea
+      id: onedarkpro-config
+      attributes:
+        label: Your `minimal.lua` config
+        description: Please paste your minimal.lua config here
+        placeholder: |
+          ```lua
+          -- Your minimal.lua config here
+          ```
+      validations:
+        required: true
+
+    - type: textarea
+      id: errors
+      attributes:
+        label: Error messages
+        description: Please paste any error messages you receive
+        placeholder: |
+          ```lua
+          -- Error messages here
+          ```
+      validations:
+        required: false
+
+    - type: textarea
+      id: bug
+      attributes:
+        label: Describe the bug
+        description: Please describe the bug and include any screenshots
+        placeholder: |
+          ### What I expect to happen
+          [Your text here]
+
+          ### What actually happens
+          [Your text here]
+      validations:
+        required: true
+
+    - type: textarea
+      id: reproduce
+      attributes:
+        label: Reproduce the bug
+        description: Please include the steps to reproduce the bug
+        placeholder: |
+          Steps to reproduce:
+          1.
+          2.
+          3.
+      validations:
+        required: false
+
+    - type: checkboxes
+      id: final-checks
+      attributes:
+        label: Final checks
+        description: |
+          Before you submit, please make sure you have completed the following steps:
+        options:
+          - label: I have made sure this issue exists in the latest version of the plugin
+            required: true
+          - label: I have tested with the `minimal.lua` config file above and still get the issue
+            required: true
+          - label: I have confirmed that Treesitter is working correctly by running `:checkhealth treesitter`
+            required: true
+          - label: If related to semantic tokens, I have checked that my LSP server supports them
+            required: true
+          - label: I have made sure this is not a duplicate issue
+            required: true
