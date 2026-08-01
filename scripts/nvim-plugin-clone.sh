@@ -16,15 +16,24 @@ set -euo pipefail
 #   4. lazy.nvim spec templates copied next to CODES/, as "wip"
 # Squash the wip commits into the marker commit via rebase before opening a PR.
 #
+# The spec templates ship three init variants, one per plugin tree, because
+# each requires its sibling spec files under a different module prefix
+# ("plugins.", "colorschemes.", "denops-plugins."). Only the variant matching
+# PLUGINS_DIR is installed, as init.lua; see init_template_for().
+#
 # Usage:
 #   nvim-plugin-clone <git-url>...
 #   task plugin-setup -- <git-url>...
+#   task colorscheme-setup -- <git-url>...
+#   task denops-plugin-setup -- <git-url>...
 #
 # Examples:
 #   nvim-plugin-clone https://github.com/xeind/vallow.nvim.git
 #   nvim-plugin-clone \
 #     https://github.com/ryanmab/onoma.nvim.git \
 #     https://github.com/zeybek/camouflage.nvim.git
+#   NVIM_PLUGINS_DIR=~/.config/nvim/lua/colorschemes \
+#     nvim-plugin-clone https://github.com/vague-theme/vague.nvim
 
 readonly TEMPLATE_DIR="${NVIM_PLUGIN_TEMPLATE_DIR:-${HOME}/NVIM_PLUGIN_TEMPLATES}"
 readonly PLUGINS_DIR="${NVIM_PLUGINS_DIR:-${HOME}/.config/nvim/lua/plugins}"
@@ -48,16 +57,44 @@ Runnable from any directory; override the target with NVIM_PLUGINS_DIR.
 EOF
 }
 
-# Usage: copy_templates <dir_name> <owner_repo>
+# Usage: init_template_for <plugins_dir>
+# Description: Echo the init template variant whose require() prefix matches
+#              the target plugin tree. Installing the wrong one leaves the
+#              spec requiring its siblings under a prefix that does not exist.
+# Returns: always 0
+init_template_for() {
+    local plugins_dir="${1:?Error: plugins_dir required}"
+
+    case "${plugins_dir##*/}" in
+        colorschemes) echo "init_colorschemes.lua" ;;
+        denops-plugins) echo "init_denops.lua" ;;
+        plugins) echo "init.lua" ;;
+        *)
+            echo "INFO: unknown target tree '${plugins_dir##*/}', using init.lua" >&2
+            echo "init.lua"
+            ;;
+    esac
+}
+
+# Usage: copy_templates <dir_name> <owner_repo> <init_template>
 # Description: Copy lazy.nvim spec templates into <dir_name>/ (excluding
-#              .git/.jj) and replace placeholders in init.lua
+#              .git/.jj), keep only <init_template> as init.lua, and replace
+#              placeholders in it
 # Returns: 0 on success, non-zero on error
 copy_templates() {
     local dir_name="${1:?Error: dir_name required}"
     local owner_repo="${2:?Error: owner_repo required}"
+    local init_template="${3:?Error: init_template required}"
 
     cp "${TEMPLATE_DIR}"/*.lua "${dir_name}/"
     cp "${TEMPLATE_DIR}/.editorconfig" "${TEMPLATE_DIR}/stylua.toml" "${dir_name}/"
+
+    # Finished specs carry exactly one init.lua in every tree, so drop the
+    # variants that do not apply here instead of shipping all three.
+    if [[ "${init_template}" != "init.lua" ]]; then
+        mv -f "${dir_name}/${init_template}" "${dir_name}/init.lua"
+    fi
+    rm -f "${dir_name}/init_colorschemes.lua" "${dir_name}/init_denops.lua"
 
     # Fill in the spec template for this plugin
     sed -i \
@@ -66,13 +103,14 @@ copy_templates() {
         "${dir_name}/init.lua"
 }
 
-# Usage: process_plugin <git_url> <base_branch>
+# Usage: process_plugin <git_url> <base_branch> <init_template>
 # Description: Create branch add/<dir>, vendor CODES/WIKIS, copy templates,
 #              and commit each step (empty feat marker, then wip commits)
 # Returns: 0 on success, 1 if skipped (existing branch/directory)
 process_plugin() {
     local url="${1:?Error: url required}"
     local base_branch="${2:?Error: base_branch required}"
+    local init_template="${3:?Error: init_template required}"
 
     # Normalize the URL: tolerate trailing slashes and a missing .git suffix.
     # A wiki URL (<repo>.wiki[.git]) is folded into its parent repository,
@@ -126,7 +164,7 @@ process_plugin() {
         echo "INFO: no wiki found for ${owner_repo}"
     fi
 
-    copy_templates "${dir_name}" "${owner_repo}"
+    copy_templates "${dir_name}" "${owner_repo}" "${init_template}"
     git add -f "${dir_name}"
     git commit -nm "wip"
 
@@ -165,9 +203,13 @@ main() {
         exit 1
     fi
 
+    local init_template
+    init_template="$(init_template_for "${PLUGINS_DIR}")"
+    echo "INFO: target ${PLUGINS_DIR} -> spec template ${init_template}"
+
     local url
     for url in "$@"; do
-        process_plugin "${url}" "${base_branch}" || true
+        process_plugin "${url}" "${base_branch}" "${init_template}" || true
     done
 
     echo
