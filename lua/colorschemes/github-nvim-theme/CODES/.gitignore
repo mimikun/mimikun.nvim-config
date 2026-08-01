@@ -1,0 +1,11 @@
+doc/tags
+test/plenary
+.repro
+misc
+node_modules/
+/cache
+/.cache
+
+# Lua LSP
+/.log
+/.meta
