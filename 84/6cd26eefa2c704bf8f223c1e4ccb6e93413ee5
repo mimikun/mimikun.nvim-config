@@ -1,0 +1,28 @@
+lua/plugins/nvim-cokeline/WIKIS/Buffer.md
+  h_220433a6faf6b8 1-133
+lua/plugins/nvim-cokeline/WIKIS/Component.md
+  h_220433a6faf6b8 1-91
+lua/plugins/nvim-cokeline/WIKIS/Example-Configs.md
+  h_220433a6faf6b8 1-685
+lua/plugins/nvim-cokeline/WIKIS/History.md
+  h_220433a6faf6b8 1-51
+lua/plugins/nvim-cokeline/WIKIS/Home.md
+  h_220433a6faf6b8 1-354
+lua/plugins/nvim-cokeline/WIKIS/TabPage.md
+  h_220433a6faf6b8 1-55
+lua/plugins/nvim-cokeline/WIKIS/Window.md
+  h_220433a6faf6b8 1-30
+lua/plugins/nvim-cokeline/WIKIS/_Sidebar.md
+  h_220433a6faf6b8 1-80
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.20",
+  "base_commit_sha": "846cd26eefa2c704bf8f223c1e4ccb6e93413ee5",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
