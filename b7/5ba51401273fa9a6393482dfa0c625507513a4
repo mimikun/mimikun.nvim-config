@@ -1,0 +1,42 @@
+lua/plugins/nvim-cokeline/docs/WIKIS/06-Functions.md
+  h_220433a6faf6b8 1,3,12,17,24,41,51,70
+lua/plugins/nvim-cokeline/CODES/cokeline.config.lua
+  h_220433a6faf6b8 124,126
+lua/plugins/nvim-cokeline/CODES/cokeline.components.lua
+  h_220433a6faf6b8 100,118-120,122-123,144,157,164,187-189,205,219,225,244
+lua/plugins/nvim-cokeline/docs/WIKIS/08-Configuration-recipes.md
+  h_220433a6faf6b8 1,3,5,7,72,74,84,86,88,90,147,149,151
+lua/plugins/nvim-cokeline/CODES/cokeline.handlers.lua
+  h_220433a6faf6b8 60
+lua/plugins/nvim-cokeline/CODES/cokeline.buffers.lua
+  h_220433a6faf6b8 67,121,138,162,164,207,210,214,312,504
+lua/plugins/nvim-cokeline/CODES/cokeline.rendering.lua
+  h_220433a6faf6b8 61,64,66,120,130,148,170,172,184,187
+lua/plugins/nvim-cokeline/CODES/cokeline.tabs.lua
+  h_220433a6faf6b8 18,108,114,123
+lua/plugins/nvim-cokeline/CODES/cokeline.sidebar.lua
+  h_220433a6faf6b8 126,147-148
+lua/plugins/nvim-cokeline/CODES/cokeline.mappings.lua
+  h_220433a6faf6b8 180-185,196,203
+lua/plugins/nvim-cokeline/CODES/cokeline.hover.lua
+  h_220433a6faf6b8 109,131,150,256
+lua/plugins/nvim-cokeline/CODES/cokeline.sliders.lua
+  h_220433a6faf6b8 14,18-19
+lua/plugins/nvim-cokeline/CODES/cokeline.utils.lua
+  h_220433a6faf6b8 11,69
+lua/plugins/nvim-cokeline/CODES/cokeline.augroups.lua
+  h_220433a6faf6b8 39,46,48,56
+lua/plugins/nvim-cokeline/keys.lua
+  h_220433a6faf6b8 6-8,15-17
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.20",
+  "base_commit_sha": "b75ba51401273fa9a6393482dfa0c625507513a4",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
