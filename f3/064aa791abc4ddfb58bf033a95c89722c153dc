@@ -1,0 +1,20 @@
+lua/colorschemes/matugen-nvim/CODES/health.lua
+  h_220433a6faf6b8 6,8-13,15-23,25-28,30-32,34-39,41-66,68-75,77-93,95-99,101-104
+lua/colorschemes/matugen-nvim/CODES/init.lua
+  h_220433a6faf6b8 7,15-40,45-47,49-55,57-70,72-73,77,86-102,108-112,114-115,117-131,133-137,139-151,153-162,168-175,177,179-192,194-200,202-203,205-212,214-221,223-234,236-247,249-259,261-270,275-281,286-293
+lua/colorschemes/matugen-nvim/CODES/plugin.matugen.lua
+  h_220433a6faf6b8 4-6,10-15
+lua/colorschemes/matugen-nvim/CODES/validator.lua
+  h_220433a6faf6b8 7-18,22,24-29,31-36,38-39,41-46,48-56,58-60,62,66,74-79,86-99
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.20",
+  "base_commit_sha": "f3064aa791abc4ddfb58bf033a95c89722c153dc",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
