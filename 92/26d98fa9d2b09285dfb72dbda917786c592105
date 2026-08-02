@@ -1,0 +1,16 @@
+lua/colorschemes/matugen-nvim/init.lua
+  h_220433a6faf6b8 9-10
+lua/colorschemes/matugen-nvim/opts.lua
+  h_220433a6faf6b8 3-10
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.20",
+  "base_commit_sha": "9226d98fa9d2b09285dfb72dbda917786c592105",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
