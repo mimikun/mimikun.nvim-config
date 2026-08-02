@@ -1,0 +1,14 @@
+lua/plugins/nvim-cokeline/opts/config.lua
+  h_220433a6faf6b8 24,57,96-98,101-103,106-113
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.20",
+  "base_commit_sha": "6c845ba2c60c4d10986f7c7ab97eb469c178fa76",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
