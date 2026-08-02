@@ -1,0 +1,14 @@
+lua/config/denops.lua
+  h_220433a6faf6b8 21
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.20",
+  "base_commit_sha": "28dd1470c5212cbec77df0f584fa9e306aa195f7",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
