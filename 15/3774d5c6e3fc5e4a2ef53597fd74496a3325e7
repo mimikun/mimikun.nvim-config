@@ -1,0 +1,14 @@
+lua/colorschemes/pastelnight-nvim/opts.lua
+  h_220433a6faf6b8 63-115
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.20",
+  "base_commit_sha": "153774d5c6e3fc5e4a2ef53597fd74496a3325e7",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
