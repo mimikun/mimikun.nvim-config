@@ -1,0 +1,127 @@
+lua/plugins/nvim-cokeline/WIKIS/_Sidebar.md
+  h_220433a6faf6b8 1-80
+lua/plugins/nvim-cokeline/CODES/.github/workflows/lines.yaml
+  h_220433a6faf6b8 1-18
+lua/plugins/nvim-cokeline/dependencies.lua
+  h_220433a6faf6b8 1-9
+lua/plugins/nvim-cokeline/CODES/.github/configs/commitlint.config.js
+  h_220433a6faf6b8 1
+lua/plugins/nvim-cokeline/CODES/.github/FUNDING.yml
+  h_220433a6faf6b8 1
+lua/plugins/nvim-cokeline/stylua.toml
+  h_220433a6faf6b8 1-13
+lua/plugins/nvim-cokeline/CODES/lua/cokeline/lazy.lua
+  h_220433a6faf6b8 1-10
+lua/plugins/nvim-cokeline/CODES/lua/cokeline/utils.lua
+  h_220433a6faf6b8 1-121
+lua/plugins/nvim-cokeline/opts.lua
+  h_220433a6faf6b8 1-6
+lua/plugins/nvim-cokeline/.editorconfig
+  h_220433a6faf6b8 1-14
+lua/plugins/nvim-cokeline/CODES/.github/workflows/panvimdoc.yml
+  h_220433a6faf6b8 1-28
+lua/plugins/nvim-cokeline/WIKIS/Component.md
+  h_220433a6faf6b8 1-91
+lua/plugins/nvim-cokeline/CODES/README.md
+  h_220433a6faf6b8 1-1111
+lua/plugins/nvim-cokeline/CODES/lua/cokeline/context.lua
+  h_220433a6faf6b8 1-32
+lua/plugins/nvim-cokeline/CODES/lua/cokeline/hover.lua
+  h_220433a6faf6b8 1-335
+lua/plugins/nvim-cokeline/CODES/neovim.yml
+  h_220433a6faf6b8 1-25
+lua/plugins/nvim-cokeline/CODES/lua/cokeline/rendering.lua
+  h_220433a6faf6b8 1-260
+lua/plugins/nvim-cokeline/CODES/lua/cokeline/tabs.lua
+  h_220433a6faf6b8 1-140
+lua/plugins/nvim-cokeline/CODES/lua/cokeline/history.lua
+  h_220433a6faf6b8 1-124
+lua/plugins/nvim-cokeline/CODES/lua/cokeline/sliders.lua
+  h_220433a6faf6b8 1-78
+lua/plugins/nvim-cokeline/keys.lua
+  h_220433a6faf6b8 1-19
+lua/plugins/nvim-cokeline/WIKIS/Buffer.md
+  h_220433a6faf6b8 1-133
+lua/plugins/nvim-cokeline/CODES/.luacheckrc
+  h_220433a6faf6b8 1-23
+lua/plugins/nvim-cokeline/CODES/doc/cokeline.txt
+  h_220433a6faf6b8 1-766
+lua/plugins/nvim-cokeline/CODES/lua/cokeline/augroups.lua
+  h_220433a6faf6b8 1-146
+lua/plugins/nvim-cokeline/WIKIS/Window.md
+  h_220433a6faf6b8 1-30
+lua/plugins/nvim-cokeline/CODES/.github/workflows/release.yml
+  h_220433a6faf6b8 1-19
+lua/plugins/nvim-cokeline/CODES/selene.toml
+  h_220433a6faf6b8 1-5
+lua/plugins/nvim-cokeline/CODES/.github/workflows/luacheck.yml
+  h_220433a6faf6b8 1-19
+lua/plugins/nvim-cokeline/WIKIS/TabPage.md
+  h_220433a6faf6b8 1-55
+lua/plugins/nvim-cokeline/CODES/lua/cokeline/hlgroups.lua
+  h_220433a6faf6b8 1-133
+lua/plugins/nvim-cokeline/CODES/lua/cokeline/init.lua
+  h_220433a6faf6b8 1-37
+lua/plugins/nvim-cokeline/CODES/lua/cokeline/mappings.lua
+  h_220433a6faf6b8 1-255
+lua/plugins/nvim-cokeline/CODES/lua/cokeline/config.lua
+  h_220433a6faf6b8 1-225
+lua/plugins/nvim-cokeline/CODES/lua/cokeline/state.lua
+  h_220433a6faf6b8 1-25
+lua/plugins/nvim-cokeline/WIKIS/Example-Configs.md
+  h_220433a6faf6b8 1-685
+lua/plugins/nvim-cokeline/CODES/lua/cokeline/sidebar.lua
+  h_220433a6faf6b8 1-165
+lua/plugins/nvim-cokeline/CODES/.gitignore
+  h_220433a6faf6b8 1-2
+lua/plugins/nvim-cokeline/events.lua
+  h_220433a6faf6b8 1-6
+lua/plugins/nvim-cokeline/CODES/lua/cokeline/buffers.lua
+  h_220433a6faf6b8 1-537
+lua/plugins/nvim-cokeline/CODES/lua/cokeline/rhs.lua
+  h_220433a6faf6b8 1-30
+lua/plugins/nvim-cokeline/CODES/lua/resession/extensions/cokeline.lua
+  h_220433a6faf6b8 1-21
+lua/plugins/nvim-cokeline/init.lua
+  h_220433a6faf6b8 1-36
+  s_45bdf35288d137::t_b1649cbabaf1df 37-40
+lua/plugins/nvim-cokeline/WIKIS/History.md
+  h_220433a6faf6b8 1-51
+lua/plugins/nvim-cokeline/CODES/lua/cokeline/components.lua
+  h_220433a6faf6b8 1-297
+lua/plugins/nvim-cokeline/CODES/stylua.toml
+  h_220433a6faf6b8 1-3
+lua/plugins/nvim-cokeline/CODES/.luarc.json
+  h_220433a6faf6b8 1-3
+lua/plugins/nvim-cokeline/WIKIS/Home.md
+  h_220433a6faf6b8 1-354
+lua/plugins/nvim-cokeline/CODES/CHANGELOG.md
+  h_220433a6faf6b8 1-75
+lua/plugins/nvim-cokeline/CODES/.github/workflows/commit-messages.yaml
+  h_220433a6faf6b8 1-35
+lua/plugins/nvim-cokeline/CODES/LICENSE
+  h_220433a6faf6b8 1-21
+lua/plugins/nvim-cokeline/CODES/lua/cokeline/handlers.lua
+  h_220433a6faf6b8 1-121
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.20",
+  "base_commit_sha": "4e0a4f4a30d045e46901361807f0de5cff331128",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  },
+  "sessions": {
+    "s_45bdf35288d137": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "447d8959-88e7-4973-9fb4-72e45cdb2cc9",
+        "model": "unknown"
+      },
+      "human_author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
