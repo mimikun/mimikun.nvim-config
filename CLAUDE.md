@@ -55,6 +55,23 @@ Skills are located in `.claude/skills/kiro-*/SKILL.md`
 - Keep steering current and verify alignment with `/kiro-spec-status`
 - Follow the user's instructions precisely, and within that scope act autonomously: gather the necessary context and complete the requested work end-to-end in this run, asking questions only when essential information is missing or the instructions are critically ambiguous.
 
+## 動作確認の使い分け
+
+- **「読み込めるか」= headless。**
+  `nvim --headless "+Lazy! install <repo>" "+Lazy! load <repo>" +qa` は
+  spec が壊れていないことの確認まで。`add-plugin` skill が指定しているのもここまで。
+- **「動くか」= `neowright` skill。** UI 描画・キーマップ・タブライン・フロート窓・
+  補完メニューが絡む確認で headless を使わない。
+
+**Why**: headless は偽の失敗を出す。2026-08-02 の nvim-cokeline 導入時に実際に2つ踏んだ。
+
+- `nvim_replace_termcodes` は `<leader>` を展開しないので、`feedkeys` でマッピングに当たらない
+- 描画時に更新されるプラグイン内部状態（cokeline の可視バッファ一覧など）が
+  headless では構築されず、正常な機能が動かないように見える
+
+どちらもプラグインではなく検証環境の問題で、切り分けに往復を3回使った。
+neowright に切り替えたら1回で通った。**速いと思った手段のほうが遅かった。**
+
 ## Steering Configuration
 - Load entire `.kiro/steering/` as project memory
 - Default files: `product.md`, `tech.md`, `structure.md`
