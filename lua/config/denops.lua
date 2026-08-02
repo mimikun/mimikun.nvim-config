@@ -18,7 +18,7 @@ local host = require("config.host")
 
 ---@type { os: string, host: string }[]
 local allowlist = {
-  { os = "linux", host = "wakamo" },
+  --{ os = "linux", host = "wakamo" },
 }
 
 for _, entry in ipairs(allowlist) do
