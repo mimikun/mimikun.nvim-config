@@ -1,0 +1,14 @@
+lua/plugins/herdr-splits-nvim/README.md
+  h_220433a6faf6b8 3
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.20",
+  "base_commit_sha": "efbb85b4b32430d2e2ced0f04342dcaee35f0621",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
