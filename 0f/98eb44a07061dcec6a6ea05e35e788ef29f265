@@ -1,0 +1,54 @@
+lua/plugins/smart-splits-nvim/CODES/api.lua
+  h_220433a6faf6b8 1-10,22,30,37,41,44,48
+lua/plugins/smart-splits-nvim/CODES/commands.lua
+  h_220433a6faf6b8 1,10,20,30,36-39,41-42,44-45,47-48,50-51,53,55,57,60,62-64,67,69
+lua/plugins/smart-splits-nvim/CODES/config.lua
+  h_220433a6faf6b8 1-3,7,34,36-38,41,49-50,56,73,82,87,98-99,102-103,109-110,112,119,124,131,134
+lua/plugins/smart-splits-nvim/CODES/init.lua
+  h_220433a6faf6b8 1-2,23,27-32,40
+lua/plugins/smart-splits-nvim/CODES/log/async.lua
+  h_220433a6faf6b8 8,14,17,26,49,65,70
+lua/plugins/smart-splits-nvim/CODES/log/file.lua
+  h_220433a6faf6b8 3-4,9,16,18,21-22
+lua/plugins/smart-splits-nvim/CODES/log/init.lua
+  h_220433a6faf6b8 1-2,5-10,14-19,22-23,28,31,42,61,87,112,115
+lua/plugins/smart-splits-nvim/CODES/move.lua
+  h_220433a6faf6b8 1-6,16,18,21,23,35,52,55,77,118
+lua/plugins/smart-splits-nvim/CODES/mux/init.lua
+  h_220433a6faf6b8 1-4,18,24,29,57,62,135,161
+lua/plugins/smart-splits-nvim/CODES/mux/kitty.lua
+  h_220433a6faf6b8 1-4,7-10,17,21,27-29,31,34,66,103,112,121,129,135,143,150
+lua/plugins/smart-splits-nvim/CODES/mux/tmux.lua
+  h_220433a6faf6b8 1,3,8-11,20,31-33,35,37,46,55,57,59,61,66-67,69,84,93,102,111,120,130,135-136,138,141,150,152,155,160,162,171,173,178,181-184
+lua/plugins/smart-splits-nvim/CODES/mux/utils.lua
+  h_220433a6faf6b8 8-9,17-18,32,60,67,73,80,87
+lua/plugins/smart-splits-nvim/CODES/mux/wezterm.lua
+  h_220433a6faf6b8 1-3,6-9,13-16,22-23,29,32,58,60,77,86,102,108,110,133,143,148,150,159-161,165-167
+lua/plugins/smart-splits-nvim/CODES/mux/zellij.lua
+  h_220433a6faf6b8 1-4,8-9,15,18,33,40,43,47,52,63,79,81,83,91,94-95,97-98,104
+lua/plugins/smart-splits-nvim/CODES/plugin.init.lua
+  h_220433a6faf6b8 23,28,30-31,33,38,44-45,52-54,64-65,69-70,73,80,82-83,98,154,157
+lua/plugins/smart-splits-nvim/CODES/plugin.smart-splits.lua
+  h_220433a6faf6b8 1,7-8
+lua/plugins/smart-splits-nvim/CODES/resize.lua
+  h_220433a6faf6b8 1-5,104,119,121,123,125,131,133,140,153,155
+lua/plugins/smart-splits-nvim/CODES/swap.lua
+  h_220433a6faf6b8 1-4,41-44,51-52
+lua/plugins/smart-splits-nvim/CODES/types.lua
+  h_220433a6faf6b8 30,32,34,36,40,42,44,48,50,54,56,58,60
+lua/plugins/smart-splits-nvim/CODES/utils.lua
+  h_220433a6faf6b8 19,46-48,50,52,54,68,73,76,81
+lua/plugins/smart-splits-nvim/CODES/win.lua
+  h_220433a6faf6b8 1-4,19-22,27-30,35-36,43-44,79,84,89,94,125,140,154,166,184-185,187,198,202
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.20",
+  "base_commit_sha": "0f98eb44a07061dcec6a6ea05e35e788ef29f265",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
