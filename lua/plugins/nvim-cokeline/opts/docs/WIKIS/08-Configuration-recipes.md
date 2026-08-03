@@ -1,11 +1,10 @@
-Welcome to the nvim-cokeline wiki!
+# Configuration recipes
 
+## Harpoon-based sorting
 
-## Configuration recipes
+This sorter pins harpoon-marked buffers to the left hand side of the tabline, while still allowing you to rearrange any others that are open.
 
-### Harpoon-based sorting:
-
-This sorter pins harpoon-marked buffers to the left hand side of the tabline, while still allowing you to rearrange any others that are open. Any harpoon mark order changes will be reflected immediately in the tabline.
+Any harpoon mark order changes will be reflected immediately in the tabline.
 
 > [!NOTE]
 > This sorter only work with Harpoon v2; It also may not be up to date. If you notice that it is broken or outdated, contributions are welcome :)
@@ -70,11 +69,9 @@ local function harpoon_sorter()
 end
 ```
 
-### Focus mappings by @psmolak:
+## Focus mappings by @psmolak
 
-<details>
-
-<summary>From <a href="https://github.com/willothy/nvim-cokeline/issues/59">#59</a></summary>
+From <https://github.com/willothy/nvim-cokeline/issues/59>
 
 Instead of setting up new keybinding for each buffer number separately in a loop, we could use `count` variable like so:
 
@@ -84,16 +81,13 @@ Instead of setting up new keybinding for each buffer number separately in a loop
  end, { silent = true, expr = true })
  ```
 
-Now whenever we precede `Tab` with a count, we will go directly to that buffer. Otherwise the `Tab` will just move to the next buffer in a list.
+Now whenever we precede `Tab` with a count, we will go directly to that buffer.
 
-</details>
+Otherwise the `Tab` will just move to the next buffer in a list.
 
-### Rounded corners
+## Rounded corners
 
-![userconfig-noib3](https://user-images.githubusercontent.com/38540736/226447796-12200cca-9dec-4145-8f4a-d271512bdf8c.png)
-
-<details>
-<summary>This config shows how you configure buffers w/ rounded corners.</summary>
+This config shows how you configure buffers w/ rounded corners.
 
 ```lua
 local hlgroups = require('cokeline.hlgroups')
@@ -150,16 +144,11 @@ require('cokeline').setup({
 })
 ```
 
-</details>
+## Equally sized buffers
 
-### Equally sized buffers
+This config shows how to get equally sized buffers.
 
-<details>
-<summary>
-This config shows how to get equally sized buffers. All the buffers
-are 23 characters wide, adding padding spaces left and right if a buffer is too
-short and cutting it off if it's too long.
-</summary>
+All the buffers are 23 characters wide, adding padding spaces left and right if a buffer is too short and cutting it off if it's too long.
 
 ```lua
 local hl_attr = require('cokeline.hlgroups').get_hl_attr
@@ -350,5 +339,3 @@ require('cokeline').setup({
 })
 
 ```
-
-</details>
