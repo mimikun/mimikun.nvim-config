@@ -1,0 +1,76 @@
+lua/plugins/herdr-splits-nvim/CODES/.github/ISSUE_TEMPLATE/bug_report.yml
+  h_220433a6faf6b8 1-100
+lua/plugins/herdr-splits-nvim/CODES/.github/ISSUE_TEMPLATE/feature_request.yml
+  h_220433a6faf6b8 1-32
+lua/plugins/herdr-splits-nvim/CODES/.github/PULL_REQUEST_TEMPLATE.md
+  h_220433a6faf6b8 1-31
+lua/plugins/herdr-splits-nvim/CODES/.github/workflows/ci.yml
+  h_220433a6faf6b8 1-43
+lua/plugins/herdr-splits-nvim/CODES/.gitignore
+  h_220433a6faf6b8 1
+lua/plugins/herdr-splits-nvim/CODES/.gitmodules
+  h_220433a6faf6b8 1-3
+lua/plugins/herdr-splits-nvim/CODES/CONTRIBUTING.md
+  h_220433a6faf6b8 1-126
+lua/plugins/herdr-splits-nvim/CODES/LICENSE
+  h_220433a6faf6b8 1-21
+lua/plugins/herdr-splits-nvim/CODES/Makefile
+  h_220433a6faf6b8 1-21
+lua/plugins/herdr-splits-nvim/CODES/README.md
+  h_220433a6faf6b8 1-457
+lua/plugins/herdr-splits-nvim/CODES/docs/superpowers/specs/2026-07-31-issues-20-22-design.md
+  h_220433a6faf6b8 1-124
+lua/plugins/herdr-splits-nvim/CODES/herdr-plugin.toml
+  h_220433a6faf6b8 1-62
+lua/plugins/herdr-splits-nvim/CODES/lua/herdr-splits/conf.lua
+  h_220433a6faf6b8 1-236
+lua/plugins/herdr-splits-nvim/CODES/lua/herdr-splits/config.lua
+  h_220433a6faf6b8 1-146
+lua/plugins/herdr-splits-nvim/CODES/lua/herdr-splits/health.lua
+  h_220433a6faf6b8 1-46
+lua/plugins/herdr-splits-nvim/CODES/lua/herdr-splits/herdr.lua
+  h_220433a6faf6b8 1-160
+lua/plugins/herdr-splits-nvim/CODES/lua/herdr-splits/init.lua
+  h_220433a6faf6b8 1-162
+lua/plugins/herdr-splits-nvim/CODES/lua/herdr-splits/nav.lua
+  h_220433a6faf6b8 1-206
+lua/plugins/herdr-splits-nvim/CODES/lua/herdr-splits/resize.lua
+  h_220433a6faf6b8 1-108
+lua/plugins/herdr-splits-nvim/CODES/lua/herdr-splits/sync.lua
+  h_220433a6faf6b8 1-127
+lua/plugins/herdr-splits-nvim/CODES/lua/herdr-splits/win.lua
+  h_220433a6faf6b8 1-154
+lua/plugins/herdr-splits-nvim/CODES/plugin/herdr-splits.lua
+  h_220433a6faf6b8 1-11
+lua/plugins/herdr-splits-nvim/CODES/scripts/herdr-nav.sh
+  h_220433a6faf6b8 1-104
+lua/plugins/herdr-splits-nvim/CODES/scripts/herdr-resize.sh
+  h_220433a6faf6b8 1-58
+lua/plugins/herdr-splits-nvim/CODES/scripts/minimal_init.lua
+  h_220433a6faf6b8 1-14
+lua/plugins/herdr-splits-nvim/CODES/tests/test_conf.lua
+  h_220433a6faf6b8 1-196
+lua/plugins/herdr-splits-nvim/CODES/tests/test_herdr.lua
+  h_220433a6faf6b8 1-267
+lua/plugins/herdr-splits-nvim/CODES/tests/test_nav.lua
+  h_220433a6faf6b8 1-520
+lua/plugins/herdr-splits-nvim/CODES/tests/test_plugin.lua
+  h_220433a6faf6b8 1-60
+lua/plugins/herdr-splits-nvim/CODES/tests/test_resize.lua
+  h_220433a6faf6b8 1-302
+lua/plugins/herdr-splits-nvim/CODES/tests/test_sync.lua
+  h_220433a6faf6b8 1-219
+lua/plugins/herdr-splits-nvim/CODES/tests/test_win.lua
+  h_220433a6faf6b8 1-138
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.20",
+  "base_commit_sha": "3bf844daad5b9abb06b37c8eeb24798c398d6236",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
