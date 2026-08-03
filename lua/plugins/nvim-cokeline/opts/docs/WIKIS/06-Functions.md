@@ -1,16 +1,6 @@
-# API Reference
+# Functions
 
-## Objects
-
-* [Component](https://github.com/willothy/nvim-cokeline/wiki/Component)
-* [Buffer](https://github.com/willothy/nvim-cokeline/wiki/Buffer)
-* [TabPage](https://github.com/willothy/nvim-cokeline/wiki/TabPage)
-* [Window](https://github.com/willothy/nvim-cokeline/wiki/Window)
-* [History](https://github.com/willothy/nvim-cokeline/wiki/History)
-
-## Functions
-
-### cokeline.mappings
+## cokeline.mappings
 
 * [pick(goal)](https://github.com/willothy/nvim-cokeline/wiki)
   Focus or close a buffer using pick letters.
@@ -19,19 +9,19 @@
 * [by_index(goal, idx)](https://github.com/willothy/nvim-cokeline/wiki)
   Focus or close a buffer by its index.
 
-### cokeline.utils
+## cokeline.utils
 
 * [buf_delete(bufnr, wipe)](https://github.com/willothy/nvim-cokeline/wiki)
   Delete the given buffer while maintaining window layout.
 
-### cokeline.hlgroups
+## cokeline.hlgroups
 
 * [get_hl(group_name)](https://github.com/willothy/nvim-cokeline/wiki)
   Memoized wrapper around `nvim_get_hl`
 * [get_hl_attr(group_name, attr)](https://github.com/willothy/nvim-cokeline/wiki)
   Get a single attribute from a hlgroup. Memoized with same cache as `get_hl`.
 
-### cokeline.buffers
+## cokeline.buffers
 
 * [is_visible(bufnr)](https://github.com/willothy/nvim-cokeline/wiki)
   Returns true if the buffer is visible.
@@ -48,7 +38,7 @@
 * [release_taken_letter(bufnr)](https://github.com/willothy/nvim-cokeline/wiki)
   Release the pick letter for a Buffer object.
 
-### cokeline.tabs
+## cokeline.tabs
 
 * [update_current(tabnr)](https://github.com/willothy/nvim-cokeline/wiki)
 * [fetch_tabs()](https://github.com/willothy/nvim-cokeline/wiki)
@@ -58,7 +48,7 @@
 * [get_tabpage(tabnr)](https://github.com/willothy/nvim-cokeline/wiki)
   Returns the Tabpage object for tabnr, if valid.
 
-### cokeline.history
+## cokeline.history
 
 * [push(bufnr)](https://github.com/willothy/nvim-cokeline/wiki)
   Push an item into the history.

@@ -2,22 +2,6 @@
 local spec = {
   "willothy/nvim-cokeline",
   --lazy = false,
-  --url = "",
-  --name = "",
-  --dev = false,
-  --dir = "",
-  --build = "",
-  --branch = "",
-  --tag = "",
-  --version = "",
-  --commit = "",
-  --main = "",
-  --pin = false,
-  --submodules = false,
-  --module = false,
-  --optional = false,
-  --ft = require("plugins.nvim-cokeline.ft"),
-  --cmd = require("plugins.nvim-cokeline.cmds"),
   keys = require("plugins.nvim-cokeline.keys"),
   event = require("plugins.nvim-cokeline.events"),
   dependencies = require("plugins.nvim-cokeline.dependencies"),
@@ -32,7 +16,6 @@ local spec = {
     local opts = require("plugins.nvim-cokeline.opts")
     require("cokeline").setup(opts)
   end,
-  --priority = 1000,
   --cond = false,
   --enabled = false,
 }
