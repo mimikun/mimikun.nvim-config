@@ -1,0 +1,132 @@
+lua/plugins/smart-splits-nvim/CODES/.busted
+  h_220433a6faf6b8 1-8
+lua/plugins/smart-splits-nvim/CODES/.envrc
+  h_220433a6faf6b8 1
+lua/plugins/smart-splits-nvim/CODES/.github/FUNDING.yml
+  h_220433a6faf6b8 1
+lua/plugins/smart-splits-nvim/CODES/.github/ISSUE_TEMPLATE/bug-report.yml
+  h_220433a6faf6b8 1-136
+lua/plugins/smart-splits-nvim/CODES/.github/ISSUE_TEMPLATE/config.yml
+  h_220433a6faf6b8 1-5
+lua/plugins/smart-splits-nvim/CODES/.github/ISSUE_TEMPLATE/feature-request.yml
+  h_220433a6faf6b8 1-22
+lua/plugins/smart-splits-nvim/CODES/.github/ISSUE_TEMPLATE/meta.yml
+  h_220433a6faf6b8 1-27
+lua/plugins/smart-splits-nvim/CODES/.github/workflows/check-pr-title.yml
+  h_220433a6faf6b8 1-21
+lua/plugins/smart-splits-nvim/CODES/.github/workflows/check.yml
+  h_220433a6faf6b8 1-21
+lua/plugins/smart-splits-nvim/CODES/.github/workflows/docs.yml
+  h_220433a6faf6b8 1-36
+lua/plugins/smart-splits-nvim/CODES/.github/workflows/release.yml
+  h_220433a6faf6b8 1-18
+lua/plugins/smart-splits-nvim/CODES/.github/workflows/update-flake.yml
+  h_220433a6faf6b8 1-23
+lua/plugins/smart-splits-nvim/CODES/.gitignore
+  h_220433a6faf6b8 1
+lua/plugins/smart-splits-nvim/CODES/LICENSE
+  h_220433a6faf6b8 1-21
+lua/plugins/smart-splits-nvim/CODES/README.md
+  h_220433a6faf6b8 1-667
+lua/plugins/smart-splits-nvim/CODES/autoload/smart_splits.vim
+  h_220433a6faf6b8 1-62
+lua/plugins/smart-splits-nvim/CODES/doc/smart-splits.nvim.txt
+  h_220433a6faf6b8 1-730
+lua/plugins/smart-splits-nvim/CODES/doc/tags
+  h_220433a6faf6b8 1-11
+lua/plugins/smart-splits-nvim/CODES/flake.lock
+  h_220433a6faf6b8 1-61
+lua/plugins/smart-splits-nvim/CODES/flake.nix
+  h_220433a6faf6b8 1-86
+lua/plugins/smart-splits-nvim/CODES/justfile
+  h_220433a6faf6b8 1-10
+lua/plugins/smart-splits-nvim/CODES/kitty/install-kittens.bash
+  h_220433a6faf6b8 1-9
+lua/plugins/smart-splits-nvim/CODES/kitty/neighboring_window.py
+  h_220433a6faf6b8 1-35
+lua/plugins/smart-splits-nvim/CODES/kitty/relative_resize.py
+  h_220433a6faf6b8 1-94
+lua/plugins/smart-splits-nvim/CODES/kitty/split_window.py
+  h_220433a6faf6b8 1-49
+lua/plugins/smart-splits-nvim/CODES/lua/smart-splits/api.lua
+  h_220433a6faf6b8 1-69
+lua/plugins/smart-splits-nvim/CODES/lua/smart-splits/commands.lua
+  h_220433a6faf6b8 1-71
+lua/plugins/smart-splits-nvim/CODES/lua/smart-splits/config.lua
+  h_220433a6faf6b8 1-139
+lua/plugins/smart-splits-nvim/CODES/lua/smart-splits/init.lua
+  h_220433a6faf6b8 1-43
+lua/plugins/smart-splits-nvim/CODES/lua/smart-splits/lazy.lua
+  h_220433a6faf6b8 1-79
+lua/plugins/smart-splits-nvim/CODES/lua/smart-splits/log/async.lua
+  h_220433a6faf6b8 1-79
+lua/plugins/smart-splits-nvim/CODES/lua/smart-splits/log/file.lua
+  h_220433a6faf6b8 1-39
+lua/plugins/smart-splits-nvim/CODES/lua/smart-splits/log/init.lua
+  h_220433a6faf6b8 1-118
+lua/plugins/smart-splits-nvim/CODES/lua/smart-splits/move.lua
+  h_220433a6faf6b8 1-122
+lua/plugins/smart-splits-nvim/CODES/lua/smart-splits/mux/init.lua
+  h_220433a6faf6b8 1-188
+lua/plugins/smart-splits-nvim/CODES/lua/smart-splits/mux/kitty.lua
+  h_220433a6faf6b8 1-153
+lua/plugins/smart-splits-nvim/CODES/lua/smart-splits/mux/tmux.lua
+  h_220433a6faf6b8 1-193
+lua/plugins/smart-splits-nvim/CODES/lua/smart-splits/mux/utils.lua
+  h_220433a6faf6b8 1-95
+lua/plugins/smart-splits-nvim/CODES/lua/smart-splits/mux/wezterm.lua
+  h_220433a6faf6b8 1-174
+lua/plugins/smart-splits-nvim/CODES/lua/smart-splits/mux/zellij.lua
+  h_220433a6faf6b8 1-116
+lua/plugins/smart-splits-nvim/CODES/lua/smart-splits/resize.lua
+  h_220433a6faf6b8 1-161
+lua/plugins/smart-splits-nvim/CODES/lua/smart-splits/swap.lua
+  h_220433a6faf6b8 1-69
+lua/plugins/smart-splits-nvim/CODES/lua/smart-splits/types.lua
+  h_220433a6faf6b8 1-64
+lua/plugins/smart-splits-nvim/CODES/lua/smart-splits/utils.lua
+  h_220433a6faf6b8 1-84
+lua/plugins/smart-splits-nvim/CODES/lua/smart-splits/win.lua
+  h_220433a6faf6b8 1-206
+lua/plugins/smart-splits-nvim/CODES/plugin/init.lua
+  h_220433a6faf6b8 1-173
+lua/plugins/smart-splits-nvim/CODES/plugin/smart-splits.lua
+  h_220433a6faf6b8 1-8
+lua/plugins/smart-splits-nvim/CODES/selene.toml
+  h_220433a6faf6b8 1-2
+lua/plugins/smart-splits-nvim/CODES/smart-splits.tmux
+  h_220433a6faf6b8 1-62
+lua/plugins/smart-splits-nvim/CODES/stylua.toml
+  h_220433a6faf6b8 1-3
+lua/plugins/smart-splits-nvim/CODES/tests/helpers.lua
+  h_220433a6faf6b8 1-86
+lua/plugins/smart-splits-nvim/CODES/tests/init.lua
+  h_220433a6faf6b8 1-6
+lua/plugins/smart-splits-nvim/CODES/tests/test_config_spec.lua
+  h_220433a6faf6b8 1-70
+lua/plugins/smart-splits-nvim/CODES/tests/test_move_spec.lua
+  h_220433a6faf6b8 1-156
+lua/plugins/smart-splits-nvim/CODES/tests/test_mux_spec.lua
+  h_220433a6faf6b8 1-143
+lua/plugins/smart-splits-nvim/CODES/tests/test_resize_spec.lua
+  h_220433a6faf6b8 1-166
+lua/plugins/smart-splits-nvim/CODES/tests/test_swap_spec.lua
+  h_220433a6faf6b8 1-112
+lua/plugins/smart-splits-nvim/CODES/tests/test_tmux_spec.lua
+  h_220433a6faf6b8 1-49
+lua/plugins/smart-splits-nvim/CODES/vim.yaml
+  h_220433a6faf6b8 1-6
+lua/plugins/smart-splits-nvim/CODES/vimdoc-gen.lua
+  h_220433a6faf6b8 1-15
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.20",
+  "base_commit_sha": "ea52208d4244ab7067382119a264778e4d5fb921",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
