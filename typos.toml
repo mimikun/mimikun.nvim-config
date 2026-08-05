@@ -1,0 +1,9 @@
+# typos configuration for the nvim-lint `typos` linter.
+#
+# Passed with `--config` from lua/plugins/nvim-lint/opts.lua, which merges with a
+# project-local `_typos.toml` instead of replacing it.
+
+[default.extend-words]
+# Clojure EDN. The default dictionary rewrites `edn` -> `end`, which corrupted
+# .edn files back when typos ran as a conform formatter with --write-changes.
+edn = "edn"
