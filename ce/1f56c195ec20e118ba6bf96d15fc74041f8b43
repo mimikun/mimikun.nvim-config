@@ -1,0 +1,20 @@
+lua/plugins/smart-splits-nvim/README.md
+  h_220433a6faf6b8 321,358,377,380,386
+lua/plugins/smart-splits-nvim/init.lua
+  h_220433a6faf6b8 5-8,18-21
+lua/plugins/smart-splits-nvim/keys.lua
+  h_220433a6faf6b8 24-44
+lua/plugins/smart-splits-nvim/opts.lua
+  h_220433a6faf6b8 5-86
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.21",
+  "base_commit_sha": "ce1f56c195ec20e118ba6bf96d15fc74041f8b43",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
