@@ -1,0 +1,542 @@
+lua/plugins/nvim-lint/CODES/.busted
+  h_220433a6faf6b8 1-13
+lua/plugins/nvim-lint/CODES/.editorconfig
+  h_220433a6faf6b8 1-8
+lua/plugins/nvim-lint/CODES/.github/linters/.luacheckrc
+  h_220433a6faf6b8 1
+lua/plugins/nvim-lint/CODES/.github/workflows/linter.yml
+  h_220433a6faf6b8 1-23
+lua/plugins/nvim-lint/CODES/.github/workflows/tests.yml
+  h_220433a6faf6b8 1-38
+lua/plugins/nvim-lint/CODES/.gitignore
+  h_220433a6faf6b8 1
+lua/plugins/nvim-lint/CODES/.luacheckrc
+  h_220433a6faf6b8 1-15
+lua/plugins/nvim-lint/CODES/.luarc.json
+  h_220433a6faf6b8 1-16
+lua/plugins/nvim-lint/CODES/.projections.json
+  h_220433a6faf6b8 1-8
+lua/plugins/nvim-lint/CODES/.woodpecker.yaml
+  h_220433a6faf6b8 1-20
+lua/plugins/nvim-lint/CODES/LICENSE.txt
+  h_220433a6faf6b8 1-675
+lua/plugins/nvim-lint/CODES/README.md
+  h_220433a6faf6b8 1-785
+lua/plugins/nvim-lint/CODES/doc/lint.txt
+  h_220433a6faf6b8 1-204
+lua/plugins/nvim-lint/CODES/lua/lint.lua
+  h_220433a6faf6b8 1-470
+lua/plugins/nvim-lint/CODES/lua/lint/linters/actionlint.lua
+  h_220433a6faf6b8 1-38
+lua/plugins/nvim-lint/CODES/lua/lint/linters/alex.lua
+  h_220433a6faf6b8 1-29
+lua/plugins/nvim-lint/CODES/lua/lint/linters/ameba.lua
+  h_220433a6faf6b8 1-40
+lua/plugins/nvim-lint/CODES/lua/lint/linters/ansible_lint.lua
+  h_220433a6faf6b8 1-10
+lua/plugins/nvim-lint/CODES/lua/lint/linters/bandit.lua
+  h_220433a6faf6b8 1-28
+lua/plugins/nvim-lint/CODES/lua/lint/linters/bash.lua
+  h_220433a6faf6b8 1-12
+lua/plugins/nvim-lint/CODES/lua/lint/linters/bean_check.lua
+  h_220433a6faf6b8 1-10
+lua/plugins/nvim-lint/CODES/lua/lint/linters/biomejs.lua
+  h_220433a6faf6b8 1-83
+lua/plugins/nvim-lint/CODES/lua/lint/linters/blocklint.lua
+  h_220433a6faf6b8 1-9
+lua/plugins/nvim-lint/CODES/lua/lint/linters/buf_lint.lua
+  h_220433a6faf6b8 1-31
+lua/plugins/nvim-lint/CODES/lua/lint/linters/buildifier.lua
+  h_220433a6faf6b8 1-134
+lua/plugins/nvim-lint/CODES/lua/lint/linters/cfn_lint.lua
+  h_220433a6faf6b8 1-14
+lua/plugins/nvim-lint/CODES/lua/lint/linters/cfn_nag.lua
+  h_220433a6faf6b8 1-34
+lua/plugins/nvim-lint/CODES/lua/lint/linters/checkbashisms.lua
+  h_220433a6faf6b8 1-19
+lua/plugins/nvim-lint/CODES/lua/lint/linters/checkmake.lua
+  h_220433a6faf6b8 1-16
+lua/plugins/nvim-lint/CODES/lua/lint/linters/checkpatch.lua
+  h_220433a6faf6b8 1-48
+lua/plugins/nvim-lint/CODES/lua/lint/linters/checkstyle.lua
+  h_220433a6faf6b8 1-21
+lua/plugins/nvim-lint/CODES/lua/lint/linters/chktex.lua
+  h_220433a6faf6b8 1-42
+lua/plugins/nvim-lint/CODES/lua/lint/linters/clangtidy.lua
+  h_220433a6faf6b8 1-18
+lua/plugins/nvim-lint/CODES/lua/lint/linters/clazy.lua
+  h_220433a6faf6b8 1-13
+lua/plugins/nvim-lint/CODES/lua/lint/linters/clippy.lua
+  h_220433a6faf6b8 1-52
+lua/plugins/nvim-lint/CODES/lua/lint/linters/clj-kondo.lua
+  h_220433a6faf6b8 1-36
+lua/plugins/nvim-lint/CODES/lua/lint/linters/cmake_lint.lua
+  h_220433a6faf6b8 1-17
+lua/plugins/nvim-lint/CODES/lua/lint/linters/cmakelint.lua
+  h_220433a6faf6b8 1-15
+lua/plugins/nvim-lint/CODES/lua/lint/linters/codespell.lua
+  h_220433a6faf6b8 1-35
+lua/plugins/nvim-lint/CODES/lua/lint/linters/commitlint.lua
+  h_220433a6faf6b8 1-27
+lua/plugins/nvim-lint/CODES/lua/lint/linters/compiler.lua
+  h_220433a6faf6b8 1-27
+lua/plugins/nvim-lint/CODES/lua/lint/linters/cppcheck.lua
+  h_220433a6faf6b8 1-37
+lua/plugins/nvim-lint/CODES/lua/lint/linters/cpplint.lua
+  h_220433a6faf6b8 1-15
+lua/plugins/nvim-lint/CODES/lua/lint/linters/credo.lua
+  h_220433a6faf6b8 1-27
+lua/plugins/nvim-lint/CODES/lua/lint/linters/cspell.lua
+  h_220433a6faf6b8 1-53
+lua/plugins/nvim-lint/CODES/lua/lint/linters/cue.lua
+  h_220433a6faf6b8 1-12
+lua/plugins/nvim-lint/CODES/lua/lint/linters/curlylint.lua
+  h_220433a6faf6b8 1-12
+lua/plugins/nvim-lint/CODES/lua/lint/linters/dash.lua
+  h_220433a6faf6b8 1-14
+lua/plugins/nvim-lint/CODES/lua/lint/linters/dclint.lua
+  h_220433a6faf6b8 1-17
+lua/plugins/nvim-lint/CODES/lua/lint/linters/deadnix.lua
+  h_220433a6faf6b8 1-31
+lua/plugins/nvim-lint/CODES/lua/lint/linters/deno.lua
+  h_220433a6faf6b8 1-47
+lua/plugins/nvim-lint/CODES/lua/lint/linters/detect-secrets.lua
+  h_220433a6faf6b8 1-42
+lua/plugins/nvim-lint/CODES/lua/lint/linters/detekt.lua
+  h_220433a6faf6b8 1-16
+lua/plugins/nvim-lint/CODES/lua/lint/linters/dialyxir.lua
+  h_220433a6faf6b8 1-40
+lua/plugins/nvim-lint/CODES/lua/lint/linters/djlint.lua
+  h_220433a6faf6b8 1-20
+lua/plugins/nvim-lint/CODES/lua/lint/linters/dmypy.lua
+  h_220433a6faf6b8 1-37
+lua/plugins/nvim-lint/CODES/lua/lint/linters/dotenv_linter.lua
+  h_220433a6faf6b8 1-15
+lua/plugins/nvim-lint/CODES/lua/lint/linters/dxc.lua
+  h_220433a6faf6b8 1-19
+lua/plugins/nvim-lint/CODES/lua/lint/linters/editorconfig-checker.lua
+  h_220433a6faf6b8 1-15
+lua/plugins/nvim-lint/CODES/lua/lint/linters/erb_lint.lua
+  h_220433a6faf6b8 1-13
+lua/plugins/nvim-lint/CODES/lua/lint/linters/eslint.lua
+  h_220433a6faf6b8 1-61
+lua/plugins/nvim-lint/CODES/lua/lint/linters/eslint_d.lua
+  h_220433a6faf6b8 1-27
+lua/plugins/nvim-lint/CODES/lua/lint/linters/eugene.lua
+  h_220433a6faf6b8 1-26
+lua/plugins/nvim-lint/CODES/lua/lint/linters/fennel.lua
+  h_220433a6faf6b8 1-25
+lua/plugins/nvim-lint/CODES/lua/lint/linters/fieldalignment.lua
+  h_220433a6faf6b8 1-50
+lua/plugins/nvim-lint/CODES/lua/lint/linters/fish.lua
+  h_220433a6faf6b8 1-12
+lua/plugins/nvim-lint/CODES/lua/lint/linters/flake8.lua
+  h_220433a6faf6b8 1-20
+lua/plugins/nvim-lint/CODES/lua/lint/linters/flawfinder.lua
+  h_220433a6faf6b8 1-24
+lua/plugins/nvim-lint/CODES/lua/lint/linters/fortitude.lua
+  h_220433a6faf6b8 1-44
+lua/plugins/nvim-lint/CODES/lua/lint/linters/fsharplint.lua
+  h_220433a6faf6b8 1-16
+lua/plugins/nvim-lint/CODES/lua/lint/linters/gawk.lua
+  h_220433a6faf6b8 1-37
+lua/plugins/nvim-lint/CODES/lua/lint/linters/gdlint.lua
+  h_220433a6faf6b8 1-25
+lua/plugins/nvim-lint/CODES/lua/lint/linters/ghdl.lua
+  h_220433a6faf6b8 1-17
+lua/plugins/nvim-lint/CODES/lua/lint/linters/gitleaks.lua
+  h_220433a6faf6b8 1-35
+lua/plugins/nvim-lint/CODES/lua/lint/linters/gitlint.lua
+  h_220433a6faf6b8 1-20
+lua/plugins/nvim-lint/CODES/lua/lint/linters/glslc.lua
+  h_220433a6faf6b8 1-18
+lua/plugins/nvim-lint/CODES/lua/lint/linters/golangcilint.lua
+  h_220433a6faf6b8 1-139
+lua/plugins/nvim-lint/CODES/lua/lint/linters/hadolint.lua
+  h_220433a6faf6b8 1-33
+lua/plugins/nvim-lint/CODES/lua/lint/linters/herb.lua
+  h_220433a6faf6b8 1-39
+lua/plugins/nvim-lint/CODES/lua/lint/linters/hledger.lua
+  h_220433a6faf6b8 1-27
+lua/plugins/nvim-lint/CODES/lua/lint/linters/hlint.lua
+  h_220433a6faf6b8 1-26
+lua/plugins/nvim-lint/CODES/lua/lint/linters/htmlhint.lua
+  h_220433a6faf6b8 1-24
+lua/plugins/nvim-lint/CODES/lua/lint/linters/inko.lua
+  h_220433a6faf6b8 1-64
+lua/plugins/nvim-lint/CODES/lua/lint/linters/janet.lua
+  h_220433a6faf6b8 1-36
+lua/plugins/nvim-lint/CODES/lua/lint/linters/joker.lua
+  h_220433a6faf6b8 1-10
+lua/plugins/nvim-lint/CODES/lua/lint/linters/jq.lua
+  h_220433a6faf6b8 1-13
+lua/plugins/nvim-lint/CODES/lua/lint/linters/jshint.lua
+  h_220433a6faf6b8 1-11
+lua/plugins/nvim-lint/CODES/lua/lint/linters/json5.lua
+  h_220433a6faf6b8 1-12
+lua/plugins/nvim-lint/CODES/lua/lint/linters/json_tool.lua
+  h_220433a6faf6b8 1-14
+lua/plugins/nvim-lint/CODES/lua/lint/linters/jsonlint.lua
+  h_220433a6faf6b8 1-15
+lua/plugins/nvim-lint/CODES/lua/lint/linters/ksh.lua
+  h_220433a6faf6b8 1-12
+lua/plugins/nvim-lint/CODES/lua/lint/linters/ktlint.lua
+  h_220433a6faf6b8 1-26
+lua/plugins/nvim-lint/CODES/lua/lint/linters/lacheck.lua
+  h_220433a6faf6b8 1-15
+lua/plugins/nvim-lint/CODES/lua/lint/linters/languagetool.lua
+  h_220433a6faf6b8 1-42
+lua/plugins/nvim-lint/CODES/lua/lint/linters/lint-openapi.lua
+  h_220433a6faf6b8 1-48
+lua/plugins/nvim-lint/CODES/lua/lint/linters/ls_lint.lua
+  h_220433a6faf6b8 1-37
+lua/plugins/nvim-lint/CODES/lua/lint/linters/lslint.lua
+  h_220433a6faf6b8 1-19
+lua/plugins/nvim-lint/CODES/lua/lint/linters/luac.lua
+  h_220433a6faf6b8 1-12
+lua/plugins/nvim-lint/CODES/lua/lint/linters/luacheck.lua
+  h_220433a6faf6b8 1-20
+lua/plugins/nvim-lint/CODES/lua/lint/linters/mado.lua
+  h_220433a6faf6b8 1-12
+lua/plugins/nvim-lint/CODES/lua/lint/linters/mago_analyze.lua
+  h_220433a6faf6b8 1-23
+lua/plugins/nvim-lint/CODES/lua/lint/linters/mago_lint.lua
+  h_220433a6faf6b8 1-23
+lua/plugins/nvim-lint/CODES/lua/lint/linters/markdownlint-cli2.lua
+  h_220433a6faf6b8 1-12
+lua/plugins/nvim-lint/CODES/lua/lint/linters/markdownlint.lua
+  h_220433a6faf6b8 1-13
+lua/plugins/nvim-lint/CODES/lua/lint/linters/markuplint.lua
+  h_220433a6faf6b8 1-38
+lua/plugins/nvim-lint/CODES/lua/lint/linters/mbake.lua
+  h_220433a6faf6b8 1-31
+lua/plugins/nvim-lint/CODES/lua/lint/linters/mh_lint.lua
+  h_220433a6faf6b8 1-17
+lua/plugins/nvim-lint/CODES/lua/lint/linters/mlint.lua
+  h_220433a6faf6b8 1-19
+lua/plugins/nvim-lint/CODES/lua/lint/linters/mypy.lua
+  h_220433a6faf6b8 1-30
+lua/plugins/nvim-lint/CODES/lua/lint/linters/nagelfar.lua
+  h_220433a6faf6b8 1-12
+lua/plugins/nvim-lint/CODES/lua/lint/linters/nix.lua
+  h_220433a6faf6b8 1-18
+lua/plugins/nvim-lint/CODES/lua/lint/linters/npm-groovy-lint.lua
+  h_220433a6faf6b8 1-52
+lua/plugins/nvim-lint/CODES/lua/lint/linters/oelint-adv.lua
+  h_220433a6faf6b8 1-27
+lua/plugins/nvim-lint/CODES/lua/lint/linters/opa_check.lua
+  h_220433a6faf6b8 1-36
+lua/plugins/nvim-lint/CODES/lua/lint/linters/oxlint.lua
+  h_220433a6faf6b8 1-20
+lua/plugins/nvim-lint/CODES/lua/lint/linters/panache.lua
+  h_220433a6faf6b8 1-29
+lua/plugins/nvim-lint/CODES/lua/lint/linters/perlcritic.lua
+  h_220433a6faf6b8 1-32
+lua/plugins/nvim-lint/CODES/lua/lint/linters/perlimports.lua
+  h_220433a6faf6b8 1-27
+lua/plugins/nvim-lint/CODES/lua/lint/linters/pflake8.lua
+  h_220433a6faf6b8 1-18
+lua/plugins/nvim-lint/CODES/lua/lint/linters/php.lua
+  h_220433a6faf6b8 1-21
+lua/plugins/nvim-lint/CODES/lua/lint/linters/phpcs.lua
+  h_220433a6faf6b8 1-46
+lua/plugins/nvim-lint/CODES/lua/lint/linters/phpinsights.lua
+  h_220433a6faf6b8 1-39
+lua/plugins/nvim-lint/CODES/lua/lint/linters/phpmd.lua
+  h_220433a6faf6b8 1-56
+lua/plugins/nvim-lint/CODES/lua/lint/linters/phpstan.lua
+  h_220433a6faf6b8 1-39
+lua/plugins/nvim-lint/CODES/lua/lint/linters/pmd.lua
+  h_220433a6faf6b8 1-26
+lua/plugins/nvim-lint/CODES/lua/lint/linters/pony.lua
+  h_220433a6faf6b8 1-15
+lua/plugins/nvim-lint/CODES/lua/lint/linters/prisma-lint.lua
+  h_220433a6faf6b8 1-38
+lua/plugins/nvim-lint/CODES/lua/lint/linters/proselint.lua
+  h_220433a6faf6b8 1-30
+lua/plugins/nvim-lint/CODES/lua/lint/linters/protolint.lua
+  h_220433a6faf6b8 1-30
+lua/plugins/nvim-lint/CODES/lua/lint/linters/psalm.lua
+  h_220433a6faf6b8 1-43
+lua/plugins/nvim-lint/CODES/lua/lint/linters/puppet-lint.lua
+  h_220433a6faf6b8 1-20
+lua/plugins/nvim-lint/CODES/lua/lint/linters/pycodestyle.lua
+  h_220433a6faf6b8 1-17
+lua/plugins/nvim-lint/CODES/lua/lint/linters/pydocstyle.lua
+  h_220433a6faf6b8 1-9
+lua/plugins/nvim-lint/CODES/lua/lint/linters/pylint.lua
+  h_220433a6faf6b8 1-51
+lua/plugins/nvim-lint/CODES/lua/lint/linters/pyrefly.lua
+  h_220433a6faf6b8 1-52
+lua/plugins/nvim-lint/CODES/lua/lint/linters/quick-lint-js.lua
+  h_220433a6faf6b8 1-26
+lua/plugins/nvim-lint/CODES/lua/lint/linters/redocly.lua
+  h_220433a6faf6b8 1-27
+lua/plugins/nvim-lint/CODES/lua/lint/linters/regal.lua
+  h_220433a6faf6b8 1-43
+lua/plugins/nvim-lint/CODES/lua/lint/linters/revive.lua
+  h_220433a6faf6b8 1-43
+lua/plugins/nvim-lint/CODES/lua/lint/linters/rflint.lua
+  h_220433a6faf6b8 1-10
+lua/plugins/nvim-lint/CODES/lua/lint/linters/robocop.lua
+  h_220433a6faf6b8 1-10
+lua/plugins/nvim-lint/CODES/lua/lint/linters/rpmlint.lua
+  h_220433a6faf6b8 1-54
+lua/plugins/nvim-lint/CODES/lua/lint/linters/rpmspec.lua
+  h_220433a6faf6b8 1-42
+lua/plugins/nvim-lint/CODES/lua/lint/linters/rstcheck.lua
+  h_220433a6faf6b8 1-20
+lua/plugins/nvim-lint/CODES/lua/lint/linters/rstlint.lua
+  h_220433a6faf6b8 1-19
+lua/plugins/nvim-lint/CODES/lua/lint/linters/rubocop.lua
+  h_220433a6faf6b8 1-47
+lua/plugins/nvim-lint/CODES/lua/lint/linters/ruby.lua
+  h_220433a6faf6b8 1-39
+lua/plugins/nvim-lint/CODES/lua/lint/linters/ruff.lua
+  h_220433a6faf6b8 1-60
+lua/plugins/nvim-lint/CODES/lua/lint/linters/rumdl.lua
+  h_220433a6faf6b8 1-34
+lua/plugins/nvim-lint/CODES/lua/lint/linters/saltlint.lua
+  h_220433a6faf6b8 1-28
+lua/plugins/nvim-lint/CODES/lua/lint/linters/selene.lua
+  h_220433a6faf6b8 1-52
+lua/plugins/nvim-lint/CODES/lua/lint/linters/shellcheck.lua
+  h_220433a6faf6b8 1-56
+lua/plugins/nvim-lint/CODES/lua/lint/linters/slang.lua
+  h_220433a6faf6b8 1-19
+lua/plugins/nvim-lint/CODES/lua/lint/linters/snakemake.lua
+  h_220433a6faf6b8 1-79
+lua/plugins/nvim-lint/CODES/lua/lint/linters/snyk_iac.lua
+  h_220433a6faf6b8 1-35
+lua/plugins/nvim-lint/CODES/lua/lint/linters/solhint.lua
+  h_220433a6faf6b8 1-16
+lua/plugins/nvim-lint/CODES/lua/lint/linters/spectral.lua
+  h_220433a6faf6b8 1-56
+lua/plugins/nvim-lint/CODES/lua/lint/linters/sphinx-lint.lua
+  h_220433a6faf6b8 1-12
+lua/plugins/nvim-lint/CODES/lua/lint/linters/sqlfluff.lua
+  h_220433a6faf6b8 1-55
+lua/plugins/nvim-lint/CODES/lua/lint/linters/sqruff.lua
+  h_220433a6faf6b8 1-39
+lua/plugins/nvim-lint/CODES/lua/lint/linters/squawk.lua
+  h_220433a6faf6b8 1-46
+lua/plugins/nvim-lint/CODES/lua/lint/linters/standardjs.lua
+  h_220433a6faf6b8 1-36
+lua/plugins/nvim-lint/CODES/lua/lint/linters/standardrb.lua
+  h_220433a6faf6b8 1-31
+lua/plugins/nvim-lint/CODES/lua/lint/linters/staticcheck.lua
+  h_220433a6faf6b8 1-39
+lua/plugins/nvim-lint/CODES/lua/lint/linters/statix.lua
+  h_220433a6faf6b8 1-10
+lua/plugins/nvim-lint/CODES/lua/lint/linters/stylelint.lua
+  h_220433a6faf6b8 1-65
+lua/plugins/nvim-lint/CODES/lua/lint/linters/svlint.lua
+  h_220433a6faf6b8 1-17
+lua/plugins/nvim-lint/CODES/lua/lint/linters/swiftlint.lua
+  h_220433a6faf6b8 1-51
+lua/plugins/nvim-lint/CODES/lua/lint/linters/systemd-analyze.lua
+  h_220433a6faf6b8 1-11
+lua/plugins/nvim-lint/CODES/lua/lint/linters/systemdlint.lua
+  h_220433a6faf6b8 1-22
+lua/plugins/nvim-lint/CODES/lua/lint/linters/tclint.lua
+  h_220433a6faf6b8 1-16
+lua/plugins/nvim-lint/CODES/lua/lint/linters/terraform_validate.lua
+  h_220433a6faf6b8 1-43
+lua/plugins/nvim-lint/CODES/lua/lint/linters/tflint.lua
+  h_220433a6faf6b8 1-36
+lua/plugins/nvim-lint/CODES/lua/lint/linters/tfsec.lua
+  h_220433a6faf6b8 1-36
+lua/plugins/nvim-lint/CODES/lua/lint/linters/tidy.lua
+  h_220433a6faf6b8 1-30
+lua/plugins/nvim-lint/CODES/lua/lint/linters/tlint.lua
+  h_220433a6faf6b8 1-28
+lua/plugins/nvim-lint/CODES/lua/lint/linters/tofu.lua
+  h_220433a6faf6b8 1-45
+lua/plugins/nvim-lint/CODES/lua/lint/linters/tombi.lua
+  h_220433a6faf6b8 1-13
+lua/plugins/nvim-lint/CODES/lua/lint/linters/trivy.lua
+  h_220433a6faf6b8 1-65
+lua/plugins/nvim-lint/CODES/lua/lint/linters/trivy_secret.lua
+  h_220433a6faf6b8 1-45
+lua/plugins/nvim-lint/CODES/lua/lint/linters/ts-standard.lua
+  h_220433a6faf6b8 1-18
+lua/plugins/nvim-lint/CODES/lua/lint/linters/twig-cs-fixer.lua
+  h_220433a6faf6b8 1-23
+lua/plugins/nvim-lint/CODES/lua/lint/linters/twigcs.lua
+  h_220433a6faf6b8 1-12
+lua/plugins/nvim-lint/CODES/lua/lint/linters/typos.lua
+  h_220433a6faf6b8 1-49
+lua/plugins/nvim-lint/CODES/lua/lint/linters/unmake.lua
+  h_220433a6faf6b8 1-19
+lua/plugins/nvim-lint/CODES/lua/lint/linters/vacuum.lua
+  h_220433a6faf6b8 1-41
+lua/plugins/nvim-lint/CODES/lua/lint/linters/vala_lint.lua
+  h_220433a6faf6b8 1-40
+lua/plugins/nvim-lint/CODES/lua/lint/linters/vale.lua
+  h_220433a6faf6b8 1-57
+lua/plugins/nvim-lint/CODES/lua/lint/linters/verilator.lua
+  h_220433a6faf6b8 1-23
+lua/plugins/nvim-lint/CODES/lua/lint/linters/vint.lua
+  h_220433a6faf6b8 1-40
+lua/plugins/nvim-lint/CODES/lua/lint/linters/vsg.lua
+  h_220433a6faf6b8 1-65
+lua/plugins/nvim-lint/CODES/lua/lint/linters/vulture.lua
+  h_220433a6faf6b8 1-22
+lua/plugins/nvim-lint/CODES/lua/lint/linters/woke.lua
+  h_220433a6faf6b8 1-43
+lua/plugins/nvim-lint/CODES/lua/lint/linters/write_good.lua
+  h_220433a6faf6b8 1-15
+lua/plugins/nvim-lint/CODES/lua/lint/linters/yamllint.lua
+  h_220433a6faf6b8 1-18
+lua/plugins/nvim-lint/CODES/lua/lint/linters/yq.lua
+  h_220433a6faf6b8 1-10
+lua/plugins/nvim-lint/CODES/lua/lint/linters/zig.lua
+  h_220433a6faf6b8 1-21
+lua/plugins/nvim-lint/CODES/lua/lint/linters/zizmor.lua
+  h_220433a6faf6b8 1-89
+lua/plugins/nvim-lint/CODES/lua/lint/linters/zlint.lua
+  h_220433a6faf6b8 1-18
+lua/plugins/nvim-lint/CODES/lua/lint/linters/zsh.lua
+  h_220433a6faf6b8 1-22
+lua/plugins/nvim-lint/CODES/lua/lint/parser.lua
+  h_220433a6faf6b8 1-316
+lua/plugins/nvim-lint/CODES/lua/lint/util.lua
+  h_220433a6faf6b8 1-70
+lua/plugins/nvim-lint/CODES/nvim-lint-scm-1.rockspec
+  h_220433a6faf6b8 1-33
+lua/plugins/nvim-lint/CODES/spec/ameba_spec.lua
+  h_220433a6faf6b8 1-125
+lua/plugins/nvim-lint/CODES/spec/ansible_lint_spec.lua
+  h_220433a6faf6b8 1-30
+lua/plugins/nvim-lint/CODES/spec/both.py
+  h_220433a6faf6b8 1-6
+lua/plugins/nvim-lint/CODES/spec/checkpatch_spec.lua
+  h_220433a6faf6b8 1-47
+lua/plugins/nvim-lint/CODES/spec/checkstyle_spec.lua
+  h_220433a6faf6b8 1-63
+lua/plugins/nvim-lint/CODES/spec/codespell_spec.lua
+  h_220433a6faf6b8 1-21
+lua/plugins/nvim-lint/CODES/spec/commitlint_spec.lua
+  h_220433a6faf6b8 1-21
+lua/plugins/nvim-lint/CODES/spec/compiler_spec.lua
+  h_220433a6faf6b8 1-62
+lua/plugins/nvim-lint/CODES/spec/cppcheck_spec.lua
+  h_220433a6faf6b8 1-41
+lua/plugins/nvim-lint/CODES/spec/credo_spec.lua
+  h_220433a6faf6b8 1-38
+lua/plugins/nvim-lint/CODES/spec/cspell_spec.lua
+  h_220433a6faf6b8 1-58
+lua/plugins/nvim-lint/CODES/spec/deadnix_spec.lua
+  h_220433a6faf6b8 1-23
+lua/plugins/nvim-lint/CODES/spec/dialyxir_spec.lua
+  h_220433a6faf6b8 1-35
+lua/plugins/nvim-lint/CODES/spec/dmypy_spec.lua
+  h_220433a6faf6b8 1-47
+lua/plugins/nvim-lint/CODES/spec/eslint_d_spec.lua
+  h_220433a6faf6b8 1-175
+lua/plugins/nvim-lint/CODES/spec/fortitude_spec.lua
+  h_220433a6faf6b8 1-91
+lua/plugins/nvim-lint/CODES/spec/herb_spec.lua
+  h_220433a6faf6b8 1-66
+lua/plugins/nvim-lint/CODES/spec/hledger_spec.lua
+  h_220433a6faf6b8 1-59
+lua/plugins/nvim-lint/CODES/spec/hlint_spec.lua
+  h_220433a6faf6b8 1-47
+lua/plugins/nvim-lint/CODES/spec/jsonlint_spec.lua
+  h_220433a6faf6b8 1-32
+lua/plugins/nvim-lint/CODES/spec/lint_spec.lua
+  h_220433a6faf6b8 1-100
+lua/plugins/nvim-lint/CODES/spec/loop.py
+  h_220433a6faf6b8 1-8
+lua/plugins/nvim-lint/CODES/spec/markdownlint_spec.lua
+  h_220433a6faf6b8 1-33
+lua/plugins/nvim-lint/CODES/spec/markuplint_spec.lua
+  h_220433a6faf6b8 1-50
+lua/plugins/nvim-lint/CODES/spec/minimal.vim
+  h_220433a6faf6b8 1-2
+lua/plugins/nvim-lint/CODES/spec/mlint_spec.lua
+  h_220433a6faf6b8 1-47
+lua/plugins/nvim-lint/CODES/spec/mypy_spec.lua
+  h_220433a6faf6b8 1-47
+lua/plugins/nvim-lint/CODES/spec/oelint-adv_spec.lua
+  h_220433a6faf6b8 1-53
+lua/plugins/nvim-lint/CODES/spec/parser_spec.lua
+  h_220433a6faf6b8 1-130
+lua/plugins/nvim-lint/CODES/spec/php_spec.lua
+  h_220433a6faf6b8 1-116
+lua/plugins/nvim-lint/CODES/spec/phpcs_spec.lua
+  h_220433a6faf6b8 1-100
+lua/plugins/nvim-lint/CODES/spec/phpmd_spec.lua
+  h_220433a6faf6b8 1-114
+lua/plugins/nvim-lint/CODES/spec/phpstan_spec.lua
+  h_220433a6faf6b8 1-62
+lua/plugins/nvim-lint/CODES/spec/pmd_spec.lua
+  h_220433a6faf6b8 1-91
+lua/plugins/nvim-lint/CODES/spec/prisma-lint_spec.lua
+  h_220433a6faf6b8 1-85
+lua/plugins/nvim-lint/CODES/spec/pycodestyle_lint_spec.lua
+  h_220433a6faf6b8 1-50
+lua/plugins/nvim-lint/CODES/spec/pydocstyle_spec.lua
+  h_220433a6faf6b8 1-41
+lua/plugins/nvim-lint/CODES/spec/pylint_spec.lua
+  h_220433a6faf6b8 1-130
+lua/plugins/nvim-lint/CODES/spec/rpmlint_spec.lua
+  h_220433a6faf6b8 1-59
+lua/plugins/nvim-lint/CODES/spec/rpmspec_spec.lua
+  h_220433a6faf6b8 1-33
+lua/plugins/nvim-lint/CODES/spec/rubocop_spec.lua
+  h_220433a6faf6b8 1-82
+lua/plugins/nvim-lint/CODES/spec/ruby_spec.lua
+  h_220433a6faf6b8 1-50
+lua/plugins/nvim-lint/CODES/spec/saltlint_spec.lua
+  h_220433a6faf6b8 1-84
+lua/plugins/nvim-lint/CODES/spec/sarif_spec.lua
+  h_220433a6faf6b8 1-362
+lua/plugins/nvim-lint/CODES/spec/snakemake_spec.lua
+  h_220433a6faf6b8 1-101
+lua/plugins/nvim-lint/CODES/spec/snyk_iac_spec.lua
+  h_220433a6faf6b8 1-81
+lua/plugins/nvim-lint/CODES/spec/sphinx-lint_spec.lua
+  h_220433a6faf6b8 1-35
+lua/plugins/nvim-lint/CODES/spec/sqlfluff_spec.lua
+  h_220433a6faf6b8 1-84
+lua/plugins/nvim-lint/CODES/spec/staticcheck_spec.lua
+  h_220433a6faf6b8 1-47
+lua/plugins/nvim-lint/CODES/spec/swiftlint_spec.lua
+  h_220433a6faf6b8 1-47
+lua/plugins/nvim-lint/CODES/spec/systemdlint_spec.lua
+  h_220433a6faf6b8 1-53
+lua/plugins/nvim-lint/CODES/spec/tclint_spec.lua
+  h_220433a6faf6b8 1-53
+lua/plugins/nvim-lint/CODES/spec/tflint_spec.lua
+  h_220433a6faf6b8 1-22
+lua/plugins/nvim-lint/CODES/spec/tfsec_spec.lua
+  h_220433a6faf6b8 1-49
+lua/plugins/nvim-lint/CODES/spec/trivy_secret_spec.lua
+  h_220433a6faf6b8 1-101
+lua/plugins/nvim-lint/CODES/spec/trivy_spec.lua
+  h_220433a6faf6b8 1-101
+lua/plugins/nvim-lint/CODES/spec/twig-cs-fixer_spec.lua
+  h_220433a6faf6b8 1-60
+lua/plugins/nvim-lint/CODES/spec/twigcs_spec.lua
+  h_220433a6faf6b8 1-39
+lua/plugins/nvim-lint/CODES/spec/util_spec.lua
+  h_220433a6faf6b8 1-25
+lua/plugins/nvim-lint/CODES/spec/vale_spec.lua
+  h_220433a6faf6b8 1-8
+lua/plugins/nvim-lint/CODES/spec/verilator_spec.lua
+  h_220433a6faf6b8 1-71
+lua/plugins/nvim-lint/CODES/spec/zizmor_spec.lua
+  h_220433a6faf6b8 1-159
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.21",
+  "base_commit_sha": "bb447ac50866a7df76a72436f326c666494fa9dc",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
