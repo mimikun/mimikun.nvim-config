@@ -1,0 +1,16 @@
+lua/plugins/diffedit-nvim/cmds.lua
+  h_220433a6faf6b8 3-6
+lua/plugins/diffedit-nvim/init.lua
+  h_220433a6faf6b8 13-14
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.21",
+  "base_commit_sha": "6dfd7e1ec9b8b7e3dad526d339861f07511a712e",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
