@@ -1,9 +1,10 @@
 ---@type LazySpec
 local spec = {
-  -- Local checkout while this is being developed. Swap for "mimikun/mason-conform.nvim"
-  -- once it is pushed.
-  dir = vim.fn.expand("~/ghq/github.com/mimikun/mason-conform.nvim"),
-  name = "mason-conform.nvim",
+  -- Private repository, so lazy.nvim cannot clone it over the default HTTPS
+  -- url_format. `dev = true` resolves it under `dev.path` in lua/config/lazy.lua
+  -- instead, which is where ghq already put it.
+  "mimikun/mason-conform.nvim",
+  dev = true,
   --lazy = false,
   dependencies = require("plugins.mason-conform-nvim.dependencies"),
   cmd = require("plugins.mason-conform-nvim.cmds"),
