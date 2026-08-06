@@ -1,0 +1,18 @@
+lua/plugins/nvim-lint/events.lua
+  h_220433a6faf6b8 4
+lua/plugins/nvim-lint/init.lua
+  h_220433a6faf6b8 15-16,25-26,45-47
+lua/plugins/nvim-lint/opts.lua
+  h_220433a6faf6b8 4-6,8-10,44,73,80-81,96-97
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.21",
+  "base_commit_sha": "342293fad2a5bb020dfd60216cca30ad97704de2",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
