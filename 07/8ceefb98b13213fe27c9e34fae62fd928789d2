@@ -1,0 +1,19 @@
+lua/config/lazy.lua
+  s_4837a9dbbabf50::t_437bdcf00957f6 57-60
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.21",
+  "base_commit_sha": "078ceefb98b13213fe27c9e34fae62fd928789d2",
+  "prompts": {},
+  "sessions": {
+    "s_4837a9dbbabf50": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "b4acd8ac-b384-4be1-910d-253dcc044946",
+        "model": "claude-opus-5"
+      },
+      "human_author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
