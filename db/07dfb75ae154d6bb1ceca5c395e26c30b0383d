@@ -1,0 +1,21 @@
+lua/plugins/mason-conform-nvim/init.lua
+  s_4837a9dbbabf50::t_a9a6c8926ec9fa 3-7
+lua/plugins/mason-nvim-lint/init.lua
+  s_4837a9dbbabf50::t_d891854ecabf14 3-8
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.21",
+  "base_commit_sha": "db07dfb75ae154d6bb1ceca5c395e26c30b0383d",
+  "prompts": {},
+  "sessions": {
+    "s_4837a9dbbabf50": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "b4acd8ac-b384-4be1-910d-253dcc044946",
+        "model": "claude-opus-5"
+      },
+      "human_author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
