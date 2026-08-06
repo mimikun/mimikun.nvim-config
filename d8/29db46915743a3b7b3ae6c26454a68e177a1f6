@@ -1,0 +1,38 @@
+lua/plugins/nvim-lint/opts.lua
+  h_220433a6faf6b8 1-6
+  s_59404f5b0c1a6b::t_c00cc02b161e4d 7-113
+lua/plugins/nvim-lint/events.lua
+  h_220433a6faf6b8 1-6
+  s_59404f5b0c1a6b::t_2e252e5cd76c2e 7-10
+lua/plugins/nvim-lint/keys.lua
+  h_220433a6faf6b8 1-17
+lua/plugins/nvim-lint/cmds.lua
+  h_220433a6faf6b8 1-6
+  s_59404f5b0c1a6b::t_5a73624a1f143e 7-10
+lua/plugins/nvim-lint/init.lua
+  h_220433a6faf6b8 1-19
+  s_59404f5b0c1a6b::t_40473b9f2d4187 20-161
+typos.toml
+  h_220433a6faf6b8 1-9
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.21",
+  "base_commit_sha": "d829db46915743a3b7b3ae6c26454a68e177a1f6",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  },
+  "sessions": {
+    "s_59404f5b0c1a6b": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "39f51290-c60b-467f-ba51-d042e126ee1a",
+        "model": "unknown"
+      },
+      "human_author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
