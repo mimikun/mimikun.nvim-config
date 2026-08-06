@@ -54,7 +54,10 @@ require("lazy").setup({
     root = vim.fn.stdpath("data") .. "/lazy-rocks",
   },
   dev = {
-    path = "~/projects",
+    -- ghq layout, so a spec's name matches its directory here.
+    path = "~/ghq/github.com/mimikun",
+    -- `patterns` is left empty on purpose: only specs that opt in with
+    -- `dev = true` resolve locally.
     fallback = false,
   },
   install = {
