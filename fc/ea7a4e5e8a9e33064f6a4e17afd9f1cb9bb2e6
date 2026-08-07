@@ -1,0 +1,14 @@
+lua/plugins/real-icons-nvim/dependencies.lua
+  h_220433a6faf6b8 8-17
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.21",
+  "base_commit_sha": "fcea7a4e5e8a9e33064f6a4e17afd9f1cb9bb2e6",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
