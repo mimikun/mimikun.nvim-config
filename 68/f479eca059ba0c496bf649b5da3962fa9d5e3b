@@ -1,0 +1,64 @@
+lua/plugins/penguin-nvim/CODES/.gitignore
+  h_220433a6faf6b8 1-2
+lua/plugins/penguin-nvim/CODES/AGENTS.md
+  h_220433a6faf6b8 1-15
+lua/plugins/penguin-nvim/CODES/LUA_C.md
+  h_220433a6faf6b8 1-88
+lua/plugins/penguin-nvim/CODES/Makefile
+  h_220433a6faf6b8 1-47
+lua/plugins/penguin-nvim/CODES/OPTIMISATIONS.md
+  h_220433a6faf6b8 1-81
+lua/plugins/penguin-nvim/CODES/README.md
+  h_220433a6faf6b8 1-254
+lua/plugins/penguin-nvim/CODES/lua/penguin/completion.lua
+  h_220433a6faf6b8 1-372
+lua/plugins/penguin-nvim/CODES/lua/penguin/config.lua
+  h_220433a6faf6b8 1-45
+lua/plugins/penguin-nvim/CODES/lua/penguin/highlight.lua
+  h_220433a6faf6b8 1-110
+lua/plugins/penguin-nvim/CODES/lua/penguin/history.lua
+  h_220433a6faf6b8 1-47
+lua/plugins/penguin-nvim/CODES/lua/penguin/init.lua
+  h_220433a6faf6b8 1-54
+lua/plugins/penguin-nvim/CODES/lua/penguin/matcher.lua
+  h_220433a6faf6b8 1-321
+lua/plugins/penguin-nvim/CODES/lua/penguin/native.lua
+  h_220433a6faf6b8 1-271
+lua/plugins/penguin-nvim/CODES/lua/penguin/normal_enter.lua
+  h_220433a6faf6b8 1-131
+lua/plugins/penguin-nvim/CODES/lua/penguin/session.lua
+  h_220433a6faf6b8 1-396
+lua/plugins/penguin-nvim/CODES/lua/penguin/ui.lua
+  h_220433a6faf6b8 1-459
+lua/plugins/penguin-nvim/CODES/plugin/penguin.lua
+  h_220433a6faf6b8 1-18
+lua/plugins/penguin-nvim/CODES/scripts/headless_bench.lua
+  h_220433a6faf6b8 1-677
+lua/plugins/penguin-nvim/CODES/scripts/headless_check.lua
+  h_220433a6faf6b8 1-691
+lua/plugins/penguin-nvim/CODES/scripts/headless_native_check.lua
+  h_220433a6faf6b8 1-866
+lua/plugins/penguin-nvim/CODES/scripts/minimal_init.lua
+  h_220433a6faf6b8 1-37
+lua/plugins/penguin-nvim/CODES/scripts/minimal_native_init.lua
+  h_220433a6faf6b8 1-65
+lua/plugins/penguin-nvim/CODES/src/penguin_filter.c
+  h_220433a6faf6b8 1-877
+lua/plugins/penguin-nvim/CODES/src/penguin_filter_types.h
+  h_220433a6faf6b8 1-15
+lua/plugins/penguin-nvim/CODES/src/penguin_match_spans.c
+  h_220433a6faf6b8 1-342
+lua/plugins/penguin-nvim/CODES/src/penguin_match_spans.h
+  h_220433a6faf6b8 1-14
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.21",
+  "base_commit_sha": "68f479eca059ba0c496bf649b5da3962fa9d5e3b",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
