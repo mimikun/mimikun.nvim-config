@@ -92,6 +92,14 @@ local opts = {
   -- Overrides for built-in linter definitions.
   -- `append_args` mirrors the key of the same name in `plugins.conform-nvim.opts`.
   linters = {
+    -- rumdl defaults its cache to ./.rumdl_cache, which litters every working directory when linting via stdin.
+    -- Caching brings no benefit here (stdin has no file identity to key on), so disable it.
+    -- Mirrors the identical override in `plugins.conform-nvim.opts`.
+    rumdl = {
+      append_args = {
+        "--no-cache",
+      },
+    },
     typos = {
       -- The default dictionary rewrites `edn` -> `end`, which is wrong for Clojure EDN.
       -- `--config` merges with a project-local `_typos.toml` rather than replacing it, so per-project settings still apply.
