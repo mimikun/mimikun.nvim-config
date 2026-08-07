@@ -1,0 +1,19 @@
+docs/plans/mason-bridge-none-ls-guard.md
+  s_cff3b98886f629::t_556f4f8a305c55 1-237
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.21",
+  "base_commit_sha": "b062766b1d4b715dff179eb13fdd6ec4ca8ac9f8",
+  "prompts": {},
+  "sessions": {
+    "s_cff3b98886f629": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "cb0856e3-ef05-4da2-8449-b903d9a6dd21",
+        "model": "claude-opus-5"
+      },
+      "human_author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
