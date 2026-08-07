@@ -1,0 +1,16 @@
+lua/plugins/bloocky/README.md
+  h_220433a6faf6b8 231
+lua/plugins/bloocky/_default.lua
+  h_220433a6faf6b8 1-3,5-6,8-29,31-74,77-97
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.21",
+  "base_commit_sha": "c7ce081244c308acfdb2840ee39b4ec456949f59",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
