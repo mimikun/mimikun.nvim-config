@@ -14,11 +14,18 @@ local spec = {
 
     -- nvim-lint has no setup().
     -- Built-in linter definitions are plain modules cached by `require`, so extending them in place is what actually sticks.
+    -- `append_args` extends the built-in argument list; every other key replaces the field outright.
     for name, override in pairs(opts.linters) do
       local linter = lint.linters[name]
 
-      if linter and override.append_args then
-        linter.args = vim.list_extend(vim.deepcopy(linter.args or {}), override.append_args)
+      if linter then
+        for key, value in pairs(override) do
+          if key == "append_args" then
+            linter.args = vim.list_extend(vim.deepcopy(linter.args or {}), value)
+          else
+            linter[key] = value
+          end
+        end
       end
     end
 

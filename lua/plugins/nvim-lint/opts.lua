@@ -99,6 +99,9 @@ local opts = {
       append_args = {
         "--no-cache",
       },
+      -- The built-in definition reads diagnostics off stderr, but rumdl writes its JSON report to stdout.
+      -- Left alone, markdown linting silently produces zero diagnostics. Verified against rumdl 0.2.52.
+      stream = "stdout",
     },
     typos = {
       -- The default dictionary rewrites `edn` -> `end`, which is wrong for Clojure EDN.
