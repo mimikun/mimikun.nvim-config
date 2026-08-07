@@ -1,0 +1,18 @@
+lua/plugins/dooing/opts/hoge
+  h_220433a6faf6b8 1
+lua/plugins/dooing/opts/init.lua
+  h_220433a6faf6b8 3-16
+lua/plugins/dooing/opts/window.lua
+  h_220433a6faf6b8 1-36
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.21",
+  "base_commit_sha": "f57b7ad2822b861f36251c7472927ab5f0a07d56",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
