@@ -1,0 +1,30 @@
+lua/plugins/dooing/opts/calendar.lua
+  h_220433a6faf6b8 1-19
+lua/plugins/dooing/opts/due_notifications.lua
+  h_220433a6faf6b8 1-13
+lua/plugins/dooing/opts/formatting.lua
+  h_220433a6faf6b8 1-11,13-21,23-30,32-40,42-50,52-60,63-64
+lua/plugins/dooing/opts/init.lua
+  h_220433a6faf6b8 17-51
+lua/plugins/dooing/opts/keymaps.lua
+  h_220433a6faf6b8 1-42
+lua/plugins/dooing/opts/nested_tasks.lua
+  h_220433a6faf6b8 1-16
+lua/plugins/dooing/opts/per_project.lua
+  h_220433a6faf6b8 1-19
+lua/plugins/dooing/opts/priorities.lua
+  h_220433a6faf6b8 1-13
+lua/plugins/dooing/opts/priority_groups.lua
+  h_220433a6faf6b8 1-26
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.21",
+  "base_commit_sha": "8312420f3ff9232381529493bb9df0e389068b7e",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
