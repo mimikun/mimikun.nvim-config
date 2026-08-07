@@ -1,0 +1,28 @@
+lua/plugins/real-icons-nvim/opts/color.lua
+  h_220433a6faf6b8 1-45
+lua/plugins/real-icons-nvim/opts/fallback.lua
+  h_220433a6faf6b8 1-45
+lua/plugins/real-icons-nvim/opts/integrations.lua
+  h_220433a6faf6b8 1-45
+lua/plugins/real-icons-nvim/opts/overrides.lua
+  h_220433a6faf6b8 1-45
+lua/plugins/real-icons-nvim/opts/packs.lua
+  h_220433a6faf6b8 1-45
+lua/plugins/real-icons-nvim/opts/real-icons-integrations.txt
+  h_220433a6faf6b8 1-58
+lua/plugins/real-icons-nvim/opts/rules.lua
+  h_220433a6faf6b8 1-45
+lua/plugins/real-icons-nvim/opts/size.lua
+  h_220433a6faf6b8 1-45
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.21",
+  "base_commit_sha": "77e2506eb3a54a6bb8c70036314d3e2b44dc4881",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
