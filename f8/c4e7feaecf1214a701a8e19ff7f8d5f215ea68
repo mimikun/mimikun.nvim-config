@@ -1,0 +1,14 @@
+lua/plugins/dooing/opts/stylua.toml
+  h_220433a6faf6b8 1-13
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.21",
+  "base_commit_sha": "f8c4e7feaecf1214a701a8e19ff7f8d5f215ea68",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
