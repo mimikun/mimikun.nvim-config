@@ -1,0 +1,18 @@
+lua/plugins/dooing/README.md
+  h_220433a6faf6b8 3,71-72,102,111,146-147,162
+lua/plugins/dooing/init.lua
+  h_220433a6faf6b8 7,13-18
+lua/plugins/dooing/opts.lua
+  h_220433a6faf6b8 5-163
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.21",
+  "base_commit_sha": "ab0d2bc623b1d2b65fd0e2f0c672d5ac30aa23fa",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
