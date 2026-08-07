@@ -121,3 +121,11 @@ tasks:
     cmds:
       - "{{.TASKFILE_DIR}}/scripts/check-options-sync.sh"
     silent: true
+
+  check-tool-litter:
+    desc: "Find formatters/linters that write into the working directory (e.g. ./.rumdl_cache)"
+    aliases:
+      - ctl
+    cmds:
+      - "{{.TASKFILE_DIR}}/scripts/check-tool-litter.sh {{.CLI_ARGS}}"
+    silent: true
