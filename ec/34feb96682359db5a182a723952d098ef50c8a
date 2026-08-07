@@ -1,0 +1,56 @@
+lua/plugins/zj-theme/CODES/.github/workflows/ci.yml
+  h_220433a6faf6b8 1-48
+lua/plugins/zj-theme/CODES/.gitignore
+  h_220433a6faf6b8 1-2
+lua/plugins/zj-theme/CODES/.luacheckrc
+  h_220433a6faf6b8 1-6
+lua/plugins/zj-theme/CODES/ARCHITECTURE.md
+  h_220433a6faf6b8 1-428
+lua/plugins/zj-theme/CODES/LICENSE
+  h_220433a6faf6b8 1-21
+lua/plugins/zj-theme/CODES/README.md
+  h_220433a6faf6b8 1-320
+lua/plugins/zj-theme/CODES/doc/zj-theme.txt
+  h_220433a6faf6b8 1-204
+lua/plugins/zj-theme/CODES/lua/zj-theme/colors.lua
+  h_220433a6faf6b8 1-14
+lua/plugins/zj-theme/CODES/lua/zj-theme/config.lua
+  h_220433a6faf6b8 1-55
+lua/plugins/zj-theme/CODES/lua/zj-theme/health.lua
+  h_220433a6faf6b8 1-139
+lua/plugins/zj-theme/CODES/lua/zj-theme/init.lua
+  h_220433a6faf6b8 1-73
+lua/plugins/zj-theme/CODES/lua/zj-theme/mappings.lua
+  h_220433a6faf6b8 1-65
+lua/plugins/zj-theme/CODES/lua/zj-theme/pane_bg.lua
+  h_220433a6faf6b8 1-226
+lua/plugins/zj-theme/CODES/lua/zj-theme/sync.lua
+  h_220433a6faf6b8 1-149
+lua/plugins/zj-theme/CODES/plugin/zj-theme.lua
+  h_220433a6faf6b8 1-8
+lua/plugins/zj-theme/CODES/stylua.toml
+  h_220433a6faf6b8 1-4
+lua/plugins/zj-theme/CODES/tests/minimal_init.lua
+  h_220433a6faf6b8 1-10
+lua/plugins/zj-theme/CODES/tests/zj-theme/colors_spec.lua
+  h_220433a6faf6b8 1-19
+lua/plugins/zj-theme/CODES/tests/zj-theme/health_spec.lua
+  h_220433a6faf6b8 1-268
+lua/plugins/zj-theme/CODES/tests/zj-theme/init_spec.lua
+  h_220433a6faf6b8 1-81
+lua/plugins/zj-theme/CODES/tests/zj-theme/pane_bg_spec.lua
+  h_220433a6faf6b8 1-360
+lua/plugins/zj-theme/CODES/tests/zj-theme/sync_spec.lua
+  h_220433a6faf6b8 1-234
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.21",
+  "base_commit_sha": "ec34feb96682359db5a182a723952d098ef50c8a",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
