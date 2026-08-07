@@ -12,22 +12,7 @@ local spec = {
 
     lint.linters_by_ft = opts.linters_by_ft
 
-    -- nvim-lint has no setup().
-    -- Built-in linter definitions are plain modules cached by `require`, so extending them in place is what actually sticks.
-    -- `append_args` extends the built-in argument list; every other key replaces the field outright.
-    for name, override in pairs(opts.linters) do
-      local linter = lint.linters[name]
-
-      if linter then
-        for key, value in pairs(override) do
-          if key == "append_args" then
-            linter.args = vim.list_extend(vim.deepcopy(linter.args or {}), value)
-          else
-            linter[key] = value
-          end
-        end
-      end
-    end
+    require("plugins.nvim-lint.apply_overrides")(lint, opts.linters)
 
     -- Resolve a linter's command the same way nvim-lint does:
     -- it may be a function so the linter can prefer a project-local binary.
