@@ -1,0 +1,30 @@
+lua/plugins/dooing/.editorconfig
+  h_220433a6faf6b8 1-14
+lua/plugins/dooing/cmds.lua
+  h_220433a6faf6b8 1-6
+lua/plugins/dooing/dependencies.lua
+  h_220433a6faf6b8 1-16
+lua/plugins/dooing/events.lua
+  h_220433a6faf6b8 1-6
+lua/plugins/dooing/ft.lua
+  h_220433a6faf6b8 1-6
+lua/plugins/dooing/init.lua
+  h_220433a6faf6b8 1-37
+lua/plugins/dooing/keys.lua
+  h_220433a6faf6b8 1-23
+lua/plugins/dooing/opts.lua
+  h_220433a6faf6b8 1-6
+lua/plugins/dooing/stylua.toml
+  h_220433a6faf6b8 1-13
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.21",
+  "base_commit_sha": "bf4fbc5aa361bda6b4316942f3477f5939c9e3ae",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
