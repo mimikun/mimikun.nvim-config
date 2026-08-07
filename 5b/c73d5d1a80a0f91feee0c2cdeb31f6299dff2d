@@ -1,0 +1,14 @@
+lua/plugins/dooing/opts/window.lua
+  h_220433a6faf6b8 10,15
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.21",
+  "base_commit_sha": "5bc73d5d1a80a0f91feee0c2cdeb31f6299dff2d",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
