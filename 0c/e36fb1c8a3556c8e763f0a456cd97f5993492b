@@ -1,0 +1,32 @@
+lua/plugins/visualizer-nvim/CODES/.github/FUNDING.yml
+  h_220433a6faf6b8 1-2
+lua/plugins/visualizer-nvim/CODES/.stylua.toml
+  h_220433a6faf6b8 1-6
+lua/plugins/visualizer-nvim/CODES/LICENSE
+  h_220433a6faf6b8 1-21
+lua/plugins/visualizer-nvim/CODES/README.md
+  h_220433a6faf6b8 1-39
+lua/plugins/visualizer-nvim/CODES/assets/three.min.js
+  h_220433a6faf6b8 1-6
+lua/plugins/visualizer-nvim/CODES/lua/visualizer/init.lua
+  h_220433a6faf6b8 1-187
+lua/plugins/visualizer-nvim/CODES/lua/visualizer/server.lua
+  h_220433a6faf6b8 1-1219
+lua/plugins/visualizer-nvim/CODES/lua/visualizer/symbol.lua
+  h_220433a6faf6b8 1-2027
+lua/plugins/visualizer-nvim/CODES/lua/visualizer/utils.lua
+  h_220433a6faf6b8 1-345
+lua/plugins/visualizer-nvim/CODES/plugin/visualizer.lua
+  h_220433a6faf6b8 1-17
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.21",
+  "base_commit_sha": "0ce36fb1c8a3556c8e763f0a456cd97f5993492b",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
