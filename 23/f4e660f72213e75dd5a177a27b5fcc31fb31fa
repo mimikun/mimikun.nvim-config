@@ -1,0 +1,16 @@
+lua/plugins/real-icons-nvim/opts/real-icons-integrations.txt
+  h_220433a6faf6b8 1-17
+lua/plugins/real-icons-nvim/opts/rules.lua
+  h_220433a6faf6b8 4-8
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.21",
+  "base_commit_sha": "23f4e660f72213e75dd5a177a27b5fcc31fb31fa",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
