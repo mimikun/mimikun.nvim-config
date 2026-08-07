@@ -1,0 +1,19 @@
+lua/plugins/nvim-lint/opts.lua
+  s_ebd59cc95e38a5::t_19f418e1d21d53 95-102
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.21",
+  "base_commit_sha": "6b9d527957a667841864f3feba8daf3995f8d559",
+  "prompts": {},
+  "sessions": {
+    "s_ebd59cc95e38a5": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "8cb74a77-ceb7-47ed-a6ed-ea7b200b0b33",
+        "model": "claude-opus-5"
+      },
+      "human_author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
