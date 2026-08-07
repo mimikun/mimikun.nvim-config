@@ -1,0 +1,14 @@
+lua/plugins/bloocky/opts.lua
+  h_220433a6faf6b8 7,11,16-20,46-50,64-70
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.21",
+  "base_commit_sha": "134e289bf6c1e765bd8af2b1a32c90cec11329cd",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
