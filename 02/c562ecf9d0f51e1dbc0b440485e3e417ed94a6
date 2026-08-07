@@ -1,0 +1,44 @@
+lua/plugins/bloocky/CODES/.github/FUNDING.yml
+  h_220433a6faf6b8 1-15
+lua/plugins/bloocky/CODES/LICENSE
+  h_220433a6faf6b8 1-21
+lua/plugins/bloocky/CODES/README.md
+  h_220433a6faf6b8 1-231
+"lua/plugins/bloocky/CODES/can't find pane: nvim"
+  h_220433a6faf6b8 1
+lua/plugins/bloocky/CODES/lua/bloocky/config.lua
+  h_220433a6faf6b8 1-79
+lua/plugins/bloocky/CODES/lua/bloocky/dialog.lua
+  h_220433a6faf6b8 1-401
+lua/plugins/bloocky/CODES/lua/bloocky/dooing.lua
+  h_220433a6faf6b8 1-54
+lua/plugins/bloocky/CODES/lua/bloocky/highlights.lua
+  h_220433a6faf6b8 1-48
+lua/plugins/bloocky/CODES/lua/bloocky/init.lua
+  h_220433a6faf6b8 1-59
+lua/plugins/bloocky/CODES/lua/bloocky/state.lua
+  h_220433a6faf6b8 1-159
+lua/plugins/bloocky/CODES/lua/bloocky/ui.lua
+  h_220433a6faf6b8 1-393
+lua/plugins/bloocky/CODES/lua/bloocky/utils.lua
+  h_220433a6faf6b8 1-257
+lua/plugins/bloocky/CODES/lua/bloocky/views/day.lua
+  h_220433a6faf6b8 1-181
+lua/plugins/bloocky/CODES/lua/bloocky/views/month.lua
+  h_220433a6faf6b8 1-157
+lua/plugins/bloocky/CODES/lua/bloocky/views/week.lua
+  h_220433a6faf6b8 1-187
+lua/plugins/bloocky/CODES/plugin/bloocky.vim
+  h_220433a6faf6b8 1-7
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.21",
+  "base_commit_sha": "02c562ecf9d0f51e1dbc0b440485e3e417ed94a6",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
