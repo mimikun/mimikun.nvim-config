@@ -1,0 +1,30 @@
+lua/plugins/penguin-nvim/.editorconfig
+  h_220433a6faf6b8 1-14
+lua/plugins/penguin-nvim/cmds.lua
+  h_220433a6faf6b8 1-6
+lua/plugins/penguin-nvim/dependencies.lua
+  h_220433a6faf6b8 1-16
+lua/plugins/penguin-nvim/events.lua
+  h_220433a6faf6b8 1-6
+lua/plugins/penguin-nvim/ft.lua
+  h_220433a6faf6b8 1-6
+lua/plugins/penguin-nvim/init.lua
+  h_220433a6faf6b8 1-37
+lua/plugins/penguin-nvim/keys.lua
+  h_220433a6faf6b8 1-23
+lua/plugins/penguin-nvim/opts.lua
+  h_220433a6faf6b8 1-6
+lua/plugins/penguin-nvim/stylua.toml
+  h_220433a6faf6b8 1-13
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.21",
+  "base_commit_sha": "44b3579af5471af9777d3dca596d6406cad46722",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
