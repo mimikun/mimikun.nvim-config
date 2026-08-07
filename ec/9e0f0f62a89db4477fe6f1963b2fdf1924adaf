@@ -1,0 +1,27 @@
+Taskfile.yml
+  s_ebd59cc95e38a5::t_ed1b079a1c1ceb 124-131
+lua/plugins/nvim-lint/apply_overrides.lua
+  s_ebd59cc95e38a5::t_79dfdbe6381b4d 1-32
+lua/plugins/nvim-lint/init.lua
+  s_ebd59cc95e38a5::t_0d5766dca7870e 15
+scripts/check-tool-litter.lua
+  s_ebd59cc95e38a5::t_59880b45908374 1-343
+scripts/check-tool-litter.sh
+  s_ebd59cc95e38a5::t_c3948bdef27449 1-32
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.21",
+  "base_commit_sha": "ec9e0f0f62a89db4477fe6f1963b2fdf1924adaf",
+  "prompts": {},
+  "sessions": {
+    "s_ebd59cc95e38a5": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "8cb74a77-ceb7-47ed-a6ed-ea7b200b0b33",
+        "model": "claude-opus-5"
+      },
+      "human_author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
