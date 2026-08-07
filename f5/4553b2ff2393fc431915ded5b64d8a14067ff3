@@ -1,0 +1,22 @@
+lua/plugins/visualizer-nvim/CODES/init.lua
+  h_220433a6faf6b8 3-4,10,19,79,81,86,90,105,120,150,181
+lua/plugins/visualizer-nvim/CODES/server.lua
+  h_220433a6faf6b8 8-9,31,33,35,39,43,45-49,62,68,78,83-84,87-88,90,93-97,101-104,108,111,113-114,125,128-131,135,143-144,148
+lua/plugins/visualizer-nvim/CODES/symbol.lua
+  h_220433a6faf6b8 4
+lua/plugins/visualizer-nvim/CODES/utils.lua
+  h_220433a6faf6b8 10,14,41,45,59,84,88,103,111-136,144-145,154,186,222,267,274-275,281-282,285-287,301,305,307,309,329,338-339
+lua/plugins/visualizer-nvim/cmds.lua
+  h_220433a6faf6b8 3
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.21",
+  "base_commit_sha": "f54553b2ff2393fc431915ded5b64d8a14067ff3",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
