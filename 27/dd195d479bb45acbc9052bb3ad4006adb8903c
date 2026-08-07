@@ -1,0 +1,58 @@
+lua/plugins/dooing/CODES/.github/FUNDING.yml
+  h_220433a6faf6b8 1-15
+lua/plugins/dooing/CODES/CLAUDE.md
+  h_220433a6faf6b8 1-144
+lua/plugins/dooing/CODES/CONTRIBUTING.md
+  h_220433a6faf6b8 1-236
+lua/plugins/dooing/CODES/LICENSE
+  h_220433a6faf6b8 1-21
+lua/plugins/dooing/CODES/README.md
+  h_220433a6faf6b8 1-476
+lua/plugins/dooing/CODES/doc/dooing.txt
+  h_220433a6faf6b8 1-290
+lua/plugins/dooing/CODES/lua/dooing/config.lua
+  h_220433a6faf6b8 1-245
+lua/plugins/dooing/CODES/lua/dooing/init.lua
+  h_220433a6faf6b8 1-456
+lua/plugins/dooing/CODES/lua/dooing/server.lua
+  h_220433a6faf6b8 1-189
+lua/plugins/dooing/CODES/lua/dooing/state.lua
+  h_220433a6faf6b8 1-1224
+lua/plugins/dooing/CODES/lua/dooing/ui.lua
+  h_220433a6faf6b8 1-6
+lua/plugins/dooing/CODES/lua/dooing/ui/actions.lua
+  h_220433a6faf6b8 1-730
+lua/plugins/dooing/CODES/lua/dooing/ui/calendar.lua
+  h_220433a6faf6b8 1-485
+lua/plugins/dooing/CODES/lua/dooing/ui/components.lua
+  h_220433a6faf6b8 1-442
+lua/plugins/dooing/CODES/lua/dooing/ui/constants.lua
+  h_220433a6faf6b8 1-25
+lua/plugins/dooing/CODES/lua/dooing/ui/due_notification.lua
+  h_220433a6faf6b8 1-315
+lua/plugins/dooing/CODES/lua/dooing/ui/highlights.lua
+  h_220433a6faf6b8 1-83
+lua/plugins/dooing/CODES/lua/dooing/ui/init.lua
+  h_220433a6faf6b8 1-93
+lua/plugins/dooing/CODES/lua/dooing/ui/keymaps.lua
+  h_220433a6faf6b8 1-66
+lua/plugins/dooing/CODES/lua/dooing/ui/rendering.lua
+  h_220433a6faf6b8 1-282
+lua/plugins/dooing/CODES/lua/dooing/ui/utils.lua
+  h_220433a6faf6b8 1-201
+lua/plugins/dooing/CODES/lua/dooing/ui/window.lua
+  h_220433a6faf6b8 1-356
+lua/plugins/dooing/CODES/plugin/dooing.vim
+  h_220433a6faf6b8 1-4
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.21",
+  "base_commit_sha": "27dd195d479bb45acbc9052bb3ad4006adb8903c",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
