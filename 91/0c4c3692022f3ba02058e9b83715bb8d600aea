@@ -1,0 +1,19 @@
+docs/plans/smart-splits-herdr.md
+  s_4edd5f935300c2::t_365caa24f03ac7 1-110
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.21",
+  "base_commit_sha": "910c4c3692022f3ba02058e9b83715bb8d600aea",
+  "prompts": {},
+  "sessions": {
+    "s_4edd5f935300c2": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "9992f1c4-e4c7-4d07-89b0-5c4c5a3e8652",
+        "model": "claude-opus-5"
+      },
+      "human_author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
