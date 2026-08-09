@@ -1,0 +1,14 @@
+lua/plugins/camouflage-nvim/opts/init.lua
+  h_220433a6faf6b8 39-43
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.21",
+  "base_commit_sha": "c7213a80b7e24788dce5a964b3c443750d425af2",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
