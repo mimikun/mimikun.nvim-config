@@ -1,0 +1,21 @@
+Taskfile.yml
+  s_6199a4cd33b87e::t_92b748939f3640 132-139
+scripts/check-vendor-stalled.sh
+  s_6199a4cd33b87e::t_82030464b126a0 1-204
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.21",
+  "base_commit_sha": "88803af1be50b3c9f22c94694c8ecb727c58ca6c",
+  "prompts": {},
+  "sessions": {
+    "s_6199a4cd33b87e": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "e4775c64-dfab-4e93-be02-5051e7b3a665",
+        "model": "claude-opus-5"
+      },
+      "human_author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
