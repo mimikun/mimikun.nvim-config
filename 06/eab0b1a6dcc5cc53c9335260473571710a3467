@@ -1,0 +1,18 @@
+lua/plugins/camouflage-nvim/opts/audit.lua
+  h_220433a6faf6b8 15-20
+lua/plugins/camouflage-nvim/opts/checks.lua
+  h_220433a6faf6b8 78-84
+lua/plugins/camouflage-nvim/opts/custom_patterns.lua
+  h_220433a6faf6b8 8-12
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.21",
+  "base_commit_sha": "06eab0b1a6dcc5cc53c9335260473571710a3467",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
