@@ -1,0 +1,20 @@
+lua/plugins/wind-nvim/opts/breaths.lua
+  h_220433a6faf6b8 1,20
+lua/plugins/wind-nvim/opts/keymaps.lua
+  h_220433a6faf6b8 1,71
+lua/plugins/wind-nvim/opts/reveal.lua
+  h_220433a6faf6b8 1,14-15
+lua/plugins/wind-nvim/opts/windows.lua
+  h_220433a6faf6b8 1,38
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.10",
+  "base_commit_sha": "620e96e7f2ec4c2771d4e798a2cd59624e48ab13",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
