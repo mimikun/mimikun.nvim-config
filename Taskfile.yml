@@ -129,3 +129,11 @@ tasks:
     cmds:
       - "{{.TASKFILE_DIR}}/scripts/check-tool-litter.sh {{.CLI_ARGS}}"
     silent: true
+
+  check-vendor-stalled:
+    desc: "List remote add/* branches still stuck at the vendor-only stage"
+    aliases:
+      - cvs
+    cmds:
+      - "{{.TASKFILE_DIR}}/scripts/check-vendor-stalled.sh {{.CLI_ARGS}}"
+    silent: true
