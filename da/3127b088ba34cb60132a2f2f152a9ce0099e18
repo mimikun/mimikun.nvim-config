@@ -1,0 +1,16 @@
+lua/plugins/penguin-nvim/init.lua
+  h_220433a6faf6b8 8-30,35
+lua/plugins/penguin-nvim/opts.lua
+  h_220433a6faf6b8 3
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.21",
+  "base_commit_sha": "da3127b088ba34cb60132a2f2f152a9ce0099e18",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
