@@ -80,7 +80,65 @@
 どちらもプラグインではなく検証環境の問題で、切り分けに往復を3回使った。
 neowright に切り替えたら1回で通った。**速いと思った手段のほうが遅かった。**
 
+同じ family の落とし穴がもう1つある。**headless nvim で `require` を先回りすると、
+lazy の `config` 実行が "loop or previous error" で失敗する。**
+master でも同じ結果になるので、**この症状を自分の変更のせいだと誤認しないこと**
+（2026-07 の selene 対応で stash して比較確認済み）。
+
 ## ステアリングの設定
 - `.kiro/steering/` 全体をプロジェクトメモリとして読み込む
 - 既定のファイル: `product.md`、`tech.md`、`structure.md`
 - カスタムファイルにも対応（`/kiro-steering-custom` で管理する）
+
+## このリポジトリの道具
+
+**どれもスクリプトが本体。ここにあるのは「存在すること」と「いつ使うか」だけ。**
+
+| 道具 | 何をするか | いつ |
+|---|---|---|
+| `scripts/nvim-plugin-clone.sh` | プラグイン追加。`add/<plugin>` ブランチを作る | `/add-plugin`、または `task plugin-setup -- <git-url>` |
+| `scripts/nvim-worktree.sh` | worktree + データ種まき + `.envrc` 生成 | `/nvim-worktree add <branch>` |
+| `task ck` (`scripts/check-keys-spec.*`) | `keys.lua` の構造リンタ | keys.lua を触ったあと |
+| `task cos` (`scripts/check-options-sync.*`) | nvim のオプション集合と `options.lua` の突き合わせ | **nvim をアップグレードしたあと** |
+
+- `nvim-plugin-clone.sh` は `~/.config/nvim/lua/plugins` を**ハードコードしている**。
+  worktree の中で使うときは `NVIM_PLUGINS_DIR` を明示する
+- テンプレートは `~/NVIM_PLUGIN_TEMPLATES`（**別リポジトリ**）。
+  ここを直さないと、生成されるファイルに同じ間違いが増え続ける
+- **設定変更のコミットはユーザー自身が行う。** Claude は push しない
+
+### worktree で並行編集するとき
+
+`NVIM_APPNAME` で分離する（このリポジトリのランタイムは全て `vim.fn.stdpath()` ベース
+なので効く）。`~/.config/nvim-<name>` に置き、`.envrc` + direnv で自動切替。
+
+- **`mason` だけは symlink 共有**（12GB あるため）。
+  **worktree 内で `:Mason` アンインストールすると本体側に波及する**
+- `lazy` と `site`（treesitter パーサ）は実コピーで分離
+
+## 規約
+
+- **`keys.lua` の `desc` / `silent` / `noremap` はフラットに書く。**
+  余分なテーブルリテラルに入れ子にすると lazy.nvim の `LazyKeysSpec` が**黙って無視する**
+  （`maparg` で `desc=nil silent=false` になる）。`task ck` がこれを検出する
+- **`options.lua` の分類ルール**: bool / number / 非空かつ非パスの string は設定を書く。
+  空文字・パス・実行時読取専用（`columns` 等）・巨大なバージョン依存文字列（`statusline` 等）・
+  非推奨の Vi 互換はコメントのまま残す
+- **`formatters/` は conform 組み込み定義のベンダリング。触らない**
+
+## ハマりどころ（コードを読んでも分からないもの）
+
+- **selene のインライン `-- selene: allow(rule)` は、直後の1要素にしか効かない。**
+  テーブル全体に効かせるには `local foo = {` の手前に置く
+- **`\u{XXXX}` は LuaJIT / Neovim で正常に動く。** selene が警告するのは
+  lua51 base が知らないだけで、コード側の修正は不要（インライン allow が正解）
+- **`luajit -b` / `-bl` はこの環境で使えない**（jit モジュール未同梱）。
+  構文チェックは `luajit -e 'loadfile(path)'`
+
+## 生きている方針（未実行）
+
+- **typos は conform から外してある。** `["*"] + --write-changes` で全ファイルに
+  かけていたため、標準辞書の `edn -> end` 補正が Clojure の EDN を保存時に壊していた
+- **nvim-lint 導入時に、typos を「検知のみ」で登録し直す**（修正はしない）。
+  その際 `[default.extend-words] edn = "edn"` の許可リストを `--config` で渡す。
+  プロジェクトローカルの `_typos.toml` とは**マージ**される（上書きではない・実測確認済み）
