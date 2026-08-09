@@ -1,0 +1,20 @@
+lua/plugins/weborigami-nvim/CODES/config.lua
+  h_220433a6faf6b8 24-37,44-61
+lua/plugins/weborigami-nvim/CODES/health.lua
+  h_220433a6faf6b8 6-41
+lua/plugins/weborigami-nvim/CODES/init.lua
+  h_220433a6faf6b8 12-22,24-37,44,46-47
+lua/plugins/weborigami-nvim/CODES/lsp.lua
+  h_220433a6faf6b8 14-21,27-33,49-111,119-120,127-155,160-163,171-190,197-247
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.21",
+  "base_commit_sha": "d851fe8cccd88b07f4f21bdd55ba33080d7a78f2",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
