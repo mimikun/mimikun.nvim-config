@@ -1,0 +1,14 @@
+docs/plans/remote-push-vendoring-smooth-metcalfe.md
+  h_220433a6faf6b8 1-329
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.21",
+  "base_commit_sha": "8bbb380f3fcff09a36f137323758892db9b84937",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
