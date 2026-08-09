@@ -1,0 +1,154 @@
+lua/plugins/weborigami-nvim/CODES/.gitignore
+  h_220433a6faf6b8 1-2
+lua/plugins/weborigami-nvim/CODES/LICENSE
+  h_220433a6faf6b8 1-29
+lua/plugins/weborigami-nvim/CODES/README.md
+  h_220433a6faf6b8 1-132
+lua/plugins/weborigami-nvim/CODES/doc/tags
+  h_220433a6faf6b8 1-12
+lua/plugins/weborigami-nvim/CODES/doc/weborigami-nvim.txt
+  h_220433a6faf6b8 1-152
+lua/plugins/weborigami-nvim/CODES/ftplugin/origami.lua
+  h_220433a6faf6b8 1-10
+lua/plugins/weborigami-nvim/CODES/ftplugin/origamihtml.lua
+  h_220433a6faf6b8 1-10
+lua/plugins/weborigami-nvim/CODES/ftplugin/origamimarkdown.lua
+  h_220433a6faf6b8 1-10
+lua/plugins/weborigami-nvim/CODES/lua/weborigami-nvim/config.lua
+  h_220433a6faf6b8 1-64
+lua/plugins/weborigami-nvim/CODES/lua/weborigami-nvim/health.lua
+  h_220433a6faf6b8 1-46
+lua/plugins/weborigami-nvim/CODES/lua/weborigami-nvim/init.lua
+  h_220433a6faf6b8 1-50
+lua/plugins/weborigami-nvim/CODES/lua/weborigami-nvim/lsp.lua
+  h_220433a6faf6b8 1-251
+lua/plugins/weborigami-nvim/CODES/scripts/sync-upstream.sh
+  h_220433a6faf6b8 1-64
+lua/plugins/weborigami-nvim/CODES/server/LICENSE
+  h_220433a6faf6b8 1-21
+lua/plugins/weborigami-nvim/CODES/server/autoComplete.mjs
+  h_220433a6faf6b8 1-203
+lua/plugins/weborigami-nvim/CODES/server/builtins.json
+  h_220433a6faf6b8 1-597
+lua/plugins/weborigami-nvim/CODES/server/definition.mjs
+  h_220433a6faf6b8 1-200
+lua/plugins/weborigami-nvim/CODES/server/diagnostics.mjs
+  h_220433a6faf6b8 1-91
+lua/plugins/weborigami-nvim/CODES/server/findInProjectScope.mjs
+  h_220433a6faf6b8 1-53
+lua/plugins/weborigami-nvim/CODES/server/hover.mjs
+  h_220433a6faf6b8 1-88
+lua/plugins/weborigami-nvim/CODES/server/index.mjs
+  h_220433a6faf6b8 1-221
+lua/plugins/weborigami-nvim/CODES/server/localDeclarations.mjs
+  h_220433a6faf6b8 1-41
+lua/plugins/weborigami-nvim/CODES/server/neovim.patch
+  h_220433a6faf6b8 1-1110
+lua/plugins/weborigami-nvim/CODES/server/package-lock.json
+  h_220433a6faf6b8 1-143
+lua/plugins/weborigami-nvim/CODES/server/package.json
+  h_220433a6faf6b8 1-26
+lua/plugins/weborigami-nvim/CODES/server/symbols.mjs
+  h_220433a6faf6b8 1-71
+lua/plugins/weborigami-nvim/CODES/server/tsconfig.json
+  h_220433a6faf6b8 1-16
+lua/plugins/weborigami-nvim/CODES/server/types.js
+  h_220433a6faf6b8 1-23
+lua/plugins/weborigami-nvim/CODES/server/upstream-sha
+  h_220433a6faf6b8 1
+lua/plugins/weborigami-nvim/CODES/server/upstream/.gitignore
+  h_220433a6faf6b8 1-3
+lua/plugins/weborigami-nvim/CODES/server/upstream/.vscode/launch.json
+  h_220433a6faf6b8 1-17
+lua/plugins/weborigami-nvim/CODES/server/upstream/.vscodeignore
+  h_220433a6faf6b8 1-4
+lua/plugins/weborigami-nvim/CODES/server/upstream/DevInstall.md
+  h_220433a6faf6b8 1-21
+lua/plugins/weborigami-nvim/CODES/server/upstream/LICENSE
+  h_220433a6faf6b8 1-21
+lua/plugins/weborigami-nvim/CODES/server/upstream/ReadMe.md
+  h_220433a6faf6b8 1-17
+lua/plugins/weborigami-nvim/CODES/server/upstream/icon.svg
+  h_220433a6faf6b8 1-61
+lua/plugins/weborigami-nvim/CODES/server/upstream/language-configuration.json
+  h_220433a6faf6b8 1-85
+lua/plugins/weborigami-nvim/CODES/server/upstream/package-lock.json
+  h_220433a6faf6b8 1-5393
+lua/plugins/weborigami-nvim/CODES/server/upstream/package.json
+  h_220433a6faf6b8 1-114
+lua/plugins/weborigami-nvim/CODES/server/upstream/src/client/builtins.json
+  h_220433a6faf6b8 1-597
+lua/plugins/weborigami-nvim/CODES/server/upstream/src/client/extension.cjs
+  h_220433a6faf6b8 1-13
+lua/plugins/weborigami-nvim/CODES/server/upstream/src/client/extension.mjs
+  h_220433a6faf6b8 1-98
+lua/plugins/weborigami-nvim/CODES/server/upstream/src/client/vscode.cjs
+  h_220433a6faf6b8 1-7
+lua/plugins/weborigami-nvim/CODES/server/upstream/src/scripts/completions.ori
+  h_220433a6faf6b8 1-24
+lua/plugins/weborigami-nvim/CODES/server/upstream/src/server/autoComplete.mjs
+  h_220433a6faf6b8 1-235
+lua/plugins/weborigami-nvim/CODES/server/upstream/src/server/definition.mjs
+  h_220433a6faf6b8 1-201
+lua/plugins/weborigami-nvim/CODES/server/upstream/src/server/diagnostics.mjs
+  h_220433a6faf6b8 1-62
+lua/plugins/weborigami-nvim/CODES/server/upstream/src/server/findInProjectScope.mjs
+  h_220433a6faf6b8 1-50
+lua/plugins/weborigami-nvim/CODES/server/upstream/src/server/localDeclarations.mjs
+  h_220433a6faf6b8 1-46
+lua/plugins/weborigami-nvim/CODES/server/upstream/src/server/server.cjs
+  h_220433a6faf6b8 1-7
+lua/plugins/weborigami-nvim/CODES/server/upstream/src/server/server.mjs
+  h_220433a6faf6b8 1-129
+lua/plugins/weborigami-nvim/CODES/server/upstream/src/server/types.ts
+  h_220433a6faf6b8 1-14
+lua/plugins/weborigami-nvim/CODES/server/upstream/src/utilities.mjs
+  h_220433a6faf6b8 1-88
+lua/plugins/weborigami-nvim/CODES/server/upstream/syntaxes/origami-html.tmLanguage.json
+  h_220433a6faf6b8 1-42
+lua/plugins/weborigami-nvim/CODES/server/upstream/syntaxes/origami-markdown.tmLanguage.json
+  h_220433a6faf6b8 1-42
+lua/plugins/weborigami-nvim/CODES/server/upstream/syntaxes/origami.tmLanguage.json
+  h_220433a6faf6b8 1-241
+lua/plugins/weborigami-nvim/CODES/server/upstream/test/autoComplete.test.mjs
+  h_220433a6faf6b8 1-69
+lua/plugins/weborigami-nvim/CODES/server/upstream/test/definition.test.mjs
+  h_220433a6faf6b8 1-110
+lua/plugins/weborigami-nvim/CODES/server/upstream/test/diagnostics.test.mjs
+  h_220433a6faf6b8 1-18
+lua/plugins/weborigami-nvim/CODES/server/upstream/test/fixtures.mjs
+  h_220433a6faf6b8 1-38
+lua/plugins/weborigami-nvim/CODES/server/upstream/test/fixtures/post.ori.md
+  h_220433a6faf6b8 1-7
+lua/plugins/weborigami-nvim/CODES/server/upstream/test/fixtures/teamData.yaml
+  h_220433a6faf6b8 1
+lua/plugins/weborigami-nvim/CODES/server/upstream/test/fixtures/template.ori
+  h_220433a6faf6b8 1-26
+lua/plugins/weborigami-nvim/CODES/server/upstream/test/fixtures/test.ori
+  h_220433a6faf6b8 1-18
+lua/plugins/weborigami-nvim/CODES/server/upstream/test/fixtures/test.ori.html
+  h_220433a6faf6b8 1-6
+lua/plugins/weborigami-nvim/CODES/server/upstream/test/fixtures/test.ori.md
+  h_220433a6faf6b8 1-7
+lua/plugins/weborigami-nvim/CODES/server/upstream/tsconfig.json
+  h_220433a6faf6b8 1-16
+lua/plugins/weborigami-nvim/CODES/server/utilities.mjs
+  h_220433a6faf6b8 1-108
+lua/plugins/weborigami-nvim/CODES/syntax/origami.vim
+  h_220433a6faf6b8 1-177
+lua/plugins/weborigami-nvim/CODES/syntax/origamihtml.vim
+  h_220433a6faf6b8 1-25
+lua/plugins/weborigami-nvim/CODES/syntax/origamimarkdown.vim
+  h_220433a6faf6b8 1-25
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.21",
+  "base_commit_sha": "a69dd2f27be3355875d327282ce90793eb36fb29",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
