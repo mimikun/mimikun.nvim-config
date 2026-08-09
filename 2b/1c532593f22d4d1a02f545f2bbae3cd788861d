@@ -1,0 +1,20 @@
+lua/plugins/penguin-nvim/README.md
+  h_220433a6faf6b8 3,11
+lua/plugins/penguin-nvim/cmds.lua
+  h_220433a6faf6b8 3
+lua/plugins/penguin-nvim/init.lua
+  h_220433a6faf6b8 8-10,12-14
+lua/plugins/penguin-nvim/keys.lua
+  h_220433a6faf6b8 4-5,9
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.21",
+  "base_commit_sha": "2b1c532593f22d4d1a02f545f2bbae3cd788861d",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
