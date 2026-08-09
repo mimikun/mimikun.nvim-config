@@ -1,0 +1,22 @@
+lua/plugins/camouflage-nvim/opts/parsers.lua
+  h_220433a6faf6b8 15-21
+lua/plugins/camouflage-nvim/opts/patterns.lua
+  h_220433a6faf6b8 26-28
+lua/plugins/camouflage-nvim/opts/policy.lua
+  h_220433a6faf6b8 24-47
+lua/plugins/camouflage-nvim/opts/project_config.lua
+  h_220433a6faf6b8 16-25
+lua/plugins/camouflage-nvim/opts/pwned.lua
+  h_220433a6faf6b8 27-40
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.21",
+  "base_commit_sha": "9ea1664e489b29171644c93242f96a8357f0077b",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
