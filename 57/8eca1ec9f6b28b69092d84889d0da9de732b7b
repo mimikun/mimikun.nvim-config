@@ -1,0 +1,14 @@
+lua/plugins/penguin-nvim/keys.lua
+  h_220433a6faf6b8 5-7
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.21",
+  "base_commit_sha": "578eca1ec9f6b28b69092d84889d0da9de732b7b",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
