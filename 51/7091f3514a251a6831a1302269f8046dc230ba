@@ -1,0 +1,29 @@
+lua/plugins/LuaSnip/dependencies.lua
+  s_105036552869a3::t_d8e409b9778155 2
+lua/plugins/LuaSnip/init.lua
+  s_105036552869a3::t_dceb1088c35f46 5-9,11-27
+lua/plugins/LuaSnip/opts.lua
+  s_105036552869a3::t_5aee55d1e39ad1 3-31
+lua/plugins/blink-cmp/dependencies.lua
+  s_105036552869a3::t_ef9d3c095c87cc 5-7
+lua/plugins/blink-cmp/opts/snippets.lua
+  s_105036552869a3::t_5a42a2c96b16a3 3-7,9
+luasnippets/all.lua
+  s_105036552869a3::t_83945aff920fb4 1-43
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.21",
+  "base_commit_sha": "517091f3514a251a6831a1302269f8046dc230ba",
+  "prompts": {},
+  "sessions": {
+    "s_105036552869a3": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "f576465b-3324-4f01-a96a-eac06db4a761",
+        "model": "claude-opus-5"
+      },
+      "human_author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
