@@ -1,0 +1,40 @@
+lua/plugins/statuscol-nvim/line-justice-nvim-SPEC/CODES/examples/custom-theme.lua
+  h_220433a6faf6b8 1-171
+lua/plugins/statuscol-nvim/line-justice-nvim-SPEC/CODES/examples/lazy-spec.lua
+  h_220433a6faf6b8 1-208
+lua/plugins/statuscol-nvim/line-justice-nvim-SPEC/CODES/init.lua
+  h_220433a6faf6b8 1-619
+lua/plugins/statuscol-nvim/line-justice-nvim-SPEC/CODES/plugin.lua
+  h_220433a6faf6b8 1-11
+lua/plugins/statuscol-nvim/line-justice-nvim-SPEC/CODES/themes/dawn.lua
+  h_220433a6faf6b8 1-33
+lua/plugins/statuscol-nvim/line-justice-nvim-SPEC/CODES/themes/horizon.lua
+  h_220433a6faf6b8 1-33
+lua/plugins/statuscol-nvim/line-justice-nvim-SPEC/CODES/themes/init.lua
+  h_220433a6faf6b8 1-239
+lua/plugins/statuscol-nvim/line-justice-nvim-SPEC/CODES/themes/midnight.lua
+  h_220433a6faf6b8 1-33
+lua/plugins/statuscol-nvim/line-justice-nvim-SPEC/README.md
+  h_220433a6faf6b8 1-289
+lua/plugins/statuscol-nvim/line-justice-nvim-SPEC/dependencies.lua
+  h_220433a6faf6b8 1-7
+lua/plugins/statuscol-nvim/line-justice-nvim-SPEC/events.lua
+  h_220433a6faf6b8 1-6
+lua/plugins/statuscol-nvim/line-justice-nvim-SPEC/init.lua
+  h_220433a6faf6b8 1-28
+lua/plugins/statuscol-nvim/line-justice-nvim-SPEC/opts.lua
+  h_220433a6faf6b8 1-55
+lua/plugins/statuscol-nvim/line-justice-nvim-SPEC/stylua.toml
+  h_220433a6faf6b8 1-13
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.21",
+  "base_commit_sha": "f592480dae6b7faf37d4bccafebe60af22bf3f4a",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
