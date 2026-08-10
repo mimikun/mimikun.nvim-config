@@ -1,7 +1,7 @@
 ---@type blink.cmp.KeymapConfig
 local keymap = {
   -- 'enter' accepts with <CR> instead of <C-y>:
-  --   <C-space> show / show_documentation / hide_documentation
+  --   <C-space> show / show_documentation / hide_documentation (remapped below)
   --   <C-e>     cancel
   --   <CR>      accept
   --   <C-n>/<C-p>, <Up>/<Down>  select_next / select_prev
@@ -29,6 +29,21 @@ local keymap = {
     "snippet_backward",
     "fallback",
   },
+
+  -- <C-space> never reaches Neovim on this machine: PowerToys Run claims it at
+  -- the Windows level, above WSL. Move the same three commands to <C-l>, which
+  -- has no default insert mode behaviour outside of ins-completion.
+  ---@type blink.cmp.KeymapCommand[]
+  ["<C-l>"] = {
+    -- Opens the menu, then toggles the documentation window
+    "show",
+    "show_documentation",
+    "hide_documentation",
+  },
+
+  -- Drop the preset's binding so it does not sit there looking usable
+  ---@type false
+  ["<C-space>"] = false,
 }
 
 return keymap

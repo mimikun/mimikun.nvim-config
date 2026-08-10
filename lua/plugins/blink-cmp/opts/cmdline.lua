@@ -13,6 +13,17 @@ local cmdline = {
     --   <C-e> cancel, <C-y> select_accept_and_enter
     ---@type blink.cmp.KeymapPreset
     preset = "cmdline",
+
+    -- Same swap as in insert mode: PowerToys Run eats <C-space>
+    ---@type blink.cmp.KeymapCommand[]
+    ["<C-l>"] = {
+      "show",
+      "show_documentation",
+      "hide_documentation",
+    },
+
+    ---@type false
+    ["<C-space>"] = false,
   },
 }
 
