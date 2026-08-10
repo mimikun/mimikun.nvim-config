@@ -1,0 +1,30 @@
+lua/plugins/line-justice-nvim/init.lua
+  h_220433a6faf6b8 4,9-10,12-13
+  h_220433a6faf6b8 1-3,5-8,11,14-16
+lua/plugins/statuscol-nvim/dependencies.lua
+  h_220433a6faf6b8 5-6
+lua/plugins/line-justice-nvim/opts/line_numbers.lua
+  h_220433a6faf6b8 1-57
+lua/plugins/statuscol-nvim/opts/segments.lua
+  h_220433a6faf6b8 1,3,91,93
+lua/plugins/line-justice-nvim/opts/init.lua
+  h_220433a6faf6b8 1,3-7
+  h_220433a6faf6b8 2,8-10
+lua/plugins/line-justice-nvim/opts/wrapped_lines.lua
+  h_220433a6faf6b8 1-25
+lua/plugins/line-justice-nvim/dependencies.lua
+  h_220433a6faf6b8 1-6
+lua/plugins/line-justice-nvim/events.lua
+  h_220433a6faf6b8 1-6
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.21",
+  "base_commit_sha": "5b237c9deb6fe8064e80928ba65f5586c976fc3e",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
