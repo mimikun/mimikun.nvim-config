@@ -1,0 +1,14 @@
+lua/plugins/line-justice-nvim/opts/line_numbers.lua
+  h_220433a6faf6b8 11-32
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.21",
+  "base_commit_sha": "560ceb844ee7ab4524a3329d3e52924e7c44a2bc",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
