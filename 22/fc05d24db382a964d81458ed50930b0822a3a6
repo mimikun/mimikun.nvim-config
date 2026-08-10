@@ -1,0 +1,22 @@
+lua/plugins/LuaSnip/WIKIS/Cool-Snippets.md
+  h_220433a6faf6b8 1-1630
+lua/plugins/LuaSnip/WIKIS/Home.md
+  h_220433a6faf6b8 1
+lua/plugins/LuaSnip/WIKIS/Migrating-from-UltiSnips.md
+  h_220433a6faf6b8 1-96
+lua/plugins/LuaSnip/WIKIS/Misc.md
+  h_220433a6faf6b8 1-1063
+lua/plugins/LuaSnip/WIKIS/Nice-Configs.md
+  h_220433a6faf6b8 1-264
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.21",
+  "base_commit_sha": "22fc05d24db382a964d81458ed50930b0822a3a6",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
