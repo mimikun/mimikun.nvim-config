@@ -1,0 +1,30 @@
+lua/plugins/LuaSnip/.editorconfig
+  h_220433a6faf6b8 1-14
+lua/plugins/LuaSnip/cmds.lua
+  h_220433a6faf6b8 1-6
+lua/plugins/LuaSnip/dependencies.lua
+  h_220433a6faf6b8 1-16
+lua/plugins/LuaSnip/events.lua
+  h_220433a6faf6b8 1-6
+lua/plugins/LuaSnip/ft.lua
+  h_220433a6faf6b8 1-6
+lua/plugins/LuaSnip/init.lua
+  h_220433a6faf6b8 1-37
+lua/plugins/LuaSnip/keys.lua
+  h_220433a6faf6b8 1-23
+lua/plugins/LuaSnip/opts.lua
+  h_220433a6faf6b8 1-6
+lua/plugins/LuaSnip/stylua.toml
+  h_220433a6faf6b8 1-13
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.21",
+  "base_commit_sha": "d46e7a2b88e1d0c5144a00c324c457c618318bc7",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
