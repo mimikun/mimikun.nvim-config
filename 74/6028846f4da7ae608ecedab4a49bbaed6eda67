@@ -1,0 +1,21 @@
+lua/plugins/blink-cmp/opts/completion.lua
+  s_105036552869a3::t_57ee8b799110fd 26-28,30,32,34
+lua/plugins/blink-cmp/opts/keymap.lua
+  s_105036552869a3::t_b759b69a373227 3,6,10,12-31
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.21",
+  "base_commit_sha": "746028846f4da7ae608ecedab4a49bbaed6eda67",
+  "prompts": {},
+  "sessions": {
+    "s_105036552869a3": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "f576465b-3324-4f01-a96a-eac06db4a761",
+        "model": "claude-opus-5"
+      },
+      "human_author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
