@@ -1,5 +1,6 @@
-local builtin = require("statuscol.builtin")
+local _builtin = require("statuscol.builtin")
 local oil_cols = require("statuscol-oil")
+local lj = require("line-justice")
 
 -- Default segments (fold -> sign -> line number + separator), explained below
 ---@type table
@@ -87,8 +88,9 @@ local segments = {
   -- NOTE: segments_3
   {
     text = {
-      builtin.lnumfunc,
+      --builtin.lnumfunc,
       --" ",
+      lj.segment,
     },
 
     --condition = {
