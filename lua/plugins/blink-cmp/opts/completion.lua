@@ -23,13 +23,15 @@ local completion = {
 
     ---@type blink.cmp.CompletionListSelectionConfig
     selection = {
-      -- Automatically select the first item
+      -- Nothing is selected until <Tab> is pressed, so <CR> stays a newline
+      -- while the menu is open but no candidate has been chosen.
+      -- Recommended by the 'enter' keymap preset.
       ---@type boolean | fun(ctx: blink.cmp.Context): boolean
-      preselect = true,
+      preselect = false,
 
-      -- Insert the item into the buffer when selecting it
+      -- Only write the item into the buffer on <CR>, not while cycling with <Tab>
       ---@type boolean | fun(ctx: blink.cmp.Context): boolean
-      auto_insert = true,
+      auto_insert = false,
     },
   },
 

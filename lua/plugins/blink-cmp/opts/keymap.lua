@@ -1,16 +1,34 @@
 ---@type blink.cmp.KeymapConfig
 local keymap = {
-  -- 'default' mirrors the built-in completion keymaps:
+  -- 'enter' accepts with <CR> instead of <C-y>:
   --   <C-space> show / show_documentation / hide_documentation
   --   <C-e>     cancel
-  --   <C-y>     select_and_accept
+  --   <CR>      accept
   --   <C-n>/<C-p>, <Up>/<Down>  select_next / select_prev
   --   <C-b>/<C-f>               scroll_documentation_up / down
-  --   <Tab>/<S-Tab>             snippet_forward / snippet_backward
   --   <C-k>                     show_signature / hide_signature
-  -- Other presets: 'super-tab', 'enter', 'none'
+  -- Other presets: 'default', 'super-tab', 'none'
   ---@type blink.cmp.KeymapPreset
-  preset = "default",
+  preset = "enter",
+
+  -- The preset only maps <Tab> to snippet navigation, so add selection in front
+  -- of it: cycle the menu with <Tab>, then confirm with <CR>.
+  -- Each command runs in order until one of them handles the key, so <Tab>
+  -- still jumps between snippet placeholders when the menu is closed, and still
+  -- falls back to a literal tab when neither applies.
+  ---@type blink.cmp.KeymapCommand[]
+  ["<Tab>"] = {
+    "select_next",
+    "snippet_forward",
+    "fallback",
+  },
+
+  ---@type blink.cmp.KeymapCommand[]
+  ["<S-Tab>"] = {
+    "select_prev",
+    "snippet_backward",
+    "fallback",
+  },
 }
 
 return keymap
