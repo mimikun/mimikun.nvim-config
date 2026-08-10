@@ -1,0 +1,14 @@
+lua/plugins/statuscol-nvim/dependencies.lua
+  h_220433a6faf6b8 5-6
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.21",
+  "base_commit_sha": "ef308db359d41c0a7e5e0a15d2dd32b4d0d7b15d",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
