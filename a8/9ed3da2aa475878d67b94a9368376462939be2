@@ -1,0 +1,19 @@
+scratch.lua
+  s_105036552869a3::t_e7b77eec522256 1-26
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.21",
+  "base_commit_sha": "a89ed3da2aa475878d67b94a9368376462939be2",
+  "prompts": {},
+  "sessions": {
+    "s_105036552869a3": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "f576465b-3324-4f01-a96a-eac06db4a761",
+        "model": "claude-opus-5"
+      },
+      "human_author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
