@@ -1,0 +1,96 @@
+lua/plugins/blink-cmp/CODES/sources/buffer/cache.lua
+  h_220433a6faf6b8 1-45
+lua/plugins/blink-cmp/CODES/sources/buffer/init.lua
+  h_220433a6faf6b8 1-199
+lua/plugins/blink-cmp/CODES/sources/buffer/parser.lua
+  h_220433a6faf6b8 1-130
+lua/plugins/blink-cmp/CODES/sources/buffer/priority.lua
+  h_220433a6faf6b8 1-43
+lua/plugins/blink-cmp/CODES/sources/buffer/recency.lua
+  h_220433a6faf6b8 1-30
+lua/plugins/blink-cmp/CODES/sources/buffer/utils.lua
+  h_220433a6faf6b8 1-52
+lua/plugins/blink-cmp/CODES/sources/cmdline/constants.lua
+  h_220433a6faf6b8 1-59
+lua/plugins/blink-cmp/CODES/sources/cmdline/help.lua
+  h_220433a6faf6b8 1-37
+lua/plugins/blink-cmp/CODES/sources/cmdline/init.lua
+  h_220433a6faf6b8 1-333
+lua/plugins/blink-cmp/CODES/sources/cmdline/man.lua
+  h_220433a6faf6b8 1-21
+lua/plugins/blink-cmp/CODES/sources/cmdline/utils.lua
+  h_220433a6faf6b8 1-263
+lua/plugins/blink-cmp/CODES/sources/complete_func.lua
+  h_220433a6faf6b8 1-167
+lua/plugins/blink-cmp/CODES/sources/lib/init.lua
+  h_220433a6faf6b8 1-336
+lua/plugins/blink-cmp/CODES/sources/lib/provider/config.lua
+  h_220433a6faf6b8 1-47
+lua/plugins/blink-cmp/CODES/sources/lib/provider/init.lua
+  h_220433a6faf6b8 1-213
+lua/plugins/blink-cmp/CODES/sources/lib/provider/list.lua
+  h_220433a6faf6b8 1-128
+lua/plugins/blink-cmp/CODES/sources/lib/provider/override.lua
+  h_220433a6faf6b8 1-19
+lua/plugins/blink-cmp/CODES/sources/lib/queue.lua
+  h_220433a6faf6b8 1-66
+lua/plugins/blink-cmp/CODES/sources/lib/tree.lua
+  h_220433a6faf6b8 1-172
+lua/plugins/blink-cmp/CODES/sources/lib/types.lua
+  h_220433a6faf6b8 1-27
+lua/plugins/blink-cmp/CODES/sources/lib/utils.lua
+  h_220433a6faf6b8 1-18
+lua/plugins/blink-cmp/CODES/sources/lsp/cache.lua
+  h_220433a6faf6b8 1-34
+lua/plugins/blink-cmp/CODES/sources/lsp/commands.lua
+  h_220433a6faf6b8 1-16
+lua/plugins/blink-cmp/CODES/sources/lsp/completion.lua
+  h_220433a6faf6b8 1-132
+lua/plugins/blink-cmp/CODES/sources/lsp/hacks/clangd.lua
+  h_220433a6faf6b8 1-17
+lua/plugins/blink-cmp/CODES/sources/lsp/hacks/docs.lua
+  h_220433a6faf6b8 1-96
+lua/plugins/blink-cmp/CODES/sources/lsp/hacks/emmet.lua
+  h_220433a6faf6b8 1-11
+lua/plugins/blink-cmp/CODES/sources/lsp/hacks/lua_ls.lua
+  h_220433a6faf6b8 1-20
+lua/plugins/blink-cmp/CODES/sources/lsp/hacks/tailwind.lua
+  h_220433a6faf6b8 1-49
+lua/plugins/blink-cmp/CODES/sources/lsp/init.lua
+  h_220433a6faf6b8 1-212
+lua/plugins/blink-cmp/CODES/sources/path/init.lua
+  h_220433a6faf6b8 1-100
+lua/plugins/blink-cmp/CODES/sources/path/lib.lua
+  h_220433a6faf6b8 1-276
+lua/plugins/blink-cmp/CODES/sources/path/regex.lua
+  h_220433a6faf6b8 1-34
+lua/plugins/blink-cmp/CODES/sources/snippets/default/builtin.lua
+  h_220433a6faf6b8 1-203
+lua/plugins/blink-cmp/CODES/sources/snippets/default/init.lua
+  h_220433a6faf6b8 1-67
+lua/plugins/blink-cmp/CODES/sources/snippets/default/registry.lua
+  h_220433a6faf6b8 1-201
+lua/plugins/blink-cmp/CODES/sources/snippets/default/scan.lua
+  h_220433a6faf6b8 1-95
+lua/plugins/blink-cmp/CODES/sources/snippets/init.lua
+  h_220433a6faf6b8 1-9
+lua/plugins/blink-cmp/CODES/sources/snippets/luasnip.lua
+  h_220433a6faf6b8 1-338
+lua/plugins/blink-cmp/CODES/sources/snippets/mini_snippets.lua
+  h_220433a6faf6b8 1-150
+lua/plugins/blink-cmp/CODES/sources/snippets/utils.lua
+  h_220433a6faf6b8 1-98
+lua/plugins/blink-cmp/CODES/sources/snippets/vsnip.lua
+  h_220433a6faf6b8 1-85
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "120068d1cee0a2f8232c625edaf46f2a20f74390",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
