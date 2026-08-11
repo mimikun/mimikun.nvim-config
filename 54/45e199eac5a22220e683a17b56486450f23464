@@ -1,0 +1,14 @@
+Taskfile.yml
+  h_220433a6faf6b8 42
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "5445e199eac5a22220e683a17b56486450f23464",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
