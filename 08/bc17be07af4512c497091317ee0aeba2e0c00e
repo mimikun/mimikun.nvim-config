@@ -1,0 +1,380 @@
+lua/plugins/kulala-nvim/CODES/.conventional-changelog.config.mjs
+  h_220433a6faf6b8 1-11
+lua/plugins/kulala-nvim/CODES/.editorconfig
+  h_220433a6faf6b8 1-11
+lua/plugins/kulala-nvim/CODES/.github/FUNDING.yml
+  h_220433a6faf6b8 1-15
+lua/plugins/kulala-nvim/CODES/.github/ISSUE_TEMPLATE/bug_report.md
+  h_220433a6faf6b8 1-36
+lua/plugins/kulala-nvim/CODES/.github/ISSUE_TEMPLATE/config.yaml
+  h_220433a6faf6b8 1-9
+lua/plugins/kulala-nvim/CODES/.github/ISSUE_TEMPLATE/feature_request.md
+  h_220433a6faf6b8 1-20
+lua/plugins/kulala-nvim/CODES/.github/PULL_REQUEST_TEMPLATE.md
+  h_220433a6faf6b8 1-33
+lua/plugins/kulala-nvim/CODES/.github/release.yml
+  h_220433a6faf6b8 1-21
+lua/plugins/kulala-nvim/CODES/.github/workflows/pre-release.yml
+  h_220433a6faf6b8 1-25
+lua/plugins/kulala-nvim/CODES/.github/workflows/release.yml
+  h_220433a6faf6b8 1-68
+lua/plugins/kulala-nvim/CODES/.github/workflows/tests.yml
+  h_220433a6faf6b8 1-157
+lua/plugins/kulala-nvim/CODES/.gitignore
+  h_220433a6faf6b8 1-31
+lua/plugins/kulala-nvim/CODES/.luacheckrc
+  h_220433a6faf6b8 1-21
+lua/plugins/kulala-nvim/CODES/.luarc.json
+  h_220433a6faf6b8 1-26
+lua/plugins/kulala-nvim/CODES/.node-version
+  h_220433a6faf6b8 1
+lua/plugins/kulala-nvim/CODES/.yamllint.yaml
+  h_220433a6faf6b8 1-5
+lua/plugins/kulala-nvim/CODES/CHANGELOG.md
+  h_220433a6faf6b8 1-1016
+lua/plugins/kulala-nvim/CODES/CODEOWNERS
+  h_220433a6faf6b8 1
+lua/plugins/kulala-nvim/CODES/CODE_OF_CONDUCT.md
+  h_220433a6faf6b8 1-85
+lua/plugins/kulala-nvim/CODES/CONTRIBUTING.md
+  h_220433a6faf6b8 1-89
+lua/plugins/kulala-nvim/CODES/LICENSE
+  h_220433a6faf6b8 1-21
+lua/plugins/kulala-nvim/CODES/Makefile
+  h_220433a6faf6b8 1-7
+lua/plugins/kulala-nvim/CODES/README.md
+  h_220433a6faf6b8 1-420
+lua/plugins/kulala-nvim/CODES/doc/kulala.NEWS.txt
+  h_220433a6faf6b8 1-378
+lua/plugins/kulala-nvim/CODES/doc/kulala.api.txt
+  h_220433a6faf6b8 1-73
+lua/plugins/kulala-nvim/CODES/doc/kulala.authentication.txt
+  h_220433a6faf6b8 1-732
+lua/plugins/kulala-nvim/CODES/doc/kulala.automatic-response-formatting.txt
+  h_220433a6faf6b8 1-51
+lua/plugins/kulala-nvim/CODES/doc/kulala.basic-usage.txt
+  h_220433a6faf6b8 1-169
+lua/plugins/kulala-nvim/CODES/doc/kulala.client-reference.txt
+  h_220433a6faf6b8 1-127
+lua/plugins/kulala-nvim/CODES/doc/kulala.configuration-options.txt
+  h_220433a6faf6b8 1-1124
+lua/plugins/kulala-nvim/CODES/doc/kulala.cookies.txt
+  h_220433a6faf6b8 1-87
+lua/plugins/kulala-nvim/CODES/doc/kulala.custom-curl-flags.txt
+  h_220433a6faf6b8 1-43
+lua/plugins/kulala-nvim/CODES/doc/kulala.default-keymaps.txt
+  h_220433a6faf6b8 1-117
+lua/plugins/kulala-nvim/CODES/doc/kulala.demos.txt
+  h_220433a6faf6b8 1-344
+lua/plugins/kulala-nvim/CODES/doc/kulala.dotenv-and-http-client.env.json-support.txt
+  h_220433a6faf6b8 1-213
+lua/plugins/kulala-nvim/CODES/doc/kulala.dynamically-setting-environment-variables-based-on-headers.txt
+  h_220433a6faf6b8 1-50
+lua/plugins/kulala-nvim/CODES/doc/kulala.dynamically-setting-environment-variables-based-on-response-json.txt
+  h_220433a6faf6b8 1-91
+lua/plugins/kulala-nvim/CODES/doc/kulala.filter-response.txt
+  h_220433a6faf6b8 1-37
+lua/plugins/kulala-nvim/CODES/doc/kulala.graphql.txt
+  h_220433a6faf6b8 1-90
+lua/plugins/kulala-nvim/CODES/doc/kulala.grpc.txt
+  h_220433a6faf6b8 1-98
+lua/plugins/kulala-nvim/CODES/doc/kulala.http-file-spec.txt
+  h_220433a6faf6b8 1-184
+lua/plugins/kulala-nvim/CODES/doc/kulala.import-and-run-http.txt
+  h_220433a6faf6b8 1-153
+lua/plugins/kulala-nvim/CODES/doc/kulala.import-export.txt
+  h_220433a6faf6b8 1-31
+lua/plugins/kulala-nvim/CODES/doc/kulala.importer.txt
+  h_220433a6faf6b8 1-5
+lua/plugins/kulala-nvim/CODES/doc/kulala.install.txt
+  h_220433a6faf6b8 1-48
+lua/plugins/kulala-nvim/CODES/doc/kulala.keymaps.txt
+  h_220433a6faf6b8 1-142
+lua/plugins/kulala-nvim/CODES/doc/kulala.lua-scripts.txt
+  h_220433a6faf6b8 1-301
+lua/plugins/kulala-nvim/CODES/doc/kulala.magic-variables.txt
+  h_220433a6faf6b8 1-41
+lua/plugins/kulala-nvim/CODES/doc/kulala.openapi.txt
+  h_220433a6faf6b8 1-146
+lua/plugins/kulala-nvim/CODES/doc/kulala.overview.txt
+  h_220433a6faf6b8 1-316
+lua/plugins/kulala-nvim/CODES/doc/kulala.public-methods.txt
+  h_220433a6faf6b8 1-201
+lua/plugins/kulala-nvim/CODES/doc/kulala.reading-file-data.txt
+  h_220433a6faf6b8 1-41
+lua/plugins/kulala-nvim/CODES/doc/kulala.recipes.txt
+  h_220433a6faf6b8 1-192
+lua/plugins/kulala-nvim/CODES/doc/kulala.redirect-the-response.txt
+  h_220433a6faf6b8 1-58
+lua/plugins/kulala-nvim/CODES/doc/kulala.request-reference.txt
+  h_220433a6faf6b8 1-344
+lua/plugins/kulala-nvim/CODES/doc/kulala.request-variables.txt
+  h_220433a6faf6b8 1-130
+lua/plugins/kulala-nvim/CODES/doc/kulala.requirements.txt
+  h_220433a6faf6b8 1-75
+lua/plugins/kulala-nvim/CODES/doc/kulala.response-reference.txt
+  h_220433a6faf6b8 1-49
+lua/plugins/kulala-nvim/CODES/doc/kulala.sending-form-data.txt
+  h_220433a6faf6b8 1-67
+lua/plugins/kulala-nvim/CODES/doc/kulala.shared-blocks.txt
+  h_220433a6faf6b8 1-115
+lua/plugins/kulala-nvim/CODES/doc/kulala.streaming-and-transfer-chunked.txt
+  h_220433a6faf6b8 1-26
+lua/plugins/kulala-nvim/CODES/doc/kulala.testing-and-reporting.txt
+  h_220433a6faf6b8 1-141
+lua/plugins/kulala-nvim/CODES/doc/kulala.txt
+  h_220433a6faf6b8 1-72
+lua/plugins/kulala-nvim/CODES/doc/kulala.using-environment-variables.txt
+  h_220433a6faf6b8 1-28
+lua/plugins/kulala-nvim/CODES/doc/kulala.using-variables.txt
+  h_220433a6faf6b8 1-66
+lua/plugins/kulala-nvim/CODES/doc/kulala.websockets.txt
+  h_220433a6faf6b8 1-50
+lua/plugins/kulala-nvim/CODES/lazy.lua
+  h_220433a6faf6b8 1-7
+lua/plugins/kulala-nvim/CODES/logo.svg
+  h_220433a6faf6b8 1
+lua/plugins/kulala-nvim/CODES/lua/kulala/api/init.lua
+  h_220433a6faf6b8 1-45
+lua/plugins/kulala-nvim/CODES/lua/kulala/augroups/init.lua
+  h_220433a6faf6b8 1-76
+lua/plugins/kulala-nvim/CODES/lua/kulala/backend.lua
+  h_220433a6faf6b8 1-596
+lua/plugins/kulala-nvim/CODES/lua/kulala/browser/browser.js
+  h_220433a6faf6b8 1-81
+lua/plugins/kulala-nvim/CODES/lua/kulala/browser/package.json
+  h_220433a6faf6b8 1-3
+lua/plugins/kulala-nvim/CODES/lua/kulala/cmd/crypto.lua
+  h_220433a6faf6b8 1-76
+lua/plugins/kulala-nvim/CODES/lua/kulala/cmd/diagnostics.lua
+  h_220433a6faf6b8 1-120
+lua/plugins/kulala-nvim/CODES/lua/kulala/cmd/export.lua
+  h_220433a6faf6b8 1-494
+lua/plugins/kulala-nvim/CODES/lua/kulala/cmd/init.lua
+  h_220433a6faf6b8 1-1303
+lua/plugins/kulala-nvim/CODES/lua/kulala/cmd/kulala_core_bridge.lua
+  h_220433a6faf6b8 1-1130
+lua/plugins/kulala-nvim/CODES/lua/kulala/cmd/lsp.lua
+  h_220433a6faf6b8 1-394
+lua/plugins/kulala-nvim/CODES/lua/kulala/cmd/oauth.lua
+  h_220433a6faf6b8 1-845
+lua/plugins/kulala-nvim/CODES/lua/kulala/cmd/shell_utils.lua
+  h_220433a6faf6b8 1-77
+lua/plugins/kulala-nvim/CODES/lua/kulala/cmd/tcp.lua
+  h_220433a6faf6b8 1-144
+lua/plugins/kulala-nvim/CODES/lua/kulala/cmd/websocket.lua
+  h_220433a6faf6b8 1-358
+lua/plugins/kulala-nvim/CODES/lua/kulala/config/defaults.lua
+  h_220433a6faf6b8 1-296
+lua/plugins/kulala-nvim/CODES/lua/kulala/config/init.lua
+  h_220433a6faf6b8 1-83
+lua/plugins/kulala-nvim/CODES/lua/kulala/config/keymaps.lua
+  h_220433a6faf6b8 1-510
+lua/plugins/kulala-nvim/CODES/lua/kulala/config/parser.lua
+  h_220433a6faf6b8 1-157
+lua/plugins/kulala-nvim/CODES/lua/kulala/db/init.lua
+  h_220433a6faf6b8 1-180
+lua/plugins/kulala-nvim/CODES/lua/kulala/external_processing/init.lua
+  h_220433a6faf6b8 1-86
+lua/plugins/kulala-nvim/CODES/lua/kulala/globals/init.lua
+  h_220433a6faf6b8 1-22
+lua/plugins/kulala-nvim/CODES/lua/kulala/globals/versions/backend.lua
+  h_220433a6faf6b8 1
+lua/plugins/kulala-nvim/CODES/lua/kulala/globals/versions/plugin.lua
+  h_220433a6faf6b8 1
+lua/plugins/kulala-nvim/CODES/lua/kulala/globals/versions/treesitter.lua
+  h_220433a6faf6b8 1
+lua/plugins/kulala-nvim/CODES/lua/kulala/graphql/init.lua
+  h_220433a6faf6b8 1-72
+lua/plugins/kulala-nvim/CODES/lua/kulala/graphql/introspection.graphql
+  h_220433a6faf6b8 1-96
+lua/plugins/kulala-nvim/CODES/lua/kulala/health.lua
+  h_220433a6faf6b8 1-44
+lua/plugins/kulala-nvim/CODES/lua/kulala/init.lua
+  h_220433a6faf6b8 1-155
+lua/plugins/kulala-nvim/CODES/lua/kulala/inlay/init.lua
+  h_220433a6faf6b8 1-87
+lua/plugins/kulala-nvim/CODES/lua/kulala/internal_processing/init.lua
+  h_220433a6faf6b8 1-178
+lua/plugins/kulala-nvim/CODES/lua/kulala/logger/bug_report.lua
+  h_220433a6faf6b8 1-164
+lua/plugins/kulala-nvim/CODES/lua/kulala/logger/init.lua
+  h_220433a6faf6b8 1-102
+lua/plugins/kulala-nvim/CODES/lua/kulala/openapi/init.lua
+  h_220433a6faf6b8 1-35
+lua/plugins/kulala-nvim/CODES/lua/kulala/parser/curl-format.json
+  h_220433a6faf6b8 1-29
+lua/plugins/kulala-nvim/CODES/lua/kulala/parser/document.lua
+  h_220433a6faf6b8 1-477
+lua/plugins/kulala-nvim/CODES/lua/kulala/parser/document_core.lua
+  h_220433a6faf6b8 1-230
+lua/plugins/kulala-nvim/CODES/lua/kulala/parser/dynamic_vars.lua
+  h_220433a6faf6b8 1-67
+lua/plugins/kulala-nvim/CODES/lua/kulala/parser/env.lua
+  h_220433a6faf6b8 1-156
+lua/plugins/kulala-nvim/CODES/lua/kulala/parser/graphql.lua
+  h_220433a6faf6b8 1-76
+lua/plugins/kulala-nvim/CODES/lua/kulala/parser/request.lua
+  h_220433a6faf6b8 1-298
+lua/plugins/kulala-nvim/CODES/lua/kulala/parser/request_variables.lua
+  h_220433a6faf6b8 1-120
+lua/plugins/kulala-nvim/CODES/lua/kulala/parser/string_variables_parser.lua
+  h_220433a6faf6b8 1-100
+lua/plugins/kulala-nvim/CODES/lua/kulala/parser/utils.lua
+  h_220433a6faf6b8 1-138
+lua/plugins/kulala-nvim/CODES/lua/kulala/script_console_notify.lua
+  h_220433a6faf6b8 1-101
+lua/plugins/kulala-nvim/CODES/lua/kulala/test_helper/assert.lua
+  h_220433a6faf6b8 1-194
+lua/plugins/kulala-nvim/CODES/lua/kulala/test_helper/globals.lua
+  h_220433a6faf6b8 1-25
+lua/plugins/kulala-nvim/CODES/lua/kulala/test_helper/kulala_core.lua
+  h_220433a6faf6b8 1-30
+lua/plugins/kulala-nvim/CODES/lua/kulala/test_helper/mock.lua
+  h_220433a6faf6b8 1-21
+lua/plugins/kulala-nvim/CODES/lua/kulala/test_helper/stubs.lua
+  h_220433a6faf6b8 1-586
+lua/plugins/kulala-nvim/CODES/lua/kulala/test_helper/test_helper.lua
+  h_220433a6faf6b8 1-4
+lua/plugins/kulala-nvim/CODES/lua/kulala/test_helper/ui.lua
+  h_220433a6faf6b8 1-161
+lua/plugins/kulala-nvim/CODES/lua/kulala/types/init.lua
+  h_220433a6faf6b8 1-135
+lua/plugins/kulala-nvim/CODES/lua/kulala/ui/auth_manager.lua
+  h_220433a6faf6b8 1-273
+lua/plugins/kulala-nvim/CODES/lua/kulala/ui/env_manager.lua
+  h_220433a6faf6b8 1-453
+lua/plugins/kulala-nvim/CODES/lua/kulala/ui/float.lua
+  h_220433a6faf6b8 1-229
+lua/plugins/kulala-nvim/CODES/lua/kulala/ui/init.lua
+  h_220433a6faf6b8 1-801
+lua/plugins/kulala-nvim/CODES/lua/kulala/ui/markdown.lua
+  h_220433a6faf6b8 1-614
+lua/plugins/kulala-nvim/CODES/lua/kulala/ui/notify.lua
+  h_220433a6faf6b8 1-55
+lua/plugins/kulala-nvim/CODES/lua/kulala/ui/openapi_panel/highlight.lua
+  h_220433a6faf6b8 1-114
+lua/plugins/kulala-nvim/CODES/lua/kulala/ui/openapi_panel/init.lua
+  h_220433a6faf6b8 1-541
+lua/plugins/kulala-nvim/CODES/lua/kulala/ui/openapi_panel/render.lua
+  h_220433a6faf6b8 1-85
+lua/plugins/kulala-nvim/CODES/lua/kulala/ui/openapi_panel/state.lua
+  h_220433a6faf6b8 1-74
+lua/plugins/kulala-nvim/CODES/lua/kulala/ui/report.lua
+  h_220433a6faf6b8 1-258
+lua/plugins/kulala-nvim/CODES/lua/kulala/ui/request_manager.lua
+  h_220433a6faf6b8 1-186
+lua/plugins/kulala-nvim/CODES/lua/kulala/ui/utils.lua
+  h_220433a6faf6b8 1-140
+lua/plugins/kulala-nvim/CODES/lua/kulala/ui/verbose.lua
+  h_220433a6faf6b8 1-152
+lua/plugins/kulala-nvim/CODES/lua/kulala/ui/winbar.lua
+  h_220433a6faf6b8 1-136
+lua/plugins/kulala-nvim/CODES/lua/kulala/ui/ws_input.lua
+  h_220433a6faf6b8 1-178
+lua/plugins/kulala-nvim/CODES/lua/kulala/utils/ascii.lua
+  h_220433a6faf6b8 1-68
+lua/plugins/kulala-nvim/CODES/lua/kulala/utils/async.lua
+  h_220433a6faf6b8 1-78
+lua/plugins/kulala-nvim/CODES/lua/kulala/utils/fs.lua
+  h_220433a6faf6b8 1-484
+lua/plugins/kulala-nvim/CODES/lua/kulala/utils/git.lua
+  h_220433a6faf6b8 1-11
+lua/plugins/kulala-nvim/CODES/lua/kulala/utils/json.lua
+  h_220433a6faf6b8 1-54
+lua/plugins/kulala-nvim/CODES/lua/kulala/utils/string.lua
+  h_220433a6faf6b8 1-77
+lua/plugins/kulala-nvim/CODES/lua/kulala/utils/table.lua
+  h_220433a6faf6b8 1-69
+lua/plugins/kulala-nvim/CODES/lua/kulala/vim-sessions.lua
+  h_220433a6faf6b8 1-174
+lua/plugins/kulala-nvim/CODES/lua/lualine/components/kulala.lua
+  h_220433a6faf6b8 1-29
+lua/plugins/kulala-nvim/CODES/minit-userscript.lua
+  h_220433a6faf6b8 1-21
+lua/plugins/kulala-nvim/CODES/minit.lua
+  h_220433a6faf6b8 1-63
+lua/plugins/kulala-nvim/CODES/minit.sh
+  h_220433a6faf6b8 1-80
+lua/plugins/kulala-nvim/CODES/minitest.lua
+  h_220433a6faf6b8 1-121
+lua/plugins/kulala-nvim/CODES/minitest.sh
+  h_220433a6faf6b8 1-42
+lua/plugins/kulala-nvim/CODES/mise.toml
+  h_220433a6faf6b8 1-3
+lua/plugins/kulala-nvim/CODES/package.json
+  h_220433a6faf6b8 1-24
+lua/plugins/kulala-nvim/CODES/pnpm-lock.yaml
+  h_220433a6faf6b8 1-372
+lua/plugins/kulala-nvim/CODES/pnpm-workspace.yaml
+  h_220433a6faf6b8 1-2
+lua/plugins/kulala-nvim/CODES/schemas/http-client.env.schema.json
+  h_220433a6faf6b8 1-57
+lua/plugins/kulala-nvim/CODES/schemas/http-client.private.env.schema.json
+  h_220433a6faf6b8 1-57
+lua/plugins/kulala-nvim/CODES/scripts/generate-changelog.sh
+  h_220433a6faf6b8 1-66
+lua/plugins/kulala-nvim/CODES/scripts/install-ci.ps1
+  h_220433a6faf6b8 1-44
+lua/plugins/kulala-nvim/CODES/scripts/install-ci.sh
+  h_220433a6faf6b8 1-19
+lua/plugins/kulala-nvim/CODES/scripts/lint.sh
+  h_220433a6faf6b8 1-42
+lua/plugins/kulala-nvim/CODES/scripts/minitest.lua
+  h_220433a6faf6b8 1-21
+lua/plugins/kulala-nvim/CODES/scripts/pre-release.sh
+  h_220433a6faf6b8 1-21
+lua/plugins/kulala-nvim/CODES/scripts/release.sh
+  h_220433a6faf6b8 1-27
+lua/plugins/kulala-nvim/CODES/scripts/tag.sh
+  h_220433a6faf6b8 1-37
+lua/plugins/kulala-nvim/CODES/scripts/tests.sh
+  h_220433a6faf6b8 1-19
+lua/plugins/kulala-nvim/CODES/stylua.toml
+  h_220433a6faf6b8 1-13
+lua/plugins/kulala-nvim/CODES/syntax/kulala_grpc_error.vim
+  h_220433a6faf6b8 1-31
+lua/plugins/kulala-nvim/CODES/test.lua
+  h_220433a6faf6b8 1
+lua/plugins/kulala-nvim/CODES/tests/.luarc.json
+  h_220433a6faf6b8 1-14
+lua/plugins/kulala-nvim/CODES/tests/_dockerfiles/linux/Dockerfile
+  h_220433a6faf6b8 1-34
+lua/plugins/kulala-nvim/CODES/tests/_dockerfiles/linux/Dockerfile.develop
+  h_220433a6faf6b8 1-48
+lua/plugins/kulala-nvim/CODES/tests/_dockerfiles/linux/README.md
+  h_220433a6faf6b8 1-36
+lua/plugins/kulala-nvim/CODES/tests/_dockerfiles/windows/Dockerfile
+  h_220433a6faf6b8 1-46
+lua/plugins/kulala-nvim/CODES/tests/_dockerfiles/windows/README.md
+  h_220433a6faf6b8 1-40
+lua/plugins/kulala-nvim/CODES/tests/config/default_env_spec.lua
+  h_220433a6faf6b8 1-20
+lua/plugins/kulala-nvim/CODES/tests/db/db_spec.lua
+  h_220433a6faf6b8 1-30
+lua/plugins/kulala-nvim/CODES/tests/script_console_notify_spec.lua
+  h_220433a6faf6b8 1-78
+lua/plugins/kulala-nvim/CODES/tests/session/vim-sessions_spec.lua
+  h_220433a6faf6b8 1-130
+lua/plugins/kulala-nvim/CODES/tests/ui/body_ft_spec.lua
+  h_220433a6faf6b8 1-26
+lua/plugins/kulala-nvim/CODES/tests/ui/env_manager_cache_spec.lua
+  h_220433a6faf6b8 1-178
+lua/plugins/kulala-nvim/CODES/tests/ui/openapi_panel_spec.lua
+  h_220433a6faf6b8 1-143
+lua/plugins/kulala-nvim/CODES/tests/util/fs_spec.lua
+  h_220433a6faf6b8 1-54
+lua/plugins/kulala-nvim/CODES/tests/utils/json_spec.lua
+  h_220433a6faf6b8 1-22
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "08bc17be07af4512c497091317ee0aeba2e0c00e",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
