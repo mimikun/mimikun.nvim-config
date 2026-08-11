@@ -1,0 +1,7 @@
+std = "lua51+vim"
+
+# Neovim plugins frequently shadow locals deliberately (e.g. `local ok, err`);
+# keep selene focused on real correctness issues rather than style nits that
+# StyLua already owns.
+[lints]
+mixed_table = "allow"
