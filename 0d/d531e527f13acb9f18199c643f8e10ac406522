@@ -1,0 +1,14 @@
+lua/plugins/blink-cmp/init.lua
+  h_220433a6faf6b8 25,29-33
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "0dd531e527f13acb9f18199c643f8e10ac406522",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
