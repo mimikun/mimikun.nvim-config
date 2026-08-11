@@ -1,0 +1,112 @@
+lua/plugins/blink-lib/CODES/.gitignore
+  h_220433a6faf6b8 1
+lua/plugins/blink-lib/CODES/.stylua.toml
+  h_220433a6faf6b8 1-8
+lua/plugins/blink-lib/CODES/LICENSE
+  h_220433a6faf6b8 1-21
+lua/plugins/blink-lib/CODES/README.md
+  h_220433a6faf6b8 1-371
+lua/plugins/blink-lib/CODES/flake.lock
+  h_220433a6faf6b8 1-24
+lua/plugins/blink-lib/CODES/flake.nix
+  h_220433a6faf6b8 1-41
+lua/plugins/blink-lib/CODES/lua/blink/download/config.lua
+  h_220433a6faf6b8 1-5
+lua/plugins/blink-lib/CODES/lua/blink/download/cpath.lua
+  h_220433a6faf6b8 1-26
+lua/plugins/blink-lib/CODES/lua/blink/download/downloader.lua
+  h_220433a6faf6b8 1-77
+lua/plugins/blink-lib/CODES/lua/blink/download/files.lua
+  h_220433a6faf6b8 1-57
+lua/plugins/blink-lib/CODES/lua/blink/download/git.lua
+  h_220433a6faf6b8 1-23
+lua/plugins/blink-lib/CODES/lua/blink/download/init.lua
+  h_220433a6faf6b8 1-54
+lua/plugins/blink-lib/CODES/lua/blink/download/system.lua
+  h_220433a6faf6b8 1-145
+lua/plugins/blink-lib/CODES/lua/blink/lib/_/buffer_size.lua
+  h_220433a6faf6b8 1-11
+lua/plugins/blink-lib/CODES/lua/blink/lib/_/list/dedup.lua
+  h_220433a6faf6b8 1-17
+lua/plugins/blink-lib/CODES/lua/blink/lib/_/list/deep_equal.lua
+  h_220433a6faf6b8 1-13
+lua/plugins/blink-lib/CODES/lua/blink/lib/_/list/equal.lua
+  h_220433a6faf6b8 1-13
+lua/plugins/blink-lib/CODES/lua/blink/lib/_/list/filter_map.lua
+  h_220433a6faf6b8 1-17
+lua/plugins/blink-lib/CODES/lua/blink/lib/_/list/find.lua
+  h_220433a6faf6b8 1-12
+lua/plugins/blink-lib/CODES/lua/blink/lib/_/list/find_idx.lua
+  h_220433a6faf6b8 1-12
+lua/plugins/blink-lib/CODES/lua/blink/lib/_/list/flatten.lua
+  h_220433a6faf6b8 1-19
+lua/plugins/blink-lib/CODES/lua/blink/lib/_/list/index_of.lua
+  h_220433a6faf6b8 1-13
+lua/plugins/blink-lib/CODES/lua/blink/lib/_/list/init.lua
+  h_220433a6faf6b8 1-20
+lua/plugins/blink-lib/CODES/lua/blink/lib/_/list/map.lua
+  h_220433a6faf6b8 1-15
+lua/plugins/blink-lib/CODES/lua/blink/lib/_/list/reverse.lua
+  h_220433a6faf6b8 1-13
+lua/plugins/blink-lib/CODES/lua/blink/lib/_/tbl/copy.lua
+  h_220433a6faf6b8 1-13
+lua/plugins/blink-lib/CODES/lua/blink/lib/_/tbl/equal.lua
+  h_220433a6faf6b8 1-23
+lua/plugins/blink-lib/CODES/lua/blink/lib/_/tbl/init.lua
+  h_220433a6faf6b8 1-16
+lua/plugins/blink-lib/CODES/lua/blink/lib/_/tbl/omit.lua
+  h_220433a6faf6b8 1-15
+lua/plugins/blink-lib/CODES/lua/blink/lib/_/tbl/pick.lua
+  h_220433a6faf6b8 1-13
+lua/plugins/blink-lib/CODES/lua/blink/lib/bench/color.lua
+  h_220433a6faf6b8 1-41
+lua/plugins/blink-lib/CODES/lua/blink/lib/bench/init.lua
+  h_220433a6faf6b8 1-167
+lua/plugins/blink-lib/CODES/lua/blink/lib/bench/report.lua
+  h_220433a6faf6b8 1-182
+lua/plugins/blink-lib/CODES/lua/blink/lib/bench/stats.lua
+  h_220433a6faf6b8 1-101
+lua/plugins/blink-lib/CODES/lua/blink/lib/bench/utils.lua
+  h_220433a6faf6b8 1-59
+lua/plugins/blink-lib/CODES/lua/blink/lib/config.lua
+  h_220433a6faf6b8 1-482
+lua/plugins/blink-lib/CODES/lua/blink/lib/fs/init.lua
+  h_220433a6faf6b8 1-171
+lua/plugins/blink-lib/CODES/lua/blink/lib/fs/list_dir_iter.lua
+  h_220433a6faf6b8 1-31
+lua/plugins/blink-lib/CODES/lua/blink/lib/init.lua
+  h_220433a6faf6b8 1-20
+lua/plugins/blink-lib/CODES/lua/blink/lib/lazy_require.lua
+  h_220433a6faf6b8 1-15
+lua/plugins/blink-lib/CODES/lua/blink/lib/log.lua
+  h_220433a6faf6b8 1-311
+lua/plugins/blink-lib/CODES/lua/blink/lib/lsp/init.lua
+  h_220433a6faf6b8 1-2
+lua/plugins/blink-lib/CODES/lua/blink/lib/lsp/server.lua
+  h_220433a6faf6b8 1-144
+lua/plugins/blink-lib/CODES/lua/blink/lib/lsp/server_types.lua
+  h_220433a6faf6b8 1-108
+lua/plugins/blink-lib/CODES/lua/blink/lib/native/init.lua
+  h_220433a6faf6b8 1-219
+lua/plugins/blink-lib/CODES/lua/blink/lib/native/managed.lua
+  h_220433a6faf6b8 1-135
+lua/plugins/blink-lib/CODES/lua/blink/lib/native/platform.lua
+  h_220433a6faf6b8 1-89
+lua/plugins/blink-lib/CODES/lua/blink/lib/nvim.lua
+  h_220433a6faf6b8 1-167
+lua/plugins/blink-lib/CODES/lua/blink/lib/task.lua
+  h_220433a6faf6b8 1-367
+lua/plugins/blink-lib/CODES/lua/blink/lib/timer.lua
+  h_220433a6faf6b8 1-55
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "b1130d4259c65fdd4bb7753bd1f3c948e570b4e5",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
