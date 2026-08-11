@@ -39,6 +39,7 @@ tasks:
     desc: git cleanfetch
     aliases:
       - cleanfetch
+      - cf
     cmds:
       - git fetch --all --prune --tags --prune-tags
     silent: true
