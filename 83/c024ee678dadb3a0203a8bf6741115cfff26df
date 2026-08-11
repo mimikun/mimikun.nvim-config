@@ -1,0 +1,22 @@
+lua/plugins/luasnip/cmds.lua
+  h_220433a6faf6b8 1-6
+lua/plugins/luasnip/events.lua
+  h_220433a6faf6b8 1-6
+lua/plugins/luasnip/ft.lua
+  h_220433a6faf6b8 1-6
+lua/plugins/luasnip/keys.lua
+  h_220433a6faf6b8 1-23
+lua/plugins/luasnip/stylua.toml
+  h_220433a6faf6b8 1-13
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "83c024ee678dadb3a0203a8bf6741115cfff26df",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
