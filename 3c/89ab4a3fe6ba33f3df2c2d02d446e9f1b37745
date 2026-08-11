@@ -1,0 +1,104 @@
+lua/plugins/buoy-nvim/CODES/.github/workflows/ci.yml
+  h_220433a6faf6b8 1-80
+lua/plugins/buoy-nvim/CODES/.github/workflows/release-please.yml
+  h_220433a6faf6b8 1-25
+lua/plugins/buoy-nvim/CODES/.gitignore
+  h_220433a6faf6b8 1-4
+lua/plugins/buoy-nvim/CODES/.pre-commit-config.yaml
+  h_220433a6faf6b8 1-19
+lua/plugins/buoy-nvim/CODES/.release-please-manifest.json
+  h_220433a6faf6b8 1-3
+lua/plugins/buoy-nvim/CODES/.stylua.toml
+  h_220433a6faf6b8 1-7
+lua/plugins/buoy-nvim/CODES/AGENTS.md
+  h_220433a6faf6b8 1-128
+lua/plugins/buoy-nvim/CODES/CHANGELOG.md
+  h_220433a6faf6b8 1-78
+lua/plugins/buoy-nvim/CODES/LICENSE
+  h_220433a6faf6b8 1-201
+lua/plugins/buoy-nvim/CODES/README.md
+  h_220433a6faf6b8 1-281
+lua/plugins/buoy-nvim/CODES/_config.yml
+  h_220433a6faf6b8 1-24
+lua/plugins/buoy-nvim/CODES/bridge/agent_cli.lua
+  h_220433a6faf6b8 1-100
+lua/plugins/buoy-nvim/CODES/bridge/context_hook.lua
+  h_220433a6faf6b8 1-50
+lua/plugins/buoy-nvim/CODES/bridge/nvim_rpc.lua
+  h_220433a6faf6b8 1-47
+lua/plugins/buoy-nvim/CODES/lua/buoy/capabilities.lua
+  h_220433a6faf6b8 1-34
+lua/plugins/buoy-nvim/CODES/lua/buoy/codex.lua
+  h_220433a6faf6b8 1-83
+lua/plugins/buoy-nvim/CODES/lua/buoy/codex_protocol.lua
+  h_220433a6faf6b8 1-103
+lua/plugins/buoy-nvim/CODES/lua/buoy/context.lua
+  h_220433a6faf6b8 1-252
+lua/plugins/buoy-nvim/CODES/lua/buoy/error.lua
+  h_220433a6faf6b8 1-8
+lua/plugins/buoy-nvim/CODES/lua/buoy/init.lua
+  h_220433a6faf6b8 1-272
+lua/plugins/buoy-nvim/CODES/lua/buoy/instructions.lua
+  h_220433a6faf6b8 1-174
+lua/plugins/buoy-nvim/CODES/lua/buoy/launcher.lua
+  h_220433a6faf6b8 1-46
+lua/plugins/buoy-nvim/CODES/lua/buoy/navigate.lua
+  h_220433a6faf6b8 1-141
+lua/plugins/buoy-nvim/CODES/lua/buoy/terminal.lua
+  h_220433a6faf6b8 1-501
+lua/plugins/buoy-nvim/CODES/lua/buoy/tools.lua
+  h_220433a6faf6b8 1-236
+lua/plugins/buoy-nvim/CODES/plugin/buoy.lua
+  h_220433a6faf6b8 1-30
+lua/plugins/buoy-nvim/CODES/release-please-config.json
+  h_220433a6faf6b8 1-11
+lua/plugins/buoy-nvim/CODES/selene.toml
+  h_220433a6faf6b8 1-7
+lua/plugins/buoy-nvim/CODES/tests/agent_cli_spec.lua
+  h_220433a6faf6b8 1-196
+lua/plugins/buoy-nvim/CODES/tests/capabilities_spec.lua
+  h_220433a6faf6b8 1-58
+lua/plugins/buoy-nvim/CODES/tests/codex_spec.lua
+  h_220433a6faf6b8 1-132
+lua/plugins/buoy-nvim/CODES/tests/context_setup_spec.lua
+  h_220433a6faf6b8 1-78
+lua/plugins/buoy-nvim/CODES/tests/context_spec.lua
+  h_220433a6faf6b8 1-130
+lua/plugins/buoy-nvim/CODES/tests/hook_spec.lua
+  h_220433a6faf6b8 1-107
+lua/plugins/buoy-nvim/CODES/tests/instructions_spec.lua
+  h_220433a6faf6b8 1-227
+lua/plugins/buoy-nvim/CODES/tests/launcher_spec.lua
+  h_220433a6faf6b8 1-126
+lua/plugins/buoy-nvim/CODES/tests/layout_spec.lua
+  h_220433a6faf6b8 1-243
+lua/plugins/buoy-nvim/CODES/tests/navigate_spec.lua
+  h_220433a6faf6b8 1-131
+lua/plugins/buoy-nvim/CODES/tests/pty_resize_spec.lua
+  h_220433a6faf6b8 1-157
+lua/plugins/buoy-nvim/CODES/tests/relayout_spec.lua
+  h_220433a6faf6b8 1-284
+lua/plugins/buoy-nvim/CODES/tests/setup_spec.lua
+  h_220433a6faf6b8 1-158
+lua/plugins/buoy-nvim/CODES/tests/startup_spec.lua
+  h_220433a6faf6b8 1-166
+lua/plugins/buoy-nvim/CODES/tests/tools_spec.lua
+  h_220433a6faf6b8 1-254
+lua/plugins/buoy-nvim/CODES/tests/visual_handoff_spec.lua
+  h_220433a6faf6b8 1-126
+lua/plugins/buoy-nvim/CODES/version.txt
+  h_220433a6faf6b8 1
+lua/plugins/buoy-nvim/CODES/vim.yml
+  h_220433a6faf6b8 1-12
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "3c89ab4a3fe6ba33f3df2c2d02d446e9f1b37745",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
