@@ -1,0 +1,30 @@
+lua/plugins/kulala-nvim/.editorconfig
+  h_220433a6faf6b8 1-14
+lua/plugins/kulala-nvim/cmds.lua
+  h_220433a6faf6b8 1-6
+lua/plugins/kulala-nvim/dependencies.lua
+  h_220433a6faf6b8 1-16
+lua/plugins/kulala-nvim/events.lua
+  h_220433a6faf6b8 1-6
+lua/plugins/kulala-nvim/ft.lua
+  h_220433a6faf6b8 1-6
+lua/plugins/kulala-nvim/init.lua
+  h_220433a6faf6b8 1-37
+lua/plugins/kulala-nvim/keys.lua
+  h_220433a6faf6b8 1-23
+lua/plugins/kulala-nvim/opts.lua
+  h_220433a6faf6b8 1-6
+lua/plugins/kulala-nvim/stylua.toml
+  h_220433a6faf6b8 1-13
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "07dcffd06fa40f3c0fa3c546736336864cc4d297",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
