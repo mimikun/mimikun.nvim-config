@@ -1,0 +1,30 @@
+lua/plugins/blink-lib/.editorconfig
+  h_220433a6faf6b8 1-14
+lua/plugins/blink-lib/cmds.lua
+  h_220433a6faf6b8 1-6
+lua/plugins/blink-lib/dependencies.lua
+  h_220433a6faf6b8 1-16
+lua/plugins/blink-lib/events.lua
+  h_220433a6faf6b8 1-6
+lua/plugins/blink-lib/ft.lua
+  h_220433a6faf6b8 1-6
+lua/plugins/blink-lib/init.lua
+  h_220433a6faf6b8 1-37
+lua/plugins/blink-lib/keys.lua
+  h_220433a6faf6b8 1-23
+lua/plugins/blink-lib/opts.lua
+  h_220433a6faf6b8 1-6
+lua/plugins/blink-lib/stylua.toml
+  h_220433a6faf6b8 1-13
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "5dfb91f27c6aa3a13801c792b66454f62a64a3bb",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
