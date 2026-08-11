@@ -1,0 +1,22 @@
+lua/plugins/blink-cmp/CODES/health.lua
+  h_220433a6faf6b8 1-82
+lua/plugins/blink-cmp/CODES/highlights.lua
+  h_220433a6faf6b8 1-55
+lua/plugins/blink-cmp/CODES/init.lua
+  h_220433a6faf6b8 1-499
+lua/plugins/blink-cmp/CODES/logger.lua
+  h_220433a6faf6b8 1
+lua/plugins/blink-cmp/CODES/types.lua
+  h_220433a6faf6b8 1-73
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "a687633be7e793709bcb10c68ae08594687d5b33",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
