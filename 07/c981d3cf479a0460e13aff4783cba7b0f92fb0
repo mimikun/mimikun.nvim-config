@@ -1,0 +1,234 @@
+lua/plugins/blink-cmp/CODES/completion/accept/init.lua
+  h_220433a6faf6b8 1-4,13-15,19-20,31,33,38,53,58,62,73,76,79-80,91-92,102-104,111-113,116-117,120-122
+lua/plugins/blink-cmp/CODES/completion/accept/prefix.lua
+  h_220433a6faf6b8 2-4,7-10,16-18,25,50-52
+lua/plugins/blink-cmp/CODES/completion/accept/preview.lua
+  h_220433a6faf6b8 1-2,7,11,13,18,32
+lua/plugins/blink-cmp/CODES/completion/brackets/config.lua
+  h_220433a6faf6b8 3-6,21-28,30-35,37,40-44,47-48,53-55,58-60
+lua/plugins/blink-cmp/CODES/completion/brackets/init.lua
+  h_220433a6faf6b8 3-4
+lua/plugins/blink-cmp/CODES/completion/brackets/kind.lua
+  h_220433a6faf6b8 1,9,12-14,24,30-31,35-37,39-41,52,59
+lua/plugins/blink-cmp/CODES/completion/brackets/semantic.lua
+  h_220433a6faf6b8 1-5,16,21-24,28-30,40-42,47-49,53,69,72,86-88,90-91,93-95,103-105,122-124
+lua/plugins/blink-cmp/CODES/completion/brackets/utils.lua
+  h_220433a6faf6b8 1-3,25-27,37-39,41-44,47,49-51,55-57,59-61,71
+lua/plugins/blink-cmp/CODES/completion/init.lua
+  h_220433a6faf6b8 1-2,7,11,18,37-39,41-43,60-62,72-74,78-87,101,106-108,110,112,116-121,123-125,132-135
+lua/plugins/blink-cmp/CODES/completion/list.lua
+  h_220433a6faf6b8 73-74,79-83,104-106,125-127,146,152-154,158,163,166,182-184,187,190-192,196-198,205-207,209-211,215-217,223-225,227,229-231,241-246,249-251,257-259,262-264,270-272,280-285,289-291,300-302,305-307,313-315,326,328-330,332-334,338-340,352,354-356,359-361,365-367,373-375,380-382,394-396,398,408,410,421,435-437,440-442,445-447,450,452-454
+lua/plugins/blink-cmp/CODES/completion/prefetch.lua
+  h_220433a6faf6b8 4,15-17,20-23
+lua/plugins/blink-cmp/CODES/completion/trigger/context.lua
+  h_220433a6faf6b8 3-4,76,90,100-102,106-108,110-112,118-119,126-127,132-134,138-140,144,149-150,155,158,164-167,174,190-192,196,202-208,210
+lua/plugins/blink-cmp/CODES/completion/trigger/init.lua
+  h_220433a6faf6b8 31,33-35,41-42,49-51,56,61-63,65,75,81,86-88,90,105,108,113,118,122,126,130,134,137-138,141-142,151,153-155,162-164,166-168,172,177-179,183-186,191-193,198-200,203,207-209,211,215,229,231-232,235-237,254,259-261,270-272,275-277,281,285-287,289-291,295-297,309-311,316-318
+lua/plugins/blink-cmp/CODES/completion/windows/documentation.lua
+  h_220433a6faf6b8 13-15,18-20,25,29,36,42-47,53-55,59-61,68-70,78-80,99,101,109-110,113,123-125,133-135,137,141,149-151,154,158,162-164,169-171,186,188-190,215-217,242
+lua/plugins/blink-cmp/CODES/completion/windows/ghost_text/init.lua
+  h_220433a6faf6b8 1-3,5-8,19,22-25,29-31,35-37,56-58,88-90,92-94,107,111,115,117,122,128-129,131
+lua/plugins/blink-cmp/CODES/completion/windows/ghost_text/utils.lua
+  h_220433a6faf6b8 3,7-9,13,15-16,22-24,32-35,44-46,48
+lua/plugins/blink-cmp/CODES/completion/windows/menu/auto_wrap.lua
+  h_220433a6faf6b8 10,14,18,33,37,41,46-48
+lua/plugins/blink-cmp/CODES/completion/windows/menu/init.lua
+  h_220433a6faf6b8 31-35,40,43,51,58-63,65,68-70,73-76,88-90,101-103,106-108,110-113,115-116,121,129-131,139,142-144,151-153,160,162-164,169-171,179,181-183,186,201-204,225-230,234-241,243,253-255,258-260,277,280,283,303-310
+lua/plugins/blink-cmp/CODES/completion/windows/render/column.lua
+  h_220433a6faf6b8 17,46,51,67-72,79-81,88,100,102-104,117,119,122,124
+lua/plugins/blink-cmp/CODES/completion/windows/render/context.lua
+  h_220433a6faf6b8 17,26,29-32,38,44-45,53,55,57,61,63-66,68,70-73,75-78,94
+lua/plugins/blink-cmp/CODES/completion/windows/render/init.lua
+  h_220433a6faf6b8 1,17,24,35-37,50,66,69-71,91-93,98,108-111,115-117,121-123,128,130-131,140-142,145,161-163,173-175,177
+lua/plugins/blink-cmp/CODES/completion/windows/render/text.lua
+  h_220433a6faf6b8 1-2,13-18,20-25,51-54,69-71,87-90
+lua/plugins/blink-cmp/CODES/completion/windows/render/treesitter.lua
+  h_220433a6faf6b8 40-42,45-47,52-55,57-59,65,69
+lua/plugins/blink-cmp/CODES/config/appearance.lua
+  h_220433a6faf6b8 7,9-11,14-38,40
+lua/plugins/blink-cmp/CODES/config/completion/accept.lua
+  h_220433a6faf6b8 25,27-29,32-36,39-40,43-45
+lua/plugins/blink-cmp/CODES/config/completion/documentation.lua
+  h_220433a6faf6b8 34,36-38,41-43,45,48-51,54-62,64-65
+lua/plugins/blink-cmp/CODES/config/completion/ghost_text.lua
+  h_220433a6faf6b8 10,12-17
+lua/plugins/blink-cmp/CODES/config/completion/init.lua
+  h_220433a6faf6b8 11-17
+lua/plugins/blink-cmp/CODES/config/completion/keyword.lua
+  h_220433a6faf6b8 11,13
+lua/plugins/blink-cmp/CODES/config/completion/list.lua
+  h_220433a6faf6b8 15,17-18,21-22
+lua/plugins/blink-cmp/CODES/config/completion/menu.lua
+  h_220433a6faf6b8 17,19-23,25-26,29,31,34,36,38,49,55-57,59,61,63,65,67,70-73,84-86,88-90,96-101,106-108,113,116,121,126,135-138,143-146,151-154,158
+lua/plugins/blink-cmp/CODES/config/completion/trigger.lua
+  h_220433a6faf6b8 18,20-32
+lua/plugins/blink-cmp/CODES/config/fuzzy.lua
+  h_220433a6faf6b8 21,24-25,28-31,34-35,38-39,41
+lua/plugins/blink-cmp/CODES/config/init.lua
+  h_220433a6faf6b8 22-30,34-35,38,41-42,44,48,55,59,64,75,79
+lua/plugins/blink-cmp/CODES/config/keymap.lua
+  h_220433a6faf6b8 166,168,170-194,197-204,209
+lua/plugins/blink-cmp/CODES/config/signature.lua
+  h_220433a6faf6b8 29,31,34-42,45-51,53-54,57,59
+lua/plugins/blink-cmp/CODES/config/snippets.lua
+  h_220433a6faf6b8 11,19-20,23,26-27,29,33-38,40-42,47-50,53,57-59,61-67,71-73,76-78,80,89-92,96-99,103-106,110
+lua/plugins/blink-cmp/CODES/config/sources.lua
+  h_220433a6faf6b8 43,46,48-50,52-59,61,69-70,72-78,84-86,89,91,94,98,102,105-108,111-113,118-119
+lua/plugins/blink-cmp/CODES/fuzzy/build/init.lua
+  h_220433a6faf6b8 1-4,14,27-29,36,39,41-43,46-51,53-67,70-72
+lua/plugins/blink-cmp/CODES/fuzzy/build/log.lua
+  h_220433a6faf6b8 7,10-13,16-21,27,29
+lua/plugins/blink-cmp/CODES/fuzzy/init.lua
+  h_220433a6faf6b8 1-3,8,10,18,21,26-28,31,38-39,42,49-51,67-68,74-75,85-87,94,103-105,119,128,132-135,137,148,167-170,178,183-185,187,197
+lua/plugins/blink-cmp/CODES/fuzzy/lua/char.lua
+  h_220433a6faf6b8 5-7,10-12,15-17,20-22,28-30,34-36,40-42,46-48,52-54,58-60,66-68,73-84
+lua/plugins/blink-cmp/CODES/fuzzy/lua/init.lua
+  h_220433a6faf6b8 1-4,26-28,41-43,46,61,80-82,85-87,93,108-110
+lua/plugins/blink-cmp/CODES/fuzzy/lua/keyword.lua
+  h_220433a6faf6b8 1,14-17,19,23-25,38,42-44,47-49,65-67,78-80,90-92
+lua/plugins/blink-cmp/CODES/fuzzy/lua/match.lua
+  h_220433a6faf6b8 17-23,26-28,58-60,64-66,85-87,91-93
+lua/plugins/blink-cmp/CODES/fuzzy/sort.lua
+  h_220433a6faf6b8 7-9,13-15,23-25,29-31,36-38,43-45,66-67,82-84,87-89
+lua/plugins/blink-cmp/CODES/health.lua
+  h_220433a6faf6b8 4,6-7,9,13,15,18,20,22,26-27,29,34,36,39-40,43,57-59,65-67,70,75
+lua/plugins/blink-cmp/CODES/highlights.lua
+  h_220433a6faf6b8 4,14-15,18-24,27-28,30,32-34,36-39,41-43,49-50
+lua/plugins/blink-cmp/CODES/init.lua
+  h_220433a6faf6b8 1-3,5-8,12-17,27-32,35-37,40-42,44-46,49-51,54-56,59-61,63,70-72,80-81,84-85,90,92-93,95-99,101,107,112-115,120-128,134-135,137-138,147-153,159-161,165-167,171-173,177-179,183-185,198-201,204-207,210,218-219,221-223,229,232,252,278-280,282-285,293-295,297-301,311-313,315,317-319,329-331,333,347-350,361-364,372-374,379-381,387-389,391,398-400,402,407-409,413-415,419-421,425-427,432-436,438-442,451-454,464-467,476-479,486-488,493-495,497,504-506,508,516-519,528-531,539-541,547-549,558-560,566-568,572-574,581,589,601
+lua/plugins/blink-cmp/CODES/keymap/apply.lua
+  h_220433a6faf6b8 3-6,9-14,42-43,47,49-50,52,62,66-68,81-83,85,120-122,131-133,141-143
+lua/plugins/blink-cmp/CODES/keymap/fallback.lua
+  h_220433a6faf6b8 3,9-11,41,45-47,50-52,56-61,73,79-80,87-89,94,100-102,113-115
+lua/plugins/blink-cmp/CODES/keymap/init.lua
+  h_220433a6faf6b8 1-5,16,20,25-27,31-33,36,46,48-50,54-56,61-63,66-68,74-76,81-83,89,100,105,110,112,131-133,146-148,152-154
+lua/plugins/blink-cmp/CODES/keymap/presets.lua
+  h_220433a6faf6b8 8-10,12-15,17-18,20-21,23,27-32,35,37-40,42-44,47-49,51,59-60,62,64-67,69-70,72,76-78,80-81,83-86,88-89,91,100-102
+lua/plugins/blink-cmp/CODES/keymap/utils.lua
+  h_220433a6faf6b8 1,3,9-11,16,24-30,41,43-45,48-49,51-52,54-56,59,63-65,68,70-72,81-86,100-109,111-112,127-132,136,170-172,176
+lua/plugins/blink-cmp/CODES/lib/buffer_events.lua
+  h_220433a6faf6b8 5-7,40,49,59-61,67-69,73,85-87,91-93,96,112-114,116,118-120,130,132-133,139-144,146,159-160,169,171-173,183,189,195,200,205-206,215-218,226-228,231,249,262-266,269-271
+lua/plugins/blink-cmp/CODES/lib/cmdline_events.lua
+  h_220433a6faf6b8 1,30-32,38-40,45-50,79,81-83,88-90,92-94,98-101,112-114,122-126
+lua/plugins/blink-cmp/CODES/lib/event_emitter.lua
+  h_220433a6faf6b8 16-18,22-24,40-42,45-47
+lua/plugins/blink-cmp/CODES/lib/term_events.lua
+  h_220433a6faf6b8 1-2,32-33,37,40,42-44,47,50,54,56-58,64-66,70,76,78-81,98,100,121
+lua/plugins/blink-cmp/CODES/lib/text_edits.lua
+  h_220433a6faf6b8 1-5,17-18,21,23-25,31,34-35,40,47-48,52,76,80-81,91,94,97,101,106,120-122,124-125,136-138,146,158,185,193-195,198,205-207,211,222,226,232,250-253,273,277,280-282,285-289,292-294,301-302,309,334,337-340,347-352,359-360,378-379,382,393,401,407-411,420,428-430,432-433
+lua/plugins/blink-cmp/CODES/lib/utils.lua
+  h_220433a6faf6b8 1,6,11-13,17-19,25-27,34-36,39-41,49,63-65,72-74,79-81,84-86,99,102-104,111-113,121-123,134,140-142,154-156,169-171
+lua/plugins/blink-cmp/CODES/lib/window/cursor_line.lua
+  h_220433a6faf6b8 1-2,22,28-30,32-33,36-38,40,46-54,59-61,66
+lua/plugins/blink-cmp/CODES/lib/window/docs.lua
+  h_220433a6faf6b8 1-3,25,38-40,47-50,54,56-57,69-70,76,88,92-94,97-99,105-108,117-119,123-125,131-133,155-157,167
+lua/plugins/blink-cmp/CODES/lib/window/init.lua
+  h_220433a6faf6b8 4-5,77,84,88,90,92,95,105,111-113,117-119,123-125,129-130,136,138-149,152-154,159-161,171-173,179-181,184,192-197,208-210,213,221-223,231,234,237,242,246-249,253-255,262,270,278-280,283,290-292,302-304,307,318-319,345,349-351,357,361-363,369,373-375,381,385-387,394-396,402,413-415,430,436,442,457,497-499,502-504,507-509,520-522,524-526,537-539
+lua/plugins/blink-cmp/CODES/lib/window/scrollbar/geometry.lua
+  h_220433a6faf6b8 3,22-24,30-32,42-43,54-57,63-65,93,97,101
+lua/plugins/blink-cmp/CODES/lib/window/scrollbar/init.lua
+  h_220433a6faf6b8 21,25-27,30-37
+lua/plugins/blink-cmp/CODES/lib/window/scrollbar/win.lua
+  h_220433a6faf6b8 3,25-27,29-31,36,40,48-50,54,58,87-89,91-92,95,98,104-106
+lua/plugins/blink-cmp/CODES/lib/window/utils.lua
+  h_220433a6faf6b8 7-9,13,18
+lua/plugins/blink-cmp/CODES/logger.lua
+  h_220433a6faf6b8 1
+lua/plugins/blink-cmp/CODES/signature/init.lua
+  h_220433a6faf6b8 4,7-8,25-27
+lua/plugins/blink-cmp/CODES/signature/trigger.lua
+  h_220433a6faf6b8 7-8,37-40,48-49,53,55-57,64,84,86,88,92-97,101,114,116,128-133,137-139,151-153,159,173-175,182-184
+lua/plugins/blink-cmp/CODES/signature/window.lua
+  h_220433a6faf6b8 11-14,17,21,27,34-37,39-41,58,60-62,65,76,89,92,105-107,109,113,120-122,125,129,134-139,142,155,163,180,193,198-200
+lua/plugins/blink-cmp/CODES/sources/buffer/cache.lua
+  h_220433a6faf6b8 15-19,28-30,35-37,47-49
+lua/plugins/blink-cmp/CODES/sources/buffer/init.lua
+  h_220433a6faf6b8 5-9,24,50,54-59,62-64,68,101-102,113-115,119-121,131-133,135-137,172-174,193-195,211-213
+lua/plugins/blink-cmp/CODES/sources/buffer/parser.lua
+  h_220433a6faf6b8 1-2,12-14,19,24-26,33-35,39,41,46-48,53,57,61,64-66,87-89,99,112-114,121-123,135
+lua/plugins/blink-cmp/CODES/sources/buffer/priority.lua
+  h_220433a6faf6b8 1,6-8,17-19,23,25-27,31-33,39-41,47-49
+lua/plugins/blink-cmp/CODES/sources/buffer/recency.lua
+  h_220433a6faf6b8 1,11-13,16-17,24-28,32-34
+lua/plugins/blink-cmp/CODES/sources/buffer/utils.lua
+  h_220433a6faf6b8 1-2,9-14,25,43-45,50-52
+lua/plugins/blink-cmp/CODES/sources/cmdline/constants.lua
+  h_220433a6faf6b8 15-24,27-28,32-33,35,41,51-53,55-56
+lua/plugins/blink-cmp/CODES/sources/cmdline/help.lua
+  h_220433a6faf6b8 1-2,13-15,17-21,25-27,32,36-38,41-43
+lua/plugins/blink-cmp/CODES/sources/cmdline/init.lua
+  h_220433a6faf6b8 5-11,19-21,23-25,27-29,38,48-50,53,62,80-81,85-86,92-95,98,102,109,119-121,124,127-128,136-137,142-144,152-153,156,161,170-171,173,175,182-185,225,227-229,231,233,239-241,244-247,259,262-264,267-269,273-275,278-281,284,290,307,312,316,319,323-325,328,330,336-337,343-344,350-352
+lua/plugins/blink-cmp/CODES/sources/cmdline/man.lua
+  h_220433a6faf6b8 1,9-11,13-16,19-21
+lua/plugins/blink-cmp/CODES/sources/cmdline/utils.lua
+  h_220433a6faf6b8 1-3,8,12,15-16,28-30,32-34,36,43-45,48,51-53,63,65,67-68,73-74,79-81,94-95,97,106-108,110,112-115,135,141-143,152,163-165,173,183-185,197,201-202,204-208,210-212,235,239-240,246-249,255-256,258-260,263,271-273,283-286,289-291
+lua/plugins/blink-cmp/CODES/sources/complete_func.lua
+  h_220433a6faf6b8 1-3,32-35,43,54,60,67-69,91,93,111,115,119-120,127,158
+lua/plugins/blink-cmp/CODES/sources/lib/init.lua
+  h_220433a6faf6b8 1-3,44,57-60,63-65,72-74,80,84-86,89-91,99-101,113-115,126,132,139-141,159-161,169-172,176-178,197,203-205,231-233,236-238,253-255,258-260,285-287,306,309,311-313,324,330,337-341,353-357
+lua/plugins/blink-cmp/CODES/sources/lib/provider/config.lua
+  h_220433a6faf6b8 23-25,28-30,41-43
+lua/plugins/blink-cmp/CODES/sources/lib/provider/init.lua
+  h_220433a6faf6b8 27-28,31,34-36,41,45,56-58,63-65,70-72,79-81,111-113,115,132-134,142-144,147-149,152-154,157-159,165-168,184-186,190,192-194,210-212,226-228,230-232,241-243
+lua/plugins/blink-cmp/CODES/sources/lib/provider/list.lua
+  h_220433a6faf6b8 47-49,54-56,62-64,72-74,90,106-108,113-115,119-121,124-126
+lua/plugins/blink-cmp/CODES/sources/lib/provider/override.lua
+  h_220433a6faf6b8 12-14
+lua/plugins/blink-cmp/CODES/sources/lib/queue.lua
+  h_220433a6faf6b8 1,30-32,35,48,57-59,67-69
+lua/plugins/blink-cmp/CODES/sources/lib/tree.lua
+  h_220433a6faf6b8 15-17,29-31,33-35,38-40,72-74,82-87,91-93,100-102,109-111,113-115,128-130,155-157,177,180-182,188-190
+lua/plugins/blink-cmp/CODES/sources/lsp/cache.lua
+  h_220433a6faf6b8 15-17,19-27
+lua/plugins/blink-cmp/CODES/sources/lsp/commands.lua
+  h_220433a6faf6b8 8-12
+lua/plugins/blink-cmp/CODES/sources/lsp/completion.lua
+  h_220433a6faf6b8 1-3,22,25,30-32,34-36,67-69,107-109,121-128,130-131
+lua/plugins/blink-cmp/CODES/sources/lsp/hacks/clangd.lua
+  h_220433a6faf6b8 6-8,11-13
+lua/plugins/blink-cmp/CODES/sources/lsp/hacks/docs.lua
+  h_220433a6faf6b8 9-11,19,27-29,34,39-41,54-56,63-65,93,100
+lua/plugins/blink-cmp/CODES/sources/lsp/hacks/lua_ls.lua
+  h_220433a6faf6b8 6-8,10,15-17
+lua/plugins/blink-cmp/CODES/sources/lsp/hacks/tailwind.lua
+  h_220433a6faf6b8 3,9-11,14-16,32-38,47,50-52
+lua/plugins/blink-cmp/CODES/sources/lsp/init.lua
+  h_220433a6faf6b8 1-2,16,24,48,52,57-59,70-72,95,98,112,119-120,127-129,131-133,163,170,184,207-209
+lua/plugins/blink-cmp/CODES/sources/path/init.lua
+  h_220433a6faf6b8 23,26-28,46-48,54,57-59,62,64,70-72,74-76,80,83,88-89,93,95-96,102-107
+lua/plugins/blink-cmp/CODES/sources/path/lib.lua
+  h_220433a6faf6b8 1-2,13-15,17,21-28,30-33,36-38,40,43,45,47,49,51,54,56,61-63,74,76-77,85-88,98-100,103,107-108,116,124,129,143,148,153,176,178-180,189,192,195,197,213-219,225-227
+lua/plugins/blink-cmp/CODES/sources/path/regex.lua
+  h_220433a6faf6b8 6-8,15-16,23-24,31
+lua/plugins/blink-cmp/CODES/sources/snippets/default/builtin.lua
+  h_220433a6faf6b8 6-7,18-21,29-40,42,53,56,65-67,82,86-88,90-92,94-96,98-100,102-104,106-108,110-112,114-116,118-120,122-124,126-128,130-132,135-136,140,144,149-151,154,159,162-163,166,173-177,192-200,202-204,215-217,223-229,233-236,241-242,254-258
+lua/plugins/blink-cmp/CODES/sources/snippets/default/init.lua
+  h_220433a6faf6b8 20-23,42-44,53,59,66-68
+lua/plugins/blink-cmp/CODES/sources/snippets/default/registry.lua
+  h_220433a6faf6b8 11,14,19-20,30-33,37-39,42,49-51,66-68,70,92-94,125-126,143,153,169-171,195-197,200,203-205
+lua/plugins/blink-cmp/CODES/sources/snippets/default/scan.lua
+  h_220433a6faf6b8 1,11-12,17-19,22,40-42,44,46-48,50-52,55,57,63-64,66-69,72-74,83,86-88,90,93-96,101
+lua/plugins/blink-cmp/CODES/sources/snippets/init.lua
+  h_220433a6faf6b8 4-5
+lua/plugins/blink-cmp/CODES/sources/snippets/luasnip.lua
+  h_220433a6faf6b8 6-10,33-35,56,63-66,73,79-81,85-87,95-99,106,108-113,115-117,119,125,129,136,151,156,158-159,162,164-166,176-178,188,201,209,216,218,225-227,242,257,268,274-276,281-282,285,302-304,309-310,325,329-333,335-337,368-370
+lua/plugins/blink-cmp/CODES/sources/snippets/mini_snippets.lua
+  h_220433a6faf6b8 28,55,82,85-87,119-120,126-128,136
+lua/plugins/blink-cmp/CODES/sources/snippets/utils.lua
+  h_220433a6faf6b8 1,25-29,37-39,42-44,59-61,63,85-86,96,99-101,105
+lua/plugins/blink-cmp/CODES/sources/snippets/vsnip.lua
+  h_220433a6faf6b8 20-22,24-26,30,37,47-49,66-67,73,81-83,88
+lua/plugins/blink-cmp/CODES/types.lua
+  h_220433a6faf6b8 21-45
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "07c981d3cf479a0460e13aff4783cba7b0f92fb0",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
