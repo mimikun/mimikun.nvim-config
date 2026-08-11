@@ -1,0 +1,18 @@
+lua/plugins/luasnip/WIKIS/Cool-Snippets.md
+  h_220433a6faf6b8 1-1630
+lua/plugins/luasnip/WIKIS/Misc.md
+  h_220433a6faf6b8 1-1063
+lua/plugins/luasnip/WIKIS/Nice-Configs.md
+  h_220433a6faf6b8 1-264
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "bf07e09e0a1209511c878fb1e085ebbe1efef9ae",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}

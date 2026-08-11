@@ -1,0 +1,14 @@
+lua/plugins/luasnip/init.lua
+  h_220433a6faf6b8 3,10,12
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "9228c60db7254b33e9552985507ad6c00c1db606",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
