@@ -34,4 +34,3 @@ local spec = {
 }
 
 return spec
--- :%s/sidekick-nvim/
