@@ -3,7 +3,7 @@ return {
   cmd = { "crush" },
   is_proc = "\\<crush\\>",
   keys = {
-    prompt = { "<a-p>", "prompt" }
+    prompt = { "<a-p>", "prompt" },
   },
-  url = "https://github.com/charmbracelet/crush"
+  url = "https://github.com/charmbracelet/crush",
 }

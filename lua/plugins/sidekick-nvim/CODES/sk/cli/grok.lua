@@ -2,5 +2,5 @@
 return {
   cmd = { "grok" },
   is_proc = "\\<grok\\>",
-  url = "https://github.com/superagent-ai/grok-cli"
+  url = "https://github.com/superagent-ai/grok-cli",
 }
