@@ -1,33 +1,5 @@
 # 🤖 `sidekick.nvim`
 
-**sidekick.nvim** is your Neovim AI sidekick that integrates Copilot LSP's
-"Next Edit Suggestions" with a built-in terminal for any AI CLI.
-Review and apply diffs, chat with AI assistants, and streamline your coding,
-without leaving your editor.
-
-<img width="2311" height="1396" alt="image" src="https://github.com/user-attachments/assets/63a33610-9a8e-45e2-bbd0-b7e3a4fde621" />
-
-## ✨ Features
-
-- **🤖 Next Edit Suggestions (NES) powered by Copilot LSP**
-  - 🪄 **Automatic Suggestions**: Fetches suggestions automatically when you pause typing or move the cursor.
-  - 🎨 **Rich Diffs**: Visualizes changes with inline and block-level diffs, featuring Treesitter-based syntax highlighting with granular diffing down to the word or character level.
-  - 🧭 **Hunk-by-Hunk Navigation**: Jump through edits to review them one by one before applying.
-  - 📊 **Statusline Integration**: Shows Copilot LSP's status, request progress, and preview text in your statusline.
-
-- **💬 Integrated AI CLI Terminal**
-  - 🚀 **Direct Access to AI CLIs**: Interact with your favorite AI command-line tools without leaving Neovim.
-  - 📦 **Pre-configured for Popular Tools**: Out-of-the-box support for Claude, Gemini, Grok, Codex, Copilot CLI, and more.
-  - ✨ **Context-Aware Prompts**: Automatically include file content, cursor position, and diagnostics in your prompts.
-  - 📝 **Prompt Library**: A library of pre-defined prompts for common tasks like explaining code, fixing issues, or writing tests.
-  - 🔄 **Session Persistence**: Keep your CLI sessions alive with `tmux` and `zellij` integration.
-  - 📂 **Automatic File Watching**: Automatically reloads files in Neovim when they are modified by AI tools.
-
-- **🔌 Extensible and Customizable**
-  - ⚙️ **Flexible Configuration**: Fine-tune every aspect of the plugin to your liking.
-  - 🧩 **Plugin-Friendly API**: A rich API for integrating with other plugins and building custom workflows.
-  - 🎨 **Customizable UI**: Change the appearance of diffs, signs, and more.
-
 ## 📋 Requirements
 
 - **Neovim** `>= 0.11.2` or newer
@@ -414,7 +386,6 @@ modify text in normal mode, or after applying an edit.
 <table><tr><th>Cmd</th><th>Lua</th></tr>
 <tr><td><code>:Sidekick nes apply</code> Apply active text edits</td><td>
 
-
 ```lua
 ---@return boolean applied
 require("sidekick.nes").apply()
@@ -423,14 +394,12 @@ require("sidekick.nes").apply()
 </td></tr>
 <tr><td><code>:Sidekick nes clear</code> Clear all active edits</td><td>
 
-
 ```lua
 require("sidekick.nes").clear()
 ```
 
 </td></tr>
 <tr><td><code>:Sidekick nes disable</code> </td><td>
-
 
 ```lua
 
@@ -440,7 +409,6 @@ require("sidekick.nes").disable()
 </td></tr>
 <tr><td><code>:Sidekick nes enable</code> </td><td>
 
-
 ```lua
 ---@param enable? boolean
 require("sidekick.nes").enable(enable)
@@ -449,14 +417,12 @@ require("sidekick.nes").enable(enable)
 </td></tr>
 <tr><td> Check if any edits are active in the current buffer</td><td>
 
-
 ```lua
 require("sidekick.nes").have()
 ```
 
 </td></tr>
 <tr><td><code>:Sidekick nes jump</code> Jump to the start of the active edit</td><td>
-
 
 ```lua
 ---@return boolean jumped
@@ -466,7 +432,6 @@ require("sidekick.nes").jump()
 </td></tr>
 <tr><td><code>:Sidekick nes toggle</code> </td><td>
 
-
 ```lua
 
 require("sidekick.nes").toggle()
@@ -474,7 +439,6 @@ require("sidekick.nes").toggle()
 
 </td></tr>
 <tr><td><code>:Sidekick nes update</code> Request new edits from the LSP server (if any)</td><td>
-
 
 ```lua
 require("sidekick.nes").update()
@@ -497,7 +461,6 @@ diagnostics when requested.
 <table><tr><th>Cmd</th><th>Lua</th></tr>
 <tr><td><code>:Sidekick cli close</code> </td><td>
 
-
 ```lua
 ---@param opts? sidekick.cli.Hide
 ---@overload fun(name: string)
@@ -506,7 +469,6 @@ require("sidekick.cli").close(opts)
 
 </td></tr>
 <tr><td><code>:Sidekick cli focus</code> Toggle focus of the terminal window if it is already open</td><td>
-
 
 ```lua
 ---@param opts? sidekick.cli.Show
@@ -517,7 +479,6 @@ require("sidekick.cli").focus(opts)
 </td></tr>
 <tr><td><code>:Sidekick cli hide</code> </td><td>
 
-
 ```lua
 ---@param opts? sidekick.cli.Hide
 ---@overload fun(name: string)
@@ -526,7 +487,6 @@ require("sidekick.cli").hide(opts)
 
 </td></tr>
 <tr><td><code>:Sidekick cli prompt</code> Select a prompt to send</td><td>
-
 
 ```lua
 ---@param opts? sidekick.cli.Prompt|{cb:nil}
@@ -537,7 +497,6 @@ require("sidekick.cli").prompt(opts)
 </td></tr>
 <tr><td> Render a message template or prompt</td><td>
 
-
 ```lua
 ---@param opts? sidekick.cli.Message|string
 require("sidekick.cli").render(opts)
@@ -545,7 +504,6 @@ require("sidekick.cli").render(opts)
 
 </td></tr>
 <tr><td><code>:Sidekick cli select</code> Start or attach to a CLI tool</td><td>
-
 
 ```lua
 ---@param opts? sidekick.cli.Select|{cb:nil}|{focus?:boolean}
@@ -556,7 +514,6 @@ require("sidekick.cli").select(opts)
 </td></tr>
 <tr><td><code>:Sidekick cli send</code> Send a message or prompt to a CLI</td><td>
 
-
 ```lua
 ---@param opts? sidekick.cli.Send
 ---@overload fun(msg:string)
@@ -566,7 +523,6 @@ require("sidekick.cli").send(opts)
 </td></tr>
 <tr><td><code>:Sidekick cli show</code> </td><td>
 
-
 ```lua
 ---@param opts? sidekick.cli.Show
 ---@overload fun(name: string)
@@ -575,7 +531,6 @@ require("sidekick.cli").show(opts)
 
 </td></tr>
 <tr><td><code>:Sidekick cli toggle</code> </td><td>
-
 
 ```lua
 ---@param opts? sidekick.cli.Show
@@ -718,7 +673,7 @@ Sidekick preconfigures popular AI CLIs. Run `:checkhealth sidekick` to see which
 | ----------------------------------------------------------- | -------------------- | ---------------------------------------------------------------------------------------------------------------------- |
 | [`aider`](https://github.com/Aider-AI/aider)                | AI pair programmer   | `pip install aider-chat` or `pipx install aider-chat`                                                                  |
 | [`amazon_q`](https://github.com/aws/amazon-q-developer-cli) | Amazon Q Developer   | [Install guide](https://docs.aws.amazon.com/amazonq/latest/qdeveloper-ug/command-line-getting-started-installing.html) |
-| [`claude`](https://github.com/anthropics/claude-code)       | Claude Code CLI      | [See Claude Code docs](https://code.claude.com/docs/en/overview#get-started)
+| [`claude`](https://github.com/anthropics/claude-code)       | Claude Code CLI      | [See Claude Code docs](https://code.claude.com/docs/en/overview#get-started) |
 | [`codex`](https://github.com/openai/codex)                  | OpenAI Codex CLI     | See [OpenAI docs](https://github.com/openai/codex)                                                                     |
 | [`copilot`](https://github.com/github/copilot-cli)          | GitHub Copilot CLI   | `npm install -g @githubnext/github-copilot-cli`                                                                        |
 | [`crush`](https://github.com/charmbracelet/crush)           | Charm's AI assistant | See [installation](https://github.com/charmbracelet/crush)                                                             |
@@ -741,7 +696,7 @@ can use it to do anything that the Lua API can do.
 
 The command structure is simple:
 
-```
+```text
 :Sidekick <module> <command> [args]
 ```
 
@@ -753,7 +708,7 @@ The command structure is simple:
 For example, to show the CLI window for the `claude` tool, you can use the
 following command:
 
-```
+```text
 :Sidekick cli show name=claude
 ```
 
@@ -796,7 +751,7 @@ Here are some examples of how to use the `:Sidekick` command:
 
 - Toggle the CLI window:
 
-  ```
+  ```text
   :Sidekick cli toggle
   ```
 
@@ -808,7 +763,7 @@ Here are some examples of how to use the `:Sidekick` command:
 
 - Send the visual selection to the current CLI tool:
 
-  ```
+  ```text
   :'<,'>Sidekick cli send msg="{selection}"
   ```
 
@@ -820,7 +775,7 @@ Here are some examples of how to use the `:Sidekick` command:
 
 - Show the CLI window for the `grok` tool and focus it:
 
-  ```
+  ```text
   :Sidekick cli show name=grok focus=true
   ```
 
