@@ -12,6 +12,10 @@ local opts = {
     enabled = true,
   },
 
+  -- Interface style (see "Modern UI" below).
+  -- Opt-in: the default keeps the -- original look, so updating never changes your interface.
+  ui = require("plugins.dooing.opts.ui"),
+
   -- Window settings
   window = require("plugins.dooing.opts.window"),
 
