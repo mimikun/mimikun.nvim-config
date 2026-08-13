@@ -1,0 +1,19 @@
+lua/plugins/otree-nvim/init.lua
+  s_c5e110389976ae::t_ab53def6416afb 19-23,27,29,37
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "14b8860dfd87b1ac07100d4a843780948a20d22c",
+  "prompts": {},
+  "sessions": {
+    "s_c5e110389976ae": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "58ee6068-1990-42cf-9005-d7ec967d0aaf",
+        "model": "claude-opus-5"
+      },
+      "human_author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
