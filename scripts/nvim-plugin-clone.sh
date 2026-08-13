@@ -127,6 +127,9 @@ process_plugin() {
     fi
     dir_name="${owner_repo##*/}"
     dir_name="${dir_name//./-}"
+    # Upstream repo names are not consistently lowercase (e.g. Otree.nvim), but
+    # every plugin directory and require() path in this config is.
+    dir_name="${dir_name,,}"
     clone_url="${base}.git"
     wiki_url="${base}.wiki.git"
     branch="add/${dir_name}"

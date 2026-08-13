@@ -87,7 +87,7 @@ Throughout the rest of this document `<tree>` means the chosen directory name.
 - The script prints `INFO: target <dir> -> spec template <name>`. **Check that
   line** — it confirms the tree actually in use before any cloning happens.
 - For each URL the script creates a branch `add/<dir-name>`
-  (`<dir-name>` = repo name with `.` → `-`, e.g. `convy.nvim` → `convy-nvim`)
+  (`<dir-name>` = repo name lowercased with `.` → `-`, e.g. `Otree.nvim` → `otree-nvim`)
   containing:
   - an empty marker commit `feat: add <owner>/<repo>`
   - `lua/<tree>/<dir-name>/CODES/` — the plugin source, history stripped ("wip" commit)
