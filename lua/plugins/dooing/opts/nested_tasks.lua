@@ -11,6 +11,9 @@ local nested_tasks = {
 
   -- Move completed nested tasks to end of parent group
   move_completed_to_end = true,
+
+  -- Inherit parent priorities and skip the priority prompt
+  inherit_priority = false,
 }
 
 return nested_tasks
