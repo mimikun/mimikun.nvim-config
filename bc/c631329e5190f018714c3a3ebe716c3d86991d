@@ -1,0 +1,32 @@
+lua/plugins/accelerated-jk-nvim/CODES/.stylua.toml
+  h_220433a6faf6b8 1-6
+lua/plugins/accelerated-jk-nvim/CODES/LICENSE
+  h_220433a6faf6b8 1-21
+lua/plugins/accelerated-jk-nvim/CODES/README.md
+  h_220433a6faf6b8 1-87
+lua/plugins/accelerated-jk-nvim/CODES/doc/accelerated-jk.txt
+  h_220433a6faf6b8 1-143
+lua/plugins/accelerated-jk-nvim/CODES/doc/tags
+  h_220433a6faf6b8 1-18
+lua/plugins/accelerated-jk-nvim/CODES/lua/accelerated-jk/config.lua
+  h_220433a6faf6b8 1-27
+lua/plugins/accelerated-jk-nvim/CODES/lua/accelerated-jk/init.lua
+  h_220433a6faf6b8 1-53
+lua/plugins/accelerated-jk-nvim/CODES/lua/accelerated-jk/position_driven.lua
+  h_220433a6faf6b8 1-62
+lua/plugins/accelerated-jk-nvim/CODES/lua/accelerated-jk/time_driven.lua
+  h_220433a6faf6b8 1-62
+lua/plugins/accelerated-jk-nvim/CODES/plugin/accelerated-jk.lua
+  h_220433a6faf6b8 1
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "bcc631329e5190f018714c3a3ebe716c3d86991d",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
