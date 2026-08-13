@@ -1,0 +1,44 @@
+lua/plugins/Otree-nvim/CODES/.stylua.toml
+  h_220433a6faf6b8 1-5
+lua/plugins/Otree-nvim/CODES/LICENSE
+  h_220433a6faf6b8 1-21
+lua/plugins/Otree-nvim/CODES/README.md
+  h_220433a6faf6b8 1-301
+lua/plugins/Otree-nvim/CODES/doc/Otree.txt
+  h_220433a6faf6b8 1-221
+lua/plugins/Otree-nvim/CODES/lua/Otree/actions.lua
+  h_220433a6faf6b8 1-450
+lua/plugins/Otree-nvim/CODES/lua/Otree/config.lua
+  h_220433a6faf6b8 1-92
+lua/plugins/Otree-nvim/CODES/lua/Otree/float.lua
+  h_220433a6faf6b8 1-174
+lua/plugins/Otree-nvim/CODES/lua/Otree/fs.lua
+  h_220433a6faf6b8 1-231
+lua/plugins/Otree-nvim/CODES/lua/Otree/git.lua
+  h_220433a6faf6b8 1-200
+lua/plugins/Otree-nvim/CODES/lua/Otree/help.lua
+  h_220433a6faf6b8 1-94
+lua/plugins/Otree-nvim/CODES/lua/Otree/init.lua
+  h_220433a6faf6b8 1-155
+lua/plugins/Otree-nvim/CODES/lua/Otree/lsp.lua
+  h_220433a6faf6b8 1-167
+lua/plugins/Otree-nvim/CODES/lua/Otree/oil.lua
+  h_220433a6faf6b8 1-41
+lua/plugins/Otree-nvim/CODES/lua/Otree/state.lua
+  h_220433a6faf6b8 1-9
+lua/plugins/Otree-nvim/CODES/lua/Otree/ui.lua
+  h_220433a6faf6b8 1-172
+lua/plugins/Otree-nvim/CODES/lua/Otree/ui_utils.lua
+  h_220433a6faf6b8 1-173
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "5c2fafada91b5054f8f2f8f934a1a0168478d352",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
