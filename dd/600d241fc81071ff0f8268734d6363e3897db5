@@ -1,0 +1,22 @@
+lua/plugins/otree-nvim/README.md
+  h_220433a6faf6b8 1
+lua/plugins/otree-nvim/cmds.lua
+  h_220433a6faf6b8 3-4
+lua/plugins/otree-nvim/dependencies.lua
+  h_220433a6faf6b8 3-4
+lua/plugins/otree-nvim/init.lua
+  h_220433a6faf6b8 4,14-17
+lua/plugins/otree-nvim/opts.lua
+  h_220433a6faf6b8 3-88
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "dd600d241fc81071ff0f8268734d6363e3897db5",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
