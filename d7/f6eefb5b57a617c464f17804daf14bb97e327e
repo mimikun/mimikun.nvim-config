@@ -1,0 +1,21 @@
+.claude/skills/add-plugin/SKILL.md
+  s_c5e110389976ae::t_4e48053ee507eb 90
+scripts/nvim-plugin-clone.sh
+  s_c5e110389976ae::t_3a88b204a05d4f 130-132
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "d7f6eefb5b57a617c464f17804daf14bb97e327e",
+  "prompts": {},
+  "sessions": {
+    "s_c5e110389976ae": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "58ee6068-1990-42cf-9005-d7ec967d0aaf",
+        "model": "claude-opus-5"
+      },
+      "human_author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
