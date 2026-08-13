@@ -1,0 +1,14 @@
+lua/plugins/brewfile-nvim/keys.lua
+  h_220433a6faf6b8 5-7,9,16-18,20,27-29,31,38-40,42,49-51,53,61,68-70,72,79-81,83
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "8e4f8fb3542974ac18daa64b3ebd9feb58842a5a",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
