@@ -1,0 +1,30 @@
+lua/plugins/brewfile-nvim/.editorconfig
+  h_220433a6faf6b8 1-14
+lua/plugins/brewfile-nvim/cmds.lua
+  h_220433a6faf6b8 1-6
+lua/plugins/brewfile-nvim/dependencies.lua
+  h_220433a6faf6b8 1-16
+lua/plugins/brewfile-nvim/events.lua
+  h_220433a6faf6b8 1-6
+lua/plugins/brewfile-nvim/ft.lua
+  h_220433a6faf6b8 1-6
+lua/plugins/brewfile-nvim/init.lua
+  h_220433a6faf6b8 1-37
+lua/plugins/brewfile-nvim/keys.lua
+  h_220433a6faf6b8 1-23
+lua/plugins/brewfile-nvim/opts.lua
+  h_220433a6faf6b8 1-6
+lua/plugins/brewfile-nvim/stylua.toml
+  h_220433a6faf6b8 1-13
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "033b91caa05de8e9ce233474014e7d8c9985d40b",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
