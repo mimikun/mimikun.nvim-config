@@ -1,0 +1,22 @@
+lua/plugins/blink-lib/cmds.lua
+  h_220433a6faf6b8 1-2,4-6
+lua/plugins/accelerated-jk-nvim/events.lua
+  h_220433a6faf6b8 1-6
+lua/plugins/accelerated-jk-nvim/init.lua
+  h_220433a6faf6b8 1-4,5,6,7-13,14-18
+lua/plugins/accelerated-jk-nvim/opts.lua
+  h_220433a6faf6b8 1-2,3-13,14,15-17,18,19-21,22,23-25,26,27-53,54-56
+lua/plugins/accelerated-jk-nvim/stylua.toml
+  h_220433a6faf6b8 1-13
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "914f63afc966588a2404c470c19692f95be9a2b9",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
