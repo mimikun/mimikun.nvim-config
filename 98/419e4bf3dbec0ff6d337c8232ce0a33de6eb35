@@ -1,0 +1,26 @@
+lua/plugins/otree-nvim/opts/float.lua
+  h_220433a6faf6b8 2-6,8,11
+lua/plugins/otree-nvim/opts/highlights.lua
+  h_220433a6faf6b8 2-21,24
+lua/plugins/otree-nvim/opts/icons.lua
+  h_220433a6faf6b8 2-9,12
+lua/plugins/otree-nvim/opts/ignore_patterns.lua
+  h_220433a6faf6b8 2-3,6
+lua/plugins/otree-nvim/opts/init.lua
+  h_220433a6faf6b8 16
+lua/plugins/otree-nvim/opts/keymaps.lua
+  h_220433a6faf6b8 2-22,25
+lua/plugins/otree-nvim/opts/tree.lua
+  h_220433a6faf6b8 2-8,11
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "98419e4bf3dbec0ff6d337c8232ce0a33de6eb35",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
