@@ -1,0 +1,72 @@
+lua/plugins/brewfile-nvim/CODES/.github/workflows/docs.yml
+  h_220433a6faf6b8 1-31
+lua/plugins/brewfile-nvim/CODES/.github/workflows/tests.yml
+  h_220433a6faf6b8 1-53
+lua/plugins/brewfile-nvim/CODES/.gitignore
+  h_220433a6faf6b8 1
+lua/plugins/brewfile-nvim/CODES/.luacheckrc
+  h_220433a6faf6b8 1-7
+lua/plugins/brewfile-nvim/CODES/.stylua.toml
+  h_220433a6faf6b8 1-6
+lua/plugins/brewfile-nvim/CODES/LICENSE
+  h_220433a6faf6b8 1-202
+lua/plugins/brewfile-nvim/CODES/Makefile
+  h_220433a6faf6b8 1-17
+lua/plugins/brewfile-nvim/CODES/README.md
+  h_220433a6faf6b8 1-126
+lua/plugins/brewfile-nvim/CODES/doc/brewfile.nvim.txt
+  h_220433a6faf6b8 1-156
+lua/plugins/brewfile-nvim/CODES/lua/brewfile/commands/common.lua
+  h_220433a6faf6b8 1-93
+lua/plugins/brewfile-nvim/CODES/lua/brewfile/commands/dump.lua
+  h_220433a6faf6b8 1-11
+lua/plugins/brewfile-nvim/CODES/lua/brewfile/commands/force_uninstall.lua
+  h_220433a6faf6b8 1-12
+lua/plugins/brewfile-nvim/CODES/lua/brewfile/commands/info.lua
+  h_220433a6faf6b8 1-12
+lua/plugins/brewfile-nvim/CODES/lua/brewfile/commands/install.lua
+  h_220433a6faf6b8 1-12
+lua/plugins/brewfile-nvim/CODES/lua/brewfile/commands/open_homepage.lua
+  h_220433a6faf6b8 1-66
+lua/plugins/brewfile-nvim/CODES/lua/brewfile/commands/uninstall.lua
+  h_220433a6faf6b8 1-12
+lua/plugins/brewfile-nvim/CODES/lua/brewfile/commands/upgrade.lua
+  h_220433a6faf6b8 1-12
+lua/plugins/brewfile-nvim/CODES/lua/brewfile/config.lua
+  h_220433a6faf6b8 1-19
+lua/plugins/brewfile-nvim/CODES/lua/brewfile/init.lua
+  h_220433a6faf6b8 1-37
+lua/plugins/brewfile-nvim/CODES/lua/brewfile/util.lua
+  h_220433a6faf6b8 1-133
+lua/plugins/brewfile-nvim/CODES/plugin/brewfile.lua
+  h_220433a6faf6b8 1-27
+lua/plugins/brewfile-nvim/CODES/tests/brewfile/brewfile_spec.lua
+  h_220433a6faf6b8 1-20
+lua/plugins/brewfile-nvim/CODES/tests/brewfile/commands/dump_spec.lua
+  h_220433a6faf6b8 1-34
+lua/plugins/brewfile-nvim/CODES/tests/brewfile/commands/force_uninstall_spec.lua
+  h_220433a6faf6b8 1-61
+lua/plugins/brewfile-nvim/CODES/tests/brewfile/commands/info_spec.lua
+  h_220433a6faf6b8 1-54
+lua/plugins/brewfile-nvim/CODES/tests/brewfile/commands/install_spec.lua
+  h_220433a6faf6b8 1-68
+lua/plugins/brewfile-nvim/CODES/tests/brewfile/commands/open_homepage_spec.lua
+  h_220433a6faf6b8 1-100
+lua/plugins/brewfile-nvim/CODES/tests/brewfile/commands/uninstall_spec.lua
+  h_220433a6faf6b8 1-75
+lua/plugins/brewfile-nvim/CODES/tests/brewfile/commands/upgrade_spec.lua
+  h_220433a6faf6b8 1-47
+lua/plugins/brewfile-nvim/CODES/tests/minimal_init.lua
+  h_220433a6faf6b8 1-11
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "02b8eac746afc4c2fe6c5200460403cec1a99a2d",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}

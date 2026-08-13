@@ -1,0 +1,16 @@
+lua/plugins/brewfile-nvim/cmds.lua
+  h_220433a6faf6b8 3-9
+lua/plugins/brewfile-nvim/init.lua
+  h_220433a6faf6b8 5
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "4dbd602b4905ba99334f099c6704992fb749f0d1",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
