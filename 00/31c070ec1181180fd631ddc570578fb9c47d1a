@@ -1,0 +1,22 @@
+lua/plugins/accelerated-jk-nvim/CODES/config.lua
+  h_220433a6faf6b8 4,18,21,24
+lua/plugins/accelerated-jk-nvim/CODES/init.lua
+  h_220433a6faf6b8 4,7-8,10,17,24-27,30
+lua/plugins/accelerated-jk-nvim/CODES/plugin.accelerated-jk.lua
+  h_220433a6faf6b8 1
+lua/plugins/accelerated-jk-nvim/CODES/position_driven.lua
+  h_220433a6faf6b8 46,48,55
+lua/plugins/accelerated-jk-nvim/CODES/time_driven.lua
+  h_220433a6faf6b8 42,44,47,49,55
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "0031c070ec1181180fd631ddc570578fb9c47d1a",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
