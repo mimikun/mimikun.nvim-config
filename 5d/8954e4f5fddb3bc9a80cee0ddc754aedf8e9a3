@@ -1,0 +1,14 @@
+lua/plugins/accelerated-jk-nvim/config.lua
+  h_220433a6faf6b8 1-27
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "5d8954e4f5fddb3bc9a80cee0ddc754aedf8e9a3",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
