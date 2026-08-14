@@ -23,9 +23,18 @@
 --   string or function, so a positional table is always the nested-opts bug and
 --   never a false positive, regardless of formatting or comments.
 --
+--   The linter also requires every entry to carry a non-empty `desc`. Without it
+--   the mapping shows up unlabelled in which-key, :map and keymap pickers. The
+--   plugin template ships `desc = ""`, so this is easy to leave behind.
+--   Entries whose lhs is still the template placeholder are skipped: the plugin
+--   itself is not configured yet, so there is nothing to describe.
+--
 -- Exit code: 0 when clean, 1 when any violation is found or a file fails to load.
 
 local GLOB = "lua/**/keys.lua"
+
+-- lhs written by the plugin template; such an entry is not filled in yet.
+local PLACEHOLDER_LHS = "<lhs>"
 
 --- Scan a single keys.lua file for nested-opts violations.
 ---@param path string Path to a keys.lua file, relative to cwd.
@@ -42,12 +51,17 @@ local function scan(path)
 
   local violations = {}
   for i, entry in ipairs(spec) do
-    if type(entry) == "table" then
+    if type(entry) == "table" and entry[1] ~= PLACEHOLDER_LHS then
+      local lhs = tostring(entry[1])
       for k, v in pairs(entry) do
         if type(k) == "number" and k >= 2 and type(v) == "table" then
-          local lhs = tostring(entry[1])
           table.insert(violations, string.format("entry #%d (%s): nested opts table at positional index %d", i, lhs, k))
         end
+      end
+      if entry.desc == nil then
+        table.insert(violations, string.format("entry #%d (%s): missing desc", i, lhs))
+      elseif entry.desc == "" then
+        table.insert(violations, string.format("entry #%d (%s): empty desc", i, lhs))
       end
     end
   end
@@ -78,8 +92,10 @@ if total_violations > 0 or total_errors > 0 then
   io.stderr:write(
     string.format(
       "\n%d violation(s) across %d file(s); %d load error(s).\n"
-        .. "Fix: hoist desc/silent/noremap/... out of the nested { ... } table\n"
-        .. "to the top level of the keymap entry (see LazyKeysSpec).\n",
+        .. "Fix (nested opts): hoist desc/silent/noremap/... out of the nested { ... }\n"
+        .. "table to the top level of the keymap entry (see LazyKeysSpec).\n"
+        .. "Fix (desc): give the mapping a non-empty desc so it is labelled in\n"
+        .. "which-key, :map and keymap pickers.\n",
       total_violations,
       #files,
       total_errors
