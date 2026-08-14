@@ -1,0 +1,14 @@
+after/lsp/jsonls.lua
+  h_220433a6faf6b8 6-8
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "cf1331e1ab4bf8ba62f3ee107128ec042dbb8568",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
