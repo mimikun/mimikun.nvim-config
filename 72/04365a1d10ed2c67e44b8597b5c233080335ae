@@ -1,0 +1,19 @@
+lua/config/usercmds.lua
+  s_99e496ba21007d::t_4311adb8a9e77b 1-190
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "7204365a1d10ed2c67e44b8597b5c233080335ae",
+  "prompts": {},
+  "sessions": {
+    "s_99e496ba21007d": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "fd89f730-eb45-42f0-a3d0-51a6ba7484df",
+        "model": "claude-opus-5"
+      },
+      "human_author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
