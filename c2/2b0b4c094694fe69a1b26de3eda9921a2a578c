@@ -1,0 +1,30 @@
+lua/plugins/schemastore-nvim/.editorconfig
+  h_220433a6faf6b8 1-14
+lua/plugins/schemastore-nvim/cmds.lua
+  h_220433a6faf6b8 1-6
+lua/plugins/schemastore-nvim/dependencies.lua
+  h_220433a6faf6b8 1-16
+lua/plugins/schemastore-nvim/events.lua
+  h_220433a6faf6b8 1-6
+lua/plugins/schemastore-nvim/ft.lua
+  h_220433a6faf6b8 1-6
+lua/plugins/schemastore-nvim/init.lua
+  h_220433a6faf6b8 1-37
+lua/plugins/schemastore-nvim/keys.lua
+  h_220433a6faf6b8 1-23
+lua/plugins/schemastore-nvim/opts.lua
+  h_220433a6faf6b8 1-6
+lua/plugins/schemastore-nvim/stylua.toml
+  h_220433a6faf6b8 1-13
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "c22b0b4c094694fe69a1b26de3eda9921a2a578c",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
