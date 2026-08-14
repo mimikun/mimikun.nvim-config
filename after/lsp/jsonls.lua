@@ -1,6 +1,11 @@
--- TODO: json ls configs
-
 ---@type vim.lsp.Config
-local config = {}
+local config = {
+  settings = {
+    json = {
+      schemas = require("schemastore").json.schemas(),
+      validate = { enable = true },
+    },
+  },
+}
 
 return config
