@@ -6,6 +6,7 @@ local keys = {
     mode = {
       "n",
     },
+    desc = "YankBank: open",
     noremap = true,
     silent = true,
   },

@@ -30,7 +30,7 @@ local keys = {
     mode = {
       "o",
     },
-    desc = "",
+    desc = "Illuminate: select reference textobject",
     silent = true,
   },
   {
@@ -41,7 +41,7 @@ local keys = {
     mode = {
       "x",
     },
-    desc = "",
+    desc = "Illuminate: select reference textobject",
     silent = true,
   },
 }

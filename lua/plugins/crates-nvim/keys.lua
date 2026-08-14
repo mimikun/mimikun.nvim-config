@@ -8,7 +8,7 @@ local keys = {
     mode = {
       "n",
     },
-    desc = "",
+    desc = "Crates: toggle",
     silent = true,
   },
   {
@@ -19,7 +19,7 @@ local keys = {
     mode = {
       "n",
     },
-    desc = "",
+    desc = "Crates: reload",
     silent = true,
   },
   {
@@ -30,7 +30,7 @@ local keys = {
     mode = {
       "n",
     },
-    desc = "",
+    desc = "Crates: show versions popup",
     silent = true,
   },
   {
@@ -41,7 +41,7 @@ local keys = {
     mode = {
       "n",
     },
-    desc = "",
+    desc = "Crates: show features popup",
     silent = true,
   },
   {
@@ -52,7 +52,7 @@ local keys = {
     mode = {
       "n",
     },
-    desc = "",
+    desc = "Crates: show dependencies popup",
     silent = true,
   },
   {
@@ -63,7 +63,7 @@ local keys = {
     mode = {
       "n",
     },
-    desc = "",
+    desc = "Crates: update crate",
     silent = true,
   },
   {
@@ -74,7 +74,7 @@ local keys = {
     mode = {
       "v",
     },
-    desc = "",
+    desc = "Crates: update selected crates",
     silent = true,
   },
   {
@@ -85,7 +85,7 @@ local keys = {
     mode = {
       "n",
     },
-    desc = "",
+    desc = "Crates: update all crates",
     silent = true,
   },
   {
@@ -96,7 +96,7 @@ local keys = {
     mode = {
       "n",
     },
-    desc = "",
+    desc = "Crates: upgrade crate",
     silent = true,
   },
   {
@@ -107,7 +107,7 @@ local keys = {
     mode = {
       "v",
     },
-    desc = "",
+    desc = "Crates: upgrade selected crates",
     silent = true,
   },
   {
@@ -118,7 +118,7 @@ local keys = {
     mode = {
       "n",
     },
-    desc = "",
+    desc = "Crates: upgrade all crates",
     silent = true,
   },
   {
@@ -129,7 +129,7 @@ local keys = {
     mode = {
       "n",
     },
-    desc = "",
+    desc = "Crates: expand plain crate to inline table",
     silent = true,
   },
   {
@@ -140,7 +140,7 @@ local keys = {
     mode = {
       "n",
     },
-    desc = "",
+    desc = "Crates: extract crate into table",
     silent = true,
   },
   {
@@ -151,7 +151,7 @@ local keys = {
     mode = {
       "n",
     },
-    desc = "",
+    desc = "Crates: open homepage",
     silent = true,
   },
   {
@@ -162,7 +162,7 @@ local keys = {
     mode = {
       "n",
     },
-    desc = "",
+    desc = "Crates: open repository",
     silent = true,
   },
   {
@@ -173,7 +173,7 @@ local keys = {
     mode = {
       "n",
     },
-    desc = "",
+    desc = "Crates: open documentation",
     silent = true,
   },
   {
@@ -184,7 +184,7 @@ local keys = {
     mode = {
       "n",
     },
-    desc = "",
+    desc = "Crates: open crates.io",
     silent = true,
   },
   {
@@ -195,7 +195,7 @@ local keys = {
     mode = {
       "n",
     },
-    desc = "",
+    desc = "Crates: open lib.rs",
     silent = true,
   },
 }
