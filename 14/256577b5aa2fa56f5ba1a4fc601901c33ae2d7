@@ -1,0 +1,29 @@
+lua/plugins/aerial-nvim/keys.lua
+  s_02b13fa547fbc0::t_02d1c9d9e7a463 11
+lua/plugins/cord-nvim/keys.lua
+  s_02b13fa547fbc0::t_785697a1c45008 11,22
+lua/plugins/crates-nvim/keys.lua
+  s_02b13fa547fbc0::t_38907cfe11e5d7 11,22,33,44,55,66,77,88,99,110,121,132,143,154,165,176,187,198
+lua/plugins/vim-illuminate/keys.lua
+  s_02b13fa547fbc0::t_f15bf3bfc75c2b 33,44
+lua/plugins/yankbank-nvim/keys.lua
+  s_02b13fa547fbc0::t_bcbd0596c727b7 9
+lua/plugins/yanky-nvim/keys.lua
+  s_02b13fa547fbc0::t_c38a69bc9fa479 149
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "14256577b5aa2fa56f5ba1a4fc601901c33ae2d7",
+  "prompts": {},
+  "sessions": {
+    "s_02b13fa547fbc0": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "9baa306f-ddf7-4f66-9482-6ec8ecec1e59",
+        "model": "claude-opus-5"
+      },
+      "human_author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
