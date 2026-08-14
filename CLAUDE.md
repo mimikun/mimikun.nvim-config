@@ -105,7 +105,8 @@ master でも同じ結果になるので、**この症状を自分の変更の�
   worktree の中で使うときは `NVIM_PLUGINS_DIR` を明示する
 - テンプレートは `~/NVIM_PLUGIN_TEMPLATES`（**別リポジトリ**）。
   ここを直さないと、生成されるファイルに同じ間違いが増え続ける
-- **設定変更のコミットはユーザー自身が行う。** Claude は push しない
+- **Claude は master へ push しない。** feature ブランチへの commit / push は、
+  指示があれば行ってよい。PR のマージはユーザー自身が行う
 
 ### worktree で並行編集するとき
 
