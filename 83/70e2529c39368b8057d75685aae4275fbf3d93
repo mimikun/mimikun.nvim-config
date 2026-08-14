@@ -1,0 +1,69 @@
+lua/plugins/schemastore-nvim/CODES/lua/schemastore/catalog.lua
+  h_220433a6faf6b8 1-9523
+lua/plugins/schemastore-nvim/CODES/.github/workflows/test.yaml
+  h_220433a6faf6b8 1-24
+lua/plugins/schemastore-nvim/CODES/NOTICE
+  h_220433a6faf6b8 1-7
+lua/plugins/schemastore-nvim/CODES/README.md
+  h_220433a6faf6b8 1-171
+lua/plugins/schemastore-nvim/CODES/test/schemastore.lua
+  h_220433a6faf6b8 1-317
+lua/plugins/schemastore-nvim/CODES/scripts/mulberry.lua
+  h_220433a6faf6b8 1-962
+lua/plugins/schemastore-nvim/ft.lua
+  h_220433a6faf6b8 1-6
+  s_cd7de4d712dc5f::t_2f58681fe4ce39 7-9
+lua/plugins/schemastore-nvim/CODES/stylua.toml
+  h_220433a6faf6b8 1-6
+lua/plugins/schemastore-nvim/CODES/scripts/generate
+  h_220433a6faf6b8 1-63
+lua/plugins/schemastore-nvim/CODES/test/catalog.lua
+  h_220433a6faf6b8 1-45
+lua/plugins/schemastore-nvim/CODES/scripts/test
+  h_220433a6faf6b8 1-47
+lua/plugins/schemastore-nvim/CODES/LICENSE
+  h_220433a6faf6b8 1-202
+lua/plugins/schemastore-nvim/CODES/.editorconfig
+  h_220433a6faf6b8 1-7
+lua/plugins/schemastore-nvim/CODES/.gitignore
+  h_220433a6faf6b8 1-111
+lua/plugins/schemastore-nvim/CODES/test/generate.lua
+  h_220433a6faf6b8 1-15
+lua/plugins/schemastore-nvim/CODES/doc/schemastore.txt
+  h_220433a6faf6b8 1-212
+lua/plugins/schemastore-nvim/CODES/lua/schemastore/generate.lua
+  h_220433a6faf6b8 1-103
+lua/plugins/schemastore-nvim/CODES/.github/workflows/generate.yaml
+  h_220433a6faf6b8 1-38
+lua/plugins/schemastore-nvim/CODES/Makefile
+  h_220433a6faf6b8 1-7
+lua/plugins/schemastore-nvim/init.lua
+  h_220433a6faf6b8 1-10
+lua/plugins/schemastore-nvim/stylua.toml
+  h_220433a6faf6b8 1-13
+lua/plugins/schemastore-nvim/.editorconfig
+  h_220433a6faf6b8 1-14
+lua/plugins/schemastore-nvim/CODES/lua/schemastore/init.lua
+  h_220433a6faf6b8 1-128
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "8370e2529c39368b8057d75685aae4275fbf3d93",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  },
+  "sessions": {
+    "s_cd7de4d712dc5f": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "b7525769-3c42-42e5-a09c-14833062409b",
+        "model": "claude-opus-5"
+      },
+      "human_author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
