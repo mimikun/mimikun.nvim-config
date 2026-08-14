@@ -1,0 +1,14 @@
+lua/config/usercmds.lua
+  h_220433a6faf6b8 2-3,6-15,28,34-35,37-40,63-67,70,84-85,105,126,186-189
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "5f593a0a8141c0248879ad8453ec6801f267d034",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
