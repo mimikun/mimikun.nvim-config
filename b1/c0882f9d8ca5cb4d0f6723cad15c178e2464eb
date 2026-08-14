@@ -1,0 +1,26 @@
+after/lsp/yamlls.lua
+  s_cd7de4d712dc5f::t_856c9d05deae1d 2-14
+after/lsp/jsonls.lua
+  s_cd7de4d712dc5f::t_856c9d05deae1d 2-9
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "b1c0882f9d8ca5cb4d0f6723cad15c178e2464eb",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  },
+  "sessions": {
+    "s_cd7de4d712dc5f": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "b7525769-3c42-42e5-a09c-14833062409b",
+        "model": "claude-opus-5"
+      },
+      "human_author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
