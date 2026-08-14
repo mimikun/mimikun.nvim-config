@@ -1,0 +1,50 @@
+lua/plugins/schemastore-nvim/CODES/.editorconfig
+  h_220433a6faf6b8 1-7
+lua/plugins/schemastore-nvim/CODES/.github/workflows/generate.yaml
+  h_220433a6faf6b8 1-38
+lua/plugins/schemastore-nvim/CODES/.github/workflows/test.yaml
+  h_220433a6faf6b8 1-24
+lua/plugins/schemastore-nvim/CODES/.gitignore
+  h_220433a6faf6b8 1-111
+lua/plugins/schemastore-nvim/CODES/LICENSE
+  h_220433a6faf6b8 1-202
+lua/plugins/schemastore-nvim/CODES/Makefile
+  h_220433a6faf6b8 1-7
+lua/plugins/schemastore-nvim/CODES/NOTICE
+  h_220433a6faf6b8 1-7
+lua/plugins/schemastore-nvim/CODES/README.md
+  h_220433a6faf6b8 1-171
+lua/plugins/schemastore-nvim/CODES/doc/schemastore.txt
+  h_220433a6faf6b8 1-212
+lua/plugins/schemastore-nvim/CODES/lua/schemastore/catalog.lua
+  h_220433a6faf6b8 1-9523
+lua/plugins/schemastore-nvim/CODES/lua/schemastore/generate.lua
+  h_220433a6faf6b8 1-103
+lua/plugins/schemastore-nvim/CODES/lua/schemastore/init.lua
+  h_220433a6faf6b8 1-128
+lua/plugins/schemastore-nvim/CODES/scripts/generate
+  h_220433a6faf6b8 1-63
+lua/plugins/schemastore-nvim/CODES/scripts/mulberry.lua
+  h_220433a6faf6b8 1-962
+lua/plugins/schemastore-nvim/CODES/scripts/test
+  h_220433a6faf6b8 1-47
+lua/plugins/schemastore-nvim/CODES/stylua.toml
+  h_220433a6faf6b8 1-6
+lua/plugins/schemastore-nvim/CODES/test/catalog.lua
+  h_220433a6faf6b8 1-45
+lua/plugins/schemastore-nvim/CODES/test/generate.lua
+  h_220433a6faf6b8 1-15
+lua/plugins/schemastore-nvim/CODES/test/schemastore.lua
+  h_220433a6faf6b8 1-317
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "ff694eaea9996e36885e5d46e4c62de8bf754834",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
