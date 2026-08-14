@@ -8,7 +8,7 @@ local keys = {
     mode = {
       "n",
     },
-    desc = "",
+    desc = "Aerial: toggle outline",
     silent = true,
   },
 }

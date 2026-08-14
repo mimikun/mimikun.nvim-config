@@ -8,7 +8,7 @@ local keys = {
     mode = {
       "n",
     },
-    desc = "",
+    desc = "Cord: toggle presence",
     silent = true,
   },
   {
@@ -19,7 +19,7 @@ local keys = {
     mode = {
       "n",
     },
-    desc = "",
+    desc = "Cord: toggle idle (force)",
     silent = true,
   },
 }

@@ -146,7 +146,7 @@ local keys = {
       "o",
       "x",
     },
-    desc = "",
+    desc = "Yanky: last put textobject",
     silent = true,
   },
 }
