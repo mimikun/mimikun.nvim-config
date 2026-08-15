@@ -1,0 +1,18 @@
+lua/plugins/codecompanion-nvim/CODES/adapters/http/ollama/init.lua
+  h_220433a6faf6b8 229-230
+lua/plugins/codecompanion-nvim/CODES/prompt_library/init.lua
+  h_220433a6faf6b8 9-10,18-19,21-24,26-33,35-37,39-45,47-59,61-62,64-68,70
+lua/plugins/codecompanion-nvim/CODES/prompt_library/markdown.lua
+  h_220433a6faf6b8 10-11,19,21,23-26,28-29,31-32,34-36,39,47-72,79-126,130-134,136,143-146,148-149,151-153,155,163-164,167-172,174-196,198-228,232-235,238-255,257-264,272-274,277-305,308-331,333,337-339,341
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "5bbc505ad414a406f7e1beaec398802ba76c27fe",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
