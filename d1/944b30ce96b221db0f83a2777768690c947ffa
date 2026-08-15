@@ -1,0 +1,48 @@
+lua/plugins/mcphub-nvim/WIKIS/API-Reference.md
+  h_220433a6faf6b8 1-193
+lua/plugins/mcphub-nvim/WIKIS/Avante.md
+  h_220433a6faf6b8 1-88
+lua/plugins/mcphub-nvim/WIKIS/CodeCompanion.md
+  h_220433a6faf6b8 1-102
+lua/plugins/mcphub-nvim/WIKIS/Configuration-File.md
+  h_220433a6faf6b8 1-84
+lua/plugins/mcphub-nvim/WIKIS/Creating-Server.md
+  h_220433a6faf6b8 1-170
+lua/plugins/mcphub-nvim/WIKIS/Demos.md
+  h_220433a6faf6b8 1-61
+lua/plugins/mcphub-nvim/WIKIS/Example-Servers.md
+  h_220433a6faf6b8 1-62
+lua/plugins/mcphub-nvim/WIKIS/Home.md
+  h_220433a6faf6b8 1-124
+lua/plugins/mcphub-nvim/WIKIS/How-it-Works.md
+  h_220433a6faf6b8 1-167
+lua/plugins/mcphub-nvim/WIKIS/Installation.md
+  h_220433a6faf6b8 1-163
+lua/plugins/mcphub-nvim/WIKIS/Lualine.md
+  h_220433a6faf6b8 1-38
+lua/plugins/mcphub-nvim/WIKIS/Native-Servers.md
+  h_220433a6faf6b8 1-129
+lua/plugins/mcphub-nvim/WIKIS/Request-Context.md
+  h_220433a6faf6b8 1-80
+lua/plugins/mcphub-nvim/WIKIS/Server-Types.md
+  h_220433a6faf6b8 1-150
+lua/plugins/mcphub-nvim/WIKIS/Support.md
+  h_220433a6faf6b8 1-32
+lua/plugins/mcphub-nvim/WIKIS/Troubleshooting.md
+  h_220433a6faf6b8 1-138
+lua/plugins/mcphub-nvim/WIKIS/Weather-Server.md
+  h_220433a6faf6b8 1-117
+lua/plugins/mcphub-nvim/WIKIS/_Sidebar.md
+  h_220433a6faf6b8 1-30
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "d1944b30ce96b221db0f83a2777768690c947ffa",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
