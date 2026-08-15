@@ -1,0 +1,1502 @@
+lua/plugins/codecompanion-nvim/CODES/.codecompanion/acp/acp.md
+  h_220433a6faf6b8 1-277
+lua/plugins/codecompanion-nvim/CODES/.codecompanion/acp/acp_json_schema.json
+  h_220433a6faf6b8 1-3597
+lua/plugins/codecompanion-nvim/CODES/.codecompanion/acp/claude_code_acp.md
+  h_220433a6faf6b8 1-77
+lua/plugins/codecompanion-nvim/CODES/.codecompanion/acp/codex_acp.md
+  h_220433a6faf6b8 1-85
+lua/plugins/codecompanion-nvim/CODES/.codecompanion/adapters/adapters.md
+  h_220433a6faf6b8 1-213
+lua/plugins/codecompanion-nvim/CODES/.codecompanion/adapters/models_list.md
+  h_220433a6faf6b8 1-32
+lua/plugins/codecompanion-nvim/CODES/.codecompanion/adapters/plenary_curl.md
+  h_220433a6faf6b8 1-365
+lua/plugins/codecompanion-nvim/CODES/.codecompanion/chat.md
+  h_220433a6faf6b8 1-99
+lua/plugins/codecompanion-nvim/CODES/.codecompanion/code_review.md
+  h_220433a6faf6b8 1-79
+lua/plugins/codecompanion-nvim/CODES/.codecompanion/rules.md
+  h_220433a6faf6b8 1-144
+lua/plugins/codecompanion-nvim/CODES/.codecompanion/tests/automated-tools.md
+  h_220433a6faf6b8 1-73
+lua/plugins/codecompanion-nvim/CODES/.codecompanion/tests/mini_test_testing.md
+  h_220433a6faf6b8 1-1011
+lua/plugins/codecompanion-nvim/CODES/.codecompanion/tests/test.md
+  h_220433a6faf6b8 1-27
+lua/plugins/codecompanion-nvim/CODES/.codecompanion/tools.md
+  h_220433a6faf6b8 1-133
+lua/plugins/codecompanion-nvim/CODES/.codecompanion/ui.md
+  h_220433a6faf6b8 1-45
+lua/plugins/codecompanion-nvim/CODES/.codecompanion/workflows.md
+  h_220433a6faf6b8 1-95
+lua/plugins/codecompanion-nvim/CODES/.dockerignore
+  h_220433a6faf6b8 1-3
+lua/plugins/codecompanion-nvim/CODES/.github/FUNDING.yml
+  h_220433a6faf6b8 1-2
+lua/plugins/codecompanion-nvim/CODES/.github/ISSUE_TEMPLATE/bug_report.yml
+  h_220433a6faf6b8 1-133
+lua/plugins/codecompanion-nvim/CODES/.github/ISSUE_TEMPLATE/config.yml
+  h_220433a6faf6b8 1-8
+lua/plugins/codecompanion-nvim/CODES/.github/pull_request_template.md
+  h_220433a6faf6b8 1-45
+lua/plugins/codecompanion-nvim/CODES/.github/workflows/ci.yml
+  h_220433a6faf6b8 1-41
+lua/plugins/codecompanion-nvim/CODES/.github/workflows/claude.yml
+  h_220433a6faf6b8 1-51
+lua/plugins/codecompanion-nvim/CODES/.github/workflows/format.yml
+  h_220433a6faf6b8 1-22
+lua/plugins/codecompanion-nvim/CODES/.github/workflows/release.yml
+  h_220433a6faf6b8 1-41
+lua/plugins/codecompanion-nvim/CODES/.github/workflows/require-checklist.yml
+  h_220433a6faf6b8 1-25
+lua/plugins/codecompanion-nvim/CODES/.github/workflows/rockspec.yml
+  h_220433a6faf6b8 1-26
+lua/plugins/codecompanion-nvim/CODES/.github/workflows/spelling.yaml
+  h_220433a6faf6b8 1-25
+lua/plugins/codecompanion-nvim/CODES/.github/workflows/sponsors.yml
+  h_220433a6faf6b8 1-30
+lua/plugins/codecompanion-nvim/CODES/.github/workflows/stale.yml
+  h_220433a6faf6b8 1-21
+lua/plugins/codecompanion-nvim/CODES/.gitignore
+  h_220433a6faf6b8 1-66
+lua/plugins/codecompanion-nvim/CODES/.luarc.json
+  h_220433a6faf6b8 1-15
+lua/plugins/codecompanion-nvim/CODES/AGENTS.md
+  h_220433a6faf6b8 1-66
+lua/plugins/codecompanion-nvim/CODES/CHANGELOG.md
+  h_220433a6faf6b8 1-3934
+lua/plugins/codecompanion-nvim/CODES/CLAUDE.md
+  h_220433a6faf6b8 1
+lua/plugins/codecompanion-nvim/CODES/CONTRIBUTING.md
+  h_220433a6faf6b8 1-258
+lua/plugins/codecompanion-nvim/CODES/Dockerfile
+  h_220433a6faf6b8 1-32
+lua/plugins/codecompanion-nvim/CODES/LICENSE
+  h_220433a6faf6b8 1-202
+lua/plugins/codecompanion-nvim/CODES/Make.ps1
+  h_220433a6faf6b8 1-87
+lua/plugins/codecompanion-nvim/CODES/Makefile
+  h_220433a6faf6b8 1-53
+lua/plugins/codecompanion-nvim/CODES/README.md
+  h_220433a6faf6b8 1-137
+lua/plugins/codecompanion-nvim/CODES/_typos.toml
+  h_220433a6faf6b8 1-3
+lua/plugins/codecompanion-nvim/CODES/doc/.gitignore
+  h_220433a6faf6b8 1-4
+lua/plugins/codecompanion-nvim/CODES/doc/.vitepress/config.mjs
+  h_220433a6faf6b8 1-335
+lua/plugins/codecompanion-nvim/CODES/doc/.vitepress/theme/CopyOrDownloadAsMarkdownButtons.js
+  h_220433a6faf6b8 1-24
+lua/plugins/codecompanion-nvim/CODES/doc/.vitepress/theme/index.js
+  h_220433a6faf6b8 1-14
+lua/plugins/codecompanion-nvim/CODES/doc/.vitepress/theme/vaporwave.css
+  h_220433a6faf6b8 1-185
+lua/plugins/codecompanion-nvim/CODES/doc/agent-client-protocol.md
+  h_220433a6faf6b8 1-104
+lua/plugins/codecompanion-nvim/CODES/doc/architecture.md
+  h_220433a6faf6b8 1-73
+lua/plugins/codecompanion-nvim/CODES/doc/codecompanion.txt
+  h_220433a6faf6b8 1-9026
+lua/plugins/codecompanion-nvim/CODES/doc/configuration/action-palette.md
+  h_220433a6faf6b8 1-36
+lua/plugins/codecompanion-nvim/CODES/doc/configuration/adapters-acp.md
+  h_220433a6faf6b8 1-490
+lua/plugins/codecompanion-nvim/CODES/doc/configuration/adapters-http.md
+  h_220433a6faf6b8 1-640
+lua/plugins/codecompanion-nvim/CODES/doc/configuration/chat-buffer.md
+  h_220433a6faf6b8 1-1212
+lua/plugins/codecompanion-nvim/CODES/doc/configuration/cli.md
+  h_220433a6faf6b8 1-198
+lua/plugins/codecompanion-nvim/CODES/doc/configuration/code-review.md
+  h_220433a6faf6b8 1-174
+lua/plugins/codecompanion-nvim/CODES/doc/configuration/extensions.md
+  h_220433a6faf6b8 1-44
+lua/plugins/codecompanion-nvim/CODES/doc/configuration/inline.md
+  h_220433a6faf6b8 1-119
+lua/plugins/codecompanion-nvim/CODES/doc/configuration/mcp.md
+  h_220433a6faf6b8 1-251
+lua/plugins/codecompanion-nvim/CODES/doc/configuration/others.md
+  h_220433a6faf6b8 1-118
+lua/plugins/codecompanion-nvim/CODES/doc/configuration/prompt-library.md
+  h_220433a6faf6b8 1-935
+lua/plugins/codecompanion-nvim/CODES/doc/configuration/rules.md
+  h_220433a6faf6b8 1-338
+lua/plugins/codecompanion-nvim/CODES/doc/configuration/system-prompt.md
+  h_220433a6faf6b8 1-218
+lua/plugins/codecompanion-nvim/CODES/doc/configuration/upgrading.md
+  h_220433a6faf6b8 1-134
+lua/plugins/codecompanion-nvim/CODES/doc/extending/adapters.md
+  h_220433a6faf6b8 1-707
+lua/plugins/codecompanion-nvim/CODES/doc/extending/agentic-workflows.md
+  h_220433a6faf6b8 1-151
+lua/plugins/codecompanion-nvim/CODES/doc/extending/extensions.md
+  h_220433a6faf6b8 1-186
+lua/plugins/codecompanion-nvim/CODES/doc/extending/parsers.md
+  h_220433a6faf6b8 1-48
+lua/plugins/codecompanion-nvim/CODES/doc/extending/tools.md
+  h_220433a6faf6b8 1-804
+lua/plugins/codecompanion-nvim/CODES/doc/extending/ui.md
+  h_220433a6faf6b8 1-206
+lua/plugins/codecompanion-nvim/CODES/doc/getting-started.md
+  h_220433a6faf6b8 1-287
+lua/plugins/codecompanion-nvim/CODES/doc/index.md
+  h_220433a6faf6b8 1-41
+lua/plugins/codecompanion-nvim/CODES/doc/installation.md
+  h_220433a6faf6b8 1-169
+lua/plugins/codecompanion-nvim/CODES/doc/integrations.md
+  h_220433a6faf6b8 1-27
+lua/plugins/codecompanion-nvim/CODES/doc/model-context-protocol.md
+  h_220433a6faf6b8 1-42
+lua/plugins/codecompanion-nvim/CODES/doc/package-lock.json
+  h_220433a6faf6b8 1-5090
+lua/plugins/codecompanion-nvim/CODES/doc/package.json
+  h_220433a6faf6b8 1-16
+lua/plugins/codecompanion-nvim/CODES/doc/public/robots.txt
+  h_220433a6faf6b8 1-3
+lua/plugins/codecompanion-nvim/CODES/doc/usage/action-palette.md
+  h_220433a6faf6b8 1-32
+lua/plugins/codecompanion-nvim/CODES/doc/usage/chat-buffer/agents-tools.md
+  h_220433a6faf6b8 1-432
+lua/plugins/codecompanion-nvim/CODES/doc/usage/chat-buffer/editor-context.md
+  h_220433a6faf6b8 1-139
+lua/plugins/codecompanion-nvim/CODES/doc/usage/chat-buffer/index.md
+  h_220433a6faf6b8 1-173
+lua/plugins/codecompanion-nvim/CODES/doc/usage/chat-buffer/rules.md
+  h_220433a6faf6b8 1-146
+lua/plugins/codecompanion-nvim/CODES/doc/usage/chat-buffer/slash-commands.md
+  h_220433a6faf6b8 1-144
+lua/plugins/codecompanion-nvim/CODES/doc/usage/cli.md
+  h_220433a6faf6b8 1-238
+lua/plugins/codecompanion-nvim/CODES/doc/usage/code-review.md
+  h_220433a6faf6b8 1-207
+lua/plugins/codecompanion-nvim/CODES/doc/usage/events.md
+  h_220433a6faf6b8 1-115
+lua/plugins/codecompanion-nvim/CODES/doc/usage/inline.md
+  h_220433a6faf6b8 1-52
+lua/plugins/codecompanion-nvim/CODES/doc/usage/introduction.md
+  h_220433a6faf6b8 1-38
+lua/plugins/codecompanion-nvim/CODES/doc/usage/prompt-library.md
+  h_220433a6faf6b8 1-26
+lua/plugins/codecompanion-nvim/CODES/doc/usage/ui.md
+  h_220433a6faf6b8 1-46
+lua/plugins/codecompanion-nvim/CODES/doc/usage/workflows.md
+  h_220433a6faf6b8 1-21
+lua/plugins/codecompanion-nvim/CODES/lua/codecompanion/_extensions/init.lua
+  h_220433a6faf6b8 1-81
+lua/plugins/codecompanion-nvim/CODES/lua/codecompanion/acp/init.lua
+  h_220433a6faf6b8 1-1026
+lua/plugins/codecompanion-nvim/CODES/lua/codecompanion/acp/methods.lua
+  h_220433a6faf6b8 1-14
+lua/plugins/codecompanion-nvim/CODES/lua/codecompanion/acp/prompt_builder.lua
+  h_220433a6faf6b8 1-316
+lua/plugins/codecompanion-nvim/CODES/lua/codecompanion/action_palette/init.lua
+  h_220433a6faf6b8 1-188
+lua/plugins/codecompanion-nvim/CODES/lua/codecompanion/action_palette/static.lua
+  h_220433a6faf6b8 1-118
+lua/plugins/codecompanion-nvim/CODES/lua/codecompanion/adapters/acp/auggie_cli.lua
+  h_220433a6faf6b8 1-56
+lua/plugins/codecompanion-nvim/CODES/lua/codecompanion/adapters/acp/cagent.lua
+  h_220433a6faf6b8 1-57
+lua/plugins/codecompanion-nvim/CODES/lua/codecompanion/adapters/acp/claude_code.lua
+  h_220433a6faf6b8 1-74
+lua/plugins/codecompanion-nvim/CODES/lua/codecompanion/adapters/acp/cline_cli.lua
+  h_220433a6faf6b8 1-64
+lua/plugins/codecompanion-nvim/CODES/lua/codecompanion/adapters/acp/codex.lua
+  h_220433a6faf6b8 1-59
+lua/plugins/codecompanion-nvim/CODES/lua/codecompanion/adapters/acp/copilot_acp.lua
+  h_220433a6faf6b8 1-64
+lua/plugins/codecompanion-nvim/CODES/lua/codecompanion/adapters/acp/cursor_cli.lua
+  h_220433a6faf6b8 1-65
+lua/plugins/codecompanion-nvim/CODES/lua/codecompanion/adapters/acp/gemini_cli.lua
+  h_220433a6faf6b8 1-65
+lua/plugins/codecompanion-nvim/CODES/lua/codecompanion/adapters/acp/goose.lua
+  h_220433a6faf6b8 1-56
+lua/plugins/codecompanion-nvim/CODES/lua/codecompanion/adapters/acp/helpers.lua
+  h_220433a6faf6b8 1-50
+lua/plugins/codecompanion-nvim/CODES/lua/codecompanion/adapters/acp/init.lua
+  h_220433a6faf6b8 1-178
+lua/plugins/codecompanion-nvim/CODES/lua/codecompanion/adapters/acp/kilocode.lua
+  h_220433a6faf6b8 1-62
+lua/plugins/codecompanion-nvim/CODES/lua/codecompanion/adapters/acp/kimi_cli.lua
+  h_220433a6faf6b8 1-64
+lua/plugins/codecompanion-nvim/CODES/lua/codecompanion/adapters/acp/kiro.lua
+  h_220433a6faf6b8 1-66
+lua/plugins/codecompanion-nvim/CODES/lua/codecompanion/adapters/acp/mistral_vibe.lua
+  h_220433a6faf6b8 1-55
+lua/plugins/codecompanion-nvim/CODES/lua/codecompanion/adapters/acp/opencode.lua
+  h_220433a6faf6b8 1-65
+lua/plugins/codecompanion-nvim/CODES/lua/codecompanion/adapters/http/anthropic.lua
+  h_220433a6faf6b8 1-832
+lua/plugins/codecompanion-nvim/CODES/lua/codecompanion/adapters/http/azure_openai.lua
+  h_220433a6faf6b8 1-184
+lua/plugins/codecompanion-nvim/CODES/lua/codecompanion/adapters/http/copilot/get_models.lua
+  h_220433a6faf6b8 1-82
+lua/plugins/codecompanion-nvim/CODES/lua/codecompanion/adapters/http/copilot/init.lua
+  h_220433a6faf6b8 1-428
+lua/plugins/codecompanion-nvim/CODES/lua/codecompanion/adapters/http/copilot/stats.lua
+  h_220433a6faf6b8 1-205
+lua/plugins/codecompanion-nvim/CODES/lua/codecompanion/adapters/http/copilot/token.lua
+  h_220433a6faf6b8 1-220
+lua/plugins/codecompanion-nvim/CODES/lua/codecompanion/adapters/http/deepseek.lua
+  h_220433a6faf6b8 1-379
+lua/plugins/codecompanion-nvim/CODES/lua/codecompanion/adapters/http/gemini.lua
+  h_220433a6faf6b8 1-590
+lua/plugins/codecompanion-nvim/CODES/lua/codecompanion/adapters/http/gemini_interactions.lua
+  h_220433a6faf6b8 1-764
+lua/plugins/codecompanion-nvim/CODES/lua/codecompanion/adapters/http/githubmodels.lua
+  h_220433a6faf6b8 1-233
+lua/plugins/codecompanion-nvim/CODES/lua/codecompanion/adapters/http/huggingface.lua
+  h_220433a6faf6b8 1-212
+lua/plugins/codecompanion-nvim/CODES/lua/codecompanion/adapters/http/init.lua
+  h_220433a6faf6b8 1-402
+lua/plugins/codecompanion-nvim/CODES/lua/codecompanion/adapters/http/jina.lua
+  h_220433a6faf6b8 1-112
+lua/plugins/codecompanion-nvim/CODES/lua/codecompanion/adapters/http/kimi.lua
+  h_220433a6faf6b8 1-215
+lua/plugins/codecompanion-nvim/CODES/lua/codecompanion/adapters/http/mistral.lua
+  h_220433a6faf6b8 1-314
+lua/plugins/codecompanion-nvim/CODES/lua/codecompanion/adapters/http/novita.lua
+  h_220433a6faf6b8 1-261
+lua/plugins/codecompanion-nvim/CODES/lua/codecompanion/adapters/http/ollama/get_models.lua
+  h_220433a6faf6b8 1-172
+lua/plugins/codecompanion-nvim/CODES/lua/codecompanion/adapters/http/ollama/init.lua
+  h_220433a6faf6b8 1-401
+lua/plugins/codecompanion-nvim/CODES/lua/codecompanion/adapters/http/openai.lua
+  h_220433a6faf6b8 1-670
+lua/plugins/codecompanion-nvim/CODES/lua/codecompanion/adapters/http/openai_compatible.lua
+  h_220433a6faf6b8 1-161
+lua/plugins/codecompanion-nvim/CODES/lua/codecompanion/adapters/http/openai_responses.lua
+  h_220433a6faf6b8 1-929
+lua/plugins/codecompanion-nvim/CODES/lua/codecompanion/adapters/http/openrouter.lua
+  h_220433a6faf6b8 1-477
+lua/plugins/codecompanion-nvim/CODES/lua/codecompanion/adapters/http/tavily.lua
+  h_220433a6faf6b8 1-104
+lua/plugins/codecompanion-nvim/CODES/lua/codecompanion/adapters/http/xai.lua
+  h_220433a6faf6b8 1-68
+lua/plugins/codecompanion-nvim/CODES/lua/codecompanion/adapters/init.lua
+  h_220433a6faf6b8 1-110
+lua/plugins/codecompanion-nvim/CODES/lua/codecompanion/adapters/shared.lua
+  h_220433a6faf6b8 1-92
+lua/plugins/codecompanion-nvim/CODES/lua/codecompanion/adapters/utils/init.lua
+  h_220433a6faf6b8 1-437
+lua/plugins/codecompanion-nvim/CODES/lua/codecompanion/adapters/utils/models/fetch.lua
+  h_220433a6faf6b8 1-155
+lua/plugins/codecompanion-nvim/CODES/lua/codecompanion/adapters/utils/models/transform.lua
+  h_220433a6faf6b8 1-195
+lua/plugins/codecompanion-nvim/CODES/lua/codecompanion/adapters/utils/structured_outputs.lua
+  h_220433a6faf6b8 1-168
+lua/plugins/codecompanion-nvim/CODES/lua/codecompanion/adapters/utils/tool_transformers.lua
+  h_220433a6faf6b8 1-181
+lua/plugins/codecompanion-nvim/CODES/lua/codecompanion/commands/diff.lua
+  h_220433a6faf6b8 1-548
+lua/plugins/codecompanion-nvim/CODES/lua/codecompanion/commands/init.lua
+  h_220433a6faf6b8 1-418
+lua/plugins/codecompanion-nvim/CODES/lua/codecompanion/config.lua
+  h_220433a6faf6b8 1-1531
+lua/plugins/codecompanion-nvim/CODES/lua/codecompanion/diff/init.lua
+  h_220433a6faf6b8 1-308
+lua/plugins/codecompanion-nvim/CODES/lua/codecompanion/diff/keymaps.lua
+  h_220433a6faf6b8 1-110
+lua/plugins/codecompanion-nvim/CODES/lua/codecompanion/diff/ui.lua
+  h_220433a6faf6b8 1-620
+lua/plugins/codecompanion-nvim/CODES/lua/codecompanion/diff/utils.lua
+  h_220433a6faf6b8 1-268
+lua/plugins/codecompanion-nvim/CODES/lua/codecompanion/health.lua
+  h_220433a6faf6b8 1-120
+lua/plugins/codecompanion-nvim/CODES/lua/codecompanion/helpers.lua
+  h_220433a6faf6b8 1-65
+lua/plugins/codecompanion-nvim/CODES/lua/codecompanion/helpers/code.lua
+  h_220433a6faf6b8 1-57
+lua/plugins/codecompanion-nvim/CODES/lua/codecompanion/http.lua
+  h_220433a6faf6b8 1-510
+lua/plugins/codecompanion-nvim/CODES/lua/codecompanion/init.lua
+  h_220433a6faf6b8 1-590
+lua/plugins/codecompanion-nvim/CODES/lua/codecompanion/integrations/herdr.lua
+  h_220433a6faf6b8 1-223
+lua/plugins/codecompanion-nvim/CODES/lua/codecompanion/integrations/init.lua
+  h_220433a6faf6b8 1-26
+lua/plugins/codecompanion-nvim/CODES/lua/codecompanion/interactions/background/builtin/chat_make_title.lua
+  h_220433a6faf6b8 1-111
+lua/plugins/codecompanion-nvim/CODES/lua/codecompanion/interactions/background/builtin/tools_judge.lua
+  h_220433a6faf6b8 1-111
+lua/plugins/codecompanion-nvim/CODES/lua/codecompanion/interactions/background/callbacks.lua
+  h_220433a6faf6b8 1-95
+lua/plugins/codecompanion-nvim/CODES/lua/codecompanion/interactions/background/init.lua
+  h_220433a6faf6b8 1-159
+lua/plugins/codecompanion-nvim/CODES/lua/codecompanion/interactions/chat/acp/commands.lua
+  h_220433a6faf6b8 1-114
+lua/plugins/codecompanion-nvim/CODES/lua/codecompanion/interactions/chat/acp/defaults.lua
+  h_220433a6faf6b8 1-105
+lua/plugins/codecompanion-nvim/CODES/lua/codecompanion/interactions/chat/acp/formatters.lua
+  h_220433a6faf6b8 1-283
+lua/plugins/codecompanion-nvim/CODES/lua/codecompanion/interactions/chat/acp/fs.lua
+  h_220433a6faf6b8 1-123
+lua/plugins/codecompanion-nvim/CODES/lua/codecompanion/interactions/chat/acp/handler.lua
+  h_220433a6faf6b8 1-434
+lua/plugins/codecompanion-nvim/CODES/lua/codecompanion/interactions/chat/acp/render.lua
+  h_220433a6faf6b8 1-62
+lua/plugins/codecompanion-nvim/CODES/lua/codecompanion/interactions/chat/acp/request_permission.lua
+  h_220433a6faf6b8 1-288
+lua/plugins/codecompanion-nvim/CODES/lua/codecompanion/interactions/chat/action_palette.lua
+  h_220433a6faf6b8 1-157
+lua/plugins/codecompanion-nvim/CODES/lua/codecompanion/interactions/chat/buffer_diffs.lua
+  h_220433a6faf6b8 1-180
+lua/plugins/codecompanion-nvim/CODES/lua/codecompanion/interactions/chat/context.lua
+  h_220433a6faf6b8 1-379
+lua/plugins/codecompanion-nvim/CODES/lua/codecompanion/interactions/chat/context_management/compaction.lua
+  h_220433a6faf6b8 1-396
+lua/plugins/codecompanion-nvim/CODES/lua/codecompanion/interactions/chat/context_management/editing.lua
+  h_220433a6faf6b8 1-99
+lua/plugins/codecompanion-nvim/CODES/lua/codecompanion/interactions/chat/context_management/init.lua
+  h_220433a6faf6b8 1-92
+lua/plugins/codecompanion-nvim/CODES/lua/codecompanion/interactions/chat/debug.lua
+  h_220433a6faf6b8 1-443
+lua/plugins/codecompanion-nvim/CODES/lua/codecompanion/interactions/chat/editor_context/init.lua
+  h_220433a6faf6b8 1-2
+lua/plugins/codecompanion-nvim/CODES/lua/codecompanion/interactions/chat/helpers/approval_prompt.lua
+  h_220433a6faf6b8 1-147
+lua/plugins/codecompanion-nvim/CODES/lua/codecompanion/interactions/chat/helpers/filter.lua
+  h_220433a6faf6b8 1-174
+lua/plugins/codecompanion-nvim/CODES/lua/codecompanion/interactions/chat/helpers/init.lua
+  h_220433a6faf6b8 1-375
+lua/plugins/codecompanion-nvim/CODES/lua/codecompanion/interactions/chat/helpers/question_prompt.lua
+  h_220433a6faf6b8 1-227
+lua/plugins/codecompanion-nvim/CODES/lua/codecompanion/interactions/chat/helpers/symbols.lua
+  h_220433a6faf6b8 1-115
+lua/plugins/codecompanion-nvim/CODES/lua/codecompanion/interactions/chat/init.lua
+  h_220433a6faf6b8 1-2180
+lua/plugins/codecompanion-nvim/CODES/lua/codecompanion/interactions/chat/keymaps/change_adapter.lua
+  h_220433a6faf6b8 1-258
+lua/plugins/codecompanion-nvim/CODES/lua/codecompanion/interactions/chat/keymaps/init.lua
+  h_220433a6faf6b8 1-720
+lua/plugins/codecompanion-nvim/CODES/lua/codecompanion/interactions/chat/parser.lua
+  h_220433a6faf6b8 1-216
+lua/plugins/codecompanion-nvim/CODES/lua/codecompanion/interactions/chat/slash_commands/builtin/acp_session_options.lua
+  h_220433a6faf6b8 1-112
+lua/plugins/codecompanion-nvim/CODES/lua/codecompanion/interactions/chat/slash_commands/builtin/buffer.lua
+  h_220433a6faf6b8 1-2
+lua/plugins/codecompanion-nvim/CODES/lua/codecompanion/interactions/chat/slash_commands/builtin/command.lua
+  h_220433a6faf6b8 1-72
+lua/plugins/codecompanion-nvim/CODES/lua/codecompanion/interactions/chat/slash_commands/builtin/compact.lua
+  h_220433a6faf6b8 1-29
+lua/plugins/codecompanion-nvim/CODES/lua/codecompanion/interactions/chat/slash_commands/builtin/fetch.lua
+  h_220433a6faf6b8 1-457
+lua/plugins/codecompanion-nvim/CODES/lua/codecompanion/interactions/chat/slash_commands/builtin/file.lua
+  h_220433a6faf6b8 1-2
+lua/plugins/codecompanion-nvim/CODES/lua/codecompanion/interactions/chat/slash_commands/builtin/fork.lua
+  h_220433a6faf6b8 1-79
+lua/plugins/codecompanion-nvim/CODES/lua/codecompanion/interactions/chat/slash_commands/builtin/help.lua
+  h_220433a6faf6b8 1-244
+lua/plugins/codecompanion-nvim/CODES/lua/codecompanion/interactions/chat/slash_commands/builtin/image.lua
+  h_220433a6faf6b8 1-188
+lua/plugins/codecompanion-nvim/CODES/lua/codecompanion/interactions/chat/slash_commands/builtin/mcp.lua
+  h_220433a6faf6b8 1-142
+lua/plugins/codecompanion-nvim/CODES/lua/codecompanion/interactions/chat/slash_commands/builtin/now.lua
+  h_220433a6faf6b8 1-22
+lua/plugins/codecompanion-nvim/CODES/lua/codecompanion/interactions/chat/slash_commands/builtin/rename.lua
+  h_220433a6faf6b8 1-33
+lua/plugins/codecompanion-nvim/CODES/lua/codecompanion/interactions/chat/slash_commands/builtin/resume.lua
+  h_220433a6faf6b8 1-128
+lua/plugins/codecompanion-nvim/CODES/lua/codecompanion/interactions/chat/slash_commands/builtin/share.lua
+  h_220433a6faf6b8 1-132
+lua/plugins/codecompanion-nvim/CODES/lua/codecompanion/interactions/chat/slash_commands/builtin/symbols.lua
+  h_220433a6faf6b8 1-253
+lua/plugins/codecompanion-nvim/CODES/lua/codecompanion/interactions/chat/slash_commands/filter.lua
+  h_220433a6faf6b8 1-12
+lua/plugins/codecompanion-nvim/CODES/lua/codecompanion/interactions/chat/slash_commands/init.lua
+  h_220433a6faf6b8 1-239
+lua/plugins/codecompanion-nvim/CODES/lua/codecompanion/interactions/chat/slash_commands/keymaps.lua
+  h_220433a6faf6b8 1-14
+lua/plugins/codecompanion-nvim/CODES/lua/codecompanion/interactions/chat/subscribers.lua
+  h_220433a6faf6b8 1-129
+lua/plugins/codecompanion-nvim/CODES/lua/codecompanion/interactions/chat/tool_registry.lua
+  h_220433a6faf6b8 1-318
+lua/plugins/codecompanion-nvim/CODES/lua/codecompanion/interactions/chat/tools/approvals.lua
+  h_220433a6faf6b8 1-145
+lua/plugins/codecompanion-nvim/CODES/lua/codecompanion/interactions/chat/tools/builtin/ask_questions.lua
+  h_220433a6faf6b8 1-169
+lua/plugins/codecompanion-nvim/CODES/lua/codecompanion/interactions/chat/tools/builtin/cmd_tool.lua
+  h_220433a6faf6b8 1-123
+lua/plugins/codecompanion-nvim/CODES/lua/codecompanion/interactions/chat/tools/builtin/create_file.lua
+  h_220433a6faf6b8 1-171
+lua/plugins/codecompanion-nvim/CODES/lua/codecompanion/interactions/chat/tools/builtin/delete_file.lua
+  h_220433a6faf6b8 1-147
+lua/plugins/codecompanion-nvim/CODES/lua/codecompanion/interactions/chat/tools/builtin/fetch_webpage.lua
+  h_220433a6faf6b8 1-151
+lua/plugins/codecompanion-nvim/CODES/lua/codecompanion/interactions/chat/tools/builtin/file_search.lua
+  h_220433a6faf6b8 1-178
+lua/plugins/codecompanion-nvim/CODES/lua/codecompanion/interactions/chat/tools/builtin/get_changed_files.lua
+  h_220433a6faf6b8 1-169
+lua/plugins/codecompanion-nvim/CODES/lua/codecompanion/interactions/chat/tools/builtin/get_diagnostics.lua
+  h_220433a6faf6b8 1-344
+lua/plugins/codecompanion-nvim/CODES/lua/codecompanion/interactions/chat/tools/builtin/grep_search.lua
+  h_220433a6faf6b8 1-268
+lua/plugins/codecompanion-nvim/CODES/lua/codecompanion/interactions/chat/tools/builtin/helpers/diff.lua
+  h_220433a6faf6b8 1-157
+lua/plugins/codecompanion-nvim/CODES/lua/codecompanion/interactions/chat/tools/builtin/helpers/init.lua
+  h_220433a6faf6b8 1-20
+lua/plugins/codecompanion-nvim/CODES/lua/codecompanion/interactions/chat/tools/builtin/insert_edit_into_file/constants.lua
+  h_220433a6faf6b8 1-61
+lua/plugins/codecompanion-nvim/CODES/lua/codecompanion/interactions/chat/tools/builtin/insert_edit_into_file/init.lua
+  h_220433a6faf6b8 1-359
+lua/plugins/codecompanion-nvim/CODES/lua/codecompanion/interactions/chat/tools/builtin/insert_edit_into_file/io.lua
+  h_220433a6faf6b8 1-73
+lua/plugins/codecompanion-nvim/CODES/lua/codecompanion/interactions/chat/tools/builtin/insert_edit_into_file/json_repair.lua
+  h_220433a6faf6b8 1-60
+lua/plugins/codecompanion-nvim/CODES/lua/codecompanion/interactions/chat/tools/builtin/insert_edit_into_file/match_selector.lua
+  h_220433a6faf6b8 1-206
+lua/plugins/codecompanion-nvim/CODES/lua/codecompanion/interactions/chat/tools/builtin/insert_edit_into_file/process.lua
+  h_220433a6faf6b8 1-327
+lua/plugins/codecompanion-nvim/CODES/lua/codecompanion/interactions/chat/tools/builtin/insert_edit_into_file/prompt.md
+  h_220433a6faf6b8 1-247
+lua/plugins/codecompanion-nvim/CODES/lua/codecompanion/interactions/chat/tools/builtin/insert_edit_into_file/strategies.lua
+  h_220433a6faf6b8 1-917
+lua/plugins/codecompanion-nvim/CODES/lua/codecompanion/interactions/chat/tools/builtin/insert_edit_into_file/utils.lua
+  h_220433a6faf6b8 1-263
+lua/plugins/codecompanion-nvim/CODES/lua/codecompanion/interactions/chat/tools/builtin/memory.lua
+  h_220433a6faf6b8 1-579
+lua/plugins/codecompanion-nvim/CODES/lua/codecompanion/interactions/chat/tools/builtin/read_file.lua
+  h_220433a6faf6b8 1-221
+lua/plugins/codecompanion-nvim/CODES/lua/codecompanion/interactions/chat/tools/builtin/run_command.lua
+  h_220433a6faf6b8 1-81
+lua/plugins/codecompanion-nvim/CODES/lua/codecompanion/interactions/chat/tools/builtin/web_search.lua
+  h_220433a6faf6b8 1-121
+lua/plugins/codecompanion-nvim/CODES/lua/codecompanion/interactions/chat/tools/filter.lua
+  h_220433a6faf6b8 1-106
+lua/plugins/codecompanion-nvim/CODES/lua/codecompanion/interactions/chat/tools/init.lua
+  h_220433a6faf6b8 1-533
+lua/plugins/codecompanion-nvim/CODES/lua/codecompanion/interactions/chat/tools/labels.lua
+  h_220433a6faf6b8 1-32
+lua/plugins/codecompanion-nvim/CODES/lua/codecompanion/interactions/chat/tools/orchestrator.lua
+  h_220433a6faf6b8 1-592
+lua/plugins/codecompanion-nvim/CODES/lua/codecompanion/interactions/chat/tools/runtime/queue.lua
+  h_220433a6faf6b8 1-2
+lua/plugins/codecompanion-nvim/CODES/lua/codecompanion/interactions/chat/tools/runtime/runner.lua
+  h_220433a6faf6b8 1-125
+lua/plugins/codecompanion-nvim/CODES/lua/codecompanion/interactions/chat/ui/builder.lua
+  h_220433a6faf6b8 1-328
+lua/plugins/codecompanion-nvim/CODES/lua/codecompanion/interactions/chat/ui/folds.lua
+  h_220433a6faf6b8 1-328
+lua/plugins/codecompanion-nvim/CODES/lua/codecompanion/interactions/chat/ui/icons.lua
+  h_220433a6faf6b8 1-93
+lua/plugins/codecompanion-nvim/CODES/lua/codecompanion/interactions/chat/ui/init.lua
+  h_220433a6faf6b8 1-665
+lua/plugins/codecompanion-nvim/CODES/lua/codecompanion/interactions/cli/init.lua
+  h_220433a6faf6b8 1-306
+lua/plugins/codecompanion-nvim/CODES/lua/codecompanion/interactions/cli/input.lua
+  h_220433a6faf6b8 1-72
+lua/plugins/codecompanion-nvim/CODES/lua/codecompanion/interactions/cli/providers/init.lua
+  h_220433a6faf6b8 1-51
+lua/plugins/codecompanion-nvim/CODES/lua/codecompanion/interactions/cli/providers/terminal.lua
+  h_220433a6faf6b8 1-225
+lua/plugins/codecompanion-nvim/CODES/lua/codecompanion/interactions/cli/ui.lua
+  h_220433a6faf6b8 1-88
+lua/plugins/codecompanion-nvim/CODES/lua/codecompanion/interactions/cmd.lua
+  h_220433a6faf6b8 1-83
+lua/plugins/codecompanion-nvim/CODES/lua/codecompanion/interactions/code_review/baseline.lua
+  h_220433a6faf6b8 1-240
+lua/plugins/codecompanion-nvim/CODES/lua/codecompanion/interactions/code_review/diff.lua
+  h_220433a6faf6b8 1-113
+lua/plugins/codecompanion-nvim/CODES/lua/codecompanion/interactions/code_review/init.lua
+  h_220433a6faf6b8 1-414
+lua/plugins/codecompanion-nvim/CODES/lua/codecompanion/interactions/code_review/keymaps.lua
+  h_220433a6faf6b8 1-77
+lua/plugins/codecompanion-nvim/CODES/lua/codecompanion/interactions/code_review/store.lua
+  h_220433a6faf6b8 1-313
+lua/plugins/codecompanion-nvim/CODES/lua/codecompanion/interactions/code_review/ui.lua
+  h_220433a6faf6b8 1-192
+lua/plugins/codecompanion-nvim/CODES/lua/codecompanion/interactions/init.lua
+  h_220433a6faf6b8 1-354
+lua/plugins/codecompanion-nvim/CODES/lua/codecompanion/interactions/inline/completion.lua
+  h_220433a6faf6b8 1-217
+lua/plugins/codecompanion-nvim/CODES/lua/codecompanion/interactions/inline/editor_context/buffer.lua
+  h_220433a6faf6b8 1-33
+lua/plugins/codecompanion-nvim/CODES/lua/codecompanion/interactions/inline/editor_context/chat.lua
+  h_220433a6faf6b8 1-43
+lua/plugins/codecompanion-nvim/CODES/lua/codecompanion/interactions/inline/editor_context/clipboard.lua
+  h_220433a6faf6b8 1-27
+lua/plugins/codecompanion-nvim/CODES/lua/codecompanion/interactions/inline/editor_context/init.lua
+  h_220433a6faf6b8 1-130
+lua/plugins/codecompanion-nvim/CODES/lua/codecompanion/interactions/inline/init.lua
+  h_220433a6faf6b8 1-853
+lua/plugins/codecompanion-nvim/CODES/lua/codecompanion/interactions/inline/keymaps.lua
+  h_220433a6faf6b8 1-27
+lua/plugins/codecompanion-nvim/CODES/lua/codecompanion/interactions/shared/edited_files.lua
+  h_220433a6faf6b8 1-72
+lua/plugins/codecompanion-nvim/CODES/lua/codecompanion/interactions/shared/editor_context/buffer.lua
+  h_220433a6faf6b8 1-193
+lua/plugins/codecompanion-nvim/CODES/lua/codecompanion/interactions/shared/editor_context/buffers.lua
+  h_220433a6faf6b8 1-144
+lua/plugins/codecompanion-nvim/CODES/lua/codecompanion/interactions/shared/editor_context/code_review.lua
+  h_220433a6faf6b8 1-128
+lua/plugins/codecompanion-nvim/CODES/lua/codecompanion/interactions/shared/editor_context/diagnostics.lua
+  h_220433a6faf6b8 1-142
+lua/plugins/codecompanion-nvim/CODES/lua/codecompanion/interactions/shared/editor_context/diff.lua
+  h_220433a6faf6b8 1-112
+lua/plugins/codecompanion-nvim/CODES/lua/codecompanion/interactions/shared/editor_context/init.lua
+  h_220433a6faf6b8 1-342
+lua/plugins/codecompanion-nvim/CODES/lua/codecompanion/interactions/shared/editor_context/messages.lua
+  h_220433a6faf6b8 1-56
+lua/plugins/codecompanion-nvim/CODES/lua/codecompanion/interactions/shared/editor_context/quickfix.lua
+  h_220433a6faf6b8 1-382
+lua/plugins/codecompanion-nvim/CODES/lua/codecompanion/interactions/shared/editor_context/selection.lua
+  h_220433a6faf6b8 1-78
+lua/plugins/codecompanion-nvim/CODES/lua/codecompanion/interactions/shared/editor_context/terminal.lua
+  h_220433a6faf6b8 1-92
+lua/plugins/codecompanion-nvim/CODES/lua/codecompanion/interactions/shared/editor_context/this.lua
+  h_220433a6faf6b8 1-37
+lua/plugins/codecompanion-nvim/CODES/lua/codecompanion/interactions/shared/editor_context/user.lua
+  h_220433a6faf6b8 1-35
+lua/plugins/codecompanion-nvim/CODES/lua/codecompanion/interactions/shared/editor_context/viewport.lua
+  h_220433a6faf6b8 1-74
+lua/plugins/codecompanion-nvim/CODES/lua/codecompanion/interactions/shared/input.lua
+  h_220433a6faf6b8 1-283
+lua/plugins/codecompanion-nvim/CODES/lua/codecompanion/interactions/shared/registry.lua
+  h_220433a6faf6b8 1-103
+lua/plugins/codecompanion-nvim/CODES/lua/codecompanion/interactions/shared/rules/helpers.lua
+  h_220433a6faf6b8 1-227
+lua/plugins/codecompanion-nvim/CODES/lua/codecompanion/interactions/shared/rules/init.lua
+  h_220433a6faf6b8 1-244
+lua/plugins/codecompanion-nvim/CODES/lua/codecompanion/interactions/shared/rules/parsers/claude.lua
+  h_220433a6faf6b8 1-65
+lua/plugins/codecompanion-nvim/CODES/lua/codecompanion/interactions/shared/rules/parsers/cli.lua
+  h_220433a6faf6b8 1-53
+lua/plugins/codecompanion-nvim/CODES/lua/codecompanion/interactions/shared/rules/parsers/codecompanion.lua
+  h_220433a6faf6b8 1-110
+lua/plugins/codecompanion-nvim/CODES/lua/codecompanion/interactions/shared/rules/parsers/init.lua
+  h_220433a6faf6b8 1-111
+lua/plugins/codecompanion-nvim/CODES/lua/codecompanion/interactions/shared/rules/parsers/none.lua
+  h_220433a6faf6b8 1-5
+lua/plugins/codecompanion-nvim/CODES/lua/codecompanion/interactions/shared/slash_commands/buffer.lua
+  h_220433a6faf6b8 1-239
+lua/plugins/codecompanion-nvim/CODES/lua/codecompanion/interactions/shared/slash_commands/file.lua
+  h_220433a6faf6b8 1-284
+lua/plugins/codecompanion-nvim/CODES/lua/codecompanion/interactions/shared/slash_commands/rules.lua
+  h_220433a6faf6b8 1-100
+lua/plugins/codecompanion-nvim/CODES/lua/codecompanion/interactions/shared/tags.lua
+  h_220433a6faf6b8 1-25
+lua/plugins/codecompanion-nvim/CODES/lua/codecompanion/interactions/shared/ui.lua
+  h_220433a6faf6b8 1-186
+lua/plugins/codecompanion-nvim/CODES/lua/codecompanion/interactions/shared/watch.lua
+  h_220433a6faf6b8 1-154
+lua/plugins/codecompanion-nvim/CODES/lua/codecompanion/mcp/client.lua
+  h_220433a6faf6b8 1-620
+lua/plugins/codecompanion-nvim/CODES/lua/codecompanion/mcp/init.lua
+  h_220433a6faf6b8 1-292
+lua/plugins/codecompanion-nvim/CODES/lua/codecompanion/mcp/methods.lua
+  h_220433a6faf6b8 1-5
+lua/plugins/codecompanion-nvim/CODES/lua/codecompanion/mcp/tool_bridge.lua
+  h_220433a6faf6b8 1-204
+lua/plugins/codecompanion-nvim/CODES/lua/codecompanion/prompt_library/builtins/code_workflow.md
+  h_220433a6faf6b8 1-32
+lua/plugins/codecompanion-nvim/CODES/lua/codecompanion/prompt_library/builtins/commit.lua
+  h_220433a6faf6b8 1-5
+lua/plugins/codecompanion-nvim/CODES/lua/codecompanion/prompt_library/builtins/commit.md
+  h_220433a6faf6b8 1-18
+lua/plugins/codecompanion-nvim/CODES/lua/codecompanion/prompt_library/builtins/explain.md
+  h_220433a6faf6b8 1-31
+lua/plugins/codecompanion-nvim/CODES/lua/codecompanion/prompt_library/builtins/fix.md
+  h_220433a6faf6b8 1-39
+lua/plugins/codecompanion-nvim/CODES/lua/codecompanion/prompt_library/builtins/inline_prompt.md
+  h_220433a6faf6b8 1-12
+lua/plugins/codecompanion-nvim/CODES/lua/codecompanion/prompt_library/builtins/lsp.lua
+  h_220433a6faf6b8 1-28
+lua/plugins/codecompanion-nvim/CODES/lua/codecompanion/prompt_library/builtins/lsp.md
+  h_220433a6faf6b8 1-21
+lua/plugins/codecompanion-nvim/CODES/lua/codecompanion/prompt_library/builtins/unit_tests.md
+  h_220433a6faf6b8 1-36
+lua/plugins/codecompanion-nvim/CODES/lua/codecompanion/prompt_library/builtins/upgrades/tools.md
+  h_220433a6faf6b8 1-162
+lua/plugins/codecompanion-nvim/CODES/lua/codecompanion/prompt_library/init.lua
+  h_220433a6faf6b8 1-73
+lua/plugins/codecompanion-nvim/CODES/lua/codecompanion/prompt_library/markdown.lua
+  h_220433a6faf6b8 1-344
+lua/plugins/codecompanion-nvim/CODES/lua/codecompanion/providers/action_palette/default.lua
+  h_220433a6faf6b8 1-55
+lua/plugins/codecompanion-nvim/CODES/lua/codecompanion/providers/action_palette/fzf_lua.lua
+  h_220433a6faf6b8 1-48
+lua/plugins/codecompanion-nvim/CODES/lua/codecompanion/providers/action_palette/mini_pick.lua
+  h_220433a6faf6b8 1-139
+lua/plugins/codecompanion-nvim/CODES/lua/codecompanion/providers/action_palette/shared.lua
+  h_220433a6faf6b8 1-30
+lua/plugins/codecompanion-nvim/CODES/lua/codecompanion/providers/action_palette/snacks.lua
+  h_220433a6faf6b8 1-81
+lua/plugins/codecompanion-nvim/CODES/lua/codecompanion/providers/action_palette/telescope.lua
+  h_220433a6faf6b8 1-141
+lua/plugins/codecompanion-nvim/CODES/lua/codecompanion/providers/completion/blink/init.lua
+  h_220433a6faf6b8 1-217
+lua/plugins/codecompanion-nvim/CODES/lua/codecompanion/providers/completion/blink/setup.lua
+  h_220433a6faf6b8 1-15
+lua/plugins/codecompanion-nvim/CODES/lua/codecompanion/providers/completion/cmp/acp_commands.lua
+  h_220433a6faf6b8 1-87
+lua/plugins/codecompanion-nvim/CODES/lua/codecompanion/providers/completion/cmp/editor_context.lua
+  h_220433a6faf6b8 1-41
+lua/plugins/codecompanion-nvim/CODES/lua/codecompanion/providers/completion/cmp/models.lua
+  h_220433a6faf6b8 1-31
+lua/plugins/codecompanion-nvim/CODES/lua/codecompanion/providers/completion/cmp/setup.lua
+  h_220433a6faf6b8 1-30
+lua/plugins/codecompanion-nvim/CODES/lua/codecompanion/providers/completion/cmp/slash_commands.lua
+  h_220433a6faf6b8 1-55
+lua/plugins/codecompanion-nvim/CODES/lua/codecompanion/providers/completion/cmp/tools.lua
+  h_220433a6faf6b8 1-47
+lua/plugins/codecompanion-nvim/CODES/lua/codecompanion/providers/completion/coc/init.lua
+  h_220433a6faf6b8 1-159
+lua/plugins/codecompanion-nvim/CODES/lua/codecompanion/providers/completion/coc/setup.lua
+  h_220433a6faf6b8 1-77
+lua/plugins/codecompanion-nvim/CODES/lua/codecompanion/providers/completion/default/omnifunc.lua
+  h_220433a6faf6b8 1-121
+lua/plugins/codecompanion-nvim/CODES/lua/codecompanion/providers/completion/default/setup.lua
+  h_220433a6faf6b8 1-12
+lua/plugins/codecompanion-nvim/CODES/lua/codecompanion/providers/completion/init.lua
+  h_220433a6faf6b8 1-335
+lua/plugins/codecompanion-nvim/CODES/lua/codecompanion/providers/init.lua
+  h_220433a6faf6b8 1-124
+lua/plugins/codecompanion-nvim/CODES/lua/codecompanion/providers/slash_commands/default.lua
+  h_220433a6faf6b8 1-137
+lua/plugins/codecompanion-nvim/CODES/lua/codecompanion/providers/slash_commands/fzf_lua.lua
+  h_220433a6faf6b8 1-38
+lua/plugins/codecompanion-nvim/CODES/lua/codecompanion/providers/slash_commands/mini_pick.lua
+  h_220433a6faf6b8 1-52
+lua/plugins/codecompanion-nvim/CODES/lua/codecompanion/providers/slash_commands/snacks.lua
+  h_220433a6faf6b8 1-36
+lua/plugins/codecompanion-nvim/CODES/lua/codecompanion/providers/slash_commands/telescope.lua
+  h_220433a6faf6b8 1-47
+lua/plugins/codecompanion-nvim/CODES/lua/codecompanion/schema.lua
+  h_220433a6faf6b8 1-156
+lua/plugins/codecompanion-nvim/CODES/lua/codecompanion/triggers.lua
+  h_220433a6faf6b8 1-14
+lua/plugins/codecompanion-nvim/CODES/lua/codecompanion/types.lua
+  h_220433a6faf6b8 1-230
+lua/plugins/codecompanion-nvim/CODES/lua/codecompanion/utils/async.lua
+  h_220433a6faf6b8 1-90
+lua/plugins/codecompanion-nvim/CODES/lua/codecompanion/utils/buffers.lua
+  h_220433a6faf6b8 1-179
+lua/plugins/codecompanion-nvim/CODES/lua/codecompanion/utils/context.lua
+  h_220433a6faf6b8 1-149
+lua/plugins/codecompanion-nvim/CODES/lua/codecompanion/utils/deprecate.lua
+  h_220433a6faf6b8 1-25
+lua/plugins/codecompanion-nvim/CODES/lua/codecompanion/utils/files.lua
+  h_220433a6faf6b8 1-534
+lua/plugins/codecompanion-nvim/CODES/lua/codecompanion/utils/hash.lua
+  h_220433a6faf6b8 1-27
+lua/plugins/codecompanion-nvim/CODES/lua/codecompanion/utils/images.lua
+  h_220433a6faf6b8 1-145
+lua/plugins/codecompanion-nvim/CODES/lua/codecompanion/utils/init.lua
+  h_220433a6faf6b8 1-305
+lua/plugins/codecompanion-nvim/CODES/lua/codecompanion/utils/jsonrpc.lua
+  h_220433a6faf6b8 1-169
+lua/plugins/codecompanion-nvim/CODES/lua/codecompanion/utils/keymaps.lua
+  h_220433a6faf6b8 1-184
+lua/plugins/codecompanion-nvim/CODES/lua/codecompanion/utils/log.lua
+  h_220433a6faf6b8 1-357
+lua/plugins/codecompanion-nvim/CODES/lua/codecompanion/utils/native_bit.lua
+  h_220433a6faf6b8 1-130
+lua/plugins/codecompanion-nvim/CODES/lua/codecompanion/utils/os.lua
+  h_220433a6faf6b8 1-36
+lua/plugins/codecompanion-nvim/CODES/lua/codecompanion/utils/queue.lua
+  h_220433a6faf6b8 1-88
+lua/plugins/codecompanion-nvim/CODES/lua/codecompanion/utils/regex.lua
+  h_220433a6faf6b8 1-65
+lua/plugins/codecompanion-nvim/CODES/lua/codecompanion/utils/tokens.lua
+  h_220433a6faf6b8 1-158
+lua/plugins/codecompanion-nvim/CODES/lua/codecompanion/utils/treesitter.lua
+  h_220433a6faf6b8 1-131
+lua/plugins/codecompanion-nvim/CODES/lua/codecompanion/utils/ui.lua
+  h_220433a6faf6b8 1-483
+lua/plugins/codecompanion-nvim/CODES/lua/codecompanion/utils/yaml.lua
+  h_220433a6faf6b8 1-144
+lua/plugins/codecompanion-nvim/CODES/lua/telescope/_extensions/codecompanion.lua
+  h_220433a6faf6b8 1-7
+lua/plugins/codecompanion-nvim/CODES/minimal.lua
+  h_220433a6faf6b8 1-94
+lua/plugins/codecompanion-nvim/CODES/plugin/codecompanion.lua
+  h_220433a6faf6b8 1-132
+lua/plugins/codecompanion-nvim/CODES/queries/c/cc_symbols.scm
+  h_220433a6faf6b8 1-24
+lua/plugins/codecompanion-nvim/CODES/queries/cpp/cc_symbols.scm
+  h_220433a6faf6b8 1-29
+lua/plugins/codecompanion-nvim/CODES/queries/go/cc_symbols.scm
+  h_220433a6faf6b8 1-29
+lua/plugins/codecompanion-nvim/CODES/queries/java/cc_symbols.scm
+  h_220433a6faf6b8 1-31
+lua/plugins/codecompanion-nvim/CODES/queries/javascript/cc_symbols.scm
+  h_220433a6faf6b8 1-26
+lua/plugins/codecompanion-nvim/CODES/queries/lua/cc_symbols.scm
+  h_220433a6faf6b8 1-17
+lua/plugins/codecompanion-nvim/CODES/queries/markdown/cc_context.scm
+  h_220433a6faf6b8 1-20
+lua/plugins/codecompanion-nvim/CODES/queries/markdown/chat.scm
+  h_220433a6faf6b8 1-20
+lua/plugins/codecompanion-nvim/CODES/queries/markdown/tokens.scm
+  h_220433a6faf6b8 1-3
+lua/plugins/codecompanion-nvim/CODES/queries/markdown/tools.scm
+  h_220433a6faf6b8 1-11
+lua/plugins/codecompanion-nvim/CODES/queries/php/cc_symbols.scm
+  h_220433a6faf6b8 1-37
+lua/plugins/codecompanion-nvim/CODES/queries/python/cc_symbols.scm
+  h_220433a6faf6b8 1-13
+lua/plugins/codecompanion-nvim/CODES/queries/python/tags.scm
+  h_220433a6faf6b8 1-17
+lua/plugins/codecompanion-nvim/CODES/queries/ruby/cc_symbols.scm
+  h_220433a6faf6b8 1-56
+lua/plugins/codecompanion-nvim/CODES/queries/ruby/tags.scm
+  h_220433a6faf6b8 1-67
+lua/plugins/codecompanion-nvim/CODES/queries/rust/cc_symbols.scm
+  h_220433a6faf6b8 1-41
+lua/plugins/codecompanion-nvim/CODES/queries/scala/cc_symbols.scm
+  h_220433a6faf6b8 1-29
+lua/plugins/codecompanion-nvim/CODES/queries/typescript/cc_symbols.scm
+  h_220433a6faf6b8 1-34
+lua/plugins/codecompanion-nvim/CODES/queries/vim/cc_symbols.scm
+  h_220433a6faf6b8 1-15
+lua/plugins/codecompanion-nvim/CODES/queries/yaml/chat.scm
+  h_220433a6faf6b8 1
+lua/plugins/codecompanion-nvim/CODES/queries/yaml/prompt_library.scm
+  h_220433a6faf6b8 1-34
+lua/plugins/codecompanion-nvim/CODES/scripts/ci-install.sh
+  h_220433a6faf6b8 1-23
+lua/plugins/codecompanion-nvim/CODES/scripts/dependencies.sh
+  h_220433a6faf6b8 1-24
+lua/plugins/codecompanion-nvim/CODES/scripts/minimal_init.lua
+  h_220433a6faf6b8 1-43
+lua/plugins/codecompanion-nvim/CODES/scripts/panvimdoc-cleanup.lua
+  h_220433a6faf6b8 1-135
+lua/plugins/codecompanion-nvim/CODES/scripts/vimdoc.md
+  h_220433a6faf6b8 1-55
+lua/plugins/codecompanion-nvim/CODES/stylua.toml
+  h_220433a6faf6b8 1-10
+lua/plugins/codecompanion-nvim/CODES/tests/acp/test_acp.lua
+  h_220433a6faf6b8 1-788
+lua/plugins/codecompanion-nvim/CODES/tests/acp/test_prompt_builder.lua
+  h_220433a6faf6b8 1-403
+lua/plugins/codecompanion-nvim/CODES/tests/adapters/acp/test_acp.lua
+  h_220433a6faf6b8 1-110
+lua/plugins/codecompanion-nvim/CODES/tests/adapters/acp/test_gemini_cli.lua
+  h_220433a6faf6b8 1-74
+lua/plugins/codecompanion-nvim/CODES/tests/adapters/http/copilot/stubs/copilot_no_streaming.txt
+  h_220433a6faf6b8 1-19
+lua/plugins/codecompanion-nvim/CODES/tests/adapters/http/copilot/stubs/copilot_quota_exceeded.txt
+  h_220433a6faf6b8 1
+lua/plugins/codecompanion-nvim/CODES/tests/adapters/http/copilot/stubs/copilot_streaming.txt
+  h_220433a6faf6b8 1-11
+lua/plugins/codecompanion-nvim/CODES/tests/adapters/http/copilot/stubs/copilot_tools_no_streaming.txt
+  h_220433a6faf6b8 1-35
+lua/plugins/codecompanion-nvim/CODES/tests/adapters/http/copilot/stubs/copilot_tools_streaming.txt
+  h_220433a6faf6b8 1-19
+lua/plugins/codecompanion-nvim/CODES/tests/adapters/http/copilot/stubs/copilot_tools_streaming_reasoning.txt
+  h_220433a6faf6b8 1-4
+lua/plugins/codecompanion-nvim/CODES/tests/adapters/http/copilot/test_copilot.lua
+  h_220433a6faf6b8 1-629
+lua/plugins/codecompanion-nvim/CODES/tests/adapters/http/copilot/test_models.lua
+  h_220433a6faf6b8 1-207
+lua/plugins/codecompanion-nvim/CODES/tests/adapters/http/copilot/test_stats.lua
+  h_220433a6faf6b8 1-226
+lua/plugins/codecompanion-nvim/CODES/tests/adapters/http/stubs/anthropic_compaction_no_streaming.txt
+  h_220433a6faf6b8 1
+lua/plugins/codecompanion-nvim/CODES/tests/adapters/http/stubs/anthropic_compaction_streaming.txt
+  h_220433a6faf6b8 1-30
+lua/plugins/codecompanion-nvim/CODES/tests/adapters/http/stubs/anthropic_no_streaming.txt
+  h_220433a6faf6b8 1-20
+lua/plugins/codecompanion-nvim/CODES/tests/adapters/http/stubs/anthropic_reasoning_no_streaming.txt
+  h_220433a6faf6b8 1-25
+lua/plugins/codecompanion-nvim/CODES/tests/adapters/http/stubs/anthropic_reasoning_streaming.txt
+  h_220433a6faf6b8 1-74
+lua/plugins/codecompanion-nvim/CODES/tests/adapters/http/stubs/anthropic_streaming.txt
+  h_220433a6faf6b8 1-18
+lua/plugins/codecompanion-nvim/CODES/tests/adapters/http/stubs/anthropic_tools_no_params_streaming.txt
+  h_220433a6faf6b8 1-48
+lua/plugins/codecompanion-nvim/CODES/tests/adapters/http/stubs/anthropic_tools_no_streaming.txt
+  h_220433a6faf6b8 1-38
+lua/plugins/codecompanion-nvim/CODES/tests/adapters/http/stubs/anthropic_tools_streaming.txt
+  h_220433a6faf6b8 1-68
+lua/plugins/codecompanion-nvim/CODES/tests/adapters/http/stubs/deepseek_no_streaming.txt
+  h_220433a6faf6b8 1
+lua/plugins/codecompanion-nvim/CODES/tests/adapters/http/stubs/deepseek_streaming.txt
+  h_220433a6faf6b8 1-170
+lua/plugins/codecompanion-nvim/CODES/tests/adapters/http/stubs/deepseek_streaming_reasoning_disabled.txt
+  h_220433a6faf6b8 1-8
+lua/plugins/codecompanion-nvim/CODES/tests/adapters/http/stubs/deepseek_tools_no_params_streaming.txt
+  h_220433a6faf6b8 1-104
+lua/plugins/codecompanion-nvim/CODES/tests/adapters/http/stubs/deepseek_tools_no_streaming.txt
+  h_220433a6faf6b8 1-48
+lua/plugins/codecompanion-nvim/CODES/tests/adapters/http/stubs/deepseek_tools_streaming.txt
+  h_220433a6faf6b8 1-73
+lua/plugins/codecompanion-nvim/CODES/tests/adapters/http/stubs/gemini_interactions_non_streaming.txt
+  h_220433a6faf6b8 1-22
+lua/plugins/codecompanion-nvim/CODES/tests/adapters/http/stubs/gemini_interactions_reasoning_streaming.txt
+  h_220433a6faf6b8 1-26
+lua/plugins/codecompanion-nvim/CODES/tests/adapters/http/stubs/gemini_interactions_streaming.txt
+  h_220433a6faf6b8 1-29
+lua/plugins/codecompanion-nvim/CODES/tests/adapters/http/stubs/gemini_interactions_structured_output.txt
+  h_220433a6faf6b8 1-17
+lua/plugins/codecompanion-nvim/CODES/tests/adapters/http/stubs/gemini_interactions_tools_completed.txt
+  h_220433a6faf6b8 1-25
+lua/plugins/codecompanion-nvim/CODES/tests/adapters/http/stubs/gemini_interactions_tools_streaming.txt
+  h_220433a6faf6b8 1-32
+lua/plugins/codecompanion-nvim/CODES/tests/adapters/http/stubs/gemini_interactions_tools_turn1.txt
+  h_220433a6faf6b8 1-16
+lua/plugins/codecompanion-nvim/CODES/tests/adapters/http/stubs/gemini_interactions_vision.txt
+  h_220433a6faf6b8 1-20
+lua/plugins/codecompanion-nvim/CODES/tests/adapters/http/stubs/gemini_no_streaming.txt
+  h_220433a6faf6b8 1-20
+lua/plugins/codecompanion-nvim/CODES/tests/adapters/http/stubs/gemini_streaming.txt
+  h_220433a6faf6b8 1-3
+lua/plugins/codecompanion-nvim/CODES/tests/adapters/http/stubs/gemini_tools_no_params_streaming.txt
+  h_220433a6faf6b8 1
+lua/plugins/codecompanion-nvim/CODES/tests/adapters/http/stubs/gemini_tools_no_streaming.txt
+  h_220433a6faf6b8 1-37
+lua/plugins/codecompanion-nvim/CODES/tests/adapters/http/stubs/gemini_tools_streaming.txt
+  h_220433a6faf6b8 1
+lua/plugins/codecompanion-nvim/CODES/tests/adapters/http/stubs/gemini_tools_thought_streaming.txt
+  h_220433a6faf6b8 1
+lua/plugins/codecompanion-nvim/CODES/tests/adapters/http/stubs/mistral_no_streaming.txt
+  h_220433a6faf6b8 1-23
+lua/plugins/codecompanion-nvim/CODES/tests/adapters/http/stubs/mistral_streaming.txt
+  h_220433a6faf6b8 1-5
+lua/plugins/codecompanion-nvim/CODES/tests/adapters/http/stubs/mistral_thinking_streaming.txt
+  h_220433a6faf6b8 1-2
+lua/plugins/codecompanion-nvim/CODES/tests/adapters/http/stubs/mistral_tools_no_streaming.txt
+  h_220433a6faf6b8 1
+lua/plugins/codecompanion-nvim/CODES/tests/adapters/http/stubs/mistral_tools_streaming.txt
+  h_220433a6faf6b8 1
+lua/plugins/codecompanion-nvim/CODES/tests/adapters/http/stubs/model_list/anthropic.json
+  h_220433a6faf6b8 1-214
+lua/plugins/codecompanion-nvim/CODES/tests/adapters/http/stubs/model_list/copilot.json
+  h_220433a6faf6b8 1-242
+lua/plugins/codecompanion-nvim/CODES/tests/adapters/http/stubs/model_list/mistral.json
+  h_220433a6faf6b8 1-162
+lua/plugins/codecompanion-nvim/CODES/tests/adapters/http/stubs/model_list/ollama.json
+  h_220433a6faf6b8 1-64
+lua/plugins/codecompanion-nvim/CODES/tests/adapters/http/stubs/model_list/openrouter.json
+  h_220433a6faf6b8 1-168
+lua/plugins/codecompanion-nvim/CODES/tests/adapters/http/stubs/novita_models.txt
+  h_220433a6faf6b8 1-696
+lua/plugins/codecompanion-nvim/CODES/tests/adapters/http/stubs/ollama_no_streaming.txt
+  h_220433a6faf6b8 1-13
+lua/plugins/codecompanion-nvim/CODES/tests/adapters/http/stubs/ollama_reasoning_no_streaming.txt
+  h_220433a6faf6b8 1-14
+lua/plugins/codecompanion-nvim/CODES/tests/adapters/http/stubs/ollama_reasoning_no_streaming.txt.orig
+  h_220433a6faf6b8 1-14
+lua/plugins/codecompanion-nvim/CODES/tests/adapters/http/stubs/ollama_reasoning_no_streaming_BACKUP_38366.txt
+  h_220433a6faf6b8 1-14
+lua/plugins/codecompanion-nvim/CODES/tests/adapters/http/stubs/ollama_reasoning_no_streaming_BACKUP_61561.txt
+  h_220433a6faf6b8 1-14
+lua/plugins/codecompanion-nvim/CODES/tests/adapters/http/stubs/ollama_reasoning_no_streaming_BACKUP_62460.txt
+  h_220433a6faf6b8 1-14
+lua/plugins/codecompanion-nvim/CODES/tests/adapters/http/stubs/ollama_reasoning_no_streaming_LOCAL_38366.txt
+  h_220433a6faf6b8 1-14
+lua/plugins/codecompanion-nvim/CODES/tests/adapters/http/stubs/ollama_reasoning_no_streaming_LOCAL_61561.txt
+  h_220433a6faf6b8 1-14
+lua/plugins/codecompanion-nvim/CODES/tests/adapters/http/stubs/ollama_reasoning_no_streaming_LOCAL_62460.txt
+  h_220433a6faf6b8 1-14
+lua/plugins/codecompanion-nvim/CODES/tests/adapters/http/stubs/ollama_reasoning_streaming.txt
+  h_220433a6faf6b8 1-15
+lua/plugins/codecompanion-nvim/CODES/tests/adapters/http/stubs/ollama_reasoning_streaming.txt.orig
+  h_220433a6faf6b8 1-15
+lua/plugins/codecompanion-nvim/CODES/tests/adapters/http/stubs/ollama_streaming.txt
+  h_220433a6faf6b8 1-9
+lua/plugins/codecompanion-nvim/CODES/tests/adapters/http/stubs/ollama_tools_no_params_streaming.txt
+  h_220433a6faf6b8 1-3
+lua/plugins/codecompanion-nvim/CODES/tests/adapters/http/stubs/ollama_tools_no_streaming.txt
+  h_220433a6faf6b8 1
+lua/plugins/codecompanion-nvim/CODES/tests/adapters/http/stubs/ollama_tools_streaming.txt
+  h_220433a6faf6b8 1-3
+lua/plugins/codecompanion-nvim/CODES/tests/adapters/http/stubs/openai_no_streaming.txt
+  h_220433a6faf6b8 1-30
+lua/plugins/codecompanion-nvim/CODES/tests/adapters/http/stubs/openai_responses_compaction_cancelled_streaming.txt
+  h_220433a6faf6b8 1-4
+lua/plugins/codecompanion-nvim/CODES/tests/adapters/http/stubs/openai_responses_compaction_no_streaming.txt
+  h_220433a6faf6b8 1-68
+lua/plugins/codecompanion-nvim/CODES/tests/adapters/http/stubs/openai_responses_compaction_streaming.txt
+  h_220433a6faf6b8 1-12
+lua/plugins/codecompanion-nvim/CODES/tests/adapters/http/stubs/openai_responses_inline.txt
+  h_220433a6faf6b8 1-38
+lua/plugins/codecompanion-nvim/CODES/tests/adapters/http/stubs/openai_responses_no_streaming.txt
+  h_220433a6faf6b8 1-66
+lua/plugins/codecompanion-nvim/CODES/tests/adapters/http/stubs/openai_responses_reasoning_no_streaming.txt
+  h_220433a6faf6b8 1-39
+lua/plugins/codecompanion-nvim/CODES/tests/adapters/http/stubs/openai_responses_reasoning_streaming.txt
+  h_220433a6faf6b8 1-433
+lua/plugins/codecompanion-nvim/CODES/tests/adapters/http/stubs/openai_responses_streaming.txt
+  h_220433a6faf6b8 1-11
+lua/plugins/codecompanion-nvim/CODES/tests/adapters/http/stubs/openai_responses_tools_no_streaming.txt
+  h_220433a6faf6b8 1-44
+lua/plugins/codecompanion-nvim/CODES/tests/adapters/http/stubs/openai_responses_tools_streaming.txt
+  h_220433a6faf6b8 1-135
+lua/plugins/codecompanion-nvim/CODES/tests/adapters/http/stubs/openai_streaming.txt
+  h_220433a6faf6b8 1-20
+lua/plugins/codecompanion-nvim/CODES/tests/adapters/http/stubs/openai_tools_no_params_streaming.txt
+  h_220433a6faf6b8 1-14
+lua/plugins/codecompanion-nvim/CODES/tests/adapters/http/stubs/openai_tools_no_streaming.txt
+  h_220433a6faf6b8 1-54
+lua/plugins/codecompanion-nvim/CODES/tests/adapters/http/stubs/openai_tools_streaming.txt
+  h_220433a6faf6b8 1-23
+lua/plugins/codecompanion-nvim/CODES/tests/adapters/http/stubs/openrouter_reasoning_no_streaming.txt
+  h_220433a6faf6b8 1-55
+lua/plugins/codecompanion-nvim/CODES/tests/adapters/http/stubs/openrouter_reasoning_streaming.txt
+  h_220433a6faf6b8 1-106
+lua/plugins/codecompanion-nvim/CODES/tests/adapters/http/stubs/openrouter_tools_no_streaming.txt
+  h_220433a6faf6b8 1-72
+lua/plugins/codecompanion-nvim/CODES/tests/adapters/http/stubs/openrouter_tools_streaming.txt
+  h_220433a6faf6b8 1-127
+lua/plugins/codecompanion-nvim/CODES/tests/adapters/http/stubs/output/anthropic_tools.lua
+  h_220433a6faf6b8 1-66
+lua/plugins/codecompanion-nvim/CODES/tests/adapters/http/stubs/output/anthropic_tools_no_params.lua
+  h_220433a6faf6b8 1-63
+lua/plugins/codecompanion-nvim/CODES/tests/adapters/http/stubs/output/copilot_tools.lua
+  h_220433a6faf6b8 1-55
+lua/plugins/codecompanion-nvim/CODES/tests/adapters/http/stubs/output/copilot_tools_no_params.lua
+  h_220433a6faf6b8 1-55
+lua/plugins/codecompanion-nvim/CODES/tests/adapters/http/stubs/output/deepseek_tools.lua
+  h_220433a6faf6b8 1-44
+lua/plugins/codecompanion-nvim/CODES/tests/adapters/http/stubs/output/deepseek_tools_no_params.lua
+  h_220433a6faf6b8 1-44
+lua/plugins/codecompanion-nvim/CODES/tests/adapters/http/stubs/output/gemini_tools.lua
+  h_220433a6faf6b8 1-68
+lua/plugins/codecompanion-nvim/CODES/tests/adapters/http/stubs/output/gemini_tools_no_params.lua
+  h_220433a6faf6b8 1-65
+lua/plugins/codecompanion-nvim/CODES/tests/adapters/http/stubs/output/ollama_tools.lua
+  h_220433a6faf6b8 1-45
+lua/plugins/codecompanion-nvim/CODES/tests/adapters/http/stubs/output/ollama_tools_no_params.lua
+  h_220433a6faf6b8 1-42
+lua/plugins/codecompanion-nvim/CODES/tests/adapters/http/stubs/output/openai_tools.lua
+  h_220433a6faf6b8 1-43
+lua/plugins/codecompanion-nvim/CODES/tests/adapters/http/stubs/output/openai_tools_no_params.lua
+  h_220433a6faf6b8 1-43
+lua/plugins/codecompanion-nvim/CODES/tests/adapters/http/stubs/output/tavily_search.txt
+  h_220433a6faf6b8 1-11
+lua/plugins/codecompanion-nvim/CODES/tests/adapters/http/stubs/transformers/anthropic.txt
+  h_220433a6faf6b8 1-19
+lua/plugins/codecompanion-nvim/CODES/tests/adapters/http/stubs/transformers/openai.txt
+  h_220433a6faf6b8 1-22
+lua/plugins/codecompanion-nvim/CODES/tests/adapters/http/test_anthropic.lua
+  h_220433a6faf6b8 1-1021
+lua/plugins/codecompanion-nvim/CODES/tests/adapters/http/test_deepseek.lua
+  h_220433a6faf6b8 1-379
+lua/plugins/codecompanion-nvim/CODES/tests/adapters/http/test_gemini.lua
+  h_220433a6faf6b8 1-466
+lua/plugins/codecompanion-nvim/CODES/tests/adapters/http/test_gemini_interactions.lua
+  h_220433a6faf6b8 1-527
+lua/plugins/codecompanion-nvim/CODES/tests/adapters/http/test_kimi.lua
+  h_220433a6faf6b8 1-32
+lua/plugins/codecompanion-nvim/CODES/tests/adapters/http/test_mistral.lua
+  h_220433a6faf6b8 1-294
+lua/plugins/codecompanion-nvim/CODES/tests/adapters/http/test_ollama.lua
+  h_220433a6faf6b8 1-525
+lua/plugins/codecompanion-nvim/CODES/tests/adapters/http/test_openai.lua
+  h_220433a6faf6b8 1-427
+lua/plugins/codecompanion-nvim/CODES/tests/adapters/http/test_openai_responses.lua
+  h_220433a6faf6b8 1-836
+lua/plugins/codecompanion-nvim/CODES/tests/adapters/http/test_openrouter.lua
+  h_220433a6faf6b8 1-307
+lua/plugins/codecompanion-nvim/CODES/tests/adapters/http/test_tools_in_chat_buffer.lua
+  h_220433a6faf6b8 1-152
+lua/plugins/codecompanion-nvim/CODES/tests/adapters/test_adapters.lua
+  h_220433a6faf6b8 1-1161
+lua/plugins/codecompanion-nvim/CODES/tests/adapters/utils/stubs/anthropic_structured_output.json
+  h_220433a6faf6b8 1-26
+lua/plugins/codecompanion-nvim/CODES/tests/adapters/utils/stubs/gemini_interactions_structured_output.json
+  h_220433a6faf6b8 1-24
+lua/plugins/codecompanion-nvim/CODES/tests/adapters/utils/stubs/gemini_structured_output.json
+  h_220433a6faf6b8 1-23
+lua/plugins/codecompanion-nvim/CODES/tests/adapters/utils/stubs/input.json
+  h_220433a6faf6b8 1-23
+lua/plugins/codecompanion-nvim/CODES/tests/adapters/utils/stubs/ollama_structured_output.json
+  h_220433a6faf6b8 1-21
+lua/plugins/codecompanion-nvim/CODES/tests/adapters/utils/stubs/openai_responses_structured_output.json
+  h_220433a6faf6b8 1-28
+lua/plugins/codecompanion-nvim/CODES/tests/adapters/utils/stubs/openai_structured_output.json
+  h_220433a6faf6b8 1-28
+lua/plugins/codecompanion-nvim/CODES/tests/adapters/utils/test_structured_outputs.lua
+  h_220433a6faf6b8 1-115
+lua/plugins/codecompanion-nvim/CODES/tests/adapters/utils/test_transformers.lua
+  h_220433a6faf6b8 1-295
+lua/plugins/codecompanion-nvim/CODES/tests/config.lua
+  h_220433a6faf6b8 1-453
+lua/plugins/codecompanion-nvim/CODES/tests/expectations.lua
+  h_220433a6faf6b8 1-191
+lua/plugins/codecompanion-nvim/CODES/tests/helpers.lua
+  h_220433a6faf6b8 1-350
+lua/plugins/codecompanion-nvim/CODES/tests/interactions/background/catalog/test_chat_make_title.lua
+  h_220433a6faf6b8 1-58
+lua/plugins/codecompanion-nvim/CODES/tests/interactions/background/catalog/test_tools_judge.lua
+  h_220433a6faf6b8 1-82
+lua/plugins/codecompanion-nvim/CODES/tests/interactions/background/test_background.lua
+  h_220433a6faf6b8 1-155
+lua/plugins/codecompanion-nvim/CODES/tests/interactions/background/test_callbacks.lua
+  h_220433a6faf6b8 1-114
+lua/plugins/codecompanion-nvim/CODES/tests/interactions/chat/acp/test_commands.lua
+  h_220433a6faf6b8 1-193
+lua/plugins/codecompanion-nvim/CODES/tests/interactions/chat/acp/test_defaults.lua
+  h_220433a6faf6b8 1-284
+lua/plugins/codecompanion-nvim/CODES/tests/interactions/chat/acp/test_formatters.lua
+  h_220433a6faf6b8 1-253
+lua/plugins/codecompanion-nvim/CODES/tests/interactions/chat/acp/test_fs.lua
+  h_220433a6faf6b8 1-391
+lua/plugins/codecompanion-nvim/CODES/tests/interactions/chat/acp/test_handler.lua
+  h_220433a6faf6b8 1-1105
+lua/plugins/codecompanion-nvim/CODES/tests/interactions/chat/acp/test_permission_request.lua
+  h_220433a6faf6b8 1-379
+lua/plugins/codecompanion-nvim/CODES/tests/interactions/chat/context_management/test_compaction.lua
+  h_220433a6faf6b8 1-509
+lua/plugins/codecompanion-nvim/CODES/tests/interactions/chat/context_management/test_editing.lua
+  h_220433a6faf6b8 1-560
+lua/plugins/codecompanion-nvim/CODES/tests/interactions/chat/context_management/test_init.lua
+  h_220433a6faf6b8 1-367
+lua/plugins/codecompanion-nvim/CODES/tests/interactions/chat/helpers/test_helpers.lua
+  h_220433a6faf6b8 1-65
+lua/plugins/codecompanion-nvim/CODES/tests/interactions/chat/slash_commands/basic.lua
+  h_220433a6faf6b8 1-25
+lua/plugins/codecompanion-nvim/CODES/tests/interactions/chat/slash_commands/test_filter.lua
+  h_220433a6faf6b8 1-115
+lua/plugins/codecompanion-nvim/CODES/tests/interactions/chat/slash_commands/test_keymaps.lua
+  h_220433a6faf6b8 1-51
+lua/plugins/codecompanion-nvim/CODES/tests/interactions/chat/test_buffer_diffs.lua
+  h_220433a6faf6b8 1-327
+lua/plugins/codecompanion-nvim/CODES/tests/interactions/chat/test_chat.lua
+  h_220433a6faf6b8 1-769
+lua/plugins/codecompanion-nvim/CODES/tests/interactions/chat/test_context.lua
+  h_220433a6faf6b8 1-649
+lua/plugins/codecompanion-nvim/CODES/tests/interactions/chat/test_editor_context.lua
+  h_220433a6faf6b8 1-367
+lua/plugins/codecompanion-nvim/CODES/tests/interactions/chat/test_keymaps.lua
+  h_220433a6faf6b8 1-197
+lua/plugins/codecompanion-nvim/CODES/tests/interactions/chat/test_messages.lua
+  h_220433a6faf6b8 1-41
+lua/plugins/codecompanion-nvim/CODES/tests/interactions/chat/test_settings.lua
+  h_220433a6faf6b8 1-37
+lua/plugins/codecompanion-nvim/CODES/tests/interactions/chat/test_subscribers.lua
+  h_220433a6faf6b8 1-112
+lua/plugins/codecompanion-nvim/CODES/tests/interactions/chat/test_system_prompt_context.lua
+  h_220433a6faf6b8 1-53
+lua/plugins/codecompanion-nvim/CODES/tests/interactions/chat/test_workflows.lua
+  h_220433a6faf6b8 1-156
+lua/plugins/codecompanion-nvim/CODES/tests/interactions/chat/tools/builtin/insert_edit_into_file/edit_tool_cases.lua
+  h_220433a6faf6b8 1-520
+lua/plugins/codecompanion-nvim/CODES/tests/interactions/chat/tools/builtin/insert_edit_into_file/test_edit_file.lua
+  h_220433a6faf6b8 1-578
+lua/plugins/codecompanion-nvim/CODES/tests/interactions/chat/tools/builtin/insert_edit_into_file/test_match_selector.lua
+  h_220433a6faf6b8 1-262
+lua/plugins/codecompanion-nvim/CODES/tests/interactions/chat/tools/builtin/insert_edit_into_file/test_strategies.lua
+  h_220433a6faf6b8 1-715
+lua/plugins/codecompanion-nvim/CODES/tests/interactions/chat/tools/builtin/stubs/cmd.lua
+  h_220433a6faf6b8 1-27
+lua/plugins/codecompanion-nvim/CODES/tests/interactions/chat/tools/builtin/stubs/cmd_consecutive.lua
+  h_220433a6faf6b8 1-28
+lua/plugins/codecompanion-nvim/CODES/tests/interactions/chat/tools/builtin/stubs/cmd_error.lua
+  h_220433a6faf6b8 1-21
+lua/plugins/codecompanion-nvim/CODES/tests/interactions/chat/tools/builtin/stubs/cmd_queue.lua
+  h_220433a6faf6b8 1-26
+lua/plugins/codecompanion-nvim/CODES/tests/interactions/chat/tools/builtin/stubs/cmd_queue_error.lua
+  h_220433a6faf6b8 1-26
+lua/plugins/codecompanion-nvim/CODES/tests/interactions/chat/tools/builtin/stubs/func.lua
+  h_220433a6faf6b8 1-37
+lua/plugins/codecompanion-nvim/CODES/tests/interactions/chat/tools/builtin/stubs/func2.lua
+  h_220433a6faf6b8 1-38
+lua/plugins/codecompanion-nvim/CODES/tests/interactions/chat/tools/builtin/stubs/func_approval.lua
+  h_220433a6faf6b8 1-39
+lua/plugins/codecompanion-nvim/CODES/tests/interactions/chat/tools/builtin/stubs/func_approval2.lua
+  h_220433a6faf6b8 1-19
+lua/plugins/codecompanion-nvim/CODES/tests/interactions/chat/tools/builtin/stubs/func_async_1.lua
+  h_220433a6faf6b8 1-43
+lua/plugins/codecompanion-nvim/CODES/tests/interactions/chat/tools/builtin/stubs/func_async_2.lua
+  h_220433a6faf6b8 1-43
+lua/plugins/codecompanion-nvim/CODES/tests/interactions/chat/tools/builtin/stubs/func_consecutive.lua
+  h_220433a6faf6b8 1-40
+lua/plugins/codecompanion-nvim/CODES/tests/interactions/chat/tools/builtin/stubs/func_error.lua
+  h_220433a6faf6b8 1-28
+lua/plugins/codecompanion-nvim/CODES/tests/interactions/chat/tools/builtin/stubs/func_handlers_once.lua
+  h_220433a6faf6b8 1-39
+lua/plugins/codecompanion-nvim/CODES/tests/interactions/chat/tools/builtin/stubs/func_queue.lua
+  h_220433a6faf6b8 1-35
+lua/plugins/codecompanion-nvim/CODES/tests/interactions/chat/tools/builtin/stubs/func_queue_2.lua
+  h_220433a6faf6b8 1-35
+lua/plugins/codecompanion-nvim/CODES/tests/interactions/chat/tools/builtin/stubs/func_return_error.lua
+  h_220433a6faf6b8 1-39
+lua/plugins/codecompanion-nvim/CODES/tests/interactions/chat/tools/builtin/stubs/mock_run_command.lua
+  h_220433a6faf6b8 1-30
+lua/plugins/codecompanion-nvim/CODES/tests/interactions/chat/tools/builtin/stubs/tool_group_tool.lua
+  h_220433a6faf6b8 1-19
+lua/plugins/codecompanion-nvim/CODES/tests/interactions/chat/tools/builtin/stubs/weather.lua
+  h_220433a6faf6b8 1-55
+lua/plugins/codecompanion-nvim/CODES/tests/interactions/chat/tools/builtin/stubs/weather_with_default.lua
+  h_220433a6faf6b8 1-53
+lua/plugins/codecompanion-nvim/CODES/tests/interactions/chat/tools/builtin/test_ask_questions.lua
+  h_220433a6faf6b8 1-261
+lua/plugins/codecompanion-nvim/CODES/tests/interactions/chat/tools/builtin/test_create_file.lua
+  h_220433a6faf6b8 1-101
+lua/plugins/codecompanion-nvim/CODES/tests/interactions/chat/tools/builtin/test_delete_file.lua
+  h_220433a6faf6b8 1-118
+lua/plugins/codecompanion-nvim/CODES/tests/interactions/chat/tools/builtin/test_fetch_webpage.lua
+  h_220433a6faf6b8 1-97
+lua/plugins/codecompanion-nvim/CODES/tests/interactions/chat/tools/builtin/test_file_search.lua
+  h_220433a6faf6b8 1-293
+lua/plugins/codecompanion-nvim/CODES/tests/interactions/chat/tools/builtin/test_get_diagnostics.lua
+  h_220433a6faf6b8 1-222
+lua/plugins/codecompanion-nvim/CODES/tests/interactions/chat/tools/builtin/test_grep_search.lua
+  h_220433a6faf6b8 1-181
+lua/plugins/codecompanion-nvim/CODES/tests/interactions/chat/tools/builtin/test_memory.lua
+  h_220433a6faf6b8 1-2009
+lua/plugins/codecompanion-nvim/CODES/tests/interactions/chat/tools/builtin/test_read_file.lua
+  h_220433a6faf6b8 1-138
+lua/plugins/codecompanion-nvim/CODES/tests/interactions/chat/tools/builtin/test_run_command.lua
+  h_220433a6faf6b8 1-191
+lua/plugins/codecompanion-nvim/CODES/tests/interactions/chat/tools/builtin/test_tool_output.lua
+  h_220433a6faf6b8 1-174
+lua/plugins/codecompanion-nvim/CODES/tests/interactions/chat/tools/builtin/test_web_search.lua
+  h_220433a6faf6b8 1-110
+lua/plugins/codecompanion-nvim/CODES/tests/interactions/chat/tools/runtime/test_cmd.lua
+  h_220433a6faf6b8 1-134
+lua/plugins/codecompanion-nvim/CODES/tests/interactions/chat/tools/runtime/test_queue.lua
+  h_220433a6faf6b8 1-108
+lua/plugins/codecompanion-nvim/CODES/tests/interactions/chat/tools/runtime/test_queue_async.lua
+  h_220433a6faf6b8 1-104
+lua/plugins/codecompanion-nvim/CODES/tests/interactions/chat/tools/runtime/test_runner.lua
+  h_220433a6faf6b8 1-267
+lua/plugins/codecompanion-nvim/CODES/tests/interactions/chat/tools/runtime/test_user_approval.lua
+  h_220433a6faf6b8 1-202
+lua/plugins/codecompanion-nvim/CODES/tests/interactions/chat/tools/test_approvals.lua
+  h_220433a6faf6b8 1-512
+lua/plugins/codecompanion-nvim/CODES/tests/interactions/chat/tools/test_filter.lua
+  h_220433a6faf6b8 1-151
+lua/plugins/codecompanion-nvim/CODES/tests/interactions/chat/tools/test_orchestrator.lua
+  h_220433a6faf6b8 1-273
+lua/plugins/codecompanion-nvim/CODES/tests/interactions/chat/tools/test_tool_registry.lua
+  h_220433a6faf6b8 1-498
+lua/plugins/codecompanion-nvim/CODES/tests/interactions/chat/tools/test_tools.lua
+  h_220433a6faf6b8 1-275
+lua/plugins/codecompanion-nvim/CODES/tests/interactions/chat/ui/test_builder_state.lua
+  h_220433a6faf6b8 1-113
+lua/plugins/codecompanion-nvim/CODES/tests/interactions/chat/ui/test_fold_reasoning_output.lua
+  h_220433a6faf6b8 1-185
+lua/plugins/codecompanion-nvim/CODES/tests/interactions/cli/providers/test_terminal.lua
+  h_220433a6faf6b8 1-377
+lua/plugins/codecompanion-nvim/CODES/tests/interactions/cli/test_cli.lua
+  h_220433a6faf6b8 1-215
+lua/plugins/codecompanion-nvim/CODES/tests/interactions/code_review/test_baseline.lua
+  h_220433a6faf6b8 1-200
+lua/plugins/codecompanion-nvim/CODES/tests/interactions/code_review/test_code_review.lua
+  h_220433a6faf6b8 1-437
+lua/plugins/codecompanion-nvim/CODES/tests/interactions/code_review/test_store.lua
+  h_220433a6faf6b8 1-210
+lua/plugins/codecompanion-nvim/CODES/tests/interactions/code_review/test_ui.lua
+  h_220433a6faf6b8 1-87
+lua/plugins/codecompanion-nvim/CODES/tests/interactions/inline/editor_context/bar.lua
+  h_220433a6faf6b8 1-33
+lua/plugins/codecompanion-nvim/CODES/tests/interactions/inline/editor_context/baz.lua
+  h_220433a6faf6b8 1-33
+lua/plugins/codecompanion-nvim/CODES/tests/interactions/inline/editor_context/foo.lua
+  h_220433a6faf6b8 1-16
+lua/plugins/codecompanion-nvim/CODES/tests/interactions/inline/test_completion.lua
+  h_220433a6faf6b8 1-383
+lua/plugins/codecompanion-nvim/CODES/tests/interactions/inline/test_inline.lua
+  h_220433a6faf6b8 1-291
+lua/plugins/codecompanion-nvim/CODES/tests/interactions/inline/test_inline_editor_context.lua
+  h_220433a6faf6b8 1-55
+lua/plugins/codecompanion-nvim/CODES/tests/interactions/shared/editor_context/bar.lua
+  h_220433a6faf6b8 1-47
+lua/plugins/codecompanion-nvim/CODES/tests/interactions/shared/editor_context/baz.lua
+  h_220433a6faf6b8 1-33
+lua/plugins/codecompanion-nvim/CODES/tests/interactions/shared/editor_context/foo.lua
+  h_220433a6faf6b8 1-33
+lua/plugins/codecompanion-nvim/CODES/tests/interactions/shared/editor_context/foo_special.lua
+  h_220433a6faf6b8 1-25
+lua/plugins/codecompanion-nvim/CODES/tests/interactions/shared/editor_context/screenshot.lua
+  h_220433a6faf6b8 1-25
+lua/plugins/codecompanion-nvim/CODES/tests/interactions/shared/editor_context/test_code_review.lua
+  h_220433a6faf6b8 1-128
+lua/plugins/codecompanion-nvim/CODES/tests/interactions/shared/editor_context/test_quickfix.lua
+  h_220433a6faf6b8 1-200
+lua/plugins/codecompanion-nvim/CODES/tests/interactions/shared/rules/parsers/test_claude_parser.lua
+  h_220433a6faf6b8 1-101
+lua/plugins/codecompanion-nvim/CODES/tests/interactions/shared/rules/parsers/test_cli_parser.lua
+  h_220433a6faf6b8 1-53
+lua/plugins/codecompanion-nvim/CODES/tests/interactions/shared/rules/parsers/test_codecompanion_parser.lua
+  h_220433a6faf6b8 1-72
+lua/plugins/codecompanion-nvim/CODES/tests/interactions/shared/rules/parsers/test_parsers.lua
+  h_220433a6faf6b8 1-113
+lua/plugins/codecompanion-nvim/CODES/tests/interactions/shared/rules/test_rules.lua
+  h_220433a6faf6b8 1-527
+lua/plugins/codecompanion-nvim/CODES/tests/interactions/shared/slash_commands/test_rules.lua
+  h_220433a6faf6b8 1-63
+lua/plugins/codecompanion-nvim/CODES/tests/interactions/shared/test_edited_files.lua
+  h_220433a6faf6b8 1-89
+lua/plugins/codecompanion-nvim/CODES/tests/log.lua
+  h_220433a6faf6b8 1-11
+lua/plugins/codecompanion-nvim/CODES/tests/mcp/test_mcp.lua
+  h_220433a6faf6b8 1-129
+lua/plugins/codecompanion-nvim/CODES/tests/mcp/test_mcp_client.lua
+  h_220433a6faf6b8 1-477
+lua/plugins/codecompanion-nvim/CODES/tests/mcp/test_mcp_tools.lua
+  h_220433a6faf6b8 1-424
+lua/plugins/codecompanion-nvim/CODES/tests/mocks/acp.lua
+  h_220433a6faf6b8 1-63
+lua/plugins/codecompanion-nvim/CODES/tests/mocks/http.lua
+  h_220433a6faf6b8 1-135
+lua/plugins/codecompanion-nvim/CODES/tests/mocks/mcp_client_transport.lua
+  h_220433a6faf6b8 1-169
+lua/plugins/codecompanion-nvim/CODES/tests/prompt_library/stubs/test_prompt.md
+  h_220433a6faf6b8 1-31
+lua/plugins/codecompanion-nvim/CODES/tests/prompt_library/test_markdown.lua
+  h_220433a6faf6b8 1-620
+lua/plugins/codecompanion-nvim/CODES/tests/prompt_library/test_prompt_library.lua
+  h_220433a6faf6b8 1-273
+lua/plugins/codecompanion-nvim/CODES/tests/providers/completion/test_adapter_cache.lua
+  h_220433a6faf6b8 1-194
+lua/plugins/codecompanion-nvim/CODES/tests/screenshots/adapters/http/tools_chat_buffer_anthropic_anthropic_tools
+  h_220433a6faf6b8 1-51
+lua/plugins/codecompanion-nvim/CODES/tests/screenshots/adapters/http/tools_chat_buffer_anthropic_anthropic_tools_no_params
+  h_220433a6faf6b8 1-51
+lua/plugins/codecompanion-nvim/CODES/tests/screenshots/adapters/http/tools_chat_buffer_copilot_openai_tools
+  h_220433a6faf6b8 1-51
+lua/plugins/codecompanion-nvim/CODES/tests/screenshots/adapters/http/tools_chat_buffer_copilot_openai_tools_no_params
+  h_220433a6faf6b8 1-51
+lua/plugins/codecompanion-nvim/CODES/tests/screenshots/adapters/http/tools_chat_buffer_deepseek_deepseek_tools
+  h_220433a6faf6b8 1-51
+lua/plugins/codecompanion-nvim/CODES/tests/screenshots/adapters/http/tools_chat_buffer_deepseek_deepseek_tools_no_params
+  h_220433a6faf6b8 1-51
+lua/plugins/codecompanion-nvim/CODES/tests/screenshots/adapters/http/tools_chat_buffer_gemini_gemini_tools
+  h_220433a6faf6b8 1-51
+lua/plugins/codecompanion-nvim/CODES/tests/screenshots/adapters/http/tools_chat_buffer_gemini_gemini_tools_no_params
+  h_220433a6faf6b8 1-51
+lua/plugins/codecompanion-nvim/CODES/tests/screenshots/adapters/http/tools_chat_buffer_ollama_ollama_tools
+  h_220433a6faf6b8 1-51
+lua/plugins/codecompanion-nvim/CODES/tests/screenshots/adapters/http/tools_chat_buffer_ollama_ollama_tools_no_params
+  h_220433a6faf6b8 1-51
+lua/plugins/codecompanion-nvim/CODES/tests/screenshots/adapters/http/tools_chat_buffer_openai_openai_tools
+  h_220433a6faf6b8 1-51
+lua/plugins/codecompanion-nvim/CODES/tests/screenshots/adapters/http/tools_chat_buffer_openai_openai_tools_no_params
+  h_220433a6faf6b8 1-51
+lua/plugins/codecompanion-nvim/CODES/tests/screenshots/tests-interactions-chat-context_management-test_compaction.lua---Compaction---locks-the-buffer-and-shows-a-status-while-the-request-is-in-flight
+  h_220433a6faf6b8 1-51
+lua/plugins/codecompanion-nvim/CODES/tests/screenshots/tests-interactions-chat-context_management-test_compaction.lua---Compaction---renders-the-compacted-chat-buffer-correctly
+  h_220433a6faf6b8 1-51
+lua/plugins/codecompanion-nvim/CODES/tests/screenshots/tests-interactions-chat-test_chat.lua---Chat---chat-buffer-is-initialized
+  h_220433a6faf6b8 1-51
+lua/plugins/codecompanion-nvim/CODES/tests/screenshots/tests-interactions-chat-test_chat.lua---Chat---loading-from-the-prompt-library-sets-the-correct-header_line
+  h_220433a6faf6b8 1-51
+lua/plugins/codecompanion-nvim/CODES/tests/screenshots/tests-interactions-chat-test_context.lua---Context---does-not-fold-single-context-item-but-applies-extmark
+  h_220433a6faf6b8 1-51
+lua/plugins/codecompanion-nvim/CODES/tests/screenshots/tests-interactions-chat-test_settings.lua---Settings---Are-rendered-correctly
+  h_220433a6faf6b8 1-51
+lua/plugins/codecompanion-nvim/CODES/tests/screenshots/tests-interactions-chat-tools-builtin-test_run_command.lua---run_command-tool
+  h_220433a6faf6b8 1-51
+lua/plugins/codecompanion-nvim/CODES/tests/screenshots/tests-interactions-chat-tools-builtin-test_tool_output.lua---Tool-output---Folds---can-be-folded
+  h_220433a6faf6b8 1-51
+lua/plugins/codecompanion-nvim/CODES/tests/screenshots/tests-interactions-chat-tools-builtin-test_tool_output.lua---Tool-output---Folds---does-not-fold-single-line-output-but-applies-extmarks
+  h_220433a6faf6b8 1-51
+lua/plugins/codecompanion-nvim/CODES/tests/screenshots/tests-interactions-chat-tools-builtin-test_tool_output.lua---Tool-output---is-displayed-and-formatted-in-the-chat-buffer
+  h_220433a6faf6b8 1-51
+lua/plugins/codecompanion-nvim/CODES/tests/screenshots/tests-interactions-chat-ui-test_fold_reasoning_output.lua---Reasoning-folds---creates-fold-from-header+1-to-before-Response-header
+  h_220433a6faf6b8 1-51
+lua/plugins/codecompanion-nvim/CODES/tests/screenshots/tests-interactions-chat-ui-test_fold_reasoning_output.lua---Reasoning-folds---preserves-earlier-folds-when-adding-a-new-reasoning-fold
+  h_220433a6faf6b8 1-51
+lua/plugins/codecompanion-nvim/CODES/tests/screenshots/tests-test_cmds.lua---cmds----CodeCompanionChat
+  h_220433a6faf6b8 1-51
+lua/plugins/codecompanion-nvim/CODES/tests/screenshots/tests-test_cmds.lua---cmds----CodeCompanionChat-Toggle
+  h_220433a6faf6b8 1-51
+lua/plugins/codecompanion-nvim/CODES/tests/screenshots/tests-test_cmds.lua---cmds_tab----CodeCompanionChat-Toggle-goes-to-chat-from-any-other-tab
+  h_220433a6faf6b8 1-51
+lua/plugins/codecompanion-nvim/CODES/tests/screenshots/tests-test_cmds.lua---cmds_tab----CodeCompanionChat-Toggle-goes-to-last-tab-from-chat
+  h_220433a6faf6b8 1-51
+lua/plugins/codecompanion-nvim/CODES/tests/screenshots/tests-test_cmds.lua---cmds_tab----CodeCompanionChat-opens-in-tab-when-set-in-config
+  h_220433a6faf6b8 1-51
+lua/plugins/codecompanion-nvim/CODES/tests/screenshots/tests-test_cmds.lua---cmds_tab_sticky----CodeCompanionChat-doesnt-follow-if-sticky-is-set
+  h_220433a6faf6b8 1-51
+lua/plugins/codecompanion-nvim/CODES/tests/screenshots/tests-test_diff.lua---Diff---Inline-Integration-Test---Example-1
+  h_220433a6faf6b8 1-51
+lua/plugins/codecompanion-nvim/CODES/tests/screenshots/tests-test_diff.lua---Diff---Integration-Test---Example-1
+  h_220433a6faf6b8 1-51
+lua/plugins/codecompanion-nvim/CODES/tests/screenshots/tests-test_diff.lua---Diff---Integration-Test---Example-2
+  h_220433a6faf6b8 1-51
+lua/plugins/codecompanion-nvim/CODES/tests/screenshots/tests-test_diff.lua---Diff---Integration-Test---Example-3
+  h_220433a6faf6b8 1-51
+lua/plugins/codecompanion-nvim/CODES/tests/screenshots/tests-test_init.lua---cli()---prompt=true-opens-the-input-buffer
+  h_220433a6faf6b8 1-51
+lua/plugins/codecompanion-nvim/CODES/tests/screenshots/tests-utils-test_ui.lua---UI-create_float-Screenshots---Creates-new-buffer-with-content
+  h_220433a6faf6b8 1-51
+lua/plugins/codecompanion-nvim/CODES/tests/screenshots/tests-utils-test_ui.lua---UI-create_float-Screenshots---Uses-existing-buffer-without-overwriting-content
+  h_220433a6faf6b8 1-51
+lua/plugins/codecompanion-nvim/CODES/tests/scripts/context_management.lua
+  h_220433a6faf6b8 1-254
+lua/plugins/codecompanion-nvim/CODES/tests/scripts/get_diagnostics_tool.lua
+  h_220433a6faf6b8 1-52
+lua/plugins/codecompanion-nvim/CODES/tests/scripts/structured_output.lua
+  h_220433a6faf6b8 1-122
+lua/plugins/codecompanion-nvim/CODES/tests/scripts/tool_testing/.env.example
+  h_220433a6faf6b8 1-5
+lua/plugins/codecompanion-nvim/CODES/tests/scripts/tool_testing/README.md
+  h_220433a6faf6b8 1-275
+lua/plugins/codecompanion-nvim/CODES/tests/scripts/tool_testing/config.local.lua.example
+  h_220433a6faf6b8 1-67
+lua/plugins/codecompanion-nvim/CODES/tests/scripts/tool_testing/config.lua
+  h_220433a6faf6b8 1-55
+lua/plugins/codecompanion-nvim/CODES/tests/scripts/tool_testing/run_tests.lua
+  h_220433a6faf6b8 1-873
+lua/plugins/codecompanion-nvim/CODES/tests/scripts/tool_testing/scenarios/insert_edit_into_file/adjacent_edits.lua
+  h_220433a6faf6b8 1-55
+lua/plugins/codecompanion-nvim/CODES/tests/scripts/tool_testing/scenarios/insert_edit_into_file/adjacent_edits.lua.expected
+  h_220433a6faf6b8 1-13
+lua/plugins/codecompanion-nvim/CODES/tests/scripts/tool_testing/scenarios/insert_edit_into_file/adjacent_edits.lua.input
+  h_220433a6faf6b8 1-13
+lua/plugins/codecompanion-nvim/CODES/tests/scripts/tool_testing/scenarios/insert_edit_into_file/crlf_line_endings.lua
+  h_220433a6faf6b8 1-64
+lua/plugins/codecompanion-nvim/CODES/tests/scripts/tool_testing/scenarios/insert_edit_into_file/crlf_line_endings.lua.expected
+  h_220433a6faf6b8 1-10
+lua/plugins/codecompanion-nvim/CODES/tests/scripts/tool_testing/scenarios/insert_edit_into_file/crlf_line_endings.lua.input
+  h_220433a6faf6b8 1-10
+lua/plugins/codecompanion-nvim/CODES/tests/scripts/tool_testing/scenarios/insert_edit_into_file/empty_new_string_deletion.lua
+  h_220433a6faf6b8 1-52
+lua/plugins/codecompanion-nvim/CODES/tests/scripts/tool_testing/scenarios/insert_edit_into_file/empty_new_string_deletion.lua.expected
+  h_220433a6faf6b8 1-26
+lua/plugins/codecompanion-nvim/CODES/tests/scripts/tool_testing/scenarios/insert_edit_into_file/empty_new_string_deletion.lua.input
+  h_220433a6faf6b8 1-31
+lua/plugins/codecompanion-nvim/CODES/tests/scripts/tool_testing/scenarios/insert_edit_into_file/json_editing.json.expected
+  h_220433a6faf6b8 1-22
+lua/plugins/codecompanion-nvim/CODES/tests/scripts/tool_testing/scenarios/insert_edit_into_file/json_editing.json.input
+  h_220433a6faf6b8 1-22
+lua/plugins/codecompanion-nvim/CODES/tests/scripts/tool_testing/scenarios/insert_edit_into_file/json_editing.lua
+  h_220433a6faf6b8 1-57
+lua/plugins/codecompanion-nvim/CODES/tests/scripts/tool_testing/scenarios/insert_edit_into_file/real_world_python.lua
+  h_220433a6faf6b8 1-54
+lua/plugins/codecompanion-nvim/CODES/tests/scripts/tool_testing/scenarios/insert_edit_into_file/real_world_python.py.expected
+  h_220433a6faf6b8 1-115
+lua/plugins/codecompanion-nvim/CODES/tests/scripts/tool_testing/scenarios/insert_edit_into_file/real_world_python.py.input
+  h_220433a6faf6b8 1-115
+lua/plugins/codecompanion-nvim/CODES/tests/scripts/tool_testing/scenarios/insert_edit_into_file/real_world_ruby.lua
+  h_220433a6faf6b8 1-60
+lua/plugins/codecompanion-nvim/CODES/tests/scripts/tool_testing/scenarios/insert_edit_into_file/real_world_ruby.rb.expected
+  h_220433a6faf6b8 1-36
+lua/plugins/codecompanion-nvim/CODES/tests/scripts/tool_testing/scenarios/insert_edit_into_file/real_world_ruby.rb.input
+  h_220433a6faf6b8 1-32
+lua/plugins/codecompanion-nvim/CODES/tests/scripts/tool_testing/scenarios/insert_edit_into_file/replace_all.lua
+  h_220433a6faf6b8 1-51
+lua/plugins/codecompanion-nvim/CODES/tests/scripts/tool_testing/scenarios/insert_edit_into_file/replace_all.lua.expected
+  h_220433a6faf6b8 1-31
+lua/plugins/codecompanion-nvim/CODES/tests/scripts/tool_testing/scenarios/insert_edit_into_file/replace_all.lua.input
+  h_220433a6faf6b8 1-31
+lua/plugins/codecompanion-nvim/CODES/tests/scripts/tool_testing/scenarios/insert_edit_into_file/simple_file_edit.lua
+  h_220433a6faf6b8 1-54
+lua/plugins/codecompanion-nvim/CODES/tests/scripts/tool_testing/scenarios/insert_edit_into_file/simple_file_edit.lua.expected
+  h_220433a6faf6b8 1-8
+lua/plugins/codecompanion-nvim/CODES/tests/scripts/tool_testing/scenarios/insert_edit_into_file/simple_file_edit.lua.input
+  h_220433a6faf6b8 1-8
+lua/plugins/codecompanion-nvim/CODES/tests/scripts/tool_testing/scenarios/insert_edit_into_file/tab_indented_python.lua
+  h_220433a6faf6b8 1-52
+lua/plugins/codecompanion-nvim/CODES/tests/scripts/tool_testing/scenarios/insert_edit_into_file/tab_indented_python.py.expected
+  h_220433a6faf6b8 1-31
+lua/plugins/codecompanion-nvim/CODES/tests/scripts/tool_testing/scenarios/insert_edit_into_file/tab_indented_python.py.input
+  h_220433a6faf6b8 1-31
+lua/plugins/codecompanion-nvim/CODES/tests/scripts/tool_testing/scenarios/insert_edit_into_file/targeted_edit.lua
+  h_220433a6faf6b8 1-64
+lua/plugins/codecompanion-nvim/CODES/tests/scripts/tool_testing/scenarios/insert_edit_into_file/targeted_edit.lua.expected
+  h_220433a6faf6b8 1-11
+lua/plugins/codecompanion-nvim/CODES/tests/scripts/tool_testing/scenarios/insert_edit_into_file/targeted_edit.lua.input
+  h_220433a6faf6b8 1-11
+lua/plugins/codecompanion-nvim/CODES/tests/scripts/tool_testing/scenarios/insert_edit_into_file/top_of_file_insertion.lua
+  h_220433a6faf6b8 1-46
+lua/plugins/codecompanion-nvim/CODES/tests/scripts/tool_testing/scenarios/insert_edit_into_file/top_of_file_insertion.lua.expected
+  h_220433a6faf6b8 1-24
+lua/plugins/codecompanion-nvim/CODES/tests/scripts/tool_testing/scenarios/insert_edit_into_file/top_of_file_insertion.lua.input
+  h_220433a6faf6b8 1-22
+lua/plugins/codecompanion-nvim/CODES/tests/scripts/tool_testing/scenarios/insert_edit_into_file/trailing_whitespace.lua
+  h_220433a6faf6b8 1-62
+lua/plugins/codecompanion-nvim/CODES/tests/scripts/tool_testing/scenarios/insert_edit_into_file/trailing_whitespace.md.expected
+  h_220433a6faf6b8 1-16
+lua/plugins/codecompanion-nvim/CODES/tests/scripts/tool_testing/scenarios/insert_edit_into_file/trailing_whitespace.md.input
+  h_220433a6faf6b8 1-16
+lua/plugins/codecompanion-nvim/CODES/tests/scripts/tool_testing/scenarios/insert_edit_into_file/unicode_content.lua
+  h_220433a6faf6b8 1-45
+lua/plugins/codecompanion-nvim/CODES/tests/scripts/tool_testing/scenarios/insert_edit_into_file/unicode_content.lua.expected
+  h_220433a6faf6b8 1-11
+lua/plugins/codecompanion-nvim/CODES/tests/scripts/tool_testing/scenarios/insert_edit_into_file/unicode_content.lua.input
+  h_220433a6faf6b8 1-11
+lua/plugins/codecompanion-nvim/CODES/tests/scripts/tool_testing/setup_tests.lua
+  h_220433a6faf6b8 1-165
+lua/plugins/codecompanion-nvim/CODES/tests/scripts/tool_testing/test.sh
+  h_220433a6faf6b8 1-457
+lua/plugins/codecompanion-nvim/CODES/tests/scripts/ui.lua
+  h_220433a6faf6b8 1-246
+lua/plugins/codecompanion-nvim/CODES/tests/stubs/acp/authenticate_response.txt
+  h_220433a6faf6b8 1-5
+lua/plugins/codecompanion-nvim/CODES/tests/stubs/acp/initialize_response.txt
+  h_220433a6faf6b8 1-27
+lua/plugins/codecompanion-nvim/CODES/tests/stubs/acp/permission_two_step.jsonl
+  h_220433a6faf6b8 1-2
+lua/plugins/codecompanion-nvim/CODES/tests/stubs/acp/prompt_response.txt
+  h_220433a6faf6b8 1-5
+lua/plugins/codecompanion-nvim/CODES/tests/stubs/acp/session_new_response.txt
+  h_220433a6faf6b8 1-7
+lua/plugins/codecompanion-nvim/CODES/tests/stubs/file.txt
+  h_220433a6faf6b8 1
+lua/plugins/codecompanion-nvim/CODES/tests/stubs/foo.lua
+  h_220433a6faf6b8 1-8
+lua/plugins/codecompanion-nvim/CODES/tests/stubs/fs_read_text_file.txt
+  h_220433a6faf6b8 1
+lua/plugins/codecompanion-nvim/CODES/tests/stubs/mcp/tools.jsonl
+  h_220433a6faf6b8 1-5
+lua/plugins/codecompanion-nvim/CODES/tests/stubs/messages.lua
+  h_220433a6faf6b8 1-76
+lua/plugins/codecompanion-nvim/CODES/tests/stubs/queue.txt
+  h_220433a6faf6b8 1-73
+lua/plugins/codecompanion-nvim/CODES/tests/stubs/rules/.rules
+  h_220433a6faf6b8 1
+lua/plugins/codecompanion-nvim/CODES/tests/stubs/rules/CLAUDE.md
+  h_220433a6faf6b8 1-3
+lua/plugins/codecompanion-nvim/CODES/tests/stubs/stub.go
+  h_220433a6faf6b8 1-12
+lua/plugins/codecompanion-nvim/CODES/tests/stubs/stub.lua
+  h_220433a6faf6b8 1-16
+lua/plugins/codecompanion-nvim/CODES/tests/stubs/stub.py
+  h_220433a6faf6b8 1-9
+lua/plugins/codecompanion-nvim/CODES/tests/stubs/stub.txt
+  h_220433a6faf6b8 1
+lua/plugins/codecompanion-nvim/CODES/tests/stubs/workflow.lua
+  h_220433a6faf6b8 1-53
+lua/plugins/codecompanion-nvim/CODES/tests/test_cmds.lua
+  h_220433a6faf6b8 1-479
+lua/plugins/codecompanion-nvim/CODES/tests/test_diff.lua
+  h_220433a6faf6b8 1-374
+lua/plugins/codecompanion-nvim/CODES/tests/test_extensions.lua
+  h_220433a6faf6b8 1-175
+lua/plugins/codecompanion-nvim/CODES/tests/test_has.lua
+  h_220433a6faf6b8 1-66
+lua/plugins/codecompanion-nvim/CODES/tests/test_hash.lua
+  h_220433a6faf6b8 1-22
+lua/plugins/codecompanion-nvim/CODES/tests/test_http.lua
+  h_220433a6faf6b8 1-404
+lua/plugins/codecompanion-nvim/CODES/tests/test_init.lua
+  h_220433a6faf6b8 1-330
+lua/plugins/codecompanion-nvim/CODES/tests/test_interactions.lua
+  h_220433a6faf6b8 1-97
+lua/plugins/codecompanion-nvim/CODES/tests/utils/test_buffers.lua
+  h_220433a6faf6b8 1-55
+lua/plugins/codecompanion-nvim/CODES/tests/utils/test_context.lua
+  h_220433a6faf6b8 1-223
+lua/plugins/codecompanion-nvim/CODES/tests/utils/test_files.lua
+  h_220433a6faf6b8 1-322
+lua/plugins/codecompanion-nvim/CODES/tests/utils/test_images.lua
+  h_220433a6faf6b8 1-72
+lua/plugins/codecompanion-nvim/CODES/tests/utils/test_jsonrpc.lua
+  h_220433a6faf6b8 1-297
+lua/plugins/codecompanion-nvim/CODES/tests/utils/test_tokens.lua
+  h_220433a6faf6b8 1-223
+lua/plugins/codecompanion-nvim/CODES/tests/utils/test_ui.lua
+  h_220433a6faf6b8 1-107
+lua/plugins/codecompanion-nvim/CODES/tests/utils/test_utils.lua
+  h_220433a6faf6b8 1-324
+lua/plugins/codecompanion-nvim/CODES/version.txt
+  h_220433a6faf6b8 1
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "b93ac875fbe382db3c5e3ed0bb1084c5ed38b463",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
