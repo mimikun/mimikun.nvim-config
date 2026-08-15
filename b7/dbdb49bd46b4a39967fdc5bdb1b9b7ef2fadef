@@ -1,0 +1,34 @@
+lua/plugins/codex-nvim/cmds.lua
+  h_220433a6faf6b8 1-2,3-20,21-23
+lua/plugins/codex-nvim/events.lua
+  h_220433a6faf6b8 1-6
+lua/plugins/codex-nvim/init.lua
+  h_220433a6faf6b8 1-4,5-7,8,9-14,15-17
+lua/plugins/codex-nvim/keys.lua
+  h_220433a6faf6b8 1-3,4,5,5-7,8-16,17-19,19-20,21,22,23,24-27
+lua/plugins/codex-nvim/opts/app_server.lua
+  h_220433a6faf6b8 1-13
+lua/plugins/codex-nvim/opts/cmd.lua
+  h_220433a6faf6b8 1-9
+lua/plugins/codex-nvim/opts/context.lua
+  h_220433a6faf6b8 1-10
+lua/plugins/codex-nvim/opts/env.lua
+  h_220433a6faf6b8 1-9
+lua/plugins/codex-nvim/opts/root_markers.lua
+  h_220433a6faf6b8 1-6
+lua/plugins/codex-nvim/opts/terminal.lua
+  h_220433a6faf6b8 1-31
+lua/plugins/codex-nvim/opts/init.lua
+  h_220433a6faf6b8 8,12,20,27,30,33
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "b7dbdb49bd46b4a39967fdc5bdb1b9b7ef2fadef",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
