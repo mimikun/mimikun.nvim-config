@@ -1,0 +1,14 @@
+lua/plugins/claudecode-nvim/opts/init.lua
+  h_220433a6faf6b8 6,9,11-12,25-26
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "7f73586a4268044f8e04eda34a869d6a1495147f",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
