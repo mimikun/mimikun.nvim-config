@@ -1,0 +1,14 @@
+lua/plugins/codex-nvim/keys.lua
+  h_220433a6faf6b8 5-7,17-19
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "699bf00a6399832655b4819afae98fd14f935b50",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
