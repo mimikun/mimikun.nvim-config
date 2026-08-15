@@ -1,0 +1,26 @@
+lua/plugins/mcphub-nvim/opts/builtin_tools.lua
+  h_220433a6faf6b8 1-51
+lua/plugins/mcphub-nvim/opts/extensions.lua
+  h_220433a6faf6b8 1-16
+lua/plugins/mcphub-nvim/opts/init.lua
+  h_220433a6faf6b8 44,59,65,67,69-70,87
+lua/plugins/mcphub-nvim/opts/log.lua
+  h_220433a6faf6b8 1-10
+lua/plugins/mcphub-nvim/opts/native_servers.lua
+  h_220433a6faf6b8 1-7
+lua/plugins/mcphub-nvim/opts/ui.lua
+  h_220433a6faf6b8 1-31
+lua/plugins/mcphub-nvim/opts/workspace.lua
+  h_220433a6faf6b8 1-42
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "6994b99348ff055b3bcc2f3d501b5ef1ea540458",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
