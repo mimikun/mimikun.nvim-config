@@ -1,0 +1,90 @@
+lua/plugins/codex-nvim/CODES/.github/workflows/ci.yml
+  h_220433a6faf6b8 1-39
+lua/plugins/codex-nvim/CODES/.luarc.json
+  h_220433a6faf6b8 1-6
+lua/plugins/codex-nvim/CODES/.markdownlint.json
+  h_220433a6faf6b8 1-7
+lua/plugins/codex-nvim/CODES/.stylua.toml
+  h_220433a6faf6b8 1-5
+lua/plugins/codex-nvim/CODES/CLAUDE.md
+  h_220433a6faf6b8 1-40
+lua/plugins/codex-nvim/CODES/LICENSE
+  h_220433a6faf6b8 1-25
+lua/plugins/codex-nvim/CODES/Makefile
+  h_220433a6faf6b8 1-18
+lua/plugins/codex-nvim/CODES/README.md
+  h_220433a6faf6b8 1-348
+lua/plugins/codex-nvim/CODES/doc/codex.txt
+  h_220433a6faf6b8 1-190
+lua/plugins/codex-nvim/CODES/doc/tags
+  h_220433a6faf6b8 1-30
+lua/plugins/codex-nvim/CODES/lua/codex/app_server.lua
+  h_220433a6faf6b8 1
+lua/plugins/codex-nvim/CODES/lua/codex/app_server/client.lua
+  h_220433a6faf6b8 1-290
+lua/plugins/codex-nvim/CODES/lua/codex/app_server/init.lua
+  h_220433a6faf6b8 1-969
+lua/plugins/codex-nvim/CODES/lua/codex/app_server/ui.lua
+  h_220433a6faf6b8 1-218
+lua/plugins/codex-nvim/CODES/lua/codex/config.lua
+  h_220433a6faf6b8 1-204
+lua/plugins/codex-nvim/CODES/lua/codex/context.lua
+  h_220433a6faf6b8 1-158
+lua/plugins/codex-nvim/CODES/lua/codex/cwd.lua
+  h_220433a6faf6b8 1-95
+lua/plugins/codex-nvim/CODES/lua/codex/explorer.lua
+  h_220433a6faf6b8 1-222
+lua/plugins/codex-nvim/CODES/lua/codex/health.lua
+  h_220433a6faf6b8 1-82
+lua/plugins/codex-nvim/CODES/lua/codex/init.lua
+  h_220433a6faf6b8 1-470
+lua/plugins/codex-nvim/CODES/lua/codex/receipt.lua
+  h_220433a6faf6b8 1-100
+lua/plugins/codex-nvim/CODES/lua/codex/terminal.lua
+  h_220433a6faf6b8 1-447
+lua/plugins/codex-nvim/CODES/lua/codex/types.lua
+  h_220433a6faf6b8 1-126
+lua/plugins/codex-nvim/CODES/lua/codex/window.lua
+  h_220433a6faf6b8 1-58
+lua/plugins/codex-nvim/CODES/plugin/codex.lua
+  h_220433a6faf6b8 1-93
+lua/plugins/codex-nvim/CODES/tests/app_server_client_spec.lua
+  h_220433a6faf6b8 1-128
+lua/plugins/codex-nvim/CODES/tests/app_server_integration.lua
+  h_220433a6faf6b8 1-35
+lua/plugins/codex-nvim/CODES/tests/app_server_spec.lua
+  h_220433a6faf6b8 1-321
+lua/plugins/codex-nvim/CODES/tests/app_server_ui_spec.lua
+  h_220433a6faf6b8 1-112
+lua/plugins/codex-nvim/CODES/tests/config_spec.lua
+  h_220433a6faf6b8 1-79
+lua/plugins/codex-nvim/CODES/tests/context_spec.lua
+  h_220433a6faf6b8 1-75
+lua/plugins/codex-nvim/CODES/tests/cwd_spec.lua
+  h_220433a6faf6b8 1-44
+lua/plugins/codex-nvim/CODES/tests/explorer_spec.lua
+  h_220433a6faf6b8 1-76
+lua/plugins/codex-nvim/CODES/tests/harness.lua
+  h_220433a6faf6b8 1-53
+lua/plugins/codex-nvim/CODES/tests/init_spec.lua
+  h_220433a6faf6b8 1-164
+lua/plugins/codex-nvim/CODES/tests/minimal_init.lua
+  h_220433a6faf6b8 1-4
+lua/plugins/codex-nvim/CODES/tests/plugin_spec.lua
+  h_220433a6faf6b8 1-46
+lua/plugins/codex-nvim/CODES/tests/run.lua
+  h_220433a6faf6b8 1-12
+lua/plugins/codex-nvim/CODES/tests/terminal_spec.lua
+  h_220433a6faf6b8 1-398
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "a3834d713f5ccc93609717a95f7cb637ca8a7c39",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
