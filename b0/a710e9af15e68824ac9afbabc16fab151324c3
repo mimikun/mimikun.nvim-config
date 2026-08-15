@@ -1,0 +1,18 @@
+lua/plugins/codecompanion-nvim/CODES/schema.lua
+  h_220433a6faf6b8 18-26,28-38,40,42,51-83,85,95-102,110-118,126-130,133,135-153
+lua/plugins/codecompanion-nvim/CODES/utils/keymaps.lua
+  h_220433a6faf6b8 14-19,27-32,41-61,69,71-80,82-86,88-93,95-100,102,104-116,133,142-149,152-154,160-178
+lua/plugins/codecompanion-nvim/CODES/utils/yaml.lua
+  h_220433a6faf6b8 8-15,17-23,25-46,55-59,61-123,125,133,139-141
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "b0a710e9af15e68824ac9afbabc16fab151324c3",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
