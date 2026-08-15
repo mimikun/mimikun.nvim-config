@@ -1,0 +1,18 @@
+lua/plugins/copilotchat-nvim/WIKIS/Examples-and-Tips.md
+  h_220433a6faf6b8 1-51
+lua/plugins/copilotchat-nvim/WIKIS/Home.md
+  h_220433a6faf6b8 1
+lua/plugins/copilotchat-nvim/WIKIS/Troubleshooting.md
+  h_220433a6faf6b8 1-4
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "64cb5cd9ea9585641502255258f868b7d6404298",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
