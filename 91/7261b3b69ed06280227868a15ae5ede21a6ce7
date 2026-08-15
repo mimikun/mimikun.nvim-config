@@ -1,0 +1,24 @@
+lua/plugins/claudecode-nvim/README.md
+  h_220433a6faf6b8 198,226,246,276,514,554
+lua/plugins/claudecode-nvim/cmds.lua
+  h_220433a6faf6b8 3-16
+lua/plugins/claudecode-nvim/dependencies.lua
+  h_220433a6faf6b8 3
+lua/plugins/claudecode-nvim/init.lua
+  h_220433a6faf6b8 20
+lua/plugins/claudecode-nvim/keys.lua
+  h_220433a6faf6b8 4-47,49-64,68-99
+lua/plugins/claudecode-nvim/opts.lua
+  h_220433a6faf6b8 3
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "917261b3b69ed06280227868a15ae5ede21a6ce7",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
