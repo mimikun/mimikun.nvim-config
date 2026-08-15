@@ -1,0 +1,24 @@
+lua/plugins/avante-nvim/WIKIS/Custom-providers.md
+  h_220433a6faf6b8 1-234
+lua/plugins/avante-nvim/WIKIS/Help-me-to-debug.md
+  h_220433a6faf6b8 1-10
+lua/plugins/avante-nvim/WIKIS/Home.md
+  h_220433a6faf6b8 1-168
+lua/plugins/avante-nvim/WIKIS/Provider-configuration-migration-guide.md
+  h_220433a6faf6b8 1-97
+lua/plugins/avante-nvim/WIKIS/Recipe-and-Tricks.md
+  h_220433a6faf6b8 1-189
+lua/plugins/avante-nvim/WIKIS/plugin‐integrations.md
+  h_220433a6faf6b8 1-37
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "d0f3804b6db06232e09302407f8952244e5f594f",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
