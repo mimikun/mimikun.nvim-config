@@ -1,0 +1,30 @@
+lua/plugins/mcphub-nvim/.editorconfig
+  h_220433a6faf6b8 1-14
+lua/plugins/mcphub-nvim/cmds.lua
+  h_220433a6faf6b8 1-6
+lua/plugins/mcphub-nvim/dependencies.lua
+  h_220433a6faf6b8 1-16
+lua/plugins/mcphub-nvim/events.lua
+  h_220433a6faf6b8 1-6
+lua/plugins/mcphub-nvim/ft.lua
+  h_220433a6faf6b8 1-6
+lua/plugins/mcphub-nvim/init.lua
+  h_220433a6faf6b8 1-37
+lua/plugins/mcphub-nvim/keys.lua
+  h_220433a6faf6b8 1-23
+lua/plugins/mcphub-nvim/opts.lua
+  h_220433a6faf6b8 1-6
+lua/plugins/mcphub-nvim/stylua.toml
+  h_220433a6faf6b8 1-13
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "1cd4c08caff084f7d2e42c797265cdf5afa97a1e",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
