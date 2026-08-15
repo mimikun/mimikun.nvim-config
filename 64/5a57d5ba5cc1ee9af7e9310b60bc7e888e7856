@@ -1,0 +1,14 @@
+lua/plugins/codecompanion-nvim/CODES/interactions/shared/editor_context/init.lua
+  h_220433a6faf6b8 8,17-29,36-40,42,53-70,78-82,90-98,101-103,105,114,116-118,120,122-124,126,133-135,137-139,141-142,144-147,149-153,156-158,160,168-173,175,177-180,182-183,185-188,190-191,193-194,196-197,199,207-220,222-226,228-230,240-298,301-316,319-326,329-331,334-337,339
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "645a57d5ba5cc1ee9af7e9310b60bc7e888e7856",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
