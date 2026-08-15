@@ -1,0 +1,14 @@
+lua/plugins/mcphub-nvim/init.lua
+  h_220433a6faf6b8 17
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "a39e8d6917ece1613c8c96607911df78f1d859f7",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
