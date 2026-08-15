@@ -1,0 +1,570 @@
+---@meta types
+
+---@class vim.api.create_autocmd.callback.args
+---@field id number
+---@field event string
+---@field group number?
+---@field match string
+---@field buf number
+---@field file string
+---@field data any
+
+---@class vim.api.keyset.create_autocmd.opts: vim.api.keyset.create_autocmd
+---@field callback? fun(ev:vim.api.create_autocmd.callback.args):boolean?
+
+---@param event string | string[] (string|array) Event(s) that will trigger the handler
+---@param opts vim.api.keyset.create_autocmd.opts
+---@return integer
+function vim.api.nvim_create_autocmd(event, opts) end
+
+---@class vim.api.keyset.user_command.callback_opts
+---@field name string
+---@field args string
+---@field fargs string[]
+---@field nargs? integer | string
+---@field bang? boolean
+---@field line1? integer
+---@field line2? integer
+---@field range? integer
+---@field count? integer
+---@field reg? string
+---@field mods? string
+---@field smods? UserCommandSmods
+
+---@class UserCommandSmods
+---@field browse boolean
+---@field confirm boolean
+---@field emsg_silent boolean
+---@field hide boolean
+---@field horizontal boolean
+---@field keepalt boolean
+---@field keepjumps boolean
+---@field keepmarks boolean
+---@field keeppatterns boolean
+---@field lockmarks boolean
+---@field noautocmd boolean
+---@field noswapfile boolean
+---@field sandbox boolean
+---@field silent boolean
+---@field split string
+---@field tab integer
+---@field unsilent boolean
+---@field verbose integer
+---@field vertical boolean
+
+---@class vim.api.keyset.user_command.opts: vim.api.keyset.user_command
+---@field nargs? integer | string
+---@field range? integer
+---@field bang? boolean
+---@field desc? string
+---@field force? boolean
+---@field complete? fun(prefix: string, line: string, pos?: integer): string[]
+---@field preview? fun(opts: vim.api.keyset.user_command.callback_opts, ns: integer, buf: integer): nil
+
+---@alias vim.api.keyset.user_command.callback fun(opts?: vim.api.keyset.user_command.callback_opts):nil
+
+---@param name string
+---@param command vim.api.keyset.user_command.callback
+---@param opts? vim.api.keyset.user_command.opts
+function vim.api.nvim_create_user_command(name, command, opts) end
+
+---@type boolean
+vim.g.avante_login = vim.g.avante_login
+
+---@class AvanteHandlerOptions: table<[string], string>
+---@field on_start AvanteLLMStartCallback
+---@field on_chunk AvanteLLMChunkCallback
+---@field on_stop AvanteLLMStopCallback
+---@field on_messages_add? fun(messages: avante.HistoryMessage[]): nil
+---@field on_state_change? fun(state: avante.GenerateState): nil
+---@field update_tokens_usage? fun(usage: avante.LLMTokenUsage): nil
+---
+---@alias AvanteLLMMessageContentItem string | { type: "text", text: string, cache_control: { type: string } | nil } | { type: "image", source: { type: "base64", media_type: string, data: string } } | { type: "tool_use", name: string, id: string, input: any } | { type: "tool_result", tool_use_id: string, content: string, is_error?: boolean, is_user_declined?: boolean } | { type: "thinking", thinking: string, signature: string } | { type: "redacted_thinking", data: string }
+
+---@alias AvanteLLMMessageContent AvanteLLMMessageContentItem[] | string
+
+---@class AvanteLLMMessage
+---@field role "user" | "assistant"
+---@field content AvanteLLMMessageContent
+
+---@class avante.TODO
+---@field id string
+---@field content string
+---@field status "todo" | "doing" | "done" | "cancelled"
+---@field priority "low" | "medium" | "high"
+
+---@class avante.HistoryMessage
+---@field message AvanteLLMMessage
+---@field timestamp string
+---@field state avante.HistoryMessageState
+---@field uuid string | nil
+---@field displayed_tool_name string | nil
+---@field displayed_content string | nil
+---@field visible boolean | nil
+---@field is_context boolean | nil
+---@field is_user_submission boolean | nil
+---@field provider string | nil
+---@field model string | nil
+---@field mode string | nil
+---@field selected_code AvanteSelectedCode | nil
+---@field selected_filepaths string[] | nil
+---@field tool_use_logs string[] | nil
+---@field tool_use_log_lines avante.ui.Line[] | nil
+---@field tool_use_store table | nil
+---@field just_for_display boolean | nil
+---@field is_dummy boolean | nil
+---@field is_compacted boolean | nil
+---@field is_deleted boolean | nil
+---@field turn_id string | nil
+---@field is_calling boolean | nil
+---@field original_content AvanteLLMMessageContent | nil
+---@field acp_tool_call? avante.acp.ToolCall | avante.acp.ToolCallUpdate
+
+---@class AvanteLLMToolResult
+---@field tool_name string
+---@field tool_use_id string
+---@field content string
+---@field is_error? boolean
+---@field is_user_declined? boolean
+
+---@class AvantePromptOptions: table<[string], string>
+---@field system_prompt string
+---@field messages AvanteLLMMessage[]
+---@field image_paths? string[]
+---@field tools? AvanteLLMTool[]
+---@field pending_compaction_history_messages? AvanteLLMMessage[]
+---
+---@class AvanteGeminiMessage
+---@field role "user"
+---@field parts { text: string }[]
+---
+---@class AvanteClaudeMessageContentBaseItem
+---@field cache_control {type: "ephemeral"}?
+---
+---@class AvanteClaudeMessageContentTextItem: AvanteClaudeMessageContentBaseItem
+---@field type "text"
+---@field text string
+---
+---@class AvanteClaudeMessageCotnentImageItem: AvanteClaudeMessageContentBaseItem
+---@field type "image"
+---@field source {type: "base64", media_type: string, data: string}
+---
+---@class AvanteClaudeMessage
+---@field role "user" | "assistant"
+---@field content [AvanteClaudeMessageContentTextItem | AvanteClaudeMessageCotnentImageItem][]
+
+---@class AvanteClaudeTool
+---@field name string
+---@field description string
+---@field input_schema AvanteClaudeToolInputSchema
+
+---@class AvanteClaudeToolInputSchema
+---@field type "object"
+---@field properties table<string, AvanteClaudeToolInputSchemaProperty>
+---@field required string[]
+
+---@class AvanteClaudeToolInputSchemaProperty
+---@field type "string" | "number" | "boolean"
+---@field description string
+---@field enum? string[]
+---
+---@class AvanteOpenAIChatResponse
+---@field id string
+---@field object "chat.completion" | "chat.completion.chunk"
+---@field created integer
+---@field model string
+---@field system_fingerprint string
+---@field choices? AvanteOpenAIResponseChoice[] | AvanteOpenAIResponseChoiceComplete[]
+---@field usage {prompt_tokens: integer, completion_tokens: integer, total_tokens: integer}
+---
+---@class AvanteOpenAIResponseChoice
+---@field index integer
+---@field delta AvanteOpenAIMessage
+---@field logprobs? integer
+---@field finish_reason? "stop" | "length"
+---
+---@class AvanteOpenAIResponseChoiceComplete
+---@field message AvanteOpenAIMessage
+---@field finish_reason "stop" | "length" | "eos_token"
+---@field index integer
+---@field logprobs integer
+---
+---@class AvanteOpenAIMessageToolCallFunction
+---@field name string
+---@field arguments string
+---
+---@class AvanteOpenAIMessageToolCall
+---@field index integer
+---@field id string
+---@field type "function"
+---@field function AvanteOpenAIMessageToolCallFunction
+---
+---@class AvanteOpenAIMessage
+---@field role? "user" | "system" | "assistant"
+---@field content? string
+---@field reasoning_content? string
+---@field reasoning? string
+---@field tool_calls? AvanteOpenAIMessageToolCall[]
+---@field type? "reasoning" | "function_call" | "function_call_output"
+---@field id? string
+---@field encrypted_content? string
+---@field summary? string
+---@field call_id? string
+---@field name? string
+---@field arguments? string
+---@field output? string
+---
+---@class AvanteOpenAITool
+---@field type "function"
+---@field function? AvanteOpenAIToolFunction
+---@field name? string
+---@field description? string | nil
+---@field parameters? AvanteOpenAIToolFunctionParameters | nil
+---@field strict? boolean | nil
+---
+---@class AvanteOpenAIToolFunction
+---@field name string
+---@field description string | nil
+---@field parameters AvanteOpenAIToolFunctionParameters | nil
+---@field strict boolean | nil
+---
+---@class AvanteOpenAIToolFunctionParameters
+---@field type "object"
+---@field properties table<string, AvanteOpenAIToolFunctionParameterProperty>
+---@field required string[]
+---@field additionalProperties boolean
+---
+---@class AvanteOpenAIToolFunctionParameterProperty
+---@field type string
+---@field description string
+---
+---@alias AvanteChatMessage AvanteClaudeMessage | AvanteOpenAIMessage | AvanteGeminiMessage
+---
+---@alias AvanteMessagesParser fun(self: AvanteProviderFunctor, opts: AvantePromptOptions): AvanteChatMessage[]
+---
+---@class AvanteCurlOutput: {url: string, proxy: string, insecure: boolean, body: table<string, any> | string, headers: table<string, string>, rawArgs: string[] | nil}
+---@alias AvanteCurlArgsParser fun(self: AvanteProviderFunctor, prompt_opts: AvantePromptOptions): (AvanteCurlOutput | nil)
+---
+---@alias AvanteResponseParser fun(self: AvanteProviderFunctor, ctx: any, data_stream: string, event_state: string?, opts: AvanteHandlerOptions): nil
+---
+---@class AvanteDefaultBaseProvider: table<string, any>
+---@field endpoint string Endpoint (e.g. "https://api.mistral.ai/v1")
+---@field extra_request_body? table<string, any>
+---@field model? string
+---@field model_names? string[] a list of model to choose from
+---@field local? boolean
+---@field proxy? string
+---@field keep_alive? string
+---@field timeout integer Timeout in milliseconds, increase this for reasoning models
+---@field allow_insecure? boolean Allow insecure server connections
+---@field api_key_name? string
+---Either the name of the environment variable containing the API key (avante will try a variant prefixed with "AVANTE_" as well) or if the value starts with "cmd:", avante will run the command and retreive the key from its stdout
+---@field _shellenv? string
+---@field disable_tools? boolean disable if prompt consumes too many tokens
+---@field entra? boolean
+---@field hide_in_model_selector? boolean Dont show provider in |:AvanteSwitchProvider|
+---@field use_ReAct_prompt? boolean
+---@field context_window? integer
+---@field use_response_api? boolean | fun(provider: AvanteDefaultBaseProvider, ctx?: any): boolean
+---@field support_previous_response_id? boolean
+--- NOTE: Response API automatically manages conversation state using previous_response_id for tool calling
+---
+---
+---@class AvanteSupportedProvider: AvanteDefaultBaseProvider
+---@field __inherited_from? string
+---@field display_name? string
+---
+---@class avante.OpenAITokenUsage
+---@field total_tokens number
+---@field prompt_tokens number
+---@field completion_tokens number
+---@field prompt_tokens_details {cached_tokens: number}
+---
+---@class avante.AnthropicTokenUsage
+---@field input_tokens number
+---@field cache_creation_input_tokens number
+---@field cache_read_input_tokens number
+---@field output_tokens number
+---
+---@class avante.GeminiTokenUsage
+---@field promptTokenCount number
+---@field candidatesTokenCount number
+---
+---@class avante.LLMTokenUsage
+---@field prompt_tokens number
+---@field completion_tokens number
+---
+---@class AvanteLLMThinkingBlock
+---@field thinking string
+---@field signature string
+---
+---@class AvanteLLMRedactedThinkingBlock
+---@field data string
+---
+---@alias avante.HistoryMessageState "generating" | "generated"
+---
+---@class AvanteLLMToolUse
+---@field name string
+---@field id string
+---@field input any
+---
+---@class AvantePartialLLMToolUse : AvanteLLMToolUse
+---@field state avante.HistoryMessageState
+---
+---@class AvanteLLMStartCallbackOptions
+---@field usage? avante.LLMTokenUsage
+---
+---@class AvanteLLMStopCallbackOptions
+---@field reason "complete" | "tool_use" | "error" | "rate_limit" | "cancelled" | "max_tokens" | "usage"
+---@field error? string | table
+---@field usage? avante.LLMTokenUsage
+---@field retry_after? integer
+---@field headers? table<string, string>
+---@field streaming_tool_use? boolean
+---
+---@alias AvanteStreamParser fun(self: AvanteProviderFunctor, ctx: any, line: string, handler_opts: AvanteHandlerOptions): nil
+---@alias AvanteLLMStartCallback fun(opts: AvanteLLMStartCallbackOptions): nil
+---@alias AvanteLLMChunkCallback fun(chunk: string): any
+---@alias AvanteLLMStopCallback fun(opts: AvanteLLMStopCallbackOptions): nil
+---@alias AvanteLLMConfigHandler fun(opts: AvanteSupportedProvider): AvanteDefaultBaseProvider, table<string, any>
+---
+---@class AvanteProviderModel
+---@field id string
+---@field name string
+---@field display_name string
+---@field provider_name string
+---@field version string
+---@field tokenizer? string
+---@field max_input_tokens? integer
+---@field max_output_tokens? integer
+---@field policy? boolean
+---
+---@alias AvanteProviderModelList AvanteProviderModel[]
+---
+---@class AvanteProvider: AvanteSupportedProvider
+---@field parse_curl_args? AvanteCurlArgsParser
+---@field parse_stream_data? AvanteStreamParser
+---@field parse_api_key? fun(): string | nil
+---
+---@class AvanteProviderFunctor
+---  Implementation of a LLM provider
+---@field _model_list_cache table
+---@field extra_headers fun(table): table | table | nil
+---@field support_prompt_caching boolean | nil
+---@field role_map table<"user" | "assistant", string>
+---@field parse_messages AvanteMessagesParser
+---@field parse_response AvanteResponseParser
+---@field parse_curl_args AvanteCurlArgsParser
+---@field is_disable_stream fun(self: AvanteProviderFunctor): boolean
+---@field setup fun(): nil
+---@field is_env_set fun(): boolean
+---@field api_key_name string Name of the environment variable
+---@field tokenizer_id string | "gpt-4o"
+---@field model? string
+---@field context_window? integer
+---@field parse_api_key fun(): string | nil
+---@field parse_stream_data? AvanteStreamParser
+---@field on_error? fun(result: table<string, any>): nil
+---@field transform_tool? fun(self: AvanteProviderFunctor, tool: AvanteLLMTool, use_prefix?: boolean): AvanteOpenAITool | AvanteClaudeTool
+---@field get_rate_limit_sleep_time? fun(self: AvanteProviderFunctor, headers: table<string, string>): integer | nil
+---@field list_models? fun(self): AvanteProviderModelList | nil
+---
+---@alias AvanteBedrockPayloadBuilder fun(self: AvanteBedrockModelHandler | AvanteBedrockProviderFunctor, prompt_opts: AvantePromptOptions, request_body: table<string, any>): table<string, any>
+---
+---@class AvanteBedrockProviderFunctor: AvanteProviderFunctor
+---@field load_model_handler fun(): AvanteBedrockModelHandler
+---@field build_bedrock_payload? AvanteBedrockPayloadBuilder
+---
+---@class AvanteBedrockModelHandler : AvanteProviderFunctor
+---@field role_map table<"user" | "assistant", string>
+---@field parse_messages AvanteMessagesParser
+---@field parse_response AvanteResponseParser
+---@field build_bedrock_payload AvanteBedrockPayloadBuilder
+---
+---@class AvanteClaudeProviderFunctor: AvanteProviderFunctor
+---@field is_temperature_unsupported fun(string): boolean
+---@field transform_anthropic_usage any
+---
+---@class AvanteACPProvider
+---@field command string
+---@field args string[]
+---@field env table<string, string>
+---@field auth_method string
+---
+---@alias AvanteLlmMode avante.Mode | "editing" | "suggesting"
+---
+---@class AvanteSelectedCode
+---@field path string
+---@field content string
+---@field file_type string
+---
+---@class AvanteSelectedFile
+---@field path string
+---@field content string
+---@field file_type string
+---
+---@class AvanteTemplateOptions
+---@field ask boolean
+---@field code_lang string
+---@field recently_viewed_files string[] | nil
+---@field selected_code AvanteSelectedCode | nil
+---@field project_context string | nil
+---@field selected_files AvanteSelectedFile[] | nil
+---@field selected_filepaths string[] | nil
+---@field diagnostics string | nil
+---@field history_messages avante.HistoryMessage[] | nil
+---@field get_todos? fun(): avante.TODO[]
+---@field update_todos? fun(todos: avante.TODO[]): nil
+---@field memory string | nil
+---@field get_tokens_usage? fun(): avante.LLMTokenUsage | nil
+---
+---@class AvanteGeneratePromptsOptions: AvanteTemplateOptions
+---@field instructions? string
+---@field mode? AvanteLlmMode
+---@field provider AvanteProviderFunctor | AvanteBedrockProviderFunctor | nil
+---@field tools? AvanteLLMTool[]
+---@field original_code? string
+---@field update_snippets? string[]
+---@field prompt_opts? AvantePromptOptions
+---@field session_ctx? table
+---@field _instructions_loaded? boolean
+---
+---@class AvanteLLMToolHistory
+---@field tool_result? AvanteLLMToolResult
+---@field tool_use? AvanteLLMToolUse
+---
+---@alias AvanteLLMMemorySummarizeCallback fun(pending_compaction_history_messages: avante.HistoryMessage[]): nil
+---
+---@alias AvanteLLMToolUseState "generating" | "generated" | "running" | "succeeded" | "failed"
+---@alias avante.GenerateState "generating" | "tool calling" | "failed" | "succeeded" | "cancelled" | "searching" | "thinking" | "compacting" | "compacted" | "initializing" | "initialized"
+---
+---@class AvanteLLMStreamOptions: AvanteGeneratePromptsOptions
+---@field acp_client? avante.acp.ACPClient
+---@field on_save_acp_client? fun(client: avante.acp.ACPClient): nil
+---@field just_connect_acp_client? boolean
+---@field acp_session_id? string
+---@field on_save_acp_session_id? fun(session_id: string): nil
+---@field on_start AvanteLLMStartCallback
+---@field on_chunk? AvanteLLMChunkCallback
+---@field on_stop AvanteLLMStopCallback
+---@field on_memory_summarize? AvanteLLMMemorySummarizeCallback
+---@field on_tool_log? fun(tool_id: string, tool_name: string, log: string, state: AvanteLLMToolUseState): nil
+---@field set_tool_use_store? fun(tool_id: string, key: string, value: any): nil
+---@field get_history_messages? fun(opts?: { all?: boolean }): avante.HistoryMessage[]
+---@field on_messages_add? fun(messages: avante.HistoryMessage[]): nil
+---@field on_state_change? fun(state: avante.GenerateState): nil
+---@field update_tokens_usage? fun(usage: avante.LLMTokenUsage): nil
+---
+---@class AvanteLLMToolFuncOpts
+---@field session_ctx table
+---@field on_complete? fun(result: boolean | string | nil, error: string | nil): nil
+---@field on_log? fun(log: string): nil
+---@field set_store? fun(key: string, value: any): nil
+---@field tool_use_id? string
+---@field streaming? boolean
+---
+---@alias AvanteLLMToolFunc<T> fun(
+---  input: T,
+---  opts: AvanteLLMToolFuncOpts)
+---  : (boolean | string | nil, string | nil)
+---
+---@class avante.LLMToolOnRenderOpts
+---@field logs string[]
+---@field state avante.HistoryMessageState
+---@field store table | nil
+---@field result_message avante.HistoryMessage | nil
+---
+--- @alias avante.LLMToolOnRender<T> fun(input: T, opts: avante.LLMToolOnRenderOpts): avante.ui.Line[]
+---
+---@class AvanteLLMTool
+---@field name string
+---@field description? string
+---@field get_description? fun(): string
+---@field func? AvanteLLMToolFunc
+---@field param AvanteLLMToolParam
+---@field returns AvanteLLMToolReturn[]
+---@field enabled? fun(opts: { user_input: string, history_messages: AvanteLLMMessage[] }): boolean
+---@field on_render? avante.LLMToolOnRender
+---@field support_streaming? boolean
+
+---@class AvanteLLMToolPublic : AvanteLLMTool
+---@field func AvanteLLMToolFunc
+
+---@class AvanteLLMToolParam
+---@field type 'table'
+---@field fields AvanteLLMToolParamField[]
+---@field usage? table
+
+---@class AvanteLLMToolParamField
+---@field name string
+---@field description? string
+---@field get_description? fun(): string
+---@field type 'string' | 'integer' | 'boolean' | 'object' | 'array'
+---@field fields? AvanteLLMToolParamField[]
+---@field items? AvanteLLMToolParamField
+---@field choices? string[]
+---@field optional? boolean
+
+---@class AvanteLLMToolReturn
+---@field name string
+---@field description string
+---@field type 'string' | 'string[]' | 'boolean' | 'array'
+---@field optional? boolean
+---
+---@class avante.ChatHistoryEntry
+---@field timestamp string
+---@field provider string
+---@field model string
+---@field request string
+---@field response string
+---@field original_response string
+---@field selected_file {filepath: string}?
+---@field selected_code AvanteSelectedCode | nil
+---@field selected_filepaths string[] | nil
+---@field visible boolean?
+---
+---@class avante.ChatHistory
+---@field title string
+---@field timestamp string
+---@field messages avante.HistoryMessage[]
+---@field entries avante.ChatHistoryEntry[]
+---@field todos avante.TODO[]
+---@field memory avante.ChatMemory | nil
+---@field filename string
+---@field system_prompt string | nil
+---@field tokens_usage avante.LLMTokenUsage | nil
+---@field acp_session_id string | nil
+---
+---@class avante.ChatMemory
+---@field content string
+---@field last_summarized_timestamp string
+---@field last_message_uuid string | nil
+---
+---@class avante.CurlOpts
+---@field provider AvanteProviderFunctor
+---@field prompt_opts AvantePromptOptions
+---@field handler_opts AvanteHandlerOptions
+---@field on_response_headers? fun(headers: table<string, string>): nil
+---
+---@class avante.lsp.Definition
+---@field content string
+---@field uri string
+---
+---@alias AvanteSlashCommandBuiltInName "clear" | "help" | "lines" | "commit" | "new" | "init" | "compact" | "model"
+---@alias AvanteSlashCommandCallback fun(self: avante.Sidebar, args: string, cb?: fun(args: string): nil): nil
+---@class AvanteSlashCommand
+---@field name AvanteSlashCommandBuiltInName | string
+---@field description string
+---@field details string
+---@field shorthelp? string
+---@field callback? AvanteSlashCommandCallback
+
+---@alias AvanteMentions "codebase" | "diagnostics" | "file" | "quickfix" | "buffers"
+---@alias AvanteMentionCallback fun(args: string, cb?: fun(args: string): nil): nil
+---@alias AvanteMention {description: string, command: AvanteMentions, details: string, shorthelp?: string, callback?: AvanteMentionCallback}
+
+---@class AvanteShortcut
+---@field name string
+---@field details string
+---@field description string
+---@field prompt string
