@@ -1,0 +1,375 @@
+local config = require("codecompanion.config")
+
+local Path = require("plenary.path")
+local buf_utils = require("codecompanion.utils.buffers")
+local log = require("codecompanion.utils.log")
+
+local M = {}
+
+local api = vim.api
+local fmt = string.format
+
+---Establishes the connection, authenticates, creates a session and links the buffer.
+---@param chat CodeCompanion.Chat
+---@param cb? function
+---@return nil
+function M.create_acp_connection(chat, cb)
+  ---Run async so as not to block the UI
+  local async_utils = require("codecompanion.utils.async")
+
+  local function call_cb()
+    if cb then
+      vim.schedule(cb)
+    end
+  end
+
+  async_utils.sync(function()
+    local ACPHandler = require("codecompanion.interactions.chat.acp.handler")
+    local handler = ACPHandler.new(chat)
+
+    if not handler:ensure_connection() then
+      return call_cb()
+    end
+
+    handler:ensure_session()
+    call_cb()
+  end)()
+end
+
+---Format the given role without any separator
+---@param role string
+---@return string
+function M.format_role(role)
+  if config.display.chat.show_header_separator then
+    role = vim.trim(role:gsub(config.display.chat.separator, ""))
+  end
+  return role
+end
+
+---Strip any context from the messages - The LLM doesn't need to see this
+---@param messages table
+---@return table
+function M.strip_context(messages)
+  local i = 1
+  while messages[i] and messages[i]:sub(1, 1) == ">" do
+    table.remove(messages, i)
+    -- we do not increment i, since removing shifts everything down
+  end
+  return messages
+end
+
+---Get the keymaps for the slash commands
+---@param slash_commands table
+---@return table
+function M.slash_command_keymaps(slash_commands)
+  local keymaps = {}
+  for k, v in pairs(slash_commands) do
+    if v.keymaps then
+      keymaps[k] = {}
+      keymaps[k].description = v.description
+      keymaps[k].callback = "keymaps." .. k
+      keymaps[k].modes = v.keymaps.modes
+    end
+  end
+
+  return keymaps
+end
+
+---Check if the messages contain any user messages
+---@param messages table The list of messages to check
+---@return boolean
+function M.has_user_messages(messages)
+  return vim.iter(messages):any(function(msg)
+    return msg.role == config.constants.USER_ROLE
+  end)
+end
+
+---Helper function to update the chat settings and model if changed
+---@param chat CodeCompanion.Chat
+---@param settings table The new settings to apply
+---@return nil
+function M.apply_settings_and_model(chat, settings)
+  local old_model = chat.settings.model
+  chat:apply_settings(settings)
+  if old_model and old_model ~= settings.model then
+    chat:change_model({ model = settings.model })
+  end
+end
+
+---Determine if a tag exists in the messages table
+---@param tag string
+---@param messages CodeCompanion.Chat.Messages
+---@return boolean
+function M.has_tag(tag, messages)
+  for _, msg in ipairs(messages) do
+    if msg._meta and msg._meta.tag == tag then
+      return true
+    end
+  end
+  return false
+end
+
+---Resolve which MCP servers should be added to new chat buffers
+---@return table<string> server_names List of server names to add to chat
+function M.mcp_servers_to_add_to_chat()
+  local mcp_cfg = config.mcp
+  local default_servers = mcp_cfg.opts and mcp_cfg.opts.default_servers
+
+  if type(default_servers) == "table" then
+    return vim.deepcopy(default_servers)
+  end
+
+  return {}
+end
+
+---Start MCP servers and add their tools to the chat buffer
+---@param chat CodeCompanion.Chat
+---@param server_names table<string> List of MCP server names
+---@return nil
+function M.start_mcp_servers(chat, server_names)
+  local mcp = require("codecompanion.mcp")
+
+  ---Add an MCP server's tool group to the chat buffer
+  ---@param name string
+  local function add_tools(name)
+    chat.tools:refresh({ adapter = chat.adapter })
+    chat.tool_registry:add(mcp.tool_prefix() .. name, { config = chat.tools.tools_config })
+    log:debug("Added MCP server tools for `%s` to chat %d", name, chat.id)
+  end
+
+  for _, name in ipairs(server_names) do
+    local status = mcp.get_status()
+    local server_status = status[name]
+
+    if server_status and server_status.ready and server_status.tool_count > 0 then
+      add_tools(name)
+    else
+      mcp.enable_server(name, {
+        on_tools_loaded = function()
+          add_tools(name)
+        end,
+      })
+    end
+  end
+end
+
+---Remove all MCP tool groups from the chat's tool registry
+---@param chat CodeCompanion.Chat
+---@return nil
+function M.remove_mcp_tools(chat)
+  local mcp = require("codecompanion.mcp")
+  local prefix = mcp.tool_prefix()
+
+  for group_name, _ in pairs(chat.tool_registry.groups) do
+    if group_name:sub(1, #prefix) == prefix then
+      chat.tool_registry:remove_group(group_name)
+    end
+  end
+end
+
+---Determine if context has already been added to the messages stack
+---@param context string
+---@param messages CodeCompanion.Chat.Messages
+---@return boolean
+function M.has_context(context, messages)
+  return vim.tbl_contains(
+    vim.tbl_map(function(msg)
+      return msg.context and msg.context.id
+    end, messages),
+    context
+  )
+end
+
+---Format buffer content with XML wrapper for LLM consumption
+---@param bufnr number
+---@param path string
+---@param opts? { message?: string, range?: table }
+---@return string content The XML-wrapped content
+---@return string id The buffer context ID
+---@return string filename The buffer filename
+function M.format_buffer_for_llm(bufnr, path, opts)
+  opts = opts or {}
+
+  -- Handle unloaded buffers
+  local content
+  if not api.nvim_buf_is_loaded(bufnr) then
+    local file_content = Path.new(path):read()
+    if file_content == "" then
+      error("Could not read the file: " .. path)
+    end
+    content = fmt(
+      [[````%s
+%s
+````]],
+      vim.filetype.match({ filename = path }),
+      buf_utils.add_line_numbers(vim.trim(file_content))
+    )
+  else
+    content = fmt(
+      [[````%s
+%s
+````]],
+      buf_utils.get_info(bufnr).filetype,
+      buf_utils.add_line_numbers(buf_utils.get_content(bufnr, opts.range))
+    )
+  end
+
+  local filename = vim.fn.fnamemodify(path, ":t")
+
+  -- Generate consistent ID using relative path for conciseness
+  local id = "<buf>" .. vim.fn.fnamemodify(path, ":.") .. "</buf>"
+
+  local message = opts.message or "File content"
+
+  local formatted_content = fmt(
+    [[<attachment filepath="%s" buffer_number="%s">%s:
+%s</attachment>]],
+    path,
+    bufnr,
+    message,
+    content
+  )
+
+  return formatted_content, id, filename
+end
+
+---Format buffer content with XML wrapper for LLM consumption
+---@param path string
+---@param opts? { message?: string, range?: table }
+---@return string file_contents
+---@return string id The context ID
+---@return string path The file path
+---@return string ft The filetype
+---@return string file_contents The raw file contents
+function M.format_file_for_llm(path, opts)
+  opts = opts or {}
+
+  local file_contents = Path.new(path):read()
+
+  local ft = vim.filetype.match({ filename = path })
+  local id = "<file>" .. vim.fn.fnamemodify(path, ":.") .. "</file>"
+
+  local content
+  if opts.message then
+    content = fmt(
+      [[%s
+
+````%s
+%s
+````]],
+      opts.message,
+      ft,
+      file_contents
+    )
+  else
+    content = fmt(
+      [[<attachment filepath="%s">%s:
+
+````%s
+%s
+````
+</attachment>]],
+      path,
+      "Here is the content from the file",
+      ft,
+      file_contents
+    )
+  end
+
+  return content, id, path, ft, file_contents
+end
+
+---Add line numbers with an offset to content
+---@param content string
+---@param start_line number The starting line number
+---@return string
+local function add_line_numbers_from(content, start_line)
+  local formatted = {}
+  local lines = vim.split(content, "\n")
+  for i, line in ipairs(lines) do
+    table.insert(formatted, fmt("%d |%s", start_line + i - 1, line))
+  end
+  return table.concat(formatted, "\n")
+end
+
+---Format a single viewport range for LLM consumption
+---@param bufnr number
+---@param range table {start_line, end_line}
+---@return string content The XML-wrapped content
+---@return string id The context ID
+function M.format_viewport_range_for_llm(bufnr, range)
+  local info = buf_utils.get_info(bufnr)
+  local filepath = info.path
+  local start_line, end_line = range[1], range[2]
+
+  local buffer_content = buf_utils.get_content(bufnr, { start_line - 1, end_line })
+  local numbered_content = add_line_numbers_from(buffer_content, start_line)
+
+  local content = fmt(
+    [[````%s
+%s
+````]],
+    info.filetype,
+    numbered_content
+  )
+
+  local excerpt_info = fmt("Excerpt from %s, lines %d to %d", filepath, start_line, end_line)
+
+  local formatted_content = fmt(
+    [[<attachment filepath="%s" buffer_number="%s">%s:
+%s</attachment>]],
+    filepath,
+    bufnr,
+    excerpt_info,
+    content
+  )
+
+  local id = fmt("<viewport>%s:%d-%d</viewport>", vim.fn.fnamemodify(filepath, ":."), start_line, end_line)
+
+  return formatted_content, id
+end
+
+---Format viewport content with XML wrapper for LLM consumption
+---@param buf_lines table Buffer lines from get_visible_lines()
+---@return string content The XML-wrapped content for all visible buffers
+function M.format_viewport_for_llm(buf_lines)
+  local formatted = {}
+
+  for bufnr, ranges in pairs(buf_lines) do
+    for _, range in ipairs(ranges) do
+      local content, _ = M.format_viewport_range_for_llm(bufnr, range)
+      table.insert(formatted, content)
+    end
+  end
+
+  return table.concat(formatted, "\n\n")
+end
+
+---Returns the number of tokens that trigger context management for a given operation
+---@param adapter CodeCompanion.HTTPAdapter
+---@param opts? { operation?: "editing"|"compaction" } defaults to "compaction"
+---@return number
+function M.trigger_context_management(adapter, opts)
+  opts = opts or {}
+  local operation = opts.operation or "compaction"
+
+  local context_management = config.interactions.chat.opts.context_management
+  local settings = context_management and context_management[operation]
+  local trigger = settings and settings.trigger
+  if trigger == nil then
+    return 0
+  end
+
+  if trigger < 1 then
+    local context_window = require("codecompanion.adapters.shared").context_window(adapter)
+    if not context_window then
+      log:debug("[Context Window] No context window for `%s` adapter, skipping %s trigger", adapter.name, operation)
+      return 0
+    end
+    trigger = math.floor(trigger * context_window)
+  end
+
+  return trigger
+end
+
+return M

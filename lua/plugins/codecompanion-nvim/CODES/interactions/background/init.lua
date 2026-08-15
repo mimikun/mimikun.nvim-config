@@ -1,0 +1,159 @@
+--[[
+===============================================================================
+    File:       codecompanion/interactions/background/init.lua
+    Author:     Oli Morris
+-------------------------------------------------------------------------------
+    Description:
+      This module implements background interactions for the chat buffer.
+      These work on the basis of non-blocking requests which attach to
+      callbacks on the chat instance.
+
+      The interactions can self-destruct after running or persist for the
+      lifetime of the chat session.
+
+      Background interactions must log or error silently so as not to impact
+      the user experience.
+
+      This code is licensed under the Apache-2.0 License.
+-------------------------------------------------------------------------------
+    Attribution:
+      If you use or distribute this code, please credit:
+      Oli Morris (https://github.com/olimorris)
+===============================================================================
+--]]
+
+local adapters = require("codecompanion.adapters")
+local config = require("codecompanion.config")
+local http = require("codecompanion.http")
+local log = require("codecompanion.utils.log")
+local schema = require("codecompanion.schema")
+
+---@class CodeCompanion.Background
+---@field adapter CodeCompanion.HTTPAdapter The adapter to use for the background task
+---@field id number The unique identifier for the background task
+---@field messages CodeCompanion.Chat.Messages The messages for the background task
+---@field settings table The settings used in the adapter
+local Background = {}
+
+---@class CodeCompanion.Background.Args
+---@field adapter? CodeCompanion.HTTPAdapter|string The adapter to use
+---@field messages? CodeCompanion.Chat.Messages The messages to initialize with
+---@field settings? table The settings for the adapter
+
+---@param args CodeCompanion.Background.Args
+---@return CodeCompanion.Background
+function Background.new(args)
+  args = args or {}
+
+  local self = setmetatable({
+    id = math.random(10000000),
+    messages = args.messages or {},
+  }, { __index = Background })
+
+  if args.adapter and adapters.resolved(args.adapter) then
+    self.adapter = args.adapter --[[@as CodeCompanion.HTTPAdapter]]
+  else
+    self.adapter = adapters.resolve(args.adapter or config.interactions.background.adapter)
+  end
+
+  -- Silence errors
+  if not self.adapter then
+    return log:debug("[Background] No adapter found")
+  end
+  if self.adapter.type ~= "http" then
+    return log:warn("Only HTTP adapters are supported for background interactions")
+  end
+
+  self.settings = schema.get_default(self.adapter, args.settings)
+  self.adapter:map_schema_to_params(self.settings)
+
+  return self ---@type CodeCompanion.Background
+end
+
+---Build the request prior to sending to the adapter
+---@param background CodeCompanion.Background
+---@param messages CodeCompanion.Chat.Messages,
+---@param opts { structured_output?: CodeCompanion.StructuredOutput.Schema }
+---@return CodeCompanion.HTTPAdapter, table
+local function build_request(background, messages, opts)
+  local adapter = vim.deepcopy(background.adapter)
+  if adapter.opts then
+    adapter.opts.stream = false
+  end
+
+  local payload = {
+    messages = adapter:map_roles(vim.deepcopy(messages)),
+    structured_output = opts.structured_output,
+  }
+
+  return adapter, payload
+end
+
+---Ask the LLM, synchronously
+---@param background CodeCompanion.Background
+---@param messages CodeCompanion.Chat.Messages
+---@param opts? { silent?: boolean, timeout?: number, parse_handler?: string, structured_output?: CodeCompanion.StructuredOutput.Schema }
+---@return any, table|nil -- parsed response, error
+local function ask_sync(background, messages, opts)
+  opts = opts or {}
+
+  if background.adapter.type ~= "http" then
+    return nil, { message = "[background::init] ask_sync only supports HTTP adapters" }
+  end
+
+  local adapter, payload = build_request(background, messages, { structured_output = opts.structured_output })
+  local client = http.new({ adapter = adapter })
+
+  log:debug("[background::init]\nAdapter: %s\nAsk Sync Payload:\n%s", adapter.name, payload)
+  local response, err = client:send_sync(payload, { silent = opts.silent, timeout = opts.timeout })
+
+  if err then
+    log:debug("[background::init] ask_sync failed: %s", err.stderr or err.message)
+    return nil, err
+  end
+
+  local parse_handler = opts.parse_handler or "parse_chat"
+  local result = adapters.call_handler(adapter, parse_handler, response)
+  return result, nil
+end
+
+---Ask the LLM asynchronously
+---@param background CodeCompanion.Background
+---@param messages CodeCompanion.Chat.Messages
+---@param opts { on_done: function, on_error?: function, on_chunk?: function, silent?: boolean, parse_handler?: string, structured_output?: CodeCompanion.StructuredOutput.Schema }
+---@return CodeCompanion.HTTPClient.RequestHandle
+local function ask_async(background, messages, opts)
+  assert(opts.on_done, "on_done callback is required for ask_async")
+
+  local adapter, payload = build_request(background, messages, { structured_output = opts.structured_output })
+  local client = http.new({ adapter = adapter })
+
+  -- Wrap the on_done callback to parse the response
+  local parse_handler = opts.parse_handler or "parse_chat"
+  local original_on_done = opts.on_done
+  opts.on_done = function(response, meta)
+    if not response or not response.body then
+      return original_on_done(nil, meta)
+    end
+
+    local result = adapters.call_handler(adapter, parse_handler, response)
+    original_on_done(result, meta)
+  end
+
+  log:trace("[background::init]\nAdapter: %s\nAsk Async Payload:\n%s", adapter.name, payload)
+  return client:send(payload, opts)
+end
+
+---Ask the LLM for a specific response
+---@param messages CodeCompanion.Chat.Message[]
+---@param opts? { method?: string, silent?: boolean, timeout?: number, parse_handler?: string, structured_output?: CodeCompanion.StructuredOutput.Schema }
+function Background:ask(messages, opts)
+  opts = vim.tbl_deep_extend("force", { method = "async" }, opts or {})
+
+  if opts.method == "sync" then
+    return ask_sync(self, messages, opts)
+  end
+  return ask_async(self, messages, opts)
+end
+
+return Background

@@ -1,0 +1,146 @@
+---
+description: "Add rules files like CLAUDE.md, AGENTS.md, or Cursor rules to the CodeCompanion chat buffer to provide persistent LLM instructions and project context."
+---
+
+# Using Rules
+
+Ensure that you have read the [Rules Configuration](/configuration/rules) section to understand how to create and configure rule groups.
+
+## Default Rule Group
+
+Below is the `default` rule group that, when [enabled](/configuration/rules#enabling-rules), provides a collection of common files to the chat buffer:
+
+```lua
+require("codecompanion").setup({
+  rules = {
+    default = {
+      description = "Collection of common files for all projects",
+      files = {
+        ".clinerules",
+        ".cursorrules",
+        ".goosehints",
+        ".rules",
+        ".windsurfrules",
+        ".github/copilot-instructions.md",
+        "AGENT.md",
+        "AGENTS.md",
+        { path = "CLAUDE.md", parser = "claude" },
+        { path = "CLAUDE.local.md", parser = "claude" },
+        { path = "~/.claude/CLAUDE.md", parser = "claude" },
+      },
+    },
+  },
+})
+```
+
+## Creating Rules
+
+The plugin does not require rules to be in a specific filetype or even format (unless you're using the `claude` parser). This allows you to leverage [mdc](https://docs.cursor.com/en/context/rules#rule-anatomy) files, markdown files or good old plain text files.
+
+The location of the rules is also unimportant. The rules files could be local to the project you're working in. Or, they could reside in a separate location on your disk. Just ensure the path is correct when you're [creating/configuring](/configuration/rules#rule-groups) the rules group.
+
+You can even set the system prompt for the chat buffer in the rules file itself.
+
+### Example 1: Rule that can be processed with the `codecompanion` parser
+
+```markdown
+# Example Rules File
+
+## System Prompt
+
+What ever goes in this section is used as a system prompt in the chat buffer.
+
+So you can specify instructions:
+- Here
+- And here
+
+...and anywhere here
+
+## My other header
+
+@./lua/codecompanion/interactions/chat/tools/init.lua
+
+Anything in this section is added as context to the chat buffer. The file above is also shared
+```
+
+### Example 2: Rule that can be processed with the `claude` parser
+
+```markdown
+# Example Claude Rules File
+
+@./lua/codecompanion/interactions/chat/tools/init.lua
+@INSTRUCTIONS.md
+
+This is a rules file that can be parsed with the Claude parser.
+
+Anything in this file is added as context to the chat buffer.
+
+Including the files above.
+```
+
+#### Resolving `@` paths
+
+Other files can be referenced in a rules file via `@path`. CodeCompanion looks for the file in this order:
+
+1. Absolute paths (starting with `/` or `~`) are used as-is
+2. Relative paths (e.g. `@INSTRUCTIONS.md`) are first resolved against the directory of the rules file itself
+3. If not found there, they're resolved against the current working directory
+4. If neither exists, a warning is logged
+
+Taking a global rules files such as `~/.claude/CLAUDE.md`: If it contains an `@RTK.md` reference inside it, this would resolve to `~/.claude/RTK.md`, regardless of where Neovim was launched from.
+
+## Adding Rules to a Chat Buffer
+
+### When Opening the Chat Buffer
+
+Rules can automatically be added to a chat buffer when it's created. Just specify the default rules to include:
+
+::: code-group
+
+```lua [Autoload]
+require("codecompanion").setup({
+  rules = {
+    opts = {
+      chat = {
+        autoload = { "default", "claude "}
+      },
+    },
+  },
+})
+```
+
+```lua [Overwrite Autoload]
+require("codecompanion").setup({
+  rules = {
+    default = {
+      description = "My default group",
+      files = {
+        "CLAUDE.md",
+        "~/Code/Helpers/my_project_specific_help.md",
+      },
+    },
+    opts = {
+      chat = {
+        autoload = "default",
+      },
+    },
+  },
+})
+```
+
+:::
+
+### Slash Command
+
+To add rules to an existing chat buffer, use the `/rules` slash command. This will allow multiple rule groups to be added at a time.
+
+### Action Palette
+
+<img src="https://github.com/user-attachments/assets/09ecd976-ac8b-446f-bed3-a8122617eb79" alt="Chat buffer action palette" />
+
+There is also a _Chat with rules_ action in the [Action Palette](/usage/action-palette). This lists all of the rule groups in the config that can be added to a new chat buffer.
+
+### Clearing Rules
+
+Rules can also be cleared from a chat buffer via the `gR` keymap. Although note, this will remove _ALL_ context that's been designated as _rules_.
+

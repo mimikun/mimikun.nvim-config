@@ -1,0 +1,832 @@
+local adapter_utils = require("codecompanion.adapters.utils")
+local config = require("codecompanion.config")
+local fetch_models = require("codecompanion.adapters.utils.models.fetch")
+local log = require("codecompanion.utils.log")
+local tags = require("codecompanion.interactions.shared.tags")
+local tool_transformer = require("codecompanion.adapters.utils.tool_transformers")
+
+local models_source = {
+  name = "Anthropic",
+  url = "https://api.anthropic.com/v1/models",
+  ---@param adapter CodeCompanion.HTTPAdapter
+  ---@return table
+  headers = function(adapter)
+    adapter_utils.get_env_vars(adapter, { timeout = config.adapters.opts.cmd_timeout })
+    return adapter_utils.set_env_vars(adapter, adapter.headers)
+  end,
+}
+
+---@class CodeCompanion.HTTPAdapter.Anthropic: CodeCompanion.HTTPAdapter
+return {
+  name = "anthropic",
+  formatted_name = "Anthropic",
+  roles = {
+    llm = "assistant",
+    user = "user",
+  },
+  features = {
+    text = true,
+    tokens = true,
+  },
+  opts = {
+    compaction = true,
+    documents = true,
+    stream = true,
+    tools = true,
+    vision = true,
+  },
+  url = "https://api.anthropic.com/v1/messages",
+  env = {
+    api_key = "ANTHROPIC_API_KEY",
+  },
+  headers = {
+    ["content-type"] = "application/json",
+    ["x-api-key"] = "${api_key}",
+    ["anthropic-version"] = "2023-06-01",
+  },
+  temp = {
+    input_tokens = 0,
+    output_tokens = 0,
+  },
+  available_tools = {
+    ["code_execution"] = {
+      description = "The code execution tool allows Claude to run Bash commands and manipulate files, including writing code, in a secure, sandboxed environment",
+      ---@param self CodeCompanion.HTTPAdapter.Anthropic
+      ---@param meta { tools: table }
+      callback = function(self, meta)
+        adapter_utils.add_header(self.headers, "anthropic-beta", "code-execution-2025-08-25")
+
+        table.insert(meta.tools, {
+          type = "code_execution_20250825",
+          name = "code_execution",
+        })
+      end,
+    },
+    ["memory"] = {
+      description = "Enables Claude to store and retrieve information across conversations through a memory file directory. Claude can create, read, update, and delete files that persist between sessions, allowing it to build knowledge over time without keeping everything in the context window",
+      ---@param self CodeCompanion.HTTPAdapter.Anthropic
+      ---@param meta { tools: table }
+      callback = function(self, meta)
+        adapter_utils.add_header(self.headers, "anthropic-beta", "context-management-2025-06-27")
+
+        table.insert(meta.tools, {
+          type = "memory_20250818",
+          name = "memory",
+        })
+      end,
+      opts = {
+        -- Allow a hybrid tool -> One that also has a client side implementation
+        client_tool = "interactions.chat.tools.memory",
+      },
+    },
+    ["web_fetch"] = {
+      description = "The web fetch tool allows Claude to retrieve full content from specified web pages and PDF documents.",
+      ---@param self CodeCompanion.HTTPAdapter.Anthropic
+      ---@param meta { tools: table }
+      callback = function(self, meta)
+        adapter_utils.add_header(self.headers, "anthropic-beta", "web-fetch-2025-09-10")
+
+        table.insert(meta.tools, {
+          type = "web_fetch_20250910",
+          name = "web_fetch",
+          max_uses = 5,
+        })
+      end,
+    },
+    ["web_search"] = {
+      description = "The web search tool gives Claude direct access to real-time web content, allowing it to answer questions with up-to-date information beyond its knowledge cutoff",
+      ---@param self CodeCompanion.HTTPAdapter.Anthropic
+      ---@param meta { tools: table }
+      callback = function(self, meta)
+        table.insert(meta.tools, {
+          type = "web_search_20250305",
+          name = "web_search",
+          max_uses = 5,
+        })
+      end,
+    },
+  },
+  handlers = {
+    ---@param self CodeCompanion.HTTPAdapter
+    ---@return boolean
+    setup = function(self)
+      if self.opts and self.opts.stream then
+        self.parameters.stream = true
+      end
+
+      -- Make sure the individual model options are set
+      local model_opts = adapter_utils.model_choice(self, { async = false })
+      if model_opts and model_opts.opts then
+        self.opts = vim.tbl_deep_extend("force", self.opts, model_opts.opts)
+        if not model_opts.opts.has_vision then
+          self.opts.vision = false
+        end
+
+        -- Ref: https://platform.claude.com/docs/en/build-with-claude/compaction
+        if self.opts.compaction ~= false and model_opts.opts.can_manage_context then
+          self.opts.can_manage_context = true
+          adapter_utils.add_header(self.headers, "anthropic-beta", "compact-2026-01-12")
+          adapter_utils.add_header(self.headers, "anthropic-beta", "context-management-2025-06-27")
+        else
+          self.opts.can_manage_context = false
+          adapter_utils.remove_header(self.headers, "anthropic-beta", "compact-2026-01-12")
+        end
+      end
+
+      return true
+    end,
+
+    ---Set the parameters
+    ---@param self CodeCompanion.HTTPAdapter
+    ---@param params table
+    ---@param messages table
+    ---@return table
+    form_parameters = function(self, params, messages)
+      local models = adapter_utils.model_choice(self)
+      if self.temp.extended_thinking and (models and models.opts and models.opts.can_reason) then
+        -- Anthropic plan on deprecating this in future model releases so I'm
+        -- labelling it as "legacy_reasoning" for now. Will remove later
+        -- Ref: https://platform.claude.com/docs/en/build-with-claude/extended-thinking
+        if models.opts.legacy_reasoning then
+          params.thinking = {
+            type = "enabled",
+            budget_tokens = self.temp.thinking_budget,
+          }
+        else
+          params.thinking = {
+            type = "adaptive",
+          }
+        end
+        -- Thinking isn't compatible with top_k
+        -- Ref: https://platform.claude.com/docs/en/build-with-claude/extended-thinking#feature-compatibility
+        params.top_k = nil
+
+        -- top_p must be between 1 and 0.95
+        -- Ref: https://platform.claude.com/docs/en/build-with-claude/extended-thinking#feature-compatibility
+        if params.top_p and (params.top_p > 1 or params.top_p < 0.95) then
+          params.top_p = 1
+        end
+      end
+
+      return params
+    end,
+
+    ---Set the format of the role and content for the messages that are sent from the chat buffer to the LLM
+    ---@param self CodeCompanion.HTTPAdapter
+    ---@param messages table Format is: { { role = "user", content = "Your prompt here" } }
+    ---@return table
+    form_messages = function(self, messages)
+      local has_tools = false
+
+      -- 1. Extract and format system messages
+      local system = vim
+        .iter(messages)
+        :filter(function(msg)
+          return msg.role == "system" and msg.content and msg.content ~= ""
+        end)
+        :map(function(msg)
+          return {
+            type = "text",
+            text = msg.content,
+            cache_control = nil, -- To be set later if needed
+          }
+        end)
+        :totable()
+      system = next(system) and system or nil
+
+      -- 2. Remove any system messages from the regular messages
+      messages = vim
+        .iter(messages)
+        :filter(function(msg)
+          return msg.role ~= "system"
+        end)
+        :totable()
+
+      -- 3–9. Clean up, role‐convert, and handle tool calls in one pass
+      messages = vim.tbl_map(function(m)
+        -- Capture compaction data before filtering removes _meta
+        local compaction = m._meta and m._meta.compaction
+
+        -- 3. Account for any images
+        if m._meta and m._meta.tag == tags.IMAGE and m.context and m.context.mimetype then
+          if self.opts and self.opts.vision then
+            m.content = {
+              {
+                type = "image",
+                source = {
+                  type = "base64",
+                  media_type = m.context.mimetype,
+                  data = m.content,
+                },
+              },
+            }
+          else
+            -- Remove the message if vision is not supported
+            return nil
+          end
+        end
+
+        -- 3b. Account for any documents
+        -- NOTE: Only support PDFs for now
+        if
+          m._meta
+          and m._meta.tag == tags.DOCUMENT
+          and m._meta.filetype == "pdf"
+          and m.context
+          and m.context.mimetype
+        then
+          if self.opts and self.opts.documents then
+            m.content = {
+              {
+                type = "document",
+                source = {
+                  type = "base64",
+                  media_type = m.context.mimetype,
+                  data = m.content,
+                },
+              },
+            }
+          end
+        end
+
+        -- 4. Remove disallowed keys
+        m = adapter_utils.filter_out_messages({
+          message = m,
+          allowed_words = {
+            "content",
+            "role",
+            "reasoning",
+            "tools",
+          },
+        })
+
+        -- 5. Turn string content into { { type = "text", text } } and add in the reasoning
+        if m.role == self.roles.user or m.role == self.roles.llm then
+          -- Anthropic doesn't allow the user to submit an empty prompt. But
+          -- this can be necessary to prompt the LLM to analyze any tool
+          -- calls and their output
+          if m.role == self.roles.user and m.content == "" then
+            m.content = "<prompt></prompt>"
+          end
+
+          if type(m.content) == "string" then
+            m.content = {
+              { type = "text", text = m.content },
+            }
+          end
+        end
+
+        if m.tools and m.tools.calls and vim.tbl_count(m.tools.calls) > 0 then
+          has_tools = true
+        end
+
+        -- 6. Treat 'tool' role as user and convert tool results to Anthropic format
+        if m.role == "tool" then
+          m.role = self.roles.user
+          if m.tools then
+            -- Handle content that might already be in Anthropic's format
+            if type(m.content) == "table" and m.content.type == "tool_result" then
+              -- Already in Anthropic format, keep it as-is but ensure it's in an array
+              m.content = { m.content }
+            else
+              -- Convert from the canonical tool-result shape to Anthropic's format
+              m.content = {
+                {
+                  type = "tool_result",
+                  tool_use_id = m.tools.call_id,
+                  content = m.content,
+                  is_error = m.tools.is_error or false,
+                },
+              }
+            end
+            m.tools = nil
+          end
+        end
+
+        -- 7. Convert any LLM tool_calls into content blocks
+        if has_tools and m.role == self.roles.llm and m.tools and m.tools.calls then
+          m.content = m.content or {}
+          for _, call in ipairs(m.tools.calls) do
+            local args = call["function"].arguments
+            table.insert(m.content, {
+              type = "tool_use",
+              id = call.id,
+              name = call["function"].name,
+              input = args ~= "" and vim.json.decode(args) or vim.empty_dict(),
+            })
+          end
+          m.tools = nil
+        end
+
+        -- 8. If reasoning is present, format it as a content block
+        if m.reasoning and type(m.content) == "table" then
+          -- Ref: https://docs.anthropic.com/en/docs/build-with-claude/extended-thinking#how-extended-thinking-works
+          table.insert(m.content, 1, {
+            type = "thinking",
+            thinking = m.reasoning.content,
+            signature = m.reasoning._data.signature,
+          })
+        end
+
+        -- 9. Include any compaction block from a previous response
+        -- Ref: https://platform.claude.com/docs/en/build-with-claude/compaction
+        if compaction and m.role == self.roles.llm and type(m.content) == "table" then
+          local insert_pos = (m.content[1] and m.content[1].type == "thinking") and 2 or 1
+          table.insert(m.content, insert_pos, compaction)
+        end
+
+        return m
+      end, messages)
+
+      -- 10. Merge consecutive messages with the same role
+      messages = adapter_utils.merge_messages(messages)
+
+      -- 11. Ensure that any consecutive tool results are merged and text messages are included
+      if has_tools then
+        for _, m in ipairs(messages) do
+          if m.role == self.roles.user and m.content and m.content ~= "" then
+            -- Check if content is already an array of blocks
+            if type(m.content) == "table" and m.content.type then
+              -- If it's a single content block (like a tool_result), make it an array
+              m.content = { m.content }
+            end
+
+            -- Now we can iterate over the content blocks
+            if type(m.content) == "table" and vim.islist(m.content) then
+              local consolidated = {}
+              for _, block in ipairs(m.content) do
+                if block.type == "tool_result" then
+                  local prev = consolidated[#consolidated]
+                  if prev and prev.type == "tool_result" and prev.tool_use_id == block.tool_use_id then
+                    -- Merge consecutive tool results with the same tool_use_id
+                    prev.content = prev.content .. block.content
+                  else
+                    table.insert(consolidated, block)
+                  end
+                else
+                  table.insert(consolidated, block)
+                end
+              end
+              m.content = consolidated
+            end
+          end
+        end
+      end
+
+      local context_management = nil
+      if self.opts.can_manage_context then
+        local helpers = require("codecompanion.interactions.chat.helpers")
+        local editing_trigger = helpers.trigger_context_management(self, { operation = "editing" })
+
+        context_management = {
+          ["edits"] = {
+            -- {
+            --   type = "clear_thinking_20251015",
+            --   keep = {
+            --     type = "thinking_turns",
+            --     value = 3,
+            --   },
+            -- },
+            {
+              type = "clear_tool_uses_20250919",
+              keep = {
+                type = "tool_uses",
+                value = 5,
+              },
+              -- Omitted when we can't resolve a context window, which leaves the API default of 100,000
+              trigger = editing_trigger > 0 and {
+                type = "input_tokens",
+                value = editing_trigger,
+              } or nil,
+            },
+            {
+              type = "compact_20260112",
+              trigger = {
+                type = "input_tokens",
+                -- Must be at LEAST 50,000 tokens to trigger compaction
+                -- Ref: https://platform.claude.com/docs/en/build-with-claude/compaction#parameters
+                value = math.max(50000, helpers.trigger_context_management(self)),
+              },
+            },
+          },
+        }
+      end
+
+      return {
+        context_management = context_management,
+        system = system,
+        messages = messages,
+
+        -- 12. Enable automatic prompt caching
+        -- Ref: https://platform.claude.com/docs/en/build-with-claude/prompt-caching#automatic-caching
+        cache_control = { type = "ephemeral" },
+      }
+    end,
+
+    ---Form the reasoning output that is stored in the chat buffer
+    ---@param self CodeCompanion.HTTPAdapter
+    ---@param data table The reasoning output from the LLM
+    ---@return nil|{ content: string, _data: table }
+    form_reasoning = function(self, data)
+      local content = vim
+        .iter(data)
+        :map(function(item)
+          return item.content
+        end)
+        :filter(function(content)
+          return content ~= nil
+        end)
+        :join("")
+
+      local signature = data[#data].signature
+
+      return {
+        content = content,
+        _data = {
+          signature = signature,
+        },
+      }
+    end,
+
+    ---Provides the schemas of the tools that are available to the LLM to call
+    ---@param self CodeCompanion.HTTPAdapter
+    ---@param tools table<string, table>
+    ---@return table|nil
+    form_tools = function(self, tools)
+      if not self.opts.tools or not tools then
+        return nil
+      end
+
+      local transformed = {}
+      for _, tool in pairs(tools) do
+        for _, schema in pairs(tool) do
+          if schema._meta and schema._meta.adapter_tool then
+            if self.available_tools[schema.name] then
+              self.available_tools[schema.name].callback(self, { tools = transformed })
+            end
+          else
+            table.insert(transformed, tool_transformer.to_anthropic(schema))
+          end
+        end
+      end
+
+      return { tools = transformed }
+    end,
+
+    ---Form the structured output schema for the request body
+    ---@param self CodeCompanion.HTTPAdapter
+    ---@param schema CodeCompanion.StructuredOutput.Schema
+    ---@return table|nil
+    form_structured_output = function(self, schema)
+      if not schema or not self.opts.can_form_structured_outputs then
+        return nil
+      end
+      return require("codecompanion.adapters.utils.structured_outputs").to_anthropic(schema)
+    end,
+
+    ---Returns the number of tokens generated from the LLM
+    ---@param self CodeCompanion.HTTPAdapter
+    ---@param data table The data from the LLM
+    ---@return number|nil
+    tokens = function(self, data)
+      if data then
+        if self.opts.stream then
+          data = adapter_utils.clean_streamed_data(data)
+        else
+          data = data.body
+        end
+        local ok, json = pcall(vim.json.decode, data)
+
+        if ok then
+          if json.type == "message_start" then
+            self.temp.input_tokens = (json.message.usage.input_tokens or 0)
+              + (json.message.usage.cache_creation_input_tokens or 0)
+              + (json.message.usage.cache_read_input_tokens or 0)
+
+            self.temp.output_tokens = json.message.usage.output_tokens or 0
+          elseif json.type == "message_delta" then
+            return (self.temp.input_tokens + self.temp.output_tokens + json.usage.output_tokens)
+          elseif json.type == "message" then
+            return (json.usage.input_tokens + json.usage.output_tokens)
+          end
+        end
+      end
+    end,
+
+    ---Output the data from the API ready for insertion into the chat buffer
+    ---@param self CodeCompanion.HTTPAdapter
+    ---@param data table The streamed JSON data from the API, also formatted by the format_data handler
+    ---@param tools? table The table to write any tool output to
+    ---@return table|nil [status: string, output: table]
+    chat_output = function(self, data, tools)
+      local output = {}
+
+      if self.opts.stream then
+        if type(data) == "string" and string.sub(data, 1, 6) == "event:" then
+          return
+        end
+      end
+
+      if data and data ~= "" then
+        if self.opts.stream then
+          data = adapter_utils.clean_streamed_data(data)
+        else
+          data = data.body
+        end
+
+        local ok, json = pcall(vim.json.decode, data, { luanil = { object = true } })
+
+        if ok then
+          if json.type == "message_start" then
+            output.role = json.message.role
+            output.content = ""
+          elseif json.type == "content_block_start" then
+            if json.content_block.type == "thinking" then
+              output.reasoning = output.reasoning or {}
+              output.reasoning.content = ""
+            end
+            if json.content_block.type == "compaction" then
+              output.meta = { compaction = { type = "compaction", content = "" } }
+            end
+            if json.content_block.type == "tool_use" and tools then
+              -- Source: https://docs.anthropic.com/en/docs/build-with-claude/tool-use/overview#single-tool-example
+              table.insert(tools, {
+                _index = json.index,
+                id = json.content_block.id,
+                name = json.content_block.name,
+                input = "",
+              })
+            end
+          elseif json.type == "content_block_delta" then
+            if json.delta.type == "thinking_delta" then
+              output.reasoning = output.reasoning or {}
+              output.reasoning.content = json.delta.thinking
+            elseif json.delta.type == "signature_delta" then
+              output.reasoning = output.reasoning or {}
+              output.reasoning.signature = json.delta.signature
+            elseif json.delta.type == "compaction_delta" then
+              output.meta = { compaction = { type = "compaction", content = json.delta.content } }
+            else
+              output.content = json.delta.text
+              if json.delta.partial_json and tools then
+                for i, tool in ipairs(tools) do
+                  if tool._index == json.index then
+                    tools[i].input = tools[i].input .. json.delta.partial_json
+                    break
+                  end
+                end
+              end
+            end
+          elseif json.type == "message" then
+            output.role = json.role
+
+            for i, content in ipairs(json.content) do
+              if content.type == "text" then
+                output.content = (output.content or "") .. content.text
+              elseif content.type == "thinking" then
+                output.reasoning = output.reasoning and output.reasoning or {}
+                output.reasoning.content = content.text
+              elseif content.type == "compaction" then
+                output.meta = output.meta or {}
+                output.meta.compaction = { type = "compaction", content = content.content }
+              elseif content.type == "tool_use" and tools then
+                table.insert(tools, {
+                  _index = i,
+                  id = content.id,
+                  name = content.name,
+                  -- Encode the input as JSON to match the partial JSON which comes encoded
+                  input = vim.json.encode(content.input),
+                })
+              end
+            end
+          end
+
+          return {
+            status = "success",
+            output = output,
+          }
+        end
+      end
+    end,
+
+    ---Output the data from the API ready for inlining into the current buffer
+    ---@param self CodeCompanion.HTTPAdapter
+    ---@param data table The streamed JSON data from the API, also formatted by the format_data handler
+    ---@param context? table Useful context about the buffer to inline to
+    ---@return table|nil
+    inline_output = function(self, data, context)
+      if self.opts.stream then
+        return log:error("Inline output is not supported for non-streaming models")
+      end
+
+      if data and data ~= "" then
+        local ok, json = pcall(vim.json.decode, data.body, { luanil = { object = true } })
+
+        if not ok then
+          log:error("Error decoding JSON: %s", data.body)
+          return { status = "error", output = json }
+        end
+
+        if ok then
+          if json.type == "message" then
+            if json.content[2] then
+              return { status = "success", output = json.content[2].text }
+            end
+            return { status = "success", output = json.content[1].text }
+          end
+        end
+      end
+    end,
+
+    tools = {
+      ---Format the LLM's tool calls for inclusion back in the request
+      ---@param self CodeCompanion.HTTPAdapter
+      ---@param tools table The raw tools collected by chat_output
+      ---@return table|nil
+      format_tool_calls = function(self, tools)
+        -- Convert to the OpenAI format
+        local formatted = {}
+        for _, tool in ipairs(tools) do
+          local formatted_tool = {
+            _index = tool._index,
+            id = tool.id,
+            type = "function",
+            ["function"] = {
+              name = tool.name,
+              arguments = tool.input,
+            },
+          }
+          table.insert(formatted, formatted_tool)
+        end
+        return formatted
+      end,
+
+      ---Output the LLM's tool call so we can include it in the messages
+      ---@param self CodeCompanion.HTTPAdapter
+      ---@param tool_call {id: string, function: table, name: string}
+      ---@param output string
+      ---@return table
+      output_response = function(self, tool_call, output)
+        return {
+          -- The role should actually be "user" but we set it to "tool" so that
+          -- in the form_messages handler it's easier to identify and merge
+          -- with other user messages.
+          role = "tool",
+          content = output,
+          tools = {
+            call_id = tool_call.id,
+            is_error = false,
+            name = tool_call["function"].name,
+          },
+          -- Chat Buffer option: To tell the chat buffer that this shouldn't be visible
+          opts = { visible = false },
+        }
+      end,
+    },
+
+    ---Function to run when the request has completed. Useful to catch errors
+    ---@param self CodeCompanion.HTTPAdapter
+    ---@param data? table
+    ---@return nil
+    on_exit = function(self, data)
+      if data and data.status >= 400 then
+        log:error("Error %s: %s", data.status, data.body)
+      end
+    end,
+  },
+  schema = {
+    ---@type CodeCompanion.Schema
+    model = {
+      order = 1,
+      mapping = "parameters",
+      type = "enum",
+      desc = "The model that will complete your prompt. See https://docs.anthropic.com/claude/docs/models-overview for additional details and options.",
+      default = "claude-sonnet-5",
+      ---@param self CodeCompanion.HTTPAdapter
+      ---@param opts? { async?: boolean }
+      ---@return table<string, CodeCompanion.Adapter.ModelChoice>
+      choices = function(self, opts)
+        return fetch_models.get(models_source, self, opts)
+      end,
+    },
+    ---@type CodeCompanion.Schema
+    extended_output = {
+      order = 2,
+      mapping = "temp",
+      type = "boolean",
+      optional = true,
+      default = false,
+      desc = "Enable larger output context (128k tokens). Only available with claude-3-7-sonnet-20250219.",
+      ---@param self CodeCompanion.HTTPAdapter
+      enabled = function(self)
+        local models = adapter_utils.model_choice(self)
+        if models and models.opts and models.opts.can_reasn then
+          return true
+        end
+        return false
+      end,
+    },
+    ---@type CodeCompanion.Schema
+    extended_thinking = {
+      order = 3,
+      mapping = "temp",
+      type = "boolean",
+      optional = true,
+      desc = "Enable extended thinking for more thorough reasoning. Requires thinking_budget to be set.",
+      default = function(self)
+        local models = adapter_utils.model_choice(self)
+        if models and models.opts and models.opts.can_reason == true then
+          return true
+        end
+        return false
+      end,
+      ---@param self CodeCompanion.HTTPAdapter
+      enabled = function(self)
+        local models = adapter_utils.model_choice(self)
+        if models and models.opts and models.opts.can_reason == true then
+          return true
+        end
+        return false
+      end,
+    },
+    ---@type CodeCompanion.Schema
+    thinking_budget = {
+      order = 4,
+      mapping = "temp",
+      type = "number",
+      optional = true,
+      default = 16000,
+      desc = "The maximum number of tokens to use for thinking when extended_thinking is enabled. Must be less than max_tokens.",
+      validate = function(n)
+        return n > 0, "Must be greater than 0"
+      end,
+      ---@param self CodeCompanion.HTTPAdapter
+      enabled = function(self)
+        local models = adapter_utils.model_choice(self)
+        if models and models.opts then
+          if models.opts.legacy_reasoning then
+            return true
+          end
+        end
+        return false
+      end,
+    },
+    ---@type CodeCompanion.Schema
+    max_tokens = {
+      order = 5,
+      mapping = "parameters",
+      type = "number",
+      optional = true,
+      default = function(self)
+        local models = adapter_utils.model_choice(self)
+        if models and models.meta and models.meta.max_tokens then
+          return models.meta.max_tokens
+        end
+        return 4096
+      end,
+      desc = "The maximum number of tokens to generate before stopping. This parameter only specifies the absolute maximum number of tokens to generate. Different models have different maximum values for this parameter.",
+      validate = function(n)
+        return n > 0 and n <= 128000, "Must be between 0 and 128000"
+      end,
+    },
+    ---@type CodeCompanion.Schema
+    top_p = {
+      order = 7,
+      mapping = "parameters",
+      type = "number",
+      optional = true,
+      default = nil,
+      desc = "Computes the cumulative distribution over all the options for each subsequent token in decreasing probability order and cuts it off once it reaches a particular probability specified by top_p",
+      validate = function(n)
+        return n >= 0 and n <= 1, "Must be between 0 and 1"
+      end,
+    },
+    ---@type CodeCompanion.Schema
+    top_k = {
+      order = 8,
+      mapping = "parameters",
+      type = "number",
+      optional = true,
+      default = nil,
+      desc = "Only sample from the top K options for each subsequent token. Use top_k to remove long tail low probability responses",
+      validate = function(n)
+        return n >= 0, "Must be greater than 0"
+      end,
+    },
+    ---@type CodeCompanion.Schema
+    stop_sequences = {
+      order = 9,
+      mapping = "parameters",
+      type = "list",
+      optional = true,
+      default = nil,
+      subtype = {
+        type = "string",
+      },
+      desc = "Sequences where the API will stop generating further tokens",
+      validate = function(l)
+        return #l >= 1, "Must have more than 1 element"
+      end,
+    },
+  },
+}
