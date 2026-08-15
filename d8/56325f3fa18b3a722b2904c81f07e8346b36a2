@@ -1,0 +1,30 @@
+lua/plugins/copilotchat-nvim/.editorconfig
+  h_220433a6faf6b8 1-14
+lua/plugins/copilotchat-nvim/cmds.lua
+  h_220433a6faf6b8 1-6
+lua/plugins/copilotchat-nvim/dependencies.lua
+  h_220433a6faf6b8 1-16
+lua/plugins/copilotchat-nvim/events.lua
+  h_220433a6faf6b8 1-6
+lua/plugins/copilotchat-nvim/ft.lua
+  h_220433a6faf6b8 1-6
+lua/plugins/copilotchat-nvim/init.lua
+  h_220433a6faf6b8 1-37
+lua/plugins/copilotchat-nvim/keys.lua
+  h_220433a6faf6b8 1-23
+lua/plugins/copilotchat-nvim/opts.lua
+  h_220433a6faf6b8 1-6
+lua/plugins/copilotchat-nvim/stylua.toml
+  h_220433a6faf6b8 1-13
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "d856325f3fa18b3a722b2904c81f07e8346b36a2",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
