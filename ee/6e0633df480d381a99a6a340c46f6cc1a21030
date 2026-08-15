@@ -1,0 +1,20 @@
+lua/plugins/codex-nvim/cmds.lua
+  h_220433a6faf6b8 3-20
+lua/plugins/codex-nvim/init.lua
+  h_220433a6faf6b8 5-7,13-18
+lua/plugins/codex-nvim/keys.lua
+  h_220433a6faf6b8 3-20,22-33,35,37
+lua/plugins/codex-nvim/opts.lua
+  h_220433a6faf6b8 3-52
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "ee6e0633df480d381a99a6a340c46f6cc1a21030",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
