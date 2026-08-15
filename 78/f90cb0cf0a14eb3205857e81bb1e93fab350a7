@@ -1,0 +1,14 @@
+lua/plugins/codecompanion-nvim/CODES/interactions/background/builtin/chat_make_title.lua
+  h_220433a6faf6b8 9-19,21,27-36,38-39,41-43,45-46,48-50,57-59,61-64,66-67,69-70,78,80,82-114
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "78f90cb0cf0a14eb3205857e81bb1e93fab350a7",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
