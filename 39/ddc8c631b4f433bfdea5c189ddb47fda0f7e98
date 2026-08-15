@@ -1,0 +1,592 @@
+lua/plugins/claudecode-nvim/CODES/.claude/hooks/format.sh
+  h_220433a6faf6b8 1-100
+lua/plugins/claudecode-nvim/CODES/.claude/settings.json
+  h_220433a6faf6b8 1-15
+lua/plugins/claudecode-nvim/CODES/.devcontainer/devcontainer.json
+  h_220433a6faf6b8 1-14
+lua/plugins/claudecode-nvim/CODES/.devcontainer/post-create.sh
+  h_220433a6faf6b8 1-33
+lua/plugins/claudecode-nvim/CODES/.gitattributes
+  h_220433a6faf6b8 1-15
+lua/plugins/claudecode-nvim/CODES/.github/ISSUE_TEMPLATE/bug_report.md
+  h_220433a6faf6b8 1-42
+lua/plugins/claudecode-nvim/CODES/.github/ISSUE_TEMPLATE/feature_request.md
+  h_220433a6faf6b8 1-27
+lua/plugins/claudecode-nvim/CODES/.github/workflows/issue-triage.yaml
+  h_220433a6faf6b8 1-20
+lua/plugins/claudecode-nvim/CODES/.github/workflows/pr-title.yaml
+  h_220433a6faf6b8 1-42
+lua/plugins/claudecode-nvim/CODES/.github/workflows/release-notes.yaml
+  h_220433a6faf6b8 1-104
+lua/plugins/claudecode-nvim/CODES/.github/workflows/release-please.yaml
+  h_220433a6faf6b8 1-146
+lua/plugins/claudecode-nvim/CODES/.github/workflows/test.yml
+  h_220433a6faf6b8 1-189
+lua/plugins/claudecode-nvim/CODES/.gitignore
+  h_220433a6faf6b8 1-72
+lua/plugins/claudecode-nvim/CODES/.luacheckrc
+  h_220433a6faf6b8 1-35
+lua/plugins/claudecode-nvim/CODES/.release-please-manifest.json
+  h_220433a6faf6b8 1-3
+lua/plugins/claudecode-nvim/CODES/.stylua.toml
+  h_220433a6faf6b8 1-11
+lua/plugins/claudecode-nvim/CODES/AGENTS.md
+  h_220433a6faf6b8 1-47
+lua/plugins/claudecode-nvim/CODES/ARCHITECTURE.md
+  h_220433a6faf6b8 1-270
+lua/plugins/claudecode-nvim/CODES/CHANGELOG.md
+  h_220433a6faf6b8 1-149
+lua/plugins/claudecode-nvim/CODES/CLAUDE.md
+  h_220433a6faf6b8 1-527
+lua/plugins/claudecode-nvim/CODES/DEVELOPMENT.md
+  h_220433a6faf6b8 1-242
+lua/plugins/claudecode-nvim/CODES/LICENSE
+  h_220433a6faf6b8 1-20
+lua/plugins/claudecode-nvim/CODES/PROTOCOL.md
+  h_220433a6faf6b8 1-583
+lua/plugins/claudecode-nvim/CODES/README.md
+  h_220433a6faf6b8 1-942
+lua/plugins/claudecode-nvim/CODES/STORY.md
+  h_220433a6faf6b8 1-89
+lua/plugins/claudecode-nvim/CODES/VERSION
+  h_220433a6faf6b8 1
+lua/plugins/claudecode-nvim/CODES/communique.toml
+  h_220433a6faf6b8 1-24
+lua/plugins/claudecode-nvim/CODES/dev-config.lua
+  h_220433a6faf6b8 1-109
+lua/plugins/claudecode-nvim/CODES/fixtures/bin/common.sh
+  h_220433a6faf6b8 1-47
+lua/plugins/claudecode-nvim/CODES/fixtures/bin/list-configs
+  h_220433a6faf6b8 1-17
+lua/plugins/claudecode-nvim/CODES/fixtures/bin/repro
+  h_220433a6faf6b8 1-89
+lua/plugins/claudecode-nvim/CODES/fixtures/bin/vv
+  h_220433a6faf6b8 1-32
+lua/plugins/claudecode-nvim/CODES/fixtures/bin/vve
+  h_220433a6faf6b8 1-44
+lua/plugins/claudecode-nvim/CODES/fixtures/cursor-toggle-repro/README.md
+  h_220433a6faf6b8 1-190
+lua/plugins/claudecode-nvim/CODES/fixtures/cursor-toggle-repro/agent-repro.sh
+  h_220433a6faf6b8 1-205
+lua/plugins/claudecode-nvim/CODES/fixtures/cursor-toggle-repro/box-delta-check.sh
+  h_220433a6faf6b8 1-90
+lua/plugins/claudecode-nvim/CODES/fixtures/cursor-toggle-repro/box-float-check.sh
+  h_220433a6faf6b8 1-64
+lua/plugins/claudecode-nvim/CODES/fixtures/cursor-toggle-repro/box.py
+  h_220433a6faf6b8 1-116
+lua/plugins/claudecode-nvim/CODES/fixtures/cursor-toggle-repro/float-fix-probe.sh
+  h_220433a6faf6b8 1-111
+lua/plugins/claudecode-nvim/CODES/fixtures/cursor-toggle-repro/float-repro.sh
+  h_220433a6faf6b8 1-153
+lua/plugins/claudecode-nvim/CODES/fixtures/cursor-toggle-repro/init.lua
+  h_220433a6faf6b8 1-373
+lua/plugins/claudecode-nvim/CODES/fixtures/cursor-toggle-repro/sample.txt
+  h_220433a6faf6b8 1-60
+lua/plugins/claudecode-nvim/CODES/fixtures/issue-208/init.lua
+  h_220433a6faf6b8 1-224
+lua/plugins/claudecode-nvim/CODES/fixtures/issue-218/README.md
+  h_220433a6faf6b8 1-84
+lua/plugins/claudecode-nvim/CODES/fixtures/issue-218/init.lua
+  h_220433a6faf6b8 1-27
+lua/plugins/claudecode-nvim/CODES/fixtures/issue-218/lazy-lock.json
+  h_220433a6faf6b8 1-7
+lua/plugins/claudecode-nvim/CODES/fixtures/issue-218/lua/config/lazy.lua
+  h_220433a6faf6b8 1-37
+lua/plugins/claudecode-nvim/CODES/fixtures/issue-218/lua/plugins/dev-claudecode.lua
+  h_220433a6faf6b8 1-150
+lua/plugins/claudecode-nvim/CODES/fixtures/issue-218/lua/plugins/render-markdown.lua
+  h_220433a6faf6b8 1-20
+lua/plugins/claudecode-nvim/CODES/fixtures/issue-218/lua/plugins/snacks.lua
+  h_220433a6faf6b8 1-10
+lua/plugins/claudecode-nvim/CODES/fixtures/issue-228/README.md
+  h_220433a6faf6b8 1-76
+lua/plugins/claudecode-nvim/CODES/fixtures/issue-228/live.lua
+  h_220433a6faf6b8 1-104
+lua/plugins/claudecode-nvim/CODES/fixtures/issue-228/repro.lua
+  h_220433a6faf6b8 1-280
+lua/plugins/claudecode-nvim/CODES/fixtures/issue-228/run.sh
+  h_220433a6faf6b8 1-12
+lua/plugins/claudecode-nvim/CODES/fixtures/issue-228/sample.txt
+  h_220433a6faf6b8 1-6
+lua/plugins/claudecode-nvim/CODES/fixtures/issue-232/README.md
+  h_220433a6faf6b8 1-80
+lua/plugins/claudecode-nvim/CODES/fixtures/issue-232/example/notes.md
+  h_220433a6faf6b8 1-14
+lua/plugins/claudecode-nvim/CODES/fixtures/issue-232/fake-claude.sh
+  h_220433a6faf6b8 1-14
+lua/plugins/claudecode-nvim/CODES/fixtures/issue-232/init.lua
+  h_220433a6faf6b8 1-16
+lua/plugins/claudecode-nvim/CODES/fixtures/issue-232/lua/config/lazy.lua
+  h_220433a6faf6b8 1-70
+lua/plugins/claudecode-nvim/CODES/fixtures/issue-232/lua/plugins/claudecode.lua
+  h_220433a6faf6b8 1-32
+lua/plugins/claudecode-nvim/CODES/fixtures/issue-232/lua/plugins/snacks.lua
+  h_220433a6faf6b8 1-12
+lua/plugins/claudecode-nvim/CODES/fixtures/issue-238/README.md
+  h_220433a6faf6b8 1-91
+lua/plugins/claudecode-nvim/CODES/fixtures/issue-238/example/target.txt
+  h_220433a6faf6b8 1-5
+lua/plugins/claudecode-nvim/CODES/fixtures/issue-238/init.lua
+  h_220433a6faf6b8 1-143
+lua/plugins/claudecode-nvim/CODES/fixtures/issue-262/init.lua
+  h_220433a6faf6b8 1-170
+lua/plugins/claudecode-nvim/CODES/fixtures/issue-277/README.md
+  h_220433a6faf6b8 1-49
+lua/plugins/claudecode-nvim/CODES/fixtures/issue-277/init.lua
+  h_220433a6faf6b8 1-136
+lua/plugins/claudecode-nvim/CODES/fixtures/issue-283/init.lua
+  h_220433a6faf6b8 1-99
+lua/plugins/claudecode-nvim/CODES/fixtures/issue-285/init.lua
+  h_220433a6faf6b8 1-155
+lua/plugins/claudecode-nvim/CODES/fixtures/issue-285/sample/src/routes/$post/index.tsx
+  h_220433a6faf6b8 1-7
+lua/plugins/claudecode-nvim/CODES/fixtures/issue-289/README.md
+  h_220433a6faf6b8 1-90
+lua/plugins/claudecode-nvim/CODES/fixtures/issue-289/init.lua
+  h_220433a6faf6b8 1-145
+lua/plugins/claudecode-nvim/CODES/fixtures/issue-289/lua/NvimTree_settings.lua
+  h_220433a6faf6b8 1-16
+lua/plugins/claudecode-nvim/CODES/fixtures/issue-289/lua/plugins/_neo-tree_.lua
+  h_220433a6faf6b8 1-27
+lua/plugins/claudecode-nvim/CODES/fixtures/issue-289/lua/regular_plugin.lua
+  h_220433a6faf6b8 1-20
+lua/plugins/claudecode-nvim/CODES/fixtures/issue-70/README.md
+  h_220433a6faf6b8 1-154
+lua/plugins/claudecode-nvim/CODES/fixtures/issue-70/init.lua
+  h_220433a6faf6b8 1-102
+lua/plugins/claudecode-nvim/CODES/fixtures/issue-70/sample.txt
+  h_220433a6faf6b8 1-7
+lua/plugins/claudecode-nvim/CODES/fixtures/mini-files/init.lua
+  h_220433a6faf6b8 1
+lua/plugins/claudecode-nvim/CODES/fixtures/mini-files/lazy-lock.json
+  h_220433a6faf6b8 1-5
+lua/plugins/claudecode-nvim/CODES/fixtures/mini-files/lua/config/lazy.lua
+  h_220433a6faf6b8 1-41
+lua/plugins/claudecode-nvim/CODES/fixtures/mini-files/lua/plugins/dev-claudecode.lua
+  h_220433a6faf6b8 1
+lua/plugins/claudecode-nvim/CODES/fixtures/mini-files/lua/plugins/init.lua
+  h_220433a6faf6b8 1-12
+lua/plugins/claudecode-nvim/CODES/fixtures/mini-files/lua/plugins/mini-files.lua
+  h_220433a6faf6b8 1-176
+lua/plugins/claudecode-nvim/CODES/fixtures/netrw/init.lua
+  h_220433a6faf6b8 1
+lua/plugins/claudecode-nvim/CODES/fixtures/netrw/lazy-lock.json
+  h_220433a6faf6b8 1-4
+lua/plugins/claudecode-nvim/CODES/fixtures/netrw/lua/config/lazy.lua
+  h_220433a6faf6b8 1-41
+lua/plugins/claudecode-nvim/CODES/fixtures/netrw/lua/config/netrw.lua
+  h_220433a6faf6b8 1-26
+lua/plugins/claudecode-nvim/CODES/fixtures/netrw/lua/plugins/dev-claudecode.lua
+  h_220433a6faf6b8 1
+lua/plugins/claudecode-nvim/CODES/fixtures/netrw/lua/plugins/init.lua
+  h_220433a6faf6b8 1-12
+lua/plugins/claudecode-nvim/CODES/fixtures/netrw/lua/plugins/netrw-keymaps.lua
+  h_220433a6faf6b8 1-38
+lua/plugins/claudecode-nvim/CODES/fixtures/netrw/lua/plugins/snacks.lua
+  h_220433a6faf6b8 1-18
+lua/plugins/claudecode-nvim/CODES/fixtures/nvim-aliases.sh
+  h_220433a6faf6b8 1-23
+lua/plugins/claudecode-nvim/CODES/fixtures/nvim-tree/init.lua
+  h_220433a6faf6b8 1
+lua/plugins/claudecode-nvim/CODES/fixtures/nvim-tree/lazy-lock.json
+  h_220433a6faf6b8 1-6
+lua/plugins/claudecode-nvim/CODES/fixtures/nvim-tree/lua/config/lazy.lua
+  h_220433a6faf6b8 1-41
+lua/plugins/claudecode-nvim/CODES/fixtures/nvim-tree/lua/plugins/dev-claudecode.lua
+  h_220433a6faf6b8 1
+lua/plugins/claudecode-nvim/CODES/fixtures/nvim-tree/lua/plugins/init.lua
+  h_220433a6faf6b8 1-12
+lua/plugins/claudecode-nvim/CODES/fixtures/nvim-tree/lua/plugins/nvim-tree.lua
+  h_220433a6faf6b8 1-23
+lua/plugins/claudecode-nvim/CODES/fixtures/oil/init.lua
+  h_220433a6faf6b8 1
+lua/plugins/claudecode-nvim/CODES/fixtures/oil/lazy-lock.json
+  h_220433a6faf6b8 1-6
+lua/plugins/claudecode-nvim/CODES/fixtures/oil/lua/config/lazy.lua
+  h_220433a6faf6b8 1-41
+lua/plugins/claudecode-nvim/CODES/fixtures/oil/lua/plugins/dev-claudecode.lua
+  h_220433a6faf6b8 1
+lua/plugins/claudecode-nvim/CODES/fixtures/oil/lua/plugins/init.lua
+  h_220433a6faf6b8 1-12
+lua/plugins/claudecode-nvim/CODES/fixtures/oil/lua/plugins/oil-nvim.lua
+  h_220433a6faf6b8 1-56
+lua/plugins/claudecode-nvim/CODES/fixtures/paste-repro/README.md
+  h_220433a6faf6b8 1-168
+lua/plugins/claudecode-nvim/CODES/fixtures/paste-repro/agent-repro.sh
+  h_220433a6faf6b8 1-121
+lua/plugins/claudecode-nvim/CODES/fixtures/paste-repro/init.lua
+  h_220433a6faf6b8 1-152
+lua/plugins/claudecode-nvim/CODES/fixtures/paste-repro/observer.py
+  h_220433a6faf6b8 1-59
+lua/plugins/claudecode-nvim/CODES/fixtures/remote-diff/README.md
+  h_220433a6faf6b8 1-82
+lua/plugins/claudecode-nvim/CODES/fixtures/remote-diff/example/a.txt
+  h_220433a6faf6b8 1-4
+lua/plugins/claudecode-nvim/CODES/fixtures/remote-diff/example/b.txt
+  h_220433a6faf6b8 1-2
+lua/plugins/claudecode-nvim/CODES/fixtures/remote-diff/example/c.lua
+  h_220433a6faf6b8 1-5
+lua/plugins/claudecode-nvim/CODES/fixtures/remote-diff/init.lua
+  h_220433a6faf6b8 1-98
+lua/plugins/claudecode-nvim/CODES/fixtures/repro/example/README.md
+  h_220433a6faf6b8 1-55
+lua/plugins/claudecode-nvim/CODES/fixtures/repro/example/a.txt
+  h_220433a6faf6b8 1-4
+lua/plugins/claudecode-nvim/CODES/fixtures/repro/example/b.txt
+  h_220433a6faf6b8 1-2
+lua/plugins/claudecode-nvim/CODES/fixtures/repro/init.lua
+  h_220433a6faf6b8 1-95
+lua/plugins/claudecode-nvim/CODES/fixtures/snacks-explorer/README.md
+  h_220433a6faf6b8 1-56
+lua/plugins/claudecode-nvim/CODES/fixtures/snacks-explorer/example/README.md
+  h_220433a6faf6b8 1-3
+lua/plugins/claudecode-nvim/CODES/fixtures/snacks-explorer/example/sample.txt
+  h_220433a6faf6b8 1-5
+lua/plugins/claudecode-nvim/CODES/fixtures/snacks-explorer/init.lua
+  h_220433a6faf6b8 1
+lua/plugins/claudecode-nvim/CODES/fixtures/snacks-explorer/lazy-lock.json
+  h_220433a6faf6b8 1-5
+lua/plugins/claudecode-nvim/CODES/fixtures/snacks-explorer/lua/config/lazy.lua
+  h_220433a6faf6b8 1-37
+lua/plugins/claudecode-nvim/CODES/fixtures/snacks-explorer/lua/plugins/dev-claudecode.lua
+  h_220433a6faf6b8 1-26
+lua/plugins/claudecode-nvim/CODES/fixtures/snacks-explorer/lua/plugins/init.lua
+  h_220433a6faf6b8 1-11
+lua/plugins/claudecode-nvim/CODES/fixtures/snacks-explorer/lua/plugins/snacks.lua
+  h_220433a6faf6b8 1-30
+lua/plugins/claudecode-nvim/CODES/fixtures/snacks-picker/README.md
+  h_220433a6faf6b8 1-85
+lua/plugins/claudecode-nvim/CODES/fixtures/snacks-picker/example/alpha.lua
+  h_220433a6faf6b8 1-8
+lua/plugins/claudecode-nvim/CODES/fixtures/snacks-picker/example/beta.lua
+  h_220433a6faf6b8 1-8
+lua/plugins/claudecode-nvim/CODES/fixtures/snacks-picker/init.lua
+  h_220433a6faf6b8 1
+lua/plugins/claudecode-nvim/CODES/fixtures/snacks-picker/lazy-lock.json
+  h_220433a6faf6b8 1-5
+lua/plugins/claudecode-nvim/CODES/fixtures/snacks-picker/lua/config/lazy.lua
+  h_220433a6faf6b8 1-37
+lua/plugins/claudecode-nvim/CODES/fixtures/snacks-picker/lua/plugins/dev-claudecode.lua
+  h_220433a6faf6b8 1-22
+lua/plugins/claudecode-nvim/CODES/fixtures/snacks-picker/lua/plugins/init.lua
+  h_220433a6faf6b8 1-11
+lua/plugins/claudecode-nvim/CODES/fixtures/snacks-picker/lua/plugins/snacks.lua
+  h_220433a6faf6b8 1-75
+lua/plugins/claudecode-nvim/CODES/lua/claudecode/config.lua
+  h_220433a6faf6b8 1-234
+lua/plugins/claudecode-nvim/CODES/lua/claudecode/cwd.lua
+  h_220433a6faf6b8 1-109
+lua/plugins/claudecode-nvim/CODES/lua/claudecode/diff.lua
+  h_220433a6faf6b8 1-1884
+lua/plugins/claudecode-nvim/CODES/lua/claudecode/diff_inline.lua
+  h_220433a6faf6b8 1-597
+lua/plugins/claudecode-nvim/CODES/lua/claudecode/health.lua
+  h_220433a6faf6b8 1-148
+lua/plugins/claudecode-nvim/CODES/lua/claudecode/init.lua
+  h_220433a6faf6b8 1-1468
+lua/plugins/claudecode-nvim/CODES/lua/claudecode/integrations.lua
+  h_220433a6faf6b8 1-557
+lua/plugins/claudecode-nvim/CODES/lua/claudecode/lockfile.lua
+  h_220433a6faf6b8 1-345
+lua/plugins/claudecode-nvim/CODES/lua/claudecode/logger.lua
+  h_220433a6faf6b8 1-154
+lua/plugins/claudecode-nvim/CODES/lua/claudecode/selection.lua
+  h_220433a6faf6b8 1-970
+lua/plugins/claudecode-nvim/CODES/lua/claudecode/server/client.lua
+  h_220433a6faf6b8 1-331
+lua/plugins/claudecode-nvim/CODES/lua/claudecode/server/frame.lua
+  h_220433a6faf6b8 1-320
+lua/plugins/claudecode-nvim/CODES/lua/claudecode/server/handshake.lua
+  h_220433a6faf6b8 1-222
+lua/plugins/claudecode-nvim/CODES/lua/claudecode/server/init.lua
+  h_220433a6faf6b8 1-433
+lua/plugins/claudecode-nvim/CODES/lua/claudecode/server/mock.lua
+  h_220433a6faf6b8 1-287
+lua/plugins/claudecode-nvim/CODES/lua/claudecode/server/tcp.lua
+  h_220433a6faf6b8 1-416
+lua/plugins/claudecode-nvim/CODES/lua/claudecode/server/utils.lua
+  h_220433a6faf6b8 1-418
+lua/plugins/claudecode-nvim/CODES/lua/claudecode/terminal.lua
+  h_220433a6faf6b8 1-763
+lua/plugins/claudecode-nvim/CODES/lua/claudecode/terminal/external.lua
+  h_220433a6faf6b8 1-208
+lua/plugins/claudecode-nvim/CODES/lua/claudecode/terminal/native.lua
+  h_220433a6faf6b8 1-445
+lua/plugins/claudecode-nvim/CODES/lua/claudecode/terminal/none.lua
+  h_220433a6faf6b8 1-74
+lua/plugins/claudecode-nvim/CODES/lua/claudecode/terminal/paste_fix.lua
+  h_220433a6faf6b8 1-171
+lua/plugins/claudecode-nvim/CODES/lua/claudecode/terminal/snacks.lua
+  h_220433a6faf6b8 1-526
+lua/plugins/claudecode-nvim/CODES/lua/claudecode/tools/check_document_dirty.lua
+  h_220433a6faf6b8 1-68
+lua/plugins/claudecode-nvim/CODES/lua/claudecode/tools/close_all_diff_tabs.lua
+  h_220433a6faf6b8 1-46
+lua/plugins/claudecode-nvim/CODES/lua/claudecode/tools/close_tab.lua
+  h_220433a6faf6b8 1-155
+lua/plugins/claudecode-nvim/CODES/lua/claudecode/tools/get_current_selection.lua
+  h_220433a6faf6b8 1-103
+lua/plugins/claudecode-nvim/CODES/lua/claudecode/tools/get_diagnostics.lua
+  h_220433a6faf6b8 1-149
+lua/plugins/claudecode-nvim/CODES/lua/claudecode/tools/get_latest_selection.lua
+  h_220433a6faf6b8 1-54
+lua/plugins/claudecode-nvim/CODES/lua/claudecode/tools/get_open_editors.lua
+  h_220433a6faf6b8 1-118
+lua/plugins/claudecode-nvim/CODES/lua/claudecode/tools/get_workspace_folders.lua
+  h_220433a6faf6b8 1-68
+lua/plugins/claudecode-nvim/CODES/lua/claudecode/tools/init.lua
+  h_220433a6faf6b8 1-180
+lua/plugins/claudecode-nvim/CODES/lua/claudecode/tools/open_diff.lua
+  h_220433a6faf6b8 1-97
+lua/plugins/claudecode-nvim/CODES/lua/claudecode/tools/open_file.lua
+  h_220433a6faf6b8 1-306
+lua/plugins/claudecode-nvim/CODES/lua/claudecode/tools/save_document.lua
+  h_220433a6faf6b8 1-88
+lua/plugins/claudecode-nvim/CODES/lua/claudecode/types.lua
+  h_220433a6faf6b8 1-158
+lua/plugins/claudecode-nvim/CODES/lua/claudecode/utils.lua
+  h_220433a6faf6b8 1-123
+lua/plugins/claudecode-nvim/CODES/lua/claudecode/visual_commands.lua
+  h_220433a6faf6b8 1-476
+lua/plugins/claudecode-nvim/CODES/mise.lock
+  h_220433a6faf6b8 1-181
+lua/plugins/claudecode-nvim/CODES/mise.toml
+  h_220433a6faf6b8 1-150
+lua/plugins/claudecode-nvim/CODES/plugin/claudecode.lua
+  h_220433a6faf6b8 1-27
+lua/plugins/claudecode-nvim/CODES/release-please-config.json
+  h_220433a6faf6b8 1-16
+lua/plugins/claudecode-nvim/CODES/reviewfixer.yaml
+  h_220433a6faf6b8 1-44
+lua/plugins/claudecode-nvim/CODES/scripts/claude_interactive.sh
+  h_220433a6faf6b8 1-358
+lua/plugins/claudecode-nvim/CODES/scripts/claude_shell_helpers.sh
+  h_220433a6faf6b8 1-189
+lua/plugins/claudecode-nvim/CODES/scripts/lib_claude.sh
+  h_220433a6faf6b8 1-368
+lua/plugins/claudecode-nvim/CODES/scripts/lib_ws_persistent.sh
+  h_220433a6faf6b8 1-444
+lua/plugins/claudecode-nvim/CODES/scripts/manual_test_helper.lua
+  h_220433a6faf6b8 1-106
+lua/plugins/claudecode-nvim/CODES/scripts/mcp_test.sh
+  h_220433a6faf6b8 1-752
+lua/plugins/claudecode-nvim/CODES/scripts/package-lock.json
+  h_220433a6faf6b8 1-1996
+lua/plugins/claudecode-nvim/CODES/scripts/package.json
+  h_220433a6faf6b8 1-11
+lua/plugins/claudecode-nvim/CODES/scripts/release-please-runner.js
+  h_220433a6faf6b8 1-522
+lua/plugins/claudecode-nvim/CODES/scripts/repro_issue_208.lua
+  h_220433a6faf6b8 1-310
+lua/plugins/claudecode-nvim/CODES/scripts/repro_issue_218.sh
+  h_220433a6faf6b8 1-150
+lua/plugins/claudecode-nvim/CODES/scripts/repro_issue_231.lua
+  h_220433a6faf6b8 1-105
+lua/plugins/claudecode-nvim/CODES/scripts/repro_issue_232.lua
+  h_220433a6faf6b8 1-206
+lua/plugins/claudecode-nvim/CODES/scripts/repro_issue_238.lua
+  h_220433a6faf6b8 1-307
+lua/plugins/claudecode-nvim/CODES/scripts/repro_issue_238.sh
+  h_220433a6faf6b8 1-149
+lua/plugins/claudecode-nvim/CODES/scripts/repro_issue_246.lua
+  h_220433a6faf6b8 1-174
+lua/plugins/claudecode-nvim/CODES/scripts/repro_issue_248.sh
+  h_220433a6faf6b8 1-152
+lua/plugins/claudecode-nvim/CODES/scripts/repro_issue_262.lua
+  h_220433a6faf6b8 1-240
+lua/plugins/claudecode-nvim/CODES/scripts/repro_issue_277.sh
+  h_220433a6faf6b8 1-256
+lua/plugins/claudecode-nvim/CODES/scripts/repro_issue_283.lua
+  h_220433a6faf6b8 1-183
+lua/plugins/claudecode-nvim/CODES/scripts/repro_issue_283.sh
+  h_220433a6faf6b8 1-140
+lua/plugins/claudecode-nvim/CODES/scripts/repro_issue_285.lua
+  h_220433a6faf6b8 1-261
+lua/plugins/claudecode-nvim/CODES/scripts/repro_issue_289.lua
+  h_220433a6faf6b8 1-205
+lua/plugins/claudecode-nvim/CODES/scripts/repro_issue_70.sh
+  h_220433a6faf6b8 1-136
+lua/plugins/claudecode-nvim/CODES/scripts/repro_issue_70_probe.lua
+  h_220433a6faf6b8 1-85
+lua/plugins/claudecode-nvim/CODES/scripts/research_messages.sh
+  h_220433a6faf6b8 1-173
+lua/plugins/claudecode-nvim/CODES/scripts/run-release-please.sh
+  h_220433a6faf6b8 1-15
+lua/plugins/claudecode-nvim/CODES/scripts/run_integration_tests_individually.sh
+  h_220433a6faf6b8 1-105
+lua/plugins/claudecode-nvim/CODES/scripts/test-release-please-runner.js
+  h_220433a6faf6b8 1-160
+lua/plugins/claudecode-nvim/CODES/scripts/test_neovim_websocket.sh
+  h_220433a6faf6b8 1-515
+lua/plugins/claudecode-nvim/CODES/scripts/test_opendiff.lua
+  h_220433a6faf6b8 1-203
+lua/plugins/claudecode-nvim/CODES/scripts/test_opendiff_simple.sh
+  h_220433a6faf6b8 1-92
+lua/plugins/claudecode-nvim/CODES/scripts/websocat.sh
+  h_220433a6faf6b8 1-15
+lua/plugins/claudecode-nvim/CODES/tests/busted_setup.lua
+  h_220433a6faf6b8 1-349
+lua/plugins/claudecode-nvim/CODES/tests/config_test.lua
+  h_220433a6faf6b8 1-211
+lua/plugins/claudecode-nvim/CODES/tests/helpers/setup.lua
+  h_220433a6faf6b8 1-40
+lua/plugins/claudecode-nvim/CODES/tests/init.lua
+  h_220433a6faf6b8 1-50
+lua/plugins/claudecode-nvim/CODES/tests/integration/basic_spec.lua
+  h_220433a6faf6b8 1-8
+lua/plugins/claudecode-nvim/CODES/tests/integration/command_args_spec.lua
+  h_220433a6faf6b8 1-458
+lua/plugins/claudecode-nvim/CODES/tests/integration/mcp_tools_spec.lua
+  h_220433a6faf6b8 1-826
+lua/plugins/claudecode-nvim/CODES/tests/lockfile_test.lua
+  h_220433a6faf6b8 1-544
+lua/plugins/claudecode-nvim/CODES/tests/minimal_init.lua
+  h_220433a6faf6b8 1-98
+lua/plugins/claudecode-nvim/CODES/tests/mocks/vim.lua
+  h_220433a6faf6b8 1-1248
+lua/plugins/claudecode-nvim/CODES/tests/selection_test.lua
+  h_220433a6faf6b8 1-1203
+lua/plugins/claudecode-nvim/CODES/tests/server_test.lua
+  h_220433a6faf6b8 1-279
+lua/plugins/claudecode-nvim/CODES/tests/simple_test.lua
+  h_220433a6faf6b8 1-19
+lua/plugins/claudecode-nvim/CODES/tests/unit/at_mention_edge_cases_spec.lua
+  h_220433a6faf6b8 1-329
+lua/plugins/claudecode-nvim/CODES/tests/unit/at_mention_spec.lua
+  h_220433a6faf6b8 1-361
+lua/plugins/claudecode-nvim/CODES/tests/unit/claudecode_add_command_spec.lua
+  h_220433a6faf6b8 1-507
+lua/plugins/claudecode-nvim/CODES/tests/unit/claudecode_send_command_spec.lua
+  h_220433a6faf6b8 1-276
+lua/plugins/claudecode-nvim/CODES/tests/unit/claudecode_send_text_command_spec.lua
+  h_220433a6faf6b8 1-140
+lua/plugins/claudecode-nvim/CODES/tests/unit/config_spec.lua
+  h_220433a6faf6b8 1-373
+lua/plugins/claudecode-nvim/CODES/tests/unit/diff_all_diff_tab_spec.lua
+  h_220433a6faf6b8 1-162
+lua/plugins/claudecode-nvim/CODES/tests/unit/diff_auto_resize_events_spec.lua
+  h_220433a6faf6b8 1-389
+lua/plugins/claudecode-nvim/CODES/tests/unit/diff_buffer_cleanup_spec.lua
+  h_220433a6faf6b8 1-339
+lua/plugins/claudecode-nvim/CODES/tests/unit/diff_client_disconnect_spec.lua
+  h_220433a6faf6b8 1-118
+lua/plugins/claudecode-nvim/CODES/tests/unit/diff_find_main_editor_window_spec.lua
+  h_220433a6faf6b8 1-134
+lua/plugins/claudecode-nvim/CODES/tests/unit/diff_hide_terminal_new_tab_spec.lua
+  h_220433a6faf6b8 1-122
+lua/plugins/claudecode-nvim/CODES/tests/unit/diff_inline_spec.lua
+  h_220433a6faf6b8 1-504
+lua/plugins/claudecode-nvim/CODES/tests/unit/diff_keep_terminal_focus_float_spec.lua
+  h_220433a6faf6b8 1-112
+lua/plugins/claudecode-nvim/CODES/tests/unit/diff_mcp_spec.lua
+  h_220433a6faf6b8 1-272
+lua/plugins/claudecode-nvim/CODES/tests/unit/diff_new_tab_strand_spec.lua
+  h_220433a6faf6b8 1-184
+lua/plugins/claudecode-nvim/CODES/tests/unit/diff_reject_on_quit_spec.lua
+  h_220433a6faf6b8 1-243
+lua/plugins/claudecode-nvim/CODES/tests/unit/diff_spec.lua
+  h_220433a6faf6b8 1-541
+lua/plugins/claudecode-nvim/CODES/tests/unit/diff_split_width_spec.lua
+  h_220433a6faf6b8 1-43
+lua/plugins/claudecode-nvim/CODES/tests/unit/diff_split_window_cleanup_spec.lua
+  h_220433a6faf6b8 1-130
+lua/plugins/claudecode-nvim/CODES/tests/unit/diff_terminal_only_window_spec.lua
+  h_220433a6faf6b8 1-129
+lua/plugins/claudecode-nvim/CODES/tests/unit/diff_ui_cleanup_spec.lua
+  h_220433a6faf6b8 1-119
+lua/plugins/claudecode-nvim/CODES/tests/unit/directory_at_mention_spec.lua
+  h_220433a6faf6b8 1-188
+lua/plugins/claudecode-nvim/CODES/tests/unit/focus_after_send_provider_warning_spec.lua
+  h_220433a6faf6b8 1-115
+lua/plugins/claudecode-nvim/CODES/tests/unit/focus_after_send_spec.lua
+  h_220433a6faf6b8 1-130
+lua/plugins/claudecode-nvim/CODES/tests/unit/health_spec.lua
+  h_220433a6faf6b8 1-165
+lua/plugins/claudecode-nvim/CODES/tests/unit/init_spec.lua
+  h_220433a6faf6b8 1-614
+lua/plugins/claudecode-nvim/CODES/tests/unit/logger_spec.lua
+  h_220433a6faf6b8 1-175
+lua/plugins/claudecode-nvim/CODES/tests/unit/mini_files_integration_spec.lua
+  h_220433a6faf6b8 1-265
+lua/plugins/claudecode-nvim/CODES/tests/unit/native_terminal_toggle_spec.lua
+  h_220433a6faf6b8 1-531
+lua/plugins/claudecode-nvim/CODES/tests/unit/netrw_integration_spec.lua
+  h_220433a6faf6b8 1-354
+lua/plugins/claudecode-nvim/CODES/tests/unit/new_file_reject_then_reopen_spec.lua
+  h_220433a6faf6b8 1-97
+lua/plugins/claudecode-nvim/CODES/tests/unit/nvim_tree_visual_selection_spec.lua
+  h_220433a6faf6b8 1-237
+lua/plugins/claudecode-nvim/CODES/tests/unit/oil_integration_spec.lua
+  h_220433a6faf6b8 1-229
+lua/plugins/claudecode-nvim/CODES/tests/unit/opendiff_blocking_spec.lua
+  h_220433a6faf6b8 1-158
+lua/plugins/claudecode-nvim/CODES/tests/unit/send_complete_event_spec.lua
+  h_220433a6faf6b8 1-195
+lua/plugins/claudecode-nvim/CODES/tests/unit/server/frame_spec.lua
+  h_220433a6faf6b8 1-283
+lua/plugins/claudecode-nvim/CODES/tests/unit/server/handshake_spec.lua
+  h_220433a6faf6b8 1-304
+lua/plugins/claudecode-nvim/CODES/tests/unit/server/tcp_spec.lua
+  h_220433a6faf6b8 1-308
+lua/plugins/claudecode-nvim/CODES/tests/unit/server_spec.lua
+  h_220433a6faf6b8 1-328
+lua/plugins/claudecode-nvim/CODES/tests/unit/snacks_picker_integration_spec.lua
+  h_220433a6faf6b8 1-390
+lua/plugins/claudecode-nvim/CODES/tests/unit/terminal/external_spec.lua
+  h_220433a6faf6b8 1-349
+lua/plugins/claudecode-nvim/CODES/tests/unit/terminal/none_provider_spec.lua
+  h_220433a6faf6b8 1-70
+lua/plugins/claudecode-nvim/CODES/tests/unit/terminal/paste_fix_spec.lua
+  h_220433a6faf6b8 1-300
+lua/plugins/claudecode-nvim/CODES/tests/unit/terminal/send_text_spec.lua
+  h_220433a6faf6b8 1-230
+lua/plugins/claudecode-nvim/CODES/tests/unit/terminal/snacks_spec.lua
+  h_220433a6faf6b8 1-158
+lua/plugins/claudecode-nvim/CODES/tests/unit/terminal/snacks_toggle_spec.lua
+  h_220433a6faf6b8 1-359
+lua/plugins/claudecode-nvim/CODES/tests/unit/terminal_spec.lua
+  h_220433a6faf6b8 1-1392
+lua/plugins/claudecode-nvim/CODES/tests/unit/tools/check_document_dirty_spec.lua
+  h_220433a6faf6b8 1-121
+lua/plugins/claudecode-nvim/CODES/tests/unit/tools/close_all_diff_tabs_spec.lua
+  h_220433a6faf6b8 1-145
+lua/plugins/claudecode-nvim/CODES/tests/unit/tools/get_current_selection_spec.lua
+  h_220433a6faf6b8 1-144
+lua/plugins/claudecode-nvim/CODES/tests/unit/tools/get_diagnostics_spec.lua
+  h_220433a6faf6b8 1-238
+lua/plugins/claudecode-nvim/CODES/tests/unit/tools/get_latest_selection_spec.lua
+  h_220433a6faf6b8 1-100
+lua/plugins/claudecode-nvim/CODES/tests/unit/tools/get_open_editors_spec.lua
+  h_220433a6faf6b8 1-375
+lua/plugins/claudecode-nvim/CODES/tests/unit/tools/get_workspace_folders_spec.lua
+  h_220433a6faf6b8 1-83
+lua/plugins/claudecode-nvim/CODES/tests/unit/tools/open_diff_mcp_spec.lua
+  h_220433a6faf6b8 1-302
+lua/plugins/claudecode-nvim/CODES/tests/unit/tools/open_file_spec.lua
+  h_220433a6faf6b8 1-360
+lua/plugins/claudecode-nvim/CODES/tests/unit/tools/save_document_spec.lua
+  h_220433a6faf6b8 1-150
+lua/plugins/claudecode-nvim/CODES/tests/unit/tools_spec.lua
+  h_220433a6faf6b8 1-378
+lua/plugins/claudecode-nvim/CODES/tests/unit/tree_buffer_classification_spec.lua
+  h_220433a6faf6b8 1-243
+lua/plugins/claudecode-nvim/CODES/tests/unit/tree_send_visual_spec.lua
+  h_220433a6faf6b8 1-183
+lua/plugins/claudecode-nvim/CODES/tests/unit/utils_spec.lua
+  h_220433a6faf6b8 1-101
+lua/plugins/claudecode-nvim/CODES/tests/unit/visual_delay_timing_spec.lua
+  h_220433a6faf6b8 1-283
+lua/plugins/claudecode-nvim/CODES/treefmt.toml
+  h_220433a6faf6b8 1-56
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "39ddc8c631b4f433bfdea5c189ddb47fda0f7e98",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
