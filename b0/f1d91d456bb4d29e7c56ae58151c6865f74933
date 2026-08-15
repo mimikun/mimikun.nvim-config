@@ -1,0 +1,304 @@
+lua/plugins/mcphub-nvim/CODES/.github/FUNDING.yml
+  h_220433a6faf6b8 1-15
+lua/plugins/mcphub-nvim/CODES/.github/pull_request_template.md
+  h_220433a6faf6b8 1-22
+lua/plugins/mcphub-nvim/CODES/.github/workflows/ci.yml
+  h_220433a6faf6b8 1-54
+lua/plugins/mcphub-nvim/CODES/.github/workflows/deploy.yml
+  h_220433a6faf6b8 1-54
+lua/plugins/mcphub-nvim/CODES/.github/workflows/format.yml
+  h_220433a6faf6b8 1-18
+lua/plugins/mcphub-nvim/CODES/.github/workflows/nix-build.yml
+  h_220433a6faf6b8 1-51
+lua/plugins/mcphub-nvim/CODES/.gitignore
+  h_220433a6faf6b8 1-9
+lua/plugins/mcphub-nvim/CODES/.luarc.json
+  h_220433a6faf6b8 1-11
+lua/plugins/mcphub-nvim/CODES/.mcphub/servers.json
+  h_220433a6faf6b8 1-37
+lua/plugins/mcphub-nvim/CODES/CHANGELOG.md
+  h_220433a6faf6b8 1-1063
+lua/plugins/mcphub-nvim/CODES/CODE_OF_CONDUCT.md
+  h_220433a6faf6b8 1-79
+lua/plugins/mcphub-nvim/CODES/CONTRIBUTING.md
+  h_220433a6faf6b8 1-159
+lua/plugins/mcphub-nvim/CODES/LICENSE.md
+  h_220433a6faf6b8 1-20
+lua/plugins/mcphub-nvim/CODES/Makefile
+  h_220433a6faf6b8 1-53
+lua/plugins/mcphub-nvim/CODES/README.md
+  h_220433a6faf6b8 1-137
+lua/plugins/mcphub-nvim/CODES/SECURITY.md
+  h_220433a6faf6b8 1-68
+lua/plugins/mcphub-nvim/CODES/bundled_build.lua
+  h_220433a6faf6b8 1-82
+lua/plugins/mcphub-nvim/CODES/doc/.gitignore
+  h_220433a6faf6b8 1-3
+lua/plugins/mcphub-nvim/CODES/doc/.vitepress/config.mjs
+  h_220433a6faf6b8 1-179
+lua/plugins/mcphub-nvim/CODES/doc/.vitepress/theme/CustomLayout.vue
+  h_220433a6faf6b8 1-16
+lua/plugins/mcphub-nvim/CODES/doc/.vitepress/theme/Sponsors.vue
+  h_220433a6faf6b8 1-147
+lua/plugins/mcphub-nvim/CODES/doc/.vitepress/theme/index.js
+  h_220433a6faf6b8 1-9
+lua/plugins/mcphub-nvim/CODES/doc/configuration.md
+  h_220433a6faf6b8 1-505
+lua/plugins/mcphub-nvim/CODES/doc/extensions/avante.md
+  h_220433a6faf6b8 1-220
+lua/plugins/mcphub-nvim/CODES/doc/extensions/codecompanion.md
+  h_220433a6faf6b8 1-271
+lua/plugins/mcphub-nvim/CODES/doc/extensions/copilotchat.md
+  h_220433a6faf6b8 1-70
+lua/plugins/mcphub-nvim/CODES/doc/extensions/lualine.md
+  h_220433a6faf6b8 1-145
+lua/plugins/mcphub-nvim/CODES/doc/index.md
+  h_220433a6faf6b8 1-161
+lua/plugins/mcphub-nvim/CODES/doc/installation.md
+  h_220433a6faf6b8 1-134
+lua/plugins/mcphub-nvim/CODES/doc/mcp/builtin/mcphub.md
+  h_220433a6faf6b8 1-66
+lua/plugins/mcphub-nvim/CODES/doc/mcp/builtin/neovim.md
+  h_220433a6faf6b8 1-253
+lua/plugins/mcphub-nvim/CODES/doc/mcp/native/best-practices.md
+  h_220433a6faf6b8 1-109
+lua/plugins/mcphub-nvim/CODES/doc/mcp/native/index.md
+  h_220433a6faf6b8 1-179
+lua/plugins/mcphub-nvim/CODES/doc/mcp/native/prompts.md
+  h_220433a6faf6b8 1-254
+lua/plugins/mcphub-nvim/CODES/doc/mcp/native/registration.md
+  h_220433a6faf6b8 1-211
+lua/plugins/mcphub-nvim/CODES/doc/mcp/native/resources.md
+  h_220433a6faf6b8 1-301
+lua/plugins/mcphub-nvim/CODES/doc/mcp/native/tools.md
+  h_220433a6faf6b8 1-287
+lua/plugins/mcphub-nvim/CODES/doc/mcp/servers_json.md
+  h_220433a6faf6b8 1-359
+lua/plugins/mcphub-nvim/CODES/doc/mcphub.txt
+  h_220433a6faf6b8 1-3673
+lua/plugins/mcphub-nvim/CODES/doc/other/api.md
+  h_220433a6faf6b8 1-251
+lua/plugins/mcphub-nvim/CODES/doc/other/architecture.md
+  h_220433a6faf6b8 1-138
+lua/plugins/mcphub-nvim/CODES/doc/other/demos.md
+  h_220433a6faf6b8 1-52
+lua/plugins/mcphub-nvim/CODES/doc/other/troubleshooting.md
+  h_220433a6faf6b8 1-92
+lua/plugins/mcphub-nvim/CODES/doc/package-lock.json
+  h_220433a6faf6b8 1-3947
+lua/plugins/mcphub-nvim/CODES/doc/package.json
+  h_220433a6faf6b8 1-13
+lua/plugins/mcphub-nvim/CODES/doc/workspace.md
+  h_220433a6faf6b8 1-206
+lua/plugins/mcphub-nvim/CODES/flake.lock
+  h_220433a6faf6b8 1-48
+lua/plugins/mcphub-nvim/CODES/flake.nix
+  h_220433a6faf6b8 1-41
+lua/plugins/mcphub-nvim/CODES/lua/mcphub/config.lua
+  h_220433a6faf6b8 1-124
+lua/plugins/mcphub-nvim/CODES/lua/mcphub/extensions/avante/init.lua
+  h_220433a6faf6b8 1-209
+lua/plugins/mcphub-nvim/CODES/lua/mcphub/extensions/avante/slash_commands.lua
+  h_220433a6faf6b8 1-117
+lua/plugins/mcphub-nvim/CODES/lua/mcphub/extensions/codecompanion/core.lua
+  h_220433a6faf6b8 1-258
+lua/plugins/mcphub-nvim/CODES/lua/mcphub/extensions/codecompanion/init.lua
+  h_220433a6faf6b8 1-39
+lua/plugins/mcphub-nvim/CODES/lua/mcphub/extensions/codecompanion/slash_commands.lua
+  h_220433a6faf6b8 1-139
+lua/plugins/mcphub-nvim/CODES/lua/mcphub/extensions/codecompanion/tools.lua
+  h_220433a6faf6b8 1-409
+lua/plugins/mcphub-nvim/CODES/lua/mcphub/extensions/codecompanion/variables.lua
+  h_220433a6faf6b8 1-114
+lua/plugins/mcphub-nvim/CODES/lua/mcphub/extensions/codecompanion/xml_tool.lua
+  h_220433a6faf6b8 1-106
+lua/plugins/mcphub-nvim/CODES/lua/mcphub/extensions/copilotchat/functions.lua
+  h_220433a6faf6b8 1-340
+lua/plugins/mcphub-nvim/CODES/lua/mcphub/extensions/copilotchat/init.lua
+  h_220433a6faf6b8 1-27
+lua/plugins/mcphub-nvim/CODES/lua/mcphub/extensions/init.lua
+  h_220433a6faf6b8 1-44
+lua/plugins/mcphub-nvim/CODES/lua/mcphub/extensions/lualine.lua
+  h_220433a6faf6b8 1-179
+lua/plugins/mcphub-nvim/CODES/lua/mcphub/extensions/shared.lua
+  h_220433a6faf6b8 1-331
+lua/plugins/mcphub-nvim/CODES/lua/mcphub/health.lua
+  h_220433a6faf6b8 1-138
+lua/plugins/mcphub-nvim/CODES/lua/mcphub/hub.lua
+  h_220433a6faf6b8 1-1689
+lua/plugins/mcphub-nvim/CODES/lua/mcphub/init.lua
+  h_220433a6faf6b8 1-214
+lua/plugins/mcphub-nvim/CODES/lua/mcphub/native/NATIVE_SERVER_LLM.md
+  h_220433a6faf6b8 1-569
+lua/plugins/mcphub-nvim/CODES/lua/mcphub/native/README.md
+  h_220433a6faf6b8 1-347
+lua/plugins/mcphub-nvim/CODES/lua/mcphub/native/init.lua
+  h_220433a6faf6b8 1-209
+lua/plugins/mcphub-nvim/CODES/lua/mcphub/native/mcphub/guide.lua
+  h_220433a6faf6b8 1-182
+lua/plugins/mcphub-nvim/CODES/lua/mcphub/native/mcphub/init.lua
+  h_220433a6faf6b8 1-39
+lua/plugins/mcphub-nvim/CODES/lua/mcphub/native/neovim/files/buffer.lua
+  h_220433a6faf6b8 1-101
+lua/plugins/mcphub-nvim/CODES/lua/mcphub/native/neovim/files/edit_file/block_locator.lua
+  h_220433a6faf6b8 1-136
+lua/plugins/mcphub-nvim/CODES/lua/mcphub/native/neovim/files/edit_file/diff_parser.lua
+  h_220433a6faf6b8 1-302
+lua/plugins/mcphub-nvim/CODES/lua/mcphub/native/neovim/files/edit_file/edit_session.lua
+  h_220433a6faf6b8 1-244
+lua/plugins/mcphub-nvim/CODES/lua/mcphub/native/neovim/files/edit_file/edit_ui.lua
+  h_220433a6faf6b8 1-1173
+lua/plugins/mcphub-nvim/CODES/lua/mcphub/native/neovim/files/edit_file/init.lua
+  h_220433a6faf6b8 1-177
+lua/plugins/mcphub-nvim/CODES/lua/mcphub/native/neovim/files/edit_file/issue_tracker.lua
+  h_220433a6faf6b8 1-150
+lua/plugins/mcphub-nvim/CODES/lua/mcphub/native/neovim/files/edit_file/search_engine.lua
+  h_220433a6faf6b8 1-311
+lua/plugins/mcphub-nvim/CODES/lua/mcphub/native/neovim/files/edit_file/string_utils.lua
+  h_220433a6faf6b8 1-316
+lua/plugins/mcphub-nvim/CODES/lua/mcphub/native/neovim/files/edit_file/types.lua
+  h_220433a6faf6b8 1-181
+lua/plugins/mcphub-nvim/CODES/lua/mcphub/native/neovim/files/environment.lua
+  h_220433a6faf6b8 1-88
+lua/plugins/mcphub-nvim/CODES/lua/mcphub/native/neovim/files/init.lua
+  h_220433a6faf6b8 1-22
+lua/plugins/mcphub-nvim/CODES/lua/mcphub/native/neovim/files/operations.lua
+  h_220433a6faf6b8 1-255
+lua/plugins/mcphub-nvim/CODES/lua/mcphub/native/neovim/files/search.lua
+  h_220433a6faf6b8 1-149
+lua/plugins/mcphub-nvim/CODES/lua/mcphub/native/neovim/files/write.lua
+  h_220433a6faf6b8 1-50
+lua/plugins/mcphub-nvim/CODES/lua/mcphub/native/neovim/init.lua
+  h_220433a6faf6b8 1-12
+lua/plugins/mcphub-nvim/CODES/lua/mcphub/native/neovim/lsp.lua
+  h_220433a6faf6b8 1-97
+lua/plugins/mcphub-nvim/CODES/lua/mcphub/native/neovim/prompts.lua
+  h_220433a6faf6b8 1-38
+lua/plugins/mcphub-nvim/CODES/lua/mcphub/native/neovim/terminal.lua
+  h_220433a6faf6b8 1-203
+lua/plugins/mcphub-nvim/CODES/lua/mcphub/native/neovim/utils/buffer.lua
+  h_220433a6faf6b8 1-243
+lua/plugins/mcphub-nvim/CODES/lua/mcphub/native/neovim/utils/keymap.lua
+  h_220433a6faf6b8 1-69
+lua/plugins/mcphub-nvim/CODES/lua/mcphub/native/neovim/utils/lsp.lua
+  h_220433a6faf6b8 1-39
+lua/plugins/mcphub-nvim/CODES/lua/mcphub/native/neovim/utils/os.lua
+  h_220433a6faf6b8 1-33
+lua/plugins/mcphub-nvim/CODES/lua/mcphub/native/utils/request.lua
+  h_220433a6faf6b8 1-69
+lua/plugins/mcphub-nvim/CODES/lua/mcphub/native/utils/response.lua
+  h_220433a6faf6b8 1-291
+lua/plugins/mcphub-nvim/CODES/lua/mcphub/native/utils/server.lua
+  h_220433a6faf6b8 1-450
+lua/plugins/mcphub-nvim/CODES/lua/mcphub/state.lua
+  h_220433a6faf6b8 1-353
+lua/plugins/mcphub-nvim/CODES/lua/mcphub/types.lua
+  h_220433a6faf6b8 1-125
+lua/plugins/mcphub-nvim/CODES/lua/mcphub/ui/capabilities/base.lua
+  h_220433a6faf6b8 1-252
+lua/plugins/mcphub-nvim/CODES/lua/mcphub/ui/capabilities/createServer.lua
+  h_220433a6faf6b8 1-115
+lua/plugins/mcphub-nvim/CODES/lua/mcphub/ui/capabilities/init.lua
+  h_220433a6faf6b8 1-22
+lua/plugins/mcphub-nvim/CODES/lua/mcphub/ui/capabilities/preview.lua
+  h_220433a6faf6b8 1-71
+lua/plugins/mcphub-nvim/CODES/lua/mcphub/ui/capabilities/prompt.lua
+  h_220433a6faf6b8 1-342
+lua/plugins/mcphub-nvim/CODES/lua/mcphub/ui/capabilities/resource.lua
+  h_220433a6faf6b8 1-115
+lua/plugins/mcphub-nvim/CODES/lua/mcphub/ui/capabilities/resourceTemplate.lua
+  h_220433a6faf6b8 1-158
+lua/plugins/mcphub-nvim/CODES/lua/mcphub/ui/capabilities/tool.lua
+  h_220433a6faf6b8 1-390
+lua/plugins/mcphub-nvim/CODES/lua/mcphub/ui/init.lua
+  h_220433a6faf6b8 1-454
+lua/plugins/mcphub-nvim/CODES/lua/mcphub/ui/views/base.lua
+  h_220433a6faf6b8 1-548
+lua/plugins/mcphub-nvim/CODES/lua/mcphub/ui/views/config.lua
+  h_220433a6faf6b8 1-149
+lua/plugins/mcphub-nvim/CODES/lua/mcphub/ui/views/help.lua
+  h_220433a6faf6b8 1-163
+lua/plugins/mcphub-nvim/CODES/lua/mcphub/ui/views/logs.lua
+  h_220433a6faf6b8 1-100
+lua/plugins/mcphub-nvim/CODES/lua/mcphub/ui/views/main.lua
+  h_220433a6faf6b8 1-1131
+lua/plugins/mcphub-nvim/CODES/lua/mcphub/ui/views/marketplace.lua
+  h_220433a6faf6b8 1-951
+lua/plugins/mcphub-nvim/CODES/lua/mcphub/utils/config_manager.lua
+  h_220433a6faf6b8 1-460
+lua/plugins/mcphub-nvim/CODES/lua/mcphub/utils/constants.lua
+  h_220433a6faf6b8 1-46
+lua/plugins/mcphub-nvim/CODES/lua/mcphub/utils/errors.lua
+  h_220433a6faf6b8 1-93
+lua/plugins/mcphub-nvim/CODES/lua/mcphub/utils/handlers.lua
+  h_220433a6faf6b8 1-387
+lua/plugins/mcphub-nvim/CODES/lua/mcphub/utils/highlights.lua
+  h_220433a6faf6b8 1-245
+lua/plugins/mcphub-nvim/CODES/lua/mcphub/utils/image_cache.lua
+  h_220433a6faf6b8 1-85
+lua/plugins/mcphub-nvim/CODES/lua/mcphub/utils/init.lua
+  h_220433a6faf6b8 1-820
+lua/plugins/mcphub-nvim/CODES/lua/mcphub/utils/installers.lua
+  h_220433a6faf6b8 1-64
+lua/plugins/mcphub-nvim/CODES/lua/mcphub/utils/log.lua
+  h_220433a6faf6b8 1-171
+lua/plugins/mcphub-nvim/CODES/lua/mcphub/utils/nuiline.lua
+  h_220433a6faf6b8 1-165
+lua/plugins/mcphub-nvim/CODES/lua/mcphub/utils/nuitext.lua
+  h_220433a6faf6b8 1-113
+lua/plugins/mcphub-nvim/CODES/lua/mcphub/utils/prompt.lua
+  h_220433a6faf6b8 1-574
+lua/plugins/mcphub-nvim/CODES/lua/mcphub/utils/renderer.lua
+  h_220433a6faf6b8 1-977
+lua/plugins/mcphub-nvim/CODES/lua/mcphub/utils/text.lua
+  h_220433a6faf6b8 1-407
+lua/plugins/mcphub-nvim/CODES/lua/mcphub/utils/ui.lua
+  h_220433a6faf6b8 1-745
+lua/plugins/mcphub-nvim/CODES/lua/mcphub/utils/validation.lua
+  h_220433a6faf6b8 1-477
+lua/plugins/mcphub-nvim/CODES/lua/mcphub/utils/version.lua
+  h_220433a6faf6b8 1-9
+lua/plugins/mcphub-nvim/CODES/lua/mcphub/utils/workspace.lua
+  h_220433a6faf6b8 1-219
+lua/plugins/mcphub-nvim/CODES/plugin/mcphub.lua
+  h_220433a6faf6b8 1-30
+lua/plugins/mcphub-nvim/CODES/scripts/minimal_init.lua
+  h_220433a6faf6b8 1-13
+lua/plugins/mcphub-nvim/CODES/scripts/vimdoc.md
+  h_220433a6faf6b8 1-34
+lua/plugins/mcphub-nvim/CODES/selene.toml
+  h_220433a6faf6b8 1-8
+lua/plugins/mcphub-nvim/CODES/stylua.toml
+  h_220433a6faf6b8 1-9
+lua/plugins/mcphub-nvim/CODES/tests/config.lua
+  h_220433a6faf6b8 1-48
+lua/plugins/mcphub-nvim/CODES/tests/helpers.lua
+  h_220433a6faf6b8 1-224
+lua/plugins/mcphub-nvim/CODES/tests/native/neovim/files/edit_file/test_block_locator.lua
+  h_220433a6faf6b8 1-637
+lua/plugins/mcphub-nvim/CODES/tests/native/neovim/files/edit_file/test_diff_parser.lua
+  h_220433a6faf6b8 1-528
+lua/plugins/mcphub-nvim/CODES/tests/native/neovim/files/edit_file/test_edit_ui.lua
+  h_220433a6faf6b8 1-631
+lua/plugins/mcphub-nvim/CODES/tests/native/neovim/files/edit_file/test_search_engine.lua
+  h_220433a6faf6b8 1-1114
+lua/plugins/mcphub-nvim/CODES/tests/native/neovim/files/edit_file/test_string_utils.lua
+  h_220433a6faf6b8 1-356
+lua/plugins/mcphub-nvim/CODES/tests/servers.json
+  h_220433a6faf6b8 1-3
+lua/plugins/mcphub-nvim/CODES/tests/state.lua
+  h_220433a6faf6b8 1-75
+lua/plugins/mcphub-nvim/CODES/tests/test_global_env.lua
+  h_220433a6faf6b8 1-88
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "b0f1d91d456bb4d29e7c56ae58151c6865f74933",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
