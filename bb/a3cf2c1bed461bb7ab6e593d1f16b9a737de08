@@ -1,0 +1,22 @@
+lua/plugins/mcphub-nvim/init.lua
+  s_1e42e1ee55bc77::t_986cc1a203b1e6 5
+lua/plugins/mcphub-nvim/builds.lua
+  s_1e42e1ee55bc77::t_986cc1a203b1e6 1-13
+  s_1e42e1ee55bc77::t_b3db14c1e72cd9 14-15
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "bba3cf2c1bed461bb7ab6e593d1f16b9a737de08",
+  "prompts": {},
+  "sessions": {
+    "s_1e42e1ee55bc77": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "c209a6d2-2902-4569-9af0-370145ce5953",
+        "model": "claude-opus-5"
+      },
+      "human_author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
