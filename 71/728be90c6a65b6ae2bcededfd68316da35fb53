@@ -1,0 +1,20 @@
+lua/plugins/avante-nvim/CODES/history/init.lua
+  h_220433a6faf6b8 13-14,16-34,36-37,57-78,81-99,102-103,105,112-124,131,139-151,160-198,205-224,237-293,296,299,309-332,340-342,345-350,352-377,379
+lua/plugins/avante-nvim/CODES/history/render.lua
+  h_220433a6faf6b8 17-28,30,39-55,57,65-80,82,89-105,113-114,116-118,120-123,125,129-131,135-156,158-164,166-218,225-243,245-247,249-269,272-275,277-287,292-345,352-355,357,359-361,363,365-438,442,444,454-455,457-461,463,465-470,472-502,504,506-538,540-569,579-601,603-608,610,619-620,622-634,643-648,656-670
+lua/plugins/avante-nvim/CODES/providers/claude.lua
+  h_220433a6faf6b8 390-395
+lua/plugins/avante-nvim/CODES/providers/openai.lua
+  h_220433a6faf6b8 285-288,385-389,1057-1061
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "71728be90c6a65b6ae2bcededfd68316da35fb53",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
