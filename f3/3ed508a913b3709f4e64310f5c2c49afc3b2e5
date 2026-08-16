@@ -1,0 +1,178 @@
+lua/plugins/avante-nvim/CODES/acp_config_selector.lua
+  h_220433a6faf6b8 35-37,50-52,70-72,83-85,97-99,145-147,149-151
+lua/plugins/avante-nvim/CODES/api.lua
+  h_220433a6faf6b8 33-35,41-43,109-111,162-164,171-173,177-182,190-192,213-215,217-219,236-241,245-247,250-252,266-268,275-277,279-281,288-290,293-295,299-301,303-305,307-309,315-317,324-326,337-339,351-353,372-374,382-384
+lua/plugins/avante-nvim/CODES/auth/pkce.lua
+  h_220433a6faf6b8 20-22,25-27,36-38,43-48,61-63,67-69,106-108,116-118
+lua/plugins/avante-nvim/CODES/clipboard.lua
+  h_220433a6faf6b8 20-22,32-34,36-38,44-46,57-59
+lua/plugins/avante-nvim/CODES/cmp_avante.commands.lua
+  h_220433a6faf6b8 13-15,17-19,21-23,25-27,38-40,67-69,78-80
+lua/plugins/avante-nvim/CODES/cmp_avante.mentions.lua
+  h_220433a6faf6b8 52-54,56-58,60-62,74-76
+lua/plugins/avante-nvim/CODES/cmp_avante.shortcuts.lua
+  h_220433a6faf6b8 12-14,16-18,20-22,24-26,37-39
+lua/plugins/avante-nvim/CODES/config.lua
+  h_220433a6faf6b8 411-413,423-425,429-436,451-453,457-464,481-487,506-515,530-532,534-540,552-554,556-562,1121-1126,1134-1136,1201-1203,1208-1210,1218-1220,1329,1370-1372,1423-1425,1429-1431,1433-1435,1448-1450
+lua/plugins/avante-nvim/CODES/diff.lua
+  h_220433a6faf6b8 99-101,117-119,122-124,142-144,249-251,258-260,266-268,277-279,285-287,362-364,375-399,406-408,420-422,470-472,483-485,525-527,535-537,543-545,580-582,585-587,591-593,624-626,645-647,651-653
+lua/plugins/avante-nvim/CODES/extensions/nvim_tree.lua
+  h_220433a6faf6b8 21-23,48-50
+lua/plugins/avante-nvim/CODES/file_selector.lua
+  h_220433a6faf6b8 17-19,22-24,29-31,39-41,70-72,97-102,145-147,160-162,172-174,209-211,219-221,251-253,257-259,272-274,278-280,312-314,334-336,342-347
+lua/plugins/avante-nvim/CODES/ftplugin.AvanteInput.lua
+  h_220433a6faf6b8 18-20,34-36,42-44,51-53,70-72
+lua/plugins/avante-nvim/CODES/health.lua
+  h_220433a6faf6b8 80-82
+lua/plugins/avante-nvim/CODES/highlights.lua
+  h_220433a6faf6b8 81-83,97-99,103-114,126-128,140-142,144-146,150-152,154-156,172-174,176-178,228-230,241-243
+lua/plugins/avante-nvim/CODES/history/helpers.lua
+  h_220433a6faf6b8 61-63,75-77,89-91,104-106,110-112
+lua/plugins/avante-nvim/CODES/history/message.lua
+  h_220433a6faf6b8 44-46,51-53,58-60
+lua/plugins/avante-nvim/CODES/history_selector.lua
+  h_220433a6faf6b8 46-51,54-59,75-77
+lua/plugins/avante-nvim/CODES/html2md.lua
+  h_220433a6faf6b8 14-16,19-21,27-29,33-35,38-40
+lua/plugins/avante-nvim/CODES/init.lua
+  h_220433a6faf6b8 195-197,208-219,222-279,282-284,287-289,293-295,305-307,426-428,432-434,446-448,456-461,470-472,503-511,523-527,536-538,549-551,558-560,622-624,639-641,648-650,652-654,661-663,669-674,679-684,689-691,696-698,701-703,710-712,726-728,745-747
+lua/plugins/avante-nvim/CODES/libs/ReAct_parser.lua
+  h_220433a6faf6b8 14-16,145-147,361-363
+lua/plugins/avante-nvim/CODES/libs/ReAct_parser2.lua
+  h_220433a6faf6b8 210-212,238-240
+lua/plugins/avante-nvim/CODES/libs/acp_client.lua
+  h_220433a6faf6b8 343-345,406-408,434-436,477-479,503-505,508-510,512-514,532-534,537-539,680-682,694-696,700-707,730-735,758-760,777-779,810-812,851-853,868-870,893-895,906-908,930-932,1181-1183,1187-1189,1193-1195
+lua/plugins/avante-nvim/CODES/libs/jsonparser.lua
+  h_220433a6faf6b8 79-81,84-86,171-173,199-201,206-208,236-238,424-426,444-446,456-458,467-469,483-485,489-491,513-515,534-536,554-556,577-579,589-591,622-624,628-630,683-685,705-707,715-717,720-722,725-727,730-732,740-742
+lua/plugins/avante-nvim/CODES/llm_tools/attempt_completion.lua
+  h_220433a6faf6b8 20-22,76-78,80-82
+lua/plugins/avante-nvim/CODES/llm_tools/base.lua
+  h_220433a6faf6b8 3-5
+lua/plugins/avante-nvim/CODES/llm_tools/bash.lua
+  h_220433a6faf6b8 226-237,246-248,253-255
+lua/plugins/avante-nvim/CODES/llm_tools/create.lua
+  h_220433a6faf6b8 54-59,65-73,80-82
+lua/plugins/avante-nvim/CODES/llm_tools/dispatch_agent.lua
+  h_220433a6faf6b8 105-107,116-118,129-131,147-149,153-155,200-202,208-210,245-247,261-263
+lua/plugins/avante-nvim/CODES/llm_tools/edit_file.lua
+  h_220433a6faf6b8 56-67,69-71,73-78,80-82,85-87,100-102,166-171,201-203
+lua/plugins/avante-nvim/CODES/llm_tools/get_diagnostics.lua
+  h_220433a6faf6b8 46-51,53-58
+lua/plugins/avante-nvim/CODES/llm_tools/glob.lua
+  h_220433a6faf6b8 52-60,77-79
+lua/plugins/avante-nvim/CODES/llm_tools/grep.lua
+  h_220433a6faf6b8 76-81,85-96,119-121,134-136,147-149,161-163,171-173
+lua/plugins/avante-nvim/CODES/llm_tools/helpers.lua
+  h_220433a6faf6b8 20-22,82-84,102-104,109-111,144-146,159-161,168-170,191-193,218-220
+lua/plugins/avante-nvim/CODES/llm_tools/insert.lua
+  h_220433a6faf6b8 64-66,68-70,72-86,89-94,106-108,121-126
+lua/plugins/avante-nvim/CODES/llm_tools/ls.lua
+  h_220433a6faf6b8 52-60
+lua/plugins/avante-nvim/CODES/llm_tools/read_todos.lua
+  h_220433a6faf6b8 26-28,33-35
+lua/plugins/avante-nvim/CODES/llm_tools/str_replace.lua
+  h_220433a6faf6b8 62-64,66-68,74-76
+lua/plugins/avante-nvim/CODES/llm_tools/think.lua
+  h_220433a6faf6b8 15-17,20-22,82-84
+lua/plugins/avante-nvim/CODES/llm_tools/undo_edit.lua
+  h_220433a6faf6b8 13-15,52-54,56-58,60-68,70-72,79-87
+lua/plugins/avante-nvim/CODES/llm_tools/view.lua
+  h_220433a6faf6b8 19-21,25-27,30-32,99-104,106-114,116-118,122-124,143-145
+lua/plugins/avante-nvim/CODES/llm_tools/write_to_file.lua
+  h_220433a6faf6b8 66-74
+lua/plugins/avante-nvim/CODES/llm_tools/write_todos.lua
+  h_220433a6faf6b8 65-67,73-75,77-79
+lua/plugins/avante-nvim/CODES/plugin.avante.lua
+  h_220433a6faf6b8 11-13,36-38,51-53,56-58,81-83,88-90,92-94,106-108,136-138,142-144,150-152,154-162,167-169,175-183,189-191,208-210,218-220,222-239
+lua/plugins/avante-nvim/CODES/providers/bedrock.lua
+  h_220433a6faf6b8 29-31,50-52,56-58,68-70,91-93,147-149,154-156,162-164,194-196,231-233,252-254,365-367,377-379
+lua/plugins/avante-nvim/CODES/providers/bedrock/claude.lua
+  h_220433a6faf6b8 54-56
+lua/plugins/avante-nvim/CODES/providers/cohere.lua
+  h_220433a6faf6b8 50-52,58-60,76-78
+lua/plugins/avante-nvim/CODES/providers/copilot.lua
+  h_220433a6faf6b8 91-93,122-124,127-129,156-158,184-189,192-194,226-228,231-233,268-270,275-280,299-314,452-454,459-461,473-475,484-486,493-498,503-505,513-515,539-541,562-564
+lua/plugins/avante-nvim/CODES/providers/gemini.lua
+  h_220433a6faf6b8 16-18,93-95,147-149,167-169,196-198,223-225,243-245,269-271,274-276,313
+lua/plugins/avante-nvim/CODES/providers/init.lua
+  h_220433a6faf6b8 78-80,131-133,144-146,154-156,163-165,183-187,190-192,196-201,203-205,229-231,265-267,278-280,293-295,297-299,303-305,320-322
+lua/plugins/avante-nvim/CODES/providers/ollama.lua
+  h_220433a6faf6b8 14-16,32-34,108-110,157-159,203-205,211-213,284-286,314-316,330-335,349-351,358-360,373-375
+lua/plugins/avante-nvim/CODES/providers/vertex.lua
+  h_220433a6faf6b8 22-24,57-62
+lua/plugins/avante-nvim/CODES/providers/vertex_claude.lua
+  h_220433a6faf6b8 29-34,72-74
+lua/plugins/avante-nvim/CODES/providers/watsonx_code_assistant.lua
+  h_220433a6faf6b8 10-12,28-30,34-36,45-47,58-60,63-65,72-74,88-90,94-96,108-110,123-125,127-129,139-141,145-147,151-153,188-190,208-210,219-221,230-232
+lua/plugins/avante-nvim/CODES/rag_service.lua
+  h_220433a6faf6b8 67-69,74-76,92-94,96-98,102-104,111-113,117-119,170-172,291-293,325-327,333-335,340-342
+lua/plugins/avante-nvim/CODES/range.lua
+  h_220433a6faf6b8 28-36
+lua/plugins/avante-nvim/CODES/repo_map.lua
+  h_220433a6faf6b8 27-29,32-34,40-42,61-63,68-70,101-103,105-107,113-115,130-132,154-156,186-188,196-201,240-242,244-246
+lua/plugins/avante-nvim/CODES/selection.lua
+  h_220433a6faf6b8 57-62,144-146,162-164,168-170,185-187,204-209,312-317,335-340,364-366,375-377,383-385,408-410,416-418
+lua/plugins/avante-nvim/CODES/slashcommands.lua
+  h_220433a6faf6b8 83-97,100-102,106-108,118-120
+lua/plugins/avante-nvim/CODES/tokenizers.lua
+  h_220433a6faf6b8 16-18,21-23,38-40,53-55,59-67,80-82,85-87
+lua/plugins/avante-nvim/CODES/ui/acp_confirm_adapter.lua
+  h_220433a6faf6b8 47-49,51-53,65-67
+lua/plugins/avante-nvim/CODES/ui/button_group_line.lua
+  h_220433a6faf6b8 48-50,72-74,95-97,111-113,124-126,148-150,160-168,185-187,192-194,224-226,232-234,244-246,248-250,268-273
+lua/plugins/avante-nvim/CODES/ui/confirm.lua
+  h_220433a6faf6b8 44-46,76-81,83-88,90-95,112-114,224-226,284-286,292-294,310-312,318-320,324-326,352-354,373-375,400-402,405-407
+lua/plugins/avante-nvim/CODES/ui/input/init.lua
+  h_220433a6faf6b8 44-46
+lua/plugins/avante-nvim/CODES/ui/input/providers/dressing.lua
+  h_220433a6faf6b8 19-21,35-37,41-43,58-60
+lua/plugins/avante-nvim/CODES/ui/input/providers/snacks.lua
+  h_220433a6faf6b8 18-20
+lua/plugins/avante-nvim/CODES/ui/line.lua
+  h_220433a6faf6b8 20-22,27-29,44-46,67-69
+lua/plugins/avante-nvim/CODES/ui/prompt_input.lua
+  h_220433a6faf6b8 89-91,102-104,108-110,113-115,132-134,138-143,149-151,198-200,223-225,247-249,254-256,258-260,263-265,268-270,281-283,291-293,302-304,310-312
+lua/plugins/avante-nvim/CODES/ui/selector/init.lua
+  h_220433a6faf6b8 64-66
+lua/plugins/avante-nvim/CODES/ui/selector/providers/fzf_lua.lua
+  h_220433a6faf6b8 17-19,24-31,49-51,56-58,67-69,76-78
+lua/plugins/avante-nvim/CODES/ui/selector/providers/mini_pick.lua
+  h_220433a6faf6b8 16-18,35-37
+lua/plugins/avante-nvim/CODES/ui/selector/providers/native.lua
+  h_220433a6faf6b8 7-9,15-17
+lua/plugins/avante-nvim/CODES/ui/selector/providers/snacks.lua
+  h_220433a6faf6b8 44-48,55-57,61-63,67-69,71-73,78-80,86-88
+lua/plugins/avante-nvim/CODES/ui/selector/providers/telescope.lua
+  h_220433a6faf6b8 22-24,46-48,82-84,95-97,129-131
+lua/plugins/avante-nvim/CODES/utils/diff2search_replace.lua
+  h_220433a6faf6b8 1-3,14-16,26-28,37-39
+lua/plugins/avante-nvim/CODES/utils/environment.lua
+  h_220433a6faf6b8 15-17,21-23,38-40,52,58-60
+lua/plugins/avante-nvim/CODES/utils/file.lua
+  h_220433a6faf6b8 25-27
+lua/plugins/avante-nvim/CODES/utils/log.lua
+  h_220433a6faf6b8 21-23,28-30,34-36,44-49,90-92,94-99,120-122
+lua/plugins/avante-nvim/CODES/utils/lru_cache.lua
+  h_220433a6faf6b8 16-18,21-23,25-27,29-31,37-39,42-44,50-52,76-78,88-90,109-111,114-116
+lua/plugins/avante-nvim/CODES/utils/path.lua
+  h_220433a6faf6b8 14-16,21-23,30-32,60-62,65-67,73-75,77-79,81-83,95-97,99-101,109-111,115-117,128-130,136-138,148-150,162-164,166-168
+lua/plugins/avante-nvim/CODES/utils/platform.lua
+  h_220433a6faf6b8 13-18,51-65,71-76
+lua/plugins/avante-nvim/CODES/utils/promptLogger.lua
+  h_220433a6faf6b8 33-35,44-46,50-52,61-63,141
+lua/plugins/avante-nvim/CODES/utils/root.lua
+  h_220433a6faf6b8 8-10,82-84,89-91,99-101,116-121,152-154,157-159,172-174,191-193,195-197,200-202,220-222,225-227,239-244
+lua/plugins/avante-nvim/CODES/utils/tokens.lua
+  h_220433a6faf6b8 29-31,36-38,52-54,71-73
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "f33ed508a913b3709f4e64310f5c2c49afc3b2e5",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
