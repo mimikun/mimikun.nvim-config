@@ -1,0 +1,556 @@
+lua/plugins/snacks-nvim/CODES/.editorconfig
+  h_220433a6faf6b8 1-7
+lua/plugins/snacks-nvim/CODES/.github/ISSUE_TEMPLATE/bug_report.yml
+  h_220433a6faf6b8 1-76
+lua/plugins/snacks-nvim/CODES/.github/ISSUE_TEMPLATE/config.yml
+  h_220433a6faf6b8 1-5
+lua/plugins/snacks-nvim/CODES/.github/ISSUE_TEMPLATE/feature_request.yml
+  h_220433a6faf6b8 1-36
+lua/plugins/snacks-nvim/CODES/.github/PULL_REQUEST_TEMPLATE.md
+  h_220433a6faf6b8 1-16
+lua/plugins/snacks-nvim/CODES/.github/dependabot.yml
+  h_220433a6faf6b8 1-6
+lua/plugins/snacks-nvim/CODES/.github/labeler.yml
+  h_220433a6faf6b8 1-117
+lua/plugins/snacks-nvim/CODES/.github/release-please-config.json
+  h_220433a6faf6b8 1-9
+lua/plugins/snacks-nvim/CODES/.github/release-please-manifest.json
+  h_220433a6faf6b8 1-3
+lua/plugins/snacks-nvim/CODES/.github/workflows/ci.yml
+  h_220433a6faf6b8 1-14
+lua/plugins/snacks-nvim/CODES/.github/workflows/labeler.yml
+  h_220433a6faf6b8 1-8
+lua/plugins/snacks-nvim/CODES/.github/workflows/pr.yml
+  h_220433a6faf6b8 1-18
+lua/plugins/snacks-nvim/CODES/.github/workflows/stale.yml
+  h_220433a6faf6b8 1-11
+lua/plugins/snacks-nvim/CODES/.github/workflows/update.yml
+  h_220433a6faf6b8 1-13
+lua/plugins/snacks-nvim/CODES/.gitignore
+  h_220433a6faf6b8 1-9
+lua/plugins/snacks-nvim/CODES/.markdownlint-cli2.yaml
+  h_220433a6faf6b8 1-3
+lua/plugins/snacks-nvim/CODES/CHANGELOG.md
+  h_220433a6faf6b8 1-2042
+lua/plugins/snacks-nvim/CODES/LICENSE
+  h_220433a6faf6b8 1-201
+lua/plugins/snacks-nvim/CODES/README.md
+  h_220433a6faf6b8 1-369
+lua/plugins/snacks-nvim/CODES/doc/snacks.nvim-animate.txt
+  h_220433a6faf6b8 1-157
+lua/plugins/snacks-nvim/CODES/doc/snacks.nvim-bigfile.txt
+  h_220433a6faf6b8 1-70
+lua/plugins/snacks-nvim/CODES/doc/snacks.nvim-bufdelete.txt
+  h_220433a6faf6b8 1-88
+lua/plugins/snacks-nvim/CODES/doc/snacks.nvim-dashboard.txt
+  h_220433a6faf6b8 1-763
+lua/plugins/snacks-nvim/CODES/doc/snacks.nvim-debug.txt
+  h_220433a6faf6b8 1-203
+lua/plugins/snacks-nvim/CODES/doc/snacks.nvim-dim.txt
+  h_220433a6faf6b8 1-108
+lua/plugins/snacks-nvim/CODES/doc/snacks.nvim-explorer.txt
+  h_220433a6faf6b8 1-243
+lua/plugins/snacks-nvim/CODES/doc/snacks.nvim-gh.txt
+  h_220433a6faf6b8 1-326
+lua/plugins/snacks-nvim/CODES/doc/snacks.nvim-git.txt
+  h_220433a6faf6b8 1-61
+lua/plugins/snacks-nvim/CODES/doc/snacks.nvim-gitbrowse.txt
+  h_220433a6faf6b8 1-150
+lua/plugins/snacks-nvim/CODES/doc/snacks.nvim-health.txt
+  h_220433a6faf6b8 1-70
+lua/plugins/snacks-nvim/CODES/doc/snacks.nvim-image.txt
+  h_220433a6faf6b8 1-352
+lua/plugins/snacks-nvim/CODES/doc/snacks.nvim-indent.txt
+  h_220433a6faf6b8 1-169
+lua/plugins/snacks-nvim/CODES/doc/snacks.nvim-init.txt
+  h_220433a6faf6b8 1-185
+lua/plugins/snacks-nvim/CODES/doc/snacks.nvim-input.txt
+  h_220433a6faf6b8 1-172
+lua/plugins/snacks-nvim/CODES/doc/snacks.nvim-keymap.txt
+  h_220433a6faf6b8 1-169
+lua/plugins/snacks-nvim/CODES/doc/snacks.nvim-layout.txt
+  h_220433a6faf6b8 1-213
+lua/plugins/snacks-nvim/CODES/doc/snacks.nvim-lazygit.txt
+  h_220433a6faf6b8 1-168
+lua/plugins/snacks-nvim/CODES/doc/snacks.nvim-meta.txt
+  h_220433a6faf6b8 1-61
+lua/plugins/snacks-nvim/CODES/doc/snacks.nvim-notifier.txt
+  h_220433a6faf6b8 1-363
+lua/plugins/snacks-nvim/CODES/doc/snacks.nvim-notify.txt
+  h_220433a6faf6b8 1-72
+lua/plugins/snacks-nvim/CODES/doc/snacks.nvim-picker.txt
+  h_220433a6faf6b8 1-3763
+lua/plugins/snacks-nvim/CODES/doc/snacks.nvim-profiler.txt
+  h_220433a6faf6b8 1-518
+lua/plugins/snacks-nvim/CODES/doc/snacks.nvim-quickfile.txt
+  h_220433a6faf6b8 1-45
+lua/plugins/snacks-nvim/CODES/doc/snacks.nvim-rename.txt
+  h_220433a6faf6b8 1-174
+lua/plugins/snacks-nvim/CODES/doc/snacks.nvim-scope.txt
+  h_220433a6faf6b8 1-213
+lua/plugins/snacks-nvim/CODES/doc/snacks.nvim-scratch.txt
+  h_220433a6faf6b8 1-211
+lua/plugins/snacks-nvim/CODES/doc/snacks.nvim-scroll.txt
+  h_220433a6faf6b8 1-93
+lua/plugins/snacks-nvim/CODES/doc/snacks.nvim-statuscolumn.txt
+  h_220433a6faf6b8 1-103
+lua/plugins/snacks-nvim/CODES/doc/snacks.nvim-styles.txt
+  h_220433a6faf6b8 1-376
+lua/plugins/snacks-nvim/CODES/doc/snacks.nvim-terminal.txt
+  h_220433a6faf6b8 1-270
+lua/plugins/snacks-nvim/CODES/doc/snacks.nvim-toggle.txt
+  h_220433a6faf6b8 1-235
+lua/plugins/snacks-nvim/CODES/doc/snacks.nvim-util.txt
+  h_220433a6faf6b8 1-324
+lua/plugins/snacks-nvim/CODES/doc/snacks.nvim-win.txt
+  h_220433a6faf6b8 1-608
+lua/plugins/snacks-nvim/CODES/doc/snacks.nvim-words.txt
+  h_220433a6faf6b8 1-100
+lua/plugins/snacks-nvim/CODES/doc/snacks.nvim-zen.txt
+  h_220433a6faf6b8 1-172
+lua/plugins/snacks-nvim/CODES/doc/snacks.nvim.txt
+  h_220433a6faf6b8 1-438
+lua/plugins/snacks-nvim/CODES/docs/animate.md
+  h_220433a6faf6b8 1-133
+lua/plugins/snacks-nvim/CODES/docs/bigfile.md
+  h_220433a6faf6b8 1-58
+lua/plugins/snacks-nvim/CODES/docs/bufdelete.md
+  h_220433a6faf6b8 1-67
+lua/plugins/snacks-nvim/CODES/docs/dashboard.md
+  h_220433a6faf6b8 1-673
+lua/plugins/snacks-nvim/CODES/docs/debug.md
+  h_220433a6faf6b8 1-166
+lua/plugins/snacks-nvim/CODES/docs/dim.md
+  h_220433a6faf6b8 1-84
+lua/plugins/snacks-nvim/CODES/docs/examples/dashboard.lua
+  h_220433a6faf6b8 1-209
+lua/plugins/snacks-nvim/CODES/docs/examples/init.lua
+  h_220433a6faf6b8 1-101
+lua/plugins/snacks-nvim/CODES/docs/examples/picker.lua
+  h_220433a6faf6b8 1-157
+lua/plugins/snacks-nvim/CODES/docs/explorer.md
+  h_220433a6faf6b8 1-192
+lua/plugins/snacks-nvim/CODES/docs/gh.md
+  h_220433a6faf6b8 1-285
+lua/plugins/snacks-nvim/CODES/docs/git.md
+  h_220433a6faf6b8 1-43
+lua/plugins/snacks-nvim/CODES/docs/gitbrowse.md
+  h_220433a6faf6b8 1-126
+lua/plugins/snacks-nvim/CODES/docs/health.md
+  h_220433a6faf6b8 1-52
+lua/plugins/snacks-nvim/CODES/docs/image.md
+  h_220433a6faf6b8 1-308
+lua/plugins/snacks-nvim/CODES/docs/indent.md
+  h_220433a6faf6b8 1-141
+lua/plugins/snacks-nvim/CODES/docs/init.md
+  h_220433a6faf6b8 1-160
+lua/plugins/snacks-nvim/CODES/docs/input.md
+  h_220433a6faf6b8 1-136
+lua/plugins/snacks-nvim/CODES/docs/keymap.md
+  h_220433a6faf6b8 1-138
+lua/plugins/snacks-nvim/CODES/docs/layout.md
+  h_220433a6faf6b8 1-171
+lua/plugins/snacks-nvim/CODES/docs/lazygit.md
+  h_220433a6faf6b8 1-132
+lua/plugins/snacks-nvim/CODES/docs/meta.md
+  h_220433a6faf6b8 1-45
+lua/plugins/snacks-nvim/CODES/docs/notifier.md
+  h_220433a6faf6b8 1-321
+lua/plugins/snacks-nvim/CODES/docs/notify.md
+  h_220433a6faf6b8 1-50
+lua/plugins/snacks-nvim/CODES/docs/picker.md
+  h_220433a6faf6b8 1-3360
+lua/plugins/snacks-nvim/CODES/docs/profiler.md
+  h_220433a6faf6b8 1-450
+lua/plugins/snacks-nvim/CODES/docs/quickfile.md
+  h_220433a6faf6b8 1-33
+lua/plugins/snacks-nvim/CODES/docs/rename.md
+  h_220433a6faf6b8 1-140
+lua/plugins/snacks-nvim/CODES/docs/scope.md
+  h_220433a6faf6b8 1-187
+lua/plugins/snacks-nvim/CODES/docs/scratch.md
+  h_220433a6faf6b8 1-173
+lua/plugins/snacks-nvim/CODES/docs/scroll.md
+  h_220433a6faf6b8 1-72
+lua/plugins/snacks-nvim/CODES/docs/statuscolumn.md
+  h_220433a6faf6b8 1-79
+lua/plugins/snacks-nvim/CODES/docs/styles.md
+  h_220433a6faf6b8 1-336
+lua/plugins/snacks-nvim/CODES/docs/terminal.md
+  h_220433a6faf6b8 1-223
+lua/plugins/snacks-nvim/CODES/docs/toggle.md
+  h_220433a6faf6b8 1-179
+lua/plugins/snacks-nvim/CODES/docs/util.md
+  h_220433a6faf6b8 1-262
+lua/plugins/snacks-nvim/CODES/docs/win.md
+  h_220433a6faf6b8 1-490
+lua/plugins/snacks-nvim/CODES/docs/words.md
+  h_220433a6faf6b8 1-75
+lua/plugins/snacks-nvim/CODES/docs/zen.md
+  h_220433a6faf6b8 1-141
+lua/plugins/snacks-nvim/CODES/lua/snacks/animate/easing.lua
+  h_220433a6faf6b8 1-470
+lua/plugins/snacks-nvim/CODES/lua/snacks/animate/init.lua
+  h_220433a6faf6b8 1-208
+lua/plugins/snacks-nvim/CODES/lua/snacks/bigfile.lua
+  h_220433a6faf6b8 1-83
+lua/plugins/snacks-nvim/CODES/lua/snacks/bufdelete.lua
+  h_220433a6faf6b8 1-124
+lua/plugins/snacks-nvim/CODES/lua/snacks/compat.lua
+  h_220433a6faf6b8 1-32
+lua/plugins/snacks-nvim/CODES/lua/snacks/dashboard.lua
+  h_220433a6faf6b8 1-1248
+lua/plugins/snacks-nvim/CODES/lua/snacks/debug.lua
+  h_220433a6faf6b8 1-427
+lua/plugins/snacks-nvim/CODES/lua/snacks/dim.lua
+  h_220433a6faf6b8 1-149
+lua/plugins/snacks-nvim/CODES/lua/snacks/explorer/actions.lua
+  h_220433a6faf6b8 1-350
+lua/plugins/snacks-nvim/CODES/lua/snacks/explorer/diagnostics.lua
+  h_220433a6faf6b8 1-40
+lua/plugins/snacks-nvim/CODES/lua/snacks/explorer/git.lua
+  h_220433a6faf6b8 1-173
+lua/plugins/snacks-nvim/CODES/lua/snacks/explorer/init.lua
+  h_220433a6faf6b8 1-127
+lua/plugins/snacks-nvim/CODES/lua/snacks/explorer/tree.lua
+  h_220433a6faf6b8 1-375
+lua/plugins/snacks-nvim/CODES/lua/snacks/explorer/watch.lua
+  h_220433a6faf6b8 1-118
+lua/plugins/snacks-nvim/CODES/lua/snacks/gh/actions.lua
+  h_220433a6faf6b8 1-995
+lua/plugins/snacks-nvim/CODES/lua/snacks/gh/api.lua
+  h_220433a6faf6b8 1-579
+lua/plugins/snacks-nvim/CODES/lua/snacks/gh/buf.lua
+  h_220433a6faf6b8 1-243
+lua/plugins/snacks-nvim/CODES/lua/snacks/gh/init.lua
+  h_220433a6faf6b8 1-221
+lua/plugins/snacks-nvim/CODES/lua/snacks/gh/item.lua
+  h_220433a6faf6b8 1-171
+lua/plugins/snacks-nvim/CODES/lua/snacks/gh/render/init.lua
+  h_220433a6faf6b8 1-623
+lua/plugins/snacks-nvim/CODES/lua/snacks/gh/types.lua
+  h_220433a6faf6b8 1-200
+lua/plugins/snacks-nvim/CODES/lua/snacks/git.lua
+  h_220433a6faf6b8 1-64
+lua/plugins/snacks-nvim/CODES/lua/snacks/gitbrowse.lua
+  h_220433a6faf6b8 1-244
+lua/plugins/snacks-nvim/CODES/lua/snacks/health.lua
+  h_220433a6faf6b8 1-151
+lua/plugins/snacks-nvim/CODES/lua/snacks/image/buf.lua
+  h_220433a6faf6b8 1-54
+lua/plugins/snacks-nvim/CODES/lua/snacks/image/convert.lua
+  h_220433a6faf6b8 1-500
+lua/plugins/snacks-nvim/CODES/lua/snacks/image/doc.lua
+  h_220433a6faf6b8 1-476
+lua/plugins/snacks-nvim/CODES/lua/snacks/image/image.lua
+  h_220433a6faf6b8 1-216
+lua/plugins/snacks-nvim/CODES/lua/snacks/image/init.lua
+  h_220433a6faf6b8 1-381
+lua/plugins/snacks-nvim/CODES/lua/snacks/image/inline.lua
+  h_220433a6faf6b8 1-152
+lua/plugins/snacks-nvim/CODES/lua/snacks/image/placement.lua
+  h_220433a6faf6b8 1-582
+lua/plugins/snacks-nvim/CODES/lua/snacks/image/terminal.lua
+  h_220433a6faf6b8 1-293
+lua/plugins/snacks-nvim/CODES/lua/snacks/image/util.lua
+  h_220433a6faf6b8 1-89
+lua/plugins/snacks-nvim/CODES/lua/snacks/indent.lua
+  h_220433a6faf6b8 1-561
+lua/plugins/snacks-nvim/CODES/lua/snacks/init.lua
+  h_220433a6faf6b8 1-227
+lua/plugins/snacks-nvim/CODES/lua/snacks/input.lua
+  h_220433a6faf6b8 1-322
+lua/plugins/snacks-nvim/CODES/lua/snacks/keymap.lua
+  h_220433a6faf6b8 1-228
+lua/plugins/snacks-nvim/CODES/lua/snacks/layout.lua
+  h_220433a6faf6b8 1-586
+lua/plugins/snacks-nvim/CODES/lua/snacks/lazygit.lua
+  h_220433a6faf6b8 1-233
+lua/plugins/snacks-nvim/CODES/lua/snacks/meta/docs.lua
+  h_220433a6faf6b8 1-721
+lua/plugins/snacks-nvim/CODES/lua/snacks/meta/init.lua
+  h_220433a6faf6b8 1-70
+lua/plugins/snacks-nvim/CODES/lua/snacks/meta/types.lua
+  h_220433a6faf6b8 1-64
+lua/plugins/snacks-nvim/CODES/lua/snacks/notifier.lua
+  h_220433a6faf6b8 1-785
+lua/plugins/snacks-nvim/CODES/lua/snacks/notify.lua
+  h_220433a6faf6b8 1-45
+lua/plugins/snacks-nvim/CODES/lua/snacks/picker/actions.lua
+  h_220433a6faf6b8 1-844
+lua/plugins/snacks-nvim/CODES/lua/snacks/picker/config/defaults.lua
+  h_220433a6faf6b8 1-460
+lua/plugins/snacks-nvim/CODES/lua/snacks/picker/config/highlights.lua
+  h_220433a6faf6b8 1-119
+lua/plugins/snacks-nvim/CODES/lua/snacks/picker/config/init.lua
+  h_220433a6faf6b8 1-367
+lua/plugins/snacks-nvim/CODES/lua/snacks/picker/config/layouts.lua
+  h_220433a6faf6b8 1-184
+lua/plugins/snacks-nvim/CODES/lua/snacks/picker/config/sources.lua
+  h_220433a6faf6b8 1-1093
+lua/plugins/snacks-nvim/CODES/lua/snacks/picker/core/_health.lua
+  h_220433a6faf6b8 1-54
+lua/plugins/snacks-nvim/CODES/lua/snacks/picker/core/actions.lua
+  h_220433a6faf6b8 1-120
+lua/plugins/snacks-nvim/CODES/lua/snacks/picker/core/filter.lua
+  h_220433a6faf6b8 1-126
+lua/plugins/snacks-nvim/CODES/lua/snacks/picker/core/finder.lua
+  h_220433a6faf6b8 1-236
+lua/plugins/snacks-nvim/CODES/lua/snacks/picker/core/frecency.lua
+  h_220433a6faf6b8 1-181
+lua/plugins/snacks-nvim/CODES/lua/snacks/picker/core/input.lua
+  h_220433a6faf6b8 1-207
+lua/plugins/snacks-nvim/CODES/lua/snacks/picker/core/list.lua
+  h_220433a6faf6b8 1-645
+lua/plugins/snacks-nvim/CODES/lua/snacks/picker/core/main.lua
+  h_220433a6faf6b8 1-90
+lua/plugins/snacks-nvim/CODES/lua/snacks/picker/core/matcher.lua
+  h_220433a6faf6b8 1-608
+lua/plugins/snacks-nvim/CODES/lua/snacks/picker/core/picker.lua
+  h_220433a6faf6b8 1-865
+lua/plugins/snacks-nvim/CODES/lua/snacks/picker/core/preview.lua
+  h_220433a6faf6b8 1-448
+lua/plugins/snacks-nvim/CODES/lua/snacks/picker/core/score.lua
+  h_220433a6faf6b8 1-203
+lua/plugins/snacks-nvim/CODES/lua/snacks/picker/format.lua
+  h_220433a6faf6b8 1-741
+lua/plugins/snacks-nvim/CODES/lua/snacks/picker/init.lua
+  h_220433a6faf6b8 1-117
+lua/plugins/snacks-nvim/CODES/lua/snacks/picker/preview.lua
+  h_220433a6faf6b8 1-379
+lua/plugins/snacks-nvim/CODES/lua/snacks/picker/resume.lua
+  h_220433a6faf6b8 1-82
+lua/plugins/snacks-nvim/CODES/lua/snacks/picker/select.lua
+  h_220433a6faf6b8 1-89
+lua/plugins/snacks-nvim/CODES/lua/snacks/picker/sort.lua
+  h_220433a6faf6b8 1-62
+lua/plugins/snacks-nvim/CODES/lua/snacks/picker/source/buffers.lua
+  h_220433a6faf6b8 1-56
+lua/plugins/snacks-nvim/CODES/lua/snacks/picker/source/diagnostics.lua
+  h_220433a6faf6b8 1-35
+lua/plugins/snacks-nvim/CODES/lua/snacks/picker/source/diff.lua
+  h_220433a6faf6b8 1-290
+lua/plugins/snacks-nvim/CODES/lua/snacks/picker/source/explorer.lua
+  h_220433a6faf6b8 1-375
+lua/plugins/snacks-nvim/CODES/lua/snacks/picker/source/files.lua
+  h_220433a6faf6b8 1-198
+lua/plugins/snacks-nvim/CODES/lua/snacks/picker/source/gh.lua
+  h_220433a6faf6b8 1-404
+lua/plugins/snacks-nvim/CODES/lua/snacks/picker/source/git.lua
+  h_220433a6faf6b8 1-484
+lua/plugins/snacks-nvim/CODES/lua/snacks/picker/source/grep.lua
+  h_220433a6faf6b8 1-177
+lua/plugins/snacks-nvim/CODES/lua/snacks/picker/source/help.lua
+  h_220433a6faf6b8 1-69
+lua/plugins/snacks-nvim/CODES/lua/snacks/picker/source/icons.lua
+  h_220433a6faf6b8 1-171
+lua/plugins/snacks-nvim/CODES/lua/snacks/picker/source/lazy.lua
+  h_220433a6faf6b8 1-41
+lua/plugins/snacks-nvim/CODES/lua/snacks/picker/source/lines.lua
+  h_220433a6faf6b8 1-24
+lua/plugins/snacks-nvim/CODES/lua/snacks/picker/source/lsp/config.lua
+  h_220433a6faf6b8 1-355
+lua/plugins/snacks-nvim/CODES/lua/snacks/picker/source/lsp/init.lua
+  h_220433a6faf6b8 1-588
+lua/plugins/snacks-nvim/CODES/lua/snacks/picker/source/meta.lua
+  h_220433a6faf6b8 1-43
+lua/plugins/snacks-nvim/CODES/lua/snacks/picker/source/proc.lua
+  h_220433a6faf6b8 1-213
+lua/plugins/snacks-nvim/CODES/lua/snacks/picker/source/qf.lua
+  h_220433a6faf6b8 1-70
+lua/plugins/snacks-nvim/CODES/lua/snacks/picker/source/recent.lua
+  h_220433a6faf6b8 1-123
+lua/plugins/snacks-nvim/CODES/lua/snacks/picker/source/scratch.lua
+  h_220433a6faf6b8 1-61
+lua/plugins/snacks-nvim/CODES/lua/snacks/picker/source/snacks.lua
+  h_220433a6faf6b8 1-23
+lua/plugins/snacks-nvim/CODES/lua/snacks/picker/source/system.lua
+  h_220433a6faf6b8 1-66
+lua/plugins/snacks-nvim/CODES/lua/snacks/picker/source/treesitter.lua
+  h_220433a6faf6b8 1-191
+lua/plugins/snacks-nvim/CODES/lua/snacks/picker/source/vim.lua
+  h_220433a6faf6b8 1-516
+lua/plugins/snacks-nvim/CODES/lua/snacks/picker/transform.lua
+  h_220433a6faf6b8 1-18
+lua/plugins/snacks-nvim/CODES/lua/snacks/picker/types.lua
+  h_220433a6faf6b8 1-70
+lua/plugins/snacks-nvim/CODES/lua/snacks/picker/util/async.lua
+  h_220433a6faf6b8 1-371
+lua/plugins/snacks-nvim/CODES/lua/snacks/picker/util/db.lua
+  h_220433a6faf6b8 1-262
+lua/plugins/snacks-nvim/CODES/lua/snacks/picker/util/diff.lua
+  h_220433a6faf6b8 1-541
+lua/plugins/snacks-nvim/CODES/lua/snacks/picker/util/highlight.lua
+  h_220433a6faf6b8 1-630
+lua/plugins/snacks-nvim/CODES/lua/snacks/picker/util/history.lua
+  h_220433a6faf6b8 1-77
+lua/plugins/snacks-nvim/CODES/lua/snacks/picker/util/init.lua
+  h_220433a6faf6b8 1-693
+lua/plugins/snacks-nvim/CODES/lua/snacks/picker/util/kv.lua
+  h_220433a6faf6b8 1-76
+lua/plugins/snacks-nvim/CODES/lua/snacks/picker/util/markdown.lua
+  h_220433a6faf6b8 1-88
+lua/plugins/snacks-nvim/CODES/lua/snacks/picker/util/minheap.lua
+  h_220433a6faf6b8 1-148
+lua/plugins/snacks-nvim/CODES/lua/snacks/picker/util/queue.lua
+  h_220433a6faf6b8 1-43
+lua/plugins/snacks-nvim/CODES/lua/snacks/picker/util/spinner.lua
+  h_220433a6faf6b8 1-134
+lua/plugins/snacks-nvim/CODES/lua/snacks/profiler/core.lua
+  h_220433a6faf6b8 1-236
+lua/plugins/snacks-nvim/CODES/lua/snacks/profiler/init.lua
+  h_220433a6faf6b8 1-396
+lua/plugins/snacks-nvim/CODES/lua/snacks/profiler/loc.lua
+  h_220433a6faf6b8 1-139
+lua/plugins/snacks-nvim/CODES/lua/snacks/profiler/picker.lua
+  h_220433a6faf6b8 1-58
+lua/plugins/snacks-nvim/CODES/lua/snacks/profiler/tracer.lua
+  h_220433a6faf6b8 1-228
+lua/plugins/snacks-nvim/CODES/lua/snacks/profiler/ui.lua
+  h_220433a6faf6b8 1-249
+lua/plugins/snacks-nvim/CODES/lua/snacks/quickfile.lua
+  h_220433a6faf6b8 1-49
+lua/plugins/snacks-nvim/CODES/lua/snacks/rename.lua
+  h_220433a6faf6b8 1-116
+lua/plugins/snacks-nvim/CODES/lua/snacks/scope.lua
+  h_220433a6faf6b8 1-802
+lua/plugins/snacks-nvim/CODES/lua/snacks/scratch.lua
+  h_220433a6faf6b8 1-304
+lua/plugins/snacks-nvim/CODES/lua/snacks/scroll.lua
+  h_220433a6faf6b8 1-402
+lua/plugins/snacks-nvim/CODES/lua/snacks/statuscolumn.lua
+  h_220433a6faf6b8 1-354
+lua/plugins/snacks-nvim/CODES/lua/snacks/terminal.lua
+  h_220433a6faf6b8 1-321
+lua/plugins/snacks-nvim/CODES/lua/snacks/toggle.lua
+  h_220433a6faf6b8 1-402
+lua/plugins/snacks-nvim/CODES/lua/snacks/util/init.lua
+  h_220433a6faf6b8 1-495
+lua/plugins/snacks-nvim/CODES/lua/snacks/util/job.lua
+  h_220433a6faf6b8 1-301
+lua/plugins/snacks-nvim/CODES/lua/snacks/util/lsp.lua
+  h_220433a6faf6b8 1-103
+lua/plugins/snacks-nvim/CODES/lua/snacks/util/spawn.lua
+  h_220433a6faf6b8 1-302
+lua/plugins/snacks-nvim/CODES/lua/snacks/win.lua
+  h_220433a6faf6b8 1-1352
+lua/plugins/snacks-nvim/CODES/lua/snacks/words.lua
+  h_220433a6faf6b8 1-173
+lua/plugins/snacks-nvim/CODES/lua/snacks/zen.lua
+  h_220433a6faf6b8 1-235
+lua/plugins/snacks-nvim/CODES/lua/trouble/sources/profiler.lua
+  h_220433a6faf6b8 1-78
+lua/plugins/snacks-nvim/CODES/plugin/snacks.lua
+  h_220433a6faf6b8 1
+lua/plugins/snacks-nvim/CODES/queries/css/images.scm
+  h_220433a6faf6b8 1-6
+lua/plugins/snacks-nvim/CODES/queries/html/images.scm
+  h_220433a6faf6b8 1-23
+lua/plugins/snacks-nvim/CODES/queries/javascript/images.scm
+  h_220433a6faf6b8 1-18
+lua/plugins/snacks-nvim/CODES/queries/latex/images.scm
+  h_220433a6faf6b8 1-17
+lua/plugins/snacks-nvim/CODES/queries/lua/highlights.scm
+  h_220433a6faf6b8 1-4
+lua/plugins/snacks-nvim/CODES/queries/lua/injections.scm
+  h_220433a6faf6b8 1-10
+lua/plugins/snacks-nvim/CODES/queries/markdown/images.scm
+  h_220433a6faf6b8 1-17
+lua/plugins/snacks-nvim/CODES/queries/markdown/injections.scm
+  h_220433a6faf6b8 1-8
+lua/plugins/snacks-nvim/CODES/queries/markdown_inline/images.scm
+  h_220433a6faf6b8 1-10
+lua/plugins/snacks-nvim/CODES/queries/norg/images.scm
+  h_220433a6faf6b8 1-9
+lua/plugins/snacks-nvim/CODES/queries/scss/images.scm
+  h_220433a6faf6b8 1-11
+lua/plugins/snacks-nvim/CODES/queries/svelte/images.scm
+  h_220433a6faf6b8 1-2
+lua/plugins/snacks-nvim/CODES/queries/tsx/images.scm
+  h_220433a6faf6b8 1
+lua/plugins/snacks-nvim/CODES/queries/typst/images.scm
+  h_220433a6faf6b8 1-10
+lua/plugins/snacks-nvim/CODES/queries/vue/images.scm
+  h_220433a6faf6b8 1-2
+lua/plugins/snacks-nvim/CODES/scripts/docs
+  h_220433a6faf6b8 1-3
+lua/plugins/snacks-nvim/CODES/scripts/docs-post
+  h_220433a6faf6b8 1-3
+lua/plugins/snacks-nvim/CODES/scripts/test
+  h_220433a6faf6b8 1-3
+lua/plugins/snacks-nvim/CODES/selene.toml
+  h_220433a6faf6b8 1-4
+lua/plugins/snacks-nvim/CODES/stylua.toml
+  h_220433a6faf6b8 1-6
+lua/plugins/snacks-nvim/CODES/tests/config_spec.lua
+  h_220433a6faf6b8 1-46
+lua/plugins/snacks-nvim/CODES/tests/gitbrowse_spec.lua
+  h_220433a6faf6b8 1-42
+lua/plugins/snacks-nvim/CODES/tests/image/big.md
+  h_220433a6faf6b8 1-8117
+lua/plugins/snacks-nvim/CODES/tests/image/math.md
+  h_220433a6faf6b8 1-26
+lua/plugins/snacks-nvim/CODES/tests/image/test-mermaid.md
+  h_220433a6faf6b8 1-12
+lua/plugins/snacks-nvim/CODES/tests/image/test.aux
+  h_220433a6faf6b8 1-6
+lua/plugins/snacks-nvim/CODES/tests/image/test.css
+  h_220433a6faf6b8 1-4
+lua/plugins/snacks-nvim/CODES/tests/image/test.html
+  h_220433a6faf6b8 1-78
+lua/plugins/snacks-nvim/CODES/tests/image/test.jsx
+  h_220433a6faf6b8 1-11
+lua/plugins/snacks-nvim/CODES/tests/image/test.md
+  h_220433a6faf6b8 1-29
+lua/plugins/snacks-nvim/CODES/tests/image/test.mmd
+  h_220433a6faf6b8 1-10
+lua/plugins/snacks-nvim/CODES/tests/image/test.norg
+  h_220433a6faf6b8 1-31
+lua/plugins/snacks-nvim/CODES/tests/image/test.org
+  h_220433a6faf6b8 1
+lua/plugins/snacks-nvim/CODES/tests/image/test.scss
+  h_220433a6faf6b8 1-5
+lua/plugins/snacks-nvim/CODES/tests/image/test.svelte
+  h_220433a6faf6b8 1-14
+lua/plugins/snacks-nvim/CODES/tests/image/test.tex
+  h_220433a6faf6b8 1-199
+lua/plugins/snacks-nvim/CODES/tests/image/test.tsx
+  h_220433a6faf6b8 1-9
+lua/plugins/snacks-nvim/CODES/tests/image/test.typ
+  h_220433a6faf6b8 1-34
+lua/plugins/snacks-nvim/CODES/tests/image/test.vue
+  h_220433a6faf6b8 1-17
+lua/plugins/snacks-nvim/CODES/tests/image/test2.md
+  h_220433a6faf6b8 1-5
+lua/plugins/snacks-nvim/CODES/tests/minit.lua
+  h_220433a6faf6b8 1-17
+lua/plugins/snacks-nvim/CODES/tests/picker/diff_spec.lua
+  h_220433a6faf6b8 1-563
+lua/plugins/snacks-nvim/CODES/tests/picker/git_status_spec.lua
+  h_220433a6faf6b8 1-39
+lua/plugins/snacks-nvim/CODES/tests/picker/matcher_spec.lua
+  h_220433a6faf6b8 1-99
+lua/plugins/snacks-nvim/CODES/tests/picker/minheap_spec.lua
+  h_220433a6faf6b8 1-31
+lua/plugins/snacks-nvim/CODES/tests/picker/util_spec.lua
+  h_220433a6faf6b8 1-19
+lua/plugins/snacks-nvim/CODES/tests/scope_spec.lua
+  h_220433a6faf6b8 1-107
+lua/plugins/snacks-nvim/CODES/tests/terminal_spec.lua
+  h_220433a6faf6b8 1-47
+lua/plugins/snacks-nvim/CODES/tests/util_spec.lua
+  h_220433a6faf6b8 1-39
+lua/plugins/snacks-nvim/CODES/vim.yml
+  h_220433a6faf6b8 1-19
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "a2f22e522c050197c31734296c82104969b9bc91",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
