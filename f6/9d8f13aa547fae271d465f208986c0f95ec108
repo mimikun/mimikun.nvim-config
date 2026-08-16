@@ -1,0 +1,30 @@
+lua/plugins/snacks-nvim/.editorconfig
+  h_220433a6faf6b8 1-14
+lua/plugins/snacks-nvim/cmds.lua
+  h_220433a6faf6b8 1-6
+lua/plugins/snacks-nvim/dependencies.lua
+  h_220433a6faf6b8 1-16
+lua/plugins/snacks-nvim/events.lua
+  h_220433a6faf6b8 1-6
+lua/plugins/snacks-nvim/ft.lua
+  h_220433a6faf6b8 1-6
+lua/plugins/snacks-nvim/init.lua
+  h_220433a6faf6b8 1-37
+lua/plugins/snacks-nvim/keys.lua
+  h_220433a6faf6b8 1-23
+lua/plugins/snacks-nvim/opts.lua
+  h_220433a6faf6b8 1-6
+lua/plugins/snacks-nvim/stylua.toml
+  h_220433a6faf6b8 1-13
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "f69d8f13aa547fae271d465f208986c0f95ec108",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
