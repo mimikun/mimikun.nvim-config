@@ -1,0 +1,12 @@
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "797d1af2cce8821219e6c47de1b769366fee6d6b",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
