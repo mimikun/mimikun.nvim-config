@@ -1,0 +1,28 @@
+lua/plugins/snacks-nvim/opts/init.lua
+  s_9653ba170c092a::t_76b098a8967683 2-10,15-16,19-35,38-88,91-92,96-97,100-110,114,116,120-123,125-127,132,134
+lua/plugins/snacks-nvim/events.lua
+  h_220433a6faf6b8 3-5,7-8
+lua/plugins/snacks-nvim/toggles.lua
+  h_220433a6faf6b8 2-9,15-26,28-42,44,46-57
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "3b15169ce393a69c1fb5507d249837c5c05ded84",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  },
+  "sessions": {
+    "s_9653ba170c092a": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "b1f642e0-0f13-4825-a0a3-b064805d8927",
+        "model": "claude-opus-5"
+      },
+      "human_author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
