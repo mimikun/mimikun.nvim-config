@@ -1,0 +1,28 @@
+lua/config/mappings.lua
+  s_bd9f8f62a8d408::t_a102a0d936c475 4-32
+lua/plugins/snacks-nvim/toggles.lua
+  s_bd9f8f62a8d408::t_9762be6b9c38a3 26-46
+lua/config/picker.lua
+  s_bd9f8f62a8d408::t_f3f62336d33b84 1-91
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "df71c59ffee3e3b010298983ac7e44e40a8401b2",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  },
+  "sessions": {
+    "s_bd9f8f62a8d408": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "cb84f991-c0a3-4da9-aa7c-875f254b313a",
+        "model": "claude-opus-5"
+      },
+      "human_author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
