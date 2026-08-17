@@ -10,6 +10,7 @@ local spec = {
   config = function()
     local opts = require("plugins.snacks-nvim.opts")
     require("snacks").setup(opts)
+    require("plugins.snacks-nvim.toggles")()
   end,
   priority = 1000,
   --cond = false,

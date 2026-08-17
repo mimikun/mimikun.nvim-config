@@ -56,6 +56,14 @@ local keys = {
     desc = "Rename current file (LSP aware)",
     silent = true,
   },
+  {
+    "<leader>u",
+    mode = {
+      "n",
+    },
+    desc = "UI toggles",
+    silent = true,
+  },
 }
 
 return keys
