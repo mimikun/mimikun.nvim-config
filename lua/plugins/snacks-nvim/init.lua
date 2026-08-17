@@ -1,8 +1,11 @@
 ---@type LazySpec
 local spec = {
   "folke/snacks.nvim",
-  lazy = false,
+  --lazy = false,
   keys = require("plugins.snacks-nvim.keys"),
+  event = require("plugins.snacks-nvim.events"),
+  --init = function()
+  --end,
   --opts = require("plugins.snacks-nvim.opts"),
   config = function()
     local opts = require("plugins.snacks-nvim.opts")
