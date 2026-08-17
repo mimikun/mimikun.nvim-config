@@ -1,0 +1,14 @@
+lua/plugins/snacks-nvim/opts/scratch.lua
+  h_220433a6faf6b8 2-82
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "2fb3bc60b6d213fd576ffd9fd58b1706291828e0",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
