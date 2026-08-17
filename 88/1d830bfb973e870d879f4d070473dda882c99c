@@ -1,0 +1,14 @@
+lua/plugins/snacks-nvim/opts/statuscolumn.lua
+  h_220433a6faf6b8 5,7-39
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "881d830bfb973e870d879f4d070473dda882c99c",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
