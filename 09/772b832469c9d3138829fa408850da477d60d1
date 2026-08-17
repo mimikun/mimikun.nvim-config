@@ -1,0 +1,14 @@
+lua/plugins/snacks-nvim/opts/lazygit.lua
+  h_220433a6faf6b8 2-61
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "09772b832469c9d3138829fa408850da477d60d1",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
