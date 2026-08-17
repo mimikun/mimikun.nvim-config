@@ -1,0 +1,58 @@
+lua/plugins/snacks-nvim/events.lua
+  h_220433a6faf6b8 1-2,9-12
+  s_bd9f8f62a8d408::t_22d03a8c117a66 3-8
+lua/plugins/snacks-nvim/init.lua
+  h_220433a6faf6b8 8
+  h_220433a6faf6b8 4,6-7
+  s_bd9f8f62a8d408::t_41533217a77204 13
+lua/plugins/snacks-nvim/opts/stylua.toml
+  h_220433a6faf6b8 1-13
+lua/plugins/snacks-nvim/opts/init.lua
+  s_bd9f8f62a8d408::t_a6cfb7391dd4e4 1-12,16-19,22-28,30,31-34,46-50,58,61-67,69-76,79
+  s_bd9f8f62a8d408::t_8eba5a94efa815 68,80
+  s_bd9f8f62a8d408::t_c45aaad06fa8a2 81
+  s_bd9f8f62a8d408::t_9d3c1dd44fd634 51-57,59-60
+  s_bd9f8f62a8d408::t_b356741fc377fe 29
+  s_bd9f8f62a8d408::t_4c2a96cc4c8a61 45
+  s_bd9f8f62a8d408::t_bd87d4b6a91d66 36-44
+  s_bd9f8f62a8d408::t_ee928a52bcf914 35
+lua/plugins/snacks-nvim/keys.lua
+  s_bd9f8f62a8d408::t_d5ded6c6a1d2af 59,61-63,65-67,69,71-74,76-78,80,82-85,87-89,91,93-96,98-100,102,104-107,109-110
+  s_bd9f8f62a8d408::t_50186b4a0f5b07 60,64,68,70,75,79,81,86,90,92,97,101,103,108
+lua/plugins/snacks-nvim/toggles.lua
+  s_bd9f8f62a8d408::t_41533217a77204 1-25,47-51
+  s_bd9f8f62a8d408::t_9762be6b9c38a3 26-46
+lua/config/mappings.lua
+  s_bd9f8f62a8d408::t_a102a0d936c475 4-32
+lua/config/picker.lua
+  s_bd9f8f62a8d408::t_f3f62336d33b84 1-91
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "35b70db376d12c3fa3a7ab96fef1dafa41360285",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  },
+  "sessions": {
+    "s_476c6b69755361": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "4f3bd12f-3d57-49ac-9539-06785226e2c1",
+        "model": "claude-opus-5"
+      },
+      "human_author": "Yuto Tanaka <git@mimikun.dev>"
+    },
+    "s_bd9f8f62a8d408": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "cb84f991-c0a3-4da9-aa7c-875f254b313a",
+        "model": "claude-opus-5"
+      },
+      "human_author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
