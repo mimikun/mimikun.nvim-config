@@ -1,0 +1,368 @@
+lua/plugins/snacks-nvim/stylua.toml
+  s_9653ba170c092a::t_9b2f980fad6e4d 1-13
+lua/plugins/snacks-nvim/opts/CODES/animate/easing.lua
+  s_476c6b69755361::t_100a97e0884775 1-470
+lua/plugins/snacks-nvim/opts/CODES/animate/init.lua
+  s_476c6b69755361::t_1534cb6b7efc21 1-208
+lua/plugins/snacks-nvim/opts/CODES/bigfile.lua
+  s_476c6b69755361::t_a1dce9d742652a 1-83
+lua/plugins/snacks-nvim/opts/CODES/bufdelete.lua
+  s_476c6b69755361::t_ed987af7277be8 1-124
+lua/plugins/snacks-nvim/opts/CODES/compat.lua
+  s_476c6b69755361::t_6f275b01964d7d 1-32
+lua/plugins/snacks-nvim/opts/CODES/dashboard.lua
+  s_476c6b69755361::t_cd722718ea924f 1-1248
+lua/plugins/snacks-nvim/opts/CODES/debug.lua
+  s_476c6b69755361::t_4a7b04564da23e 1-427
+lua/plugins/snacks-nvim/opts/CODES/dim.lua
+  s_476c6b69755361::t_ebf9daf80f7d94 1-149
+lua/plugins/snacks-nvim/opts/CODES/explorer/actions.lua
+  s_476c6b69755361::t_24ddad316bcdea 1-350
+lua/plugins/snacks-nvim/opts/CODES/explorer/diagnostics.lua
+  s_476c6b69755361::t_fd0ec1d3bf723b 1-40
+lua/plugins/snacks-nvim/opts/CODES/explorer/git.lua
+  s_476c6b69755361::t_86093b47c795fc 1-173
+lua/plugins/snacks-nvim/opts/CODES/explorer/init.lua
+  s_476c6b69755361::t_01b62b657cc987 1-127
+lua/plugins/snacks-nvim/opts/CODES/explorer/tree.lua
+  s_476c6b69755361::t_a6d24112e1f764 1-375
+lua/plugins/snacks-nvim/opts/CODES/explorer/watch.lua
+  s_476c6b69755361::t_222404dd1a2a9c 1-118
+lua/plugins/snacks-nvim/opts/CODES/gh/actions.lua
+  s_476c6b69755361::t_29f417deb2173d 1-995
+lua/plugins/snacks-nvim/opts/CODES/gh/api.lua
+  s_476c6b69755361::t_0b20d96ef42ee1 1-579
+lua/plugins/snacks-nvim/opts/CODES/gh/buf.lua
+  s_476c6b69755361::t_c03b59453a3f90 1-243
+lua/plugins/snacks-nvim/opts/CODES/gh/init.lua
+  s_476c6b69755361::t_dd40be230530b5 1-221
+lua/plugins/snacks-nvim/opts/CODES/gh/item.lua
+  s_476c6b69755361::t_336b5d535fb0a3 1-171
+lua/plugins/snacks-nvim/opts/CODES/gh/render/init.lua
+  s_476c6b69755361::t_2c058587b42246 1-623
+lua/plugins/snacks-nvim/opts/CODES/gh/types.lua
+  s_476c6b69755361::t_ddbecfc49d5b3d 1-200
+lua/plugins/snacks-nvim/opts/CODES/git.lua
+  s_476c6b69755361::t_d98baca38a9e42 1-64
+lua/plugins/snacks-nvim/opts/CODES/gitbrowse.lua
+  s_476c6b69755361::t_080d36b91152b7 1-244
+lua/plugins/snacks-nvim/opts/CODES/health.lua
+  s_476c6b69755361::t_96eb62bbfb9cc6 1-151
+lua/plugins/snacks-nvim/opts/CODES/image/buf.lua
+  s_476c6b69755361::t_afcad8f3d5fb5d 1-54
+lua/plugins/snacks-nvim/opts/CODES/image/convert.lua
+  s_476c6b69755361::t_ea85b93307805c 1-500
+lua/plugins/snacks-nvim/opts/CODES/image/doc.lua
+  s_476c6b69755361::t_4334baf328876e 1-476
+lua/plugins/snacks-nvim/opts/CODES/image/image.lua
+  s_476c6b69755361::t_8c577e81e20960 1-216
+lua/plugins/snacks-nvim/opts/CODES/image/init.lua
+  s_476c6b69755361::t_55ba19039408eb 1-381
+lua/plugins/snacks-nvim/opts/CODES/image/inline.lua
+  s_476c6b69755361::t_8ecc9e41eadeef 1-152
+lua/plugins/snacks-nvim/opts/CODES/image/placement.lua
+  s_476c6b69755361::t_729e6d44cc55bb 1-582
+lua/plugins/snacks-nvim/opts/CODES/image/terminal.lua
+  s_476c6b69755361::t_aae8e7127c553a 1-293
+lua/plugins/snacks-nvim/opts/CODES/image/util.lua
+  s_476c6b69755361::t_c38b0ba8a55127 1-89
+lua/plugins/snacks-nvim/opts/CODES/indent.lua
+  s_476c6b69755361::t_ff7125fddf1e66 1-561
+lua/plugins/snacks-nvim/opts/CODES/init.lua
+  s_476c6b69755361::t_9dfa2e60a31256 1-227
+lua/plugins/snacks-nvim/opts/CODES/input.lua
+  s_476c6b69755361::t_87201993472bf2 1-322
+lua/plugins/snacks-nvim/opts/CODES/keymap.lua
+  s_476c6b69755361::t_d55fe1125884e1 1-228
+lua/plugins/snacks-nvim/opts/CODES/layout.lua
+  s_476c6b69755361::t_c3faf07ce0f4f8 1-586
+lua/plugins/snacks-nvim/opts/CODES/lazygit.lua
+  s_476c6b69755361::t_de175258779add 1-233
+lua/plugins/snacks-nvim/opts/CODES/meta/docs.lua
+  s_476c6b69755361::t_ecffc75b8d5bff 1-721
+lua/plugins/snacks-nvim/opts/CODES/meta/init.lua
+  s_476c6b69755361::t_61576122bf00df 1-70
+lua/plugins/snacks-nvim/opts/CODES/meta/types.lua
+  s_476c6b69755361::t_5c8197f11dffc3 1-64
+lua/plugins/snacks-nvim/opts/CODES/notifier.lua
+  s_476c6b69755361::t_92656185c19df6 1-785
+lua/plugins/snacks-nvim/opts/CODES/notify.lua
+  s_476c6b69755361::t_c53b4ff182c20f 1-45
+lua/plugins/snacks-nvim/opts/CODES/picker/actions.lua
+  s_476c6b69755361::t_ff2479e98664a3 1-844
+lua/plugins/snacks-nvim/opts/CODES/picker/config/defaults.lua
+  s_476c6b69755361::t_4acb70b5ee0737 1-460
+lua/plugins/snacks-nvim/opts/CODES/picker/config/highlights.lua
+  s_476c6b69755361::t_0354d20f0ffd72 1-119
+lua/plugins/snacks-nvim/opts/CODES/picker/config/init.lua
+  s_476c6b69755361::t_7985d1c7c9e03f 1-367
+lua/plugins/snacks-nvim/opts/CODES/picker/config/layouts.lua
+  s_476c6b69755361::t_90e0f69482494d 1-184
+lua/plugins/snacks-nvim/opts/CODES/picker/config/sources.lua
+  s_476c6b69755361::t_5bbbf11c71e153 1-1093
+lua/plugins/snacks-nvim/opts/CODES/picker/core/_health.lua
+  s_476c6b69755361::t_9575c36cca0316 1-54
+lua/plugins/snacks-nvim/opts/CODES/picker/core/actions.lua
+  s_476c6b69755361::t_184d20fa322c88 1-120
+lua/plugins/snacks-nvim/opts/CODES/picker/core/filter.lua
+  s_476c6b69755361::t_9daa7e1958cfc8 1-126
+lua/plugins/snacks-nvim/opts/CODES/picker/core/finder.lua
+  s_476c6b69755361::t_3da67252d0e025 1-236
+lua/plugins/snacks-nvim/opts/CODES/picker/core/frecency.lua
+  s_476c6b69755361::t_02ef754df52ccb 1-181
+lua/plugins/snacks-nvim/opts/CODES/picker/core/input.lua
+  s_476c6b69755361::t_b674f91be7afca 1-207
+lua/plugins/snacks-nvim/opts/CODES/picker/core/list.lua
+  s_476c6b69755361::t_1545428b1efbce 1-645
+lua/plugins/snacks-nvim/opts/CODES/picker/core/main.lua
+  s_476c6b69755361::t_2bef305c3e7865 1-90
+lua/plugins/snacks-nvim/opts/CODES/picker/core/matcher.lua
+  s_476c6b69755361::t_ca42f83d230959 1-608
+lua/plugins/snacks-nvim/opts/CODES/picker/core/picker.lua
+  s_476c6b69755361::t_81878b08de236c 1-865
+lua/plugins/snacks-nvim/opts/CODES/picker/core/preview.lua
+  s_476c6b69755361::t_8d2cc102f2bbbe 1-448
+lua/plugins/snacks-nvim/opts/CODES/picker/core/score.lua
+  s_476c6b69755361::t_1dcf2903180f72 1-203
+lua/plugins/snacks-nvim/opts/CODES/picker/format.lua
+  s_476c6b69755361::t_855321c3b47644 1-741
+lua/plugins/snacks-nvim/opts/CODES/picker/init.lua
+  s_476c6b69755361::t_af149adb3ffc36 1-117
+lua/plugins/snacks-nvim/opts/CODES/picker/preview.lua
+  s_476c6b69755361::t_a002860a16c3c1 1-379
+lua/plugins/snacks-nvim/opts/CODES/picker/resume.lua
+  s_476c6b69755361::t_da0dcd5440afe4 1-82
+lua/plugins/snacks-nvim/opts/CODES/picker/select.lua
+  s_476c6b69755361::t_32aaa28cf1f03e 1-89
+lua/plugins/snacks-nvim/opts/CODES/picker/sort.lua
+  s_476c6b69755361::t_7137e262018311 1-62
+lua/plugins/snacks-nvim/opts/CODES/picker/source/buffers.lua
+  s_476c6b69755361::t_35131a7c527c9b 1-56
+lua/plugins/snacks-nvim/opts/CODES/picker/source/diagnostics.lua
+  s_476c6b69755361::t_3391de95eca241 1-35
+lua/plugins/snacks-nvim/opts/CODES/picker/source/diff.lua
+  s_476c6b69755361::t_69e1c23a6f9164 1-290
+lua/plugins/snacks-nvim/opts/CODES/picker/source/explorer.lua
+  s_476c6b69755361::t_55b0a75ad10c9e 1-375
+lua/plugins/snacks-nvim/opts/CODES/picker/source/files.lua
+  s_476c6b69755361::t_5d1f866759471d 1-198
+lua/plugins/snacks-nvim/opts/CODES/picker/source/gh.lua
+  s_476c6b69755361::t_263016001c78ab 1-404
+lua/plugins/snacks-nvim/opts/CODES/picker/source/git.lua
+  s_476c6b69755361::t_645a6e56020833 1-484
+lua/plugins/snacks-nvim/opts/CODES/picker/source/grep.lua
+  s_476c6b69755361::t_1e06982a1a6d82 1-177
+lua/plugins/snacks-nvim/opts/CODES/picker/source/help.lua
+  s_476c6b69755361::t_624c567070c2b3 1-69
+lua/plugins/snacks-nvim/opts/CODES/picker/source/icons.lua
+  s_476c6b69755361::t_8a3030b0a73c4d 1-171
+lua/plugins/snacks-nvim/opts/CODES/picker/source/lazy.lua
+  s_476c6b69755361::t_f92a071c4088ed 1-41
+lua/plugins/snacks-nvim/opts/CODES/picker/source/lines.lua
+  s_476c6b69755361::t_a48cb69c5aaf17 1-24
+lua/plugins/snacks-nvim/opts/CODES/picker/source/lsp/config.lua
+  s_476c6b69755361::t_5bf5fb104c211d 1-355
+lua/plugins/snacks-nvim/opts/CODES/picker/source/lsp/init.lua
+  s_476c6b69755361::t_d3eef85f0d6051 1-588
+lua/plugins/snacks-nvim/opts/CODES/picker/source/meta.lua
+  s_476c6b69755361::t_c07ef8de2347b5 1-43
+lua/plugins/snacks-nvim/opts/CODES/picker/source/proc.lua
+  s_476c6b69755361::t_34cb379a6eb24e 1-213
+lua/plugins/snacks-nvim/opts/CODES/picker/source/qf.lua
+  s_476c6b69755361::t_7bd0f3bfba3725 1-70
+lua/plugins/snacks-nvim/opts/CODES/picker/source/recent.lua
+  s_476c6b69755361::t_937997fa05f0dd 1-123
+lua/plugins/snacks-nvim/opts/CODES/picker/source/scratch.lua
+  s_476c6b69755361::t_803ba55404519a 1-61
+lua/plugins/snacks-nvim/opts/CODES/picker/source/snacks.lua
+  s_476c6b69755361::t_82924cba835f2b 1-23
+lua/plugins/snacks-nvim/opts/CODES/picker/source/system.lua
+  s_476c6b69755361::t_49b605ecbba5d6 1-66
+lua/plugins/snacks-nvim/opts/CODES/picker/source/treesitter.lua
+  s_476c6b69755361::t_68e2e696995195 1-191
+lua/plugins/snacks-nvim/opts/CODES/picker/source/vim.lua
+  s_476c6b69755361::t_c7444ef25b32ab 1-516
+lua/plugins/snacks-nvim/opts/CODES/picker/transform.lua
+  s_476c6b69755361::t_33c88a624bf1d7 1-18
+lua/plugins/snacks-nvim/opts/CODES/picker/types.lua
+  s_476c6b69755361::t_7961c1269e5a5c 1-70
+lua/plugins/snacks-nvim/opts/CODES/picker/util/async.lua
+  s_476c6b69755361::t_1f5267ff75d56d 1-371
+lua/plugins/snacks-nvim/opts/CODES/picker/util/db.lua
+  s_476c6b69755361::t_0b7eae68d99e4a 1-262
+lua/plugins/snacks-nvim/opts/CODES/picker/util/diff.lua
+  s_476c6b69755361::t_9399192ae9437b 1-541
+lua/plugins/snacks-nvim/opts/CODES/picker/util/highlight.lua
+  s_476c6b69755361::t_cb1f03713bd3ee 1-630
+lua/plugins/snacks-nvim/opts/CODES/picker/util/history.lua
+  s_476c6b69755361::t_8881c47506b4b5 1-77
+lua/plugins/snacks-nvim/opts/CODES/picker/util/init.lua
+  s_476c6b69755361::t_dc1cc491c98c67 1-693
+lua/plugins/snacks-nvim/opts/CODES/picker/util/kv.lua
+  s_476c6b69755361::t_91bb46813f0627 1-76
+lua/plugins/snacks-nvim/opts/CODES/picker/util/markdown.lua
+  s_476c6b69755361::t_b1653033c41286 1-88
+lua/plugins/snacks-nvim/opts/CODES/picker/util/minheap.lua
+  s_476c6b69755361::t_551898cbf7ffe5 1-148
+lua/plugins/snacks-nvim/opts/CODES/picker/util/queue.lua
+  s_476c6b69755361::t_348ef9baacdc7e 1-43
+lua/plugins/snacks-nvim/opts/CODES/picker/util/spinner.lua
+  s_476c6b69755361::t_41da6d5d3e408b 1-134
+lua/plugins/snacks-nvim/opts/CODES/profiler/core.lua
+  s_476c6b69755361::t_d9f43c6f5c56da 1-236
+lua/plugins/snacks-nvim/opts/CODES/profiler/init.lua
+  s_476c6b69755361::t_106a43dcd3748e 1-396
+lua/plugins/snacks-nvim/opts/CODES/profiler/loc.lua
+  s_476c6b69755361::t_691c432a1f2de7 1-139
+lua/plugins/snacks-nvim/opts/CODES/profiler/picker.lua
+  s_476c6b69755361::t_9490fd07ce2c96 1-58
+lua/plugins/snacks-nvim/opts/CODES/profiler/tracer.lua
+  s_476c6b69755361::t_a37b9eb4c14b29 1-228
+lua/plugins/snacks-nvim/opts/CODES/profiler/ui.lua
+  s_476c6b69755361::t_e583a8df37e2e5 1-249
+lua/plugins/snacks-nvim/opts/CODES/quickfile.lua
+  s_476c6b69755361::t_385570aaedd60c 1-49
+lua/plugins/snacks-nvim/opts/CODES/rename.lua
+  s_476c6b69755361::t_95d936b90403e9 1-116
+lua/plugins/snacks-nvim/opts/CODES/scope.lua
+  s_476c6b69755361::t_6d8c96155fb7aa 1-802
+lua/plugins/snacks-nvim/opts/CODES/scratch.lua
+  s_476c6b69755361::t_ac7a9c1eb81afe 1-304
+lua/plugins/snacks-nvim/opts/CODES/scroll.lua
+  s_476c6b69755361::t_751fc3c6e74087 1-402
+lua/plugins/snacks-nvim/opts/CODES/statuscolumn.lua
+  s_476c6b69755361::t_522c2ba317122b 1-354
+lua/plugins/snacks-nvim/opts/CODES/terminal.lua
+  s_476c6b69755361::t_141f9c9fe2be59 1-321
+lua/plugins/snacks-nvim/opts/CODES/toggle.lua
+  s_476c6b69755361::t_d7ca2b537aab26 1-402
+lua/plugins/snacks-nvim/opts/CODES/util/init.lua
+  s_476c6b69755361::t_bf55ed846b53e1 1-495
+lua/plugins/snacks-nvim/opts/CODES/util/job.lua
+  s_476c6b69755361::t_c58fc96f83e670 1-301
+lua/plugins/snacks-nvim/opts/CODES/util/lsp.lua
+  s_476c6b69755361::t_3acda23aefcfd2 1-103
+lua/plugins/snacks-nvim/opts/CODES/util/spawn.lua
+  s_476c6b69755361::t_149c0a883ca4f8 1-302
+lua/plugins/snacks-nvim/opts/CODES/win.lua
+  s_476c6b69755361::t_4ec9dbaea1eeb5 1-1352
+lua/plugins/snacks-nvim/opts/CODES/words.lua
+  s_476c6b69755361::t_117768e0609f12 1-173
+lua/plugins/snacks-nvim/opts/CODES/zen.lua
+  s_476c6b69755361::t_0cca78e376d642 1-235
+lua/plugins/snacks-nvim/opts/README.md
+  s_476c6b69755361::t_4ef495db8877bb 1-4,5-10,11-31,32-297
+lua/plugins/snacks-nvim/opts/docs/animate.md
+  s_476c6b69755361::t_a0fd7149b10fcb 1-133
+lua/plugins/snacks-nvim/opts/docs/bigfile.md
+  s_476c6b69755361::t_69569678841281 1-58
+lua/plugins/snacks-nvim/opts/docs/bufdelete.md
+  s_476c6b69755361::t_9614d28de0413c 1-67
+lua/plugins/snacks-nvim/opts/docs/dashboard.md
+  s_476c6b69755361::t_916838adc62967 1-673
+lua/plugins/snacks-nvim/opts/docs/debug.md
+  s_476c6b69755361::t_cbb8530d2c36b7 1-166
+lua/plugins/snacks-nvim/opts/docs/dim.md
+  s_476c6b69755361::t_f8acfcdd630418 1-84
+lua/plugins/snacks-nvim/opts/docs/examples/dashboard.lua
+  s_476c6b69755361::t_a693aea9013f46 1-209
+lua/plugins/snacks-nvim/opts/docs/examples/init.lua
+  s_476c6b69755361::t_7e4c826496a13f 1-101
+lua/plugins/snacks-nvim/opts/docs/examples/picker.lua
+  s_476c6b69755361::t_e0379a4a88e359 1-157
+lua/plugins/snacks-nvim/opts/docs/explorer.md
+  s_476c6b69755361::t_a1b77227b9af0c 1-192
+lua/plugins/snacks-nvim/opts/docs/gh.md
+  s_476c6b69755361::t_990caaa404dea4 1-285
+lua/plugins/snacks-nvim/opts/docs/git.md
+  s_476c6b69755361::t_9cdaa077a84e37 1-43
+lua/plugins/snacks-nvim/opts/docs/gitbrowse.md
+  s_476c6b69755361::t_4e392a7ab40e73 1-126
+lua/plugins/snacks-nvim/opts/docs/health.md
+  s_476c6b69755361::t_ce2e3ca8ba99bc 1-52
+lua/plugins/snacks-nvim/opts/docs/image.md
+  s_476c6b69755361::t_9b6c7258972f78 1-308
+lua/plugins/snacks-nvim/opts/docs/indent.md
+  s_476c6b69755361::t_b06a5edd382339 1-141
+lua/plugins/snacks-nvim/opts/docs/init.md
+  s_476c6b69755361::t_b1bcfa106802f5 1-160
+lua/plugins/snacks-nvim/opts/docs/input.md
+  s_476c6b69755361::t_63eb0a39744e92 1-136
+lua/plugins/snacks-nvim/opts/docs/keymap.md
+  s_476c6b69755361::t_739f411cf0c479 1-138
+lua/plugins/snacks-nvim/opts/docs/layout.md
+  s_476c6b69755361::t_bba56c45297981 1-171
+lua/plugins/snacks-nvim/opts/docs/lazygit.md
+  s_476c6b69755361::t_86442c3a638049 1-132
+lua/plugins/snacks-nvim/opts/docs/meta.md
+  s_476c6b69755361::t_f49c1bb34bf7fc 1-45
+lua/plugins/snacks-nvim/opts/docs/notifier.md
+  s_476c6b69755361::t_4bca441f103be8 1-321
+lua/plugins/snacks-nvim/opts/docs/notify.md
+  s_476c6b69755361::t_565e059f872b52 1-50
+lua/plugins/snacks-nvim/opts/docs/picker.md
+  s_476c6b69755361::t_53942e758e12e0 1-3360
+lua/plugins/snacks-nvim/opts/docs/profiler.md
+  s_476c6b69755361::t_8d7109adb852c3 1-450
+lua/plugins/snacks-nvim/opts/docs/quickfile.md
+  s_476c6b69755361::t_f13665be40b543 1-33
+lua/plugins/snacks-nvim/opts/docs/rename.md
+  s_476c6b69755361::t_87b4ad6613645a 1-140
+lua/plugins/snacks-nvim/opts/docs/scope.md
+  s_476c6b69755361::t_4210767e624984 1-187
+lua/plugins/snacks-nvim/opts/docs/scratch.md
+  s_476c6b69755361::t_be637bc2bdf922 1-173
+lua/plugins/snacks-nvim/opts/docs/scroll.md
+  s_476c6b69755361::t_73f8eaa8458f21 1-72
+lua/plugins/snacks-nvim/opts/docs/statuscolumn.md
+  s_476c6b69755361::t_63db1702663aed 1-79
+lua/plugins/snacks-nvim/opts/docs/styles.md
+  s_476c6b69755361::t_7e07549bab49b2 1-336
+lua/plugins/snacks-nvim/opts/docs/terminal.md
+  s_476c6b69755361::t_72e2c6cb1a7174 1-223
+lua/plugins/snacks-nvim/opts/docs/toggle.md
+  s_476c6b69755361::t_3d7af49262da5e 1-179
+lua/plugins/snacks-nvim/opts/docs/util.md
+  s_476c6b69755361::t_0616706a97add9 1-262
+lua/plugins/snacks-nvim/opts/docs/win.md
+  s_476c6b69755361::t_6c889f41e0d1ab 1-490
+lua/plugins/snacks-nvim/opts/docs/words.md
+  s_476c6b69755361::t_23624e2778341e 1-75
+lua/plugins/snacks-nvim/opts/docs/zen.md
+  s_476c6b69755361::t_ae1fbb72cb421d 1-141
+lua/plugins/snacks-nvim/opts/init.lua
+  h_220433a6faf6b8 1-47
+lua/plugins/snacks-nvim/dependencies.lua
+  h_220433a6faf6b8 1-2,3-4,5-7
+lua/plugins/snacks-nvim/init.lua
+  h_220433a6faf6b8 4,7
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "9b1c636174cf4d9799ab6094dd9cbba8849fcca1",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  },
+  "sessions": {
+    "s_476c6b69755361": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "4f3bd12f-3d57-49ac-9539-06785226e2c1",
+        "model": "claude-opus-5"
+      },
+      "human_author": "Yuto Tanaka <git@mimikun.dev>"
+    },
+    "s_9653ba170c092a": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "b1f642e0-0f13-4825-a0a3-b064805d8927",
+        "model": "claude-opus-5"
+      },
+      "human_author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
