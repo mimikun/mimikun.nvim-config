@@ -1,0 +1,207 @@
+-- Disabled: another plugin in this config already owns the feature.
+-- image-nvim
+---@type snacks.image.Config | {}
+local image = {
+  -- enable image viewer
+  ---@type boolean
+  enabled = false,
+
+  ---@type string[]
+  formats = {
+    "png",
+    "jpg",
+    "jpeg",
+    "gif",
+    "bmp",
+    "webp",
+    "tiff",
+    "heic",
+    "avif",
+    "mp4",
+    "mov",
+    "avi",
+    "mkv",
+    "webm",
+    "pdf",
+    "icns",
+  },
+
+  -- try displaying the image, even if the terminal does not support it
+  force = false,
+  doc = {
+    -- enable image viewer for documents
+    -- a treesitter parser must be available for the enabled languages.
+    enabled = true,
+
+    -- render the image inline in the buffer
+    -- if your env doesn't support unicode placeholders, this will be disabled
+    -- takes precedence over `opts.float` on supported terminals
+    inline = true,
+
+    -- render the image in a floating window
+    -- only used if `opts.inline` is disabled
+    float = true,
+
+    max_width = 80,
+    max_height = 40,
+
+    -- Set to `true`, to conceal the image text when rendering inline.
+    -- (experimental)
+    ---@param lang string tree-sitter language
+    ---@param type snacks.image.Type image type
+    conceal = function(lang, type)
+      -- only conceal math expressions
+      return type == "math"
+    end,
+  },
+  img_dirs = {
+    "img",
+    "images",
+    "assets",
+    "static",
+    "public",
+    "media",
+    "attachments",
+  },
+  -- window options applied to windows displaying image buffers
+  -- an image buffer is a buffer with `filetype=image`
+  -- options for windows showing the image
+  ---@field wo? vim.wo | {}
+  wo = {
+    wrap = false,
+    number = false,
+    relativenumber = false,
+    cursorcolumn = false,
+    signcolumn = "no",
+    foldcolumn = "0",
+    list = false,
+    spell = false,
+    statuscolumn = "",
+  },
+
+  cache = vim.fn.stdpath("cache") .. "/snacks/image",
+
+  debug = {
+    request = false,
+    convert = false,
+    placement = false,
+  },
+
+  env = {},
+
+  -- icons used to show where an inline image is located that is
+  -- rendered below the text.
+  icons = {
+    math = "󰪚 ",
+    chart = "󰄧 ",
+    image = " ",
+  },
+
+  ---@type snacks.image.convert.Config
+  convert = {
+    -- show a notification on error
+    notify = false,
+
+    ---@type snacks.image.args
+    mermaid = function()
+      local theme = vim.o.background == "light" and "neutral" or "dark"
+      return {
+        "-i",
+        "{src}",
+        "-o",
+        "{file}",
+        "-b",
+        "transparent",
+        "-t",
+        theme,
+        "-s",
+        "{scale}",
+      }
+    end,
+
+    ---@type table<string,snacks.image.args>
+    magick = {
+      -- default for raster images
+      default = {
+        "{src}[0]",
+        "-scale",
+        "1920x1080>",
+      },
+
+      -- used by vector images like svg
+      vector = {
+        "-density",
+        192,
+        "{src}[{page}]",
+      },
+
+      math = {
+        "-density",
+        192,
+        "{src}[{page}]",
+        "-trim",
+      },
+
+      pdf = {
+        "-density",
+        192,
+        "{src}[{page}]",
+        "-background",
+        "white",
+        "-alpha",
+        "remove",
+        "-trim",
+      },
+    },
+  },
+
+  math = {
+    -- enable math expression rendering
+    enabled = true,
+    -- in the templates below, `${header}` comes from any section in your document,
+    -- between a start/end header comment. Comment syntax is language-specific.
+    -- * start comment: `// snacks: header start`
+    -- * end comment:   `// snacks: header end`
+    typst = {
+      tpl = [[
+        #set page(width: auto, height: auto, margin: (x: 2pt, y: 2pt))
+        #show math.equation.where(block: false): set text(top-edge: "bounds", bottom-edge: "bounds")
+        #set text(size: 12pt, fill: rgb("${color}"))
+        ${header}
+        ${content}]],
+    },
+    latex = {
+      -- see https://www.sascha-frank.com/latex-font-size.html
+      font_size = "Large",
+
+      -- for latex documents, the doc packages are included automatically,
+      -- but you can add more packages here. Useful for markdown documents.
+      packages = {
+        "amsmath",
+        "amssymb",
+        "amsfonts",
+        "amscd",
+        "mathtools",
+      },
+      tpl = [[
+        \documentclass[preview,border=0pt,varwidth,12pt]{standalone}
+        \usepackage{${packages}}
+        \begin{document}
+        ${header}
+        { \${font_size} \selectfont
+          \color[HTML]{${color}}
+        ${content}}
+        \end{document}]],
+    },
+  },
+
+  --- Resolves a reference to an image with src in a file (currently markdown only).
+  --- Return the absolute path or url to the image.
+  --- When `nil`, the path is resolved relative to the file.
+  ---@field resolve? fun(file: string, src: string): string?
+
+  -- options for the image buffer
+  ---@field bo? vim.bo|{}
+}
+
+return image
