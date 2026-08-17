@@ -64,6 +64,50 @@ local keys = {
     desc = "UI toggles",
     silent = true,
   },
+  {
+    "<leader>bc",
+    function()
+      require("snacks").bufdelete()
+    end,
+    mode = {
+      "n",
+    },
+    desc = "Delete buffer (keep layout)",
+    silent = true,
+  },
+  {
+    "<leader>bC",
+    function()
+      require("snacks").bufdelete.other()
+    end,
+    mode = {
+      "n",
+    },
+    desc = "Delete other buffers",
+    silent = true,
+  },
+  {
+    "<leader>bx",
+    function()
+      require("snacks").bufdelete.invisible()
+    end,
+    mode = {
+      "n",
+    },
+    desc = "Delete invisible buffers",
+    silent = true,
+  },
+  {
+    "<leader>ba",
+    function()
+      require("snacks").bufdelete.all()
+    end,
+    mode = {
+      "n",
+    },
+    desc = "Delete all buffers",
+    silent = true,
+  },
 }
 
 return keys
