@@ -1,0 +1,64 @@
+lua/plugins/snacks-nvim/opts/animate.lua
+  h_220433a6faf6b8 1-6
+lua/plugins/snacks-nvim/opts/bigfile.lua
+  h_220433a6faf6b8 1-6
+lua/plugins/snacks-nvim/opts/dashboard.lua
+  h_220433a6faf6b8 1-8
+lua/plugins/snacks-nvim/opts/dim.lua
+  h_220433a6faf6b8 1-6
+lua/plugins/snacks-nvim/opts/explorer.lua
+  h_220433a6faf6b8 1-8
+lua/plugins/snacks-nvim/opts/gh.lua
+  h_220433a6faf6b8 1-5
+lua/plugins/snacks-nvim/opts/gitbrowse.lua
+  h_220433a6faf6b8 1-5
+lua/plugins/snacks-nvim/opts/image.lua
+  h_220433a6faf6b8 1-8
+lua/plugins/snacks-nvim/opts/indent.lua
+  h_220433a6faf6b8 1-8
+lua/plugins/snacks-nvim/opts/init.lua
+  h_220433a6faf6b8 164-188
+lua/plugins/snacks-nvim/opts/input.lua
+  h_220433a6faf6b8 1-7
+lua/plugins/snacks-nvim/opts/layout.lua
+  h_220433a6faf6b8 1-6
+lua/plugins/snacks-nvim/opts/lazygit.lua
+  h_220433a6faf6b8 1-4
+lua/plugins/snacks-nvim/opts/notifier.lua
+  h_220433a6faf6b8 1-8
+lua/plugins/snacks-nvim/opts/picker.lua
+  h_220433a6faf6b8 1-14
+lua/plugins/snacks-nvim/opts/profiler.lua
+  h_220433a6faf6b8 1-5
+lua/plugins/snacks-nvim/opts/quickfile.lua
+  h_220433a6faf6b8 1-6
+lua/plugins/snacks-nvim/opts/scope.lua
+  h_220433a6faf6b8 1-7
+lua/plugins/snacks-nvim/opts/scratch.lua
+  h_220433a6faf6b8 1-4
+lua/plugins/snacks-nvim/opts/scroll.lua
+  h_220433a6faf6b8 1-8
+lua/plugins/snacks-nvim/opts/statuscolumn.lua
+  h_220433a6faf6b8 1-8
+lua/plugins/snacks-nvim/opts/terminal.lua
+  h_220433a6faf6b8 1-6
+lua/plugins/snacks-nvim/opts/toggle.lua
+  h_220433a6faf6b8 1-6
+lua/plugins/snacks-nvim/opts/win.lua
+  h_220433a6faf6b8 1-6
+lua/plugins/snacks-nvim/opts/words.lua
+  h_220433a6faf6b8 1-8
+lua/plugins/snacks-nvim/opts/zen.lua
+  h_220433a6faf6b8 1-6
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "37c78d61bb4fa92ebed07f2740dccf6777c2074d",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
