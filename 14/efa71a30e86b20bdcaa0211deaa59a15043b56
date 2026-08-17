@@ -1,0 +1,14 @@
+lua/plugins/snacks-nvim/opts/image.lua
+  h_220433a6faf6b8 6-120,124-133
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "14efa71a30e86b20bdcaa0211deaa59a15043b56",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
