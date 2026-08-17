@@ -1,9 +1,0 @@
-{
-  "$schema": "https://raw.githubusercontent.com/googleapis/release-please/main/schemas/config.json",
-  "packages": {
-    ".": {
-      "extra-files": ["lua/snacks/init.lua"],
-      "release-type": "simple"
-    }
-  }
-}
