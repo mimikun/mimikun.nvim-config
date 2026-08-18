@@ -1,0 +1,40 @@
+lua/plugins/octo-nvim/opts/colors.lua
+  h_220433a6faf6b8 4,6-7,9-10,12-13,15-16,18-19,21-22,24-25,27-28,30-31,33-34,36-37
+lua/plugins/octo-nvim/opts/debug.lua
+  h_220433a6faf6b8 3
+lua/plugins/octo-nvim/opts/discussions.lua
+  h_220433a6faf6b8 3,5,7-8
+lua/plugins/octo-nvim/opts/file_panel.lua
+  h_220433a6faf6b8 4,7-10
+lua/plugins/octo-nvim/opts/issues.lua
+  h_220433a6faf6b8 4,7,11
+lua/plugins/octo-nvim/opts/notifications.lua
+  h_220433a6faf6b8 4
+lua/plugins/octo-nvim/opts/picker_config.lua
+  h_220433a6faf6b8 4,8,12,14,16,18-19,22-23,25,27-28,31,33,35-36,39-40,42,44-45,48-49,51,53-54,60,65,68,81,94,98,102,106,108-109,111-112
+lua/plugins/octo-nvim/opts/poll.lua
+  h_220433a6faf6b8 4,8,12,16
+lua/plugins/octo-nvim/opts/pull_requests.lua
+  h_220433a6faf6b8 4,7,11,16,20
+lua/plugins/octo-nvim/opts/reviews.lua
+  h_220433a6faf6b8 4,8,12
+lua/plugins/octo-nvim/opts/runs.lua
+  h_220433a6faf6b8 3,5,7-8,10-11,13-14,16-17,19-20
+lua/plugins/octo-nvim/opts/search.lua
+  h_220433a6faf6b8 4
+lua/plugins/octo-nvim/opts/suppress_missing_scope.lua
+  h_220433a6faf6b8 3
+lua/plugins/octo-nvim/opts/ui.lua
+  h_220433a6faf6b8 4,8,12,15
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "81be3d11f211ccd7567676eadb0212217034ccf9",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
