@@ -1,0 +1,24 @@
+lua/plugins/octo-nvim/README.md
+  h_220433a6faf6b8 3,6,399,582-583,709,731,742,765
+lua/plugins/octo-nvim/cmds.lua
+  h_220433a6faf6b8 3
+lua/plugins/octo-nvim/dependencies.lua
+  h_220433a6faf6b8 3,5-7
+lua/plugins/octo-nvim/init.lua
+  h_220433a6faf6b8 5,7-8,13-17
+lua/plugins/octo-nvim/keys.lua
+  h_220433a6faf6b8 3-20,22-46,48-50,52
+lua/plugins/octo-nvim/opts/init.lua
+  h_220433a6faf6b8 5-10
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "a79a2fddb4befd822ad623e561f6c9580732b43d",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
