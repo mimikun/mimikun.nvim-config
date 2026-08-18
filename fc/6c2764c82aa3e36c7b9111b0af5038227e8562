@@ -1,0 +1,80 @@
+lua/plugins/nvim-hlslens/CODES/.editorconfig
+  h_220433a6faf6b8 1-19
+lua/plugins/nvim-hlslens/CODES/.github/ISSUE_TEMPLATE/bug_report.md
+  h_220433a6faf6b8 1-62
+lua/plugins/nvim-hlslens/CODES/.github/ISSUE_TEMPLATE/feature_request.md
+  h_220433a6faf6b8 1-20
+lua/plugins/nvim-hlslens/CODES/.gitignore
+  h_220433a6faf6b8 1-2
+lua/plugins/nvim-hlslens/CODES/.luarc.jsonc
+  h_220433a6faf6b8 1-32
+lua/plugins/nvim-hlslens/CODES/CHANGELOG.md
+  h_220433a6faf6b8 1-98
+lua/plugins/nvim-hlslens/CODES/LICENSE
+  h_220433a6faf6b8 1-29
+lua/plugins/nvim-hlslens/CODES/Makefile
+  h_220433a6faf6b8 1-18
+lua/plugins/nvim-hlslens/CODES/README.md
+  h_220433a6faf6b8 1-338
+lua/plugins/nvim-hlslens/CODES/doc/hlslens.txt
+  h_220433a6faf6b8 1-11
+lua/plugins/nvim-hlslens/CODES/lua/hlslens.lua
+  h_220433a6faf6b8 1-78
+lua/plugins/nvim-hlslens/CODES/lua/hlslens/cmdline/fold.lua
+  h_220433a6faf6b8 1-37
+lua/plugins/nvim-hlslens/CODES/lua/hlslens/cmdline/init.lua
+  h_220433a6faf6b8 1-350
+lua/plugins/nvim-hlslens/CODES/lua/hlslens/cmdline/parser.lua
+  h_220433a6faf6b8 1-194
+lua/plugins/nvim-hlslens/CODES/lua/hlslens/config.lua
+  h_220433a6faf6b8 1-21
+lua/plugins/nvim-hlslens/CODES/lua/hlslens/decorator.lua
+  h_220433a6faf6b8 1-67
+lua/plugins/nvim-hlslens/CODES/lua/hlslens/ext/ufo.lua
+  h_220433a6faf6b8 1-177
+lua/plugins/nvim-hlslens/CODES/lua/hlslens/highlight.lua
+  h_220433a6faf6b8 1-78
+lua/plugins/nvim-hlslens/CODES/lua/hlslens/lib/debounce.lua
+  h_220433a6faf6b8 1-79
+lua/plugins/nvim-hlslens/CODES/lua/hlslens/lib/disposable.lua
+  h_220433a6faf6b8 1-36
+lua/plugins/nvim-hlslens/CODES/lua/hlslens/lib/event.lua
+  h_220433a6faf6b8 1-56
+lua/plugins/nvim-hlslens/CODES/lua/hlslens/lib/throttle.lua
+  h_220433a6faf6b8 1-79
+lua/plugins/nvim-hlslens/CODES/lua/hlslens/main.lua
+  h_220433a6faf6b8 1-106
+lua/plugins/nvim-hlslens/CODES/lua/hlslens/position/init.lua
+  h_220433a6faf6b8 1-317
+lua/plugins/nvim-hlslens/CODES/lua/hlslens/position/range/qf.lua
+  h_220433a6faf6b8 1-136
+lua/plugins/nvim-hlslens/CODES/lua/hlslens/position/range/regex.lua
+  h_220433a6faf6b8 1-60
+lua/plugins/nvim-hlslens/CODES/lua/hlslens/qf.lua
+  h_220433a6faf6b8 1-100
+lua/plugins/nvim-hlslens/CODES/lua/hlslens/render/extmark.lua
+  h_220433a6faf6b8 1-140
+lua/plugins/nvim-hlslens/CODES/lua/hlslens/render/floatwin.lua
+  h_220433a6faf6b8 1-155
+lua/plugins/nvim-hlslens/CODES/lua/hlslens/render/init.lua
+  h_220433a6faf6b8 1-442
+lua/plugins/nvim-hlslens/CODES/lua/hlslens/render/winhl.lua
+  h_220433a6faf6b8 1-43
+lua/plugins/nvim-hlslens/CODES/lua/hlslens/utils.lua
+  h_220433a6faf6b8 1-247
+lua/plugins/nvim-hlslens/CODES/lua/hlslens/wffi.lua
+  h_220433a6faf6b8 1-143
+lua/plugins/nvim-hlslens/CODES/plugin/hlslens.vim
+  h_220433a6faf6b8 1-11
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "fc6c2764c82aa3e36c7b9111b0af5038227e8562",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
