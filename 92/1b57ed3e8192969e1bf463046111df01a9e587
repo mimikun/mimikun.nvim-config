@@ -1,0 +1,22 @@
+lua/plugins/nvim-hlslens/init.lua
+  s_cd378c562595b6::t_7434ec2dd28080 6
+lua/plugins/nvim-hlslens/keys.lua
+  s_cd378c562595b6::t_7434ec2dd28080 1-15,19-75
+  s_cd378c562595b6::t_1bf5eaaf756b71 76-78
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "921b57ed3e8192969e1bf463046111df01a9e587",
+  "prompts": {},
+  "sessions": {
+    "s_cd378c562595b6": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "c0c8c650-1c48-4911-bf27-8e2f875c3597",
+        "model": "claude-opus-5"
+      },
+      "human_author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
