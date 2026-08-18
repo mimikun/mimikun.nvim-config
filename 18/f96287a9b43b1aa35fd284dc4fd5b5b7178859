@@ -1,0 +1,32 @@
+lua/plugins/hover-notes-nvim/CODES/config.lua
+  h_220433a6faf6b8 4-14,18-19
+lua/plugins/hover-notes-nvim/CODES/constants.lua
+  h_220433a6faf6b8 6-8
+lua/plugins/hover-notes-nvim/CODES/core/category.lua
+  h_220433a6faf6b8 9-11,13-14,16,18,22-23,25,27-29,33,37,39-41,43-45,47,51,53-56
+lua/plugins/hover-notes-nvim/CODES/core/manager.lua
+  h_220433a6faf6b8 17-20,24-25,27,31-32,34-35,37,41-80,84-85,87-88,90-91,93-97,99-104,106,110-111,115-116,118,122-128,132-133,135,137-143,145-147,149,151-153,155-157,159
+lua/plugins/hover-notes-nvim/CODES/core/notes_db.lua
+  h_220433a6faf6b8 8,10-12,14,18-57,61-63,65-67,69-71,73,75-77,79-84,86-88,90,94-95,99,103-104,108-111,113,115-117,119-120,124-126
+lua/plugins/hover-notes-nvim/CODES/init.lua
+  h_220433a6faf6b8 11-13,15-17,21-45,49-52,54,56-59,61,65-94,98-105,109-114,118-122,126-130,134-136
+lua/plugins/hover-notes-nvim/CODES/ui/init.lua
+  h_220433a6faf6b8 7,11-14,16-20,24,26-30
+lua/plugins/hover-notes-nvim/CODES/utils.lua
+  h_220433a6faf6b8 4-7,11-13,15,17-19,21,23-25,27,31,33-35,39-40,42-46,48
+lua/plugins/hover-notes-nvim/cmds.lua
+  h_220433a6faf6b8 3-9
+lua/plugins/hover-notes-nvim/init.lua
+  h_220433a6faf6b8 5-6,12-13
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "18f96287a9b43b1aa35fd284dc4fd5b5b7178859",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
