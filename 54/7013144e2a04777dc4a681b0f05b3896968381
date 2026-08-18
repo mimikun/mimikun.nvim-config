@@ -1,0 +1,18 @@
+lua/plugins/octo-nvim/opts/gh_env.lua
+  h_220433a6faf6b8 1-5
+lua/plugins/octo-nvim/opts/init.lua
+  h_220433a6faf6b8 79,83,87,91,95,99,103,107-108,111,116,119-120,122,129,136,143,147,153,164,173,178,193-198,413,420,424
+lua/plugins/octo-nvim/opts/suppress_missing_scope.lua
+  h_220433a6faf6b8 1-6
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "547013144e2a04777dc4a681b0f05b3896968381",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
