@@ -1,0 +1,14 @@
+lua/plugins/hover-notes-nvim/opts.lua
+  h_220433a6faf6b8 3-7,11-13
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "d044b09bc66fa3c5da538ccc357ac838b5ae2b70",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
