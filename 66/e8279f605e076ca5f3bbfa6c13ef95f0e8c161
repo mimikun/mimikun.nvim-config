@@ -1,0 +1,30 @@
+lua/plugins/nvim-hlslens/.editorconfig
+  h_220433a6faf6b8 1-14
+lua/plugins/nvim-hlslens/cmds.lua
+  h_220433a6faf6b8 1-6
+lua/plugins/nvim-hlslens/dependencies.lua
+  h_220433a6faf6b8 1-16
+lua/plugins/nvim-hlslens/events.lua
+  h_220433a6faf6b8 1-6
+lua/plugins/nvim-hlslens/ft.lua
+  h_220433a6faf6b8 1-6
+lua/plugins/nvim-hlslens/init.lua
+  h_220433a6faf6b8 1-37
+lua/plugins/nvim-hlslens/keys.lua
+  h_220433a6faf6b8 1-23
+lua/plugins/nvim-hlslens/opts.lua
+  h_220433a6faf6b8 1-6
+lua/plugins/nvim-hlslens/stylua.toml
+  h_220433a6faf6b8 1-13
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "66e8279f605e076ca5f3bbfa6c13ef95f0e8c161",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
