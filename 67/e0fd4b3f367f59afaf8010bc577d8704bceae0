@@ -1,0 +1,24 @@
+lua/plugins/octo-nvim/opts/commands.lua
+  h_220433a6faf6b8 1-5
+lua/plugins/octo-nvim/opts/default_remote.lua
+  h_220433a6faf6b8 1-8
+lua/plugins/octo-nvim/opts/init.lua
+  h_220433a6faf6b8 4-54,56-57,59-60,62-63,65-66,68-69,71-72,74-90,92-108,112,431-433
+lua/plugins/octo-nvim/opts/picker_config.lua
+  h_220433a6faf6b8 1-80
+lua/plugins/octo-nvim/opts/ssh_aliases.lua
+  h_220433a6faf6b8 1-6
+lua/plugins/octo-nvim/opts/timeline_icons.lua
+  h_220433a6faf6b8 1-60
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "67e0fd4b3f367f59afaf8010bc577d8704bceae0",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
