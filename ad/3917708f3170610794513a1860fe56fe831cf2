@@ -1,0 +1,30 @@
+lua/plugins/hover-notes-nvim/.editorconfig
+  h_220433a6faf6b8 1-14
+lua/plugins/hover-notes-nvim/cmds.lua
+  h_220433a6faf6b8 1-6
+lua/plugins/hover-notes-nvim/dependencies.lua
+  h_220433a6faf6b8 1-16
+lua/plugins/hover-notes-nvim/events.lua
+  h_220433a6faf6b8 1-6
+lua/plugins/hover-notes-nvim/ft.lua
+  h_220433a6faf6b8 1-6
+lua/plugins/hover-notes-nvim/init.lua
+  h_220433a6faf6b8 1-37
+lua/plugins/hover-notes-nvim/keys.lua
+  h_220433a6faf6b8 1-23
+lua/plugins/hover-notes-nvim/opts.lua
+  h_220433a6faf6b8 1-6
+lua/plugins/hover-notes-nvim/stylua.toml
+  h_220433a6faf6b8 1-13
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "ad3917708f3170610794513a1860fe56fe831cf2",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
