@@ -1,0 +1,14 @@
+lua/plugins/octo-nvim/opts/_types.lua
+  h_220433a6faf6b8 1-165
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "a240819ff42b5f7c1cb0c527a0179a25c1aa88e3",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
