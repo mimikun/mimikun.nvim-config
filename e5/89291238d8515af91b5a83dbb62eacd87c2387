@@ -1,0 +1,120 @@
+lua/plugins/nvim-ufo/CODES/.editorconfig
+  h_220433a6faf6b8 1-22
+lua/plugins/nvim-ufo/CODES/.github/ISSUE_TEMPLATE/bug_report.yml
+  h_220433a6faf6b8 1-65
+lua/plugins/nvim-ufo/CODES/.github/ISSUE_TEMPLATE/config.yml
+  h_220433a6faf6b8 1
+lua/plugins/nvim-ufo/CODES/.github/ISSUE_TEMPLATE/feature_request.yml
+  h_220433a6faf6b8 1-23
+lua/plugins/nvim-ufo/CODES/.github/workflows/luarocks.yml
+  h_220433a6faf6b8 1-31
+lua/plugins/nvim-ufo/CODES/.gitignore
+  h_220433a6faf6b8 1-2
+lua/plugins/nvim-ufo/CODES/.luarc.jsonc
+  h_220433a6faf6b8 1-29
+lua/plugins/nvim-ufo/CODES/CHANGELOG.md
+  h_220433a6faf6b8 1-220
+lua/plugins/nvim-ufo/CODES/LICENSE
+  h_220433a6faf6b8 1-29
+lua/plugins/nvim-ufo/CODES/Makefile
+  h_220433a6faf6b8 1-18
+lua/plugins/nvim-ufo/CODES/README.md
+  h_220433a6faf6b8 1-411
+lua/plugins/nvim-ufo/CODES/coc-extension/index.js
+  h_220433a6faf6b8 1-53
+lua/plugins/nvim-ufo/CODES/doc/example.lua
+  h_220433a6faf6b8 1-186
+lua/plugins/nvim-ufo/CODES/doc/ufo.txt
+  h_220433a6faf6b8 1-17
+lua/plugins/nvim-ufo/CODES/lua/ufo.lua
+  h_220433a6faf6b8 1-199
+lua/plugins/nvim-ufo/CODES/lua/ufo/action.lua
+  h_220433a6faf6b8 1-196
+lua/plugins/nvim-ufo/CODES/lua/ufo/bufmanager.lua
+  h_220433a6faf6b8 1-115
+lua/plugins/nvim-ufo/CODES/lua/ufo/config.lua
+  h_220433a6faf6b8 1-93
+lua/plugins/nvim-ufo/CODES/lua/ufo/decorator.lua
+  h_220433a6faf6b8 1-434
+lua/plugins/nvim-ufo/CODES/lua/ufo/fold/driver.lua
+  h_220433a6faf6b8 1-173
+lua/plugins/nvim-ufo/CODES/lua/ufo/fold/init.lua
+  h_220433a6faf6b8 1-242
+lua/plugins/nvim-ufo/CODES/lua/ufo/fold/manager.lua
+  h_220433a6faf6b8 1-226
+lua/plugins/nvim-ufo/CODES/lua/ufo/highlight.lua
+  h_220433a6faf6b8 1-116
+lua/plugins/nvim-ufo/CODES/lua/ufo/lib/debounce.lua
+  h_220433a6faf6b8 1-78
+lua/plugins/nvim-ufo/CODES/lua/ufo/lib/disposable.lua
+  h_220433a6faf6b8 1-36
+lua/plugins/nvim-ufo/CODES/lua/ufo/lib/event.lua
+  h_220433a6faf6b8 1-58
+lua/plugins/nvim-ufo/CODES/lua/ufo/lib/log.lua
+  h_220433a6faf6b8 1-106
+lua/plugins/nvim-ufo/CODES/lua/ufo/main.lua
+  h_220433a6faf6b8 1-207
+lua/plugins/nvim-ufo/CODES/lua/ufo/model/buffer.lua
+  h_220433a6faf6b8 1-247
+lua/plugins/nvim-ufo/CODES/lua/ufo/model/foldbuffer.lua
+  h_220433a6faf6b8 1-276
+lua/plugins/nvim-ufo/CODES/lua/ufo/model/foldedline.lua
+  h_220433a6faf6b8 1-85
+lua/plugins/nvim-ufo/CODES/lua/ufo/model/foldingrange.lua
+  h_220433a6faf6b8 1-36
+lua/plugins/nvim-ufo/CODES/lua/ufo/model/linesize.lua
+  h_220433a6faf6b8 1-119
+lua/plugins/nvim-ufo/CODES/lua/ufo/model/window.lua
+  h_220433a6faf6b8 1-172
+lua/plugins/nvim-ufo/CODES/lua/ufo/preview/floatwin.lua
+  h_220433a6faf6b8 1-247
+lua/plugins/nvim-ufo/CODES/lua/ufo/preview/init.lua
+  h_220433a6faf6b8 1-410
+lua/plugins/nvim-ufo/CODES/lua/ufo/preview/keymap.lua
+  h_220433a6faf6b8 1-97
+lua/plugins/nvim-ufo/CODES/lua/ufo/preview/scrollbar.lua
+  h_220433a6faf6b8 1-108
+lua/plugins/nvim-ufo/CODES/lua/ufo/preview/winbar.lua
+  h_220433a6faf6b8 1-80
+lua/plugins/nvim-ufo/CODES/lua/ufo/provider/indent.lua
+  h_220433a6faf6b8 1-203
+lua/plugins/nvim-ufo/CODES/lua/ufo/provider/init.lua
+  h_220433a6faf6b8 1-82
+lua/plugins/nvim-ufo/CODES/lua/ufo/provider/lsp/coc.lua
+  h_220433a6faf6b8 1-68
+lua/plugins/nvim-ufo/CODES/lua/ufo/provider/lsp/fastfailure.lua
+  h_220433a6faf6b8 1-18
+lua/plugins/nvim-ufo/CODES/lua/ufo/provider/lsp/init.lua
+  h_220433a6faf6b8 1-114
+lua/plugins/nvim-ufo/CODES/lua/ufo/provider/lsp/nvim.lua
+  h_220433a6faf6b8 1-101
+lua/plugins/nvim-ufo/CODES/lua/ufo/provider/marker.lua
+  h_220433a6faf6b8 1-221
+lua/plugins/nvim-ufo/CODES/lua/ufo/provider/treesitter.lua
+  h_220433a6faf6b8 1-221
+lua/plugins/nvim-ufo/CODES/lua/ufo/render/extmark.lua
+  h_220433a6faf6b8 1-76
+lua/plugins/nvim-ufo/CODES/lua/ufo/render/init.lua
+  h_220433a6faf6b8 1-308
+lua/plugins/nvim-ufo/CODES/lua/ufo/render/match.lua
+  h_220433a6faf6b8 1-49
+lua/plugins/nvim-ufo/CODES/lua/ufo/render/treesitter.lua
+  h_220433a6faf6b8 1-100
+lua/plugins/nvim-ufo/CODES/lua/ufo/utils.lua
+  h_220433a6faf6b8 1-371
+lua/plugins/nvim-ufo/CODES/lua/ufo/wffi.lua
+  h_220433a6faf6b8 1-100
+lua/plugins/nvim-ufo/CODES/package.json
+  h_220433a6faf6b8 1-16
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "e589291238d8515af91b5a83dbb62eacd87c2387",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
