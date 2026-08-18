@@ -1,0 +1,96 @@
+lua/plugins/nvim-bqf/CODES/.editorconfig
+  h_220433a6faf6b8 1-22
+lua/plugins/nvim-bqf/CODES/.github/ISSUE_TEMPLATE/bug_report.yml
+  h_220433a6faf6b8 1-43
+lua/plugins/nvim-bqf/CODES/.github/ISSUE_TEMPLATE/config.yml
+  h_220433a6faf6b8 1
+lua/plugins/nvim-bqf/CODES/.github/ISSUE_TEMPLATE/feature_request.yml
+  h_220433a6faf6b8 1-23
+lua/plugins/nvim-bqf/CODES/.gitignore
+  h_220433a6faf6b8 1-2
+lua/plugins/nvim-bqf/CODES/.luarc.jsonc
+  h_220433a6faf6b8 1-29
+lua/plugins/nvim-bqf/CODES/CHANGELOG.md
+  h_220433a6faf6b8 1-250
+lua/plugins/nvim-bqf/CODES/LICENSE
+  h_220433a6faf6b8 1-29
+lua/plugins/nvim-bqf/CODES/Makefile
+  h_220433a6faf6b8 1-18
+lua/plugins/nvim-bqf/CODES/README.md
+  h_220433a6faf6b8 1-710
+lua/plugins/nvim-bqf/CODES/after/ftplugin/qf/bqf.vim
+  h_220433a6faf6b8 1-10
+lua/plugins/nvim-bqf/CODES/doc/bqf.txt
+  h_220433a6faf6b8 1-15
+lua/plugins/nvim-bqf/CODES/lua/bqf.lua
+  h_220433a6faf6b8 1-75
+lua/plugins/nvim-bqf/CODES/lua/bqf/config.lua
+  h_220433a6faf6b8 1-109
+lua/plugins/nvim-bqf/CODES/lua/bqf/filter/base.lua
+  h_220433a6faf6b8 1-61
+lua/plugins/nvim-bqf/CODES/lua/bqf/filter/fzf.lua
+  h_220433a6faf6b8 1-608
+lua/plugins/nvim-bqf/CODES/lua/bqf/keymap.lua
+  h_220433a6faf6b8 1-207
+lua/plugins/nvim-bqf/CODES/lua/bqf/layout.lua
+  h_220433a6faf6b8 1-114
+lua/plugins/nvim-bqf/CODES/lua/bqf/lib/debounce.lua
+  h_220433a6faf6b8 1-75
+lua/plugins/nvim-bqf/CODES/lua/bqf/lib/log.lua
+  h_220433a6faf6b8 1-105
+lua/plugins/nvim-bqf/CODES/lua/bqf/lib/throttle.lua
+  h_220433a6faf6b8 1-76
+lua/plugins/nvim-bqf/CODES/lua/bqf/magicwin/core.lua
+  h_220433a6faf6b8 1-280
+lua/plugins/nvim-bqf/CODES/lua/bqf/magicwin/handler.lua
+  h_220433a6faf6b8 1-410
+lua/plugins/nvim-bqf/CODES/lua/bqf/magicwin/lsize.lua
+  h_220433a6faf6b8 1-181
+lua/plugins/nvim-bqf/CODES/lua/bqf/magicwin/session.lua
+  h_220433a6faf6b8 1-75
+lua/plugins/nvim-bqf/CODES/lua/bqf/main.lua
+  h_220433a6faf6b8 1-149
+lua/plugins/nvim-bqf/CODES/lua/bqf/preview/extmark.lua
+  h_220433a6faf6b8 1-60
+lua/plugins/nvim-bqf/CODES/lua/bqf/preview/floatwin.lua
+  h_220433a6faf6b8 1-265
+lua/plugins/nvim-bqf/CODES/lua/bqf/preview/handler.lua
+  h_220433a6faf6b8 1-557
+lua/plugins/nvim-bqf/CODES/lua/bqf/preview/scrollbar.lua
+  h_220433a6faf6b8 1-114
+lua/plugins/nvim-bqf/CODES/lua/bqf/preview/session.lua
+  h_220433a6faf6b8 1-223
+lua/plugins/nvim-bqf/CODES/lua/bqf/preview/title.lua
+  h_220433a6faf6b8 1-57
+lua/plugins/nvim-bqf/CODES/lua/bqf/preview/treesitter.lua
+  h_220433a6faf6b8 1-148
+lua/plugins/nvim-bqf/CODES/lua/bqf/qfwin/handler.lua
+  h_220433a6faf6b8 1-275
+lua/plugins/nvim-bqf/CODES/lua/bqf/qfwin/list.lua
+  h_220433a6faf6b8 1-277
+lua/plugins/nvim-bqf/CODES/lua/bqf/qfwin/session.lua
+  h_220433a6faf6b8 1-107
+lua/plugins/nvim-bqf/CODES/lua/bqf/qfwin/sign.lua
+  h_220433a6faf6b8 1-160
+lua/plugins/nvim-bqf/CODES/lua/bqf/struct/lru.lua
+  h_220433a6faf6b8 1-166
+lua/plugins/nvim-bqf/CODES/lua/bqf/utils.lua
+  h_220433a6faf6b8 1-520
+lua/plugins/nvim-bqf/CODES/lua/bqf/wffi.lua
+  h_220433a6faf6b8 1-74
+lua/plugins/nvim-bqf/CODES/lua/bqf/wpos.lua
+  h_220433a6faf6b8 1-141
+lua/plugins/nvim-bqf/CODES/plugin/bqf.vim
+  h_220433a6faf6b8 1-7
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "92b5d0f9876769ba47559eab6ae42860554daee5",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
