@@ -1,0 +1,14 @@
+lua/plugins/nvim-hlslens/init.lua
+  h_220433a6faf6b8 7
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "82942188e9bd8477b5fd1389eb0a83b82835d053",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
