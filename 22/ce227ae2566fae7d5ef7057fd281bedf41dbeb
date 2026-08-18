@@ -1,0 +1,38 @@
+lua/plugins/hover-notes-nvim/CODES/.gitignore
+  h_220433a6faf6b8 1-41
+lua/plugins/hover-notes-nvim/CODES/LICENSE
+  h_220433a6faf6b8 1-21
+lua/plugins/hover-notes-nvim/CODES/README.md
+  h_220433a6faf6b8 1-91
+lua/plugins/hover-notes-nvim/CODES/lua/hover-notes/config.lua
+  h_220433a6faf6b8 1-22
+lua/plugins/hover-notes-nvim/CODES/lua/hover-notes/constants.lua
+  h_220433a6faf6b8 1-11
+lua/plugins/hover-notes-nvim/CODES/lua/hover-notes/core/category.lua
+  h_220433a6faf6b8 1-59
+lua/plugins/hover-notes-nvim/CODES/lua/hover-notes/core/manager.lua
+  h_220433a6faf6b8 1-162
+lua/plugins/hover-notes-nvim/CODES/lua/hover-notes/core/notes_db.lua
+  h_220433a6faf6b8 1-129
+lua/plugins/hover-notes-nvim/CODES/lua/hover-notes/init.lua
+  h_220433a6faf6b8 1-138
+lua/plugins/hover-notes-nvim/CODES/lua/hover-notes/ui/float_editor.lua
+  h_220433a6faf6b8 1-257
+lua/plugins/hover-notes-nvim/CODES/lua/hover-notes/ui/init.lua
+  h_220433a6faf6b8 1-33
+lua/plugins/hover-notes-nvim/CODES/lua/hover-notes/utils.lua
+  h_220433a6faf6b8 1-51
+lua/plugins/hover-notes-nvim/CODES/plugin/hover-notes.lua
+  h_220433a6faf6b8 1-47
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "22ce227ae2566fae7d5ef7057fd281bedf41dbeb",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
