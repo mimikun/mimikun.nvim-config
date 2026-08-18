@@ -1,0 +1,20 @@
+lua/plugins/nvim-hlslens/README.md
+  h_220433a6faf6b8 3,5,7-9,11-14,16-19,22,24-25,27-29,31-42,44-45,48,50,52-54,56-60,62-89
+lua/plugins/nvim-hlslens/cmds.lua
+  h_220433a6faf6b8 3-5
+lua/plugins/nvim-hlslens/dependencies.lua
+  h_220433a6faf6b8 3
+lua/plugins/nvim-hlslens/init.lua
+  h_220433a6faf6b8 6,9,14-45
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "df7a38ce571aa28803676a95f9ef6ac1e908f883",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
