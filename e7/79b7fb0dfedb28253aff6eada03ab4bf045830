@@ -1,0 +1,20 @@
+lua/plugins/nvim-ufo/README.md
+  h_220433a6faf6b8 3
+lua/plugins/nvim-ufo/cmds.lua
+  h_220433a6faf6b8 3-9
+lua/plugins/nvim-ufo/dependencies.lua
+  h_220433a6faf6b8 3
+lua/plugins/nvim-ufo/init.lua
+  h_220433a6faf6b8 19,21-22
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "e779b7fb0dfedb28253aff6eada03ab4bf045830",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
