@@ -1,0 +1,276 @@
+lua/plugins/octo-nvim/CODES/.agents/skills/execute-lua/SKILL.md
+  h_220433a6faf6b8 1-147
+lua/plugins/octo-nvim/CODES/.agents/skills/timeline-items/SKILL.md
+  h_220433a6faf6b8 1-241
+lua/plugins/octo-nvim/CODES/.github/ISSUE_TEMPLATE/bug_report.md
+  h_220433a6faf6b8 1-21
+lua/plugins/octo-nvim/CODES/.github/ISSUE_TEMPLATE/feature_request.md
+  h_220433a6faf6b8 1-14
+lua/plugins/octo-nvim/CODES/.github/PULL_REQUEST_TEMPLATE.md
+  h_220433a6faf6b8 1-24
+lua/plugins/octo-nvim/CODES/.github/dependabot.yml
+  h_220433a6faf6b8 1-9
+lua/plugins/octo-nvim/CODES/.github/workflows/.luarc.json
+  h_220433a6faf6b8 1-34
+lua/plugins/octo-nvim/CODES/.github/workflows/labels.yml
+  h_220433a6faf6b8 1-15
+lua/plugins/octo-nvim/CODES/.github/workflows/lint.yml
+  h_220433a6faf6b8 1-18
+lua/plugins/octo-nvim/CODES/.github/workflows/semantic-pr.yml
+  h_220433a6faf6b8 1-55
+lua/plugins/octo-nvim/CODES/.github/workflows/tests.yml
+  h_220433a6faf6b8 1-47
+lua/plugins/octo-nvim/CODES/.github/workflows/typecheck.yml
+  h_220433a6faf6b8 1-69
+lua/plugins/octo-nvim/CODES/.gitignore
+  h_220433a6faf6b8 1
+lua/plugins/octo-nvim/CODES/.graphqlrc
+  h_220433a6faf6b8 1-2
+lua/plugins/octo-nvim/CODES/.pre-commit-config.yaml
+  h_220433a6faf6b8 1-31
+lua/plugins/octo-nvim/CODES/.stylua.toml
+  h_220433a6faf6b8 1-7
+lua/plugins/octo-nvim/CODES/CODE_OF_CONDUCT.md
+  h_220433a6faf6b8 1-72
+lua/plugins/octo-nvim/CODES/CONTRIBUTING.md
+  h_220433a6faf6b8 1-70
+lua/plugins/octo-nvim/CODES/LICENSE
+  h_220433a6faf6b8 1-21
+lua/plugins/octo-nvim/CODES/Makefile
+  h_220433a6faf6b8 1-12
+lua/plugins/octo-nvim/CODES/README.md
+  h_220433a6faf6b8 1-987
+lua/plugins/octo-nvim/CODES/after/queries/lua/injections.scm
+  h_220433a6faf6b8 1-40
+lua/plugins/octo-nvim/CODES/after/syntax/octo.vim
+  h_220433a6faf6b8 1-33
+lua/plugins/octo-nvim/CODES/doc/octo.txt
+  h_220433a6faf6b8 1-666
+lua/plugins/octo-nvim/CODES/lua/octo/autocmds.lua
+  h_220433a6faf6b8 1-115
+lua/plugins/octo-nvim/CODES/lua/octo/commands.lua
+  h_220433a6faf6b8 1-3024
+lua/plugins/octo-nvim/CODES/lua/octo/completion/init.lua
+  h_220433a6faf6b8 1-101
+lua/plugins/octo-nvim/CODES/lua/octo/completion/search.lua
+  h_220433a6faf6b8 1-466
+lua/plugins/octo-nvim/CODES/lua/octo/config.lua
+  h_220433a6faf6b8 1-878
+lua/plugins/octo-nvim/CODES/lua/octo/constants.lua
+  h_220433a6faf6b8 1-36
+lua/plugins/octo-nvim/CODES/lua/octo/context.lua
+  h_220433a6faf6b8 1-71
+lua/plugins/octo-nvim/CODES/lua/octo/date.lua
+  h_220433a6faf6b8 1-1205
+lua/plugins/octo-nvim/CODES/lua/octo/debug/buffer.lua
+  h_220433a6faf6b8 1-715
+lua/plugins/octo-nvim/CODES/lua/octo/debug/init.lua
+  h_220433a6faf6b8 1-83
+lua/plugins/octo-nvim/CODES/lua/octo/discussions.lua
+  h_220433a6faf6b8 1-166
+lua/plugins/octo-nvim/CODES/lua/octo/folds.lua
+  h_220433a6faf6b8 1-305
+lua/plugins/octo-nvim/CODES/lua/octo/gh/fragments.lua
+  h_220433a6faf6b8 1-1845
+lua/plugins/octo-nvim/CODES/lua/octo/gh/graphql.lua
+  h_220433a6faf6b8 1-32
+lua/plugins/octo-nvim/CODES/lua/octo/gh/headers.lua
+  h_220433a6faf6b8 1-13
+lua/plugins/octo-nvim/CODES/lua/octo/gh/init.lua
+  h_220433a6faf6b8 1-591
+lua/plugins/octo-nvim/CODES/lua/octo/gh/mutations.lua
+  h_220433a6faf6b8 1-1340
+lua/plugins/octo-nvim/CODES/lua/octo/gh/parser.lua
+  h_220433a6faf6b8 1-56
+lua/plugins/octo-nvim/CODES/lua/octo/gh/queries.lua
+  h_220433a6faf6b8 1-1581
+lua/plugins/octo-nvim/CODES/lua/octo/gh/timeline_registry.lua
+  h_220433a6faf6b8 1-51
+lua/plugins/octo-nvim/CODES/lua/octo/health.lua
+  h_220433a6faf6b8 1-250
+lua/plugins/octo-nvim/CODES/lua/octo/init.lua
+  h_220433a6faf6b8 1-438
+lua/plugins/octo-nvim/CODES/lua/octo/log.lua
+  h_220433a6faf6b8 1-13
+lua/plugins/octo-nvim/CODES/lua/octo/logins.lua
+  h_220433a6faf6b8 1-42
+lua/plugins/octo-nvim/CODES/lua/octo/mappings.lua
+  h_220433a6faf6b8 1-552
+lua/plugins/octo-nvim/CODES/lua/octo/model/body-metadata.lua
+  h_220433a6faf6b8 1-40
+lua/plugins/octo-nvim/CODES/lua/octo/model/comment-metadata.lua
+  h_220433a6faf6b8 1-72
+lua/plugins/octo-nvim/CODES/lua/octo/model/octo-buffer.lua
+  h_220433a6faf6b8 1-1197
+lua/plugins/octo-nvim/CODES/lua/octo/model/pull-request.lua
+  h_220433a6faf6b8 1-271
+lua/plugins/octo-nvim/CODES/lua/octo/model/thread-metadata.lua
+  h_220433a6faf6b8 1-33
+lua/plugins/octo-nvim/CODES/lua/octo/model/title-metadata.lua
+  h_220433a6faf6b8 1-32
+lua/plugins/octo-nvim/CODES/lua/octo/navigation.lua
+  h_220433a6faf6b8 1-220
+lua/plugins/octo-nvim/CODES/lua/octo/notifications.lua
+  h_220433a6faf6b8 1-141
+lua/plugins/octo-nvim/CODES/lua/octo/notify.lua
+  h_220433a6faf6b8 1-26
+lua/plugins/octo-nvim/CODES/lua/octo/picker.lua
+  h_220433a6faf6b8 1-64
+lua/plugins/octo-nvim/CODES/lua/octo/pickers/default/provider.lua
+  h_220433a6faf6b8 1-1436
+lua/plugins/octo-nvim/CODES/lua/octo/pickers/fzf-lua/entry_maker.lua
+  h_220433a6faf6b8 1-283
+lua/plugins/octo-nvim/CODES/lua/octo/pickers/fzf-lua/log.lua
+  h_220433a6faf6b8 1
+lua/plugins/octo-nvim/CODES/lua/octo/pickers/fzf-lua/pickers/actions.lua
+  h_220433a6faf6b8 1-32
+lua/plugins/octo-nvim/CODES/lua/octo/pickers/fzf-lua/pickers/assigned_labels.lua
+  h_220433a6faf6b8 1-72
+lua/plugins/octo-nvim/CODES/lua/octo/pickers/fzf-lua/pickers/assignees.lua
+  h_220433a6faf6b8 1-64
+lua/plugins/octo-nvim/CODES/lua/octo/pickers/fzf-lua/pickers/changed_files.lua
+  h_220433a6faf6b8 1-49
+lua/plugins/octo-nvim/CODES/lua/octo/pickers/fzf-lua/pickers/commits.lua
+  h_220433a6faf6b8 1-49
+lua/plugins/octo-nvim/CODES/lua/octo/pickers/fzf-lua/pickers/fzf_actions.lua
+  h_220433a6faf6b8 1-39
+lua/plugins/octo-nvim/CODES/lua/octo/pickers/fzf-lua/pickers/gists.lua
+  h_220433a6faf6b8 1-103
+lua/plugins/octo-nvim/CODES/lua/octo/pickers/fzf-lua/pickers/issue_templates.lua
+  h_220433a6faf6b8 1-35
+lua/plugins/octo-nvim/CODES/lua/octo/pickers/fzf-lua/pickers/issues.lua
+  h_220433a6faf6b8 1-100
+lua/plugins/octo-nvim/CODES/lua/octo/pickers/fzf-lua/pickers/labels.lua
+  h_220433a6faf6b8 1-60
+lua/plugins/octo-nvim/CODES/lua/octo/pickers/fzf-lua/pickers/notifications.lua
+  h_220433a6faf6b8 1-136
+lua/plugins/octo-nvim/CODES/lua/octo/pickers/fzf-lua/pickers/pending_threads.lua
+  h_220433a6faf6b8 1-44
+lua/plugins/octo-nvim/CODES/lua/octo/pickers/fzf-lua/pickers/project_cards_v2.lua
+  h_220433a6faf6b8 1-56
+lua/plugins/octo-nvim/CODES/lua/octo/pickers/fzf-lua/pickers/project_columns_v2.lua
+  h_220433a6faf6b8 1-94
+lua/plugins/octo-nvim/CODES/lua/octo/pickers/fzf-lua/pickers/prs.lua
+  h_220433a6faf6b8 1-114
+lua/plugins/octo-nvim/CODES/lua/octo/pickers/fzf-lua/pickers/repos.lua
+  h_220433a6faf6b8 1-64
+lua/plugins/octo-nvim/CODES/lua/octo/pickers/fzf-lua/pickers/review_commits.lua
+  h_220433a6faf6b8 1-83
+lua/plugins/octo-nvim/CODES/lua/octo/pickers/fzf-lua/pickers/search.lua
+  h_220433a6faf6b8 1-115
+lua/plugins/octo-nvim/CODES/lua/octo/pickers/fzf-lua/pickers/users.lua
+  h_220433a6faf6b8 1-121
+lua/plugins/octo-nvim/CODES/lua/octo/pickers/fzf-lua/pickers/utils.lua
+  h_220433a6faf6b8 1-104
+lua/plugins/octo-nvim/CODES/lua/octo/pickers/fzf-lua/previewers.lua
+  h_220433a6faf6b8 1-433
+lua/plugins/octo-nvim/CODES/lua/octo/pickers/fzf-lua/provider.lua
+  h_220433a6faf6b8 1-32
+lua/plugins/octo-nvim/CODES/lua/octo/pickers/snacks/provider.lua
+  h_220433a6faf6b8 1-1778
+lua/plugins/octo-nvim/CODES/lua/octo/pickers/telescope/entry_maker.lua
+  h_220433a6faf6b8 1-847
+lua/plugins/octo-nvim/CODES/lua/octo/pickers/telescope/previewers.lua
+  h_220433a6faf6b8 1-319
+lua/plugins/octo-nvim/CODES/lua/octo/pickers/telescope/provider.lua
+  h_220433a6faf6b8 1-1840
+lua/plugins/octo-nvim/CODES/lua/octo/polling.lua
+  h_220433a6faf6b8 1-253
+lua/plugins/octo-nvim/CODES/lua/octo/ratelimit.lua
+  h_220433a6faf6b8 1-199
+lua/plugins/octo-nvim/CODES/lua/octo/release.lua
+  h_220433a6faf6b8 1-28
+lua/plugins/octo-nvim/CODES/lua/octo/reviews/file-entry.lua
+  h_220433a6faf6b8 1-626
+lua/plugins/octo-nvim/CODES/lua/octo/reviews/file-panel.lua
+  h_220433a6faf6b8 1-494
+lua/plugins/octo-nvim/CODES/lua/octo/reviews/init.lua
+  h_220433a6faf6b8 1-708
+lua/plugins/octo-nvim/CODES/lua/octo/reviews/layout.lua
+  h_220433a6faf6b8 1-350
+lua/plugins/octo-nvim/CODES/lua/octo/reviews/renderer.lua
+  h_220433a6faf6b8 1-122
+lua/plugins/octo-nvim/CODES/lua/octo/reviews/rev.lua
+  h_220433a6faf6b8 1-31
+lua/plugins/octo-nvim/CODES/lua/octo/reviews/thread-panel.lua
+  h_220433a6faf6b8 1-165
+lua/plugins/octo-nvim/CODES/lua/octo/reviews/thread.lua
+  h_220433a6faf6b8 1-97
+lua/plugins/octo-nvim/CODES/lua/octo/ui/bubbles.lua
+  h_220433a6faf6b8 1-121
+lua/plugins/octo-nvim/CODES/lua/octo/ui/colors.lua
+  h_220433a6faf6b8 1-298
+lua/plugins/octo-nvim/CODES/lua/octo/ui/signs.lua
+  h_220433a6faf6b8 1-86
+lua/plugins/octo-nvim/CODES/lua/octo/ui/statuscolumn.lua
+  h_220433a6faf6b8 1-90
+lua/plugins/octo-nvim/CODES/lua/octo/ui/text-chunk-builder.lua
+  h_220433a6faf6b8 1-335
+lua/plugins/octo-nvim/CODES/lua/octo/ui/window.lua
+  h_220433a6faf6b8 1-184
+lua/plugins/octo-nvim/CODES/lua/octo/ui/writers.lua
+  h_220433a6faf6b8 1-3891
+lua/plugins/octo-nvim/CODES/lua/octo/uri.lua
+  h_220433a6faf6b8 1-238
+lua/plugins/octo-nvim/CODES/lua/octo/utils.lua
+  h_220433a6faf6b8 1-2280
+lua/plugins/octo-nvim/CODES/lua/octo/workflow_runs.lua
+  h_220433a6faf6b8 1-1174
+lua/plugins/octo-nvim/CODES/lua/telescope/_extensions/octo.lua
+  h_220433a6faf6b8 1-4
+lua/plugins/octo-nvim/CODES/lua/tests/minimal.lua
+  h_220433a6faf6b8 1-48
+lua/plugins/octo-nvim/CODES/lua/tests/minimal_init.vim
+  h_220433a6faf6b8 1-13
+lua/plugins/octo-nvim/CODES/lua/tests/octo/config_spec.lua
+  h_220433a6faf6b8 1-223
+lua/plugins/octo-nvim/CODES/lua/tests/plenary/config_spec.lua
+  h_220433a6faf6b8 1-84
+lua/plugins/octo-nvim/CODES/lua/tests/plenary/context_spec.lua
+  h_220433a6faf6b8 1-95
+lua/plugins/octo-nvim/CODES/lua/tests/plenary/copy_branch_spec.lua
+  h_220433a6faf6b8 1-270
+lua/plugins/octo-nvim/CODES/lua/tests/plenary/details_folds_spec.lua
+  h_220433a6faf6b8 1-592
+lua/plugins/octo-nvim/CODES/lua/tests/plenary/gh_graphql_spec.lua
+  h_220433a6faf6b8 1-53
+lua/plugins/octo-nvim/CODES/lua/tests/plenary/gh_spec.lua
+  h_220433a6faf6b8 1-369
+lua/plugins/octo-nvim/CODES/lua/tests/plenary/merge_pr_spec.lua
+  h_220433a6faf6b8 1-268
+lua/plugins/octo-nvim/CODES/lua/tests/plenary/renderer_spec.lua
+  h_220433a6faf6b8 1-76
+lua/plugins/octo-nvim/CODES/lua/tests/plenary/text_chunk_builder_spec.lua
+  h_220433a6faf6b8 1-294
+lua/plugins/octo-nvim/CODES/lua/tests/plenary/timeline/assignment_events_spec.lua
+  h_220433a6faf6b8 1-330
+lua/plugins/octo-nvim/CODES/lua/tests/plenary/timeline/label_events_spec.lua
+  h_220433a6faf6b8 1-278
+lua/plugins/octo-nvim/CODES/lua/tests/plenary/timeline/review_requested_events_spec.lua
+  h_220433a6faf6b8 1-324
+lua/plugins/octo-nvim/CODES/lua/tests/plenary/uri_spec.lua
+  h_220433a6faf6b8 1-245
+lua/plugins/octo-nvim/CODES/lua/tests/plenary/utils_spec.lua
+  h_220433a6faf6b8 1-285
+lua/plugins/octo-nvim/CODES/lua/tests/test_utils.lua
+  h_220433a6faf6b8 1-145
+lua/plugins/octo-nvim/CODES/lua/tests/vusted/load_buffer_stale_spec.lua
+  h_220433a6faf6b8 1-135
+lua/plugins/octo-nvim/CODES/scripts/example-timeline.lua
+  h_220433a6faf6b8 1-546
+lua/plugins/octo-nvim/CODES/scripts/gen-config-docs.sh
+  h_220433a6faf6b8 1-48
+lua/plugins/octo-nvim/CODES/scripts/no-vim-notify.sh
+  h_220433a6faf6b8 1-24
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "d9d3d084fffc3c6723291120025eaa7a7e4c1295",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
