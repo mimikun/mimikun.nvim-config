@@ -1,0 +1,40 @@
+lua/plugins/octo-nvim/opts/colors.lua
+  h_220433a6faf6b8 1-444
+lua/plugins/octo-nvim/opts/debug.lua
+  h_220433a6faf6b8 1-444
+lua/plugins/octo-nvim/opts/discussions.lua
+  h_220433a6faf6b8 1-444
+lua/plugins/octo-nvim/opts/file_panel.lua
+  h_220433a6faf6b8 1-444
+lua/plugins/octo-nvim/opts/init.lua
+  h_220433a6faf6b8 432-444
+lua/plugins/octo-nvim/opts/issues.lua
+  h_220433a6faf6b8 1-444
+lua/plugins/octo-nvim/opts/mappings.lua
+  h_220433a6faf6b8 1-444
+lua/plugins/octo-nvim/opts/notifications.lua
+  h_220433a6faf6b8 1-444
+lua/plugins/octo-nvim/opts/poll.lua
+  h_220433a6faf6b8 1-444
+lua/plugins/octo-nvim/opts/pull_requests.lua
+  h_220433a6faf6b8 1-444
+lua/plugins/octo-nvim/opts/reviews.lua
+  h_220433a6faf6b8 1-444
+lua/plugins/octo-nvim/opts/runs.lua
+  h_220433a6faf6b8 1-444
+lua/plugins/octo-nvim/opts/search.lua
+  h_220433a6faf6b8 1-444
+lua/plugins/octo-nvim/opts/ui.lua
+  h_220433a6faf6b8 1-444
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "af4dfba3a5b74fb1008237875670a255c7799113",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
