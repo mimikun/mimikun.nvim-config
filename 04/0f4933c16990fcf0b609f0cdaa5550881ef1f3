@@ -1,0 +1,34 @@
+lua/plugins/homegrown-nvim/opts/bracket_nav.lua
+  h_220433a6faf6b8 1-85
+lua/plugins/homegrown-nvim/opts/copy.lua
+  h_220433a6faf6b8 1-85
+lua/plugins/homegrown-nvim/opts/dir.lua
+  h_220433a6faf6b8 1-85
+lua/plugins/homegrown-nvim/opts/highlighter.lua
+  h_220433a6faf6b8 1-85
+lua/plugins/homegrown-nvim/opts/md_preview.lua
+  h_220433a6faf6b8 1-85
+lua/plugins/homegrown-nvim/opts/pairs.lua
+  h_220433a6faf6b8 1-85
+lua/plugins/homegrown-nvim/opts/replace.lua
+  h_220433a6faf6b8 1-85
+lua/plugins/homegrown-nvim/opts/runner.lua
+  h_220433a6faf6b8 1-85
+lua/plugins/homegrown-nvim/opts/terminal.lua
+  h_220433a6faf6b8 1-85
+lua/plugins/homegrown-nvim/opts/tiling.lua
+  h_220433a6faf6b8 1-85
+lua/plugins/homegrown-nvim/opts/tmux.lua
+  h_220433a6faf6b8 1-85
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "040f4933c16990fcf0b609f0cdaa5550881ef1f3",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
