@@ -1,0 +1,42 @@
+lua/plugins/nvim-html-css/CODES/cache.lua
+  h_220433a6faf6b8 1-168
+lua/plugins/nvim-html-css/CODES/config.lua
+  h_220433a6faf6b8 1-18
+lua/plugins/nvim-html-css/CODES/definition.lua
+  h_220433a6faf6b8 1-91
+lua/plugins/nvim-html-css/CODES/fetcher.lua
+  h_220433a6faf6b8 1-105
+lua/plugins/nvim-html-css/CODES/health.lua
+  h_220433a6faf6b8 1-29
+lua/plugins/nvim-html-css/CODES/hover.lua
+  h_220433a6faf6b8 1-78
+lua/plugins/nvim-html-css/CODES/init.lua
+  h_220433a6faf6b8 1-139
+lua/plugins/nvim-html-css/CODES/lsp.lua
+  h_220433a6faf6b8 1-352
+lua/plugins/nvim-html-css/CODES/parsers/css.lua
+  h_220433a6faf6b8 1-172
+lua/plugins/nvim-html-css/CODES/parsers/html.lua
+  h_220433a6faf6b8 1-68
+lua/plugins/nvim-html-css/CODES/parsers/utils.lua
+  h_220433a6faf6b8 1-29
+lua/plugins/nvim-html-css/CODES/peek.lua
+  h_220433a6faf6b8 1-102
+lua/plugins/nvim-html-css/CODES/types.lua
+  h_220433a6faf6b8 1-54
+lua/plugins/nvim-html-css/CODES/utils.lua
+  h_220433a6faf6b8 1-212
+lua/plugins/nvim-html-css/README.md
+  h_220433a6faf6b8 1-272
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "93d867caced5b2afffe105bbc5655bb22731bb4b",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
