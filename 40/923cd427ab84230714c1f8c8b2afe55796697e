@@ -1,0 +1,42 @@
+lua/plugins/bento-nvim/CODES/actions.lua
+  h_220433a6faf6b8 1-68
+lua/plugins/bento-nvim/CODES/api.lua
+  h_220433a6faf6b8 1-264
+lua/plugins/bento-nvim/CODES/init.lua
+  h_220433a6faf6b8 1-866
+lua/plugins/bento-nvim/CODES/plugin.bento.lua
+  h_220433a6faf6b8 1-9
+lua/plugins/bento-nvim/CODES/ui.lua
+  h_220433a6faf6b8 1-1896
+lua/plugins/bento-nvim/CODES/utils.lua
+  h_220433a6faf6b8 1-174
+lua/plugins/bento-nvim/README.md
+  h_220433a6faf6b8 1-523
+lua/plugins/bento-nvim/cmds.lua
+  h_220433a6faf6b8 1-6
+lua/plugins/bento-nvim/dependencies.lua
+  h_220433a6faf6b8 1-16
+lua/plugins/bento-nvim/events.lua
+  h_220433a6faf6b8 1-6
+lua/plugins/bento-nvim/ft.lua
+  h_220433a6faf6b8 1-6
+lua/plugins/bento-nvim/init.lua
+  h_220433a6faf6b8 1-36
+lua/plugins/bento-nvim/keys.lua
+  h_220433a6faf6b8 1-23
+lua/plugins/bento-nvim/opts.lua
+  h_220433a6faf6b8 1-6
+lua/plugins/bento-nvim/stylua.toml
+  h_220433a6faf6b8 1-13
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "40923cd427ab84230714c1f8c8b2afe55796697e",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
