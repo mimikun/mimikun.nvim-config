@@ -1,0 +1,58 @@
+lua/plugins/hover-nvim/CODES/.emmyrc.json
+  h_220433a6faf6b8 1-30
+lua/plugins/hover-nvim/CODES/.github/FUNDING.yml
+  h_220433a6faf6b8 1
+lua/plugins/hover-nvim/CODES/.stylua.toml
+  h_220433a6faf6b8 1-6
+lua/plugins/hover-nvim/CODES/LICENSE
+  h_220433a6faf6b8 1-21
+lua/plugins/hover-nvim/CODES/Makefile
+  h_220433a6faf6b8 1-5
+lua/plugins/hover-nvim/CODES/README.md
+  h_220433a6faf6b8 1-295
+lua/plugins/hover-nvim/CODES/lua/hover.lua
+  h_220433a6faf6b8 1-76
+lua/plugins/hover-nvim/CODES/lua/hover/actions.lua
+  h_220433a6faf6b8 1-374
+lua/plugins/hover-nvim/CODES/lua/hover/async.lua
+  h_220433a6faf6b8 1-90
+lua/plugins/hover-nvim/CODES/lua/hover/config.lua
+  h_220433a6faf6b8 1-60
+lua/plugins/hover-nvim/CODES/lua/hover/highlights.lua
+  h_220433a6faf6b8 1-37
+lua/plugins/hover-nvim/CODES/lua/hover/providers.lua
+  h_220433a6faf6b8 1-145
+lua/plugins/hover-nvim/CODES/lua/hover/providers/dap.lua
+  h_220433a6faf6b8 1-97
+lua/plugins/hover-nvim/CODES/lua/hover/providers/diagnostic.lua
+  h_220433a6faf6b8 1-217
+lua/plugins/hover-nvim/CODES/lua/hover/providers/dictionary.lua
+  h_220433a6faf6b8 1-130
+lua/plugins/hover-nvim/CODES/lua/hover/providers/fold_preview.lua
+  h_220433a6faf6b8 1-105
+lua/plugins/hover-nvim/CODES/lua/hover/providers/gh.lua
+  h_220433a6faf6b8 1-121
+lua/plugins/hover-nvim/CODES/lua/hover/providers/gh_user.lua
+  h_220433a6faf6b8 1-97
+lua/plugins/hover-nvim/CODES/lua/hover/providers/highlight.lua
+  h_220433a6faf6b8 1-128
+lua/plugins/hover-nvim/CODES/lua/hover/providers/jira.lua
+  h_220433a6faf6b8 1-35
+lua/plugins/hover-nvim/CODES/lua/hover/providers/lsp.lua
+  h_220433a6faf6b8 1-119
+lua/plugins/hover-nvim/CODES/lua/hover/providers/man.lua
+  h_220433a6faf6b8 1-45
+lua/plugins/hover-nvim/CODES/lua/hover/util.lua
+  h_220433a6faf6b8 1-380
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "6aad1186ef6232d93492eb7b53d1131b3c7a7fe5",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
