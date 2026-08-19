@@ -1,0 +1,76 @@
+lua/plugins/minibuffer-nvim/README.md
+  h_220433a6faf6b8 1-370
+lua/plugins/minibuffer-nvim/CODES/builtin/ui_input.lua
+  h_220433a6faf6b8 1-41
+lua/plugins/minibuffer-nvim/CODES/builtin/ui_select.lua
+  h_220433a6faf6b8 1-34
+lua/plugins/minibuffer-nvim/CODES/config.lua
+  h_220433a6faf6b8 1-46
+lua/plugins/minibuffer-nvim/CODES/examples/buffers.lua
+  h_220433a6faf6b8 1-227
+lua/plugins/minibuffer-nvim/CODES/examples/diagnostics.lua
+  h_220433a6faf6b8 1-117
+lua/plugins/minibuffer-nvim/CODES/examples/files.lua
+  h_220433a6faf6b8 1-164
+lua/plugins/minibuffer-nvim/CODES/examples/git-files.lua
+  h_220433a6faf6b8 1-140
+lua/plugins/minibuffer-nvim/CODES/examples/history.lua
+  h_220433a6faf6b8 1-85
+lua/plugins/minibuffer-nvim/CODES/examples/list.lua
+  h_220433a6faf6b8 1-103
+lua/plugins/minibuffer-nvim/CODES/examples/live-grep.lua
+  h_220433a6faf6b8 1-211
+lua/plugins/minibuffer-nvim/CODES/examples/manpages.lua
+  h_220433a6faf6b8 1-143
+lua/plugins/minibuffer-nvim/CODES/examples/marks.lua
+  h_220433a6faf6b8 1-92
+lua/plugins/minibuffer-nvim/CODES/examples/oldfiles.lua
+  h_220433a6faf6b8 1-143
+lua/plugins/minibuffer-nvim/CODES/init.lua
+  h_220433a6faf6b8 1-294
+lua/plugins/minibuffer-nvim/CODES/integrations/fff.lua
+  h_220433a6faf6b8 1-242
+lua/plugins/minibuffer-nvim/CODES/sessions/cmd.lua
+  h_220433a6faf6b8 1-677
+lua/plugins/minibuffer-nvim/CODES/sessions/display.lua
+  h_220433a6faf6b8 1-170
+lua/plugins/minibuffer-nvim/CODES/sessions/input.lua
+  h_220433a6faf6b8 1-514
+lua/plugins/minibuffer-nvim/CODES/sessions/scratch.lua
+  h_220433a6faf6b8 1-176
+lua/plugins/minibuffer-nvim/CODES/sessions/select.lua
+  h_220433a6faf6b8 1-552
+lua/plugins/minibuffer-nvim/CODES/state.lua
+  h_220433a6faf6b8 1-51
+lua/plugins/minibuffer-nvim/CODES/types.lua
+  h_220433a6faf6b8 1-30
+lua/plugins/minibuffer-nvim/CODES/util.lua
+  h_220433a6faf6b8 1-324
+lua/plugins/minibuffer-nvim/cmds.lua
+  h_220433a6faf6b8 1-6
+lua/plugins/minibuffer-nvim/dependencies.lua
+  h_220433a6faf6b8 1-16
+lua/plugins/minibuffer-nvim/events.lua
+  h_220433a6faf6b8 1-6
+lua/plugins/minibuffer-nvim/ft.lua
+  h_220433a6faf6b8 1-6
+lua/plugins/minibuffer-nvim/init.lua
+  h_220433a6faf6b8 1-37
+lua/plugins/minibuffer-nvim/keys.lua
+  h_220433a6faf6b8 1-23
+lua/plugins/minibuffer-nvim/opts.lua
+  h_220433a6faf6b8 1-6
+lua/plugins/minibuffer-nvim/stylua.toml
+  h_220433a6faf6b8 1-13
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "862c12e40eefdc779686807bed9a47e5686d9524",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
