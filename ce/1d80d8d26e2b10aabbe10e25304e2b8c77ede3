@@ -1,0 +1,14 @@
+lua/plugins/homegrown-nvim/_readme.lua
+  h_220433a6faf6b8 1-34
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "ce1d80d8d26e2b10aabbe10e25304e2b8c77ede3",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
