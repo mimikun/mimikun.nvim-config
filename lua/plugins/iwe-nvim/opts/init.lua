@@ -1,9 +1,5 @@
 ---@type IWE.Config
 local opts = {
-  -- LSP server configuration
-  ---@type IWE.Config.LSP
-  lsp = require("plugins.iwe-nvim.opts.lsp"),
-
   -- Key mapping configuration
   ---@type IWE.Config.Mappings
   mappings = require("plugins.iwe-nvim.opts.mappings"),
