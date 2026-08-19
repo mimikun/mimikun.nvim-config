@@ -1,0 +1,16 @@
+lua/plugins/iwe-nvim/dependencies.lua
+  h_220433a6faf6b8 4-9,11-15
+lua/plugins/iwe-nvim/opts/init.lua
+  h_220433a6faf6b8 18-39
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "48f979cbd6f1d3d99c5a8f825b411ed02f0b419e",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
