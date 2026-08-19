@@ -1,0 +1,22 @@
+lua/plugins/nvim-html-css/opts/documentation.lua
+  h_220433a6faf6b8 1-7
+lua/plugins/nvim-html-css/opts/handlers.lua
+  h_220433a6faf6b8 1-25
+lua/plugins/nvim-html-css/opts/init.lua
+  h_220433a6faf6b8 8,33,40,68
+lua/plugins/nvim-html-css/opts/peek.lua
+  h_220433a6faf6b8 1-29
+lua/plugins/nvim-html-css/opts/style_sheets.lua
+  h_220433a6faf6b8 1-10
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "c50b1e2224ab3020abdacae8bc1d7d9f42272f18",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
