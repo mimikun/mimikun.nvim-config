@@ -32,19 +32,18 @@ local spec = {
         return
       end
 
-      vim.api.nvim_buf_call(buf, function()
-        local opt = vim.opt_local
+      -- indentation, provided by nvim-treesitter (buffer-local)
+      vim.bo[buf].indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
 
-        -- folds, provided by Neovim
-        opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
-        opt.foldmethod = "expr"
+      -- folds, provided by Neovim
+      -- (window-local: apply to every window currently displaying this buffer)
+      for _, win in ipairs(vim.fn.win_findbuf(buf)) do
+        vim.wo[win].foldexpr = "v:lua.vim.treesitter.foldexpr()"
+        vim.wo[win].foldmethod = "expr"
 
         -- open all folds by default
-        opt.foldlevel = 99
-
-        -- indentation, provided by nvim-treesitter
-        opt.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
-      end)
+        vim.wo[win].foldlevel = 99
+      end
     end
 
     -- Auto-enable treesitter for all filetypes with an installed parser
