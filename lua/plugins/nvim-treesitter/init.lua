@@ -33,12 +33,12 @@ local spec = {
       end
 
       -- indentation, provided by nvim-treesitter (buffer-local)
-      vim.bo[buf].indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+      vim.bo[buf].indentexpr = nvim_treesitter.indentexpr
 
       -- folds, provided by Neovim
       -- (window-local: apply to every window currently displaying this buffer)
       for _, win in ipairs(vim.fn.win_findbuf(buf)) do
-        vim.wo[win].foldexpr = "v:lua.vim.treesitter.foldexpr()"
+        vim.wo[win].foldexpr = vim.treesitter.foldexpr
         vim.wo[win].foldmethod = "expr"
 
         -- open all folds by default
