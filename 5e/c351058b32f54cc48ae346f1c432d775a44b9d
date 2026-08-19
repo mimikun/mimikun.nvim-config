@@ -1,0 +1,58 @@
+lua/plugins/homegrown-nvim/CODES/.github/workflows/ci.yml
+  h_220433a6faf6b8 1-33
+lua/plugins/homegrown-nvim/CODES/.github/workflows/docs.yml
+  h_220433a6faf6b8 1-29
+lua/plugins/homegrown-nvim/CODES/.gitignore
+  h_220433a6faf6b8 1
+lua/plugins/homegrown-nvim/CODES/.stylua.toml
+  h_220433a6faf6b8 1-7
+lua/plugins/homegrown-nvim/CODES/LICENSE
+  h_220433a6faf6b8 1-674
+lua/plugins/homegrown-nvim/CODES/Makefile
+  h_220433a6faf6b8 1-11
+lua/plugins/homegrown-nvim/CODES/README.md
+  h_220433a6faf6b8 1-228
+lua/plugins/homegrown-nvim/CODES/doc/homegrown.txt
+  h_220433a6faf6b8 1-235
+lua/plugins/homegrown-nvim/CODES/lua/homegrown/bracket_nav.lua
+  h_220433a6faf6b8 1-43
+lua/plugins/homegrown-nvim/CODES/lua/homegrown/config.lua
+  h_220433a6faf6b8 1-102
+lua/plugins/homegrown-nvim/CODES/lua/homegrown/copy.lua
+  h_220433a6faf6b8 1-69
+lua/plugins/homegrown-nvim/CODES/lua/homegrown/dir.lua
+  h_220433a6faf6b8 1-74
+lua/plugins/homegrown-nvim/CODES/lua/homegrown/highlighter.lua
+  h_220433a6faf6b8 1-202
+lua/plugins/homegrown-nvim/CODES/lua/homegrown/init.lua
+  h_220433a6faf6b8 1-57
+lua/plugins/homegrown-nvim/CODES/lua/homegrown/md_preview.lua
+  h_220433a6faf6b8 1-146
+lua/plugins/homegrown-nvim/CODES/lua/homegrown/pairs.lua
+  h_220433a6faf6b8 1-89
+lua/plugins/homegrown-nvim/CODES/lua/homegrown/replace.lua
+  h_220433a6faf6b8 1-70
+lua/plugins/homegrown-nvim/CODES/lua/homegrown/runner.lua
+  h_220433a6faf6b8 1-93
+lua/plugins/homegrown-nvim/CODES/lua/homegrown/terminal.lua
+  h_220433a6faf6b8 1-46
+lua/plugins/homegrown-nvim/CODES/lua/homegrown/tiling.lua
+  h_220433a6faf6b8 1-30
+lua/plugins/homegrown-nvim/CODES/lua/homegrown/tmux.lua
+  h_220433a6faf6b8 1-28
+lua/plugins/homegrown-nvim/CODES/tests/homegrown_spec.lua
+  h_220433a6faf6b8 1-178
+lua/plugins/homegrown-nvim/CODES/tests/init.lua
+  h_220433a6faf6b8 1-13
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "5ec351058b32f54cc48ae346f1c432d775a44b9d",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
