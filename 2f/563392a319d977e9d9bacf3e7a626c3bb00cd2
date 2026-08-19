@@ -1,0 +1,18 @@
+lua/plugins/bento-nvim/README.md
+  h_220433a6faf6b8 10
+lua/plugins/bento-nvim/_readme.lua
+  h_220433a6faf6b8 1-43
+lua/plugins/bento-nvim/init.lua
+  h_220433a6faf6b8 28-31
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "2f563392a319d977e9d9bacf3e7a626c3bb00cd2",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
