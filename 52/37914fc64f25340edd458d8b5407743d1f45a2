@@ -1,0 +1,48 @@
+lua/plugins/iwe-nvim/CODES/commands.lua
+  h_220433a6faf6b8 1-253
+lua/plugins/iwe-nvim/CODES/config.lua
+  h_220433a6faf6b8 1-166
+lua/plugins/iwe-nvim/CODES/health.lua
+  h_220433a6faf6b8 1-304
+lua/plugins/iwe-nvim/CODES/init.lua
+  h_220433a6faf6b8 1-56
+lua/plugins/iwe-nvim/CODES/lsp.iwes.lua
+  h_220433a6faf6b8 1-7
+lua/plugins/iwe-nvim/CODES/mappings.lua
+  h_220433a6faf6b8 1-241
+lua/plugins/iwe-nvim/CODES/picker/adapters/fzf_lua.lua
+  h_220433a6faf6b8 1-92
+lua/plugins/iwe-nvim/CODES/picker/adapters/mini.lua
+  h_220433a6faf6b8 1-297
+lua/plugins/iwe-nvim/CODES/picker/adapters/snacks.lua
+  h_220433a6faf6b8 1-95
+lua/plugins/iwe-nvim/CODES/picker/adapters/telescope.lua
+  h_220433a6faf6b8 1-154
+lua/plugins/iwe-nvim/CODES/picker/adapters/vim_ui.lua
+  h_220433a6faf6b8 1-267
+lua/plugins/iwe-nvim/CODES/picker/init.lua
+  h_220433a6faf6b8 1-217
+lua/plugins/iwe-nvim/CODES/picker/registry.lua
+  h_220433a6faf6b8 1-81
+lua/plugins/iwe-nvim/CODES/plugin.iwe.lua
+  h_220433a6faf6b8 1-29
+lua/plugins/iwe-nvim/CODES/preview.lua
+  h_220433a6faf6b8 1-219
+lua/plugins/iwe-nvim/CODES/telescope.lua
+  h_220433a6faf6b8 1-165
+lua/plugins/iwe-nvim/README.md
+  h_220433a6faf6b8 1-330
+lua/plugins/iwe-nvim/iwe.txt
+  h_220433a6faf6b8 1-396
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "5237914fc64f25340edd458d8b5407743d1f45a2",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
