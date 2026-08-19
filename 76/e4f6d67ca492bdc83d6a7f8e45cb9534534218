@@ -1,0 +1,36 @@
+lua/plugins/iwe-nvim/CODES/commands.lua
+  h_220433a6faf6b8 4-5,10,16,22,30,32,40,53,55,57,59,61,63,65,77,79,101,103,105,107,132,144,151,157,159-160,172-175,183,186,193,202-205,215-216,223-229,231-234,236-237,240,247,249,259-260,262,266
+lua/plugins/iwe-nvim/CODES/config.lua
+  h_220433a6faf6b8 41,50,55-56
+lua/plugins/iwe-nvim/CODES/health.lua
+  h_220433a6faf6b8 4,8,10-11,13-15,22,24-25,28-30,33-34,36,39,42-45,52,57,59,63,65,71-73,80,82,85-90,93-95,98-100,105,107-108,113,115,121,123-125,132,134,139-163,168,170,175,178,190,193,195,197-198,203,205,207-208,215,218-219,221-223,226-229,234-235,237-239,242-246,251,255,258,260,262-264,270,272,276,278,281-282,289,291,293,300,303
+lua/plugins/iwe-nvim/CODES/init.lua
+  h_220433a6faf6b8 6,15-16,20-21,23,26,31,44
+lua/plugins/iwe-nvim/CODES/lsp.iwes.lua
+  h_220433a6faf6b8 3-5
+lua/plugins/iwe-nvim/CODES/mappings.lua
+  h_220433a6faf6b8 4,9,11,15,17,21,23,26,28,32-54,57-139,142-148,151-197,200-258,261-271,283-284,290-293,296-297,300,305-311,316-317,322-325,328-329
+lua/plugins/iwe-nvim/CODES/picker/init.lua
+  h_220433a6faf6b8 42-59,82
+lua/plugins/iwe-nvim/CODES/plugin.iwe.lua
+  h_220433a6faf6b8 15-16,23,26-27
+lua/plugins/iwe-nvim/CODES/preview.lua
+  h_220433a6faf6b8 4,10,14-15,27,32,43,60,92,97,122-130,136,161-169,175,193,199,217-218,220,229
+lua/plugins/iwe-nvim/CODES/telescope.lua
+  h_220433a6faf6b8 7,12,24-25,31,47-48,128-129,146,162
+lua/plugins/iwe-nvim/opts/stylua.toml
+  h_220433a6faf6b8 1-13
+lua/plugins/iwe-nvim/stylua.toml
+  h_220433a6faf6b8 1-13
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "76e4f6d67ca492bdc83d6a7f8e45cb9534534218",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
