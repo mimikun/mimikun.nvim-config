@@ -1,0 +1,46 @@
+lua/plugins/hover-nvim/CODES/actions.lua
+  h_220433a6faf6b8 3,6,24,50-51,55,88,92,124,140,164,199,215,219,244,275,280,295,310,349
+lua/plugins/hover-nvim/CODES/async.lua
+  h_220433a6faf6b8 13,19,22,55,59,76,80-81
+lua/plugins/hover-nvim/CODES/config.lua
+  h_220433a6faf6b8 13,20-24,26,53
+lua/plugins/hover-nvim/CODES/highlights.lua
+  h_220433a6faf6b8 16-24
+lua/plugins/hover-nvim/CODES/hover.lua
+  h_220433a6faf6b8 7,13,20,25,31,37,43-44
+lua/plugins/hover-nvim/CODES/providers.lua
+  h_220433a6faf6b8 57,67,105,115,128-130,133,136
+lua/plugins/hover-nvim/CODES/providers/dap.lua
+  h_220433a6faf6b8 38,44,54,57,60-61,63-64,66-67,69-70,76,78,91-92
+lua/plugins/hover-nvim/CODES/providers/diagnostic.lua
+  h_220433a6faf6b8 9-12,19,24,47,50,52,66,90,102,106,110-111,114,121-122,124,134,140-141,143,159,162,164,167,171,173,175-176,213
+lua/plugins/hover-nvim/CODES/providers/dictionary.lua
+  h_220433a6faf6b8 1,39,44,46,49,55,58,62,65,70,72-73,75,79,83-84,86,106,110-111,114,117,123,126
+lua/plugins/hover-nvim/CODES/providers/fold_preview.lua
+  h_220433a6faf6b8 4,9-10,13,16,21,23,27,50,52,82,94
+lua/plugins/hover-nvim/CODES/providers/gh.lua
+  h_220433a6faf6b8 3,6,31,38,46-53,56,68-69,71,75,77,80-83,86,90,93-96,107,113
+lua/plugins/hover-nvim/CODES/providers/gh_user.lua
+  h_220433a6faf6b8 4-5,15,23,30,41-48,52,57-59,65,75,81,83,89
+lua/plugins/hover-nvim/CODES/providers/highlight.lua
+  h_220433a6faf6b8 17-18,25,37,41,43,45,47,50,57,67,75,82,92,98-99,107,122
+lua/plugins/hover-nvim/CODES/providers/jira.lua
+  h_220433a6faf6b8 2,7,12,15,18,20,22-23,28,32
+lua/plugins/hover-nvim/CODES/providers/lsp.lua
+  h_220433a6faf6b8 16-17,19,44,53,56,62,64,74,91,115
+lua/plugins/hover-nvim/CODES/providers/man.lua
+  h_220433a6faf6b8 5,9-13,17-19,25,35,39
+lua/plugins/hover-nvim/CODES/util.lua
+  h_220433a6faf6b8 3,16,25,29,36,58,62,69,72,81,83,100,108,122,126,208,215,274,295,297,305,340,342-343,354,356,367,369-370
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "d139d8ca58c5ffab0a5811ebcd0b356bbeb20352",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
