@@ -1,0 +1,18 @@
+lua/plugins/homegrown-nvim/opts/bracket_nav.lua
+  h_220433a6faf6b8 9-26
+lua/plugins/homegrown-nvim/opts/pairs.lua
+  h_220433a6faf6b8 10-45
+lua/plugins/homegrown-nvim/opts/runner.lua
+  h_220433a6faf6b8 10-26
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "0d914ecc192a683121314dc56a74a5d0fe8d76d0",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
