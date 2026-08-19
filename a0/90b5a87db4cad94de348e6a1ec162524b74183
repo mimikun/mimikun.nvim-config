@@ -1,0 +1,19 @@
+lua/plugins/nvim-treesitter/init.lua
+  s_73c3aaa49c2e3f::t_8c75926823dbfc 36,41
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "a090b5a87db4cad94de348e6a1ec162524b74183",
+  "prompts": {},
+  "sessions": {
+    "s_73c3aaa49c2e3f": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "7796048b-ad88-42aa-a018-493c62664f1c",
+        "model": "claude-opus-5"
+      },
+      "human_author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
