@@ -1,0 +1,14 @@
+lua/plugins/translate-nvim/Keep-original-line-breaks.md
+  h_220433a6faf6b8 1-14
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "95304309cf2b232641335925ba73d4ff148a2a15",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
