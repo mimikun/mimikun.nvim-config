@@ -1,0 +1,16 @@
+lua/plugins/translate-nvim/WIKIS/Home.md
+  h_220433a6faf6b8 1
+lua/plugins/translate-nvim/WIKIS/Keep-original-line-breaks.md
+  h_220433a6faf6b8 1-14
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "1bd9def170fb00adc0d9d3aaa257fa87250494a1",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
