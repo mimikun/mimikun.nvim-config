@@ -1,0 +1,16 @@
+lua/plugins/translate-nvim/opts/init.lua
+  h_220433a6faf6b8 3-37
+lua/plugins/translate-nvim/opts/translate-nvim.txt
+  h_220433a6faf6b8 469
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "fda8cb62671e292c588e150b998b96e65d970d77",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
