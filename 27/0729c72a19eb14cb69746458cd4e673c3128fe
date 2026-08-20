@@ -1,0 +1,14 @@
+lua/plugins/hover-nvim/opts/providers.lua
+  h_220433a6faf6b8 1-5
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "270729c72a19eb14cb69746458cd4e673c3128fe",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
