@@ -1,0 +1,16 @@
+lua/plugins/ccc-nvim/opts/inputs.lua
+  h_220433a6faf6b8 1-50
+lua/plugins/ccc-nvim/opts/outputs.lua
+  h_220433a6faf6b8 1-48
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "19fa2fcd44ca9c752dc86146a341b86d8a89bc6f",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
