@@ -1,0 +1,19 @@
+lua/plugins/translate-nvim/events.lua
+  s_90f75fb44f3ad4::t_06c0356e390aed 1-6
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "f4aaad6001360e689e91ebfb0834c5dcfcf8d341",
+  "prompts": {},
+  "sessions": {
+    "s_90f75fb44f3ad4": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "f2da0027-b97d-47ca-bc5a-3e9f39c3937e",
+        "model": "claude-opus-5"
+      },
+      "human_author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
