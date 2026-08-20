@@ -1,0 +1,24 @@
+lua/plugins/hover-nvim/opts/providers.lua
+  s_2d511deb46cc6d::t_83f5870f9596b0 12-14,40-45,81-83
+lua/plugins/hover-nvim/keys.lua
+  s_2d511deb46cc6d::t_cf5a47dafb47b3 4,6,11-44
+lua/plugins/hover-nvim/init.lua
+  s_2d511deb46cc6d::t_cf5a47dafb47b3 5
+  s_2d511deb46cc6d::t_2fa8fa05e4dece 6
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "8af1af557fc93011fc84c3d905eea17a027dce83",
+  "prompts": {},
+  "sessions": {
+    "s_2d511deb46cc6d": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "7641e2d2-fc9d-49a4-9f66-d92e7edac9dc",
+        "model": "claude-opus-5"
+      },
+      "human_author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
