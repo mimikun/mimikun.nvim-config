@@ -1,0 +1,146 @@
+lua/plugins/translate-nvim/CODES/.github/ISSUE_TEMPLATE/bug_report.yml
+  h_220433a6faf6b8 1-61
+lua/plugins/translate-nvim/CODES/.gitignore
+  h_220433a6faf6b8 1
+lua/plugins/translate-nvim/CODES/LICENSE
+  h_220433a6faf6b8 1-21
+lua/plugins/translate-nvim/CODES/README.md
+  h_220433a6faf6b8 1-126
+lua/plugins/translate-nvim/CODES/doc/translate-nvim.txt
+  h_220433a6faf6b8 1-713
+lua/plugins/translate-nvim/CODES/lua/translate/command.lua
+  h_220433a6faf6b8 1-56
+lua/plugins/translate-nvim/CODES/lua/translate/config.lua
+  h_220433a6faf6b8 1-171
+lua/plugins/translate-nvim/CODES/lua/translate/init.lua
+  h_220433a6faf6b8 1-147
+lua/plugins/translate-nvim/CODES/lua/translate/kit/Async/AsyncTask.lua
+  h_220433a6faf6b8 1-193
+lua/plugins/translate-nvim/CODES/lua/translate/kit/Async/AsyncTask.spec.lua
+  h_220433a6faf6b8 1-143
+lua/plugins/translate-nvim/CODES/lua/translate/kit/Async/init.lua
+  h_220433a6faf6b8 1-58
+lua/plugins/translate-nvim/CODES/lua/translate/kit/Async/init.spec.lua
+  h_220433a6faf6b8 1-24
+lua/plugins/translate-nvim/CODES/lua/translate/kit/Cache.lua
+  h_220433a6faf6b8 1-69
+lua/plugins/translate-nvim/CODES/lua/translate/kit/Cache.spec.lua
+  h_220433a6faf6b8 1-40
+lua/plugins/translate-nvim/CODES/lua/translate/kit/Config.lua
+  h_220433a6faf6b8 1-103
+lua/plugins/translate-nvim/CODES/lua/translate/kit/Config.spec.lua
+  h_220433a6faf6b8 1-48
+lua/plugins/translate-nvim/CODES/lua/translate/kit/LSP/Position.lua
+  h_220433a6faf6b8 1-114
+lua/plugins/translate-nvim/CODES/lua/translate/kit/LSP/Position.spec.lua
+  h_220433a6faf6b8 1-45
+lua/plugins/translate-nvim/CODES/lua/translate/kit/LSP/Range.lua
+  h_220433a6faf6b8 1-35
+lua/plugins/translate-nvim/CODES/lua/translate/kit/LSP/Range.spec.lua
+  h_220433a6faf6b8 1-10
+lua/plugins/translate-nvim/CODES/lua/translate/kit/Lua/TreeSitter.lua
+  h_220433a6faf6b8 1-301
+lua/plugins/translate-nvim/CODES/lua/translate/kit/Lua/TreeSitter.spec.lua
+  h_220433a6faf6b8 1-70
+lua/plugins/translate-nvim/CODES/lua/translate/kit/Lua/init.lua
+  h_220433a6faf6b8 1-12
+lua/plugins/translate-nvim/CODES/lua/translate/kit/Lua/init.spec.lua
+  h_220433a6faf6b8 1-16
+lua/plugins/translate-nvim/CODES/lua/translate/kit/Vim/Buffer.lua
+  h_220433a6faf6b8 1-54
+lua/plugins/translate-nvim/CODES/lua/translate/kit/Vim/Buffer.spec.lua
+  h_220433a6faf6b8 1-36
+lua/plugins/translate-nvim/CODES/lua/translate/kit/Vim/Highlight.lua
+  h_220433a6faf6b8 1-43
+lua/plugins/translate-nvim/CODES/lua/translate/kit/Vim/Highlight.spec.lua
+  h_220433a6faf6b8 1-10
+lua/plugins/translate-nvim/CODES/lua/translate/kit/Vim/Keymap.lua
+  h_220433a6faf6b8 1-45
+lua/plugins/translate-nvim/CODES/lua/translate/kit/Vim/Keymap.spec.lua
+  h_220433a6faf6b8 1-24
+lua/plugins/translate-nvim/CODES/lua/translate/kit/Vim/Syntax.lua
+  h_220433a6faf6b8 1-37
+lua/plugins/translate-nvim/CODES/lua/translate/kit/Vim/Syntax.spec.lua
+  h_220433a6faf6b8 1-29
+lua/plugins/translate-nvim/CODES/lua/translate/kit/init.lua
+  h_220433a6faf6b8 1-142
+lua/plugins/translate-nvim/CODES/lua/translate/kit/init.spec.lua
+  h_220433a6faf6b8 1-76
+lua/plugins/translate-nvim/CODES/lua/translate/preset/command/deepl.lua
+  h_220433a6faf6b8 1-78
+lua/plugins/translate-nvim/CODES/lua/translate/preset/command/deepl_free.lua
+  h_220433a6faf6b8 1-23
+lua/plugins/translate-nvim/CODES/lua/translate/preset/command/deepl_pro.lua
+  h_220433a6faf6b8 1-23
+lua/plugins/translate-nvim/CODES/lua/translate/preset/command/google.lua
+  h_220433a6faf6b8 1-167
+lua/plugins/translate-nvim/CODES/lua/translate/preset/command/translate_shell.lua
+  h_220433a6faf6b8 1-287
+lua/plugins/translate-nvim/CODES/lua/translate/preset/output/floating.lua
+  h_220433a6faf6b8 1-52
+lua/plugins/translate-nvim/CODES/lua/translate/preset/output/insert.lua
+  h_220433a6faf6b8 1-32
+lua/plugins/translate-nvim/CODES/lua/translate/preset/output/register.lua
+  h_220433a6faf6b8 1-26
+lua/plugins/translate-nvim/CODES/lua/translate/preset/output/replace.lua
+  h_220433a6faf6b8 1-22
+lua/plugins/translate-nvim/CODES/lua/translate/preset/output/split.lua
+  h_220433a6faf6b8 1-93
+lua/plugins/translate-nvim/CODES/lua/translate/preset/parse_after/deepl.lua
+  h_220433a6faf6b8 1-16
+lua/plugins/translate-nvim/CODES/lua/translate/preset/parse_after/deepl_free.lua
+  h_220433a6faf6b8 1
+lua/plugins/translate-nvim/CODES/lua/translate/preset/parse_after/deepl_pro.lua
+  h_220433a6faf6b8 1
+lua/plugins/translate-nvim/CODES/lua/translate/preset/parse_after/google.lua
+  h_220433a6faf6b8 1-7
+lua/plugins/translate-nvim/CODES/lua/translate/preset/parse_after/head.lua
+  h_220433a6faf6b8 1-59
+lua/plugins/translate-nvim/CODES/lua/translate/preset/parse_after/no_handle.lua
+  h_220433a6faf6b8 1-7
+lua/plugins/translate-nvim/CODES/lua/translate/preset/parse_after/oneline.lua
+  h_220433a6faf6b8 1-10
+lua/plugins/translate-nvim/CODES/lua/translate/preset/parse_after/rate.lua
+  h_220433a6faf6b8 1-40
+lua/plugins/translate-nvim/CODES/lua/translate/preset/parse_after/translate_shell.lua
+  h_220433a6faf6b8 1-21
+lua/plugins/translate-nvim/CODES/lua/translate/preset/parse_after/window.lua
+  h_220433a6faf6b8 1-25
+lua/plugins/translate-nvim/CODES/lua/translate/preset/parse_before/concat.lua
+  h_220433a6faf6b8 1-13
+lua/plugins/translate-nvim/CODES/lua/translate/preset/parse_before/natural.lua
+  h_220433a6faf6b8 1-130
+lua/plugins/translate-nvim/CODES/lua/translate/preset/parse_before/no_handle.lua
+  h_220433a6faf6b8 1-9
+lua/plugins/translate-nvim/CODES/lua/translate/preset/parse_before/trim.lua
+  h_220433a6faf6b8 1-20
+lua/plugins/translate-nvim/CODES/lua/translate/util/comment.lua
+  h_220433a6faf6b8 1-296
+lua/plugins/translate-nvim/CODES/lua/translate/util/context.lua
+  h_220433a6faf6b8 1-123
+lua/plugins/translate-nvim/CODES/lua/translate/util/replace.lua
+  h_220433a6faf6b8 1-48
+lua/plugins/translate-nvim/CODES/lua/translate/util/select.lua
+  h_220433a6faf6b8 1-100
+lua/plugins/translate-nvim/CODES/lua/translate/util/utf8.lua
+  h_220433a6faf6b8 1-297
+lua/plugins/translate-nvim/CODES/lua/translate/util/util.lua
+  h_220433a6faf6b8 1-189
+lua/plugins/translate-nvim/CODES/plugin/translate.lua
+  h_220433a6faf6b8 1-5
+lua/plugins/translate-nvim/CODES/stylua.toml
+  h_220433a6faf6b8 1-5
+lua/plugins/translate-nvim/CODES/utils/minimal.vim
+  h_220433a6faf6b8 1-16
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "a5e8c4be486cf17524dba8ce467245864ccfc0ce",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
