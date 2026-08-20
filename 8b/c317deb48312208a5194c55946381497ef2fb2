@@ -1,0 +1,222 @@
+lua/plugins/ccc-nvim/CODES/.github/ISSUE_TEMPLATE/bug_report.yml
+  h_220433a6faf6b8 1-73
+lua/plugins/ccc-nvim/CODES/.github/ISSUE_TEMPLATE/config.yml
+  h_220433a6faf6b8 1
+lua/plugins/ccc-nvim/CODES/.github/ISSUE_TEMPLATE/feature_request.yml
+  h_220433a6faf6b8 1-18
+lua/plugins/ccc-nvim/CODES/.github/workflows/format.yml
+  h_220433a6faf6b8 1-25
+lua/plugins/ccc-nvim/CODES/.github/workflows/test.yml
+  h_220433a6faf6b8 1-57
+lua/plugins/ccc-nvim/CODES/.gitignore
+  h_220433a6faf6b8 1
+lua/plugins/ccc-nvim/CODES/LICENSE
+  h_220433a6faf6b8 1-21
+lua/plugins/ccc-nvim/CODES/Makefile
+  h_220433a6faf6b8 1-7
+lua/plugins/ccc-nvim/CODES/README.md
+  h_220433a6faf6b8 1-50
+lua/plugins/ccc-nvim/CODES/doc/ccc.txt
+  h_220433a6faf6b8 1-786
+lua/plugins/ccc-nvim/CODES/lua/ccc/color/alpha.lua
+  h_220433a6faf6b8 1-64
+lua/plugins/ccc-nvim/CODES/lua/ccc/color/init.lua
+  h_220433a6faf6b8 1-126
+lua/plugins/ccc-nvim/CODES/lua/ccc/color/prev_colors.lua
+  h_220433a6faf6b8 1-56
+lua/plugins/ccc-nvim/CODES/lua/ccc/config/default.lua
+  h_220433a6faf6b8 1-136
+lua/plugins/ccc-nvim/CODES/lua/ccc/config/init.lua
+  h_220433a6faf6b8 1-22
+lua/plugins/ccc-nvim/CODES/lua/ccc/convert.lua
+  h_220433a6faf6b8 1-31
+lua/plugins/ccc-nvim/CODES/lua/ccc/core.lua
+  h_220433a6faf6b8 1-123
+lua/plugins/ccc-nvim/CODES/lua/ccc/handler/highlight.lua
+  h_220433a6faf6b8 1-42
+lua/plugins/ccc-nvim/CODES/lua/ccc/handler/lsp.lua
+  h_220433a6faf6b8 1-143
+lua/plugins/ccc-nvim/CODES/lua/ccc/handler/picker.lua
+  h_220433a6faf6b8 1-87
+lua/plugins/ccc-nvim/CODES/lua/ccc/highlighter.lua
+  h_220433a6faf6b8 1-156
+lua/plugins/ccc-nvim/CODES/lua/ccc/init.lua
+  h_220433a6faf6b8 1-87
+lua/plugins/ccc-nvim/CODES/lua/ccc/input/cmyk.lua
+  h_220433a6faf6b8 1-31
+lua/plugins/ccc-nvim/CODES/lua/ccc/input/hsl.lua
+  h_220433a6faf6b8 1-37
+lua/plugins/ccc-nvim/CODES/lua/ccc/input/hsluv.lua
+  h_220433a6faf6b8 1-25
+lua/plugins/ccc-nvim/CODES/lua/ccc/input/hsv.lua
+  h_220433a6faf6b8 1-37
+lua/plugins/ccc-nvim/CODES/lua/ccc/input/hwb.lua
+  h_220433a6faf6b8 1-37
+lua/plugins/ccc-nvim/CODES/lua/ccc/input/init.lua
+  h_220433a6faf6b8 1-47
+lua/plugins/ccc-nvim/CODES/lua/ccc/input/lab.lua
+  h_220433a6faf6b8 1-25
+lua/plugins/ccc-nvim/CODES/lua/ccc/input/lch.lua
+  h_220433a6faf6b8 1-25
+lua/plugins/ccc-nvim/CODES/lua/ccc/input/okhsl.lua
+  h_220433a6faf6b8 1-37
+lua/plugins/ccc-nvim/CODES/lua/ccc/input/okhsv.lua
+  h_220433a6faf6b8 1-37
+lua/plugins/ccc-nvim/CODES/lua/ccc/input/oklab.lua
+  h_220433a6faf6b8 1-42
+lua/plugins/ccc-nvim/CODES/lua/ccc/input/oklch.lua
+  h_220433a6faf6b8 1-41
+lua/plugins/ccc-nvim/CODES/lua/ccc/input/rgb.lua
+  h_220433a6faf6b8 1-40
+lua/plugins/ccc-nvim/CODES/lua/ccc/input/xyz.lua
+  h_220433a6faf6b8 1-29
+lua/plugins/ccc-nvim/CODES/lua/ccc/kit/App/Cache.lua
+  h_220433a6faf6b8 1-70
+lua/plugins/ccc-nvim/CODES/lua/ccc/kit/App/Character.lua
+  h_220433a6faf6b8 1-58
+lua/plugins/ccc-nvim/CODES/lua/ccc/kit/App/Config.lua
+  h_220433a6faf6b8 1-99
+lua/plugins/ccc-nvim/CODES/lua/ccc/kit/App/Event.lua
+  h_220433a6faf6b8 1-77
+lua/plugins/ccc-nvim/CODES/lua/ccc/kit/Async/AsyncTask.lua
+  h_220433a6faf6b8 1-246
+lua/plugins/ccc-nvim/CODES/lua/ccc/kit/Async/init.lua
+  h_220433a6faf6b8 1-161
+lua/plugins/ccc-nvim/CODES/lua/ccc/kit/IO/init.lua
+  h_220433a6faf6b8 1-450
+lua/plugins/ccc-nvim/CODES/lua/ccc/kit/LSP/Client.lua
+  h_220433a6faf6b8 1-1309
+lua/plugins/ccc-nvim/CODES/lua/ccc/kit/LSP/Position.lua
+  h_220433a6faf6b8 1-113
+lua/plugins/ccc-nvim/CODES/lua/ccc/kit/LSP/Range.lua
+  h_220433a6faf6b8 1-74
+lua/plugins/ccc-nvim/CODES/lua/ccc/kit/LSP/init.lua
+  h_220433a6faf6b8 1-1911
+lua/plugins/ccc-nvim/CODES/lua/ccc/kit/Thread/Server/README.md
+  h_220433a6faf6b8 1-16
+lua/plugins/ccc-nvim/CODES/lua/ccc/kit/Thread/Server/Session.lua
+  h_220433a6faf6b8 1-131
+lua/plugins/ccc-nvim/CODES/lua/ccc/kit/Thread/Server/_bootstrap.lua
+  h_220433a6faf6b8 1-27
+lua/plugins/ccc-nvim/CODES/lua/ccc/kit/Thread/Server/init.lua
+  h_220433a6faf6b8 1-121
+lua/plugins/ccc-nvim/CODES/lua/ccc/kit/Thread/Worker.lua
+  h_220433a6faf6b8 1-62
+lua/plugins/ccc-nvim/CODES/lua/ccc/kit/Vim/Keymap.lua
+  h_220433a6faf6b8 1-88
+lua/plugins/ccc-nvim/CODES/lua/ccc/kit/Vim/RegExp.lua
+  h_220433a6faf6b8 1-42
+lua/plugins/ccc-nvim/CODES/lua/ccc/kit/Vim/Syntax.lua
+  h_220433a6faf6b8 1-61
+lua/plugins/ccc-nvim/CODES/lua/ccc/kit/init.lua
+  h_220433a6faf6b8 1-212
+lua/plugins/ccc-nvim/CODES/lua/ccc/mapping.lua
+  h_220433a6faf6b8 1-152
+lua/plugins/ccc-nvim/CODES/lua/ccc/output/css_hsl.lua
+  h_220433a6faf6b8 1-22
+lua/plugins/ccc-nvim/CODES/lua/ccc/output/css_hwb.lua
+  h_220433a6faf6b8 1-22
+lua/plugins/ccc-nvim/CODES/lua/ccc/output/css_lab.lua
+  h_220433a6faf6b8 1-22
+lua/plugins/ccc-nvim/CODES/lua/ccc/output/css_lch.lua
+  h_220433a6faf6b8 1-22
+lua/plugins/ccc-nvim/CODES/lua/ccc/output/css_oklab.lua
+  h_220433a6faf6b8 1-21
+lua/plugins/ccc-nvim/CODES/lua/ccc/output/css_oklch.lua
+  h_220433a6faf6b8 1-22
+lua/plugins/ccc-nvim/CODES/lua/ccc/output/css_rgb.lua
+  h_220433a6faf6b8 1-19
+lua/plugins/ccc-nvim/CODES/lua/ccc/output/css_rgba.lua
+  h_220433a6faf6b8 1-19
+lua/plugins/ccc-nvim/CODES/lua/ccc/output/float.lua
+  h_220433a6faf6b8 1-21
+lua/plugins/ccc-nvim/CODES/lua/ccc/output/hex.lua
+  h_220433a6faf6b8 1-40
+lua/plugins/ccc-nvim/CODES/lua/ccc/output/hex_short.lua
+  h_220433a6faf6b8 1-43
+lua/plugins/ccc-nvim/CODES/lua/ccc/picker/ansi_escape.lua
+  h_220433a6faf6b8 1-132
+lua/plugins/ccc-nvim/CODES/lua/ccc/picker/css_hsl.lua
+  h_220433a6faf6b8 1-53
+lua/plugins/ccc-nvim/CODES/lua/ccc/picker/css_hwb.lua
+  h_220433a6faf6b8 1-45
+lua/plugins/ccc-nvim/CODES/lua/ccc/picker/css_lab.lua
+  h_220433a6faf6b8 1-45
+lua/plugins/ccc-nvim/CODES/lua/ccc/picker/css_lch.lua
+  h_220433a6faf6b8 1-44
+lua/plugins/ccc-nvim/CODES/lua/ccc/picker/css_name.lua
+  h_220433a6faf6b8 1-196
+lua/plugins/ccc-nvim/CODES/lua/ccc/picker/css_oklab.lua
+  h_220433a6faf6b8 1-45
+lua/plugins/ccc-nvim/CODES/lua/ccc/picker/css_oklch.lua
+  h_220433a6faf6b8 1-44
+lua/plugins/ccc-nvim/CODES/lua/ccc/picker/css_rgb.lua
+  h_220433a6faf6b8 1-55
+lua/plugins/ccc-nvim/CODES/lua/ccc/picker/custom_entries.lua
+  h_220433a6faf6b8 1-75
+lua/plugins/ccc-nvim/CODES/lua/ccc/picker/defaults.lua
+  h_220433a6faf6b8 1-30
+lua/plugins/ccc-nvim/CODES/lua/ccc/picker/hex.lua
+  h_220433a6faf6b8 1-50
+lua/plugins/ccc-nvim/CODES/lua/ccc/picker/hex_long.lua
+  h_220433a6faf6b8 1-13
+lua/plugins/ccc-nvim/CODES/lua/ccc/picker/hex_short.lua
+  h_220433a6faf6b8 1-13
+lua/plugins/ccc-nvim/CODES/lua/ccc/picker/trailing_whitespace.lua
+  h_220433a6faf6b8 1-93
+lua/plugins/ccc-nvim/CODES/lua/ccc/select.lua
+  h_220433a6faf6b8 1-25
+lua/plugins/ccc-nvim/CODES/lua/ccc/types/class.lua
+  h_220433a6faf6b8 1-48
+lua/plugins/ccc-nvim/CODES/lua/ccc/types/color.lua
+  h_220433a6faf6b8 1-58
+lua/plugins/ccc-nvim/CODES/lua/ccc/types/config.lua
+  h_220433a6faf6b8 1-93
+lua/plugins/ccc-nvim/CODES/lua/ccc/ui/float.lua
+  h_220433a6faf6b8 1-339
+lua/plugins/ccc-nvim/CODES/lua/ccc/utils/api.lua
+  h_220433a6faf6b8 1-79
+lua/plugins/ccc-nvim/CODES/lua/ccc/utils/array.lua
+  h_220433a6faf6b8 1-671
+lua/plugins/ccc-nvim/CODES/lua/ccc/utils/convert.lua
+  h_220433a6faf6b8 1-469
+lua/plugins/ccc-nvim/CODES/lua/ccc/utils/hex.lua
+  h_220433a6faf6b8 1-30
+lua/plugins/ccc-nvim/CODES/lua/ccc/utils/hsluv.lua
+  h_220433a6faf6b8 1-342
+lua/plugins/ccc-nvim/CODES/lua/ccc/utils/init.lua
+  h_220433a6faf6b8 1-157
+lua/plugins/ccc-nvim/CODES/lua/ccc/utils/ok_colorspace.lua
+  h_220433a6faf6b8 1-579
+lua/plugins/ccc-nvim/CODES/lua/ccc/utils/parse.lua
+  h_220433a6faf6b8 1-117
+lua/plugins/ccc-nvim/CODES/lua/ccc/utils/pattern.lua
+  h_220433a6faf6b8 1-51
+lua/plugins/ccc-nvim/CODES/lua/ccc/utils/test.lua
+  h_220433a6faf6b8 1-43
+lua/plugins/ccc-nvim/CODES/plugin/ccc.vim
+  h_220433a6faf6b8 1-7
+lua/plugins/ccc-nvim/CODES/stylua.toml
+  h_220433a6faf6b8 1-5
+lua/plugins/ccc-nvim/CODES/test/command_spec.lua
+  h_220433a6faf6b8 1-395
+lua/plugins/ccc-nvim/CODES/test/input_spec.lua
+  h_220433a6faf6b8 1-233
+lua/plugins/ccc-nvim/CODES/test/output_spec.lua
+  h_220433a6faf6b8 1-123
+lua/plugins/ccc-nvim/CODES/test/picker_spec.lua
+  h_220433a6faf6b8 1-328
+lua/plugins/ccc-nvim/CODES/utils/minimal.vim
+  h_220433a6faf6b8 1-24
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "8bc317deb48312208a5194c55946381497ef2fb2",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
