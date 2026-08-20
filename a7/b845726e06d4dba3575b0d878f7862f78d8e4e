@@ -1,0 +1,35 @@
+lua/plugins/translate-nvim/.editorconfig
+  s_90f75fb44f3ad4::t_793c0b41036ccc 1-14
+lua/plugins/translate-nvim/cmds.lua
+  s_90f75fb44f3ad4::t_6082c89bc68573 1-6
+lua/plugins/translate-nvim/dependencies.lua
+  s_90f75fb44f3ad4::t_c47aead0b125ed 1-16
+lua/plugins/translate-nvim/events.lua
+  s_90f75fb44f3ad4::t_06c0356e390aed 1-6
+lua/plugins/translate-nvim/ft.lua
+  s_90f75fb44f3ad4::t_fd7bacfd575a65 1-6
+lua/plugins/translate-nvim/init.lua
+  s_90f75fb44f3ad4::t_c0178571ac5354 1-37
+lua/plugins/translate-nvim/keys.lua
+  s_90f75fb44f3ad4::t_1a6fb7f9c09fe9 1-23
+lua/plugins/translate-nvim/opts.lua
+  s_90f75fb44f3ad4::t_4f8c2b08f38b14 1-6
+lua/plugins/translate-nvim/stylua.toml
+  s_90f75fb44f3ad4::t_396893b5501919 1-13
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "a7b845726e06d4dba3575b0d878f7862f78d8e4e",
+  "prompts": {},
+  "sessions": {
+    "s_90f75fb44f3ad4": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "f2da0027-b97d-47ca-bc5a-3e9f39c3937e",
+        "model": "claude-opus-5"
+      },
+      "human_author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
