@@ -1,0 +1,18 @@
+lua/plugins/ccc-nvim/WIKIS/Home.md
+  h_220433a6faf6b8 1
+lua/plugins/ccc-nvim/WIKIS/Special-pickers.md
+  h_220433a6faf6b8 1-40
+lua/plugins/ccc-nvim/WIKIS/Use-multiple-color-spaces-simultaneously.md
+  h_220433a6faf6b8 1-91
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "8167fea500e01e44432690293a3eb93323955835",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
