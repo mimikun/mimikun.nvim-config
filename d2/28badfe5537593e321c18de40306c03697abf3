@@ -1,0 +1,30 @@
+lua/plugins/review-nvim/opts/auto_refresh.lua
+  h_220433a6faf6b8 1-9,12
+lua/plugins/review-nvim/opts/diff.lua
+  h_220433a6faf6b8 1-3,5,8
+lua/plugins/review-nvim/opts/export.lua
+  h_220433a6faf6b8 1-17,20
+lua/plugins/review-nvim/opts/keymaps.lua
+  h_220433a6faf6b8 1-2,4,7
+lua/plugins/review-nvim/opts/persistence.lua
+  h_220433a6faf6b8 1-5,8
+lua/plugins/review-nvim/opts/quick_comments.lua
+  h_220433a6faf6b8 1-3,5-7,9-11,14-16,18,20-22,25-27,33
+lua/plugins/review-nvim/opts/templates.lua
+  h_220433a6faf6b8 1-41,45
+lua/plugins/review-nvim/opts/tmux.lua
+  h_220433a6faf6b8 1-3,5,7-9,12
+lua/plugins/review-nvim/opts/ui.lua
+  h_220433a6faf6b8 1-9,12
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "d228badfe5537593e321c18de40306c03697abf3",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
