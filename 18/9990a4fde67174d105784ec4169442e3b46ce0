@@ -1,0 +1,14 @@
+lua/plugins/translate-nvim/CODES/preset/command/deepl.lua
+  h_220433a6faf6b8 30
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "189990a4fde67174d105784ec4169442e3b46ce0",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
