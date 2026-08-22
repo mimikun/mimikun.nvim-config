@@ -1,0 +1,22 @@
+docs/plans/motion-plugins.md
+  s_d94464264cb8f0::t_ee204226d07afd 52-53
+  s_d94464264cb8f0::t_79f12c1ab45398 24,112,120,168,197
+  s_d94464264cb8f0::t_58725ac1199ff2 182-183
+  s_d94464264cb8f0::t_f8e52b50c36042 1-23,25-51,54-111,113-119,121-167,169-181,184-196,198-257
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.16",
+  "base_commit_sha": "db45122723d9b797a976bfd1342dd711bf32c328",
+  "prompts": {},
+  "sessions": {
+    "s_d94464264cb8f0": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "863e9180-bcc8-4c90-8f5f-e9f3033a5f8f",
+        "model": "claude-opus-5"
+      },
+      "human_author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
