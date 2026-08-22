@@ -1,0 +1,30 @@
+lua/plugins/diffview-plus-nvim/.editorconfig
+  h_220433a6faf6b8 1-14
+lua/plugins/diffview-plus-nvim/cmds.lua
+  h_220433a6faf6b8 1-6
+lua/plugins/diffview-plus-nvim/dependencies.lua
+  h_220433a6faf6b8 1-16
+lua/plugins/diffview-plus-nvim/events.lua
+  h_220433a6faf6b8 1-6
+lua/plugins/diffview-plus-nvim/ft.lua
+  h_220433a6faf6b8 1-6
+lua/plugins/diffview-plus-nvim/init.lua
+  h_220433a6faf6b8 1-37
+lua/plugins/diffview-plus-nvim/keys.lua
+  h_220433a6faf6b8 1-23
+lua/plugins/diffview-plus-nvim/opts.lua
+  h_220433a6faf6b8 1-6
+lua/plugins/diffview-plus-nvim/stylua.toml
+  h_220433a6faf6b8 1-13
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.23",
+  "base_commit_sha": "26345fae69a9e02c5740917ea8397e88074b0352",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
