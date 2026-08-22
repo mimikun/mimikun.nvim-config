@@ -1,0 +1,14 @@
+lua/plugins/helpview-nvim/opts/vimdoc/horizontal_rules.lua
+  h_220433a6faf6b8 70-77
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.23",
+  "base_commit_sha": "f044d48e72b7f900b3a3646e36594c5b238205ad",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
