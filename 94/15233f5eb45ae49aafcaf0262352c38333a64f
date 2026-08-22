@@ -1,0 +1,18 @@
+lua/plugins/helpview-nvim/opts/vimdoc/modelines.lua
+  h_220433a6faf6b8 4-5,8-9,11-13,16-17,25-26,31-33
+lua/plugins/helpview-nvim/opts/vimdoc/notes.lua
+  h_220433a6faf6b8 4-5,8-9,16-17
+lua/plugins/helpview-nvim/opts/vimdoc/optionlinks.lua
+  h_220433a6faf6b8 4-6,9-10,16-18
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.23",
+  "base_commit_sha": "9415233f5eb45ae49aafcaf0262352c38333a64f",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
