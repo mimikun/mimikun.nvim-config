@@ -1,0 +1,14 @@
+lua/plugins/helpview-nvim/opts/init.lua
+  h_220433a6faf6b8 9,13
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.23",
+  "base_commit_sha": "20219418825a73ab27bb10adb5015f88878dd59a",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
