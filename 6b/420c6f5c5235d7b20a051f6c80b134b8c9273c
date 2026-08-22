@@ -1,0 +1,62 @@
+lua/plugins/substitute-nvim/CODES/.github/workflows/integration.yml
+  h_220433a6faf6b8 1-46
+lua/plugins/substitute-nvim/CODES/.github/workflows/panvimdoc.yml
+  h_220433a6faf6b8 1-22
+lua/plugins/substitute-nvim/CODES/.gitignore
+  h_220433a6faf6b8 1-3
+lua/plugins/substitute-nvim/CODES/.luacheckrc
+  h_220433a6faf6b8 1
+lua/plugins/substitute-nvim/CODES/CODE_OF_CONDUCT.md
+  h_220433a6faf6b8 1-3
+lua/plugins/substitute-nvim/CODES/DEMO.md
+  h_220433a6faf6b8 1-13
+lua/plugins/substitute-nvim/CODES/LICENCE
+  h_220433a6faf6b8 1-10
+lua/plugins/substitute-nvim/CODES/Makefile
+  h_220433a6faf6b8 1-2
+lua/plugins/substitute-nvim/CODES/README.md
+  h_220433a6faf6b8 1-457
+lua/plugins/substitute-nvim/CODES/doc/substitute-nvim.txt
+  h_220433a6faf6b8 1-555
+lua/plugins/substitute-nvim/CODES/lua/substitute.lua
+  h_220433a6faf6b8 1-142
+lua/plugins/substitute-nvim/CODES/lua/substitute/config.lua
+  h_220433a6faf6b8 1-76
+lua/plugins/substitute-nvim/CODES/lua/substitute/exchange.lua
+  h_220433a6faf6b8 1-128
+lua/plugins/substitute-nvim/CODES/lua/substitute/modifiers.lua
+  h_220433a6faf6b8 1-86
+lua/plugins/substitute-nvim/CODES/lua/substitute/range.lua
+  h_220433a6faf6b8 1-221
+lua/plugins/substitute-nvim/CODES/lua/substitute/utils.lua
+  h_220433a6faf6b8 1-258
+lua/plugins/substitute-nvim/CODES/spec/init.lua
+  h_220433a6faf6b8 1-43
+lua/plugins/substitute-nvim/CODES/spec/substitute/exchange_spec.lua
+  h_220433a6faf6b8 1-148
+lua/plugins/substitute-nvim/CODES/spec/substitute/modifiers/config_spec.lua
+  h_220433a6faf6b8 1-59
+lua/plugins/substitute-nvim/CODES/spec/substitute/modifiers/linewise_spec.lua
+  h_220433a6faf6b8 1-75
+lua/plugins/substitute-nvim/CODES/spec/substitute/modifiers/reindent_spec.lua
+  h_220433a6faf6b8 1-148
+lua/plugins/substitute-nvim/CODES/spec/substitute/range_spec.lua
+  h_220433a6faf6b8 1-143
+lua/plugins/substitute-nvim/CODES/spec/substitute/utils_spec.lua
+  h_220433a6faf6b8 1-498
+lua/plugins/substitute-nvim/CODES/spec/substitute_spec.lua
+  h_220433a6faf6b8 1-197
+lua/plugins/substitute-nvim/CODES/stylua.toml
+  h_220433a6faf6b8 1-7
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.23",
+  "base_commit_sha": "6b420c6f5c5235d7b20a051f6c80b134b8c9273c",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
