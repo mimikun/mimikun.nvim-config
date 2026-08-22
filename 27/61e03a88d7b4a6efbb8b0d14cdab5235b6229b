@@ -1,0 +1,14 @@
+lua/plugins/dial-nvim/init.lua
+  h_220433a6faf6b8 6
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.23",
+  "base_commit_sha": "2761e03a88d7b4a6efbb8b0d14cdab5235b6229b",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
