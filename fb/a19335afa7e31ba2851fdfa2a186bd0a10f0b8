@@ -1,0 +1,119 @@
+lua/plugins/dial-nvim/CODES/LICENSE
+  h_220433a6faf6b8 1-21
+lua/plugins/dial-nvim/CODES/lua/dial/augend.lua
+  h_220433a6faf6b8 1-23
+lua/plugins/dial-nvim/CODES/.stylua.toml
+  h_220433a6faf6b8 1-6
+lua/plugins/dial-nvim/keys.lua
+  h_220433a6faf6b8 1-20
+  s_2ee2d9996009ee::t_56f3bc14681925 21-93
+lua/plugins/dial-nvim/CODES/tests/dial/augend/decimal_fraction_spec.lua
+  h_220433a6faf6b8 1-227
+lua/plugins/dial-nvim/CODES/lua/dial/handle.lua
+  h_220433a6faf6b8 1-256
+lua/plugins/dial-nvim/CODES/autoload/dial/operator.vim
+  h_220433a6faf6b8 1-31
+lua/plugins/dial-nvim/CODES/lua/dial/augend/common.lua
+  h_220433a6faf6b8 1-88
+lua/plugins/dial-nvim/CODES/doc/dial.txt
+  h_220433a6faf6b8 1-1728
+lua/plugins/dial-nvim/CODES/tests/dial/augend/date_spec.lua
+  h_220433a6faf6b8 1-313
+lua/plugins/dial-nvim/CODES/lua/dial/augend/user.lua
+  h_220433a6faf6b8 1-35
+lua/plugins/dial-nvim/CODES/tests/dial/augend/integer_spec.lua
+  h_220433a6faf6b8 1-222
+lua/plugins/dial-nvim/.editorconfig
+  h_220433a6faf6b8 1-14
+lua/plugins/dial-nvim/CODES/lua/dial/augend/misc.lua
+  h_220433a6faf6b8 1-40
+lua/plugins/dial-nvim/CODES/lua/dial/augend/hexcolor.lua
+  h_220433a6faf6b8 1-128
+lua/plugins/dial-nvim/CODES/plugin/dial.lua
+  h_220433a6faf6b8 1-18
+lua/plugins/dial-nvim/CODES/README.md
+  h_220433a6faf6b8 1-391
+lua/plugins/dial-nvim/CODES/lua/dial/map.lua
+  h_220433a6faf6b8 1-104
+lua/plugins/dial-nvim/stylua.toml
+  h_220433a6faf6b8 1-13
+lua/plugins/dial-nvim/WIKIS/Home.md
+  h_220433a6faf6b8 1
+lua/plugins/dial-nvim/CODES/lua/dial/augend/semver.lua
+  h_220433a6faf6b8 1-107
+lua/plugins/dial-nvim/CODES/doc/dial.jax
+  h_220433a6faf6b8 1-1639
+lua/plugins/dial-nvim/CODES/tests/dial/augend/case_spec.lua
+  h_220433a6faf6b8 1-38
+lua/plugins/dial-nvim/CODES/lua/dial/augend/date.lua
+  h_220433a6faf6b8 1-763
+lua/plugins/dial-nvim/CODES/TROUBLESHOOTING_ja.md
+  h_220433a6faf6b8 1-59
+lua/plugins/dial-nvim/opts.lua
+  h_220433a6faf6b8 1-6
+  s_2ee2d9996009ee::t_539ec911435799 7-45
+lua/plugins/dial-nvim/CODES/lua/dial/config.lua
+  h_220433a6faf6b8 1-80
+lua/plugins/dial-nvim/CODES/tests/minimal_init.lua
+  h_220433a6faf6b8 1-11
+lua/plugins/dial-nvim/CODES/README_ja.md
+  h_220433a6faf6b8 1-368
+lua/plugins/dial-nvim/CODES/doc/.gitignore
+  h_220433a6faf6b8 1
+lua/plugins/dial-nvim/CODES/tests/dial/augend/constant_spec.lua
+  h_220433a6faf6b8 1-26
+lua/plugins/dial-nvim/CODES/lua/dial/augend/constant.lua
+  h_220433a6faf6b8 1-248
+lua/plugins/dial-nvim/CODES/lua/dial/augend/paren.lua
+  h_220433a6faf6b8 1-245
+lua/plugins/dial-nvim/CODES/.github/workflows/test.yml
+  h_220433a6faf6b8 1-22
+lua/plugins/dial-nvim/CODES/tests/dial/augend/paren_spec.lua
+  h_220433a6faf6b8 1-181
+lua/plugins/dial-nvim/CODES/lua/dial/augend/integer.lua
+  h_220433a6faf6b8 1-338
+lua/plugins/dial-nvim/CODES/lua/dial/augend/decimal_fraction.lua
+  h_220433a6faf6b8 1-148
+lua/plugins/dial-nvim/CODES/lua/dial/types.lua
+  h_220433a6faf6b8 1-18
+lua/plugins/dial-nvim/CODES/tests/dial/augend/hexcolor_spec.lua
+  h_220433a6faf6b8 1-319
+lua/plugins/dial-nvim/CODES/lua/dial/util.lua
+  h_220433a6faf6b8 1-189
+lua/plugins/dial-nvim/CODES/lua/dial/augend/case.lua
+  h_220433a6faf6b8 1-265
+lua/plugins/dial-nvim/CODES/tests/dial/augend/misc_spec.lua
+  h_220433a6faf6b8 1-29
+lua/plugins/dial-nvim/CODES/lua/dial/command.lua
+  h_220433a6faf6b8 1-237
+lua/plugins/dial-nvim/CODES/TROUBLESHOOTING.md
+  h_220433a6faf6b8 1-61
+lua/plugins/dial-nvim/init.lua
+  h_220433a6faf6b8 1-11
+  s_2ee2d9996009ee::t_a79e695c470ead 12-18
+lua/plugins/dial-nvim/CODES/HISTORY.md
+  h_220433a6faf6b8 1-63
+lua/plugins/dial-nvim/CODES/run
+  h_220433a6faf6b8 1-64
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.23",
+  "base_commit_sha": "fba19335afa7e31ba2851fdfa2a186bd0a10f0b8",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  },
+  "sessions": {
+    "s_2ee2d9996009ee": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "e006add7-2066-4018-9d8f-30b089089878",
+        "model": "claude-opus-5"
+      },
+      "human_author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
