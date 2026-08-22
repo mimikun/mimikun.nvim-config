@@ -1,0 +1,14 @@
+lua/plugins/substitute-nvim/README.md
+  h_220433a6faf6b8 1-457
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.23",
+  "base_commit_sha": "6d535345b2e1054f5d87542bb1e236768b1b8f71",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
