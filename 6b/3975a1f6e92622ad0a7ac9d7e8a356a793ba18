@@ -1,0 +1,19 @@
+lua/plugins/nvim-ts-autotag/opts.lua
+  s_3052eb86229b45::t_bad9283db59abe 3-53
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.23",
+  "base_commit_sha": "6b3975a1f6e92622ad0a7ac9d7e8a356a793ba18",
+  "prompts": {},
+  "sessions": {
+    "s_3052eb86229b45": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "9f00eb41-cfcd-49c9-81e9-4d756fda42d3",
+        "model": "claude-opus-5"
+      },
+      "human_author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
