@@ -1,0 +1,18 @@
+lua/plugins/substitute-nvim/README.md
+  h_220433a6faf6b8 125
+lua/plugins/substitute-nvim/keys.lua
+  h_220433a6faf6b8 25-34
+lua/plugins/substitute-nvim/opts.lua
+  h_220433a6faf6b8 3-4,6-13,15-16,18-23,25-40,43,45-46,51,53-55
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.23",
+  "base_commit_sha": "9704427ec352850176d2d541e092056a83f0ab88",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
