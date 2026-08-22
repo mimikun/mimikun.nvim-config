@@ -1,0 +1,86 @@
+lua/plugins/nvim-ts-autotag/CODES/.editorconfig
+  h_220433a6faf6b8 1-14
+lua/plugins/nvim-ts-autotag/CODES/.github/FUNDING.yml
+  h_220433a6faf6b8 1
+lua/plugins/nvim-ts-autotag/CODES/.github/stale.yml
+  h_220433a6faf6b8 1-19
+lua/plugins/nvim-ts-autotag/CODES/.github/workflows/ci.yml
+  h_220433a6faf6b8 1-43
+lua/plugins/nvim-ts-autotag/CODES/.gitignore
+  h_220433a6faf6b8 1
+lua/plugins/nvim-ts-autotag/CODES/.luarc.json
+  h_220433a6faf6b8 1-6
+lua/plugins/nvim-ts-autotag/CODES/LICENSE
+  h_220433a6faf6b8 1-21
+lua/plugins/nvim-ts-autotag/CODES/Makefile
+  h_220433a6faf6b8 1-8
+lua/plugins/nvim-ts-autotag/CODES/README.md
+  h_220433a6faf6b8 1-136
+lua/plugins/nvim-ts-autotag/CODES/lua/nvim-ts-autotag.lua
+  h_220433a6faf6b8 1-39
+lua/plugins/nvim-ts-autotag/CODES/lua/nvim-ts-autotag/_log.lua
+  h_220433a6faf6b8 1-12
+lua/plugins/nvim-ts-autotag/CODES/lua/nvim-ts-autotag/config/ft.lua
+  h_220433a6faf6b8 1-96
+lua/plugins/nvim-ts-autotag/CODES/lua/nvim-ts-autotag/config/init.lua
+  h_220433a6faf6b8 1-78
+lua/plugins/nvim-ts-autotag/CODES/lua/nvim-ts-autotag/config/plugin.lua
+  h_220433a6faf6b8 1-249
+lua/plugins/nvim-ts-autotag/CODES/lua/nvim-ts-autotag/internal.lua
+  h_220433a6faf6b8 1-522
+lua/plugins/nvim-ts-autotag/CODES/lua/nvim-ts-autotag/utils.lua
+  h_220433a6faf6b8 1-191
+lua/plugins/nvim-ts-autotag/CODES/plugin/nvim-ts-autotag.lua
+  h_220433a6faf6b8 1
+lua/plugins/nvim-ts-autotag/CODES/sample/index.hbs
+  h_220433a6faf6b8 1-4
+lua/plugins/nvim-ts-autotag/CODES/sample/index.html
+  h_220433a6faf6b8 1-20
+lua/plugins/nvim-ts-autotag/CODES/sample/index.html.erb
+  h_220433a6faf6b8 1-20
+lua/plugins/nvim-ts-autotag/CODES/sample/index.js
+  h_220433a6faf6b8 1-23
+lua/plugins/nvim-ts-autotag/CODES/sample/index.php
+  h_220433a6faf6b8 1-29
+lua/plugins/nvim-ts-autotag/CODES/sample/index.res
+  h_220433a6faf6b8 1-18
+lua/plugins/nvim-ts-autotag/CODES/sample/index.svelte
+  h_220433a6faf6b8 1-25
+lua/plugins/nvim-ts-autotag/CODES/sample/index.templ
+  h_220433a6faf6b8 1-13
+lua/plugins/nvim-ts-autotag/CODES/sample/index.ts
+  h_220433a6faf6b8 1-6
+lua/plugins/nvim-ts-autotag/CODES/sample/index.tsx
+  h_220433a6faf6b8 1-23
+lua/plugins/nvim-ts-autotag/CODES/sample/index.vue
+  h_220433a6faf6b8 1-25
+lua/plugins/nvim-ts-autotag/CODES/sample/index.xml
+  h_220433a6faf6b8 1-37
+lua/plugins/nvim-ts-autotag/CODES/tests/minimal_init.lua
+  h_220433a6faf6b8 1-142
+lua/plugins/nvim-ts-autotag/CODES/tests/specs/close_slash_tag_spec.lua
+  h_220433a6faf6b8 1-213
+lua/plugins/nvim-ts-autotag/CODES/tests/specs/closetag_spec.lua
+  h_220433a6faf6b8 1-279
+lua/plugins/nvim-ts-autotag/CODES/tests/specs/renametag_spec.lua
+  h_220433a6faf6b8 1-366
+lua/plugins/nvim-ts-autotag/CODES/tests/test.lua
+  h_220433a6faf6b8 1-13
+lua/plugins/nvim-ts-autotag/CODES/tests/utils/helpers.lua
+  h_220433a6faf6b8 1-160
+lua/plugins/nvim-ts-autotag/CODES/tests/utils/paths.lua
+  h_220433a6faf6b8 1-78
+lua/plugins/nvim-ts-autotag/CODES/tests/utils/utils.lua
+  h_220433a6faf6b8 1-12
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.23",
+  "base_commit_sha": "e98b1169fdc0362d2d9f3080b1a9fa2b7de763ef",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
