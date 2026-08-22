@@ -1,0 +1,110 @@
+lua/plugins/fff-nvim/CODES/empty_config.lua
+  h_220433a6faf6b8 1-62
+lua/plugins/fff-nvim/CODES/lua/fff.lua
+  h_220433a6faf6b8 1
+lua/plugins/fff-nvim/CODES/lua/fff/conf.lua
+  h_220433a6faf6b8 1-498
+lua/plugins/fff-nvim/CODES/lua/fff/core.lua
+  h_220433a6faf6b8 1-222
+lua/plugins/fff-nvim/CODES/lua/fff/download.lua
+  h_220433a6faf6b8 1-289
+lua/plugins/fff-nvim/CODES/lua/fff/file_picker/file_info.lua
+  h_220433a6faf6b8 1-415
+lua/plugins/fff-nvim/CODES/lua/fff/file_picker/icons.lua
+  h_220433a6faf6b8 1-91
+lua/plugins/fff-nvim/CODES/lua/fff/file_picker/image.lua
+  h_220433a6faf6b8 1-264
+lua/plugins/fff-nvim/CODES/lua/fff/file_picker/init.lua
+  h_220433a6faf6b8 1-212
+lua/plugins/fff-nvim/CODES/lua/fff/file_picker/preview.lua
+  h_220433a6faf6b8 1-946
+lua/plugins/fff-nvim/CODES/lua/fff/fuzzy.lua
+  h_220433a6faf6b8 1-58
+lua/plugins/fff-nvim/CODES/lua/fff/health.lua
+  h_220433a6faf6b8 1-362
+lua/plugins/fff-nvim/CODES/lua/fff/highlights.lua
+  h_220433a6faf6b8 1-304
+lua/plugins/fff-nvim/CODES/lua/fff/layout.lua
+  h_220433a6faf6b8 1-654
+lua/plugins/fff-nvim/CODES/lua/fff/list_separator.lua
+  h_220433a6faf6b8 1-138
+lua/plugins/fff-nvim/CODES/lua/fff/location_utils.lua
+  h_220433a6faf6b8 1-308
+lua/plugins/fff-nvim/CODES/lua/fff/main.lua
+  h_220433a6faf6b8 1-659
+lua/plugins/fff-nvim/CODES/lua/fff/picker_ui/README.md
+  h_220433a6faf6b8 1-82
+lua/plugins/fff-nvim/CODES/lua/fff/picker_ui/combo_renderer.lua
+  h_220433a6faf6b8 1-49
+lua/plugins/fff-nvim/CODES/lua/fff/picker_ui/file_renderer.lua
+  h_220433a6faf6b8 1-268
+lua/plugins/fff-nvim/CODES/lua/fff/picker_ui/grep_renderer.lua
+  h_220433a6faf6b8 1-295
+lua/plugins/fff-nvim/CODES/lua/fff/picker_ui/layout_manager.lua
+  h_220433a6faf6b8 1-150
+lua/plugins/fff-nvim/CODES/lua/fff/picker_ui/list_renderer.lua
+  h_220433a6faf6b8 1-258
+lua/plugins/fff-nvim/CODES/lua/fff/picker_ui/navigation.lua
+  h_220433a6faf6b8 1-289
+lua/plugins/fff-nvim/CODES/lua/fff/picker_ui/picker_ui.lua
+  h_220433a6faf6b8 1-778
+lua/plugins/fff-nvim/CODES/lua/fff/picker_ui/picker_ui_state.lua
+  h_220433a6faf6b8 1-260
+lua/plugins/fff-nvim/CODES/lua/fff/picker_ui/preview_manager.lua
+  h_220433a6faf6b8 1-236
+lua/plugins/fff-nvim/CODES/lua/fff/picker_ui/renderer.lua
+  h_220433a6faf6b8 1-324
+lua/plugins/fff-nvim/CODES/lua/fff/picker_ui/search_manager.lua
+  h_220433a6faf6b8 1-367
+lua/plugins/fff-nvim/CODES/lua/fff/picker_ui/ui_creator.lua
+  h_220433a6faf6b8 1-510
+lua/plugins/fff-nvim/CODES/lua/fff/picker_ui/utils.lua
+  h_220433a6faf6b8 1-97
+lua/plugins/fff-nvim/CODES/lua/fff/rust/init.lua
+  h_220433a6faf6b8 1-76
+lua/plugins/fff-nvim/CODES/lua/fff/scrollbar.lua
+  h_220433a6faf6b8 1-119
+lua/plugins/fff-nvim/CODES/lua/fff/treesitter_hl.lua
+  h_220433a6faf6b8 1-111
+lua/plugins/fff-nvim/CODES/lua/fff/utils.lua
+  h_220433a6faf6b8 1-140
+lua/plugins/fff-nvim/CODES/lua/fff/utils/fs.lua
+  h_220433a6faf6b8 1-33
+lua/plugins/fff-nvim/CODES/lua/fff/utils/system.lua
+  h_220433a6faf6b8 1-61
+lua/plugins/fff-nvim/CODES/lua/fff/utils/version.lua
+  h_220433a6faf6b8 1-156
+lua/plugins/fff-nvim/CODES/plugin/fff.lua
+  h_220433a6faf6b8 1-109
+lua/plugins/fff-nvim/README.md
+  h_220433a6faf6b8 1-876
+lua/plugins/fff-nvim/cmds.lua
+  h_220433a6faf6b8 1-6
+lua/plugins/fff-nvim/dependencies.lua
+  h_220433a6faf6b8 1-16
+lua/plugins/fff-nvim/events.lua
+  h_220433a6faf6b8 1-6
+lua/plugins/fff-nvim/fff.nvim.txt
+  h_220433a6faf6b8 1-462
+lua/plugins/fff-nvim/ft.lua
+  h_220433a6faf6b8 1-6
+lua/plugins/fff-nvim/init.lua
+  h_220433a6faf6b8 1-35
+lua/plugins/fff-nvim/keys.lua
+  h_220433a6faf6b8 1-23
+lua/plugins/fff-nvim/opts.lua
+  h_220433a6faf6b8 1-6
+lua/plugins/fff-nvim/stylua.toml
+  h_220433a6faf6b8 1-13
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.23",
+  "base_commit_sha": "18442c6d82415d39eacc4c1903e0071d379c0703",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
