@@ -1,0 +1,14 @@
+lua/plugins/rustowl/opts/client.lua
+  h_220433a6faf6b8 5-7,11-14,18-30,32-44,46-58
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.23",
+  "base_commit_sha": "9d98cd9ca6b0e9042dd94258d09b30351acb67f2",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
