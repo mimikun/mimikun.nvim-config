@@ -1,0 +1,16 @@
+lua/plugins/pomo-nvim/opts/stylua.toml
+  h_220433a6faf6b8 1-13
+lua/plugins/pomo-nvim/stylua.toml
+  h_220433a6faf6b8 1-13
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.23",
+  "base_commit_sha": "c5ed0a813871a364863a24498ad875c7ba824823",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
