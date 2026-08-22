@@ -1,0 +1,14 @@
+lua/plugins/helpview-nvim/opts/highlight_groups.lua
+  h_220433a6faf6b8 1-3,5
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.23",
+  "base_commit_sha": "1d89014b842d294e313380e070f7d71dfa182d1b",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
