@@ -1,0 +1,40 @@
+lua/plugins/helpview-nvim/opts/vimdoc/arguments.lua
+  h_220433a6faf6b8 1-581
+lua/plugins/helpview-nvim/opts/vimdoc/code_blocks.lua
+  h_220433a6faf6b8 1-581
+lua/plugins/helpview-nvim/opts/vimdoc/headings.lua
+  h_220433a6faf6b8 1-581
+lua/plugins/helpview-nvim/opts/vimdoc/highlight_groups.lua
+  h_220433a6faf6b8 1-581
+lua/plugins/helpview-nvim/opts/vimdoc/horizontal_rules.lua
+  h_220433a6faf6b8 1-581
+lua/plugins/helpview-nvim/opts/vimdoc/init.lua
+  h_220433a6faf6b8 569-581
+lua/plugins/helpview-nvim/opts/vimdoc/inline_codes.lua
+  h_220433a6faf6b8 1-581
+lua/plugins/helpview-nvim/opts/vimdoc/keycodes.lua
+  h_220433a6faf6b8 1-581
+lua/plugins/helpview-nvim/opts/vimdoc/modelines.lua
+  h_220433a6faf6b8 1-581
+lua/plugins/helpview-nvim/opts/vimdoc/notes.lua
+  h_220433a6faf6b8 1-581
+lua/plugins/helpview-nvim/opts/vimdoc/optionlinks.lua
+  h_220433a6faf6b8 1-581
+lua/plugins/helpview-nvim/opts/vimdoc/taglinks.lua
+  h_220433a6faf6b8 1-581
+lua/plugins/helpview-nvim/opts/vimdoc/tags.lua
+  h_220433a6faf6b8 1-581
+lua/plugins/helpview-nvim/opts/vimdoc/urls.lua
+  h_220433a6faf6b8 1-581
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.23",
+  "base_commit_sha": "1ec9bb92f21d025ed75054114714b2e2edc9594c",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
