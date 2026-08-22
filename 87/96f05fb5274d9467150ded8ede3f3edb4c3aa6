@@ -1,0 +1,16 @@
+lua/plugins/squix-nvim/opts/stylua.toml
+  h_220433a6faf6b8 1-13
+lua/plugins/squix-nvim/stylua.toml
+  h_220433a6faf6b8 1-13
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.23",
+  "base_commit_sha": "8796f05fb5274d9467150ded8ede3f3edb4c3aa6",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
