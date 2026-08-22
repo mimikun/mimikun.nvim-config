@@ -1,0 +1,20 @@
+lua/plugins/pomo-nvim/opts/init.lua
+  h_220433a6faf6b8 10,14-15,19
+lua/plugins/pomo-nvim/opts/notifiers.lua
+  h_220433a6faf6b8 1-33
+lua/plugins/pomo-nvim/opts/sessions.lua
+  h_220433a6faf6b8 1-34
+lua/plugins/pomo-nvim/opts/timers.lua
+  h_220433a6faf6b8 1-13
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.23",
+  "base_commit_sha": "d5edd3fe7970befd77f76ef86385db0500db150c",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
