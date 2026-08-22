@@ -1,0 +1,30 @@
+lua/plugins/dial-nvim/.editorconfig
+  h_220433a6faf6b8 1-14
+lua/plugins/dial-nvim/cmds.lua
+  h_220433a6faf6b8 1-6
+lua/plugins/dial-nvim/dependencies.lua
+  h_220433a6faf6b8 1-16
+lua/plugins/dial-nvim/events.lua
+  h_220433a6faf6b8 1-6
+lua/plugins/dial-nvim/ft.lua
+  h_220433a6faf6b8 1-6
+lua/plugins/dial-nvim/init.lua
+  h_220433a6faf6b8 1-37
+lua/plugins/dial-nvim/keys.lua
+  h_220433a6faf6b8 1-23
+lua/plugins/dial-nvim/opts.lua
+  h_220433a6faf6b8 1-6
+lua/plugins/dial-nvim/stylua.toml
+  h_220433a6faf6b8 1-13
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.23",
+  "base_commit_sha": "0a5d4a9f841abc5241e0a8271e05fb6863205cc0",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
