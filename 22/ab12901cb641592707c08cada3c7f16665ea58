@@ -1,0 +1,210 @@
+lua/plugins/diffs-nvim/CODES/.busted
+  h_220433a6faf6b8 1-9
+lua/plugins/diffs-nvim/CODES/.editorconfig
+  h_220433a6faf6b8 1-9
+lua/plugins/diffs-nvim/CODES/.github/DISCUSSION_TEMPLATE/q-a.yaml
+  h_220433a6faf6b8 1-17
+lua/plugins/diffs-nvim/CODES/.github/ISSUE_TEMPLATE/bug_report.yaml
+  h_220433a6faf6b8 1-134
+lua/plugins/diffs-nvim/CODES/.github/ISSUE_TEMPLATE/config.yaml
+  h_220433a6faf6b8 1-5
+lua/plugins/diffs-nvim/CODES/.github/ISSUE_TEMPLATE/feature_request.yaml
+  h_220433a6faf6b8 1-30
+lua/plugins/diffs-nvim/CODES/.github/pull_request_template.md
+  h_220433a6faf6b8 1-3
+lua/plugins/diffs-nvim/CODES/.github/workflows/luarocks.yaml
+  h_220433a6faf6b8 1-21
+lua/plugins/diffs-nvim/CODES/.github/workflows/quality.yaml
+  h_220433a6faf6b8 1-34
+lua/plugins/diffs-nvim/CODES/.github/workflows/test.yaml
+  h_220433a6faf6b8 1-28
+lua/plugins/diffs-nvim/CODES/.gitignore
+  h_220433a6faf6b8 1-14
+lua/plugins/diffs-nvim/CODES/.luarc.json
+  h_220433a6faf6b8 1-21
+lua/plugins/diffs-nvim/CODES/.styluaignore
+  h_220433a6faf6b8 1
+lua/plugins/diffs-nvim/CODES/LICENSE
+  h_220433a6faf6b8 1-21
+lua/plugins/diffs-nvim/CODES/README.md
+  h_220433a6faf6b8 1-139
+lua/plugins/diffs-nvim/CODES/biome.json
+  h_220433a6faf6b8 1-33
+lua/plugins/diffs-nvim/CODES/diffs.nvim-scm-1.rockspec
+  h_220433a6faf6b8 1-30
+lua/plugins/diffs-nvim/CODES/doc/diffs.nvim.txt
+  h_220433a6faf6b8 1-1665
+lua/plugins/diffs-nvim/CODES/flake.lock
+  h_220433a6faf6b8 1-43
+lua/plugins/diffs-nvim/CODES/flake.nix
+  h_220433a6faf6b8 1-62
+lua/plugins/diffs-nvim/CODES/justfile
+  h_220433a6faf6b8 1-18
+lua/plugins/diffs-nvim/CODES/lua/diffs/actions.lua
+  h_220433a6faf6b8 1-486
+lua/plugins/diffs-nvim/CODES/lua/diffs/commands.lua
+  h_220433a6faf6b8 1-2536
+lua/plugins/diffs-nvim/CODES/lua/diffs/config.lua
+  h_220433a6faf6b8 1-306
+lua/plugins/diffs-nvim/CODES/lua/diffs/conflict.lua
+  h_220433a6faf6b8 1-534
+lua/plugins/diffs-nvim/CODES/lua/diffs/content.lua
+  h_220433a6faf6b8 1-86
+lua/plugins/diffs-nvim/CODES/lua/diffs/diff.lua
+  h_220433a6faf6b8 1-610
+lua/plugins/diffs-nvim/CODES/lua/diffs/diffargs.lua
+  h_220433a6faf6b8 1-254
+lua/plugins/diffs-nvim/CODES/lua/diffs/diffopt.lua
+  h_220433a6faf6b8 1-96
+lua/plugins/diffs-nvim/CODES/lua/diffs/difftastic.lua
+  h_220433a6faf6b8 1-399
+lua/plugins/diffs-nvim/CODES/lua/diffs/fugitive.lua
+  h_220433a6faf6b8 1-284
+lua/plugins/diffs-nvim/CODES/lua/diffs/generated/init.lua
+  h_220433a6faf6b8 1
+lua/plugins/diffs-nvim/CODES/lua/diffs/generated/source.lua
+  h_220433a6faf6b8 1-349
+lua/plugins/diffs-nvim/CODES/lua/diffs/git.lua
+  h_220433a6faf6b8 1-239
+lua/plugins/diffs-nvim/CODES/lua/diffs/gitsigns.lua
+  h_220433a6faf6b8 1-164
+lua/plugins/diffs-nvim/CODES/lua/diffs/health.lua
+  h_220433a6faf6b8 1-36
+lua/plugins/diffs-nvim/CODES/lua/diffs/highlight.lua
+  h_220433a6faf6b8 1-1018
+lua/plugins/diffs-nvim/CODES/lua/diffs/hunks.lua
+  h_220433a6faf6b8 1-589
+lua/plugins/diffs-nvim/CODES/lua/diffs/init.lua
+  h_220433a6faf6b8 1-28
+lua/plugins/diffs-nvim/CODES/lua/diffs/integrations.lua
+  h_220433a6faf6b8 1-79
+lua/plugins/diffs-nvim/CODES/lua/diffs/keymaps.lua
+  h_220433a6faf6b8 1-97
+lua/plugins/diffs-nvim/CODES/lua/diffs/lib.lua
+  h_220433a6faf6b8 1-227
+lua/plugins/diffs-nvim/CODES/lua/diffs/lists.lua
+  h_220433a6faf6b8 1-982
+lua/plugins/diffs-nvim/CODES/lua/diffs/log.lua
+  h_220433a6faf6b8 1-50
+lua/plugins/diffs-nvim/CODES/lua/diffs/merge.lua
+  h_220433a6faf6b8 1-344
+lua/plugins/diffs-nvim/CODES/lua/diffs/parser.lua
+  h_220433a6faf6b8 1-393
+lua/plugins/diffs-nvim/CODES/lua/diffs/rails.lua
+  h_220433a6faf6b8 1-317
+lua/plugins/diffs-nvim/CODES/lua/diffs/render.lua
+  h_220433a6faf6b8 1-336
+lua/plugins/diffs-nvim/CODES/lua/diffs/review.lua
+  h_220433a6faf6b8 1-918
+lua/plugins/diffs-nvim/CODES/lua/diffs/runtime/attach.lua
+  h_220433a6faf6b8 1-88
+lua/plugins/diffs-nvim/CODES/lua/diffs/runtime/cache.lua
+  h_220433a6faf6b8 1-432
+lua/plugins/diffs-nvim/CODES/lua/diffs/runtime/decorator.lua
+  h_220433a6faf6b8 1-120
+lua/plugins/diffs-nvim/CODES/lua/diffs/runtime/diff_windows.lua
+  h_220433a6faf6b8 1-81
+lua/plugins/diffs-nvim/CODES/lua/diffs/runtime/highlight_groups.lua
+  h_220433a6faf6b8 1-173
+lua/plugins/diffs-nvim/CODES/lua/diffs/runtime/init.lua
+  h_220433a6faf6b8 1-236
+lua/plugins/diffs-nvim/CODES/lua/diffs/spec.lua
+  h_220433a6faf6b8 1-287
+lua/plugins/diffs-nvim/CODES/lua/diffs/split.lua
+  h_220433a6faf6b8 1-1467
+lua/plugins/diffs-nvim/CODES/lua/diffs/split_align.lua
+  h_220433a6faf6b8 1-118
+lua/plugins/diffs-nvim/CODES/lua/diffs/telescope.lua
+  h_220433a6faf6b8 1-15
+lua/plugins/diffs-nvim/CODES/plugin/diffs.lua
+  h_220433a6faf6b8 1-166
+lua/plugins/diffs-nvim/CODES/selene.toml
+  h_220433a6faf6b8 1-4
+lua/plugins/diffs-nvim/CODES/spec/actions_spec.lua
+  h_220433a6faf6b8 1-711
+lua/plugins/diffs-nvim/CODES/spec/api_spec.lua
+  h_220433a6faf6b8 1-36
+lua/plugins/diffs-nvim/CODES/spec/commands_spec.lua
+  h_220433a6faf6b8 1-4604
+lua/plugins/diffs-nvim/CODES/spec/config_spec.lua
+  h_220433a6faf6b8 1-352
+lua/plugins/diffs-nvim/CODES/spec/conflict_spec.lua
+  h_220433a6faf6b8 1-1147
+lua/plugins/diffs-nvim/CODES/spec/content_spec.lua
+  h_220433a6faf6b8 1-71
+lua/plugins/diffs-nvim/CODES/spec/context_spec.lua
+  h_220433a6faf6b8 1-414
+lua/plugins/diffs-nvim/CODES/spec/decoration_provider_spec.lua
+  h_220433a6faf6b8 1-377
+lua/plugins/diffs-nvim/CODES/spec/diff_files_spec.lua
+  h_220433a6faf6b8 1-249
+lua/plugins/diffs-nvim/CODES/spec/diff_spec.lua
+  h_220433a6faf6b8 1-224
+lua/plugins/diffs-nvim/CODES/spec/diffargs_spec.lua
+  h_220433a6faf6b8 1-269
+lua/plugins/diffs-nvim/CODES/spec/diffopt_spec.lua
+  h_220433a6faf6b8 1-290
+lua/plugins/diffs-nvim/CODES/spec/diffspec_spec.lua
+  h_220433a6faf6b8 1-132
+lua/plugins/diffs-nvim/CODES/spec/difftastic_spec.lua
+  h_220433a6faf6b8 1-219
+lua/plugins/diffs-nvim/CODES/spec/email_quote_spec.lua
+  h_220433a6faf6b8 1-476
+lua/plugins/diffs-nvim/CODES/spec/fugitive_spec.lua
+  h_220433a6faf6b8 1-401
+lua/plugins/diffs-nvim/CODES/spec/git_spec.lua
+  h_220433a6faf6b8 1-115
+lua/plugins/diffs-nvim/CODES/spec/gitsigns_spec.lua
+  h_220433a6faf6b8 1-236
+lua/plugins/diffs-nvim/CODES/spec/helpers.lua
+  h_220433a6faf6b8 1-62
+lua/plugins/diffs-nvim/CODES/spec/highlight_spec.lua
+  h_220433a6faf6b8 1-2797
+lua/plugins/diffs-nvim/CODES/spec/hunks_spec.lua
+  h_220433a6faf6b8 1-380
+lua/plugins/diffs-nvim/CODES/spec/integration_spec.lua
+  h_220433a6faf6b8 1-440
+lua/plugins/diffs-nvim/CODES/spec/jj_conflict_spec.lua
+  h_220433a6faf6b8 1-177
+lua/plugins/diffs-nvim/CODES/spec/merge_spec.lua
+  h_220433a6faf6b8 1-951
+lua/plugins/diffs-nvim/CODES/spec/minimal_init.lua
+  h_220433a6faf6b8 1-4
+lua/plugins/diffs-nvim/CODES/spec/neogit_integration_spec.lua
+  h_220433a6faf6b8 1-126
+lua/plugins/diffs-nvim/CODES/spec/neojj_integration_spec.lua
+  h_220433a6faf6b8 1-174
+lua/plugins/diffs-nvim/CODES/spec/parser_spec.lua
+  h_220433a6faf6b8 1-1129
+lua/plugins/diffs-nvim/CODES/spec/plugin_spec.lua
+  h_220433a6faf6b8 1-161
+lua/plugins/diffs-nvim/CODES/spec/rails_spec.lua
+  h_220433a6faf6b8 1-208
+lua/plugins/diffs-nvim/CODES/spec/read_buffer_spec.lua
+  h_220433a6faf6b8 1-1093
+lua/plugins/diffs-nvim/CODES/spec/render_spec.lua
+  h_220433a6faf6b8 1-311
+lua/plugins/diffs-nvim/CODES/spec/runtime_spec.lua
+  h_220433a6faf6b8 1-599
+lua/plugins/diffs-nvim/CODES/spec/split_align_spec.lua
+  h_220433a6faf6b8 1-109
+lua/plugins/diffs-nvim/CODES/spec/telescope_spec.lua
+  h_220433a6faf6b8 1-42
+lua/plugins/diffs-nvim/CODES/spec/ux_spec.lua
+  h_220433a6faf6b8 1-267
+lua/plugins/diffs-nvim/CODES/stylua.toml
+  h_220433a6faf6b8 1-8
+lua/plugins/diffs-nvim/CODES/vim.yaml
+  h_220433a6faf6b8 1-26
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.23",
+  "base_commit_sha": "22ab12901cb641592707c08cada3c7f16665ea58",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
