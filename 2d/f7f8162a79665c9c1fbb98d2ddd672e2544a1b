@@ -1,0 +1,76 @@
+lua/plugins/codewindow-nvim/CODES/.editorconfig
+  h_220433a6faf6b8 1-5
+lua/plugins/codewindow-nvim/CODES/.envrc
+  h_220433a6faf6b8 1
+lua/plugins/codewindow-nvim/CODES/.stylua.toml
+  h_220433a6faf6b8 1-2
+lua/plugins/codewindow-nvim/CODES/AGENTS.md
+  h_220433a6faf6b8 1-122
+lua/plugins/codewindow-nvim/CODES/CLAUDE.md
+  h_220433a6faf6b8 1
+lua/plugins/codewindow-nvim/CODES/LICENSE
+  h_220433a6faf6b8 1-21
+lua/plugins/codewindow-nvim/CODES/README.md
+  h_220433a6faf6b8 1-134
+lua/plugins/codewindow-nvim/CODES/flake.lock
+  h_220433a6faf6b8 1-27
+lua/plugins/codewindow-nvim/CODES/flake.nix
+  h_220433a6faf6b8 1-68
+lua/plugins/codewindow-nvim/CODES/justfile
+  h_220433a6faf6b8 1-21
+lua/plugins/codewindow-nvim/CODES/lua/codewindow.lua
+  h_220433a6faf6b8 1-91
+lua/plugins/codewindow-nvim/CODES/lua/codewindow/config.lua
+  h_220433a6faf6b8 1-45
+lua/plugins/codewindow-nvim/CODES/lua/codewindow/errors.lua
+  h_220433a6faf6b8 1-54
+lua/plugins/codewindow-nvim/CODES/lua/codewindow/git.lua
+  h_220433a6faf6b8 1-64
+lua/plugins/codewindow-nvim/CODES/lua/codewindow/heatmap.lua
+  h_220433a6faf6b8 1-220
+lua/plugins/codewindow-nvim/CODES/lua/codewindow/highlight.lua
+  h_220433a6faf6b8 1-328
+lua/plugins/codewindow-nvim/CODES/lua/codewindow/humanize.lua
+  h_220433a6faf6b8 1-113
+lua/plugins/codewindow-nvim/CODES/lua/codewindow/ruler.lua
+  h_220433a6faf6b8 1-97
+lua/plugins/codewindow-nvim/CODES/lua/codewindow/stopwatch.lua
+  h_220433a6faf6b8 1-54
+lua/plugins/codewindow-nvim/CODES/lua/codewindow/text.lua
+  h_220433a6faf6b8 1-150
+lua/plugins/codewindow-nvim/CODES/lua/codewindow/utils.lua
+  h_220433a6faf6b8 1-185
+lua/plugins/codewindow-nvim/CODES/lua/codewindow/window.lua
+  h_220433a6faf6b8 1-327
+lua/plugins/codewindow-nvim/CODES/plugin/codewindow.lua
+  h_220433a6faf6b8 1-97
+lua/plugins/codewindow-nvim/CODES/tests/fixtures/9b5ad71b2ce5302211f9c61530b329a4922fc6a4
+  h_220433a6faf6b8 1-100256
+lua/plugins/codewindow-nvim/CODES/tests/minimal_init.lua
+  h_220433a6faf6b8 1-17
+lua/plugins/codewindow-nvim/CODES/tests/test_config.lua
+  h_220433a6faf6b8 1-62
+lua/plugins/codewindow-nvim/CODES/tests/test_heatmap.lua
+  h_220433a6faf6b8 1-179
+lua/plugins/codewindow-nvim/CODES/tests/test_humanize.lua
+  h_220433a6faf6b8 1-40
+lua/plugins/codewindow-nvim/CODES/tests/test_plugin.lua
+  h_220433a6faf6b8 1-83
+lua/plugins/codewindow-nvim/CODES/tests/test_ruler.lua
+  h_220433a6faf6b8 1-125
+lua/plugins/codewindow-nvim/CODES/tests/test_text.lua
+  h_220433a6faf6b8 1-160
+lua/plugins/codewindow-nvim/CODES/tests/test_utils.lua
+  h_220433a6faf6b8 1-118
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.23",
+  "base_commit_sha": "2df7f8162a79665c9c1fbb98d2ddd672e2544a1b",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
