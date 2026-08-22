@@ -1,0 +1,16 @@
+lua/plugins/nvim-ts-autotag/init.lua
+  h_220433a6faf6b8 11-22,24-25
+lua/plugins/nvim-ts-autotag/opts/stylua.toml
+  h_220433a6faf6b8 1-13
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.23",
+  "base_commit_sha": "d109a99d3fb6bea379f4e59efb1e16d24203eaf8",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
