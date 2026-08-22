@@ -1,0 +1,386 @@
+lua/plugins/diffview-plus-nvim/CODES/.github/ISSUE_TEMPLATE/bug_report.yml
+  h_220433a6faf6b8 1-138
+lua/plugins/diffview-plus-nvim/CODES/.github/ISSUE_TEMPLATE/config.yml
+  h_220433a6faf6b8 1
+lua/plugins/diffview-plus-nvim/CODES/.github/workflows/ci.yml
+  h_220433a6faf6b8 1-189
+lua/plugins/diffview-plus-nvim/CODES/.gitignore
+  h_220433a6faf6b8 1-8
+lua/plugins/diffview-plus-nvim/CODES/.luacheckrc
+  h_220433a6faf6b8 1-4
+lua/plugins/diffview-plus-nvim/CODES/.luarc.json
+  h_220433a6faf6b8 1-21
+lua/plugins/diffview-plus-nvim/CODES/CONTRIBUTING.md
+  h_220433a6faf6b8 1-104
+lua/plugins/diffview-plus-nvim/CODES/LICENSE
+  h_220433a6faf6b8 1-17
+lua/plugins/diffview-plus-nvim/CODES/Makefile
+  h_220433a6faf6b8 1-132
+lua/plugins/diffview-plus-nvim/CODES/README.md
+  h_220433a6faf6b8 1-209
+lua/plugins/diffview-plus-nvim/CODES/RECIPES.md
+  h_220433a6faf6b8 1-352
+lua/plugins/diffview-plus-nvim/CODES/TIPS.md
+  h_220433a6faf6b8 1-451
+lua/plugins/diffview-plus-nvim/CODES/USAGE.md
+  h_220433a6faf6b8 1-287
+lua/plugins/diffview-plus-nvim/CODES/doc/diffview.txt
+  h_220433a6faf6b8 1-2752
+lua/plugins/diffview-plus-nvim/CODES/doc/diffview_changelog.txt
+  h_220433a6faf6b8 1-347
+lua/plugins/diffview-plus-nvim/CODES/doc/diffview_defaults.txt
+  h_220433a6faf6b8 1-362
+lua/plugins/diffview-plus-nvim/CODES/lua/diffview/actions.lua
+  h_220433a6faf6b8 1-1296
+lua/plugins/diffview-plus-nvim/CODES/lua/diffview/api/init.lua
+  h_220433a6faf6b8 1-36
+lua/plugins/diffview-plus-nvim/CODES/lua/diffview/api/selections.lua
+  h_220433a6faf6b8 1-206
+lua/plugins/diffview-plus-nvim/CODES/lua/diffview/api/views/diff/diff_view.lua
+  h_220433a6faf6b8 1-209
+lua/plugins/diffview-plus-nvim/CODES/lua/diffview/arg_parser.lua
+  h_220433a6faf6b8 1-436
+lua/plugins/diffview-plus-nvim/CODES/lua/diffview/async.lua
+  h_220433a6faf6b8 1-597
+lua/plugins/diffview-plus-nvim/CODES/lua/diffview/bootstrap.lua
+  h_220433a6faf6b8 1-53
+lua/plugins/diffview-plus-nvim/CODES/lua/diffview/config.lua
+  h_220433a6faf6b8 1-1898
+lua/plugins/diffview-plus-nvim/CODES/lua/diffview/control.lua
+  h_220433a6faf6b8 1-300
+lua/plugins/diffview-plus-nvim/CODES/lua/diffview/debounce.lua
+  h_220433a6faf6b8 1-279
+lua/plugins/diffview-plus-nvim/CODES/lua/diffview/diff.lua
+  h_220433a6faf6b8 1-230
+lua/plugins/diffview-plus-nvim/CODES/lua/diffview/events.lua
+  h_220433a6faf6b8 1-235
+lua/plugins/diffview-plus-nvim/CODES/lua/diffview/ffi.lua
+  h_220433a6faf6b8 1-36
+lua/plugins/diffview-plus-nvim/CODES/lua/diffview/health.lua
+  h_220433a6faf6b8 1-102
+lua/plugins/diffview-plus-nvim/CODES/lua/diffview/hl.lua
+  h_220433a6faf6b8 1-578
+lua/plugins/diffview-plus-nvim/CODES/lua/diffview/init.lua
+  h_220433a6faf6b8 1-362
+lua/plugins/diffview-plus-nvim/CODES/lua/diffview/job.lua
+  h_220433a6faf6b8 1-582
+lua/plugins/diffview-plus-nvim/CODES/lua/diffview/job_utils.lua
+  h_220433a6faf6b8 1-36
+lua/plugins/diffview-plus-nvim/CODES/lua/diffview/lazy.lua
+  h_220433a6faf6b8 1-130
+lua/plugins/diffview-plus-nvim/CODES/lua/diffview/lib.lua
+  h_220433a6faf6b8 1-533
+lua/plugins/diffview-plus-nvim/CODES/lua/diffview/logger.lua
+  h_220433a6faf6b8 1-427
+lua/plugins/diffview-plus-nvim/CODES/lua/diffview/mock.lua
+  h_220433a6faf6b8 1-43
+lua/plugins/diffview-plus-nvim/CODES/lua/diffview/multi_job.lua
+  h_220433a6faf6b8 1-254
+lua/plugins/diffview-plus-nvim/CODES/lua/diffview/oop.lua
+  h_220433a6faf6b8 1-234
+lua/plugins/diffview-plus-nvim/CODES/lua/diffview/path.lua
+  h_220433a6faf6b8 1-767
+lua/plugins/diffview-plus-nvim/CODES/lua/diffview/perf.lua
+  h_220433a6faf6b8 1-93
+lua/plugins/diffview-plus-nvim/CODES/lua/diffview/renderer.lua
+  h_220433a6faf6b8 1-531
+lua/plugins/diffview-plus-nvim/CODES/lua/diffview/scanner.lua
+  h_220433a6faf6b8 1-50
+lua/plugins/diffview-plus-nvim/CODES/lua/diffview/scene/file_entry.lua
+  h_220433a6faf6b8 1-466
+lua/plugins/diffview-plus-nvim/CODES/lua/diffview/scene/inline_diff.lua
+  h_220433a6faf6b8 1-1991
+lua/plugins/diffview-plus-nvim/CODES/lua/diffview/scene/layout.lua
+  h_220433a6faf6b8 1-476
+lua/plugins/diffview-plus-nvim/CODES/lua/diffview/scene/layouts/diff_1.lua
+  h_220433a6faf6b8 1-139
+lua/plugins/diffview-plus-nvim/CODES/lua/diffview/scene/layouts/diff_1_inline.lua
+  h_220433a6faf6b8 1-755
+lua/plugins/diffview-plus-nvim/CODES/lua/diffview/scene/layouts/diff_1_inline_pinned.lua
+  h_220433a6faf6b8 1-25
+lua/plugins/diffview-plus-nvim/CODES/lua/diffview/scene/layouts/diff_1_pinned.lua
+  h_220433a6faf6b8 1-24
+lua/plugins/diffview-plus-nvim/CODES/lua/diffview/scene/layouts/diff_1_raw.lua
+  h_220433a6faf6b8 1-87
+lua/plugins/diffview-plus-nvim/CODES/lua/diffview/scene/layouts/diff_2.lua
+  h_220433a6faf6b8 1-62
+lua/plugins/diffview-plus-nvim/CODES/lua/diffview/scene/layouts/diff_2_hor.lua
+  h_220433a6faf6b8 1-30
+lua/plugins/diffview-plus-nvim/CODES/lua/diffview/scene/layouts/diff_2_hor_pinned.lua
+  h_220433a6faf6b8 1-58
+lua/plugins/diffview-plus-nvim/CODES/lua/diffview/scene/layouts/diff_2_ver.lua
+  h_220433a6faf6b8 1-30
+lua/plugins/diffview-plus-nvim/CODES/lua/diffview/scene/layouts/diff_2_ver_pinned.lua
+  h_220433a6faf6b8 1-27
+lua/plugins/diffview-plus-nvim/CODES/lua/diffview/scene/layouts/diff_3.lua
+  h_220433a6faf6b8 1-108
+lua/plugins/diffview-plus-nvim/CODES/lua/diffview/scene/layouts/diff_3_hor.lua
+  h_220433a6faf6b8 1-30
+lua/plugins/diffview-plus-nvim/CODES/lua/diffview/scene/layouts/diff_3_mixed.lua
+  h_220433a6faf6b8 1-30
+lua/plugins/diffview-plus-nvim/CODES/lua/diffview/scene/layouts/diff_3_ver.lua
+  h_220433a6faf6b8 1-30
+lua/plugins/diffview-plus-nvim/CODES/lua/diffview/scene/layouts/diff_4.lua
+  h_220433a6faf6b8 1-99
+lua/plugins/diffview-plus-nvim/CODES/lua/diffview/scene/layouts/diff_4_mixed.lua
+  h_220433a6faf6b8 1-31
+lua/plugins/diffview-plus-nvim/CODES/lua/diffview/scene/view.lua
+  h_220433a6faf6b8 1-311
+lua/plugins/diffview-plus-nvim/CODES/lua/diffview/scene/views/diff/diff_view.lua
+  h_220433a6faf6b8 1-1091
+lua/plugins/diffview-plus-nvim/CODES/lua/diffview/scene/views/diff/file_diff_view.lua
+  h_220433a6faf6b8 1-72
+lua/plugins/diffview-plus-nvim/CODES/lua/diffview/scene/views/diff/file_dir_diff_view.lua
+  h_220433a6faf6b8 1-252
+lua/plugins/diffview-plus-nvim/CODES/lua/diffview/scene/views/diff/file_merge_view.lua
+  h_220433a6faf6b8 1-117
+lua/plugins/diffview-plus-nvim/CODES/lua/diffview/scene/views/diff/file_panel.lua
+  h_220433a6faf6b8 1-607
+lua/plugins/diffview-plus-nvim/CODES/lua/diffview/scene/views/diff/listeners.lua
+  h_220433a6faf6b8 1-792
+lua/plugins/diffview-plus-nvim/CODES/lua/diffview/scene/views/diff/null_diff_view.lua
+  h_220433a6faf6b8 1-112
+lua/plugins/diffview-plus-nvim/CODES/lua/diffview/scene/views/diff/render.lua
+  h_220433a6faf6b8 1-512
+lua/plugins/diffview-plus-nvim/CODES/lua/diffview/scene/views/file_history/file_history_panel.lua
+  h_220433a6faf6b8 1-821
+lua/plugins/diffview-plus-nvim/CODES/lua/diffview/scene/views/file_history/file_history_view.lua
+  h_220433a6faf6b8 1-629
+lua/plugins/diffview-plus-nvim/CODES/lua/diffview/scene/views/file_history/listeners.lua
+  h_220433a6faf6b8 1-417
+lua/plugins/diffview-plus-nvim/CODES/lua/diffview/scene/views/file_history/option_panel.lua
+  h_220433a6faf6b8 1-214
+lua/plugins/diffview-plus-nvim/CODES/lua/diffview/scene/views/file_history/render.lua
+  h_220433a6faf6b8 1-474
+lua/plugins/diffview-plus-nvim/CODES/lua/diffview/scene/views/standard/standard_view.lua
+  h_220433a6faf6b8 1-518
+lua/plugins/diffview-plus-nvim/CODES/lua/diffview/scene/window.lua
+  h_220433a6faf6b8 1-458
+lua/plugins/diffview-plus-nvim/CODES/lua/diffview/selection_store.lua
+  h_220433a6faf6b8 1-97
+lua/plugins/diffview-plus-nvim/CODES/lua/diffview/session.lua
+  h_220433a6faf6b8 1-609
+lua/plugins/diffview-plus-nvim/CODES/lua/diffview/stream.lua
+  h_220433a6faf6b8 1-343
+lua/plugins/diffview-plus-nvim/CODES/lua/diffview/tests/functional/actions_features_spec.lua
+  h_220433a6faf6b8 1-544
+lua/plugins/diffview-plus-nvim/CODES/lua/diffview/tests/functional/actions_spec.lua
+  h_220433a6faf6b8 1-384
+lua/plugins/diffview-plus-nvim/CODES/lua/diffview/tests/functional/append_implicit_indicators_spec.lua
+  h_220433a6faf6b8 1-110
+lua/plugins/diffview-plus-nvim/CODES/lua/diffview/tests/functional/async_guards_spec.lua
+  h_220433a6faf6b8 1-185
+lua/plugins/diffview-plus-nvim/CODES/lua/diffview/tests/functional/bootstrap_spec.lua
+  h_220433a6faf6b8 1-75
+lua/plugins/diffview-plus-nvim/CODES/lua/diffview/tests/functional/browser_and_restore_spec.lua
+  h_220433a6faf6b8 1-407
+lua/plugins/diffview-plus-nvim/CODES/lua/diffview/tests/functional/cdiff_view_spec.lua
+  h_220433a6faf6b8 1-525
+lua/plugins/diffview-plus-nvim/CODES/lua/diffview/tests/functional/close_spec.lua
+  h_220433a6faf6b8 1-224
+lua/plugins/diffview-plus-nvim/CODES/lua/diffview/tests/functional/closing_guard_spec.lua
+  h_220433a6faf6b8 1-377
+lua/plugins/diffview-plus-nvim/CODES/lua/diffview/tests/functional/config_features_spec.lua
+  h_220433a6faf6b8 1-283
+lua/plugins/diffview-plus-nvim/CODES/lua/diffview/tests/functional/config_options_spec.lua
+  h_220433a6faf6b8 1-798
+lua/plugins/diffview-plus-nvim/CODES/lua/diffview/tests/functional/config_spec.lua
+  h_220433a6faf6b8 1-106
+lua/plugins/diffview-plus-nvim/CODES/lua/diffview/tests/functional/cycle_layouts_spec.lua
+  h_220433a6faf6b8 1-828
+lua/plugins/diffview-plus-nvim/CODES/lua/diffview/tests/functional/debounce_spec.lua
+  h_220433a6faf6b8 1-201
+lua/plugins/diffview-plus-nvim/CODES/lua/diffview/tests/functional/diff_parser_spec.lua
+  h_220433a6faf6b8 1-162
+lua/plugins/diffview-plus-nvim/CODES/lua/diffview/tests/functional/diff_view_spec.lua
+  h_220433a6faf6b8 1-636
+lua/plugins/diffview-plus-nvim/CODES/lua/diffview/tests/functional/event_emitter_spec.lua
+  h_220433a6faf6b8 1-275
+lua/plugins/diffview-plus-nvim/CODES/lua/diffview/tests/functional/file_diff_view_spec.lua
+  h_220433a6faf6b8 1-173
+lua/plugins/diffview-plus-nvim/CODES/lua/diffview/tests/functional/file_dir_diff_view_spec.lua
+  h_220433a6faf6b8 1-252
+lua/plugins/diffview-plus-nvim/CODES/lua/diffview/tests/functional/file_entry_spec.lua
+  h_220433a6faf6b8 1-472
+lua/plugins/diffview-plus-nvim/CODES/lua/diffview/tests/functional/file_history_focus_refresh_spec.lua
+  h_220433a6faf6b8 1-46
+lua/plugins/diffview-plus-nvim/CODES/lua/diffview/tests/functional/file_history_render_spec.lua
+  h_220433a6faf6b8 1-830
+lua/plugins/diffview-plus-nvim/CODES/lua/diffview/tests/functional/file_merge_view_spec.lua
+  h_220433a6faf6b8 1-329
+lua/plugins/diffview-plus-nvim/CODES/lua/diffview/tests/functional/file_spec.lua
+  h_220433a6faf6b8 1-809
+lua/plugins/diffview-plus-nvim/CODES/lua/diffview/tests/functional/focus_diff_spec.lua
+  h_220433a6faf6b8 1-272
+lua/plugins/diffview-plus-nvim/CODES/lua/diffview/tests/functional/fold_limit_spec.lua
+  h_220433a6faf6b8 1-57
+lua/plugins/diffview-plus-nvim/CODES/lua/diffview/tests/functional/git_adapter_spec.lua
+  h_220433a6faf6b8 1-2024
+lua/plugins/diffview-plus-nvim/CODES/lua/diffview/tests/functional/git_cpath_snapshot_spec.lua
+  h_220433a6faf6b8 1-219
+lua/plugins/diffview-plus-nvim/CODES/lua/diffview/tests/functional/git_merge_matrix_spec.lua
+  h_220433a6faf6b8 1-132
+lua/plugins/diffview-plus-nvim/CODES/lua/diffview/tests/functional/git_parser_spec.lua
+  h_220433a6faf6b8 1-212
+lua/plugins/diffview-plus-nvim/CODES/lua/diffview/tests/functional/gitsigns_autocmd_spec.lua
+  h_220433a6faf6b8 1-103
+lua/plugins/diffview-plus-nvim/CODES/lua/diffview/tests/functional/hg_adapter_spec.lua
+  h_220433a6faf6b8 1-707
+lua/plugins/diffview-plus-nvim/CODES/lua/diffview/tests/functional/highlight_spec.lua
+  h_220433a6faf6b8 1-50
+lua/plugins/diffview-plus-nvim/CODES/lua/diffview/tests/functional/inline_diff_spec.lua
+  h_220433a6faf6b8 1-2270
+lua/plugins/diffview-plus-nvim/CODES/lua/diffview/tests/functional/jj_adapter_spec.lua
+  h_220433a6faf6b8 1-2463
+lua/plugins/diffview-plus-nvim/CODES/lua/diffview/tests/functional/jj_save_and_advance_spec.lua
+  h_220433a6faf6b8 1-251
+lua/plugins/diffview-plus-nvim/CODES/lua/diffview/tests/functional/job_utils_spec.lua
+  h_220433a6faf6b8 1-57
+lua/plugins/diffview-plus-nvim/CODES/lua/diffview/tests/functional/keymap_save_spec.lua
+  h_220433a6faf6b8 1-359
+lua/plugins/diffview-plus-nvim/CODES/lua/diffview/tests/functional/layouts_spec.lua
+  h_220433a6faf6b8 1-2061
+lua/plugins/diffview-plus-nvim/CODES/lua/diffview/tests/functional/lib_spec.lua
+  h_220433a6faf6b8 1-105
+lua/plugins/diffview-plus-nvim/CODES/lua/diffview/tests/functional/merge_artifacts_spec.lua
+  h_220433a6faf6b8 1-178
+lua/plugins/diffview-plus-nvim/CODES/lua/diffview/tests/functional/misc_fixes_spec.lua
+  h_220433a6faf6b8 1-532
+lua/plugins/diffview-plus-nvim/CODES/lua/diffview/tests/functional/nil_guards_spec.lua
+  h_220433a6faf6b8 1-593
+lua/plugins/diffview-plus-nvim/CODES/lua/diffview/tests/functional/node_spec.lua
+  h_220433a6faf6b8 1-194
+lua/plugins/diffview-plus-nvim/CODES/lua/diffview/tests/functional/null_adapter_spec.lua
+  h_220433a6faf6b8 1-139
+lua/plugins/diffview-plus-nvim/CODES/lua/diffview/tests/functional/null_matrix_spec.lua
+  h_220433a6faf6b8 1-37
+lua/plugins/diffview-plus-nvim/CODES/lua/diffview/tests/functional/one_sided_layout_spec.lua
+  h_220433a6faf6b8 1-268
+lua/plugins/diffview-plus-nvim/CODES/lua/diffview/tests/functional/open_race_guard_spec.lua
+  h_220433a6faf6b8 1-193
+lua/plugins/diffview-plus-nvim/CODES/lua/diffview/tests/functional/p4_adapter_spec.lua
+  h_220433a6faf6b8 1-361
+lua/plugins/diffview-plus-nvim/CODES/lua/diffview/tests/functional/panel_render_spec.lua
+  h_220433a6faf6b8 1-1552
+lua/plugins/diffview-plus-nvim/CODES/lua/diffview/tests/functional/panel_spec.lua
+  h_220433a6faf6b8 1-1344
+lua/plugins/diffview-plus-nvim/CODES/lua/diffview/tests/functional/parse_conflicts_spec.lua
+  h_220433a6faf6b8 1-268
+lua/plugins/diffview-plus-nvim/CODES/lua/diffview/tests/functional/pathlib_spec.lua
+  h_220433a6faf6b8 1-336
+lua/plugins/diffview-plus-nvim/CODES/lua/diffview/tests/functional/pin_local_spec.lua
+  h_220433a6faf6b8 1-1038
+lua/plugins/diffview-plus-nvim/CODES/lua/diffview/tests/functional/restore_focus_after_layout_swap_spec.lua
+  h_220433a6faf6b8 1-247
+lua/plugins/diffview-plus-nvim/CODES/lua/diffview/tests/functional/selection_store_spec.lua
+  h_220433a6faf6b8 1-265
+lua/plugins/diffview-plus-nvim/CODES/lua/diffview/tests/functional/selections_api_spec.lua
+  h_220433a6faf6b8 1-378
+lua/plugins/diffview-plus-nvim/CODES/lua/diffview/tests/functional/session_spec.lua
+  h_220433a6faf6b8 1-914
+lua/plugins/diffview-plus-nvim/CODES/lua/diffview/tests/functional/set_revs_spec.lua
+  h_220433a6faf6b8 1-369
+lua/plugins/diffview-plus-nvim/CODES/lua/diffview/tests/functional/standard_view_spec.lua
+  h_220433a6faf6b8 1-625
+lua/plugins/diffview-plus-nvim/CODES/lua/diffview/tests/functional/stream_spec.lua
+  h_220433a6faf6b8 1-266
+lua/plugins/diffview-plus-nvim/CODES/lua/diffview/tests/functional/swap_cancellation_spec.lua
+  h_220433a6faf6b8 1-270
+lua/plugins/diffview-plus-nvim/CODES/lua/diffview/tests/functional/toggle_spec.lua
+  h_220433a6faf6b8 1-110
+lua/plugins/diffview-plus-nvim/CODES/lua/diffview/tests/functional/utils_spec.lua
+  h_220433a6faf6b8 1-318
+lua/plugins/diffview-plus-nvim/CODES/lua/diffview/tests/functional/view_spec.lua
+  h_220433a6faf6b8 1-245
+lua/plugins/diffview-plus-nvim/CODES/lua/diffview/tests/functional/window_spec.lua
+  h_220433a6faf6b8 1-448
+lua/plugins/diffview-plus-nvim/CODES/lua/diffview/tests/functional/wrap_entries_spec.lua
+  h_220433a6faf6b8 1-265
+lua/plugins/diffview-plus-nvim/CODES/lua/diffview/tests/helpers.lua
+  h_220433a6faf6b8 1-110
+lua/plugins/diffview-plus-nvim/CODES/lua/diffview/tests/init.lua
+  h_220433a6faf6b8 1
+lua/plugins/diffview-plus-nvim/CODES/lua/diffview/ui/model.lua
+  h_220433a6faf6b8 1-26
+lua/plugins/diffview-plus-nvim/CODES/lua/diffview/ui/models/file_tree/file_tree.lua
+  h_220433a6faf6b8 1-209
+lua/plugins/diffview-plus-nvim/CODES/lua/diffview/ui/models/file_tree/node.lua
+  h_220433a6faf6b8 1-234
+lua/plugins/diffview-plus-nvim/CODES/lua/diffview/ui/panel.lua
+  h_220433a6faf6b8 1-866
+lua/plugins/diffview-plus-nvim/CODES/lua/diffview/ui/panels/commit_log_panel.lua
+  h_220433a6faf6b8 1-156
+lua/plugins/diffview-plus-nvim/CODES/lua/diffview/ui/panels/help_panel.lua
+  h_220433a6faf6b8 1-241
+lua/plugins/diffview-plus-nvim/CODES/lua/diffview/utils.lua
+  h_220433a6faf6b8 1-1415
+lua/plugins/diffview-plus-nvim/CODES/lua/diffview/vcs/adapter.lua
+  h_220433a6faf6b8 1-699
+lua/plugins/diffview-plus-nvim/CODES/lua/diffview/vcs/adapters/git/commit.lua
+  h_220433a6faf6b8 1-80
+lua/plugins/diffview-plus-nvim/CODES/lua/diffview/vcs/adapters/git/init.lua
+  h_220433a6faf6b8 1-2855
+lua/plugins/diffview-plus-nvim/CODES/lua/diffview/vcs/adapters/git/parser.lua
+  h_220433a6faf6b8 1-163
+lua/plugins/diffview-plus-nvim/CODES/lua/diffview/vcs/adapters/git/rev.lua
+  h_220433a6faf6b8 1-153
+lua/plugins/diffview-plus-nvim/CODES/lua/diffview/vcs/adapters/hg/commit.lua
+  h_220433a6faf6b8 1-42
+lua/plugins/diffview-plus-nvim/CODES/lua/diffview/vcs/adapters/hg/init.lua
+  h_220433a6faf6b8 1-1544
+lua/plugins/diffview-plus-nvim/CODES/lua/diffview/vcs/adapters/hg/rev.lua
+  h_220433a6faf6b8 1-77
+lua/plugins/diffview-plus-nvim/CODES/lua/diffview/vcs/adapters/jj/commit.lua
+  h_220433a6faf6b8 1-44
+lua/plugins/diffview-plus-nvim/CODES/lua/diffview/vcs/adapters/jj/init.lua
+  h_220433a6faf6b8 1-2100
+lua/plugins/diffview-plus-nvim/CODES/lua/diffview/vcs/adapters/jj/rev.lua
+  h_220433a6faf6b8 1-76
+lua/plugins/diffview-plus-nvim/CODES/lua/diffview/vcs/adapters/null/init.lua
+  h_220433a6faf6b8 1-213
+lua/plugins/diffview-plus-nvim/CODES/lua/diffview/vcs/adapters/null/rev.lua
+  h_220433a6faf6b8 1-59
+lua/plugins/diffview-plus-nvim/CODES/lua/diffview/vcs/adapters/p4/commit.lua
+  h_220433a6faf6b8 1-143
+lua/plugins/diffview-plus-nvim/CODES/lua/diffview/vcs/adapters/p4/init.lua
+  h_220433a6faf6b8 1-1240
+lua/plugins/diffview-plus-nvim/CODES/lua/diffview/vcs/adapters/p4/rev.lua
+  h_220433a6faf6b8 1-125
+lua/plugins/diffview-plus-nvim/CODES/lua/diffview/vcs/commit.lua
+  h_220433a6faf6b8 1-83
+lua/plugins/diffview-plus-nvim/CODES/lua/diffview/vcs/file.lua
+  h_220433a6faf6b8 1-833
+lua/plugins/diffview-plus-nvim/CODES/lua/diffview/vcs/file_dict.lua
+  h_220433a6faf6b8 1-105
+lua/plugins/diffview-plus-nvim/CODES/lua/diffview/vcs/flag_option.lua
+  h_220433a6faf6b8 1-158
+lua/plugins/diffview-plus-nvim/CODES/lua/diffview/vcs/init.lua
+  h_220433a6faf6b8 1-68
+lua/plugins/diffview-plus-nvim/CODES/lua/diffview/vcs/log_entry.lua
+  h_220433a6faf6b8 1-134
+lua/plugins/diffview-plus-nvim/CODES/lua/diffview/vcs/rev.lua
+  h_220433a6faf6b8 1-142
+lua/plugins/diffview-plus-nvim/CODES/lua/diffview/vcs/utils.lua
+  h_220433a6faf6b8 1-905
+lua/plugins/diffview-plus-nvim/CODES/plugin/diffview.lua
+  h_220433a6faf6b8 1-77
+lua/plugins/diffview-plus-nvim/CODES/scripts/check_config_schema.lua
+  h_220433a6faf6b8 1-288
+lua/plugins/diffview-plus-nvim/CODES/scripts/meta/busted_globals.lua
+  h_220433a6faf6b8 1-15
+lua/plugins/diffview-plus-nvim/CODES/scripts/test_init.lua
+  h_220433a6faf6b8 1-44
+lua/plugins/diffview-plus-nvim/CODES/stylua.toml
+  h_220433a6faf6b8 1-8
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.23",
+  "base_commit_sha": "5076cb13e3b633752f37a3f943a675d6a3ced027",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
