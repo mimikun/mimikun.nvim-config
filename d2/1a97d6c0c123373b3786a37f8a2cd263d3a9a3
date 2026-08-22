@@ -1,0 +1,72 @@
+lua/plugins/helpview-nvim/CODES/.github/workflows/luarocks.yml
+  h_220433a6faf6b8 1-41
+lua/plugins/helpview-nvim/CODES/.github/workflows/release-please.yml
+  h_220433a6faf6b8 1-26
+lua/plugins/helpview-nvim/CODES/.gitmodules
+  h_220433a6faf6b8 1-3
+lua/plugins/helpview-nvim/CODES/.luarc.json
+  h_220433a6faf6b8 1-15
+lua/plugins/helpview-nvim/CODES/CHANGELOG.md
+  h_220433a6faf6b8 1-116
+lua/plugins/helpview-nvim/CODES/LICENSE
+  h_220433a6faf6b8 1-201
+lua/plugins/helpview-nvim/CODES/README.md
+  h_220433a6faf6b8 1-396
+"lua/plugins/helpview-nvim/CODES/doc/Custom renderers.txt"
+  h_220433a6faf6b8 1-48
+"lua/plugins/helpview-nvim/CODES/doc/Developer documentation.txt"
+  h_220433a6faf6b8 1-153
+"lua/plugins/helpview-nvim/CODES/doc/Migration guides.txt"
+  h_220433a6faf6b8 1-140
+"lua/plugins/helpview-nvim/CODES/doc/Preview options.txt"
+  h_220433a6faf6b8 1-404
+"lua/plugins/helpview-nvim/CODES/doc/Vimdoc options.txt"
+  h_220433a6faf6b8 1-1335
+lua/plugins/helpview-nvim/CODES/doc/home.txt
+  h_220433a6faf6b8 1-767
+lua/plugins/helpview-nvim/CODES/doc/tags
+  h_220433a6faf6b8 1-51
+lua/plugins/helpview-nvim/CODES/lua/definitions/helpview.lua
+  h_220433a6faf6b8 1-69
+lua/plugins/helpview-nvim/CODES/lua/definitions/parsers/vimdoc.lua
+  h_220433a6faf6b8 1-173
+lua/plugins/helpview-nvim/CODES/lua/definitions/preview.lua
+  h_220433a6faf6b8 1-96
+lua/plugins/helpview-nvim/CODES/lua/definitions/renderers/vimdoc.lua
+  h_220433a6faf6b8 1-234
+lua/plugins/helpview-nvim/CODES/lua/definitions/test.txt
+  h_220433a6faf6b8 1-12
+lua/plugins/helpview-nvim/CODES/lua/helpview.lua
+  h_220433a6faf6b8 1-1229
+lua/plugins/helpview-nvim/CODES/lua/helpview/filetypes.lua
+  h_220433a6faf6b8 1-780
+lua/plugins/helpview-nvim/CODES/lua/helpview/health.lua
+  h_220433a6faf6b8 1-605
+lua/plugins/helpview-nvim/CODES/lua/helpview/highlights.lua
+  h_220433a6faf6b8 1-1572
+lua/plugins/helpview-nvim/CODES/lua/helpview/parser.lua
+  h_220433a6faf6b8 1-131
+lua/plugins/helpview-nvim/CODES/lua/helpview/parsers/vimdoc.lua
+  h_220433a6faf6b8 1-569
+lua/plugins/helpview-nvim/CODES/lua/helpview/renderer.lua
+  h_220433a6faf6b8 1-410
+lua/plugins/helpview-nvim/CODES/lua/helpview/renderers/vimdoc.lua
+  h_220433a6faf6b8 1-1132
+lua/plugins/helpview-nvim/CODES/lua/helpview/spec.lua
+  h_220433a6faf6b8 1-811
+lua/plugins/helpview-nvim/CODES/lua/helpview/utils.lua
+  h_220433a6faf6b8 1-420
+lua/plugins/helpview-nvim/CODES/plugin/helpview.lua
+  h_220433a6faf6b8 1-864
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.23",
+  "base_commit_sha": "d21a97d6c0c123373b3786a37f8a2cd263d3a9a3",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
