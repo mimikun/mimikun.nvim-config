@@ -1,0 +1,30 @@
+lua/plugins/codesettings-nvim/.editorconfig
+  h_220433a6faf6b8 1-14
+lua/plugins/codesettings-nvim/cmds.lua
+  h_220433a6faf6b8 1-6
+lua/plugins/codesettings-nvim/dependencies.lua
+  h_220433a6faf6b8 1-16
+lua/plugins/codesettings-nvim/events.lua
+  h_220433a6faf6b8 1-6
+lua/plugins/codesettings-nvim/ft.lua
+  h_220433a6faf6b8 1-6
+lua/plugins/codesettings-nvim/init.lua
+  h_220433a6faf6b8 1-37
+lua/plugins/codesettings-nvim/keys.lua
+  h_220433a6faf6b8 1-23
+lua/plugins/codesettings-nvim/opts.lua
+  h_220433a6faf6b8 1-6
+lua/plugins/codesettings-nvim/stylua.toml
+  h_220433a6faf6b8 1-13
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.23",
+  "base_commit_sha": "2a8b6ebb693b9e29e81e8eb1f0c17c33cf04d358",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
