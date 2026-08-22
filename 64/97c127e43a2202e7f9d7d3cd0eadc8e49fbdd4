@@ -1,0 +1,1364 @@
+lua/plugins/codedocs-nvim/CODES/.busted
+  h_220433a6faf6b8 1-11
+lua/plugins/codedocs-nvim/CODES/.commitlintrc.yaml
+  h_220433a6faf6b8 1-13
+lua/plugins/codedocs-nvim/CODES/.editorconfig
+  h_220433a6faf6b8 1-10
+lua/plugins/codedocs-nvim/CODES/.github/FUNDING.yml
+  h_220433a6faf6b8 1-15
+lua/plugins/codedocs-nvim/CODES/.github/ISSUE_TEMPLATE/bug_report.yml
+  h_220433a6faf6b8 1-69
+lua/plugins/codedocs-nvim/CODES/.github/ISSUE_TEMPLATE/config.yml
+  h_220433a6faf6b8 1
+lua/plugins/codedocs-nvim/CODES/.github/ISSUE_TEMPLATE/feature_request.yml
+  h_220433a6faf6b8 1-38
+lua/plugins/codedocs-nvim/CODES/.github/pull_request_template.md
+  h_220433a6faf6b8 1-14
+lua/plugins/codedocs-nvim/CODES/.github/workflows/code_checks.yaml
+  h_220433a6faf6b8 1-43
+lua/plugins/codedocs-nvim/CODES/.github/workflows/commits.yaml
+  h_220433a6faf6b8 1-39
+lua/plugins/codedocs-nvim/CODES/.github/workflows/markdown.yaml
+  h_220433a6faf6b8 1-25
+lua/plugins/codedocs-nvim/CODES/.github/workflows/panvimdoc.yaml
+  h_220433a6faf6b8 1-41
+lua/plugins/codedocs-nvim/CODES/.github/workflows/tests.yaml
+  h_220433a6faf6b8 1-88
+lua/plugins/codedocs-nvim/CODES/.gitignore
+  h_220433a6faf6b8 1-5
+lua/plugins/codedocs-nvim/CODES/.luacheckrc
+  h_220433a6faf6b8 1-15
+lua/plugins/codedocs-nvim/CODES/.markdownlint.yaml
+  h_220433a6faf6b8 1-8
+lua/plugins/codedocs-nvim/CODES/.markdownlintignore
+  h_220433a6faf6b8 1-4
+lua/plugins/codedocs-nvim/CODES/.prettierrc
+  h_220433a6faf6b8 1-4
+lua/plugins/codedocs-nvim/CODES/.stylua.toml
+  h_220433a6faf6b8 1-5
+lua/plugins/codedocs-nvim/CODES/.styluaignore
+  h_220433a6faf6b8 1-2
+lua/plugins/codedocs-nvim/CODES/CONTRIBUTING.md
+  h_220433a6faf6b8 1-94
+lua/plugins/codedocs-nvim/CODES/LICENSE
+  h_220433a6faf6b8 1-674
+lua/plugins/codedocs-nvim/CODES/Makefile
+  h_220433a6faf6b8 1-17
+lua/plugins/codedocs-nvim/CODES/README.md
+  h_220433a6faf6b8 1-644
+lua/plugins/codedocs-nvim/CODES/doc/codedocs.txt
+  h_220433a6faf6b8 1-681
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/README.md
+  h_220433a6faf6b8 1-90
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/annotation_builder/builder.lua
+  h_220433a6faf6b8 1-125
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/annotation_builder/builder_spec.lua
+  h_220433a6faf6b8 1-44
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/annotation_builder/cases/a/input_blocks.lua
+  h_220433a6faf6b8 1-61
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/annotation_builder/cases/a/output
+  h_220433a6faf6b8 1-12
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/annotation_builder/cases/b/input_blocks.lua
+  h_220433a6faf6b8 1-59
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/annotation_builder/cases/b/output
+  h_220433a6faf6b8 1-13
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/annotation_builder/cases/c/input_blocks.lua
+  h_220433a6faf6b8 1-64
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/annotation_builder/cases/c/output
+  h_220433a6faf6b8 1-15
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/annotation_builder/cases/control/input_blocks.lua
+  h_220433a6faf6b8 1-65
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/annotation_builder/cases/control/output
+  h_220433a6faf6b8 1-12
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/annotation_builder/cases/d/input_blocks.lua
+  h_220433a6faf6b8 1-73
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/annotation_builder/cases/d/output
+  h_220433a6faf6b8 1-18
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/annotation_builder/cases/e/input_blocks.lua
+  h_220433a6faf6b8 1-65
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/annotation_builder/cases/e/output
+  h_220433a6faf6b8 1-12
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/annotation_builder/cases/f/input_blocks.lua
+  h_220433a6faf6b8 1-61
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/annotation_builder/cases/f/output
+  h_220433a6faf6b8 1-12
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/annotation_builder/init.lua
+  h_220433a6faf6b8 1-63
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/customization_spec.lua
+  h_220433a6faf6b8 1-353
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/init.lua
+  h_220433a6faf6b8 1-177
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/annotations_spec.lua
+  h_220433a6faf6b8 1-53
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/bash/init.lua
+  h_220433a6faf6b8 1-20
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/bash/styles/Google/comment/init.lua
+  h_220433a6faf6b8 1-12
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/bash/styles/Google/comment/output_cases/all/input
+  h_220433a6faf6b8 1
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/bash/styles/Google/comment/output_cases/all/output
+  h_220433a6faf6b8 1
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/bash/styles/Google/func/init.lua
+  h_220433a6faf6b8 1-63
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/bash/styles/Google/func/output_cases/all/input
+  h_220433a6faf6b8 1-16
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/bash/styles/Google/func/output_cases/all/output
+  h_220433a6faf6b8 1-11
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/bash/styles/Google/init.lua
+  h_220433a6faf6b8 1-4
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/bash/styles/Google/shebang/init.lua
+  h_220433a6faf6b8 1-11
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/bash/styles/Google/shebang/output_cases/all/input
+  h_220433a6faf6b8 1
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/bash/styles/Google/shebang/output_cases/all/output
+  h_220433a6faf6b8 1
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/bash/targets/func/globals/extraction_cases/item_detection/a/input
+  h_220433a6faf6b8 1-8
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/bash/targets/func/globals/extraction_cases/item_detection/a/metadata.lua
+  h_220433a6faf6b8 1-11
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/bash/targets/func/globals/init.lua
+  h_220433a6faf6b8 1-26
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/bash/targets/func/globals/queries/func_var_expansions.scm
+  h_220433a6faf6b8 1
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/bash/targets/func/globals/queries/global_vars.scm
+  h_220433a6faf6b8 1-3
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/bash/targets/func/init.lua
+  h_220433a6faf6b8 1-4
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/bash/targets/func/parameters/extraction_cases/item_detection/no_params/input
+  h_220433a6faf6b8 1-4
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/bash/targets/func/parameters/extraction_cases/item_detection/no_params/metadata.lua
+  h_220433a6faf6b8 1-8
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/bash/targets/func/parameters/extraction_cases/item_detection/one_param/input
+  h_220433a6faf6b8 1-4
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/bash/targets/func/parameters/extraction_cases/item_detection/one_param/metadata.lua
+  h_220433a6faf6b8 1-10
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/bash/targets/func/parameters/extraction_cases/item_detection/two_params/input
+  h_220433a6faf6b8 1-5
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/bash/targets/func/parameters/extraction_cases/item_detection/two_params/metadata.lua
+  h_220433a6faf6b8 1-11
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/bash/targets/func/parameters/init.lua
+  h_220433a6faf6b8 1
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/bash/targets/func/parameters/queries/parameters.scm
+  h_220433a6faf6b8 1-4
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/bash/targets/func/returns/init.lua
+  h_220433a6faf6b8 1
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/c/init.lua
+  h_220433a6faf6b8 1-20
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/c/styles/Doxygen/comment/init.lua
+  h_220433a6faf6b8 1-12
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/c/styles/Doxygen/comment/output_cases/all/input
+  h_220433a6faf6b8 1
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/c/styles/Doxygen/comment/output_cases/all/output
+  h_220433a6faf6b8 1
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/c/styles/Doxygen/func/init.lua
+  h_220433a6faf6b8 1-79
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/c/styles/Doxygen/func/output_cases/all/input
+  h_220433a6faf6b8 1-3
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/c/styles/Doxygen/func/output_cases/all/output
+  h_220433a6faf6b8 1-7
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/c/styles/Doxygen/func/output_cases/empty/input
+  h_220433a6faf6b8 1-2
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/c/styles/Doxygen/func/output_cases/empty/output
+  h_220433a6faf6b8 1-3
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/c/styles/Doxygen/func/output_cases/returns/input
+  h_220433a6faf6b8 1-2
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/c/styles/Doxygen/func/output_cases/returns/output
+  h_220433a6faf6b8 1-5
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/c/styles/Doxygen/init.lua
+  h_220433a6faf6b8 1-4
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/c/targets/func/init.lua
+  h_220433a6faf6b8 1-4
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/c/targets/func/parameters/extraction_cases/item_detection/double_pointer_one_param/input
+  h_220433a6faf6b8 1
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/c/targets/func/parameters/extraction_cases/item_detection/double_pointer_one_param/metadata.lua
+  h_220433a6faf6b8 1-9
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/c/targets/func/parameters/extraction_cases/item_detection/double_pointer_two_params/input
+  h_220433a6faf6b8 1
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/c/targets/func/parameters/extraction_cases/item_detection/double_pointer_two_params/metadata.lua
+  h_220433a6faf6b8 1-10
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/c/targets/func/parameters/extraction_cases/item_detection/no_params/input
+  h_220433a6faf6b8 1-3
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/c/targets/func/parameters/extraction_cases/item_detection/no_params/metadata.lua
+  h_220433a6faf6b8 1-7
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/c/targets/func/parameters/extraction_cases/item_detection/one_param/input
+  h_220433a6faf6b8 1-3
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/c/targets/func/parameters/extraction_cases/item_detection/one_param/metadata.lua
+  h_220433a6faf6b8 1-10
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/c/targets/func/parameters/extraction_cases/item_detection/pointer_one_param/input
+  h_220433a6faf6b8 1
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/c/targets/func/parameters/extraction_cases/item_detection/pointer_one_param/metadata.lua
+  h_220433a6faf6b8 1-9
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/c/targets/func/parameters/extraction_cases/item_detection/pointer_two_params/input
+  h_220433a6faf6b8 1
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/c/targets/func/parameters/extraction_cases/item_detection/pointer_two_params/metadata.lua
+  h_220433a6faf6b8 1-10
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/c/targets/func/parameters/extraction_cases/item_detection/two_params/input
+  h_220433a6faf6b8 1-3
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/c/targets/func/parameters/extraction_cases/item_detection/two_params/metadata.lua
+  h_220433a6faf6b8 1-11
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/c/targets/func/parameters/extraction_cases/type_detection/default/input
+  h_220433a6faf6b8 1-2
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/c/targets/func/parameters/extraction_cases/type_detection/default/metadata.lua
+  h_220433a6faf6b8 1-50
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/c/targets/func/parameters/init.lua
+  h_220433a6faf6b8 1-17
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/c/targets/func/parameters/queries/parameters.scm
+  h_220433a6faf6b8 1-14
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/c/targets/func/returns/extraction_cases/type_detection/default/input
+  h_220433a6faf6b8 1-2
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/c/targets/func/returns/extraction_cases/type_detection/default/metadata.lua
+  h_220433a6faf6b8 1-50
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/c/targets/func/returns/init.lua
+  h_220433a6faf6b8 1
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/c/targets/func/returns/queries/returns.scm
+  h_220433a6faf6b8 1-6
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/cpp/init.lua
+  h_220433a6faf6b8 1-20
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/cpp/styles/Doxygen/comment/init.lua
+  h_220433a6faf6b8 1-11
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/cpp/styles/Doxygen/comment/output_cases/empty/input
+  h_220433a6faf6b8 1
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/cpp/styles/Doxygen/comment/output_cases/empty/output
+  h_220433a6faf6b8 1
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/cpp/styles/Doxygen/func/init.lua
+  h_220433a6faf6b8 1-80
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/cpp/styles/Doxygen/func/output_cases/all/input
+  h_220433a6faf6b8 1-3
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/cpp/styles/Doxygen/func/output_cases/all/output
+  h_220433a6faf6b8 1-7
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/cpp/styles/Doxygen/func/output_cases/empty/input
+  h_220433a6faf6b8 1-2
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/cpp/styles/Doxygen/func/output_cases/empty/output
+  h_220433a6faf6b8 1-3
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/cpp/styles/Doxygen/func/output_cases/returns/input
+  h_220433a6faf6b8 1-2
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/cpp/styles/Doxygen/func/output_cases/returns/output
+  h_220433a6faf6b8 1-5
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/cpp/styles/Doxygen/init.lua
+  h_220433a6faf6b8 1-4
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/cpp/targets/func/init.lua
+  h_220433a6faf6b8 1-4
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/cpp/targets/func/parameters/extraction_cases/item_detection/double_pointer_one_param/input
+  h_220433a6faf6b8 1
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/cpp/targets/func/parameters/extraction_cases/item_detection/double_pointer_one_param/metadata.lua
+  h_220433a6faf6b8 1-9
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/cpp/targets/func/parameters/extraction_cases/item_detection/double_pointer_two_params/input
+  h_220433a6faf6b8 1
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/cpp/targets/func/parameters/extraction_cases/item_detection/double_pointer_two_params/metadata.lua
+  h_220433a6faf6b8 1-10
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/cpp/targets/func/parameters/extraction_cases/item_detection/no_params/input
+  h_220433a6faf6b8 1-3
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/cpp/targets/func/parameters/extraction_cases/item_detection/no_params/metadata.lua
+  h_220433a6faf6b8 1-8
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/cpp/targets/func/parameters/extraction_cases/item_detection/one_default_param/input
+  h_220433a6faf6b8 1
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/cpp/targets/func/parameters/extraction_cases/item_detection/one_default_param/metadata.lua
+  h_220433a6faf6b8 1-9
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/cpp/targets/func/parameters/extraction_cases/item_detection/one_param/input
+  h_220433a6faf6b8 1-3
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/cpp/targets/func/parameters/extraction_cases/item_detection/one_param/metadata.lua
+  h_220433a6faf6b8 1-10
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/cpp/targets/func/parameters/extraction_cases/item_detection/pointer_one_param/input
+  h_220433a6faf6b8 1
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/cpp/targets/func/parameters/extraction_cases/item_detection/pointer_one_param/metadata.lua
+  h_220433a6faf6b8 1-9
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/cpp/targets/func/parameters/extraction_cases/item_detection/pointer_two_params/input
+  h_220433a6faf6b8 1
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/cpp/targets/func/parameters/extraction_cases/item_detection/pointer_two_params/metadata.lua
+  h_220433a6faf6b8 1-10
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/cpp/targets/func/parameters/extraction_cases/item_detection/reference_one_param/input
+  h_220433a6faf6b8 1
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/cpp/targets/func/parameters/extraction_cases/item_detection/reference_one_param/metadata.lua
+  h_220433a6faf6b8 1-9
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/cpp/targets/func/parameters/extraction_cases/item_detection/reference_two_params/input
+  h_220433a6faf6b8 1
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/cpp/targets/func/parameters/extraction_cases/item_detection/reference_two_params/metadata.lua
+  h_220433a6faf6b8 1-10
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/cpp/targets/func/parameters/extraction_cases/item_detection/two_default_params/input
+  h_220433a6faf6b8 1
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/cpp/targets/func/parameters/extraction_cases/item_detection/two_default_params/metadata.lua
+  h_220433a6faf6b8 1-10
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/cpp/targets/func/parameters/extraction_cases/item_detection/two_params/input
+  h_220433a6faf6b8 1-3
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/cpp/targets/func/parameters/extraction_cases/item_detection/two_params/metadata.lua
+  h_220433a6faf6b8 1-11
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/cpp/targets/func/parameters/extraction_cases/type_detection/default/input
+  h_220433a6faf6b8 1-2
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/cpp/targets/func/parameters/extraction_cases/type_detection/default/metadata.lua
+  h_220433a6faf6b8 1-55
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/cpp/targets/func/parameters/init.lua
+  h_220433a6faf6b8 1-18
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/cpp/targets/func/parameters/queries/parameters.scm
+  h_220433a6faf6b8 1-29
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/cpp/targets/func/returns/extraction_cases/type_detection/default/input
+  h_220433a6faf6b8 1-2
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/cpp/targets/func/returns/extraction_cases/type_detection/default/metadata.lua
+  h_220433a6faf6b8 1-55
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/cpp/targets/func/returns/init.lua
+  h_220433a6faf6b8 1
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/cpp/targets/func/returns/queries/returns.scm
+  h_220433a6faf6b8 1-7
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/gdscript/init.lua
+  h_220433a6faf6b8 1-8
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/gdscript/styles/Codedocs/comment/init.lua
+  h_220433a6faf6b8 1-11
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/gdscript/styles/Codedocs/comment/output_cases/empty/input
+  h_220433a6faf6b8 1
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/gdscript/styles/Codedocs/comment/output_cases/empty/output
+  h_220433a6faf6b8 1
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/gdscript/styles/Codedocs/export/init.lua
+  h_220433a6faf6b8 1-11
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/gdscript/styles/Codedocs/export/output_cases/empty/input
+  h_220433a6faf6b8 1
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/gdscript/styles/Codedocs/export/output_cases/empty/output
+  h_220433a6faf6b8 1
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/gdscript/styles/Codedocs/init.lua
+  h_220433a6faf6b8 1-4
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/gdscript/styles/Codedocs/on_ready/init.lua
+  h_220433a6faf6b8 1-11
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/gdscript/styles/Codedocs/on_ready/output_cases/empty/input
+  h_220433a6faf6b8 1
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/gdscript/styles/Codedocs/on_ready/output_cases/empty/output
+  h_220433a6faf6b8 1
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/gdscript/styles/Codedocs/warning_ignore/init.lua
+  h_220433a6faf6b8 1-11
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/gdscript/styles/Codedocs/warning_ignore/output_cases/empty/input
+  h_220433a6faf6b8 1
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/gdscript/styles/Codedocs/warning_ignore/output_cases/empty/output
+  h_220433a6faf6b8 1
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/go/init.lua
+  h_220433a6faf6b8 1-20
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/go/styles/Godoc/comment/init.lua
+  h_220433a6faf6b8 1-11
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/go/styles/Godoc/comment/output_cases/empty/input
+  h_220433a6faf6b8 1
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/go/styles/Godoc/comment/output_cases/empty/output
+  h_220433a6faf6b8 1
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/go/styles/Godoc/func/init.lua
+  h_220433a6faf6b8 1-59
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/go/styles/Godoc/func/output_cases/all/input
+  h_220433a6faf6b8 1-3
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/go/styles/Godoc/func/output_cases/all/output
+  h_220433a6faf6b8 1
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/go/styles/Godoc/func/output_cases/empty/input
+  h_220433a6faf6b8 1-2
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/go/styles/Godoc/func/output_cases/empty/output
+  h_220433a6faf6b8 1
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/go/styles/Godoc/func/output_cases/returns/input
+  h_220433a6faf6b8 1-2
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/go/styles/Godoc/func/output_cases/returns/output
+  h_220433a6faf6b8 1
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/go/styles/Godoc/init.lua
+  h_220433a6faf6b8 1-4
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/go/targets/func/init.lua
+  h_220433a6faf6b8 1-4
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/go/targets/func/parameters/extraction_cases/item_detection/no_params/input
+  h_220433a6faf6b8 1-3
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/go/targets/func/parameters/extraction_cases/item_detection/no_params/metadata.lua
+  h_220433a6faf6b8 1-8
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/go/targets/func/parameters/extraction_cases/item_detection/one_param/input
+  h_220433a6faf6b8 1-3
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/go/targets/func/parameters/extraction_cases/item_detection/one_param/metadata.lua
+  h_220433a6faf6b8 1-10
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/go/targets/func/parameters/extraction_cases/item_detection/params_grouping/input
+  h_220433a6faf6b8 1-2
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/go/targets/func/parameters/extraction_cases/item_detection/params_grouping/metadata.lua
+  h_220433a6faf6b8 1-11
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/go/targets/func/parameters/extraction_cases/item_detection/two_params/input
+  h_220433a6faf6b8 1-3
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/go/targets/func/parameters/extraction_cases/item_detection/two_params/metadata.lua
+  h_220433a6faf6b8 1-11
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/go/targets/func/parameters/extraction_cases/type_detection/default/input
+  h_220433a6faf6b8 1-2
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/go/targets/func/parameters/extraction_cases/type_detection/default/metadata.lua
+  h_220433a6faf6b8 1-46
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/go/targets/func/parameters/init.lua
+  h_220433a6faf6b8 1-25
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/go/targets/func/parameters/queries/parameters.scm
+  h_220433a6faf6b8 1-14
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/go/targets/func/returns/extraction_cases/type_detection/default/input
+  h_220433a6faf6b8 1-2
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/go/targets/func/returns/extraction_cases/type_detection/default/metadata.lua
+  h_220433a6faf6b8 1-46
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/go/targets/func/returns/init.lua
+  h_220433a6faf6b8 1
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/go/targets/func/returns/queries/returns.scm
+  h_220433a6faf6b8 1-11
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/html/init.lua
+  h_220433a6faf6b8 1-19
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/html/styles/Codedocs/comment/init.lua
+  h_220433a6faf6b8 1-11
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/html/styles/Codedocs/comment/output_cases/empty/input
+  h_220433a6faf6b8 1
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/html/styles/Codedocs/comment/output_cases/empty/output
+  h_220433a6faf6b8 1
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/html/styles/Codedocs/init.lua
+  h_220433a6faf6b8 1-4
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/java/init.lua
+  h_220433a6faf6b8 1-21
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/java/styles/JavaDoc/class/init.lua
+  h_220433a6faf6b8 1-52
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/java/styles/JavaDoc/class/output_cases/empty/input
+  h_220433a6faf6b8 1-7
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/java/styles/JavaDoc/class/output_cases/empty/output
+  h_220433a6faf6b8 1-3
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/java/styles/JavaDoc/comment/init.lua
+  h_220433a6faf6b8 1-11
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/java/styles/JavaDoc/comment/output_cases/empty/input
+  h_220433a6faf6b8 1
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/java/styles/JavaDoc/comment/output_cases/empty/output
+  h_220433a6faf6b8 1
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/java/styles/JavaDoc/func/init.lua
+  h_220433a6faf6b8 1-80
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/java/styles/JavaDoc/func/output_cases/all/input
+  h_220433a6faf6b8 1-3
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/java/styles/JavaDoc/func/output_cases/all/output
+  h_220433a6faf6b8 1-7
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/java/styles/JavaDoc/func/output_cases/empty/input
+  h_220433a6faf6b8 1-2
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/java/styles/JavaDoc/func/output_cases/empty/output
+  h_220433a6faf6b8 1-3
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/java/styles/JavaDoc/func/output_cases/returns/input
+  h_220433a6faf6b8 1-2
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/java/styles/JavaDoc/func/output_cases/returns/output
+  h_220433a6faf6b8 1-5
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/java/styles/JavaDoc/init.lua
+  h_220433a6faf6b8 1-4
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/java/targets/class/init.lua
+  h_220433a6faf6b8 1-4
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/java/targets/class/instance_attributes/extraction_cases/item_detection/a/input
+  h_220433a6faf6b8 1-2
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/java/targets/class/instance_attributes/extraction_cases/item_detection/a/metadata.lua
+  h_220433a6faf6b8 1-7
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/java/targets/class/instance_attributes/extraction_cases/item_detection/b/input
+  h_220433a6faf6b8 1-3
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/java/targets/class/instance_attributes/extraction_cases/item_detection/b/metadata.lua
+  h_220433a6faf6b8 1-12
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/java/targets/class/instance_attributes/init.lua
+  h_220433a6faf6b8 1
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/java/targets/class/instance_attributes/queries/instance_attributes.scm
+  h_220433a6faf6b8 1-7
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/java/targets/class/static_attributes/init.lua
+  h_220433a6faf6b8 1
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/java/targets/class/static_attributes/queries/static_attributes.scm
+  h_220433a6faf6b8 1-6
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/java/targets/func/init.lua
+  h_220433a6faf6b8 1-4
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/java/targets/func/parameters/extraction_cases/item_detection/no_params/input
+  h_220433a6faf6b8 1-3
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/java/targets/func/parameters/extraction_cases/item_detection/no_params/metadata.lua
+  h_220433a6faf6b8 1-8
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/java/targets/func/parameters/extraction_cases/item_detection/one_param/input
+  h_220433a6faf6b8 1-3
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/java/targets/func/parameters/extraction_cases/item_detection/one_param/metadata.lua
+  h_220433a6faf6b8 1-10
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/java/targets/func/parameters/extraction_cases/item_detection/two_params/input
+  h_220433a6faf6b8 1-3
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/java/targets/func/parameters/extraction_cases/item_detection/two_params/metadata.lua
+  h_220433a6faf6b8 1-11
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/java/targets/func/parameters/extraction_cases/type_detection/default/input
+  h_220433a6faf6b8 1-2
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/java/targets/func/parameters/extraction_cases/type_detection/default/metadata.lua
+  h_220433a6faf6b8 1-46
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/java/targets/func/parameters/init.lua
+  h_220433a6faf6b8 1
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/java/targets/func/parameters/queries/parameters.scm
+  h_220433a6faf6b8 1-12
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/java/targets/func/returns/extraction_cases/type_detection/default/input
+  h_220433a6faf6b8 1-2
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/java/targets/func/returns/extraction_cases/type_detection/default/metadata.lua
+  h_220433a6faf6b8 1-46
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/java/targets/func/returns/init.lua
+  h_220433a6faf6b8 1
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/java/targets/func/returns/queries/returns.scm
+  h_220433a6faf6b8 1-9
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/javascript/init.lua
+  h_220433a6faf6b8 1-21
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/javascript/styles/JSDoc/class/init.lua
+  h_220433a6faf6b8 1-51
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/javascript/styles/JSDoc/comment/init.lua
+  h_220433a6faf6b8 1-11
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/javascript/styles/JSDoc/comment/output_cases/empty/input
+  h_220433a6faf6b8 1
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/javascript/styles/JSDoc/comment/output_cases/empty/output
+  h_220433a6faf6b8 1
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/javascript/styles/JSDoc/func/init.lua
+  h_220433a6faf6b8 1-80
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/javascript/styles/JSDoc/func/output_cases/all/input
+  h_220433a6faf6b8 1-3
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/javascript/styles/JSDoc/func/output_cases/all/output
+  h_220433a6faf6b8 1-7
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/javascript/styles/JSDoc/func/output_cases/empty/input
+  h_220433a6faf6b8 1-2
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/javascript/styles/JSDoc/func/output_cases/empty/output
+  h_220433a6faf6b8 1-3
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/javascript/styles/JSDoc/func/output_cases/returns/input
+  h_220433a6faf6b8 1-3
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/javascript/styles/JSDoc/func/output_cases/returns/output
+  h_220433a6faf6b8 1-5
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/javascript/styles/JSDoc/init.lua
+  h_220433a6faf6b8 1-4
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/javascript/targets/class/constructor_instance_attributes/init.lua
+  h_220433a6faf6b8 1-13
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/javascript/targets/class/constructor_instance_attributes/queries/constructor.scm
+  h_220433a6faf6b8 1-4
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/javascript/targets/class/constructor_instance_attributes/queries/instance_attributes.scm
+  h_220433a6faf6b8 1-3
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/javascript/targets/class/init.lua
+  h_220433a6faf6b8 1-4
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/javascript/targets/class/instance_attributes/init.lua
+  h_220433a6faf6b8 1-17
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/javascript/targets/class/instance_attributes/queries/instance_attributes.scm
+  h_220433a6faf6b8 1-3
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/javascript/targets/class/static_attributes/init.lua
+  h_220433a6faf6b8 1
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/javascript/targets/class/static_attributes/queries/static_attributes.scm
+  h_220433a6faf6b8 1-4
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/javascript/targets/func/init.lua
+  h_220433a6faf6b8 1-11
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/javascript/targets/func/parameters/extraction_cases/item_detection/no_params/input
+  h_220433a6faf6b8 1-2
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/javascript/targets/func/parameters/extraction_cases/item_detection/no_params/metadata.lua
+  h_220433a6faf6b8 1-8
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/javascript/targets/func/parameters/extraction_cases/item_detection/one_default_param/input
+  h_220433a6faf6b8 1-2
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/javascript/targets/func/parameters/extraction_cases/item_detection/one_default_param/metadata.lua
+  h_220433a6faf6b8 1-9
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/javascript/targets/func/parameters/extraction_cases/item_detection/one_param/input
+  h_220433a6faf6b8 1-2
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/javascript/targets/func/parameters/extraction_cases/item_detection/one_param/metadata.lua
+  h_220433a6faf6b8 1-10
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/javascript/targets/func/parameters/extraction_cases/item_detection/two_default_params/input
+  h_220433a6faf6b8 1-2
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/javascript/targets/func/parameters/extraction_cases/item_detection/two_default_params/metadata.lua
+  h_220433a6faf6b8 1-10
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/javascript/targets/func/parameters/extraction_cases/item_detection/two_params/input
+  h_220433a6faf6b8 1-3
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/javascript/targets/func/parameters/extraction_cases/item_detection/two_params/metadata.lua
+  h_220433a6faf6b8 1-11
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/javascript/targets/func/parameters/init.lua
+  h_220433a6faf6b8 1
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/javascript/targets/func/parameters/queries/parameters.scm
+  h_220433a6faf6b8 1-29
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/javascript/targets/func/returns/extraction_cases/item_detection/a/input
+  h_220433a6faf6b8 1-3
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/javascript/targets/func/returns/extraction_cases/item_detection/a/metadata.lua
+  h_220433a6faf6b8 1-9
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/javascript/targets/func/returns/init.lua
+  h_220433a6faf6b8 1-11
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/javascript/targets/func/returns/queries/returns.scm
+  h_220433a6faf6b8 1-2
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/kotlin/init.lua
+  h_220433a6faf6b8 1-21
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/kotlin/styles/KDoc/class/init.lua
+  h_220433a6faf6b8 1-49
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/kotlin/styles/KDoc/class/output_cases/empty/input
+  h_220433a6faf6b8 1-10
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/kotlin/styles/KDoc/class/output_cases/empty/output
+  h_220433a6faf6b8 1-3
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/kotlin/styles/KDoc/comment/init.lua
+  h_220433a6faf6b8 1-11
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/kotlin/styles/KDoc/comment/output_cases/empty/input
+  h_220433a6faf6b8 1
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/kotlin/styles/KDoc/comment/output_cases/empty/output
+  h_220433a6faf6b8 1
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/kotlin/styles/KDoc/func/init.lua
+  h_220433a6faf6b8 1-80
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/kotlin/styles/KDoc/func/output_cases/all/input
+  h_220433a6faf6b8 1-3
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/kotlin/styles/KDoc/func/output_cases/all/output
+  h_220433a6faf6b8 1-7
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/kotlin/styles/KDoc/func/output_cases/empty/input
+  h_220433a6faf6b8 1-2
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/kotlin/styles/KDoc/func/output_cases/empty/output
+  h_220433a6faf6b8 1-3
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/kotlin/styles/KDoc/func/output_cases/returns/input
+  h_220433a6faf6b8 1-2
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/kotlin/styles/KDoc/func/output_cases/returns/output
+  h_220433a6faf6b8 1-5
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/kotlin/styles/KDoc/init.lua
+  h_220433a6faf6b8 1-4
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/kotlin/targets/class/constructor_instance_attributes/init.lua
+  h_220433a6faf6b8 1
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/kotlin/targets/class/constructor_instance_attributes/queries/constructor_instance_attributes.scm
+  h_220433a6faf6b8 1-6
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/kotlin/targets/class/init.lua
+  h_220433a6faf6b8 1-4
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/kotlin/targets/class/instance_attributes/init.lua
+  h_220433a6faf6b8 1
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/kotlin/targets/class/instance_attributes/queries/instance_attributes.scm
+  h_220433a6faf6b8 1-13
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/kotlin/targets/class/static_attributes/init.lua
+  h_220433a6faf6b8 1
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/kotlin/targets/class/static_attributes/queries/static_attributes.scm
+  h_220433a6faf6b8 1-6
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/kotlin/targets/func/init.lua
+  h_220433a6faf6b8 1-4
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/kotlin/targets/func/parameters/extraction_cases/item_detection/no_params/input
+  h_220433a6faf6b8 1-3
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/kotlin/targets/func/parameters/extraction_cases/item_detection/no_params/metadata.lua
+  h_220433a6faf6b8 1-8
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/kotlin/targets/func/parameters/extraction_cases/item_detection/one_default_param/input
+  h_220433a6faf6b8 1
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/kotlin/targets/func/parameters/extraction_cases/item_detection/one_default_param/metadata.lua
+  h_220433a6faf6b8 1-9
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/kotlin/targets/func/parameters/extraction_cases/item_detection/one_param/input
+  h_220433a6faf6b8 1-3
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/kotlin/targets/func/parameters/extraction_cases/item_detection/one_param/metadata.lua
+  h_220433a6faf6b8 1-10
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/kotlin/targets/func/parameters/extraction_cases/item_detection/two_default_params/input
+  h_220433a6faf6b8 1
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/kotlin/targets/func/parameters/extraction_cases/item_detection/two_default_params/metadata.lua
+  h_220433a6faf6b8 1-10
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/kotlin/targets/func/parameters/extraction_cases/item_detection/two_params/input
+  h_220433a6faf6b8 1-3
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/kotlin/targets/func/parameters/extraction_cases/item_detection/two_params/metadata.lua
+  h_220433a6faf6b8 1-11
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/kotlin/targets/func/parameters/extraction_cases/type_detection/default/input
+  h_220433a6faf6b8 1-2
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/kotlin/targets/func/parameters/extraction_cases/type_detection/default/metadata.lua
+  h_220433a6faf6b8 1-74
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/kotlin/targets/func/parameters/init.lua
+  h_220433a6faf6b8 1
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/kotlin/targets/func/parameters/queries/parameters.scm
+  h_220433a6faf6b8 1-8
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/kotlin/targets/func/returns/extraction_cases/item_detection/a/input
+  h_220433a6faf6b8 1-2
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/kotlin/targets/func/returns/extraction_cases/item_detection/a/metadata.lua
+  h_220433a6faf6b8 1-7
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/kotlin/targets/func/returns/extraction_cases/type_detection/default/input
+  h_220433a6faf6b8 1-2
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/kotlin/targets/func/returns/extraction_cases/type_detection/default/metadata.lua
+  h_220433a6faf6b8 1-66
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/kotlin/targets/func/returns/init.lua
+  h_220433a6faf6b8 1
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/kotlin/targets/func/returns/queries/returns.scm
+  h_220433a6faf6b8 1-5
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/lua/init.lua
+  h_220433a6faf6b8 1-21
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/lua/styles/EmmyLua/comment/init.lua
+  h_220433a6faf6b8 1-11
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/lua/styles/EmmyLua/comment/output_cases/empty/input
+  h_220433a6faf6b8 1
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/lua/styles/EmmyLua/comment/output_cases/empty/output
+  h_220433a6faf6b8 1
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/lua/styles/EmmyLua/func/init.lua
+  h_220433a6faf6b8 1-66
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/lua/styles/EmmyLua/func/output_cases/all/input
+  h_220433a6faf6b8 1-3
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/lua/styles/EmmyLua/func/output_cases/all/output
+  h_220433a6faf6b8 1-4
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/lua/styles/EmmyLua/func/output_cases/empty/input
+  h_220433a6faf6b8 1-2
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/lua/styles/EmmyLua/func/output_cases/empty/output
+  h_220433a6faf6b8 1
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/lua/styles/EmmyLua/func/output_cases/func_var/input
+  h_220433a6faf6b8 1-3
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/lua/styles/EmmyLua/func/output_cases/func_var/output
+  h_220433a6faf6b8 1-4
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/lua/styles/EmmyLua/func/output_cases/method/input
+  h_220433a6faf6b8 1-5
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/lua/styles/EmmyLua/func/output_cases/method/output
+  h_220433a6faf6b8 1-4
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/lua/styles/EmmyLua/func/output_cases/returns/input
+  h_220433a6faf6b8 1-3
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/lua/styles/EmmyLua/func/output_cases/returns/output
+  h_220433a6faf6b8 1-2
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/lua/styles/EmmyLua/init.lua
+  h_220433a6faf6b8 1-4
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/lua/styles/LDoc/comment/init.lua
+  h_220433a6faf6b8 1-11
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/lua/styles/LDoc/comment/output_cases/empty/input
+  h_220433a6faf6b8 1
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/lua/styles/LDoc/comment/output_cases/empty/output
+  h_220433a6faf6b8 1
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/lua/styles/LDoc/func/init.lua
+  h_220433a6faf6b8 1-67
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/lua/styles/LDoc/func/output_cases/all/input
+  h_220433a6faf6b8 1-3
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/lua/styles/LDoc/func/output_cases/all/output
+  h_220433a6faf6b8 1-4
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/lua/styles/LDoc/func/output_cases/empty/input
+  h_220433a6faf6b8 1-2
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/lua/styles/LDoc/func/output_cases/empty/output
+  h_220433a6faf6b8 1
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/lua/styles/LDoc/func/output_cases/func_var/input
+  h_220433a6faf6b8 1-3
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/lua/styles/LDoc/func/output_cases/func_var/output
+  h_220433a6faf6b8 1-4
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/lua/styles/LDoc/func/output_cases/method/input
+  h_220433a6faf6b8 1-5
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/lua/styles/LDoc/func/output_cases/method/output
+  h_220433a6faf6b8 1-4
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/lua/styles/LDoc/func/output_cases/returns/input
+  h_220433a6faf6b8 1-3
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/lua/styles/LDoc/func/output_cases/returns/output
+  h_220433a6faf6b8 1-2
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/lua/styles/LDoc/init.lua
+  h_220433a6faf6b8 1-4
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/lua/targets/func/init.lua
+  h_220433a6faf6b8 1-10
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/lua/targets/func/parameters/extraction_cases/item_detection/no_params/input
+  h_220433a6faf6b8 1-3
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/lua/targets/func/parameters/extraction_cases/item_detection/no_params/metadata.lua
+  h_220433a6faf6b8 1-8
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/lua/targets/func/parameters/extraction_cases/item_detection/one_param/input
+  h_220433a6faf6b8 1-3
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/lua/targets/func/parameters/extraction_cases/item_detection/one_param/metadata.lua
+  h_220433a6faf6b8 1-10
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/lua/targets/func/parameters/extraction_cases/item_detection/two_params/input
+  h_220433a6faf6b8 1-3
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/lua/targets/func/parameters/extraction_cases/item_detection/two_params/metadata.lua
+  h_220433a6faf6b8 1-11
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/lua/targets/func/parameters/init.lua
+  h_220433a6faf6b8 1
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/lua/targets/func/parameters/queries/parameters.scm
+  h_220433a6faf6b8 1-2
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/lua/targets/func/returns/extraction_cases/item_detection/a/input
+  h_220433a6faf6b8 1-3
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/lua/targets/func/returns/extraction_cases/item_detection/a/metadata.lua
+  h_220433a6faf6b8 1-9
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/lua/targets/func/returns/init.lua
+  h_220433a6faf6b8 1-11
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/lua/targets/func/returns/queries/returns.scm
+  h_220433a6faf6b8 1-2
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/markdown/init.lua
+  h_220433a6faf6b8 1-19
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/markdown/styles/Codedocs/comment/init.lua
+  h_220433a6faf6b8 1-11
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/markdown/styles/Codedocs/comment/output_cases/empty/input
+  h_220433a6faf6b8 1
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/markdown/styles/Codedocs/comment/output_cases/empty/output
+  h_220433a6faf6b8 1
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/markdown/styles/Codedocs/init.lua
+  h_220433a6faf6b8 1-4
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/php/init.lua
+  h_220433a6faf6b8 1-20
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/php/styles/PHPDoc/comment/init.lua
+  h_220433a6faf6b8 1-11
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/php/styles/PHPDoc/comment/output_cases/empty/input
+  h_220433a6faf6b8 1
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/php/styles/PHPDoc/comment/output_cases/empty/output
+  h_220433a6faf6b8 1
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/php/styles/PHPDoc/func/init.lua
+  h_220433a6faf6b8 1-80
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/php/styles/PHPDoc/func/output_cases/empty/input
+  h_220433a6faf6b8 1-3
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/php/styles/PHPDoc/func/output_cases/empty/output
+  h_220433a6faf6b8 1-3
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/php/styles/PHPDoc/func/output_cases/return_statement/input
+  h_220433a6faf6b8 1-4
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/php/styles/PHPDoc/func/output_cases/return_statement/output
+  h_220433a6faf6b8 1-5
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/php/styles/PHPDoc/func/output_cases/returns/input
+  h_220433a6faf6b8 1-4
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/php/styles/PHPDoc/func/output_cases/returns/output
+  h_220433a6faf6b8 1-5
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/php/styles/PHPDoc/func/output_cases/typed_params_returns_a/input
+  h_220433a6faf6b8 1-4
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/php/styles/PHPDoc/func/output_cases/typed_params_returns_a/output
+  h_220433a6faf6b8 1-7
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/php/styles/PHPDoc/func/output_cases/typed_params_returns_b/input
+  h_220433a6faf6b8 1-4
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/php/styles/PHPDoc/func/output_cases/typed_params_returns_b/output
+  h_220433a6faf6b8 1-8
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/php/styles/PHPDoc/func/output_cases/typed_params_returns_c/input
+  h_220433a6faf6b8 1-4
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/php/styles/PHPDoc/func/output_cases/typed_params_returns_c/output
+  h_220433a6faf6b8 1-8
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/php/styles/PHPDoc/func/output_cases/untyped_params_returns/input
+  h_220433a6faf6b8 1-4
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/php/styles/PHPDoc/func/output_cases/untyped_params_returns/output
+  h_220433a6faf6b8 1-7
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/php/styles/PHPDoc/init.lua
+  h_220433a6faf6b8 1-4
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/php/styles/PHPDoc/phptag/init.lua
+  h_220433a6faf6b8 1-12
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/php/styles/PHPDoc/phptag/output_cases/empty/input
+  h_220433a6faf6b8 1
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/php/styles/PHPDoc/phptag/output_cases/empty/output
+  h_220433a6faf6b8 1-2
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/php/targets/func/init.lua
+  h_220433a6faf6b8 1-7
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/php/targets/func/parameters/extraction_cases/item_detection/alternating_three_typed/input
+  h_220433a6faf6b8 1-3
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/php/targets/func/parameters/extraction_cases/item_detection/alternating_three_typed/metadata.lua
+  h_220433a6faf6b8 1-11
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/php/targets/func/parameters/extraction_cases/item_detection/alternating_three_untyped/input
+  h_220433a6faf6b8 1-3
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/php/targets/func/parameters/extraction_cases/item_detection/alternating_three_untyped/metadata.lua
+  h_220433a6faf6b8 1-11
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/php/targets/func/parameters/extraction_cases/item_detection/alternating_two_typed/input
+  h_220433a6faf6b8 1-3
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/php/targets/func/parameters/extraction_cases/item_detection/alternating_two_typed/metadata.lua
+  h_220433a6faf6b8 1-10
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/php/targets/func/parameters/extraction_cases/item_detection/alternating_two_untyped/input
+  h_220433a6faf6b8 1-3
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/php/targets/func/parameters/extraction_cases/item_detection/alternating_two_untyped/metadata.lua
+  h_220433a6faf6b8 1-10
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/php/targets/func/parameters/extraction_cases/item_detection/no_params/input
+  h_220433a6faf6b8 1-4
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/php/targets/func/parameters/extraction_cases/item_detection/no_params/metadata.lua
+  h_220433a6faf6b8 1-8
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/php/targets/func/parameters/extraction_cases/item_detection/one_default_param/input
+  h_220433a6faf6b8 1-3
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/php/targets/func/parameters/extraction_cases/item_detection/one_default_param/metadata.lua
+  h_220433a6faf6b8 1-9
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/php/targets/func/parameters/extraction_cases/item_detection/one_param/input
+  h_220433a6faf6b8 1-4
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/php/targets/func/parameters/extraction_cases/item_detection/one_param/metadata.lua
+  h_220433a6faf6b8 1-10
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/php/targets/func/parameters/extraction_cases/item_detection/one_untyped_default_param/input
+  h_220433a6faf6b8 1-3
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/php/targets/func/parameters/extraction_cases/item_detection/one_untyped_default_param/metadata.lua
+  h_220433a6faf6b8 1-9
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/php/targets/func/parameters/extraction_cases/item_detection/two_default_params/input
+  h_220433a6faf6b8 1-3
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/php/targets/func/parameters/extraction_cases/item_detection/two_default_params/metadata.lua
+  h_220433a6faf6b8 1-10
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/php/targets/func/parameters/extraction_cases/item_detection/two_params/input
+  h_220433a6faf6b8 1-4
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/php/targets/func/parameters/extraction_cases/item_detection/two_params/metadata.lua
+  h_220433a6faf6b8 1-11
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/php/targets/func/parameters/extraction_cases/item_detection/two_untyped_default_params/input
+  h_220433a6faf6b8 1-3
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/php/targets/func/parameters/extraction_cases/item_detection/two_untyped_default_params/metadata.lua
+  h_220433a6faf6b8 1-10
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/php/targets/func/parameters/extraction_cases/item_detection/untyped_one_param/input
+  h_220433a6faf6b8 1-4
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/php/targets/func/parameters/extraction_cases/item_detection/untyped_one_param/metadata.lua
+  h_220433a6faf6b8 1-9
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/php/targets/func/parameters/extraction_cases/item_detection/untyped_two_params/input
+  h_220433a6faf6b8 1-4
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/php/targets/func/parameters/extraction_cases/item_detection/untyped_two_params/metadata.lua
+  h_220433a6faf6b8 1-10
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/php/targets/func/parameters/extraction_cases/type_detection/default/input
+  h_220433a6faf6b8 1-3
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/php/targets/func/parameters/extraction_cases/type_detection/default/metadata.lua
+  h_220433a6faf6b8 1-41
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/php/targets/func/parameters/init.lua
+  h_220433a6faf6b8 1
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/php/targets/func/parameters/queries/parameters.scm
+  h_220433a6faf6b8 1-11
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/php/targets/func/returns/extraction_cases/item_detection/a/input
+  h_220433a6faf6b8 1-5
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/php/targets/func/returns/extraction_cases/item_detection/a/metadata.lua
+  h_220433a6faf6b8 1-9
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/php/targets/func/returns/extraction_cases/type_detection/default/input
+  h_220433a6faf6b8 1-3
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/php/targets/func/returns/extraction_cases/type_detection/default/metadata.lua
+  h_220433a6faf6b8 1-38
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/php/targets/func/returns/init.lua
+  h_220433a6faf6b8 1-17
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/php/targets/func/returns/queries/returns.scm
+  h_220433a6faf6b8 1-9
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/php/targets/func/returns/queries/returns_alt.scm
+  h_220433a6faf6b8 1-2
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/presence_detection_spec.lua
+  h_220433a6faf6b8 1-70
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/python/init.lua
+  h_220433a6faf6b8 1-23
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/python/styles/Google/class/init.lua
+  h_220433a6faf6b8 1-50
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/python/styles/Google/comment/init.lua
+  h_220433a6faf6b8 1-11
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/python/styles/Google/comment/output_cases/empty/input
+  h_220433a6faf6b8 1
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/python/styles/Google/comment/output_cases/empty/output
+  h_220433a6faf6b8 1
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/python/styles/Google/func/init.lua
+  h_220433a6faf6b8 1-74
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/python/styles/Google/func/output_cases/empty/input
+  h_220433a6faf6b8 1-2
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/python/styles/Google/func/output_cases/empty/output
+  h_220433a6faf6b8 1-3
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/python/styles/Google/func/output_cases/mixed_typed_params_a/input
+  h_220433a6faf6b8 1-2
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/python/styles/Google/func/output_cases/mixed_typed_params_a/output
+  h_220433a6faf6b8 1-8
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/python/styles/Google/func/output_cases/mixed_typed_params_b/input
+  h_220433a6faf6b8 1-2
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/python/styles/Google/func/output_cases/mixed_typed_params_b/output
+  h_220433a6faf6b8 1-8
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/python/styles/Google/func/output_cases/typed_params/input
+  h_220433a6faf6b8 1-2
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/python/styles/Google/func/output_cases/typed_params/output
+  h_220433a6faf6b8 1-7
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/python/styles/Google/func/output_cases/typed_params_and_returns/input
+  h_220433a6faf6b8 1-2
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/python/styles/Google/func/output_cases/typed_params_and_returns/output
+  h_220433a6faf6b8 1-10
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/python/styles/Google/func/output_cases/typed_returns/input
+  h_220433a6faf6b8 1-2
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/python/styles/Google/func/output_cases/typed_returns/output
+  h_220433a6faf6b8 1-6
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/python/styles/Google/func/output_cases/untyped_params/input
+  h_220433a6faf6b8 1-2
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/python/styles/Google/func/output_cases/untyped_params/output
+  h_220433a6faf6b8 1-7
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/python/styles/Google/func/output_cases/untyped_params_typed_returns/input
+  h_220433a6faf6b8 1-2
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/python/styles/Google/func/output_cases/untyped_params_typed_returns/output
+  h_220433a6faf6b8 1-10
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/python/styles/Google/init.lua
+  h_220433a6faf6b8 1-4
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/python/styles/NumPy/class/init.lua
+  h_220433a6faf6b8 1-48
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/python/styles/NumPy/comment/init.lua
+  h_220433a6faf6b8 1-11
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/python/styles/NumPy/comment/output_cases/empty/input
+  h_220433a6faf6b8 1
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/python/styles/NumPy/comment/output_cases/empty/output
+  h_220433a6faf6b8 1
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/python/styles/NumPy/func/init.lua
+  h_220433a6faf6b8 1-76
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/python/styles/NumPy/func/output_cases/empty/input
+  h_220433a6faf6b8 1-2
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/python/styles/NumPy/func/output_cases/empty/output
+  h_220433a6faf6b8 1-3
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/python/styles/NumPy/func/output_cases/mixed_typed_params_a/input
+  h_220433a6faf6b8 1-2
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/python/styles/NumPy/func/output_cases/mixed_typed_params_a/output
+  h_220433a6faf6b8 1-12
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/python/styles/NumPy/func/output_cases/mixed_typed_params_b/input
+  h_220433a6faf6b8 1-2
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/python/styles/NumPy/func/output_cases/mixed_typed_params_b/output
+  h_220433a6faf6b8 1-12
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/python/styles/NumPy/func/output_cases/typed_params/input
+  h_220433a6faf6b8 1-2
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/python/styles/NumPy/func/output_cases/typed_params/output
+  h_220433a6faf6b8 1-10
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/python/styles/NumPy/func/output_cases/typed_params_and_returns/input
+  h_220433a6faf6b8 1-2
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/python/styles/NumPy/func/output_cases/typed_params_and_returns/output
+  h_220433a6faf6b8 1-15
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/python/styles/NumPy/func/output_cases/typed_returns/input
+  h_220433a6faf6b8 1-2
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/python/styles/NumPy/func/output_cases/typed_returns/output
+  h_220433a6faf6b8 1-8
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/python/styles/NumPy/func/output_cases/untyped_params/input
+  h_220433a6faf6b8 1-2
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/python/styles/NumPy/func/output_cases/untyped_params/output
+  h_220433a6faf6b8 1-10
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/python/styles/NumPy/func/output_cases/untyped_params_typed_returns/input
+  h_220433a6faf6b8 1-2
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/python/styles/NumPy/func/output_cases/untyped_params_typed_returns/output
+  h_220433a6faf6b8 1-15
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/python/styles/NumPy/init.lua
+  h_220433a6faf6b8 1-4
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/python/styles/reST/class/init.lua
+  h_220433a6faf6b8 1-49
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/python/styles/reST/comment/init.lua
+  h_220433a6faf6b8 1-11
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/python/styles/reST/comment/output_cases/empty/input
+  h_220433a6faf6b8 1
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/python/styles/reST/comment/output_cases/empty/output
+  h_220433a6faf6b8 1
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/python/styles/reST/func/init.lua
+  h_220433a6faf6b8 1-76
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/python/styles/reST/func/output_cases/empty/input
+  h_220433a6faf6b8 1-2
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/python/styles/reST/func/output_cases/empty/output
+  h_220433a6faf6b8 1-3
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/python/styles/reST/func/output_cases/mixed_typed_params_a/input
+  h_220433a6faf6b8 1-2
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/python/styles/reST/func/output_cases/mixed_typed_params_a/output
+  h_220433a6faf6b8 1-10
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/python/styles/reST/func/output_cases/mixed_typed_params_b/input
+  h_220433a6faf6b8 1-2
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/python/styles/reST/func/output_cases/mixed_typed_params_b/output
+  h_220433a6faf6b8 1-10
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/python/styles/reST/func/output_cases/typed_params/input
+  h_220433a6faf6b8 1-2
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/python/styles/reST/func/output_cases/typed_params/output
+  h_220433a6faf6b8 1-8
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/python/styles/reST/func/output_cases/typed_params_and_returns/input
+  h_220433a6faf6b8 1-2
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/python/styles/reST/func/output_cases/typed_params_and_returns/output
+  h_220433a6faf6b8 1-10
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/python/styles/reST/func/output_cases/typed_returns/input
+  h_220433a6faf6b8 1-2
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/python/styles/reST/func/output_cases/typed_returns/output
+  h_220433a6faf6b8 1-6
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/python/styles/reST/func/output_cases/untyped_params/input
+  h_220433a6faf6b8 1-2
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/python/styles/reST/func/output_cases/untyped_params/output
+  h_220433a6faf6b8 1-8
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/python/styles/reST/func/output_cases/untyped_params_typed_returns/input
+  h_220433a6faf6b8 1-2
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/python/styles/reST/func/output_cases/untyped_params_typed_returns/output
+  h_220433a6faf6b8 1-10
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/python/styles/reST/init.lua
+  h_220433a6faf6b8 1-4
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/python/targets/class/constructor_instance_attributes/a.ts
+  h_220433a6faf6b8 1-21
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/python/targets/class/constructor_instance_attributes/init.lua
+  h_220433a6faf6b8 1-17
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/python/targets/class/constructor_instance_attributes/queries/constructor.scm
+  h_220433a6faf6b8 1-3
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/python/targets/class/constructor_instance_attributes/queries/constructor_instance_attributes.scm
+  h_220433a6faf6b8 1-2
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/python/targets/class/init.lua
+  h_220433a6faf6b8 1-4
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/python/targets/class/instance_attributes/init.lua
+  h_220433a6faf6b8 1
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/python/targets/class/instance_attributes/queries/instance_attributes.scm
+  h_220433a6faf6b8 1-7
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/python/targets/class/static_attributes/init.lua
+  h_220433a6faf6b8 1
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/python/targets/class/static_attributes/queries/static_attributes.scm
+  h_220433a6faf6b8 1-5
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/python/targets/func/init.lua
+  h_220433a6faf6b8 1-4
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/python/targets/func/parameters/extraction_cases/item_detection/alternating_three_typed/input
+  h_220433a6faf6b8 1-2
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/python/targets/func/parameters/extraction_cases/item_detection/alternating_three_typed/metadata.lua
+  h_220433a6faf6b8 1-11
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/python/targets/func/parameters/extraction_cases/item_detection/alternating_three_untyped/input
+  h_220433a6faf6b8 1-2
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/python/targets/func/parameters/extraction_cases/item_detection/alternating_three_untyped/metadata.lua
+  h_220433a6faf6b8 1-11
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/python/targets/func/parameters/extraction_cases/item_detection/alternating_two_typed/input
+  h_220433a6faf6b8 1-2
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/python/targets/func/parameters/extraction_cases/item_detection/alternating_two_typed/metadata.lua
+  h_220433a6faf6b8 1-10
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/python/targets/func/parameters/extraction_cases/item_detection/alternating_two_untyped/input
+  h_220433a6faf6b8 1-2
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/python/targets/func/parameters/extraction_cases/item_detection/alternating_two_untyped/metadata.lua
+  h_220433a6faf6b8 1-10
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/python/targets/func/parameters/extraction_cases/item_detection/no_params/input
+  h_220433a6faf6b8 1-3
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/python/targets/func/parameters/extraction_cases/item_detection/no_params/metadata.lua
+  h_220433a6faf6b8 1-8
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/python/targets/func/parameters/extraction_cases/item_detection/one_default_param/input
+  h_220433a6faf6b8 1-2
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/python/targets/func/parameters/extraction_cases/item_detection/one_default_param/metadata.lua
+  h_220433a6faf6b8 1-9
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/python/targets/func/parameters/extraction_cases/item_detection/one_param/input
+  h_220433a6faf6b8 1-3
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/python/targets/func/parameters/extraction_cases/item_detection/one_param/metadata.lua
+  h_220433a6faf6b8 1-10
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/python/targets/func/parameters/extraction_cases/item_detection/two_default_params/input
+  h_220433a6faf6b8 1-2
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/python/targets/func/parameters/extraction_cases/item_detection/two_default_params/metadata.lua
+  h_220433a6faf6b8 1-10
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/python/targets/func/parameters/extraction_cases/item_detection/two_params/input
+  h_220433a6faf6b8 1-3
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/python/targets/func/parameters/extraction_cases/item_detection/two_params/metadata.lua
+  h_220433a6faf6b8 1-11
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/python/targets/func/parameters/extraction_cases/item_detection/typed_one_default_param/input
+  h_220433a6faf6b8 1-2
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/python/targets/func/parameters/extraction_cases/item_detection/typed_one_default_param/metadata.lua
+  h_220433a6faf6b8 1-9
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/python/targets/func/parameters/extraction_cases/item_detection/typed_one_param/input
+  h_220433a6faf6b8 1-3
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/python/targets/func/parameters/extraction_cases/item_detection/typed_one_param/metadata.lua
+  h_220433a6faf6b8 1-9
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/python/targets/func/parameters/extraction_cases/item_detection/typed_two_default_param/input
+  h_220433a6faf6b8 1-2
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/python/targets/func/parameters/extraction_cases/item_detection/typed_two_default_param/metadata.lua
+  h_220433a6faf6b8 1-10
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/python/targets/func/parameters/extraction_cases/item_detection/typed_two_params/input
+  h_220433a6faf6b8 1-3
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/python/targets/func/parameters/extraction_cases/item_detection/typed_two_params/metadata.lua
+  h_220433a6faf6b8 1-10
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/python/targets/func/parameters/extraction_cases/type_detection/default/input
+  h_220433a6faf6b8 1-2
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/python/targets/func/parameters/extraction_cases/type_detection/default/metadata.lua
+  h_220433a6faf6b8 1-45
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/python/targets/func/parameters/init.lua
+  h_220433a6faf6b8 1
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/python/targets/func/parameters/queries/parameters.scm
+  h_220433a6faf6b8 1-16
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/python/targets/func/returns/extraction_cases/type_detection/default/input
+  h_220433a6faf6b8 1-2
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/python/targets/func/returns/extraction_cases/type_detection/default/metadata.lua
+  h_220433a6faf6b8 1-37
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/python/targets/func/returns/init.lua
+  h_220433a6faf6b8 1-17
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/python/targets/func/returns/queries/returns.scm
+  h_220433a6faf6b8 1-7
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/python/targets/func/returns/queries/returns_alt.scm
+  h_220433a6faf6b8 1-2
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/ruby/init.lua
+  h_220433a6faf6b8 1-20
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/ruby/styles/YARD/comment/init.lua
+  h_220433a6faf6b8 1-11
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/ruby/styles/YARD/comment/output_cases/empty/input
+  h_220433a6faf6b8 1
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/ruby/styles/YARD/comment/output_cases/empty/output
+  h_220433a6faf6b8 1
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/ruby/styles/YARD/func/init.lua
+  h_220433a6faf6b8 1-67
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/ruby/styles/YARD/func/output_cases/empty/input
+  h_220433a6faf6b8 1-2
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/ruby/styles/YARD/func/output_cases/empty/output
+  h_220433a6faf6b8 1
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/ruby/styles/YARD/func/output_cases/params_and_return_statement/input
+  h_220433a6faf6b8 1-3
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/ruby/styles/YARD/func/output_cases/params_and_return_statement/output
+  h_220433a6faf6b8 1-5
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/ruby/styles/YARD/func/output_cases/return_statement/input
+  h_220433a6faf6b8 1-3
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/ruby/styles/YARD/func/output_cases/return_statement/output
+  h_220433a6faf6b8 1-3
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/ruby/styles/YARD/init.lua
+  h_220433a6faf6b8 1-4
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/ruby/targets/func/init.lua
+  h_220433a6faf6b8 1-4
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/ruby/targets/func/parameters/extraction_cases/item_detection/no_params/input
+  h_220433a6faf6b8 1-3
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/ruby/targets/func/parameters/extraction_cases/item_detection/no_params/metadata.lua
+  h_220433a6faf6b8 1-8
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/ruby/targets/func/parameters/extraction_cases/item_detection/one_default_param/input
+  h_220433a6faf6b8 1-2
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/ruby/targets/func/parameters/extraction_cases/item_detection/one_default_param/metadata.lua
+  h_220433a6faf6b8 1-9
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/ruby/targets/func/parameters/extraction_cases/item_detection/one_param/input
+  h_220433a6faf6b8 1-3
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/ruby/targets/func/parameters/extraction_cases/item_detection/one_param/metadata.lua
+  h_220433a6faf6b8 1-10
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/ruby/targets/func/parameters/extraction_cases/item_detection/two_default_params/input
+  h_220433a6faf6b8 1-2
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/ruby/targets/func/parameters/extraction_cases/item_detection/two_default_params/metadata.lua
+  h_220433a6faf6b8 1-10
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/ruby/targets/func/parameters/extraction_cases/item_detection/two_params/input
+  h_220433a6faf6b8 1-3
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/ruby/targets/func/parameters/extraction_cases/item_detection/two_params/metadata.lua
+  h_220433a6faf6b8 1-11
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/ruby/targets/func/parameters/init.lua
+  h_220433a6faf6b8 1
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/ruby/targets/func/parameters/queries/parameters.scm
+  h_220433a6faf6b8 1-6
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/ruby/targets/func/returns/extraction_cases/item_detection/a/input
+  h_220433a6faf6b8 1-3
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/ruby/targets/func/returns/extraction_cases/item_detection/a/metadata.lua
+  h_220433a6faf6b8 1-9
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/ruby/targets/func/returns/init.lua
+  h_220433a6faf6b8 1-11
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/ruby/targets/func/returns/queries/returns.scm
+  h_220433a6faf6b8 1-2
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/rust/init.lua
+  h_220433a6faf6b8 1-20
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/rust/styles/RustDoc/comment/init.lua
+  h_220433a6faf6b8 1-11
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/rust/styles/RustDoc/comment/output_cases/empty/input
+  h_220433a6faf6b8 1
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/rust/styles/RustDoc/comment/output_cases/empty/output
+  h_220433a6faf6b8 1
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/rust/styles/RustDoc/func/init.lua
+  h_220433a6faf6b8 1-67
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/rust/styles/RustDoc/func/output_cases/empty/input
+  h_220433a6faf6b8 1-2
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/rust/styles/RustDoc/func/output_cases/empty/output
+  h_220433a6faf6b8 1
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/rust/styles/RustDoc/func/output_cases/params_and_returns/input
+  h_220433a6faf6b8 1-3
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/rust/styles/RustDoc/func/output_cases/params_and_returns/output
+  h_220433a6faf6b8 1-10
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/rust/styles/RustDoc/func/output_cases/returns/input
+  h_220433a6faf6b8 1-2
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/rust/styles/RustDoc/func/output_cases/returns/output
+  h_220433a6faf6b8 1-5
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/rust/styles/RustDoc/init.lua
+  h_220433a6faf6b8 1-4
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/rust/targets/func/init.lua
+  h_220433a6faf6b8 1-4
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/rust/targets/func/parameters/extraction_cases/item_detection/no_params/input
+  h_220433a6faf6b8 1-3
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/rust/targets/func/parameters/extraction_cases/item_detection/no_params/metadata.lua
+  h_220433a6faf6b8 1-8
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/rust/targets/func/parameters/extraction_cases/item_detection/one_param/input
+  h_220433a6faf6b8 1-3
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/rust/targets/func/parameters/extraction_cases/item_detection/one_param/metadata.lua
+  h_220433a6faf6b8 1-10
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/rust/targets/func/parameters/extraction_cases/item_detection/two_params/input
+  h_220433a6faf6b8 1-3
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/rust/targets/func/parameters/extraction_cases/item_detection/two_params/metadata.lua
+  h_220433a6faf6b8 1-11
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/rust/targets/func/parameters/extraction_cases/type_detection/default/input
+  h_220433a6faf6b8 1-2
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/rust/targets/func/parameters/extraction_cases/type_detection/default/metadata.lua
+  h_220433a6faf6b8 1-60
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/rust/targets/func/parameters/init.lua
+  h_220433a6faf6b8 1
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/rust/targets/func/parameters/queries/parameters.scm
+  h_220433a6faf6b8 1-13
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/rust/targets/func/returns/extraction_cases/type_detection/default/input
+  h_220433a6faf6b8 1-2
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/rust/targets/func/returns/extraction_cases/type_detection/default/metadata.lua
+  h_220433a6faf6b8 1-54
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/rust/targets/func/returns/init.lua
+  h_220433a6faf6b8 1
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/rust/targets/func/returns/queries/returns.scm
+  h_220433a6faf6b8 1-10
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/sql/init.lua
+  h_220433a6faf6b8 1-8
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/sql/styles/Codedocs/comment/init.lua
+  h_220433a6faf6b8 1-11
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/sql/styles/Codedocs/comment/output_cases/empty/input
+  h_220433a6faf6b8 1
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/sql/styles/Codedocs/comment/output_cases/empty/output
+  h_220433a6faf6b8 1
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/sql/styles/Codedocs/init.lua
+  h_220433a6faf6b8 1-4
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/toml/init.lua
+  h_220433a6faf6b8 1-8
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/toml/styles/Codedocs/comment/init.lua
+  h_220433a6faf6b8 1-11
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/toml/styles/Codedocs/comment/output_cases/empty/input
+  h_220433a6faf6b8 1
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/toml/styles/Codedocs/comment/output_cases/empty/output
+  h_220433a6faf6b8 1
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/toml/styles/Codedocs/init.lua
+  h_220433a6faf6b8 1-4
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/treesitter/init.lua
+  h_220433a6faf6b8 1-8
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/treesitter/styles/Codedocs/comment/init.lua
+  h_220433a6faf6b8 1-11
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/treesitter/styles/Codedocs/comment/output_cases/empty/input
+  h_220433a6faf6b8 1
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/treesitter/styles/Codedocs/comment/output_cases/empty/output
+  h_220433a6faf6b8 1
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/treesitter/styles/Codedocs/init.lua
+  h_220433a6faf6b8 1-4
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/type_detection_spec.lua
+  h_220433a6faf6b8 1-67
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/typescript/init.lua
+  h_220433a6faf6b8 1-21
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/typescript/styles/TSDoc/class/init.lua
+  h_220433a6faf6b8 1-49
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/typescript/styles/TSDoc/class/output_cases/empty/input
+  h_220433a6faf6b8 1-8
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/typescript/styles/TSDoc/class/output_cases/empty/output
+  h_220433a6faf6b8 1-3
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/typescript/styles/TSDoc/comment/init.lua
+  h_220433a6faf6b8 1-11
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/typescript/styles/TSDoc/comment/output_cases/empty/input
+  h_220433a6faf6b8 1
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/typescript/styles/TSDoc/comment/output_cases/empty/output
+  h_220433a6faf6b8 1
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/typescript/styles/TSDoc/func/init.lua
+  h_220433a6faf6b8 1-80
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/typescript/styles/TSDoc/func/output_cases/empty/input
+  h_220433a6faf6b8 1-2
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/typescript/styles/TSDoc/func/output_cases/empty/output
+  h_220433a6faf6b8 1-3
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/typescript/styles/TSDoc/func/output_cases/return_statement/input
+  h_220433a6faf6b8 1-3
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/typescript/styles/TSDoc/func/output_cases/return_statement/output
+  h_220433a6faf6b8 1-5
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/typescript/styles/TSDoc/func/output_cases/typed_params/input
+  h_220433a6faf6b8 1-2
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/typescript/styles/TSDoc/func/output_cases/typed_params/output
+  h_220433a6faf6b8 1-6
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/typescript/styles/TSDoc/func/output_cases/typed_params_and_return/input
+  h_220433a6faf6b8 1-3
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/typescript/styles/TSDoc/func/output_cases/typed_params_and_return/output
+  h_220433a6faf6b8 1-7
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/typescript/styles/TSDoc/init.lua
+  h_220433a6faf6b8 1-4
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/typescript/targets/class/constructor_instance_attributes/init.lua
+  h_220433a6faf6b8 1-16
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/typescript/targets/class/constructor_instance_attributes/queries/constructor.scm
+  h_220433a6faf6b8 1-4
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/typescript/targets/class/constructor_instance_attributes/queries/instance_attributes.scm
+  h_220433a6faf6b8 1-4
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/typescript/targets/class/init.lua
+  h_220433a6faf6b8 1-4
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/typescript/targets/class/instance_attributes/init.lua
+  h_220433a6faf6b8 1-16
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/typescript/targets/class/instance_attributes/queries/body_instance_attributes.scm
+  h_220433a6faf6b8 1-3
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/typescript/targets/class/instance_attributes/queries/func_instance_attributes.scm
+  h_220433a6faf6b8 1-4
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/typescript/targets/class/static_attributes/init.lua
+  h_220433a6faf6b8 1
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/typescript/targets/class/static_attributes/queries/static_attributes.scm
+  h_220433a6faf6b8 1-4
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/typescript/targets/func/init.lua
+  h_220433a6faf6b8 1-7
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/typescript/targets/func/parameters/extraction_cases/item_detection/no_params/input
+  h_220433a6faf6b8 1-3
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/typescript/targets/func/parameters/extraction_cases/item_detection/no_params/metadata.lua
+  h_220433a6faf6b8 1-8
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/typescript/targets/func/parameters/extraction_cases/item_detection/one_default_param/input
+  h_220433a6faf6b8 1
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/typescript/targets/func/parameters/extraction_cases/item_detection/one_default_param/metadata.lua
+  h_220433a6faf6b8 1-9
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/typescript/targets/func/parameters/extraction_cases/item_detection/one_param/input
+  h_220433a6faf6b8 1-3
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/typescript/targets/func/parameters/extraction_cases/item_detection/one_param/metadata.lua
+  h_220433a6faf6b8 1-10
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/typescript/targets/func/parameters/extraction_cases/item_detection/two_default_params/input
+  h_220433a6faf6b8 1
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/typescript/targets/func/parameters/extraction_cases/item_detection/two_default_params/metadata.lua
+  h_220433a6faf6b8 1-10
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/typescript/targets/func/parameters/extraction_cases/item_detection/two_params/input
+  h_220433a6faf6b8 1-3
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/typescript/targets/func/parameters/extraction_cases/item_detection/two_params/metadata.lua
+  h_220433a6faf6b8 1-11
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/typescript/targets/func/parameters/extraction_cases/type_detection/default/input
+  h_220433a6faf6b8 1-2
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/typescript/targets/func/parameters/extraction_cases/type_detection/default/metadata.lua
+  h_220433a6faf6b8 1-71
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/typescript/targets/func/parameters/init.lua
+  h_220433a6faf6b8 1
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/typescript/targets/func/parameters/queries/parameters.scm
+  h_220433a6faf6b8 1-15
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/typescript/targets/func/returns/extraction_cases/item_detection/a/input
+  h_220433a6faf6b8 1-3
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/typescript/targets/func/returns/extraction_cases/item_detection/a/metadata.lua
+  h_220433a6faf6b8 1-9
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/typescript/targets/func/returns/extraction_cases/type_detection/default/input
+  h_220433a6faf6b8 1-2
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/typescript/targets/func/returns/extraction_cases/type_detection/default/metadata.lua
+  h_220433a6faf6b8 1-71
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/typescript/targets/func/returns/init.lua
+  h_220433a6faf6b8 1-17
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/typescript/targets/func/returns/queries/returns.scm
+  h_220433a6faf6b8 1-28
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/languages/typescript/targets/func/returns/queries/returns_alt.scm
+  h_220433a6faf6b8 1-2
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/validations.lua
+  h_220433a6faf6b8 1-137
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/config/validations_spec.lua
+  h_220433a6faf6b8 1-17
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/health.lua
+  h_220433a6faf6b8 1-44
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/init.lua
+  h_220433a6faf6b8 1-94
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/item_extractor/init.lua
+  h_220433a6faf6b8 1-122
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/item_extractor/query_loader.lua
+  h_220433a6faf6b8 1-42
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/item_extractor/ts.lua
+  h_220433a6faf6b8 1-92
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/utils/general.lua
+  h_220433a6faf6b8 1-43
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/utils/logger.lua
+  h_220433a6faf6b8 1-55
+lua/plugins/codedocs-nvim/CODES/lua/codedocs/utils/tests.lua
+  h_220433a6faf6b8 1-81
+lua/plugins/codedocs-nvim/CODES/plugin/codedocs.lua
+  h_220433a6faf6b8 1-38
+lua/plugins/codedocs-nvim/CODES/scripts/git-hooks/pre-commit
+  h_220433a6faf6b8 1-3
+lua/plugins/codedocs-nvim/CODES/scripts/install_deps.sh
+  h_220433a6faf6b8 1-17
+lua/plugins/codedocs-nvim/CODES/scripts/local_checks.sh
+  h_220433a6faf6b8 1-39
+lua/plugins/codedocs-nvim/CODES/scripts/new_lang.sh
+  h_220433a6faf6b8 1-131
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.23",
+  "base_commit_sha": "6497c127e43a2202e7f9d7d3cd0eadc8e49fbdd4",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
