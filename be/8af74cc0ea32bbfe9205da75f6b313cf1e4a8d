@@ -1,0 +1,14 @@
+lua/plugins/dial-nvim/WIKIS/Home.md
+  h_220433a6faf6b8 1
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.23",
+  "base_commit_sha": "be8af74cc0ea32bbfe9205da75f6b313cf1e4a8d",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
