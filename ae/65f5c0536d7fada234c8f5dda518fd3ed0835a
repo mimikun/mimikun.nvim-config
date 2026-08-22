@@ -1,0 +1,18 @@
+lua/plugins/nvim-ts-autotag/CODES/ft.lua
+  h_220433a6faf6b8 34-44,51-57,64,72-75,84-90,92-93
+lua/plugins/nvim-ts-autotag/CODES/init.lua
+  h_220433a6faf6b8 4,10,17-20,25,31,37-41,55-60,73-75
+lua/plugins/nvim-ts-autotag/CODES/plugin.lua
+  h_220433a6faf6b8 5-129,137-139,147-173,180,186-208,210-230,237-239,241-244,246
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.23",
+  "base_commit_sha": "ae65f5c0536d7fada234c8f5dda518fd3ed0835a",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
