@@ -1,0 +1,347 @@
+================================================================================
+                                                *diffview.changelog*
+
+CHANGELOG
+
+NOTE: Breaking changes and notable feature additions are listed here.
+
+                                                *diffview.changelog-session-restoration*
+
+Open `:DiffviewOpen` and `:DiffviewFileHistory` views now survive a
+`:mksession` + `:source Session.vim` round trip. Per-file cursor and
+viewport are restored for every file visited in the saved session.
+
+State is written to a `<session>.diffview.json` sidecar on
+`:mksession` and `VimLeave`, and replayed on `SessionLoadPost`.
+Gated by `|diffview-config-restore_session|` (default `true`).
+
+Session managers that run `-c "DiffviewOpen ..."` at startup should
+defer the open past `VimEnter`; otherwise the tab is created before
+the session is sourced and the manager's `%bw!` strands its buffers.
+
+                                                *diffview.changelog-jj-adapter*
+
+ISSUE: https://github.com/sindrets/diffview.nvim/issues/562
+
+The Jujutsu (jj) adapter supports `:DiffviewOpen` and
+`:DiffviewFileHistory` end-to-end, and implements `file_restore` via
+`jj restore --from <commit> -- <path>` (with `jj op undo` as the
+suggested undo).
+
+Configure log options under `file_history_panel.log_options.jj` the
+same way as `git`/`hg`. Supported flags: `--revisions <revset>`,
+`--limit <n>`, `--reversed`.
+
+Staging-related actions (`s`/`S`/`U`, restoring from "staged") are
+no-ops in jj — there is no staging index. The adapter surfaces a
+one-time warning when these are invoked instead of failing silently.
+
+The `--pin-local` flag, the line-range `[range]:DiffviewFileHistory`
+form, and the `--cached`/`--staged`/`--imply-local` options remain
+Git-only.
+
+In colocated repos, set `preferred_adapter = "jj"` to use the Jujutsu
+adapter instead of Git.
+
+                                                *diffview.changelog-out-of-vcs-views*
+
+ISSUES: https://github.com/sindrets/diffview.nvim/issues/562,
+        https://github.com/sindrets/diffview.nvim/issues/286
+
+Two new commands open diff views that don't query any VCS, suitable as
+external editor entry points for tools like jj's merge tool and diff
+editor (and for ad-hoc use). They are also the integration point that
+closes issue 286 in the sindrets repo (arbitrary directory
+diffing).
+
+`:DiffviewMergeFiles {output} [{base}] {left} {right}` opens a 3-way or
+4-way merge editor backed by on-disk file paths. `{output}` is the
+editable buffer; the other paths are read-only. See `:h :DiffviewMergeFiles`
+for the `~/.config/jj/config.toml` wiring.
+
+`:DiffviewDiffDirs {left} {right} [{output}]` opens a side-by-side diff
+of two on-disk directories (no VCS involvement); when `{output}` is
+provided the middle buffer points at `{output}/<rel>` and edits flow
+back there. See `:h :DiffviewDiffDirs` for jj's `diff-editor` wiring.
+
+                                                *diffview.changelog-new-adapters*
+
+Two additional VCS adapters are supported beyond `git` and `hg`:
+
+  - **Sapling**, detected automatically through the Mercurial adapter.
+    Use `hg_cmd` to configure the executable (e.g. `hg_cmd = { "sl" }`).
+
+  - **Perforce** (experimental), via the `p4` CLI. Requires `p4` >=
+    2019.1 and the environment variables `P4PORT`, `P4USER`, `P4CLIENT`.
+    Configure log options under `file_history_panel.log_options.p4`.
+
+See also |diffview.changelog-jj-adapter| for the Jujutsu adapter.
+
+                                                *diffview.changelog-breaking-panel-show*
+
+PR: https://github.com/dlyongemallo/diffview-plus.nvim/pull/165
+
+`file_panel.show` previously controlled both `:DiffviewOpen` and
+`:DiffviewFileHistory`. Visibility is now split: set `file_panel.show`
+for diff views and the new `file_history_panel.show` (default `true`)
+for file-history views.
+
+                                                *diffview.changelog-pin-local*
+
+PR: https://github.com/dlyongemallo/diffview-plus.nvim/pull/158
+
+The new `:DiffviewFileHistory --pin-local` flag pins the right-hand
+side of the diff to the working-tree copy of the followed path while
+the left-hand side cycles through commits. Useful for reviewing how a
+file has evolved against its current state.
+
+Configurable via `view.file_history.pin_local`. Multi-file pinning is
+supported through a synthetic `LOCAL` log entry at the top of history.
+Git only. Cannot be combined with `--base`.
+
+                                                *diffview.changelog-diff1-inline*
+
+PR: https://github.com/dlyongemallo/diffview-plus.nvim/pull/120
+
+The new `diff1_inline` layout renders unified diffs in a single window
+via extmark overlays. Tree-sitter highlights are preserved on both
+added text and deleted virt_lines.
+
+Style is configurable via `view.inline.style`:
+
+  - `"unified"` (default): standard unified diff appearance.
+  - `"overleaf"`: inline strikethrough for deletions.
+
+Deletion highlight is configurable via `view.inline.deletion_highlight`.
+
+                                                *diffview.changelog-multi-selection*
+
+PRs: https://github.com/dlyongemallo/diffview-plus.nvim/pull/36,
+     https://github.com/dlyongemallo/diffview-plus.nvim/pull/45,
+     https://github.com/dlyongemallo/diffview-plus.nvim/pull/46
+
+The file panel supports multi-file selection for batch operations.
+Default keymaps: `w` to toggle a selection on the current file, `C`
+to clear all selections. Staging, unstaging, restore, and similar
+actions operate on the selection when present.
+
+Selections persist across Neovim restarts. Selection marks and their
+placement are configurable via `file_panel.mark_placement` and
+`file_panel.always_show_marks`.
+
+                                                *diffview.changelog-breaking-nvim-010*
+
+PR: https://github.com/dlyongemallo/diffview-plus.nvim/pull/11
+
+The minimum required Neovim version has been bumped to 0.10.
+
+                                                *diffview.changelog-271*
+
+PR: https://github.com/sindrets/diffview.nvim/pull/271
+
+The config for log options has changed. In preparation of adding support of
+other VCS, the table is now divided into sub-tables per VCS type. This allows
+you to define different default log options for different VCS tools. To update
+your config, just move all your current log options into the new table key
+`git`:
+
+        Before: ~
+>
+                require("diffview").setup({
+                  -- ...
+                  file_history_panel = {
+                    log_options = {
+                      single_file = {
+                        max_count = 512,
+                        follow = true,
+                      },
+                      multi_file = {
+                        max_count = 128,
+                      },
+                    },
+                  },
+                })
+<
+
+        After: ~
+>
+                require("diffview").setup({
+                  -- ...
+                  file_history_panel = {
+                    log_options = {
+                      git = {
+                        single_file = {
+                          max_count = 512,
+                          follow = true,
+                        },
+                        multi_file = {
+                          max_count = 128,
+                        },
+                      },
+                    },
+                  },
+                })
+<
+                                                *diffview.changelog-190*
+
+PR: https://github.com/sindrets/diffview.nvim/pull/190
+
+This PR involves a major refactor of the layout system. The changes are made
+in preparation of the planned merge-tool, which is going to involve 3-way
+diffs, and possibly also 4-way diffs. Different entries in the same view may
+now use completely different window layouts. Thus the action `view_windo` has
+changed to reflect these changes. See |diffview-actions-view_windo| for more
+details on the new usage.
+
+                                                *diffview.changelog-169*
+
+PR: https://github.com/sindrets/diffview.nvim/pull/169
+
+The file history option panel is now able to accept multiple values separated
+by whitespace. This means that if you want to specify values with whitespace,
+you need to quote the value, or escape the whitespace with a backslash (`\`).
+
+                                                *diffview.changelog-151*
+
+PR: https://github.com/sindrets/diffview.nvim/pull/151
+
+The config for log options has changed. The table is now divided into the
+sub-tables `single_file`, and `multi_file`. This allows you to define
+different default log options for history targeting singular files, and
+history targeting multiple paths, and/or directories. To update your config,
+just move all your log options into the new table keys `single_file` and
+`multi_file`:
+
+        Before: ~
+>
+                require("diffview").setup({
+                  -- ...
+                  file_history_panel = {
+                    log_options = {
+                      max_count = 512,
+                      follow = true,
+                    },
+                  },
+                })
+<
+
+        After: ~
+>
+                require("diffview").setup({
+                  -- ...
+                  file_history_panel = {
+                    log_options = {
+                      single_file = {
+                        max_count = 512,
+                        follow = true,
+                      },
+                      multi_file = {
+                        max_count = 128,
+                        -- follow = false   -- `follow` only applies to single-file history
+                      },
+                    },
+                  },
+                })
+<
+
+You only need to define the options you want to change from the defaults. To
+find all the available log options, see |diffview.git.LogOptions|.
+
+Calling `:DiffviewFileHistory` with no args would previously target the file
+in the current buffer. This has now been changed to instead target the
+top-level of the working tree. This was changed because with how it worked
+before, there was effectively no way to get the file history equivalent of
+running `git log` with no path args. If your cwd was some subdirectory of the
+working tree, and you wanted the full file history of the tree, you would have
+to manually type out the path to the top-level. On the contrary, getting the
+history for the current file is always as simple as just using `%`, which
+expands to the current file name.
+
+To get the file history for the current file like before, simply run: >
+
+        :DiffviewFileHistory %
+<
+
+                                                *diffview.changelog-137*
+
+PR: https://github.com/sindrets/diffview.nvim/pull/137
+
+The minimum required version has been bumped to Neovim 0.7.0, as the plugin
+now uses some of the API functions provided in this release.
+
+                                                *diffview.changelog-136*
+
+PR: https://github.com/sindrets/diffview.nvim/pull/136
+
+This PR refactors the internal representation of a panel (the various
+interactive windows used in the plugin). The way panels are configured has
+been changed and extended in a manner that is incompatible with the way it was
+done before. To update your config, just move all the window related options
+into a new table key `win_config`:
+
+        Before: ~
+>
+                require("diffview").setup({
+                  -- ...
+                  file_panel = {
+                    position = "left",
+                    width = 35,
+                    height = 16,
+                    -- (Other options...)
+                  },
+                })
+<
+        After: ~
+>
+                require("diffview").setup({
+                  -- ...
+                  file_panel = {
+                    win_config = {
+                      position = "left",
+                      width = 35,
+                      height = 16,
+                    },
+                    -- (Other options...)
+                  },
+                })
+<
+This goes for both the `file_panel` and the `file_history_panel` config. To
+see all the available options for `win_config`, see
+|diffview-config-win_config|.
+
+                                                *diffview.changelog-93*
+
+PR: https://github.com/sindrets/diffview.nvim/pull/93
+
+The plugin will from here on out require `plenary.nvim`:
+https://github.com/nvim-lua/plenary.nvim
+
+I'm using plenary for it's async utilities as well as job management. To
+update, just make sure plenary is loaded before diffview. Examples:
+
+        Packer:~
+            `use { 'sindrets/diffview.nvim', requires = 'nvim-lua/plenary.nvim' }`
+
+        Plug:~
+            `Plug 'nvim-lua/plenary.nvim'`
+            `Plug 'sindrets/diffview.nvim'`
+
+                                                *diffview.changelog-64*
+
+PR: https://github.com/sindrets/diffview.nvim/pull/64
+
+This PR introduces some small breaking changes in the config, and for plugins
+integrating diffview+.
+
+The `use_icons` config table key has been moved out of the `file_panel` table.
+This has been done because `use_icons` now applies to other contexts than just
+the file panel. The correct way to configure this now is to set `use_icons`
+somewhere from the top level of the config table.
+
+For plugins integrating diffview+:
+Several of the git utilities have been refactored into their own namespace
+(`lua/diffview/git/`). I (STS) felt this was necessary due to the growing
+scope of the plugin. Most notably this means that the `Rev` class now resides
+in `lua/diffview/git/rev.lua`.
+
+ vim:tw=78:ts=8:ft=help:norl:

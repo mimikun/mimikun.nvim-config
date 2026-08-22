@@ -1,0 +1,827 @@
+local actions = require("diffview.actions")
+local config = require("diffview.config")
+local helpers = require("diffview.tests.helpers")
+local utils = require("diffview.utils")
+
+local Diff1 = require("diffview.scene.layouts.diff_1").Diff1
+local Diff1Inline = require("diffview.scene.layouts.diff_1_inline").Diff1Inline
+local Diff1InlinePinned = require("diffview.scene.layouts.diff_1_inline_pinned").Diff1InlinePinned
+local Diff1Pinned = require("diffview.scene.layouts.diff_1_pinned").Diff1Pinned
+local Diff2Hor = require("diffview.scene.layouts.diff_2_hor").Diff2Hor
+local Diff2HorPinned = require("diffview.scene.layouts.diff_2_hor_pinned").Diff2HorPinned
+local Diff2Ver = require("diffview.scene.layouts.diff_2_ver").Diff2Ver
+local Diff2VerPinned = require("diffview.scene.layouts.diff_2_ver_pinned").Diff2VerPinned
+local Diff3Hor = require("diffview.scene.layouts.diff_3_hor").Diff3Hor
+local Diff3Ver = require("diffview.scene.layouts.diff_3_ver").Diff3Ver
+local Diff3Mixed = require("diffview.scene.layouts.diff_3_mixed").Diff3Mixed
+local Diff4Mixed = require("diffview.scene.layouts.diff_4_mixed").Diff4Mixed
+local FileHistoryView = require("diffview.scene.views.file_history.file_history_view").FileHistoryView
+
+local eq = helpers.eq
+
+describe("diffview.config cycle_layouts defaults", function()
+  it("has a cycle_layouts section in view defaults", function()
+    local defaults = config.defaults
+    assert.truthy(defaults.view.cycle_layouts)
+  end)
+
+  it("default list contains diff2_horizontal and diff2_vertical", function()
+    local default_list = config.defaults.view.cycle_layouts.default
+    eq({ "diff2_horizontal", "diff2_vertical" }, default_list)
+  end)
+
+  it("merge_tool list contains the expected five layouts", function()
+    local mt_list = config.defaults.view.cycle_layouts.merge_tool
+    eq({
+      "diff3_horizontal",
+      "diff3_vertical",
+      "diff3_mixed",
+      "diff4_mixed",
+      "diff1_plain",
+    }, mt_list)
+  end)
+
+  it("cycle_layouts persists after setup with empty overrides", function()
+    local original = vim.deepcopy(config.get_config())
+    local old_warn = utils.warn
+    utils.warn = function() end
+
+    local ok, err = pcall(function()
+      config.setup({})
+      local conf = config.get_config()
+      assert.truthy(conf.view.cycle_layouts)
+      assert.truthy(conf.view.cycle_layouts.default)
+      assert.truthy(conf.view.cycle_layouts.merge_tool)
+    end)
+
+    utils.warn = old_warn
+    config.setup(original)
+
+    if not ok then
+      error(err)
+    end
+  end)
+
+  it("falls back to defaults when cycle_layouts is not a table", function()
+    local original = vim.deepcopy(config.get_config())
+    local warnings = {}
+    local old_warn = utils.warn
+    utils.warn = function(msg)
+      warnings[#warnings + 1] = msg
+    end
+
+    local ok, err = pcall(function()
+      config.setup({ view = { cycle_layouts = "not a table" } })
+      local conf = config.get_config()
+      -- Both default cycles should match the hard defaults (auto-append is
+      -- a no-op because the configured layouts are already present).
+      eq(config.defaults.view.cycle_layouts.default, conf.view.cycle_layouts.default)
+      eq(config.defaults.view.cycle_layouts.merge_tool, conf.view.cycle_layouts.merge_tool)
+    end)
+
+    utils.warn = old_warn
+    config.setup(original)
+
+    if not ok then
+      error(err)
+    end
+    assert.is_true(#warnings > 0, "expected a warning about invalid cycle_layouts")
+  end)
+
+  it("falls back to defaults when a cycle_layouts entry is not a table", function()
+    local original = vim.deepcopy(config.get_config())
+    local warnings = {}
+    local old_warn = utils.warn
+    utils.warn = function(msg)
+      warnings[#warnings + 1] = msg
+    end
+
+    local ok, err = pcall(function()
+      config.setup({ view = { cycle_layouts = { default = "diff2_horizontal" } } })
+      local conf = config.get_config()
+      -- Invalid entry was replaced with the default list.
+      eq(config.defaults.view.cycle_layouts.default, conf.view.cycle_layouts.default)
+    end)
+
+    utils.warn = old_warn
+    config.setup(original)
+
+    if not ok then
+      error(err)
+    end
+    assert.is_true(#warnings > 0, "expected a warning about invalid cycle_layouts.default")
+  end)
+
+  it("falls back to defaults when a cycle_layouts entry is a non-list table", function()
+    local original = vim.deepcopy(config.get_config())
+    local warnings = {}
+    local old_warn = utils.warn
+    utils.warn = function(msg)
+      warnings[#warnings + 1] = msg
+    end
+
+    local ok, err = pcall(function()
+      -- A map (not a list) is rejected because `cycle_layout()` iterates
+      -- with `ipairs()` and would silently drop string-keyed entries.
+      config.setup({
+        view = { cycle_layouts = { merge_tool = { foo = "diff3_horizontal" } } },
+      })
+      local conf = config.get_config()
+      eq(config.defaults.view.cycle_layouts.merge_tool, conf.view.cycle_layouts.merge_tool)
+    end)
+
+    utils.warn = old_warn
+    config.setup(original)
+
+    if not ok then
+      error(err)
+    end
+    assert.is_true(#warnings > 0, "expected a warning about invalid cycle_layouts.merge_tool")
+  end)
+
+  it("auto-appends shared cycle entries in a deterministic order", function()
+    local original = vim.deepcopy(config.get_config())
+    local old_warn = utils.warn
+    utils.warn = function() end
+
+    local ok, err = pcall(function()
+      -- `default` and `file_history` both feed into `cycle_layouts.default`.
+      -- With distinct starting layouts and an empty cycle, the insertion
+      -- order must follow the declared kind order, not hash iteration.
+      config.setup({
+        view = {
+          default = { layout = "diff2_horizontal" },
+          file_history = { layout = "diff2_vertical" },
+          cycle_layouts = { default = {} },
+        },
+      })
+      local resolved = config.get_config().view.cycle_layouts.default
+      eq({ "diff2_horizontal", "diff2_vertical" }, resolved)
+    end)
+
+    utils.warn = old_warn
+    config.setup(original)
+
+    if not ok then
+      error(err)
+    end
+  end)
+end)
+
+describe("diffview.actions.set_layout name resolution", function()
+  local lib = require("diffview.lib")
+  local stubs = {}
+  local err_messages
+
+  local function stub(tbl, key, val)
+    stubs[#stubs + 1] = { tbl, key, tbl[key] }
+    tbl[key] = val
+  end
+
+  before_each(function()
+    err_messages = {}
+    stub(utils, "err", function(msg)
+      err_messages[#err_messages + 1] = msg
+    end)
+    -- Ensure no view is active so set_layout returns early after resolving.
+    stub(lib, "get_current_view", function()
+      return nil
+    end)
+  end)
+
+  after_each(function()
+    for i = #stubs, 1, -1 do
+      local s = stubs[i]
+      s[1][s[2]] = s[3]
+    end
+    stubs = {}
+  end)
+
+  it("known layout names produce no error", function()
+    local known_names = {
+      "diff1_plain",
+      "diff1_inline",
+      "diff2_horizontal",
+      "diff2_vertical",
+      "diff3_horizontal",
+      "diff3_vertical",
+      "diff3_mixed",
+      "diff4_mixed",
+    }
+
+    for _, name in ipairs(known_names) do
+      err_messages = {}
+      local fn = actions.set_layout(name)
+      assert.is_function(fn)
+      fn()
+      eq(0, #err_messages, "unexpected error for layout: " .. name)
+    end
+  end)
+
+  it("unknown layout name triggers an error message", function()
+    local fn = actions.set_layout("nonexistent_layout")
+    fn()
+    eq(1, #err_messages)
+    assert.truthy(err_messages[1]:find("Unknown layout"))
+    assert.truthy(err_messages[1]:find("nonexistent_layout"))
+  end)
+
+  it("empty string layout name triggers an error message", function()
+    local fn = actions.set_layout("")
+    fn()
+    eq(1, #err_messages)
+    assert.truthy(err_messages[1]:find("Unknown layout"))
+  end)
+end)
+
+describe("diffview.actions.cycle_layout cycling logic", function()
+  local lib = require("diffview.lib")
+  local DiffView_class = require("diffview.scene.views.diff.diff_view").DiffView
+
+  local stubs = {}
+  local converted_layouts
+
+  local function stub(tbl, key, val)
+    stubs[#stubs + 1] = { tbl, key, tbl[key] }
+    tbl[key] = val
+  end
+
+  before_each(function()
+    converted_layouts = {}
+  end)
+
+  after_each(function()
+    for i = #stubs, 1, -1 do
+      local s = stubs[i]
+      s[1][s[2]] = s[3]
+    end
+    stubs = {}
+  end)
+
+  --- Build a mock file entry with a given layout class.
+  local function mock_file_entry(layout_class, kind)
+    return {
+      layout = {
+        class = layout_class,
+        emitter = require("diffview.events").EventEmitter(),
+      },
+      kind = kind or "working",
+      convert_layout = function(self, next_class)
+        converted_layouts[#converted_layouts + 1] = next_class
+        self.layout.class = next_class
+      end,
+    }
+  end
+
+  --- Build a mock DiffView.
+  local function mock_diff_view(files, cur_entry)
+    return {
+      class = DiffView_class,
+      instanceof = function(self, other)
+        return self.class == other
+      end,
+      cur_entry = cur_entry,
+      cur_layout = {
+        get_main_win = function()
+          return { id = 1 }
+        end,
+        is_focused = function()
+          return false
+        end,
+        sync_scroll = function() end,
+      },
+      panel = {
+        files = { working = files, staged = {} },
+      },
+      files = { conflicting = {} },
+      set_file = function() end,
+    }
+  end
+
+  it("returns early when no view is active", function()
+    stub(lib, "get_current_view", function()
+      return nil
+    end)
+
+    -- Should not error.
+    actions.cycle_layout()
+    eq(0, #converted_layouts)
+  end)
+
+  it("returns early when cur_entry is nil (empty diff)", function()
+    local view = mock_diff_view({}, nil)
+
+    stub(lib, "get_current_view", function()
+      return view
+    end)
+
+    -- Should not error despite files being nil.
+    actions.cycle_layout()
+    eq(0, #converted_layouts)
+  end)
+
+  it("cycles from diff2_horizontal to diff2_vertical (default list)", function()
+    local file = mock_file_entry(Diff2Hor)
+    local view = mock_diff_view({ file }, file)
+
+    stub(lib, "get_current_view", function()
+      return view
+    end)
+    stub(vim.api, "nvim_win_get_cursor", function()
+      return { 1, 0 }
+    end)
+
+    actions.cycle_layout()
+
+    eq(1, #converted_layouts)
+    eq(Diff2Ver, converted_layouts[1])
+  end)
+
+  it("wraps from diff2_vertical back to diff2_horizontal", function()
+    local file = mock_file_entry(Diff2Ver)
+    local view = mock_diff_view({ file }, file)
+
+    stub(lib, "get_current_view", function()
+      return view
+    end)
+    stub(vim.api, "nvim_win_get_cursor", function()
+      return { 1, 0 }
+    end)
+
+    actions.cycle_layout()
+
+    eq(1, #converted_layouts)
+    eq(Diff2Hor, converted_layouts[1])
+  end)
+
+  it("cycles through merge_tool layouts for conflicting files", function()
+    -- Expected merge_tool order: Diff3Hor -> Diff3Ver -> Diff3Mixed -> Diff4Mixed -> Diff1
+    local expected_cycle = { Diff3Ver, Diff3Mixed, Diff4Mixed, Diff1, Diff3Hor }
+
+    local current_class = Diff3Hor
+    for i, expected_next in ipairs(expected_cycle) do
+      converted_layouts = {}
+      local file = mock_file_entry(current_class, "conflicting")
+      local view = mock_diff_view({}, file)
+      view.files.conflicting = { file }
+
+      stub(lib, "get_current_view", function()
+        return view
+      end)
+      stub(vim.api, "nvim_win_get_cursor", function()
+        return { 1, 0 }
+      end)
+
+      actions.cycle_layout()
+
+      eq(1, #converted_layouts, "step " .. i .. ": expected one conversion")
+      eq(expected_next, converted_layouts[1], "step " .. i .. ": wrong next layout")
+
+      current_class = expected_next
+
+      -- Clean up stubs for next iteration.
+      for j = #stubs, 1, -1 do
+        local s = stubs[j]
+        s[1][s[2]] = s[3]
+      end
+      stubs = {}
+    end
+  end)
+
+  it("applies layout change to all files in the list", function()
+    local file1 = mock_file_entry(Diff2Hor)
+    local file2 = mock_file_entry(Diff2Hor)
+    local file3 = mock_file_entry(Diff2Hor)
+    local view = mock_diff_view({ file1, file2, file3 }, file1)
+
+    stub(lib, "get_current_view", function()
+      return view
+    end)
+    stub(vim.api, "nvim_win_get_cursor", function()
+      return { 1, 0 }
+    end)
+
+    actions.cycle_layout()
+
+    -- All three files should have been converted.
+    eq(3, #converted_layouts)
+    for _, layout in ipairs(converted_layouts) do
+      eq(Diff2Ver, layout)
+    end
+  end)
+end)
+
+describe("diffview.actions.cycle_layout with custom config", function()
+  local lib = require("diffview.lib")
+  local DiffView_class = require("diffview.scene.views.diff.diff_view").DiffView
+
+  local stubs = {}
+  local converted_layouts
+
+  local function stub(tbl, key, val)
+    stubs[#stubs + 1] = { tbl, key, tbl[key] }
+    tbl[key] = val
+  end
+
+  local function mock_file_entry(layout_class, kind)
+    return {
+      layout = {
+        class = layout_class,
+        emitter = require("diffview.events").EventEmitter(),
+      },
+      kind = kind or "working",
+      convert_layout = function(self, next_class)
+        converted_layouts[#converted_layouts + 1] = next_class
+        self.layout.class = next_class
+      end,
+    }
+  end
+
+  local function mock_diff_view(files, cur_entry)
+    return {
+      class = DiffView_class,
+      instanceof = function(self, other)
+        return self.class == other
+      end,
+      cur_entry = cur_entry,
+      cur_layout = {
+        get_main_win = function()
+          return { id = 1 }
+        end,
+        is_focused = function()
+          return false
+        end,
+        sync_scroll = function() end,
+      },
+      panel = {
+        files = { working = files, staged = {} },
+      },
+      files = { conflicting = {} },
+      set_file = function() end,
+    }
+  end
+
+  local original_config
+
+  before_each(function()
+    converted_layouts = {}
+    original_config = vim.deepcopy(config.get_config())
+  end)
+
+  after_each(function()
+    for i = #stubs, 1, -1 do
+      local s = stubs[i]
+      s[1][s[2]] = s[3]
+    end
+    stubs = {}
+
+    -- Restore original config.
+    local old_warn = utils.warn
+    utils.warn = function() end
+    config.setup(original_config)
+    utils.warn = old_warn
+  end)
+
+  it("uses custom default cycle when configured", function()
+    local old_warn = utils.warn
+    utils.warn = function() end
+    config.setup({
+      view = {
+        cycle_layouts = {
+          default = { "diff1_plain", "diff2_horizontal", "diff2_vertical" },
+        },
+      },
+    })
+    utils.warn = old_warn
+
+    -- Starting at Diff1, should cycle to Diff2Hor.
+    local file = mock_file_entry(Diff1)
+    local view = mock_diff_view({ file }, file)
+
+    stub(lib, "get_current_view", function()
+      return view
+    end)
+    stub(vim.api, "nvim_win_get_cursor", function()
+      return { 1, 0 }
+    end)
+
+    actions.cycle_layout()
+
+    eq(1, #converted_layouts)
+    eq(Diff2Hor, converted_layouts[1])
+  end)
+
+  it("auto-inserts view.default.layout into cycle_layouts.default", function()
+    local orig = vim.deepcopy(config.get_config())
+    config.setup({
+      view = {
+        default = { layout = "diff1_inline" },
+        cycle_layouts = { default = { "diff2_horizontal", "diff2_vertical" } },
+      },
+    })
+
+    local resolved = config.get_config().view.cycle_layouts.default
+    assert.is_true(
+      vim.tbl_contains(resolved, "diff1_inline"),
+      "diff1_inline should be auto-inserted into the default cycle"
+    )
+
+    config.setup(orig)
+  end)
+
+  it("auto-insert is a no-op when default layout is already in the cycle", function()
+    local orig = vim.deepcopy(config.get_config())
+    config.setup({
+      view = {
+        default = { layout = "diff2_horizontal" },
+        cycle_layouts = { default = { "diff2_horizontal", "diff2_vertical" } },
+      },
+    })
+
+    local resolved = config.get_config().view.cycle_layouts.default
+    eq({ "diff2_horizontal", "diff2_vertical" }, resolved)
+
+    config.setup(orig)
+  end)
+
+  it("cycling from a layout that isn't in the cycle goes to the first entry", function()
+    -- Defensive guard: Lua's `-1 % N + 1 == N` would pick the LAST layout on
+    -- not-found without explicit handling.
+    local orig = vim.deepcopy(config.get_config())
+    config.setup({
+      view = { cycle_layouts = { default = { "diff2_horizontal", "diff2_vertical" } } },
+    })
+
+    local file = mock_file_entry(Diff3Hor) -- not in the default cycle
+    local view = mock_diff_view({ file }, file)
+
+    stub(lib, "get_current_view", function()
+      return view
+    end)
+    stub(vim.api, "nvim_win_get_cursor", function()
+      return { 1, 0 }
+    end)
+
+    actions.cycle_layout()
+
+    eq(1, #converted_layouts)
+    eq(Diff2Hor, converted_layouts[1])
+
+    config.setup(orig)
+  end)
+
+  it("auto-includes the default layout so cycling stays valid with bogus names", function()
+    local old_warn = utils.warn
+    utils.warn = function() end
+    config.setup({
+      view = {
+        cycle_layouts = {
+          default = { "bogus_layout", "another_fake" },
+        },
+      },
+    })
+    utils.warn = old_warn
+
+    -- Bogus names get filtered out; `view.default.layout` (diff2_horizontal,
+    -- the config default) is auto-inserted by setup so the cycle has at
+    -- least one valid entry. Cycling is a no-op from the sole layout.
+    local file = mock_file_entry(Diff2Hor)
+    local view = mock_diff_view({ file }, file)
+
+    stub(lib, "get_current_view", function()
+      return view
+    end)
+    stub(vim.api, "nvim_win_get_cursor", function()
+      return { 1, 0 }
+    end)
+
+    actions.cycle_layout()
+
+    eq(1, #converted_layouts)
+    eq(Diff2Hor, converted_layouts[1])
+  end)
+end)
+
+-- Regression: when `pin_local` is on and the cycle list contains a Diff1
+-- layout (e.g. `diff1_inline` auto-inserted by config validation when
+-- `view.file_history.layout` is set to it), `cycle_layout` used to land
+-- on that entry, `resolve_pinned_layout` would collapse it to the default
+-- Diff2's pinned form, and if the cycle was already on that orientation
+-- `convert_layout` was a no-op -- so the user saw cycling stop part-way
+-- (e.g. Ver -> Hor -> stuck on Hor). `pinned_variant` now covers Diff1
+-- and Diff1Inline (mapped to their pin_local-safe pinned siblings), so
+-- the same set of layout NAMES is reachable whether `pin_local` is on or
+-- off; in pin_local mode the active class is the `*_pinned` form, which
+-- declares `shared_symbols = { "b" }` and keeps `FileEntry:destroy` from
+-- tearing down the view-owned working-tree file.
+describe("diffview.actions.cycle_layout pin_local cycling", function()
+  local lib = require("diffview.lib")
+
+  local stubs = {}
+  local converted_layouts
+
+  local function stub(tbl, key, val)
+    stubs[#stubs + 1] = { tbl, key, tbl[key] }
+    tbl[key] = val
+  end
+
+  local original_config
+
+  before_each(function()
+    converted_layouts = {}
+    original_config = vim.deepcopy(config.get_config())
+  end)
+
+  after_each(function()
+    for i = #stubs, 1, -1 do
+      local s = stubs[i]
+      s[1][s[2]] = s[3]
+    end
+    stubs = {}
+
+    local old_warn = utils.warn
+    utils.warn = function() end
+    config.setup(original_config)
+    utils.warn = old_warn
+  end)
+
+  local function mock_file_entry(layout_class)
+    return {
+      layout = {
+        class = layout_class,
+        emitter = require("diffview.events").EventEmitter(),
+      },
+      kind = "working",
+      convert_layout = function(self, next_class)
+        converted_layouts[#converted_layouts + 1] = next_class
+        self.layout.class = next_class
+      end,
+    }
+  end
+
+  -- Mock a FileHistoryView: stub `instanceof` so the action's dispatch
+  -- picks the file-history branch, and inherit the helper methods from
+  -- the real class via `__index` so `unpinned_layout` and
+  -- `resolve_pinned_layout` reflect actual behaviour.
+  local function mock_file_history_view(files, cur_entry, pin_local)
+    return setmetatable({
+      pin_local = pin_local,
+      instanceof = function(self, other)
+        return other == FileHistoryView
+      end,
+      cur_layout = {
+        get_main_win = function()
+          return { id = 1 }
+        end,
+        is_focused = function()
+          return false
+        end,
+        sync_scroll = function() end,
+      },
+      panel = {
+        list_files = function()
+          return files
+        end,
+      },
+      cur_file = function()
+        return cur_entry
+      end,
+      set_file = function() end,
+    }, { __index = FileHistoryView })
+  end
+
+  it("cycles through all entries when cycle has a trailing Diff1 entry", function()
+    -- Reproduces the reported bug: with cycle `{ Ver, Hor, Diff1Inline }`
+    -- and `pin_local`, cycling used to skip Diff1Inline (resolved to the
+    -- default Diff2's pinned form, so the user got Ver -> Hor -> stuck on
+    -- Hor). `pinned_variant` now covers Diff1Inline, so cycling lands on
+    -- `Diff1InlinePinned` (b-side declared shared, view-owned working-tree
+    -- File survives entry teardown) and the cycle visits all three.
+    local old_warn = utils.warn
+    utils.warn = function() end
+    config.setup({
+      view = {
+        file_history = { layout = "diff2_vertical", pin_local = true },
+        cycle_layouts = {
+          default = { "diff2_vertical", "diff2_horizontal", "diff1_inline" },
+        },
+      },
+    })
+    utils.warn = old_warn
+
+    local file = mock_file_entry(Diff2VerPinned)
+    local view = mock_file_history_view({ file }, file, true)
+
+    stub(lib, "get_current_view", function()
+      return view
+    end)
+    stub(vim.api, "nvim_win_get_cursor", function()
+      return { 1, 0 }
+    end)
+
+    actions.cycle_layout()
+    eq(1, #converted_layouts)
+    eq(Diff2HorPinned, converted_layouts[1])
+
+    actions.cycle_layout()
+    eq(2, #converted_layouts)
+    eq(Diff1InlinePinned, converted_layouts[2])
+
+    actions.cycle_layout()
+    eq(3, #converted_layouts)
+    eq(Diff2VerPinned, converted_layouts[3])
+  end)
+
+  it("cycles through Diff1-only cycles in pin_local mode", function()
+    -- The cycle list contains only Diff1 variants; both have pinned
+    -- siblings, so cycling stays in the pin_local-safe class space.
+    local old_warn = utils.warn
+    utils.warn = function() end
+    config.setup({
+      view = {
+        file_history = { layout = "diff1_inline", pin_local = true },
+        default = { layout = "diff1_inline" },
+        cycle_layouts = { default = { "diff1_inline", "diff1_plain" } },
+      },
+    })
+    utils.warn = old_warn
+
+    local file = mock_file_entry(Diff1InlinePinned)
+    local view = mock_file_history_view({ file }, file, true)
+
+    stub(lib, "get_current_view", function()
+      return view
+    end)
+    stub(vim.api, "nvim_win_get_cursor", function()
+      return { 1, 0 }
+    end)
+
+    actions.cycle_layout()
+    eq(1, #converted_layouts)
+    eq(Diff1Pinned, converted_layouts[1])
+  end)
+
+  it("reaches the same set of layouts whether pin_local is on or off", function()
+    -- Symmetry check: with `cycle_layouts.default = { Hor, Ver, Diff1Inline }`,
+    -- three presses should land on the same sequence of layout NAMES
+    -- regardless of `pin_local` (the pin_local entries differ only by
+    -- carrying the `*_pinned` class for the same orientation).
+    local old_warn = utils.warn
+    utils.warn = function() end
+    config.setup({
+      view = {
+        cycle_layouts = {
+          default = { "diff2_horizontal", "diff2_vertical", "diff1_inline" },
+        },
+      },
+    })
+    utils.warn = old_warn
+
+    local file_off = mock_file_entry(Diff2Hor)
+    local view_off = mock_file_history_view({ file_off }, file_off, false)
+    stub(lib, "get_current_view", function()
+      return view_off
+    end)
+    stub(vim.api, "nvim_win_get_cursor", function()
+      return { 1, 0 }
+    end)
+
+    actions.cycle_layout()
+    actions.cycle_layout()
+    actions.cycle_layout()
+    local off_names = {
+      converted_layouts[1].name,
+      converted_layouts[2].name,
+      converted_layouts[3].name,
+    }
+    eq({ "diff2_vertical", "diff1_inline", "diff2_horizontal" }, off_names)
+
+    -- Reset for the pin_local pass.
+    for i = #stubs, 1, -1 do
+      local s = stubs[i]
+      s[1][s[2]] = s[3]
+    end
+    stubs = {}
+    converted_layouts = {}
+
+    local file_on = mock_file_entry(Diff2HorPinned)
+    local view_on = mock_file_history_view({ file_on }, file_on, true)
+    stub(lib, "get_current_view", function()
+      return view_on
+    end)
+    stub(vim.api, "nvim_win_get_cursor", function()
+      return { 1, 0 }
+    end)
+
+    actions.cycle_layout()
+    actions.cycle_layout()
+    actions.cycle_layout()
+    local on_names = {
+      converted_layouts[1].name,
+      converted_layouts[2].name,
+      converted_layouts[3].name,
+    }
+    -- Same orientations, with `*_pinned` variants throughout.
+    eq({ "diff2_vertical_pinned", "diff1_inline_pinned", "diff2_horizontal_pinned" }, on_names)
+  end)
+end)
