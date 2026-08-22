@@ -1,0 +1,24 @@
+"lua/plugins/helpview-nvim/WIKIS/Custom renderers.md"
+  h_220433a6faf6b8 1-43
+"lua/plugins/helpview-nvim/WIKIS/Developer documentation.md"
+  h_220433a6faf6b8 1-147
+lua/plugins/helpview-nvim/WIKIS/Home.md
+  h_220433a6faf6b8 1-759
+"lua/plugins/helpview-nvim/WIKIS/Migration guide.md"
+  h_220433a6faf6b8 1-134
+"lua/plugins/helpview-nvim/WIKIS/Preview options.md"
+  h_220433a6faf6b8 1-391
+"lua/plugins/helpview-nvim/WIKIS/Vimdoc options.md"
+  h_220433a6faf6b8 1-1357
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.23",
+  "base_commit_sha": "e13fcb48d1625c85f672a9a9551f7c2adec08a87",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
