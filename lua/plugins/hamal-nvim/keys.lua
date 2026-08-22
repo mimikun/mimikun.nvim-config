@@ -9,7 +9,7 @@ local keys = {
       "n",
       "v",
     },
-    desc = "",
+    desc = "Hamal Jump (split screen)",
     silent = true,
   },
 }
