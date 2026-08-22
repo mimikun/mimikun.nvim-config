@@ -1,0 +1,16 @@
+lua/plugins/helpview-nvim/opts/vimdoc/taglinks.lua
+  h_220433a6faf6b8 4-5,8-9,16-18
+lua/plugins/helpview-nvim/opts/vimdoc/tags.lua
+  h_220433a6faf6b8 4-5,8-9,17-18,22-24
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.23",
+  "base_commit_sha": "b7d2db150173e3683ea76d1dc6f523f0e3dd0102",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
