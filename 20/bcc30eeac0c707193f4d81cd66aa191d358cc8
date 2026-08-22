@@ -1,0 +1,356 @@
+lua/plugins/codesettings-nvim/CODES/.envrc
+  h_220433a6faf6b8 1
+lua/plugins/codesettings-nvim/CODES/.github/FUNDING.yml
+  h_220433a6faf6b8 1
+lua/plugins/codesettings-nvim/CODES/.github/ISSUE_TEMPLATE/bug-report.yml
+  h_220433a6faf6b8 1-80
+lua/plugins/codesettings-nvim/CODES/.github/ISSUE_TEMPLATE/config.yml
+  h_220433a6faf6b8 1
+lua/plugins/codesettings-nvim/CODES/.github/ISSUE_TEMPLATE/feature-request.yml
+  h_220433a6faf6b8 1-36
+lua/plugins/codesettings-nvim/CODES/.github/workflows/check.yml
+  h_220433a6faf6b8 1-52
+lua/plugins/codesettings-nvim/CODES/.github/workflows/docs.yml
+  h_220433a6faf6b8 1-32
+lua/plugins/codesettings-nvim/CODES/.github/workflows/lint-pr-title.yml
+  h_220433a6faf6b8 1-16
+lua/plugins/codesettings-nvim/CODES/.github/workflows/release.yml
+  h_220433a6faf6b8 1-18
+lua/plugins/codesettings-nvim/CODES/.github/workflows/update-flake.yml
+  h_220433a6faf6b8 1-22
+lua/plugins/codesettings-nvim/CODES/.github/workflows/update-schemas.yml
+  h_220433a6faf6b8 1-23
+lua/plugins/codesettings-nvim/CODES/.gitignore
+  h_220433a6faf6b8 1
+lua/plugins/codesettings-nvim/CODES/LICENSE
+  h_220433a6faf6b8 1-201
+lua/plugins/codesettings-nvim/CODES/README.md
+  h_220433a6faf6b8 1-574
+lua/plugins/codesettings-nvim/CODES/after/codesettings-nls/cssls.nls.json
+  h_220433a6faf6b8 1-111
+lua/plugins/codesettings-nvim/CODES/after/codesettings-nls/html.nls.json
+  h_220433a6faf6b8 1-40
+lua/plugins/codesettings-nvim/CODES/after/codesettings-nls/jsonls.nls.json
+  h_220433a6faf6b8 1-24
+lua/plugins/codesettings-nvim/CODES/after/codesettings-nls/ltex.nls.json
+  h_220433a6faf6b8 1-573
+lua/plugins/codesettings-nvim/CODES/after/codesettings-nls/lua_ls.nls.json
+  h_220433a6faf6b8 1-367
+lua/plugins/codesettings-nvim/CODES/after/codesettings-nls/omnisharp.nls.json
+  h_220433a6faf6b8 1-517
+lua/plugins/codesettings-nvim/CODES/after/codesettings-nls/tinymist.nls.json
+  h_220433a6faf6b8 1-199
+lua/plugins/codesettings-nvim/CODES/after/codesettings-nls/ts_ls.nls.json
+  h_220433a6faf6b8 1-340
+lua/plugins/codesettings-nvim/CODES/after/codesettings-nls/volar.nls.json
+  h_220433a6faf6b8 1-30
+lua/plugins/codesettings-nvim/CODES/after/codesettings-schemas/als.json
+  h_220433a6faf6b8 1-511
+lua/plugins/codesettings-nvim/CODES/after/codesettings-schemas/angularls.json
+  h_220433a6faf6b8 1-58
+lua/plugins/codesettings-nvim/CODES/after/codesettings-schemas/astro.json
+  h_220433a6faf6b8 1-46
+lua/plugins/codesettings-nvim/CODES/after/codesettings-schemas/awkls.json
+  h_220433a6faf6b8 1-23
+lua/plugins/codesettings-nvim/CODES/after/codesettings-schemas/basedpyright.json
+  h_220433a6faf6b8 1-1855
+lua/plugins/codesettings-nvim/CODES/after/codesettings-schemas/bashls.json
+  h_220433a6faf6b8 1-111
+lua/plugins/codesettings-nvim/CODES/after/codesettings-schemas/clangd.json
+  h_220433a6faf6b8 1-109
+lua/plugins/codesettings-nvim/CODES/after/codesettings-schemas/codesettings.json
+  h_220433a6faf6b8 1-89
+lua/plugins/codesettings-nvim/CODES/after/codesettings-schemas/cssls.json
+  h_220433a6faf6b8 1-920
+lua/plugins/codesettings-nvim/CODES/after/codesettings-schemas/dartls.json
+  h_220433a6faf6b8 1-1539
+lua/plugins/codesettings-nvim/CODES/after/codesettings-schemas/denols.json
+  h_220433a6faf6b8 1-362
+lua/plugins/codesettings-nvim/CODES/after/codesettings-schemas/elixirls.json
+  h_220433a6faf6b8 1-186
+lua/plugins/codesettings-nvim/CODES/after/codesettings-schemas/elmls.json
+  h_220433a6faf6b8 1-75
+lua/plugins/codesettings-nvim/CODES/after/codesettings-schemas/emmylua_ls.json
+  h_220433a6faf6b8 1-1145
+lua/plugins/codesettings-nvim/CODES/after/codesettings-schemas/eslint.json
+  h_220433a6faf6b8 1-572
+lua/plugins/codesettings-nvim/CODES/after/codesettings-schemas/flow.json
+  h_220433a6faf6b8 1-93
+lua/plugins/codesettings-nvim/CODES/after/codesettings-schemas/fsautocomplete.json
+  h_220433a6faf6b8 1-571
+lua/plugins/codesettings-nvim/CODES/after/codesettings-schemas/gopls.json
+  h_220433a6faf6b8 1-1633
+lua/plugins/codesettings-nvim/CODES/after/codesettings-schemas/grammarly.json
+  h_220433a6faf6b8 1-718
+lua/plugins/codesettings-nvim/CODES/after/codesettings-schemas/graphql.json
+  h_220433a6faf6b8 1-84
+lua/plugins/codesettings-nvim/CODES/after/codesettings-schemas/haxe_language_server.json
+  h_220433a6faf6b8 1-840
+lua/plugins/codesettings-nvim/CODES/after/codesettings-schemas/hhvm.json
+  h_220433a6faf6b8 1-99
+lua/plugins/codesettings-nvim/CODES/after/codesettings-schemas/hie.json
+  h_220433a6faf6b8 1-1250
+lua/plugins/codesettings-nvim/CODES/after/codesettings-schemas/hls.json
+  h_220433a6faf6b8 1-1250
+lua/plugins/codesettings-nvim/CODES/after/codesettings-schemas/html.json
+  h_220433a6faf6b8 1-208
+lua/plugins/codesettings-nvim/CODES/after/codesettings-schemas/intelephense.json
+  h_220433a6faf6b8 1-928
+lua/plugins/codesettings-nvim/CODES/after/codesettings-schemas/java_language_server.json
+  h_220433a6faf6b8 1-78
+lua/plugins/codesettings-nvim/CODES/after/codesettings-schemas/jdtls.json
+  h_220433a6faf6b8 1-1338
+lua/plugins/codesettings-nvim/CODES/after/codesettings-schemas/jsonls.json
+  h_220433a6faf6b8 1-109
+lua/plugins/codesettings-nvim/CODES/after/codesettings-schemas/julials.json
+  h_220433a6faf6b8 1-393
+lua/plugins/codesettings-nvim/CODES/after/codesettings-schemas/kotlin_language_server.json
+  h_220433a6faf6b8 1-182
+lua/plugins/codesettings-nvim/CODES/after/codesettings-schemas/ltex.json
+  h_220433a6faf6b8 1-2436
+lua/plugins/codesettings-nvim/CODES/after/codesettings-schemas/lua_ls.json
+  h_220433a6faf6b8 1-3428
+lua/plugins/codesettings-nvim/CODES/after/codesettings-schemas/luau_lsp.json
+  h_220433a6faf6b8 1-653
+lua/plugins/codesettings-nvim/CODES/after/codesettings-schemas/nickel_ls.json
+  h_220433a6faf6b8 1-23
+lua/plugins/codesettings-nvim/CODES/after/codesettings-schemas/nil_ls.json
+  h_220433a6faf6b8 1-48
+lua/plugins/codesettings-nvim/CODES/after/codesettings-schemas/nixd.json
+  h_220433a6faf6b8 1-68
+lua/plugins/codesettings-nvim/CODES/after/codesettings-schemas/omnisharp.json
+  h_220433a6faf6b8 1-1062
+lua/plugins/codesettings-nvim/CODES/after/codesettings-schemas/perlls.json
+  h_220433a6faf6b8 1-136
+lua/plugins/codesettings-nvim/CODES/after/codesettings-schemas/perlnavigator.json
+  h_220433a6faf6b8 1-204
+lua/plugins/codesettings-nvim/CODES/after/codesettings-schemas/perlpls.json
+  h_220433a6faf6b8 1-115
+lua/plugins/codesettings-nvim/CODES/after/codesettings-schemas/powershell_es.json
+  h_220433a6faf6b8 1-440
+lua/plugins/codesettings-nvim/CODES/after/codesettings-schemas/psalm.json
+  h_220433a6faf6b8 1-144
+lua/plugins/codesettings-nvim/CODES/after/codesettings-schemas/puppet.json
+  h_220433a6faf6b8 1-166
+lua/plugins/codesettings-nvim/CODES/after/codesettings-schemas/purescriptls.json
+  h_220433a6faf6b8 1-227
+lua/plugins/codesettings-nvim/CODES/after/codesettings-schemas/pylsp.json
+  h_220433a6faf6b8 1-545
+lua/plugins/codesettings-nvim/CODES/after/codesettings-schemas/pyright.json
+  h_220433a6faf6b8 1-1450
+lua/plugins/codesettings-nvim/CODES/after/codesettings-schemas/r_language_server.json
+  h_220433a6faf6b8 1-53
+lua/plugins/codesettings-nvim/CODES/after/codesettings-schemas/rescriptls.json
+  h_220433a6faf6b8 1-96
+lua/plugins/codesettings-nvim/CODES/after/codesettings-schemas/rls.json
+  h_220433a6faf6b8 1-333
+lua/plugins/codesettings-nvim/CODES/after/codesettings-schemas/rome.json
+  h_220433a6faf6b8 1-43
+lua/plugins/codesettings-nvim/CODES/after/codesettings-schemas/ruff.json
+  h_220433a6faf6b8 1-369
+lua/plugins/codesettings-nvim/CODES/after/codesettings-schemas/rust_analyzer.json
+  h_220433a6faf6b8 1-1874
+lua/plugins/codesettings-nvim/CODES/after/codesettings-schemas/solargraph.json
+  h_220433a6faf6b8 1-174
+lua/plugins/codesettings-nvim/CODES/after/codesettings-schemas/solidity_ls.json
+  h_220433a6faf6b8 1-148
+lua/plugins/codesettings-nvim/CODES/after/codesettings-schemas/sonarlint.json
+  h_220433a6faf6b8 1-335
+lua/plugins/codesettings-nvim/CODES/after/codesettings-schemas/sorbet.json
+  h_220433a6faf6b8 1-215
+lua/plugins/codesettings-nvim/CODES/after/codesettings-schemas/sourcekit.json
+  h_220433a6faf6b8 1-664
+lua/plugins/codesettings-nvim/CODES/after/codesettings-schemas/spectral.json
+  h_220433a6faf6b8 1-58
+lua/plugins/codesettings-nvim/CODES/after/codesettings-schemas/stylelint_lsp.json
+  h_220433a6faf6b8 1-89
+lua/plugins/codesettings-nvim/CODES/after/codesettings-schemas/svelte.json
+  h_220433a6faf6b8 1-351
+lua/plugins/codesettings-nvim/CODES/after/codesettings-schemas/svlangserver.json
+  h_220433a6faf6b8 1-119
+lua/plugins/codesettings-nvim/CODES/after/codesettings-schemas/tailwindcss.json
+  h_220433a6faf6b8 1-241
+lua/plugins/codesettings-nvim/CODES/after/codesettings-schemas/terraformls.json
+  h_220433a6faf6b8 1-116
+lua/plugins/codesettings-nvim/CODES/after/codesettings-schemas/tinymist.json
+  h_220433a6faf6b8 1-579
+lua/plugins/codesettings-nvim/CODES/after/codesettings-schemas/ts_ls.json
+  h_220433a6faf6b8 1-2627
+lua/plugins/codesettings-nvim/CODES/after/codesettings-schemas/typst_lsp.json
+  h_220433a6faf6b8 1-83
+lua/plugins/codesettings-nvim/CODES/after/codesettings-schemas/volar.json
+  h_220433a6faf6b8 1-179
+lua/plugins/codesettings-nvim/CODES/after/codesettings-schemas/vtsls.json
+  h_220433a6faf6b8 1-1313
+lua/plugins/codesettings-nvim/CODES/after/codesettings-schemas/vuels.json
+  h_220433a6faf6b8 1-371
+lua/plugins/codesettings-nvim/CODES/after/codesettings-schemas/wgls_analyzer.json
+  h_220433a6faf6b8 1-283
+lua/plugins/codesettings-nvim/CODES/after/codesettings-schemas/yamlls.json
+  h_220433a6faf6b8 1-97
+lua/plugins/codesettings-nvim/CODES/after/codesettings-schemas/zeta_note.json
+  h_220433a6faf6b8 1-27
+lua/plugins/codesettings-nvim/CODES/after/codesettings-schemas/zls.json
+  h_220433a6faf6b8 1-166
+lua/plugins/codesettings-nvim/CODES/bench/report.md
+  h_220433a6faf6b8 1-11
+lua/plugins/codesettings-nvim/CODES/bench/run.lua
+  h_220433a6faf6b8 1-377
+lua/plugins/codesettings-nvim/CODES/checks/generated-files.nix
+  h_220433a6faf6b8 1-27
+lua/plugins/codesettings-nvim/CODES/checks/selene.nix
+  h_220433a6faf6b8 1-9
+lua/plugins/codesettings-nvim/CODES/checks/statix.nix
+  h_220433a6faf6b8 1-9
+lua/plugins/codesettings-nvim/CODES/codesettings.json
+  h_220433a6faf6b8 1-28
+lua/plugins/codesettings-nvim/CODES/doc/codesettings.nvim.txt
+  h_220433a6faf6b8 1-641
+lua/plugins/codesettings-nvim/CODES/doc/tags
+  h_220433a6faf6b8 1-18
+lua/plugins/codesettings-nvim/CODES/flake.lock
+  h_220433a6faf6b8 1-142
+lua/plugins/codesettings-nvim/CODES/flake.nix
+  h_220433a6faf6b8 1-70
+lua/plugins/codesettings-nvim/CODES/ftplugin/json.lua
+  h_220433a6faf6b8 1-18
+lua/plugins/codesettings-nvim/CODES/ftplugin/lua.lua
+  h_220433a6faf6b8 1-17
+lua/plugins/codesettings-nvim/CODES/justfile
+  h_220433a6faf6b8 1-23
+lua/plugins/codesettings-nvim/CODES/lua/codesettings/build/annotations.lua
+  h_220433a6faf6b8 1-257
+lua/plugins/codesettings-nvim/CODES/lua/codesettings/build/cli.lua
+  h_220433a6faf6b8 1-118
+lua/plugins/codesettings-nvim/CODES/lua/codesettings/build/config-schema.lua
+  h_220433a6faf6b8 1-333
+lua/plugins/codesettings-nvim/CODES/lua/codesettings/build/doc.lua
+  h_220433a6faf6b8 1-138
+lua/plugins/codesettings-nvim/CODES/lua/codesettings/build/schemas.lua
+  h_220433a6faf6b8 1-371
+lua/plugins/codesettings-nvim/CODES/lua/codesettings/build/terminal-objects.lua
+  h_220433a6faf6b8 1-44
+lua/plugins/codesettings-nvim/CODES/lua/codesettings/build/util.lua
+  h_220433a6faf6b8 1-130
+lua/plugins/codesettings-nvim/CODES/lua/codesettings/commands/edit.lua
+  h_220433a6faf6b8 1-31
+lua/plugins/codesettings-nvim/CODES/lua/codesettings/commands/files.lua
+  h_220433a6faf6b8 1-12
+lua/plugins/codesettings-nvim/CODES/lua/codesettings/commands/healthcheck.lua
+  h_220433a6faf6b8 1-3
+lua/plugins/codesettings-nvim/CODES/lua/codesettings/commands/local.lua
+  h_220433a6faf6b8 1-12
+lua/plugins/codesettings-nvim/CODES/lua/codesettings/commands/show.lua
+  h_220433a6faf6b8 1-67
+lua/plugins/codesettings-nvim/CODES/lua/codesettings/commands/view.lua
+  h_220433a6faf6b8 1-62
+lua/plugins/codesettings-nvim/CODES/lua/codesettings/config/builder.lua
+  h_220433a6faf6b8 1-145
+lua/plugins/codesettings-nvim/CODES/lua/codesettings/config/init.lua
+  h_220433a6faf6b8 1-61
+lua/plugins/codesettings-nvim/CODES/lua/codesettings/config/schema.lua
+  h_220433a6faf6b8 1-215
+lua/plugins/codesettings-nvim/CODES/lua/codesettings/extensions/env.lua
+  h_220433a6faf6b8 1-35
+lua/plugins/codesettings-nvim/CODES/lua/codesettings/extensions/init.lua
+  h_220433a6faf6b8 1-173
+lua/plugins/codesettings-nvim/CODES/lua/codesettings/extensions/neoconf.lua
+  h_220433a6faf6b8 1-102
+lua/plugins/codesettings-nvim/CODES/lua/codesettings/extensions/vscode.lua
+  h_220433a6faf6b8 1-95
+lua/plugins/codesettings-nvim/CODES/lua/codesettings/generated/annotations.lua
+  h_220433a6faf6b8 1-27672
+lua/plugins/codesettings-nvim/CODES/lua/codesettings/generated/codesettings-config-schema.lua
+  h_220433a6faf6b8 1-123
+lua/plugins/codesettings-nvim/CODES/lua/codesettings/generated/defaults.lua
+  h_220433a6faf6b8 1-13
+lua/plugins/codesettings-nvim/CODES/lua/codesettings/generated/terminal-objects.lua
+  h_220433a6faf6b8 1-70
+lua/plugins/codesettings-nvim/CODES/lua/codesettings/health.lua
+  h_220433a6faf6b8 1-85
+lua/plugins/codesettings-nvim/CODES/lua/codesettings/init.lua
+  h_220433a6faf6b8 1-131
+lua/plugins/codesettings-nvim/CODES/lua/codesettings/integrations/jsonc.lua
+  h_220433a6faf6b8 1-24
+lua/plugins/codesettings-nvim/CODES/lua/codesettings/integrations/jsonls/init.lua
+  h_220433a6faf6b8 1-85
+lua/plugins/codesettings-nvim/CODES/lua/codesettings/integrations/jsonls/transformer.lua
+  h_220433a6faf6b8 1-148
+lua/plugins/codesettings-nvim/CODES/lua/codesettings/integrations/live-reload.lua
+  h_220433a6faf6b8 1-96
+lua/plugins/codesettings-nvim/CODES/lua/codesettings/integrations/luals.lua
+  h_220433a6faf6b8 1-22
+lua/plugins/codesettings-nvim/CODES/lua/codesettings/json/init.lua
+  h_220433a6faf6b8 1-558
+lua/plugins/codesettings-nvim/CODES/lua/codesettings/json/jsonc.lua
+  h_220433a6faf6b8 1-409
+lua/plugins/codesettings-nvim/CODES/lua/codesettings/nls.lua
+  h_220433a6faf6b8 1-105
+lua/plugins/codesettings-nvim/CODES/lua/codesettings/schema.lua
+  h_220433a6faf6b8 1-154
+lua/plugins/codesettings-nvim/CODES/lua/codesettings/settings.lua
+  h_220433a6faf6b8 1-258
+lua/plugins/codesettings-nvim/CODES/lua/codesettings/util.lua
+  h_220433a6faf6b8 1-474
+lua/plugins/codesettings-nvim/CODES/plugin/codesettings.lua
+  h_220433a6faf6b8 1-38
+lua/plugins/codesettings-nvim/CODES/selene.toml
+  h_220433a6faf6b8 1-2
+lua/plugins/codesettings-nvim/CODES/spec/config_spec.lua
+  h_220433a6faf6b8 1-147
+lua/plugins/codesettings-nvim/CODES/spec/extensions/env_spec.lua
+  h_220433a6faf6b8 1-161
+lua/plugins/codesettings-nvim/CODES/spec/extensions/init_spec.lua
+  h_220433a6faf6b8 1-129
+lua/plugins/codesettings-nvim/CODES/spec/extensions/neoconf_spec.lua
+  h_220433a6faf6b8 1-271
+lua/plugins/codesettings-nvim/CODES/spec/extensions/vscode_spec.lua
+  h_220433a6faf6b8 1-327
+lua/plugins/codesettings-nvim/CODES/spec/integration_tests_spec.lua
+  h_220433a6faf6b8 1-237
+lua/plugins/codesettings-nvim/CODES/spec/jsonls_spec.lua
+  h_220433a6faf6b8 1-212
+lua/plugins/codesettings-nvim/CODES/spec/nls_spec.lua
+  h_220433a6faf6b8 1-213
+lua/plugins/codesettings-nvim/CODES/spec/runner.lua
+  h_220433a6faf6b8 1-8
+lua/plugins/codesettings-nvim/CODES/spec/schema_spec.lua
+  h_220433a6faf6b8 1-88
+lua/plugins/codesettings-nvim/CODES/spec/settings_spec.lua
+  h_220433a6faf6b8 1-400
+lua/plugins/codesettings-nvim/CODES/spec/test-config-files/.vscode/settings.json
+  h_220433a6faf6b8 1-20
+lua/plugins/codesettings-nvim/CODES/spec/test-config-files/codesettings.json
+  h_220433a6faf6b8 1-12
+lua/plugins/codesettings-nvim/CODES/spec/test-config-files/codesettings_plugin_conf.json
+  h_220433a6faf6b8 1-9
+lua/plugins/codesettings-nvim/CODES/spec/test-config-files/env_extension.json
+  h_220433a6faf6b8 1-5
+lua/plugins/codesettings-nvim/CODES/spec/test-config-files/lspsettings.json
+  h_220433a6faf6b8 1-14
+lua/plugins/codesettings-nvim/CODES/spec/test-config-files/subroot/.vscode/settings.json
+  h_220433a6faf6b8 1-7
+lua/plugins/codesettings-nvim/CODES/spec/test-config-files/subroot/customsettings.json
+  h_220433a6faf6b8 1-9
+lua/plugins/codesettings-nvim/CODES/spec/test-config-files/vscode_variables_extension.json
+  h_220433a6faf6b8 1-5
+lua/plugins/codesettings-nvim/CODES/spec/util_spec.lua
+  h_220433a6faf6b8 1-144
+lua/plugins/codesettings-nvim/CODES/stylua.toml
+  h_220433a6faf6b8 1-5
+lua/plugins/codesettings-nvim/CODES/treefmt.nix
+  h_220433a6faf6b8 1-9
+lua/plugins/codesettings-nvim/CODES/vim.yml
+  h_220433a6faf6b8 1-31
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.23",
+  "base_commit_sha": "20bcc30eeac0c707193f4d81cd66aa191d358cc8",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
