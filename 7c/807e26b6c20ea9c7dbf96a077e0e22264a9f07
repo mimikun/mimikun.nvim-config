@@ -1,0 +1,20 @@
+lua/plugins/nvim-ts-autotag/README.md
+  h_220433a6faf6b8 25-26
+lua/plugins/nvim-ts-autotag/dependencies.lua
+  h_220433a6faf6b8 3
+lua/plugins/nvim-ts-autotag/events.lua
+  h_220433a6faf6b8 3-5
+lua/plugins/nvim-ts-autotag/init.lua
+  h_220433a6faf6b8 5-6,8-11
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.23",
+  "base_commit_sha": "7c807e26b6c20ea9c7dbf96a077e0e22264a9f07",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
