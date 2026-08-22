@@ -1,0 +1,17 @@
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.16",
+  "base_commit_sha": "e14f57d3aa53ae870d3277ffefdcb963935de778",
+  "prompts": {},
+  "sessions": {
+    "s_e50cb237397537": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "1bdf6d98-42c7-4499-9d48-ab6d7a2eb198",
+        "model": "claude-opus-5"
+      },
+      "human_author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
