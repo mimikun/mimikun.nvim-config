@@ -1,0 +1,28 @@
+lua/plugins/helpview-nvim/opts/highlight_groups.md
+  h_220433a6faf6b8 38
+lua/plugins/helpview-nvim/opts/horizontal_rules.md
+  h_220433a6faf6b8 122
+lua/plugins/helpview-nvim/opts/inline_codes.md
+  h_220433a6faf6b8 43
+lua/plugins/helpview-nvim/opts/keycodes.md
+  h_220433a6faf6b8 31
+lua/plugins/helpview-nvim/opts/modelines.md
+  h_220433a6faf6b8 43
+lua/plugins/helpview-nvim/opts/notes.md
+  h_220433a6faf6b8 37
+lua/plugins/helpview-nvim/opts/tags.md
+  h_220433a6faf6b8 34
+lua/plugins/helpview-nvim/opts/urls.md
+  h_220433a6faf6b8 311
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.23",
+  "base_commit_sha": "2a78a869ea0fe1047853606237eca28204ec8886",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
