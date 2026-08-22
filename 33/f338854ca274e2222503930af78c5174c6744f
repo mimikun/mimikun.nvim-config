@@ -1,0 +1,30 @@
+lua/plugins/template-nvim/CODES/.github/FUNDING.yml
+  h_220433a6faf6b8 1
+lua/plugins/template-nvim/CODES/.github/workflows/ci.yml
+  h_220433a6faf6b8 1-32
+lua/plugins/template-nvim/CODES/.stylua.toml
+  h_220433a6faf6b8 1-6
+lua/plugins/template-nvim/CODES/LICENSE
+  h_220433a6faf6b8 1-21
+lua/plugins/template-nvim/CODES/README.md
+  h_220433a6faf6b8 1-202
+lua/plugins/template-nvim/CODES/doc/template.nvim.txt
+  h_220433a6faf6b8 1-218
+lua/plugins/template-nvim/CODES/lua/telescope/_extensions/find_template.lua
+  h_220433a6faf6b8 1-77
+lua/plugins/template-nvim/CODES/lua/template/init.lua
+  h_220433a6faf6b8 1-293
+lua/plugins/template-nvim/CODES/plugin/template.lua
+  h_220433a6faf6b8 1-50
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.23",
+  "base_commit_sha": "33f338854ca274e2222503930af78c5174c6744f",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
