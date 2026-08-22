@@ -1,0 +1,30 @@
+lua/plugins/nvim-ts-autotag/.editorconfig
+  h_220433a6faf6b8 1-14
+lua/plugins/nvim-ts-autotag/cmds.lua
+  h_220433a6faf6b8 1-6
+lua/plugins/nvim-ts-autotag/dependencies.lua
+  h_220433a6faf6b8 1-16
+lua/plugins/nvim-ts-autotag/events.lua
+  h_220433a6faf6b8 1-6
+lua/plugins/nvim-ts-autotag/ft.lua
+  h_220433a6faf6b8 1-6
+lua/plugins/nvim-ts-autotag/init.lua
+  h_220433a6faf6b8 1-37
+lua/plugins/nvim-ts-autotag/keys.lua
+  h_220433a6faf6b8 1-23
+lua/plugins/nvim-ts-autotag/opts.lua
+  h_220433a6faf6b8 1-6
+lua/plugins/nvim-ts-autotag/stylua.toml
+  h_220433a6faf6b8 1-13
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.23",
+  "base_commit_sha": "3c6be5a6cc0ab26fa9869111632ef80f05885c72",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
