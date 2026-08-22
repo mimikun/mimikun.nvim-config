@@ -1,0 +1,14 @@
+lua/plugins/helpview-nvim/opts/vimdoc/inline_codes.lua
+  h_220433a6faf6b8 13-37
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.23",
+  "base_commit_sha": "512dee477ccdc1d04b61bdfaf8a574b57eb8bddd",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
