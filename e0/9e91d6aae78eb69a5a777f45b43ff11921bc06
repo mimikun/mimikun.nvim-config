@@ -1,0 +1,30 @@
+lua/plugins/codewindow-nvim/.editorconfig
+  h_220433a6faf6b8 1-14
+lua/plugins/codewindow-nvim/cmds.lua
+  h_220433a6faf6b8 1-6
+lua/plugins/codewindow-nvim/dependencies.lua
+  h_220433a6faf6b8 1-16
+lua/plugins/codewindow-nvim/events.lua
+  h_220433a6faf6b8 1-6
+lua/plugins/codewindow-nvim/ft.lua
+  h_220433a6faf6b8 1-6
+lua/plugins/codewindow-nvim/init.lua
+  h_220433a6faf6b8 1-37
+lua/plugins/codewindow-nvim/keys.lua
+  h_220433a6faf6b8 1-23
+lua/plugins/codewindow-nvim/opts.lua
+  h_220433a6faf6b8 1-6
+lua/plugins/codewindow-nvim/stylua.toml
+  h_220433a6faf6b8 1-13
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.23",
+  "base_commit_sha": "e09e91d6aae78eb69a5a777f45b43ff11921bc06",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
