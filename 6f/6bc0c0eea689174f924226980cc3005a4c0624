@@ -1,0 +1,40 @@
+lua/plugins/lspsaga-nvim/WIKIS/00-index.md
+  h_220433a6faf6b8 1-81
+lua/plugins/lspsaga-nvim/WIKIS/breadcrumbs.md
+  h_220433a6faf6b8 1-43
+lua/plugins/lspsaga-nvim/WIKIS/callhierarchy.md
+  h_220433a6faf6b8 1-37
+lua/plugins/lspsaga-nvim/WIKIS/codeaction.md
+  h_220433a6faf6b8 1-37
+lua/plugins/lspsaga-nvim/WIKIS/definition.md
+  h_220433a6faf6b8 1-48
+lua/plugins/lspsaga-nvim/WIKIS/diagnostic.md
+  h_220433a6faf6b8 1-130
+lua/plugins/lspsaga-nvim/WIKIS/finder.md
+  h_220433a6faf6b8 1-166
+lua/plugins/lspsaga-nvim/WIKIS/floaterm.md
+  h_220433a6faf6b8 1-18
+lua/plugins/lspsaga-nvim/WIKIS/hover.md
+  h_220433a6faf6b8 1-56
+lua/plugins/lspsaga-nvim/WIKIS/implement.md
+  h_220433a6faf6b8 1-31
+lua/plugins/lspsaga-nvim/WIKIS/lightbulb.md
+  h_220433a6faf6b8 1-32
+lua/plugins/lspsaga-nvim/WIKIS/misc.md
+  h_220433a6faf6b8 1-45
+lua/plugins/lspsaga-nvim/WIKIS/outline.md
+  h_220433a6faf6b8 1-40
+lua/plugins/lspsaga-nvim/WIKIS/rename.md
+  h_220433a6faf6b8 1-52
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.23",
+  "base_commit_sha": "6f6bc0c0eea689174f924226980cc3005a4c0624",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
