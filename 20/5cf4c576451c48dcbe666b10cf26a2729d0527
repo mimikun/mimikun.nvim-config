@@ -1,0 +1,16 @@
+lua/plugins/nvim-surround/dependencies.lua
+  h_220433a6faf6b8 3
+lua/plugins/nvim-surround/init.lua
+  h_220433a6faf6b8 5-7,11-12,17-20
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.23",
+  "base_commit_sha": "205cf4c576451c48dcbe666b10cf26a2729d0527",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
