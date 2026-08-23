@@ -1,7 +1,7 @@
 ---@type LazyKeysSpec[]
 local keys = {
   {
-    "<leader>mo",
+    "<leader>Mo",
     function()
       require("codewindow").open_minimap()
     end,
@@ -12,7 +12,7 @@ local keys = {
     silent = true,
   },
   {
-    "<leader>mf",
+    "<leader>Mf",
     function()
       require("codewindow").toggle_focus()
     end,
@@ -23,7 +23,7 @@ local keys = {
     silent = true,
   },
   {
-    "<leader>mc",
+    "<leader>Mc",
     function()
       require("codewindow").close_minimap()
     end,
@@ -34,7 +34,7 @@ local keys = {
     silent = true,
   },
   {
-    "<leader>mm",
+    "<leader>Mm",
     function()
       require("codewindow").toggle_minimap()
     end,
