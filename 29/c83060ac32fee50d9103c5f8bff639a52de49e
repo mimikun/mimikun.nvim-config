@@ -1,0 +1,88 @@
+lua/plugins/nvim-surround/CODES/.github/ISSUE_TEMPLATE/bug_report.yml
+  h_220433a6faf6b8 1-83
+lua/plugins/nvim-surround/CODES/.github/ISSUE_TEMPLATE/config.yml
+  h_220433a6faf6b8 1-4
+lua/plugins/nvim-surround/CODES/.github/ISSUE_TEMPLATE/feature_request.md
+  h_220433a6faf6b8 1-20
+lua/plugins/nvim-surround/CODES/.github/workflows/integration.yml
+  h_220433a6faf6b8 1-40
+lua/plugins/nvim-surround/CODES/.github/workflows/luarocks-release.yml
+  h_220433a6faf6b8 1-30
+lua/plugins/nvim-surround/CODES/.github/workflows/release-please.yml
+  h_220433a6faf6b8 1-19
+lua/plugins/nvim-surround/CODES/.gitignore
+  h_220433a6faf6b8 1-8
+lua/plugins/nvim-surround/CODES/.luacheckrc
+  h_220433a6faf6b8 1-16
+lua/plugins/nvim-surround/CODES/CHANGELOG.md
+  h_220433a6faf6b8 1-418
+lua/plugins/nvim-surround/CODES/CONTRIBUTING.md
+  h_220433a6faf6b8 1-48
+lua/plugins/nvim-surround/CODES/LICENSE
+  h_220433a6faf6b8 1-21
+lua/plugins/nvim-surround/CODES/README.md
+  h_220433a6faf6b8 1-114
+lua/plugins/nvim-surround/CODES/doc/nvim-surround.txt
+  h_220433a6faf6b8 1-819
+lua/plugins/nvim-surround/CODES/lua/nvim-surround/annotations.lua
+  h_220433a6faf6b8 1-62
+lua/plugins/nvim-surround/CODES/lua/nvim-surround/buffer.lua
+  h_220433a6faf6b8 1-333
+lua/plugins/nvim-surround/CODES/lua/nvim-surround/cache.lua
+  h_220433a6faf6b8 1-20
+lua/plugins/nvim-surround/CODES/lua/nvim-surround/config.lua
+  h_220433a6faf6b8 1-623
+lua/plugins/nvim-surround/CODES/lua/nvim-surround/functional.lua
+  h_220433a6faf6b8 1-14
+lua/plugins/nvim-surround/CODES/lua/nvim-surround/init.lua
+  h_220433a6faf6b8 1-428
+lua/plugins/nvim-surround/CODES/lua/nvim-surround/input.lua
+  h_220433a6faf6b8 1-40
+lua/plugins/nvim-surround/CODES/lua/nvim-surround/motions.lua
+  h_220433a6faf6b8 1-70
+lua/plugins/nvim-surround/CODES/lua/nvim-surround/patterns.lua
+  h_220433a6faf6b8 1-187
+lua/plugins/nvim-surround/CODES/lua/nvim-surround/queries.lua
+  h_220433a6faf6b8 1-127
+lua/plugins/nvim-surround/CODES/lua/nvim-surround/treesitter.lua
+  h_220433a6faf6b8 1-119
+lua/plugins/nvim-surround/CODES/lua/nvim-surround/utils.lua
+  h_220433a6faf6b8 1-119
+lua/plugins/nvim-surround/CODES/plugin/nvim-surround.lua
+  h_220433a6faf6b8 1-156
+lua/plugins/nvim-surround/CODES/queries/lua/nvim-surround.scm
+  h_220433a6faf6b8 1-3
+lua/plugins/nvim-surround/CODES/selene.toml
+  h_220433a6faf6b8 1
+lua/plugins/nvim-surround/CODES/stylua.toml
+  h_220433a6faf6b8 1-6
+lua/plugins/nvim-surround/CODES/tests/aliases_spec.lua
+  h_220433a6faf6b8 1-52
+lua/plugins/nvim-surround/CODES/tests/basics_spec.lua
+  h_220433a6faf6b8 1-926
+lua/plugins/nvim-surround/CODES/tests/configuration_spec.lua
+  h_220433a6faf6b8 1-638
+lua/plugins/nvim-surround/CODES/tests/dot_repeat_spec.lua
+  h_220433a6faf6b8 1-261
+lua/plugins/nvim-surround/CODES/tests/function_calls_spec.lua
+  h_220433a6faf6b8 1-117
+lua/plugins/nvim-surround/CODES/tests/html_tags_spec.lua
+  h_220433a6faf6b8 1-35
+lua/plugins/nvim-surround/CODES/tests/jumps_spec.lua
+  h_220433a6faf6b8 1-200
+lua/plugins/nvim-surround/CODES/tests/minimal_init.lua
+  h_220433a6faf6b8 1-39
+lua/plugins/nvim-surround/CODES/vim.yml
+  h_220433a6faf6b8 1-24
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.23",
+  "base_commit_sha": "29c83060ac32fee50d9103c5f8bff639a52de49e",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
