@@ -1,0 +1,20 @@
+lua/plugins/codedocs-nvim/cmds.lua
+  h_220433a6faf6b8 3
+lua/plugins/codedocs-nvim/dependencies.lua
+  h_220433a6faf6b8 13
+lua/plugins/codedocs-nvim/init.lua
+  h_220433a6faf6b8 6,9,14-17
+lua/plugins/codedocs-nvim/keys.lua
+  h_220433a6faf6b8 21
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.23",
+  "base_commit_sha": "f76b91675bff5e538916b462c269944c27b2db64",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
