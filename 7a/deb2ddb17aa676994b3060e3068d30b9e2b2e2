@@ -1,0 +1,62 @@
+lua/plugins/keeper-nvim/CODES/.busted
+  h_220433a6faf6b8 1-13
+lua/plugins/keeper-nvim/CODES/.editorconfig
+  h_220433a6faf6b8 1-8
+lua/plugins/keeper-nvim/CODES/.github/ISSUE_TEMPLATE/bug_report.md
+  h_220433a6faf6b8 1-38
+lua/plugins/keeper-nvim/CODES/.github/ISSUE_TEMPLATE/feature_request.md
+  h_220433a6faf6b8 1-20
+lua/plugins/keeper-nvim/CODES/.gitignore
+  h_220433a6faf6b8 1-3
+lua/plugins/keeper-nvim/CODES/.luacheckrc
+  h_220433a6faf6b8 1-10
+lua/plugins/keeper-nvim/CODES/CHANGELOG.md
+  h_220433a6faf6b8 1-44
+lua/plugins/keeper-nvim/CODES/LICENSE
+  h_220433a6faf6b8 1-21
+lua/plugins/keeper-nvim/CODES/README.md
+  h_220433a6faf6b8 1-72
+lua/plugins/keeper-nvim/CODES/cliff.toml
+  h_220433a6faf6b8 1-81
+lua/plugins/keeper-nvim/CODES/doc/keeper.txt
+  h_220433a6faf6b8 1-97
+lua/plugins/keeper-nvim/CODES/justfile
+  h_220433a6faf6b8 1-6
+lua/plugins/keeper-nvim/CODES/keeper.nvim-scm-1.rockspec
+  h_220433a6faf6b8 1-18
+lua/plugins/keeper-nvim/CODES/lua/keeper/buffers.lua
+  h_220433a6faf6b8 1-36
+lua/plugins/keeper-nvim/CODES/lua/keeper/constants.lua
+  h_220433a6faf6b8 1-8
+lua/plugins/keeper-nvim/CODES/lua/keeper/functions.lua
+  h_220433a6faf6b8 1-67
+lua/plugins/keeper-nvim/CODES/lua/keeper/helpers.lua
+  h_220433a6faf6b8 1-22
+lua/plugins/keeper-nvim/CODES/lua/keeper/init.lua
+  h_220433a6faf6b8 1-72
+lua/plugins/keeper-nvim/CODES/lua/keeper/persist.lua
+  h_220433a6faf6b8 1-69
+lua/plugins/keeper-nvim/CODES/lua/keeper/view.lua
+  h_220433a6faf6b8 1-77
+lua/plugins/keeper-nvim/CODES/plugin/keeper.lua
+  h_220433a6faf6b8 1-11
+lua/plugins/keeper-nvim/CODES/spec/functions_spec.lua
+  h_220433a6faf6b8 1-131
+lua/plugins/keeper-nvim/CODES/spec/minimal_init.lua
+  h_220433a6faf6b8 1-11
+lua/plugins/keeper-nvim/CODES/spec/persist_spec.lua
+  h_220433a6faf6b8 1-125
+lua/plugins/keeper-nvim/CODES/spec/view_spec.lua
+  h_220433a6faf6b8 1-54
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.23",
+  "base_commit_sha": "7adeb2ddb17aa676994b3060e3068d30b9e2b2e2",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
