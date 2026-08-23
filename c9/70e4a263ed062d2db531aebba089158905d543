@@ -1,0 +1,73 @@
+lua/plugins/nvim-surround/WIKIS/Configuration.md
+  h_220433a6faf6b8 1-491
+lua/plugins/nvim-surround/WIKIS/Features.md
+  h_220433a6faf6b8 1-282
+lua/plugins/nvim-surround/WIKIS/For-Developers.md
+  h_220433a6faf6b8 1-153
+lua/plugins/nvim-surround/WIKIS/Getting-Started-for-Beginners.md
+  h_220433a6faf6b8 1-104
+lua/plugins/nvim-surround/WIKIS/Home.md
+  h_220433a6faf6b8 1-14
+lua/plugins/nvim-surround/WIKIS/Migrating-From-Another-Plugin.md
+  h_220433a6faf6b8 1-68
+lua/plugins/nvim-surround/dependencies.lua
+  h_220433a6faf6b8 1-2,3,4-6
+lua/plugins/nvim-surround/events.lua
+  h_220433a6faf6b8 1-6
+lua/plugins/nvim-surround/ft.lua
+  h_220433a6faf6b8 1-6
+lua/plugins/nvim-surround/init.lua
+  h_220433a6faf6b8 1-4,5-7,8,9-10,11,12-15,16-20
+lua/plugins/nvim-surround/keys.lua
+  h_220433a6faf6b8 1-23
+lua/plugins/nvim-surround/opts.lua
+  h_220433a6faf6b8 1-6
+lua/plugins/nvim-surround/stylua.toml
+  h_220433a6faf6b8 1-13
+lua/plugins/nvim-surround/CODES/buffer.lua
+  s_4bc932a2c1edb2::t_0962daa6dfabfd 4-5,16-17,23-25,27-29,35-42,54-58,65-67,73,79-81,87-96,98-100,102-103,109-125,133-134,142,148,157-161,173-174,176-182,190-191,193-202,214-220,229,237,246,255,263-265,272-273,279-280,287-291,301-305,307-323,328-330
+lua/plugins/nvim-surround/CODES/cache.lua
+  s_4bc932a2c1edb2::t_0bdce3ce1e9b44 15-17
+lua/plugins/nvim-surround/config.lua
+  s_4bc932a2c1edb2::t_461cfe14bf9e81 5-12,14-20,22-28,30-99,101-255,267-268,276-288,295-304,306-309,311-325,336,344-348,357-379,387-391,399-403,411-415,423-430,432-433,440-442,444-446,453-459,467-473,481-487,495-504,511-536,538-539,546,548-549,556-563,565-575,577,579-584,586-587,595-597,606-613,619-620
+  h_220433a6faf6b8 1
+lua/plugins/nvim-surround/CODES/functional.lua
+  s_4bc932a2c1edb2::t_dd9ca4e12f5b5b 8-11
+lua/plugins/nvim-surround/CODES/init.lua
+  s_4bc932a2c1edb2::t_c24095f380f858 6,12,18-39,50-69,71-91,97-139,142-165,172-200,202,209-226,228-269,278-289,291-315,317-322,324-326,328-337,341-355,359-376,379-387,389-400,402-406,408-409,411-425
+lua/plugins/nvim-surround/CODES/input.lua
+  s_4bc932a2c1edb2::t_c386ae795ee240 8-13,20-25,33-37
+lua/plugins/nvim-surround/CODES/motions.lua
+  s_4bc932a2c1edb2::t_245df21b0bc57d 8,16-19,21-24,26-30,34-35,37-67
+lua/plugins/nvim-surround/CODES/patterns.lua
+  s_4bc932a2c1edb2::t_2ae404ef2fd80d 7-12,20-23,31-36,38,46-49,57-70,72-74,76-101,103-124,133-157,159-184
+lua/plugins/nvim-surround/CODES/plugin.nvim-surround.lua
+  s_4bc932a2c1edb2::t_f96fb6ddacf2d3 6-8,29-67,74,76-77,80,82-83,86,88-90,93,95-97,100,102-104,107,109-111,114-120,122-124,127-132,134-136,139-141,144,146-148,151,153-155
+lua/plugins/nvim-surround/CODES/queries.lua
+  s_4bc932a2c1edb2::t_71141b7a80c3da 17-19,21-23,25-32,34-39,47,49-59,61-65,67-68,77-78,80-84,86-89,91-98,100-101,103-113,115,117-123
+lua/plugins/nvim-surround/CODES/treesitter.lua
+  s_4bc932a2c1edb2::t_f3d7b50920df7a 8-9,11-16,18,27-29,31-32,39-40,47,55-59,61-69,77,79-81,83-101,103-107,109-116
+lua/plugins/nvim-surround/CODES/utils.lua
+  s_4bc932a2c1edb2::t_02a2a57f4f8c03 12-19,27-32,41-47,49-64,66-70,72-73,81-111,113,115-116
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.23",
+  "base_commit_sha": "c970e4a263ed062d2db531aebba089158905d543",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  },
+  "sessions": {
+    "s_4bc932a2c1edb2": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "2beeb268-dd5f-47c2-b9e8-2d97e0279b16",
+        "model": "claude-opus-5"
+      },
+      "human_author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
