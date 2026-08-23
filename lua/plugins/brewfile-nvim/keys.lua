@@ -1,7 +1,7 @@
 ---@type LazyKeysSpec[]
 local keys = {
   {
-    "<leader>b",
+    "<leader>B",
     mode = {
       "n",
     },
@@ -9,7 +9,7 @@ local keys = {
     silent = true,
   },
   {
-    "<leader>bi",
+    "<leader>Bi",
     function()
       require("brewfile").install()
     end,
@@ -20,7 +20,7 @@ local keys = {
     silent = true,
   },
   {
-    "<leader>br",
+    "<leader>Br",
     function()
       require("brewfile").dump()
     end,
@@ -31,7 +31,7 @@ local keys = {
     silent = true,
   },
   {
-    "<leader>bo",
+    "<leader>Bo",
     function()
       require("brewfile").open_homepage()
     end,
@@ -42,7 +42,7 @@ local keys = {
     silent = true,
   },
   {
-    "<leader>bd",
+    "<leader>Bd",
     function()
       require("brewfile").uninstall()
     end,
@@ -53,7 +53,7 @@ local keys = {
     silent = true,
   },
   {
-    "<leader>bD",
+    "<leader>BD",
     function()
       require("brewfile").force_uninstall()
     end,
@@ -61,7 +61,7 @@ local keys = {
     silent = true,
   },
   {
-    "<leader>bI",
+    "<leader>BI",
     function()
       require("brewfile").info()
     end,
@@ -72,7 +72,7 @@ local keys = {
     silent = true,
   },
   {
-    "<leader>bu",
+    "<leader>Bu",
     function()
       require("brewfile").upgrade()
     end,
