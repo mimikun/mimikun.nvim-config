@@ -1,0 +1,19 @@
+lua/plugins/lspsaga-nvim/init.lua
+  s_4bc932a2c1edb2::t_743c59e3e89b37 5
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.23",
+  "base_commit_sha": "be09f777ba68b9eb163705da0a3181ce9fbbb51c",
+  "prompts": {},
+  "sessions": {
+    "s_4bc932a2c1edb2": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "2beeb268-dd5f-47c2-b9e8-2d97e0279b16",
+        "model": "claude-opus-5"
+      },
+      "human_author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
