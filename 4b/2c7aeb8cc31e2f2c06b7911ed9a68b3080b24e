@@ -1,0 +1,36 @@
+lua/plugins/tiny-code-action-nvim/CODES/action.lua
+  h_220433a6faf6b8 134
+lua/plugins/tiny-code-action-nvim/CODES/backend/diffsofancy.lua
+  h_220433a6faf6b8 11,15
+lua/plugins/tiny-code-action-nvim/CODES/base/picker.lua
+  h_220433a6faf6b8 12,94
+lua/plugins/tiny-code-action-nvim/CODES/base/previewer.lua
+  h_220433a6faf6b8 88,114
+lua/plugins/tiny-code-action-nvim/CODES/init.lua
+  h_220433a6faf6b8 73,127
+lua/plugins/tiny-code-action-nvim/CODES/picker.lua
+  h_220433a6faf6b8 48,68,89
+lua/plugins/tiny-code-action-nvim/CODES/pickers/buffer.lua
+  h_220433a6faf6b8 34,43-44
+lua/plugins/tiny-code-action-nvim/CODES/pickers/buffer_utils/display.lua
+  h_220433a6faf6b8 64,117,128
+lua/plugins/tiny-code-action-nvim/CODES/pickers/buffer_utils/preview.lua
+  h_220433a6faf6b8 124,129
+lua/plugins/tiny-code-action-nvim/CODES/pickers/buffer_utils/window.lua
+  h_220433a6faf6b8 146,300,336
+lua/plugins/tiny-code-action-nvim/CODES/pickers/snacks.lua
+  h_220433a6faf6b8 45
+lua/plugins/tiny-code-action-nvim/CODES/previewers/telescope.lua
+  h_220433a6faf6b8 58
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.23",
+  "base_commit_sha": "4b2c7aeb8cc31e2f2c06b7911ed9a68b3080b24e",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
