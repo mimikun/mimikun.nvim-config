@@ -1,0 +1,14 @@
+lua/plugins/codedocs-nvim/opts.lua
+  h_220433a6faf6b8 26-29,36-40
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.23",
+  "base_commit_sha": "0b3d85f115e08ba0007c4c79c645c3f85b8b7dbc",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
