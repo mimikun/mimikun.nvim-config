@@ -1,0 +1,14 @@
+lua/plugins/lspsaga-nvim/opts/hover.lua
+  h_220433a6faf6b8 1-8,13
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.23",
+  "base_commit_sha": "6bfeeae4c5386949c2bed0799edfd87aaab01f17",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
