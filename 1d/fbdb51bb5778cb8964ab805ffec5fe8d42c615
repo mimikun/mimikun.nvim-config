@@ -1,0 +1,24 @@
+lua/plugins/nvim-surround/WIKIS/Configuration.md
+  h_220433a6faf6b8 1-491
+lua/plugins/nvim-surround/WIKIS/Features.md
+  h_220433a6faf6b8 1-282
+lua/plugins/nvim-surround/WIKIS/For-Developers.md
+  h_220433a6faf6b8 1-153
+lua/plugins/nvim-surround/WIKIS/Getting-Started-for-Beginners.md
+  h_220433a6faf6b8 1-104
+lua/plugins/nvim-surround/WIKIS/Home.md
+  h_220433a6faf6b8 1-14
+lua/plugins/nvim-surround/WIKIS/Migrating-From-Another-Plugin.md
+  h_220433a6faf6b8 1-68
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.23",
+  "base_commit_sha": "1dfbdb51bb5778cb8964ab805ffec5fe8d42c615",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
