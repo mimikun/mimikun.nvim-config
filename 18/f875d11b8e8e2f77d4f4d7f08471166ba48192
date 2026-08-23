@@ -1,0 +1,14 @@
+lua/plugins/tiny-code-action-nvim/opts/picker.lua
+  h_220433a6faf6b8 17-20
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.23",
+  "base_commit_sha": "18f875d11b8e8e2f77d4f4d7f08471166ba48192",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
