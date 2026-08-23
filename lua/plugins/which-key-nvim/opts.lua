@@ -21,12 +21,44 @@ local opts = {
   ---@type wk.Spec
   spec = {
     {
+      "<leader>a",
+      group = "ai",
+    },
+    {
+      "<leader>C",
+      group = "cord",
+    },
+    {
+      "<leader>d",
+      group = "diagnostics",
+    },
+    {
       "<leader>j",
       group = "jump2d",
     },
     {
       "<leader>l",
       group = "leap",
+    },
+    {
+      "<leader>o",
+      group = "github",
+    },
+    {
+      "<leader>q",
+      group = "session",
+    },
+    {
+      "<leader>u",
+      group = "toggle",
+    },
+    {
+      "<leader>x",
+      group = "trouble",
+    },
+    {
+      "<leader>z",
+      group = "telekasten",
     },
   },
 
