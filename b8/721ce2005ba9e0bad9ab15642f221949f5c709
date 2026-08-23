@@ -1,0 +1,20 @@
+lua/plugins/lspsaga-nvim/WIKIS/00-index.md
+  h_220433a6faf6b8 1
+lua/plugins/lspsaga-nvim/dependencies.lua
+  h_220433a6faf6b8 3-4
+lua/plugins/lspsaga-nvim/events.lua
+  h_220433a6faf6b8 3-4
+lua/plugins/lspsaga-nvim/init.lua
+  h_220433a6faf6b8 7-8,10-13
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.23",
+  "base_commit_sha": "b8721ce2005ba9e0bad9ab15642f221949f5c709",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
