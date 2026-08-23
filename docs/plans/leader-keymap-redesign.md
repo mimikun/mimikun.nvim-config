@@ -6,6 +6,50 @@ which-key のグループラベル付けから始めたが、prefix の分け方
 調査日 2026-08-23 / Neovim `v0.13.0-dev-1376+g6423657352`（bob nightly）。
 プラグイン 170 個（有効 140 / 無効 29）、`<leader>` 配下 269 キーマップ。
 
+## 0. 再開のしかた
+
+**この節だけ読めば作業を引き継げる。** 以下は 2026-08-23 時点。
+
+### 作業場所
+
+| 項目 | 値 |
+|---|---|
+| ブランチ | `add/which-key-group-labels` |
+| worktree | `~/.config/nvim-whichkey-labels`（消えていたら作り直す。ブランチは本体の `.git` にある） |
+| 本体 | `~/.config/nvim`（master。ここでは作業しない） |
+
+```
+git worktree add ~/.config/nvim-whichkey-labels add/which-key-group-labels
+```
+
+### いまどこまで進んだか
+
+- **設計は閉じた。** §1〜§4 は確定。§5 が実装リストで、**まだ1つも着手していない**
+- **既にコミット済みの実装は3つだけ** — which-key のラベル8件、minimap を `M` へ、
+  brew を `B` へ。これらは §3 の結論の先取りで、設計と矛盾しない
+- **保留は「大文字待ちの列」7件だけ**（§3-4 の末尾）。退去は確定、文字が未定
+
+### 本人に聞くべきこと（これ以外は聞かなくてよい）
+
+**7つの対象に大文字を1つずつ割り当てる件。** 一度「決めかねる」と言われている
+ので、**催促しない。** 向こうから話を戻すまで待つ。叩き台は §3-4 の末尾にある。
+
+それ以外の決定は全部済んでいる。**同じ問いを再度立てないこと。**
+
+### 次の一歩（費用対効果の順）
+
+1. **§5-1** — `rhs` なし3件（`<leader>a` `<leader>u` `<leader>B`）の削除。
+   **3行消すだけで3つの prefix の `timeoutlen` 待ちが消える**
+2. **§5-2** — Fyler と Triptych の無効化（**どちらも使っていないと本人が明言**）
+3. **§5-3** — prefix の移動。量が多いので1コミット1論理単位で
+
+### やってはいけないこと
+
+- **「その prefix は空いている」を実行時ダンプだけで判定しない。**
+  この設計の途中で2回外している。**必ず付録B の4経路を見る**
+- **推測でラベルを付けない。** 中身と食い違うラベルは `+N keymaps` より悪い
+- **保留7件を推測で埋めない。** 本人の頻度と好みの問題で、こちらでは導けない
+
 ## 決まっていること
 
 **分類軸は混在。切る規則を明示する**（2026-08-23 決定）。
@@ -380,6 +424,78 @@ leap 7件に、nvim-hlslens の `<leader>l`（Clear search highlight）が単独
 
 その上で3つを出す — ①同じキーを複数プラグインが定義、②prefix 自体が実マッピング、
 ③1プラグインが複数の prefix にまたがる。
+
+### 再実行するスクリプト
+
+`~/.config/nvim` か worktree の直下で走らせる。**経路2〜4を1回で見る。**
+
+```python
+import os, re, collections
+pat = re.compile(r'"<[lL]eader>([^"]*)"')
+VIEWLOCAL = {"codediff-nvim","triptych-nvim","mq-nvim","dooing","octo-nvim"}
+owner_keys = collections.defaultdict(set); key_owners = collections.defaultdict(set)
+disabled = {}
+for root, dirs, files in os.walk("lua"):
+    for fn in files:
+        if not fn.endswith(".lua"): continue
+        path = os.path.join(root, fn)
+        # which-key のラベル登録はマッピングではないので除外する
+        if "which-key-nvim" in path or path.endswith(os.path.join("config","picker.lua")):
+            continue
+        parts = path.split(os.sep)
+        owner = parts[2] if len(parts) > 2 and parts[1] == "plugins" else "config"
+        if owner not in disabled:
+            init = os.path.join("lua","plugins",owner,"init.lua")
+            disabled[owner] = os.path.exists(init) and bool(
+                re.search(r'^\s*enabled = false', open(init,encoding='utf-8').read(), re.M))
+        for k in pat.findall(open(path, encoding="utf-8").read()):
+            if not k: continue
+            owner_keys[owner].add(k); key_owners[k].add(owner)
+
+print("=== 衝突 ===")
+for k, owners in sorted(key_owners.items()):
+    live = {o for o in owners if not disabled.get(o)}
+    if len(live) > 1:
+        glob = {o for o in live if o not in VIEWLOCAL}
+        tag = "グローバル" if len(glob) > 1 else "ビュー内限定を含む"
+        print(f"  <leader>{k:5} [{tag}] {', '.join(sorted(live))}")
+
+print("=== prefix 自体が実マッピング ===")
+allk = {k for k,o in key_owners.items() if any(not disabled.get(x) for x in o)}
+for k in sorted(allk):
+    if len(k)==1 and any(x!=k and x.startswith(k) for x in allk):
+        print(f"  <leader>{k}  {', '.join(sorted(o for o in key_owners[k] if not disabled.get(o)))}")
+
+print("=== 1プラグインが複数 prefix にまたがる ===")
+for o, keys in sorted(owner_keys.items()):
+    if disabled.get(o) or o == "config": continue
+    pres = {k[0] for k in keys}
+    if len(pres) > 1: print(f"  {o:26} {' '.join(sorted(pres))}")
+```
+
+**`VIEWLOCAL` は手で維持している一覧。** そのプラグインのウィンドウ内でしか
+効かないものを衝突から除くために使う。新しいプラグインを入れたら足すこと。
+
+**経路1（実行時ダンプ）は別に取る:**
+
+```
+nvim --headless -c 'lua vim.defer_fn(function()
+  local out = {}
+  for _, mode in ipairs({"n","v","x","o","i","t"}) do
+    for _, m in ipairs(vim.api.nvim_get_keymap(mode)) do
+      if m.lhs:sub(1,1) == " " then
+        table.insert(out, mode .. "\t" .. m.lhs:sub(2) .. "\t" .. (m.desc or ""))
+      end
+    end
+  end
+  table.sort(out)
+  local f = io.open("/tmp/keymaps.tsv","w") f:write(table.concat(out,"\n")) f:close()
+  vim.cmd("qa!")
+end, 4000)'
+```
+
+**この2つの差分が、経路2〜4で拾えて経路1に出ないもの** — つまり
+バッファローカル・LSP attach 時・無効なプラグインの分になる。
 
 ### 結果 — 衝突はグローバル11件、うち10件が設計で解決済み
 
