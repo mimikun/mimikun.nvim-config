@@ -1,0 +1,122 @@
+lua/plugins/vimtoria/CODES/.gitignore
+  h_220433a6faf6b8 1-2
+lua/plugins/vimtoria/CODES/LICENSE
+  h_220433a6faf6b8 1-21
+lua/plugins/vimtoria/CODES/PLANNING.md
+  h_220433a6faf6b8 1-102
+lua/plugins/vimtoria/CODES/README.md
+  h_220433a6faf6b8 1-410
+lua/plugins/vimtoria/CODES/autoload/vimtoria/ai.vim
+  h_220433a6faf6b8 1-120
+lua/plugins/vimtoria/CODES/autoload/vimtoria/build.vim
+  h_220433a6faf6b8 1-130
+lua/plugins/vimtoria/CODES/autoload/vimtoria/core.vim
+  h_220433a6faf6b8 1-499
+lua/plugins/vimtoria/CODES/autoload/vimtoria/data.vim
+  h_220433a6faf6b8 1-241
+lua/plugins/vimtoria/CODES/autoload/vimtoria/diplo.vim
+  h_220433a6faf6b8 1-244
+lua/plugins/vimtoria/CODES/autoload/vimtoria/econ.vim
+  h_220433a6faf6b8 1-474
+lua/plugins/vimtoria/CODES/autoload/vimtoria/events.vim
+  h_220433a6faf6b8 1-112
+lua/plugins/vimtoria/CODES/autoload/vimtoria/history.vim
+  h_220433a6faf6b8 1-163
+lua/plugins/vimtoria/CODES/autoload/vimtoria/i18n.vim
+  h_220433a6faf6b8 1-379
+lua/plugins/vimtoria/CODES/autoload/vimtoria/map.vim
+  h_220433a6faf6b8 1-32
+lua/plugins/vimtoria/CODES/autoload/vimtoria/politics.vim
+  h_220433a6faf6b8 1-255
+lua/plugins/vimtoria/CODES/autoload/vimtoria/popup.vim
+  h_220433a6faf6b8 1-388
+lua/plugins/vimtoria/CODES/autoload/vimtoria/screens/budget.vim
+  h_220433a6faf6b8 1-55
+lua/plugins/vimtoria/CODES/autoload/vimtoria/screens/construction.vim
+  h_220433a6faf6b8 1-64
+lua/plugins/vimtoria/CODES/autoload/vimtoria/screens/diplo.vim
+  h_220433a6faf6b8 1-63
+lua/plugins/vimtoria/CODES/autoload/vimtoria/screens/lang.vim
+  h_220433a6faf6b8 1-26
+lua/plugins/vimtoria/CODES/autoload/vimtoria/screens/map.vim
+  h_220433a6faf6b8 1-193
+lua/plugins/vimtoria/CODES/autoload/vimtoria/screens/market.vim
+  h_220433a6faf6b8 1-63
+lua/plugins/vimtoria/CODES/autoload/vimtoria/screens/military.vim
+  h_220433a6faf6b8 1-80
+lua/plugins/vimtoria/CODES/autoload/vimtoria/screens/politics.vim
+  h_220433a6faf6b8 1-94
+lua/plugins/vimtoria/CODES/autoload/vimtoria/screens/pops.vim
+  h_220433a6faf6b8 1-52
+lua/plugins/vimtoria/CODES/autoload/vimtoria/screens/ranking.vim
+  h_220433a6faf6b8 1-47
+lua/plugins/vimtoria/CODES/autoload/vimtoria/screens/select.vim
+  h_220433a6faf6b8 1-63
+lua/plugins/vimtoria/CODES/autoload/vimtoria/screens/state.vim
+  h_220433a6faf6b8 1-43
+lua/plugins/vimtoria/CODES/autoload/vimtoria/screens/tech.vim
+  h_220433a6faf6b8 1-77
+lua/plugins/vimtoria/CODES/autoload/vimtoria/screens/todo.vim
+  h_220433a6faf6b8 1-19
+lua/plugins/vimtoria/CODES/autoload/vimtoria/tech.vim
+  h_220433a6faf6b8 1-161
+lua/plugins/vimtoria/CODES/autoload/vimtoria/ui.vim
+  h_220433a6faf6b8 1-505
+lua/plugins/vimtoria/CODES/autoload/vimtoria/war.vim
+  h_220433a6faf6b8 1-244
+lua/plugins/vimtoria/CODES/data/diplomacy.vim
+  h_220433a6faf6b8 1-42
+lua/plugins/vimtoria/CODES/data/economy.vim
+  h_220433a6faf6b8 1-167
+lua/plugins/vimtoria/CODES/data/events.vim
+  h_220433a6faf6b8 1-82
+lua/plugins/vimtoria/CODES/data/history.vim
+  h_220433a6faf6b8 1-724
+lua/plugins/vimtoria/CODES/data/map.vim
+  h_220433a6faf6b8 1-1035
+lua/plugins/vimtoria/CODES/data/map_ascii.vim
+  h_220433a6faf6b8 1-42
+lua/plugins/vimtoria/CODES/data/politics.vim
+  h_220433a6faf6b8 1-226
+lua/plugins/vimtoria/CODES/data/tech.vim
+  h_220433a6faf6b8 1-287
+lua/plugins/vimtoria/CODES/doc/vimtoria.txt
+  h_220433a6faf6b8 1-233
+lua/plugins/vimtoria/CODES/plugin/vimtoria.vim
+  h_220433a6faf6b8 1-9
+lua/plugins/vimtoria/CODES/syntax/vimtoria.vim
+  h_220433a6faf6b8 1-31
+lua/plugins/vimtoria/CODES/test/run.sh
+  h_220433a6faf6b8 1-55
+lua/plugins/vimtoria/CODES/test/test_build.vim
+  h_220433a6faf6b8 1-174
+lua/plugins/vimtoria/CODES/test/test_core.vim
+  h_220433a6faf6b8 1-242
+lua/plugins/vimtoria/CODES/test/test_econ.vim
+  h_220433a6faf6b8 1-125
+lua/plugins/vimtoria/CODES/test/test_m4.vim
+  h_220433a6faf6b8 1-152
+lua/plugins/vimtoria/CODES/test/test_m6.vim
+  h_220433a6faf6b8 1-215
+lua/plugins/vimtoria/CODES/test/test_m7.vim
+  h_220433a6faf6b8 1-231
+lua/plugins/vimtoria/CODES/test/test_politics.vim
+  h_220433a6faf6b8 1-124
+lua/plugins/vimtoria/CODES/test/test_tech.vim
+  h_220433a6faf6b8 1-149
+lua/plugins/vimtoria/CODES/test/test_war.vim
+  h_220433a6faf6b8 1-160
+lua/plugins/vimtoria/CODES/tools/gen_map.vim
+  h_220433a6faf6b8 1-434
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.23",
+  "base_commit_sha": "ba3397faaad0eeed81981497724d176e3313b3d7",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
