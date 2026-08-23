@@ -1,0 +1,90 @@
+lua/plugins/tiny-code-action-nvim/CODES/.gitignore
+  h_220433a6faf6b8 1
+lua/plugins/tiny-code-action-nvim/CODES/LICENSE
+  h_220433a6faf6b8 1-21
+lua/plugins/tiny-code-action-nvim/CODES/README.md
+  h_220433a6faf6b8 1-473
+lua/plugins/tiny-code-action-nvim/CODES/lua/telescope/_extensions/tiny-code-action.lua
+  h_220433a6faf6b8 1-11
+lua/plugins/tiny-code-action-nvim/CODES/lua/tiny-code-action/action.lua
+  h_220433a6faf6b8 1-287
+lua/plugins/tiny-code-action-nvim/CODES/lua/tiny-code-action/backend/delta.lua
+  h_220433a6faf6b8 1-33
+lua/plugins/tiny-code-action-nvim/CODES/lua/tiny-code-action/backend/diffsofancy.lua
+  h_220433a6faf6b8 1-28
+lua/plugins/tiny-code-action-nvim/CODES/lua/tiny-code-action/backend/difftastic.lua
+  h_220433a6faf6b8 1-32
+lua/plugins/tiny-code-action-nvim/CODES/lua/tiny-code-action/backend/vim.lua
+  h_220433a6faf6b8 1-19
+lua/plugins/tiny-code-action-nvim/CODES/lua/tiny-code-action/base/backend.lua
+  h_220433a6faf6b8 1-67
+lua/plugins/tiny-code-action-nvim/CODES/lua/tiny-code-action/base/picker.lua
+  h_220433a6faf6b8 1-127
+lua/plugins/tiny-code-action-nvim/CODES/lua/tiny-code-action/base/previewer.lua
+  h_220433a6faf6b8 1-135
+lua/plugins/tiny-code-action-nvim/CODES/lua/tiny-code-action/config.lua
+  h_220433a6faf6b8 1-97
+lua/plugins/tiny-code-action-nvim/CODES/lua/tiny-code-action/edit.lua
+  h_220433a6faf6b8 1-248
+lua/plugins/tiny-code-action-nvim/CODES/lua/tiny-code-action/filters.lua
+  h_220433a6faf6b8 1-78
+lua/plugins/tiny-code-action-nvim/CODES/lua/tiny-code-action/finder.lua
+  h_220433a6faf6b8 1-146
+lua/plugins/tiny-code-action-nvim/CODES/lua/tiny-code-action/highlights.lua
+  h_220433a6faf6b8 1-13
+lua/plugins/tiny-code-action-nvim/CODES/lua/tiny-code-action/init.lua
+  h_220433a6faf6b8 1-143
+lua/plugins/tiny-code-action-nvim/CODES/lua/tiny-code-action/picker.lua
+  h_220433a6faf6b8 1-112
+lua/plugins/tiny-code-action-nvim/CODES/lua/tiny-code-action/pickers/buffer.lua
+  h_220433a6faf6b8 1-76
+lua/plugins/tiny-code-action-nvim/CODES/lua/tiny-code-action/pickers/buffer_utils/categories.lua
+  h_220433a6faf6b8 1-74
+lua/plugins/tiny-code-action-nvim/CODES/lua/tiny-code-action/pickers/buffer_utils/display.lua
+  h_220433a6faf6b8 1-161
+lua/plugins/tiny-code-action-nvim/CODES/lua/tiny-code-action/pickers/buffer_utils/groups.lua
+  h_220433a6faf6b8 1-51
+lua/plugins/tiny-code-action-nvim/CODES/lua/tiny-code-action/pickers/buffer_utils/hotkeys.lua
+  h_220433a6faf6b8 1-413
+lua/plugins/tiny-code-action-nvim/CODES/lua/tiny-code-action/pickers/buffer_utils/preview.lua
+  h_220433a6faf6b8 1-229
+lua/plugins/tiny-code-action-nvim/CODES/lua/tiny-code-action/pickers/buffer_utils/window.lua
+  h_220433a6faf6b8 1-390
+lua/plugins/tiny-code-action-nvim/CODES/lua/tiny-code-action/pickers/fzf-lua.lua
+  h_220433a6faf6b8 1-120
+lua/plugins/tiny-code-action-nvim/CODES/lua/tiny-code-action/pickers/select.lua
+  h_220433a6faf6b8 1-53
+lua/plugins/tiny-code-action-nvim/CODES/lua/tiny-code-action/pickers/snacks.lua
+  h_220433a6faf6b8 1-105
+lua/plugins/tiny-code-action-nvim/CODES/lua/tiny-code-action/pickers/telescope.lua
+  h_220433a6faf6b8 1-155
+lua/plugins/tiny-code-action-nvim/CODES/lua/tiny-code-action/previewers/buffer.lua
+  h_220433a6faf6b8 1-53
+lua/plugins/tiny-code-action-nvim/CODES/lua/tiny-code-action/previewers/fzf-lua.lua
+  h_220433a6faf6b8 1-98
+lua/plugins/tiny-code-action-nvim/CODES/lua/tiny-code-action/previewers/select.lua
+  h_220433a6faf6b8 1-7
+lua/plugins/tiny-code-action-nvim/CODES/lua/tiny-code-action/previewers/snacks.lua
+  h_220433a6faf6b8 1-61
+lua/plugins/tiny-code-action-nvim/CODES/lua/tiny-code-action/previewers/telescope.lua
+  h_220433a6faf6b8 1-70
+lua/plugins/tiny-code-action-nvim/CODES/lua/tiny-code-action/terminal/init.lua
+  h_220433a6faf6b8 1-102
+lua/plugins/tiny-code-action-nvim/CODES/lua/tiny-code-action/utils.lua
+  h_220433a6faf6b8 1-198
+lua/plugins/tiny-code-action-nvim/CODES/selene.toml
+  h_220433a6faf6b8 1
+lua/plugins/tiny-code-action-nvim/CODES/stylua.toml
+  h_220433a6faf6b8 1-11
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.23",
+  "base_commit_sha": "0f0f39314e913d6fc1db35ddfe3707fbb1fbaea1",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
