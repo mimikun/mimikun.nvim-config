@@ -1,0 +1,30 @@
+lua/plugins/nvim-surround/.editorconfig
+  h_220433a6faf6b8 1-14
+lua/plugins/nvim-surround/cmds.lua
+  h_220433a6faf6b8 1-6
+lua/plugins/nvim-surround/dependencies.lua
+  h_220433a6faf6b8 1-16
+lua/plugins/nvim-surround/events.lua
+  h_220433a6faf6b8 1-6
+lua/plugins/nvim-surround/ft.lua
+  h_220433a6faf6b8 1-6
+lua/plugins/nvim-surround/init.lua
+  h_220433a6faf6b8 1-37
+lua/plugins/nvim-surround/keys.lua
+  h_220433a6faf6b8 1-23
+lua/plugins/nvim-surround/opts.lua
+  h_220433a6faf6b8 1-6
+lua/plugins/nvim-surround/stylua.toml
+  h_220433a6faf6b8 1-13
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.23",
+  "base_commit_sha": "e71a8175901d56c73fc803662fd2b438cd742e29",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
