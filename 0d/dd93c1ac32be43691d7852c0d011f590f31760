@@ -1,0 +1,21 @@
+lua/plugins/brewfile-nvim/keys.lua
+  s_4bc932a2c1edb2::t_340eb35b2cdce5 4,12,23,34,45,56,64,75
+lua/plugins/which-key-nvim/opts.lua
+  s_4bc932a2c1edb2::t_28daf8aa69080e 31-38
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.23",
+  "base_commit_sha": "0ddd93c1ac32be43691d7852c0d011f590f31760",
+  "prompts": {},
+  "sessions": {
+    "s_4bc932a2c1edb2": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "2beeb268-dd5f-47c2-b9e8-2d97e0279b16",
+        "model": "claude-opus-5"
+      },
+      "human_author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
