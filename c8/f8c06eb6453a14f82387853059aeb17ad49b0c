@@ -1,0 +1,37 @@
+lua/plugins/nvim-surround/opts.lua
+  h_220433a6faf6b8 1-2
+  s_329e0d9d48d7ca::t_0e0a294ba35575 3-6,7-10
+lua/plugins/nvim-surround/events.lua
+  h_220433a6faf6b8 1-6
+lua/plugins/nvim-surround/init.lua
+  h_220433a6faf6b8 1-7,8,9-18
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.23",
+  "base_commit_sha": "c8f8c06eb6453a14f82387853059aeb17ad49b0c",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  },
+  "sessions": {
+    "s_329e0d9d48d7ca": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "36416581-b50b-4a99-a0e3-3d109d9c9653",
+        "model": "claude-opus-5"
+      },
+      "human_author": "Yuto Tanaka <git@mimikun.dev>"
+    },
+    "s_4bc932a2c1edb2": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "2beeb268-dd5f-47c2-b9e8-2d97e0279b16",
+        "model": "claude-opus-5"
+      },
+      "human_author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
