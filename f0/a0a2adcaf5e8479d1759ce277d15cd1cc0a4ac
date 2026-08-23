@@ -1,0 +1,114 @@
+lua/plugins/lspsaga-nvim/CODES/.github/FUNDING.yml
+  h_220433a6faf6b8 1-3
+lua/plugins/lspsaga-nvim/CODES/.github/ISSUE_TEMPLATE/bug_report.yml
+  h_220433a6faf6b8 1-52
+lua/plugins/lspsaga-nvim/CODES/.github/ISSUE_TEMPLATE/feature_request.md
+  h_220433a6faf6b8 1-20
+lua/plugins/lspsaga-nvim/CODES/.github/workflows/ci.yml
+  h_220433a6faf6b8 1-70
+lua/plugins/lspsaga-nvim/CODES/.stylua.toml
+  h_220433a6faf6b8 1-6
+lua/plugins/lspsaga-nvim/CODES/LICENSE
+  h_220433a6faf6b8 1-21
+lua/plugins/lspsaga-nvim/CODES/README.md
+  h_220433a6faf6b8 1-19
+lua/plugins/lspsaga-nvim/CODES/doc/lspsaga.nvim.txt
+  h_220433a6faf6b8 1-39
+lua/plugins/lspsaga-nvim/CODES/lua/lspsaga/beacon.lua
+  h_220433a6faf6b8 1-62
+lua/plugins/lspsaga-nvim/CODES/lua/lspsaga/callhierarchy.lua
+  h_220433a6faf6b8 1-494
+lua/plugins/lspsaga-nvim/CODES/lua/lspsaga/codeaction/init.lua
+  h_220433a6faf6b8 1-395
+lua/plugins/lspsaga-nvim/CODES/lua/lspsaga/codeaction/lightbulb.lua
+  h_220433a6faf6b8 1-208
+lua/plugins/lspsaga-nvim/CODES/lua/lspsaga/codeaction/preview.lua
+  h_220433a6faf6b8 1-225
+lua/plugins/lspsaga-nvim/CODES/lua/lspsaga/command.lua
+  h_220433a6faf6b8 1-83
+lua/plugins/lspsaga-nvim/CODES/lua/lspsaga/definition.lua
+  h_220433a6faf6b8 1-331
+lua/plugins/lspsaga-nvim/CODES/lua/lspsaga/diagnostic/init.lua
+  h_220433a6faf6b8 1-330
+lua/plugins/lspsaga-nvim/CODES/lua/lspsaga/diagnostic/show.lua
+  h_220433a6faf6b8 1-404
+lua/plugins/lspsaga-nvim/CODES/lua/lspsaga/diagnostic/virt.lua
+  h_220433a6faf6b8 1-45
+lua/plugins/lspsaga-nvim/CODES/lua/lspsaga/finder/box.lua
+  h_220433a6faf6b8 1-239
+lua/plugins/lspsaga-nvim/CODES/lua/lspsaga/finder/init.lua
+  h_220433a6faf6b8 1-572
+lua/plugins/lspsaga-nvim/CODES/lua/lspsaga/floaterm.lua
+  h_220433a6faf6b8 1-89
+lua/plugins/lspsaga-nvim/CODES/lua/lspsaga/health.lua
+  h_220433a6faf6b8 1-30
+lua/plugins/lspsaga-nvim/CODES/lua/lspsaga/highlight.lua
+  h_220433a6faf6b8 1-94
+lua/plugins/lspsaga-nvim/CODES/lua/lspsaga/hover.lua
+  h_220433a6faf6b8 1-348
+lua/plugins/lspsaga-nvim/CODES/lua/lspsaga/implement/init.lua
+  h_220433a6faf6b8 1-215
+lua/plugins/lspsaga-nvim/CODES/lua/lspsaga/init.lua
+  h_220433a6faf6b8 1-224
+lua/plugins/lspsaga-nvim/CODES/lua/lspsaga/layout/float.lua
+  h_220433a6faf6b8 1-128
+lua/plugins/lspsaga-nvim/CODES/lua/lspsaga/layout/init.lua
+  h_220433a6faf6b8 1-108
+lua/plugins/lspsaga-nvim/CODES/lua/lspsaga/layout/normal.lua
+  h_220433a6faf6b8 1-34
+lua/plugins/lspsaga-nvim/CODES/lua/lspsaga/logger.lua
+  h_220433a6faf6b8 1-47
+lua/plugins/lspsaga-nvim/CODES/lua/lspsaga/lspkind.lua
+  h_220433a6faf6b8 1-89
+lua/plugins/lspsaga-nvim/CODES/lua/lspsaga/luadoc.lua
+  h_220433a6faf6b8 1-196
+lua/plugins/lspsaga-nvim/CODES/lua/lspsaga/rename/init.lua
+  h_220433a6faf6b8 1-231
+lua/plugins/lspsaga-nvim/CODES/lua/lspsaga/rename/project.lua
+  h_220433a6faf6b8 1-196
+lua/plugins/lspsaga-nvim/CODES/lua/lspsaga/slist.lua
+  h_220433a6faf6b8 1-72
+lua/plugins/lspsaga-nvim/CODES/lua/lspsaga/symbol/head.lua
+  h_220433a6faf6b8 1-215
+lua/plugins/lspsaga-nvim/CODES/lua/lspsaga/symbol/init.lua
+  h_220433a6faf6b8 1-231
+lua/plugins/lspsaga-nvim/CODES/lua/lspsaga/symbol/outline.lua
+  h_220433a6faf6b8 1-617
+lua/plugins/lspsaga-nvim/CODES/lua/lspsaga/symbol/winbar.lua
+  h_220433a6faf6b8 1-286
+lua/plugins/lspsaga-nvim/CODES/lua/lspsaga/typehierarchy.lua
+  h_220433a6faf6b8 1-495
+lua/plugins/lspsaga-nvim/CODES/lua/lspsaga/util.lua
+  h_220433a6faf6b8 1-335
+lua/plugins/lspsaga-nvim/CODES/lua/lspsaga/window.lua
+  h_220433a6faf6b8 1-201
+lua/plugins/lspsaga-nvim/CODES/plugin/lspsaga.lua
+  h_220433a6faf6b8 1-18
+lua/plugins/lspsaga-nvim/CODES/test/fake_lsp.lua
+  h_220433a6faf6b8 1-84
+lua/plugins/lspsaga-nvim/CODES/test/finder_spec.lua
+  h_220433a6faf6b8 1-57
+lua/plugins/lspsaga-nvim/CODES/test/helper.lua
+  h_220433a6faf6b8 1-66
+lua/plugins/lspsaga-nvim/CODES/test/layout_spec.lua
+  h_220433a6faf6b8 1-97
+lua/plugins/lspsaga-nvim/CODES/test/minimal_test.lua
+  h_220433a6faf6b8 1-6
+lua/plugins/lspsaga-nvim/CODES/test/slist_spec.lua
+  h_220433a6faf6b8 1-103
+lua/plugins/lspsaga-nvim/CODES/test/util_spec.lua
+  h_220433a6faf6b8 1-77
+lua/plugins/lspsaga-nvim/CODES/test/window_spec.lua
+  h_220433a6faf6b8 1-110
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.23",
+  "base_commit_sha": "f0a0a2adcaf5e8479d1759ce277d15cd1cc0a4ac",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
