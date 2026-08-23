@@ -1,0 +1,20 @@
+lua/plugins/keeper-nvim/cmds.lua
+  h_220433a6faf6b8 3
+lua/plugins/keeper-nvim/init.lua
+  h_220433a6faf6b8 14-17
+lua/plugins/keeper-nvim/keys.lua
+  h_220433a6faf6b8 21
+lua/plugins/keeper-nvim/readme.lua
+  h_220433a6faf6b8 1-12
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.23",
+  "base_commit_sha": "8cac16328d0b8caac4a6f597bd18e590b6ccad34",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
