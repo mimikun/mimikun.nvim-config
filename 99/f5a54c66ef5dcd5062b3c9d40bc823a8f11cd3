@@ -1,0 +1,48 @@
+lua/plugins/lspsaga-nvim/opts/beacon.lua
+  h_220433a6faf6b8 1-193
+lua/plugins/lspsaga-nvim/opts/callhierarchy.lua
+  h_220433a6faf6b8 1-193
+lua/plugins/lspsaga-nvim/opts/code_action.lua
+  h_220433a6faf6b8 1-193
+lua/plugins/lspsaga-nvim/opts/definition.lua
+  h_220433a6faf6b8 1-193
+lua/plugins/lspsaga-nvim/opts/diagnostic.lua
+  h_220433a6faf6b8 1-193
+lua/plugins/lspsaga-nvim/opts/finder.lua
+  h_220433a6faf6b8 1-193
+lua/plugins/lspsaga-nvim/opts/floaterm.lua
+  h_220433a6faf6b8 1-193
+lua/plugins/lspsaga-nvim/opts/hover.lua
+  h_220433a6faf6b8 1-193
+lua/plugins/lspsaga-nvim/opts/implement.lua
+  h_220433a6faf6b8 1-193
+lua/plugins/lspsaga-nvim/opts/init.lua
+  h_220433a6faf6b8 3-19
+lua/plugins/lspsaga-nvim/opts/lightbulb.lua
+  h_220433a6faf6b8 1-193
+lua/plugins/lspsaga-nvim/opts/outline.lua
+  h_220433a6faf6b8 1-193
+lua/plugins/lspsaga-nvim/opts/rename.lua
+  h_220433a6faf6b8 1-193
+lua/plugins/lspsaga-nvim/opts/request_timeout.lua
+  h_220433a6faf6b8 1-193
+lua/plugins/lspsaga-nvim/opts/scroll_preview.lua
+  h_220433a6faf6b8 1-193
+lua/plugins/lspsaga-nvim/opts/symbol_in_winbar.lua
+  h_220433a6faf6b8 1-193
+lua/plugins/lspsaga-nvim/opts/typehierarchy.lua
+  h_220433a6faf6b8 1-193
+lua/plugins/lspsaga-nvim/opts/ui.lua
+  h_220433a6faf6b8 1-193
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.23",
+  "base_commit_sha": "99f5a54c66ef5dcd5062b3c9d40bc823a8f11cd3",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
