@@ -1,0 +1,22 @@
+lua/plugins/tiny-code-action-nvim/README.md
+  h_220433a6faf6b8 1,108,114,200,228,273,282,299,312,324,396,399,404
+lua/plugins/tiny-code-action-nvim/dependencies.lua
+  h_220433a6faf6b8 4-5
+lua/plugins/tiny-code-action-nvim/events.lua
+  h_220433a6faf6b8 3-4
+lua/plugins/tiny-code-action-nvim/init.lua
+  h_220433a6faf6b8 8,14-16
+lua/plugins/tiny-code-action-nvim/keys.lua
+  h_220433a6faf6b8 4,6,10,12-13
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.23",
+  "base_commit_sha": "2db620eabdcda1f55f68c13d8bd4a96a60352421",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
