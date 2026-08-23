@@ -1,0 +1,19 @@
+docs/plans/leader-keymap-redesign.md
+  s_4bc932a2c1edb2::t_894eef66620fe2 1-248
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.23",
+  "base_commit_sha": "80acfaa1f414bc6dbfeb667e445952994d8884b5",
+  "prompts": {},
+  "sessions": {
+    "s_4bc932a2c1edb2": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "2beeb268-dd5f-47c2-b9e8-2d97e0279b16",
+        "model": "claude-opus-5"
+      },
+      "human_author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
