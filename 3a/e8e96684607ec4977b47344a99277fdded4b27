@@ -1,0 +1,30 @@
+lua/plugins/vimtoria/.editorconfig
+  h_220433a6faf6b8 1-14
+lua/plugins/vimtoria/cmds.lua
+  h_220433a6faf6b8 1-6
+lua/plugins/vimtoria/dependencies.lua
+  h_220433a6faf6b8 1-16
+lua/plugins/vimtoria/events.lua
+  h_220433a6faf6b8 1-6
+lua/plugins/vimtoria/ft.lua
+  h_220433a6faf6b8 1-6
+lua/plugins/vimtoria/init.lua
+  h_220433a6faf6b8 1-37
+lua/plugins/vimtoria/keys.lua
+  h_220433a6faf6b8 1-23
+lua/plugins/vimtoria/opts.lua
+  h_220433a6faf6b8 1-6
+lua/plugins/vimtoria/stylua.toml
+  h_220433a6faf6b8 1-13
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.23",
+  "base_commit_sha": "3ae8e96684607ec4977b47344a99277fdded4b27",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
