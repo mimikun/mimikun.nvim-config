@@ -1,0 +1,21 @@
+lua/plugins/codedocs-nvim/CODES/README.md
+  s_7f44726c487d3a::t_67a70d24958143 1-90
+lua/plugins/codedocs-nvim/README.md
+  s_7f44726c487d3a::t_97633dde359b31 1-644
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.23",
+  "base_commit_sha": "fd5e3472eec4ce61e85c0b6a337d12da46a5f81b",
+  "prompts": {},
+  "sessions": {
+    "s_7f44726c487d3a": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "8aca6e9c-1985-4ccc-84a7-157439dc2e9a",
+        "model": "claude-opus-5"
+      },
+      "human_author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
