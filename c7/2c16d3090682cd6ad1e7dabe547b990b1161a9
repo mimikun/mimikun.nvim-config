@@ -1,0 +1,14 @@
+lua/plugins/codewindow-nvim/init.lua
+  h_220433a6faf6b8 6,16-17
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.23",
+  "base_commit_sha": "c72c16d3090682cd6ad1e7dabe547b990b1161a9",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
