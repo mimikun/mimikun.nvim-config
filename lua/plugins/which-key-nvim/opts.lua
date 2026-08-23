@@ -41,6 +41,14 @@ local opts = {
       group = "leap",
     },
     {
+      "<leader>m",
+      group = "markdown",
+    },
+    {
+      "<leader>M",
+      group = "minimap",
+    },
+    {
       "<leader>o",
       group = "github",
     },
