@@ -1,0 +1,30 @@
+lua/plugins/lspsaga-nvim/.editorconfig
+  h_220433a6faf6b8 1-14
+lua/plugins/lspsaga-nvim/cmds.lua
+  h_220433a6faf6b8 1-6
+lua/plugins/lspsaga-nvim/dependencies.lua
+  h_220433a6faf6b8 1-16
+lua/plugins/lspsaga-nvim/events.lua
+  h_220433a6faf6b8 1-6
+lua/plugins/lspsaga-nvim/ft.lua
+  h_220433a6faf6b8 1-6
+lua/plugins/lspsaga-nvim/init.lua
+  h_220433a6faf6b8 1-37
+lua/plugins/lspsaga-nvim/keys.lua
+  h_220433a6faf6b8 1-23
+lua/plugins/lspsaga-nvim/opts.lua
+  h_220433a6faf6b8 1-6
+lua/plugins/lspsaga-nvim/stylua.toml
+  h_220433a6faf6b8 1-13
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.23",
+  "base_commit_sha": "c9147adc12cf5822fed30ac622ee47fe9d59bddd",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
