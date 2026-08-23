@@ -157,6 +157,9 @@ gitsigns は `<leader>h` をソースに持たない。あれは README の例�
    `add/diffs-nvim` が控えているので `<leader>g` はグループのまま
 4. **「頭文字が同じ」は対象が同じことを意味しない。** `m` に minimap / markdown / mq
    が同居していたのがその形。**ラベルが書けない prefix は分類が間違っている**
+5. **グループの親に単独マッピングを置かない。** ラベルが目的なら which-key の `spec`
+   に書く。lazy.nvim の `keys` spec に `rhs` なしのエントリを置いて代用しない —
+   **マッピングとしては登録されるので、押すたびに `timeoutlen` を払って何も起きない**
 
 ### 3-1. `t` からの退去 — 完了（2026-08-23 決定）
 
@@ -188,24 +191,266 @@ gitsigns は `<leader>h` をソースに持たない。あれは README の例�
 
 2文字目の具体（`Gi` `Gp` など）は実装時に詰める。
 
-### 3-2. B分類（パネルの開閉）11件 — **TBD**
+### 3-2. B分類（パネルの開閉）11件 — 完了（2026-08-23 決定）
 
-`mm` `mf` minimap / `mp` `mt` markdown preview / `sc` scratch / `tt` tabterm /
-`td` todo list / `tb` calendar / `ac` Claude / `v` Vallow / Triptych
+4件は 3-1 で行き先が決まっている（`tt`→`T` / `td`→`D` / `tb`→`K` / `mm` `mf`→`M`）。
+`mp` `mt` は `m`（markdown）配下、`ac` は `a`（ai）配下のままで規則に合う。残り3件:
 
-### 3-3. C分類（プラグイン固有の内部モード）9件 — **TBD**
+| 対象 | 決定 | 導出 |
+|---|---|---|
+| snacks scratch `sc` `sS` | **`bs` `bS`**（buffer 配下） | **scratch buffer はバッファ**。`s` にいたのは squix と場所を取り合っていただけで意味的な理由が無い |
+| SQL 系10件（squix 8 + vi-sql 2） | **`<leader>Q`** に統合 | 同じ対象。`v` は vallow 専用になる |
+| ファイラ2つ（Fyler `e` / Triptych `-`） | **両方 `enabled = false`** | **どちらも使っていない**（本人確認）。§2 どおり、使っていないものに prefix を確保しない |
 
-`Ct` `Ci` Cord / `ct` `nt` Crates / `ef` `eh` `ei` `er` Ecolog / `st` masking
+**SQL 統合で、判明していた到達不能3件が全部消える。**
 
-### 3-4. 残りの prefix — **TBD**
+| 衝突 | 消える理由 |
+|---|---|
+| `st`（masking が squix を潰す） | squix が `Q` へ退去 |
+| `sS`（scratch が squix を潰す） | 同上 |
+| `vs`（vi-sql が vallow を潰す） | vi-sql が `Q` へ退去 |
 
-`c` 22 / `z` 19 / `b` 14 / `n` 13 / `e` 13 / `s` 10 / `a` 10 / `p` 8 / `l` 8 /
-`x` 4 / `v` 4 / `q` 4 / `k` 3 / `j` 3 / `i` 2 / `d` 3（`dt` `dc` が `u` へ抜けた後）
+`gd` と `tb` は 3-1 で解消済みなので、**付録A の5件は全て片付く。**
 
-## 4. 検算 — **TBD**
+**副作用:**
 
-割り当てが決まったら、下の4経路すべてで一覧を作り直し、規約から外れている
-ものを洗う。
+- Fyler を無効化すると `<leader>e` の単独マッピングが消え、**Ecolog 13件の
+  `timeoutlen` 待ちが無くなる**（単独キーが13件の親を兼ねていた）
+- `<leader>-` が空く
+- Triptych はウィンドウ内で `<leader>cd` `<leader>.` も使っていたが、無効化で消える
+
+### 3-3. C分類（プラグイン固有の内部モード）9件 — 完了（2026-08-23 決定）
+
+| キー | 決定 | 導出 |
+|---|---|---|
+| `Ct` `Ci` Cord | **そのまま**（`C`） | 対象別で既に正しい |
+| `ef` `eh` `ei` `er` Ecolog | **そのまま**（`e`） | 同上。Fyler が抜けて `e` は Ecolog 専用になる |
+| `ct` Crates | **そのまま**（`c`） | 3-4 で `c` = crates に整理する |
+| `st` masking（shelter.nvim） | **`es`**（Ecolog 配下） | **shelter は Ecolog の masking 機能。** 別プラグインだが対象は Ecolog |
+| `nt` | **crates ではない** | package-info.nvim（npm）。3-4 で扱う |
+
+`s` に残るのは `sr`（Rename file）と `sz`（Chezmoi source files）の2件になる。
+
+### 3-4. 残りの prefix
+
+#### `c` = crates（2026-08-23 決定。2件だけ保留）
+
+`c` には7プラグインが同居していて、**新たに衝突が3件見つかった。**
+
+| キー | 効くもの | 潰れているもの |
+|---|---|---|
+| `cd` | Convert to decimal（convy） | crates.nvim の `cd` |
+| `cf` | Crates: show features | chezmoi.nvim の `cf` |
+| `cs` | Symbols（Trouble） | convy の `cs` |
+
+crates が最大勢力（14件）なので **`c` = crates** とし、他を退去させる。
+
+| 退去するもの | 行き先 | 導出 |
+|---|---|---|
+| trouble `cl` `cs` | **`x` 配下**（`xl` `xs`） | **Trouble は既に `x` に4件持っている。** 同じプラグインが2箇所に分かれていた |
+| calendar-vim `cal` `caL` | **`K` 配下** | 3-1 で bloocky カレンダーを `K` にした。カレンダーという対象で統合 |
+| chezmoi.nvim `cf` `cfn` | **`sz` と統合** | 同じ対象が `c` と `s` に分かれていた |
+| codediff 8件 | **そのまま** | diff ビュー内のみ。グローバルには出ない |
+| nvim-html-css `cp` | — | **登録されていない**。要調査 |
+| convy `cc` `cd` `cs` | **保留**（2026-08-23 時点） | 「変換」に同居先が無い。大文字1つが要る |
+| calcium `<leader>c` 単独 | **保留**（2026-08-23 時点） | 電卓。1件・控えなし → 大文字1打 |
+
+**この整理で `cd` `cf` `cs` の3件が全部消える**（convy と chezmoi が退去し、Trouble が `x` へ移るため）。
+
+#### `n` = package-info（2026-08-23 決定）
+
+package-info.nvim 7件（`nc` `nd` `ni` `np` `ns` `nt` `nu`）と
+neovim-tips 6件（`nto` `ntb` `nte` `nta` `ntp` `ntr`）が同居していた。
+**`nt` が親子で衝突**（package-info の `nt` = Toggle dependency versions が、
+neovim-tips の `nt*` の親として扱われ、`timeoutlen` 待ちの後にしか発火しない）。
+**両方とも有効**であることを確認済み。
+
+- **`n` = package-info**（npm）。7件はそのまま。`nt` の待ちが消える
+- **neovim-tips は `<leader>N`**（未使用）。6件でグループが要る
+- `c` = cargo / `n` = npm で**エコシステム別に揃う**
+
+#### `p` = yank / paste（2026-08-23 決定。2件保留）
+
+4つの対象が同居していた。**`<leader>p` は yank の paste で決め打ち**（本人）。
+
+| 出所 | キー | 状態 |
+|---|---|---|
+| yankbank | `bind_indices` → **`p1`〜`p9`** | インデックス貼り付け |
+| yanky.nvim | `p`（Open Yank History、n/x） | **潰れている** |
+| ports.nvim | `p` 単独 | 勝っている |
+| pomodoro.nvim | `ps` `pr` `pS` `pw` `px` ＋ `pp` | **`pp` が潰れている** |
+| peeper-picker.nvim | `pp` `ph` | `pp` を勝ち取っている |
+| dooing | `p`（Todo スクラッチパッド） | dooing ウィンドウ内のみ |
+
+**`p1`〜`p9` の存在で `<leader>p` が数字の親になり、ports の単独キーは
+毎回 `timeoutlen` を待ってから発火していた**（`b` `e` `l` と同じ形）。
+
+| 対象 | 決定 |
+|---|---|
+| yank / paste | **`p` を維持**。yankbank の `p1`〜`p9` ＋ yanky の履歴 |
+| peeper-picker 2件 | **`t`（find）配下**。README で確認 — カーソル下のシンボルの出現箇所を、LSP の定義・参照に加えて文字列・コメント・生成物からも拾って1リストにする。**§1 の find の定義にそのまま当たる** |
+| pomodoro 6件 | **保留**（2026-08-23 時点）。退去は確定、文字が未定 |
+| ports.nvim 1件 | **保留**（同上）。ローカルの listening ポート一覧と kill / open / tail |
+
+**`pp` の衝突は peeper が `t` へ抜けることで消える。**
+
+#### `a` = ai（2026-08-23 決定）
+
+claudecode 10件と codex 3件が第2キーを取り合っていた。
+
+| キー | claudecode | codex | aerial |
+|---|---|---|---|
+| `a` 単独 | AI/Claude Code | — | **Aerial: toggle outline（潰れている）** |
+| `ab` | Add current buffer（**潰れている**） | Add current buffer to Codex | — |
+| `as` | Send to Claude / Add file（**同一ファイル内で2回定義**） | （codex の `as`） | — |
+
+- **`a` = ai を維持。** claudecode と codex は対象が同じ（AI エージェント）
+- **第2キーはツール別に分ける。** 同じ操作（buffer 追加、送信）が両方にあるので、
+  **操作で分けると必ず衝突する。** ツールで先に分ければ構造的に解決し、
+  `add/avante-nvim` `add/codecompanion-nvim` `add/copilotchat-nvim`
+  `add/sidekick-nvim` `add/nvim-aibo` が控えているので**実際に効いてくる**
+- **aerial は退去。** アウトラインは AI と無関係。1件・控えなし → 大文字1打（保留）
+- **`as` の重複定義は設計とは別のバグ。** claudecode の `keys.lua` が同じキーを
+  46行目（Send to Claude）と55行目（Add file）で2回定義している
+
+#### `k` = hover（2026-08-23 決定）
+
+作業の最初に保留にした prefix。**規則が揃ったので導出できるようになった。**
+
+- hover.nvim は `K` と `gK` も持つ。`<leader>k` はその仲間として筋が通る
+- codedocs は1件・控えなし → **大文字1打**（保留）。`k` に残すとラベルと食い違う
+- 当初検討した「hover を `<leader>h` へ」は**成立しない**。`h` は gitsigns の
+  hunk 12件（バッファローカル）が使っている
+
+#### `l` = leap（2026-08-23 決定）
+
+leap 7件に、nvim-hlslens の `<leader>l`（Clear search highlight）が単独キーとして
+乗っている。**leap の親を兼ねているので、押すたびに `timeoutlen` 待ちが入る**
+（`b` `e` `p` と同じ形）。
+
+- **`l` = leap。** hlslens は1件・控えなし → 大文字1打（保留）
+
+#### そのまま（確認済み・触る必要なし）
+
+| prefix | オーナー | 件数 |
+|---|---|---|
+| `z` | telekasten 単独 | 19 |
+| `x` | trouble 単独 | 4（＋ `c` から `cl` `cs` が合流） |
+| `j` | mini.jump2d 単独 | 3 |
+| `d` | tiny-inline-diagnostic 単独 | 3（`dt` `dc` が `u` へ抜けた後） |
+| `b` | cokeline ＋ snacks | 6（octo が `G` へ、scratch が合流） |
+| `e` | ecolog 単独 | 12（Fyler 無効化、shelter が `es` で合流） |
+| `q` | persistence 単独 | 4（octo の `qa` が抜けた後） |
+| `i` | img-clip `ip` ＋ lazyissues `i` | 2。**`i` 単独が `ip` の親を兼ねている**が、2件なので影響は小さい |
+
+#### 大文字待ちの列 — **TBD**
+
+退去は確定しているが、文字が未定のもの。
+
+| 対象 | 件数 | 内容 |
+|---|---|---|
+| convy | 3 | 変換（`cc` `cd` `cs`） |
+| calcium | 1 | 電卓 |
+| pomodoro | 6 | ポモドーロ |
+| ports.nvim | 1 | listening ポート一覧 |
+| aerial | 1 | アウトライン切り替え |
+| codedocs | 1 | アノテーション挿入 |
+| nvim-hlslens | 1 | 検索ハイライト消去 |
+
+空いている大文字: `A E H I J O U V W X Y Z`
+（使用済み: `B` brew / `C` cord / `D` dooing / `F`→廃止 / `G` github / `K` calendar /
+`L` lint / `M` minimap / `N` neovim-tips / `P` template / `Q` sql / `R` translate /
+`S` surround-ui / `T` tabterm）
+
+## 4. 検算（2026-08-23 実施）
+
+### 手順
+
+付録B の4経路を突き合わせる。`nvim_get_keymap` の実行時ダンプだけでは足りない。
+
+1. **実行時ダンプ** — headless で全モードの `nvim_get_keymap` を取る。
+   グローバルに登録されているものが出る
+2. **設定ソースの走査** — `lua/` 全体を `"<leader>..."` で拾い、
+   プラグインごとに集計する。**バッファローカルも無効なプラグインも拾える**
+3. **which-key のラベル登録を除外する** — `which-key-nvim/opts.lua` の `spec` と
+   `config/picker.lua` の `which-key.add()` は**マッピングではない**。
+   除外しないと衝突として誤検出する（実際に誤検出した）
+4. **組み立て型の prefix を個別に確認する** — `"<leader>" .. root_key` の形は
+   grep に出ない
+
+その上で3つを出す — ①同じキーを複数プラグインが定義、②prefix 自体が実マッピング、
+③1プラグインが複数の prefix にまたがる。
+
+### 結果 — 衝突はグローバル11件、うち10件が設計で解決済み
+
+| 衝突 | 解決する決定 |
+|---|---|
+| `a`（aerial / claudecode / octo） | aerial 退去、octo → `G` |
+| `ab` `as`（claudecode / codex） | ツール別に第2キーを分割 |
+| `cd`（convy / crates / triptych） | convy 退去、triptych 無効化 |
+| `cs`（convy / trouble） | 両方退去（trouble → `x`） |
+| `gd` | tiny-glimmer → `u` |
+| `pp` | peeper → `t`（find） |
+| `sS` `st` | squix → `Q`、shelter → `es` |
+| `tb` | bloocky → `K` |
+| `vs` | vi-sql → `Q` |
+| `p`（dooing / ports / yankbank / yanky） | **部分解決。** ports の文字が未定 |
+
+ビュー内限定の衝突（codediff の `b` `cX` `ct` `cx` `hr` `hs`、mq の `md`）は、
+そのウィンドウの外では効くので設計対象外。
+
+### 結果 — 設計に無かった論点が1つ出た
+
+**グループの親に単独マッピングが乗っているものが10件。** うち3件は `rhs` を持たない。
+
+| キー | 正体 |
+|---|---|
+| `<leader>a`（claudecode） | `rhs` なし。desc = "AI/Claude Code" |
+| `<leader>u`（snacks） | `rhs` なし。desc = "UI toggles" |
+| `<leader>B`（brewfile） | `rhs` なし。desc = "Brewfile" |
+
+**which-key のグループラベルを lazy.nvim の `keys` spec で代用したもの。**
+今日 `spec` に書いたラベルと同じ役目を別の仕組みで二重にやっており、しかも
+**マッピングとしては登録されるので `timeoutlen` 待ちが発生して何も起きない。**
+
+→ 共通規則5 として明文化した。
+
+## 5. 実装リスト
+
+設計が決まった分。**上から順に、1コミット1論理単位で入れる。**
+
+### 5-1. 削除するだけで効くもの（機能を失わない）
+
+- [ ] `<leader>a`（claudecode）の `rhs` なしエントリを削除。ラベルは `spec` 側が持つ
+- [ ] `<leader>u`（snacks）の同上
+- [ ] `<leader>B`（brewfile）の同上。遅延ロードは子キーが引く
+
+### 5-2. 無効化
+
+- [ ] Fyler.nvim を `enabled = false`（`<leader>e` の待ちが消える）
+- [ ] Triptych を `enabled = false`（`<leader>-` `<leader>cd` `<leader>.` が空く）
+
+### 5-3. prefix の移動
+
+- [ ] find: `F` → `t`（12件）。`t` の現住民は先に退去させる
+- [ ] tabterm → `T` / dooing → `D` / translate → `R` / bloocky → `K` / template → `P`
+- [ ] obsidian-tasks → `o`、octo ＋ github-actions ＋ `gB` → `G`
+- [ ] squix ＋ vi-sql → `Q`、shelter → `es`
+- [ ] neovim-tips → `N`
+- [ ] trouble の `cl` `cs` → `x` 配下、calendar-vim → `K` 配下、chezmoi → `sz` と統合
+- [ ] snacks scratch → `bs` `bS`
+- [ ] peeper-picker → `t` 配下
+- [ ] A分類のトグルを `u` へ（gitsigns `tb` `tw` / tiny-glimmer 3件 / blink-indent `ti`）
+- [ ] claudecode と codex の第2キーをツール別に分ける
+
+### 5-4. 設計とは別のバグ
+
+- [ ] claudecode の `keys.lua` が `<leader>as` を2回定義している（46行目 / 55行目）
+- [ ] nvim-html-css の `cp` が登録されていない。要調査
+
+### 5-5. 保留が解けてから
+
+- [ ] 大文字待ちの列7件（convy / calcium / pomodoro / ports / aerial / codedocs / hlslens）
 
 ## 付録A. 判明している衝突（2026-08-23 時点）
 
@@ -217,6 +462,9 @@ gitsigns は `<leader>h` をソースに持たない。あれは README の例�
 | `tb` | gitsigns: blame トグル | Bloocky: toggle calendar | git 配下のバッファ |
 | `md` | mq: Debug current file | Markdown render demo | `.mq` のみ |
 | `gd` | github-actions: Dispatch workflow | tiny-glimmer | グローバル |
+| `cd` | convy: Convert to decimal | crates.nvim | グローバル |
+| `cf` | crates: show features | chezmoi.nvim | グローバル |
+| `cs` | Trouble: Symbols | convy | グローバル |
 
 上3件は**どこからも押せない。** 下2件はバッファローカルが覆っているだけなので、
 そのファイル種別の外では効く。
