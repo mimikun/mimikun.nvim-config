@@ -29,6 +29,14 @@ local opts = {
       group = "cord",
     },
     {
+      "<leader>b",
+      group = "buffer",
+    },
+    {
+      "<leader>B",
+      group = "brew",
+    },
+    {
       "<leader>d",
       group = "diagnostics",
     },
