@@ -1,0 +1,19 @@
+lua/plugins/nvumi/opts/opts_keys.lua
+  s_97a7d722bec7af::t_1167cf50e28d31 1-20
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.23",
+  "base_commit_sha": "4ab2990e1ab8a989e60ad58385cd89a6f3d2421a",
+  "prompts": {},
+  "sessions": {
+    "s_97a7d722bec7af": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "66f60162-49ab-48a8-90ae-2e6d71bf96b5",
+        "model": "claude-opus-5"
+      },
+      "human_author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
