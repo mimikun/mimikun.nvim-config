@@ -14,7 +14,7 @@
 
 local M = {}
 
----@alias TSTrackPhase "queued"|"downloading"|"generating"|"compiling"|"installing"|"failed"
+---@alias TSTrackPhase "queued"|"downloading"|"generating"|"compiling"|"installing"|"uninstalling"|"failed"
 
 ---@class TSTrackEntry
 ---@field phase TSTrackPhase
@@ -50,12 +50,16 @@ local function changed()
 end
 
 ---@param ctx string?
----@return string? lang
+---@return string? lang, string? kind "install" or "uninstall"
 local function lang_of(ctx)
   if type(ctx) ~= "string" then
     return nil
   end
-  return ctx:match("^install/(.+)$") or ctx:match("^uninstall/(.+)$")
+  local lang = ctx:match("^install/(.+)$")
+  if lang then
+    return lang, "install"
+  end
+  return ctx:match("^uninstall/(.+)$"), "uninstall"
 end
 
 ---@param lang string
@@ -86,11 +90,11 @@ function M.setup()
 
   local new = log.new
   log.new = function(ctx)
-    local lang = lang_of(ctx)
+    local lang, kind = lang_of(ctx)
     if lang then
       -- The logger is created at the top of try_install_lang, so this is the
       -- moment the language leaves the queue.
-      set(lang, "queued")
+      set(lang, kind == "uninstall" and "uninstalling" or "queued")
     end
     return new(ctx)
   end
@@ -101,14 +105,15 @@ function M.setup()
 
   local info = logger.info
   logger.info = function(self, message, ...)
-    local lang = lang_of(self.ctx)
+    local lang, kind = lang_of(self.ctx)
     if lang then
       local text = select("#", ...) > 0 and message:format(...) or message
       if DONE[text] then
         state[lang] = nil
         changed()
       else
-        set(lang, PHASES[text:match("^%a+")] or "installing", text)
+        local fallback = kind == "uninstall" and "uninstalling" or "installing"
+        set(lang, PHASES[text:match("^%a+")] or fallback, text)
       end
     end
     return info(self, message, ...)
@@ -141,22 +146,6 @@ function M.busy()
     end
   end
   return false
-end
-
----Drop tracking for languages that reached a healthy state on disk, so a
----failure from an earlier run stops being reported once it is fixed.
----@param healthy table<string, boolean>
-function M.settle(healthy)
-  local dropped = false
-  for lang, entry in pairs(state) do
-    if healthy[lang] and entry.phase == "failed" then
-      state[lang] = nil
-      dropped = true
-    end
-  end
-  if dropped then
-    changed()
-  end
 end
 
 ---@param fn function

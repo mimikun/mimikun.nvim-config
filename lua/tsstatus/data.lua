@@ -25,6 +25,7 @@ local M = {}
 ---@field wanted string? revision the registry asks for
 ---@field have string? revision recorded at install time
 ---@field queries boolean queries directory is present
+---@field queries_missing boolean? parser is installed but its queries are not
 ---@field phase string? live phase, when an install is in flight
 ---@field message string? last message from the installer
 
@@ -128,13 +129,18 @@ function M.collect(progress)
         -- No pinned revision means the parser tracks a branch; there is nothing
         -- to compare against, so treat it as current rather than guessing.
         local stale = wanted ~= nil and wanted ~= have
+        -- Highlighting comes from the queries, not the parser, so a parser
+        -- whose queries never landed is broken no matter what its revision
+        -- says. It needs a forced reinstall, which is what "outdated" routes to.
+        local no_queries = queries[lang] ~= true
         push({
           lang = lang,
-          state = stale and "outdated" or "installed",
+          state = (stale or no_queries) and "outdated" or "installed",
           tier = parser.tier,
           wanted = wanted,
           have = have,
-          queries = queries[lang] == true,
+          queries = not no_queries,
+          queries_missing = no_queries or nil,
         })
       end
     end

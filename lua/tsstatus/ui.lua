@@ -5,6 +5,7 @@
 -- detail. Sections that need no action start collapsed: an expanded list of 320
 -- healthy parsers would bury the two that failed.
 
+local actions = require("tsstatus.actions")
 local data = require("tsstatus.data")
 local track = require("tsstatus.track")
 
@@ -21,7 +22,7 @@ local NS = vim.api.nvim_create_namespace("tsstatus")
 
 ---@type TSStatusSection[]
 local SECTIONS = {
-  { state = "installing", label = "installing", icon = "•", hl = "DiagnosticInfo", collapsed = false },
+  { state = "installing", label = "in progress", icon = "•", hl = "DiagnosticInfo", collapsed = false },
   { state = "failed", label = "failed", icon = "!", hl = "DiagnosticError", collapsed = false },
   { state = "missing", label = "missing", icon = "✗", hl = "DiagnosticError", collapsed = false },
   { state = "outdated", label = "outdated", icon = "⟳", hl = "DiagnosticWarn", collapsed = false },
@@ -33,10 +34,13 @@ local SECTIONS = {
 local SPINNER = { "⠋", "⠙", "⠹", "⠸", "⠼", "⠴", "⠦", "⠧", "⠇", "⠏" }
 local TICK_MS = 120
 
-local HELP = "q close   r refresh   <Tab> fold section"
+local HELP = "q close   r refresh   <Tab> fold   i install   u update all   x uninstall   / filter"
 
 ---@type table<string, boolean>?
 local collapsed = nil
+
+---Substring the list is narrowed to. Empty means "show everything".
+local filter = ""
 
 local frame = 1
 
@@ -53,14 +57,30 @@ local function short(rev)
   return rev
 end
 
+---Installer errors carry absolute paths and can run to several hundred
+---characters; the row only has to say which parser broke and roughly why.
+---:TSLog still has the whole thing.
+---@param text string
+---@return string
+local function truncate(text)
+  local limit = 60
+  if vim.fn.strchars(text) <= limit then
+    return text
+  end
+  return vim.fn.strcharpart(text, 0, limit - 1) .. "…"
+end
+
 ---@param entry TSStatusEntry
 ---@return string
 local function detail(entry)
   if entry.state == "installing" then
     return entry.phase or "queued"
   elseif entry.state == "failed" then
-    return entry.message or "install failed"
+    return truncate(entry.message or "install failed")
   elseif entry.state == "outdated" then
+    if entry.queries_missing then
+      return "queries missing"
+    end
     return ("%s -> %s"):format(short(entry.have), short(entry.wanted))
   elseif entry.state == "missing" then
     return short(entry.wanted)
@@ -81,18 +101,28 @@ local function icon_of(section)
   return section.icon
 end
 
+---@class TSStatusRowMap
+---@field section table<integer, TSStatusState>
+---@field entry table<integer, TSStatusEntry>
+---@field langs table<TSStatusState, string[]>
+
 ---@param report TSStatusReport
----@return string[] lines, table[] highlights, table<integer, string> section_of_line
+---@return string[] lines, table[] highlights, TSStatusRowMap map
 local function render(report)
   local buckets = {}
+  local langs = {}
   for _, entry in ipairs(report.entries) do
-    buckets[entry.state] = buckets[entry.state] or {}
-    table.insert(buckets[entry.state], entry)
+    langs[entry.state] = langs[entry.state] or {}
+    table.insert(langs[entry.state], entry.lang)
+    if filter == "" or entry.lang:find(filter, 1, true) then
+      buckets[entry.state] = buckets[entry.state] or {}
+      table.insert(buckets[entry.state], entry)
+    end
   end
 
   local lines = {}
   local hls = {}
-  local section_of_line = {}
+  local map = { section = {}, entry = {}, langs = langs }
 
   ---@param text string
   ---@param hl string?
@@ -127,7 +157,7 @@ local function render(report)
       local folded = collapsed[section.state]
       local row =
         add((" %s %s (%d)%s"):format(icon_of(section), section.label, #entries, folded and "  ..." or ""), section.hl)
-      section_of_line[row] = section.state
+      map.section[row] = section.state
       if not folded then
         for _, entry in ipairs(entries) do
           -- Icons are multi-byte and not all the same width, so the highlight
@@ -137,25 +167,29 @@ local function render(report)
           row = add(prefix .. name .. detail(entry))
           hls[#hls + 1] = { row, 0, #prefix, section.hl }
           hls[#hls + 1] = { row, #prefix + #name, -1, "Comment" }
-          section_of_line[row] = section.state
+          map.section[row] = section.state
+          map.entry[row] = entry
         end
       end
       -- The blank separator belongs to the section above it, so <Tab> still
       -- lands on something when the cursor is one line past a folded header.
-      section_of_line[add("")] = section.state
+      map.section[add("")] = section.state
     end
   end
 
+  if filter ~= "" then
+    add((" filter: %s   (/ to change, / then <CR> to clear)"):format(filter), "WarningMsg")
+  end
   add(" " .. HELP, "Comment")
 
-  return lines, hls, section_of_line
+  return lines, hls, map
 end
 
 ---@param buf integer
 ---@param report TSStatusReport
----@return table<integer, string>
+---@return TSStatusRowMap
 local function draw(buf, report)
-  local lines, hls, section_of_line = render(report)
+  local lines, hls, map = render(report)
 
   vim.bo[buf].modifiable = true
   vim.api.nvim_buf_set_lines(buf, 0, -1, false, lines)
@@ -173,7 +207,7 @@ local function draw(buf, report)
     end
   end
 
-  return section_of_line
+  return map
 end
 
 ---@param buf integer
@@ -204,15 +238,10 @@ end
 
 ---@return TSStatusReport
 local function collect()
-  local report = data.collect(track.state())
-  local healthy = {}
-  for _, entry in ipairs(report.entries) do
-    if entry.state == "installed" or entry.state == "queries_only" then
-      healthy[entry.lang] = true
-    end
-  end
-  track.settle(healthy)
-  return report
+  -- A failure is deliberately sticky: it clears when the installer is asked to
+  -- try that language again, not when the parser file happens to look fine.
+  -- An install can leave the parser in place and still have failed.
+  return data.collect(track.state())
 end
 
 function M.open()
@@ -237,7 +266,7 @@ function M.open()
   vim.bo[buf].bufhidden = "wipe"
   vim.bo[buf].filetype = "tsstatus"
 
-  local sections = draw(buf, report)
+  local rows = draw(buf, report)
 
   local win = vim.api.nvim_open_win(buf, true, {
     relative = "editor",
@@ -264,7 +293,7 @@ function M.open()
     end
     report = fresh
     local cursor = vim.api.nvim_win_get_cursor(win)
-    sections = draw(buf, report)
+    rows = draw(buf, report)
     fit(win, buf)
     local last = vim.api.nvim_buf_line_count(buf)
     vim.api.nvim_win_set_cursor(win, { math.min(cursor[1], last), cursor[2] })
@@ -310,8 +339,15 @@ function M.open()
   -- another window), so the tracker wakes the timer rather than the timer
   -- polling for work.
   local subscription = track.subscribe(vim.schedule_wrap(function()
+    if not alive() then
+      return
+    end
     if track.busy() then
       start()
+    else
+      -- A short install can begin and end between two ticks, so the last event
+      -- has to redraw by itself or the screen keeps showing the old state.
+      redraw(collect())
     end
   end))
 
@@ -331,6 +367,63 @@ function M.open()
     vim.keymap.set("n", lhs, fn, { buffer = buf, nowait = true, silent = true })
   end
 
+  ---@return TSStatusState? state, TSStatusEntry? entry
+  local function under_cursor()
+    local row = vim.api.nvim_win_get_cursor(win)[1] - 1
+    return rows.section[row], rows.entry[row]
+  end
+
+  ---Languages the cursor points at: one row, or every visible row of the
+  ---section whose header (or trailing blank line) the cursor sits on.
+  ---@return string[] langs, TSStatusState? state
+  local function targets()
+    local state, entry = under_cursor()
+    if entry then
+      return { entry.lang }, state
+    end
+    if not state then
+      return {}, nil
+    end
+    local langs = {}
+    for _, candidate in ipairs(report.entries) do
+      if candidate.state == state and (filter == "" or candidate.lang:find(filter, 1, true)) then
+        langs[#langs + 1] = candidate.lang
+      end
+    end
+    return langs, state
+  end
+
+  ---Outdated parsers, split by whether nvim-treesitter can update them.
+  ---@return string[] updatable, string[] reinstall
+  local function outdated()
+    local updatable, reinstall = {}, {}
+    for _, entry in ipairs(report.entries) do
+      if entry.state == "outdated" then
+        -- update() reads <lang>.revision through an assert()ing helper
+        -- (nvim-treesitter/util.lua:6), so a parser whose revision file is
+        -- missing crashes the whole batch. Those go through a forced install
+        -- instead, which rewrites the revision file and heals the state.
+        if entry.have and entry.have ~= "" and not entry.queries_missing then
+          updatable[#updatable + 1] = entry.lang
+        else
+          reinstall[#reinstall + 1] = entry.lang
+        end
+      end
+    end
+    return updatable, reinstall
+  end
+
+  ---A whole section at once is a big, slow action, so it asks before starting.
+  ---@param verb string
+  ---@param langs string[]
+  ---@return boolean
+  local function confirmed(verb, langs)
+    if #langs <= 1 then
+      return true
+    end
+    return vim.fn.confirm(("%s %d parsers?"):format(verb, #langs), "&Yes\n&No", 2) == 1
+  end
+
   map("q", function()
     vim.api.nvim_win_close(win, true)
   end)
@@ -341,12 +434,61 @@ function M.open()
     redraw(collect())
   end)
   map("<Tab>", function()
-    local row = vim.api.nvim_win_get_cursor(win)[1] - 1
-    local state = sections[row]
+    local state = under_cursor()
     if state then
       collapsed[state] = not collapsed[state]
       redraw(report)
     end
+  end)
+
+  map("i", function()
+    local langs, state = targets()
+    if #langs == 0 then
+      return
+    end
+    -- Anything already on disk has to be forced, otherwise install() sees the
+    -- parser present and returns without doing anything.
+    local present = state ~= "missing" and state ~= "failed"
+    if not confirmed(present and "Reinstall" or "Install", langs) then
+      return
+    end
+    actions.install(langs, present)
+  end)
+
+  map("u", function()
+    -- Update is deliberately not cursor-driven: "bring everything current" is
+    -- the only version of it anyone wants, and outdated is where it applies.
+    local updatable, reinstall = outdated()
+    local total = #updatable + #reinstall
+    if total == 0 then
+      vim.notify("TSStatus: every parser is up to date", vim.log.levels.INFO)
+      return
+    end
+    local subject = {}
+    vim.list_extend(subject, updatable)
+    vim.list_extend(subject, reinstall)
+    if not confirmed("Update", subject) then
+      return
+    end
+    actions.update(updatable)
+    actions.install(reinstall, true)
+  end)
+
+  map("x", function()
+    local langs = targets()
+    if #langs > 0 then
+      actions.uninstall(langs)
+    end
+  end)
+
+  map("/", function()
+    vim.ui.input({ prompt = "Filter parsers: ", default = filter }, function(input)
+      if input == nil then
+        return
+      end
+      filter = vim.trim(input)
+      redraw(report)
+    end)
   end)
 end
 
