@@ -1,0 +1,20 @@
+lua/plugins/project-nvim/WIKIS/Home.md
+  h_220433a6faf6b8 1-12
+lua/plugins/project-nvim/WIKIS/Keymaps.md
+  h_220433a6faf6b8 1-44
+lua/plugins/project-nvim/WIKIS/Migrating-From-The-Original.md
+  h_220433a6faf6b8 1-54
+lua/plugins/project-nvim/WIKIS/Tips-And-Tricks.md
+  h_220433a6faf6b8 1-38
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.23",
+  "base_commit_sha": "5d0401926fdd33564c48cd16774945b4630ff03e",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
