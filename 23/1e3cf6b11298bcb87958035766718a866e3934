@@ -1,0 +1,32 @@
+lua/plugins/noice-nvim/opts/cmdline.lua
+  h_220433a6faf6b8 1-203
+lua/plugins/noice-nvim/opts/commands.lua
+  h_220433a6faf6b8 1-203
+lua/plugins/noice-nvim/opts/init.lua
+  h_220433a6faf6b8 7-15
+lua/plugins/noice-nvim/opts/lsp.lua
+  h_220433a6faf6b8 1-203
+lua/plugins/noice-nvim/opts/markdown.lua
+  h_220433a6faf6b8 1-203
+lua/plugins/noice-nvim/opts/messages.lua
+  h_220433a6faf6b8 1-203
+lua/plugins/noice-nvim/opts/notify.lua
+  h_220433a6faf6b8 1-203
+lua/plugins/noice-nvim/opts/popupmenu.lua
+  h_220433a6faf6b8 1-203
+lua/plugins/noice-nvim/opts/presets.lua
+  h_220433a6faf6b8 1-203
+lua/plugins/noice-nvim/opts/redirect.lua
+  h_220433a6faf6b8 1-203
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.23",
+  "base_commit_sha": "231e3cf6b11298bcb87958035766718a866e3934",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
