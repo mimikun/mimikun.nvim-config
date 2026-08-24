@@ -1,0 +1,46 @@
+lua/plugins/nvumi/opts/Recipes.md
+  h_220433a6faf6b8 1-327
+lua/plugins/nvumi/cmds.lua
+  h_220433a6faf6b8 1-2,3-6,7-9
+lua/plugins/nvumi/dependencies.lua
+  h_220433a6faf6b8 1-16
+lua/plugins/nvumi/events.lua
+  h_220433a6faf6b8 1-6
+lua/plugins/nvumi/ft.lua
+  h_220433a6faf6b8 1-2,3,4-6
+lua/plugins/nvumi/init.lua
+  h_220433a6faf6b8 1-4,5-6,7,8,9,10,11-16,17-19
+lua/plugins/nvumi/keys.lua
+  h_220433a6faf6b8 1-3,4,5,6,7-9,10,11,12-16
+lua/plugins/nvumi/stylua.toml
+  h_220433a6faf6b8 1-13
+lua/plugins/nvumi/opts/custom_conversions.lua
+  h_220433a6faf6b8 1-18
+lua/plugins/nvumi/opts/custom_functions.lua
+  h_220433a6faf6b8 1-26
+lua/plugins/nvumi/opts/stylua.toml
+  h_220433a6faf6b8 1-13
+lua/plugins/nvumi/opts/opts_keys.lua
+  s_97a7d722bec7af::t_1167cf50e28d31 1-20
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.23",
+  "base_commit_sha": "c19f952a254defec5e6117ebae1cd6a8cab65115",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  },
+  "sessions": {
+    "s_97a7d722bec7af": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "66f60162-49ab-48a8-90ae-2e6d71bf96b5",
+        "model": "claude-opus-5"
+      },
+      "human_author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
