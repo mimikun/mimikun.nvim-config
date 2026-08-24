@@ -1,0 +1,198 @@
+lua/plugins/noice-nvim/CODES/.editorconfig
+  h_220433a6faf6b8 1-7
+lua/plugins/noice-nvim/CODES/.github/ISSUE_TEMPLATE/bug_report.yml
+  h_220433a6faf6b8 1-76
+lua/plugins/noice-nvim/CODES/.github/ISSUE_TEMPLATE/config.yml
+  h_220433a6faf6b8 1-5
+lua/plugins/noice-nvim/CODES/.github/ISSUE_TEMPLATE/feature_request.yml
+  h_220433a6faf6b8 1-36
+lua/plugins/noice-nvim/CODES/.github/PULL_REQUEST_TEMPLATE.md
+  h_220433a6faf6b8 1-16
+lua/plugins/noice-nvim/CODES/.github/dependabot.yml
+  h_220433a6faf6b8 1-6
+lua/plugins/noice-nvim/CODES/.github/workflows/ci.yml
+  h_220433a6faf6b8 1-14
+lua/plugins/noice-nvim/CODES/.github/workflows/labeler.yml
+  h_220433a6faf6b8 1-8
+lua/plugins/noice-nvim/CODES/.github/workflows/pr.yml
+  h_220433a6faf6b8 1-18
+lua/plugins/noice-nvim/CODES/.github/workflows/stale.yml
+  h_220433a6faf6b8 1-11
+lua/plugins/noice-nvim/CODES/.github/workflows/update.yml
+  h_220433a6faf6b8 1-13
+lua/plugins/noice-nvim/CODES/.gitignore
+  h_220433a6faf6b8 1-9
+lua/plugins/noice-nvim/CODES/.markdownlint-cli2.yaml
+  h_220433a6faf6b8 1-3
+lua/plugins/noice-nvim/CODES/.markdownlint.yaml
+  h_220433a6faf6b8 1-12
+lua/plugins/noice-nvim/CODES/.neoconf.json
+  h_220433a6faf6b8 1-19
+lua/plugins/noice-nvim/CODES/CHANGELOG.md
+  h_220433a6faf6b8 1-1173
+lua/plugins/noice-nvim/CODES/LICENSE
+  h_220433a6faf6b8 1-201
+lua/plugins/noice-nvim/CODES/README.md
+  h_220433a6faf6b8 1-819
+lua/plugins/noice-nvim/CODES/doc/noice.nvim.txt
+  h_220433a6faf6b8 1-986
+lua/plugins/noice-nvim/CODES/lazy.lua
+  h_220433a6faf6b8 1-7
+lua/plugins/noice-nvim/CODES/lua/noice/api/init.lua
+  h_220433a6faf6b8 1-18
+lua/plugins/noice-nvim/CODES/lua/noice/api/status.lua
+  h_220433a6faf6b8 1-75
+lua/plugins/noice-nvim/CODES/lua/noice/commands.lua
+  h_220433a6faf6b8 1-127
+lua/plugins/noice-nvim/CODES/lua/noice/config/cmdline.lua
+  h_220433a6faf6b8 1-59
+lua/plugins/noice-nvim/CODES/lua/noice/config/format.lua
+  h_220433a6faf6b8 1-161
+lua/plugins/noice-nvim/CODES/lua/noice/config/highlights.lua
+  h_220433a6faf6b8 1-145
+lua/plugins/noice-nvim/CODES/lua/noice/config/icons.lua
+  h_220433a6faf6b8 1-28
+lua/plugins/noice-nvim/CODES/lua/noice/config/init.lua
+  h_220433a6faf6b8 1-302
+lua/plugins/noice-nvim/CODES/lua/noice/config/preset.lua
+  h_220433a6faf6b8 1-133
+lua/plugins/noice-nvim/CODES/lua/noice/config/routes.lua
+  h_220433a6faf6b8 1-122
+lua/plugins/noice-nvim/CODES/lua/noice/config/status.lua
+  h_220433a6faf6b8 1-16
+lua/plugins/noice-nvim/CODES/lua/noice/config/views.lua
+  h_220433a6faf6b8 1-270
+lua/plugins/noice-nvim/CODES/lua/noice/health.lua
+  h_220433a6faf6b8 1-276
+lua/plugins/noice-nvim/CODES/lua/noice/init.lua
+  h_220433a6faf6b8 1-91
+lua/plugins/noice-nvim/CODES/lua/noice/integrations/fzf.lua
+  h_220433a6faf6b8 1-113
+lua/plugins/noice-nvim/CODES/lua/noice/integrations/snacks.lua
+  h_220433a6faf6b8 1-60
+lua/plugins/noice-nvim/CODES/lua/noice/lsp/docs.lua
+  h_220433a6faf6b8 1-82
+lua/plugins/noice-nvim/CODES/lua/noice/lsp/format.lua
+  h_220433a6faf6b8 1-49
+lua/plugins/noice-nvim/CODES/lua/noice/lsp/hover.lua
+  h_220433a6faf6b8 1-33
+lua/plugins/noice-nvim/CODES/lua/noice/lsp/init.lua
+  h_220433a6faf6b8 1-74
+lua/plugins/noice-nvim/CODES/lua/noice/lsp/message.lua
+  h_220433a6faf6b8 1-40
+lua/plugins/noice-nvim/CODES/lua/noice/lsp/override.lua
+  h_220433a6faf6b8 1-65
+lua/plugins/noice-nvim/CODES/lua/noice/lsp/progress.lua
+  h_220433a6faf6b8 1-113
+lua/plugins/noice-nvim/CODES/lua/noice/lsp/signature.lua
+  h_220433a6faf6b8 1-232
+lua/plugins/noice-nvim/CODES/lua/noice/message/filter.lua
+  h_220433a6faf6b8 1-185
+lua/plugins/noice-nvim/CODES/lua/noice/message/init.lua
+  h_220433a6faf6b8 1-124
+lua/plugins/noice-nvim/CODES/lua/noice/message/manager.lua
+  h_220433a6faf6b8 1-129
+lua/plugins/noice-nvim/CODES/lua/noice/message/router.lua
+  h_220433a6faf6b8 1-250
+lua/plugins/noice-nvim/CODES/lua/noice/source/notify.lua
+  h_220433a6faf6b8 1-72
+lua/plugins/noice-nvim/CODES/lua/noice/text/block.lua
+  h_220433a6faf6b8 1-218
+lua/plugins/noice-nvim/CODES/lua/noice/text/format/formatters.lua
+  h_220433a6faf6b8 1-198
+lua/plugins/noice-nvim/CODES/lua/noice/text/format/init.lua
+  h_220433a6faf6b8 1-172
+lua/plugins/noice-nvim/CODES/lua/noice/text/highlight.lua
+  h_220433a6faf6b8 1-85
+lua/plugins/noice-nvim/CODES/lua/noice/text/init.lua
+  h_220433a6faf6b8 1-127
+lua/plugins/noice-nvim/CODES/lua/noice/text/markdown.lua
+  h_220433a6faf6b8 1-258
+lua/plugins/noice-nvim/CODES/lua/noice/text/syntax.lua
+  h_220433a6faf6b8 1-34
+lua/plugins/noice-nvim/CODES/lua/noice/text/treesitter.lua
+  h_220433a6faf6b8 1-89
+lua/plugins/noice-nvim/CODES/lua/noice/types/nui.lua
+  h_220433a6faf6b8 1-55
+lua/plugins/noice-nvim/CODES/lua/noice/ui/cmdline.lua
+  h_220433a6faf6b8 1-335
+lua/plugins/noice-nvim/CODES/lua/noice/ui/grid.lua
+  h_220433a6faf6b8 1-5
+lua/plugins/noice-nvim/CODES/lua/noice/ui/init.lua
+  h_220433a6faf6b8 1-217
+lua/plugins/noice-nvim/CODES/lua/noice/ui/msg.lua
+  h_220433a6faf6b8 1-192
+lua/plugins/noice-nvim/CODES/lua/noice/ui/popupmenu/cmp.lua
+  h_220433a6faf6b8 1-70
+lua/plugins/noice-nvim/CODES/lua/noice/ui/popupmenu/init.lua
+  h_220433a6faf6b8 1-98
+lua/plugins/noice-nvim/CODES/lua/noice/ui/popupmenu/nui.lua
+  h_220433a6faf6b8 1-281
+lua/plugins/noice-nvim/CODES/lua/noice/ui/state.lua
+  h_220433a6faf6b8 1-27
+lua/plugins/noice-nvim/CODES/lua/noice/util/call.lua
+  h_220433a6faf6b8 1-168
+lua/plugins/noice-nvim/CODES/lua/noice/util/ffi.lua
+  h_220433a6faf6b8 1-40
+lua/plugins/noice-nvim/CODES/lua/noice/util/hacks.lua
+  h_220433a6faf6b8 1-200
+lua/plugins/noice-nvim/CODES/lua/noice/util/init.lua
+  h_220433a6faf6b8 1-395
+lua/plugins/noice-nvim/CODES/lua/noice/util/lazy.lua
+  h_220433a6faf6b8 1-25
+lua/plugins/noice-nvim/CODES/lua/noice/util/nui.lua
+  h_220433a6faf6b8 1-232
+lua/plugins/noice-nvim/CODES/lua/noice/util/spinners.lua
+  h_220433a6faf6b8 1-1021
+lua/plugins/noice-nvim/CODES/lua/noice/util/stats.lua
+  h_220433a6faf6b8 1-38
+lua/plugins/noice-nvim/CODES/lua/noice/view/backend/mini.lua
+  h_220433a6faf6b8 1-105
+lua/plugins/noice-nvim/CODES/lua/noice/view/backend/notify.lua
+  h_220433a6faf6b8 1-209
+lua/plugins/noice-nvim/CODES/lua/noice/view/backend/notify_send.lua
+  h_220433a6faf6b8 1-166
+lua/plugins/noice-nvim/CODES/lua/noice/view/backend/popup.lua
+  h_220433a6faf6b8 1-5
+lua/plugins/noice-nvim/CODES/lua/noice/view/backend/snacks.lua
+  h_220433a6faf6b8 1-137
+lua/plugins/noice-nvim/CODES/lua/noice/view/backend/split.lua
+  h_220433a6faf6b8 1-5
+lua/plugins/noice-nvim/CODES/lua/noice/view/backend/virtualtext.lua
+  h_220433a6faf6b8 1-35
+lua/plugins/noice-nvim/CODES/lua/noice/view/init.lua
+  h_220433a6faf6b8 1-282
+lua/plugins/noice-nvim/CODES/lua/noice/view/nui.lua
+  h_220433a6faf6b8 1-313
+lua/plugins/noice-nvim/CODES/lua/noice/view/scrollbar.lua
+  h_220433a6faf6b8 1-181
+lua/plugins/noice-nvim/CODES/lua/telescope/_extensions/noice.lua
+  h_220433a6faf6b8 1-125
+lua/plugins/noice-nvim/CODES/scripts/test
+  h_220433a6faf6b8 1-3
+lua/plugins/noice-nvim/CODES/selene.toml
+  h_220433a6faf6b8 1-4
+lua/plugins/noice-nvim/CODES/stylua.toml
+  h_220433a6faf6b8 1-6
+lua/plugins/noice-nvim/CODES/tests/minit.lua
+  h_220433a6faf6b8 1-20
+lua/plugins/noice-nvim/CODES/tests/text/markdown_spec.lua
+  h_220433a6faf6b8 1-213
+lua/plugins/noice-nvim/CODES/tests/util/ffi_spec.lua
+  h_220433a6faf6b8 1-7
+lua/plugins/noice-nvim/CODES/tests/view/init_spec.lua
+  h_220433a6faf6b8 1-12
+lua/plugins/noice-nvim/CODES/vim.yml
+  h_220433a6faf6b8 1-19
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.23",
+  "base_commit_sha": "63817b2501a42a553d1094e0a54e86d19836db4b",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
