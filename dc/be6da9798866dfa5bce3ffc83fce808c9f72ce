@@ -1,0 +1,25 @@
+lua/tsstatus/actions.lua
+  s_1713fbf4fb7226::t_1c849cce93be5e 1-66
+lua/tsstatus/data.lua
+  s_1713fbf4fb7226::t_b8928481e953fd 28,132-135,138,142-143
+lua/tsstatus/track.lua
+  s_1713fbf4fb7226::t_b1e74250d6fa87 17,53,58-62,93,97,108,115-116
+lua/tsstatus/ui.lua
+  s_1713fbf4fb7226::t_542606584efa44 8,25,37,42-44,60-72,79,81-83,104-108,110,113,115-120,125,160,170-171,176,180-182,185,190,192,210,241-244,269,296,342-344,347-350,370-426,437,443-492
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.23",
+  "base_commit_sha": "dcbe6da9798866dfa5bce3ffc83fce808c9f72ce",
+  "prompts": {},
+  "sessions": {
+    "s_1713fbf4fb7226": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "5406540a-aa44-4195-83a6-8c0f8d810662",
+        "model": "claude-opus-5"
+      },
+      "human_author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
