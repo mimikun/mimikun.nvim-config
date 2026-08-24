@@ -1,0 +1,254 @@
+local range_to_string = require("std.lsp").range_to_string
+
+local Element = require("lean.tui").Element
+local InteractiveCode = require("lean.widget.interactive_code")
+local config = require("lean.config")
+local lsp_diagnostics = require("lean.diagnostic").lsp_diagnostics
+
+local interactive_goal = {}
+
+---A hypothesis name which is accessible according to Lean's naming conventions.
+---
+---Mirrors `Lean.Name.isInaccessibleUserName`: inaccessible names contain a
+---dagger anywhere within them, as shadowed names have further superscript
+---indices appended after theirs (e.g. `x✝¹`).
+---@param name string
+local function is_accessible(name)
+  return not name:find("✝", 1, true)
+end
+
+---Render a hypothesis name.
+---@param name string
+---@param mvar_id MVarId
+---@param fvar_id FVarId
+---@param locations? Locations
+local function to_hypothesis_name(name, mvar_id, fvar_id, locations)
+  local function accessible_hlgroups()
+    return { is_accessible(name) and "leanInfoHypName" or "leanInfoInaccessibleHypName" }
+  end
+
+  local highlightable, select
+  local hlgroups = accessible_hlgroups
+
+  if locations and mvar_id and fvar_id then
+    highlightable = true
+
+    ---@type GoalsLocation
+    local location = { mvarId = mvar_id, loc = { hyp = fvar_id } }
+
+    hlgroups = function()
+      return locations:is_selected(location) and { "leanInfoSelected" } or accessible_hlgroups()
+    end
+
+    select = function()
+      locations:toggle_selection(location)
+    end
+  end
+
+  return Element:new({
+    text = name,
+    highlightable = highlightable,
+    hlgroups = hlgroups,
+    events = { select = select },
+  })
+end
+
+---Render the hypothesis according to view options.
+---@param hyp InteractiveHypothesisBundle
+---@param mvar_id MVarId
+---@param opts InfoviewViewOptions
+---@param sess ReconnectingSubsession
+---@param locations? Locations
+local function to_hypothesis_element(hyp, mvar_id, opts, sess, locations)
+  if (not opts.show_instances and hyp.isInstance) or (not opts.show_types and hyp.isType) then
+    return
+  end
+
+  local names = vim
+    .iter(ipairs(hyp.names))
+    :map(function(i, name)
+      if opts.show_hidden_assumptions or is_accessible(name) then
+        return to_hypothesis_name(name, mvar_id, hyp.fvarIds[i], locations)
+      end
+    end)
+    :totable()
+  if #names == 0 then
+    return
+  end
+
+  local type_locations = locations
+    and mvar_id
+    and hyp.fvarIds
+    and hyp.fvarIds[1]
+    and locations:in_template({
+      mvarId = mvar_id,
+      loc = { hypType = { hyp.fvarIds[1], "" } },
+    })
+  local element = Element:new({
+    name = "hyp",
+    children = {
+      Element:concat(names, " ", {
+        hlgroups = hyp.isInserted and { "leanInfoHypNameInserted" } or hyp.isRemoved and {
+          "leanInfoHypNameRemoved",
+        } or nil,
+      }),
+      Element.text(" : "),
+      InteractiveCode(hyp.type, sess, type_locations),
+    },
+  })
+
+  if opts.show_let_values and hyp.val then
+    local val_locations = locations
+      and mvar_id
+      and hyp.fvarIds
+      and hyp.fvarIds[1]
+      and locations:in_template({
+        mvarId = mvar_id,
+        loc = { hypValue = { hyp.fvarIds[1], "" } },
+      })
+    element:add_child(Element:new({
+      text = " := ",
+      name = "hyp_val",
+      children = { InteractiveCode(hyp.val, sess, val_locations) },
+    }))
+  end
+
+  return element
+end
+
+---Diagnostic information for the current line from the Lean server.
+---@param params lsp.TextDocumentPositionParams
+---@return Element[]
+function interactive_goal.diagnostics(params)
+  local markers = config().infoview.severity_markers
+
+  local bufnr = vim.uri_to_bufnr(params.textDocument.uri)
+  if not vim.api.nvim_buf_is_loaded(bufnr) then
+    return {}
+  end
+
+  ---@param diagnostic vim.Diagnostic
+  return vim.tbl_map(function(diagnostic)
+    local range = diagnostic.user_data and diagnostic.user_data.lsp and diagnostic.user_data.lsp.fullRange
+      ---@type lsp.Range
+      or {
+        start = {
+          line = diagnostic.lnum,
+          character = diagnostic.col,
+        },
+        ["end"] = {
+          line = diagnostic.end_lnum,
+          character = diagnostic.end_col,
+        },
+      }
+    return Element:foldable({
+      title = Element.title(("%s: %s"):format(range_to_string(range), markers[diagnostic.severity])),
+      body = {
+        Element:new({
+          -- So. #check foo gives back a diagnostic with *no* trailing newline
+          -- but #eval foo gives back one *with* a trailing newline.
+          -- VSCode displays both of them the same, so let's do that as well by
+          -- essentially stripping off one trailing newline if present in a
+          -- diagnostic message.
+          text = diagnostic.message:gsub("\n$", ""),
+        }),
+      },
+      gap = 0,
+    })
+  end, lsp_diagnostics({ lnum = params.position.line }, bufnr))
+end
+
+---@param goal InteractiveGoal | InteractiveTermGoal
+---@param sess ReconnectingSubsession
+---@param locations Locations? nil if we're rendering a term goal
+---@param view_options? InfoviewViewOptions
+function interactive_goal.Goal(goal, sess, locations, view_options)
+  view_options = view_options or config().infoview.view_options or {}
+
+  local case
+  if goal.userName then
+    case = Element:new({
+      children = {
+        Element:new({ text = "case ", hlgroups = { "leanInfoGoalCase" } }),
+        Element:new({ text = goal.userName .. "\n" }),
+      },
+    })
+  end
+  local children = { case }
+
+  local goal_locations = locations
+    and goal.mvarId
+    and locations:in_template({
+      mvarId = goal.mvarId,
+      loc = { target = "" },
+    })
+  local goal_element = Element:new({
+    name = "goal",
+    children = {
+      Element:new({
+        text = goal.goalPrefix or "⊢ ",
+        hlgroups = goal.isInserted and { "leanInfoGoalInserted" } or goal.isRemoved and {
+          "leanInfoGoalRemoved",
+        } or { "leanInfoGoalPrefix" },
+      }),
+      Element:new({
+        name = "goal-type",
+        children = { InteractiveCode(goal.type, sess, goal_locations) },
+      }),
+    },
+  })
+  local hyps = vim.iter(goal.hyps):map(function(hyp)
+    return to_hypothesis_element(hyp, goal.mvarId, view_options, sess, locations)
+  end)
+
+  local separator = Element.text("\n")
+  if view_options.reverse then
+    table.insert(children, goal_element)
+    if hyps:peek() then
+      table.insert(children, separator)
+      table.insert(children, Element:concat(hyps:rev():totable(), "\n"))
+    end
+  else
+    if hyps:peek() then
+      table.insert(children, Element:concat(hyps:totable(), "\n"))
+      table.insert(children, separator)
+    end
+    table.insert(children, goal_element)
+  end
+
+  return Element:new({ name = "interactive-goal", children = children })
+end
+
+---@param goals InteractiveGoal[]
+---@param sess ReconnectingSubsession
+---@param locations Locations
+---@param view_options InfoviewViewOptions
+---@return Element[]
+function interactive_goal.Goals(goals, sess, locations, view_options)
+  ---@param goal InteractiveGoal
+  local children = vim.iter(goals):map(function(goal)
+    return interactive_goal.Goal(goal, sess, locations, view_options)
+  end)
+  return { Element:concat(children:totable(), "\n\n") }
+end
+
+---The current (term) goal state.
+---@param goal InteractiveTermGoal
+---@param sess ReconnectingSubsession
+---@param view_options InfoviewViewOptions
+---@return Element[]
+function interactive_goal.interactive_term_goal(goal, sess, view_options)
+  if not goal then
+    return {}
+  end
+
+  return {
+    Element:foldable({
+      title = Element.title(("expected type (%s)"):format(range_to_string(goal.range)), "leanInfoExpectedType"),
+      body = { interactive_goal.Goal(goal, sess, nil, view_options) },
+      gap = 1,
+    }),
+  }
+end
+
+return interactive_goal

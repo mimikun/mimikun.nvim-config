@@ -1,0 +1,203 @@
+local Element = require("lean.tui").Element
+local TaggedText = require("lean.widget.tagged_text")
+
+---@alias DiffTag 'wasChanged' | 'willChange' | 'wasDeleted' | 'willDelete' | 'wasInserted' | 'willInsert'
+
+---A user-facing explanation of a changing piece of the goal state.
+---
+---Corresponds to equivalent VSCode explanations.
+---@type table<DiffTag, string>
+local DIFF_TAG_TO_EXPLANATION = {
+  wasChanged = "This subexpression has been modified.",
+  willChange = "This subexpression will be modified.",
+  wasInserted = "This subexpression has been inserted.",
+  willInsert = "This subexpression will be inserted.",
+  wasDeleted = "This subexpression has been removed.",
+  willDelete = "This subexpression will be deleted.",
+}
+
+---Information about a subexpression within delaborated code.
+---@class SubexprInfo
+---@field info InfoWithCtx The `Elab.Info` node with the semantics of this part of the output.
+---@field subexprPos string The position of this subexpression within the top-level expression.
+---@field diffStatus? DiffTag Display the subexpression as in a diff view (e.g. red/green like `git diff`)
+
+local InteractiveCode
+
+---Render a SubexprInfo tag node.
+---
+---@param subexpr_info SubexprInfo
+---@param tag TaggedText.SubExprInfo
+---@param sess ReconnectingSubsession
+---@param locations? Locations
+---@param self_renderer? function renderer for recursive child code (defaults to InteractiveCode)
+local function render_subexpr_info(subexpr_info, tag, sess, locations, self_renderer)
+  self_renderer = self_renderer or InteractiveCode
+
+  local element = Element:new({ highlightable = true })
+  if subexpr_info.diffStatus then
+    element.hlgroups = { "leanInfoDiff" .. subexpr_info.diffStatus }
+  end
+
+  ---@param ctx ElementEventContext
+  local do_reset = function(ctx)
+    ctx.clear_tooltip()
+    ctx.rehover()
+  end
+
+  ---@param info_popup InfoPopup
+  local mk_tooltip = function(info_popup)
+    local tooltip_element = Element.noop()
+
+    if info_popup.exprExplicit ~= nil then
+      -- Tooltip data from infoToInteractive is always CodeWithInfos.
+      tooltip_element:add_child(InteractiveCode(info_popup.exprExplicit, sess, locations))
+      if info_popup.type ~= nil then
+        tooltip_element:add_child(Element.text(" : "))
+      end
+    end
+
+    if info_popup.type ~= nil then
+      tooltip_element:add_child(InteractiveCode(info_popup.type, sess, locations))
+    end
+
+    if info_popup.doc ~= nil and info_popup.doc ~= vim.NIL then
+      tooltip_element:add_child(Element.text("\n\n"))
+      tooltip_element:add_child(Element.text(info_popup.doc)) -- TODO: markdown
+    end
+
+    if subexpr_info.diffStatus then
+      tooltip_element:add_child(Element.text("\n\n"))
+      tooltip_element:add_child(Element:new({
+        hlgroups = { "Comment" },
+        text = DIFF_TAG_TO_EXPLANATION[subexpr_info.diffStatus],
+      }))
+    end
+
+    return tooltip_element
+  end
+
+  local info_with_ctx = subexpr_info.info
+
+  ---@param ctx ElementEventContext
+  local do_open_all = function(ctx)
+    local info_popup, err = sess:infoToInteractive(info_with_ctx)
+
+    local tooltip
+    if err then
+      tooltip = Element.noop(vim.inspect(err))
+    else
+      tooltip = mk_tooltip(info_popup)
+    end
+
+    ctx.set_tooltip(tooltip)
+    ctx.rehover()
+  end
+
+  ---@param ctx ElementEventContext
+  local click = function(ctx)
+    if ctx.tooltip_open() then
+      return do_reset(ctx)
+    else
+      return do_open_all(ctx)
+    end
+  end
+
+  ---@param kind GoToKind
+  local go_to = function(_, kind)
+    local links, err = sess:getGoToLocation(kind, info_with_ctx)
+    if err or #links == 0 then
+      return
+    end
+
+    -- Switch to window of current Lean file
+    local current_infoview = require("lean.infoview").get_current_infoview()
+    if current_infoview then
+      current_infoview:jump_to_last_window()
+    end
+
+    vim.lsp.util.show_document(links[1], "utf-16", { focus = true })
+    if #links > 1 then
+      vim.fn.setqflist({}, " ", {
+        title = "LSP locations",
+        items = vim.lsp.util.locations_to_items(links, "utf-16"),
+      })
+      vim.cmd("botright copen")
+    end
+  end
+  local go_to_def = function(ctx) ---@param ctx ElementEventContext
+    go_to(ctx, "definition")
+  end
+  local go_to_decl = function(ctx) ---@param ctx ElementEventContext
+    go_to(ctx, "declaration")
+  end
+  local go_to_type = function(ctx) ---@param ctx ElementEventContext
+    go_to(ctx, "type")
+  end
+
+  element.events = {
+    click = click,
+    clear = function(ctx) ---@param ctx ElementEventContext
+      ctx.clear_tooltip()
+    end,
+    go_to_def = go_to_def,
+    go_to_decl = go_to_decl,
+    go_to_type = go_to_type,
+  }
+
+  if locations then
+    -- The server's canonical identity for this subexpression (mvarId + loc +
+    -- subexprPos). Keying its open tooltip by this makes the tooltip track the
+    -- same logical subexpression across goal rebuilds, and -- crucially -- go
+    -- away rather than show stale when the goal changes to something else at the
+    -- same structural position.
+    element.tooltip_id = vim.json.encode(locations:template_with_subexpr_pos(subexpr_info.subexprPos))
+    local diff_hl = element.hlgroups ---@type string[]?
+    function element.hlgroups()
+      local selected = locations:is_subexpr_selected(subexpr_info.subexprPos)
+      if diff_hl and selected then
+        return vim.iter({ diff_hl, { "leanInfoSelected" } }):flatten():totable()
+      elseif selected then
+        return { "leanInfoSelected" }
+      else
+        return diff_hl
+      end
+    end
+    element.events.select = function()
+      locations:toggle_subexpr_selection(subexpr_info.subexprPos)
+    end
+  end
+
+  element:add_child(self_renderer(tag, sess, locations))
+
+  return element
+end
+
+---@class TaggedText.SubExprInfo: TaggedText
+---@field append? TaggedText.SubExprInfo[]
+---@field tag? {[1]: SubexprInfo, [2]: TaggedText.SubExprInfo }
+
+---@alias CodeWithInfos TaggedText.SubExprInfo
+
+-- FIXME: make inductive take parameters and really merge with TaggedTextMsgEmbed
+InteractiveCode = TaggedText("SubexprInfo", render_subexpr_info)
+
+---@alias HighlightedSubexprInfo SubexprInfo | '"highlighted"'
+---@alias HighlightedCodeWithInfos TaggedText
+
+---Render a HighlightedCodeWithInfos, i.e. code where some subexpressions
+---may be tagged with 'highlighted' to indicate trace search matches.
+local HighlightedInteractiveCode
+HighlightedInteractiveCode = TaggedText("HighlightedSubexprInfo", function(info, tag, sess, locations)
+  if info == "highlighted" then
+    local child = HighlightedInteractiveCode(tag, sess, locations)
+    child.hlgroups = { "leanInfoHighlighted" }
+    return child
+  end
+  return render_subexpr_info(info, tag, sess, locations, HighlightedInteractiveCode)
+end)
+
+-- Exposed as a property to avoid changing the module return value.
+InteractiveCode.Highlighted = HighlightedInteractiveCode
+
+return InteractiveCode
