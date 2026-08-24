@@ -1,0 +1,22 @@
+lua/plugins/noice-nvim/WIKIS/A-Guide-to-Messages.md
+  h_220433a6faf6b8 1-323
+lua/plugins/noice-nvim/WIKIS/Configuration-Recipes.md
+  h_220433a6faf6b8 1-245
+lua/plugins/noice-nvim/WIKIS/Home.md
+  h_220433a6faf6b8 1
+lua/plugins/noice-nvim/WIKIS/Minimal-`init.lua`-to-Reproduce-an-Issue.md
+  h_220433a6faf6b8 1-46
+lua/plugins/noice-nvim/WIKIS/What's-New?.md
+  h_220433a6faf6b8 1-42
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.23",
+  "base_commit_sha": "ab34e4c54c571b0aae7671b6b4398423cc259e0f",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
