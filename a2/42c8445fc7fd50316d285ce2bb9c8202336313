@@ -1,0 +1,22 @@
+lua/plugins/nvumi/WIKIS/Configuration.md
+  h_220433a6faf6b8 1-57
+lua/plugins/nvumi/WIKIS/Home.md
+  h_220433a6faf6b8 1-11
+lua/plugins/nvumi/WIKIS/Installation.md
+  h_220433a6faf6b8 1-48
+lua/plugins/nvumi/WIKIS/Recipes.md
+  h_220433a6faf6b8 1-327
+lua/plugins/nvumi/WIKIS/Usage.md
+  h_220433a6faf6b8 1-50
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.23",
+  "base_commit_sha": "a242c8445fc7fd50316d285ce2bb9c8202336313",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
