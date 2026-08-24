@@ -1,0 +1,64 @@
+lua/plugins/yankdown-nvim/CODES/.github/workflows/ci.yml
+  h_220433a6faf6b8 1-193
+lua/plugins/yankdown-nvim/CODES/.github/workflows/release.yml
+  h_220433a6faf6b8 1-39
+lua/plugins/yankdown-nvim/CODES/.gitignore
+  h_220433a6faf6b8 1-54
+lua/plugins/yankdown-nvim/CODES/.luacheckrc
+  h_220433a6faf6b8 1-4
+lua/plugins/yankdown-nvim/CODES/.stylua.toml
+  h_220433a6faf6b8 1-5
+lua/plugins/yankdown-nvim/CODES/LICENSE
+  h_220433a6faf6b8 1-21
+lua/plugins/yankdown-nvim/CODES/README.md
+  h_220433a6faf6b8 1-227
+lua/plugins/yankdown-nvim/CODES/assets/demo.tape
+  h_220433a6faf6b8 1-116
+lua/plugins/yankdown-nvim/CODES/lua/yankdown/cf_html.lua
+  h_220433a6faf6b8 1-83
+lua/plugins/yankdown-nvim/CODES/lua/yankdown/check.lua
+  h_220433a6faf6b8 1-179
+lua/plugins/yankdown-nvim/CODES/lua/yankdown/clipboard.lua
+  h_220433a6faf6b8 1-165
+lua/plugins/yankdown-nvim/CODES/lua/yankdown/convert.lua
+  h_220433a6faf6b8 1-30
+lua/plugins/yankdown-nvim/CODES/lua/yankdown/init.lua
+  h_220433a6faf6b8 1-86
+lua/plugins/yankdown-nvim/CODES/lua/yankdown/native.lua
+  h_220433a6faf6b8 1-9
+lua/plugins/yankdown-nvim/CODES/lua/yankdown/paste.lua
+  h_220433a6faf6b8 1-89
+lua/plugins/yankdown-nvim/CODES/scripts/benchmark.lua
+  h_220433a6faf6b8 1-66
+lua/plugins/yankdown-nvim/CODES/tests/integration/html_paste.lua
+  h_220433a6faf6b8 1-43
+lua/plugins/yankdown-nvim/CODES/tests/integration/wayland_check.lua
+  h_220433a6faf6b8 1-23
+lua/plugins/yankdown-nvim/CODES/tests/minitest.lua
+  h_220433a6faf6b8 1-39
+lua/plugins/yankdown-nvim/CODES/tests/run.lua
+  h_220433a6faf6b8 1-10
+lua/plugins/yankdown-nvim/CODES/tests/test_cf_html.lua
+  h_220433a6faf6b8 1-144
+lua/plugins/yankdown-nvim/CODES/tests/test_check.lua
+  h_220433a6faf6b8 1-381
+lua/plugins/yankdown-nvim/CODES/tests/test_clipboard.lua
+  h_220433a6faf6b8 1-239
+lua/plugins/yankdown-nvim/CODES/tests/test_convert.lua
+  h_220433a6faf6b8 1-42
+lua/plugins/yankdown-nvim/CODES/tests/test_init.lua
+  h_220433a6faf6b8 1-102
+lua/plugins/yankdown-nvim/CODES/tests/test_paste.lua
+  h_220433a6faf6b8 1-217
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.23",
+  "base_commit_sha": "3ec7f430f165a97310bbd578dd77d2471fa1fe07",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
