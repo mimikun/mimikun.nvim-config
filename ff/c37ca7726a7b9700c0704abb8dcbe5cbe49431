@@ -1,0 +1,38 @@
+lua/plugins/project-nvim/opts/custom_projects.lua
+  h_220433a6faf6b8 1-2
+lua/plugins/project-nvim/opts/defaults.lua
+  h_220433a6faf6b8 3-28
+lua/plugins/project-nvim/opts/different_owners.lua
+  h_220433a6faf6b8 1-9
+lua/plugins/project-nvim/opts/disable_on.lua
+  h_220433a6faf6b8 1-33
+lua/plugins/project-nvim/opts/exclude_dirs.lua
+  h_220433a6faf6b8 1-3
+lua/plugins/project-nvim/opts/fzf_lua.lua
+  h_220433a6faf6b8 1-14
+lua/plugins/project-nvim/opts/history.lua
+  h_220433a6faf6b8 1-13
+lua/plugins/project-nvim/opts/init.lua
+  h_220433a6faf6b8 4,44,47,53,55-57,69,75,78-90
+lua/plugins/project-nvim/opts/log.lua
+  h_220433a6faf6b8 1-18
+lua/plugins/project-nvim/opts/lsp.lua
+  h_220433a6faf6b8 1-16
+lua/plugins/project-nvim/opts/patterns.lua
+  h_220433a6faf6b8 1-22
+lua/plugins/project-nvim/opts/picker.lua
+  h_220433a6faf6b8 1-17
+lua/plugins/project-nvim/opts/snacks.lua
+  h_220433a6faf6b8 1-32
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.23",
+  "base_commit_sha": "ffc37ca7726a7b9700c0704abb8dcbe5cbe49431",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
