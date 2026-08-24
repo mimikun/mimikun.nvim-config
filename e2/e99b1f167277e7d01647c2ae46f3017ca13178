@@ -1,0 +1,18 @@
+lua/plugins/yankdown-nvim/ft.lua
+  h_220433a6faf6b8 3
+lua/plugins/yankdown-nvim/init.lua
+  h_220433a6faf6b8 5-8
+lua/plugins/yankdown-nvim/keys.lua
+  h_220433a6faf6b8 21-25
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.23",
+  "base_commit_sha": "e2e99b1f167277e7d01647c2ae46f3017ca13178",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
