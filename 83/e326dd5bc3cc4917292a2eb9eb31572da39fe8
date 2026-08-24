@@ -1,0 +1,30 @@
+lua/plugins/nvumi/.editorconfig
+  h_220433a6faf6b8 1-14
+lua/plugins/nvumi/cmds.lua
+  h_220433a6faf6b8 1-6
+lua/plugins/nvumi/dependencies.lua
+  h_220433a6faf6b8 1-16
+lua/plugins/nvumi/events.lua
+  h_220433a6faf6b8 1-6
+lua/plugins/nvumi/ft.lua
+  h_220433a6faf6b8 1-6
+lua/plugins/nvumi/init.lua
+  h_220433a6faf6b8 1-37
+lua/plugins/nvumi/keys.lua
+  h_220433a6faf6b8 1-23
+lua/plugins/nvumi/opts.lua
+  h_220433a6faf6b8 1-6
+lua/plugins/nvumi/stylua.toml
+  h_220433a6faf6b8 1-13
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.23",
+  "base_commit_sha": "83e326dd5bc3cc4917292a2eb9eb31572da39fe8",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}

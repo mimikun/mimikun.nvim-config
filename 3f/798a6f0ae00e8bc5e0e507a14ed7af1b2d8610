@@ -1,0 +1,88 @@
+lua/plugins/nvumi/CODES/.github/workflows/ci.yml
+  h_220433a6faf6b8 1-60
+lua/plugins/nvumi/CODES/.gitignore
+  h_220433a6faf6b8 1-2
+lua/plugins/nvumi/CODES/.luacheckrc
+  h_220433a6faf6b8 1-24
+lua/plugins/nvumi/CODES/.luarc.json
+  h_220433a6faf6b8 1-11
+lua/plugins/nvumi/CODES/LICENSE
+  h_220433a6faf6b8 1-21
+lua/plugins/nvumi/CODES/README.md
+  h_220433a6faf6b8 1-235
+lua/plugins/nvumi/CODES/doc/nvumi.txt
+  h_220433a6faf6b8 1-218
+lua/plugins/nvumi/CODES/doc/tags
+  h_220433a6faf6b8 1
+lua/plugins/nvumi/CODES/lua/nvumi/actions.lua
+  h_220433a6faf6b8 1-38
+lua/plugins/nvumi/CODES/lua/nvumi/autocmds.lua
+  h_220433a6faf6b8 1-46
+lua/plugins/nvumi/CODES/lua/nvumi/config.lua
+  h_220433a6faf6b8 1-43
+lua/plugins/nvumi/CODES/lua/nvumi/converter.lua
+  h_220433a6faf6b8 1-64
+lua/plugins/nvumi/CODES/lua/nvumi/debounce.lua
+  h_220433a6faf6b8 1-20
+lua/plugins/nvumi/CODES/lua/nvumi/evaluator.lua
+  h_220433a6faf6b8 1-51
+lua/plugins/nvumi/CODES/lua/nvumi/init.lua
+  h_220433a6faf6b8 1-12
+lua/plugins/nvumi/CODES/lua/nvumi/main.lua
+  h_220433a6faf6b8 1-31
+lua/plugins/nvumi/CODES/lua/nvumi/processor.lua
+  h_220433a6faf6b8 1-69
+lua/plugins/nvumi/CODES/lua/nvumi/renderer.lua
+  h_220433a6faf6b8 1-47
+lua/plugins/nvumi/CODES/lua/nvumi/runner.lua
+  h_220433a6faf6b8 1-35
+lua/plugins/nvumi/CODES/lua/nvumi/scratch.lua
+  h_220433a6faf6b8 1-161
+lua/plugins/nvumi/CODES/lua/nvumi/state.lua
+  h_220433a6faf6b8 1-106
+lua/plugins/nvumi/CODES/lua/nvumi/unit_formatter.lua
+  h_220433a6faf6b8 1-35
+lua/plugins/nvumi/CODES/plugin/nvumi.lua
+  h_220433a6faf6b8 1
+lua/plugins/nvumi/CODES/scripts/test
+  h_220433a6faf6b8 1-3
+lua/plugins/nvumi/CODES/stylua.toml
+  h_220433a6faf6b8 1-6
+lua/plugins/nvumi/CODES/tests/actions_spec.lua
+  h_220433a6faf6b8 1-65
+lua/plugins/nvumi/CODES/tests/config_spec.lua
+  h_220433a6faf6b8 1-34
+lua/plugins/nvumi/CODES/tests/converter_spec.lua
+  h_220433a6faf6b8 1-88
+lua/plugins/nvumi/CODES/tests/debounce_spec.lua
+  h_220433a6faf6b8 1-25
+lua/plugins/nvumi/CODES/tests/evaluator_spec.lua
+  h_220433a6faf6b8 1-67
+lua/plugins/nvumi/CODES/tests/init_spec.lua
+  h_220433a6faf6b8 1-12
+lua/plugins/nvumi/CODES/tests/main_spec.lua
+  h_220433a6faf6b8 1-25
+lua/plugins/nvumi/CODES/tests/minit.lua
+  h_220433a6faf6b8 1-11
+lua/plugins/nvumi/CODES/tests/processor_spec.lua
+  h_220433a6faf6b8 1-83
+lua/plugins/nvumi/CODES/tests/renderer_spec.lua
+  h_220433a6faf6b8 1-95
+lua/plugins/nvumi/CODES/tests/runner_spec.lua
+  h_220433a6faf6b8 1-42
+lua/plugins/nvumi/CODES/tests/state_spec.lua
+  h_220433a6faf6b8 1-79
+lua/plugins/nvumi/CODES/tests/unit_formatter_spec.lua
+  h_220433a6faf6b8 1-33
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.23",
+  "base_commit_sha": "3f798a6f0ae00e8bc5e0e507a14ed7af1b2d8610",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
