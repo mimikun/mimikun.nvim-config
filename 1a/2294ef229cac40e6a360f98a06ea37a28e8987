@@ -1,0 +1,14 @@
+lua/plugins/ports-nvim/keys.lua
+  h_220433a6faf6b8 4
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.23",
+  "base_commit_sha": "1a2294ef229cac40e6a360f98a06ea37a28e8987",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
