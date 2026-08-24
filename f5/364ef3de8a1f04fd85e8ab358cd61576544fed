@@ -1,0 +1,30 @@
+lua/plugins/yankdown-nvim/.editorconfig
+  h_220433a6faf6b8 1-14
+lua/plugins/yankdown-nvim/cmds.lua
+  h_220433a6faf6b8 1-6
+lua/plugins/yankdown-nvim/dependencies.lua
+  h_220433a6faf6b8 1-16
+lua/plugins/yankdown-nvim/events.lua
+  h_220433a6faf6b8 1-6
+lua/plugins/yankdown-nvim/ft.lua
+  h_220433a6faf6b8 1-6
+lua/plugins/yankdown-nvim/init.lua
+  h_220433a6faf6b8 1-37
+lua/plugins/yankdown-nvim/keys.lua
+  h_220433a6faf6b8 1-23
+lua/plugins/yankdown-nvim/opts.lua
+  h_220433a6faf6b8 1-6
+lua/plugins/yankdown-nvim/stylua.toml
+  h_220433a6faf6b8 1-13
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.23",
+  "base_commit_sha": "f5364ef3de8a1f04fd85e8ab358cd61576544fed",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
