@@ -1,0 +1,86 @@
+lua/plugins/project-nvim/CODES/_meta.lua
+  h_220433a6faf6b8 1-659
+lua/plugins/project-nvim/CODES/commands.lua
+  h_220433a6faf6b8 1-391
+lua/plugins/project-nvim/CODES/config/defaults.lua
+  h_220433a6faf6b8 1-530
+lua/plugins/project-nvim/CODES/config/init.lua
+  h_220433a6faf6b8 1-254
+lua/plugins/project-nvim/CODES/core.lua
+  h_220433a6faf6b8 1-632
+lua/plugins/project-nvim/CODES/extensions/fzf-lua.lua
+  h_220433a6faf6b8 1-102
+lua/plugins/project-nvim/CODES/extensions/init.lua
+  h_220433a6faf6b8 1-14
+lua/plugins/project-nvim/CODES/extensions/picker.lua
+  h_220433a6faf6b8 1-17
+lua/plugins/project-nvim/CODES/extensions/snacks.lua
+  h_220433a6faf6b8 1-138
+lua/plugins/project-nvim/CODES/health.lua
+  h_220433a6faf6b8 1-181
+lua/plugins/project-nvim/CODES/init.lua
+  h_220433a6faf6b8 1-211
+lua/plugins/project-nvim/CODES/lualine.components.project.lua
+  h_220433a6faf6b8 1-129
+lua/plugins/project-nvim/CODES/picker.sources.projects.lua
+  h_220433a6faf6b8 1-76
+lua/plugins/project-nvim/CODES/popup.lua
+  h_220433a6faf6b8 1-482
+lua/plugins/project-nvim/CODES/telescope/actions.lua
+  h_220433a6faf6b8 1-176
+lua/plugins/project-nvim/CODES/telescope/healthcheck.lua
+  h_220433a6faf6b8 1-62
+lua/plugins/project-nvim/CODES/telescope/init.lua
+  h_220433a6faf6b8 1-26
+lua/plugins/project-nvim/CODES/telescope/main.lua
+  h_220433a6faf6b8 1-118
+lua/plugins/project-nvim/CODES/telescope/util.lua
+  h_220433a6faf6b8 1-64
+lua/plugins/project-nvim/CODES/util/globtopattern.lua
+  h_220433a6faf6b8 1-208
+lua/plugins/project-nvim/CODES/util/history.lua
+  h_220433a6faf6b8 1-830
+lua/plugins/project-nvim/CODES/util/init.lua
+  h_220433a6faf6b8 1-807
+lua/plugins/project-nvim/CODES/util/log.lua
+  h_220433a6faf6b8 1-392
+lua/plugins/project-nvim/CODES/util/path.lua
+  h_220433a6faf6b8 1-307
+lua/plugins/project-nvim/README.md
+  h_220433a6faf6b8 1-291
+lua/plugins/project-nvim/cmds.lua
+  h_220433a6faf6b8 1-6
+lua/plugins/project-nvim/dependencies.lua
+  h_220433a6faf6b8 1-11
+lua/plugins/project-nvim/docs/Keymaps.md
+  h_220433a6faf6b8 1-44
+lua/plugins/project-nvim/docs/Tips-And-Tricks.md
+  h_220433a6faf6b8 1-38
+lua/plugins/project-nvim/docs/project.txt
+  h_220433a6faf6b8 1-1033
+lua/plugins/project-nvim/events.lua
+  h_220433a6faf6b8 1-6
+lua/plugins/project-nvim/ft.lua
+  h_220433a6faf6b8 1-6
+lua/plugins/project-nvim/init.lua
+  h_220433a6faf6b8 1-37
+lua/plugins/project-nvim/keys.lua
+  h_220433a6faf6b8 1-23
+lua/plugins/project-nvim/opts.lua
+  h_220433a6faf6b8 1-6
+lua/plugins/project-nvim/readme.lua
+  h_220433a6faf6b8 1-271
+lua/plugins/project-nvim/stylua.toml
+  h_220433a6faf6b8 1-13
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.23",
+  "base_commit_sha": "33622dc6350d18fe7be011a971043ec76e84deda",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
