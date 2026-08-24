@@ -7,6 +7,13 @@
 
 local M = {}
 
+---Install the progress hooks. Call it as early as possible -- before the first
+---install starts -- if the live view should cover the startup run too.
+---@return boolean ok
+function M.setup()
+  return require("tsstatus.track").setup()
+end
+
 function M.open()
   require("tsstatus.ui").open()
 end

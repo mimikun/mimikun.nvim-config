@@ -10,6 +10,8 @@
 local M = {}
 
 ---@alias TSStatusState
+---| "installing"   an install is running for it right now
+---| "failed"       the last install attempt logged an error
 ---| "installed"    parser present and at the revision the registry asks for
 ---| "outdated"     parser present, revision differs (or was never recorded)
 ---| "missing"      registry has a grammar for it, nothing is installed
@@ -23,6 +25,8 @@ local M = {}
 ---@field wanted string? revision the registry asks for
 ---@field have string? revision recorded at install time
 ---@field queries boolean queries directory is present
+---@field phase string? live phase, when an install is in flight
+---@field message string? last message from the installer
 
 ---@class TSStatusReport
 ---@field entries TSStatusEntry[]
@@ -57,8 +61,10 @@ local function to_set(list)
   return set
 end
 
+---@param progress table<string, TSTrackEntry>? live state from tsstatus.track
 ---@return TSStatusReport
-function M.collect()
+function M.collect(progress)
+  progress = progress or {}
   local config = require("nvim-treesitter.config")
   local parsers = require("nvim-treesitter.parsers")
 
@@ -68,6 +74,8 @@ function M.collect()
 
   local entries = {}
   local counts = {
+    installing = 0,
+    failed = 0,
     installed = 0,
     outdated = 0,
     missing = 0,
@@ -77,6 +85,14 @@ function M.collect()
 
   ---@param entry TSStatusEntry
   local function push(entry)
+    -- What the installer is doing right now outranks what the disk shows: a
+    -- parser being compiled is neither missing nor installed yet.
+    local live = progress[entry.lang]
+    if live then
+      entry.state = live.phase == "failed" and "failed" or "installing"
+      entry.phase = live.phase
+      entry.message = live.message
+    end
     entries[#entries + 1] = entry
     counts[entry.state] = counts[entry.state] + 1
   end

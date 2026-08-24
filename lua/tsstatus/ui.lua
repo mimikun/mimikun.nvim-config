@@ -6,6 +6,7 @@
 -- healthy parsers would bury the two that failed.
 
 local data = require("tsstatus.data")
+local track = require("tsstatus.track")
 
 local M = {}
 
@@ -20,6 +21,8 @@ local NS = vim.api.nvim_create_namespace("tsstatus")
 
 ---@type TSStatusSection[]
 local SECTIONS = {
+  { state = "installing", label = "installing", icon = "•", hl = "DiagnosticInfo", collapsed = false },
+  { state = "failed", label = "failed", icon = "!", hl = "DiagnosticError", collapsed = false },
   { state = "missing", label = "missing", icon = "✗", hl = "DiagnosticError", collapsed = false },
   { state = "outdated", label = "outdated", icon = "⟳", hl = "DiagnosticWarn", collapsed = false },
   { state = "orphan", label = "not in registry", icon = "?", hl = "DiagnosticInfo", collapsed = true },
@@ -27,10 +30,15 @@ local SECTIONS = {
   { state = "installed", label = "up to date", icon = "✓", hl = "DiagnosticOk", collapsed = true },
 }
 
+local SPINNER = { "⠋", "⠙", "⠹", "⠸", "⠼", "⠴", "⠦", "⠧", "⠇", "⠏" }
+local TICK_MS = 120
+
 local HELP = "q close   r refresh   <Tab> fold section"
 
 ---@type table<string, boolean>?
 local collapsed = nil
+
+local frame = 1
 
 ---@param rev string?
 ---@return string
@@ -48,7 +56,11 @@ end
 ---@param entry TSStatusEntry
 ---@return string
 local function detail(entry)
-  if entry.state == "outdated" then
+  if entry.state == "installing" then
+    return entry.phase or "queued"
+  elseif entry.state == "failed" then
+    return entry.message or "install failed"
+  elseif entry.state == "outdated" then
     return ("%s -> %s"):format(short(entry.have), short(entry.wanted))
   elseif entry.state == "missing" then
     return short(entry.wanted)
@@ -58,6 +70,15 @@ local function detail(entry)
     return "installed by something else"
   end
   return short(entry.have)
+end
+
+---@param section TSStatusSection
+---@return string
+local function icon_of(section)
+  if section.state == "installing" then
+    return SPINNER[frame]
+  end
+  return section.icon
 end
 
 ---@param report TSStatusReport
@@ -91,7 +112,11 @@ local function render(report)
   local summary = {}
   for _, section in ipairs(SECTIONS) do
     local count = report.counts[section.state] or 0
-    summary[#summary + 1] = ("%s %d %s"):format(section.icon, count, section.label)
+    -- States at zero are noise, except "up to date" which is the number the
+    -- screen exists to show even when it is the only one left.
+    if count > 0 or section.state == "installed" then
+      summary[#summary + 1] = ("%s %d %s"):format(icon_of(section), count, section.label)
+    end
   end
   add(" " .. table.concat(summary, "   "), "Title")
   add("")
@@ -101,13 +126,13 @@ local function render(report)
     if #entries > 0 then
       local folded = collapsed[section.state]
       local row =
-        add((" %s %s (%d)%s"):format(section.icon, section.label, #entries, folded and "  ..." or ""), section.hl)
+        add((" %s %s (%d)%s"):format(icon_of(section), section.label, #entries, folded and "  ..." or ""), section.hl)
       section_of_line[row] = section.state
       if not folded then
         for _, entry in ipairs(entries) do
           -- Icons are multi-byte and not all the same width, so the highlight
           -- columns are measured off the built string rather than assumed.
-          local prefix = ("   %s "):format(section.icon)
+          local prefix = ("   %s "):format(icon_of(section))
           local name = ("%-28s "):format(entry.lang)
           row = add(prefix .. name .. detail(entry))
           hls[#hls + 1] = { row, 0, #prefix, section.hl }
@@ -177,6 +202,19 @@ local function fit(win, buf)
   })
 end
 
+---@return TSStatusReport
+local function collect()
+  local report = data.collect(track.state())
+  local healthy = {}
+  for _, entry in ipairs(report.entries) do
+    if entry.state == "installed" or entry.state == "queries_only" then
+      healthy[entry.lang] = true
+    end
+  end
+  track.settle(healthy)
+  return report
+end
+
 function M.open()
   -- Fold state is per-session, not per-window: reopening the screen after an
   -- install should look the way the user left it.
@@ -187,7 +225,9 @@ function M.open()
     end
   end
 
-  local ok, report = pcall(data.collect)
+  track.setup()
+
+  local ok, report = pcall(collect)
   if not ok then
     vim.notify("TSStatus: " .. tostring(report), vim.log.levels.ERROR)
     return
@@ -214,13 +254,78 @@ function M.open()
   vim.wo[win].wrap = false
   fit(win, buf)
 
+  local function alive()
+    return vim.api.nvim_win_is_valid(win) and vim.api.nvim_buf_is_valid(buf)
+  end
+
   local function redraw(fresh)
+    if not alive() then
+      return
+    end
+    report = fresh
     local cursor = vim.api.nvim_win_get_cursor(win)
-    sections = draw(buf, fresh)
+    sections = draw(buf, report)
     fit(win, buf)
     local last = vim.api.nvim_buf_line_count(buf)
     vim.api.nvim_win_set_cursor(win, { math.min(cursor[1], last), cursor[2] })
   end
+
+  -- While an install is running the screen animates; when nothing is moving the
+  -- timer stops, so an idle window costs nothing.
+  local timer = vim.uv.new_timer()
+  local ticking = false
+
+  local function stop()
+    ticking = false
+    if timer and not timer:is_closing() then
+      timer:stop()
+    end
+  end
+
+  local function tick()
+    if not alive() then
+      stop()
+      return
+    end
+    frame = frame % #SPINNER + 1
+    redraw(collect())
+    if not track.busy() then
+      stop()
+    end
+  end
+
+  local function start()
+    if ticking or not alive() then
+      return
+    end
+    ticking = true
+    timer:start(TICK_MS, TICK_MS, vim.schedule_wrap(tick))
+  end
+
+  if track.busy() then
+    start()
+  end
+
+  -- An install can begin after the window is already open (:TSInstall from
+  -- another window), so the tracker wakes the timer rather than the timer
+  -- polling for work.
+  local subscription = track.subscribe(vim.schedule_wrap(function()
+    if track.busy() then
+      start()
+    end
+  end))
+
+  vim.api.nvim_create_autocmd({ "BufWipeout", "BufDelete" }, {
+    buffer = buf,
+    once = true,
+    callback = function()
+      stop()
+      if timer and not timer:is_closing() then
+        timer:close()
+      end
+      track.unsubscribe(subscription)
+    end,
+  })
 
   local function map(lhs, fn)
     vim.keymap.set("n", lhs, fn, { buffer = buf, nowait = true, silent = true })
@@ -233,8 +338,7 @@ function M.open()
     vim.api.nvim_win_close(win, true)
   end)
   map("r", function()
-    report = data.collect()
-    redraw(report)
+    redraw(collect())
   end)
   map("<Tab>", function()
     local row = vim.api.nvim_win_get_cursor(win)[1] - 1

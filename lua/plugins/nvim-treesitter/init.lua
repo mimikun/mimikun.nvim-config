@@ -5,6 +5,10 @@ local spec = {
   build = ":TSUpdate",
   cmd = require("plugins.nvim-treesitter.cmds"),
   config = function()
+    -- Hook the installer's logger before the first install starts, so :TSStatus
+    -- can show what each parser is doing during the startup run too.
+    require("tsstatus").setup()
+
     local opts = require("plugins.nvim-treesitter.opts")
     local install_languages = require("plugins.nvim-treesitter.install.languages")
     local install_options = require("plugins.nvim-treesitter.install.options")
