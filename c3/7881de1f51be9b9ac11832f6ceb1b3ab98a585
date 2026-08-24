@@ -1,0 +1,27 @@
+lua/plugins/nvim-treesitter/init.lua
+  s_1713fbf4fb7226::t_10414b3b6e1167 8-11
+lua/tsstatus/data.lua
+  s_1713fbf4fb7226::t_4dcc15d8a68346 13-14,28-29,64,66-67,77-78,88-95
+lua/tsstatus/init.lua
+  s_1713fbf4fb7226::t_e847d2f9c05879 10-16
+lua/tsstatus/track.lua
+  s_1713fbf4fb7226::t_bf3297d8c6cae4 1-176
+lua/tsstatus/ui.lua
+  s_1713fbf4fb7226::t_74a2fb1ac7757c 9,24-25,33-35,41-42,59-63,75-83,115-119,129,135,205-217,228-230,257-260,262-265,267,273-329,341
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.23",
+  "base_commit_sha": "c37881de1f51be9b9ac11832f6ceb1b3ab98a585",
+  "prompts": {},
+  "sessions": {
+    "s_1713fbf4fb7226": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "5406540a-aa44-4195-83a6-8c0f8d810662",
+        "model": "claude-opus-5"
+      },
+      "human_author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
