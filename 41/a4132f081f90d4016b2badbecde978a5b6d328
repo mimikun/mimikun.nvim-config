@@ -1,0 +1,658 @@
+lua/plugins/lean-nvim/CODES/.devcontainer/lazyvim/Dockerfile
+  h_220433a6faf6b8 1-41
+lua/plugins/lean-nvim/CODES/.devcontainer/lazyvim/devcontainer.json
+  h_220433a6faf6b8 1-5
+lua/plugins/lean-nvim/CODES/.devcontainer/lazyvim/lean.lua
+  h_220433a6faf6b8 1-17
+lua/plugins/lean-nvim/CODES/.github/SECURITY.md
+  h_220433a6faf6b8 1-15
+lua/plugins/lean-nvim/CODES/.github/dependabot.yml
+  h_220433a6faf6b8 1-8
+lua/plugins/lean-nvim/CODES/.github/release.yml
+  h_220433a6faf6b8 1-5
+lua/plugins/lean-nvim/CODES/.github/workflows/abbreviations.yml
+  h_220433a6faf6b8 1-38
+lua/plugins/lean-nvim/CODES/.github/workflows/benchmark.yml
+  h_220433a6faf6b8 1-36
+lua/plugins/lean-nvim/CODES/.github/workflows/ci.yml
+  h_220433a6faf6b8 1-102
+lua/plugins/lean-nvim/CODES/.github/workflows/docs.yml
+  h_220433a6faf6b8 1-49
+lua/plugins/lean-nvim/CODES/.github/workflows/zizmor.yml
+  h_220433a6faf6b8 1-30
+lua/plugins/lean-nvim/CODES/.gitignore
+  h_220433a6faf6b8 1-18
+lua/plugins/lean-nvim/CODES/.luacheckrc
+  h_220433a6faf6b8 1-23
+lua/plugins/lean-nvim/CODES/.luacov
+  h_220433a6faf6b8 1-4
+lua/plugins/lean-nvim/CODES/.luarc.json
+  h_220433a6faf6b8 1-6
+lua/plugins/lean-nvim/CODES/.markdownlint.jsonc
+  h_220433a6faf6b8 1-11
+lua/plugins/lean-nvim/CODES/.pre-commit-config.yaml
+  h_220433a6faf6b8 1-29
+lua/plugins/lean-nvim/CODES/.stylua.toml
+  h_220433a6faf6b8 1-10
+lua/plugins/lean-nvim/CODES/CONTRIBUTING.md
+  h_220433a6faf6b8 1-47
+lua/plugins/lean-nvim/CODES/COPYING
+  h_220433a6faf6b8 1-19
+lua/plugins/lean-nvim/CODES/LICENSES
+  h_220433a6faf6b8 1-187
+lua/plugins/lean-nvim/CODES/README.md
+  h_220433a6faf6b8 1-118
+lua/plugins/lean-nvim/CODES/autoload/tcomment/types/lean.vim
+  h_220433a6faf6b8 1-2
+lua/plugins/lean-nvim/CODES/demos/basic.lua
+  h_220433a6faf6b8 1-158
+lua/plugins/lean-nvim/CODES/demos/basic.tape
+  h_220433a6faf6b8 1-181
+lua/plugins/lean-nvim/CODES/demos/lean/.gitignore
+  h_220433a6faf6b8 1
+lua/plugins/lean-nvim/CODES/demos/lean/Abbreviations.lean
+  h_220433a6faf6b8 1-6
+lua/plugins/lean-nvim/CODES/demos/lean/Demos.lean
+  h_220433a6faf6b8 1-6
+lua/plugins/lean-nvim/CODES/demos/lean/Demos/Diagnostics.lean
+  h_220433a6faf6b8 1-14
+lua/plugins/lean-nvim/CODES/demos/lean/Demos/Hover.lean
+  h_220433a6faf6b8 1-5
+lua/plugins/lean-nvim/CODES/demos/lean/Demos/Inspect.lean
+  h_220433a6faf6b8 1-4
+lua/plugins/lean-nvim/CODES/demos/lean/Demos/Navigation.lean
+  h_220433a6faf6b8 1-10
+lua/plugins/lean-nvim/CODES/demos/lean/Demos/Pins.lean
+  h_220433a6faf6b8 1-8
+lua/plugins/lean-nvim/CODES/demos/lean/Demos/TraceSearch.lean
+  h_220433a6faf6b8 1-6
+lua/plugins/lean-nvim/CODES/demos/lean/Demos/Widgets.lean
+  h_220433a6faf6b8 1-75
+lua/plugins/lean-nvim/CODES/demos/lean/lake-manifest.json
+  h_220433a6faf6b8 1-16
+lua/plugins/lean-nvim/CODES/demos/lean/lakefile.toml
+  h_220433a6faf6b8 1-9
+lua/plugins/lean-nvim/CODES/demos/lean/lean-toolchain
+  h_220433a6faf6b8 1
+lua/plugins/lean-nvim/CODES/demos/project/.gitignore
+  h_220433a6faf6b8 1
+lua/plugins/lean-nvim/CODES/demos/project/lake-manifest.json
+  h_220433a6faf6b8 1-96
+lua/plugins/lean-nvim/CODES/demos/project/lakefile.lean
+  h_220433a6faf6b8 1-14
+lua/plugins/lean-nvim/CODES/demos/project/lean-toolchain
+  h_220433a6faf6b8 1
+lua/plugins/lean-nvim/CODES/demos/tapes/abbreviations.tape
+  h_220433a6faf6b8 1-55
+lua/plugins/lean-nvim/CODES/demos/tapes/diagnostics.tape
+  h_220433a6faf6b8 1-75
+lua/plugins/lean-nvim/CODES/demos/tapes/helpers.tape
+  h_220433a6faf6b8 1-6
+lua/plugins/lean-nvim/CODES/demos/tapes/hover.tape
+  h_220433a6faf6b8 1-82
+lua/plugins/lean-nvim/CODES/demos/tapes/inspect.tape
+  h_220433a6faf6b8 1-69
+lua/plugins/lean-nvim/CODES/demos/tapes/module-hierarchy.tape
+  h_220433a6faf6b8 1-88
+lua/plugins/lean-nvim/CODES/demos/tapes/navigation.tape
+  h_220433a6faf6b8 1-136
+lua/plugins/lean-nvim/CODES/demos/tapes/pins.tape
+  h_220433a6faf6b8 1-84
+lua/plugins/lean-nvim/CODES/demos/tapes/setup.tape
+  h_220433a6faf6b8 1-9
+lua/plugins/lean-nvim/CODES/demos/tapes/trace-search.tape
+  h_220433a6faf6b8 1-107
+lua/plugins/lean-nvim/CODES/doc/elan.txt
+  h_220433a6faf6b8 1-77
+lua/plugins/lean-nvim/CODES/doc/lean.txt
+  h_220433a6faf6b8 1-655
+lua/plugins/lean-nvim/CODES/doc/tags
+  h_220433a6faf6b8 1-103
+lua/plugins/lean-nvim/CODES/ftplugin/lean/lean.lua
+  h_220433a6faf6b8 1-83
+lua/plugins/lean-nvim/CODES/ftplugin/lean/switch.lua
+  h_220433a6faf6b8 1-59
+lua/plugins/lean-nvim/CODES/ftplugin/leaninfo.lua
+  h_220433a6faf6b8 1-45
+lua/plugins/lean-nvim/CODES/ftplugin/leanstderr.lua
+  h_220433a6faf6b8 1-6
+lua/plugins/lean-nvim/CODES/indent/lean.lua
+  h_220433a6faf6b8 1-16
+lua/plugins/lean-nvim/CODES/justfile
+  h_220433a6faf6b8 1-121
+lua/plugins/lean-nvim/CODES/lean.nvim-scm-1.rockspec
+  h_220433a6faf6b8 1-23
+lua/plugins/lean-nvim/CODES/lsp/leanls.lua
+  h_220433a6faf6b8 1-298
+lua/plugins/lean-nvim/CODES/lua/README.md
+  h_220433a6faf6b8 1-24
+lua/plugins/lean-nvim/CODES/lua/elan/init.lua
+  h_220433a6faf6b8 1-33
+lua/plugins/lean-nvim/CODES/lua/elan/toolchain.lua
+  h_220433a6faf6b8 1-46
+lua/plugins/lean-nvim/CODES/lua/kitty.lua
+  h_220433a6faf6b8 1-376
+lua/plugins/lean-nvim/CODES/lua/lean/abbreviations.lua
+  h_220433a6faf6b8 1-354
+lua/plugins/lean-nvim/CODES/lua/lean/commands.lua
+  h_220433a6faf6b8 1-94
+lua/plugins/lean-nvim/CODES/lua/lean/config.lua
+  h_220433a6faf6b8 1-316
+lua/plugins/lean-nvim/CODES/lua/lean/diagnostic.lua
+  h_220433a6faf6b8 1-333
+lua/plugins/lean-nvim/CODES/lua/lean/goals.lua
+  h_220433a6faf6b8 1-59
+lua/plugins/lean-nvim/CODES/lua/lean/health.lua
+  h_220433a6faf6b8 1-60
+lua/plugins/lean-nvim/CODES/lua/lean/hover.lua
+  h_220433a6faf6b8 1-200
+lua/plugins/lean-nvim/CODES/lua/lean/indent.lua
+  h_220433a6faf6b8 1-152
+lua/plugins/lean-nvim/CODES/lua/lean/infoview.lua
+  h_220433a6faf6b8 1-2258
+lua/plugins/lean-nvim/CODES/lua/lean/infoview/components.lua
+  h_220433a6faf6b8 1-189
+lua/plugins/lean-nvim/CODES/lua/lean/infoview/instrumentation.lua
+  h_220433a6faf6b8 1-366
+lua/plugins/lean-nvim/CODES/lua/lean/infoview/locations.lua
+  h_220433a6faf6b8 1-185
+lua/plugins/lean-nvim/CODES/lua/lean/infoview/plain.lua
+  h_220433a6faf6b8 1-97
+lua/plugins/lean-nvim/CODES/lua/lean/init.lua
+  h_220433a6faf6b8 1-336
+lua/plugins/lean-nvim/CODES/lua/lean/log.lua
+  h_220433a6faf6b8 1-40
+lua/plugins/lean-nvim/CODES/lua/lean/loogle.lua
+  h_220433a6faf6b8 1-61
+lua/plugins/lean-nvim/CODES/lua/lean/lsp.lua
+  h_220433a6faf6b8 1-126
+lua/plugins/lean-nvim/CODES/lua/lean/module_hierarchy.lua
+  h_220433a6faf6b8 1-402
+lua/plugins/lean-nvim/CODES/lua/lean/progress.lua
+  h_220433a6faf6b8 1-65
+lua/plugins/lean-nvim/CODES/lua/lean/progress_bars.lua
+  h_220433a6faf6b8 1-98
+lua/plugins/lean-nvim/CODES/lua/lean/rpc.lua
+  h_220433a6faf6b8 1-692
+lua/plugins/lean-nvim/CODES/lua/lean/satellite.lua
+  h_220433a6faf6b8 1-91
+lua/plugins/lean-nvim/CODES/lua/lean/sorry.lua
+  h_220433a6faf6b8 1-61
+lua/plugins/lean-nvim/CODES/lua/lean/stderr.lua
+  h_220433a6faf6b8 1-113
+lua/plugins/lean-nvim/CODES/lua/lean/tui.lua
+  h_220433a6faf6b8 1-1914
+lua/plugins/lean-nvim/CODES/lua/lean/wait.lua
+  h_220433a6faf6b8 1-111
+lua/plugins/lean-nvim/CODES/lua/lean/widget/interactive_code.lua
+  h_220433a6faf6b8 1-207
+lua/plugins/lean-nvim/CODES/lua/lean/widget/interactive_diagnostic.lua
+  h_220433a6faf6b8 1-214
+lua/plugins/lean-nvim/CODES/lua/lean/widget/interactive_goal.lua
+  h_220433a6faf6b8 1-261
+lua/plugins/lean-nvim/CODES/lua/lean/widget/tagged_text.lua
+  h_220433a6faf6b8 1-38
+lua/plugins/lean-nvim/CODES/lua/lean/widgets.lua
+  h_220433a6faf6b8 1-393
+lua/plugins/lean-nvim/CODES/lua/lean/widgets/GoToModuleLink.lua
+  h_220433a6faf6b8 1-39
+lua/plugins/lean-nvim/CODES/lua/lean/widgets/Lean/Meta/Hint/textInsertionWidget.lua
+  h_220433a6faf6b8 1-59
+lua/plugins/lean-nvim/CODES/lua/lean/widgets/Lean/Meta/Hint/tryThisDiffWidget.lua
+  h_220433a6faf6b8 1-27
+lua/plugins/lean-nvim/CODES/lua/lean/widgets/Lean/Meta/Tactic/TryThis/tryThisWidget.lua
+  h_220433a6faf6b8 1-35
+lua/plugins/lean-nvim/CODES/lua/lean/widgets/Lean/errorDescriptionWidget.lua
+  h_220433a6faf6b8 1-19
+lua/plugins/lean-nvim/CODES/lua/lean/widgets/ProofStatus.lua
+  h_220433a6faf6b8 1-21
+lua/plugins/lean-nvim/CODES/lua/lean/widgets/ProofWidgets/ExprPresentation.lua
+  h_220433a6faf6b8 1-11
+lua/plugins/lean-nvim/CODES/lua/lean/widgets/ProofWidgets/FilterDetails.lua
+  h_220433a6faf6b8 1-62
+lua/plugins/lean-nvim/CODES/lua/lean/widgets/ProofWidgets/GoalTypePanel.lua
+  h_220433a6faf6b8 1-20
+lua/plugins/lean-nvim/CODES/lua/lean/widgets/ProofWidgets/GraphDisplay.lua
+  h_220433a6faf6b8 1-35
+lua/plugins/lean-nvim/CODES/lua/lean/widgets/ProofWidgets/HtmlDisplay.lua
+  h_220433a6faf6b8 1-14
+lua/plugins/lean-nvim/CODES/lua/lean/widgets/ProofWidgets/HtmlDisplayPanel.lua
+  h_220433a6faf6b8 1-14
+lua/plugins/lean-nvim/CODES/lua/lean/widgets/ProofWidgets/InteractiveCode.lua
+  h_220433a6faf6b8 1-9
+lua/plugins/lean-nvim/CODES/lua/lean/widgets/ProofWidgets/InteractiveExpr.lua
+  h_220433a6faf6b8 1-9
+lua/plugins/lean-nvim/CODES/lua/lean/widgets/ProofWidgets/InteractiveMessage.lua
+  h_220433a6faf6b8 1-15
+lua/plugins/lean-nvim/CODES/lua/lean/widgets/ProofWidgets/MakeEditLink.lua
+  h_220433a6faf6b8 1-10
+lua/plugins/lean-nvim/CODES/lua/lean/widgets/ProofWidgets/MarkdownDisplay.lua
+  h_220433a6faf6b8 1-11
+lua/plugins/lean-nvim/CODES/lua/lean/widgets/ProofWidgets/Penrose/Diagram.lua
+  h_220433a6faf6b8 1-26
+lua/plugins/lean-nvim/CODES/lua/lean/widgets/ProofWidgets/RefreshComponent.lua
+  h_220433a6faf6b8 1-65
+lua/plugins/lean-nvim/CODES/lua/lean/widgets/ProofWidgets/SelectionPanel.lua
+  h_220433a6faf6b8 1-15
+lua/plugins/lean-nvim/CODES/lua/lean/widgets/_private/Lean/Meta/Tactic/TryThis/0/Lean
+  h_220433a6faf6b8 1
+lua/plugins/lean-nvim/CODES/lua/lean/widgets/llmstepTryThisWidget.lua
+  h_220433a6faf6b8 1-34
+lua/plugins/lean-nvim/CODES/lua/proofwidgets/call_cancellable.lua
+  h_220433a6faf6b8 1-57
+lua/plugins/lean-nvim/CODES/lua/proofwidgets/expr_presentation.lua
+  h_220433a6faf6b8 1-80
+lua/plugins/lean-nvim/CODES/lua/proofwidgets/html.lua
+  h_220433a6faf6b8 1-280
+lua/plugins/lean-nvim/CODES/lua/proofwidgets/interactive_expr.lua
+  h_220433a6faf6b8 1-24
+lua/plugins/lean-nvim/CODES/lua/proofwidgets/make_edit_link.lua
+  h_220433a6faf6b8 1-46
+lua/plugins/lean-nvim/CODES/lua/proofwidgets/present_selection.lua
+  h_220433a6faf6b8 1-18
+lua/plugins/lean-nvim/CODES/lua/std/async.lua
+  h_220433a6faf6b8 1-174
+lua/plugins/lean-nvim/CODES/lua/std/histogram.lua
+  h_220433a6faf6b8 1-279
+lua/plugins/lean-nvim/CODES/lua/std/humanize.lua
+  h_220433a6faf6b8 1-17
+lua/plugins/lean-nvim/CODES/lua/std/inductive.lua
+  h_220433a6faf6b8 1-100
+lua/plugins/lean-nvim/CODES/lua/std/lsp.lua
+  h_220433a6faf6b8 1-116
+lua/plugins/lean-nvim/CODES/lua/std/nvim/buffer.lua
+  h_220433a6faf6b8 1-319
+lua/plugins/lean-nvim/CODES/lua/std/nvim/tab.lua
+  h_220433a6faf6b8 1-55
+lua/plugins/lean-nvim/CODES/lua/std/nvim/window.lua
+  h_220433a6faf6b8 1-234
+lua/plugins/lean-nvim/CODES/lua/std/ringbuf.lua
+  h_220433a6faf6b8 1-52
+lua/plugins/lean-nvim/CODES/lua/std/stopwatch.lua
+  h_220433a6faf6b8 1-122
+lua/plugins/lean-nvim/CODES/lua/std/subprocess.lua
+  h_220433a6faf6b8 1-22
+lua/plugins/lean-nvim/CODES/lua/std/text.lua
+  h_220433a6faf6b8 1-29
+lua/plugins/lean-nvim/CODES/lua/std/throttle.lua
+  h_220433a6faf6b8 1-40
+lua/plugins/lean-nvim/CODES/lua/telescope/_extensions/lean_abbreviations.lua
+  h_220433a6faf6b8 1-62
+lua/plugins/lean-nvim/CODES/lua/telescope/_extensions/loogle.lua
+  h_220433a6faf6b8 1-82
+lua/plugins/lean-nvim/CODES/lua/tui/codicons.lua
+  h_220433a6faf6b8 1-274
+lua/plugins/lean-nvim/CODES/lua/tui/graphic.lua
+  h_220433a6faf6b8 1-25
+lua/plugins/lean-nvim/CODES/lua/tui/html.lua
+  h_220433a6faf6b8 1-630
+lua/plugins/lean-nvim/CODES/lua/tui/image.lua
+  h_220433a6faf6b8 1-105
+lua/plugins/lean-nvim/CODES/lua/tui/modal.lua
+  h_220433a6faf6b8 1-92
+lua/plugins/lean-nvim/CODES/lua/tui/plot.lua
+  h_220433a6faf6b8 1-506
+lua/plugins/lean-nvim/CODES/lua/tui/svg.lua
+  h_220433a6faf6b8 1-144
+lua/plugins/lean-nvim/CODES/lua/tui/table.lua
+  h_220433a6faf6b8 1-160
+lua/plugins/lean-nvim/CODES/lua/tui/tabs.lua
+  h_220433a6faf6b8 1-120
+lua/plugins/lean-nvim/CODES/package.json
+  h_220433a6faf6b8 1-10
+lua/plugins/lean-nvim/CODES/plugin/lean.lua
+  h_220433a6faf6b8 1
+lua/plugins/lean-nvim/CODES/scripts/microbench_fileProgress.lua
+  h_220433a6faf6b8 1-49
+lua/plugins/lean-nvim/CODES/scripts/minimal_init.lua
+  h_220433a6faf6b8 1-98
+lua/plugins/lean-nvim/CODES/selene-vim.toml
+  h_220433a6faf6b8 1-21
+lua/plugins/lean-nvim/CODES/selene.toml
+  h_220433a6faf6b8 1-4
+lua/plugins/lean-nvim/CODES/snippets/lean.json
+  h_220433a6faf6b8 1-25
+lua/plugins/lean-nvim/CODES/spec/abbreviations/abbreviations_spec.lua
+  h_220433a6faf6b8 1-193
+lua/plugins/lean-nvim/CODES/spec/abbreviations/api_spec.lua
+  h_220433a6faf6b8 1-22
+lua/plugins/lean-nvim/CODES/spec/all_modifiable_spec.lua
+  h_220433a6faf6b8 1-10
+lua/plugins/lean-nvim/CODES/spec/autocmd_spec.lua
+  h_220433a6faf6b8 1-35
+lua/plugins/lean-nvim/CODES/spec/checkhealth_spec.lua
+  h_220433a6faf6b8 1-20
+lua/plugins/lean-nvim/CODES/spec/code_action_spec.lua
+  h_220433a6faf6b8 1-37
+lua/plugins/lean-nvim/CODES/spec/commands_spec.lua
+  h_220433a6faf6b8 1-47
+lua/plugins/lean-nvim/CODES/spec/commenting_spec.lua
+  h_220433a6faf6b8 1-56
+lua/plugins/lean-nvim/CODES/spec/config_spec.lua
+  h_220433a6faf6b8 1-30
+lua/plugins/lean-nvim/CODES/spec/current_search_paths_spec.lua
+  h_220433a6faf6b8 1-32
+lua/plugins/lean-nvim/CODES/spec/diagnostics_spec.lua
+  h_220433a6faf6b8 1-15
+lua/plugins/lean-nvim/CODES/spec/filter_hypothesis_custom_spec.lua
+  h_220433a6faf6b8 1-32
+lua/plugins/lean-nvim/CODES/spec/fixtures.lua
+  h_220433a6faf6b8 1-92
+lua/plugins/lean-nvim/CODES/spec/fixtures/bigTraces.lean
+  h_220433a6faf6b8 1-7
+lua/plugins/lean-nvim/CODES/spec/fixtures/indent/comment.in.lean
+  h_220433a6faf6b8 1-13
+lua/plugins/lean-nvim/CODES/spec/fixtures/indent/comment.lean
+  h_220433a6faf6b8 1
+lua/plugins/lean-nvim/CODES/spec/fixtures/indent/declaration_with_comment.in.lean
+  h_220433a6faf6b8 1-8
+lua/plugins/lean-nvim/CODES/spec/fixtures/indent/declaration_with_comment.lean
+  h_220433a6faf6b8 1-8
+lua/plugins/lean-nvim/CODES/spec/fixtures/indent/declarations.in.lean
+  h_220433a6faf6b8 1-19
+lua/plugins/lean-nvim/CODES/spec/fixtures/indent/declarations.lean
+  h_220433a6faf6b8 1-19
+lua/plugins/lean-nvim/CODES/spec/fixtures/indent/multiline_delimited.in.lean
+  h_220433a6faf6b8 1-14
+lua/plugins/lean-nvim/CODES/spec/fixtures/indent/multiline_delimited.lean
+  h_220433a6faf6b8 1-14
+lua/plugins/lean-nvim/CODES/spec/fixtures/indent/nested_indent.in.lean
+  h_220433a6faf6b8 1-7
+lua/plugins/lean-nvim/CODES/spec/fixtures/indent/nested_indent.lean
+  h_220433a6faf6b8 1-7
+lua/plugins/lean-nvim/CODES/spec/fixtures/indent/never_indent.in.lean
+  h_220433a6faf6b8 1-17
+lua/plugins/lean-nvim/CODES/spec/fixtures/indent/never_indent.lean
+  h_220433a6faf6b8 1-17
+lua/plugins/lean-nvim/CODES/spec/fixtures/indent/structure_notation.in.lean
+  h_220433a6faf6b8 1-8
+lua/plugins/lean-nvim/CODES/spec/fixtures/indent/structure_notation.lean
+  h_220433a6faf6b8 1-8
+lua/plugins/lean-nvim/CODES/spec/fixtures/indent/structure_with_extra_linebreaks.in.lean
+  h_220433a6faf6b8 1-6
+lua/plugins/lean-nvim/CODES/spec/fixtures/indent/structure_with_extra_linebreaks.lean
+  h_220433a6faf6b8 1-6
+lua/plugins/lean-nvim/CODES/spec/fixtures/indent/successive_structures.in.lean
+  h_220433a6faf6b8 1-2
+lua/plugins/lean-nvim/CODES/spec/fixtures/indent/successive_structures.lean
+  h_220433a6faf6b8 1-2
+lua/plugins/lean-nvim/CODES/spec/fixtures/indent/successive_structures_with_whitespace.in.lean
+  h_220433a6faf6b8 1-3
+lua/plugins/lean-nvim/CODES/spec/fixtures/indent/successive_structures_with_whitespace.lean
+  h_220433a6faf6b8 1-3
+lua/plugins/lean-nvim/CODES/spec/fixtures/indent/with_attribute.in.lean
+  h_220433a6faf6b8 1-4
+lua/plugins/lean-nvim/CODES/spec/fixtures/indent/with_attribute.lean
+  h_220433a6faf6b8 1-4
+lua/plugins/lean-nvim/CODES/spec/fixtures/indent/with_dedent.in.lean
+  h_220433a6faf6b8 1-4
+lua/plugins/lean-nvim/CODES/spec/fixtures/indent/with_dedent.lean
+  h_220433a6faf6b8 1-4
+lua/plugins/lean-nvim/CODES/spec/fixtures/indent/with_double_indented_type.in.lean
+  h_220433a6faf6b8 1-4
+lua/plugins/lean-nvim/CODES/spec/fixtures/indent/with_double_indented_type.lean
+  h_220433a6faf6b8 1-4
+lua/plugins/lean-nvim/CODES/spec/fixtures/projects/Example/Example.lean
+  h_220433a6faf6b8 1-23
+lua/plugins/lean-nvim/CODES/spec/fixtures/projects/Example/Example/JumpToStdlib.lean
+  h_220433a6faf6b8 1
+lua/plugins/lean-nvim/CODES/spec/fixtures/projects/Example/Example/RestartFile.lean
+  h_220433a6faf6b8 1-2
+lua/plugins/lean-nvim/CODES/spec/fixtures/projects/Example/Example/RestartFileDependent.lean
+  h_220433a6faf6b8 1-2
+lua/plugins/lean-nvim/CODES/spec/fixtures/projects/Example/Example/Squares.lean
+  h_220433a6faf6b8 1-6
+lua/plugins/lean-nvim/CODES/spec/fixtures/projects/Example/foo/Foo.lean
+  h_220433a6faf6b8 1
+lua/plugins/lean-nvim/CODES/spec/fixtures/projects/Example/foo/lake-manifest.json
+  h_220433a6faf6b8 1-5
+lua/plugins/lean-nvim/CODES/spec/fixtures/projects/Example/foo/lakefile.toml
+  h_220433a6faf6b8 1-5
+lua/plugins/lean-nvim/CODES/spec/fixtures/projects/Example/foo/lean-toolchain
+  h_220433a6faf6b8 1
+lua/plugins/lean-nvim/CODES/spec/fixtures/projects/Example/lake-manifest.json
+  h_220433a6faf6b8 1-13
+lua/plugins/lean-nvim/CODES/spec/fixtures/projects/Example/lakefile.toml
+  h_220433a6faf6b8 1-10
+lua/plugins/lean-nvim/CODES/spec/fixtures/projects/Example/lean-toolchain
+  h_220433a6faf6b8 1
+lua/plugins/lean-nvim/CODES/spec/fixtures/projects/SimpleFakeCoreLean/lean-toolchain
+  h_220433a6faf6b8 1
+lua/plugins/lean-nvim/CODES/spec/fixtures/projects/SimpleFakeCoreLean/src/lean-toolchain
+  h_220433a6faf6b8 1
+lua/plugins/lean-nvim/CODES/spec/fixtures/projects/Standalone/lean-toolchain
+  h_220433a6faf6b8 1
+lua/plugins/lean-nvim/CODES/spec/fixtures/projects/WithWidgets/WithWidgets.lean
+  h_220433a6faf6b8 1-7
+lua/plugins/lean-nvim/CODES/spec/fixtures/projects/WithWidgets/WithWidgets/FilterDetailsWidget.lean
+  h_220433a6faf6b8 1-32
+lua/plugins/lean-nvim/CODES/spec/fixtures/projects/WithWidgets/WithWidgets/GenericRpcWidget.lean
+  h_220433a6faf6b8 1-23
+lua/plugins/lean-nvim/CODES/spec/fixtures/projects/WithWidgets/WithWidgets/HtmlDemo.lean
+  h_220433a6faf6b8 1-102
+lua/plugins/lean-nvim/CODES/spec/fixtures/projects/WithWidgets/WithWidgets/InteractiveExprWidget.lean
+  h_220433a6faf6b8 1-10
+lua/plugins/lean-nvim/CODES/spec/fixtures/projects/WithWidgets/WithWidgets/MarkdownWidget.lean
+  h_220433a6faf6b8 1-6
+lua/plugins/lean-nvim/CODES/spec/fixtures/projects/WithWidgets/WithWidgets/NullPropsWidget.lean
+  h_220433a6faf6b8 1-9
+lua/plugins/lean-nvim/CODES/spec/fixtures/projects/WithWidgets/WithWidgets/PreWidget.lean
+  h_220433a6faf6b8 1-9
+lua/plugins/lean-nvim/CODES/spec/fixtures/projects/WithWidgets/WithWidgets/RefreshWidget.lean
+  h_220433a6faf6b8 1-10
+lua/plugins/lean-nvim/CODES/spec/fixtures/projects/WithWidgets/WithWidgets/SvgWidget.lean
+  h_220433a6faf6b8 1-13
+lua/plugins/lean-nvim/CODES/spec/fixtures/projects/WithWidgets/lake-manifest.json
+  h_220433a6faf6b8 1-96
+lua/plugins/lean-nvim/CODES/spec/fixtures/projects/WithWidgets/lakefile.toml
+  h_220433a6faf6b8 1-17
+lua/plugins/lean-nvim/CODES/spec/fixtures/projects/WithWidgets/lean-toolchain
+  h_220433a6faf6b8 1
+lua/plugins/lean-nvim/CODES/spec/fixtures/widgets/lean/widgets/NullPropsWidget.lua
+  h_220433a6faf6b8 1-7
+lua/plugins/lean-nvim/CODES/spec/fixtures/widgets/lean/widgets/helloWidget.lua
+  h_220433a6faf6b8 1-5
+lua/plugins/lean-nvim/CODES/spec/fixtures/widgets/lean/widgets/showPropWithHover.lua
+  h_220433a6faf6b8 1-3
+lua/plugins/lean-nvim/CODES/spec/ft_spec.lua
+  h_220433a6faf6b8 1-55
+lua/plugins/lean-nvim/CODES/spec/goals_spec.lua
+  h_220433a6faf6b8 1-53
+lua/plugins/lean-nvim/CODES/spec/helpers.lua
+  h_220433a6faf6b8 1-469
+lua/plugins/lean-nvim/CODES/spec/helpers_spec.lua
+  h_220433a6faf6b8 1-114
+lua/plugins/lean-nvim/CODES/spec/hover_spec.lua
+  h_220433a6faf6b8 1-212
+lua/plugins/lean-nvim/CODES/spec/img_spec.lua
+  h_220433a6faf6b8 1-125
+lua/plugins/lean-nvim/CODES/spec/indent_spec.lua
+  h_220433a6faf6b8 1-331
+lua/plugins/lean-nvim/CODES/spec/infoview/auto_diff_pin_spec.lua
+  h_220433a6faf6b8 1-189
+lua/plugins/lean-nvim/CODES/spec/infoview/autoopen_custom_spec.lua
+  h_220433a6faf6b8 1-34
+lua/plugins/lean-nvim/CODES/spec/infoview/autoopen_false_spec.lua
+  h_220433a6faf6b8 1-43
+lua/plugins/lean-nvim/CODES/spec/infoview/autoopen_spec.lua
+  h_220433a6faf6b8 1-109
+lua/plugins/lean-nvim/CODES/spec/infoview/autoupdate_spec.lua
+  h_220433a6faf6b8 1-315
+lua/plugins/lean-nvim/CODES/spec/infoview/close_all_spec.lua
+  h_220433a6faf6b8 1-58
+lua/plugins/lean-nvim/CODES/spec/infoview/contents_spec.lua
+  h_220433a6faf6b8 1-602
+lua/plugins/lean-nvim/CODES/spec/infoview/go_to_spec.lua
+  h_220433a6faf6b8 1-39
+lua/plugins/lean-nvim/CODES/spec/infoview/highlighting_spec.lua
+  h_220433a6faf6b8 1-32
+lua/plugins/lean-nvim/CODES/spec/infoview/instrumentation_spec.lua
+  h_220433a6faf6b8 1-99
+lua/plugins/lean-nvim/CODES/spec/infoview/jump_spec.lua
+  h_220433a6faf6b8 1-33
+lua/plugins/lean-nvim/CODES/spec/infoview/layout/horizontal_bottom_spec.lua
+  h_220433a6faf6b8 1-34
+lua/plugins/lean-nvim/CODES/spec/infoview/layout/horizontal_fractional_spec.lua
+  h_220433a6faf6b8 1-25
+lua/plugins/lean-nvim/CODES/spec/infoview/layout/horizontal_landscape_spec.lua
+  h_220433a6faf6b8 1-47
+lua/plugins/lean-nvim/CODES/spec/infoview/layout/horizontal_top_spec.lua
+  h_220433a6faf6b8 1-56
+lua/plugins/lean-nvim/CODES/spec/infoview/layout/landscape_spec.lua
+  h_220433a6faf6b8 1-61
+lua/plugins/lean-nvim/CODES/spec/infoview/layout/portrait_spec.lua
+  h_220433a6faf6b8 1-62
+lua/plugins/lean-nvim/CODES/spec/infoview/layout/reposition_spec.lua
+  h_220433a6faf6b8 1-146
+lua/plugins/lean-nvim/CODES/spec/infoview/layout/tab_spec.lua
+  h_220433a6faf6b8 1-61
+lua/plugins/lean-nvim/CODES/spec/infoview/layout/vertical_fractional_spec.lua
+  h_220433a6faf6b8 1-25
+lua/plugins/lean-nvim/CODES/spec/infoview/layout/vertical_portrait_spec.lua
+  h_220433a6faf6b8 1-46
+lua/plugins/lean-nvim/CODES/spec/infoview/locations_spec.lua
+  h_220433a6faf6b8 1-25
+lua/plugins/lean-nvim/CODES/spec/infoview/lsp_dead_spec.lua
+  h_220433a6faf6b8 1-94
+lua/plugins/lean-nvim/CODES/spec/infoview/messages_custom_spec.lua
+  h_220433a6faf6b8 1-85
+lua/plugins/lean-nvim/CODES/spec/infoview/move_cursor_to_goal_spec.lua
+  h_220433a6faf6b8 1-86
+lua/plugins/lean-nvim/CODES/spec/infoview/navigation_spec.lua
+  h_220433a6faf6b8 1-304
+lua/plugins/lean-nvim/CODES/spec/infoview/open_close_spec.lua
+  h_220433a6faf6b8 1-251
+lua/plugins/lean-nvim/CODES/spec/infoview/pin_spec.lua
+  h_220433a6faf6b8 1-543
+lua/plugins/lean-nvim/CODES/spec/infoview/plain_contents_spec.lua
+  h_220433a6faf6b8 1-462
+lua/plugins/lean-nvim/CODES/spec/infoview/tabedit_spec.lua
+  h_220433a6faf6b8 1-21
+lua/plugins/lean-nvim/CODES/spec/infoview/toggle_spec.lua
+  h_220433a6faf6b8 1-42
+lua/plugins/lean-nvim/CODES/spec/infoview/tooltips_spec.lua
+  h_220433a6faf6b8 1-244
+lua/plugins/lean-nvim/CODES/spec/infoview/view_options_spec.lua
+  h_220433a6faf6b8 1-137
+lua/plugins/lean-nvim/CODES/spec/infoview/widgets_spec.lua
+  h_220433a6faf6b8 1-32
+lua/plugins/lean-nvim/CODES/spec/kitty_spec.lua
+  h_220433a6faf6b8 1-65
+lua/plugins/lean-nvim/CODES/spec/log_spec.lua
+  h_220433a6faf6b8 1-25
+lua/plugins/lean-nvim/CODES/spec/lsp_spec.lua
+  h_220433a6faf6b8 1-37
+lua/plugins/lean-nvim/CODES/spec/mappings_spec.lua
+  h_220433a6faf6b8 1-160
+lua/plugins/lean-nvim/CODES/spec/matchit_spec.lua
+  h_220433a6faf6b8 1-137
+lua/plugins/lean-nvim/CODES/spec/module_hierarchy_spec.lua
+  h_220433a6faf6b8 1-219
+lua/plugins/lean-nvim/CODES/spec/nomodifiable_custom_spec.lua
+  h_220433a6faf6b8 1-21
+lua/plugins/lean-nvim/CODES/spec/progress_bars_spec.lua
+  h_220433a6faf6b8 1-68
+lua/plugins/lean-nvim/CODES/spec/restart_file_spec.lua
+  h_220433a6faf6b8 1-97
+lua/plugins/lean-nvim/CODES/spec/root_dir_spec.lua
+  h_220433a6faf6b8 1-51
+lua/plugins/lean-nvim/CODES/spec/rpc_metrics_spec.lua
+  h_220433a6faf6b8 1-120
+lua/plugins/lean-nvim/CODES/spec/setup_spec.lua
+  h_220433a6faf6b8 1-60
+lua/plugins/lean-nvim/CODES/spec/signs_custom_text_spec.lua
+  h_220433a6faf6b8 1-27
+lua/plugins/lean-nvim/CODES/spec/signs_disabled_spec.lua
+  h_220433a6faf6b8 1-35
+lua/plugins/lean-nvim/CODES/spec/signs_spec.lua
+  h_220433a6faf6b8 1-68
+lua/plugins/lean-nvim/CODES/spec/sorry_spec.lua
+  h_220433a6faf6b8 1-155
+lua/plugins/lean-nvim/CODES/spec/std/histogram_spec.lua
+  h_220433a6faf6b8 1-593
+lua/plugins/lean-nvim/CODES/spec/std/humanize_spec.lua
+  h_220433a6faf6b8 1-26
+lua/plugins/lean-nvim/CODES/spec/std/inductive_spec.lua
+  h_220433a6faf6b8 1-288
+lua/plugins/lean-nvim/CODES/spec/std/nvim/buffer_spec.lua
+  h_220433a6faf6b8 1-611
+lua/plugins/lean-nvim/CODES/spec/std/nvim/tab_spec.lua
+  h_220433a6faf6b8 1-93
+lua/plugins/lean-nvim/CODES/spec/std/nvim/window_spec.lua
+  h_220433a6faf6b8 1-494
+lua/plugins/lean-nvim/CODES/spec/std/ringbuf_spec.lua
+  h_220433a6faf6b8 1-54
+lua/plugins/lean-nvim/CODES/spec/std/stopwatch_spec.lua
+  h_220433a6faf6b8 1-174
+lua/plugins/lean-nvim/CODES/spec/std/subprocess_spec.lua
+  h_220433a6faf6b8 1-25
+lua/plugins/lean-nvim/CODES/spec/std/text_spec.lua
+  h_220433a6faf6b8 1-50
+lua/plugins/lean-nvim/CODES/spec/std/throttle_spec.lua
+  h_220433a6faf6b8 1-66
+lua/plugins/lean-nvim/CODES/spec/stderr_spec.lua
+  h_220433a6faf6b8 1-55
+lua/plugins/lean-nvim/CODES/spec/svg_spec.lua
+  h_220433a6faf6b8 1-218
+lua/plugins/lean-nvim/CODES/spec/switch_spec.lua
+  h_220433a6faf6b8 1-118
+lua/plugins/lean-nvim/CODES/spec/syntax_spec.lua
+  h_220433a6faf6b8 1-44
+lua/plugins/lean-nvim/CODES/spec/trace_spec.lua
+  h_220433a6faf6b8 1-226
+lua/plugins/lean-nvim/CODES/spec/tui/async_spec.lua
+  h_220433a6faf6b8 1-210
+lua/plugins/lean-nvim/CODES/spec/tui/codicons_spec.lua
+  h_220433a6faf6b8 1-81
+lua/plugins/lean-nvim/CODES/spec/tui/core_spec.lua
+  h_220433a6faf6b8 1-1526
+lua/plugins/lean-nvim/CODES/spec/tui/graphic_spec.lua
+  h_220433a6faf6b8 1-53
+lua/plugins/lean-nvim/CODES/spec/tui/html_spec.lua
+  h_220433a6faf6b8 1-686
+lua/plugins/lean-nvim/CODES/spec/tui/modal_spec.lua
+  h_220433a6faf6b8 1-184
+lua/plugins/lean-nvim/CODES/spec/tui/overlay_spec.lua
+  h_220433a6faf6b8 1-99
+lua/plugins/lean-nvim/CODES/spec/tui/pending_elements_spec.lua
+  h_220433a6faf6b8 1-32
+lua/plugins/lean-nvim/CODES/spec/tui/plot_spec.lua
+  h_220433a6faf6b8 1-87
+lua/plugins/lean-nvim/CODES/spec/tui/table_spec.lua
+  h_220433a6faf6b8 1-92
+lua/plugins/lean-nvim/CODES/spec/tui/tabs_spec.lua
+  h_220433a6faf6b8 1-159
+lua/plugins/lean-nvim/CODES/spec/tui/tooltip_rebuild_spec.lua
+  h_220433a6faf6b8 1-128
+lua/plugins/lean-nvim/CODES/spec/use_suggested_mappings_spec.lua
+  h_220433a6faf6b8 1-21
+lua/plugins/lean-nvim/CODES/spec/widgets/core_spec.lua
+  h_220433a6faf6b8 1-244
+lua/plugins/lean-nvim/CODES/spec/widgets/generic_rpc_spec.lua
+  h_220433a6faf6b8 1-43
+lua/plugins/lean-nvim/CODES/spec/widgets/importgraph_spec.lua
+  h_220433a6faf6b8 1-42
+lua/plugins/lean-nvim/CODES/spec/widgets/mathlib_spec.lua
+  h_220433a6faf6b8 1-111
+lua/plugins/lean-nvim/CODES/spec/widgets/proofwidgets_spec.lua
+  h_220433a6faf6b8 1-359
+lua/plugins/lean-nvim/CODES/spec/without_setup_spec.lua
+  h_220433a6faf6b8 1-68
+lua/plugins/lean-nvim/CODES/syntax/lean.vim
+  h_220433a6faf6b8 1-143
+lua/plugins/lean-nvim/CODES/syntax/leaninfo.lua
+  h_220433a6faf6b8 1-85
+lua/plugins/lean-nvim/CODES/vscode-lean/abbreviations.json
+  h_220433a6faf6b8 1-1859
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.23",
+  "base_commit_sha": "41a4132f081f90d4016b2badbecde978a5b6d328",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
