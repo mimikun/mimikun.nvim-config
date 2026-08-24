@@ -1,0 +1,14 @@
+lua/plugins/nvumi/init.lua
+  h_220433a6faf6b8 11-16
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.23",
+  "base_commit_sha": "c4e687e04919ebb0db0e7af9cf168fc2032a330f",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
