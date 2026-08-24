@@ -1,0 +1,14 @@
+lua/plugins/yankdown-nvim/opts.lua
+  h_220433a6faf6b8 3-10
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.23",
+  "base_commit_sha": "96df2e3c87b442d81ae9d85fdbc8b083098ce996",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
