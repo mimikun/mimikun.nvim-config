@@ -1,0 +1,18 @@
+lua/plugins/project-nvim/opts/README.md
+  h_220433a6faf6b8 209-213
+lua/plugins/project-nvim/opts/custom_projects.lua
+  h_220433a6faf6b8 1-17
+lua/plugins/project-nvim/opts/patterns.lua
+  h_220433a6faf6b8 20-32
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.23",
+  "base_commit_sha": "bafe248c3f7fbb617544eea52ad98ddde97150d4",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
