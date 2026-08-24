@@ -1,0 +1,16 @@
+lua/plugins/noice-nvim/opts/init.lua
+  h_220433a6faf6b8 21,24,27,30
+lua/plugins/noice-nvim/opts/views.lua
+  h_220433a6faf6b8 1-2,6-8,13,21-31,35-38,47-49,53-56,69-71,74-77,97-102,114-117,136-143,183,223-226,246-249,259-261,269-272,288
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.23",
+  "base_commit_sha": "69dfdb7911c8e0286dd8b4de2b2704c1213e9a8c",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
