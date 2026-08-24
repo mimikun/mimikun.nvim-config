@@ -1,0 +1,36 @@
+lua/plugins/project-nvim/stylua.toml
+  h_220433a6faf6b8 1-13
+lua/plugins/project-nvim/docs/Tips-And-Tricks.md
+  h_220433a6faf6b8 1-38
+lua/plugins/project-nvim/opts.lua
+  h_220433a6faf6b8 1-6
+lua/plugins/project-nvim/cmds.lua
+  h_220433a6faf6b8 1-6
+lua/plugins/project-nvim/init.lua
+  h_220433a6faf6b8 1-17
+lua/plugins/project-nvim/readme.lua
+  h_220433a6faf6b8 1-271
+lua/plugins/project-nvim/dependencies.lua
+  h_220433a6faf6b8 1-11
+lua/plugins/project-nvim/docs/project.txt
+  h_220433a6faf6b8 1-1033
+lua/plugins/project-nvim/events.lua
+  h_220433a6faf6b8 1-6
+lua/plugins/project-nvim/docs/Keymaps.md
+  h_220433a6faf6b8 1-44
+lua/plugins/project-nvim/README.md
+  h_220433a6faf6b8 1-291
+lua/plugins/project-nvim/defaults.lua
+  h_220433a6faf6b8 1-530
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.23",
+  "base_commit_sha": "c6852365e94686937056c0c285fa3865424c264d",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
