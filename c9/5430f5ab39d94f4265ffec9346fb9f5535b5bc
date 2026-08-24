@@ -1,0 +1,14 @@
+lua/plugins/project-nvim/opts/hoge.lua
+  h_220433a6faf6b8 1-25
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.23",
+  "base_commit_sha": "c95430f5ab39d94f4265ffec9346fb9f5535b5bc",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
