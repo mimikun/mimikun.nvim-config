@@ -1,0 +1,16 @@
+lua/plugins/nvumi/opts/Recipes.md
+  h_220433a6faf6b8 1,3,38-39,59-60,86-87,93,96,124-125,131,155-156,162,182-183,188,212-213,218,249-250,255,277-278,284-286,301-302,307,324-325
+lua/plugins/nvumi/opts/custom_conversions.lua
+  h_220433a6faf6b8 14-15
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.23",
+  "base_commit_sha": "a3b8cf040e571a4c55b14d27f78afa6a1fd6c512",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
