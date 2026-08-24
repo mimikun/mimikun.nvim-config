@@ -1,0 +1,18 @@
+lua/plugins/lean-nvim/WIKIS/Home.md
+  h_220433a6faf6b8 1-17
+lua/plugins/lean-nvim/WIKIS/The-lean.nvim-Manual.md
+  h_220433a6faf6b8 1-838
+lua/plugins/lean-nvim/WIKIS/_Sidebar.md
+  h_220433a6faf6b8 1-30
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.23",
+  "base_commit_sha": "8417cbfdce98d19b0d43fb71f0be9ea9fccc3fa8",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
