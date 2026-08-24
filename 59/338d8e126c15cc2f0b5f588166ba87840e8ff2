@@ -1,0 +1,14 @@
+lua/plugins/noice-nvim/opts/presets.lua
+  h_220433a6faf6b8 3-19
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.23",
+  "base_commit_sha": "59338d8e126c15cc2f0b5f588166ba87840e8ff2",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
