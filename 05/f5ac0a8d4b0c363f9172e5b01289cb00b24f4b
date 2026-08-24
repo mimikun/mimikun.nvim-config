@@ -1,0 +1,16 @@
+lua/plugins/project-nvim/opts/init.lua
+  h_220433a6faf6b8 92
+lua/plugins/project-nvim/opts/telescope.lua
+  h_220433a6faf6b8 1-76
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.23",
+  "base_commit_sha": "05f5ac0a8d4b0c363f9172e5b01289cb00b24f4b",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
