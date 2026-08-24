@@ -1,0 +1,18 @@
+lua/plugins/noice-nvim/README.md
+  h_220433a6faf6b8 28,39,75,138-139,194-195,215,239,261,291,298-299,310-311,317-318
+lua/plugins/noice-nvim/cmds.lua
+  h_220433a6faf6b8 3-11
+lua/plugins/noice-nvim/init.lua
+  h_220433a6faf6b8 5
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.23",
+  "base_commit_sha": "712fb82050fa58638fa0bd8d0b3ab2af2da93cca",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
