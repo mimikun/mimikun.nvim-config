@@ -1,0 +1,30 @@
+lua/plugins/vim-quickrun/.editorconfig
+  h_220433a6faf6b8 1-14
+lua/plugins/vim-quickrun/cmds.lua
+  h_220433a6faf6b8 1-6
+lua/plugins/vim-quickrun/dependencies.lua
+  h_220433a6faf6b8 1-16
+lua/plugins/vim-quickrun/events.lua
+  h_220433a6faf6b8 1-6
+lua/plugins/vim-quickrun/ft.lua
+  h_220433a6faf6b8 1-6
+lua/plugins/vim-quickrun/init.lua
+  h_220433a6faf6b8 1-37
+lua/plugins/vim-quickrun/keys.lua
+  h_220433a6faf6b8 1-23
+lua/plugins/vim-quickrun/opts.lua
+  h_220433a6faf6b8 1-6
+lua/plugins/vim-quickrun/stylua.toml
+  h_220433a6faf6b8 1-13
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.24",
+  "base_commit_sha": "ef0dd0d771dbba1841cb872e85905e3f68222783",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
