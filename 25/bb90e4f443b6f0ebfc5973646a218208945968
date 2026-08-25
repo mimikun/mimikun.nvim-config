@@ -1,0 +1,148 @@
+lua/plugins/vim-quickrun/CODES/.gitattributes
+  h_220433a6faf6b8 1
+lua/plugins/vim-quickrun/CODES/.github/CODE_OF_CONDUCT.md
+  h_220433a6faf6b8 1-76
+lua/plugins/vim-quickrun/CODES/.github/CONTRIBUTING.md
+  h_220433a6faf6b8 1-58
+lua/plugins/vim-quickrun/CODES/.github/ISSUE_TEMPLATE/bug_report.md
+  h_220433a6faf6b8 1-39
+lua/plugins/vim-quickrun/CODES/.github/ISSUE_TEMPLATE/feature_request.md
+  h_220433a6faf6b8 1-19
+lua/plugins/vim-quickrun/CODES/.github/ISSUE_TEMPLATE/question.md
+  h_220433a6faf6b8 1-10
+lua/plugins/vim-quickrun/CODES/.github/PULL_REQUEST_TEMPLATE.md
+  h_220433a6faf6b8 1-14
+lua/plugins/vim-quickrun/CODES/.github/PULL_REQUEST_TEMPLATE/bug_fix.md
+  h_220433a6faf6b8 1-35
+lua/plugins/vim-quickrun/CODES/.github/PULL_REQUEST_TEMPLATE/issue_resolving.md
+  h_220433a6faf6b8 1-6
+lua/plugins/vim-quickrun/CODES/.github/PULL_REQUEST_TEMPLATE/new_feature.md
+  h_220433a6faf6b8 1-11
+lua/plugins/vim-quickrun/CODES/.github/PULL_REQUEST_TEMPLATE/trivial_fix.md
+  h_220433a6faf6b8 1-6
+lua/plugins/vim-quickrun/CODES/.github/workflows/test.yml
+  h_220433a6faf6b8 1-54
+lua/plugins/vim-quickrun/CODES/LICENSE.txt
+  h_220433a6faf6b8 1-19
+lua/plugins/vim-quickrun/CODES/README.md
+  h_220433a6faf6b8 1-9
+lua/plugins/vim-quickrun/CODES/autoload/quickrun.vim
+  h_220433a6faf6b8 1-804
+lua/plugins/vim-quickrun/CODES/autoload/quickrun/command.vim
+  h_220433a6faf6b8 1-129
+lua/plugins/vim-quickrun/CODES/autoload/quickrun/config.vim
+  h_220433a6faf6b8 1-61
+lua/plugins/vim-quickrun/CODES/autoload/quickrun/hook/cd.vim
+  h_220433a6faf6b8 1-77
+lua/plugins/vim-quickrun/CODES/autoload/quickrun/hook/eval.vim
+  h_220433a6faf6b8 1-29
+lua/plugins/vim-quickrun/CODES/autoload/quickrun/hook/output_encode.vim
+  h_220433a6faf6b8 1-47
+lua/plugins/vim-quickrun/CODES/autoload/quickrun/hook/shebang.vim
+  h_220433a6faf6b8 1-23
+lua/plugins/vim-quickrun/CODES/autoload/quickrun/hook/sweep.vim
+  h_220433a6faf6b8 1-25
+lua/plugins/vim-quickrun/CODES/autoload/quickrun/hook/time.vim
+  h_220433a6faf6b8 1-38
+lua/plugins/vim-quickrun/CODES/autoload/quickrun/module.vim
+  h_220433a6faf6b8 1-164
+lua/plugins/vim-quickrun/CODES/autoload/quickrun/outputter/browser.vim
+  h_220433a6faf6b8 1-38
+lua/plugins/vim-quickrun/CODES/autoload/quickrun/outputter/buffer.vim
+  h_220433a6faf6b8 1-256
+lua/plugins/vim-quickrun/CODES/autoload/quickrun/outputter/buffer_legacy.vim
+  h_220433a6faf6b8 1-158
+lua/plugins/vim-quickrun/CODES/autoload/quickrun/outputter/buffered.vim
+  h_220433a6faf6b8 1-29
+lua/plugins/vim-quickrun/CODES/autoload/quickrun/outputter/error.vim
+  h_220433a6faf6b8 1-23
+lua/plugins/vim-quickrun/CODES/autoload/quickrun/outputter/file.vim
+  h_220433a6faf6b8 1-42
+lua/plugins/vim-quickrun/CODES/autoload/quickrun/outputter/loclist.vim
+  h_220433a6faf6b8 1-24
+lua/plugins/vim-quickrun/CODES/autoload/quickrun/outputter/message.vim
+  h_220433a6faf6b8 1-35
+lua/plugins/vim-quickrun/CODES/autoload/quickrun/outputter/multi.vim
+  h_220433a6faf6b8 1-37
+lua/plugins/vim-quickrun/CODES/autoload/quickrun/outputter/null.vim
+  h_220433a6faf6b8 1-13
+lua/plugins/vim-quickrun/CODES/autoload/quickrun/outputter/popup.vim
+  h_220433a6faf6b8 1-33
+lua/plugins/vim-quickrun/CODES/autoload/quickrun/outputter/quickfix.vim
+  h_220433a6faf6b8 1-86
+lua/plugins/vim-quickrun/CODES/autoload/quickrun/outputter/variable.vim
+  h_220433a6faf6b8 1-42
+lua/plugins/vim-quickrun/CODES/autoload/quickrun/runner/concurrent_process.vim
+  h_220433a6faf6b8 1-95
+lua/plugins/vim-quickrun/CODES/autoload/quickrun/runner/job.vim
+  h_220433a6faf6b8 1-95
+lua/plugins/vim-quickrun/CODES/autoload/quickrun/runner/python.vim
+  h_220433a6faf6b8 1-93
+lua/plugins/vim-quickrun/CODES/autoload/quickrun/runner/remote.vim
+  h_220433a6faf6b8 1-101
+lua/plugins/vim-quickrun/CODES/autoload/quickrun/runner/shell.vim
+  h_220433a6faf6b8 1-51
+lua/plugins/vim-quickrun/CODES/autoload/quickrun/runner/system.vim
+  h_220433a6faf6b8 1-44
+lua/plugins/vim-quickrun/CODES/autoload/quickrun/runner/terminal.vim
+  h_220433a6faf6b8 1-105
+lua/plugins/vim-quickrun/CODES/autoload/quickrun/runner/vimproc.vim
+  h_220433a6faf6b8 1-121
+lua/plugins/vim-quickrun/CODES/autoload/quickrun/runner/vimscript.vim
+  h_220433a6faf6b8 1-50
+lua/plugins/vim-quickrun/CODES/autoload/quickrun/session.vim
+  h_220433a6faf6b8 1-464
+lua/plugins/vim-quickrun/CODES/autoload/vital/_quickrun.vim
+  h_220433a6faf6b8 1-9
+lua/plugins/vim-quickrun/CODES/autoload/vital/_quickrun/ConcurrentProcess.vim
+  h_220433a6faf6b8 1-256
+lua/plugins/vim-quickrun/CODES/autoload/vital/_quickrun/Data/Dict.vim
+  h_220433a6faf6b8 1-151
+lua/plugins/vim-quickrun/CODES/autoload/vital/_quickrun/Data/List.vim
+  h_220433a6faf6b8 1-656
+lua/plugins/vim-quickrun/CODES/autoload/vital/_quickrun/Data/String.vim
+  h_220433a6faf6b8 1-585
+lua/plugins/vim-quickrun/CODES/autoload/vital/_quickrun/Prelude.vim
+  h_220433a6faf6b8 1-346
+lua/plugins/vim-quickrun/CODES/autoload/vital/_quickrun/Process.vim
+  h_220433a6faf6b8 1-166
+lua/plugins/vim-quickrun/CODES/autoload/vital/_quickrun/System/File.vim
+  h_220433a6faf6b8 1-302
+lua/plugins/vim-quickrun/CODES/autoload/vital/_quickrun/System/Filepath.vim
+  h_220433a6faf6b8 1-283
+lua/plugins/vim-quickrun/CODES/autoload/vital/_quickrun/Vim/Buffer.vim
+  h_220433a6faf6b8 1-207
+lua/plugins/vim-quickrun/CODES/autoload/vital/_quickrun/Vim/Guard.vim
+  h_220433a6faf6b8 1-228
+lua/plugins/vim-quickrun/CODES/autoload/vital/_quickrun/Vim/Message.vim
+  h_220433a6faf6b8 1-74
+lua/plugins/vim-quickrun/CODES/autoload/vital/_quickrun/Vim/Type.vim
+  h_220433a6faf6b8 1-82
+lua/plugins/vim-quickrun/CODES/autoload/vital/_quickrun/Vim/ViewTracer.vim
+  h_220433a6faf6b8 1-87
+lua/plugins/vim-quickrun/CODES/autoload/vital/quickrun.vim
+  h_220433a6faf6b8 1-346
+lua/plugins/vim-quickrun/CODES/autoload/vital/quickrun.vital
+  h_220433a6faf6b8 1-11
+lua/plugins/vim-quickrun/CODES/doc/quickrun.jax
+  h_220433a6faf6b8 1-1204
+lua/plugins/vim-quickrun/CODES/doc/quickrun.txt
+  h_220433a6faf6b8 1-1039
+lua/plugins/vim-quickrun/CODES/plugin/quickrun.vim
+  h_220433a6faf6b8 1-19
+lua/plugins/vim-quickrun/CODES/test/.themisrc
+  h_220433a6faf6b8 1-44
+lua/plugins/vim-quickrun/CODES/test/outputter/buffer.vimspec
+  h_220433a6faf6b8 1-433
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.24",
+  "base_commit_sha": "25bb90e4f443b6f0ebfc5973646a218208945968",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
