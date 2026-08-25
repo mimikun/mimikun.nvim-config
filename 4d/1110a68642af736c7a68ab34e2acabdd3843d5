@@ -1,0 +1,30 @@
+lua/plugins/harpoon/.editorconfig
+  h_220433a6faf6b8 1-14
+lua/plugins/harpoon/cmds.lua
+  h_220433a6faf6b8 1-6
+lua/plugins/harpoon/dependencies.lua
+  h_220433a6faf6b8 1-16
+lua/plugins/harpoon/events.lua
+  h_220433a6faf6b8 1-6
+lua/plugins/harpoon/ft.lua
+  h_220433a6faf6b8 1-6
+lua/plugins/harpoon/init.lua
+  h_220433a6faf6b8 1-37
+lua/plugins/harpoon/keys.lua
+  h_220433a6faf6b8 1-23
+lua/plugins/harpoon/opts.lua
+  h_220433a6faf6b8 1-6
+lua/plugins/harpoon/stylua.toml
+  h_220433a6faf6b8 1-13
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.24",
+  "base_commit_sha": "4d1110a68642af736c7a68ab34e2acabdd3843d5",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
