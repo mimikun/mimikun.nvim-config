@@ -1,0 +1,14 @@
+lua/plugins/harpoon/init.lua
+  h_220433a6faf6b8 24
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.24",
+  "base_commit_sha": "91ab5a2b202b7130a15ef697fd4e92fab40c3087",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
