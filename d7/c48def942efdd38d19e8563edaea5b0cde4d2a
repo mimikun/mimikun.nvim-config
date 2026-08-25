@@ -1,0 +1,170 @@
+lua/plugins/telescope-nvim/README.md
+  h_220433a6faf6b8 1-576
+lua/plugins/telescope-nvim/docs/secret.txt
+  h_220433a6faf6b8 1-32
+lua/plugins/telescope-nvim/docs/telescope.txt
+  h_220433a6faf6b8 1-3665
+lua/plugins/telescope-nvim/docs/telescope_changelog.txt
+  h_220433a6faf6b8 1-282
+lua/plugins/telescope-nvim/CODES/ftplugin.TelescopePrompt.lua
+  h_220433a6faf6b8 1-12
+lua/plugins/telescope-nvim/CODES/ftplugin.TelescopeResults.lua
+  h_220433a6faf6b8 1-7
+lua/plugins/telescope-nvim/CODES/_extensions/init.lua
+  h_220433a6faf6b8 1-73
+lua/plugins/telescope-nvim/CODES/actions/generate.lua
+  h_220433a6faf6b8 1-119
+lua/plugins/telescope-nvim/CODES/actions/history.lua
+  h_220433a6faf6b8 1-216
+lua/plugins/telescope-nvim/CODES/actions/init.lua
+  h_220433a6faf6b8 1-1591
+lua/plugins/telescope-nvim/CODES/actions/layout.lua
+  h_220433a6faf6b8 1-148
+lua/plugins/telescope-nvim/CODES/actions/mt.lua
+  h_220433a6faf6b8 1-210
+lua/plugins/telescope-nvim/CODES/actions/set.lua
+  h_220433a6faf6b8 1-315
+lua/plugins/telescope-nvim/CODES/actions/state.lua
+  h_220433a6faf6b8 1-57
+lua/plugins/telescope-nvim/CODES/actions/utils.lua
+  h_220433a6faf6b8 1-144
+lua/plugins/telescope-nvim/CODES/algos/fzy.lua
+  h_220433a6faf6b8 1-197
+lua/plugins/telescope-nvim/CODES/algos/linked_list.lua
+  h_220433a6faf6b8 1-255
+lua/plugins/telescope-nvim/CODES/algos/string_distance.lua
+  h_220433a6faf6b8 1-52
+lua/plugins/telescope-nvim/CODES/async_job.lua
+  h_220433a6faf6b8 1-322
+lua/plugins/telescope-nvim/CODES/builtin/__diagnostics.lua
+  h_220433a6faf6b8 1-206
+lua/plugins/telescope-nvim/CODES/builtin/__files.lua
+  h_220433a6faf6b8 1-660
+lua/plugins/telescope-nvim/CODES/builtin/__git.lua
+  h_220433a6faf6b8 1-522
+lua/plugins/telescope-nvim/CODES/builtin/__internal.lua
+  h_220433a6faf6b8 1-1555
+lua/plugins/telescope-nvim/CODES/builtin/__lsp.lua
+  h_220433a6faf6b8 1-516
+lua/plugins/telescope-nvim/CODES/builtin/init.lua
+  h_220433a6faf6b8 1-725
+lua/plugins/telescope-nvim/CODES/command.lua
+  h_220433a6faf6b8 1-261
+lua/plugins/telescope-nvim/CODES/config.lua
+  h_220433a6faf6b8 1-987
+lua/plugins/telescope-nvim/CODES/config/resolve.lua
+  h_220433a6faf6b8 1-327
+lua/plugins/telescope-nvim/CODES/debounce.lua
+  h_220433a6faf6b8 1-165
+lua/plugins/telescope-nvim/CODES/entry_manager.lua
+  h_220433a6faf6b8 1-168
+lua/plugins/telescope-nvim/CODES/finders.lua
+  h_220433a6faf6b8 1-232
+lua/plugins/telescope-nvim/CODES/finders/async_job_finder.lua
+  h_220433a6faf6b8 1-84
+lua/plugins/telescope-nvim/CODES/finders/async_oneshot_finder.lua
+  h_220433a6faf6b8 1-104
+lua/plugins/telescope-nvim/CODES/finders/async_static_finder.lua
+  h_220433a6faf6b8 1-44
+lua/plugins/telescope-nvim/CODES/from_entry.lua
+  h_220433a6faf6b8 1-45
+lua/plugins/telescope-nvim/CODES/health.lua
+  h_220433a6faf6b8 1-123
+lua/plugins/telescope-nvim/CODES/init.lua
+  h_220433a6faf6b8 1-171
+lua/plugins/telescope-nvim/CODES/log.lua
+  h_220433a6faf6b8 1-4
+lua/plugins/telescope-nvim/CODES/make_entry.lua
+  h_220433a6faf6b8 1-1416
+lua/plugins/telescope-nvim/CODES/mappings.lua
+  h_220433a6faf6b8 1-364
+lua/plugins/telescope-nvim/CODES/operators.lua
+  h_220433a6faf6b8 1-23
+lua/plugins/telescope-nvim/CODES/pickers.lua
+  h_220433a6faf6b8 1-1724
+lua/plugins/telescope-nvim/CODES/pickers/entry_display.lua
+  h_220433a6faf6b8 1-167
+lua/plugins/telescope-nvim/CODES/pickers/highlights.lua
+  h_220433a6faf6b8 1-125
+lua/plugins/telescope-nvim/CODES/pickers/layout.lua
+  h_220433a6faf6b8 1-194
+lua/plugins/telescope-nvim/CODES/pickers/layout_strategies.lua
+  h_220433a6faf6b8 1-964
+lua/plugins/telescope-nvim/CODES/pickers/multi.lua
+  h_220433a6faf6b8 1-50
+lua/plugins/telescope-nvim/CODES/pickers/scroller.lua
+  h_220433a6faf6b8 1-124
+lua/plugins/telescope-nvim/CODES/pickers/window.lua
+  h_220433a6faf6b8 1-49
+lua/plugins/telescope-nvim/CODES/previewers/buffer_previewer.lua
+  h_220433a6faf6b8 1-1189
+lua/plugins/telescope-nvim/CODES/previewers/init.lua
+  h_220433a6faf6b8 1-334
+lua/plugins/telescope-nvim/CODES/previewers/previewer.lua
+  h_220433a6faf6b8 1-107
+lua/plugins/telescope-nvim/CODES/previewers/term_previewer.lua
+  h_220433a6faf6b8 1-344
+lua/plugins/telescope-nvim/CODES/previewers/utils.lua
+  h_220433a6faf6b8 1-284
+lua/plugins/telescope-nvim/CODES/sorters.lua
+  h_220433a6faf6b8 1-624
+lua/plugins/telescope-nvim/CODES/state.lua
+  h_220433a6faf6b8 1-39
+lua/plugins/telescope-nvim/CODES/testharness/helpers.lua
+  h_220433a6faf6b8 1-56
+lua/plugins/telescope-nvim/CODES/testharness/init.lua
+  h_220433a6faf6b8 1-112
+lua/plugins/telescope-nvim/CODES/testharness/runner.lua
+  h_220433a6faf6b8 1-156
+lua/plugins/telescope-nvim/CODES/themes.lua
+  h_220433a6faf6b8 1-135
+lua/plugins/telescope-nvim/CODES/utils.lua
+  h_220433a6faf6b8 1-775
+lua/plugins/telescope-nvim/CODES/plugin.telescope.lua
+  h_220433a6faf6b8 1-151
+lua/plugins/telescope-nvim/docs/WIKIS/Configuration-Recipes.md
+  h_220433a6faf6b8 1-1209
+lua/plugins/telescope-nvim/docs/WIKIS/Cookbook-How-To.md
+  h_220433a6faf6b8 1
+lua/plugins/telescope-nvim/docs/WIKIS/Extensions.md
+  h_220433a6faf6b8 1-173
+lua/plugins/telescope-nvim/docs/WIKIS/FAQ.md
+  h_220433a6faf6b8 1-45
+lua/plugins/telescope-nvim/docs/WIKIS/Gallery.md
+  h_220433a6faf6b8 1-91
+lua/plugins/telescope-nvim/docs/WIKIS/Home.md
+  h_220433a6faf6b8 1-13
+lua/plugins/telescope-nvim/docs/WIKIS/Showcase.md
+  h_220433a6faf6b8 1-181
+lua/plugins/telescope-nvim/docs/WIKIS/Switching-from-fzf-to-telescope.md
+  h_220433a6faf6b8 1-6
+lua/plugins/telescope-nvim/docs/WIKIS/Troubleshoot.md
+  h_220433a6faf6b8 1-9
+lua/plugins/telescope-nvim/cmds.lua
+  h_220433a6faf6b8 1-6
+lua/plugins/telescope-nvim/dependencies.lua
+  h_220433a6faf6b8 1-16
+lua/plugins/telescope-nvim/events.lua
+  h_220433a6faf6b8 1-6
+lua/plugins/telescope-nvim/ft.lua
+  h_220433a6faf6b8 1-6
+lua/plugins/telescope-nvim/init.lua
+  h_220433a6faf6b8 1-31,32-33,34-36
+lua/plugins/telescope-nvim/keys.lua
+  h_220433a6faf6b8 1-23
+lua/plugins/telescope-nvim/opts.lua
+  h_220433a6faf6b8 1-6
+lua/plugins/telescope-nvim/stylua.toml
+  h_220433a6faf6b8 1-13
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.24",
+  "base_commit_sha": "d7c48def942efdd38d19e8563edaea5b0cde4d2a",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
