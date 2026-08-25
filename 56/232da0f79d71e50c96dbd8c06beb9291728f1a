@@ -1,0 +1,16 @@
+lua/plugins/markview-nvim/CODES/blink-markview.lua
+  h_220433a6faf6b8 181-184
+lua/plugins/markview-nvim/CODES/cmp-markview.lua
+  h_220433a6faf6b8 124-127
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.24",
+  "base_commit_sha": "56232da0f79d71e50c96dbd8c06beb9291728f1a",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
