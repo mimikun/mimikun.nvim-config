@@ -1,0 +1,22 @@
+lua/plugins/toggleterm-nvim/WIKIS/Home.md
+  h_220433a6faf6b8 1-3
+lua/plugins/toggleterm-nvim/WIKIS/Mouse-support.md
+  h_220433a6faf6b8 1-33
+lua/plugins/toggleterm-nvim/WIKIS/Per-file-type-shell.md
+  h_220433a6faf6b8 1-30
+lua/plugins/toggleterm-nvim/WIKIS/Screenshots-and-showcase.md
+  h_220433a6faf6b8 1-6
+lua/plugins/toggleterm-nvim/WIKIS/Tips-and-Tricks.md
+  h_220433a6faf6b8 1-118
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.24",
+  "base_commit_sha": "011f43ed232f61c47bc693c9300fe107bc194a36",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
