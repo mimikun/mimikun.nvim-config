@@ -1,0 +1,30 @@
+lua/plugins/telescope-nvim/.editorconfig
+  h_220433a6faf6b8 1-14
+lua/plugins/telescope-nvim/cmds.lua
+  h_220433a6faf6b8 1-6
+lua/plugins/telescope-nvim/dependencies.lua
+  h_220433a6faf6b8 1-16
+lua/plugins/telescope-nvim/events.lua
+  h_220433a6faf6b8 1-6
+lua/plugins/telescope-nvim/ft.lua
+  h_220433a6faf6b8 1-6
+lua/plugins/telescope-nvim/init.lua
+  h_220433a6faf6b8 1-37
+lua/plugins/telescope-nvim/keys.lua
+  h_220433a6faf6b8 1-23
+lua/plugins/telescope-nvim/opts.lua
+  h_220433a6faf6b8 1-6
+lua/plugins/telescope-nvim/stylua.toml
+  h_220433a6faf6b8 1-13
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.24",
+  "base_commit_sha": "70fcfa1bccb4004fce9579b0a8792de4743a7312",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
