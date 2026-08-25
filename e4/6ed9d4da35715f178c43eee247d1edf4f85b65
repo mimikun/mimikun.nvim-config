@@ -1,0 +1,302 @@
+lua/plugins/overseer-nvim/CODES/.envrc
+  h_220433a6faf6b8 1-3
+lua/plugins/overseer-nvim/CODES/.github/ISSUE_TEMPLATE/bug_report.yml
+  h_220433a6faf6b8 1-117
+lua/plugins/overseer-nvim/CODES/.github/ISSUE_TEMPLATE/discussion.yml
+  h_220433a6faf6b8 1-21
+lua/plugins/overseer-nvim/CODES/.github/ISSUE_TEMPLATE/feature_request.yml
+  h_220433a6faf6b8 1-43
+lua/plugins/overseer-nvim/CODES/.github/pre-commit
+  h_220433a6faf6b8 1-3
+lua/plugins/overseer-nvim/CODES/.github/pre-push
+  h_220433a6faf6b8 1-11
+lua/plugins/overseer-nvim/CODES/.github/workflows/automation_remove_question_label_on_comment.yml
+  h_220433a6faf6b8 1-16
+lua/plugins/overseer-nvim/CODES/.github/workflows/automation_request_review.yml
+  h_220433a6faf6b8 1-27
+lua/plugins/overseer-nvim/CODES/.github/workflows/install_nvim.sh
+  h_220433a6faf6b8 1-16
+lua/plugins/overseer-nvim/CODES/.github/workflows/tests.yml
+  h_220433a6faf6b8 1-123
+lua/plugins/overseer-nvim/CODES/.gitignore
+  h_220433a6faf6b8 1-48
+lua/plugins/overseer-nvim/CODES/.luacheckrc
+  h_220433a6faf6b8 1-17
+lua/plugins/overseer-nvim/CODES/.luarc.json
+  h_220433a6faf6b8 1-9
+lua/plugins/overseer-nvim/CODES/.stylua.toml
+  h_220433a6faf6b8 1-5
+lua/plugins/overseer-nvim/CODES/.vscode/tasks.json
+  h_220433a6faf6b8 1-117
+lua/plugins/overseer-nvim/CODES/CHANGELOG.md
+  h_220433a6faf6b8 1-561
+lua/plugins/overseer-nvim/CODES/LICENSE
+  h_220433a6faf6b8 1-21
+lua/plugins/overseer-nvim/CODES/Makefile
+  h_220433a6faf6b8 1-47
+lua/plugins/overseer-nvim/CODES/README.md
+  h_220433a6faf6b8 1-275
+lua/plugins/overseer-nvim/CODES/doc/components.md
+  h_220433a6faf6b8 1-283
+lua/plugins/overseer-nvim/CODES/doc/explanation.md
+  h_220433a6faf6b8 1-136
+lua/plugins/overseer-nvim/CODES/doc/extending_vscode.md
+  h_220433a6faf6b8 1-70
+lua/plugins/overseer-nvim/CODES/doc/guides.md
+  h_220433a6faf6b8 1-464
+lua/plugins/overseer-nvim/CODES/doc/overseer.txt
+  h_220433a6faf6b8 1-1131
+lua/plugins/overseer-nvim/CODES/doc/parsers.md
+  h_220433a6faf6b8 1-321
+lua/plugins/overseer-nvim/CODES/doc/recipes.md
+  h_220433a6faf6b8 1-181
+lua/plugins/overseer-nvim/CODES/doc/reference.md
+  h_220433a6faf6b8 1-934
+lua/plugins/overseer-nvim/CODES/doc/rendering.md
+  h_220433a6faf6b8 1-394
+lua/plugins/overseer-nvim/CODES/doc/strategies.md
+  h_220433a6faf6b8 1-73
+lua/plugins/overseer-nvim/CODES/doc/third_party.md
+  h_220433a6faf6b8 1-238
+lua/plugins/overseer-nvim/CODES/doc/tutorials.md
+  h_220433a6faf6b8 1-140
+lua/plugins/overseer-nvim/CODES/justfile
+  h_220433a6faf6b8 1-23
+lua/plugins/overseer-nvim/CODES/lua/cmp_overseer/init.lua
+  h_220433a6faf6b8 1-33
+lua/plugins/overseer-nvim/CODES/lua/lualine/components/overseer.lua
+  h_220433a6faf6b8 1-106
+lua/plugins/overseer-nvim/CODES/lua/neotest/client/strategies/overseer.lua
+  h_220433a6faf6b8 1-173
+lua/plugins/overseer-nvim/CODES/lua/neotest/consumers/overseer.lua
+  h_220433a6faf6b8 1-89
+lua/plugins/overseer-nvim/CODES/lua/overseer/action_util.lua
+  h_220433a6faf6b8 1-105
+lua/plugins/overseer-nvim/CODES/lua/overseer/commands.lua
+  h_220433a6faf6b8 1-238
+lua/plugins/overseer-nvim/CODES/lua/overseer/component.lua
+  h_220433a6faf6b8 1-352
+lua/plugins/overseer-nvim/CODES/lua/overseer/component/dependencies.lua
+  h_220433a6faf6b8 1-101
+lua/plugins/overseer-nvim/CODES/lua/overseer/component/dependencies/on_success_complete_dependency.lua
+  h_220433a6faf6b8 1-41
+lua/plugins/overseer-nvim/CODES/lua/overseer/component/display_duration.lua
+  h_220433a6faf6b8 1-8
+lua/plugins/overseer-nvim/CODES/lua/overseer/component/neotest/link_with_neotest.lua
+  h_220433a6faf6b8 1-26
+lua/plugins/overseer-nvim/CODES/lua/overseer/component/on_complete_dispose.lua
+  h_220433a6faf6b8 1-131
+lua/plugins/overseer-nvim/CODES/lua/overseer/component/on_complete_notify.lua
+  h_220433a6faf6b8 1-59
+lua/plugins/overseer-nvim/CODES/lua/overseer/component/on_complete_restart.lua
+  h_220433a6faf6b8 1-46
+lua/plugins/overseer-nvim/CODES/lua/overseer/component/on_exit_set_status.lua
+  h_220433a6faf6b8 1-27
+lua/plugins/overseer-nvim/CODES/lua/overseer/component/on_output_notify.lua
+  h_220433a6faf6b8 1-147
+lua/plugins/overseer-nvim/CODES/lua/overseer/component/on_output_parse.lua
+  h_220433a6faf6b8 1-117
+lua/plugins/overseer-nvim/CODES/lua/overseer/component/on_output_quickfix.lua
+  h_220433a6faf6b8 1-248
+lua/plugins/overseer-nvim/CODES/lua/overseer/component/on_output_summarize.lua
+  h_220433a6faf6b8 1-8
+lua/plugins/overseer-nvim/CODES/lua/overseer/component/on_output_write_file.lua
+  h_220433a6faf6b8 1-38
+lua/plugins/overseer-nvim/CODES/lua/overseer/component/on_result_diagnostics.lua
+  h_220433a6faf6b8 1-112
+lua/plugins/overseer-nvim/CODES/lua/overseer/component/on_result_diagnostics_quickfix.lua
+  h_220433a6faf6b8 1-80
+lua/plugins/overseer-nvim/CODES/lua/overseer/component/on_result_diagnostics_trouble.lua
+  h_220433a6faf6b8 1-39
+lua/plugins/overseer-nvim/CODES/lua/overseer/component/on_result_notify.lua
+  h_220433a6faf6b8 1-52
+lua/plugins/overseer-nvim/CODES/lua/overseer/component/open_output.lua
+  h_220433a6faf6b8 1-112
+lua/plugins/overseer-nvim/CODES/lua/overseer/component/orchestrator/on_broadcast_update_orchestrator.lua
+  h_220433a6faf6b8 1-16
+lua/plugins/overseer-nvim/CODES/lua/overseer/component/orchestrator/on_status_broadcast.lua
+  h_220433a6faf6b8 1-16
+lua/plugins/overseer-nvim/CODES/lua/overseer/component/restart_on_save.lua
+  h_220433a6faf6b8 1-140
+lua/plugins/overseer-nvim/CODES/lua/overseer/component/run_after.lua
+  h_220433a6faf6b8 1-100
+lua/plugins/overseer-nvim/CODES/lua/overseer/component/timeout.lua
+  h_220433a6faf6b8 1-45
+lua/plugins/overseer-nvim/CODES/lua/overseer/component/unique.lua
+  h_220433a6faf6b8 1-58
+lua/plugins/overseer-nvim/CODES/lua/overseer/config.lua
+  h_220433a6faf6b8 1-276
+lua/plugins/overseer-nvim/CODES/lua/overseer/constants.lua
+  h_220433a6faf6b8 1-13
+lua/plugins/overseer-nvim/CODES/lua/overseer/dap.lua
+  h_220433a6faf6b8 1-88
+lua/plugins/overseer-nvim/CODES/lua/overseer/enum.lua
+  h_220433a6faf6b8 1-25
+lua/plugins/overseer-nvim/CODES/lua/overseer/files.lua
+  h_220433a6faf6b8 1-187
+lua/plugins/overseer-nvim/CODES/lua/overseer/form/init.lua
+  h_220433a6faf6b8 1-396
+lua/plugins/overseer-nvim/CODES/lua/overseer/form/utils.lua
+  h_220433a6faf6b8 1-350
+lua/plugins/overseer-nvim/CODES/lua/overseer/health.lua
+  h_220433a6faf6b8 1-70
+lua/plugins/overseer-nvim/CODES/lua/overseer/init.lua
+  h_220433a6faf6b8 1-526
+lua/plugins/overseer-nvim/CODES/lua/overseer/json.lua
+  h_220433a6faf6b8 1-80
+lua/plugins/overseer-nvim/CODES/lua/overseer/keymap_util.lua
+  h_220433a6faf6b8 1-166
+lua/plugins/overseer-nvim/CODES/lua/overseer/layout.lua
+  h_220433a6faf6b8 1-174
+lua/plugins/overseer-nvim/CODES/lua/overseer/log.lua
+  h_220433a6faf6b8 1-131
+lua/plugins/overseer-nvim/CODES/lua/overseer/notifier.lua
+  h_220433a6faf6b8 1-87
+lua/plugins/overseer-nvim/CODES/lua/overseer/parselib.lua
+  h_220433a6faf6b8 1-311
+lua/plugins/overseer-nvim/CODES/lua/overseer/render.lua
+  h_220433a6faf6b8 1-379
+lua/plugins/overseer-nvim/CODES/lua/overseer/shell.lua
+  h_220433a6faf6b8 1-216
+lua/plugins/overseer-nvim/CODES/lua/overseer/strategy/init.lua
+  h_220433a6faf6b8 1-24
+lua/plugins/overseer-nvim/CODES/lua/overseer/strategy/jobstart.lua
+  h_220433a6faf6b8 1-347
+lua/plugins/overseer-nvim/CODES/lua/overseer/strategy/orchestrator.lua
+  h_220433a6faf6b8 1-312
+lua/plugins/overseer-nvim/CODES/lua/overseer/strategy/system.lua
+  h_220433a6faf6b8 1-280
+lua/plugins/overseer-nvim/CODES/lua/overseer/strategy/test.lua
+  h_220433a6faf6b8 1-66
+lua/plugins/overseer-nvim/CODES/lua/overseer/task.lua
+  h_220433a6faf6b8 1-662
+lua/plugins/overseer-nvim/CODES/lua/overseer/task_editor.lua
+  h_220433a6faf6b8 1-460
+lua/plugins/overseer-nvim/CODES/lua/overseer/task_list/actions.lua
+  h_220433a6faf6b8 1-198
+lua/plugins/overseer-nvim/CODES/lua/overseer/task_list/init.lua
+  h_220433a6faf6b8 1-223
+lua/plugins/overseer-nvim/CODES/lua/overseer/task_list/keymaps.lua
+  h_220433a6faf6b8 1-121
+lua/plugins/overseer-nvim/CODES/lua/overseer/task_list/sidebar.lua
+  h_220433a6faf6b8 1-410
+lua/plugins/overseer-nvim/CODES/lua/overseer/task_view.lua
+  h_220433a6faf6b8 1-186
+lua/plugins/overseer-nvim/CODES/lua/overseer/template.lua
+  h_220433a6faf6b8 1-672
+lua/plugins/overseer-nvim/CODES/lua/overseer/template/cargo-make.lua
+  h_220433a6faf6b8 1-39
+lua/plugins/overseer-nvim/CODES/lua/overseer/template/cargo.lua
+  h_220433a6faf6b8 1-106
+lua/plugins/overseer-nvim/CODES/lua/overseer/template/composer.lua
+  h_220433a6faf6b8 1-35
+lua/plugins/overseer-nvim/CODES/lua/overseer/template/deno.lua
+  h_220433a6faf6b8 1-34
+lua/plugins/overseer-nvim/CODES/lua/overseer/template/devenv.lua
+  h_220433a6faf6b8 1-51
+lua/plugins/overseer-nvim/CODES/lua/overseer/template/just.lua
+  h_220433a6faf6b8 1-151
+lua/plugins/overseer-nvim/CODES/lua/overseer/template/mage.lua
+  h_220433a6faf6b8 1-70
+lua/plugins/overseer-nvim/CODES/lua/overseer/template/make.lua
+  h_220433a6faf6b8 1-69
+lua/plugins/overseer-nvim/CODES/lua/overseer/template/mise.lua
+  h_220433a6faf6b8 1-70
+lua/plugins/overseer-nvim/CODES/lua/overseer/template/mix.lua
+  h_220433a6faf6b8 1-46
+lua/plugins/overseer-nvim/CODES/lua/overseer/template/npm.lua
+  h_220433a6faf6b8 1-141
+lua/plugins/overseer-nvim/CODES/lua/overseer/template/rake.lua
+  h_220433a6faf6b8 1-81
+lua/plugins/overseer-nvim/CODES/lua/overseer/template/task.lua
+  h_220433a6faf6b8 1-72
+lua/plugins/overseer-nvim/CODES/lua/overseer/template/tox.lua
+  h_220433a6faf6b8 1-44
+lua/plugins/overseer-nvim/CODES/lua/overseer/template/vscode.lua
+  h_220433a6faf6b8 1-48
+lua/plugins/overseer-nvim/CODES/lua/overseer/util.lua
+  h_220433a6faf6b8 1-816
+lua/plugins/overseer-nvim/CODES/lua/overseer/vscode/init.lua
+  h_220433a6faf6b8 1-315
+lua/plugins/overseer-nvim/CODES/lua/overseer/vscode/problem_matcher.lua
+  h_220433a6faf6b8 1-632
+lua/plugins/overseer-nvim/CODES/lua/overseer/vscode/provider/func/debug_java.lua
+  h_220433a6faf6b8 1-17
+lua/plugins/overseer-nvim/CODES/lua/overseer/vscode/provider/func/debug_node.lua
+  h_220433a6faf6b8 1-17
+lua/plugins/overseer-nvim/CODES/lua/overseer/vscode/provider/func/debug_powershell.lua
+  h_220433a6faf6b8 1-10
+lua/plugins/overseer-nvim/CODES/lua/overseer/vscode/provider/func/init.lua
+  h_220433a6faf6b8 1-157
+lua/plugins/overseer-nvim/CODES/lua/overseer/vscode/provider/npm.lua
+  h_220433a6faf6b8 1-36
+lua/plugins/overseer-nvim/CODES/lua/overseer/vscode/provider/process.lua
+  h_220433a6faf6b8 1-11
+lua/plugins/overseer-nvim/CODES/lua/overseer/vscode/provider/shell.lua
+  h_220433a6faf6b8 1-16
+lua/plugins/overseer-nvim/CODES/lua/overseer/vscode/provider/typescript.lua
+  h_220433a6faf6b8 1-26
+lua/plugins/overseer-nvim/CODES/lua/overseer/vscode/variables.lua
+  h_220433a6faf6b8 1-138
+lua/plugins/overseer-nvim/CODES/lua/overseer/vscode/vs_util.lua
+  h_220433a6faf6b8 1-32
+lua/plugins/overseer-nvim/CODES/lua/overseer/window.lua
+  h_220433a6faf6b8 1-154
+lua/plugins/overseer-nvim/CODES/lua/resession/extensions/overseer.lua
+  h_220433a6faf6b8 1-51
+lua/plugins/overseer-nvim/CODES/plugin/overseer.lua
+  h_220433a6faf6b8 1
+lua/plugins/overseer-nvim/CODES/run_tests.sh
+  h_220433a6faf6b8 1-22
+lua/plugins/overseer-nvim/CODES/scripts/generate.py
+  h_220433a6faf6b8 1-692
+lua/plugins/overseer-nvim/CODES/scripts/main.py
+  h_220433a6faf6b8 1-31
+lua/plugins/overseer-nvim/CODES/scripts/requirements.txt
+  h_220433a6faf6b8 1-4
+lua/plugins/overseer-nvim/CODES/selene.toml
+  h_220433a6faf6b8 1
+lua/plugins/overseer-nvim/CODES/tests/fake_background_task.sh
+  h_220433a6faf6b8 1-19
+lua/plugins/overseer-nvim/CODES/tests/files_spec.lua
+  h_220433a6faf6b8 1-64
+lua/plugins/overseer-nvim/CODES/tests/json_spec.lua
+  h_220433a6faf6b8 1-49
+lua/plugins/overseer-nvim/CODES/tests/manual/test_dependencies.lua
+  h_220433a6faf6b8 1-14
+lua/plugins/overseer-nvim/CODES/tests/manual/test_form.lua
+  h_220433a6faf6b8 1-41
+lua/plugins/overseer-nvim/CODES/tests/manual/test_orchestrator.lua
+  h_220433a6faf6b8 1-24
+lua/plugins/overseer-nvim/CODES/tests/manual/test_task_editor.lua
+  h_220433a6faf6b8 1-7
+lua/plugins/overseer-nvim/CODES/tests/manual/test_wrapped_jobstart.lua
+  h_220433a6faf6b8 1-13
+lua/plugins/overseer-nvim/CODES/tests/manual/test_wrapped_system.lua
+  h_220433a6faf6b8 1-17
+lua/plugins/overseer-nvim/CODES/tests/minimal_init.lua
+  h_220433a6faf6b8 1-5
+lua/plugins/overseer-nvim/CODES/tests/parser_spec.lua
+  h_220433a6faf6b8 1-353
+lua/plugins/overseer-nvim/CODES/tests/shell_spec.lua
+  h_220433a6faf6b8 1-140
+lua/plugins/overseer-nvim/CODES/tests/template/prompt_spec.lua
+  h_220433a6faf6b8 1-68
+lua/plugins/overseer-nvim/CODES/tests/template/vscode_spec.lua
+  h_220433a6faf6b8 1-386
+lua/plugins/overseer-nvim/CODES/tests/util_spec.lua
+  h_220433a6faf6b8 1-51
+lua/plugins/overseer-nvim/CODES/vim.toml
+  h_220433a6faf6b8 1-7
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.24",
+  "base_commit_sha": "e46ed9d4da35715f178c43eee247d1edf4f85b65",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
