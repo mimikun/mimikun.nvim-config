@@ -1,0 +1,114 @@
+lua/plugins/nvim-autopairs/CODES/.editorconfig
+  h_220433a6faf6b8 1-23
+lua/plugins/nvim-autopairs/CODES/.github/FUNDING.yml
+  h_220433a6faf6b8 1-2
+lua/plugins/nvim-autopairs/CODES/.github/ISSUE_TEMPLATE/bug_report.yml
+  h_220433a6faf6b8 1-71
+lua/plugins/nvim-autopairs/CODES/.github/ISSUE_TEMPLATE/config.yml
+  h_220433a6faf6b8 1-2
+lua/plugins/nvim-autopairs/CODES/.github/ISSUE_TEMPLATE/feature_request.md
+  h_220433a6faf6b8 1-20
+lua/plugins/nvim-autopairs/CODES/.github/generated-files-bot.yml
+  h_220433a6faf6b8 1-7
+lua/plugins/nvim-autopairs/CODES/.github/stale.yml
+  h_220433a6faf6b8 1-19
+lua/plugins/nvim-autopairs/CODES/.github/workflows/ci.yml
+  h_220433a6faf6b8 1-39
+lua/plugins/nvim-autopairs/CODES/.github/workflows/docs.yml
+  h_220433a6faf6b8 1-51
+lua/plugins/nvim-autopairs/CODES/.github/workflows/sponsors.yml
+  h_220433a6faf6b8 1-30
+lua/plugins/nvim-autopairs/CODES/.github/workflows/stylua.yml
+  h_220433a6faf6b8 1-25
+lua/plugins/nvim-autopairs/CODES/.gitignore
+  h_220433a6faf6b8 1
+lua/plugins/nvim-autopairs/CODES/.luarc.json
+  h_220433a6faf6b8 1-6
+lua/plugins/nvim-autopairs/CODES/.stylua.toml
+  h_220433a6faf6b8 1-9
+lua/plugins/nvim-autopairs/CODES/.styluaignore
+  h_220433a6faf6b8 1
+lua/plugins/nvim-autopairs/CODES/LICENSE
+  h_220433a6faf6b8 1-22
+lua/plugins/nvim-autopairs/CODES/Makefile
+  h_220433a6faf6b8 1-9
+lua/plugins/nvim-autopairs/CODES/README.md
+  h_220433a6faf6b8 1-424
+lua/plugins/nvim-autopairs/CODES/doc/nvim-autopairs-rules.txt
+  h_220433a6faf6b8 1-359
+lua/plugins/nvim-autopairs/CODES/doc/nvim-autopairs.txt
+  h_220433a6faf6b8 1-472
+lua/plugins/nvim-autopairs/CODES/lua/nvim-autopairs.lua
+  h_220433a6faf6b8 1-714
+lua/plugins/nvim-autopairs/CODES/lua/nvim-autopairs/_log.lua
+  h_220433a6faf6b8 1-13
+lua/plugins/nvim-autopairs/CODES/lua/nvim-autopairs/completion/cmp.lua
+  h_220433a6faf6b8 1-98
+lua/plugins/nvim-autopairs/CODES/lua/nvim-autopairs/completion/compe.lua
+  h_220433a6faf6b8 1-102
+lua/plugins/nvim-autopairs/CODES/lua/nvim-autopairs/completion/handlers.lua
+  h_220433a6faf6b8 1-101
+lua/plugins/nvim-autopairs/CODES/lua/nvim-autopairs/conds.lua
+  h_220433a6faf6b8 1-361
+lua/plugins/nvim-autopairs/CODES/lua/nvim-autopairs/fastwrap.lua
+  h_220433a6faf6b8 1-257
+lua/plugins/nvim-autopairs/CODES/lua/nvim-autopairs/rule.lua
+  h_220433a6faf6b8 1-237
+lua/plugins/nvim-autopairs/CODES/lua/nvim-autopairs/rules/basic.lua
+  h_220433a6faf6b8 1-127
+lua/plugins/nvim-autopairs/CODES/lua/nvim-autopairs/rules/endwise-elixir.lua
+  h_220433a6faf6b8 1-9
+lua/plugins/nvim-autopairs/CODES/lua/nvim-autopairs/rules/endwise-lua.lua
+  h_220433a6faf6b8 1-19
+lua/plugins/nvim-autopairs/CODES/lua/nvim-autopairs/rules/endwise-ruby.lua
+  h_220433a6faf6b8 1-22
+lua/plugins/nvim-autopairs/CODES/lua/nvim-autopairs/rules/ts_basic.lua
+  h_220433a6faf6b8 1-22
+lua/plugins/nvim-autopairs/CODES/lua/nvim-autopairs/ts-conds.lua
+  h_220433a6faf6b8 1-194
+lua/plugins/nvim-autopairs/CODES/lua/nvim-autopairs/ts-rule.lua
+  h_220433a6faf6b8 1-15
+lua/plugins/nvim-autopairs/CODES/lua/nvim-autopairs/ts-utils.lua
+  h_220433a6faf6b8 1-40
+lua/plugins/nvim-autopairs/CODES/lua/nvim-autopairs/utils.lua
+  h_220433a6faf6b8 1-234
+lua/plugins/nvim-autopairs/CODES/tests/afterquote_spec.lua
+  h_220433a6faf6b8 1-99
+lua/plugins/nvim-autopairs/CODES/tests/endwise/init.lua
+  h_220433a6faf6b8 1-22
+lua/plugins/nvim-autopairs/CODES/tests/endwise/javascript.js
+  h_220433a6faf6b8 1-18
+lua/plugins/nvim-autopairs/CODES/tests/endwise/main.rs
+  h_220433a6faf6b8 1-15
+lua/plugins/nvim-autopairs/CODES/tests/endwise/ruby.rb
+  h_220433a6faf6b8 1-4
+lua/plugins/nvim-autopairs/CODES/tests/endwise/sample.lua
+  h_220433a6faf6b8 1-18
+lua/plugins/nvim-autopairs/CODES/tests/endwise/sample.md
+  h_220433a6faf6b8 1-9
+lua/plugins/nvim-autopairs/CODES/tests/endwise_spec.lua
+  h_220433a6faf6b8 1-84
+lua/plugins/nvim-autopairs/CODES/tests/fastwrap_spec.lua
+  h_220433a6faf6b8 1-53
+lua/plugins/nvim-autopairs/CODES/tests/minimal.vim
+  h_220433a6faf6b8 1-30
+lua/plugins/nvim-autopairs/CODES/tests/nvim-autopairs_spec.lua
+  h_220433a6faf6b8 1-1001
+lua/plugins/nvim-autopairs/CODES/tests/test_utils.lua
+  h_220433a6faf6b8 1-187
+lua/plugins/nvim-autopairs/CODES/tests/treesitter_spec.lua
+  h_220433a6faf6b8 1-132
+lua/plugins/nvim-autopairs/CODES/tests/utils_spec.lua
+  h_220433a6faf6b8 1-64
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.24",
+  "base_commit_sha": "429923cb698a5b9d0fc587fd57af9d83ab78071b",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
