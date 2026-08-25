@@ -1,0 +1,52 @@
+lua/plugins/harpoon/CODES/autocmd.lua
+  h_220433a6faf6b8 1-2
+lua/plugins/harpoon/CODES/buffer.lua
+  h_220433a6faf6b8 1-102
+lua/plugins/harpoon/CODES/config.lua
+  h_220433a6faf6b8 1-282
+lua/plugins/harpoon/CODES/data.lua
+  h_220433a6faf6b8 1-164
+lua/plugins/harpoon/CODES/extensions/init.lua
+  h_220433a6faf6b8 1-111
+lua/plugins/harpoon/CODES/init.lua
+  h_220433a6faf6b8 1-179
+lua/plugins/harpoon/CODES/list.lua
+  h_220433a6faf6b8 1-367
+lua/plugins/harpoon/CODES/logger.lua
+  h_220433a6faf6b8 1-69
+lua/plugins/harpoon/CODES/scratch/toggle.lua
+  h_220433a6faf6b8 1-3
+lua/plugins/harpoon/CODES/telescope.ext.harpoon.lua
+  h_220433a6faf6b8 1-11
+lua/plugins/harpoon/CODES/telescope.ext.marks.lua
+  h_220433a6faf6b8 1-137
+lua/plugins/harpoon/CODES/test/config_spec.lua
+  h_220433a6faf6b8 1-29
+lua/plugins/harpoon/CODES/test/harpoon_spec.lua
+  h_220433a6faf6b8 1-230
+lua/plugins/harpoon/CODES/test/list_spec.lua
+  h_220433a6faf6b8 1-331
+lua/plugins/harpoon/CODES/test/logger_spec.lua
+  h_220433a6faf6b8 1-28
+lua/plugins/harpoon/CODES/test/ui_spec.lua
+  h_220433a6faf6b8 1-211
+lua/plugins/harpoon/CODES/test/utils.lua
+  h_220433a6faf6b8 1-106
+lua/plugins/harpoon/CODES/ui.lua
+  h_220433a6faf6b8 1-210
+lua/plugins/harpoon/CODES/utils.lua
+  h_220433a6faf6b8 1-25
+lua/plugins/harpoon/README.md
+  h_220433a6faf6b8 1-311
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.24",
+  "base_commit_sha": "21d9c8d9cd846e15ea4fe504e0ba4827ef46ee34",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
