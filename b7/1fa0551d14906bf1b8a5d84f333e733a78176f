@@ -1,0 +1,18 @@
+lua/plugins/harpoon/README.md
+  h_220433a6faf6b8 2,12,14,18-19,23,78,82,87,136,144-145,160,162,167-168,170,173,177,187,190,193,205,227,236,240-241,249,262-263,265,272,274,280,282-283
+lua/plugins/harpoon/dependencies.lua
+  h_220433a6faf6b8 3
+lua/plugins/harpoon/init.lua
+  h_220433a6faf6b8 4
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.24",
+  "base_commit_sha": "b71fa0551d14906bf1b8a5d84f333e733a78176f",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
