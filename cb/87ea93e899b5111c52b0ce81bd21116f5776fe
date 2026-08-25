@@ -1,0 +1,14 @@
+lua/plugins/vim-quickrun/WIKIS/Home.textile
+  h_220433a6faf6b8 1
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.24",
+  "base_commit_sha": "cb87ea93e899b5111c52b0ce81bd21116f5776fe",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
