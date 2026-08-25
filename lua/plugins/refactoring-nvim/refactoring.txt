@@ -1,0 +1,248 @@
+*refactoring.nvim* Refactor and print debugging
+
+------------------------------------------------------------------------------
+                                                                   *refactoring*
+Features:
+- Inline variable:
+  - Inline the definition of the variable under cursor into all its references.
+  - Requires:
+    - LSP server with support for `textDocument/references` and `textDocument/definition`
+    - Tree-sitter parser and queries (`refactor_reference` and `refactor_variable`)
+- Extract variable:
+  - Extract an expression, and all its usages in a buffer, into a variable.
+  - Requires:
+    - Tree-sitter parser and queries (`refactor_scope` and `refactor_output_statement`)
+- Inline function:
+  - Inline the definition of the function under cursor into all its
+  references (only supports functions with a single return statement).
+  - Requires:
+    - LSP server with support for `textDocument/references` and `textDocument/definition`
+    - Tree-sitter parser and queries (`refactor_function` and `refactor_function_call`)
+- Extract function:
+  - Extract text into a function and replace it with a call to that function.
+  - Requires:
+    - Tree-sitter parser and queries (`refactor_reference`, `refactor_scope`,
+    `refactor_output_function` and `refactor_input_function`)
+- Print location:
+  - Inserts a debug print statement with the location under cursor (e.g. `some_function#if#for`).
+  - Requires:
+    - Tree-sitter parser and queries (`refactor_comment` and `refactor_output_statement`)
+- Print variable:
+  - Inserts a debug print statement with all the variable and locations
+  (e.g. `some_function#if#for`) in the selected range.
+  - Requires:
+    - Tree-sitter parser and queries (`refactor_comment`,
+    `refactor_reference`, `refactor_output_statement` and `refactor_scope`)
+- Print expression:
+  - Inserts a debug print statement with the selected expression and
+  location (e.g. `some_function#if#for`).
+  - Requires:
+    - Tree-sitter parser and queries (`refactor_comment` and `refactor_output_statement`)
+- Debug print cleanup:
+  - Cleanup the debug print statements in the selected range.
+  - Requires:
+    - Tree-sitter parser and queries (`refactor_comment`)
+
+------------------------------------------------------------------------------
+*refactor.refactor.extract_func.UserOpts*
+Fields ~
+{show_success_message} (`boolean?`)
+{input} (`string[]?`)
+{preview_ns} (`integer?`)
+{code_generation?} (`refactor.extract_func.UserCodeGeneration`)
+
+------------------------------------------------------------------------------
+*refactor.refactor.extract_var.UserOpts*
+Fields ~
+{show_success_message} (`boolean?`)
+{input} (`string[]?`)
+{preview_ns} (`integer?`)
+{code_generation?} (`refactor.extract_var.UserCodeGeneration`)
+
+------------------------------------------------------------------------------
+*refactor.refactor.inline_var.UserOpts*
+Fields ~
+{show_success_message} (`boolean?`)
+{input} (`string[]?`)
+{preview_ns} (`integer?`)
+{code_generation?} (`refactor.inline_var.UserCodeGeneration`)
+
+------------------------------------------------------------------------------
+*refactor.refactor.inline_func.UserOpts*
+Fields ~
+{show_success_message} (`boolean?`)
+{input} (`string[]?`)
+{preview_ns} (`integer?`)
+{code_generation?} (`refactor.inline_func.UserCodeGeneration`)
+
+------------------------------------------------------------------------------
+                                                              *M.extract_func()*
+                            `M.extract_func`({opts})
+Extract text into a function and replace it with a call to that function.
+
+- Requires:
+  - Tree-sitter parser and queries (`refactor_reference`, `refactor_scope`,
+  `refactor_output_function` and `refactor_input_function`)
+Parameters ~
+{opts} (`refactor.refactor.extract_func.UserOpts?`)
+
+------------------------------------------------------------------------------
+                                                      *M.extract_func_to_file()*
+                        `M.extract_func_to_file`({opts})
+Extract text into a function in a different file and replace it with a call
+to that function.
+
+- Requires:
+  - Tree-sitter parser and queries (`refactor_reference`, `refactor_scope`,
+  `refactor_output_function` and `refactor_input_function`)
+Parameters ~
+{opts} (`refactor.refactor.extract_func.UserOpts?`)
+
+------------------------------------------------------------------------------
+                                                               *M.extract_var()*
+                            `M.extract_var`({opts})
+Extract an expression, and all its usages in a buffer, into a variable.
+
+- Requires:
+  - Tree-sitter parser and queries (`refactor_scope` and
+  `refactor_output_statement`)
+Parameters ~
+{opts} (`refactor.refactor.extract_var.UserOpts?`)
+
+------------------------------------------------------------------------------
+                                                                *M.inline_var()*
+                             `M.inline_var`({opts})
+Inline the definition of the variable under cursor into all its references.
+
+- Requires:
+  - LSP server with support for `textDocument/references` and `textDocument/definition`
+  - Tree-sitter parser and queries (`refactor_reference` and `refactor_variable`)
+Parameters ~
+{opts} (`refactor.refactor.inline_var.UserOpts?`)
+
+------------------------------------------------------------------------------
+                                                               *M.inline_func()*
+                            `M.inline_func`({opts})
+Inline the definition of the function under cursor into all its
+references (only supports functions with a single return statement).
+- Requires:
+  - LSP server with support for `textDocument/references` and
+  `textDocument/definition`
+  - Tree-sitter parser and queries (`refactor_function` and
+  `refactor_function_call`)
+Parameters ~
+{opts} (`refactor.refactor.inline_func.UserOpts?`)
+
+------------------------------------------------------------------------------
+*refactor.select_refactor.Opts*
+Fields ~
+{prefer_ex_cmd} (`boolean?`)
+
+------------------------------------------------------------------------------
+                                                           *M.select_refactor()*
+                          `M.select_refactor`({opts})
+Use |vim.ui.select()| to select a refactor.
+
+The `prefer_ex_cmd` option can be used to pre-populate the command line
+with the ex command needed to execute the refactor. This allows to previews
+changes.
+Parameters ~
+{opts?} (`refactor.select_refactor.Opts`)
+
+------------------------------------------------------------------------------
+                                                                     *M.setup()*
+                               `M.setup`({opts})
+Change the default configuration of `refactoring.nvim`.
+
+NOTE: there is no need to call this function if you are happy with the
+defaults.
+Parameters ~
+{opts?} (`refactor.UserConfig`)
+
+
+==============================================================================
+------------------------------------------------------------------------------
+*refactor.debug.Marker*
+Fields ~
+{start} (`string`)
+{end} (`string`)
+
+------------------------------------------------------------------------------
+*refactor.debug.UserMarkers*
+Fields ~
+{print_var?} (`refactor.debug.Marker`)
+{print_loc?} (`refactor.debug.Marker`)
+{print_exp?} (`refactor.debug.Marker`)
+
+------------------------------------------------------------------------------
+*refactor.debug.cleanup.UserOpts*
+Fields ~
+{markers?} (`refactor.debug.UserMarkers`)
+{types?} (`('print_var'|'print_loc'|'print_exp')[]`)
+{restore_view?} (`boolean`) Does not work with dot-repeat
+
+------------------------------------------------------------------------------
+*refactor.debug.print_var.UserOpts*
+Fields ~
+{marker?} (`refactor.debug.Marker`)
+{output_location?} (`'above'|'below'`)
+{code_generation?} (`refactor.print_var.UserCodeGeneration`)
+
+------------------------------------------------------------------------------
+*refactor.debug.print_loc.UserOpts*
+Fields ~
+{marker?} (`refactor.debug.Marker`)
+{output_location?} (`'above'|'below'`)
+{code_generation?} (`refactor.print_loc.UserCodeGeneration`)
+
+------------------------------------------------------------------------------
+*refactor.debug.print_exp.UserOpts*
+Fields ~
+{marker?} (`refactor.debug.Marker`)
+{output_location?} (`'above'|'below'`)
+{code_generation?} (`refactor.print_exp.CodeGeneration`)
+
+------------------------------------------------------------------------------
+                                                                 *M.print_var()*
+                             `M.print_var`({opts})
+Inserts a debug print statement with all the variable and locations
+(e.g. `some_function#if#for`) in the selected range.
+- Requires:
+  - Tree-sitter parser and queries (`refactor_comment`,
+  `refactor_reference`, `refactor_output_statement` and `refactor_scope`)
+Parameters ~
+{opts} (`refactor.debug.print_var.UserOpts?`)
+
+------------------------------------------------------------------------------
+                                                                   *M.cleanup()*
+                              `M.cleanup`({opts})
+Cleanup the debug print statements in the selected range.
+- Requires:
+  - Tree-sitter parser and queries (`refactor_comment`)
+Parameters ~
+{opts} (`refactor.debug.cleanup.UserOpts?`)
+
+------------------------------------------------------------------------------
+                                                                 *M.print_loc()*
+                             `M.print_loc`({opts})
+Inserts a debug print statement with the location under cursor (e.g.
+`some_function#if#for`).
+- Requires:
+  - Tree-sitter parser and queries (`refactor_comment` and
+  `refactor_output_statement`)
+Parameters ~
+{opts} (`refactor.debug.print_loc.UserOpts?`)
+
+------------------------------------------------------------------------------
+                                                                 *M.print_exp()*
+                             `M.print_exp`({opts})
+Inserts a debug print statement with the selected expression and location
+(e.g. `some_function#if#for`).
+- Requires:
+  - Tree-sitter parser and queries (`refactor_comment` and
+  `refactor_output_statement`)
+Parameters ~
+{opts} (`refactor.debug.print_exp.UserOpts?`)
+
+
+ vim:tw=78:ts=8:noet:ft=help:norl:
