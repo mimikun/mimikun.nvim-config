@@ -1,0 +1,556 @@
+lua/plugins/refactoring-nvim/CODES/.github/FUNDING.yml
+  h_220433a6faf6b8 1
+lua/plugins/refactoring-nvim/CODES/.github/workflows/format.yml
+  h_220433a6faf6b8 1-15
+lua/plugins/refactoring-nvim/CODES/.github/workflows/test.yml
+  h_220433a6faf6b8 1-32
+lua/plugins/refactoring-nvim/CODES/.gitignore
+  h_220433a6faf6b8 1-5
+lua/plugins/refactoring-nvim/CODES/.ignore
+  h_220433a6faf6b8 1-2
+lua/plugins/refactoring-nvim/CODES/.stylua.toml
+  h_220433a6faf6b8 1-7
+lua/plugins/refactoring-nvim/CODES/.styluaignore
+  h_220433a6faf6b8 1
+lua/plugins/refactoring-nvim/CODES/.tsqueryrc.json
+  h_220433a6faf6b8 1-351
+lua/plugins/refactoring-nvim/CODES/CONTRIBUTING.md
+  h_220433a6faf6b8 1-7
+lua/plugins/refactoring-nvim/CODES/LICENSE
+  h_220433a6faf6b8 1-21
+lua/plugins/refactoring-nvim/CODES/Makefile
+  h_220433a6faf6b8 1-30
+lua/plugins/refactoring-nvim/CODES/README.md
+  h_220433a6faf6b8 1-236
+lua/plugins/refactoring-nvim/CODES/doc/refactoring.txt
+  h_220433a6faf6b8 1-248
+lua/plugins/refactoring-nvim/CODES/lua/refactoring.lua
+  h_220433a6faf6b8 1-266
+lua/plugins/refactoring-nvim/CODES/lua/refactoring/command.lua
+  h_220433a6faf6b8 1-122
+lua/plugins/refactoring-nvim/CODES/lua/refactoring/config.lua
+  h_220433a6faf6b8 1-1054
+lua/plugins/refactoring-nvim/CODES/lua/refactoring/debug.lua
+  h_220433a6faf6b8 1-153
+lua/plugins/refactoring-nvim/CODES/lua/refactoring/debug/cleanup.lua
+  h_220433a6faf6b8 1-138
+lua/plugins/refactoring-nvim/CODES/lua/refactoring/debug/print_exp.lua
+  h_220433a6faf6b8 1-266
+lua/plugins/refactoring-nvim/CODES/lua/refactoring/debug/print_loc.lua
+  h_220433a6faf6b8 1-268
+lua/plugins/refactoring-nvim/CODES/lua/refactoring/debug/print_var.lua
+  h_220433a6faf6b8 1-398
+lua/plugins/refactoring-nvim/CODES/lua/refactoring/debug/utils.lua
+  h_220433a6faf6b8 1-123
+lua/plugins/refactoring-nvim/CODES/lua/refactoring/pos.lua
+  h_220433a6faf6b8 1-228
+lua/plugins/refactoring-nvim/CODES/lua/refactoring/range.lua
+  h_220433a6faf6b8 1-396
+lua/plugins/refactoring-nvim/CODES/lua/refactoring/refactor/extract_func.lua
+  h_220433a6faf6b8 1-755
+lua/plugins/refactoring-nvim/CODES/lua/refactoring/refactor/extract_var.lua
+  h_220433a6faf6b8 1-288
+lua/plugins/refactoring-nvim/CODES/lua/refactoring/refactor/inline_func.lua
+  h_220433a6faf6b8 1-444
+lua/plugins/refactoring-nvim/CODES/lua/refactoring/refactor/inline_var.lua
+  h_220433a6faf6b8 1-368
+lua/plugins/refactoring-nvim/CODES/lua/refactoring/utils.lua
+  h_220433a6faf6b8 1-696
+lua/plugins/refactoring-nvim/CODES/plugin/command.lua
+  h_220433a6faf6b8 1
+lua/plugins/refactoring-nvim/CODES/plugin/ts.lua
+  h_220433a6faf6b8 1-179
+lua/plugins/refactoring-nvim/CODES/queries/c/refactor_comment.scm
+  h_220433a6faf6b8 1
+lua/plugins/refactoring-nvim/CODES/queries/c/refactor_debug_path.scm
+  h_220433a6faf6b8 1-16
+lua/plugins/refactoring-nvim/CODES/queries/c/refactor_input_function.scm
+  h_220433a6faf6b8 1-2
+lua/plugins/refactoring-nvim/CODES/queries/c/refactor_output_function.scm
+  h_220433a6faf6b8 1-5
+lua/plugins/refactoring-nvim/CODES/queries/c/refactor_output_statement.scm
+  h_220433a6faf6b8 1-5
+lua/plugins/refactoring-nvim/CODES/queries/c/refactor_reference.scm
+  h_220433a6faf6b8 1-119
+lua/plugins/refactoring-nvim/CODES/queries/c/refactor_scope.scm
+  h_220433a6faf6b8 1-27
+lua/plugins/refactoring-nvim/CODES/queries/c/refactor_variable.scm
+  h_220433a6faf6b8 1-14
+lua/plugins/refactoring-nvim/CODES/queries/c_sharp/refactor_comment.scm
+  h_220433a6faf6b8 1
+lua/plugins/refactoring-nvim/CODES/queries/c_sharp/refactor_debug_path.scm
+  h_220433a6faf6b8 1-17
+lua/plugins/refactoring-nvim/CODES/queries/c_sharp/refactor_input_function.scm
+  h_220433a6faf6b8 1-12
+lua/plugins/refactoring-nvim/CODES/queries/c_sharp/refactor_output_function.scm
+  h_220433a6faf6b8 1-17
+lua/plugins/refactoring-nvim/CODES/queries/c_sharp/refactor_output_statement.scm
+  h_220433a6faf6b8 1-27
+lua/plugins/refactoring-nvim/CODES/queries/c_sharp/refactor_reference.scm
+  h_220433a6faf6b8 1-56
+lua/plugins/refactoring-nvim/CODES/queries/c_sharp/refactor_scope.scm
+  h_220433a6faf6b8 1-24
+lua/plugins/refactoring-nvim/CODES/queries/c_sharp/refactor_variable.scm
+  h_220433a6faf6b8 1-15
+lua/plugins/refactoring-nvim/CODES/queries/cpp/refactor_comment.scm
+  h_220433a6faf6b8 1
+lua/plugins/refactoring-nvim/CODES/queries/cpp/refactor_debug_path.scm
+  h_220433a6faf6b8 1
+lua/plugins/refactoring-nvim/CODES/queries/cpp/refactor_input_function.scm
+  h_220433a6faf6b8 1
+lua/plugins/refactoring-nvim/CODES/queries/cpp/refactor_output_function.scm
+  h_220433a6faf6b8 1
+lua/plugins/refactoring-nvim/CODES/queries/cpp/refactor_output_statement.scm
+  h_220433a6faf6b8 1
+lua/plugins/refactoring-nvim/CODES/queries/cpp/refactor_reference.scm
+  h_220433a6faf6b8 1
+lua/plugins/refactoring-nvim/CODES/queries/cpp/refactor_scope.scm
+  h_220433a6faf6b8 1
+lua/plugins/refactoring-nvim/CODES/queries/cpp/refactor_variable.scm
+  h_220433a6faf6b8 1
+lua/plugins/refactoring-nvim/CODES/queries/ecma/refactor_comment.scm
+  h_220433a6faf6b8 1
+lua/plugins/refactoring-nvim/CODES/queries/ecma/refactor_debug_path.scm
+  h_220433a6faf6b8 1-34
+lua/plugins/refactoring-nvim/CODES/queries/ecma/refactor_input_function.scm
+  h_220433a6faf6b8 1-21
+lua/plugins/refactoring-nvim/CODES/queries/ecma/refactor_output_function.scm
+  h_220433a6faf6b8 1-59
+lua/plugins/refactoring-nvim/CODES/queries/ecma/refactor_output_statement.scm
+  h_220433a6faf6b8 1-131
+lua/plugins/refactoring-nvim/CODES/queries/ecma/refactor_reference.scm
+  h_220433a6faf6b8 1-147
+lua/plugins/refactoring-nvim/CODES/queries/ecma/refactor_scope.scm
+  h_220433a6faf6b8 1-61
+lua/plugins/refactoring-nvim/CODES/queries/ecma/refactor_variable.scm
+  h_220433a6faf6b8 1-23
+lua/plugins/refactoring-nvim/CODES/queries/go/refactor_comment.scm
+  h_220433a6faf6b8 1
+lua/plugins/refactoring-nvim/CODES/queries/go/refactor_input_function.scm
+  h_220433a6faf6b8 1-12
+lua/plugins/refactoring-nvim/CODES/queries/go/refactor_output_function.scm
+  h_220433a6faf6b8 1-11
+lua/plugins/refactoring-nvim/CODES/queries/go/refactor_output_statement.scm
+  h_220433a6faf6b8 1-9
+lua/plugins/refactoring-nvim/CODES/queries/go/refactor_reference.scm
+  h_220433a6faf6b8 1-179
+lua/plugins/refactoring-nvim/CODES/queries/go/refactor_scope.scm
+  h_220433a6faf6b8 1-43
+lua/plugins/refactoring-nvim/CODES/queries/go/refactor_variable.scm
+  h_220433a6faf6b8 1-13
+lua/plugins/refactoring-nvim/CODES/queries/java/refactor_comment.scm
+  h_220433a6faf6b8 1-4
+lua/plugins/refactoring-nvim/CODES/queries/java/refactor_input_function.scm
+  h_220433a6faf6b8 1-5
+lua/plugins/refactoring-nvim/CODES/queries/java/refactor_output_function.scm
+  h_220433a6faf6b8 1-8
+lua/plugins/refactoring-nvim/CODES/queries/java/refactor_output_statement.scm
+  h_220433a6faf6b8 1-23
+lua/plugins/refactoring-nvim/CODES/queries/java/refactor_reference.scm
+  h_220433a6faf6b8 1-98
+lua/plugins/refactoring-nvim/CODES/queries/java/refactor_scope.scm
+  h_220433a6faf6b8 1-21
+lua/plugins/refactoring-nvim/CODES/queries/java/refactor_variable.scm
+  h_220433a6faf6b8 1-14
+lua/plugins/refactoring-nvim/CODES/queries/javascript/refactor_comment.scm
+  h_220433a6faf6b8 1
+lua/plugins/refactoring-nvim/CODES/queries/javascript/refactor_debug_path.scm
+  h_220433a6faf6b8 1
+lua/plugins/refactoring-nvim/CODES/queries/javascript/refactor_input_function.scm
+  h_220433a6faf6b8 1
+lua/plugins/refactoring-nvim/CODES/queries/javascript/refactor_output_function.scm
+  h_220433a6faf6b8 1
+lua/plugins/refactoring-nvim/CODES/queries/javascript/refactor_output_statement.scm
+  h_220433a6faf6b8 1-3
+lua/plugins/refactoring-nvim/CODES/queries/javascript/refactor_reference.scm
+  h_220433a6faf6b8 1-29
+lua/plugins/refactoring-nvim/CODES/queries/javascript/refactor_scope.scm
+  h_220433a6faf6b8 1
+lua/plugins/refactoring-nvim/CODES/queries/javascript/refactor_variable.scm
+  h_220433a6faf6b8 1
+lua/plugins/refactoring-nvim/CODES/queries/lua/refactor_comment.scm
+  h_220433a6faf6b8 1
+lua/plugins/refactoring-nvim/CODES/queries/lua/refactor_debug_path.scm
+  h_220433a6faf6b8 1-33
+lua/plugins/refactoring-nvim/CODES/queries/lua/refactor_function.scm
+  h_220433a6faf6b8 1-26
+lua/plugins/refactoring-nvim/CODES/queries/lua/refactor_function_call.scm
+  h_220433a6faf6b8 1-44
+lua/plugins/refactoring-nvim/CODES/queries/lua/refactor_input_function.scm
+  h_220433a6faf6b8 1-16
+lua/plugins/refactoring-nvim/CODES/queries/lua/refactor_output_function.scm
+  h_220433a6faf6b8 1-24
+lua/plugins/refactoring-nvim/CODES/queries/lua/refactor_output_statement.scm
+  h_220433a6faf6b8 1-45
+lua/plugins/refactoring-nvim/CODES/queries/lua/refactor_reference.scm
+  h_220433a6faf6b8 1-226
+lua/plugins/refactoring-nvim/CODES/queries/lua/refactor_scope.scm
+  h_220433a6faf6b8 1-27
+lua/plugins/refactoring-nvim/CODES/queries/lua/refactor_variable.scm
+  h_220433a6faf6b8 1-25
+lua/plugins/refactoring-nvim/CODES/queries/php/refactor_comment.scm
+  h_220433a6faf6b8 1
+lua/plugins/refactoring-nvim/CODES/queries/php/refactor_debug_path.scm
+  h_220433a6faf6b8 1-16
+lua/plugins/refactoring-nvim/CODES/queries/php/refactor_input_function.scm
+  h_220433a6faf6b8 1-8
+lua/plugins/refactoring-nvim/CODES/queries/php/refactor_output_function.scm
+  h_220433a6faf6b8 1-13
+lua/plugins/refactoring-nvim/CODES/queries/php/refactor_output_statement.scm
+  h_220433a6faf6b8 1-47
+lua/plugins/refactoring-nvim/CODES/queries/php/refactor_reference.scm
+  h_220433a6faf6b8 1-128
+lua/plugins/refactoring-nvim/CODES/queries/php/refactor_scope.scm
+  h_220433a6faf6b8 1-26
+lua/plugins/refactoring-nvim/CODES/queries/php/refactor_variable.scm
+  h_220433a6faf6b8 1-16
+lua/plugins/refactoring-nvim/CODES/queries/powershell/refactor_comment.scm
+  h_220433a6faf6b8 1
+lua/plugins/refactoring-nvim/CODES/queries/powershell/refactor_debug_path.scm
+  h_220433a6faf6b8 1-22
+lua/plugins/refactoring-nvim/CODES/queries/powershell/refactor_input_function.scm
+  h_220433a6faf6b8 1-9
+lua/plugins/refactoring-nvim/CODES/queries/powershell/refactor_output_function.scm
+  h_220433a6faf6b8 1-14
+lua/plugins/refactoring-nvim/CODES/queries/powershell/refactor_output_statement.scm
+  h_220433a6faf6b8 1-36
+lua/plugins/refactoring-nvim/CODES/queries/powershell/refactor_reference.scm
+  h_220433a6faf6b8 1-141
+lua/plugins/refactoring-nvim/CODES/queries/powershell/refactor_scope.scm
+  h_220433a6faf6b8 1-20
+lua/plugins/refactoring-nvim/CODES/queries/powershell/refactor_variable.scm
+  h_220433a6faf6b8 1-4
+lua/plugins/refactoring-nvim/CODES/queries/python/refactor_comment.scm
+  h_220433a6faf6b8 1
+lua/plugins/refactoring-nvim/CODES/queries/python/refactor_debug_path.scm
+  h_220433a6faf6b8 1-16
+lua/plugins/refactoring-nvim/CODES/queries/python/refactor_input_function.scm
+  h_220433a6faf6b8 1-14
+lua/plugins/refactoring-nvim/CODES/queries/python/refactor_output_function.scm
+  h_220433a6faf6b8 1-19
+lua/plugins/refactoring-nvim/CODES/queries/python/refactor_output_statement.scm
+  h_220433a6faf6b8 1-32
+lua/plugins/refactoring-nvim/CODES/queries/python/refactor_reference.scm
+  h_220433a6faf6b8 1-89
+lua/plugins/refactoring-nvim/CODES/queries/python/refactor_scope.scm
+  h_220433a6faf6b8 1-14
+lua/plugins/refactoring-nvim/CODES/queries/python/refactor_variable.scm
+  h_220433a6faf6b8 1-40
+lua/plugins/refactoring-nvim/CODES/queries/ruby/refactor_comment.scm
+  h_220433a6faf6b8 1
+lua/plugins/refactoring-nvim/CODES/queries/ruby/refactor_input_function.scm
+  h_220433a6faf6b8 1-19
+lua/plugins/refactoring-nvim/CODES/queries/ruby/refactor_output_function.scm
+  h_220433a6faf6b8 1-27
+lua/plugins/refactoring-nvim/CODES/queries/ruby/refactor_output_statement.scm
+  h_220433a6faf6b8 1-37
+lua/plugins/refactoring-nvim/CODES/queries/ruby/refactor_reference.scm
+  h_220433a6faf6b8 1-110
+lua/plugins/refactoring-nvim/CODES/queries/ruby/refactor_scope.scm
+  h_220433a6faf6b8 1-8
+lua/plugins/refactoring-nvim/CODES/queries/ruby/refactor_variable.scm
+  h_220433a6faf6b8 1-3
+lua/plugins/refactoring-nvim/CODES/queries/tsx/refactor_comment.scm
+  h_220433a6faf6b8 1
+lua/plugins/refactoring-nvim/CODES/queries/tsx/refactor_debug_path.scm
+  h_220433a6faf6b8 1
+lua/plugins/refactoring-nvim/CODES/queries/tsx/refactor_input_function.scm
+  h_220433a6faf6b8 1
+lua/plugins/refactoring-nvim/CODES/queries/tsx/refactor_output_function.scm
+  h_220433a6faf6b8 1
+lua/plugins/refactoring-nvim/CODES/queries/tsx/refactor_output_statement.scm
+  h_220433a6faf6b8 1
+lua/plugins/refactoring-nvim/CODES/queries/tsx/refactor_reference.scm
+  h_220433a6faf6b8 1-5
+lua/plugins/refactoring-nvim/CODES/queries/tsx/refactor_scope.scm
+  h_220433a6faf6b8 1
+lua/plugins/refactoring-nvim/CODES/queries/tsx/refactor_variable.scm
+  h_220433a6faf6b8 1
+lua/plugins/refactoring-nvim/CODES/queries/typescript/refactor_comment.scm
+  h_220433a6faf6b8 1
+lua/plugins/refactoring-nvim/CODES/queries/typescript/refactor_debug_path.scm
+  h_220433a6faf6b8 1
+lua/plugins/refactoring-nvim/CODES/queries/typescript/refactor_input_function.scm
+  h_220433a6faf6b8 1
+lua/plugins/refactoring-nvim/CODES/queries/typescript/refactor_output_function.scm
+  h_220433a6faf6b8 1
+lua/plugins/refactoring-nvim/CODES/queries/typescript/refactor_output_statement.scm
+  h_220433a6faf6b8 1
+lua/plugins/refactoring-nvim/CODES/queries/typescript/refactor_reference.scm
+  h_220433a6faf6b8 1-49
+lua/plugins/refactoring-nvim/CODES/queries/typescript/refactor_scope.scm
+  h_220433a6faf6b8 1
+lua/plugins/refactoring-nvim/CODES/queries/typescript/refactor_variable.scm
+  h_220433a6faf6b8 1
+lua/plugins/refactoring-nvim/CODES/queries/vim/refactor_comment.scm
+  h_220433a6faf6b8 1
+lua/plugins/refactoring-nvim/CODES/queries/vim/refactor_debug_path.scm
+  h_220433a6faf6b8 1-16
+lua/plugins/refactoring-nvim/CODES/queries/vim/refactor_input_function.scm
+  h_220433a6faf6b8 1-2
+lua/plugins/refactoring-nvim/CODES/queries/vim/refactor_output_function.scm
+  h_220433a6faf6b8 1-5
+lua/plugins/refactoring-nvim/CODES/queries/vim/refactor_output_statement.scm
+  h_220433a6faf6b8 1-77
+lua/plugins/refactoring-nvim/CODES/queries/vim/refactor_reference.scm
+  h_220433a6faf6b8 1-222
+lua/plugins/refactoring-nvim/CODES/queries/vim/refactor_scope.scm
+  h_220433a6faf6b8 1-6
+lua/plugins/refactoring-nvim/CODES/queries/vim/refactor_variable.scm
+  h_220433a6faf6b8 1-9
+lua/plugins/refactoring-nvim/CODES/scripts/minidoc.lua
+  h_220433a6faf6b8 1-19
+lua/plugins/refactoring-nvim/CODES/scripts/minimal_init.lua
+  h_220433a6faf6b8 1-102
+lua/plugins/refactoring-nvim/CODES/tests/files/cleanup_does_not_leave_whitespace_behind_after.lua
+  h_220433a6faf6b8 1-4
+lua/plugins/refactoring-nvim/CODES/tests/files/cleanup_does_not_leave_whitespace_behind_before.lua
+  h_220433a6faf6b8 1-8
+lua/plugins/refactoring-nvim/CODES/tests/files/cleanup_works_after.lua
+  h_220433a6faf6b8 1-9
+lua/plugins/refactoring-nvim/CODES/tests/files/cleanup_works_before.lua
+  h_220433a6faf6b8 1-11
+lua/plugins/refactoring-nvim/CODES/tests/files/extract_func_chooses_correct_declaration_after.lua
+  h_220433a6faf6b8 1-10
+lua/plugins/refactoring-nvim/CODES/tests/files/extract_func_chooses_correct_declaration_before.lua
+  h_220433a6faf6b8 1-6
+lua/plugins/refactoring-nvim/CODES/tests/files/extract_func_defaults_to_selected_location_after.lua
+  h_220433a6faf6b8 1-6
+lua/plugins/refactoring-nvim/CODES/tests/files/extract_func_defaults_to_selected_location_before.lua
+  h_220433a6faf6b8 1-2
+lua/plugins/refactoring-nvim/CODES/tests/files/extract_func_existing_file_after.lua
+  h_220433a6faf6b8 1-11
+lua/plugins/refactoring-nvim/CODES/tests/files/extract_func_existing_file_before.lua
+  h_220433a6faf6b8 1-7
+lua/plugins/refactoring-nvim/CODES/tests/files/extract_func_identifies_references_outside_selected_range_scope_after.lua
+  h_220433a6faf6b8 1-11
+lua/plugins/refactoring-nvim/CODES/tests/files/extract_func_identifies_references_outside_selected_range_scope_before.lua
+  h_220433a6faf6b8 1-5
+lua/plugins/refactoring-nvim/CODES/tests/files/extract_func_method_after.go
+  h_220433a6faf6b8 1-13
+lua/plugins/refactoring-nvim/CODES/tests/files/extract_func_method_before.go
+  h_220433a6faf6b8 1-9
+lua/plugins/refactoring-nvim/CODES/tests/files/extract_func_new_file.lua
+  h_220433a6faf6b8 1-5
+lua/plugins/refactoring-nvim/CODES/tests/files/extract_func_to_existing_file_after.lua
+  h_220433a6faf6b8 1
+lua/plugins/refactoring-nvim/CODES/tests/files/extract_func_to_existing_file_before.lua
+  h_220433a6faf6b8 1
+lua/plugins/refactoring-nvim/CODES/tests/files/extract_func_to_new_file_after.lua
+  h_220433a6faf6b8 1
+lua/plugins/refactoring-nvim/CODES/tests/files/extract_func_to_new_file_before.lua
+  h_220433a6faf6b8 1
+lua/plugins/refactoring-nvim/CODES/tests/files/extract_func_works_after.go
+  h_220433a6faf6b8 1-46
+lua/plugins/refactoring-nvim/CODES/tests/files/extract_func_works_after.java
+  h_220433a6faf6b8 1-48
+lua/plugins/refactoring-nvim/CODES/tests/files/extract_func_works_after.lua
+  h_220433a6faf6b8 1-47
+lua/plugins/refactoring-nvim/CODES/tests/files/extract_func_works_after.php
+  h_220433a6faf6b8 1-51
+lua/plugins/refactoring-nvim/CODES/tests/files/extract_func_works_after.ps1
+  h_220433a6faf6b8 1-63
+lua/plugins/refactoring-nvim/CODES/tests/files/extract_func_works_after.py
+  h_220433a6faf6b8 1-44
+lua/plugins/refactoring-nvim/CODES/tests/files/extract_func_works_after.rb
+  h_220433a6faf6b8 1-44
+lua/plugins/refactoring-nvim/CODES/tests/files/extract_func_works_after.vim
+  h_220433a6faf6b8 1-39
+lua/plugins/refactoring-nvim/CODES/tests/files/extract_func_works_before.go
+  h_220433a6faf6b8 1-40
+lua/plugins/refactoring-nvim/CODES/tests/files/extract_func_works_before.java
+  h_220433a6faf6b8 1-42
+lua/plugins/refactoring-nvim/CODES/tests/files/extract_func_works_before.lua
+  h_220433a6faf6b8 1-31
+lua/plugins/refactoring-nvim/CODES/tests/files/extract_func_works_before.php
+  h_220433a6faf6b8 1-44
+lua/plugins/refactoring-nvim/CODES/tests/files/extract_func_works_before.ps1
+  h_220433a6faf6b8 1-46
+lua/plugins/refactoring-nvim/CODES/tests/files/extract_func_works_before.py
+  h_220433a6faf6b8 1-39
+lua/plugins/refactoring-nvim/CODES/tests/files/extract_func_works_before.rb
+  h_220433a6faf6b8 1-38
+lua/plugins/refactoring-nvim/CODES/tests/files/extract_func_works_before.vim
+  h_220433a6faf6b8 1-35
+lua/plugins/refactoring-nvim/CODES/tests/files/extract_var_uses_closest_point_to_highest_selected_text_with_correct_scope_after.lua
+  h_220433a6faf6b8 1-10
+lua/plugins/refactoring-nvim/CODES/tests/files/extract_var_uses_closest_point_to_highest_selected_text_with_correct_scope_before.lua
+  h_220433a6faf6b8 1-9
+lua/plugins/refactoring-nvim/CODES/tests/files/extract_var_works_after.c
+  h_220433a6faf6b8 1-26
+lua/plugins/refactoring-nvim/CODES/tests/files/extract_var_works_after.cs
+  h_220433a6faf6b8 1-32
+lua/plugins/refactoring-nvim/CODES/tests/files/extract_var_works_after.go
+  h_220433a6faf6b8 1-32
+lua/plugins/refactoring-nvim/CODES/tests/files/extract_var_works_after.java
+  h_220433a6faf6b8 1-30
+lua/plugins/refactoring-nvim/CODES/tests/files/extract_var_works_after.js
+  h_220433a6faf6b8 1-27
+lua/plugins/refactoring-nvim/CODES/tests/files/extract_var_works_after.lua
+  h_220433a6faf6b8 1-30
+lua/plugins/refactoring-nvim/CODES/tests/files/extract_var_works_after.php
+  h_220433a6faf6b8 1-26
+lua/plugins/refactoring-nvim/CODES/tests/files/extract_var_works_after.ps1
+  h_220433a6faf6b8 1-19
+lua/plugins/refactoring-nvim/CODES/tests/files/extract_var_works_after.py
+  h_220433a6faf6b8 1-15
+lua/plugins/refactoring-nvim/CODES/tests/files/extract_var_works_after.rb
+  h_220433a6faf6b8 1-27
+lua/plugins/refactoring-nvim/CODES/tests/files/extract_var_works_after.vim
+  h_220433a6faf6b8 1-18
+lua/plugins/refactoring-nvim/CODES/tests/files/extract_var_works_before.c
+  h_220433a6faf6b8 1-25
+lua/plugins/refactoring-nvim/CODES/tests/files/extract_var_works_before.cs
+  h_220433a6faf6b8 1-31
+lua/plugins/refactoring-nvim/CODES/tests/files/extract_var_works_before.go
+  h_220433a6faf6b8 1-31
+lua/plugins/refactoring-nvim/CODES/tests/files/extract_var_works_before.java
+  h_220433a6faf6b8 1-29
+lua/plugins/refactoring-nvim/CODES/tests/files/extract_var_works_before.js
+  h_220433a6faf6b8 1-26
+lua/plugins/refactoring-nvim/CODES/tests/files/extract_var_works_before.lua
+  h_220433a6faf6b8 1-29
+lua/plugins/refactoring-nvim/CODES/tests/files/extract_var_works_before.php
+  h_220433a6faf6b8 1-25
+lua/plugins/refactoring-nvim/CODES/tests/files/extract_var_works_before.ps1
+  h_220433a6faf6b8 1-18
+lua/plugins/refactoring-nvim/CODES/tests/files/extract_var_works_before.py
+  h_220433a6faf6b8 1-14
+lua/plugins/refactoring-nvim/CODES/tests/files/extract_var_works_before.rb
+  h_220433a6faf6b8 1-26
+lua/plugins/refactoring-nvim/CODES/tests/files/extract_var_works_before.vim
+  h_220433a6faf6b8 1-17
+lua/plugins/refactoring-nvim/CODES/tests/files/extract_var_works_for_1_nested_scope_after.lua
+  h_220433a6faf6b8 1-4
+lua/plugins/refactoring-nvim/CODES/tests/files/extract_var_works_for_1_nested_scope_before.lua
+  h_220433a6faf6b8 1-3
+lua/plugins/refactoring-nvim/CODES/tests/files/extract_var_works_for_1_scope_after.lua
+  h_220433a6faf6b8 1-5
+lua/plugins/refactoring-nvim/CODES/tests/files/extract_var_works_for_1_scope_before.lua
+  h_220433a6faf6b8 1-4
+lua/plugins/refactoring-nvim/CODES/tests/files/extract_var_works_for_multiple_scopes_including_global_after.lua
+  h_220433a6faf6b8 1-6
+lua/plugins/refactoring-nvim/CODES/tests/files/extract_var_works_for_multiple_scopes_including_global_before.lua
+  h_220433a6faf6b8 1-5
+lua/plugins/refactoring-nvim/CODES/tests/files/foo.lua
+  h_220433a6faf6b8 1-3
+lua/plugins/refactoring-nvim/CODES/tests/files/inline_func_anonymous_function_declaration_after.lua
+  h_220433a6faf6b8 1-11
+lua/plugins/refactoring-nvim/CODES/tests/files/inline_func_anonymous_function_declaration_before.lua
+  h_220433a6faf6b8 1-8
+lua/plugins/refactoring-nvim/CODES/tests/files/inline_func_removes_redundant_assignments_after.lua
+  h_220433a6faf6b8 1-6
+lua/plugins/refactoring-nvim/CODES/tests/files/inline_func_removes_redundant_assignments_before.lua
+  h_220433a6faf6b8 1-7
+lua/plugins/refactoring-nvim/CODES/tests/files/inline_func_works_after.lua
+  h_220433a6faf6b8 1-11
+lua/plugins/refactoring-nvim/CODES/tests/files/inline_func_works_before.lua
+  h_220433a6faf6b8 1-8
+lua/plugins/refactoring-nvim/CODES/tests/files/inline_var_comparison_operator_after.py
+  h_220433a6faf6b8 1-5
+lua/plugins/refactoring-nvim/CODES/tests/files/inline_var_comparison_operator_before.py
+  h_220433a6faf6b8 1-6
+lua/plugins/refactoring-nvim/CODES/tests/files/inline_var_filters_LSP_definitions_without_a_Treesitter_match_after.lua
+  h_220433a6faf6b8 1-6
+lua/plugins/refactoring-nvim/CODES/tests/files/inline_var_filters_LSP_definitions_without_a_Treesitter_match_before.lua
+  h_220433a6faf6b8 1-7
+lua/plugins/refactoring-nvim/CODES/tests/files/inline_var_multiple_assignment_after.c
+  h_220433a6faf6b8 1-10
+lua/plugins/refactoring-nvim/CODES/tests/files/inline_var_multiple_assignment_after.lua
+  h_220433a6faf6b8 1-5
+lua/plugins/refactoring-nvim/CODES/tests/files/inline_var_multiple_assignment_before.c
+  h_220433a6faf6b8 1-10
+lua/plugins/refactoring-nvim/CODES/tests/files/inline_var_multiple_assignment_before.lua
+  h_220433a6faf6b8 1-5
+lua/plugins/refactoring-nvim/CODES/tests/files/inline_var_orders_references_text_edits_backwards_after.lua
+  h_220433a6faf6b8 1-3
+lua/plugins/refactoring-nvim/CODES/tests/files/inline_var_orders_references_text_edits_backwards_before.lua
+  h_220433a6faf6b8 1-4
+lua/plugins/refactoring-nvim/CODES/tests/files/inline_var_simple_assignment_after.lua
+  h_220433a6faf6b8 1-3
+lua/plugins/refactoring-nvim/CODES/tests/files/inline_var_simple_assignment_before.lua
+  h_220433a6faf6b8 1-4
+lua/plugins/refactoring-nvim/CODES/tests/files/print_exp_works_after.lua
+  h_220433a6faf6b8 1-9
+lua/plugins/refactoring-nvim/CODES/tests/files/print_exp_works_before.lua
+  h_220433a6faf6b8 1-7
+lua/plugins/refactoring-nvim/CODES/tests/files/print_loc_midline_statement_after.lua
+  h_220433a6faf6b8 1-8
+lua/plugins/refactoring-nvim/CODES/tests/files/print_loc_works_above_after.lua
+  h_220433a6faf6b8 1-17
+lua/plugins/refactoring-nvim/CODES/tests/files/print_loc_works_above_before.lua
+  h_220433a6faf6b8 1-15
+lua/plugins/refactoring-nvim/CODES/tests/files/print_loc_works_below_after.lua
+  h_220433a6faf6b8 1-17
+lua/plugins/refactoring-nvim/CODES/tests/files/print_loc_works_below_before.lua
+  h_220433a6faf6b8 1-15
+lua/plugins/refactoring-nvim/CODES/tests/files/print_loc_works_injected_after.md
+  h_220433a6faf6b8 1-5
+lua/plugins/refactoring-nvim/CODES/tests/files/print_loc_works_injected_before.md
+  h_220433a6faf6b8 1-3
+lua/plugins/refactoring-nvim/CODES/tests/files/print_loc_works_midline_statement_before.lua
+  h_220433a6faf6b8 1-2
+lua/plugins/refactoring-nvim/CODES/tests/files/print_var_works_above_after.lua
+  h_220433a6faf6b8 1-11
+lua/plugins/refactoring-nvim/CODES/tests/files/print_var_works_above_before.lua
+  h_220433a6faf6b8 1-8
+lua/plugins/refactoring-nvim/CODES/tests/files/print_var_works_after.c
+  h_220433a6faf6b8 1-8
+lua/plugins/refactoring-nvim/CODES/tests/files/print_var_works_after.cpp
+  h_220433a6faf6b8 1-8
+lua/plugins/refactoring-nvim/CODES/tests/files/print_var_works_after.js
+  h_220433a6faf6b8 1-6
+lua/plugins/refactoring-nvim/CODES/tests/files/print_var_works_after.ps1
+  h_220433a6faf6b8 1-6
+lua/plugins/refactoring-nvim/CODES/tests/files/print_var_works_after.py
+  h_220433a6faf6b8 1-4
+lua/plugins/refactoring-nvim/CODES/tests/files/print_var_works_after.vim
+  h_220433a6faf6b8 1-6
+lua/plugins/refactoring-nvim/CODES/tests/files/print_var_works_before.c
+  h_220433a6faf6b8 1-6
+lua/plugins/refactoring-nvim/CODES/tests/files/print_var_works_before.cpp
+  h_220433a6faf6b8 1-6
+lua/plugins/refactoring-nvim/CODES/tests/files/print_var_works_before.js
+  h_220433a6faf6b8 1-4
+lua/plugins/refactoring-nvim/CODES/tests/files/print_var_works_before.ps1
+  h_220433a6faf6b8 1-4
+lua/plugins/refactoring-nvim/CODES/tests/files/print_var_works_before.py
+  h_220433a6faf6b8 1-2
+lua/plugins/refactoring-nvim/CODES/tests/files/print_var_works_before.vim
+  h_220433a6faf6b8 1-4
+lua/plugins/refactoring-nvim/CODES/tests/files/print_var_works_below_after.lua
+  h_220433a6faf6b8 1-11
+lua/plugins/refactoring-nvim/CODES/tests/files/print_var_works_below_before.lua
+  h_220433a6faf6b8 1-8
+lua/plugins/refactoring-nvim/CODES/tests/files/works_for_deeply_nested_expressions_after.lua
+  h_220433a6faf6b8 1-5
+lua/plugins/refactoring-nvim/CODES/tests/files/works_for_deeply_nested_expressions_before.lua
+  h_220433a6faf6b8 1-4
+lua/plugins/refactoring-nvim/CODES/tests/test_cleanup.lua
+  h_220433a6faf6b8 1-86
+lua/plugins/refactoring-nvim/CODES/tests/test_extract_func.lua
+  h_220433a6faf6b8 1-277
+lua/plugins/refactoring-nvim/CODES/tests/test_extract_var.lua
+  h_220433a6faf6b8 1-316
+lua/plugins/refactoring-nvim/CODES/tests/test_inline_func.lua
+  h_220433a6faf6b8 1-103
+lua/plugins/refactoring-nvim/CODES/tests/test_inline_var.lua
+  h_220433a6faf6b8 1-156
+lua/plugins/refactoring-nvim/CODES/tests/test_print_exp.lua
+  h_220433a6faf6b8 1-79
+lua/plugins/refactoring-nvim/CODES/tests/test_print_loc.lua
+  h_220433a6faf6b8 1-100
+lua/plugins/refactoring-nvim/CODES/tests/test_print_var.lua
+  h_220433a6faf6b8 1-206
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.24",
+  "base_commit_sha": "b6b7ac31df13680c67b94c9c3887bbb77337293d",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
