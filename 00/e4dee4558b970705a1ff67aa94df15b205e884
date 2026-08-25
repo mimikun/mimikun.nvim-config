@@ -1,0 +1,106 @@
+lua/plugins/telescope-nvim/CODES/actions/generate.lua
+  h_220433a6faf6b8 22-26,70,100,105
+lua/plugins/telescope-nvim/CODES/actions/history.lua
+  h_220433a6faf6b8 2-3,178,182,213
+lua/plugins/telescope-nvim/CODES/actions/init.lua
+  h_220433a6faf6b8 54-57,59-63,66,165,183,201,261,420,470,498,507,586,590,610,620,641,674,744,752,789,798,802,811,817,870,876,885,1162,1169,1231,1284,1303,1310,1313,1317,1420,1484,1492,1495,1519
+lua/plugins/telescope-nvim/CODES/actions/layout.lua
+  h_220433a6faf6b8 4-7
+lua/plugins/telescope-nvim/CODES/actions/mt.lua
+  h_220433a6faf6b8 119,125
+lua/plugins/telescope-nvim/CODES/actions/set.lua
+  h_220433a6faf6b8 12-15,17,173,177-178,220
+lua/plugins/telescope-nvim/CODES/actions/state.lua
+  h_220433a6faf6b8 6,14,20,43
+lua/plugins/telescope-nvim/CODES/actions/utils.lua
+  h_220433a6faf6b8 6,82,105,121
+lua/plugins/telescope-nvim/CODES/algos/fzy.lua
+  h_220433a6faf6b8 51,55
+lua/plugins/telescope-nvim/CODES/async_job.lua
+  h_220433a6faf6b8 3-4,6,8,44,60,273,281,284,305
+lua/plugins/telescope-nvim/CODES/builtin/__diagnostics.lua
+  h_220433a6faf6b8 2-5,144,182,185,187,190
+lua/plugins/telescope-nvim/CODES/builtin/__files.lua
+  h_220433a6faf6b8 3-11,13,15,164,180,210-212,216,242,246,248,253,288,290,292,294,296,356,359,376,379,382,385,388,391,461,464,466,469,543,546,553,567,577,606,610,625,627,632
+lua/plugins/telescope-nvim/CODES/builtin/__git.lua
+  h_220433a6faf6b8 3-13,57,61,151,156,201,204,224-225,232-233,235-236,243,246,319,329,332,339,345,353,425,440,469,483
+lua/plugins/telescope-nvim/CODES/builtin/__internal.lua
+  h_220433a6faf6b8 3-13,49,84,95,102,139,183,203,206,250,258,267,274,294,296,302,342,351,370,372,392,398,410,433,436,448,468,471-472,491,497,504,532,535,556,592,595,604,645,691,694,700,755,765,781,802,813,820,869,912,915,923,986,1017,1020,1053,1083,1095,1100,1102,1109,1123,1151,1206,1218,1221,1247,1250,1303,1306,1312,1332,1334,1340,1360,1363,1369,1385,1392,1395,1410,1421-1422,1425,1446,1452,1454,1460,1467,1505,1508,1533,1536
+lua/plugins/telescope-nvim/CODES/builtin/__lsp.lua
+  h_220433a6faf6b8 7,9-12,43,46,239,242,357,360,362,365,406,409,411,414,452,455,467
+lua/plugins/telescope-nvim/CODES/command.lua
+  h_220433a6faf6b8 41-42,44-45,234
+lua/plugins/telescope-nvim/CODES/config.lua
+  h_220433a6faf6b8 1-2,4,522
+lua/plugins/telescope-nvim/CODES/config/resolve.lua
+  h_220433a6faf6b8 86,265,267,270,272
+lua/plugins/telescope-nvim/CODES/debounce.lua
+  h_220433a6faf6b8 156
+lua/plugins/telescope-nvim/CODES/entry_manager.lua
+  h_220433a6faf6b8 1,3,9,22
+lua/plugins/telescope-nvim/CODES/finders.lua
+  h_220433a6faf6b8 1,3-4,6-8,61,64,101,118,177,181,197,210
+lua/plugins/telescope-nvim/CODES/finders/async_job_finder.lua
+  h_220433a6faf6b8 1,4-5,44,50,58
+lua/plugins/telescope-nvim/CODES/finders/async_oneshot_finder.lua
+  h_220433a6faf6b8 1-4,48,55
+lua/plugins/telescope-nvim/CODES/finders/async_static_finder.lua
+  h_220433a6faf6b8 3
+lua/plugins/telescope-nvim/CODES/from_entry.lua
+  h_220433a6faf6b8 10
+lua/plugins/telescope-nvim/CODES/ftplugin.TelescopePrompt.lua
+  h_220433a6faf6b8 2-3
+lua/plugins/telescope-nvim/CODES/health.lua
+  h_220433a6faf6b8 3,45,61,77,95,103,118
+lua/plugins/telescope-nvim/CODES/init.lua
+  h_220433a6faf6b8 1,126
+lua/plugins/telescope-nvim/CODES/log.lua
+  h_220433a6faf6b8 1,4
+lua/plugins/telescope-nvim/CODES/make_entry.lua
+  h_220433a6faf6b8 36-39,377,384,387,391,417,423,426,429,522,526,537,541,544,554,562,595,603,616,626,678,681,758,764,767,770,774,809,816,820,823,860,868,870,875,909,915,918,921,935,941,944,965,984,993,996,1001,1043,1046,1057,1060,1062,1072,1197,1200,1213,1222,1248,1256,1259,1264,1292,1301,1314,1320,1352,1359,1382,1391,1399
+lua/plugins/telescope-nvim/CODES/mappings.lua
+  h_220433a6faf6b8 125-126,252
+lua/plugins/telescope-nvim/CODES/pickers.lua
+  h_220433a6faf6b8 1,5,8,10-16,18-22,24-25,30-32,63,96,100,106,110,116,120,182,186,212,232,236,419,474,477,644,650,689,1081,1134,1139,1207,1274,1278,1310,1390,1407,1411,1423,1435,1458,1575,1629,1633,1703
+lua/plugins/telescope-nvim/CODES/pickers/entry_display.lua
+  h_220433a6faf6b8 58-61,152
+lua/plugins/telescope-nvim/CODES/pickers/highlights.lua
+  h_220433a6faf6b8 3,5,9-11
+lua/plugins/telescope-nvim/CODES/pickers/layout_strategies.lua
+  h_220433a6faf6b8 51-53,109,507,509,617
+lua/plugins/telescope-nvim/CODES/pickers/window.lua
+  h_220433a6faf6b8 1
+lua/plugins/telescope-nvim/CODES/plugin.telescope.lua
+  h_220433a6faf6b8 1-2,112
+lua/plugins/telescope-nvim/CODES/previewers/buffer_previewer.lua
+  h_220433a6faf6b8 4-8,10,17,19,25,199,282,284,382,478,500,536,542,584,601,603,619,647,651,678,682,706,711,713,729,736,742,749,756,786,790,809,813,839,843,870,874,901,910,928,936,940,972,976,1043,1047,1061,1066,1085,1092,1096,1100,1108,1129,1172,1176,1186
+lua/plugins/telescope-nvim/CODES/previewers/init.lua
+  h_220433a6faf6b8 22-24
+lua/plugins/telescope-nvim/CODES/previewers/previewer.lua
+  h_220433a6faf6b8 1
+lua/plugins/telescope-nvim/CODES/previewers/term_previewer.lua
+  h_220433a6faf6b8 4-8,16,23,57,62,70,94,96,101,255,269,278,304,313,341
+lua/plugins/telescope-nvim/CODES/previewers/utils.lua
+  h_220433a6faf6b8 3-4,7-8,16,21-22,42,74,79,191
+lua/plugins/telescope-nvim/CODES/sorters.lua
+  h_220433a6faf6b8 1-2,103,106,240,320,348,409,419,434,440,443,476,484,486,494,498,502,507,509,511,536,543,561
+lua/plugins/telescope-nvim/CODES/testharness/helpers.lua
+  h_220433a6faf6b8 4,9,37-38
+lua/plugins/telescope-nvim/CODES/testharness/init.lua
+  h_220433a6faf6b8 1,3
+lua/plugins/telescope-nvim/CODES/testharness/runner.lua
+  h_220433a6faf6b8 1,18,44,51,55,62,87,91,94,96,138
+lua/plugins/telescope-nvim/CODES/utils.lua
+  h_220433a6faf6b8 6-7,9,50,66,534
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.24",
+  "base_commit_sha": "00e4dee4558b970705a1ff67aa94df15b205e884",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
