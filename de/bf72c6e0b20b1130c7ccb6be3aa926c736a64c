@@ -1,0 +1,76 @@
+lua/plugins/nvim-autopairs/README.md
+  h_220433a6faf6b8 1-424
+lua/plugins/nvim-autopairs/docs/nvim-autopairs-rules.txt
+  h_220433a6faf6b8 1-359
+lua/plugins/nvim-autopairs/docs/nvim-autopairs.txt
+  h_220433a6faf6b8 1-472
+lua/plugins/nvim-autopairs/docs/WIKIS/Completion-plugin.md
+  h_220433a6faf6b8 1-137
+lua/plugins/nvim-autopairs/docs/WIKIS/Custom-rules.md
+  h_220433a6faf6b8 1-351
+lua/plugins/nvim-autopairs/docs/WIKIS/Endwise.md
+  h_220433a6faf6b8 1-67
+lua/plugins/nvim-autopairs/docs/WIKIS/Rules-API.md
+  h_220433a6faf6b8 1-281
+lua/plugins/nvim-autopairs/cmds.lua
+  h_220433a6faf6b8 1-6
+lua/plugins/nvim-autopairs/dependencies.lua
+  h_220433a6faf6b8 1-16
+lua/plugins/nvim-autopairs/events.lua
+  h_220433a6faf6b8 1-6
+lua/plugins/nvim-autopairs/ft.lua
+  h_220433a6faf6b8 1-6
+lua/plugins/nvim-autopairs/init.lua
+  h_220433a6faf6b8 1-37
+lua/plugins/nvim-autopairs/keys.lua
+  h_220433a6faf6b8 1-23
+lua/plugins/nvim-autopairs/opts.lua
+  h_220433a6faf6b8 1-6
+lua/plugins/nvim-autopairs/stylua.toml
+  h_220433a6faf6b8 1-13
+lua/plugins/nvim-autopairs/CODES/_log.lua
+  h_220433a6faf6b8 3-5,8-11
+lua/plugins/nvim-autopairs/CODES/completion/cmp.lua
+  h_220433a6faf6b8 1-3,10-14,16-20,22-26,28-32,34-38,40-44,46-55,59-61,63-66,68-72,74-77,79-81,83-84,86-88,90-93,95
+lua/plugins/nvim-autopairs/CODES/completion/compe.lua
+  h_220433a6faf6b8 1-3,12-14,16-20,22-41,43,47-69,71-77,79,81-82,88
+lua/plugins/nvim-autopairs/CODES/completion/handlers.lua
+  h_220433a6faf6b8 1-2,11-14,16-25,27-29,31-32,34-52,54,59-62,64-73,75-82,86-89
+lua/plugins/nvim-autopairs/CODES/conds.lua
+  h_220433a6faf6b8 1-2,31-34,36-37,41-51,53-54,58-64,66-67,71-77,79-80,84-93,95-96,100-105,107,111-117,119,123-134,136,140-149,151,155-162,164-165,174-183,185-186,190-202,204,208-215,217,221-225,227,231-235,237,241-245,247,251-262,264-269,271-272,276-282,284,289-297,299,303-308,310,317-323,325
+lua/plugins/nvim-autopairs/CODES/fastwrap.lua
+  h_220433a6faf6b8 1-3,7-19,22,27-30,34-35,37-42,46-75,78-79,82-85,87-102,105-111,113-124,126-137,139-141,143-144,146-148,151-159,161-167,169-189,193-219,221
+lua/plugins/nvim-autopairs/CODES/nvim-autopairs.lua
+  h_220433a6faf6b8 1-3,9-11,15-35,39-83,87,91-95,99-102,104-105,109-128,132-135,139-140,144,148,152,157-158,162-165,167,171-173,175-178,180-182,184,186-187,189-191,193-194,196-198,200-202,204-208,213,219-222,226-289,291-294,296-300,302-355,359-384,386-390,392-393,397,401,405,409-464,466-478,480-481,485,487-528,532-583,588-614,616-617,619,621-622,626-627,631,635-639,643-648
+lua/plugins/nvim-autopairs/CODES/rule.lua
+  h_220433a6faf6b8 1,17-19,24-32,34,36-68,70-72,74-75,77-78,82-84,88-89,93-94,98-102,106-109,113-116,119-120,124-130,134-139,141-142,146-147,151-155,159-163,167-171,179-187,191-198,202-203,207-212,214-218,222,226,230,234
+lua/plugins/nvim-autopairs/CODES/rules/basic.lua
+  h_220433a6faf6b8 1-3,6-9,11-12,14-17,21-25,27-33,37-108,112-114
+lua/plugins/nvim-autopairs/CODES/rules/endwise-elixir.lua
+  h_220433a6faf6b8 1,4-6
+lua/plugins/nvim-autopairs/CODES/rules/endwise-lua.lua
+  h_220433a6faf6b8 1,4-6
+lua/plugins/nvim-autopairs/CODES/rules/endwise-ruby.lua
+  h_220433a6faf6b8 1,4-19
+lua/plugins/nvim-autopairs/CODES/rules/ts_basic.lua
+  h_220433a6faf6b8 1-3,5-10,13-21
+lua/plugins/nvim-autopairs/CODES/ts-conds.lua
+  h_220433a6faf6b8 1-3,8-21,23-31,33-58,62-94,96-98,102-119,121-122,126-143,145,149-152,154-164,168-176,178
+lua/plugins/nvim-autopairs/CODES/ts-rule.lua
+  h_220433a6faf6b8 1-3,6-14
+lua/plugins/nvim-autopairs/CODES/ts-utils.lua
+  h_220433a6faf6b8 1,5-7,9-13,19-25,27-28,32-36
+lua/plugins/nvim-autopairs/CODES/utils.lua
+  h_220433a6faf6b8 3,6-15,19-20,24,28,32,36-41,50-74,76-77,81-82,86,90,92-98,102-105,109-112,116,118-119,123-124,127,131-132,136-140,149-155,159-164,166-169,174,178-187,191,195,200,212-213,215-219,221-223,225-227
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.24",
+  "base_commit_sha": "debf72c6e0b20b1130c7ccb6be3aa926c736a64c",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
