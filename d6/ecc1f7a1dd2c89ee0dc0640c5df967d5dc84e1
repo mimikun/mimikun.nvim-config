@@ -1,0 +1,30 @@
+lua/plugins/markview-nvim/.editorconfig
+  h_220433a6faf6b8 1-14
+lua/plugins/markview-nvim/cmds.lua
+  h_220433a6faf6b8 1-6
+lua/plugins/markview-nvim/dependencies.lua
+  h_220433a6faf6b8 1-16
+lua/plugins/markview-nvim/events.lua
+  h_220433a6faf6b8 1-6
+lua/plugins/markview-nvim/ft.lua
+  h_220433a6faf6b8 1-6
+lua/plugins/markview-nvim/init.lua
+  h_220433a6faf6b8 1-37
+lua/plugins/markview-nvim/keys.lua
+  h_220433a6faf6b8 1-23
+lua/plugins/markview-nvim/opts.lua
+  h_220433a6faf6b8 1-6
+lua/plugins/markview-nvim/stylua.toml
+  h_220433a6faf6b8 1-13
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.24",
+  "base_commit_sha": "d6ecc1f7a1dd2c89ee0dc0640c5df967d5dc84e1",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
