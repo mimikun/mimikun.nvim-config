@@ -1,0 +1,64 @@
+lua/plugins/harpoon/CODES/.editorconfig
+  h_220433a6faf6b8 1-9
+lua/plugins/harpoon/CODES/.github/FUNDING.yml
+  h_220433a6faf6b8 1
+lua/plugins/harpoon/CODES/.github/ISSUE_TEMPLATE/bug_report.md
+  h_220433a6faf6b8 1-14
+lua/plugins/harpoon/CODES/.github/ISSUE_TEMPLATE/feature_request.md
+  h_220433a6faf6b8 1-14
+lua/plugins/harpoon/CODES/.github/workflows/format.yml
+  h_220433a6faf6b8 1-26
+lua/plugins/harpoon/CODES/.github/workflows/lint.yml
+  h_220433a6faf6b8 1-18
+lua/plugins/harpoon/CODES/.luacheckrc
+  h_220433a6faf6b8 1-12
+lua/plugins/harpoon/CODES/.stylua.toml
+  h_220433a6faf6b8 1-5
+lua/plugins/harpoon/CODES/LICENSE
+  h_220433a6faf6b8 1-21
+lua/plugins/harpoon/CODES/Makefile
+  h_220433a6faf6b8 1-9
+lua/plugins/harpoon/CODES/README.md
+  h_220433a6faf6b8 1-252
+lua/plugins/harpoon/CODES/TODO.md
+  h_220433a6faf6b8 1-12
+lua/plugins/harpoon/CODES/lua/harpoon/cmd-ui.lua
+  h_220433a6faf6b8 1-160
+lua/plugins/harpoon/CODES/lua/harpoon/dev.lua
+  h_220433a6faf6b8 1-48
+lua/plugins/harpoon/CODES/lua/harpoon/init.lua
+  h_220433a6faf6b8 1-310
+lua/plugins/harpoon/CODES/lua/harpoon/mark.lua
+  h_220433a6faf6b8 1-427
+lua/plugins/harpoon/CODES/lua/harpoon/tabline.lua
+  h_220433a6faf6b8 1-93
+lua/plugins/harpoon/CODES/lua/harpoon/term.lua
+  h_220433a6faf6b8 1-146
+lua/plugins/harpoon/CODES/lua/harpoon/test/manage-a-mark.lua
+  h_220433a6faf6b8 1-3
+lua/plugins/harpoon/CODES/lua/harpoon/test/manage_cmd_spec.lua
+  h_220433a6faf6b8 1-141
+lua/plugins/harpoon/CODES/lua/harpoon/tmux.lua
+  h_220433a6faf6b8 1-232
+lua/plugins/harpoon/CODES/lua/harpoon/ui.lua
+  h_220433a6faf6b8 1-307
+lua/plugins/harpoon/CODES/lua/harpoon/utils.lua
+  h_220433a6faf6b8 1-77
+lua/plugins/harpoon/CODES/lua/telescope/_extensions/harpoon.lua
+  h_220433a6faf6b8 1-11
+lua/plugins/harpoon/CODES/lua/telescope/_extensions/marks.lua
+  h_220433a6faf6b8 1-134
+lua/plugins/harpoon/CODES/scripts/tmux/switch-back-to-nvim
+  h_220433a6faf6b8 1-14
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.24",
+  "base_commit_sha": "57bc658c2834d1c8268203715e711542a1802f2b",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
