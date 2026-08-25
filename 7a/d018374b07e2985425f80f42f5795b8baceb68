@@ -1,0 +1,22 @@
+lua/plugins/nvim-autopairs/WIKIS/Completion-plugin.md
+  h_220433a6faf6b8 1-137
+lua/plugins/nvim-autopairs/WIKIS/Custom-rules.md
+  h_220433a6faf6b8 1-351
+lua/plugins/nvim-autopairs/WIKIS/Endwise.md
+  h_220433a6faf6b8 1-67
+lua/plugins/nvim-autopairs/WIKIS/Home.md
+  h_220433a6faf6b8 1
+lua/plugins/nvim-autopairs/WIKIS/Rules-API.md
+  h_220433a6faf6b8 1-281
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.24",
+  "base_commit_sha": "7ad018374b07e2985425f80f42f5795b8baceb68",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
