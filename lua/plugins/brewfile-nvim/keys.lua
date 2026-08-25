@@ -1,14 +1,6 @@
 ---@type LazyKeysSpec[]
 local keys = {
   {
-    "<leader>B",
-    mode = {
-      "n",
-    },
-    desc = "Brewfile",
-    silent = true,
-  },
-  {
     "<leader>Bi",
     function()
       require("brewfile").install()

@@ -57,14 +57,6 @@ local keys = {
     silent = true,
   },
   {
-    "<leader>u",
-    mode = {
-      "n",
-    },
-    desc = "UI toggles",
-    silent = true,
-  },
-  {
     "<leader>bc",
     function()
       require("snacks").bufdelete()
