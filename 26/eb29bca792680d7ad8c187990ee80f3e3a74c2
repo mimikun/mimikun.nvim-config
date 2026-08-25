@@ -1,0 +1,542 @@
+lua/plugins/luixbits-roomplanner-nvim/CODES/.github/ISSUE_TEMPLATE/bug_report.yml
+  h_220433a6faf6b8 1-89
+lua/plugins/luixbits-roomplanner-nvim/CODES/.github/ISSUE_TEMPLATE/config.yml
+  h_220433a6faf6b8 1-8
+lua/plugins/luixbits-roomplanner-nvim/CODES/.github/ISSUE_TEMPLATE/feature_request.yml
+  h_220433a6faf6b8 1-57
+lua/plugins/luixbits-roomplanner-nvim/CODES/.github/dependabot.yml
+  h_220433a6faf6b8 1-15
+lua/plugins/luixbits-roomplanner-nvim/CODES/.github/pull_request_template.md
+  h_220433a6faf6b8 1-25
+lua/plugins/luixbits-roomplanner-nvim/CODES/.github/workflows/ci.yml
+  h_220433a6faf6b8 1-142
+lua/plugins/luixbits-roomplanner-nvim/CODES/.github/workflows/release.yml
+  h_220433a6faf6b8 1-80
+lua/plugins/luixbits-roomplanner-nvim/CODES/.gitignore
+  h_220433a6faf6b8 1-4
+lua/plugins/luixbits-roomplanner-nvim/CODES/CHANGELOG.md
+  h_220433a6faf6b8 1-59
+lua/plugins/luixbits-roomplanner-nvim/CODES/CODE_OF_CONDUCT.md
+  h_220433a6faf6b8 1-35
+lua/plugins/luixbits-roomplanner-nvim/CODES/CONTRIBUTING.md
+  h_220433a6faf6b8 1-63
+lua/plugins/luixbits-roomplanner-nvim/CODES/LICENSE
+  h_220433a6faf6b8 1-674
+lua/plugins/luixbits-roomplanner-nvim/CODES/NOTICE
+  h_220433a6faf6b8 1-9
+lua/plugins/luixbits-roomplanner-nvim/CODES/README.md
+  h_220433a6faf6b8 1-142
+lua/plugins/luixbits-roomplanner-nvim/CODES/RELEASE.md
+  h_220433a6faf6b8 1-101
+lua/plugins/luixbits-roomplanner-nvim/CODES/SECURITY.md
+  h_220433a6faf6b8 1-44
+lua/plugins/luixbits-roomplanner-nvim/CODES/SUPPORT.md
+  h_220433a6faf6b8 1-27
+lua/plugins/luixbits-roomplanner-nvim/CODES/doc/roomplan.txt
+  h_220433a6faf6b8 1-608
+lua/plugins/luixbits-roomplanner-nvim/CODES/docs/README.md
+  h_220433a6faf6b8 1-78
+lua/plugins/luixbits-roomplanner-nvim/CODES/docs/SUMMARY.md
+  h_220433a6faf6b8 1-34
+lua/plugins/luixbits-roomplanner-nvim/CODES/docs/adr/0000-template.md
+  h_220433a6faf6b8 1-39
+lua/plugins/luixbits-roomplanner-nvim/CODES/docs/adr/0001-exact-geometry-and-terminal-rendering.md
+  h_220433a6faf6b8 1-58
+lua/plugins/luixbits-roomplanner-nvim/CODES/docs/adr/0002-semantic-actions-as-mutation-boundary.md
+  h_220433a6faf6b8 1-57
+lua/plugins/luixbits-roomplanner-nvim/CODES/docs/adr/0003-independent-plugin-and-schema-versioning.md
+  h_220433a6faf6b8 1-60
+lua/plugins/luixbits-roomplanner-nvim/CODES/docs/adr/0004-conflict-safe-source-sessions.md
+  h_220433a6faf6b8 1-58
+lua/plugins/luixbits-roomplanner-nvim/CODES/docs/adr/0005-popup-first-registry-driven-interaction.md
+  h_220433a6faf6b8 1-63
+lua/plugins/luixbits-roomplanner-nvim/CODES/docs/adr/README.md
+  h_220433a6faf6b8 1-38
+lua/plugins/luixbits-roomplanner-nvim/CODES/docs/assets/README.md
+  h_220433a6faf6b8 1-34
+lua/plugins/luixbits-roomplanner-nvim/CODES/docs/configuration/keymaps.md
+  h_220433a6faf6b8 1-175
+lua/plugins/luixbits-roomplanner-nvim/CODES/docs/configuration/settings.md
+  h_220433a6faf6b8 1-194
+lua/plugins/luixbits-roomplanner-nvim/CODES/docs/configuration/ui-providers.md
+  h_220433a6faf6b8 1-46
+lua/plugins/luixbits-roomplanner-nvim/CODES/docs/data/coordinates-and-schema.md
+  h_220433a6faf6b8 1-107
+lua/plugins/luixbits-roomplanner-nvim/CODES/docs/data/storage-and-sessions.md
+  h_220433a6faf6b8 1-81
+lua/plugins/luixbits-roomplanner-nvim/CODES/docs/data/validation.md
+  h_220433a6faf6b8 1-51
+lua/plugins/luixbits-roomplanner-nvim/CODES/docs/development/architecture.md
+  h_220433a6faf6b8 1-115
+lua/plugins/luixbits-roomplanner-nvim/CODES/docs/development/compatibility.md
+  h_220433a6faf6b8 1-72
+lua/plugins/luixbits-roomplanner-nvim/CODES/docs/development/contributing.md
+  h_220433a6faf6b8 1-21
+lua/plugins/luixbits-roomplanner-nvim/CODES/docs/development/releasing.md
+  h_220433a6faf6b8 1-24
+lua/plugins/luixbits-roomplanner-nvim/CODES/docs/display/appearance.md
+  h_220433a6faf6b8 1-108
+lua/plugins/luixbits-roomplanner-nvim/CODES/docs/display/aspect-and-rotation.md
+  h_220433a6faf6b8 1-51
+lua/plugins/luixbits-roomplanner-nvim/CODES/docs/getting-started/concepts.md
+  h_220433a6faf6b8 1-43
+lua/plugins/luixbits-roomplanner-nvim/CODES/docs/getting-started/installation.md
+  h_220433a6faf6b8 1-135
+lua/plugins/luixbits-roomplanner-nvim/CODES/docs/getting-started/quick-start.md
+  h_220433a6faf6b8 1-89
+lua/plugins/luixbits-roomplanner-nvim/CODES/docs/planning/doors.md
+  h_220433a6faf6b8 1-41
+lua/plugins/luixbits-roomplanner-nvim/CODES/docs/planning/furniture-catalogs.md
+  h_220433a6faf6b8 1-92
+lua/plugins/luixbits-roomplanner-nvim/CODES/docs/planning/furniture.md
+  h_220433a6faf6b8 1-79
+lua/plugins/luixbits-roomplanner-nvim/CODES/docs/planning/rooms.md
+  h_220433a6faf6b8 1-100
+lua/plugins/luixbits-roomplanner-nvim/CODES/docs/planning/sun-study.md
+  h_220433a6faf6b8 1-91
+lua/plugins/luixbits-roomplanner-nvim/CODES/docs/planning/windows-and-outlets.md
+  h_220433a6faf6b8 1-80
+lua/plugins/luixbits-roomplanner-nvim/CODES/docs/reference/commands.md
+  h_220433a6faf6b8 1-68
+lua/plugins/luixbits-roomplanner-nvim/CODES/docs/reference/limitations-and-roadmap.md
+  h_220433a6faf6b8 1-83
+lua/plugins/luixbits-roomplanner-nvim/CODES/docs/reference/lua-api.md
+  h_220433a6faf6b8 1-82
+lua/plugins/luixbits-roomplanner-nvim/CODES/docs/reference/troubleshooting.md
+  h_220433a6faf6b8 1-104
+lua/plugins/luixbits-roomplanner-nvim/CODES/docs/workspace/canvas.md
+  h_220433a6faf6b8 1-107
+lua/plugins/luixbits-roomplanner-nvim/CODES/docs/workspace/forms-and-actions.md
+  h_220433a6faf6b8 1-87
+lua/plugins/luixbits-roomplanner-nvim/CODES/docs/workspace/navigation.md
+  h_220433a6faf6b8 1-63
+lua/plugins/luixbits-roomplanner-nvim/CODES/docs/workspace/overview.md
+  h_220433a6faf6b8 1-53
+lua/plugins/luixbits-roomplanner-nvim/CODES/docs/workspace/panels.md
+  h_220433a6faf6b8 1-56
+lua/plugins/luixbits-roomplanner-nvim/CODES/flake.lock
+  h_220433a6faf6b8 1-27
+lua/plugins/luixbits-roomplanner-nvim/CODES/flake.nix
+  h_220433a6faf6b8 1-88
+lua/plugins/luixbits-roomplanner-nvim/CODES/lua/roomplan/actions.lua
+  h_220433a6faf6b8 1-1067
+lua/plugins/luixbits-roomplanner-nvim/CODES/lua/roomplan/analysis/sunlight.lua
+  h_220433a6faf6b8 1-174
+lua/plugins/luixbits-roomplanner-nvim/CODES/lua/roomplan/api.lua
+  h_220433a6faf6b8 1-11
+lua/plugins/luixbits-roomplanner-nvim/CODES/lua/roomplan/canvas_detail.lua
+  h_220433a6faf6b8 1-33
+lua/plugins/luixbits-roomplanner-nvim/CODES/lua/roomplan/catalog.lua
+  h_220433a6faf6b8 1-241
+lua/plugins/luixbits-roomplanner-nvim/CODES/lua/roomplan/catalog/import.lua
+  h_220433a6faf6b8 1-200
+lua/plugins/luixbits-roomplanner-nvim/CODES/lua/roomplan/catalog/v2_adapter.lua
+  h_220433a6faf6b8 1-104
+lua/plugins/luixbits-roomplanner-nvim/CODES/lua/roomplan/codec/json.lua
+  h_220433a6faf6b8 1-1023
+lua/plugins/luixbits-roomplanner-nvim/CODES/lua/roomplan/color.lua
+  h_220433a6faf6b8 1-61
+lua/plugins/luixbits-roomplanner-nvim/CODES/lua/roomplan/commands.lua
+  h_220433a6faf6b8 1-92
+lua/plugins/luixbits-roomplanner-nvim/CODES/lua/roomplan/compat.lua
+  h_220433a6faf6b8 1-42
+lua/plugins/luixbits-roomplanner-nvim/CODES/lua/roomplan/config.lua
+  h_220433a6faf6b8 1-259
+lua/plugins/luixbits-roomplanner-nvim/CODES/lua/roomplan/controller.lua
+  h_220433a6faf6b8 1-19
+lua/plugins/luixbits-roomplanner-nvim/CODES/lua/roomplan/controller/common.lua
+  h_220433a6faf6b8 1-123
+lua/plugins/luixbits-roomplanner-nvim/CODES/lua/roomplan/controller/edit.lua
+  h_220433a6faf6b8 1-706
+lua/plugins/luixbits-roomplanner-nvim/CODES/lua/roomplan/controller/persistence.lua
+  h_220433a6faf6b8 1-667
+lua/plugins/luixbits-roomplanner-nvim/CODES/lua/roomplan/controller/shape.lua
+  h_220433a6faf6b8 1-347
+lua/plugins/luixbits-roomplanner-nvim/CODES/lua/roomplan/controller/source.lua
+  h_220433a6faf6b8 1-545
+lua/plugins/luixbits-roomplanner-nvim/CODES/lua/roomplan/controller/source_context.lua
+  h_220433a6faf6b8 1-101
+lua/plugins/luixbits-roomplanner-nvim/CODES/lua/roomplan/controller/sun.lua
+  h_220433a6faf6b8 1-546
+lua/plugins/luixbits-roomplanner-nvim/CODES/lua/roomplan/controller/view.lua
+  h_220433a6faf6b8 1-706
+lua/plugins/luixbits-roomplanner-nvim/CODES/lua/roomplan/directions.lua
+  h_220433a6faf6b8 1-105
+lua/plugins/luixbits-roomplanner-nvim/CODES/lua/roomplan/geometry/adjacency.lua
+  h_220433a6faf6b8 1-223
+lua/plugins/luixbits-roomplanner-nvim/CODES/lua/roomplan/geometry/alignment.lua
+  h_220433a6faf6b8 1-281
+lua/plugins/luixbits-roomplanner-nvim/CODES/lua/roomplan/geometry/door.lua
+  h_220433a6faf6b8 1-88
+lua/plugins/luixbits-roomplanner-nvim/CODES/lua/roomplan/geometry/footprint.lua
+  h_220433a6faf6b8 1-27
+lua/plugins/luixbits-roomplanner-nvim/CODES/lua/roomplan/geometry/footprint/adapters.lua
+  h_220433a6faf6b8 1-228
+lua/plugins/luixbits-roomplanner-nvim/CODES/lua/roomplan/geometry/footprint/core.lua
+  h_220433a6faf6b8 1-595
+lua/plugins/luixbits-roomplanner-nvim/CODES/lua/roomplan/geometry/footprint/metrics.lua
+  h_220433a6faf6b8 1-359
+lua/plugins/luixbits-roomplanner-nvim/CODES/lua/roomplan/geometry/footprint/relations.lua
+  h_220433a6faf6b8 1-148
+lua/plugins/luixbits-roomplanner-nvim/CODES/lua/roomplan/geometry/footprint/transforms.lua
+  h_220433a6faf6b8 1-189
+lua/plugins/luixbits-roomplanner-nvim/CODES/lua/roomplan/geometry/furniture_placement.lua
+  h_220433a6faf6b8 1-87
+lua/plugins/luixbits-roomplanner-nvim/CODES/lua/roomplan/geometry/init.lua
+  h_220433a6faf6b8 1-15
+lua/plugins/luixbits-roomplanner-nvim/CODES/lua/roomplan/geometry/interval.lua
+  h_220433a6faf6b8 1-91
+lua/plugins/luixbits-roomplanner-nvim/CODES/lua/roomplan/geometry/measurement.lua
+  h_220433a6faf6b8 1-117
+lua/plugins/luixbits-roomplanner-nvim/CODES/lua/roomplan/geometry/number.lua
+  h_220433a6faf6b8 1-69
+lua/plugins/luixbits-roomplanner-nvim/CODES/lua/roomplan/geometry/rect.lua
+  h_220433a6faf6b8 1-170
+lua/plugins/luixbits-roomplanner-nvim/CODES/lua/roomplan/geometry/sector.lua
+  h_220433a6faf6b8 1-368
+lua/plugins/luixbits-roomplanner-nvim/CODES/lua/roomplan/geometry/segment.lua
+  h_220433a6faf6b8 1-114
+lua/plugins/luixbits-roomplanner-nvim/CODES/lua/roomplan/geometry/snapping.lua
+  h_220433a6faf6b8 1-676
+lua/plugins/luixbits-roomplanner-nvim/CODES/lua/roomplan/geometry/wall_attachment.lua
+  h_220433a6faf6b8 1-155
+lua/plugins/luixbits-roomplanner-nvim/CODES/lua/roomplan/health.lua
+  h_220433a6faf6b8 1-429
+lua/plugins/luixbits-roomplanner-nvim/CODES/lua/roomplan/highlights.lua
+  h_220433a6faf6b8 1-167
+lua/plugins/luixbits-roomplanner-nvim/CODES/lua/roomplan/history.lua
+  h_220433a6faf6b8 1-366
+lua/plugins/luixbits-roomplanner-nvim/CODES/lua/roomplan/ids.lua
+  h_220433a6faf6b8 1-187
+lua/plugins/luixbits-roomplanner-nvim/CODES/lua/roomplan/init.lua
+  h_220433a6faf6b8 1-42
+lua/plugins/luixbits-roomplanner-nvim/CODES/lua/roomplan/model.lua
+  h_220433a6faf6b8 1-158
+lua/plugins/luixbits-roomplanner-nvim/CODES/lua/roomplan/model/entities.lua
+  h_220433a6faf6b8 1-160
+lua/plugins/luixbits-roomplanner-nvim/CODES/lua/roomplan/model/room_footprints.lua
+  h_220433a6faf6b8 1-195
+lua/plugins/luixbits-roomplanner-nvim/CODES/lua/roomplan/outlet_types.lua
+  h_220433a6faf6b8 1-25
+lua/plugins/luixbits-roomplanner-nvim/CODES/lua/roomplan/render/canvas.lua
+  h_220433a6faf6b8 1-1041
+lua/plugins/luixbits-roomplanner-nvim/CODES/lua/roomplan/render/glyphs.lua
+  h_220433a6faf6b8 1-225
+lua/plugins/luixbits-roomplanner-nvim/CODES/lua/roomplan/render/raster.lua
+  h_220433a6faf6b8 1-1327
+lua/plugins/luixbits-roomplanner-nvim/CODES/lua/roomplan/render/text.lua
+  h_220433a6faf6b8 1-332
+lua/plugins/luixbits-roomplanner-nvim/CODES/lua/roomplan/render/viewport.lua
+  h_220433a6faf6b8 1-374
+lua/plugins/luixbits-roomplanner-nvim/CODES/lua/roomplan/room_shape.lua
+  h_220433a6faf6b8 1-361
+lua/plugins/luixbits-roomplanner-nvim/CODES/lua/roomplan/room_shape/snapping.lua
+  h_220433a6faf6b8 1-247
+lua/plugins/luixbits-roomplanner-nvim/CODES/lua/roomplan/scene/build.lua
+  h_220433a6faf6b8 1-921
+lua/plugins/luixbits-roomplanner-nvim/CODES/lua/roomplan/scene/labels.lua
+  h_220433a6faf6b8 1-200
+lua/plugins/luixbits-roomplanner-nvim/CODES/lua/roomplan/scene/walls.lua
+  h_220433a6faf6b8 1-564
+lua/plugins/luixbits-roomplanner-nvim/CODES/lua/roomplan/schema.lua
+  h_220433a6faf6b8 1-221
+lua/plugins/luixbits-roomplanner-nvim/CODES/lua/roomplan/schema/common.lua
+  h_220433a6faf6b8 1-427
+lua/plugins/luixbits-roomplanner-nvim/CODES/lua/roomplan/schema/migrations/v1_to_v2.lua
+  h_220433a6faf6b8 1-128
+lua/plugins/luixbits-roomplanner-nvim/CODES/lua/roomplan/schema/migrations/v2_to_v3.lua
+  h_220433a6faf6b8 1-44
+lua/plugins/luixbits-roomplanner-nvim/CODES/lua/roomplan/schema/migrations/v3_to_v4.lua
+  h_220433a6faf6b8 1-41
+lua/plugins/luixbits-roomplanner-nvim/CODES/lua/roomplan/schema/v1.lua
+  h_220433a6faf6b8 1-281
+lua/plugins/luixbits-roomplanner-nvim/CODES/lua/roomplan/schema/v2.lua
+  h_220433a6faf6b8 1-9
+lua/plugins/luixbits-roomplanner-nvim/CODES/lua/roomplan/schema/v2/document.lua
+  h_220433a6faf6b8 1-126
+lua/plugins/luixbits-roomplanner-nvim/CODES/lua/roomplan/schema/v2/entities.lua
+  h_220433a6faf6b8 1-206
+lua/plugins/luixbits-roomplanner-nvim/CODES/lua/roomplan/schema/v2/footprint.lua
+  h_220433a6faf6b8 1-126
+lua/plugins/luixbits-roomplanner-nvim/CODES/lua/roomplan/schema/v2/key_order.lua
+  h_220433a6faf6b8 1-65
+lua/plugins/luixbits-roomplanner-nvim/CODES/lua/roomplan/schema/v3.lua
+  h_220433a6faf6b8 1-9
+lua/plugins/luixbits-roomplanner-nvim/CODES/lua/roomplan/schema/v3/document.lua
+  h_220433a6faf6b8 1-159
+lua/plugins/luixbits-roomplanner-nvim/CODES/lua/roomplan/schema/v3/entities.lua
+  h_220433a6faf6b8 1-95
+lua/plugins/luixbits-roomplanner-nvim/CODES/lua/roomplan/schema/v3/key_order.lua
+  h_220433a6faf6b8 1-85
+lua/plugins/luixbits-roomplanner-nvim/CODES/lua/roomplan/schema/v4.lua
+  h_220433a6faf6b8 1-7
+lua/plugins/luixbits-roomplanner-nvim/CODES/lua/roomplan/schema/v4/document.lua
+  h_220433a6faf6b8 1-37
+lua/plugins/luixbits-roomplanner-nvim/CODES/lua/roomplan/schema/v4/entities.lua
+  h_220433a6faf6b8 1-137
+lua/plugins/luixbits-roomplanner-nvim/CODES/lua/roomplan/schema/v4/key_order.lua
+  h_220433a6faf6b8 1-43
+lua/plugins/luixbits-roomplanner-nvim/CODES/lua/roomplan/selection_set.lua
+  h_220433a6faf6b8 1-77
+lua/plugins/luixbits-roomplanner-nvim/CODES/lua/roomplan/session.lua
+  h_220433a6faf6b8 1-384
+lua/plugins/luixbits-roomplanner-nvim/CODES/lua/roomplan/solar.lua
+  h_220433a6faf6b8 1-189
+lua/plugins/luixbits-roomplanner-nvim/CODES/lua/roomplan/state.lua
+  h_220433a6faf6b8 1-153
+lua/plugins/luixbits-roomplanner-nvim/CODES/lua/roomplan/storage/atomic.lua
+  h_220433a6faf6b8 1-97
+lua/plugins/luixbits-roomplanner-nvim/CODES/lua/roomplan/storage/init.lua
+  h_220433a6faf6b8 1-44
+lua/plugins/luixbits-roomplanner-nvim/CODES/lua/roomplan/storage/json.lua
+  h_220433a6faf6b8 1-103
+lua/plugins/luixbits-roomplanner-nvim/CODES/lua/roomplan/storage/norg.lua
+  h_220433a6faf6b8 1-194
+lua/plugins/luixbits-roomplanner-nvim/CODES/lua/roomplan/storage/norg_scan.lua
+  h_220433a6faf6b8 1-239
+lua/plugins/luixbits-roomplanner-nvim/CODES/lua/roomplan/storage/source.lua
+  h_220433a6faf6b8 1-199
+lua/plugins/luixbits-roomplanner-nvim/CODES/lua/roomplan/ui/action_registry.lua
+  h_220433a6faf6b8 1-1087
+lua/plugins/luixbits-roomplanner-nvim/CODES/lua/roomplan/ui/flow.lua
+  h_220433a6faf6b8 1-96
+lua/plugins/luixbits-roomplanner-nvim/CODES/lua/roomplan/ui/form/fields.lua
+  h_220433a6faf6b8 1-231
+lua/plugins/luixbits-roomplanner-nvim/CODES/lua/roomplan/ui/form/init.lua
+  h_220433a6faf6b8 1-601
+lua/plugins/luixbits-roomplanner-nvim/CODES/lua/roomplan/ui/form/render.lua
+  h_220433a6faf6b8 1-171
+lua/plugins/luixbits-roomplanner-nvim/CODES/lua/roomplan/ui/form/side_preview.lua
+  h_220433a6faf6b8 1-197
+lua/plugins/luixbits-roomplanner-nvim/CODES/lua/roomplan/ui/form/state.lua
+  h_220433a6faf6b8 1-338
+lua/plugins/luixbits-roomplanner-nvim/CODES/lua/roomplan/ui/forms/alignment.lua
+  h_220433a6faf6b8 1-174
+lua/plugins/luixbits-roomplanner-nvim/CODES/lua/roomplan/ui/forms/common.lua
+  h_220433a6faf6b8 1-64
+lua/plugins/luixbits-roomplanner-nvim/CODES/lua/roomplan/ui/forms/door.lua
+  h_220433a6faf6b8 1-574
+lua/plugins/luixbits-roomplanner-nvim/CODES/lua/roomplan/ui/forms/furniture.lua
+  h_220433a6faf6b8 1-652
+lua/plugins/luixbits-roomplanner-nvim/CODES/lua/roomplan/ui/forms/furniture_preview.lua
+  h_220433a6faf6b8 1-87
+lua/plugins/luixbits-roomplanner-nvim/CODES/lua/roomplan/ui/forms/init.lua
+  h_220433a6faf6b8 1-13
+lua/plugins/luixbits-roomplanner-nvim/CODES/lua/roomplan/ui/forms/measurement.lua
+  h_220433a6faf6b8 1-155
+lua/plugins/luixbits-roomplanner-nvim/CODES/lua/roomplan/ui/forms/outlet.lua
+  h_220433a6faf6b8 1-390
+lua/plugins/luixbits-roomplanner-nvim/CODES/lua/roomplan/ui/forms/placement.lua
+  h_220433a6faf6b8 1-160
+lua/plugins/luixbits-roomplanner-nvim/CODES/lua/roomplan/ui/forms/plan.lua
+  h_220433a6faf6b8 1-85
+lua/plugins/luixbits-roomplanner-nvim/CODES/lua/roomplan/ui/forms/room.lua
+  h_220433a6faf6b8 1-443
+lua/plugins/luixbits-roomplanner-nvim/CODES/lua/roomplan/ui/forms/room_preview.lua
+  h_220433a6faf6b8 1-43
+lua/plugins/luixbits-roomplanner-nvim/CODES/lua/roomplan/ui/forms/room_sections.lua
+  h_220433a6faf6b8 1-86
+lua/plugins/luixbits-roomplanner-nvim/CODES/lua/roomplan/ui/forms/site.lua
+  h_220433a6faf6b8 1-74
+lua/plugins/luixbits-roomplanner-nvim/CODES/lua/roomplan/ui/forms/template.lua
+  h_220433a6faf6b8 1-144
+lua/plugins/luixbits-roomplanner-nvim/CODES/lua/roomplan/ui/forms/wall_attachment.lua
+  h_220433a6faf6b8 1-166
+lua/plugins/luixbits-roomplanner-nvim/CODES/lua/roomplan/ui/forms/window.lua
+  h_220433a6faf6b8 1-321
+lua/plugins/luixbits-roomplanner-nvim/CODES/lua/roomplan/ui/help.lua
+  h_220433a6faf6b8 1-92
+lua/plugins/luixbits-roomplanner-nvim/CODES/lua/roomplan/ui/keymaps.lua
+  h_220433a6faf6b8 1-82
+lua/plugins/luixbits-roomplanner-nvim/CODES/lua/roomplan/ui/list.lua
+  h_220433a6faf6b8 1-36
+lua/plugins/luixbits-roomplanner-nvim/CODES/lua/roomplan/ui/mappings.lua
+  h_220433a6faf6b8 1-38
+lua/plugins/luixbits-roomplanner-nvim/CODES/lua/roomplan/ui/minimap.lua
+  h_220433a6faf6b8 1-293
+lua/plugins/luixbits-roomplanner-nvim/CODES/lua/roomplan/ui/palette.lua
+  h_220433a6faf6b8 1-595
+lua/plugins/luixbits-roomplanner-nvim/CODES/lua/roomplan/ui/panels/action_bar.lua
+  h_220433a6faf6b8 1-228
+lua/plugins/luixbits-roomplanner-nvim/CODES/lua/roomplan/ui/panels/common.lua
+  h_220433a6faf6b8 1-109
+lua/plugins/luixbits-roomplanner-nvim/CODES/lua/roomplan/ui/panels/issues.lua
+  h_220433a6faf6b8 1-54
+lua/plugins/luixbits-roomplanner-nvim/CODES/lua/roomplan/ui/panels/objects.lua
+  h_220433a6faf6b8 1-128
+lua/plugins/luixbits-roomplanner-nvim/CODES/lua/roomplan/ui/panels/properties.lua
+  h_220433a6faf6b8 1-233
+lua/plugins/luixbits-roomplanner-nvim/CODES/lua/roomplan/ui/presenter.lua
+  h_220433a6faf6b8 1-842
+lua/plugins/luixbits-roomplanner-nvim/CODES/lua/roomplan/ui/prompts.lua
+  h_220433a6faf6b8 1-62
+lua/plugins/luixbits-roomplanner-nvim/CODES/lua/roomplan/ui/workspace.lua
+  h_220433a6faf6b8 1-67
+lua/plugins/luixbits-roomplanner-nvim/CODES/lua/roomplan/ui/workspace/interaction.lua
+  h_220433a6faf6b8 1-351
+lua/plugins/luixbits-roomplanner-nvim/CODES/lua/roomplan/ui/workspace/layout.lua
+  h_220433a6faf6b8 1-384
+lua/plugins/luixbits-roomplanner-nvim/CODES/lua/roomplan/ui/workspace/lifecycle.lua
+  h_220433a6faf6b8 1-228
+lua/plugins/luixbits-roomplanner-nvim/CODES/lua/roomplan/ui/workspace/render.lua
+  h_220433a6faf6b8 1-217
+lua/plugins/luixbits-roomplanner-nvim/CODES/lua/roomplan/ui/workspace/util.lua
+  h_220433a6faf6b8 1-40
+lua/plugins/luixbits-roomplanner-nvim/CODES/lua/roomplan/ui/workspace_defaults.lua
+  h_220433a6faf6b8 1-31
+lua/plugins/luixbits-roomplanner-nvim/CODES/lua/roomplan/ui/workspace_state.lua
+  h_220433a6faf6b8 1-339
+lua/plugins/luixbits-roomplanner-nvim/CODES/lua/roomplan/units.lua
+  h_220433a6faf6b8 1-191
+lua/plugins/luixbits-roomplanner-nvim/CODES/lua/roomplan/util.lua
+  h_220433a6faf6b8 1-46
+lua/plugins/luixbits-roomplanner-nvim/CODES/lua/roomplan/validate.lua
+  h_220433a6faf6b8 1-1567
+lua/plugins/luixbits-roomplanner-nvim/CODES/plan.md
+  h_220433a6faf6b8 1-164
+lua/plugins/luixbits-roomplanner-nvim/CODES/plugin/roomplan.lua
+  h_220433a6faf6b8 1-4
+lua/plugins/luixbits-roomplanner-nvim/CODES/schema/roomplan-v2.schema.json
+  h_220433a6faf6b8 1-307
+lua/plugins/luixbits-roomplanner-nvim/CODES/schema/roomplan-v3.schema.json
+  h_220433a6faf6b8 1-380
+lua/plugins/luixbits-roomplanner-nvim/CODES/schema/roomplan-v4.schema.json
+  h_220433a6faf6b8 1-404
+lua/plugins/luixbits-roomplanner-nvim/CODES/schema/roomplan.schema.json
+  h_220433a6faf6b8 1-254
+lua/plugins/luixbits-roomplanner-nvim/CODES/scripts/benchmark.lua
+  h_220433a6faf6b8 1-224
+lua/plugins/luixbits-roomplanner-nvim/CODES/scripts/benchmark.sh
+  h_220433a6faf6b8 1-10
+lua/plugins/luixbits-roomplanner-nvim/CODES/scripts/minimal_init.lua
+  h_220433a6faf6b8 1-2
+lua/plugins/luixbits-roomplanner-nvim/CODES/scripts/release-check.sh
+  h_220433a6faf6b8 1-36
+lua/plugins/luixbits-roomplanner-nvim/CODES/scripts/release-notes.sh
+  h_220433a6faf6b8 1-46
+lua/plugins/luixbits-roomplanner-nvim/CODES/scripts/test.sh
+  h_220433a6faf6b8 1-26
+lua/plugins/luixbits-roomplanner-nvim/CODES/stylua.toml
+  h_220433a6faf6b8 1-8
+lua/plugins/luixbits-roomplanner-nvim/CODES/tests/fixtures/acceptance.roomplan.json
+  h_220433a6faf6b8 1-89
+lua/plugins/luixbits-roomplanner-nvim/CODES/tests/fixtures/compound-v2.roomplan.json
+  h_220433a6faf6b8 1-79
+lua/plugins/luixbits-roomplanner-nvim/CODES/tests/fixtures/embedded-plan.norg
+  h_220433a6faf6b8 1-35
+lua/plugins/luixbits-roomplanner-nvim/CODES/tests/fixtures/empty.roomplan.json
+  h_220433a6faf6b8 1-21
+lua/plugins/luixbits-roomplanner-nvim/CODES/tests/fixtures/extension-fields.roomplan.json
+  h_220433a6faf6b8 1-40
+lua/plugins/luixbits-roomplanner-nvim/CODES/tests/fixtures/future-version.roomplan.json
+  h_220433a6faf6b8 1-12
+lua/plugins/luixbits-roomplanner-nvim/CODES/tests/fixtures/invalid-layout.roomplan.json
+  h_220433a6faf6b8 1-45
+lua/plugins/luixbits-roomplanner-nvim/CODES/tests/fixtures/legacy-plan.norg
+  h_220433a6faf6b8 1-24
+lua/plugins/luixbits-roomplanner-nvim/CODES/tests/fixtures/malformed.roomplan.json
+  h_220433a6faf6b8 1-5
+lua/plugins/luixbits-roomplanner-nvim/CODES/tests/fixtures/migration-v1.expected-v2.roomplan.json
+  h_220433a6faf6b8 1-113
+lua/plugins/luixbits-roomplanner-nvim/CODES/tests/fixtures/migration-v1.roomplan.json
+  h_220433a6faf6b8 1-82
+lua/plugins/luixbits-roomplanner-nvim/CODES/tests/fixtures/windows-outlets-v3.roomplan.json
+  h_220433a6faf6b8 1-75
+lua/plugins/luixbits-roomplanner-nvim/CODES/tests/guard_child.lua
+  h_220433a6faf6b8 1-20
+lua/plugins/luixbits-roomplanner-nvim/CODES/tests/harness.lua
+  h_220433a6faf6b8 1-74
+lua/plugins/luixbits-roomplanner-nvim/CODES/tests/integration/commands_spec.lua
+  h_220433a6faf6b8 1-99
+lua/plugins/luixbits-roomplanner-nvim/CODES/tests/integration/controller_lifecycle_spec.lua
+  h_220433a6faf6b8 1-1838
+lua/plugins/luixbits-roomplanner-nvim/CODES/tests/integration/minimap_spec.lua
+  h_220433a6faf6b8 1-75
+lua/plugins/luixbits-roomplanner-nvim/CODES/tests/integration/storage_bom_spec.lua
+  h_220433a6faf6b8 1-135
+lua/plugins/luixbits-roomplanner-nvim/CODES/tests/integration/sun_study_controller_spec.lua
+  h_220433a6faf6b8 1-139
+lua/plugins/luixbits-roomplanner-nvim/CODES/tests/run.lua
+  h_220433a6faf6b8 1-14
+lua/plugins/luixbits-roomplanner-nvim/CODES/tests/unit/action_registry_spec.lua
+  h_220433a6faf6b8 1-398
+lua/plugins/luixbits-roomplanner-nvim/CODES/tests/unit/catalog_spec.lua
+  h_220433a6faf6b8 1-226
+lua/plugins/luixbits-roomplanner-nvim/CODES/tests/unit/catalog_v2_adapter_spec.lua
+  h_220433a6faf6b8 1-116
+lua/plugins/luixbits-roomplanner-nvim/CODES/tests/unit/color_spec.lua
+  h_220433a6faf6b8 1-38
+lua/plugins/luixbits-roomplanner-nvim/CODES/tests/unit/compound_actions_spec.lua
+  h_220433a6faf6b8 1-467
+lua/plugins/luixbits-roomplanner-nvim/CODES/tests/unit/compound_forms_spec.lua
+  h_220433a6faf6b8 1-343
+lua/plugins/luixbits-roomplanner-nvim/CODES/tests/unit/compound_geometry_spec.lua
+  h_220433a6faf6b8 1-296
+lua/plugins/luixbits-roomplanner-nvim/CODES/tests/unit/compound_scene_spec.lua
+  h_220433a6faf6b8 1-248
+lua/plugins/luixbits-roomplanner-nvim/CODES/tests/unit/config_spec.lua
+  h_220433a6faf6b8 1-116
+lua/plugins/luixbits-roomplanner-nvim/CODES/tests/unit/controller_facade_spec.lua
+  h_220433a6faf6b8 1-24
+lua/plugins/luixbits-roomplanner-nvim/CODES/tests/unit/documentation_spec.lua
+  h_220433a6faf6b8 1-121
+lua/plugins/luixbits-roomplanner-nvim/CODES/tests/unit/door_form_spec.lua
+  h_220433a6faf6b8 1-50
+lua/plugins/luixbits-roomplanner-nvim/CODES/tests/unit/fixture_matrix_spec.lua
+  h_220433a6faf6b8 1-87
+lua/plugins/luixbits-roomplanner-nvim/CODES/tests/unit/form_spec.lua
+  h_220433a6faf6b8 1-488
+lua/plugins/luixbits-roomplanner-nvim/CODES/tests/unit/geometry_validation_spec.lua
+  h_220433a6faf6b8 1-1091
+lua/plugins/luixbits-roomplanner-nvim/CODES/tests/unit/health_spec.lua
+  h_220433a6faf6b8 1-106
+lua/plugins/luixbits-roomplanner-nvim/CODES/tests/unit/highlights_spec.lua
+  h_220433a6faf6b8 1-105
+lua/plugins/luixbits-roomplanner-nvim/CODES/tests/unit/model_foundation_spec.lua
+  h_220433a6faf6b8 1-394
+lua/plugins/luixbits-roomplanner-nvim/CODES/tests/unit/norg_scan_spec.lua
+  h_220433a6faf6b8 1-69
+lua/plugins/luixbits-roomplanner-nvim/CODES/tests/unit/panel_render_spec.lua
+  h_220433a6faf6b8 1-91
+lua/plugins/luixbits-roomplanner-nvim/CODES/tests/unit/placement_tools_spec.lua
+  h_220433a6faf6b8 1-107
+lua/plugins/luixbits-roomplanner-nvim/CODES/tests/unit/render_spec.lua
+  h_220433a6faf6b8 1-1214
+lua/plugins/luixbits-roomplanner-nvim/CODES/tests/unit/room_footprint_presets_spec.lua
+  h_220433a6faf6b8 1-135
+lua/plugins/luixbits-roomplanner-nvim/CODES/tests/unit/room_shape_spec.lua
+  h_220433a6faf6b8 1-414
+lua/plugins/luixbits-roomplanner-nvim/CODES/tests/unit/schema_migration_spec.lua
+  h_220433a6faf6b8 1-397
+lua/plugins/luixbits-roomplanner-nvim/CODES/tests/unit/schema_v3_spec.lua
+  h_220433a6faf6b8 1-244
+lua/plugins/luixbits-roomplanner-nvim/CODES/tests/unit/schema_v4_spec.lua
+  h_220433a6faf6b8 1-127
+lua/plugins/luixbits-roomplanner-nvim/CODES/tests/unit/state_flow_spec.lua
+  h_220433a6faf6b8 1-90
+lua/plugins/luixbits-roomplanner-nvim/CODES/tests/unit/sun_study_spec.lua
+  h_220433a6faf6b8 1-197
+lua/plugins/luixbits-roomplanner-nvim/CODES/tests/unit/wall_attachment_forms_spec.lua
+  h_220433a6faf6b8 1-202
+lua/plugins/luixbits-roomplanner-nvim/CODES/tests/unit/wall_attachment_spec.lua
+  h_220433a6faf6b8 1-126
+lua/plugins/luixbits-roomplanner-nvim/CODES/tests/unit/window_outlet_actions_spec.lua
+  h_220433a6faf6b8 1-299
+lua/plugins/luixbits-roomplanner-nvim/CODES/tests/unit/window_outlet_ui_spec.lua
+  h_220433a6faf6b8 1-127
+lua/plugins/luixbits-roomplanner-nvim/CODES/tests/unit/window_outlet_validation_spec.lua
+  h_220433a6faf6b8 1-271
+lua/plugins/luixbits-roomplanner-nvim/CODES/tests/unit/workspace_ui_spec.lua
+  h_220433a6faf6b8 1-913
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.24",
+  "base_commit_sha": "26eb29bca792680d7ad8c187990ee80f3e3a74c2",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
