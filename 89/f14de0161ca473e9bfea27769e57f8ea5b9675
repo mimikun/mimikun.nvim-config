@@ -1,0 +1,30 @@
+lua/plugins/nvim-autopairs/.editorconfig
+  h_220433a6faf6b8 1-14
+lua/plugins/nvim-autopairs/cmds.lua
+  h_220433a6faf6b8 1-6
+lua/plugins/nvim-autopairs/dependencies.lua
+  h_220433a6faf6b8 1-16
+lua/plugins/nvim-autopairs/events.lua
+  h_220433a6faf6b8 1-6
+lua/plugins/nvim-autopairs/ft.lua
+  h_220433a6faf6b8 1-6
+lua/plugins/nvim-autopairs/init.lua
+  h_220433a6faf6b8 1-37
+lua/plugins/nvim-autopairs/keys.lua
+  h_220433a6faf6b8 1-23
+lua/plugins/nvim-autopairs/opts.lua
+  h_220433a6faf6b8 1-6
+lua/plugins/nvim-autopairs/stylua.toml
+  h_220433a6faf6b8 1-13
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.24",
+  "base_commit_sha": "89f14de0161ca473e9bfea27769e57f8ea5b9675",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
