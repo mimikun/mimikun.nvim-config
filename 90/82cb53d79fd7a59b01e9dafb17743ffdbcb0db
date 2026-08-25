@@ -1,0 +1,74 @@
+lua/plugins/overseer-nvim/CODES/action_util.lua
+  h_220433a6faf6b8 78
+lua/plugins/overseer-nvim/CODES/component/dependencies.lua
+  h_220433a6faf6b8 43
+lua/plugins/overseer-nvim/CODES/component/on_complete_dispose.lua
+  h_220433a6faf6b8 67,84,88,91
+lua/plugins/overseer-nvim/CODES/component/on_output_notify.lua
+  h_220433a6faf6b8 83
+lua/plugins/overseer-nvim/CODES/component/on_output_parse.lua
+  h_220433a6faf6b8 67,73,82,98
+lua/plugins/overseer-nvim/CODES/component/on_output_quickfix.lua
+  h_220433a6faf6b8 124
+lua/plugins/overseer-nvim/CODES/component/open_output.lua
+  h_220433a6faf6b8 75,86
+lua/plugins/overseer-nvim/CODES/component/run_after.lua
+  h_220433a6faf6b8 61
+lua/plugins/overseer-nvim/CODES/dap.lua
+  h_220433a6faf6b8 57
+lua/plugins/overseer-nvim/CODES/form/init.lua
+  h_220433a6faf6b8 297
+lua/plugins/overseer-nvim/CODES/health.lua
+  h_220433a6faf6b8 59
+lua/plugins/overseer-nvim/CODES/keymap_util.lua
+  h_220433a6faf6b8 27
+lua/plugins/overseer-nvim/CODES/layout.lua
+  h_220433a6faf6b8 36,104,111
+lua/plugins/overseer-nvim/CODES/render.lua
+  h_220433a6faf6b8 23,269
+lua/plugins/overseer-nvim/CODES/strategy/jobstart.lua
+  h_220433a6faf6b8 288,299
+lua/plugins/overseer-nvim/CODES/strategy/system.lua
+  h_220433a6faf6b8 220
+lua/plugins/overseer-nvim/CODES/task.lua
+  h_220433a6faf6b8 600
+lua/plugins/overseer-nvim/CODES/task_editor.lua
+  h_220433a6faf6b8 177
+lua/plugins/overseer-nvim/CODES/task_list/actions.lua
+  h_220433a6faf6b8 155,164
+lua/plugins/overseer-nvim/CODES/task_list/sidebar.lua
+  h_220433a6faf6b8 320
+lua/plugins/overseer-nvim/CODES/task_view.lua
+  h_220433a6faf6b8 47,69
+lua/plugins/overseer-nvim/CODES/template.lua
+  h_220433a6faf6b8 109,169-171,620
+lua/plugins/overseer-nvim/CODES/template/cargo-make.lua
+  h_220433a6faf6b8 7
+lua/plugins/overseer-nvim/CODES/template/composer.lua
+  h_220433a6faf6b8 9
+lua/plugins/overseer-nvim/CODES/template/just.lua
+  h_220433a6faf6b8 116
+lua/plugins/overseer-nvim/CODES/template/mage.lua
+  h_220433a6faf6b8 35
+lua/plugins/overseer-nvim/CODES/template/mise.lua
+  h_220433a6faf6b8 18
+lua/plugins/overseer-nvim/CODES/util.lua
+  h_220433a6faf6b8 122,733-735
+lua/plugins/overseer-nvim/CODES/vscode/init.lua
+  h_220433a6faf6b8 302
+lua/plugins/overseer-nvim/CODES/vscode/problem_matcher.lua
+  h_220433a6faf6b8 529,531,590
+lua/plugins/overseer-nvim/CODES/vscode/vs_util.lua
+  h_220433a6faf6b8 7
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.24",
+  "base_commit_sha": "9082cb53d79fd7a59b01e9dafb17743ffdbcb0db",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
