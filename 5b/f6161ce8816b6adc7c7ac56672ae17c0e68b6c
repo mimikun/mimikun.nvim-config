@@ -1,0 +1,292 @@
+lua/plugins/render-markdown-nvim/CODES/.github/ISSUE_TEMPLATE/bug_report.yml
+  h_220433a6faf6b8 1-78
+lua/plugins/render-markdown-nvim/CODES/.github/ISSUE_TEMPLATE/feature_request.yml
+  h_220433a6faf6b8 1-29
+lua/plugins/render-markdown-nvim/CODES/.github/ISSUE_TEMPLATE/help.yml
+  h_220433a6faf6b8 1-37
+lua/plugins/render-markdown-nvim/CODES/.github/workflows/luarocks.yml
+  h_220433a6faf6b8 1-40
+lua/plugins/render-markdown-nvim/CODES/.gitignore
+  h_220433a6faf6b8 1-4
+lua/plugins/render-markdown-nvim/CODES/.stylua.toml
+  h_220433a6faf6b8 1-9
+lua/plugins/render-markdown-nvim/CODES/CHANGELOG.md
+  h_220433a6faf6b8 1-1231
+lua/plugins/render-markdown-nvim/CODES/LICENSE
+  h_220433a6faf6b8 1-21
+lua/plugins/render-markdown-nvim/CODES/README.md
+  h_220433a6faf6b8 1-1876
+lua/plugins/render-markdown-nvim/CODES/benches/medium_spec.lua
+  h_220433a6faf6b8 1-17
+lua/plugins/render-markdown-nvim/CODES/benches/medium_table_spec.lua
+  h_220433a6faf6b8 1-17
+lua/plugins/render-markdown-nvim/CODES/benches/readme_spec.lua
+  h_220433a6faf6b8 1-17
+lua/plugins/render-markdown-nvim/CODES/benches/util.lua
+  h_220433a6faf6b8 1-60
+lua/plugins/render-markdown-nvim/CODES/demo/box_dash_quote.md
+  h_220433a6faf6b8 1-11
+lua/plugins/render-markdown-nvim/CODES/demo/callout.md
+  h_220433a6faf6b8 1-35
+lua/plugins/render-markdown-nvim/CODES/demo/format.tape
+  h_220433a6faf6b8 1-35
+lua/plugins/render-markdown-nvim/CODES/demo/heading_code.md
+  h_220433a6faf6b8 1-23
+lua/plugins/render-markdown-nvim/CODES/demo/latex.md
+  h_220433a6faf6b8 1-7
+lua/plugins/render-markdown-nvim/CODES/demo/list_table.md
+  h_220433a6faf6b8 1-24
+lua/plugins/render-markdown-nvim/CODES/demo/minit.lua
+  h_220433a6faf6b8 1-55
+lua/plugins/render-markdown-nvim/CODES/demo/run.py
+  h_220433a6faf6b8 1-96
+lua/plugins/render-markdown-nvim/CODES/doc/custom-handlers.md
+  h_220433a6faf6b8 1-123
+lua/plugins/render-markdown-nvim/CODES/doc/limitations.md
+  h_220433a6faf6b8 1-211
+lua/plugins/render-markdown-nvim/CODES/doc/markdown-ecosystem.md
+  h_220433a6faf6b8 1-43
+lua/plugins/render-markdown-nvim/CODES/doc/purpose.md
+  h_220433a6faf6b8 1-12
+lua/plugins/render-markdown-nvim/CODES/doc/render-markdown.txt
+  h_220433a6faf6b8 1-1980
+lua/plugins/render-markdown-nvim/CODES/doc/todo.md
+  h_220433a6faf6b8 1-3
+lua/plugins/render-markdown-nvim/CODES/doc/troubleshooting.md
+  h_220433a6faf6b8 1-126
+lua/plugins/render-markdown-nvim/CODES/justfile
+  h_220433a6faf6b8 1-55
+lua/plugins/render-markdown-nvim/CODES/lua/render-markdown/api.lua
+  h_220433a6faf6b8 1-101
+lua/plugins/render-markdown-nvim/CODES/lua/render-markdown/core/colors.lua
+  h_220433a6faf6b8 1-150
+lua/plugins/render-markdown-nvim/CODES/lua/render-markdown/core/command.lua
+  h_220433a6faf6b8 1-101
+lua/plugins/render-markdown-nvim/CODES/lua/render-markdown/core/handlers.lua
+  h_220433a6faf6b8 1-98
+lua/plugins/render-markdown-nvim/CODES/lua/render-markdown/core/log.lua
+  h_220433a6faf6b8 1-162
+lua/plugins/render-markdown-nvim/CODES/lua/render-markdown/core/manager.lua
+  h_220433a6faf6b8 1-174
+lua/plugins/render-markdown-nvim/CODES/lua/render-markdown/core/preview.lua
+  h_220433a6faf6b8 1-139
+lua/plugins/render-markdown-nvim/CODES/lua/render-markdown/core/ts.lua
+  h_220433a6faf6b8 1-115
+lua/plugins/render-markdown-nvim/CODES/lua/render-markdown/core/ui.lua
+  h_220433a6faf6b8 1-242
+lua/plugins/render-markdown-nvim/CODES/lua/render-markdown/debug/diff.lua
+  h_220433a6faf6b8 1-32
+lua/plugins/render-markdown-nvim/CODES/lua/render-markdown/debug/marks.lua
+  h_220433a6faf6b8 1-187
+lua/plugins/render-markdown-nvim/CODES/lua/render-markdown/debug/schema.lua
+  h_220433a6faf6b8 1-171
+lua/plugins/render-markdown-nvim/CODES/lua/render-markdown/handler/html.lua
+  h_220433a6faf6b8 1-34
+lua/plugins/render-markdown-nvim/CODES/lua/render-markdown/handler/latex.lua
+  h_220433a6faf6b8 1-309
+lua/plugins/render-markdown-nvim/CODES/lua/render-markdown/handler/markdown.lua
+  h_220433a6faf6b8 1-63
+lua/plugins/render-markdown-nvim/CODES/lua/render-markdown/handler/markdown_inline.lua
+  h_220433a6faf6b8 1-45
+lua/plugins/render-markdown-nvim/CODES/lua/render-markdown/handler/yaml.lua
+  h_220433a6faf6b8 1-36
+lua/plugins/render-markdown-nvim/CODES/lua/render-markdown/health.lua
+  h_220433a6faf6b8 1-230
+lua/plugins/render-markdown-nvim/CODES/lua/render-markdown/init.lua
+  h_220433a6faf6b8 1-168
+lua/plugins/render-markdown-nvim/CODES/lua/render-markdown/integ/blink.lua
+  h_220433a6faf6b8 1-64
+lua/plugins/render-markdown-nvim/CODES/lua/render-markdown/integ/cmp.lua
+  h_220433a6faf6b8 1-52
+lua/plugins/render-markdown-nvim/CODES/lua/render-markdown/integ/coq.lua
+  h_220433a6faf6b8 1-66
+lua/plugins/render-markdown-nvim/CODES/lua/render-markdown/integ/lsp.lua
+  h_220433a6faf6b8 1-76
+lua/plugins/render-markdown-nvim/CODES/lua/render-markdown/integ/source.lua
+  h_220433a6faf6b8 1-153
+lua/plugins/render-markdown-nvim/CODES/lua/render-markdown/lib/compat.lua
+  h_220433a6faf6b8 1-58
+lua/plugins/render-markdown-nvim/CODES/lua/render-markdown/lib/config.lua
+  h_220433a6faf6b8 1-131
+lua/plugins/render-markdown-nvim/CODES/lua/render-markdown/lib/converter.lua
+  h_220433a6faf6b8 1-42
+lua/plugins/render-markdown-nvim/CODES/lua/render-markdown/lib/decorator.lua
+  h_220433a6faf6b8 1-71
+lua/plugins/render-markdown-nvim/CODES/lua/render-markdown/lib/env.lua
+  h_220433a6faf6b8 1-281
+lua/plugins/render-markdown-nvim/CODES/lua/render-markdown/lib/extmark.lua
+  h_220433a6faf6b8 1-74
+lua/plugins/render-markdown-nvim/CODES/lua/render-markdown/lib/icons.lua
+  h_220433a6faf6b8 1-92
+lua/plugins/render-markdown-nvim/CODES/lua/render-markdown/lib/indent.lua
+  h_220433a6faf6b8 1-72
+lua/plugins/render-markdown-nvim/CODES/lua/render-markdown/lib/interval.lua
+  h_220433a6faf6b8 1-69
+lua/plugins/render-markdown-nvim/CODES/lua/render-markdown/lib/iter.lua
+  h_220433a6faf6b8 1-45
+lua/plugins/render-markdown-nvim/CODES/lua/render-markdown/lib/line.lua
+  h_220433a6faf6b8 1-110
+lua/plugins/render-markdown-nvim/CODES/lua/render-markdown/lib/list.lua
+  h_220433a6faf6b8 1-35
+lua/plugins/render-markdown-nvim/CODES/lua/render-markdown/lib/marks.lua
+  h_220433a6faf6b8 1-143
+lua/plugins/render-markdown-nvim/CODES/lua/render-markdown/lib/node.lua
+  h_220433a6faf6b8 1-291
+lua/plugins/render-markdown-nvim/CODES/lua/render-markdown/lib/presets.lua
+  h_220433a6faf6b8 1-163
+lua/plugins/render-markdown-nvim/CODES/lua/render-markdown/lib/resolved.lua
+  h_220433a6faf6b8 1-57
+lua/plugins/render-markdown-nvim/CODES/lua/render-markdown/lib/str.lua
+  h_220433a6faf6b8 1-72
+lua/plugins/render-markdown-nvim/CODES/lua/render-markdown/render/base.lua
+  h_220433a6faf6b8 1-72
+lua/plugins/render-markdown-nvim/CODES/lua/render-markdown/render/common/footnote.lua
+  h_220433a6faf6b8 1-41
+lua/plugins/render-markdown-nvim/CODES/lua/render-markdown/render/common/wiki.lua
+  h_220433a6faf6b8 1-99
+lua/plugins/render-markdown-nvim/CODES/lua/render-markdown/render/html/comment.lua
+  h_220433a6faf6b8 1-45
+lua/plugins/render-markdown-nvim/CODES/lua/render-markdown/render/html/tag.lua
+  h_220433a6faf6b8 1-50
+lua/plugins/render-markdown-nvim/CODES/lua/render-markdown/render/inline/code.lua
+  h_220433a6faf6b8 1-99
+lua/plugins/render-markdown-nvim/CODES/lua/render-markdown/render/inline/highlight.lua
+  h_220433a6faf6b8 1-90
+lua/plugins/render-markdown-nvim/CODES/lua/render-markdown/render/inline/link.lua
+  h_220433a6faf6b8 1-84
+lua/plugins/render-markdown-nvim/CODES/lua/render-markdown/render/inline/shortcut.lua
+  h_220433a6faf6b8 1-39
+lua/plugins/render-markdown-nvim/CODES/lua/render-markdown/render/markdown/bullet.lua
+  h_220433a6faf6b8 1-163
+lua/plugins/render-markdown-nvim/CODES/lua/render-markdown/render/markdown/checkbox.lua
+  h_220433a6faf6b8 1-137
+lua/plugins/render-markdown-nvim/CODES/lua/render-markdown/render/markdown/code.lua
+  h_220433a6faf6b8 1-295
+lua/plugins/render-markdown-nvim/CODES/lua/render-markdown/render/markdown/dash.lua
+  h_220433a6faf6b8 1-65
+lua/plugins/render-markdown-nvim/CODES/lua/render-markdown/render/markdown/document.lua
+  h_220433a6faf6b8 1-37
+lua/plugins/render-markdown-nvim/CODES/lua/render-markdown/render/markdown/heading.lua
+  h_220433a6faf6b8 1-303
+lua/plugins/render-markdown-nvim/CODES/lua/render-markdown/render/markdown/list.lua
+  h_220433a6faf6b8 1-22
+lua/plugins/render-markdown-nvim/CODES/lua/render-markdown/render/markdown/paragraph.lua
+  h_220433a6faf6b8 1-69
+lua/plugins/render-markdown-nvim/CODES/lua/render-markdown/render/markdown/quote.lua
+  h_220433a6faf6b8 1-123
+lua/plugins/render-markdown-nvim/CODES/lua/render-markdown/render/markdown/section.lua
+  h_220433a6faf6b8 1-92
+lua/plugins/render-markdown-nvim/CODES/lua/render-markdown/render/markdown/table.lua
+  h_220433a6faf6b8 1-428
+lua/plugins/render-markdown-nvim/CODES/lua/render-markdown/render/yaml/bullet.lua
+  h_220433a6faf6b8 1-52
+lua/plugins/render-markdown-nvim/CODES/lua/render-markdown/request/callout.lua
+  h_220433a6faf6b8 1-29
+lua/plugins/render-markdown-nvim/CODES/lua/render-markdown/request/checkbox.lua
+  h_220433a6faf6b8 1-36
+lua/plugins/render-markdown-nvim/CODES/lua/render-markdown/request/conceal.lua
+  h_220433a6faf6b8 1-200
+lua/plugins/render-markdown-nvim/CODES/lua/render-markdown/request/context.lua
+  h_220433a6faf6b8 1-81
+lua/plugins/render-markdown-nvim/CODES/lua/render-markdown/request/inline.lua
+  h_220433a6faf6b8 1-55
+lua/plugins/render-markdown-nvim/CODES/lua/render-markdown/request/latex.lua
+  h_220433a6faf6b8 1-23
+lua/plugins/render-markdown-nvim/CODES/lua/render-markdown/request/used.lua
+  h_220433a6faf6b8 1-23
+lua/plugins/render-markdown-nvim/CODES/lua/render-markdown/request/view.lua
+  h_220433a6faf6b8 1-93
+lua/plugins/render-markdown-nvim/CODES/lua/render-markdown/settings.lua
+  h_220433a6faf6b8 1-1912
+lua/plugins/render-markdown-nvim/CODES/lua/render-markdown/state.lua
+  h_220433a6faf6b8 1-107
+lua/plugins/render-markdown-nvim/CODES/lua/render-markdown/types.lua
+  h_220433a6faf6b8 1-319
+lua/plugins/render-markdown-nvim/CODES/neovim.yml
+  h_220433a6faf6b8 1-45
+lua/plugins/render-markdown-nvim/CODES/plugin/render-markdown.lua
+  h_220433a6faf6b8 1-10
+lua/plugins/render-markdown-nvim/CODES/scripts/generate.py
+  h_220433a6faf6b8 1-62
+lua/plugins/render-markdown-nvim/CODES/scripts/requirements.txt
+  h_220433a6faf6b8 1-3
+lua/plugins/render-markdown-nvim/CODES/scripts/update.py
+  h_220433a6faf6b8 1-271
+lua/plugins/render-markdown-nvim/CODES/selene.toml
+  h_220433a6faf6b8 1-4
+lua/plugins/render-markdown-nvim/CODES/tests/ad_hoc_spec.lua
+  h_220433a6faf6b8 1-93
+lua/plugins/render-markdown-nvim/CODES/tests/checkbox_spec.lua
+  h_220433a6faf6b8 1-36
+lua/plugins/render-markdown-nvim/CODES/tests/code_inline_spec.lua
+  h_220433a6faf6b8 1-44
+lua/plugins/render-markdown-nvim/CODES/tests/code_spec.lua
+  h_220433a6faf6b8 1-332
+lua/plugins/render-markdown-nvim/CODES/tests/conceal_level_spec.lua
+  h_220433a6faf6b8 1-93
+lua/plugins/render-markdown-nvim/CODES/tests/custom_handler_spec.lua
+  h_220433a6faf6b8 1-83
+lua/plugins/render-markdown-nvim/CODES/tests/data/ft_override.md
+  h_220433a6faf6b8 1-7
+lua/plugins/render-markdown-nvim/CODES/tests/demo/box_dash_quote_spec.lua
+  h_220433a6faf6b8 1-52
+lua/plugins/render-markdown-nvim/CODES/tests/demo/callout_spec.lua
+  h_220433a6faf6b8 1-133
+lua/plugins/render-markdown-nvim/CODES/tests/demo/heading_code_spec.lua
+  h_220433a6faf6b8 1-73
+lua/plugins/render-markdown-nvim/CODES/tests/demo/latex_spec.lua
+  h_220433a6faf6b8 1-72
+lua/plugins/render-markdown-nvim/CODES/tests/demo/list_table_spec.lua
+  h_220433a6faf6b8 1-181
+lua/plugins/render-markdown-nvim/CODES/tests/footnote_spec.lua
+  h_220433a6faf6b8 1-53
+lua/plugins/render-markdown-nvim/CODES/tests/ft_override_spec.lua
+  h_220433a6faf6b8 1-10
+lua/plugins/render-markdown-nvim/CODES/tests/heading_spec.lua
+  h_220433a6faf6b8 1-295
+lua/plugins/render-markdown-nvim/CODES/tests/helpers/details.lua
+  h_220433a6faf6b8 1-122
+lua/plugins/render-markdown-nvim/CODES/tests/helpers/marks.lua
+  h_220433a6faf6b8 1-54
+lua/plugins/render-markdown-nvim/CODES/tests/helpers/row.lua
+  h_220433a6faf6b8 1-29
+lua/plugins/render-markdown-nvim/CODES/tests/helpers/system.lua
+  h_220433a6faf6b8 1-41
+lua/plugins/render-markdown-nvim/CODES/tests/indent_spec.lua
+  h_220433a6faf6b8 1-172
+lua/plugins/render-markdown-nvim/CODES/tests/latex_spec.lua
+  h_220433a6faf6b8 1-138
+lua/plugins/render-markdown-nvim/CODES/tests/minimal_init.lua
+  h_220433a6faf6b8 1-44
+lua/plugins/render-markdown-nvim/CODES/tests/quote_spec.lua
+  h_220433a6faf6b8 1-120
+lua/plugins/render-markdown-nvim/CODES/tests/table_spec.lua
+  h_220433a6faf6b8 1-282
+lua/plugins/render-markdown-nvim/CODES/tests/unit/completion_spec.lua
+  h_220433a6faf6b8 1-148
+lua/plugins/render-markdown-nvim/CODES/tests/unit/interval_spec.lua
+  h_220433a6faf6b8 1-108
+lua/plugins/render-markdown-nvim/CODES/tests/unit/presets_spec.lua
+  h_220433a6faf6b8 1-46
+lua/plugins/render-markdown-nvim/CODES/tests/unit/state_spec.lua
+  h_220433a6faf6b8 1-173
+lua/plugins/render-markdown-nvim/CODES/tests/unit/str_spec.lua
+  h_220433a6faf6b8 1-31
+lua/plugins/render-markdown-nvim/CODES/tests/unit/view_spec.lua
+  h_220433a6faf6b8 1-25
+lua/plugins/render-markdown-nvim/CODES/tests/util.lua
+  h_220433a6faf6b8 1-507
+lua/plugins/render-markdown-nvim/CODES/tests/wikilink_spec.lua
+  h_220433a6faf6b8 1-33
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.24",
+  "base_commit_sha": "5bf6161ce8816b6adc7c7ac56672ae17c0e68b6c",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
