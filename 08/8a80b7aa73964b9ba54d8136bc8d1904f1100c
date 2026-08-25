@@ -1,0 +1,264 @@
+lua/plugins/markview-nvim/CODES/.github/ISSUE_TEMPLATE/bug_report.yml
+  h_220433a6faf6b8 1-93
+lua/plugins/markview-nvim/CODES/.github/ISSUE_TEMPLATE/feature_request.yml
+  h_220433a6faf6b8 1-32
+lua/plugins/markview-nvim/CODES/.github/workflows/luarocks.yml
+  h_220433a6faf6b8 1-41
+lua/plugins/markview-nvim/CODES/.github/workflows/release-please.yml
+  h_220433a6faf6b8 1-26
+lua/plugins/markview-nvim/CODES/.github/workflows/stale.yml
+  h_220433a6faf6b8 1-31
+lua/plugins/markview-nvim/CODES/.gitmodules
+  h_220433a6faf6b8 1-3
+lua/plugins/markview-nvim/CODES/.luarc.json
+  h_220433a6faf6b8 1-15
+lua/plugins/markview-nvim/CODES/CHANGELOG.md
+  h_220433a6faf6b8 1-868
+lua/plugins/markview-nvim/CODES/LICENSE
+  h_220433a6faf6b8 1-201
+lua/plugins/markview-nvim/CODES/README.md
+  h_220433a6faf6b8 1-635
+lua/plugins/markview-nvim/CODES/doc/markview.nvim-advanced.txt
+  h_220433a6faf6b8 1-50
+lua/plugins/markview-nvim/CODES/doc/markview.nvim-asciidoc.txt
+  h_220433a6faf6b8 1-698
+lua/plugins/markview-nvim/CODES/doc/markview.nvim-asciidoc_inline.txt
+  h_220433a6faf6b8 1-444
+lua/plugins/markview-nvim/CODES/doc/markview.nvim-autocmds.txt
+  h_220433a6faf6b8 1-112
+lua/plugins/markview-nvim/CODES/doc/markview.nvim-comment.txt
+  h_220433a6faf6b8 1-1289
+lua/plugins/markview-nvim/CODES/doc/markview.nvim-config.txt
+  h_220433a6faf6b8 1-182
+lua/plugins/markview-nvim/CODES/doc/markview.nvim-dev.txt
+  h_220433a6faf6b8 1-176
+lua/plugins/markview-nvim/CODES/doc/markview.nvim-experimental.txt
+  h_220433a6faf6b8 1-143
+lua/plugins/markview-nvim/CODES/doc/markview.nvim-extras.txt
+  h_220433a6faf6b8 1-149
+lua/plugins/markview-nvim/CODES/doc/markview.nvim-hl.txt
+  h_220433a6faf6b8 1-139
+lua/plugins/markview-nvim/CODES/doc/markview.nvim-html.txt
+  h_220433a6faf6b8 1-337
+lua/plugins/markview-nvim/CODES/doc/markview.nvim-integrations.txt
+  h_220433a6faf6b8 1-196
+lua/plugins/markview-nvim/CODES/doc/markview.nvim-latex.txt
+  h_220433a6faf6b8 1-623
+lua/plugins/markview-nvim/CODES/doc/markview.nvim-markdown.txt
+  h_220433a6faf6b8 1-1243
+lua/plugins/markview-nvim/CODES/doc/markview.nvim-markdown_inline.txt
+  h_220433a6faf6b8 1-884
+lua/plugins/markview-nvim/CODES/doc/markview.nvim-presets.txt
+  h_220433a6faf6b8 1-210
+lua/plugins/markview-nvim/CODES/doc/markview.nvim-preview.txt
+  h_220433a6faf6b8 1-373
+lua/plugins/markview-nvim/CODES/doc/markview.nvim-renderers.txt
+  h_220433a6faf6b8 1-107
+lua/plugins/markview-nvim/CODES/doc/markview.nvim-typst.txt
+  h_220433a6faf6b8 1-795
+lua/plugins/markview-nvim/CODES/doc/markview.nvim-usage.txt
+  h_220433a6faf6b8 1-287
+lua/plugins/markview-nvim/CODES/doc/markview.nvim-yaml.txt
+  h_220433a6faf6b8 1-157
+lua/plugins/markview-nvim/CODES/doc/markview.nvim.txt
+  h_220433a6faf6b8 1-657
+lua/plugins/markview-nvim/CODES/doc/tags
+  h_220433a6faf6b8 1-141
+lua/plugins/markview-nvim/CODES/lua/blink-markview.lua
+  h_220433a6faf6b8 1-230
+lua/plugins/markview-nvim/CODES/lua/cmp-markview.lua
+  h_220433a6faf6b8 1-159
+lua/plugins/markview-nvim/CODES/lua/markview.lua
+  h_220433a6faf6b8 1-148
+lua/plugins/markview-nvim/CODES/lua/markview/actions.lua
+  h_220433a6faf6b8 1-1051
+lua/plugins/markview-nvim/CODES/lua/markview/autocmds.lua
+  h_220433a6faf6b8 1-557
+lua/plugins/markview-nvim/CODES/lua/markview/commands.lua
+  h_220433a6faf6b8 1-257
+lua/plugins/markview-nvim/CODES/lua/markview/config/asciidoc.lua
+  h_220433a6faf6b8 1-439
+lua/plugins/markview-nvim/CODES/lua/markview/config/asciidoc_inline.lua
+  h_220433a6faf6b8 1-346
+lua/plugins/markview-nvim/CODES/lua/markview/config/comment.lua
+  h_220433a6faf6b8 1-904
+lua/plugins/markview-nvim/CODES/lua/markview/config/html.lua
+  h_220433a6faf6b8 1-220
+lua/plugins/markview-nvim/CODES/lua/markview/config/latex.lua
+  h_220433a6faf6b8 1-368
+lua/plugins/markview-nvim/CODES/lua/markview/config/markdown.lua
+  h_220433a6faf6b8 1-665
+lua/plugins/markview-nvim/CODES/lua/markview/config/markdown_inline.lua
+  h_220433a6faf6b8 1-529
+lua/plugins/markview-nvim/CODES/lua/markview/config/typst.lua
+  h_220433a6faf6b8 1-397
+lua/plugins/markview-nvim/CODES/lua/markview/config/yaml.lua
+  h_220433a6faf6b8 1-101
+lua/plugins/markview-nvim/CODES/lua/markview/entities.lua
+  h_220433a6faf6b8 1-832
+lua/plugins/markview-nvim/CODES/lua/markview/extras/checkboxes.lua
+  h_220433a6faf6b8 1-685
+lua/plugins/markview-nvim/CODES/lua/markview/extras/editor.lua
+  h_220433a6faf6b8 1-760
+lua/plugins/markview-nvim/CODES/lua/markview/extras/headings.lua
+  h_220433a6faf6b8 1-181
+lua/plugins/markview-nvim/CODES/lua/markview/filetypes.lua
+  h_220433a6faf6b8 1-796
+lua/plugins/markview-nvim/CODES/lua/markview/health.lua
+  h_220433a6faf6b8 1-336
+lua/plugins/markview-nvim/CODES/lua/markview/highlights.lua
+  h_220433a6faf6b8 1-665
+lua/plugins/markview-nvim/CODES/lua/markview/integrations.lua
+  h_220433a6faf6b8 1-131
+lua/plugins/markview-nvim/CODES/lua/markview/links.lua
+  h_220433a6faf6b8 1-437
+lua/plugins/markview-nvim/CODES/lua/markview/parser.lua
+  h_220433a6faf6b8 1-303
+lua/plugins/markview-nvim/CODES/lua/markview/parsers/asciidoc.lua
+  h_220433a6faf6b8 1-920
+lua/plugins/markview-nvim/CODES/lua/markview/parsers/asciidoc_inline.lua
+  h_220433a6faf6b8 1-430
+lua/plugins/markview-nvim/CODES/lua/markview/parsers/comment.lua
+  h_220433a6faf6b8 1-556
+lua/plugins/markview-nvim/CODES/lua/markview/parsers/html.lua
+  h_220433a6faf6b8 1-199
+lua/plugins/markview-nvim/CODES/lua/markview/parsers/latex.lua
+  h_220433a6faf6b8 1-654
+lua/plugins/markview-nvim/CODES/lua/markview/parsers/links/html.lua
+  h_220433a6faf6b8 1-117
+lua/plugins/markview-nvim/CODES/lua/markview/parsers/links/markdown.lua
+  h_220433a6faf6b8 1-191
+lua/plugins/markview-nvim/CODES/lua/markview/parsers/markdown.lua
+  h_220433a6faf6b8 1-1073
+lua/plugins/markview-nvim/CODES/lua/markview/parsers/markdown_inline.lua
+  h_220433a6faf6b8 1-693
+lua/plugins/markview-nvim/CODES/lua/markview/parsers/typst.lua
+  h_220433a6faf6b8 1-636
+lua/plugins/markview-nvim/CODES/lua/markview/parsers/yaml.lua
+  h_220433a6faf6b8 1-199
+lua/plugins/markview-nvim/CODES/lua/markview/presets.lua
+  h_220433a6faf6b8 1-1332
+lua/plugins/markview-nvim/CODES/lua/markview/renderer.lua
+  h_220433a6faf6b8 1-583
+lua/plugins/markview-nvim/CODES/lua/markview/renderers/asciidoc.lua
+  h_220433a6faf6b8 1-1456
+lua/plugins/markview-nvim/CODES/lua/markview/renderers/asciidoc/tostring.lua
+  h_220433a6faf6b8 1-388
+lua/plugins/markview-nvim/CODES/lua/markview/renderers/asciidoc_inline.lua
+  h_220433a6faf6b8 1-354
+lua/plugins/markview-nvim/CODES/lua/markview/renderers/comment.lua
+  h_220433a6faf6b8 1-988
+lua/plugins/markview-nvim/CODES/lua/markview/renderers/common/visual_text.lua
+  h_220433a6faf6b8 1-224
+lua/plugins/markview-nvim/CODES/lua/markview/renderers/html.lua
+  h_220433a6faf6b8 1-222
+lua/plugins/markview-nvim/CODES/lua/markview/renderers/latex.lua
+  h_220433a6faf6b8 1-973
+lua/plugins/markview-nvim/CODES/lua/markview/renderers/markdown.lua
+  h_220433a6faf6b8 1-2859
+lua/plugins/markview-nvim/CODES/lua/markview/renderers/markdown/tostring.lua
+  h_220433a6faf6b8 1-882
+lua/plugins/markview-nvim/CODES/lua/markview/renderers/markdown_inline.lua
+  h_220433a6faf6b8 1-1173
+lua/plugins/markview-nvim/CODES/lua/markview/renderers/typst.lua
+  h_220433a6faf6b8 1-1686
+lua/plugins/markview-nvim/CODES/lua/markview/renderers/yaml.lua
+  h_220433a6faf6b8 1-110
+lua/plugins/markview-nvim/CODES/lua/markview/spec.lua
+  h_220433a6faf6b8 1-411
+lua/plugins/markview-nvim/CODES/lua/markview/state.lua
+  h_220433a6faf6b8 1-235
+lua/plugins/markview-nvim/CODES/lua/markview/symbols.lua
+  h_220433a6faf6b8 1-6386
+lua/plugins/markview-nvim/CODES/lua/markview/types/_health.lua
+  h_220433a6faf6b8 1-62
+lua/plugins/markview-nvim/CODES/lua/markview/types/experimental.lua
+  h_220433a6faf6b8 1-18
+lua/plugins/markview-nvim/CODES/lua/markview/types/highlights.lua
+  h_220433a6faf6b8 1-27
+lua/plugins/markview-nvim/CODES/lua/markview/types/markview.lua
+  h_220433a6faf6b8 1-150
+lua/plugins/markview-nvim/CODES/lua/markview/types/parsers.lua
+  h_220433a6faf6b8 1-20
+lua/plugins/markview-nvim/CODES/lua/markview/types/parsers/asciidoc.lua
+  h_220433a6faf6b8 1-296
+lua/plugins/markview-nvim/CODES/lua/markview/types/parsers/asciidoc_inline.lua
+  h_220433a6faf6b8 1-96
+lua/plugins/markview-nvim/CODES/lua/markview/types/parsers/comment.lua
+  h_220433a6faf6b8 1-158
+lua/plugins/markview-nvim/CODES/lua/markview/types/parsers/html.lua
+  h_220433a6faf6b8 1-57
+lua/plugins/markview-nvim/CODES/lua/markview/types/parsers/latex.lua
+  h_220433a6faf6b8 1-165
+lua/plugins/markview-nvim/CODES/lua/markview/types/parsers/markdown.lua
+  h_220433a6faf6b8 1-271
+lua/plugins/markview-nvim/CODES/lua/markview/types/parsers/markdown_inline.lua
+  h_220433a6faf6b8 1-274
+lua/plugins/markview-nvim/CODES/lua/markview/types/parsers/typst.lua
+  h_220433a6faf6b8 1-277
+lua/plugins/markview-nvim/CODES/lua/markview/types/parsers/yaml.lua
+  h_220433a6faf6b8 1-23
+lua/plugins/markview-nvim/CODES/lua/markview/types/preview.lua
+  h_220433a6faf6b8 1-213
+lua/plugins/markview-nvim/CODES/lua/markview/types/renderers/asciidoc.lua
+  h_220433a6faf6b8 1-371
+lua/plugins/markview-nvim/CODES/lua/markview/types/renderers/asciidoc_inline.lua
+  h_220433a6faf6b8 1-80
+lua/plugins/markview-nvim/CODES/lua/markview/types/renderers/comment.lua
+  h_220433a6faf6b8 1-226
+lua/plugins/markview-nvim/CODES/lua/markview/types/renderers/html.lua
+  h_220433a6faf6b8 1-56
+lua/plugins/markview-nvim/CODES/lua/markview/types/renderers/latex.lua
+  h_220433a6faf6b8 1-147
+lua/plugins/markview-nvim/CODES/lua/markview/types/renderers/markdown.lua
+  h_220433a6faf6b8 1-337
+lua/plugins/markview-nvim/CODES/lua/markview/types/renderers/markdown_inline.lua
+  h_220433a6faf6b8 1-207
+lua/plugins/markview-nvim/CODES/lua/markview/types/renderers/typst.lua
+  h_220433a6faf6b8 1-268
+lua/plugins/markview-nvim/CODES/lua/markview/types/renderers/yaml.lua
+  h_220433a6faf6b8 1-41
+lua/plugins/markview-nvim/CODES/lua/markview/utils.lua
+  h_220433a6faf6b8 1-435
+lua/plugins/markview-nvim/CODES/lua/markview/wrap.lua
+  h_220433a6faf6b8 1-278
+lua/plugins/markview-nvim/CODES/plugin/markview.lua
+  h_220433a6faf6b8 1-2
+lua/plugins/markview-nvim/CODES/test/asciidoc.adoc
+  h_220433a6faf6b8 1-136
+lua/plugins/markview-nvim/CODES/test/asciidoc_inline.adoc
+  h_220433a6faf6b8 1-30
+lua/plugins/markview-nvim/CODES/test/comment.lua
+  h_220433a6faf6b8 1-32
+lua/plugins/markview-nvim/CODES/test/html.md
+  h_220433a6faf6b8 1-59
+lua/plugins/markview-nvim/CODES/test/latex.md
+  h_220433a6faf6b8 1-73
+lua/plugins/markview-nvim/CODES/test/markdown.md
+  h_220433a6faf6b8 1-180
+lua/plugins/markview-nvim/CODES/test/markdown_inline.md
+  h_220433a6faf6b8 1-85
+lua/plugins/markview-nvim/CODES/test/table_ref_tag_drift.md
+  h_220433a6faf6b8 1-59
+lua/plugins/markview-nvim/CODES/test/tostring_recursion.md
+  h_220433a6faf6b8 1-32
+lua/plugins/markview-nvim/CODES/test/tostring_strikethrough_width.md
+  h_220433a6faf6b8 1-34
+lua/plugins/markview-nvim/CODES/test/tostring_word_attached_emphasis.md
+  h_220433a6faf6b8 1-41
+lua/plugins/markview-nvim/CODES/test/typst.typ
+  h_220433a6faf6b8 1-117
+lua/plugins/markview-nvim/CODES/test/yaml.md
+  h_220433a6faf6b8 1-13
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.24",
+  "base_commit_sha": "088a80b7aa73964b9ba54d8136bc8d1904f1100c",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
