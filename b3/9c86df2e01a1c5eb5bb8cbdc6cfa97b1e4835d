@@ -1,0 +1,30 @@
+lua/plugins/telescope-nvim/WIKIS/Configuration-Recipes.md
+  h_220433a6faf6b8 1-1209
+lua/plugins/telescope-nvim/WIKIS/Cookbook-‐-How-To.md
+  h_220433a6faf6b8 1
+lua/plugins/telescope-nvim/WIKIS/Extensions.md
+  h_220433a6faf6b8 1-173
+lua/plugins/telescope-nvim/WIKIS/FAQ.md
+  h_220433a6faf6b8 1-45
+lua/plugins/telescope-nvim/WIKIS/Gallery.md
+  h_220433a6faf6b8 1-91
+lua/plugins/telescope-nvim/WIKIS/Home.md
+  h_220433a6faf6b8 1-13
+lua/plugins/telescope-nvim/WIKIS/Showcase.md
+  h_220433a6faf6b8 1-181
+lua/plugins/telescope-nvim/WIKIS/Switching-from-fzf-to-telescope.md
+  h_220433a6faf6b8 1-6
+lua/plugins/telescope-nvim/WIKIS/Troubleshoot.md
+  h_220433a6faf6b8 1-9
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.24",
+  "base_commit_sha": "b39c86df2e01a1c5eb5bb8cbdc6cfa97b1e4835d",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
