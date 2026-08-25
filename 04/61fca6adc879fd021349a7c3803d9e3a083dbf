@@ -1,0 +1,56 @@
+"lua/plugins/markview-nvim/WIKIS/Advanced usage.md"
+  h_220433a6faf6b8 1-55
+"lua/plugins/markview-nvim/WIKIS/Asciidoc inline.md"
+  h_220433a6faf6b8 1-464
+lua/plugins/markview-nvim/WIKIS/Asciidoc.md
+  h_220433a6faf6b8 1-717
+lua/plugins/markview-nvim/WIKIS/Autocmds.md
+  h_220433a6faf6b8 1-124
+lua/plugins/markview-nvim/WIKIS/Comment.md
+  h_220433a6faf6b8 1-1302
+lua/plugins/markview-nvim/WIKIS/Configuration.md
+  h_220433a6faf6b8 1-217
+lua/plugins/markview-nvim/WIKIS/Development.md
+  h_220433a6faf6b8 1-188
+lua/plugins/markview-nvim/WIKIS/Experimental.md
+  h_220433a6faf6b8 1-149
+lua/plugins/markview-nvim/WIKIS/Extras.md
+  h_220433a6faf6b8 1-164
+lua/plugins/markview-nvim/WIKIS/HTML.md
+  h_220433a6faf6b8 1-351
+"lua/plugins/markview-nvim/WIKIS/Highlight groups.md"
+  h_220433a6faf6b8 1-147
+lua/plugins/markview-nvim/WIKIS/Home.md
+  h_220433a6faf6b8 1-95
+lua/plugins/markview-nvim/WIKIS/Integrations.md
+  h_220433a6faf6b8 1-190
+lua/plugins/markview-nvim/WIKIS/LaTeX.md
+  h_220433a6faf6b8 1-632
+"lua/plugins/markview-nvim/WIKIS/Markdown inline.md"
+  h_220433a6faf6b8 1-902
+lua/plugins/markview-nvim/WIKIS/Markdown.md
+  h_220433a6faf6b8 1-1256
+lua/plugins/markview-nvim/WIKIS/Presets.md
+  h_220433a6faf6b8 1-198
+lua/plugins/markview-nvim/WIKIS/Preview.md
+  h_220433a6faf6b8 1-341
+lua/plugins/markview-nvim/WIKIS/Renderers.md
+  h_220433a6faf6b8 1-136
+lua/plugins/markview-nvim/WIKIS/Typst.md
+  h_220433a6faf6b8 1-815
+lua/plugins/markview-nvim/WIKIS/Usage.md
+  h_220433a6faf6b8 1-314
+lua/plugins/markview-nvim/WIKIS/YAML.md
+  h_220433a6faf6b8 1-180
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.24",
+  "base_commit_sha": "0461fca6adc879fd021349a7c3803d9e3a083dbf",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
