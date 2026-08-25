@@ -1,0 +1,16 @@
+lua/plugins/vim-quickrun/quickrun.jax
+  h_220433a6faf6b8 1-1204
+lua/plugins/vim-quickrun/quickrun.txt
+  h_220433a6faf6b8 1-1039
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.24",
+  "base_commit_sha": "1489b7189f76c60c0b020f835c44068fa4c52754",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
