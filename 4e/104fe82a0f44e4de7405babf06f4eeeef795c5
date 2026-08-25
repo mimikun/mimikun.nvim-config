@@ -1,0 +1,60 @@
+lua/plugins/toggleterm-nvim/CODES/.github/FUNDING.yml
+  h_220433a6faf6b8 1-13
+lua/plugins/toggleterm-nvim/CODES/.github/ISSUE_TEMPLATE/bug_report.yaml
+  h_220433a6faf6b8 1-67
+lua/plugins/toggleterm-nvim/CODES/.github/workflows/ci.yml
+  h_220433a6faf6b8 1-98
+lua/plugins/toggleterm-nvim/CODES/.gitignore
+  h_220433a6faf6b8 1
+lua/plugins/toggleterm-nvim/CODES/.luarc.json
+  h_220433a6faf6b8 1-11
+lua/plugins/toggleterm-nvim/CODES/CHANGELOG.md
+  h_220433a6faf6b8 1-138
+lua/plugins/toggleterm-nvim/CODES/LICENSE
+  h_220433a6faf6b8 1-675
+lua/plugins/toggleterm-nvim/CODES/README.md
+  h_220433a6faf6b8 1-568
+lua/plugins/toggleterm-nvim/CODES/doc/toggleterm.txt
+  h_220433a6faf6b8 1-591
+lua/plugins/toggleterm-nvim/CODES/lua/toggleterm.lua
+  h_220433a6faf6b8 1-502
+lua/plugins/toggleterm-nvim/CODES/lua/toggleterm/colors.lua
+  h_220433a6faf6b8 1-117
+lua/plugins/toggleterm-nvim/CODES/lua/toggleterm/commandline.lua
+  h_220433a6faf6b8 1-198
+lua/plugins/toggleterm-nvim/CODES/lua/toggleterm/config.lua
+  h_220433a6faf6b8 1-157
+lua/plugins/toggleterm-nvim/CODES/lua/toggleterm/constants.lua
+  h_220433a6faf6b8 1-12
+lua/plugins/toggleterm-nvim/CODES/lua/toggleterm/lazy.lua
+  h_220433a6faf6b8 1-17
+lua/plugins/toggleterm-nvim/CODES/lua/toggleterm/terminal.lua
+  h_220433a6faf6b8 1-595
+lua/plugins/toggleterm-nvim/CODES/lua/toggleterm/ui.lua
+  h_220433a6faf6b8 1-479
+lua/plugins/toggleterm-nvim/CODES/lua/toggleterm/utils.lua
+  h_220433a6faf6b8 1-135
+lua/plugins/toggleterm-nvim/CODES/stylua.toml
+  h_220433a6faf6b8 1-5
+lua/plugins/toggleterm-nvim/CODES/tests/command-complete_spec.lua
+  h_220433a6faf6b8 1-86
+lua/plugins/toggleterm-nvim/CODES/tests/commandline_spec.lua
+  h_220433a6faf6b8 1-55
+lua/plugins/toggleterm-nvim/CODES/tests/minimal_init.lua
+  h_220433a6faf6b8 1-39
+lua/plugins/toggleterm-nvim/CODES/tests/state_spec.lua
+  h_220433a6faf6b8 1-43
+lua/plugins/toggleterm-nvim/CODES/tests/terminal_spec.lua
+  h_220433a6faf6b8 1-474
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.24",
+  "base_commit_sha": "4e104fe82a0f44e4de7405babf06f4eeeef795c5",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
