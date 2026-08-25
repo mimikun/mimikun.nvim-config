@@ -1,0 +1,108 @@
+lua/plugins/skkelua-nvim/README.md
+  h_220433a6faf6b8 1-176
+lua/plugins/skkelua-nvim/skkelua.txt
+  h_220433a6faf6b8 1-457
+lua/plugins/skkelua-nvim/CODES/candidate.lua
+  h_220433a6faf6b8 1-23
+lua/plugins/skkelua-nvim/CODES/config.lua
+  h_220433a6faf6b8 1-339
+lua/plugins/skkelua-nvim/CODES/context.lua
+  h_220433a6faf6b8 1-63
+lua/plugins/skkelua-nvim/CODES/dictionary.lua
+  h_220433a6faf6b8 1-444
+lua/plugins/skkelua-nvim/CODES/function.lua
+  h_220433a6faf6b8 1-73
+lua/plugins/skkelua-nvim/CODES/function/common.lua
+  h_220433a6faf6b8 1-231
+lua/plugins/skkelua-nvim/CODES/function/dictionary.lua
+  h_220433a6faf6b8 1-236
+lua/plugins/skkelua-nvim/CODES/function/disable.lua
+  h_220433a6faf6b8 1-32
+lua/plugins/skkelua-nvim/CODES/function/henkan.lua
+  h_220433a6faf6b8 1-219
+lua/plugins/skkelua-nvim/CODES/function/input.lua
+  h_220433a6faf6b8 1-268
+lua/plugins/skkelua-nvim/CODES/function/mode.lua
+  h_220433a6faf6b8 1-148
+lua/plugins/skkelua-nvim/CODES/guard.lua
+  h_220433a6faf6b8 1-167
+lua/plugins/skkelua-nvim/CODES/indicator.lua
+  h_220433a6faf6b8 1-355
+lua/plugins/skkelua-nvim/CODES/init.lua
+  h_220433a6faf6b8 1-726
+lua/plugins/skkelua-nvim/CODES/kana.lua
+  h_220433a6faf6b8 1-201
+lua/plugins/skkelua-nvim/CODES/kana/hira_hankata.lua
+  h_220433a6faf6b8 1-107
+lua/plugins/skkelua-nvim/CODES/kana/hira_kata.lua
+  h_220433a6faf6b8 1-104
+lua/plugins/skkelua-nvim/CODES/kana/rom_hira.lua
+  h_220433a6faf6b8 1-253
+lua/plugins/skkelua-nvim/CODES/kana/rom_zen.lua
+  h_220433a6faf6b8 1-98
+lua/plugins/skkelua-nvim/CODES/keymap.lua
+  h_220433a6faf6b8 1-128
+lua/plugins/skkelua-nvim/CODES/lsp.lua
+  h_220433a6faf6b8 1-585
+lua/plugins/skkelua-nvim/CODES/map.lua
+  h_220433a6faf6b8 1-41
+lua/plugins/skkelua-nvim/CODES/mode.lua
+  h_220433a6faf6b8 1-41
+lua/plugins/skkelua-nvim/CODES/notation.lua
+  h_220433a6faf6b8 1-83
+lua/plugins/skkelua-nvim/CODES/okuri.lua
+  h_220433a6faf6b8 1-116
+lua/plugins/skkelua-nvim/CODES/option.lua
+  h_220433a6faf6b8 1-53
+lua/plugins/skkelua-nvim/CODES/persistent.lua
+  h_220433a6faf6b8 1-52
+lua/plugins/skkelua-nvim/CODES/popup.lua
+  h_220433a6faf6b8 1-87
+lua/plugins/skkelua-nvim/CODES/preedit.lua
+  h_220433a6faf6b8 1-59
+lua/plugins/skkelua-nvim/CODES/register_prompt.lua
+  h_220433a6faf6b8 1-191
+lua/plugins/skkelua-nvim/CODES/sources/google_japanese_input.lua
+  h_220433a6faf6b8 1-99
+lua/plugins/skkelua-nvim/CODES/sources/skk_dictionary.lua
+  h_220433a6faf6b8 1-257
+lua/plugins/skkelua-nvim/CODES/sources/skk_server.lua
+  h_220433a6faf6b8 1-233
+lua/plugins/skkelua-nvim/CODES/sources/user_dictionary.lua
+  h_220433a6faf6b8 1-391
+lua/plugins/skkelua-nvim/CODES/state.lua
+  h_220433a6faf6b8 1-125
+lua/plugins/skkelua-nvim/CODES/store.lua
+  h_220433a6faf6b8 1-84
+lua/plugins/skkelua-nvim/CODES/util.lua
+  h_220433a6faf6b8 1-283
+lua/plugins/skkelua-nvim/CODES/plugin.skkelua.lua
+  h_220433a6faf6b8 1-40
+lua/plugins/skkelua-nvim/cmds.lua
+  h_220433a6faf6b8 1-6
+lua/plugins/skkelua-nvim/dependencies.lua
+  h_220433a6faf6b8 1-16
+lua/plugins/skkelua-nvim/events.lua
+  h_220433a6faf6b8 1-6
+lua/plugins/skkelua-nvim/ft.lua
+  h_220433a6faf6b8 1-6
+lua/plugins/skkelua-nvim/init.lua
+  h_220433a6faf6b8 1-37
+lua/plugins/skkelua-nvim/keys.lua
+  h_220433a6faf6b8 1-23
+lua/plugins/skkelua-nvim/opts.lua
+  h_220433a6faf6b8 1-6
+lua/plugins/skkelua-nvim/stylua.toml
+  h_220433a6faf6b8 1-13
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.24",
+  "base_commit_sha": "ca97a3f4bc09468d74a9cbc9e4c217e3d19edfc4",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
