@@ -1,0 +1,30 @@
+lua/plugins/skkelua-nvim/.editorconfig
+  h_220433a6faf6b8 1-14
+lua/plugins/skkelua-nvim/cmds.lua
+  h_220433a6faf6b8 1-6
+lua/plugins/skkelua-nvim/dependencies.lua
+  h_220433a6faf6b8 1-16
+lua/plugins/skkelua-nvim/events.lua
+  h_220433a6faf6b8 1-6
+lua/plugins/skkelua-nvim/ft.lua
+  h_220433a6faf6b8 1-6
+lua/plugins/skkelua-nvim/init.lua
+  h_220433a6faf6b8 1-37
+lua/plugins/skkelua-nvim/keys.lua
+  h_220433a6faf6b8 1-23
+lua/plugins/skkelua-nvim/opts.lua
+  h_220433a6faf6b8 1-6
+lua/plugins/skkelua-nvim/stylua.toml
+  h_220433a6faf6b8 1-13
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.24",
+  "base_commit_sha": "d676a8d109f8538c852ad38fc070e73b545ef2ac",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
