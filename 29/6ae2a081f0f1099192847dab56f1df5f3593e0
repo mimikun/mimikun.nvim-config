@@ -1,0 +1,88 @@
+lua/plugins/render-markdown-nvim/WIKIS/BlockQuotes.md
+  h_220433a6faf6b8 1-88
+lua/plugins/render-markdown-nvim/WIKIS/Callouts.md
+  h_220433a6faf6b8 1-72
+lua/plugins/render-markdown-nvim/WIKIS/Checkboxes.md
+  h_220433a6faf6b8 1-84
+lua/plugins/render-markdown-nvim/WIKIS/CodeBlocks.md
+  h_220433a6faf6b8 1-195
+lua/plugins/render-markdown-nvim/WIKIS/Colors.md
+  h_220433a6faf6b8 1-207
+lua/plugins/render-markdown-nvim/WIKIS/DashedLine.md
+  h_220433a6faf6b8 1-47
+lua/plugins/render-markdown-nvim/WIKIS/Fonts.md
+  h_220433a6faf6b8 1-470
+lua/plugins/render-markdown-nvim/WIKIS/Headings.md
+  h_220433a6faf6b8 1-173
+lua/plugins/render-markdown-nvim/WIKIS/Home.md
+  h_220433a6faf6b8 1-351
+lua/plugins/render-markdown-nvim/WIKIS/Indent.md
+  h_220433a6faf6b8 1-94
+lua/plugins/render-markdown-nvim/WIKIS/Latex.md
+  h_220433a6faf6b8 1-85
+lua/plugins/render-markdown-nvim/WIKIS/Links.md
+  h_220433a6faf6b8 1-123
+lua/plugins/render-markdown-nvim/WIKIS/ListBullets.md
+  h_220433a6faf6b8 1-80
+lua/plugins/render-markdown-nvim/WIKIS/Paragraphs.md
+  h_220433a6faf6b8 1-54
+lua/plugins/render-markdown-nvim/WIKIS/Signs.md
+  h_220433a6faf6b8 1-35
+lua/plugins/render-markdown-nvim/WIKIS/Tables.md
+  h_220433a6faf6b8 1-148
+lua/plugins/render-markdown-nvim/WIKIS/demo/.stylua.toml
+  h_220433a6faf6b8 1-9
+lua/plugins/render-markdown-nvim/WIKIS/demo/_callout.md
+  h_220433a6faf6b8 1-8
+lua/plugins/render-markdown-nvim/WIKIS/demo/_checkboxes.md
+  h_220433a6faf6b8 1-6
+lua/plugins/render-markdown-nvim/WIKIS/demo/_code.md
+  h_220433a6faf6b8 1-12
+lua/plugins/render-markdown-nvim/WIKIS/demo/_dash.md
+  h_220433a6faf6b8 1-3
+lua/plugins/render-markdown-nvim/WIKIS/demo/_headings.md
+  h_220433a6faf6b8 1-11
+lua/plugins/render-markdown-nvim/WIKIS/demo/_indent.md
+  h_220433a6faf6b8 1-30
+lua/plugins/render-markdown-nvim/WIKIS/demo/_latex.md
+  h_220433a6faf6b8 1-9
+lua/plugins/render-markdown-nvim/WIKIS/demo/_link.md
+  h_220433a6faf6b8 1-10
+lua/plugins/render-markdown-nvim/WIKIS/demo/_list.md
+  h_220433a6faf6b8 1-10
+lua/plugins/render-markdown-nvim/WIKIS/demo/_main.md
+  h_220433a6faf6b8 1-2
+lua/plugins/render-markdown-nvim/WIKIS/demo/_paragraphs.md
+  h_220433a6faf6b8 1-9
+lua/plugins/render-markdown-nvim/WIKIS/demo/_quote.md
+  h_220433a6faf6b8 1-10
+lua/plugins/render-markdown-nvim/WIKIS/demo/_sign.md
+  h_220433a6faf6b8 1-5
+lua/plugins/render-markdown-nvim/WIKIS/demo/_table.md
+  h_220433a6faf6b8 1-8
+lua/plugins/render-markdown-nvim/WIKIS/demo/gif.format.tape
+  h_220433a6faf6b8 1-64
+lua/plugins/render-markdown-nvim/WIKIS/demo/image.format.tape
+  h_220433a6faf6b8 1-14
+lua/plugins/render-markdown-nvim/WIKIS/demo/minit.format.lua
+  h_220433a6faf6b8 1-40
+lua/plugins/render-markdown-nvim/WIKIS/demo/requirements.txt
+  h_220433a6faf6b8 1-2
+lua/plugins/render-markdown-nvim/WIKIS/demo/run.py
+  h_220433a6faf6b8 1-466
+lua/plugins/render-markdown-nvim/WIKIS/demo/update.py
+  h_220433a6faf6b8 1-115
+lua/plugins/render-markdown-nvim/WIKIS/justfile
+  h_220433a6faf6b8 1-48
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.24",
+  "base_commit_sha": "296ae2a081f0f1099192847dab56f1df5f3593e0",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
