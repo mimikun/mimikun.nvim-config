@@ -1,12 +1,6 @@
 ---@type LazyKeysSpec[]
 local keys = {
   {
-    "<leader>a",
-    nil,
-    desc = "AI/Claude Code",
-    silent = true,
-  },
-  {
     "<leader>ac",
     "<cmd>ClaudeCode<cr>",
     desc = "Toggle Claude",
