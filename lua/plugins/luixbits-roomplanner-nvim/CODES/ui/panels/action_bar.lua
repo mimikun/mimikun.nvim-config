@@ -1,0 +1,260 @@
+local common = require("roomplan.ui.panels.common")
+local registry = require("roomplan.ui.action_registry")
+
+local M = {}
+
+local function hint(action)
+  if action.key == nil then
+    return action.label
+  end
+  return string.format("[%s] %s", action.key_label or registry.display_key(action.key), action.label)
+end
+
+local function sorted(actions)
+  local result = common.copy_list(actions)
+  table.sort(result, function(left, right)
+    if (left.priority or 0) ~= (right.priority or 0) then
+      return (left.priority or 0) > (right.priority or 0)
+    end
+    return tostring(left.id) < tostring(right.id)
+  end)
+  return result
+end
+
+local function compact_mode(ctx)
+  return registry.context_title(ctx)
+end
+
+local function breadcrumb_text(ctx)
+  if type(ctx.breadcrumb) == "table" then
+    return ctx.breadcrumb.text
+  end
+  if type(ctx.breadcrumb) == "string" then
+    return ctx.breadcrumb
+  end
+end
+
+local function status(ctx, show_breadcrumb)
+  local breadcrumb = show_breadcrumb ~= false and breadcrumb_text(ctx) or nil
+  local contextual_mode = breadcrumb and (ctx.mode == "MOVE" or ctx.mode == "RESIZE")
+  local values = {}
+  if contextual_mode then
+    values[#values + 1] = breadcrumb
+    values[#values + 1] = "hjkl/HJKL"
+  elseif breadcrumb and (ctx.mode == nil or ctx.mode == "NAV") then
+    values[#values + 1] = breadcrumb
+    values[#values + 1] = compact_mode(ctx)
+  else
+    values[#values + 1] = compact_mode(ctx)
+    if breadcrumb then
+      values[#values + 1] = breadcrumb
+    end
+  end
+  if ctx.conflicted then
+    values[#values + 1] = "CONFLICT"
+  else
+    values[#values + 1] = ctx.dirty and "DIRTY" or "SAVED"
+  end
+  if ctx.mode == "MOVE" and ctx.move_feedback and not contextual_mode then
+    values[#values + 1] = ctx.move_feedback
+  end
+  if ctx.mode == "RESIZE" then
+    values[#values + 1] = ctx.snap_enabled and "SNAP ON" or "SNAP OFF"
+    if ctx.shape_snap and not contextual_mode then
+      values[#values + 1] = ctx.shape_snap
+    end
+  elseif ctx.snap_enabled then
+    values[#values + 1] = "SNAP"
+    if ctx.snap_summary and not contextual_mode then
+      values[#values + 1] = ctx.snap_summary
+    end
+  end
+  if not ctx.form then
+    values[#values + 1] = "DETAIL " .. tostring(ctx.detail_level or "middle"):upper()
+  end
+  if ctx.zoom then
+    values[#values + 1] = string.format("×%.2g", ctx.zoom)
+  end
+  return table.concat(values, " · ")
+end
+
+local function is_primary(action)
+  return action.id ~= "help" and action.enabled == true and action.key ~= nil
+end
+
+local function find_help(actions)
+  for _, action in ipairs(actions) do
+    if action.id == "help" then
+      return action
+    end
+  end
+end
+
+local function overflow(actions, shown, ctx)
+  local visible = {}
+  for _, action in ipairs(shown) do
+    visible[action] = true
+  end
+  local result = {}
+  for _, action in ipairs(actions) do
+    if action.id ~= "help" and not visible[action] then
+      result[#result + 1] = action
+    end
+  end
+  local help = find_help(actions)
+  return result, (help and help.count or registry.more_count(ctx)) + #result
+end
+
+local function compose(shown, actions, status_text, ctx)
+  local parts = {}
+  for _, action in ipairs(shown) do
+    parts[#parts + 1] = hint(action)
+  end
+  local hidden, hidden_count = overflow(actions, shown, ctx)
+  local help = find_help(actions)
+  local more_key = help and (help.key_label or registry.display_key(help.key)) or nil
+  local more = more_key and string.format("[%s] More", more_key) or "More"
+  if hidden_count > 0 then
+    more = more .. string.format(" (%d)", hidden_count)
+  end
+  parts[#parts + 1] = more
+  return table.concat(parts, "  ") .. "  ·  " .. status_text, hidden, hidden_count, more
+end
+
+function M.render(ctx, width, opts)
+  ctx = ctx or {}
+  opts = opts or {}
+  local actions = sorted(opts.actions or registry.context_controls(ctx))
+  local status_text = status(ctx)
+  if ctx.details_visible and not ctx.form then
+    local document = common.document(width)
+    local highlights = { { start_col = 0, end_col = -1, hl_group = "RoomPlanWorkspaceMuted" } }
+    local mode = compact_mode(ctx)
+    local mode_at = status_text:find(mode, 1, true)
+    if mode_at then
+      highlights[#highlights + 1] = {
+        start_col = mode_at - 1,
+        end_col = mode_at - 1 + #mode,
+        hl_group = "RoomPlanWorkspaceTitle",
+      }
+    end
+    local breadcrumb = breadcrumb_text(ctx)
+    local breadcrumb_at = breadcrumb and status_text:find(breadcrumb, 1, true) or nil
+    if breadcrumb_at then
+      highlights[#highlights + 1] = {
+        start_col = breadcrumb_at - 1,
+        end_col = breadcrumb_at - 1 + #breadcrumb,
+        hl_group = type(ctx.breadcrumb) == "table" and ctx.breadcrumb.hl_group or "RoomPlanWorkspaceStatus",
+      }
+    end
+    local alert = ctx.conflicted and "CONFLICT" or (ctx.dirty and "DIRTY" or nil)
+    local alert_at = alert and status_text:find(alert, 1, true) or nil
+    if alert_at then
+      highlights[#highlights + 1] = {
+        start_col = alert_at - 1,
+        end_col = alert_at - 1 + #alert,
+        hl_group = ctx.conflicted and "RoomPlanWorkspaceError" or "RoomPlanWorkspaceWarning",
+      }
+    end
+    common.line(document, status_text, { highlights = highlights })
+    document.actions = actions
+    document.shown_actions = {}
+    document.overflow_actions = actions
+    document.overflow_count = #actions
+    document.status = status_text
+    document.breadcrumb = ctx.breadcrumb
+    document.details_visible = true
+    return common.finish(document, opts.height or 1)
+  end
+  local candidates = {}
+  for _, action in ipairs(actions) do
+    if is_primary(action) then
+      candidates[#candidates + 1] = action
+    end
+  end
+
+  local shown = {}
+  for index = 1, math.min(opts.max_actions or 5, #candidates) do
+    shown[index] = candidates[index]
+  end
+  local fitting_status = status(ctx, false)
+  local fitting_line = compose(shown, actions, fitting_status, ctx)
+  while #shown > 0 and common.width(fitting_line) > width do
+    shown[#shown] = nil
+    fitting_line = compose(shown, actions, fitting_status, ctx)
+  end
+  -- Breadcrumbs add context without displacing action hints that already fit.
+  -- The final common.line() call clips lower-priority trailing status on narrow
+  -- canvases while keeping the result to one display-width-bounded line.
+  local line, hidden, hidden_count, more = compose(shown, actions, status_text, ctx)
+
+  local document = common.document(width)
+  local highlights = {}
+  local cursor = 0
+  for _, action in ipairs(shown) do
+    local text = hint(action)
+    highlights[#highlights + 1] = {
+      start_col = cursor,
+      end_col = cursor + #text,
+      hl_group = "RoomPlanWorkspaceStatus",
+    }
+    if action.key ~= nil then
+      local key = "[" .. (action.key_label or registry.display_key(action.key)) .. "]"
+      highlights[#highlights + 1] = {
+        start_col = cursor,
+        end_col = cursor + #key,
+        hl_group = "RoomPlanWorkspaceKey",
+      }
+    end
+    cursor = cursor + #text + 2
+  end
+  highlights[#highlights + 1] = {
+    start_col = cursor,
+    end_col = cursor + #more,
+    hl_group = "RoomPlanWorkspaceTitle",
+  }
+  local more_key_end = more:find("]", 1, true)
+  if more_key_end then
+    highlights[#highlights + 1] = {
+      start_col = cursor,
+      end_col = cursor + more_key_end,
+      hl_group = "RoomPlanWorkspaceKey",
+    }
+  end
+  local status_at = assert(line:find(status_text, 1, true)) - 1
+  highlights[#highlights + 1] = {
+    start_col = status_at,
+    end_col = -1,
+    hl_group = "RoomPlanWorkspaceMuted",
+  }
+  local breadcrumb = breadcrumb_text(ctx)
+  local breadcrumb_at = breadcrumb and line:find(breadcrumb, status_at + 1, true) or nil
+  if breadcrumb_at then
+    highlights[#highlights + 1] = {
+      start_col = breadcrumb_at - 1,
+      end_col = breadcrumb_at - 1 + #breadcrumb,
+      hl_group = type(ctx.breadcrumb) == "table" and ctx.breadcrumb.hl_group or "RoomPlanWorkspaceStatus",
+    }
+  end
+  local alert = ctx.conflicted and "CONFLICT" or (ctx.dirty and "DIRTY" or nil)
+  if alert then
+    local alert_at = line:find(alert, status_at + 1, true)
+    if alert_at then
+      highlights[#highlights + 1] = {
+        start_col = alert_at - 1,
+        end_col = alert_at - 1 + #alert,
+        hl_group = ctx.conflicted and "RoomPlanWorkspaceError" or "RoomPlanWorkspaceWarning",
+      }
+    end
+  end
+  common.line(document, line, { highlights = highlights })
+  document.actions = actions
+  document.shown_actions = shown
+  document.overflow_actions = hidden
+  document.overflow_count = hidden_count
+  document.status = status_text
+  document.breadcrumb = ctx.breadcrumb
+  return common.finish(document, opts.height or 1)
+end
+
+return M
