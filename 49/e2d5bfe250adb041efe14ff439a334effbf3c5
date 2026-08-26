@@ -1,0 +1,14 @@
+lua/plugins/nvim-autopairs/init.lua
+  h_220433a6faf6b8 9-11
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.24",
+  "base_commit_sha": "49e2d5bfe250adb041efe14ff439a334effbf3c5",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
