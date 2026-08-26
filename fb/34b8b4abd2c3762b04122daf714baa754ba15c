@@ -1,0 +1,14 @@
+lua/plugins/blink-pairs/init.lua
+  h_220433a6faf6b8 15-16
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.24",
+  "base_commit_sha": "fb34b8b4abd2c3762b04122daf714baa754ba15c",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
