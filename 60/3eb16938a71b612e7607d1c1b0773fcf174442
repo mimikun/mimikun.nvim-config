@@ -1,0 +1,20 @@
+lua/plugins/nvim-autopairs/README.md
+  h_220433a6faf6b8 1,5,7,16-17,75,173,177,206,226,241
+lua/plugins/nvim-autopairs/events.lua
+  h_220433a6faf6b8 3-4
+lua/plugins/nvim-autopairs/init.lua
+  h_220433a6faf6b8 22,28-31
+lua/plugins/nvim-autopairs/readme.lua
+  h_220433a6faf6b8 1-35
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.24",
+  "base_commit_sha": "603eb16938a71b612e7607d1c1b0773fcf174442",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
