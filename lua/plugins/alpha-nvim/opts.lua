@@ -17,6 +17,8 @@ theta.buttons.val = {
   { type = "padding", val = 1 },
   button("z", "󰝒  Open Telekasten Panel", "<cmd>Telekasten<CR>"),
   { type = "padding", val = 1 },
+  button("T", "󰌵  Open Tips", "<cmd>NeovimTips<CR>"),
+  { type = "padding", val = 1 },
   button("q", "󰅚  Quit", "<cmd>qa<CR>"),
 }
 
