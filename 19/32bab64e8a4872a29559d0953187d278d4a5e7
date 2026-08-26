@@ -1,0 +1,14 @@
+neovim_tips/user_tips.md
+  h_220433a6faf6b8 3-24
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.24",
+  "base_commit_sha": "1932bab64e8a4872a29559d0953187d278d4a5e7",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
