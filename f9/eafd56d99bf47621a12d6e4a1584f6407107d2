@@ -1,0 +1,24 @@
+lua/plugins/markview-nvim/opts/WIKIS/Preview.md
+  h_220433a6faf6b8 20
+lua/plugins/markview-nvim/opts/WIKIS/Renderers.md
+  h_220433a6faf6b8 2,33-36,38-49,51-64,66-81,83-102,104-105
+lua/plugins/markview-nvim/opts/markdown_inline.lua
+  h_220433a6faf6b8 5,8-9,12-13,16-17,20-21,24-25,28-29,32-33,36-37,40-41,44-45,48-49,52-53,56-57,60-61,63-66
+lua/plugins/markview-nvim/opts/preview.lua
+  h_220433a6faf6b8 1,4-5,7-9,12-13,16-17,19-21,23,26-27,29-35,37-39,42-43,45-47,49-51,54-55,57-59,62-63,68-77
+lua/plugins/markview-nvim/opts/typst.lua
+  h_220433a6faf6b8 1,4-5,8-9,11-13,16-17,19-21,24-25,27-29,31-33,36-37,39-41,44-45,47-49,52-53,55-57,59-61,64-65,67-69
+lua/plugins/markview-nvim/opts/yaml.lua
+  h_220433a6faf6b8 1,4-5,8
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.24",
+  "base_commit_sha": "f9eafd56d99bf47621a12d6e4a1584f6407107d2",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
