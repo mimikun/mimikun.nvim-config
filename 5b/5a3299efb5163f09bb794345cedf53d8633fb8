@@ -1,0 +1,14 @@
+lua/plugins/markview-nvim/keys.lua
+  h_220433a6faf6b8 21
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.24",
+  "base_commit_sha": "5b5a3299efb5163f09bb794345cedf53d8633fb8",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
