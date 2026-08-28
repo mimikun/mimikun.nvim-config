@@ -1,0 +1,19 @@
+lua/plugins/nvim-cokeline/opts/init.lua
+  s_a372b297d60d88::t_a207f0dbec0447 1-14,16-21,23-96
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.0",
+  "base_commit_sha": "f4e1183c33721da32f0e1706a89ad89fcb085f60",
+  "prompts": {},
+  "sessions": {
+    "s_a372b297d60d88": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "4c499fba-d785-4cf3-a07e-67ca9decb812",
+        "model": "claude-opus-5"
+      },
+      "human_author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
