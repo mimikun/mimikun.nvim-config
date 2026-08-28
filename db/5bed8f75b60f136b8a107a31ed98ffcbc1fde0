@@ -1,0 +1,66 @@
+lua/plugins/render-markdown-nvim/opts/anti_conceal.lua
+  h_220433a6faf6b8 3
+lua/plugins/render-markdown-nvim/opts/bullet.lua
+  h_220433a6faf6b8 3
+lua/plugins/render-markdown-nvim/opts/callout.lua
+  h_220433a6faf6b8 3
+lua/plugins/render-markdown-nvim/opts/checkbox.lua
+  h_220433a6faf6b8 2-4
+lua/plugins/render-markdown-nvim/opts/code.lua
+  h_220433a6faf6b8 2-4
+lua/plugins/render-markdown-nvim/opts/completions.lua
+  h_220433a6faf6b8 2-4
+lua/plugins/render-markdown-nvim/opts/custom_handlers.lua
+  h_220433a6faf6b8 2-4
+lua/plugins/render-markdown-nvim/opts/dash.lua
+  h_220433a6faf6b8 2-4
+lua/plugins/render-markdown-nvim/opts/document.lua
+  h_220433a6faf6b8 2-4
+lua/plugins/render-markdown-nvim/opts/heading.lua
+  h_220433a6faf6b8 2-4
+lua/plugins/render-markdown-nvim/opts/html.lua
+  h_220433a6faf6b8 2-4
+lua/plugins/render-markdown-nvim/opts/indent.lua
+  h_220433a6faf6b8 2-4
+lua/plugins/render-markdown-nvim/opts/init.lua
+  h_220433a6faf6b8 72,75,78,81,84,87,90,93,96,99,102,105,108,111,114,117,120,123,126,129,132,135,138,141,144,147,150
+lua/plugins/render-markdown-nvim/opts/injections.lua
+  h_220433a6faf6b8 2-4
+lua/plugins/render-markdown-nvim/opts/latex.lua
+  h_220433a6faf6b8 2-4
+lua/plugins/render-markdown-nvim/opts/link.lua
+  h_220433a6faf6b8 2-4
+lua/plugins/render-markdown-nvim/opts/on.lua
+  h_220433a6faf6b8 2-4
+lua/plugins/render-markdown-nvim/opts/overrides.lua
+  h_220433a6faf6b8 2-4
+lua/plugins/render-markdown-nvim/opts/padding.lua
+  h_220433a6faf6b8 2-4
+lua/plugins/render-markdown-nvim/opts/paragraph.lua
+  h_220433a6faf6b8 2-4
+lua/plugins/render-markdown-nvim/opts/patterns.lua
+  h_220433a6faf6b8 2-4
+lua/plugins/render-markdown-nvim/opts/pipe_table.lua
+  h_220433a6faf6b8 2-4
+lua/plugins/render-markdown-nvim/opts/quote.lua
+  h_220433a6faf6b8 2-4
+lua/plugins/render-markdown-nvim/opts/render.lua
+  h_220433a6faf6b8 2-4
+lua/plugins/render-markdown-nvim/opts/sign.lua
+  h_220433a6faf6b8 2-4
+lua/plugins/render-markdown-nvim/opts/win_options.lua
+  h_220433a6faf6b8 2-4
+lua/plugins/render-markdown-nvim/opts/yaml.lua
+  h_220433a6faf6b8 2-4
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.0",
+  "base_commit_sha": "db5bed8f75b60f136b8a107a31ed98ffcbc1fde0",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
