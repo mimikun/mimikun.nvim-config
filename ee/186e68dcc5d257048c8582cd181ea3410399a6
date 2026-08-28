@@ -1,0 +1,22 @@
+lua/plugins/render-markdown-nvim/README.md
+  h_220433a6faf6b8 3,8,21,868,971,1006,1120,1161,1218,1277,1319,1385,1438,1540,1563,1598,1600,1621
+lua/plugins/render-markdown-nvim/cmds.lua
+  h_220433a6faf6b8 3
+lua/plugins/render-markdown-nvim/dependencies.lua
+  h_220433a6faf6b8 3-4
+lua/plugins/render-markdown-nvim/init.lua
+  h_220433a6faf6b8 28-31,33-34
+lua/plugins/render-markdown-nvim/opts.lua
+  h_220433a6faf6b8 1-2
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.0",
+  "base_commit_sha": "ee186e68dcc5d257048c8582cd181ea3410399a6",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
