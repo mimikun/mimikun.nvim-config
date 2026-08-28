@@ -1,0 +1,66 @@
+lua/plugins/render-markdown-nvim/opts/anti_conceal.lua
+  h_220433a6faf6b8 1-153
+lua/plugins/render-markdown-nvim/opts/bullet.lua
+  h_220433a6faf6b8 1-153
+lua/plugins/render-markdown-nvim/opts/callout.lua
+  h_220433a6faf6b8 1-153
+lua/plugins/render-markdown-nvim/opts/checkbox.lua
+  h_220433a6faf6b8 1-153
+lua/plugins/render-markdown-nvim/opts/code.lua
+  h_220433a6faf6b8 1-153
+lua/plugins/render-markdown-nvim/opts/completions.lua
+  h_220433a6faf6b8 1-153
+lua/plugins/render-markdown-nvim/opts/custom_handlers.lua
+  h_220433a6faf6b8 1-153
+lua/plugins/render-markdown-nvim/opts/dash.lua
+  h_220433a6faf6b8 1-153
+lua/plugins/render-markdown-nvim/opts/document.lua
+  h_220433a6faf6b8 1-153
+lua/plugins/render-markdown-nvim/opts/heading.lua
+  h_220433a6faf6b8 1-153
+lua/plugins/render-markdown-nvim/opts/html.lua
+  h_220433a6faf6b8 1-153
+lua/plugins/render-markdown-nvim/opts/indent.lua
+  h_220433a6faf6b8 1-153
+lua/plugins/render-markdown-nvim/opts/injections.lua
+  h_220433a6faf6b8 1-153
+lua/plugins/render-markdown-nvim/opts/inlie_highlight.lua
+  h_220433a6faf6b8 1-153
+lua/plugins/render-markdown-nvim/opts/latex.lua
+  h_220433a6faf6b8 1-153
+lua/plugins/render-markdown-nvim/opts/link.lua
+  h_220433a6faf6b8 1-153
+lua/plugins/render-markdown-nvim/opts/on.lua
+  h_220433a6faf6b8 1-153
+lua/plugins/render-markdown-nvim/opts/overrides.lua
+  h_220433a6faf6b8 1-153
+lua/plugins/render-markdown-nvim/opts/padding.lua
+  h_220433a6faf6b8 1-153
+lua/plugins/render-markdown-nvim/opts/paragraph.lua
+  h_220433a6faf6b8 1-153
+lua/plugins/render-markdown-nvim/opts/patterns.lua
+  h_220433a6faf6b8 1-153
+lua/plugins/render-markdown-nvim/opts/pipe_table.lua
+  h_220433a6faf6b8 1-153
+lua/plugins/render-markdown-nvim/opts/quote.lua
+  h_220433a6faf6b8 1-153
+lua/plugins/render-markdown-nvim/opts/render.lua
+  h_220433a6faf6b8 1-153
+lua/plugins/render-markdown-nvim/opts/sign.lua
+  h_220433a6faf6b8 1-153
+lua/plugins/render-markdown-nvim/opts/win_options.lua
+  h_220433a6faf6b8 1-153
+lua/plugins/render-markdown-nvim/opts/yaml.lua
+  h_220433a6faf6b8 1-153
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.0",
+  "base_commit_sha": "4bc16aa8535d54699c08d6828c06d3714bb724be",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
