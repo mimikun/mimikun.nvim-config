@@ -1,0 +1,261 @@
+---@alias WindowKind
+---| "replace" Like :enew
+---| "tab" Open in a new tab
+---| "split" Open in a split
+---| "split_above" Like :top split
+---| "split_above_all" Like :top split
+---| "split_below" Like :below split
+---| "split_below_all" Like :below split
+---| "vsplit" Open in a vertical split
+---| "floating" Open in a floating window
+---| "floating_console" Open in a floating window across the bottom of the screen
+---| "auto" vsplit if window would have 80 cols, otherwise split
+
+---@class NeogitCommitBufferConfig Commit buffer options
+---@field kind WindowKind The type of window that should be opened
+---@field verify_commit boolean Show commit signature information in the buffer
+
+---@class NeogitConfigPopup Popup window options
+---@field kind WindowKind The type of window that should be opened
+---@field show_title boolean Show a title for the popup
+
+---@class NeogitConfigFloating
+---@field relative? string
+---@field width? number
+---@field height? number
+---@field col? number
+---@field row? number
+---@field style? string
+---@field border? string
+
+---@alias StagedDiffSplitKind
+---| "split" Open in a split
+---| "vsplit" Open in a vertical split
+---| "split_above" Like :top split
+---| "auto" "vsplit" if window would have 80 cols, otherwise "split"
+
+---@class NeogitCommitEditorConfigPopup Popup window options
+---@field kind WindowKind The type of window that should be opened
+---@field show_staged_diff? boolean Display staged changes in a buffer when committing
+---@field staged_diff_split_kind? StagedDiffSplitKind Whether to show staged changes in a vertical or horizontal split
+---@field spell_check? boolean Enable/Disable spell checking
+
+---@alias NeogitConfigSignsIcon { [1]: string, [2]: string }
+
+---@class NeogitConfigSigns
+---@field hunk NeogitConfigSignsIcon The icons to use for open and closed hunks
+---@field item NeogitConfigSignsIcon The icons to use for open and closed items
+---@field section NeogitConfigSignsIcon The icons to use for open and closed sections
+
+---@class NeogitConfigSection A section to show in the Neogit Status buffer, e.g. Staged/Unstaged/Untracked
+---@field folded boolean Whether or not this section should be open or closed by default
+---@field hidden boolean Whether or not this section should be shown
+
+---@class NeogitConfigSections
+---@field untracked NeogitConfigSection|nil
+---@field unstaged NeogitConfigSection|nil
+---@field staged NeogitConfigSection|nil
+---@field stashes NeogitConfigSection|nil
+---@field unpulled_upstream NeogitConfigSection|nil
+---@field unmerged_upstream NeogitConfigSection|nil
+---@field unpulled_pushRemote NeogitConfigSection|nil
+---@field unmerged_pushRemote NeogitConfigSection|nil
+---@field recent NeogitConfigSection|nil
+---@field rebase NeogitConfigSection|nil
+---@field sequencer NeogitConfigSection|nil
+---@field bisect NeogitConfigSection|nil
+
+---@class HighlightOptions
+---@field italic?     boolean
+---@field bold?       boolean
+---@field underline?  boolean
+---@field bg0?        string  Darkest background color
+---@field bg1?        string  Second darkest background color
+---@field bg2?        string  Second lightest background color
+---@field bg3?        string  Lightest background color
+---@field grey?       string  middle grey shade for foreground
+---@field white?      string  Foreground white (main text)
+---@field red?        string  Foreground red
+---@field bg_red?     string  Background red
+---@field line_red?   string  Cursor line highlight for red regions, like deleted hunks
+---@field orange?     string  Foreground orange
+---@field bg_orange?  string  background orange
+---@field yellow?     string  Foreground yellow
+---@field bg_yellow?  string  background yellow
+---@field green?      string  Foreground green
+---@field bg_green?   string  Background green
+---@field line_green? string  Cursor line highlight for green regions, like added hunks
+---@field cyan?       string  Foreground cyan
+---@field bg_cyan?    string  Background cyan
+---@field blue?       string  Foreground blue
+---@field bg_blue?    string  Background blue
+---@field purple?     string  Foreground purple
+---@field bg_purple?  string  Background purple
+---@field md_purple?  string  Background _medium_ purple. Lighter than bg_purple. Used for hunk headers.
+
+---@class NeogitFilewatcherConfig
+---@field enabled boolean
+---@field filewatcher NeogitFilewatcherConfig|nil
+
+---@alias NeogitConfigMappingsFinder
+---| "Select"
+---| "Close"
+---| "Next"
+---| "Previous"
+---| "CopySelection"
+---| "MultiselectToggleNext"
+---| "MultiselectTogglePrevious"
+---| "InsertCompletion"
+---| "NOP"
+---| "ScrollWheelDown"
+---| "ScrollWheelUp"
+---| "MouseClick"
+---| false
+
+---@alias NeogitConfigMappingsStatus
+---| "Close"
+---| "MoveDown"
+---| "MoveUp"
+---| "OpenTree"
+---| "OpenFold"
+---| "Command"
+---| "Depth1"
+---| "Depth2"
+---| "Depth3"
+---| "Depth4"
+---| "Toggle"
+---| "Discard"
+---| "Stage"
+---| "StageUnstaged"
+---| "StageAll"
+---| "Unstage"
+---| "UnstageStaged"
+---| "Untrack"
+---| "RefreshBuffer"
+---| "GoToFile"
+---| "GoToParentRepo",
+---| "PeekFile"
+---| "VSplitOpen"
+---| "SplitOpen"
+---| "TabOpen"
+---| "GoToPreviousHunkHeader"
+---| "GoToNextHunkHeader"
+---| "CommandHistory"
+---| "ShowRefs"
+---| "InitRepo"
+---| "YankSelected"
+---| "OpenOrScrollUp"
+---| "OpenOrScrollDown"
+---| "PeekUp"
+---| "PeekDown"
+---| "NextSection"
+---| "PreviousSection"
+---| false
+---| fun()
+
+---@alias NeogitConfigMappingsPopup
+---| "HelpPopup"
+---| "DiffPopup"
+---| "PullPopup"
+---| "RebasePopup"
+---| "MergePopup"
+---| "PushPopup"
+---| "CommitPopup"
+---| "LogPopup"
+---| "MarginPopup"
+---| "RevertPopup"
+---| "StashPopup"
+---| "IgnorePopup"
+---| "CherryPickPopup"
+---| "BisectPopup"
+---| "BranchPopup"
+---| "FetchPopup"
+---| "ResetPopup"
+---| "RemotePopup"
+---| "TagPopup"
+---| "WorktreePopup"
+---| false
+
+---@alias NeogitConfigMappingsRebaseEditor
+---| "Pick"
+---| "Reword"
+---| "Edit"
+---| "Squash"
+---| "Fixup"
+---| "Execute"
+---| "Drop"
+---| "Break"
+---| "MoveUp"
+---| "MoveDown"
+---| "Close"
+---| "OpenCommit"
+---| "Submit"
+---| "Abort"
+---| "OpenOrScrollUp"
+---| "OpenOrScrollDown"
+---| false
+---| fun()
+
+---@alias NeogitConfigMappingsCommitEditor
+---| "Close"
+---| "Submit"
+---| "Abort"
+---| "PrevMessage"
+---| "ResetMessage"
+---| "NextMessage"
+---| false
+---| fun()
+
+---@alias NeogitConfigMappingsCommitEditor_I
+---| "Submit"
+---| "Abort"
+---| false
+---| fun()
+
+---@alias NeogitConfigMappingsRebaseEditor_I
+---| "Submit"
+---| "Abort"
+---| false
+---| fun()
+---
+---@alias NeogitConfigMappingsRefsView
+---| "DeleteBranch"
+---| false
+---| fun()
+
+---@alias NeogitGraphStyle
+---| "ascii"
+---| "unicode"
+---| "kitty"
+---
+---@alias NeogitCommitOrder
+---| ""
+---| "topo"
+---| "author-date"
+---| "date"
+
+---@alias NeogitHook
+---| "PreBranchCheckout"
+
+---@class NeogitConfigStatusOptions
+---@field recent_commit_count? integer The number of recent commits to display
+---@field mode_padding? integer The amount of padding to add to the right of the mode column
+---@field HEAD_padding? integer The amount of padding to add to the right of the HEAD label
+---@field HEAD_folded? boolean Whether or not this section should be open or closed by default
+---@field mode_text? { [string]: string } The text to display for each mode
+---@field show_head_commit_hash? boolean Show the commit hash for HEADs in the status buffer
+
+---@class NeogitConfigMappings Consult the config file or documentation for values
+---@field finder? { [string]: NeogitConfigMappingsFinder } A dictionary that uses finder commands to set multiple keybinds
+---@field status? { [string]: NeogitConfigMappingsStatus } A dictionary that uses status commands to set a single keybind
+---@field popup? { [string]: NeogitConfigMappingsPopup } A dictionary that uses popup commands to set a single keybind
+---@field rebase_editor? { [string]: NeogitConfigMappingsRebaseEditor } A dictionary that uses Rebase editor commands to set a single keybind
+---@field rebase_editor_I? { [string]: NeogitConfigMappingsRebaseEditor_I } A dictionary that uses Rebase editor commands to set a single keybind
+---@field commit_editor? { [string]: NeogitConfigMappingsCommitEditor } A dictionary that uses Commit editor commands to set a single keybind
+---@field commit_editor_I? { [string]: NeogitConfigMappingsCommitEditor_I } A dictionary that uses Commit editor commands to set a single keybind
+---@field refs_view? { [string]: NeogitConfigMappingsRefsView } A dictionary that uses Refs view editor commands to set a single keybind
+
+---@class NeogitConfigGitService
+---@field pull_request? string
+---@field commit? string
+---@field tree? string
