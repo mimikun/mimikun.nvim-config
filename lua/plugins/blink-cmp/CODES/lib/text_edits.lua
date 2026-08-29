@@ -1,0 +1,436 @@
+local lib = require("blink.lib")
+local nvim = require("blink.lib.nvim")
+local config = require("blink.cmp.config")
+local utils = require("blink.cmp.lib.utils")
+local context = require("blink.cmp.completion.trigger.context")
+
+local text_edits = {}
+
+--- Applies one or more text edits to the current buffer, assuming utf-8 encoding
+--- @param text_edit lsp.TextEdit The main text edit (at the cursor). Can be dot repeated.
+--- @param additional_text_edits? lsp.TextEdit[] Additional text edits that can e.g. add import statements.
+function text_edits.apply(text_edit, additional_text_edits)
+  additional_text_edits = additional_text_edits or {}
+
+  local mode = context.get_mode()
+  assert(
+    lib.list.contains({ "default", "cmdline", "cmdwin", "term" }, mode),
+    "Unsupported mode for text edits: " .. mode
+  )
+
+  if mode == "default" or mode == "cmdwin" then
+    -- writing to dot repeat may fail in command-line window
+    if mode == "default" and config.completion.accept.dot_repeat then
+      text_edits.write_to_dot_repeat(text_edit)
+    end
+
+    local all_edits = lib.list.copy(additional_text_edits)
+    table.insert(all_edits, text_edit)
+
+    local cur_bufnr = nvim.get_current_buf()
+    vim.lsp.util.apply_text_edits(all_edits, cur_bufnr, "utf-8")
+  end
+
+  if mode == "cmdline" then
+    assert(#additional_text_edits == 0, "Cmdline mode only supports one text edit. Contributions welcome!")
+
+    local line = context.get_line()
+    local edited_line = line:sub(1, text_edit.range.start.character)
+      .. text_edit.newText
+      .. line:sub(text_edit.range["end"].character + 1)
+    -- FIXME: for some reason, we have to set the cursor here, instead of later,
+    -- because this will override the cursor position set later
+    vim.fn.setcmdline(edited_line, text_edit.range.start.character + #text_edit.newText + 1)
+  end
+
+  -- TODO: apply dot repeat
+  if mode == "term" then
+    assert(#additional_text_edits == 0, "Terminal mode only supports one text edit. Contributions welcome!")
+
+    if vim.bo.channel and vim.bo.channel ~= 0 then
+      local n_replaced = utils.get_vim_pos_cursor(0).col - text_edit.range.start.character
+      local backspace_keycode = "\8"
+
+      vim.fn.chansend(vim.bo.channel, backspace_keycode:rep(n_replaced) .. text_edit.newText)
+    end
+  end
+end
+
+------- Undo -------
+
+--- Gets the reverse of the text edit, must be called before applying
+--- @param text_edit lsp.TextEdit
+--- @return lsp.TextEdit
+function text_edits.get_undo_text_edit(text_edit)
+  return {
+    range = text_edits.get_undo_range(text_edit),
+    newText = text_edits.get_text_to_replace(text_edit),
+  }
+end
+
+--- Gets the range for undoing an applied text edit
+--- @param text_edit lsp.TextEdit
+--- @return lsp.Range
+function text_edits.get_undo_range(text_edit)
+  text_edit = vim.deepcopy(text_edit)
+  local lines = vim.split(text_edit.newText, "\n")
+  local last_line_len = lines[#lines] and #lines[#lines] or 0
+
+  local range = text_edit.range
+  range["end"].line = range.start.line + #lines - 1
+  range["end"].character = #lines > 1 and last_line_len or range.start.character + last_line_len
+
+  return range
+end
+
+--- Gets the text the text edit will replace
+--- @param text_edit lsp.TextEdit
+--- @return string
+function text_edits.get_text_to_replace(text_edit)
+  local lines = {}
+  for line = text_edit.range.start.line, text_edit.range["end"].line do
+    local line_text = context.get_line()
+    local is_start_line = line == text_edit.range.start.line
+    local is_end_line = line == text_edit.range["end"].line
+
+    if is_start_line and is_end_line then
+      table.insert(lines, line_text:sub(text_edit.range.start.character + 1, text_edit.range["end"].character))
+    elseif is_start_line then
+      table.insert(lines, line_text:sub(text_edit.range.start.character + 1))
+    elseif is_end_line then
+      table.insert(lines, line_text:sub(1, text_edit.range["end"].character))
+    else
+      table.insert(lines, line_text)
+    end
+  end
+  return table.concat(lines, "\n")
+end
+
+------- Get -------
+
+--- Grabbed from vim.lsp.utils. Converts an offset_encoding to byte offset
+--- @param position lsp.Position
+--- @param offset_encoding? 'utf-8'|'utf-16'|'utf-32'
+--- @return integer
+local function get_line_byte_from_position(position, offset_encoding)
+  local bufnr = nvim.get_current_buf()
+  local col = position.character
+
+  -- When on the first character, we can ignore the difference between byte and character
+  if col == 0 then
+    return 0
+  end
+
+  local line = nvim.buf_get_lines(bufnr, position.line, position.line + 1, false)[1] or ""
+  col = vim.str_byteindex(line, offset_encoding or "utf-16", col, false) or 0
+
+  return math.min(col, #line)
+end
+
+--- Gets the text edit from an item, handling insert/replace ranges and converts
+--- offset encodings (utf-16 | utf-32) to utf-8
+--- @param item blink.cmp.CompletionItem
+--- @return lsp.TextEdit
+function text_edits.get_from_item(item)
+  -- Guess the text edit if the item doesn't define it
+  if not item.textEdit then
+    return text_edits.guess(item)
+  end
+
+  local item_text_edit = vim.deepcopy(item.textEdit)
+
+  -- FIXME: temporarily convert insertReplaceEdit to regular textEdit
+  local range ---@type lsp.Range
+  if item_text_edit.range == nil then
+    --- @cast item_text_edit lsp.InsertReplaceEdit
+    if config.completion.keyword.range == "full" and item_text_edit.replace ~= nil then
+      range = item_text_edit.replace
+    else
+      range = item_text_edit.insert or item_text_edit.replace
+    end
+  end
+
+  ---@type lsp.TextEdit
+  local text_edit = {
+    newText = item_text_edit.newText,
+    range = range or item_text_edit.range,
+  }
+  assert(text_edit.range ~= nil, "Invalid text edit: missing range")
+
+  text_edit = text_edits.compensate_for_cursor_movement(text_edit, item.pos, context.get_pos())
+
+  -- convert the offset encoding to utf-8
+  -- TODO: we have to do this last because it applies a max on the position based on the length of the line
+  -- so it would break the offset code when removing characters at the end of the line
+  local offset_encoding = text_edits.offset_encoding_from_item(item)
+  text_edit = text_edits.to_utf_8(text_edit, offset_encoding)
+
+  text_edit.range = text_edits.clamp_range_to_bounds(text_edit.range)
+
+  return text_edit
+end
+
+--- Adjust the position of the text edit to be the current cursor position
+--- since the data might be outdated. We compare the cursor column position
+--- from when the items were fetched versus the current.
+--- HACK: is there a better way?
+--- @param text_edit lsp.TextEdit
+--- @param old_pos vim.Pos Position when the text edit was created
+--- @param new_pos vim.Pos New position
+--- @return lsp.TextEdit
+function text_edits.compensate_for_cursor_movement(text_edit, old_pos, new_pos)
+  text_edit = vim.deepcopy(text_edit)
+
+  local offset = new_pos.col - old_pos.col
+  text_edit.range["end"].character = text_edit.range["end"].character + offset
+
+  return text_edit
+end
+
+--- @param item blink.cmp.CompletionItem
+--- @return "utf-8"|"utf-16"|"utf-32"
+function text_edits.offset_encoding_from_item(item)
+  if not item.client_id then
+    return "utf-8"
+  end
+
+  local client = vim.lsp.get_client_by_id(item.client_id)
+  return client ~= nil and client.offset_encoding or "utf-8"
+end
+
+--- @param text_edit lsp.TextEdit
+--- @param offset_encoding "utf-8"|"utf-16"|"utf-32"
+--- @return lsp.TextEdit
+function text_edits.to_utf_8(text_edit, offset_encoding)
+  if offset_encoding == "utf-8" then
+    return text_edit
+  end
+
+  text_edit = vim.deepcopy(text_edit)
+  text_edit.range.start.character = get_line_byte_from_position(text_edit.range.start, offset_encoding)
+  text_edit.range["end"].character = get_line_byte_from_position(text_edit.range["end"], offset_encoding)
+  return text_edit
+end
+
+--- Uses the keyword_regex to guess the text edit ranges
+--- TODO: Doesn't work when the item contains characters not included in the context regex
+--- @param item blink.cmp.CompletionItem
+--- @return lsp.TextEdit
+function text_edits.guess(item)
+  local word = (lib.is_not_nil(item.insertText) and item.insertText)
+    or (lib.is_not_nil(item.label) and item.label)
+    or ""
+
+  local pos = context.get_pos()
+  local start_col, end_col =
+    require("blink.cmp.fuzzy").guess_edit_range(item, context.get_line(), pos.col, config.completion.keyword.range)
+
+  -- convert to 0-index
+  return {
+    range = {
+      start = { line = pos.row, character = start_col },
+      ["end"] = { line = pos.row, character = end_col },
+    },
+    newText = word,
+  }
+end
+
+--- Clamps the range to the bounds of their respective lines
+--- @param range lsp.Range
+--- @return lsp.Range
+function text_edits.clamp_range_to_bounds(range)
+  range = vim.deepcopy(range)
+
+  local line_count = nvim.buf_line_count(0)
+
+  range.start.line = math.min(math.max(range.start.line, 0), line_count - 1)
+  local start_line = context.get_line(range.start.line)
+  range.start.character = math.min(math.max(range.start.character, 0), #start_line)
+
+  range["end"].line = math.min(math.max(range["end"].line, 0), line_count - 1)
+  local end_line = context.get_line(range["end"].line)
+  range["end"].character = math.min(
+    math.max(range["end"].character, range.start.line == range["end"].line and range.start.character or 0),
+    #end_line
+  )
+
+  return range
+end
+
+--- The TextEdit.range.start/end indicate the range of text that will be replaced.
+--- This means that the end position will be the range _before_ applying the edit.
+--- This function gets the end position of the range _after_ applying the edit.
+--- This may be used for placing the cursor after applying the edit.
+--- Returns 0-indexed line and column
+---
+--- TODO: write tests cases, there are many uncommon cases it doesn't handle
+---
+--- @param text_edit lsp.TextEdit
+--- @param additional_text_edits lsp.TextEdit[]
+--- @return vim.Pos
+function text_edits.get_apply_end_position(text_edit, additional_text_edits)
+  -- Calculate the end position of the range, ignoring the additional text edits
+  local lines = vim.split(text_edit.newText, "\n")
+  local last_line_len = #lines[#lines]
+  local line_count = #lines
+
+  local end_line = text_edit.range["end"].line + line_count - 1
+
+  local end_col = last_line_len
+  if line_count == 1 then
+    end_col = end_col + text_edit.range.start.character
+  end
+
+  -- Adjust the end position based on the additional text edits
+  local text_edits_before = vim.tbl_filter(function(edit)
+    return edit.range.start.line < text_edit.range.start.line
+      or edit.range.start.line == text_edit.range.start.line
+        and edit.range.start.character <= text_edit.range.start.character
+  end, additional_text_edits)
+  -- Sort first to last
+  table.sort(text_edits_before, function(a, b)
+    if a.range.start.line ~= b.range.start.line then
+      return a.range.start.line < b.range.start.line
+    end
+    return a.range.start.character < b.range.start.character
+  end)
+
+  local line_offset = 0
+  local col_offset = 0
+  for _, edit in ipairs(text_edits_before) do
+    local lines_replaced = edit.range["end"].line - edit.range.start.line
+    local edit_lines = vim.split(edit.newText, "\n")
+    local lines_added = #edit_lines - 1
+    line_offset = line_offset - lines_replaced + lines_added
+
+    -- Same line as the current text edit, offset the column
+    if edit.range.start.line == text_edit.range.start.line then
+      if #edit_lines == 1 then
+        local chars_replaced = edit.range["end"].character - edit.range.start.character
+        local chars_added = #edit_lines[#edit_lines]
+        col_offset = col_offset + chars_added - chars_replaced
+      else
+        -- TODO: if it doesn't replace the entire line, we need to offset by the remaining characters
+        col_offset = col_offset + #edit_lines[#edit_lines]
+      end
+    end
+
+    -- TODO: what if the end line of this edit is the same as the start line of our current edit?
+  end
+  end_line = end_line + line_offset
+  end_col = end_col + col_offset
+
+  return utils.get_vim_pos(0, end_line, end_col)
+end
+
+----- Dot repeat -----
+
+--- Other plugins may use feedkeys to switch modes, with `i` set. This would
+--- cause neovim to run those feedkeys first, potentially causing our <C-x><C-z> to run
+--- in the wrong mode, e.g. if the plugin runs `<Esc>v` (luasnip)
+---
+--- In normal and visual mode, these keys cause neovim to go to the background
+--- so we create our own mapping that only runs `<C-x><C-z>` if we're in insert mode
+local dot_repeat_hack_name = "<Plug>BlinkCmpDotRepeatHack"
+local opts = {
+  callback = function()
+    if nvim.get_mode().mode:match("i") then
+      return "<C-x><C-z>"
+    end
+    return ""
+  end,
+  silent = true,
+  replace_keycodes = true,
+  expr = true,
+  noremap = true,
+}
+nvim.set_keymap("i", dot_repeat_hack_name, "", opts)
+nvim.set_keymap("n", dot_repeat_hack_name, "", opts)
+nvim.set_keymap("s", dot_repeat_hack_name, "", opts)
+nvim.set_keymap("v", dot_repeat_hack_name, "", opts)
+nvim.set_keymap("c", dot_repeat_hack_name, "", opts)
+nvim.set_keymap("t", dot_repeat_hack_name, "", opts)
+
+---@type integer?
+local dot_repeat_buffer = nil
+local function get_dot_repeat_buffer()
+  if dot_repeat_buffer == nil or not nvim.buf_is_valid(dot_repeat_buffer) then
+    dot_repeat_buffer = nvim.create_buf(false, true)
+    vim.bo[dot_repeat_buffer].filetype = "blink-cmp-dot-repeat"
+    vim.bo[dot_repeat_buffer].buftype = "nofile"
+  end
+  return dot_repeat_buffer
+end
+
+--- Write to the `.` register so that dot-repeat works. This works by creating a
+--- temporary floating window and buffer, using `vim.fn.complete` to delete and
+--- add text, and then closing the window.
+---
+--- See the tracking issue for directly writing to `.` register:
+--- https://github.com/neovim/neovim/issues/19806#issuecomment-2365146298
+--- @param text_edit lsp.TextEdit
+function text_edits.write_to_dot_repeat(text_edit)
+  local chars_to_delete = #table.concat(
+    nvim.buf_get_text(
+      0,
+      text_edit.range.start.line,
+      text_edit.range.start.character,
+      text_edit.range["end"].line,
+      text_edit.range["end"].character,
+      {}
+    ),
+    "\n"
+  )
+  local chars_to_insert = text_edit.newText
+
+  utils.defer_neovide_redraw(function()
+    utils.with_no_autocmds(function()
+      local curr_win = nvim.get_current_win()
+
+      -- create temporary floating window and buffer for writing
+      local buf = get_dot_repeat_buffer()
+      local win = nvim.open_win(buf, true, {
+        relative = "win",
+        win = nvim.get_current_win(),
+        width = 1,
+        height = 1,
+        row = 0,
+        col = 0,
+        noautocmd = true,
+      })
+      nvim.buf_set_text(buf, 0, 0, 0, 0, { "_" .. string.rep("a", chars_to_delete) })
+      nvim.win_set_cursor(0, { 1, chars_to_delete + 1 })
+
+      -- emulate builtin completion (dot repeat)
+      local saved_completeopt = vim.opt.completeopt
+      local saved_shortmess = vim.o.shortmess
+      vim.opt.completeopt = ""
+      if not saved_shortmess:match("c") then
+        vim.o.shortmess = vim.o.shortmess .. "c"
+      end
+      vim.fn.complete(1, { "_" .. chars_to_insert })
+      vim.opt.completeopt = saved_completeopt
+      vim.o.shortmess = saved_shortmess
+
+      -- close window and focus original window
+      nvim.win_close(win, true)
+      nvim.set_current_win(curr_win)
+
+      -- exit completion mode
+      nvim.feedkeys(vim.keycode("<Plug>BlinkCmpDotRepeatHack"), "in", false)
+    end)
+  end)
+end
+
+--- Moves the cursor while preserving dot repeat
+--- @param amount integer Number of characters to move the cursor by, can be negative to move left
+function text_edits.move_cursor_in_dot_repeat(amount)
+  if amount == 0 then
+    return
+  end
+
+  local keys = string.rep("<C-g>U" .. (amount > 0 and "<Right>" or "<Left>"), math.abs(amount))
+  nvim.feedkeys(vim.keycode(keys), "in", false)
+end
+
+return text_edits
