@@ -1,0 +1,55 @@
+local config = require("codecompanion.config")
+local log = require("codecompanion.utils.log")
+local ui_utils = require("codecompanion.utils.ui")
+
+---@class CodeCompanion.ActionPalette.Provider.Default: CodeCompanion.SlashCommand.Provider
+---@field context table
+local Provider = {}
+
+---@params CodeCompanion.ActionPalette.ProvidersArgs
+function Provider.new(args)
+  log:trace("Default action palette provider triggered")
+
+  return setmetatable(args, { __index = Provider })
+end
+
+---The default picker
+---@param items table The items to display in the picker
+---@param opts? table The options for the picker
+---@return nil
+function Provider:picker(items, opts)
+  opts = opts or {}
+  opts.columns = opts.columns or { "name", "interaction", "description" }
+  opts.prompt = opts.prompt or config.display.action_palette.opts.title or "CodeCompanion actions"
+
+  ui_utils.action_palette_selector(items, {
+    prompt = opts.prompt,
+    width = config.display.action_palette.width,
+    height = config.display.action_palette.height,
+    format = function(item)
+      local formatted_item = {}
+      for _, column in ipairs(opts.columns) do
+        if item[column] ~= nil then
+          if type(item[column]) == "function" then
+            table.insert(formatted_item, item[column](self.context))
+          else
+            table.insert(formatted_item, item[column] or "")
+          end
+        end
+      end
+      return formatted_item
+    end,
+    callback = function(item)
+      return self:select(item)
+    end,
+  })
+end
+
+---The action to take when an item is selected
+---@param item table The selected item
+---@return nil
+function Provider:select(item)
+  return require("codecompanion.providers.action_palette.shared").select(self, item)
+end
+
+return Provider

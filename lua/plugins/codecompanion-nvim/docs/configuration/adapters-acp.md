@@ -1,0 +1,490 @@
+---
+description: "Configure Agent Client Protocol (ACP) adapters in CodeCompanion to connect with CLI agents like Claude Code, Codex, Gemini CLI, and OpenCode from Neovim."
+---
+
+# Configuring ACP Adapters
+
+This section contains configuration which is specific to Agent Client Protocol (ACP) adapters only. There is a lot of shared functionality between ACP and [http](/configuration/adapters-http) adapters. Therefore it's recommended you read the two pages together.
+
+## Customising an Adapter
+
+There are two ways to customise a preset adapter, and you'll see both throughout this page:
+
+- **Function** - Use this for full or computed setups. Custom `commands`, `defaults`, or values resolved at call time
+- **`extend` table** - Use this for static overrides like credentials or setting a default value
+
+::: code-group
+
+```lua [Function]
+require("codecompanion").setup({
+  adapters = {
+    acp = {
+      gemini_cli = function()
+        return require("codecompanion.adapters").extend("gemini_cli", {
+          commands = {
+            default = { "some-other-gemini", "--experimental-acp" },
+          },
+          defaults = {
+            auth_method = "gemini-api-key",
+            timeout = 20000, -- 20 seconds
+          },
+          env = { GEMINI_API_KEY = "cmd:op read op://personal/Gemini/credential --no-newline" },
+        })
+      end,
+    },
+  },
+})
+```
+
+```lua [Extend Table]
+require("codecompanion").setup({
+  adapters = {
+    acp = {
+      extend = {
+        gemini_cli = {
+          defaults = { auth_method = "gemini-api-key" },
+          env = { GEMINI_API_KEY = "cmd:op read op://personal/Gemini/credential --no-newline" },
+        },
+      },
+    },
+  },
+})
+```
+
+:::
+
+> [!IMPORTANT]
+> The `extend` key is the adapter's name in the [config](https://github.com/olimorris/codecompanion.nvim/blob/main/lua/codecompanion/config.lua), not the resolved adapter name.
+
+## Setting a Default Adapter
+
+You can select an ACP adapter to be the default for all chat interactions:
+
+```lua
+require("codecompanion").setup({
+  interactions = {
+    chat = {
+      adapter = "gemini_cli",
+    },
+  },
+}),
+```
+
+## Setting Default Session Config Options
+
+The ACP specification has recently added support for [session config options](https://agentclientprotocol.com/protocol/session-config-options). These are lists of configuration options that agents can share with CodeCompanion at the start of a session such as models, reasoning levels, and more.
+
+### Models
+
+There are numerous was you can set a model in your config and it differs significantly from other session config options because of how CodeCompanion integrates adapters and models into the chat interaction.
+
+::: code-group
+
+```lua [Interactions] {4-7}
+require("codecompanion").setup({
+  interactions = {
+    chat = {
+      adapter = {
+        name = "codex",
+        model = "gpt-5.4",
+      },
+    },
+  },
+}),
+```
+
+```lua [Adapter String] {6-10}
+require("codecompanion").setup({
+  adapters = {
+    acp = {
+      codex = function()
+        return require("codecompanion.adapters").extend("codex", {
+          defaults = {
+            session_config_options = {
+              model = "gpt-5.4"
+            },
+          },
+        })
+      end,
+    }
+  },
+}),
+```
+
+```lua [Adapter Function] {6-14}
+require("codecompanion").setup({
+  adapters = {
+    acp = {
+      codex = function()
+        return require("codecompanion.adapters").extend("codex", {
+          defaults = {
+            session_config_options = {
+              ---@param self CodeCompanion.ACPAdapter
+              ---@return string
+              model = function(self)
+                return "gpt-5.4"
+              end,
+            },
+          },
+        })
+      end,
+    }
+  },
+}),
+```
+
+:::
+
+### Others
+
+To set any other session config option, you can pass them in the `defaults.session_config_options` table:
+
+```lua {6-11}
+require("codecompanion").setup({
+  adapters = {
+    acp = {
+      codex = function()
+        return require("codecompanion.adapters").extend("codex", {
+          defaults = {
+            session_config_options = {
+              mode = "Full Access",
+              thought_level = "Xhigh",
+            },
+          },
+        })
+      end,
+    }
+  },
+}),
+```
+
+To find out what the available session config options are for a specific adapter you can open the [debug window](/usage/chat-buffer/#debug-window) in the chat buffer.
+
+## Configuring MCP Servers
+
+Some ACP adapters [support](https://agentclientprotocol.com/protocol/session-setup#mcp-servers) connecting to Model Client Protocol (MCP) servers. If you've defined [MCP servers in your configuration](/configuration/mcp), then CodeCompanion can automatically connect to those servers when initializing the adapter.
+
+To enable this, set `inherit_from_config` in the ACP adapter's `defaults.mcpServers` field:
+
+```lua
+require("codecompanion").setup({
+  adapters = {
+    acp = {
+      claude_code = function()
+        return require("codecompanion.adapters").extend("claude_code", {
+          defaults = {
+            mcpServers = "inherit_from_config",
+          },
+        })
+      end,
+    },
+  },
+})
+```
+
+> [!NOTE]
+> CodeCompanion does not display the MCP servers in the chat buffer's context when used with an ACP adapter.
+
+Alternatively, you can configure MCP servers manually. In the below example, we're configuring Claude Code to connect to the [sequential-thinking](https://github.com/modelcontextprotocol/servers/tree/main/src/sequentialthinking) server via stdio:
+
+```lua
+require("codecompanion").setup({
+  adapters = {
+    acp = {
+      claude_code = function()
+        return require("codecompanion.adapters").extend("claude_code", {
+          defaults = {
+            mcpServers = {
+              {
+                name = "sequential-thinking",
+                command = "npx",
+                args = { "-y", "@modelcontextprotocol/server-sequential-thinking" },
+                env = {},
+              },
+            },
+          },
+        })
+      end,
+    },
+  },
+})
+```
+
+You can also disable this by setting `mcp.opts.acp_enabled = false` in your configuration.
+
+## Hiding Preset Adapters
+
+By default, the plugin shows all available adapters, including the presets. If you prefer to only display the adapters defined in your user configuration, you can set the `show_presets` option to `false`:
+
+```lua
+require("codecompanion").setup({
+  adapters = {
+    acp = {
+      opts = {
+        show_presets = false,
+      },
+    },
+  },
+})
+```
+
+## Setup: Auggie CLI from Augment Code
+
+To use [Auggie CLI](https://docs.augmentcode.com/cli/overview) within CodeCompanion, you simply need to follow their [Getting Started](https://docs.augmentcode.com/cli/overview#getting-started) guide.
+
+## Setup: Cagent
+
+To use Docker's [Cagent](https://github.com/docker/cagent) within CodeCompanion, you need to follow these steps:
+
+1. [Install](https://github.com/docker/cagent?tab=readme-ov-file#installation) Cagent as per their instructions
+2. [Create an agent](https://github.com/docker/cagent?tab=readme-ov-file#run-agents) in the repository you're working from
+3. Test the agent by running `cagent run your_agent.yaml` in the CLI
+4. In your CodeCompanion config, extend the `cagent` adapter to include the agent:
+
+```lua
+require("codecompanion").setup({
+  adapters = {
+    acp = {
+      cagent = function()
+        return require("codecompanion.adapters").extend("cagent", {
+          commands = {
+            default = {
+              "cagent",
+              "acp",
+              "your_agent.yaml",
+            },
+          },
+        })
+      end,
+    },
+  },
+})
+```
+
+If you have multiple agent files that you like to run separately, you can create multiple commands for each agent.
+
+## Setup: Claude Code
+
+To use [Claude Code](https://www.anthropic.com/claude-code) within CodeCompanion, you'll need to take the following steps:
+
+1. [Install](https://docs.anthropic.com/en/docs/claude-code/quickstart#step-1%3A-install-claude-code) Claude Code
+2. [Install](https://github.com/zed-industries/claude-agent-acp) the Zed ACP adapter for Claude Code
+
+### Using Claude Pro Subscription
+
+3. In your CLI, run `claude setup-token`. You'll be redirected to the Claude.ai website for authorization:
+<img src="https://github.com/user-attachments/assets/28b70ba1-6fd2-4431-9905-c60c83286e4c" alt="Claude Pro Authorization" />
+4. Back in your CLI, copy the OAuth token (in yellow):
+<img src="https://github.com/user-attachments/assets/73992480-20a6-4858-a9fe-93a4e49004ff" alt="Claude Pro OAuth Token" />
+5. In your CodeCompanion config, extend the `claude_code` adapter and include the OAuth token (see the section on [environment variables and setting API keys](/configuration/adapters-http#environment-variables-setting-an-api-key) for other ways to do this):
+```lua
+require("codecompanion").setup({
+  adapters = {
+    acp = {
+      claude_code = function()
+        return require("codecompanion.adapters").extend("claude_code", {
+          env = {
+            CLAUDE_CODE_OAUTH_TOKEN = "my-oauth-token",
+          },
+        })
+      end,
+    },
+  },
+})
+```
+
+### Using an API Key
+
+3. [Create](https://console.anthropic.com/settings/keys) an API key in your Anthropic console.
+4. In your CodeCompanion config, extend the `claude_code` adapter and set the `ANTHROPIC_API_KEY`:
+```lua
+require("codecompanion").setup({
+  adapters = {
+    acp = {
+      claude_code = function()
+        return require("codecompanion.adapters").extend("claude_code", {
+          env = {
+            ANTHROPIC_API_KEY = "my-api-key",
+          },
+        })
+      end,
+    },
+  },
+})
+```
+
+## Setup: Cline CLI
+
+To use [Cline CLI](https://cline.bot/cli) within CodeCompanion, you'll need to take the following steps:
+
+1. [Install](https://docs.cline.bot/getting-started/installing-cline#cli) Cline CLI.
+2. Authenticate by running `cline auth`.
+3. Select the `cline_cli` adapter in your chat buffer
+
+
+## Setup: Codex
+
+To use OpenAI's [Codex](https://openai.com/codex/), install [codex-acp](https://github.com/agentclientprotocol/codex-acp).
+
+By default, the adapter will look for an `OPENAI_API_KEY` in your shell, however you can also authenticate via ChatGPT. This can be customized in the plugin configuration:
+
+```lua
+require("codecompanion").setup({
+  adapters = {
+    acp = {
+      codex = function()
+        return require("codecompanion.adapters").extend("codex", {
+          defaults = {
+            auth_method = "api-key", -- "api-key"|"chat-gpt"
+          },
+          env = {
+            OPENAI_API_KEY = "my-api-key",
+          },
+        })
+      end,
+    },
+  },
+})
+```
+
+## Setup: Copilot CLI
+
+Install [Copilot CLI](https://docs.github.com/en/copilot/how-tos/copilot-cli/set-up-copilot-cli/install-copilot-cli) as per the instructions and then in the terminal run `copilot` and ensure that you're authenticated.
+
+## Setup: Cursor CLI
+
+To use [Cursor](https://www.cursor.com/) within CodeCompanion, you'll need to take the following steps:
+
+1. Install `agent` as per the [Cursor CLI documentation](https://cursor.com/docs/cli/overview)
+2. Authenticate by running `agent login` in your terminal
+3. Select the `cursor_cli` adapter in your chat buffer
+
+## Setup: Gemini CLI
+
+1. Install [Gemini CLI](https://github.com/google-gemini/gemini-cli)
+2. Update your CodeCompanion config and select which authentication methods you'd like to use. Currently there are:
+    - `oauth-personal` which uses your Google login
+    - `gemini-api-key`
+    - `vertex-ai`)
+
+The example below uses the `gemini-api-key` method, pulling the API key from [1Password CLI](https://developer.1password.com/docs/cli/get-started/):
+
+```lua
+require("codecompanion").setup({
+  adapters = {
+    acp = {
+      gemini_cli = function()
+        return require("codecompanion.adapters").extend("gemini_cli", {
+          defaults = {
+            auth_method = "gemini-api-key", -- "oauth-personal"|"gemini-api-key"|"vertex-ai"
+          },
+          env = {
+            GEMINI_API_KEY = "cmd:op read op://personal/Gemini_API/credential --no-newline",
+          },
+        })
+      end,
+    },
+  },
+})
+```
+
+## Setup: Goose CLI
+
+To use [Goose](https://goose-docs.ai/) in CodeCompanion, ensure you've followed their [documentation](https://goose-docs.ai/docs/getting-started/installation/) to setup and install Goose CLI. Then ensure that in your chat buffer you select the `goose` adapter.
+
+## Setup: Kilo Code
+
+To use [Kilo Code](https://kilo.ai) in CodeCompanion, ensure you've followed their documentation to [install](https://kilo.ai/docs/getting-started/installing#cli) and [configure](https://kilo.ai/docs/getting-started/setup-authentication#cli) it. Then ensure that in your chat buffer you select the `kilocode` adapter.
+
+You can specify a custom model in your `~/.config/kilo/kilo.json` file:
+
+```json
+{
+    "$schema": "https://kilo.ai/config.json",
+    "model": "kilo/kilo-auto/free",
+}
+```
+
+## Setup: Kimi CLI
+
+Install [Kimi CLI](https://github.com/MoonshotAI/kimi-cli?tab=readme-ov-file#installation) as per their instructions. Then in the CLI, run `kimi` followed by `/login` to configure your API key. Then ensure that in your chat buffer you select the `kimi_cli` adapter.
+
+## Setup: Kiro CLI
+
+Install [Kiro cli](https://kiro.dev/docs/cli/) as per their instructions. Then open it and login (if installation doesn't already prompt you to login). the codecompanion adapter will execute `kiro-cli acp`, make sure to have it available on your PATH.
+
+## Setup: Mistral Vibe
+
+To use [Mistral Vibe](https://github.com/mistralai/mistral-vibe) in CodeCompanion, ensure you've followed their documentation to [install](https://github.com/mistralai/mistral-vibe). Then run `vibe --setup` in your CLI in order to setup your API key. Then ensure that in your chat buffer you select the `mistral_vibe` adapter.
+
+## Setup: OpenCode
+
+To use [OpenCode](https://opencode.ai) in CodeCompanion, ensure you've followed their documentation to [install](https://opencode.ai/docs/#install) and [configure](https://opencode.ai/docs/#configure) it. Then ensure that in your chat buffer you select the `opencode` adapter.
+
+You can specify a custom model in your `~/.config/opencode/config.json` file:
+
+```json
+{
+    "$schema": "https://opencode.ai/config.json",
+    "model": "github-copilot/claude-sonnet-4.5",
+}
+```
+
+## Creating Custom ACP Adapters
+
+Not every ACP-compatible tool will have a built-in adapter. You can define your own directly in your configuration — the example below uses a hypothetical `myagent` CLI tool. Use the [built-in ACP adapters](https://github.com/olimorris/codecompanion.nvim/blob/main/lua/codecompanion/adapters/acp) as a reference.
+
+````lua
+require("codecompanion").setup({
+  adapters = {
+    acp = {
+      my_agent = function()
+        local helpers = require("codecompanion.adapters.acp.helpers")
+        return {
+          name = "my_agent",
+          formatted_name = "MyAgent",
+          type = "acp",
+          roles = {
+            llm = "assistant",
+            user = "user",
+          },
+          commands = {
+            default = {
+              "myagent",
+              "--acp",
+            },
+          },
+          defaults = {
+            mcpServers = {},
+            timeout = 20000, -- 20 seconds
+          },
+          parameters = {
+            protocolVersion = 1,
+            clientCapabilities = {
+              fs = { readTextFile = true, writeTextFile = true },
+            },
+            clientInfo = {
+              name = "CodeCompanion.nvim",
+              version = "1.0.0",
+            },
+          },
+          handlers = {
+            setup = function(self)
+              return true
+            end,
+            auth = function(self)
+              return true
+            end,
+            form_messages = function(self, messages, capabilities)
+              return helpers.form_messages(self, messages, capabilities)
+            end,
+            on_exit = function(self, code) end,
+          },
+        }
+      end,
+    },
+  },
+})
+````
+
+User-created adapters are shared in the [adapter discussions on GitHub](https://github.com/olimorris/codecompanion.nvim/discussions?discussions_q=is%3Aopen+label%3A%22tip%3A+adapter%22) — a good place to raise issues or ask questions about your specific adapter.

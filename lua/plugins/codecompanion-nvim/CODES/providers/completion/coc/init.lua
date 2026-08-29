@@ -1,0 +1,159 @@
+--- @module 'coc'
+
+local completion = require("codecompanion.providers.completion")
+local config = require("codecompanion.config")
+local triggers = require("codecompanion.triggers")
+
+--- @type table Cache for callback addresses that get lost (replaced by vim.Nil) during serialization.
+local callbacks_cache = {}
+
+--- Transforms CodeCompanion completion items into coc.nvim-compatible completion items.
+--- The completion items are modified in place!
+--- @param opt table Trigger context from coc.nvim.
+--- @param complete_items table CodeCompanion completion items.
+--- @return table coc.nvim-compatible completion items.
+local function transform_complete_items(opt, complete_items)
+  for _, item in ipairs(complete_items) do
+    -- Populate standard Vim completion-items fields (see :h complete-items).
+    if opt.triggerCharacter == triggers.mappings.editor_context then
+      item.word = string.format("{%s}", item.label:sub(2))
+    elseif opt.triggerCharacter == triggers.mappings.tools then
+      item.word = string.format("{%s}", item.label:sub(2))
+    else
+      item.word = item.label:sub(2)
+    end
+    item.abbr = item.label -- The text to show in the completion menu
+    item.info = item.detail -- The details shown in the preview window
+    item.menu = item.detail -- Short description shown in the menu
+
+    -- Set kind for icon/highlight coloring (see :h complete-items)
+    if item.type == "slash_command" then
+      item.kind = "f" -- function
+    elseif item.type == "tool" then
+      item.kind = "m" -- member/module
+    elseif item.type == "editor_context" then
+      item.kind = "v" -- variable
+    elseif item.type == "acp_command" then
+      item.kind = "f" -- function
+    end
+
+    -- Context to be used by CodeCompanion later
+    item.context = {
+      bufnr = opt.bufnr,
+      input = opt.input,
+      cursor = { row = opt.linenr, col = opt.colnr },
+    }
+
+    -- Cache callback function pointers.
+    if item.config and type(item.config.callback) == "function" then
+      callbacks_cache[item.label] = item.config.callback
+    end
+
+    -- Remove label; otherwise coc.nvim adds an extra trigger character.
+    item.label = nil
+  end
+
+  return complete_items
+end
+
+--- Deletes text from the start position to the cursor position.
+--- @param bufnr number Buffer number
+--- @param start table Start position
+--- @param start_offset number Start offset
+local function delete_text_to_cursor(bufnr, start, start_offset)
+  local cursor = vim.api.nvim_win_get_cursor(0)
+
+  -- Convert from 1-based to 0-based indices.
+  local range = {
+    start = {
+      line = start.row - 1,
+      character = start.col - 1 + start_offset,
+    },
+    ["end"] = {
+      line = cursor[1] - 1,
+      character = cursor[2], -- Cursor end position is exclusive.
+    },
+  }
+
+  vim.lsp.util.apply_text_edits({ { newText = "", range = range } }, bufnr, "utf-8")
+end
+
+--- @class coc.Source
+local M = {}
+
+---Returns coc.nvim source initialization parameters.
+---@return table
+function M.init()
+  local trigger_chars = { triggers.mappings.slash_commands, triggers.mappings.tools, triggers.mappings.editor_context }
+  if config.interactions.chat.slash_commands.opts.acp.enabled then
+    table.insert(trigger_chars, triggers.mappings.acp_slash_commands)
+  end
+
+  return {
+    priority = 99,
+    shortcut = "CodeCompanion",
+    filetypes = { "codecompanion", "codecompanion_input" },
+    triggerCharacters = trigger_chars,
+  }
+end
+
+---Provides CodeCompanion completion items for coc.nvim-triggered completion.
+---@param opt table Completion trigger context
+---@return table Completion items
+function M.complete(opt)
+  local complete_items
+
+  if opt.triggerCharacter == triggers.mappings.acp_slash_commands then
+    complete_items = transform_complete_items(opt, completion.acp_commands(opt.bufnr))
+  elseif opt.triggerCharacter == triggers.mappings.slash_commands then
+    complete_items = transform_complete_items(opt, completion.slash_commands(completion.interaction_type()))
+  elseif opt.triggerCharacter == triggers.mappings.tools then
+    complete_items = transform_complete_items(opt, completion.tools())
+  elseif opt.triggerCharacter == triggers.mappings.editor_context then
+    complete_items = transform_complete_items(opt, completion.editor_context())
+  else
+    complete_items = {}
+  end
+
+  return complete_items
+end
+
+---Executes selected slash command on coc.nvim-triggered completion action.
+---@param opt table The selected item from the completion menu.
+---@return nil
+function M.execute(opt)
+  -- ACP commands don't need execution, just text insertion
+  if opt.type == "acp_command" then
+    return
+  end
+
+  if not (opt.type == "slash_command") then
+    return
+  end
+
+  local bufnr = opt.context.bufnr
+
+  -- Remove the keyword from the chat buffer.
+  local start = opt.context.cursor
+  delete_text_to_cursor(bufnr, start, -1)
+
+  opt.label = opt.abbr -- Necessary for command execution
+  opt.info = nil -- No longer needed
+
+  -- Restore the function callback.
+  if opt.config and callbacks_cache[opt.label] then
+    opt.config.callback = callbacks_cache[opt.label]
+  end
+
+  local slash_commands = require("codecompanion.interactions.chat.slash_commands")
+  if completion.interaction_type() == "cli" then
+    slash_commands.new():execute_cli(opt, function(paths)
+      slash_commands.insert_path(bufnr, paths)
+    end)
+  else
+    local chat = require("codecompanion").buf_get_chat(bufnr)
+    slash_commands.run(opt, chat)
+  end
+end
+
+return M

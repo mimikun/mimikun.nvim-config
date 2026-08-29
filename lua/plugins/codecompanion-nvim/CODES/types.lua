@@ -1,0 +1,230 @@
+---@meta Agent Client Protocol
+
+---@class ACP.promptCapabilities
+---@field audio boolean
+---@field embeddedContext boolean
+---@field image boolean
+
+---@class ACP.sessionCapabilities
+---@field list? table|nil
+
+---@class ACP.agentCapabilities
+---@field loadSession boolean
+---@field promptCapabilities ACP.promptCapabilities
+---@field sessionCapabilities? ACP.sessionCapabilities
+
+---@class ACP.AuthMethod
+---@field id string
+---@field name string
+---@field description? string|nil
+
+---@alias ACP.authMethods ACP.AuthMethod[]
+
+---@class ACP.AvailableCommand
+---@field name string The command name (e.g., "cost", "context")
+---@field description string The command description
+---@field input? { hint: string } Optional input hint for arguments
+
+---@alias ACP.availableCommands ACP.AvailableCommand[]
+
+---@meta Model Context Protocol
+
+---@class MCP.JSONRPCRequest
+---@field jsonrpc "2.0"
+---@field id integer | string
+---@field method string
+---@field params table<string, any>?
+
+---@class MCP.JSONRPCResultResponse
+---@field jsonrpc "2.0"
+---@field id integer | string
+---@field result table<string, any>?
+
+---@class MCP.JSONRPCErrorResponse
+---@field jsonrpc "2.0"
+---@field id integer | string
+---@field error { code: integer, message: string, data: any? }
+
+---@class MCP.Tool
+---@field name string
+---@field inputSchema table
+---@field description? string
+---@field title? string
+---@field execution? table
+
+---@class MCP.TextContent
+---@field type "text"
+---@field text string
+
+---@alias MCP.ContentBlock MCP.TextContent|any
+
+---@class MCP.CallToolResult
+---@field isError? boolean
+---@field content MCP.ContentBlock[]
+
+---@meta Tree-sitter
+
+---@class vim.treesitter.LanguageTree
+---@field parse function
+
+---@class TSNode
+---@field start_pos function
+---@field end_pos function
+---@field type function
+---@field parent function
+
+---@class TSQuery
+
+---@meta CodeCompanion
+
+---@alias CodeCompanion.Chat.Messages CodeCompanion.Chat.Message[]
+
+---@class CodeCompanion.Chat.Message
+---@field role string Role of the author (e.g. "user", "llm", "system", "tool")
+---@field content string The raw Markdown/text content of the message (optional for tool-only entries)
+---@field tools? table Optional tool data
+---@field tools.call_id? string Tool call ID
+---@field tools.calls? CodeCompanion.Chat.ToolCall[] Array of tool calls
+---@field tools.id? string Tool ID
+---@field opts? table Optional metadata used by the UI and processing
+---@field opts.sync_all? boolean When synced, whether the entire buffer is shared
+---@field opts.sync_diff? boolean When synced, whether only buffer diffs are shared
+---@field opts.visible? boolean Whether the message should be shown in the chat UI
+---@field _meta? table Internal static metadata (e.g. { sent = true })
+---@field _meta.id? number Unique identifier for the message (generated via hash)
+---@field _meta.cycle? number The chat turn cycle when this message was added
+---@field _meta.index? number The index of the chat message in the messages stack
+---@field _meta.tag? string A tag to identify special messages — see `codecompanion.interactions.shared.tags`
+---@field _meta.cumulative_tokens? number Actual cumulative token count from the API when this message was generated
+---@field _meta.estimated_tokens? number Estimated token count associated with this message
+---@field context? { id?: string, path?: string, mimetype?: string, url?: string } Optional context object
+---@field reasoning? CodeCompanion.Chat.Reasoning Optional reasoning object returned by some adapters
+---@field type? string Optional message type used by the UI (e.g. "llm_message", "tool_message", "reasoning_message")
+---@field _raw? any Any adapter-specific raw payload stored with the message
+---@field created_at? number Unix timestamp (optional, helpful for sorting/logging)
+
+---@class CodeCompanion.Chat.ToolFunctionCall
+---@field name string Name of the function/tool (e.g. "run_command", "grep_search")
+---@field arguments string|table Raw JSON string or parsed table of arguments
+
+---@class CodeCompanion.Chat.ToolCall
+---@field id string Unique tool call identifier (e.g. "call_8Aoq8...")
+---@field type string Typically "function" (adapter/tool-specific)
+---@field _index? number Position index when returned by adapters
+---@field ["function"]? CodeCompanion.Chat.ToolFunctionCall Function descriptor (adapter key name is "function")
+---@field result? any Optional execution result or intermediate payload
+
+---@class CodeCompanion.Chat.Reasoning
+---@field content string The LLM's chain-of-thought / internal reasoning (often markdown)
+---@field meta? table Optional structured reasoning metadata
+
+---@class CodeCompanion.SlashCommand
+---@field Chat CodeCompanion.Chat The chat buffer
+---@field config table The config of the slash command
+---@field context table The context of the chat buffer from the completion menu
+---@field opts table The options for the slash command
+---@field output fun(selected: table, opts: table): nil The function to call when a selection is made
+
+---@class CodeCompanion.SlashCommandArgs
+---@field Chat CodeCompanion.Chat The chat buffer
+---@field config table The config of the slash command
+---@field context table The context of the chat buffer from the completion menu
+---@field opts table The options for the slash command
+
+---@class CodeCompanion.EditorContext
+---@field editor_context table The editor context from the config
+
+---@class CodeCompanion.EditorContext
+---@field Chat CodeCompanion.Chat The chat buffer
+---@field buffer_context CodeCompanion.BufferContext The buffer context to share with the LLM-
+---@field config table The config for the variable
+---@field target string The buffer that's being targeted by the variable
+---@field params string Any additional parameters for the variable
+
+---@class CodeCompanion.EditorContextArgs
+---@field Chat? CodeCompanion.Chat The chat buffer (nil for CLI interactions)
+---@field buffer_context CodeCompanion.BufferContext The buffer context to share with the LLM
+---@field config table The config for the variable
+---@field target string The buffer that's being targeted by the variable
+---@field params string Any additional parameters for the variable
+
+---@class CodeCompanion.Subscribers
+---@field queue CodeCompanion.Chat.Event[]
+
+---@class CodeCompanion.SubscribersArgs
+---@field queue CodeCompanion.Chat.Event[]
+
+---@class CodeCompanion.Chat.Event
+---@field callback fun(chat: CodeCompanion.Chat): nil The prompt to send to the LLM
+---@field condition fun(chat: CodeCompanion.Chat): boolean The condition to check before sending the prompt
+---@field data { name: string, type: string, opts: {auto_submit: boolean } } The data to send to the LLM
+---@field id number The unique identifier for the event
+---@field reuse fun(chat: CodeCompanion.Chat): boolean Should the current prompt be reused?
+---@field order number The order in which the events are executed
+
+---@class CodeCompanion.Tools.Unresolved : CodeCompanion.Tools.Tool
+---@field extends? string The factory to use for resolution (e.g. "cmd_tool")
+
+---@class CodeCompanion.Tools.Tool
+---@field name string The name of the tool
+---@field cmds table The commands to execute
+---@field function_call table The function call from the LLM
+---@field schema table The schema that the LLM must use in its response to execute a tool
+---@field system_prompt string | fun(schema: table): string The system prompt to the LLM explaining the tool and the schema
+---@field opts? table The options for the tool
+---@field env? fun(schema: table): table|nil Any environment variables that can be used in the *_cmd fields. Receives the parsed schema from the LLM
+---@field gates? table Handlers which decide whether a tool may run
+---@field gates.judge_context? fun(self: CodeCompanion.Tools.Tool, meta: table): string|nil The action, described in plain English, for the background judge to vet
+---@field handlers table Functions which handle the execution of a tool
+---@field handlers.setup? fun(self: CodeCompanion.Tools.Tool, tools: CodeCompanion.Tools): any Function used to setup the tool. Called before any commands
+---@field handlers.prompt_condition? fun(self: CodeCompanion.Tools.Tool, tools: CodeCompanion.Tools, config: table): boolean Function to determine whether to show the promp to the user or not
+---@field handlers.on_exit? fun(self: CodeCompanion.Tools.Tool, tools: CodeCompanion.Tools): any Function to call at the end of a group of commands or functions
+---@field output? table Functions which handle the output after every execution of a tool
+---@field output.prompt fun(self: CodeCompanion.Tools.Tool, tools: CodeCompanion.Tools): string The message which is shared with the user when asking for their approval
+---@field output.rejected? fun(self: CodeCompanion.Tools.Tool, tools: CodeCompanion.Tools, cmd: table, opts?: {reason?: string}): any Function to call if the user rejects running a command
+---@field output.error? fun(self: CodeCompanion.Tools.Tool, tools: CodeCompanion.Tools, cmd: table, stderr: table, stdout?: table): any The function to call if an error occurs
+---@field output.success? fun(self: CodeCompanion.Tools.Tool, tools: CodeCompanion.Tools, cmd: table, stdout: table): any Function to call if the tool is successful
+---@field output.cancelled? fun(self: CodeCompanion.Tools.Tool, tools: CodeCompanion.Tools, cmd: table): any Function to call if the tool is cancelled
+---@field args table The arguments sent over by the LLM when making the request
+---@field tool table The tool configuration from the config file
+
+---@class CodeCompanion.SlashCommand.Provider
+---@field output function The function to call when a selection is made
+---@field provider table The path to the provider
+---@field title string The title of the provider's window
+---@field SlashCommand CodeCompanion.SlashCommand
+
+---@class CodeCompanion.SlashCommand.ProviderArgs
+---@field output function The function to call when a selection is made
+---@field SlashCommand CodeCompanion.SlashCommand
+---@field title string The title of the provider's window
+
+---@class CodeCompanion.ActionPalette.Provider
+---@field validate table Validate an item
+---@field resolve table Resolve an item into an action
+---@field context table Store all arguments in this table
+
+---@class CodeCompanion.ActionPalette.ProvidersArgs Arguments that can be injected into the chat
+---@field validate table Validate an item
+---@field resolve table Resolve an item into an action
+---@field context table The buffer context
+
+---@class CodeCompanion.BufferContext
+---@field bufnr number The buffer number
+---@field buftype string The buffer type
+---@field code string|false The lines of the selection
+---@field cursor_pos number[] The cursor position as [line, col]
+---@field end_col number The end column of the selection
+---@field end_line number The end line of the selection
+---@field filetype string The filetype of the buffer
+---@field filename string The name of the file
+---@field is_visual boolean Whether the selection is visual
+---@field is_normal boolean Whether the selection is normal
+---@field lines string[] The lines in the buffer
+---@field line_count number The number of lines in the buffer
+---@field mode string The current mode
+---@field relative_path string The path to the buffer relative to the current working directory
+---@field start_line number The start line of the selection
+---@field start_col number The start column of the selection
+---@field winnr number The window number
+---@field user_prompt string The prompt provided by the user

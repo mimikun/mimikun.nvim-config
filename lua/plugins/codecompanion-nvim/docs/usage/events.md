@@ -1,0 +1,115 @@
+---
+description: "Reference for all CodeCompanion events and hooks — integrate with Neovim's autocmd system to react to chat, inline, CLI, and tool lifecycle events."
+---
+
+# Events / Hooks
+
+In order to enable a tighter integration between CodeCompanion and your Neovim config, the plugin fires events at various points during its lifecycle.
+
+## List of Events
+
+The events that are fired from within the plugin are:
+
+- `CodeCompanionACPConnected` - Fired after the ACP connection is authenticated and ready to use
+- `CodeCompanionACPSessionPre` - Fired after ACP authentication completes but before a new session is established; allows subscribers to modify the connection (e.g. inject MCP servers) synchronously
+- `CodeCompanionACPSessionPost` - Fired after a new ACP session has been established
+- `CodeCompanionChatACPModeChanged` - Fired after the ACP mode has been changed in the chat
+- `CodeCompanionACPChatRestored` - Fired after an ACP session has been restored
+- `CodeCompanionChatCreated` - Fired after a chat has been created for the first time
+- `CodeCompanionChatOpened` - Fired after a chat has been opened
+- `CodeCompanionChatClosed` - Fired after a chat has been permanently closed
+- `CodeCompanionChatHidden` - Fired after a chat has been hidden
+- `CodeCompanionChatSubmitted` - Fired after a chat has been submitted
+- `CodeCompanionChatDone` - Fired after a chat has received the response
+- `CodeCompanionChatCompacting` - Fired after the chat begins compacting messages to reduce token usage
+- `CodeCompanionChatStopped` - Fired after a chat has been stopped
+- `CodeCompanionChatCleared` - Fired after a chat has been cleared
+- `CodeCompanionChatRestored` - Fired after a chat has been restored to an editable state (e.g. when `on_before_submit` prevents submission)
+- `CodeCompanionChatAdapter` - Fired after the adapter has been set in the chat
+- `CodeCompanionChatModel` - Fired after the model has been set in the chat
+- `CodeCompanionCLICreated` - Fired after a CLI buffer has been created for the first time
+- `CodeCompanionCLIOpened` - Fired after a CLI buffer has been opened
+- `CodeCompanionCLIClosed` - Fired after a CLI buffer has been closed
+- `CodeCompanionCLIHidden` - Fired after a CLI buffer has been hidden
+- `CodeCompanionCLISent` - Fired after data has been sent to a CLI buffer
+- `CodeCompanionContextChanged` - Fired when the context that a chat buffer follows, changes
+- `CodeCompanionFileEdited` - Fired after the LLM has edited or created a file; the data payload includes the `path` and what made the change (`tool`)
+- `CodeCompanionInlineStarted` - Fired at the start of the Inline interaction
+- `CodeCompanionInlineFinished` - Fired at the end of the Inline interaction
+- `CodeCompanionMCPServerStart` - Fired when an MCP server is started
+- `CodeCompanionMCPServerReady` - Fired when an MCP server is ready for requests
+- `CodeCompanionMCPServerClosed` - Fired when an MCP server is closed
+- `CodeCompanionMCPServerToolsLoaded` - Fired when tools are loaded for an MCP server
+- `CodeCompanionRequestStarted` - Fired at the start of any API request
+- `CodeCompanionRequestStreaming` - Fired at the start of a streaming API request
+- `CodeCompanionRequestFinished` - Fired at the end of any API request
+- `CodeCompanionToolAdded` - Fired when a tool has been added to a chat
+- `CodeCompanionToolApprovalRequested` - Fired when a tool is requesting approval to run
+- `CodeCompanionToolApprovalFinished` - Fired when a user has actioned an approval request
+- `CodeCompanionToolStarted` - Fired when a tool has started executing
+- `CodeCompanionToolFinished` - Fired when a tool has finished executing
+- `CodeCompanionToolsStarted` - Fired when the tool system has been initiated
+- `CodeCompanionToolsFinished` - Fired when the tool system has finished running all tools
+- `CodeCompanionToolsJudgeStarted` - Fired when the background judge begins vetting a tool call
+- `CodeCompanionToolsJudgeFinished` - Fired when the background judge returns its verdict
+
+
+In addition to these events, the chat buffer has its own **callback system** for hooking into lifecycle events like `on_before_submit`, `on_checkpoint` and `on_tool_output`. These callbacks receive the chat instance and can inspect or mutate chat state. See the [callbacks](/configuration/chat-buffer#callbacks) section for details.
+
+There are also events that can be utilized to trigger commands from within the plugin:
+
+- `CodeCompanionChatRefreshCache` - Used to refresh conditional elements in the chat buffer
+
+## Event Data
+
+Each event also comes with a data payload. For example, with `CodeCompanionRequestStarted`:
+
+```lua
+{
+  buf = 10,
+  data = {
+    adapter = {
+      formatted_name = "Copilot",
+      model = "o3-mini-2025-01-31",
+      name = "copilot"
+    },
+    bufnr = 10,
+    id = 6107753,
+    interaction = "chat"
+  },
+  event = "User",
+  file = "CodeCompanionRequestStarted",
+  group = 14,
+  id = 30,
+  match = "CodeCompanionRequestStarted"
+}
+```
+
+And the `CodeCompanionRequestFinished` also has a `data.status` value.
+
+## Consuming an Event
+
+Events can be hooked into as follows:
+
+```lua
+local group = vim.api.nvim_create_augroup("CodeCompanionHooks", {})
+
+vim.api.nvim_create_autocmd({ "User" }, {
+  pattern = "CodeCompanionInline*",
+  group = group,
+  callback = function(request)
+    if request.match == "CodeCompanionInlineFinished" then
+      -- Format the buffer after the inline request has completed
+      require("conform").format({ bufnr = request.buf })
+    end
+  end,
+})
+```
+
+You can trigger an event with:
+
+```lua
+vim.api.nvim_exec_autocmds("User", {
+  pattern = "CodeCompanionChatRefreshCache",
+})
+```

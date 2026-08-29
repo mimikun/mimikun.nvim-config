@@ -1,0 +1,83 @@
+local Snacks = require("snacks")
+local config = require("codecompanion.config")
+local log = require("codecompanion.utils.log")
+
+---@class CodeCompanion.ActionPalette.Provider.Snacks: CodeCompanion.SlashCommand.Provider
+---@field context table
+---@field resolve function
+local Provider = {}
+
+---@params CodeCompanion.ActionPalette.ProvidersArgs
+function Provider.new(args)
+  log:trace("Snacks action palette provider triggered")
+  if not args.resolve then
+    args.resolve = require("codecompanion.action_palette").resolve
+  end
+
+  return setmetatable(args, { __index = Provider })
+end
+
+---@param items table The items to display in the picker
+---@param opts? table The options for the picker
+---@return nil
+function Provider:picker(items, opts)
+  opts = opts or {}
+
+  -- Store provider reference
+  local provider = self
+
+  -- Transform items to include both display text and original data
+  local picker_items = {}
+  for _, item in ipairs(items) do
+    local description = item.description or ""
+    local preview = { text = description }
+    if item.bufnr ~= nil then
+      preview = {
+        text = table.concat(vim.api.nvim_buf_get_lines(item.bufnr, 0, -1, false), "\n"),
+        ft = "codecompanion",
+      }
+    end
+    table.insert(picker_items, {
+      text = item.name,
+      item = item,
+      preview = preview,
+    })
+  end
+  -- Create Snacks picker
+  Snacks.picker({
+    items = picker_items,
+    title = opts.prompt or config.display.action_palette.opts.title or "CodeCompanion actions",
+    preview = "preview",
+    -- Define what happens when an item is confirmed
+    confirm = function(picker, item)
+      if item and item.item then
+        -- Close the picker
+        picker:close()
+        -- Process the selection using the provider's resolve method or select method
+        if type(item.item.callback) == "function" then
+          item.item.callback()
+        elseif provider.resolve and (item.item.picker == nil) then
+          provider.resolve(item.item, provider.context)
+        else
+          provider:select(item.item)
+        end
+      end
+    end,
+    -- Format each item for display
+    format = function(item)
+      return { { item.text } }
+    end,
+  })
+end
+
+---The action to take when an item is selected
+---@param item table The selected item
+---@return nil
+function Provider:select(item)
+  if self.resolve and (item.picker == nil) then
+    return self.resolve(item, self.context)
+  end
+  return require("codecompanion.providers.action_palette.shared").select(self, item)
+end
+
+return Provider

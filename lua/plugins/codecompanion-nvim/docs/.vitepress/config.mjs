@@ -1,0 +1,335 @@
+import { joinURL, withoutTrailingSlash } from "ufo";
+import { defineConfig } from "vitepress";
+import { execSync } from "node:child_process";
+import { withMermaid } from "vitepress-plugin-mermaid";
+import llmstxt from "vitepress-plugin-llms";
+import { copyOrDownloadAsMarkdownButtons } from "vitepress-plugin-llms";
+
+const inProd = process.env.NODE_ENV === "production";
+
+let version = "Main";
+if (inProd) {
+  try {
+    version = execSync("git describe --tags --abbrev=0", {
+      encoding: "utf-8",
+    }).trim();
+  } catch (error) {
+    console.warn("Failed to get git version, using default.");
+  }
+}
+
+const siteUrl = "https://codecompanion.olimorris.dev";
+
+const baseHeaders = [
+  ["meta", { name: "twitter:site", content: "@olimorris_" }],
+  ["meta", { name: "twitter:card", content: "summary_large_image" }],
+  [
+    "meta",
+    {
+      name: "twitter:image:src",
+      content: siteUrl + "/assets/images/social_banner.png",
+    },
+  ],
+  [
+    "meta",
+    {
+      property: "og:image",
+      content: siteUrl + "/assets/images/social_banner.png",
+    },
+  ],
+  [
+    "meta",
+    {
+      name: "twitter:image",
+      content: siteUrl + "/assets/images/social_banner.png",
+    },
+  ],
+  ["meta", { property: "og:image:width", content: "1280" }],
+  ["meta", { property: "og:image:height", content: "640" }],
+  ["meta", { property: "og:image:type", content: "image/png" }],
+  [
+    "meta",
+    { property: "og:site_name", content: "CodeCompanion.nvim Documentation" },
+  ],
+  ["meta", { property: "og:type", content: "website" }],
+  [
+    "link",
+    {
+      rel: "sitemap",
+      type: "application/xml",
+      title: "Sitemap",
+      href: siteUrl + "/sitemap.xml",
+    },
+  ],
+  ["link", { rel: "icon", type: "image/png", href: "/favicon.png" }],
+  [
+    "script",
+    { type: "application/ld+json" },
+    JSON.stringify({
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "WebSite",
+          name: "CodeCompanion.nvim",
+          url: siteUrl,
+        },
+        {
+          "@type": "SoftwareApplication",
+          name: "CodeCompanion.nvim",
+          description:
+            "AI coding, Vim style. CodeCompanion is a plugin which enables you to code with AI, using LLMs and agents, in Neovim.",
+          applicationCategory: "DeveloperApplication",
+          operatingSystem: "Linux, macOS, Windows",
+          url: siteUrl,
+          downloadUrl: "https://github.com/olimorris/codecompanion.nvim",
+          author: {
+            "@type": "Person",
+            name: "Oli Morris",
+            url: "https://github.com/olimorris",
+          },
+          offers: {
+            "@type": "Offer",
+            price: "0",
+            priceCurrency: "USD",
+          },
+        },
+      ],
+    }),
+  ],
+];
+
+const umamiScript = [
+  "script",
+  {
+    defer: "true",
+    src: "https://cloud.umami.is/script.js",
+    "data-website-id": "6fb6c149-1aba-4531-b613-7fc54d42191a",
+  },
+];
+const headers = inProd ? [...baseHeaders, umamiScript] : baseHeaders;
+
+// https://vitepress.dev/reference/site-config
+export default withMermaid(
+  defineConfig({
+    vite: {
+      plugins: [llmstxt()],
+    },
+    markdown: {
+      config(md) {
+        md.use(copyOrDownloadAsMarkdownButtons);
+      },
+    },
+    mermaid: {
+      securityLevel: "loose", // Allows more flexibility
+      theme: "base", // Use base theme to allow CSS variables to take effect
+    },
+    // optionally set additional config for plugin itself with MermaidPluginConfig
+    title: "CodeCompanion.nvim",
+    description:
+      "AI coding, Vim style. CodeCompanion is a plugin which enables you to code with AI, using LLMs and agents, in Neovim.",
+    lang: "en",
+    cleanUrls: true,
+    head: headers,
+    sitemap: {
+      hostname: siteUrl,
+    },
+    themeConfig: {
+      lastUpdated: {
+        formatOptions: {
+          dateStyle: "medium",
+        },
+      },
+
+      outline: "deep",
+
+      logo: "https://github.com/user-attachments/assets/7083eeb1-2f6c-4cf6-82ff-bc3171cab801",
+      nav: [
+        {
+          text: `${version}`,
+          items: [
+            {
+              text: "Changelog",
+              link: "https://github.com/olimorris/codecompanion.nvim/blob/main/CHANGELOG.md",
+            },
+            {
+              text: "Contributing",
+              link: "https://github.com/olimorris/codecompanion.nvim/blob/main/CONTRIBUTING.md",
+            },
+          ],
+        },
+      ],
+
+      sidebar: [
+        { text: "Introduction", link: "/" },
+        { text: "Installation", link: "/installation" },
+        { text: "Getting Started", link: "/getting-started" },
+        { text: "Architecture", link: "/architecture" },
+        { text: "Integrations", link: "/integrations" },
+        {
+          text: "Agent Client Protocol (ACP)",
+          link: "agent-client-protocol",
+        },
+        {
+          text: "Model Context Protocol (MCP)",
+          link: "model-context-protocol",
+        },
+        {
+          text: "Configuration",
+          collapsed: true,
+          items: [
+            { text: "Upgrading", link: "/configuration/upgrading" },
+
+            { text: "Action Palette", link: "/configuration/action-palette" },
+            { text: "Adapters - ACP", link: "/configuration/adapters-acp" },
+            { text: "Adapters - HTTP", link: "/configuration/adapters-http" },
+            { text: "Chat Buffer", link: "/configuration/chat-buffer" },
+            { text: "CLI", link: "/configuration/cli" },
+            { text: "Code Review", link: "/configuration/code-review" },
+            { text: "Extensions", link: "/configuration/extensions" },
+            {
+              text: "Inline",
+              link: "/configuration/inline",
+            },
+            { text: "MCP", link: "/configuration/mcp" },
+            { text: "Prompt Library", link: "/configuration/prompt-library" },
+            { text: "Rules", link: "/configuration/rules" },
+            { text: "System Prompt", link: "/configuration/system-prompt" },
+            { text: "Others", link: "/configuration/others" },
+          ],
+        },
+        {
+          text: "Usage",
+          collapsed: false,
+          items: [
+            { text: "Introduction", link: "/usage/introduction" },
+            { text: "Action Palette", link: "/usage/action-palette" },
+            {
+              text: "Chat Buffer",
+              link: "/usage/chat-buffer/",
+              collapsed: true,
+              items: [
+                {
+                  text: "Agents/Tools",
+                  link: "/usage/chat-buffer/agents-tools",
+                },
+                {
+                  text: "Editor Context",
+                  link: "/usage/chat-buffer/editor-context",
+                },
+                { text: "Rules", link: "/usage/chat-buffer/rules" },
+                {
+                  text: "Slash Commands",
+                  link: "/usage/chat-buffer/slash-commands",
+                },
+              ],
+            },
+            { text: "CLI", link: "/usage/cli" },
+            { text: "Code Review", link: "/usage/code-review" },
+            { text: "Events", link: "/usage/events" },
+            { text: "Inline", link: "/usage/inline" },
+            { text: "Prompt Library", link: "/usage/prompt-library" },
+            { text: "Workflows", link: "/usage/workflows" },
+            { text: "UI", link: "/usage/ui" },
+          ],
+        },
+        {
+          text: "Extending the Plugin",
+          collapsed: true,
+          items: [
+            { text: "Adapters", link: "/extending/adapters" },
+            {
+              text: "Agentic Workflows",
+              link: "/extending/agentic-workflows",
+            },
+            { text: "Extensions", link: "/extending/extensions" },
+            { text: "Rules Parsers", link: "/extending/parsers" },
+            { text: "Tools", link: "/extending/tools" },
+            { text: "UI", link: "/extending/ui" },
+          ],
+        },
+      ],
+
+      editLink: {
+        pattern:
+          "https://github.com/olimorris/codecompanion.nvim/edit/main/doc/:path",
+        text: "Edit this page on GitHub",
+      },
+
+      footer: {
+        message: "Released under the Apache-2.0 License.",
+        copyright: "Copyright © 2024-present Oli Morris",
+      },
+
+      socialLinks: [
+        {
+          icon: "github",
+          link: "https://github.com/olimorris/codecompanion.nvim",
+        },
+      ],
+
+      search: { provider: "local" },
+    },
+    transformPageData: (page, { siteConfig }) => {
+      page.frontmatter = page.frontmatter || {};
+
+      // Initialize the `head` frontmatter if it doesn't exist.
+      page.frontmatter.head ??= [];
+
+      const title =
+        (page.frontmatter.title || page.title) + " | " + siteConfig.site.title;
+      const description =
+        page.frontmatter.description ||
+        page.description ||
+        siteConfig.site.description;
+      const url = joinURL(
+        siteUrl,
+        withoutTrailingSlash(page.filePath.replace(/(index)?\.md$/, "")),
+      );
+
+      page.frontmatter.head.push(
+        [
+          "meta",
+          {
+            property: "og:title",
+            content: title,
+          },
+        ],
+        [
+          "meta",
+          {
+            name: "twitter:title",
+            content: title,
+          },
+        ],
+        [
+          "meta",
+          {
+            property: "og:description",
+            content: description,
+          },
+        ],
+        [
+          "meta",
+          {
+            name: "twitter:description",
+            content: description,
+          },
+        ],
+        [
+          "link",
+          {
+            rel: "canonical",
+            href: url,
+          },
+        ],
+        [
+          "meta",
+          {
+            property: "og:url",
+            content: url,
+          },
+        ],
+      );
+    },
+  }),
+);

@@ -1,0 +1,16 @@
+{
+  "devDependencies": {
+    "@types/node": "^22.10.5",
+    "mermaid": "^11.16.1",
+    "ufo": "^1.6.1",
+    "vitepress": "^1.6.0",
+    "vitepress-plugin-llms": "^1.11.0",
+    "vitepress-plugin-mermaid": "^2.0.17"
+  },
+  "scripts": {
+    "dev": "vitepress dev",
+    "build": "vitepress build",
+    "build:release": "NODE_ENV=production git fetch --unshallow && vitepress build",
+    "preview": "vitepress preview"
+  }
+}

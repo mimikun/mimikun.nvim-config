@@ -1,0 +1,335 @@
+local config = require("codecompanion.config")
+local slash_command_filter = require("codecompanion.interactions.chat.slash_commands.filter")
+local tool_filter = require("codecompanion.interactions.chat.tools.filter")
+local triggers = require("codecompanion.triggers")
+
+local buf_utils = require("codecompanion.utils.buffers")
+
+local api = vim.api
+
+-- Editor context groups and cache
+local _ec_aug = nil
+local _ec_cache = {} ---@type table<string, table>
+local _ec_cache_valid = false
+
+---Setup the editor context cache
+---@return nil
+local function _ec_cache_setup()
+  if _ec_aug then
+    return
+  end
+
+  _ec_aug = api.nvim_create_augroup("codecompanion.chat.editor_context", { clear = true })
+
+  -- Keep track of the current buffer state across Neovim
+  api.nvim_create_autocmd({
+    "BufAdd",
+    "BufDelete",
+    "BufWipeout",
+    "BufUnload",
+    "BufNewFile",
+    "BufReadPost",
+  }, {
+    group = _ec_aug,
+    callback = function()
+      _ec_cache = {}
+      _ec_cache_valid = false
+    end,
+  })
+end
+
+local M = {}
+
+-- Cache adapter info per buffer (type + evaluated tools)
+local adapter_cache = {}
+
+local aug = api.nvim_create_augroup("codecompanion.completion", { clear = true })
+
+-- Listen to both ChatAdapter and ChatModel events to keep cache in sync
+-- ChatAdapter fires when the adapter changes
+-- ChatModel fires when the model changes (primarily for HTTP adapters)
+api.nvim_create_autocmd("User", {
+  group = aug,
+  pattern = { "CodeCompanionChatAdapter", "CodeCompanionChatModel" },
+  callback = function(args)
+    local bufnr = args.data.bufnr
+
+    -- Only update adapter cache if the event explicitly includes adapter data
+    local has_adapter_field = false
+    for k, _ in pairs(args.data) do
+      if k == "adapter" then
+        has_adapter_field = true
+        break
+      end
+    end
+
+    if has_adapter_field then
+      if args.data.adapter then
+        tool_filter.refresh_cache()
+        slash_command_filter.refresh_cache()
+        adapter_cache[bufnr] = args.data.adapter
+      else
+        adapter_cache[bufnr] = nil
+      end
+    end
+
+    -- If adapter field is not present in the event then we don't update the cache
+  end,
+})
+
+api.nvim_create_autocmd("User", {
+  group = aug,
+  pattern = "CodeCompanionChatClosed",
+  callback = function(args)
+    local bufnr = args.data.bufnr
+    adapter_cache[bufnr] = nil
+  end,
+})
+
+---Return the slash commands to be used for completion
+---@param interaction? string The interaction type to filter by (defaults to current buffer)
+---@return table
+function M.slash_commands(interaction)
+  interaction = interaction or M.interaction_type()
+
+  local bufnr = api.nvim_get_current_buf()
+  local adapter_info = adapter_cache[bufnr]
+
+  local filtered_slash_commands = slash_command_filter.filter_enabled_slash_commands(
+    config.interactions.chat.slash_commands,
+    { adapter = adapter_info }
+  )
+
+  local slash_commands = vim
+    .iter(filtered_slash_commands)
+    :filter(function(name, v)
+      if name == "opts" then
+        return false
+      end
+      -- CLI: strict opt-in only via opts.interactions
+      if interaction == "cli" then
+        local allowed = v.opts and v.opts.interactions
+        if not allowed or not vim.tbl_contains(allowed, "cli") then
+          return false
+        end
+      else
+        -- Chat: backwards compatible — only filter out if explicitly excluded
+        local allowed = v.opts and v.opts.interactions
+        if allowed and not vim.tbl_contains(allowed, interaction) then
+          return false
+        end
+      end
+      return true
+    end)
+    :map(function(label, v)
+      return {
+        label = triggers.mappings.slash_commands .. label,
+        detail = v.description,
+        config = v,
+        type = "slash_command",
+      }
+    end)
+    :totable()
+
+  -- Prompt library slash commands (chat only)
+  if interaction == "chat" then
+    vim
+      .iter(pairs(require("codecompanion.helpers").get_prompts()))
+      :filter(function(_, v)
+        if not (v.opts and v.opts.is_slash_cmd and v.interaction == "chat") then
+          return false
+        end
+
+        -- Check if this prompt library slash command should be enabled
+        if v.enabled ~= nil then
+          if type(v.enabled) == "function" then
+            local ok, result = pcall(v.enabled, { adapter = adapter_info })
+            return ok and result
+          elseif type(v.enabled) == "boolean" then
+            return v.enabled
+          end
+        end
+        return true
+      end)
+      :each(function(_, v)
+        local prompt = {
+          detail = v.description,
+          config = v,
+          type = "slash_command",
+          from_prompt_library = true,
+        }
+        if v.opts and v.opts.alias then
+          prompt.label = string.format("%s%s", triggers.mappings.slash_commands, v.opts.alias)
+        else
+          prompt.label = string.format("%s%s", triggers.mappings.slash_commands, v.opts.name)
+        end
+        table.insert(slash_commands, prompt)
+      end)
+  end
+
+  return slash_commands
+end
+
+---Return the ACP commands to be used for completion
+---@param bufnr? number Buffer number (defaults to current buffer)
+---@return table
+function M.acp_commands(bufnr)
+  bufnr = bufnr or api.nvim_get_current_buf()
+
+  -- Only show ACP commands if this buffer is using an ACP adapter
+  local adapter_info = adapter_cache[bufnr]
+  if not adapter_info or adapter_info.type ~= "acp" then
+    return {}
+  end
+
+  local acp_commands = require("codecompanion.interactions.chat.acp.commands")
+  local commands = acp_commands.get_commands_for_buffer(bufnr)
+
+  return vim
+    .iter(commands)
+    :map(function(cmd)
+      local detail = cmd.description
+      if cmd.input and cmd.input ~= vim.NIL and type(cmd.input) == "table" and cmd.input.hint then
+        detail = detail .. " " .. cmd.input.hint
+      end
+
+      return {
+        label = triggers.mappings.acp_slash_commands .. cmd.name,
+        detail = detail,
+        command = cmd,
+        type = "acp_command",
+      }
+    end)
+    :totable()
+end
+
+---Return the tools to be used for completion
+---@return table
+function M.tools()
+  local bufnr = api.nvim_get_current_buf()
+  local adapter_info = adapter_cache[bufnr]
+
+  -- Only show tools for HTTP adapters
+  if not adapter_info or adapter_info.type == "acp" then
+    return {}
+  end
+
+  -- Get filtered tools configuration (this uses the cache!)
+  local tools = tool_filter.filter_enabled_tools(config.interactions.chat.tools, { adapter = adapter_info })
+
+  -- Add groups
+  local items = vim
+    .iter(tools.groups)
+    :filter(function(label)
+      return label ~= "tools"
+    end)
+    :map(function(label, v)
+      return {
+        label = triggers.mappings.tools .. label,
+        name = label,
+        type = "tool",
+        callback = v.callback,
+        detail = v.description,
+      }
+    end)
+    :totable()
+
+  -- Add config tools
+  vim
+    .iter(tools)
+    :filter(function(label, value)
+      return label ~= "opts" and label ~= "groups" and value.visible ~= false
+    end)
+    :each(function(label, v)
+      local description = v.description
+      if v._adapter_tool then
+        description = string.format("**%s** %s", adapter_info.name, description)
+      end
+
+      table.insert(items, {
+        label = triggers.mappings.tools .. label,
+        name = label,
+        type = "tool",
+        callback = v.callback,
+        detail = description,
+      })
+    end)
+
+  return items
+end
+
+---Determine the interaction type from the current buffer's filetype
+---@return string "chat"|"cli"
+function M.interaction_type()
+  if vim.bo.filetype == "codecompanion_input" then
+    return "cli"
+  end
+  return "chat"
+end
+
+---Return the editor context to be used for completion
+---@param interaction? string The interaction type to filter by (defaults to current buffer)
+---@return table
+function M.editor_context(interaction)
+  interaction = interaction or M.interaction_type()
+
+  _ec_cache_setup()
+  if _ec_cache[interaction] and _ec_cache_valid then
+    return _ec_cache[interaction]
+  end
+
+  local ec_config = config.interactions.shared.editor_context
+
+  local editor_context = vim
+    .iter(ec_config)
+    :filter(function(label, data)
+      if label == "opts" then
+        return false
+      end
+      local allowed = data.opts and data.opts.interactions
+      if allowed and not vim.tbl_contains(allowed, interaction) then
+        return false
+      end
+      return true
+    end)
+    :map(function(label, data)
+      return {
+        label = triggers.mappings.editor_context .. label,
+        detail = data.description,
+        type = "editor_context",
+      }
+    end)
+    :totable()
+
+  local open_buffers = buf_utils.get_open()
+
+  local name_counts = vim.iter(open_buffers):fold({}, function(acc, item)
+    acc[item.name] = (acc[item.name] or 0) + 1
+    return acc
+  end)
+
+  local buffers = vim
+    .iter(open_buffers)
+    :map(function(buf)
+      local name
+      if name_counts[buf.name] > 1 then
+        name = buf.path
+      else
+        name = buf.name
+      end
+
+      return {
+        label = triggers.mappings.editor_context .. "buffer:" .. name,
+        detail = "Path: " .. buf.path .. "\nBuffer: " .. buf.bufnr,
+        type = "editor_context",
+      }
+    end)
+    :totable()
+
+  _ec_cache[interaction] = vim.list_extend(editor_context, buffers)
+  _ec_cache_valid = true
+
+  return _ec_cache[interaction]
+end
+
+return M

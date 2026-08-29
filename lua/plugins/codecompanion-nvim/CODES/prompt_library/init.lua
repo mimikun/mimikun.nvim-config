@@ -1,0 +1,73 @@
+local M = {}
+
+local _prompts = {}
+
+---Load the builtin markdown prompts shipped with the plugin
+---@param context CodeCompanion.BufferContext
+---@return table
+function M.load_builtins(context)
+  local builtins_dir = vim.fn.fnamemodify(debug.getinfo(1).source:sub(2), ":h") .. "/builtins"
+  return require("codecompanion.prompt_library.markdown").load_from_dir(builtins_dir, context)
+end
+
+---Resolve the prompts in the prompt library with a view to displaying them in the action palette.
+---@param context table
+---@param config table
+---@return table
+function M.resolve(context, config)
+  _prompts = {}
+  local sort_index = true
+
+  for name, prompt in pairs(config.prompt_library) do
+    if config.display.action_palette.opts.show_prompt_library_builtins == false then
+      -- goto continue
+    end
+
+    if not prompt.opts or not prompt.opts.index then
+      if name == "markdown" then
+        prompt.opts = prompt.opts or {}
+        prompt.opts.index = 1
+      else
+        sort_index = false
+      end
+    end
+
+    if type(prompt.name) == "function" then
+      name = prompt.name(context)
+    end
+
+    local description = prompt.description
+    if type(prompt.description) == "function" then
+      description = prompt.description(context)
+    end
+    if prompt.opts and prompt.opts.slash_cmd then
+      description = description
+    end
+
+    table.insert(_prompts, {
+      condition = prompt.condition,
+      context = prompt.context,
+      description = description,
+      interaction = prompt.interaction or prompt.strategy,
+      mcp_servers = prompt.mcp_servers,
+      name = name,
+      opts = prompt.opts,
+      picker = prompt.picker,
+      prompts = prompt.prompts,
+      rules = prompt.rules,
+      tools = prompt.tools,
+    })
+
+    -- ::continue::
+  end
+
+  if sort_index then
+    table.sort(_prompts, function(a, b)
+      return a.opts.index < b.opts.index
+    end)
+  end
+
+  return _prompts
+end
+
+return M
