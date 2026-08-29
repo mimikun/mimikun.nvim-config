@@ -9,71 +9,66 @@
 
 -- Note: `snacks.setup()` defaults `enabled` to `true` for any key present in these opts, so `enabled = false` has to be spelled out to opt out.
 
----@type table
+---@type snacks.Config
 local opts = {
-  -- ==========================================================================
-  -- Group A: setup-driven.
-  -- `enabled` is honoured here.
-  -- ==========================================================================
+  -- Libraries used by the modules above (and usable directly):
+  -- `animate` is gated by `vim.g.snacks_animate`, not by this table.
+  ---@type snacks.animate.Config
+  animate = require("plugins.snacks-nvim.opts.animate"),
 
-  bigfile = {
-    enabled = true,
-  },
-
-  quickfile = {
-    enabled = true,
-  },
-
-  -- better `vim.ui.input`
-  input = {
-    enabled = true,
-  },
-
-  -- scope text objects / jumping
-  scope = {
-    enabled = true,
-  },
+  ---@type snacks.bigfile.Config
+  bigfile = require("plugins.snacks-nvim.opts.bigfile"),
 
   -- Disabled: another plugin in this config already owns the feature.
   -- alpha-nvim
-  dashboard = {
-    enabled = false,
-  },
+  ---@type snacks.dashboard.Config
+  dashboard = require("plugins.snacks-nvim.opts.dashboard"),
 
+  -- decided against, see above
+  -- twilight-nvim
+  ---@type  snacks.dim.Config
+  dim = require("plugins.snacks-nvim.opts.dim"),
+
+  -- Disabled: another plugin in this config already owns the feature.
   -- oil-nvim / fyler-nvim / triptych-nvim / otree-nvim
-  explorer = {
-    enabled = false,
-  },
+  ---@type snacks.explorer.Config
+  explorer = require("plugins.snacks-nvim.opts.explorer"),
 
+  -- Available, not mapped yet:
+  -- always registers the `gh://*` BufReadCmd, regardless of this table
+  ---@type snacks.gh.Config
+  gh = require("plugins.snacks-nvim.opts.gh"),
+
+  -- Already mapped in keys.lua:
+  ---@type snacks.gitbrowse.Config
+  gitbrowse = require("plugins.snacks-nvim.opts.gitbrowse"),
+
+  -- Disabled: another plugin in this config already owns the feature.
   -- image-nvim
-  image = {
-    enabled = false,
-  },
+  ---@type snacks.image.Config | {}
+  image = require("plugins.snacks-nvim.opts.image"),
 
+  -- Disabled: another plugin in this config already owns the feature.
   -- indent-blankline-nvim / virt-column-nvim
-  indent = {
-    enabled = false,
-  },
+  ---@type snacks.indent.Config
+  indent = require("plugins.snacks-nvim.opts.indent"),
 
+  -- better `vim.ui.input`
+  ---@type snacks.input.Config
+  input = require("plugins.snacks-nvim.opts.input"),
+
+  -- Available, not mapped yet:
+  -- Libraries used by the modules above (and usable directly):
+  ---@type snacks.layout.Config
+  layout = require("plugins.snacks-nvim.opts.layout"),
+
+  ---@type snacks.lazygit.Config
+  lazygit = require("plugins.snacks-nvim.opts.lazygit"),
+
+  ---@type snacks.notifier.Config
+  -- Disabled: another plugin in this config already owns the feature.
   -- nvim-notify
-  notifier = {
-    enabled = false,
-  },
-
-  -- smear-cursor-nvim
-  scroll = {
-    enabled = false,
-  },
-
-  -- statuscol-nvim
-  statuscolumn = {
-    enabled = false,
-  },
-
-  -- vim-illuminate
-  words = {
-    enabled = false,
-  },
+  notifier = require("plugins.snacks-nvim.opts.notifier"),
 
   -- On trial as the general-purpose picker, to be compared against telescope before settling.
   -- Reached through the `<leader>F` keymaps in `keys.lua`.
@@ -82,60 +77,60 @@ local opts = {
   -- telescope is already in the tree (pulled in as a dependency of ascii-nvim, chezmoi-nvim, github-actions-nvim, homeassistant-nvim, iwe-nvim, ...) and telescope-ui-select.nvim already owns `vim.ui.select`.
   -- Leaving this at its default would have both plugins assign it, with the winner decided by load order.
   -- Keep the trial to picker-vs-picker and leave `vim.ui.select` alone.
-  picker = {
-    enabled = true,
-    ui_select = false,
-  },
-
-  -- ==========================================================================
-  -- Group B: on-demand.
-  -- `enabled` is never read -- do not rely on it.
-  -- Left at defaults; reachable only through keys.lua or an explicit call.
-  -- ==========================================================================
-
-  -- Decided against: another plugin already owns the feature and stays the one we use.
-  -- Note that `enabled = false` would be inert here (see the header), so these are kept dormant purely by never mapping a key or calling them.
-  --   `zen`      -> zen-mode-nvim
-  --   `terminal` -> tabterm-nvim
-  -- Both entries are kept so this file stays a full inventory;
-  -- do not add keymaps for them.
-
-  -- twilight-nvim
-  dim = {},
-
-  -- decided against, see above
-  terminal = {},
-
-  -- decided against, see above
-  zen = {},
-
-  -- Already mapped in keys.lua:
-  gitbrowse = {},
-
-  lazygit = {},
-
-  scratch = {},
+  ---@type snacks.picker.Config
+  picker = require("plugins.snacks-nvim.opts.picker"),
 
   -- Available, not mapped yet:
+  ---@type snacks.profiler.Config
+  profiler = require("plugins.snacks-nvim.opts.profiler"),
 
-  -- always registers the `gh://*` BufReadCmd, regardless of this table
-  gh = {},
+  ---@type snacks.quickfile.Config
+  quickfile = require("plugins.snacks-nvim.opts.quickfile"),
 
-  profiler = {},
+  -- scope text objects / jumping
+  ---@type snacks.scope.Config
+  scope = require("plugins.snacks-nvim.opts.scope"),
 
+  ---@type snacks.scratch.Config
+  scratch = require("plugins.snacks-nvim.opts.scratch"),
+
+  -- Disabled: another plugin in this config already owns the feature.
+  -- smear-cursor-nvim
+  ---@type snacks.scroll.Config
+  scroll = require("plugins.snacks-nvim.opts.scroll"),
+
+  -- Disabled: another plugin in this config already owns the feature.
+  -- statuscol-nvim
+  ---@type snacks.statuscolumn.Config
+  statuscolumn = require("plugins.snacks-nvim.opts.statuscolumn"),
+
+  -- decided against, see above
+  -- tabterm-nvim
+  ---@type snacks.terminal.Config
+  terminal = require("plugins.snacks-nvim.opts.terminal"),
+
+  -- Available, not mapped yet:
   -- which-key-nvim integrated toggles
-  toggle = {},
+  ---@type snacks.toggle.Config
+  toggle = require("plugins.snacks-nvim.opts.toggle"),
 
+  -- Available, not mapped yet:
   -- Libraries used by the modules above (and usable directly):
-  -- `animate` is gated by `vim.g.snacks_animate`, not by this table.
-  animate = {},
+  ---@type snacks.win.Config
+  win = require("plugins.snacks-nvim.opts.win"),
 
-  layout = {},
+  -- Disabled: another plugin in this config already owns the feature.
+  -- vim-illuminate
+  ---@type snacks.words.Config
+  words = require("plugins.snacks-nvim.opts.words"),
 
-  win = {},
+  -- decided against, see above
+  -- zen-mode-nvim
+  ---@type snacks.zen.Config
+  zen = require("plugins.snacks-nvim.opts.zen"),
+
+  -- Modules with no config surface at all, hence no key here:
+  --   bufdelete, debug, git, keymap, notify, rename, util
 }
-
--- Modules with no config surface at all, hence no key here:
---   bufdelete, debug, git, keymap, notify, rename, util
 
 return opts
