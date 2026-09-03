@@ -1,0 +1,62 @@
+lua/plugins/render-markdown-nvim/opts/anti_conceal.lua
+  h_220433a6faf6b8 45-131
+lua/plugins/render-markdown-nvim/opts/bullet.lua
+  h_220433a6faf6b8 66-163
+lua/plugins/render-markdown-nvim/opts/callout.lua
+  h_220433a6faf6b8 184-252
+lua/plugins/render-markdown-nvim/opts/checkbox.lua
+  h_220433a6faf6b8 84-182
+lua/plugins/render-markdown-nvim/opts/code.lua
+  h_220433a6faf6b8 178-394
+lua/plugins/render-markdown-nvim/opts/completions.lua
+  h_220433a6faf6b8 40-95
+lua/plugins/render-markdown-nvim/opts/custom_handlers.lua
+  h_220433a6faf6b8 8-40
+lua/plugins/render-markdown-nvim/opts/dash.lua
+  h_220433a6faf6b8 41-104
+lua/plugins/render-markdown-nvim/opts/document.lua
+  h_220433a6faf6b8 24-61
+lua/plugins/render-markdown-nvim/opts/heading.lua
+  h_220433a6faf6b8 140-331
+lua/plugins/render-markdown-nvim/opts/html.lua
+  h_220433a6faf6b8 41-118
+lua/plugins/render-markdown-nvim/opts/indent.lua
+  h_220433a6faf6b8 39-85
+lua/plugins/render-markdown-nvim/opts/injections.lua
+  h_220433a6faf6b8 22-59
+lua/plugins/render-markdown-nvim/opts/inline_highlight.lua
+  h_220433a6faf6b8 29-73
+lua/plugins/render-markdown-nvim/opts/latex.lua
+  h_220433a6faf6b8 46-105
+lua/plugins/render-markdown-nvim/opts/link.lua
+  h_220433a6faf6b8 208-395
+lua/plugins/render-markdown-nvim/opts/on.lua
+  h_220433a6faf6b8 29-68
+lua/plugins/render-markdown-nvim/opts/overrides.lua
+  h_220433a6faf6b8 37-84
+lua/plugins/render-markdown-nvim/opts/padding.lua
+  h_220433a6faf6b8 9-25
+lua/plugins/render-markdown-nvim/opts/paragraph.lua
+  h_220433a6faf6b8 31-77
+lua/plugins/render-markdown-nvim/opts/patterns.lua
+  h_220433a6faf6b8 26-70
+lua/plugins/render-markdown-nvim/opts/pipe_table.lua
+  h_220433a6faf6b8 86-199
+lua/plugins/render-markdown-nvim/opts/quote.lua
+  h_220433a6faf6b8 39-87
+lua/plugins/render-markdown-nvim/opts/render.lua
+  h_220433a6faf6b8 9-29
+lua/plugins/render-markdown-nvim/opts/sign.lua
+  h_220433a6faf6b8 17-45
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.0",
+  "base_commit_sha": "8264ef936213968b3ed4faadd28833bfb1fe7263",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
