@@ -1,0 +1,16 @@
+lua/plugins/render-markdown-nvim/opts/checkbox.lua
+  h_220433a6faf6b8 46-49,51-56
+lua/plugins/render-markdown-nvim/opts/pipe_table.lua
+  h_220433a6faf6b8 10-14,18-22,69-72
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.0",
+  "base_commit_sha": "379ee10cf12e28103381a3439f013d865e3cf17b",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
