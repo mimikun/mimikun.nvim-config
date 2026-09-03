@@ -1,0 +1,14 @@
+lua/plugins/render-markdown-nvim/opts/custom_handlers.lua
+  h_220433a6faf6b8 5-12
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.0",
+  "base_commit_sha": "b650547376a32f7477622646e37f13b5fbf6ba51",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
