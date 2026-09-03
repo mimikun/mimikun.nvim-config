@@ -1,0 +1,38 @@
+lua/plugins/render-markdown-nvim/opts/docs/README.Block-Quotes.md
+  h_220433a6faf6b8 1-37
+lua/plugins/render-markdown-nvim/opts/docs/README.Callouts.md
+  h_220433a6faf6b8 1-48
+lua/plugins/render-markdown-nvim/opts/docs/README.Checkboxes.md
+  h_220433a6faf6b8 1-54
+lua/plugins/render-markdown-nvim/opts/docs/README.Code-Blocks.md
+  h_220433a6faf6b8 1-109
+lua/plugins/render-markdown-nvim/opts/docs/README.Dashed-Line.md
+  h_220433a6faf6b8 1-36
+lua/plugins/render-markdown-nvim/opts/docs/README.Headings.md
+  h_220433a6faf6b8 1-98
+lua/plugins/render-markdown-nvim/opts/docs/README.Indent.md
+  h_220433a6faf6b8 1-32
+lua/plugins/render-markdown-nvim/opts/docs/README.Links.md
+  h_220433a6faf6b8 1-97
+lua/plugins/render-markdown-nvim/opts/docs/README.List-Bullets.md
+  h_220433a6faf6b8 1-50
+lua/plugins/render-markdown-nvim/opts/docs/README.Paragraphs.md
+  h_220433a6faf6b8 1-30
+lua/plugins/render-markdown-nvim/opts/docs/README.Signs.md
+  h_220433a6faf6b8 1-18
+lua/plugins/render-markdown-nvim/opts/docs/README.Tables.md
+  h_220433a6faf6b8 1-61
+lua/plugins/render-markdown-nvim/opts/docs/README.others.md
+  h_220433a6faf6b8 1-84
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.0",
+  "base_commit_sha": "9f9d1657ee6c447291b529064db697d18a814088",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
