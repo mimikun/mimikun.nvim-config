@@ -1,0 +1,18 @@
+lua/plugins/render-markdown-nvim/opts/link.lua
+  h_220433a6faf6b8 10,13,17,22,28,32,36,41,45,49,53,57,61,65,68,72,76,80-81,86,90,105,112,114,116
+lua/plugins/render-markdown-nvim/opts/on.lua
+  h_220433a6faf6b8 4-7,10-13,16-19,22-25
+lua/plugins/render-markdown-nvim/opts/overrides.lua
+  h_220433a6faf6b8 11,15,26,30
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.0",
+  "base_commit_sha": "3fed860b566ba19a3fce25b384dc08d10ea702fe",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
