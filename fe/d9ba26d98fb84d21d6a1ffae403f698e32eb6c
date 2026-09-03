@@ -1,0 +1,14 @@
+lua/plugins/render-markdown-nvim/opts/anti_conceal.lua
+  h_220433a6faf6b8 4,8,12,16,35
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.0",
+  "base_commit_sha": "fed9ba26d98fb84d21d6a1ffae403f698e32eb6c",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
