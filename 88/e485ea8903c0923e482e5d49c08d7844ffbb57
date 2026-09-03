@@ -1,0 +1,54 @@
+lua/plugins/render-markdown-nvim/opts/anti_conceal.lua
+  h_220433a6faf6b8 2-37
+lua/plugins/render-markdown-nvim/opts/callout.lua
+  h_220433a6faf6b8 2-174
+lua/plugins/render-markdown-nvim/opts/completions.lua
+  h_220433a6faf6b8 2-28
+lua/plugins/render-markdown-nvim/opts/custom_handlers.lua
+  h_220433a6faf6b8 2-5
+lua/plugins/render-markdown-nvim/opts/dash.lua
+  h_220433a6faf6b8 2-33
+lua/plugins/render-markdown-nvim/opts/default.md
+  h_220433a6faf6b8 89,188,230,274
+lua/plugins/render-markdown-nvim/opts/document.lua
+  h_220433a6faf6b8 2-18
+lua/plugins/render-markdown-nvim/opts/html.lua
+  h_220433a6faf6b8 2-33
+lua/plugins/render-markdown-nvim/opts/indent.lua
+  h_220433a6faf6b8 2-30
+lua/plugins/render-markdown-nvim/opts/inline_highlight.lua
+  h_220433a6faf6b8 2-4,6-22
+lua/plugins/render-markdown-nvim/opts/latex.lua
+  h_220433a6faf6b8 2-37
+lua/plugins/render-markdown-nvim/opts/link.lua
+  h_220433a6faf6b8 2-181
+lua/plugins/render-markdown-nvim/opts/on.lua
+  h_220433a6faf6b8 2-14
+lua/plugins/render-markdown-nvim/opts/overrides.lua
+  h_220433a6faf6b8 2-30
+lua/plugins/render-markdown-nvim/opts/padding.lua
+  h_220433a6faf6b8 2-5
+lua/plugins/render-markdown-nvim/opts/paragraph.lua
+  h_220433a6faf6b8 2-25
+lua/plugins/render-markdown-nvim/opts/quote.lua
+  h_220433a6faf6b8 2-33
+lua/plugins/render-markdown-nvim/opts/render.lua
+  h_220433a6faf6b8 2-5
+lua/plugins/render-markdown-nvim/opts/sign.lua
+  h_220433a6faf6b8 2-11
+lua/plugins/render-markdown-nvim/opts/win_options.lua
+  h_220433a6faf6b8 2-22
+lua/plugins/render-markdown-nvim/opts/yaml.lua
+  h_220433a6faf6b8 2-8
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.0",
+  "base_commit_sha": "88e485ea8903c0923e482e5d49c08d7844ffbb57",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
