@@ -1,0 +1,20 @@
+lua/plugins/render-markdown-nvim/opts/completions.lua
+  h_220433a6faf6b8 4,6,11,13,18,20,24,26-27,32-33
+lua/plugins/render-markdown-nvim/opts/dash.lua
+  h_220433a6faf6b8 14,23,28,32,36
+lua/plugins/render-markdown-nvim/opts/document.lua
+  h_220433a6faf6b8 11,14,18
+lua/plugins/render-markdown-nvim/opts/heading.lua
+  h_220433a6faf6b8 14,18,22,29,44,49,58,65,70,75,80,85,89,93,97,101,106,118,135
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.0",
+  "base_commit_sha": "7c8edcbaa797c6eae6199455130b5a45f30d9ba8",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
