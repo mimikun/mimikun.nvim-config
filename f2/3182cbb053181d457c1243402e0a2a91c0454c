@@ -1,0 +1,92 @@
+lua/plugins/real-icons-nvim/CODES/.gitignore
+  h_220433a6faf6b8 1-6
+lua/plugins/real-icons-nvim/CODES/LICENSE
+  h_220433a6faf6b8 1-22
+lua/plugins/real-icons-nvim/CODES/Makefile
+  h_220433a6faf6b8 1-4
+lua/plugins/real-icons-nvim/CODES/README.md
+  h_220433a6faf6b8 1-325
+lua/plugins/real-icons-nvim/CODES/THIRD_PARTY.md
+  h_220433a6faf6b8 1-29
+lua/plugins/real-icons-nvim/CODES/doc/real-icons.txt
+  h_220433a6faf6b8 1-531
+lua/plugins/real-icons-nvim/CODES/doc/tags
+  h_220433a6faf6b8 1-10
+lua/plugins/real-icons-nvim/CODES/lua/real-icons/assets.lua
+  h_220433a6faf6b8 1-32
+lua/plugins/real-icons-nvim/CODES/lua/real-icons/backend/kitty.lua
+  h_220433a6faf6b8 1-328
+lua/plugins/real-icons-nvim/CODES/lua/real-icons/cache/init.lua
+  h_220433a6faf6b8 1-561
+lua/plugins/real-icons-nvim/CODES/lua/real-icons/command.lua
+  h_220433a6faf6b8 1-267
+lua/plugins/real-icons-nvim/CODES/lua/real-icons/config.lua
+  h_220433a6faf6b8 1-60
+lua/plugins/real-icons-nvim/CODES/lua/real-icons/fallback.lua
+  h_220433a6faf6b8 1-144
+lua/plugins/real-icons-nvim/CODES/lua/real-icons/health.lua
+  h_220433a6faf6b8 1-198
+lua/plugins/real-icons-nvim/CODES/lua/real-icons/init.lua
+  h_220433a6faf6b8 1-354
+lua/plugins/real-icons-nvim/CODES/lua/real-icons/integrations/bufferline.lua
+  h_220433a6faf6b8 1-61
+lua/plugins/real-icons-nvim/CODES/lua/real-icons/integrations/fzf_lua.lua
+  h_220433a6faf6b8 1-461
+lua/plugins/real-icons-nvim/CODES/lua/real-icons/integrations/lualine.lua
+  h_220433a6faf6b8 1-156
+lua/plugins/real-icons-nvim/CODES/lua/real-icons/integrations/mini_files.lua
+  h_220433a6faf6b8 1-71
+lua/plugins/real-icons-nvim/CODES/lua/real-icons/integrations/neo_tree.lua
+  h_220433a6faf6b8 1-84
+lua/plugins/real-icons-nvim/CODES/lua/real-icons/integrations/nvim_tree.lua
+  h_220433a6faf6b8 1-240
+lua/plugins/real-icons-nvim/CODES/lua/real-icons/integrations/oil.lua
+  h_220433a6faf6b8 1-210
+lua/plugins/real-icons-nvim/CODES/lua/real-icons/integrations/snacks_picker.lua
+  h_220433a6faf6b8 1-119
+lua/plugins/real-icons-nvim/CODES/lua/real-icons/integrations/telescope.lua
+  h_220433a6faf6b8 1-100
+lua/plugins/real-icons-nvim/CODES/lua/real-icons/integrations/telescope_file_browser.lua
+  h_220433a6faf6b8 1-266
+lua/plugins/real-icons-nvim/CODES/lua/real-icons/log.lua
+  h_220433a6faf6b8 1-15
+lua/plugins/real-icons-nvim/CODES/lua/real-icons/packs/discovery.lua
+  h_220433a6faf6b8 1-160
+lua/plugins/real-icons-nvim/CODES/lua/real-icons/packs/init.lua
+  h_220433a6faf6b8 1-257
+lua/plugins/real-icons-nvim/CODES/lua/real-icons/packs/loaders/builtin.lua
+  h_220433a6faf6b8 1-54
+lua/plugins/real-icons-nvim/CODES/lua/real-icons/packs/loaders/simple.lua
+  h_220433a6faf6b8 1-61
+lua/plugins/real-icons-nvim/CODES/lua/real-icons/packs/loaders/vscode.lua
+  h_220433a6faf6b8 1-84
+lua/plugins/real-icons-nvim/CODES/lua/real-icons/packs/util.lua
+  h_220433a6faf6b8 1-76
+lua/plugins/real-icons-nvim/CODES/lua/real-icons/path.lua
+  h_220433a6faf6b8 1-73
+lua/plugins/real-icons-nvim/CODES/lua/real-icons/render/placeholder.lua
+  h_220433a6faf6b8 1-242
+lua/plugins/real-icons-nvim/CODES/lua/real-icons/resolver.lua
+  h_220433a6faf6b8 1-334
+lua/plugins/real-icons-nvim/CODES/lua/real-icons/rules.lua
+  h_220433a6faf6b8 1-114
+lua/plugins/real-icons-nvim/CODES/lua/real-icons/ui/select_pack.lua
+  h_220433a6faf6b8 1-248
+lua/plugins/real-icons-nvim/CODES/plugin/real-icons.lua
+  h_220433a6faf6b8 1-6
+lua/plugins/real-icons-nvim/CODES/tests/minimal_init.lua
+  h_220433a6faf6b8 1-6
+lua/plugins/real-icons-nvim/CODES/tests/run.lua
+  h_220433a6faf6b8 1-1046
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.21",
+  "base_commit_sha": "f23182cbb053181d457c1243402e0a2a91c0454c",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
