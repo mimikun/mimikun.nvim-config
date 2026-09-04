@@ -1,0 +1,18 @@
+lua/plugins/weborigami-nvim/events.lua
+  h_220433a6faf6b8 1-6
+lua/plugins/weborigami-nvim/init.lua
+  h_220433a6faf6b8 1-2,3,4,5,6,7,8-13,14-16
+lua/plugins/weborigami-nvim/opts.lua
+  h_220433a6faf6b8 1,2,3-16,17-18,19,20,21,22-23,24-25,26,27-31,32-34,35,36,37-43,44,45,46,47,48,49,50-51,52,53-54,55-56,57-59
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.21",
+  "base_commit_sha": "c1bb68f547dc6324b484a56d21d12f20d102ba1f",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
