@@ -1,0 +1,28 @@
+lua/plugins/render-markdown-nvim/opts/Block-Quotes.md
+  h_220433a6faf6b8 3,13,23
+lua/plugins/render-markdown-nvim/opts/Code-Blocks.md
+  h_220433a6faf6b8 3,13,27,37,47,61,74,89,104,118
+lua/plugins/render-markdown-nvim/opts/Headings.md
+  h_220433a6faf6b8 3
+lua/plugins/render-markdown-nvim/opts/Links.md
+  h_220433a6faf6b8 3
+lua/plugins/render-markdown-nvim/opts/List-Bullets.md
+  h_220433a6faf6b8 3
+lua/plugins/render-markdown-nvim/opts/Paragraphs.md
+  h_220433a6faf6b8 3
+lua/plugins/render-markdown-nvim/opts/Signs.md
+  h_220433a6faf6b8 3
+lua/plugins/render-markdown-nvim/opts/Tables.md
+  h_220433a6faf6b8 3
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.0",
+  "base_commit_sha": "083153f518c34aea8ea48b1e6d733a0374a721c4",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
