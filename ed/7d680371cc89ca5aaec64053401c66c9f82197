@@ -1,0 +1,34 @@
+lua/plugins/bloocky/cmds.lua
+  h_220433a6faf6b8 1-2,3-5,6-8
+lua/plugins/bloocky/dependencies.lua
+  h_220433a6faf6b8 1-2,3,4-6
+lua/plugins/bloocky/events.lua
+  h_220433a6faf6b8 1-6
+lua/plugins/bloocky/init.lua
+  h_220433a6faf6b8 1-4,5-6,7,8,9,10-15,16-18
+lua/plugins/bloocky/keys.lua
+  h_220433a6faf6b8 1-3,4,5,6,7-9,10,11-12,13-17
+lua/plugins/bloocky/opts/hours.lua
+  h_220433a6faf6b8 1-10
+lua/plugins/bloocky/opts/icons.lua
+  h_220433a6faf6b8 1-7
+lua/plugins/bloocky/opts/init.lua
+  h_220433a6faf6b8 15,20,22,25,27
+lua/plugins/bloocky/opts/integrations.lua
+  h_220433a6faf6b8 1-12
+lua/plugins/bloocky/opts/keymaps.lua
+  h_220433a6faf6b8 1-30
+lua/plugins/bloocky/opts/window.lua
+  h_220433a6faf6b8 1-12
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.21",
+  "base_commit_sha": "ed7d680371cc89ca5aaec64053401c66c9f82197",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
