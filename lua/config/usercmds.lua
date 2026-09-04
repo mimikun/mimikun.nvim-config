@@ -204,3 +204,12 @@ end, {
     return plugin_names(collect(vim.api.nvim_get_current_buf()), lead)
   end,
 })
+
+-- :TSStatus -- nvim-treesitter installs parsers asynchronously and reports the
+-- result only through :TSLog, so "did all of them finish?" has no answer while
+-- the session is running. lua/tsstatus renders that answer as a screen.
+vim.api.nvim_create_user_command("TSStatus", function()
+  require("tsstatus").open()
+end, {
+  desc = "Show tree-sitter parser install status (installed / outdated / missing)",
+})
