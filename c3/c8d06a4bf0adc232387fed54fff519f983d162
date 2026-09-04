@@ -1,0 +1,16 @@
+lua/plugins/markview-nvim/opts/Typst.md
+  h_220433a6faf6b8 2-3,49-50,83-84,101-102,180-181,209-210,278-279,310-311,332-333,409-410,431-432,465-466,491-492,517-518,539-540,576-577,778-779
+lua/plugins/markview-nvim/opts/typst.lua
+  h_220433a6faf6b8 10-12,16-18,22-24,28-30,34-36,40-42,46-48,52-54,58-60,64-66,70-72,76-78,82-84,88-90,94-96,100-102
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.0",
+  "base_commit_sha": "c3c8d06a4bf0adc232387fed54fff519f983d162",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
