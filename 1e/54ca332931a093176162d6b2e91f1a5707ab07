@@ -1,0 +1,16 @@
+lua/plugins/render-markdown-nvim/opts/docs/Indent.md
+  h_220433a6faf6b8 37-131
+lua/plugins/render-markdown-nvim/opts/docs/Links.md
+  h_220433a6faf6b8 102-225
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.0",
+  "base_commit_sha": "1e54ca332931a093176162d6b2e91f1a5707ab07",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
