@@ -1,0 +1,14 @@
+lua/plugins/render-markdown-nvim/opts/docs/Block-Quotes.md
+  h_220433a6faf6b8 3-44,60,83,93,103
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.0",
+  "base_commit_sha": "11c9fb90dcd970c1595209566e1f4e7e12a4575b",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
