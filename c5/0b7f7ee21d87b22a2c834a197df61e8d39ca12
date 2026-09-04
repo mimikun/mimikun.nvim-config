@@ -1,0 +1,14 @@
+lua/plugins/render-markdown-nvim/opts/docs/Tables.md
+  h_220433a6faf6b8 3-4,64-214
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.0",
+  "base_commit_sha": "c50b7f7ee21d87b22a2c834a197df61e8d39ca12",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
