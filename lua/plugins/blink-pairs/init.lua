@@ -2,7 +2,9 @@
 local spec = {
   "saghen/blink.pairs",
   --lazy = false,
-  version = "*",
+  -- NOTE: Do not set `version`. `blink.lib` publishes no tags, so it always
+  -- tracks `main`. Pinning this to the latest tag strands it on an older
+  -- `blink.lib` config API and breaks setup at startup.
   build = function()
     -- download prebuilt binaries from github releases, must be on a versioned release
     --require("blink.pairs").download():pwait(60000)
