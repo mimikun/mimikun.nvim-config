@@ -24,9 +24,6 @@ local highlights = {
   ---@type number
   priority = 200,
 
-  ---@type integer
-  ns = vim.api.nvim_create_namespace("blink.pairs"),
-
   -- highlights matching pairs under the cursor
   ---@type blink.pairs.MatchparenConfig
   matchparen = {
