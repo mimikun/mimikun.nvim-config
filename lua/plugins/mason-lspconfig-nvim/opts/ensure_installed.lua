@@ -127,7 +127,8 @@ local ensure_installed = {
   -- helm, yaml.helm-values
   --"helm_ls",
   -- haskell, lhaskell
-  "hls",
+  -- NOTE: needs ghcup in PATH to build
+  --"hls",
   -- hoon
   --"hoon_ls",
   -- html
