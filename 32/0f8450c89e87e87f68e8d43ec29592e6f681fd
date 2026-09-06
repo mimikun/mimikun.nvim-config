@@ -1,0 +1,26 @@
+lua/plugins/markview-nvim/opts/html/stylua.toml
+  h_220433a6faf6b8 1-13
+lua/plugins/markview-nvim/opts/latex/stylua.toml
+  h_220433a6faf6b8 1-13
+lua/plugins/markview-nvim/opts/markdown/stylua.toml
+  h_220433a6faf6b8 1-13
+lua/plugins/markview-nvim/opts/markdown_inline/stylua.toml
+  h_220433a6faf6b8 1-13
+lua/plugins/markview-nvim/opts/preview/stylua.toml
+  h_220433a6faf6b8 1-13
+lua/plugins/markview-nvim/opts/typst/stylua.toml
+  h_220433a6faf6b8 1-13
+lua/plugins/markview-nvim/opts/yaml/stylua.toml
+  h_220433a6faf6b8 1-13
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "320f8450c89e87e87f68e8d43ec29592e6f681fd",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
