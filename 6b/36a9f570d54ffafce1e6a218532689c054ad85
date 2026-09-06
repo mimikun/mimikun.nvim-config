@@ -1,0 +1,16 @@
+lua/plugins/md-render-nvim/dependencies.lua
+  h_220433a6faf6b8 3-4
+lua/plugins/md-render-nvim/init.lua
+  h_220433a6faf6b8 11-19
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "6b36a9f570d54ffafce1e6a218532689c054ad85",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
