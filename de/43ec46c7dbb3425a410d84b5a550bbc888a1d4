@@ -1,0 +1,16 @@
+lua/plugins/md-render-nvim/opts/stylua.toml
+  h_220433a6faf6b8 1-13
+lua/plugins/md-render-nvim/stylua.toml
+  h_220433a6faf6b8 1-13
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "de43ec46c7dbb3425a410d84b5a550bbc888a1d4",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
