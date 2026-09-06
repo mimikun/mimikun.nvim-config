@@ -1,0 +1,20 @@
+lua/plugins/encore-nvim/README.md
+  h_220433a6faf6b8 1,20-21
+lua/plugins/encore-nvim/cmds.lua
+  h_220433a6faf6b8 3
+lua/plugins/encore-nvim/init.lua
+  h_220433a6faf6b8 5,7,9-12
+lua/plugins/encore-nvim/opts.lua
+  h_220433a6faf6b8 1-2,4-106
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "429bb149b8be288f925e6747cf3b996f78831326",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
