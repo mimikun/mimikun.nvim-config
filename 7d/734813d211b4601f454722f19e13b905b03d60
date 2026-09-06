@@ -1,0 +1,18 @@
+lua/plugins/projecthub-nvim/README.md
+  h_220433a6faf6b8 3,32-34,71,75,77,184,268
+lua/plugins/projecthub-nvim/cmds.lua
+  h_220433a6faf6b8 3-23
+lua/plugins/projecthub-nvim/init.lua
+  h_220433a6faf6b8 20
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "7d734813d211b4601f454722f19e13b905b03d60",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
