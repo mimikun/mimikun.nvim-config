@@ -1,0 +1,16 @@
+lua/plugins/markview-nvim/opts/Preview.md
+  h_220433a6faf6b8 1,3,5,7,31,33,43,45,56,58,70,78,110,141,149,164,176,190,202,218
+lua/plugins/markview-nvim/opts/preview.lua
+  h_220433a6faf6b8 66-69
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "e213bd349e99694bcc92b1c7bf02063497cc0d20",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
