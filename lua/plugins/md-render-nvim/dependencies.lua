@@ -1,8 +1,8 @@
 ---@type LazySpec[]
 local dependencies = {
-  "nvim-tree/nvim-web-devicons",
+  --"nvim-tree/nvim-web-devicons",
+  "nvim-mini/mini.icons",
   "delphinus/budoux.lua",
-  --"echasnovski/mini.icons",
   --"folke/snacks.nvim",
   --"nvim-telescope/telescope.nvim",
 }
