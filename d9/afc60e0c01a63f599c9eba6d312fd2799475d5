@@ -1,0 +1,24 @@
+lua/plugins/markview-nvim/opts/WIKIS/Asciidoc-inline.md
+  h_220433a6faf6b8 15
+lua/plugins/markview-nvim/opts/WIKIS/Asciidoc.md
+  h_220433a6faf6b8 21,208,336
+lua/plugins/markview-nvim/opts/WIKIS/Comment.md
+  h_220433a6faf6b8 371,453,574,608,644,680,868,904,1239
+lua/plugins/markview-nvim/opts/WIKIS/Extras.md
+  h_220433a6faf6b8 7-8,69-70,84-86,115-116,147
+lua/plugins/markview-nvim/opts/WIKIS/Integrations.md
+  h_220433a6faf6b8 5-6,17-18,21,28-29,44-45,63-64,88-89,100-101,110-111,126-127,170
+lua/plugins/markview-nvim/opts/WIKIS/Presets.md
+  h_220433a6faf6b8 5-6,27-28,31,43,69-70,73,85,115-116,119,131,153,155,161,169-170,173,177,189
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "d9afc60e0c01a63f599c9eba6d312fd2799475d5",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
