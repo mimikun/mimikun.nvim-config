@@ -1,0 +1,14 @@
+lua/plugins/projecthub-nvim/readme.lua
+  h_220433a6faf6b8 1-95
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "10f2e5a08824a672e624d0e78237b3f6f7406acf",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
