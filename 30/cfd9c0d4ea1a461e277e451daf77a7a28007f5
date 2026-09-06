@@ -1,0 +1,54 @@
+lua/plugins/md-render-nvim/CODES/command.lua
+  h_220433a6faf6b8 1-127
+lua/plugins/md-render-nvim/CODES/content_builder.lua
+  h_220433a6faf6b8 1-3183
+lua/plugins/md-render-nvim/CODES/display_utils.lua
+  h_220433a6faf6b8 1-1368
+lua/plugins/md-render-nvim/CODES/float_win.lua
+  h_220433a6faf6b8 1-41
+lua/plugins/md-render-nvim/CODES/icons.lua
+  h_220433a6faf6b8 1-169
+lua/plugins/md-render-nvim/CODES/image.lua
+  h_220433a6faf6b8 1-2009
+lua/plugins/md-render-nvim/CODES/init.lua
+  h_220433a6faf6b8 1-162
+lua/plugins/md-render-nvim/CODES/markdown.lua
+  h_220433a6faf6b8 1-1721
+lua/plugins/md-render-nvim/CODES/markdown_table.lua
+  h_220433a6faf6b8 1-1033
+lua/plugins/md-render-nvim/CODES/obsidian.lua
+  h_220433a6faf6b8 1-154
+lua/plugins/md-render-nvim/CODES/plugin.md-render.lua
+  h_220433a6faf6b8 1-70
+lua/plugins/md-render-nvim/CODES/preview.lua
+  h_220433a6faf6b8 1-2634
+lua/plugins/md-render-nvim/CODES/snacks.lua
+  h_220433a6faf6b8 1-210
+lua/plugins/md-render-nvim/CODES/tab_win.lua
+  h_220433a6faf6b8 1-48
+lua/plugins/md-render-nvim/CODES/telescope.lua
+  h_220433a6faf6b8 1-261
+lua/plugins/md-render-nvim/CODES/telescope.md_render.lua
+  h_220433a6faf6b8 1-35
+lua/plugins/md-render-nvim/CODES/text_size.lua
+  h_220433a6faf6b8 1-1173
+lua/plugins/md-render-nvim/CODES/tty.lua
+  h_220433a6faf6b8 1-254
+lua/plugins/md-render-nvim/CODES/url_hover.lua
+  h_220433a6faf6b8 1-242
+lua/plugins/md-render-nvim/CODES/wrap.lua
+  h_220433a6faf6b8 1-925
+lua/plugins/md-render-nvim/README.md
+  h_220433a6faf6b8 1-487
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "30cfd9c0d4ea1a461e277e451daf77a7a28007f5",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
