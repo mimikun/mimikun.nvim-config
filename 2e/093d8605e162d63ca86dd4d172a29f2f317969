@@ -1,0 +1,62 @@
+lua/plugins/encore-nvim/CODES/.github/workflows/docgen.yml
+  h_220433a6faf6b8 1-42
+lua/plugins/encore-nvim/CODES/.github/workflows/tests.yml
+  h_220433a6faf6b8 1-53
+lua/plugins/encore-nvim/CODES/.gitignore
+  h_220433a6faf6b8 1-6
+lua/plugins/encore-nvim/CODES/.stylua.toml
+  h_220433a6faf6b8 1-6
+lua/plugins/encore-nvim/CODES/AGENTS.md
+  h_220433a6faf6b8 1-89
+lua/plugins/encore-nvim/CODES/LICENSE
+  h_220433a6faf6b8 1-232
+lua/plugins/encore-nvim/CODES/Makefile
+  h_220433a6faf6b8 1-6
+lua/plugins/encore-nvim/CODES/README.md
+  h_220433a6faf6b8 1-262
+lua/plugins/encore-nvim/CODES/doc/encore.txt
+  h_220433a6faf6b8 1-325
+lua/plugins/encore-nvim/CODES/lua/encore/annotations.lua
+  h_220433a6faf6b8 1-98
+lua/plugins/encore-nvim/CODES/lua/encore/config.lua
+  h_220433a6faf6b8 1-128
+lua/plugins/encore-nvim/CODES/lua/encore/engine.lua
+  h_220433a6faf6b8 1-481
+lua/plugins/encore-nvim/CODES/lua/encore/help.lua
+  h_220433a6faf6b8 1-105
+lua/plugins/encore-nvim/CODES/lua/encore/highlight.lua
+  h_220433a6faf6b8 1-42
+lua/plugins/encore-nvim/CODES/lua/encore/history.lua
+  h_220433a6faf6b8 1-371
+lua/plugins/encore-nvim/CODES/lua/encore/hud.lua
+  h_220433a6faf6b8 1-272
+lua/plugins/encore-nvim/CODES/lua/encore/init.lua
+  h_220433a6faf6b8 1-146
+lua/plugins/encore-nvim/CODES/lua/encore/render.lua
+  h_220433a6faf6b8 1-447
+lua/plugins/encore-nvim/CODES/lua/encore/report.lua
+  h_220433a6faf6b8 1-755
+lua/plugins/encore-nvim/CODES/lua/encore/ui.lua
+  h_220433a6faf6b8 1-113
+lua/plugins/encore-nvim/CODES/tests/config_spec.lua
+  h_220433a6faf6b8 1-18
+lua/plugins/encore-nvim/CODES/tests/engine_steps.lua
+  h_220433a6faf6b8 1-561
+lua/plugins/encore-nvim/CODES/tests/minimal_init.lua
+  h_220433a6faf6b8 1-14
+lua/plugins/encore-nvim/CODES/tests/render_spec.lua
+  h_220433a6faf6b8 1-140
+lua/plugins/encore-nvim/CODES/tests/run_engine.py
+  h_220433a6faf6b8 1-85
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "2e093d8605e162d63ca86dd4d172a29f2f317969",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
