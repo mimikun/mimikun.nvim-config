@@ -1,0 +1,30 @@
+lua/plugins/encore-nvim/.editorconfig
+  h_220433a6faf6b8 1-14
+lua/plugins/encore-nvim/cmds.lua
+  h_220433a6faf6b8 1-6
+lua/plugins/encore-nvim/dependencies.lua
+  h_220433a6faf6b8 1-16
+lua/plugins/encore-nvim/events.lua
+  h_220433a6faf6b8 1-6
+lua/plugins/encore-nvim/ft.lua
+  h_220433a6faf6b8 1-6
+lua/plugins/encore-nvim/init.lua
+  h_220433a6faf6b8 1-37
+lua/plugins/encore-nvim/keys.lua
+  h_220433a6faf6b8 1-23
+lua/plugins/encore-nvim/opts.lua
+  h_220433a6faf6b8 1-6
+lua/plugins/encore-nvim/stylua.toml
+  h_220433a6faf6b8 1-13
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "2ba94ec0c6b6d6915be90576ada2e099f4f8c71f",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
