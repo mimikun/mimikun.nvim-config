@@ -1,0 +1,40 @@
+lua/plugins/projecthub-nvim/opts/bkp.lua
+  h_220433a6faf6b8 1-120
+lua/plugins/projecthub-nvim/opts/bots.lua
+  h_220433a6faf6b8 1-55
+lua/plugins/projecthub-nvim/opts/extra.lua
+  h_220433a6faf6b8 1-120
+lua/plugins/projecthub-nvim/opts/github.lua
+  h_220433a6faf6b8 1-120
+lua/plugins/projecthub-nvim/opts/hoge
+  h_220433a6faf6b8 1-2
+lua/plugins/projecthub-nvim/opts/icons.lua
+  h_220433a6faf6b8 1-120
+lua/plugins/projecthub-nvim/opts/incoming.lua
+  h_220433a6faf6b8 1-120
+lua/plugins/projecthub-nvim/opts/init.lua
+  h_220433a6faf6b8 4,7-8,11,14,17,19,22,26,28,30-34,36-40,42-44,46-51
+lua/plugins/projecthub-nvim/opts/me.lua
+  h_220433a6faf6b8 1-120
+lua/plugins/projecthub-nvim/opts/polling.lua
+  h_220433a6faf6b8 1-120
+lua/plugins/projecthub-nvim/opts/roots.lua
+  h_220433a6faf6b8 1-120
+lua/plugins/projecthub-nvim/opts/sound.lua
+  h_220433a6faf6b8 1-120
+lua/plugins/projecthub-nvim/opts/stars.lua
+  h_220433a6faf6b8 1-120
+lua/plugins/projecthub-nvim/opts/window.lua
+  h_220433a6faf6b8 1-120
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "b066bf6b48a99d0e585867cf7bfd326de60fd740",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
