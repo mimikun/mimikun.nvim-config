@@ -1,0 +1,48 @@
+lua/plugins/projecthub-nvim/CODES/commit_tags.lua
+  h_220433a6faf6b8 1-305
+lua/plugins/projecthub-nvim/CODES/i18n.lua
+  h_220433a6faf6b8 1-560
+lua/plugins/projecthub-nvim/CODES/init.lua
+  h_220433a6faf6b8 1-176
+lua/plugins/projecthub-nvim/CODES/notify.lua
+  h_220433a6faf6b8 1-149
+lua/plugins/projecthub-nvim/CODES/projects.lua
+  h_220433a6faf6b8 1-2543
+lua/plugins/projecthub-nvim/CODES/sound.lua
+  h_220433a6faf6b8 1-152
+lua/plugins/projecthub-nvim/CODES/stars.lua
+  h_220433a6faf6b8 1-528
+lua/plugins/projecthub-nvim/CODES/ui.lua
+  h_220433a6faf6b8 1-5097
+lua/plugins/projecthub-nvim/README.md
+  h_220433a6faf6b8 1-61
+lua/plugins/projecthub-nvim/cmds.lua
+  h_220433a6faf6b8 1-26
+lua/plugins/projecthub-nvim/config.lua
+  h_220433a6faf6b8 1-126
+lua/plugins/projecthub-nvim/dependencies.lua
+  h_220433a6faf6b8 1-9
+lua/plugins/projecthub-nvim/events.lua
+  h_220433a6faf6b8 1-6
+lua/plugins/projecthub-nvim/init.lua
+  h_220433a6faf6b8 1-18
+lua/plugins/projecthub-nvim/keys.lua
+  h_220433a6faf6b8 1-24
+lua/plugins/projecthub-nvim/opts.lua
+  h_220433a6faf6b8 1-6
+lua/plugins/projecthub-nvim/readme.lua
+  h_220433a6faf6b8 1-95
+lua/plugins/projecthub-nvim/stylua.toml
+  h_220433a6faf6b8 1-13
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "811a69eac3e79bc12c78531c698c41fc0753edad",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
