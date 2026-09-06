@@ -1,0 +1,30 @@
+lua/plugins/projecthub-nvim/.editorconfig
+  h_220433a6faf6b8 1-14
+lua/plugins/projecthub-nvim/cmds.lua
+  h_220433a6faf6b8 1-6
+lua/plugins/projecthub-nvim/dependencies.lua
+  h_220433a6faf6b8 1-16
+lua/plugins/projecthub-nvim/events.lua
+  h_220433a6faf6b8 1-6
+lua/plugins/projecthub-nvim/ft.lua
+  h_220433a6faf6b8 1-6
+lua/plugins/projecthub-nvim/init.lua
+  h_220433a6faf6b8 1-37
+lua/plugins/projecthub-nvim/keys.lua
+  h_220433a6faf6b8 1-23
+lua/plugins/projecthub-nvim/opts.lua
+  h_220433a6faf6b8 1-6
+lua/plugins/projecthub-nvim/stylua.toml
+  h_220433a6faf6b8 1-13
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "39def165e4a0d535385ff040767584f10fdbc69a",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
