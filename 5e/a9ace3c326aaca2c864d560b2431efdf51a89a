@@ -1,0 +1,18 @@
+lua/plugins/md-render-nvim/init.lua
+  h_220433a6faf6b8 12-16
+lua/plugins/md-render-nvim/opts/image.lua
+  h_220433a6faf6b8 1-11
+lua/plugins/md-render-nvim/opts/text_size.lua
+  h_220433a6faf6b8 1-8
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "5ea9ace3c326aaca2c864d560b2431efdf51a89a",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
