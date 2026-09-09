@@ -1,0 +1,14 @@
+lua/plugins/termfile-nvim/readme.lua
+  h_220433a6faf6b8 1-30
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "2635e4a3917da2ce92d756890923c5f78e55a528",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
