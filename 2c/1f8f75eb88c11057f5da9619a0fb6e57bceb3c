@@ -1,0 +1,30 @@
+lua/plugins/termfile-nvim/CODES/.gitignore
+  h_220433a6faf6b8 1-7
+lua/plugins/termfile-nvim/CODES/LICENSE
+  h_220433a6faf6b8 1-674
+lua/plugins/termfile-nvim/CODES/README.md
+  h_220433a6faf6b8 1-181
+lua/plugins/termfile-nvim/CODES/doc/termfile.txt
+  h_220433a6faf6b8 1-148
+lua/plugins/termfile-nvim/CODES/lua/termfile/config.lua
+  h_220433a6faf6b8 1-45
+lua/plugins/termfile-nvim/CODES/lua/termfile/init.lua
+  h_220433a6faf6b8 1-183
+lua/plugins/termfile-nvim/CODES/lua/termfile/session.lua
+  h_220433a6faf6b8 1-107
+lua/plugins/termfile-nvim/CODES/lua/termfile/terminal.lua
+  h_220433a6faf6b8 1-245
+lua/plugins/termfile-nvim/CODES/plugin/termfile.lua
+  h_220433a6faf6b8 1-13
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "2c1f8f75eb88c11057f5da9619a0fb6e57bceb3c",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
