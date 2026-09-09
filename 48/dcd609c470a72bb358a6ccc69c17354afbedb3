@@ -1,0 +1,20 @@
+lua/plugins/termfile-nvim/events.lua
+  h_220433a6faf6b8 1-6
+lua/plugins/termfile-nvim/init.lua
+  h_220433a6faf6b8 1-15
+lua/plugins/termfile-nvim/opts.lua
+  h_220433a6faf6b8 1-43
+lua/plugins/encore-nvim/init.lua
+  h_220433a6faf6b8 12-13
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "48dcd609c470a72bb358a6ccc69c17354afbedb3",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
