@@ -1,0 +1,20 @@
+lua/plugins/telescope-nvim/cmds.lua
+  h_220433a6faf6b8 3
+lua/plugins/telescope-nvim/dependencies.lua
+  h_220433a6faf6b8 3-5
+lua/plugins/telescope-nvim/init.lua
+  h_220433a6faf6b8 5,9-10
+lua/plugins/telescope-nvim/keys.lua
+  h_220433a6faf6b8 4-65
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "82110030eaeaad39a6ce618ddf3d91df0618aee0",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
