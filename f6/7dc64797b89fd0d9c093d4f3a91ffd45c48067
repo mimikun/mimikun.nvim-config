@@ -1,0 +1,14 @@
+lua/plugins/encore-nvim/init.lua
+  h_220433a6faf6b8 12-13
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "f67dc64797b89fd0d9c093d4f3a91ffd45c48067",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
