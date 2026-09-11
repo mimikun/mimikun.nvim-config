@@ -1,0 +1,264 @@
+lua/plugins/sqlserver-nvim/CODES/.editorconfig
+  h_220433a6faf6b8 1-23
+lua/plugins/sqlserver-nvim/CODES/.gitattributes
+  h_220433a6faf6b8 1-5
+lua/plugins/sqlserver-nvim/CODES/.github/workflows/test.yml
+  h_220433a6faf6b8 1-147
+lua/plugins/sqlserver-nvim/CODES/.gitignore
+  h_220433a6faf6b8 1-15
+lua/plugins/sqlserver-nvim/CODES/.luarc.json
+  h_220433a6faf6b8 1-5
+lua/plugins/sqlserver-nvim/CODES/.markdownlint.json
+  h_220433a6faf6b8 1-3
+lua/plugins/sqlserver-nvim/CODES/.prettierrc.json
+  h_220433a6faf6b8 1-3
+lua/plugins/sqlserver-nvim/CODES/.stylua.toml
+  h_220433a6faf6b8 1-2
+lua/plugins/sqlserver-nvim/CODES/AGENTS.md
+  h_220433a6faf6b8 1-53
+lua/plugins/sqlserver-nvim/CODES/CHANGELOG.md
+  h_220433a6faf6b8 1-128
+lua/plugins/sqlserver-nvim/CODES/CONTRIBUTING.md
+  h_220433a6faf6b8 1-117
+lua/plugins/sqlserver-nvim/CODES/LICENSE.md
+  h_220433a6faf6b8 1-21
+lua/plugins/sqlserver-nvim/CODES/Makefile
+  h_220433a6faf6b8 1-73
+lua/plugins/sqlserver-nvim/CODES/README.md
+  h_220433a6faf6b8 1-145
+lua/plugins/sqlserver-nvim/CODES/docs/architecture.md
+  h_220433a6faf6b8 1-168
+lua/plugins/sqlserver-nvim/CODES/docs/configuration.md
+  h_220433a6faf6b8 1-154
+lua/plugins/sqlserver-nvim/CODES/docs/connections-json.md
+  h_220433a6faf6b8 1-67
+lua/plugins/sqlserver-nvim/CODES/docs/lsp-settings.md
+  h_220433a6faf6b8 1-157
+lua/plugins/sqlserver-nvim/CODES/docs/migrating-from-mssql.md
+  h_220433a6faf6b8 1-223
+lua/plugins/sqlserver-nvim/CODES/docs/public-api.md
+  h_220433a6faf6b8 1-124
+lua/plugins/sqlserver-nvim/CODES/docs/releasing.md
+  h_220433a6faf6b8 1-118
+lua/plugins/sqlserver-nvim/CODES/docs/roadmap.md
+  h_220433a6faf6b8 1-109
+lua/plugins/sqlserver-nvim/CODES/docs/usage.md
+  h_220433a6faf6b8 1-226
+lua/plugins/sqlserver-nvim/CODES/docs/vision.md
+  h_220433a6faf6b8 1-97
+lua/plugins/sqlserver-nvim/CODES/findings/minimised.json
+  h_220433a6faf6b8 1-331
+lua/plugins/sqlserver-nvim/CODES/findings/notes.md
+  h_220433a6faf6b8 1-124
+lua/plugins/sqlserver-nvim/CODES/ftplugin/sqlserver-result.lua
+  h_220433a6faf6b8 1
+lua/plugins/sqlserver-nvim/CODES/lua/sqlserver/adapters/sql_tools_service/client.lua
+  h_220433a6faf6b8 1-208
+lua/plugins/sqlserver-nvim/CODES/lua/sqlserver/adapters/sql_tools_service/constants.lua
+  h_220433a6faf6b8 1-3
+lua/plugins/sqlserver-nvim/CODES/lua/sqlserver/adapters/sql_tools_service/installer.lua
+  h_220433a6faf6b8 1-153
+lua/plugins/sqlserver-nvim/CODES/lua/sqlserver/adapters/sql_tools_service/query.lua
+  h_220433a6faf6b8 1-301
+lua/plugins/sqlserver-nvim/CODES/lua/sqlserver/api.lua
+  h_220433a6faf6b8 1-277
+lua/plugins/sqlserver-nvim/CODES/lua/sqlserver/config/defaults.lua
+  h_220433a6faf6b8 1-91
+lua/plugins/sqlserver-nvim/CODES/lua/sqlserver/config/timeouts.lua
+  h_220433a6faf6b8 1-28
+lua/plugins/sqlserver-nvim/CODES/lua/sqlserver/config/ui.lua
+  h_220433a6faf6b8 1-26
+lua/plugins/sqlserver-nvim/CODES/lua/sqlserver/connections/profiles.lua
+  h_220433a6faf6b8 1-153
+lua/plugins/sqlserver-nvim/CODES/lua/sqlserver/init.lua
+  h_220433a6faf6b8 1-1254
+lua/plugins/sqlserver-nvim/CODES/lua/sqlserver/objects/script.lua
+  h_220433a6faf6b8 1-33
+lua/plugins/sqlserver-nvim/CODES/lua/sqlserver/objects/ui/picker.lua
+  h_220433a6faf6b8 1-497
+lua/plugins/sqlserver-nvim/CODES/lua/sqlserver/platform/clipboard.lua
+  h_220433a6faf6b8 1-78
+lua/plugins/sqlserver-nvim/CODES/lua/sqlserver/queries/selection.lua
+  h_220433a6faf6b8 1-87
+lua/plugins/sqlserver-nvim/CODES/lua/sqlserver/queries/summary.lua
+  h_220433a6faf6b8 1-61
+lua/plugins/sqlserver-nvim/CODES/lua/sqlserver/results/cell.lua
+  h_220433a6faf6b8 1-18
+lua/plugins/sqlserver-nvim/CODES/lua/sqlserver/results/collection.lua
+  h_220433a6faf6b8 1-64
+lua/plugins/sqlserver-nvim/CODES/lua/sqlserver/results/column.lua
+  h_220433a6faf6b8 1-47
+lua/plugins/sqlserver-nvim/CODES/lua/sqlserver/results/html.lua
+  h_220433a6faf6b8 1-41
+lua/plugins/sqlserver-nvim/CODES/lua/sqlserver/results/result_set.lua
+  h_220433a6faf6b8 1-35
+lua/plugins/sqlserver-nvim/CODES/lua/sqlserver/results/selection.lua
+  h_220433a6faf6b8 1-61
+lua/plugins/sqlserver-nvim/CODES/lua/sqlserver/results/ui/buffer.lua
+  h_220433a6faf6b8 1-35
+lua/plugins/sqlserver-nvim/CODES/lua/sqlserver/results/ui/column_info.lua
+  h_220433a6faf6b8 1-79
+lua/plugins/sqlserver-nvim/CODES/lua/sqlserver/results/ui/export.lua
+  h_220433a6faf6b8 1-37
+lua/plugins/sqlserver-nvim/CODES/lua/sqlserver/results/ui/keymaps.lua
+  h_220433a6faf6b8 1-96
+lua/plugins/sqlserver-nvim/CODES/lua/sqlserver/results/ui/renderer.lua
+  h_220433a6faf6b8 1-122
+lua/plugins/sqlserver-nvim/CODES/lua/sqlserver/results/ui/sticky_header.lua
+  h_220433a6faf6b8 1-166
+lua/plugins/sqlserver-nvim/CODES/lua/sqlserver/results/ui/view.lua
+  h_220433a6faf6b8 1-617
+lua/plugins/sqlserver-nvim/CODES/lua/sqlserver/results/ui/winbar.lua
+  h_220433a6faf6b8 1-49
+lua/plugins/sqlserver-nvim/CODES/lua/sqlserver/ui/activity.lua
+  h_220433a6faf6b8 1-205
+lua/plugins/sqlserver-nvim/CODES/lua/sqlserver/ui/commands.lua
+  h_220433a6faf6b8 1-116
+lua/plugins/sqlserver-nvim/CODES/lua/sqlserver/ui/keymaps.lua
+  h_220433a6faf6b8 1-211
+lua/plugins/sqlserver-nvim/CODES/lua/sqlserver/ui/status.lua
+  h_220433a6faf6b8 1-107
+lua/plugins/sqlserver-nvim/CODES/lua/sqlserver/utils.lua
+  h_220433a6faf6b8 1-308
+lua/plugins/sqlserver-nvim/CODES/lua/sqlserver/workspace/activity_stream.lua
+  h_220433a6faf6b8 1-57
+lua/plugins/sqlserver-nvim/CODES/lua/sqlserver/workspace/init.lua
+  h_220433a6faf6b8 1-402
+lua/plugins/sqlserver-nvim/CODES/lua/sqlserver/workspace/registry.lua
+  h_220433a6faf6b8 1-45
+lua/plugins/sqlserver-nvim/CODES/scripts/minitest.lua
+  h_220433a6faf6b8 1-14
+lua/plugins/sqlserver-nvim/CODES/tests/assert-no-process-leaks.sh
+  h_220433a6faf6b8 1-29
+lua/plugins/sqlserver-nvim/CODES/tests/completion.sql
+  h_220433a6faf6b8 1-2
+"lua/plugins/sqlserver-nvim/CODES/tests/filename with spaces.sql"
+  h_220433a6faf6b8 1
+lua/plugins/sqlserver-nvim/CODES/tests/helpers.lua
+  h_220433a6faf6b8 1-31
+lua/plugins/sqlserver-nvim/CODES/tests/helpers/integration.lua
+  h_220433a6faf6b8 1-221
+lua/plugins/sqlserver-nvim/CODES/tests/integration/compose.yaml
+  h_220433a6faf6b8 1-24
+lua/plugins/sqlserver-nvim/CODES/tests/integration/seed.sql
+  h_220433a6faf6b8 1-90
+lua/plugins/sqlserver-nvim/CODES/tests/integration/specs/cancel_query_spec.lua
+  h_220433a6faf6b8 1-50
+lua/plugins/sqlserver-nvim/CODES/tests/integration/specs/connect_spec.lua
+  h_220433a6faf6b8 1-40
+lua/plugins/sqlserver-nvim/CODES/tests/integration/specs/dbo_completion_spec.lua
+  h_220433a6faf6b8 1-39
+lua/plugins/sqlserver-nvim/CODES/tests/integration/specs/download_spec.lua
+  h_220433a6faf6b8 1-42
+lua/plugins/sqlserver-nvim/CODES/tests/integration/specs/edit_connections_spec.lua
+  h_220433a6faf6b8 1-37
+lua/plugins/sqlserver-nvim/CODES/tests/integration/specs/error_line_numbers_integration_spec.lua
+  h_220433a6faf6b8 1-125
+lua/plugins/sqlserver-nvim/CODES/tests/integration/specs/execute_query_spec.lua
+  h_220433a6faf6b8 1-31
+lua/plugins/sqlserver-nvim/CODES/tests/integration/specs/execution_scope_integration_spec.lua
+  h_220433a6faf6b8 1-127
+lua/plugins/sqlserver-nvim/CODES/tests/integration/specs/failed_statement_results_spec.lua
+  h_220433a6faf6b8 1-54
+lua/plugins/sqlserver-nvim/CODES/tests/integration/specs/file_with_space_spec.lua
+  h_220433a6faf6b8 1-35
+lua/plugins/sqlserver-nvim/CODES/tests/integration/specs/finder_spec.lua
+  h_220433a6faf6b8 1-44
+lua/plugins/sqlserver-nvim/CODES/tests/integration/specs/language_intelligence_spec.lua
+  h_220433a6faf6b8 1-100
+lua/plugins/sqlserver-nvim/CODES/tests/integration/specs/mixed_query_results_spec.lua
+  h_220433a6faf6b8 1-52
+lua/plugins/sqlserver-nvim/CODES/tests/integration/specs/multiple_result_sets_spec.lua
+  h_220433a6faf6b8 1-62
+lua/plugins/sqlserver-nvim/CODES/tests/integration/specs/new_query_completion_spec.lua
+  h_220433a6faf6b8 1-20
+lua/plugins/sqlserver-nvim/CODES/tests/integration/specs/non_ascii_spec.lua
+  h_220433a6faf6b8 1-70
+lua/plugins/sqlserver-nvim/CODES/tests/integration/specs/object_scripting_spec.lua
+  h_220433a6faf6b8 1-95
+lua/plugins/sqlserver-nvim/CODES/tests/integration/specs/public_api_integration_spec.lua
+  h_220433a6faf6b8 1-132
+lua/plugins/sqlserver-nvim/CODES/tests/integration/specs/query_error_presentation_spec.lua
+  h_220433a6faf6b8 1-87
+lua/plugins/sqlserver-nvim/CODES/tests/integration/specs/query_zero_rows_spec.lua
+  h_220433a6faf6b8 1-26
+lua/plugins/sqlserver-nvim/CODES/tests/integration/specs/result_history_integration_spec.lua
+  h_220433a6faf6b8 1-54
+lua/plugins/sqlserver-nvim/CODES/tests/integration/specs/result_limits_spec.lua
+  h_220433a6faf6b8 1-37
+lua/plugins/sqlserver-nvim/CODES/tests/integration/specs/result_value_fidelity_spec.lua
+  h_220433a6faf6b8 1-47
+lua/plugins/sqlserver-nvim/CODES/tests/integration/specs/saved_file_completion_spec.lua
+  h_220433a6faf6b8 1-22
+lua/plugins/sqlserver-nvim/CODES/tests/integration/specs/switch_database_spec.lua
+  h_220433a6faf6b8 1-53
+lua/plugins/sqlserver-nvim/CODES/tests/integration/specs/unnamed_query_buffer_spec.lua
+  h_220433a6faf6b8 1-46
+lua/plugins/sqlserver-nvim/CODES/tests/integration/specs/use_query_spec.lua
+  h_220433a6faf6b8 1-39
+lua/plugins/sqlserver-nvim/CODES/tests/integration/test_integration.lua
+  h_220433a6faf6b8 1-59
+lua/plugins/sqlserver-nvim/CODES/tests/minimal-init.lua
+  h_220433a6faf6b8 1-14
+lua/plugins/sqlserver-nvim/CODES/tests/unit/activity_stream_spec.lua
+  h_220433a6faf6b8 1-39
+lua/plugins/sqlserver-nvim/CODES/tests/unit/activity_ui_spec.lua
+  h_220433a6faf6b8 1-111
+lua/plugins/sqlserver-nvim/CODES/tests/unit/clipboard_spec.lua
+  h_220433a6faf6b8 1-18
+lua/plugins/sqlserver-nvim/CODES/tests/unit/config_ui_spec.lua
+  h_220433a6faf6b8 1-21
+lua/plugins/sqlserver-nvim/CODES/tests/unit/connection_profiles_spec.lua
+  h_220433a6faf6b8 1-50
+lua/plugins/sqlserver-nvim/CODES/tests/unit/lsp_nulls_spec.lua
+  h_220433a6faf6b8 1-38
+lua/plugins/sqlserver-nvim/CODES/tests/unit/object_script_spec.lua
+  h_220433a6faf6b8 1-38
+lua/plugins/sqlserver-nvim/CODES/tests/unit/public_api_spec.lua
+  h_220433a6faf6b8 1-213
+lua/plugins/sqlserver-nvim/CODES/tests/unit/query_result_renderer_spec.lua
+  h_220433a6faf6b8 1-85
+lua/plugins/sqlserver-nvim/CODES/tests/unit/query_selection_spec.lua
+  h_220433a6faf6b8 1-48
+lua/plugins/sqlserver-nvim/CODES/tests/unit/query_summary_spec.lua
+  h_220433a6faf6b8 1-33
+lua/plugins/sqlserver-nvim/CODES/tests/unit/result_column_navigation_spec.lua
+  h_220433a6faf6b8 1-111
+lua/plugins/sqlserver-nvim/CODES/tests/unit/result_export_view_spec.lua
+  h_220433a6faf6b8 1-23
+lua/plugins/sqlserver-nvim/CODES/tests/unit/result_filetype_spec.lua
+  h_220433a6faf6b8 1-52
+lua/plugins/sqlserver-nvim/CODES/tests/unit/result_html_spec.lua
+  h_220433a6faf6b8 1-35
+lua/plugins/sqlserver-nvim/CODES/tests/unit/result_selection_spec.lua
+  h_220433a6faf6b8 1-42
+lua/plugins/sqlserver-nvim/CODES/tests/unit/result_session_spec.lua
+  h_220433a6faf6b8 1-144
+lua/plugins/sqlserver-nvim/CODES/tests/unit/result_sticky_header_spec.lua
+  h_220433a6faf6b8 1-80
+lua/plugins/sqlserver-nvim/CODES/tests/unit/result_winbar_spec.lua
+  h_220433a6faf6b8 1-36
+lua/plugins/sqlserver-nvim/CODES/tests/unit/sql_tools_service_client_spec.lua
+  h_220433a6faf6b8 1-97
+lua/plugins/sqlserver-nvim/CODES/tests/unit/sql_tools_service_installer_spec.lua
+  h_220433a6faf6b8 1-69
+lua/plugins/sqlserver-nvim/CODES/tests/unit/sql_tools_service_query_spec.lua
+  h_220433a6faf6b8 1-143
+lua/plugins/sqlserver-nvim/CODES/tests/unit/test_unit.lua
+  h_220433a6faf6b8 1-34
+lua/plugins/sqlserver-nvim/CODES/tests/unit/timeouts_spec.lua
+  h_220433a6faf6b8 1-26
+lua/plugins/sqlserver-nvim/CODES/tests/unit/workspace_spec.lua
+  h_220433a6faf6b8 1-201
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "c449cb7c08aa747dfc665684ba4f6a7e70072250",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
