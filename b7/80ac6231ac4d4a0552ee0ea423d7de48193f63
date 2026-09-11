@@ -1,0 +1,30 @@
+lua/plugins/po-jump-nvim/.editorconfig
+  h_220433a6faf6b8 1-14
+lua/plugins/po-jump-nvim/cmds.lua
+  h_220433a6faf6b8 1-6
+lua/plugins/po-jump-nvim/dependencies.lua
+  h_220433a6faf6b8 1-16
+lua/plugins/po-jump-nvim/events.lua
+  h_220433a6faf6b8 1-6
+lua/plugins/po-jump-nvim/ft.lua
+  h_220433a6faf6b8 1-6
+lua/plugins/po-jump-nvim/init.lua
+  h_220433a6faf6b8 1-37
+lua/plugins/po-jump-nvim/keys.lua
+  h_220433a6faf6b8 1-23
+lua/plugins/po-jump-nvim/opts.lua
+  h_220433a6faf6b8 1-6
+lua/plugins/po-jump-nvim/stylua.toml
+  h_220433a6faf6b8 1-13
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "b780ac6231ac4d4a0552ee0ea423d7de48193f63",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
