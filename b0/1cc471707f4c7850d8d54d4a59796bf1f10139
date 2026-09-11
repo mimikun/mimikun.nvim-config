@@ -1,0 +1,22 @@
+lua/plugins/starfall-nvim/CODES/README.md
+  h_220433a6faf6b8 1-193
+lua/plugins/starfall-nvim/CODES/lua/starfall/config.lua
+  h_220433a6faf6b8 1-79
+lua/plugins/starfall-nvim/CODES/lua/starfall/engine.lua
+  h_220433a6faf6b8 1-809
+lua/plugins/starfall-nvim/CODES/lua/starfall/highlights.lua
+  h_220433a6faf6b8 1-38
+lua/plugins/starfall-nvim/CODES/lua/starfall/init.lua
+  h_220433a6faf6b8 1-49
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "b01cc471707f4c7850d8d54d4a59796bf1f10139",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
