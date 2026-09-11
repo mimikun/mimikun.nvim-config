@@ -1,0 +1,18 @@
+lua/plugins/po-jump-nvim/CODES/LICENSE
+  h_220433a6faf6b8 1-14
+lua/plugins/po-jump-nvim/CODES/README.md
+  h_220433a6faf6b8 1-34
+lua/plugins/po-jump-nvim/CODES/lua/po-jump/init.lua
+  h_220433a6faf6b8 1-156
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "a699f374e8d92bc535d97e2585433d5633052a87",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
