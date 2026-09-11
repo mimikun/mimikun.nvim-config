@@ -1,0 +1,14 @@
+lua/plugins/po-jump-nvim/init.lua
+  h_220433a6faf6b8 6
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "c9c6f4ea1512c2b993a8b1f52c94bcb4e7639a84",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
