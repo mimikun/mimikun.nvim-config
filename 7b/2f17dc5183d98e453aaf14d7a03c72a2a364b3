@@ -1,0 +1,30 @@
+lua/plugins/slides-nvim/.editorconfig
+  h_220433a6faf6b8 1-14
+lua/plugins/slides-nvim/cmds.lua
+  h_220433a6faf6b8 1-6
+lua/plugins/slides-nvim/dependencies.lua
+  h_220433a6faf6b8 1-16
+lua/plugins/slides-nvim/events.lua
+  h_220433a6faf6b8 1-6
+lua/plugins/slides-nvim/ft.lua
+  h_220433a6faf6b8 1-6
+lua/plugins/slides-nvim/init.lua
+  h_220433a6faf6b8 1-37
+lua/plugins/slides-nvim/keys.lua
+  h_220433a6faf6b8 1-23
+lua/plugins/slides-nvim/opts.lua
+  h_220433a6faf6b8 1-6
+lua/plugins/slides-nvim/stylua.toml
+  h_220433a6faf6b8 1-13
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "7b2f17dc5183d98e453aaf14d7a03c72a2a364b3",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
