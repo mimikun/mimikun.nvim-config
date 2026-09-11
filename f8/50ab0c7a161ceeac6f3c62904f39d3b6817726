@@ -1,0 +1,14 @@
+lua/plugins/starfall-nvim/opts.lua
+  h_220433a6faf6b8 3-98
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "f850ab0c7a161ceeac6f3c62904f39d3b6817726",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
