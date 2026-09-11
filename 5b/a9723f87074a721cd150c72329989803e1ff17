@@ -1,0 +1,116 @@
+lua/plugins/bang-nvim/CODES/.coderabbit.yaml
+  h_220433a6faf6b8 1-15
+lua/plugins/bang-nvim/CODES/.github/ISSUE_TEMPLATE/bug_report.yml
+  h_220433a6faf6b8 1-57
+lua/plugins/bang-nvim/CODES/.github/ISSUE_TEMPLATE/feature_request.yml
+  h_220433a6faf6b8 1-21
+lua/plugins/bang-nvim/CODES/.github/workflows/autofix.yml
+  h_220433a6faf6b8 1-26
+lua/plugins/bang-nvim/CODES/.github/workflows/ci.yml
+  h_220433a6faf6b8 1-53
+lua/plugins/bang-nvim/CODES/.github/workflows/release.yml
+  h_220433a6faf6b8 1-26
+lua/plugins/bang-nvim/CODES/.gitignore
+  h_220433a6faf6b8 1-398
+lua/plugins/bang-nvim/CODES/.pre-commit-config.yaml
+  h_220433a6faf6b8 1-40
+lua/plugins/bang-nvim/CODES/CONTRIBUTING.md
+  h_220433a6faf6b8 1-55
+lua/plugins/bang-nvim/CODES/LICENSE
+  h_220433a6faf6b8 1-21
+lua/plugins/bang-nvim/CODES/README.md
+  h_220433a6faf6b8 1-90
+lua/plugins/bang-nvim/CODES/cliff.toml
+  h_220433a6faf6b8 1-62
+lua/plugins/bang-nvim/CODES/demo/_init.lua
+  h_220433a6faf6b8 1-41
+lua/plugins/bang-nvim/CODES/demo/_theme.tape
+  h_220433a6faf6b8 1-7
+lua/plugins/bang-nvim/CODES/demo/block.tape
+  h_220433a6faf6b8 1-29
+lua/plugins/bang-nvim/CODES/demo/case-block-empty.tape
+  h_220433a6faf6b8 1-29
+lua/plugins/bang-nvim/CODES/demo/case-block-padding.tape
+  h_220433a6faf6b8 1-30
+lua/plugins/bang-nvim/CODES/demo/case-block-wide-char.tape
+  h_220433a6faf6b8 1-29
+lua/plugins/bang-nvim/CODES/demo/case-charwise-dollar.tape
+  h_220433a6faf6b8 1-25
+lua/plugins/bang-nvim/CODES/demo/case-expand-bang.tape
+  h_220433a6faf6b8 1-29
+lua/plugins/bang-nvim/CODES/demo/case-readonly.tape
+  h_220433a6faf6b8 1-23
+lua/plugins/bang-nvim/CODES/demo/case-selection-exclusive.tape
+  h_220433a6faf6b8 1-29
+lua/plugins/bang-nvim/CODES/demo/edge-cases.md
+  h_220433a6faf6b8 1-52
+lua/plugins/bang-nvim/CODES/demo/failure.tape
+  h_220433a6faf6b8 1-24
+lua/plugins/bang-nvim/CODES/demo/motion.tape
+  h_220433a6faf6b8 1-32
+lua/plugins/bang-nvim/CODES/demo/repeat.tape
+  h_220433a6faf6b8 1-27
+lua/plugins/bang-nvim/CODES/doc/bang.txt
+  h_220433a6faf6b8 1-310
+lua/plugins/bang-nvim/CODES/dprint.json
+  h_220433a6faf6b8 1-23
+lua/plugins/bang-nvim/CODES/lua/bang/adapters.lua
+  h_220433a6faf6b8 1-413
+lua/plugins/bang-nvim/CODES/lua/bang/config.lua
+  h_220433a6faf6b8 1-95
+lua/plugins/bang-nvim/CODES/lua/bang/exec.lua
+  h_220433a6faf6b8 1-194
+lua/plugins/bang-nvim/CODES/lua/bang/health.lua
+  h_220433a6faf6b8 1-135
+lua/plugins/bang-nvim/CODES/lua/bang/history.lua
+  h_220433a6faf6b8 1-141
+lua/plugins/bang-nvim/CODES/lua/bang/init.lua
+  h_220433a6faf6b8 1-213
+lua/plugins/bang-nvim/CODES/lua/bang/notify.lua
+  h_220433a6faf6b8 1-13
+lua/plugins/bang-nvim/CODES/lua/bang/region.lua
+  h_220433a6faf6b8 1-738
+lua/plugins/bang-nvim/CODES/mise.toml
+  h_220433a6faf6b8 1-40
+lua/plugins/bang-nvim/CODES/plugin/bang.lua
+  h_220433a6faf6b8 1-43
+lua/plugins/bang-nvim/CODES/renovate.json
+  h_220433a6faf6b8 1-19
+lua/plugins/bang-nvim/CODES/selene.toml
+  h_220433a6faf6b8 1
+lua/plugins/bang-nvim/CODES/stylua.toml
+  h_220433a6faf6b8 1-5
+lua/plugins/bang-nvim/CODES/tests/fixtures/log_shell.sh
+  h_220433a6faf6b8 1-21
+lua/plugins/bang-nvim/CODES/tests/helpers.lua
+  h_220433a6faf6b8 1-392
+lua/plugins/bang-nvim/CODES/tests/minimal_init.lua
+  h_220433a6faf6b8 1-39
+lua/plugins/bang-nvim/CODES/tests/test_command.lua
+  h_220433a6faf6b8 1-526
+lua/plugins/bang-nvim/CODES/tests/test_differential.lua
+  h_220433a6faf6b8 1-731
+lua/plugins/bang-nvim/CODES/tests/test_engine.lua
+  h_220433a6faf6b8 1-1655
+lua/plugins/bang-nvim/CODES/tests/test_fuzz.lua
+  h_220433a6faf6b8 1-260
+lua/plugins/bang-nvim/CODES/tests/test_health.lua
+  h_220433a6faf6b8 1-153
+lua/plugins/bang-nvim/CODES/tests/test_operator.lua
+  h_220433a6faf6b8 1-813
+lua/plugins/bang-nvim/CODES/tests/test_regressions.lua
+  h_220433a6faf6b8 1-138
+lua/plugins/bang-nvim/CODES/vim.yml
+  h_220433a6faf6b8 1-7
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "5ba9723f87074a721cd150c72329989803e1ff17",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
