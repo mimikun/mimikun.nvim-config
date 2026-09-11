@@ -1,0 +1,18 @@
+lua/plugins/starfall-nvim/cmds.lua
+  h_220433a6faf6b8 3-5
+lua/plugins/starfall-nvim/init.lua
+  h_220433a6faf6b8 28-31
+lua/plugins/starfall-nvim/keys.lua
+  h_220433a6faf6b8 21
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "56423bb5331979d3a79533df689cf9d0f64a87db",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
