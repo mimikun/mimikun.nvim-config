@@ -1,0 +1,36 @@
+lua/plugins/slides-nvim/CODES/Makefile
+  h_220433a6faf6b8 1-4
+lua/plugins/slides-nvim/CODES/README.md
+  h_220433a6faf6b8 1-210
+lua/plugins/slides-nvim/CODES/examples/presentation.md
+  h_220433a6faf6b8 1-142
+lua/plugins/slides-nvim/CODES/lua/slides/init.lua
+  h_220433a6faf6b8 1-404
+lua/plugins/slides-nvim/CODES/lua/slides/parser.lua
+  h_220433a6faf6b8 1-98
+lua/plugins/slides-nvim/CODES/lua/slides/view.lua
+  h_220433a6faf6b8 1-606
+lua/plugins/slides-nvim/CODES/plugin/slides.lua
+  h_220433a6faf6b8 1-7
+lua/plugins/slides-nvim/CODES/tests/parser_spec.lua
+  h_220433a6faf6b8 1-107
+lua/plugins/slides-nvim/CODES/tests/runner.lua
+  h_220433a6faf6b8 1-20
+lua/plugins/slides-nvim/CODES/tests/slides_spec.lua
+  h_220433a6faf6b8 1-300
+lua/plugins/slides-nvim/CODES/tests/test_helper.lua
+  h_220433a6faf6b8 1-108
+lua/plugins/slides-nvim/CODES/tests/view_spec.lua
+  h_220433a6faf6b8 1-223
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "1d7693e27700bb4294cb92497412c46dc726dc9e",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
