@@ -1,0 +1,19 @@
+vendor/misskey.nvim/lua/misskey/api.lua
+  s_e8dd5f0a1f48d0::t_8f2f4eb2056260 12-25,37,94
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "649bb4889e95f2a96e5fd169919907899533f735",
+  "prompts": {},
+  "sessions": {
+    "s_e8dd5f0a1f48d0": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "94dfb287-ed58-47de-9389-0aff1ad751f5",
+        "model": "claude-opus-5"
+      },
+      "human_author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
