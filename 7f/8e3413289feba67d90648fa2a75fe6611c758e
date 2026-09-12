@@ -1,0 +1,29 @@
+lua/plugins/misskey-nvim/cmds.lua
+  s_e8dd5f0a1f48d0::t_7817c4bf568d4b 5
+vendor/misskey.nvim/README.md
+  s_e8dd5f0a1f48d0::t_7e53e5aeb1b353 8-9,35-36
+vendor/misskey.nvim/lua/misskey/channel.lua
+  s_e8dd5f0a1f48d0::t_b2365b4e033081 1-115
+vendor/misskey.nvim/lua/misskey/init.lua
+  s_e8dd5f0a1f48d0::t_e1b9ea78f5b05e 20-27
+vendor/misskey.nvim/lua/misskey/ui/timeline.lua
+  s_e8dd5f0a1f48d0::t_69581b3e366bcc 13-20,23,203-205,219-221,225-227,229,245,251-260
+vendor/misskey.nvim/plugin/misskey.lua
+  s_e8dd5f0a1f48d0::t_c62cab914f91f1 33-36
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "7f8e3413289feba67d90648fa2a75fe6611c758e",
+  "prompts": {},
+  "sessions": {
+    "s_e8dd5f0a1f48d0": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "94dfb287-ed58-47de-9389-0aff1ad751f5",
+        "model": "claude-opus-5"
+      },
+      "human_author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
