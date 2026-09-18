@@ -12,7 +12,7 @@ local keys = {
     silent = true,
   },
   {
-    "<leader>gB",
+    "<leader>Gb",
     function()
       require("snacks").gitbrowse()
     end,

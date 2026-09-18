@@ -1,7 +1,7 @@
 ---@type LazyKeysSpec[]
 local keys = {
   {
-    "<leader>gd",
+    "<leader>Gad",
     function()
       require("github-actions").dispatch_workflow()
     end,
@@ -12,7 +12,7 @@ local keys = {
     silent = true,
   },
   {
-    "<leader>gh",
+    "<leader>Gah",
     function()
       require("github-actions").show_history()
     end,
@@ -23,7 +23,7 @@ local keys = {
     silent = true,
   },
   {
-    "<leader>gp",
+    "<leader>Gap",
     function()
       require("github-actions").show_history({ pr_mode = true })
     end,
@@ -34,7 +34,7 @@ local keys = {
     silent = true,
   },
   {
-    "<leader>gw",
+    "<leader>Gaw",
     function()
       require("github-actions").watch_workflow()
     end,
@@ -45,7 +45,7 @@ local keys = {
     silent = true,
   },
   {
-    "<leader>go",
+    "<leader>Gao",
     function()
       require("github-actions").open_workflow_url()
     end,

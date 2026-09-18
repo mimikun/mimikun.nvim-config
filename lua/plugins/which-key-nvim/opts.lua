@@ -89,6 +89,14 @@ local opts = {
       group = "calendar",
     },
     {
+      "<leader>G",
+      group = "github",
+    },
+    {
+      "<leader>Ga",
+      group = "actions",
+    },
+    {
       "<leader>x",
       group = "trouble",
     },
