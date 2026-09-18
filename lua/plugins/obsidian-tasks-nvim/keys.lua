@@ -1,7 +1,7 @@
 ---@type LazyKeysSpec[]
 local keys = {
   {
-    "<leader>to",
+    "<leader>oo",
     function()
       require("obsidian-tasks").open()
     end,
@@ -12,7 +12,7 @@ local keys = {
     silent = true,
   },
   {
-    "<leader>ta",
+    "<leader>oa",
     function()
       require("obsidian-tasks").create()
     end,

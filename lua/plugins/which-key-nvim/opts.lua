@@ -58,7 +58,7 @@ local opts = {
     },
     {
       "<leader>o",
-      group = "github",
+      group = "obsidian",
     },
     {
       "<leader>q",

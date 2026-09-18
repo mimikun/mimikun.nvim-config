@@ -66,10 +66,10 @@ local opts = {
 
   mappings = {
     -- global mapping, nil disables it
-    open = "<leader>to",
+    open = "<leader>oo",
 
     -- global mapping, nil disables it
-    create = "<leader>ta",
+    create = "<leader>oa",
     create_in_view = "a",
     toggle = "<Space>",
     edit = "<CR>",
