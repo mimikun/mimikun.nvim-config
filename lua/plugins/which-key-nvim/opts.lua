@@ -101,6 +101,10 @@ local opts = {
       group = "sql",
     },
     {
+      "<leader>N",
+      group = "neovim-tips",
+    },
+    {
       "<leader>x",
       group = "trouble",
     },
