@@ -1,0 +1,23 @@
+docs/plans/leader-keymap-redesign.md
+  s_37ab78028a8837::t_01a6984bd69c54 557-575
+lua/plugins/fyler-nvim/init.lua
+  s_37ab78028a8837::t_a590fa95209370 14-15
+lua/plugins/triptych-nvim/init.lua
+  s_37ab78028a8837::t_73b8d4dedb746f 14-15
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "5749eb713ac49ea2ebb8b4a5ac70e00965d16d2e",
+  "prompts": {},
+  "sessions": {
+    "s_37ab78028a8837": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "9a6ccbda-6007-4615-aaac-5d76705d4a42",
+        "model": "claude-opus-5"
+      },
+      "human_author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
