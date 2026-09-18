@@ -1,0 +1,21 @@
+lua/plugins/gitsigns-nvim/opts.lua
+  s_37ab78028a8837::t_6d43c2d17a0f6f 400
+lua/plugins/tiny-inline-diagnostic-nvim/keys.lua
+  s_37ab78028a8837::t_53a8ece707f1cd 26,37
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "cf79a3afe2b2558b742c60801770b322ad6c6704",
+  "prompts": {},
+  "sessions": {
+    "s_37ab78028a8837": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "9a6ccbda-6007-4615-aaac-5d76705d4a42",
+        "model": "claude-opus-5"
+      },
+      "human_author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
