@@ -11,8 +11,8 @@ local spec = {
     local opts = require("plugins.fyler-nvim.opts")
     require("fyler").setup(opts)
   end,
-  --cond = false,
-  --enabled = false,
+  cond = false,
+  enabled = false,
 }
 
 return spec
