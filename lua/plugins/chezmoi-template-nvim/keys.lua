@@ -1,7 +1,7 @@
 ---@type LazyKeysSpec[]
 local keys = {
   {
-    "<leader>sz",
+    "<leader>szs",
     "<cmd>Chezmoi pick<cr>",
     mode = {
       "n",

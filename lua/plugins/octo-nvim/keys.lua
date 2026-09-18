@@ -19,31 +19,31 @@ local keys = {
   --  silent = true,
   --},
   {
-    "<leader>oi",
+    "<leader>Gi",
     "<CMD>Octo issue list<CR>",
     desc = "List GitHub Issues",
     silent = true,
   },
   {
-    "<leader>op",
+    "<leader>Gp",
     "<CMD>Octo pr list<CR>",
     desc = "List GitHub PullRequests",
     silent = true,
   },
   {
-    "<leader>od",
+    "<leader>Gd",
     "<CMD>Octo discussion list<CR>",
     desc = "List GitHub Discussions",
     silent = true,
   },
   {
-    "<leader>on",
+    "<leader>Gn",
     "<CMD>Octo notification list<CR>",
     desc = "List GitHub Notifications",
     silent = true,
   },
   {
-    "<leader>os",
+    "<leader>Gs",
     function()
       require("octo.utils").create_base_search_command({
         include_current_repo = true,

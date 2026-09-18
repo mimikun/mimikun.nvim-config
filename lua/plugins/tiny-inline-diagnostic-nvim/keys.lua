@@ -23,7 +23,7 @@ local keys = {
     silent = true,
   },
   {
-    "<leader>dt",
+    "<leader>ud",
     function()
       require("tiny-inline-diagnostic").toggle()
     end,
@@ -34,7 +34,7 @@ local keys = {
     silent = true,
   },
   {
-    "<leader>dc",
+    "<leader>uD",
     function()
       require("tiny-inline-diagnostic").toggle_cursor_only()
     end,

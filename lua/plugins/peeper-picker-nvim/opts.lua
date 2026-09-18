@@ -15,8 +15,8 @@ local opts = {
   history_size = 100,
   default_keymaps = {
     enabled = false,
-    find = "<leader>pp",
-    history = "<leader>ph",
+    find = "<leader>to",
+    history = "<leader>tO",
   },
   ignored_dirs = {
     --it

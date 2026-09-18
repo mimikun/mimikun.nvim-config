@@ -18,47 +18,47 @@ local Picker = require("config.picker")
 
 ---@type table<string, { [1]: string, [2]: string | string[] }>
 local picker_keys = {
-  ["<leader>Ff"] = {
+  ["<leader>tf"] = {
     "files",
     "Find files",
   },
-  ["<leader>Fg"] = {
+  ["<leader>tg"] = {
     "grep",
     "Live grep",
   },
-  ["<leader>Fb"] = {
+  ["<leader>tb"] = {
     "buffers",
     "Find buffers",
   },
-  ["<leader>Fr"] = {
+  ["<leader>tr"] = {
     "recent",
     "Recent files",
   },
-  ["<leader>Fl"] = {
+  ["<leader>tl"] = {
     "lines",
     "Fuzzy find in buffer",
   },
-  ["<leader>Fh"] = {
+  ["<leader>th"] = {
     "help",
     "Help pages",
   },
-  ["<leader>Fd"] = {
+  ["<leader>td"] = {
     "diagnostics",
     "Diagnostics",
   },
-  ["<leader>Fs"] = {
+  ["<leader>ts"] = {
     "lsp_symbols",
     "LSP document symbols",
   },
-  ["<leader>Fk"] = {
+  ["<leader>tk"] = {
     "keymaps",
     "Keymaps",
   },
-  ["<leader>Fp"] = {
+  ["<leader>tp"] = {
     "pickers",
     "All picker sources",
   },
-  ["<leader>FR"] = {
+  ["<leader>tR"] = {
     "resume",
     "Resume last picker",
   },
@@ -83,7 +83,7 @@ vim.keymap.set(
     "n",
     "x",
   },
-  "<leader>Fw",
+  "<leader>tw",
   Picker.fn("grep_word"),
   {
     desc = "Grep word/selection",

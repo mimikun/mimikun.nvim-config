@@ -58,15 +58,63 @@ local opts = {
     },
     {
       "<leader>o",
-      group = "github",
+      group = "obsidian",
     },
     {
       "<leader>q",
       group = "session",
     },
     {
+      "<leader>E",
+      group = "tabterm",
+    },
+    {
       "<leader>u",
       group = "toggle",
+    },
+    {
+      "<leader>ua",
+      group = "animations",
+    },
+    {
+      "<leader>D",
+      group = "dooing",
+    },
+    {
+      "<leader>R",
+      group = "translate",
+    },
+    {
+      "<leader>K",
+      group = "calendar",
+    },
+    {
+      "<leader>G",
+      group = "github",
+    },
+    {
+      "<leader>Ga",
+      group = "actions",
+    },
+    {
+      "<leader>Q",
+      group = "sql",
+    },
+    {
+      "<leader>N",
+      group = "neovim-tips",
+    },
+    {
+      "<leader>sz",
+      group = "chezmoi",
+    },
+    {
+      "<leader>ac",
+      group = "claude",
+    },
+    {
+      "<leader>ax",
+      group = "codex",
     },
     {
       "<leader>x",

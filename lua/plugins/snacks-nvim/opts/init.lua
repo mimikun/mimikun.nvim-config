@@ -76,7 +76,7 @@ local opts = {
   },
 
   -- On trial as the general-purpose picker, to be compared against telescope before settling.
-  -- Reached through the `<leader>F` keymaps in `keys.lua`.
+  -- Reached through the `<leader>t` keymaps in `keys.lua`.
 
   -- `ui_select = false` is deliberate:
   -- telescope is already in the tree (pulled in as a dependency of ascii-nvim, chezmoi-nvim, github-actions-nvim, homeassistant-nvim, iwe-nvim, ...) and telescope-ui-select.nvim already owns `vim.ui.select`.

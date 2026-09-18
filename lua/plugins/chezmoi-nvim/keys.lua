@@ -2,7 +2,7 @@
 local keys = {
   -- NOTE: USE telescope.nvim
   {
-    "<leader>cf",
+    "<leader>szf",
     function()
       require("chezmoi.pick").telescope()
     end,
@@ -13,7 +13,7 @@ local keys = {
     silent = true,
   },
   {
-    "<leader>cfn",
+    "<leader>szn",
     function()
       local targets = vim.fn.stdpath("config")
       local args = {
@@ -35,7 +35,7 @@ local keys = {
   --[[
   -- NOTE: USE snacks.nvim picker
   {
-    "<leader>cf",
+    "<leader>szf",
     function()
       require("chezmoi.pick").snacks()
     end,
@@ -46,7 +46,7 @@ local keys = {
     silent = true,
   },
   {
-    "<leader>cfn",
+    "<leader>szn",
     function()
       local targets = vim.fn.stdpath("config")
       local args = {
@@ -69,7 +69,7 @@ local keys = {
   --[[
   -- NOTE: USE fzf-lua
   {
-    "<leader>cf",
+    "<leader>szf",
     function()
       require("chezmoi.pick").fzf()
     end,
@@ -80,7 +80,7 @@ local keys = {
     silent = true,
   },
   {
-    "<leader>cfn",
+    "<leader>szn",
     function()
       local targets = vim.fn.stdpath("config")
       local args = {
@@ -103,7 +103,7 @@ local keys = {
   --[[
   -- NOTE: USE mini.nvim mini.pick
   {
-    "<leader>cf",
+    "<leader>szf",
     function()
       require("chezmoi.pick").mini()
     end,
@@ -114,7 +114,7 @@ local keys = {
     silent = true,
   },
   {
-    "<leader>cfn",
+    "<leader>szn",
     function()
       local targets = vim.fn.stdpath("config")
       local args = {

@@ -1,7 +1,7 @@
 ---@type LazyKeysSpec[]
 local keys = {
   {
-    "<leader>pp",
+    "<leader>to",
     function()
       require("peeper_picker").find()
     end,
@@ -12,7 +12,7 @@ local keys = {
     silent = true,
   },
   {
-    "<leader>ph",
+    "<leader>tO",
     function()
       require("peeper_picker").history()
     end,

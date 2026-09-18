@@ -8,26 +8,31 @@ which-key のグループラベル付けから始めたが、prefix の分け方
 
 ## 0. 再開のしかた
 
-**この節だけ読めば作業を引き継げる。** 以下は 2026-08-23 時点。
+**この節だけ読めば作業を引き継げる。** 設計は 2026-08-23、実装は 2026-09-18 時点。
 
 ### 作業場所
 
 | 項目 | 値 |
 |---|---|
-| ブランチ | `add/which-key-group-labels` |
-| worktree | `~/.config/nvim-whichkey-labels`（消えていたら作り直す。ブランチは本体の `.git` にある） |
+| ブランチ | `feat/leader-keymap-redesign-phase2`（§5-2 / §5-3 の実装。未 push） |
+| worktree | `~/.config/nvim-leader-impl`（消えていたら作り直す。ブランチは本体の `.git` にある） |
 | 本体 | `~/.config/nvim`（master。ここでは作業しない） |
+| 検証 | `NVIM_APPNAME=nvim-leader-impl nvim --headless ...`。データディレクトリの symlink `~/.local/share/nvim-leader-impl` は張ってある |
 
 ```
-git worktree add ~/.config/nvim-whichkey-labels add/which-key-group-labels
+git worktree add ~/.config/nvim-leader-impl feat/leader-keymap-redesign-phase2
 ```
 
 ### いまどこまで進んだか
 
-- **設計は閉じた。** §1〜§4 は確定。§5 が実装リストで、**まだ1つも着手していない**
-- **既にコミット済みの実装は3つだけ** — which-key のラベル8件、minimap を `M` へ、
-  brew を `B` へ。これらは §3 の結論の先取りで、設計と矛盾しない
-- **保留は「大文字待ちの列」7件だけ**（§3-4 の末尾）。退去は確定、文字が未定
+- **設計は閉じた。** §1〜§4 は確定
+- **§5-1 は master にマージ済み**（PR #343）
+- **§5-2 と §5-3 は上のブランチに全件コミット済み**（2026-09-18、実装20コミット ＋ この文書1コミット）。
+  push と PR は本人の判断待ち。実装時に決めた2文字目と、設計と実測のズレは
+  §5 の各項目の下に書いてある
+- **§5-4 は調査済み（2026-09-18）。2件とも誤診で、コード変更なし。§5-5 は未着手**
+- **保留は「大文字待ちの列」7件**（§3-4 の末尾）。退去は確定、文字が未定。
+  実装中に増えた「本人の判断が要るもの」は §5-3 の末尾「実装で見つかった未決」にある
 
 ### 本人に聞くべきこと（これ以外は聞かなくてよい）
 
@@ -38,10 +43,9 @@ git worktree add ~/.config/nvim-whichkey-labels add/which-key-group-labels
 
 ### 次の一歩（費用対効果の順）
 
-1. **§5-1** — `rhs` なし3件（`<leader>a` `<leader>u` `<leader>B`）の削除。
-   **3行消すだけで3つの prefix の `timeoutlen` 待ちが消える**
-2. **§5-2** — Fyler と Triptych の無効化（**どちらも使っていないと本人が明言**）
-3. **§5-3** — prefix の移動。量が多いので1コミット1論理単位で
+1. **ブランチを PR にするか決める**（本人）。§5-3 末尾の未決3件を見てから
+2. ~~**§5-4** — 設計とは別のバグ2件~~ → **2026-09-18 に調査。2件とも誤診で、直すものは無かった**
+3. **§5-5** — 大文字待ちの列。本人が話を戻すまで待つ
 
 ### やってはいけないこと
 
@@ -214,15 +218,28 @@ gitsigns は `<leader>h` をソースに持たない。あれは README の例�
 | blink-indent `ti`（無効） | `u` 配下 | — | A分類 |
 | tiny-glimmer `ge` `gd` `gt` | `u` 配下 | — | A分類。**git とは無関係**なので `g` には残さない |
 | bloocky `tb` カレンダー | **`<leader>K`** | 単独キー | 稀・1件・控えなし |
-| template.nvim `tp` | **`<leader>P`** | 単独キー | 稀・1件・控えなし |
+| template.nvim `tp` | **`<leader>T`** | 単独キー | 稀・1件・控えなし。**2026-09-18 に `P` から変更**（下記） |
 | translate.nvim `tj` `te` | **`<leader>R`** | グループ | 稀・2件 |
-| tabterm.nvim `tt` `ts` `tc` | **`<leader>T`** | グループ | 稀・3件 |
+| tabterm.nvim `tt` `ts` `tc` | **`<leader>E`** | グループ | 稀・3件。**2026-09-18 に `T` から退去**（下記） |
 | dooing `td` `tD` `tN` `tn` | **`<leader>D`** | グループ | 稀・4件 |
 | obsidian-tasks `to` `ta` | **`<leader>o`** | グループ | 本人の要求。将来 obsidian.nvim も |
 | octo.nvim `o*` 5件 | **`<leader>G`** | グループ | `o` を空けるため。GitHub Actions と合流 |
 | github-actions.nvim `gd` `gh` `go` `gp` `gw` | **`<leader>G`** | グループ | git（ローカル）と GitHub（リモート）は別対象 |
 | snacks `gB` browse | **`<leader>G`** | グループ | リモートを開く操作 |
 | snacks `gl` LazyGit | **`<leader>gl` のまま** | グループ | 規則3。git 系は控えが5本ある |
+
+**`T` と `P` の入れ替え（2026-09-18、本人の決定）。** 実装時に前提が2つ崩れていた。
+
+- **`P` は空いていなかった。** 設計の翌日 2026-08-24 に ports が `Pt`、09-06 に
+  projecthub が `Pj` に入り、**`P` はグループになっていた。** 規則5（親に単独を
+  乗せない）に当たるので template を `P` に置けない
+- **本人の判断: `T` は template のもの。tabterm から剥がす**
+- **tabterm の移動先は `E`。** 導出は「プラグイン名に含まれる文字のうち空いているもの」
+  で、`tabterm` からは `A` と `E` が該当する。`A` は `a` = ai が高頻度で紛れるため `E`
+
+**設計時に `P` を選んだ導出そのものは生きている**（稀・1件・控えなし → 大文字1打）。
+崩れたのは「`P` が空いている」という前提だけ。**大文字の空き状況は設計から実装まで
+の間に動く。実装の直前に実測し直すこと。**
 
 **副作用:**
 
@@ -401,10 +418,13 @@ leap 7件に、nvim-hlslens の `<leader>l`（Clear search highlight）が単独
 | codedocs | 1 | アノテーション挿入 |
 | nvim-hlslens | 1 | 検索ハイライト消去 |
 
-空いている大文字: `A E H I J O U V W X Y Z`
-（使用済み: `B` brew / `C` cord / `D` dooing / `F`→廃止 / `G` github / `K` calendar /
-`L` lint / `M` minimap / `N` neovim-tips / `P` template / `Q` sql / `R` translate /
-`S` surround-ui / `T` tabterm）
+空いている大文字: `A F H I J O U V W X Y Z`
+（使用済み: `B` brew / `C` cord / `D` dooing / `E` tabterm / `G` github / `K` calendar /
+`L` lint / `M` minimap / `N` neovim-tips / `P` ports ＋ projecthub / `Q` sql /
+`R` translate / `S` surround-ui / `T` template）
+
+**この行は 2026-09-18 に実測で引き直した。** `P` は設計の翌日から ports が入っていて
+空いておらず、`F` は find が `t` へ移って空いた。**設計時点の一覧を実装時に信じない。**
 
 ## 4. 検算（2026-08-23 実施）
 
@@ -535,34 +555,123 @@ end, 4000)'
 
 設計が決まった分。**上から順に、1コミット1論理単位で入れる。**
 
-### 5-1. 削除するだけで効くもの（機能を失わない）
+### 5-1. 削除するだけで効くもの（機能を失わない）— master にマージ済み（PR #343）
 
-- [ ] `<leader>a`（claudecode）の `rhs` なしエントリを削除。ラベルは `spec` 側が持つ
-- [ ] `<leader>u`（snacks）の同上
-- [ ] `<leader>B`（brewfile）の同上。遅延ロードは子キーが引く
+- [x] `<leader>a`（claudecode）の `rhs` なしエントリを削除。ラベルは `spec` 側が持つ
+- [x] `<leader>u`（snacks）の同上
+- [x] `<leader>B`（brewfile）の同上。遅延ロードは子キーが引く
 
-### 5-2. 無効化
+**実測（headless 前後比較）: 効いたのは `a` と `B` の2件。** `<leader>u` は
+そもそもグローバルに登録されていなかった。snacks は起動時にロードされるので、
+`keys` spec がスタブとして残る局面が無い。削除自体は無害なので、そのまま。
 
-- [ ] Fyler.nvim を `enabled = false`（`<leader>e` の待ちが消える）
-- [ ] Triptych を `enabled = false`（`<leader>-` `<leader>cd` `<leader>.` が空く）
+### 5-2. 無効化 — 完了（2026-09-18）
 
-### 5-3. prefix の移動
+- [x] Fyler.nvim を `enabled = false`（`<leader>e` の待ちが消える）
+- [x] Triptych を `enabled = false`（`<leader>-` `<leader>cd` `<leader>.` が空く）
 
-- [ ] find: `F` → `t`（12件）。`t` の現住民は先に退去させる
-- [ ] tabterm → `T` / dooing → `D` / translate → `R` / bloocky → `K` / template → `P`
-- [ ] obsidian-tasks → `o`、octo ＋ github-actions ＋ `gB` → `G`
-- [ ] squix ＋ vi-sql → `Q`、shelter → `es`
-- [ ] neovim-tips → `N`
-- [ ] trouble の `cl` `cs` → `x` 配下、calendar-vim → `K` 配下、chezmoi → `sz` と統合
-- [ ] snacks scratch → `bs` `bS`
-- [ ] peeper-picker → `t` 配下
-- [ ] A分類のトグルを `u` へ（gitsigns `tb` `tw` / tiny-glimmer 3件 / blink-indent `ti`）
-- [ ] claudecode と codex の第2キーをツール別に分ける
+**実測: 空いたのは `e` と `-` だけ。** 設計の「`cd` `.` が空く」は外れ。
 
-### 5-4. 設計とは別のバグ
+- `<leader>cd` は空かない。convy の `cd`（Convert to decimal）がグローバルに
+  居て、Triptych の分はウィンドウ内限定だった。**消えた分だけ次点が繰り上がる**
+- `<leader>.` は前から登録されていない（Triptych のウィンドウ内限定）
+- `<leader>sS` の持ち主が snacks scratch → squix に変わった（§5-3 で両方動くので
+  実害なし。ただし「消したら次点が出てくる」の実例）
 
-- [ ] claudecode の `keys.lua` が `<leader>as` を2回定義している（46行目 / 55行目）
-- [ ] nvim-html-css の `cp` が登録されていない。要調査
+### 5-3. prefix の移動 — 完了（2026-09-18。ブランチ `feat/leader-keymap-redesign-phase2`）
+
+2文字目は実装時に決めた。**設計と違う点は太字。**
+
+- [x] find: `F` → `t`（12件）。2文字目はそのまま（`tf` `tg` `tb` `tr` `tl` `th` `td`
+  `ts` `tk` `tp` `tR` `tw`）。which-key の "Find" ラベルも `t` へ
+- [x] tabterm → `Et` `Es` `Ec` / dooing → `Dd` `DD` `DN` `Dn` / translate → `Rj` `Re` /
+  bloocky → `Kb` / **template → `T`（`P` ではない。§3-1 の追記を参照）**
+- [x] obsidian-tasks → `oo` `oa`、octo → `Gi` `Gp` `Gd` `Gn` `Gs`、
+  **github-actions → `Ga` 配下（`Gad` `Gah` `Gap` `Gaw` `Gao`）** — `Gd` `Gp` が
+  octo と衝突するので actions をサブグループにした、snacks `gB` → `Gb`
+- [x] squix → `Q` ＋ 元の2文字目（`Qt` `Qs` `Qi` `QS` `QT` `Qq` `Qa`）、
+  vi-sql → `Qo`（open）`Qj`（jump）、shelter → `es`
+- [x] neovim-tips → `N` ＋ 元の3文字目（`No` `Nb` `Nr` `Ne` `Na` `Np`）
+- [x] trouble `cl` `cs` → `xl` `xs`、calendar-vim → `Kv` `Kh`、
+  **chezmoi → `sz` をグループにして統合**（`szs` source files / `szf` all files /
+  `szn` nvim config）。chezmoi.nvim は無効だが、有効化した瞬間に `sz` が
+  「親に乗った単独マッピング」になるので、規則5 に合わせて先に割った
+- [x] snacks scratch → `bs` `bS`
+- [x] peeper-picker → `to` `tO`（occurrences。`tp` は picker sources、`ts` は LSP symbols）
+- [x] A分類のトグルを `u` へ — gitsigns `tb` `tw` → `ug` `uG`、
+  tiny-glimmer 3件 → **`ua` サブグループ（`uae` `uad` `uat`）**、blink-indent `ti` → `ui`、
+  **tiny-inline-diagnostic `dt` `dc` → `ud` `uD`**（§1 で A分類、§3-4 も「抜けた後」で
+  数えているのに、このリストから漏れていた）
+- [x] claudecode → `ac` 配下（`acc` `acf` `acr` `acC` `acm` `acb` `acs` `aca` `acd`）、
+  codex → `ax` 配下（`axx` `axb` `axs`）。`as` の「二重定義」は §5-4 で誤診と判明
+
+**実測（headless、n/v/x/o/i/t 全モード）: 292 → 299 件。n モードだけなら 224 → 229。**
+増えたのは、衝突で隠れていた側が表に出た分（`sS` `st` `ab` `as` `gd` `cs` と peeper）。
+`t` 配下は find 12 ＋ peeper 2 の14件だけになり、`F` は空。付録B の経路2〜4 の
+スクリプトで見て、**設計で解決対象にした衝突はグローバルから全部消えた。**
+
+#### 実装で見つかった未決（本人の判断が要る。§5-5 に準ずる）
+
+設計（2026-08-23）の後に本人が手で入れた変更で、前提が変わっていたもの。
+
+| 対象 | 何が起きているか | いま置いてある場所 |
+|---|---|---|
+| **nvumi**（09-06 追加） | `<leader>on` を持つ。設計時は octo の `on` の下に隠れていた。octo が `G` へ抜けたので、**`o`（obsidian）の中に電卓が1件混ざる** | そのまま `on`。calcium（電卓、大文字待ち）と対象が同じなので、決めるときは2つ一緒に |
+| **tiny-code-action** | `<leader>ca` が crates の `ca`（update all）と**グローバルで衝突**。付録A に無かった。**勝者が実行のたびに入れ替わる** — 2026-09-18 に、キーマップを1件も触っていない2回の起動で crates → tiny-code-action に変わった。**固定の衝突ではなく非決定** | そのまま。**付録A の他の行と性質が違うので、同じ扱いにしない** |
+| **`<leader>P` のラベル** | ports ＋ projecthub のグループに which-key ラベルが無い | そのまま |
+
+その他の実測メモ:
+
+- 設計は「peeper が `pp` を勝ち取っている」としていたが、**実測は逆で pomodoro の
+  `pp`（pause）が勝っていた**。peeper が `t` へ抜けたので、どちらにせよ解消
+- vallow の `vs` の desc は "search findings"（設計では "switch"）。vi-sql が抜けて
+  表に出た
+- `y`（nvumi / yankbank）と `pS`（pomodoro / project-nvim）は、どちらも片側が
+  バッファローカル（nvumi のウィンドウ内 / project-nvim の `on_attach`）。
+  そのバッファの中だけ覆う形で、gitsigns の旧 `tb` と同じ範囲。**`p` の整理（§5-5）の中で**
+
+### 5-4. 設計とは別のバグ — **2件とも誤診だった（2026-09-18 に調査）**
+
+- [x] claudecode の `keys.lua` が `<leader>as` を2回定義している（46行目 / 55行目）
+- [x] nvim-html-css の `cp` が登録されていない。要調査
+
+**どちらもバグではない。修正するものは無い。**
+
+#### claudecode の「二重定義」— 別モード・別スコープなので衝突しない
+
+2つのエントリは lhs が同じだけで、中身が違う。
+
+| エントリ | mode | スコープ |
+|---|---|---|
+| Send to Claude | `v`（と `x`） | グローバル |
+| Add file | `n`（既定） | **`ft` 指定でバッファローカル** |
+
+`lazy/core/handler/keys.lua` の `M.parse` が id を組み立てるとき、**`ft` があれば
+id に `" (NvimTree, neo-tree, ...)"` を、mode が `n` でなければ `" (v)"` を足す**
+（42〜51行目）。したがって2つの id は別物で、lazy は一方を捨てない。
+さらに `ft` 付きは `FileType` autocmd 経由で**バッファローカルに**張られる（151〜163行目）。
+
+**実機で確認した**（2026-09-18、oil バッファで `nvim_buf_get_keymap`）:
+
+- グローバル: `v` と `x` に `<leader>acs` = "Send to Claude" のみ
+- oil バッファのバッファローカル: `n` に `<leader>acs` = "Add file"
+
+**両方ちゃんと効いている。**
+
+#### nvim-html-css の `cp` — プラグインが無効
+
+`lua/plugins/nvim-html-css/init.lua` が `cond = false` / `enabled = false`。
+**無効なプラグインの `keys` spec は登録されない。** 仕様どおりの挙動。
+
+#### 教訓 — これで5度目
+
+**どちらも「spec ファイルに書いてあること」を実行時の事実として読んだために生まれた。**
+付録B が挙げている4つの経路のうち、経路2（バッファローカル）と、
+そこに書き漏らしていた**経路5「プラグインが無効」**に当たる。
+
+**§5-4 という節が存在したこと自体が、この誤読の産物だった。**
+この形はこれまでに which-key の件数（2回）、§5-1 の3件、§5-2 の4件で外している。
+**ファイルを読んで「バグだ」と思ったら、直す前に1回動かして確かめること。**
 
 ### 5-5. 保留が解けてから
 
@@ -608,5 +717,12 @@ end, 4000)'
    `<leader>F` = "Find"）
 4. **文字列連結で組み立てる prefix** — `"<leader>" .. config.root_key` のような形。
    **ソースを `<leader>X` で grep しても出てこない**（例: surround-ui の `<leader>S`）
+5. **無効なプラグインの `keys` spec**（2026-09-18 に追加）— `enabled = false` なら
+   lazy はそのプラグインを読まないので、`keys.lua` に何が書いてあっても登録されない。
+   **ソースには存在し、実行時には存在しない**（例: nvim-html-css の `<leader>cp`）
 
-**空いていると判断する前に、4つとも見ること。**
+**空いていると判断する前に、5つとも見ること。**
+
+**逆向きにも効く。** 「ソースにあるのに実行時に無い」を見つけたとき、
+バグだと決める前に経路2（バッファローカル）と経路5（無効）を潰すこと。
+**§5-4 の2件は、これをやらずにバグとして起票されたものだった。**

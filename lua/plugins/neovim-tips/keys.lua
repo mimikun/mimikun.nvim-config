@@ -1,7 +1,7 @@
 ---@type LazyKeysSpec[]
 local keys = {
   {
-    "<leader>nto",
+    "<leader>No",
     ":NeovimTips<CR>",
     mode = {
       "n",
@@ -10,7 +10,7 @@ local keys = {
     silent = true,
   },
   {
-    "<leader>ntb",
+    "<leader>Nb",
     ":NeovimTipsBookmarks<CR>",
     mode = {
       "n",
@@ -19,7 +19,7 @@ local keys = {
     silent = true,
   },
   {
-    "<leader>ntr",
+    "<leader>Nr",
     ":NeovimTipsRandom<CR>",
     mode = {
       "n",
@@ -28,7 +28,7 @@ local keys = {
     silent = true,
   },
   {
-    "<leader>nte",
+    "<leader>Ne",
     ":NeovimTipsEdit<CR>",
     mode = {
       "n",
@@ -37,7 +37,7 @@ local keys = {
     silent = true,
   },
   {
-    "<leader>nta",
+    "<leader>Na",
     ":NeovimTipsAdd<CR>",
     mode = {
       "n",
@@ -46,7 +46,7 @@ local keys = {
     silent = true,
   },
   {
-    "<leader>ntp",
+    "<leader>Np",
     ":NeovimTipsPdf<CR>",
     mode = {
       "n",

@@ -1,7 +1,7 @@
 ---@type LazyKeysSpec[]
 local keys = {
   {
-    "<leader>cal",
+    "<leader>Kv",
     "CalendarV",
     mode = {
       "n",
@@ -10,7 +10,7 @@ local keys = {
     silent = true,
   },
   {
-    "<leader>caL",
+    "<leader>Kh",
     "CalendarH",
     mode = {
       "n",

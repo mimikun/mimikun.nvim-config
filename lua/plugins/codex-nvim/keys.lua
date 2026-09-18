@@ -1,19 +1,19 @@
 ---@type LazyKeysSpec[]
 local keys = {
   {
-    "<leader>ax",
+    "<leader>axx",
     function()
       require("codex").focus()
     end,
     desc = "Focus or hide Codex",
   },
   {
-    "<leader>ab",
+    "<leader>axb",
     "<cmd>CodexAdd<cr>",
     desc = "Add current buffer to Codex",
   },
   {
-    "<leader>as",
+    "<leader>axs",
     function()
       require("codex").send_visual()
     end,

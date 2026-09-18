@@ -13,13 +13,13 @@ local keys = {
     silent = true,
   },
   {
-    "<leader>cs",
+    "<leader>xs",
     "<cmd>Trouble symbols toggle focus=false<cr>",
     desc = "Symbols (Trouble)",
     silent = true,
   },
   {
-    "<leader>cl",
+    "<leader>xl",
     "<cmd>Trouble lsp toggle focus=false win.position=right<cr>",
     desc = "LSP Definitions / references / ... (Trouble)",
     silent = true,

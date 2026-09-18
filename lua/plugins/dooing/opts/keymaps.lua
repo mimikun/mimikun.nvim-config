@@ -1,18 +1,18 @@
 -- Keymaps
 local keymaps = {
   -- Toggle global todos
-  toggle_window = "<leader>td",
+  toggle_window = "<leader>Dd",
 
   -- Toggle project-specific todos
-  open_project_todo = "<leader>tD",
+  open_project_todo = "<leader>DD",
 
   -- Show due items window
-  show_due_notification = "<leader>tN",
+  show_due_notification = "<leader>DN",
 
   new_todo = "i",
 
   -- Create nested subtask under current todo
-  create_nested_task = "<leader>tn",
+  create_nested_task = "<leader>Dn",
 
   toggle_todo = "x",
   delete_todo = "d",
