@@ -1,7 +1,7 @@
 ---@type LazyKeysSpec[]
 local keys = {
   {
-    "<Leader>tp",
+    "<leader>I",
     function()
       vim.fn.feedkeys(":Template ")
     end,
