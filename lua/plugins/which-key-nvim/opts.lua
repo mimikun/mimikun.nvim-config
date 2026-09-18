@@ -65,7 +65,7 @@ local opts = {
       group = "session",
     },
     {
-      "<leader>T",
+      "<leader>E",
       group = "tabterm",
     },
     {
