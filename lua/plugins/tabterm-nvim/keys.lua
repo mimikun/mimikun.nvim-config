@@ -1,7 +1,7 @@
 ---@type LazyKeysSpec[]
 local keys = {
   {
-    "<leader>tt",
+    "<leader>Tt",
     function()
       require("tabterm").toggle()
     end,
@@ -12,7 +12,7 @@ local keys = {
     silent = true,
   },
   {
-    "<leader>ts",
+    "<leader>Ts",
     function()
       require("tabterm").new_shell()
     end,
@@ -23,7 +23,7 @@ local keys = {
     silent = true,
   },
   {
-    "<leader>tc",
+    "<leader>Tc",
     function()
       require("tabterm").new_command()
     end,

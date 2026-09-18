@@ -65,6 +65,10 @@ local opts = {
       group = "session",
     },
     {
+      "<leader>T",
+      group = "tabterm",
+    },
+    {
       "<leader>u",
       group = "toggle",
     },
