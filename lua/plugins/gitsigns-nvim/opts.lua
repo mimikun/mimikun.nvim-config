@@ -397,7 +397,7 @@ local opts = {
 
     -- Toggles
     map("n", "<leader>ug", gitsigns.toggle_current_line_blame)
-    map("n", "<leader>ud", gitsigns.toggle_word_diff)
+    map("n", "<leader>uG", gitsigns.toggle_word_diff)
 
     -- Text object
     map({ "o", "x" }, "ih", gitsigns.select_hunk)
