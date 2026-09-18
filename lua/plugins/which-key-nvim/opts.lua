@@ -109,6 +109,14 @@ local opts = {
       group = "chezmoi",
     },
     {
+      "<leader>ac",
+      group = "claude",
+    },
+    {
+      "<leader>ax",
+      group = "codex",
+    },
+    {
       "<leader>x",
       group = "trouble",
     },

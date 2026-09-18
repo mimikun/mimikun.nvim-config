@@ -1,43 +1,43 @@
 ---@type LazyKeysSpec[]
 local keys = {
   {
-    "<leader>ac",
+    "<leader>acc",
     "<cmd>ClaudeCode<cr>",
     desc = "Toggle Claude",
     silent = true,
   },
   {
-    "<leader>af",
+    "<leader>acf",
     "<cmd>ClaudeCodeFocus<cr>",
     desc = "Focus Claude",
     silent = true,
   },
   {
-    "<leader>ar",
+    "<leader>acr",
     "<cmd>ClaudeCode --resume<cr>",
     desc = "Resume Claude",
     silent = true,
   },
   {
-    "<leader>aC",
+    "<leader>acC",
     "<cmd>ClaudeCode --continue<cr>",
     desc = "Continue Claude",
     silent = true,
   },
   {
-    "<leader>am",
+    "<leader>acm",
     "<cmd>ClaudeCodeSelectModel<cr>",
     desc = "Select Claude model",
     silent = true,
   },
   {
-    "<leader>ab",
+    "<leader>acb",
     "<cmd>ClaudeCodeAdd %<cr>",
     desc = "Add current buffer",
     silent = true,
   },
   {
-    "<leader>as",
+    "<leader>acs",
     "<cmd>ClaudeCodeSend<cr>",
     mode = {
       "v",
@@ -46,7 +46,7 @@ local keys = {
     silent = true,
   },
   {
-    "<leader>as",
+    "<leader>acs",
     "<cmd>ClaudeCodeTreeAdd<cr>",
     desc = "Add file",
     ft = {
@@ -62,13 +62,13 @@ local keys = {
 
   -- Diff management
   {
-    "<leader>aa",
+    "<leader>aca",
     "<cmd>ClaudeCodeDiffAccept<cr>",
     desc = "Accept diff",
     silent = true,
   },
   {
-    "<leader>ad",
+    "<leader>acd",
     "<cmd>ClaudeCodeDiffDeny<cr>",
     desc = "Deny diff",
     silent = true,
