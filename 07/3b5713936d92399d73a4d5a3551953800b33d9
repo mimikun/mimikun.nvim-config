@@ -1,0 +1,23 @@
+lua/plugins/claudecode-nvim/keys.lua
+  s_37ab78028a8837::t_3399affc373646 4,10,16,22,28,34,40,49,65,71
+lua/plugins/codex-nvim/keys.lua
+  s_37ab78028a8837::t_7798b0818a3dc1 4,11,16
+lua/plugins/which-key-nvim/opts.lua
+  s_37ab78028a8837::t_8c071e382b691c 111-118
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "073b5713936d92399d73a4d5a3551953800b33d9",
+  "prompts": {},
+  "sessions": {
+    "s_37ab78028a8837": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "9a6ccbda-6007-4615-aaac-5d76705d4a42",
+        "model": "claude-opus-5"
+      },
+      "human_author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
