@@ -11,8 +11,8 @@ local spec = {
     local opts = require("plugins.triptych-nvim.opts")
     require("triptych").setup(opts)
   end,
-  --cond = false,
-  --enabled = false,
+  cond = false,
+  enabled = false,
 }
 
 return spec
