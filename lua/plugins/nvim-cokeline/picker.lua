@@ -1,6 +1,6 @@
 -- Fuzzy buffer picker that honours cokeline's own buffer order.
 --
--- `<leader>Fb` (lua/config/picker.lua) already offers a backend-agnostic buffer picker, but it
+-- `<leader>tb` (lua/config/picker.lua) already offers a backend-agnostic buffer picker, but it
 -- lists buffers in bufnr order. Once `<leader>bH` / `<leader>bL` have moved buffers around, the
 -- tabline order and the bufnr order disagree, and the picker no longer matches what is on screen.
 -- This module reads `cokeline.state.visible_buffers` so the picker lists exactly the tabline,
@@ -9,7 +9,7 @@
 -- snacks-only, deliberately: cokeline order needs a custom finder, and a telescope equivalent
 -- would mean a separate `finders.new_table` + `entry_maker`. It is therefore NOT registered as a
 -- source in `lua/config/picker.lua`, and `<leader>uf` does not affect it. When bufnr order is
--- good enough, `<leader>Fb` remains available on both backends.
+-- good enough, `<leader>tb` remains available on both backends.
 
 local M = {}
 
@@ -51,7 +51,7 @@ function M.buffers()
   -- `format = "buffer"` reuses snacks' own buffer rendering and preview, which only read
   -- `item.buf`. The `<c-x>` / `dd` delete keys do NOT come with it: they live in the `buffers`
   -- entry of snacks' `picker/config/sources.lua`, and a custom `source` name gets no source
-  -- config at all. They are restored here so this picker behaves like `<leader>Fb`.
+  -- config at all. They are restored here so this picker behaves like `<leader>tb`.
   require("snacks").picker.pick({
     source = "cokeline_buffers",
     title = "Cokeline Buffers",

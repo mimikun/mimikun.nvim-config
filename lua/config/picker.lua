@@ -5,7 +5,7 @@
 --   snacks    - better integrated, more sources, matches the rest of the folke plugins already in this config
 --   telescope - far better maintained, and it is not going away regardless: 18 plugins here pull it in through `dependencies.lua`
 
--- Neither wins outright, so the `<leader>F` keymaps dispatch through this module and `<leader>uf` flips the backend.
+-- Neither wins outright, so the `<leader>t` keymaps dispatch through this module and `<leader>uf` flips the backend.
 -- The choice is session-local (`vim.g.picker_backend`); it is not persisted across restarts.
 
 local M = {}
@@ -132,7 +132,7 @@ vim.api.nvim_create_autocmd("User", {
     pcall(function()
       require("which-key").add({
         {
-          "<leader>F",
+          "<leader>t",
           group = "Find",
         },
       })
