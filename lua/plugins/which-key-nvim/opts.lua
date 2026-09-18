@@ -77,6 +77,10 @@ local opts = {
       group = "animations",
     },
     {
+      "<leader>D",
+      group = "dooing",
+    },
+    {
       "<leader>x",
       group = "trouble",
     },

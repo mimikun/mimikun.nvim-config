@@ -2,7 +2,7 @@
 local keys = {
   -- Only set up keymap if it's enabled in config
   {
-    "<leader>td",
+    "<leader>Dd",
     function()
       require("dooing").open_global_todo()
     end,
@@ -14,7 +14,7 @@ local keys = {
   },
   -- Set up project todo keymap if enabled
   {
-    "<leader>tD",
+    "<leader>DD",
     function()
       require("dooing").open_project_todo()
     end,
@@ -26,7 +26,7 @@ local keys = {
   },
   -- Set up due notification keymap if enabled
   {
-    "<leader>tN",
+    "<leader>DN",
     function()
       require("dooing").show_due_notification()
     end,
