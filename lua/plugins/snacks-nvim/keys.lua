@@ -24,7 +24,7 @@ local keys = {
     silent = true,
   },
   {
-    "<leader>sc",
+    "<leader>bs",
     function()
       require("snacks").scratch()
     end,
@@ -35,7 +35,7 @@ local keys = {
     silent = true,
   },
   {
-    "<leader>sS",
+    "<leader>bS",
     function()
       require("snacks").scratch.select()
     end,
