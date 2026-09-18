@@ -1,0 +1,25 @@
+lua/plugins/bloocky/keys.lua
+  s_37ab78028a8837::t_b590bc2412586a 4
+lua/plugins/bloocky/opts/keymaps.lua
+  s_37ab78028a8837::t_4df239ed5a5dd9 3
+lua/plugins/calendar-vim/keys.lua
+  s_37ab78028a8837::t_e8a8e611d47b31 4,13
+lua/plugins/which-key-nvim/opts.lua
+  s_37ab78028a8837::t_e26e67cb3cc34b 87-90
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "f3b7e821208dd32acd1e96e28319af77e3a160c4",
+  "prompts": {},
+  "sessions": {
+    "s_37ab78028a8837": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "9a6ccbda-6007-4615-aaac-5d76705d4a42",
+        "model": "claude-opus-5"
+      },
+      "human_author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
