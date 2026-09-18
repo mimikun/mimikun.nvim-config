@@ -1,0 +1,23 @@
+lua/plugins/obsidian-tasks-nvim/keys.lua
+  s_37ab78028a8837::t_1f79c43a35707f 4,15
+lua/plugins/obsidian-tasks-nvim/opts.lua
+  s_37ab78028a8837::t_f0947ee6d6f707 69,72
+lua/plugins/which-key-nvim/opts.lua
+  s_37ab78028a8837::t_0ffbefbc0d3920 61
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "126142087d9b08f6065761eaaac36ed52a3b9f83",
+  "prompts": {},
+  "sessions": {
+    "s_37ab78028a8837": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "9a6ccbda-6007-4615-aaac-5d76705d4a42",
+        "model": "claude-opus-5"
+      },
+      "human_author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
