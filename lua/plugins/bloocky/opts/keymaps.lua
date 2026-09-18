@@ -1,6 +1,6 @@
 local keymaps = {
   -- Global
-  toggle = "<leader>tb",
+  toggle = "<leader>Kb",
 
   -- Inside the calendar window
   calendar = {

@@ -85,6 +85,10 @@ local opts = {
       group = "translate",
     },
     {
+      "<leader>K",
+      group = "calendar",
+    },
+    {
       "<leader>x",
       group = "trouble",
     },

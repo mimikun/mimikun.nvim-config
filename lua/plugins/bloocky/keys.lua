@@ -1,7 +1,7 @@
 ---@type LazyKeysSpec[]
 local keys = {
   {
-    "<leader>tb",
+    "<leader>Kb",
     function()
       require("bloocky.ui").toggle()
     end,
