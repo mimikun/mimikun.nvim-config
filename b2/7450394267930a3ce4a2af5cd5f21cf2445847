@@ -1,0 +1,23 @@
+lua/plugins/dooing/keys.lua
+  s_37ab78028a8837::t_0aab9272280d50 5,17,29
+lua/plugins/dooing/opts/keymaps.lua
+  s_37ab78028a8837::t_cdc30a9674d897 4,7,10,15
+lua/plugins/which-key-nvim/opts.lua
+  s_37ab78028a8837::t_072e7815086a0e 79-82
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "b27450394267930a3ce4a2af5cd5f21cf2445847",
+  "prompts": {},
+  "sessions": {
+    "s_37ab78028a8837": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "9a6ccbda-6007-4615-aaac-5d76705d4a42",
+        "model": "claude-opus-5"
+      },
+      "human_author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
