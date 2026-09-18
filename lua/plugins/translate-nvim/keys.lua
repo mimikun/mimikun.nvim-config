@@ -1,7 +1,7 @@
 ---@type LazyKeysSpec[]
 local keys = {
   {
-    "<leader>tj",
+    "<leader>Rj",
     "<Cmd>Translate JA<CR>",
     mode = {
       "n",
@@ -11,7 +11,7 @@ local keys = {
     silent = true,
   },
   {
-    "<leader>te",
+    "<leader>Re",
     "<Cmd>Translate EN<CR>",
     mode = {
       "n",
