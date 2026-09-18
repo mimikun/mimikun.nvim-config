@@ -69,6 +69,10 @@ local opts = {
       group = "toggle",
     },
     {
+      "<leader>ua",
+      group = "animations",
+    },
+    {
       "<leader>x",
       group = "trouble",
     },

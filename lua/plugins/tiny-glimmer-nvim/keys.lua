@@ -1,7 +1,7 @@
 ---@type LazyKeysSpec[]
 local keys = {
   {
-    "<leader>ge",
+    "<leader>uae",
     function()
       require("tiny-glimmer").enable()
     end,
@@ -12,7 +12,7 @@ local keys = {
     silent = true,
   },
   {
-    "<leader>gd",
+    "<leader>uad",
     function()
       require("tiny-glimmer").disable()
     end,
@@ -23,7 +23,7 @@ local keys = {
     silent = true,
   },
   {
-    "<leader>gt",
+    "<leader>uat",
     function()
       require("tiny-glimmer").toggle()
     end,
