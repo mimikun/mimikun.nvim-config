@@ -43,8 +43,7 @@ git worktree add ~/.config/nvim-leader-impl feat/leader-keymap-redesign-phase2
 
 ### 次の一歩（費用対効果の順）
 
-1. **ブランチを PR にするか決める**（本人）。仮置きした `template → I` と、
-   §5-3 末尾の未決3件を見てから
+1. **ブランチを PR にするか決める**（本人）。§5-3 末尾の未決3件を見てから
 2. **§5-4** — 設計とは別のバグ2件
 3. **§5-5** — 大文字待ちの列。本人が話を戻すまで待つ
 
@@ -219,15 +218,28 @@ gitsigns は `<leader>h` をソースに持たない。あれは README の例�
 | blink-indent `ti`（無効） | `u` 配下 | — | A分類 |
 | tiny-glimmer `ge` `gd` `gt` | `u` 配下 | — | A分類。**git とは無関係**なので `g` には残さない |
 | bloocky `tb` カレンダー | **`<leader>K`** | 単独キー | 稀・1件・控えなし |
-| template.nvim `tp` | **`<leader>P`** | 単独キー | 稀・1件・控えなし |
+| template.nvim `tp` | **`<leader>T`** | 単独キー | 稀・1件・控えなし。**2026-09-18 に `P` から変更**（下記） |
 | translate.nvim `tj` `te` | **`<leader>R`** | グループ | 稀・2件 |
-| tabterm.nvim `tt` `ts` `tc` | **`<leader>T`** | グループ | 稀・3件 |
+| tabterm.nvim `tt` `ts` `tc` | **`<leader>E`** | グループ | 稀・3件。**2026-09-18 に `T` から退去**（下記） |
 | dooing `td` `tD` `tN` `tn` | **`<leader>D`** | グループ | 稀・4件 |
 | obsidian-tasks `to` `ta` | **`<leader>o`** | グループ | 本人の要求。将来 obsidian.nvim も |
 | octo.nvim `o*` 5件 | **`<leader>G`** | グループ | `o` を空けるため。GitHub Actions と合流 |
 | github-actions.nvim `gd` `gh` `go` `gp` `gw` | **`<leader>G`** | グループ | git（ローカル）と GitHub（リモート）は別対象 |
 | snacks `gB` browse | **`<leader>G`** | グループ | リモートを開く操作 |
 | snacks `gl` LazyGit | **`<leader>gl` のまま** | グループ | 規則3。git 系は控えが5本ある |
+
+**`T` と `P` の入れ替え（2026-09-18、本人の決定）。** 実装時に前提が2つ崩れていた。
+
+- **`P` は空いていなかった。** 設計の翌日 2026-08-24 に ports が `Pt`、09-06 に
+  projecthub が `Pj` に入り、**`P` はグループになっていた。** 規則5（親に単独を
+  乗せない）に当たるので template を `P` に置けない
+- **本人の判断: `T` は template のもの。tabterm から剥がす**
+- **tabterm の移動先は `E`。** 導出は「プラグイン名に含まれる文字のうち空いているもの」
+  で、`tabterm` からは `A` と `E` が該当する。`A` は `a` = ai が高頻度で紛れるため `E`
+
+**設計時に `P` を選んだ導出そのものは生きている**（稀・1件・控えなし → 大文字1打）。
+崩れたのは「`P` が空いている」という前提だけ。**大文字の空き状況は設計から実装まで
+の間に動く。実装の直前に実測し直すこと。**
 
 **副作用:**
 
@@ -406,10 +418,13 @@ leap 7件に、nvim-hlslens の `<leader>l`（Clear search highlight）が単独
 | codedocs | 1 | アノテーション挿入 |
 | nvim-hlslens | 1 | 検索ハイライト消去 |
 
-空いている大文字: `A E H I J O U V W X Y Z`
-（使用済み: `B` brew / `C` cord / `D` dooing / `F`→廃止 / `G` github / `K` calendar /
-`L` lint / `M` minimap / `N` neovim-tips / `P` template / `Q` sql / `R` translate /
-`S` surround-ui / `T` tabterm）
+空いている大文字: `A F H I J O U V W X Y Z`
+（使用済み: `B` brew / `C` cord / `D` dooing / `E` tabterm / `G` github / `K` calendar /
+`L` lint / `M` minimap / `N` neovim-tips / `P` ports ＋ projecthub / `Q` sql /
+`R` translate / `S` surround-ui / `T` template）
+
+**この行は 2026-09-18 に実測で引き直した。** `P` は設計の翌日から ports が入っていて
+空いておらず、`F` は find が `t` へ移って空いた。**設計時点の一覧を実装時に信じない。**
 
 ## 4. 検算（2026-08-23 実施）
 
@@ -569,8 +584,8 @@ end, 4000)'
 
 - [x] find: `F` → `t`（12件）。2文字目はそのまま（`tf` `tg` `tb` `tr` `tl` `th` `td`
   `ts` `tk` `tp` `tR` `tw`）。which-key の "Find" ラベルも `t` へ
-- [x] tabterm → `Tt` `Ts` `Tc` / dooing → `Dd` `DD` `DN` `Dn` / translate → `Rj` `Re` /
-  bloocky → `Kb` / **template → `I`（`P` ではない。下の「未決」参照）**
+- [x] tabterm → `Et` `Es` `Ec` / dooing → `Dd` `DD` `DN` `Dn` / translate → `Rj` `Re` /
+  bloocky → `Kb` / **template → `T`（`P` ではない。§3-1 の追記を参照）**
 - [x] obsidian-tasks → `oo` `oa`、octo → `Gi` `Gp` `Gd` `Gn` `Gs`、
   **github-actions → `Ga` 配下（`Gad` `Gah` `Gap` `Gaw` `Gao`）** — `Gd` `Gp` が
   octo と衝突するので actions をサブグループにした、snacks `gB` → `Gb`
@@ -601,9 +616,8 @@ end, 4000)'
 
 | 対象 | 何が起きているか | いま置いてある場所 |
 |---|---|---|
-| **template.nvim** | 設計は `P` 単独。だが 2026-08-24 に ports が `Pt`、09-06 に projecthub が `Pj` に入り、**`P` はグループになった**。親に単独を乗せない（規則5）ので `P` は使えない | **仮に `<leader>I`**（desc "Insert Template" の I。1件・稀）。違えば1行 |
 | **nvumi**（09-06 追加） | `<leader>on` を持つ。設計時は octo の `on` の下に隠れていた。octo が `G` へ抜けたので、**`o`（obsidian）の中に電卓が1件混ざる** | そのまま `on`。calcium（電卓、大文字待ち）と対象が同じなので、決めるときは2つ一緒に |
-| **tiny-code-action** | `<leader>ca` が crates の `ca`（update all）と**グローバルで衝突**。付録A に無かった。今回は動かしていないが、読み込み順で勝者が入れ替わる（実測で crates → tiny-code-action に変わった） | そのまま |
+| **tiny-code-action** | `<leader>ca` が crates の `ca`（update all）と**グローバルで衝突**。付録A に無かった。**勝者が実行のたびに入れ替わる** — 2026-09-18 に、キーマップを1件も触っていない2回の起動で crates → tiny-code-action に変わった。**固定の衝突ではなく非決定** | そのまま。**付録A の他の行と性質が違うので、同じ扱いにしない** |
 | **`<leader>P` のラベル** | ports ＋ projecthub のグループに which-key ラベルが無い | そのまま |
 
 その他の実測メモ:
