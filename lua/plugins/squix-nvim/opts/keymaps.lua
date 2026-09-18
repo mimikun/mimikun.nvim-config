@@ -2,25 +2,25 @@
 -- set any to a key to enable
 local keymaps = {
   -- :SquixRun            (normal + visual)
-  run = "<leader>st",
+  run = "<leader>Qt",
 
   -- :SquixRunNamedQuery  (normal)
-  run_named_query = "<leader>sq",
+  run_named_query = "<leader>Qq",
 
   -- :SquixAdd            (normal + visual)
-  add = "<leader>sa",
+  add = "<leader>Qa",
 
   -- :SquixSwitch         (normal)
-  switch = "<leader>ss",
+  switch = "<leader>Qs",
 
   -- :SquixInit           (normal)
-  init = "<leader>si",
+  init = "<leader>Qi",
 
   -- :SquixStatus         (normal)
-  status = "<leader>sS",
+  status = "<leader>QS",
 
   -- :SquixTables         (normal)
-  tables = "<leader>sT",
+  tables = "<leader>QT",
 }
 
 return keymaps

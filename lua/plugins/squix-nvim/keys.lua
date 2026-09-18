@@ -1,7 +1,7 @@
 ---@type LazyKeysSpec[]
 local keys = {
   {
-    "<leader>st",
+    "<leader>Qt",
     "<cmd>SquixRun<cr>",
     mode = {
       "n",
@@ -11,7 +11,7 @@ local keys = {
   },
   {
     -- <Esc> first so '<,'> reflect THIS selection, not the previous one.
-    "<leader>st",
+    "<leader>Qt",
     "<Esc><cmd>'<,'>SquixRun<cr>",
     mode = {
       "v",
@@ -20,7 +20,7 @@ local keys = {
     silent = true,
   },
   {
-    "<leader>ss",
+    "<leader>Qs",
     "<cmd>SquixSwitch<cr>",
     mode = {
       "n",
@@ -29,7 +29,7 @@ local keys = {
     silent = true,
   },
   {
-    "<leader>si",
+    "<leader>Qi",
     "<cmd>SquixInit<cr>",
     mode = {
       "n",
@@ -38,7 +38,7 @@ local keys = {
     silent = true,
   },
   {
-    "<leader>sS",
+    "<leader>QS",
     "<cmd>SquixStatus<cr>",
     mode = {
       "n",
@@ -47,7 +47,7 @@ local keys = {
     silent = true,
   },
   {
-    "<leader>sT",
+    "<leader>QT",
     "<cmd>SquixTables<cr>",
     mode = {
       "n",
@@ -56,7 +56,7 @@ local keys = {
     silent = true,
   },
   {
-    "<leader>sq",
+    "<leader>Qq",
     "<cmd>SquixRunNamedQuery<cr>",
     mode = {
       "n",
@@ -65,7 +65,7 @@ local keys = {
     silent = true,
   },
   {
-    "<leader>sa",
+    "<leader>Qa",
     "<cmd>SquixAdd<cr>",
     mode = {
       "n",
@@ -74,7 +74,7 @@ local keys = {
     silent = true,
   },
   {
-    "<leader>sa",
+    "<leader>Qa",
     "<Esc><cmd>'<,'>SquixAdd<cr>",
     mode = {
       "v",

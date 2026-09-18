@@ -97,6 +97,10 @@ local opts = {
       group = "actions",
     },
     {
+      "<leader>Q",
+      group = "sql",
+    },
+    {
       "<leader>x",
       group = "trouble",
     },
