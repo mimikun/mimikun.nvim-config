@@ -1,0 +1,21 @@
+lua/plugins/peeper-picker-nvim/keys.lua
+  s_37ab78028a8837::t_e2620ec47d75bd 4,15
+lua/plugins/peeper-picker-nvim/opts.lua
+  s_37ab78028a8837::t_abf1edb42d8b1b 18-19
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "90870e9177a9c0de24ef06e906c0ed3b4f4c57cd",
+  "prompts": {},
+  "sessions": {
+    "s_37ab78028a8837": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "9a6ccbda-6007-4615-aaac-5d76705d4a42",
+        "model": "claude-opus-5"
+      },
+      "human_author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
