@@ -1,0 +1,23 @@
+lua/plugins/chezmoi-nvim/keys.lua
+  s_37ab78028a8837::t_7f9b6c5400b37a 5,16,38,49,72,83,106,117
+lua/plugins/chezmoi-template-nvim/keys.lua
+  s_37ab78028a8837::t_20aadfb8e71528 4
+lua/plugins/which-key-nvim/opts.lua
+  s_37ab78028a8837::t_f0a36ee7699154 107-110
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "da859f6807d143449c072d25a24d497829ca63fc",
+  "prompts": {},
+  "sessions": {
+    "s_37ab78028a8837": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "9a6ccbda-6007-4615-aaac-5d76705d4a42",
+        "model": "claude-opus-5"
+      },
+      "human_author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
