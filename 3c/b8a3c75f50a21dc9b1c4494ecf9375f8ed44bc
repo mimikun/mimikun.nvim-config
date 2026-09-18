@@ -1,0 +1,21 @@
+lua/plugins/tabterm-nvim/keys.lua
+  s_37ab78028a8837::t_efa37f0486533b 4,15,26
+lua/plugins/which-key-nvim/opts.lua
+  s_37ab78028a8837::t_2568327590b8dd 67-70
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "3cb8a3c75f50a21dc9b1c4494ecf9375f8ed44bc",
+  "prompts": {},
+  "sessions": {
+    "s_37ab78028a8837": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "9a6ccbda-6007-4615-aaac-5d76705d4a42",
+        "model": "claude-opus-5"
+      },
+      "human_author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
