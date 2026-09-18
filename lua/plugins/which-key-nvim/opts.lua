@@ -105,6 +105,10 @@ local opts = {
       group = "neovim-tips",
     },
     {
+      "<leader>sz",
+      group = "chezmoi",
+    },
+    {
       "<leader>x",
       group = "trouble",
     },
