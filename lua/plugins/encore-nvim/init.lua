@@ -9,8 +9,8 @@ local spec = {
     local opts = require("plugins.encore-nvim.opts")
     require("encore").setup(opts)
   end,
-  --cond = false,
-  --enabled = false,
+  cond = false,
+  enabled = false,
 }
 
 return spec
