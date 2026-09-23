@@ -1,0 +1,74 @@
+lua/plugins/vellum-nvim/CODES/.gitignore
+  h_220433a6faf6b8 1
+lua/plugins/vellum-nvim/CODES/AGENTS.md
+  h_220433a6faf6b8 1-60
+lua/plugins/vellum-nvim/CODES/CLAUDE.md
+  h_220433a6faf6b8 1
+lua/plugins/vellum-nvim/CODES/DECISIONS.md
+  h_220433a6faf6b8 1-29
+lua/plugins/vellum-nvim/CODES/LICENSE
+  h_220433a6faf6b8 1-21
+lua/plugins/vellum-nvim/CODES/PLAN.md
+  h_220433a6faf6b8 1-23
+lua/plugins/vellum-nvim/CODES/PROGRESS.md
+  h_220433a6faf6b8 1-29
+lua/plugins/vellum-nvim/CODES/README.md
+  h_220433a6faf6b8 1-76
+lua/plugins/vellum-nvim/CODES/build.lua
+  h_220433a6faf6b8 1-7
+lua/plugins/vellum-nvim/CODES/docs/demo.md
+  h_220433a6faf6b8 1-80
+lua/plugins/vellum-nvim/CODES/lua/vellum/browser.lua
+  h_220433a6faf6b8 1-114
+lua/plugins/vellum-nvim/CODES/lua/vellum/code.lua
+  h_220433a6faf6b8 1-90
+lua/plugins/vellum-nvim/CODES/lua/vellum/image.lua
+  h_220433a6faf6b8 1-149
+lua/plugins/vellum-nvim/CODES/lua/vellum/init.lua
+  h_220433a6faf6b8 1-134
+lua/plugins/vellum-nvim/CODES/lua/vellum/inline.lua
+  h_220433a6faf6b8 1-194
+lua/plugins/vellum-nvim/CODES/lua/vellum/media.lua
+  h_220433a6faf6b8 1-68
+lua/plugins/vellum-nvim/CODES/lua/vellum/render.lua
+  h_220433a6faf6b8 1-470
+lua/plugins/vellum-nvim/CODES/lua/vellum/theme.lua
+  h_220433a6faf6b8 1-122
+lua/plugins/vellum-nvim/CODES/plugin/vellum.lua
+  h_220433a6faf6b8 1
+lua/plugins/vellum-nvim/CODES/render/.puppeteerrc.cjs
+  h_220433a6faf6b8 1-2
+lua/plugins/vellum-nvim/CODES/render/browser.mjs
+  h_220433a6faf6b8 1-132
+lua/plugins/vellum-nvim/CODES/render/package-lock.json
+  h_220433a6faf6b8 1-1518
+lua/plugins/vellum-nvim/CODES/render/package.json
+  h_220433a6faf6b8 1-9
+lua/plugins/vellum-nvim/CODES/test/diagrams.md
+  h_220433a6faf6b8 1-92
+lua/plugins/vellum-nvim/CODES/test/dump.lua
+  h_220433a6faf6b8 1-14
+lua/plugins/vellum-nvim/CODES/test/images/logo.svg
+  h_220433a6faf6b8 1
+lua/plugins/vellum-nvim/CODES/test/init.lua
+  h_220433a6faf6b8 1-6
+lua/plugins/vellum-nvim/CODES/test/perf.lua
+  h_220433a6faf6b8 1-26
+lua/plugins/vellum-nvim/CODES/test/run.lua
+  h_220433a6faf6b8 1-311
+lua/plugins/vellum-nvim/CODES/test/sample.md
+  h_220433a6faf6b8 1-74
+lua/plugins/vellum-nvim/CODES/test/sweep.lua
+  h_220433a6faf6b8 1-84
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "0f2ab996ae8552ed82f61f5fb809f17a11026667",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
