@@ -1,0 +1,22 @@
+lua/plugins/vellum-nvim/cmds.lua
+  h_220433a6faf6b8 3
+lua/plugins/vellum-nvim/ft.lua
+  h_220433a6faf6b8 3
+lua/plugins/vellum-nvim/init.lua
+  h_220433a6faf6b8 5-8,10-13
+lua/plugins/vellum-nvim/keys.lua
+  h_220433a6faf6b8 4-5,9
+lua/plugins/vellum-nvim/opts.lua
+  h_220433a6faf6b8 3-4
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "a27d745033131128a0a2ec4a6acf5ff0d2d94c8a",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
