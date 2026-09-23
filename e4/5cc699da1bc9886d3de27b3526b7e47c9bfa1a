@@ -1,0 +1,14 @@
+lua/plugins/vellum-nvim/keys.lua
+  h_220433a6faf6b8 5-7
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "e45cc699da1bc9886d3de27b3526b7e47c9bfa1a",
+  "prompts": {},
+  "humans": {
+    "h_220433a6faf6b8": {
+      "author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
